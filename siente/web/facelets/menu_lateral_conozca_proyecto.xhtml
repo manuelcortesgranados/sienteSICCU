@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view id="menu_lateral_proyecto"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf">
+
+    <rich:panel headerClass="sliderich" header="Conozca el Proyecto" style="width:100%;">
+        <center>
+            <h:panelGrid columns="3" border="0" style="width:100%;" columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
+                <interkont:spacer width="1" />
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="Cobra_bt59 anchorLink"  
+                        action="#{Supervisor$AdministrarObraNew.iniciardeta}">
+                    </a4j:commandLink>
+                </h:panelGroup>
+                <h:commandLink styleClass="vtitle21" value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
+
+                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.comen}" />
+                <h:panelGroup>
+                    <a4j:commandLink  styleClass="Cobra_bt60 anchorLink" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
+                        <!--<a4j:commandLink styleClass="Cobra_bt60 anchorLink" />-->
+                    </a4j:commandLink>
+                </h:panelGroup>
+                <h:commandLink styleClass="vtitle21" value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
+
+                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.imag}" />
+                <h:panelGroup>                   
+                        <a4j:commandLink styleClass="Cobra_bt61 anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
+                </h:panelGroup>
+                <h:commandLink styleClass="vtitle21" value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
+                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.docu}"  />
+                <h:panelGroup>                    
+                        <a4j:commandLink styleClass="Cobra_bt63 anchorLink"  action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
+               </h:panelGroup>
+                <h:commandLink styleClass="vtitle21" value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
+                <!--
+                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.video}" />
+                <h:panelGroup>
+                    <h:outputLink value="#{facesContext.externalContext.requestContextPath}/faces/Supervisor/Viewvideo.jspx?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}">
+                        <h:graphicImage height="40" width="40" value="/resources/imgs/ciudadano_04.png" />
+                    </h:outputLink>
+                </h:panelGroup>
+                <h:outputText styleClass="vtitle07" value="Videos" />-->
+            </h:panelGrid>
+        </center>
+    </rich:panel>
+
+
+</f:view>

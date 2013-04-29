@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
+    <interkont:spacer height="20" style="width:100%;"/>
+    <!--
+     <rich:panel header="Indicadores" id="menuIndicadores" bodyClass="tool" headerClass="headertool" style="border-style: none; width: 100%" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_Consolidar}">
+                <a4j:commandLink styleClass="indicadores anchorLink" action="consolidado" immediate="true" />
+                <a4j:commandLink styleClass="text" value="Consolidar" action="consolidado" immediate="true" />
+            </h:panelGrid>
+        </h:panelGrid>
+    </rich:panel>
+    -->
+    <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
+        <td>
+            <tr>
+                <h:outputText value="Indicadores" styleClass="headerIndicadores"/>
+            </tr>
+            <tr>
+                <div id="navIndicadores" >
+                    <div id="elipse">
+
+                    </div>
+
+                    <ul>
+                        <li><h:commandLink value="#{var.header1}" styleClass="conso anchorLink"
+                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuConsolidados}">
+                                
+                            </h:commandLink>
+                        </li>
+                        <li><h:commandLink value="#{var.header2}" styleClass="presu anchorLink"
+                                           style="font-size: 9px;"   action="#{GraficarIndicadores.menuAvanceAh}"
+                                            >
+                                
+                            </h:commandLink></li>
+                        <li><h:commandLink value="#{var.header3}" styleClass="humani anchorLink"
+                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuAvanceObras}"
+                                          >
+                                
+                            </h:commandLink></li>
+                        <li><h:commandLink value="#{var.header4}" styleClass="terri anchorLink"
+                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuAvanceConvenios}"
+                                            >
+                                
+                            </h:commandLink></li>
+                    </ul>
+                </div>
+            </tr>
+        </td>
+    </table>
+
+   
+
+</f:view>

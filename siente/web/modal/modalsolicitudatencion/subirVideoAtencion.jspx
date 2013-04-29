@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="modalVideoAtencion" autosized="true">
+        <rich:panel header="#{var.seleccionarvideo}" styleClass="rich-panel-body" style="padding:0px;">
+            <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                <a4j:commandButton id="esconder_panelVideoAtencion" onclick="javascript:Richfaces.hideModalPanel('modalVideoAtencion')" immediate="true"
+                                   styleClass="btn_cerrar"  />
+            </h:panelGroup>
+            <h:form id="formVideoAtencion">
+                <h:panelGroup id="panelVideoAtencion">
+                    <h:panelGrid columnClasses="top,top" columns="2">
+                        <rich:fileUpload acceptedTypes="avi,mpeg,mpg,mp4,wmv" addControlLabel="#{var.adicionar}"
+                                         allowFlash="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.useFlash}" clearAllControlLabel="#{var.borrartodo}" clearControlLabel="#{var.eliminar}"
+                                         doneLabel="#{var.hecho}" fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.listener}" id="uploadvideoAtencion"
+                                         immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.autoSubida}" listHeight="150" listWidth="250"
+                                         maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.cantidadSubidas}" uploadControlLabel="#{var.subir}">
+                            <a4j:ajax event="onuploadcomplete" render="infovideoAtencion"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="infovideoAtencion">
+                            <center>
+                                <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.files}" var="file">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                            <h:panelGrid columns="1">
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <a4j:commandButton id="borrarDatos_VideoAtencion" action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarVideoAtencion}"
+                                                   render="infovideoAtencion, uploadvideoAtencion, layoutVideoAtencion" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size>0}" value="#{var.boarcsub}"
+                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarVideoTemporal}" id="BTaceptarVideoAtencion"
+                                                   value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size>0}"
+                                                   onclick="javascript:Richfaces.hideModalPanel('modalVideoAtencion')"
+                                                   render="layoutVideoAtencion"
+                                                      style="font-size: 12px;"/>
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                </h:panelGroup>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+
+</f:view>

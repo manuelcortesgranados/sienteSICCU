@@ -1,0 +1,200 @@
+#container {
+        margin-top: 3em;
+}
+
+.panelSlider {
+    height: 19em;
+}
+
+.panelInversion {
+    height: 19em;
+    width: 18em;
+}
+
+.panelValorInversion {
+    height:22em;
+}
+
+.panelPersonasHogares {
+    height:22em;
+}
+
+.panelConvenios {
+    height:22em;
+}
+
+.panelRehabilitacion {
+    height:28em;
+}
+
+.panelAtencion {
+    height:28em;
+}
+
+.texto1 {
+    text-align: center;
+    font-size:1em;
+}
+
+.panelTableroControl {
+    background: #ffffff;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #f5f5f5 42%, #e0e0e0 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(42%,#f5f5f5), color-stop(100%,#e0e0e0));
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#f5f5f5 42%,#e0e0e0 100%);
+    background: -o-linear-gradient(top,  #ffffff 0%,#f5f5f5 42%,#e0e0e0 100%);
+    background: -ms-linear-gradient(top,  #ffffff 0%,#f5f5f5 42%,#e0e0e0 100%);
+    background: linear-gradient(top,  #ffffff 0%,#f5f5f5 42%,#e0e0e0 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e0e0',GradientType=0 );
+    border-bottom: #D1D1D1 double solid;
+    border-top: #FFFFFF thin solid;
+    border-left: #D1D1D1 thin solid;
+    border-right: #D1D1D1 thin solid;
+    color:#376D8F;
+    text-align:center;
+    font-family:Arial, Helvetica, sans-serif;
+    padding-0.5em;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    -moz-border-radius-bottomright: 10px;
+    -moz-border-radius-bottomleft: 10px;
+    -webkit-border-radius: 0px 0px 10px 10px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.panelSelectorLocalidad {
+    background: #333333;
+    background: -moz-linear-gradient(top,  #333333 50%, #000000 51%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#333333), color-stop(51%,#000000));
+    background: -webkit-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: -o-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: -ms-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: linear-gradient(top,  #333333 50%,#000000 51%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#000000',GradientType=0 );
+    height:40px;
+    width:240px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border:#000 thin solid;
+    -webkit-box-shadow:  2px 1px 3px 1px #999999;
+    -moz-box-shadow:  2px 1px 3px 1px #999999;
+    box-shadow:  2px 1px 3px 1px #999999;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#666;
+    text-align:left;
+    text-indent:0.5em;
+    line-height:4em;
+    margin:10px;
+    padding-top:0.9em;
+    padding-right:0.9em;
+    padding-bottom:0.9em;
+    padding-left:0.9em;
+}
+
+.selectLocalidad {
+    background: #FFFFFF;
+    background: -moz-linear-gradient(top,  #FFFFFF 50%, #FFFFFF 51%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#FFFFFF), color-stop(51%,#FFFFFF));
+    background: -webkit-linear-gradient(top,  #FFFFFF 50%,#FFFFFF 51%);
+    background: -o-linear-gradient(top,  #FFFFFF 50%,#FFFFFF 51%);
+    background: -ms-linear-gradient(top,  #FFFFFF 50%,#FFFFFF 51%);
+    background: linear-gradient(top,  #FFFFFF 50%,#FFFFFF 51%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#FFFFFF',GradientType=0 );
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border:#666 thin solid;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#666;
+    text-align:left;
+    width:15em;
+}
+
+.divSlider {
+    margin: 0 auto;
+}
+
+.seccion-izq-dashboard{
+    vertical-align: top;
+}
+
+.seccion-der-dashboard{
+    vertical-align: top;
+}
+
+.invtotal {
+    /**background: #333333;
+    background: -moz-linear-gradient(top,  #333333 50%, #000000 51%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#333333), color-stop(51%,#000000));
+    background: -webkit-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: -o-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: -ms-linear-gradient(top,  #333333 50%,#000000 51%);
+    background: linear-gradient(top,  #333333 50%,#000000 51%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#000000',GradientType=0 );**/
+    background: #ff9735;
+    background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
+    background: -webkit-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -o-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -ms-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9735', endColorstr='#f8763c',GradientType=0 );
+    height:50px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    border:#FFF thin solid;
+    -webkit-box-shadow:  2px 1px 3px 1px #999999;
+    -moz-box-shadow:  2px 1px 3px 1px #999999;
+    box-shadow:  2px 1px 3px 1px #999999;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#FFF;
+    text-align:center;
+    line-height:50px;
+    margin-top:70px;
+    margin-bottom:40px;
+    width:25em;
+    font-size:1.1em;
+    font-weight:bold;
+}
+
+.tituloValor {
+   color:#003;
+   font-size:2em;
+   font-weight:bold;
+}
+
+.labelItemAtencion {
+    color:#376D8F;
+    font-size:1.1em;
+    vertical-align:middle
+}
+
+.valorItemAtencion {
+    color:#666666;
+    font-size:1.2em;
+    font-weight: bold;
+    vertical-align:middle;
+    padding-left:0.1em;
+}
+
+.liItemAtencion {
+    background-image:  url(/siente/resources/imgs/nov_evento.png);
+    background-repeat: no-repeat;
+    background-position: 0em  0.4em;
+    padding-left: 1.8em;
+}
+
+
+.labelPersonasHogares {
+   color:#000033;
+   font-size:15px;
+}
+
+.imagenPersonasHogares {
+}
+
+.panelImagenPersonasHogares {
+    position: relative;
+    top:25px;
+}

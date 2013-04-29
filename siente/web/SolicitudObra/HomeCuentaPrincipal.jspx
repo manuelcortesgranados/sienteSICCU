@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="head">
+                <title>Solicitud Obra</title>
+                <h:outputScript src="/resources/script_supervisor.js"/>
+            </ui:define>
+             <ui:define name="title">
+                <h:outputText value="#{var.cuentaprincipal}"/>
+            </ui:define>
+            <ui:define name="menu">
+                 <ui:include src="/facelets/menu_soliobra.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                 <ui:include src="/facelets/menu_lateral_soliobra.xhtml"/>
+            </ui:define>
+            <ui:define name="body">
+                <h:form>
+                <rich:panel header="#{var.crearcuenta}">
+                    
+                    <interkont:spacer height="20"/>
+                    
+                    <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" style="width:100%;">
+                        <f:facet name="header">
+                            <h:outputText value="1. #{var.cuentaprincipal}"/>
+                        </f:facet>
+                        <center>
+                        <h:panelGroup>
+                            
+                        <h:panelGrid columns="2" cellspacing="15" >
+                            <h:outputText value="#{var.nombredecuenta}"/>
+                            <h:inputText size="8" id="nombrecuenta"/>
+                       
+
+                       
+                            <h:outputText value="#{var.tipodecuenta}"/>
+                            <h:selectOneMenu id="tipocuenta"/>
+                       
+
+                        
+                            <h:outputText value="#{var.montocuenta}"/>
+                            <h:inputText size="8" id="montocuenta"/>
+                        
+
+                                <h:outputText value="#{var.saldoactual}"/>
+                                <h:inputText size="8" id="saldoactual"/>
+                          </h:panelGrid>
+
+                            <h:panelGrid columns="1" cellspacing="15">
+                            <a4j:commandButton id="agregar" value="#{var.agregar}" styleClass="btn_pri_inm"   style="font-size:12px;">
+
+                            </a4j:commandButton>
+                            </h:panelGrid>
+                            
+                          
+                            <rich:dataTable id="tablacuentas"  var="currentRow" rows="7" style="width:100%;">
+                                <f:facet name="header" >
+                                    <rich:columnGroup >
+                                        
+                                    <rich:column colspan="4">
+                                        <h:outputText value="#{var.listacuentas}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column breakBefore="true" >
+                                        <h:outputText value="#{var.nombrecuenta}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <h:outputText value="#{var.tipocuenta}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <h:outputText value="#{var.monto}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <h:outputText value="#{var.eliminarcuenta}"/>
+                                    </rich:column>
+                                    </rich:columnGroup>
+                                    
+                                </f:facet>
+                                <rich:column  >
+                                        <h:outputText value="#{var.nombre}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <h:outputText value="#{var.nombre}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <h:outputText value="#{var.nombre}"/>
+                                    </rich:column>
+                                    
+                                    <rich:column >
+                                        <a4j:commandLink value="Ir"/>
+                                    </rich:column>
+                                <f:facet name="footer">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="4" breakBefore="true" style="text-align: center;">
+                                            <rich:dataScroller id="scrollTablacuenta" for="tablacuentas" render="tablacuentas"/>
+                                    </rich:column>
+                                    </rich:columnGroup>
+                                    </f:facet>
+                </rich:dataTable>
+                            
+
+                      
+                        </h:panelGroup>
+                            </center>
+                       
+                        
+                        
+                    </rich:collapsiblePanel>
+
+                </rich:panel>
+
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </f:view>                    
+</html>
+
+
+

@@ -1,0 +1,83 @@
+package Seguridad;
+
+import cobra.SessionBeanCobra;
+import java.io.IOException;
+
+import java.util.ResourceBundle;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+@SuppressWarnings("deprecation")
+public class DisableUrlSessionFilter implements Filter {
+
+    /**
+     * Filters requests to disable URL-based session identifiers.
+     */
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException {
+        
+        // skip non-http requests
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        SessionBeanCobra beanone = (SessionBeanCobra) httpRequest.getSession().getAttribute("SessionBeanCobra");
+
+      //  ResourceBundle bundle = ResourceBundle.getBundle("cobra.properties.Bundle");
+        try {
+            if (!(request instanceof HttpServletRequest)) {
+                chain.doFilter(request, response);
+                return;
+            }
+
+
+            // clear session if session id in URL
+            if (httpRequest.isRequestedSessionIdFromURL()) {
+                HttpSession session = httpRequest.getSession();
+                if (session != null) {
+                    session.invalidate();
+                }
+            }
+
+            // wrap response to remove URL encoding
+            HttpServletResponseWrapper wrappedResponse = new HttpServletResponseWrapper(httpResponse) {
+
+                @Override
+                public String encodeRedirectUrl(String url) {
+                    return url;
+                }
+
+                @Override
+                public String encodeRedirectURL(String url) {
+                    return url;
+                }
+
+                @Override
+                public String encodeUrl(String url) {
+                    return url;
+                }
+
+                @Override
+                public String encodeURL(String url) {
+                    return url;
+                }
+            };
+
+            chain.doFilter(request, wrappedResponse);
+        } catch (ServletException e) {
+            httpRequest.getSession(false).invalidate();
+            httpResponse.sendRedirect("/"+beanone.getBundle().getString("versioncobra") +"/inicio.jspx");
+            
+        } catch (javax.faces.FacesException e) {
+        }
+
+    }
+
+    /**
+     * Unused.
+     */
+    public void init(FilterConfig config) throws ServletException {
+    }
+    /**
+     * Unused.
+     */
+    public void destroy() {
+    }
+}

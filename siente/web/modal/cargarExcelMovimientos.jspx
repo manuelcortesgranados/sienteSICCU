@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp_subirexcelgiros" resizeable="false" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Subir Archivo Giros"/>
+            </h:panelGroup>
+        </f:facet>
+       <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_subirexcelgiros" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_mp_subirexcelgiros" event="onclick" for="mp_subirexcelgiros" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <h:panelGroup id="gpUploadDocAt">
+                    <h:panelGrid columnClasses="top,top" columns="2">
+                        <rich:fileUpload acceptedTypes="csv" addControlLabel="#{var.adicionar}" 
+                                         clearAllControlLabel="#{var.borrartodo}" clearControlLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                         fileUploadListener="#{Financiera$CargarExcel.cargadorArchivoMovimientos.listener}" id="uploadDocumentoMovs"
+                                         immediateUpload="true"
+                                         listHeight="150" listWidth="250" maxFilesQuantity="1"
+                                         uploadControlLabel="#{var.subir}">
+                            <a4j:ajax event="onuploadcomplete" render="info_documento"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="info_documento">
+                            <center>
+                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{Financiera$CargarExcel.cargadorArchivoMovimientos.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Financiera$CargarExcel.cargadorArchivoMovimientos.archivos}" var="file">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                            <h:panelGrid columns="1">
+
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <br/>
+                                <a4j:commandButton action="#{Financiera$CargarExcel.cargadorArchivoMovimientos.borrarDatosSubidos}" render="info_documento, uploadDocumento"
+                                                   rendered="#{Financiera$CargarExcel.cargadorArchivoMovimientos.numArchivos>0}" value="#{var.boarcsub}" style="font-size:12px;"/>
+                                <a4j:commandButton value="#{var.validar}"
+                                                   action="#{Financiera$CargarExcel.cargarExcelFinancieraPl}"
+                                                   onclick="javascript:Richfaces.hideModalPanel('mp_subirexcelgiros')"
+                                                    style="font-size:12px;"
+                                                   rendered="#{Financiera$CargarExcel.cargadorArchivoMovimientos.numArchivos>0}" />
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:panelGroup>
+        </h:form>
+    </rich:popupPanel>
+
+</f:view>

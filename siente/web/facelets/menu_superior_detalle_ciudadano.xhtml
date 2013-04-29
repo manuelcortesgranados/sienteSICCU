@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
+    <h:form>
+        <center>
+            <h:panelGrid columns="4"  rowClasses="alignverticaldetalle" >
+                <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px" >
+                    <h:panelGroup layout="block" style="height:30px" >
+                        <a4j:commandLink styleClass="buttonblue1 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
+                                         immediate="true" render="panelBody" value="#{var.informacionciu}" style="text-align: center; width:180px!important;
+                                         height:25px!important;color:#FFF!important;"
+                                         action="#{Supervisor$AdministrarObraNew.iniciardeta}"
+                                         />
+                        <a4j:commandLink styleClass="buttonblue1_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
+                                         immediate="true" render="panelBody" value="#{var.informacionciu}" 
+                                         action="#{Supervisor$AdministrarObraNew.iniciardeta}"
+                                         />
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGrid  cellpadding="0" cellspacing="0" style="height:30px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnparticipacion_ciudadano}" >
+                    <h:panelGroup layout="block" style="height:30px" >
+                        <a4j:commandLink styleClass="buttonblue2 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
+                                         immediate="true" render="panelBody" value="#{var.comentariosciu}" style="text-align: center; width:180px!important;
+                                         height:25px!important;color:#FFF!important;"
+                                         action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
+                                         />
+                        <a4j:commandLink styleClass="buttonblue2_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
+                                         immediate="true" render="panelBody" value="#{var.comentariosciu}" 
+                                         action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
+                                         />
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px"  >
+                    <h:panelGroup layout="block" style="height:30px" >
+                        <a4j:commandLink styleClass="buttonblue3 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=4}"
+                                         immediate="true" render="panelBody" value="#{var.fotosciu}" style="text-align: center; width:180px!important;
+                                         height:25px!important;color:#FFF!important;"
+                                         action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
+                                         />
+                        <a4j:commandLink styleClass="buttonblue3_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==4}"
+                                         immediate="true" render="panelBody" value="#{var.fotosciu}" 
+                                         action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
+                                         />
+                    </h:panelGroup>
+                </h:panelGrid>
+                <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px"  >
+                    <h:panelGroup layout="block" style="height:30px" >
+                        <a4j:commandLink styleClass="buttonblue4 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=3}"
+                                         immediate="true" render="panelBody" value="#{var.documentosciu}" style="text-align: center; width:180px!important;
+                                         height:25px!important;color:#FFF!important;"
+                                         action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
+                                         />
+                        <a4j:commandLink styleClass="buttonblue4_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==3}"
+                                         immediate="true" render="panelBody" value="#{var.documentosciu}" 
+                                         action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
+                                         />
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:panelGrid>
+        </center>
+    </h:form>
+
+</f:view>

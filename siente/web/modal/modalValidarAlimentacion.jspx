@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalValidarAlimentacion"  width="500" autosized="true" headerClass="rich-panel-header" styleClass="detalleproyecto" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.validar} Alimentación"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalValidarAlimentacion" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_modalValidarAlimentacion" event="onclick" for="modalValidarAlimentacion" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form id="frmValidarAlimentacion">
+            <rich:panel rendered="#{Supervisor$DetalleObra.permitirvalidar}">
+                <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" style="width:100%;">
+                    <h:outputLabel id="lblFechaRevision" value="#{var.fecharevision}: "/>
+                    <rich:calendar id="lblFechaRev" value="#{Supervisor$DetalleObra.valialiment.datefecharevision}" buttonIconDisabled="true" disabled="true"/>
+                    <h:outputLabel id="lblEstadoRevision" value="#{var.estadorevision}: "/>
+                    <h:selectOneMenu id="cmbestadorevision" value="#{Supervisor$DetalleObra.valialiment.boolestado}" >
+                        <f:selectItem itemValue="false" itemLabel="Incompleto"/>
+                        <f:selectItem itemValue="true" itemLabel="Completo"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel id="lblTipoInforme" value="#{var.tipoinforme}: "/>
+                    <h:selectOneMenu id="cmbtipoinforme" value="#{Supervisor$DetalleObra.valialiment.tipoinforme.intidtipoinforme}">
+                        <f:selectItems value="#{Supervisor$DetalleObra.tipoinforme}"/>
+                    </h:selectOneMenu>                                    
+                    <h:outputLabel id="lblValidarAlimentacion" value="#{var.observacionesProyecto}: "/>
+                    <h:panelGrid>
+                    <h:inputTextarea id="validarAlimentacionArea" cols="35" rows="6" 
+                                     value="#{Supervisor$DetalleObra.valialiment.textobservacion}"  />
+                        
+                       </h:panelGrid>
+                    <h:outputLabel id="lbllistachequeo" value="#{var.listachequeo}"/>
+
+                    <a4j:commandButton id="btnlistaverificar"  value="Lista de Verificacion"   action="#{Supervisor$DetalleObra.llenarListaverificacion}"
+                                       style="border-radius: 10px; box-shadow: 2px 2px 5px #999;" immediate="true"
+                                       oncomplete="javascript:Richfaces.showModalPanel('modalFormularioValidarAlimentacion')" render="listarchequeo" />
+
+
+                </h:panelGrid>
+                <center>
+                    <h:panelGroup >
+                        <h:panelGrid columns="3" styleClass="center">
+                            <a4j:commandButton id="btnguardar" action="#{Supervisor$DetalleObra.guardarAprobacionAlimentacionSi}" value="#{var.guardar}" >
+                                <a4j:ajax event="oncomplete" render="panelVali"
+                                             oncomplete="javascript:Richfaces.hideModalPanel('modalValidarAlimentacion')"/>
+                            </a4j:commandButton>
+                            <interkont:spacer width="5"/>
+                            <a4j:commandButton id="btncancelar"  value="#{var.cancelar}"  >
+                                <a4j:ajax event="oncomplete" render="panelVali"
+                                             oncomplete="javascript:Richfaces.hideModalPanel('modalValidarAlimentacion')"/>
+                            </a4j:commandButton>
+                        </h:panelGrid>                            
+                    </h:panelGroup>
+                </center>
+            </rich:panel>
+                <rich:panel rendered="#{!Supervisor$DetalleObra.permitirvalidar}">
+                    <center>
+                    <h:panelGroup >
+                        <h:panelGrid columns="3" styleClass="center">
+                            <h:outputText value="El #{var.solicitudproyecto} ya fue aprobado en su último informe 100%"/>
+                            <interkont:spacer width="5"/>
+                            <a4j:commandButton id="btncancelar2"  value="#{var.cancelar}"  >
+                                <a4j:ajax event="oncomplete" render="panelVali"
+                                             oncomplete="javascript:Richfaces.hideModalPanel('modalValidarAlimentacion')"/>
+                            </a4j:commandButton>
+                        </h:panelGrid>                            
+                    </h:panelGroup>
+                </center>
+                    
+                </rich:panel>
+        </h:form>
+
+    </rich:popupPanel>
+
+
+</f:view>

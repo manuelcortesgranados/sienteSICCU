@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:a4j="http://richfaces.org/a4j" 
+                 xmlns:interkont="http://www.interkont.com/jsf"
+                 template="/facelets/template_login.xhtml" >
+    <ui:define name="head">
+        <title>Siente</title>
+        <script type="text/javascript">z
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-17795889-18']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script');
+                ga.type = 'text/javascript';
+                ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+        <script type="text/javascript">
+               (function() {
+                       var ODWbrowse = document.createElement('script');
+                ODWbrowse.type = 'text/javascript';
+                ODWbrowse.async = true;
+                       ODWbrowse.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'server11.operadordigital.com/whobrowse/whobrowse.php?a1b6724916db2291b6b048cc9870b9cf250afb5b4b6e1bb9cfe0e83a0a0908fa0eb29f738e98bcd9';
+                       var WBs = document.getElementsByTagName('script')[0];
+                WBs.parentNode.insertBefore(ODWbrowse, WBs);
+               })();
+        </script>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form> 
+            <h:panelGroup layout="block" styleClass="content-tab-login" id="gpLogPrinci">
+                <h:graphicImage url="/resources/imgs/login/logo_login.png" width="350"/>
+                <rich:panel>
+                    <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
+                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos">
+                            <a4j:region>
+                                <h:panelGroup layout="block">
+                                    <h:panelGrid  style="width:100%;" >
+                                        <!-- <interkont:spacer style="width:100%;" height="20"/>-->
+                                        <h:outputText value="#{var.logintabentrarbienvenido}"  />
+                                        <!--<interkont:spacer style="width:100%;" height="20"/>-->
+                                        <h:outputText value="#{var.loginmensajeprincipal}" />
+                                        <h:outputText value="#{var.loginmensajeprincipal2}"  />
+                                        <h:outputText value="#{var.loginmensajeprincipal3}"  />
+                                        <!-- <interkont:spacer style="width:100%;" height="20"/>-->
+                                        <h:outputText value="#{var.logintabentraringresarcon}" />
+                                        <h:panelGrid  style="width:100%;" rendered="false">
+                                            <h:outputText value="#{var.logintabentrarcontenidoingresarconuno}" />    
+                                            <h:outputText value="#{var.logintabentrarcontenidoingresarcondos}" />    
+                                        </h:panelGrid>
+                                        <h:inputText id="usuariodos" title="Usuario" required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
+                                        <h:panelGrid style="width:100%;" >
+                                            <rich:message for="usuariodos" />
+                                        </h:panelGrid>
+                                        <h:panelGroup style="width:100%">
+                                            <center>
+                                                <h:panelGrid columns="2">
+                                                    <h:inputSecret id="contrasenados"  title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
+                                                        <f:validateLength maximum="20" minimum="8"/>
+                                                    </h:inputSecret>
+                                                    
+                                                    <a4j:commandButton id="enviardos"  onclick="Richfaces.showModalPanel('ajaxLoadingModalBox', {width: 155, height: 155});"
+                                                                       value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                                       >
+                                                        <a4j:ajax event="click"   oncomplete="Richfaces.hideModalPanel('ajaxLoadingModalBox')"/>
+                                                    </a4j:commandButton>
+                                                </h:panelGrid>                                                      
+                                            </center>
+                                        </h:panelGroup>
+                                        <h:panelGrid style="width:100%;">
+                                            <rich:message for="contrasenados"/>
+                                        </h:panelGrid>
+                                        <h:panelGrid style="width:100%">
+                                            <center>
+                                                <a4j:commandLink value="#{var.logintabentrarolvidocontrasenia}" 
+                                                                 oncomplete="javascript:Richfaces.showModalPanel('panelRecordarContra');"/>
+                                            </center>
+                                        </h:panelGrid>
+                                        <h:panelGroup style="width:100%" rendered="false">
+                                            <center>
+
+                                                <h:panelGrid columns="3">
+                                                    <h:selectBooleanCheckbox id="checkdos" />
+                                                    <h:outputText value="#{var.logintabentrarcontentcheck}"   />
+                                                    <h:outputText value="#{var.logintabentrarolvidocontrasenia}" />
+                                                </h:panelGrid>
+                                            </center>
+                                        </h:panelGroup> 
+
+                                        <!-- <interkont:spacer style="width:100%;" height="20"/>-->
+                                        <h:panelGroup style="width:100%">
+                                            <center>
+                                                <h:panelGrid rendered="#{var.varcomentariologin}">
+                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado}"  />    
+                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado2}" />    
+                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado3}" />                                                            
+                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado4}" />
+                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado5}" />                                                            
+                                                </h:panelGrid>
+                                            </center>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </a4j:region> 
+                        </rich:tab>
+                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()">
+                            en construccion     
+                        </rich:tab>
+                    </rich:tabPanel>
+                </rich:panel>
+                <h:panelGroup layout="block" styleClass="div-login-imgs" rendered="#{var.logologin}">
+                    <h:graphicImage url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
+                    <h:graphicImage url="/resources/imgs/login/separador.png" width="10" height="60"/>
+                    <h:graphicImage url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
+                </h:panelGroup>
+
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

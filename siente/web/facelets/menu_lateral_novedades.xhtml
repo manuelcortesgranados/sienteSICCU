@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
+
+
+    <interkont:spacer  height="10"/>
+
+    <rich:panel headerClass="sliderich" bodyClass="sliderichcontentbluenovedades" header="Actividad Reciente" id="Novedades"  >
+
+
+        <a4j:repeat value="#{HomeGestion.listarecientes}" var="item" >
+            <h:panelGrid  columns="2" style="border-bottom:#F0F4F8 thin solid; font-family: Verdana,Geneva,sans-serif; font-size: 9px;"  >
+
+
+                <h:graphicImage value="#{item.strrutaimg}"/>
+
+                <rich:panel style="color: #333333; width: 100%;" styleClass="richPanelNovedades">
+                    <h:outputText value="#{item.textoinicial}"/>
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="enlaceobra"
+                                      onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="enlaceobra"
+                                      onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
+                    <h:outputText value=" #{item.textofinal}"/>
+                    <h:graphicImage value="/resources/imgs/line.png" style="width:100%;"  />
+                </rich:panel>
+            </h:panelGrid>
+        </a4j:repeat>
+
+    </rich:panel>
+
+
+    <interkont:spacer height="5px"/>
+
+</f:view>

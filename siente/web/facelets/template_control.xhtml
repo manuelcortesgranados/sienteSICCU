@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
+    <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>            
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <ui:insert name="head"/>
+
+            <style type="text/css">
+                body,td,th {
+                    margin: 0px;
+                    font-family: Verdana, Geneva, sans-serif;
+                }
+            </style> 
+            <script type="text/javascript">
+
+                    var _gaq = _gaq || [];
+                    _gaq.push(['_setAccount', 'UA-17795889-18']);
+                    _gaq.push(['_trackPageview']);
+
+                    (function() {
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                    })();
+
+                </script>
+                
+            
+        </head>
+
+        <body >
+            <h:form id="form_menu">
+                <ui:insert name="menu"/>
+            </h:form>
+
+            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1">
+                <tr>
+                    <td width="15%"></td>
+                    
+                </tr>
+                <tr>                    
+                    <td valign="top" height="35">
+                        <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="width:100%;">
+                                    <a4j:outputPanel id="panelBody">
+                                        <rich:messages id="messages" globalOnly="true"
+                                                       styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                       infoLabelClass="info_texto" warnLabelClass="warn_texto"
+                                                       errorLabelClass="error_texto">
+                                            <f:facet name="infoMarker">
+                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                            </f:facet>
+                                            <f:facet name="warnMarker">
+                                                <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                            </f:facet>
+                                            <f:facet name="errorMarker">
+                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            </f:facet>
+                                            <f:facet name="fatalMarker">
+                                                <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            </f:facet>
+                                        </rich:messages>
+                                        <ui:insert name="body" />
+                                        <ui:include src="/facelets/ajaxStatus.xhtml" />
+                                    </a4j:outputPanel>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="tablafooter">
+                <tr style="height:15px;"/>
+                <tr>
+                    <td style="width:100%;">
+                        <h:form id="form_footer">
+                            <ui:include src="/facelets/footer.xhtml"/>
+
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</f:view>

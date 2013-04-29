@@ -1,0 +1,239 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets" locale="#{var.rcalendarlocale}">
+    <ui:composition template="/facelets/template_main.xhtml">
+
+        <ui:define name="head">
+            <title>Cambio Contraseña</title>
+            <h:outputScript src="/resources/script_supervisor.js"/>
+
+        </ui:define>
+
+        <ui:define name="title">
+            <h:outputText value="#{var.miperfil}" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}"/>
+            <h:outputText value="Perfíl" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}"/>
+        </ui:define>
+
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </ui:define>
+        <ui:define name="body">
+            <script language="JavaScript">
+
+                function maximaLongitud(texto,maxlong)
+                {
+                    var out_value;
+
+                    if (texto.value.length > maxlong)
+                    {
+                        in_value = texto.value;
+                        out_value = in_value.substring(0,maxlong);
+                        texto.value = out_value;
+                        return false;
+                    }
+                    return true;
+                }
+
+                function borrar_campo3()
+                {
+                    if (document.getElementById("frmcomentariomuro:iacomentario3").value == "Escriba Su Comentario")
+                        document.getElementById("frmcomentariomuro:iacomentario3").value ="";
+                }
+                
+            </script>
+
+            <h:form>
+                <h:panelGrid columns="3"  style="width:100%;" id="pgmiperfil">
+
+                    <h:panelGrid  style="background:#F2F7FA;" style="width:100%;" columnClasses="panelcenter" >
+                        <h:graphicImage styleClass="picborder" url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  height="113"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}" styleClass="vtitle17"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"  styleClass="vtitle18"/>
+                        <interkont:spacer width="30"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="2"  bgcolor="#F2F7FA" styleClass="stable" style="width:100%;" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+
+                        <h:outputText id="lblcorreoelectronico"  value="#{var.correo}" styleClass="vtitle19" style="float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.stremail}" styleClass="vtitle20" style="float:left; position:relative;"/>
+                        <interkont:spacer height="5" style="width:100%;"/>
+                        <interkont:spacer height="5" style="width:100%;"/>
+                        <h:outputText id="lblidioma"  value="#{var.idioma}" styleClass="vtitle19" style=" float:left;"/>
+                        <h:outputLabel   value="Español" styleClass="vtitle20" style=" float:left; position:relative;"/>
+                        <interkont:spacer height="5"/>
+                        <interkont:spacer height="5"/>
+                        <h:outputText id="lblcedula"  value="#{var.cedula}"  styleClass="vtitle19" style="float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.intcedula}" styleClass="vtitle20" style=" float:left; position:relative;"/>
+                        <interkont:spacer height="5"/>
+                        <interkont:spacer height="5"/>
+                        <h:outputText id="lblfechanac"  value="#{var.fechadeNacimiento}"  styleClass="vtitle19" style="float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.datefechanacimiento}" styleClass="vtitle20" style=" float:left; position:relative;">
+                            <f:convertDateTime dateStyle="long"/>
+                        </h:outputLabel>
+                        <interkont:spacer height="5"/>
+                        <interkont:spacer height="5"/>
+                        <h:outputText id="lblubicacion"  value="#{var.ubicacionciudadano}"  styleClass="vtitle19" style="float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}" styleClass="vtitle20" style="float:left; position:relative;"/>
+
+                        <interkont:spacer height="5"/>
+                        <interkont:spacer height="5"/>
+                        <h:outputText id="lblcelular"  value="#{var.celular}"  styleClass="vtitle19" style=" float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" styleClass="vtitle20" style=" float:left; position:relative"/>
+                        <!--
+                        <h:outputText id="lblprofesion"  value="#{var.profesion}"  styleClass="vtitle19" style="float:left;"/>
+                        <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.cargo.strdescripcion}" styleClass="vtitle20" style=" float:left; position:relative;"/>
+
+                        <interkont:spacer height="5"/>
+                        <interkont:spacer height="5"/>
+                        -->
+
+                    </h:panelGrid>
+
+                    <h:panelGrid  style="width:100%;">
+                        <h:panelGrid columns="2" styleClass="stable" bgcolor="#F2F7FA" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" style="width:100%;">
+                            <h:outputText id="lblidiomaotro"  value="#{var.idioma}" styleClass="vtitle19" style=" float:left;"/>
+                            <h:outputLabel   value="Español" styleClass="vtitle20" style=" float:left; position:relative;"/>
+                            <interkont:spacer height="5"/>
+                            <interkont:spacer height="5"/>
+                            <h:outputText id="lblubicacionotro"  value="#{var.ubicacionciudadano}"  styleClass="vtitle19" style="float:left;"/>
+                            <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}" styleClass="vtitle20" style="float:left; position:relative;"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="1"  style="width:100%;"  bgcolor="#F2F7FA">
+                            <interkont:spacer height="5"/>
+                            <interkont:spacer height="5"/>
+                            <interkont:spacer height="5"/>
+                            <interkont:spacer height="5"/>
+                            <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfacebook}" styleClass="vtitle20"/>
+                            <a4j:commandLink styleClass="social_fb_ anchorLink" disabled="true"/>
+                            <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtwiter}" styleClass="vtitle20"/>
+                            <a4j:commandLink styleClass="social_tw_ anchorLink" disabled="true"/>
+                        </h:panelGrid>
+                        <interkont:spacer height="5"/>
+                        <h:panelGrid bgcolor="#F2F7FA" style="width:100%;"  style="height:30px;" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                            <a4j:commandLink styleClass="perfil01 anchorLink"  action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" render="modif_ciudadano"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+            </h:form>
+            <div id="header_content1">
+                <div class="star">
+                    <h:outputText value="Contenido"/>
+                </div>
+            </div>
+
+            <interkont:spacer height="20"/>
+            <h:form>
+                <h:panelGrid columns="2" id="pgcontenido">
+                    <rich:panel styleClass="blueframe" >
+                        <h:outputLabel value="#{var.proyecto}s que sigo" styleClass="vtitle13" style="padding-top:15; padding-bottom:10;"/>
+                        <h:panelGrid columns="3">
+                            <h:graphicImage style="float:left;" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  width="70" height="70"/>
+                            <h:outputLabel value="#{SessionBeanCobra.obraseguida}" styleClass="vtitle15" style="float:left; width:30; padding-top:10; padding-left:30;"/>
+                            <h:outputLabel value="Ver #{var.solicitudproyecto}s" styleClass="vtitle14" style="float:left; width:30; padding-top:10; padding-left:30;"/>
+                        </h:panelGrid>
+                    </rich:panel>
+                    <rich:panel styleClass="blueframe" >
+                        <h:outputLabel value="Comentarios" styleClass="vtitle13" style="padding-top:15; padding-bottom:10;"/>
+                        <h:panelGrid columns="3">
+                            <h:graphicImage style="float:left;" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_02.png"  width="70" height="70"/>
+                            <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.intcomentario}" styleClass="vtitle15" style="float:left; width:30; padding-top:10; padding-left:30;"/>
+                            <h:outputLabel value="Ver mi muro" styleClass="vtitle14" style="float:left; width:100; padding-right:-5px; padding-top:10;"/>
+                        </h:panelGrid>
+                    </rich:panel>
+                    <rich:panel styleClass="blueframe" >
+                        <h:outputLabel value="Fotos" styleClass="vtitle13" style="padding-top:15; padding-bottom:10;"/>
+                        <h:panelGrid columns="3">
+                            <h:graphicImage style="float:left;" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_03.png"  width="70" height="70"/>
+                            <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.intfotos}" styleClass="vtitle15" style="float:left; width:30; padding-top:10; padding-left:30;"/>
+                            <h:outputLabel value="Ver imágenes" styleClass="vtitle14" style="float:left; width:100; padding-right:-5px; padding-top:10;"/>
+                        </h:panelGrid>
+                    </rich:panel>
+
+                    <!-- <rich:panel styleClass="blueframe" >
+                        <h:outputLabel value="Videos" styleClass="vtitle13" style="padding-top:15; padding-bottom:10;"/>
+                        <h:panelGrid columns="3">
+                            <h:graphicImage style="float:left;" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_04.png"  width="70" height="70"/>
+                            <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.intvideo}" styleClass="vtitle15" style="float:left; width:30; padding-top:10; padding-left:30;"/>
+                            <h:outputLabel value="Fotos" styleClass="vtitle14" style="float:left; width:100; padding-right:-5px; padding-top:10;"/>
+                        </h:panelGrid>
+                    </rich:panel>-->
+                </h:panelGrid>
+            </h:form>
+            <div id="header_content">
+                <div class="comentario">
+                    <h:outputText value="Mi muro" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}"/>
+                    <h:outputText value="Muro" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}"/>
+                </div>
+            </div>
+            <interkont:spacer height="10"/>
+            <h:form id="frmcomentariomuro">
+                <rich:panel id="panelmuro" >
+                    <h:panelGrid columns="1" style="width:100%;">
+                        <a4j:region id="idregion">
+                            <h:panelGrid columns="1" width="70%" >
+                                <a4j:status id="idstatuscomentario3"/>
+                                <h:outputText id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" styleClass="vtitle12" style="float:right;" />
+                                <h:inputTextarea id="iacomentario3" styleClass="commentframe" rows="5" cols="120" onkeydown="return maximaLongitud(this,400)"
+                                                 value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo3(this);" >
+                                    <a4j:ajax action="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="onkeyup" render="idcontarmensaje3" status="idstatuscomentario3" />
+                                </h:inputTextarea>
+
+
+                                <h:outputText value="Utilice este espacio para opinar e intercambiar opiniones con los demás ciudadanos" styleClass="vtitle09"/>
+
+                                <a4j:commandLink styleClass="publicar anchorLink" action="#{Ciudadano$PerfilCiudadano.AgregarComentario}" render="pgmuro,panelmuro,pgcontenido">
+                                </a4j:commandLink>
+
+                            </h:panelGrid>
+                        </a4j:region>
+                        <h:panelGrid columns="2" id="pgmuro" >
+
+                            <a4j:repeat id="rpmuro" value="#{SessionBeanCobra.ciudadanoservice.listaComentariosperfil}" binding="#{Ciudadano$PerfilCiudadano.repeatusuarioperfil}" var="rowcomentario" rows="3" >
+                                <h:panelGrid columns="3"  >
+
+                                    <h:panelGrid styleClass="commentframe">
+                                        <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuarioPerfil}" type="submit" >
+                                            <h:graphicImage url="#{var.ipserver}siente#{rowcomentario.jsfUsuariocomento.tercero.strfoto}"  width="85" height="65"/>
+                                        </a4j:commandLink>
+                                        <interkont:spacer width="30"/>
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="3">
+                                        <h:graphicImage url="/resources/imgs/com_arrow.png" width="20" height="26"/>
+
+                                        <h:panelGrid styleClass="commentuser" style="width:100%;">
+                                            <h:panelGroup>
+                                                <h:outputText id="idstrnombre1" value="#{rowcomentario.jsfUsuariocomento.tercero.strnombrecompleto}" styleClass="vtitle03"/>
+                                                <interkont:spacer width="20"/>
+                                                <h:outputText id="iddate1" value="#{rowcomentario.datefechaopinion}" styleClass="vtitle09">
+                                                    <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
+                                                </h:outputText>
+                                            </h:panelGroup>
+                                            <h:panelGrid width="800px">
+                                                <h:outputLabel  id="idcomentario1" value="#{rowcomentario.stropinion}"
+                                                                style="align:justify; padding:10px;" />
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </a4j:repeat>
+                        </h:panelGrid>
+                        <rich:dataScroller for="rpmuro" align="center" render="pgmuro"  />
+                    </h:panelGrid>
+                </rich:panel>
+            </h:form>
+            <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
+
+        </ui:define>
+
+    </ui:composition>
+</f:view>

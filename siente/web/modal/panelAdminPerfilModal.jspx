@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view>
+        <!--<rich:popupPanel id="mp-admin-perfil" moveable="true" width="650" height="550">
+            <rich:panel header="#{var.rpanhea_administraciondelperfil}">
+                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                    <a4j:commandButton id="bt-admin-perfil" onclick="javascript:Richfaces.hideModalPanel('mp-admin-perfil')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                </h:panelGroup>
+                <h:form id="mp-admin-perfil-form">
+                    <h:outputLabel  value="#{var.Usuario} "/>
+                    <h:outputText id="label_usuario"  value="nombre" />
+                    <h:outputLabel   value="#{var.label_adminperfil} "/><interkont:spacer height="10"/>
+                    <rich:messages layout="table" tooltip="true" showDetail="false" showSummary="true">
+                    </rich:messages>
+                    <rich:collapsiblePanel switchType="client" label="#{var.admenco}" render="shu" >
+                        <interkont:spacer height="10"/>
+                        <h:dataTable value="#{HomeInterventor.lisrelusucor}" var="releveusuco">
+                            <h:column>
+                                <h:outputText value="codigo del evento :"/>
+                                <h:outputText value="#{releveusuco.eventoscorreo.intidevento}"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="descrip evento :"/>
+                                <h:outputText value="#{releveusuco.eventoscorreo.strdescevento}"/>
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="nom :"/>
+                                <h:outputText value="#{releveusuco.usuario.strnombreusuario}"/>
+                            </h:column>
+                        </h:dataTable>
+
+                        <rich:listShuttle id="shu" sourceValue="#{Supervisor$HomeSupervisor.evendisponibles}"
+                                          targetValue="#{HomeInterventor.liseventosseleccionados}"
+                                          var="items"  sourceListWidth="180" targetListWidth="180"
+                                          sourceCaptionLabel="#{var.evendisponibles}" targetCaptionLabel="#{var.evenusados}" converter="ListShuttleConverter"
+                                          >
+
+                            <h:column>
+                                <h:outputText value="#{items.strdescevento}" />
+                            </h:column>
+                            <h:column>
+                                <h:graphicImage url="resources/images/add.gif"/>
+                            </h:column>
+                        </rich:listShuttle>
+                        <a4j:commandButton type="button" styleClass="btn_sec_med" value="#{var.copiartodos}" onclick="#{rich:component('shu')}.copyAll();" />
+                        <a4j:commandButton type="button" styleClass="btn_sec_med" value="#{var.copiar}" onclick="#{rich:component('shu')}.copy();" />
+                        <a4j:commandButton type="button" styleClass="btn_sec_med" value="#{var.remover}" onclick="#{rich:component('shu')}.remove();" />
+                        <a4j:commandButton type="button" styleClass="btn_sec_med" value="#{var.removertodos}" onclick="#{rich:component('shu')}.removeAll();" />
+
+                    <br/><center>
+                        <a4j:commandButton value="#{var.guardareventos}" action="#{HomeInterventor.guardarRelacionesUsuario}"
+                                           styleClass="btn_sec_gig"   />
+                            </center>
+                    </rich:collapsiblePanel>
+
+
+                </h:form>
+            </rich:panel>
+        </rich:popupPanel>-->
+    </f:view>
+</html>

@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel id="modalinformacioninterventoria"  headerClass="rich-panel-header" height="400" width="1200" style="overflow: auto">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="INFORMACION GENERAL DE INTERVENTORIA" styleClass="txt_header"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalinformacioninterventoria" onclick="javascript:Richfaces.hideModalPanel('modalinformacioninterventoria')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                    <rich:componentControl attachTo="esconder-modalinformacioninterventoria" event="onclick" for="modalinformacioninterventoria" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel header="#{var.numerocontrato}" headerClass="tooltip" >
+            <h:outputText id="inNumEncargoS"  value="#{Supervision$Externa.objetoSeguimiento.strnumcontrato}" />
+        </rich:panel>
+        <rich:panel header="#{var.numeroencargo}" headerClass="tooltip" >
+            <h:outputText id="inEncargoFiduS" value="#{Supervision$Externa.objetoSeguimiento.intnumencargofidu}"/>
+        </rich:panel>
+        <rich:panel header="#{var.contratista}" headerClass="tooltip" >
+            <h:outputText id="inContratistaS" value="#{Supervision$Externa.objetoSeguimiento.strcontratista}"   />
+        </rich:panel>
+        <rich:panel header="#{var.objetodelcontrato}" headerClass="tooltip" >
+            <h:outputText id="inObjetoS"  value="#{Supervision$Externa.objetoSeguimiento.strobjcontratointerven}" />
+        </rich:panel>
+        <rich:panel header="#{var.plazo} (Meses)" headerClass="tooltip" >
+            <h:outputText id="inPlazoS" value="#{Supervision$Externa.objetoSeguimiento.intplazocontrato}"/>
+        </rich:panel>
+        <rich:panel header="#{var.fechainicioacta}" headerClass="tooltip" >
+            <h:outputText id="inFechaInicioS"  value="#{Supervision$Externa.objetoSeguimiento.datefecactainiinterv}"/>
+        </rich:panel>
+        <rich:panel header="#{var.fechafinalizacion}" headerClass="tooltip" >
+            <h:outputText id="inFechaFinalizacionS" value="#{Supervision$Externa.objetoSeguimiento.datefecactafininterv}"/>
+        </rich:panel>
+        <rich:panel header="#{var.prorroga} (Meses)" headerClass="tooltip" >
+            <h:outputText id="inProrrogaS" value="#{Supervision$Externa.objetoSeguimiento.intmesesprorroga}"  />
+        </rich:panel>
+        <rich:panel header="#{var.fechafinalizacion} #{var.vigentes}" headerClass="tooltip" >
+            <h:outputText id="inFechaFinalizacionVigS" value="#{Supervision$Externa.objetoSeguimiento.datefecfinalizavigeninter}" />
+        </rich:panel>
+        <rich:panel header="#{var.valorcontrato}" headerClass="tooltip" >
+            <h:outputText id="inValorContratoS"  value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}" />
+        </rich:panel>
+        <rich:panel header="#{var.preguntavalorinterventoria}" headerClass="tooltip" >
+            <h:outputText id="inPreguntaValorS"  value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}"   />
+        </rich:panel>
+        <rich:panel header="#{var.condicioninterventoria}" headerClass="tooltip" >
+            <h:outputText id="inCondiccionS"  value="#{Supervision$Externa.objetoSeguimiento.boolcumpleporcenvalrmenoroigual}"  />
+        </rich:panel>
+    </rich:popupPanel>
+
+</html>

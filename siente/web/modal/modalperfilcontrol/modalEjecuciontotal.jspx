@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp-EjecucionTotal" width="1100" height="400" headerClass="rich-panel-header" style="overflow: auto;">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.ejecuciontotal}" styleClass="txt_header"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_mp_EjecucionTotal" event="onclick" for="mp-EjecucionTotal" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form target="_blank">
+            <rich:panel>
+                <h:panelGrid columns="1">
+                    <h:outputText value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
+                                  style="font-size:14px; font-color:black; font-weight: bold;"/>
+                    <h:commandLink action="#{HomeGestion.reportePdfInversionFases}">
+                        <h:graphicImage width="1000" value="#{var.imginversionfases}"/>
+                    </h:commandLink>
+                    <h:outputText value="1. Consolidado Inversión"
+                                  style="font-size:14px; font-color:black; font-weight: bold;"/>
+                    <h:commandLink action="#{HomeGestion.reportePdfInversionFasesDeptos}">
+                        <h:graphicImage width="1000" value="#{var.imginversionfasesdeptos}"/>
+                    </h:commandLink>
+                </h:panelGrid>
+            </rich:panel>
+        </h:form>
+
+    </rich:popupPanel>
+</f:view>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalVideo"  width="370" height="200" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="VIDEO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalVideo" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_modalVideo" event="onclick" for="modalVideo" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <center>
+          <h:graphicImage value="/resources/imgs/Logo_republica.png" width="185px" /><!--#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}  rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"-->
+                        <h:panelGroup rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}">
+                            <!-- <h:outputText value="#{var.imgnodispo}" styleClass="txt_outtext"/>-->
+                        </h:panelGroup>
+        </center>
+    </rich:popupPanel>
+
+</f:view>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+        <ui:insert name="head"/>
+
+        <script type="text/javascript">
+
+            //Detectando si es Safari
+            var is_safari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;
+            
+
+            //Detectando si es Chrome
+          /* var is_chrome= navigator.userAgent.toLowerCase().indexOf('chrome/') > -1;
+            if (is_chrome) {
+                url=("#{facesContext.externalContext.requestContextPath}/faces/Cobra/firefox.jspx");
+                window.location= url;
+            }*/
+             
+            //Detectando Cualquier version de IE
+            if ('\v'=='v')  {
+                url=("#{facesContext.externalContext.requestContextPath}/faces/Cobra/firefox.jspx");
+                window.location= url;
+             }             
+             
+        </script>
+         
+        </head>
+
+        <body>
+
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr><h:outputLabel value="#{SessionBeanCobra.fechaServer}"/>
+                    <td height="50"/>
+                </tr>
+              
+                
+                <tr>
+                    <td>
+                          <ui:insert name="body"/>   
+                        <div style="margin: 5px 0 0 20px;">
+                            <rich:messages id="messages" globalOnly="true"
+                                           styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                           infoLabelClass="info_texto" warnLabelClass="warn_texto"
+                                           errorLabelClass="error_texto">
+                                <f:facet name="infoMarker">
+                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                </f:facet>
+                                <f:facet name="warnMarker">
+                                    <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                </f:facet>
+                                <f:facet name="errorMarker">
+                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                                <f:facet name="fatalMarker">
+                                    <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                            </rich:messages></div></td>
+                </tr>
+                <tr>
+                    <td><div >                            
+                                                 
+                            <div id="signup_datafield">
+                                                                 
+                                <ui:include src="/facelets/ajaxStatus.xhtml"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+               
+            </table>
+             
+            <div id="login_image"></div>
+        <h:panelGroup rendered="#{var.logologin}">
+            <div class="social">
+                <a href="#{var.btnfacebook}" class="fb anchorLink" target="_blank"></a>
+                <a href="#{var.btntwitter}" class="tw anchorLink" target="_blank"></a>
+                <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
+            </div>
+        </h:panelGroup>
+        </body>
+    </html>
+</f:view>

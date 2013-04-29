@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:rich="http://richfaces.org/rich">
+    <ui:composition>
+        <rich:popupPanel id="panelUploadCronograma" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+            <f:facet name="header" >
+                <h:panelGroup >
+                    <h:outputText  value="#{var.cargarcronograma}"/>
+                </h:panelGroup>
+            </f:facet>
+            <f:facet name="controls">
+                <h:form>
+                    <h:panelGroup>
+                        <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="cerrar"
+                                         title="#{var.cerrar}" onclick="return false;"/>
+                        <rich:componentControl attachTo="esconder_panelUploadCronograma" event="onclick" for="panelUploadCronograma" operation="hide"/>
+                    </h:panelGroup>
+                </h:form>
+            </f:facet>
+            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+                <h:form id="formCronograma">
+                    <h:panelGroup id="layoutDocCronog">
+                        <h:panelGrid columnClasses="top,top" columns="2">
+                            <rich:fileUpload 
+                                                                                         id="uploadCrono"
+                                                                                         fileUploadListener="#{Supervisor$ModificarProyecto.cargadorCronograma.listener}"
+                                                                                         acceptedTypes="xls, xlsx"
+                                                                                         immediateUpload="true"
+                                                                                         maxFilesQuantity="1"
+                                                                                         listWidth="250"
+                                                                                         listHeight="150"
+                                                                                         autoclear="true"
+                                                                                         addControlLabel="#{var.adicionar}"
+                                                                                         uploadControlLabel="#{var.subir}"
+                                                                                         doneLabel="#{var.hecho}"
+                                                                                         clearAllControlLabel="#{var.borrartodo}"
+                                                                                         clearControlLabel="#{var.eliminar}">
+                                <a4j:ajax event="onuploadcomplete" render="infoCrono"/>
+                            </rich:fileUpload>
+                            <h:panelGroup id="infoCrono">
+                                <center>
+                                    <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.arcsub}"/>
+                                        </f:facet>
+                                        <h:outputText rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
+                                            <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                                <h:panelGrid columns="1">
+
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText value="#{var.nomarc}"/>
+                                                        <h:outputText value="#{file.nombre}"/>
+                                                        <h:outputText value="#{var.taarc}"/>
+                                                        <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    </h:panelGrid>
+                                                </h:panelGrid>
+                                            </rich:panel>
+                                        </rich:dataGrid>
+                                    </rich:panel>
+                                    <interkont:spacer height="3"/>
+                                    <br/>
+                                    <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorCronograma.borrarDatosSubidos}" render="infoCrono, uploadCrono, panelInfoCronoSubido"
+                                                       rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
+                                                       styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                    <a4j:commandButton oncomplete="btValidarCronogramaOnComplete();" value="#{var.validar}" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}"
+                                                       render="panelMensajes,funcionBtValidarCronogramaOnComplete, panelInfoCronoSubido, messages" action="#{Supervisor$ModificarProyecto.btValidarCronogramaAction}"
+                                                       style="font-size: 12px;"/>
+                                </center>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:form>
+            </rich:panel>
+        </rich:popupPanel>
+        <h:panelGroup id="funcionBtValidarCronogramaOnComplete">
+            <script type="text/javascript">
+        function btValidarCronogramaOnComplete() {
+            if (
+                #{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}
+            ) {
+                    javascript:Richfaces.hideModalPanel('panelUploadCronograma');
+                } else {
+                    javascript:Richfaces.showModalPanel('mp_cronograma_msjerror');
+                }
+                return false;
+            }
+            </script>
+        </h:panelGroup>
+    </ui:composition>
+</f:view>

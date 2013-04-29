@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="false" width="350" style="padding:0px;"
+                     headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.confirmarguardadoali}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfirmaGuardar" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelConfirmaGuardar" event="onclick" for="panelConfirmaGuardar" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <center>
+                <h:panelGrid id="layoutGuardar">
+                    <h:outputText rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
+                    <h:outputText rendered="#{Supervisor$Alimentar.estadoalimentar==0}" styleClass="txt_outtext" value="#{Supervisor$Alimentar.mensajefin}"/>
+                    <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
+                    <h:form>
+                        <center>
+                            <a4j:commandButton id="BTaceptarGuardar" value="#{var.aceptar}"
+                                               rendered="#{Supervisor$Alimentar.estadoalimentar==0}"
+                                               onclick="javascript:Richfaces.hideModalPanel('panelConfirmaGuardar');">
+                            </a4j:commandButton>
+                        </center>
+                        <h:panelGrid columns="2">
+                            <a4j:commandButton action="#{Supervisor$Alimentar.finalizarModal_action}" id="BTaceptar" value="#{var.si}"
+                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}" render="gpPrincipalAlimentar,panelImagen,ima1,ima2,layoutDocActa, panelVideo"
+                                               style="font-size:12px" onclick="javascript:Richfaces.hideModalPanel('panelConfirmaGuardar');">
+                                <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.showModalPanel('panelGuardado')"
+                                             render="gpPrincipalAlimentar, panelImagen,ima1,ima2,layoutDocActa, panelVideo"/>
+                            </a4j:commandButton>
+                            <a4j:commandButton id="BTcancelar" value="#{var.no}"
+                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
+                                <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.hideModalPanel('panelConfirmaGuardar')"/>
+                            </a4j:commandButton>
+                        </h:panelGrid>
+
+                    </h:form>
+                </h:panelGrid>
+            </center>
+        </rich:panel>
+    </rich:popupPanel>
+
+</f:view>

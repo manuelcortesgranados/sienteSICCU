@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="head">
+                <title>Atención Humanitaria</title>
+            </ui:define>
+            <ui:define name="title">
+                <h:outputText value="#{var.generarsolicitudah}"/>
+            </ui:define>
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_atencion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_atencion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_registrar_atencion_hum.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_perfil_atencion_hum.xhtml"/>
+            </ui:define>
+            <ui:define name="body">
+                <h:form id="form_imagenes" target="_blank">
+                    <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.movimientosfinancieros}"/>
+                        </f:facet>
+                        <interkont:spacer height="3"/>
+                        <rich:dataTable id="tablaMovimientos"
+                                        
+                                        value="#{SessionBeanCobra.atencionhumanitariaService.listadoMovimientos}"
+                                        var="currentRow"  style="width:100%;">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column breakBefore="true" colspan="12">
+                                        <h:outputText value="Movimientos Financieros" />
+                                    </rich:column>
+                                    <rich:column breakBefore="true">
+                                        <h:outputText value="#{var.comprobantefidu}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.descripcion}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.valor} Movimiento"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.valor} Ejecutado"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.valor} Legalizado"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.porcentajejecutado}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="% Legalizado"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.fecha} legalización"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.tipom} Movimiento"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Estado movimiento"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Orden de pago"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{var.nombre} Contratista"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:column breakBefore="true">
+                                <h:outputText value="#{currentRow.strcomprobantefidu}"/>
+                            </rich:column>
+                            <rich:column >
+                                <h:outputText value="#{currentRow.strdescripcionmovimiento}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.numvlrmovimiento}">
+                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText value="#{currentRow.numvlrejecutado}">
+                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.numvlrlegalizado}">
+                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.floatporejecucion}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.floatporcentajelegalizacion}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.datefechalegalizacion}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.ordendepago.strordenpago}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{currentRow.strnombrecontratista}"/>
+                            </rich:column>
+                        </rich:dataTable>
+                    </rich:collapsiblePanel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

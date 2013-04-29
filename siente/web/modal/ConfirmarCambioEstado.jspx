@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="confirmarCambioEstado" autosized="true" 
+                      headerClass="sliderich" styleClass="sliderichcontentblue" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="Solicitar cambio de estado de #{var.solicitudproyecto}"/>
+            </h:panelGroup>
+        </f:facet>
+
+        <h:form>           
+            <center>
+                <h:panelGrid id="pgconfirmarCambioEstado"  columnClasses="panelcenter" width="300px" styleClass="sliderichcontentblue" cellpadding="0" cellspacing="0" >
+                    <h:graphicImage height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                    <h:panelGroup>
+                        <center>
+                            <h:outputText styleClass="vtitle23" value="Está completamente seguro de solicitar el cambio de estado de su #{var.solicitudproyecto}?" />
+                        </center>
+                    </h:panelGroup>
+                    <center>
+                        <interkont:spacer height="15" />
+                        <h:panelGroup>
+                            <a4j:commandButton id="BTaceptarCambio" value="Si" styleClass="buttonform"  action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}" >
+                                <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('confirmarCambioEstado');" />
+                            </a4j:commandButton>
+                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" styleClass="buttonform" >
+                                <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('confirmarCambioEstado');"/>
+                            </a4j:commandButton>
+                        </h:panelGroup>
+                    </center>
+                </h:panelGrid>
+            </center>
+
+        </h:form>
+    </rich:popupPanel>
+
+</f:view>
