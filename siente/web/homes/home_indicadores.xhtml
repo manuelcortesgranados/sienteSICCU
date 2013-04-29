@@ -51,22 +51,22 @@
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==0}">
                         <f:selectItem itemValue="0" itemLabel="Presupuesto en ejecución" />
                         <!--<f:selectItem itemValue="1" itemLabel="Consolidado general" />-->
-                        <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                        <a4j:ajax event="change" listener="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
                     </h:selectOneMenu>
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==1}">
                         <f:selectItem itemValue="2" itemLabel="Avance atención humanitaria" />
-                        <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                        <a4j:ajax event="change" listener="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
                     </h:selectOneMenu>
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==2}">
                         <f:selectItem itemValue="3" itemLabel="Avance #{var.proyecto}s con Entidades Territoriales en el País" />
-                        <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                        <a4j:ajax event="change" listener="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
                     </h:selectOneMenu>
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==3}">
                         <f:selectItem itemValue="4" itemLabel="Avance #{var.proyecto}s con Entidades Nacionales en el País" />
                         <f:selectItem itemValue="5" itemLabel="Avance de ejecución financiera de #{var.proyecto}s con Entidades Nacionales en el País" />
 
                         <f:selectItem itemValue="6" itemLabel="Avance Convenios con Entidades Nacionales en el País" />
-                        <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                        <a4j:ajax event="change" listener="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
                     </h:selectOneMenu>
 
                     <h:panelGroup id="cmbLoc" >
@@ -86,7 +86,7 @@
                                     <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"   style="width:200px;" >
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.sedeptos}" />
-                                        <a4j:ajax event="onchange" action="#{GraficarIndicadores.llenarMunicipios}" render="municipioincomindica"/>
+                                        <a4j:ajax event="change" listener="#{GraficarIndicadores.llenarMunicipios}" render="municipioincomindica"/>
                                     </h:selectOneMenu>
                                 </h:panelGroup>
                                 <interkont:spacer width="10"/>
@@ -121,7 +121,7 @@
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==1}">
 
-                    <rich:dataTable id="tablaConsolGen"  style="text-align:left;" var="fila" style="width:100%;"
+                    <rich:dataTable id="tablaConsolGen"  style="text-align:left; width:100%;" var="fila" 
                                     value="#{GraficarIndicadores.listaconsolidadosgen}"
                                     >
                         <f:facet name="header">
@@ -133,7 +133,7 @@
                                     <h:outputText value="Nacional"/>                                           
                                 </rich:column>
 
-                                <rich:column colspan="1" breakBefore="true">                                            
+                                <rich:column colspan="1" breakRowBefore="true">                                            
                                     <h:outputText value=" "/>                                           
                                 </rich:column>
 
@@ -220,7 +220,7 @@
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==2}">
 
-                    <rich:dataTable id="tablaAvanceHUm"  style="text-align:left;" var="fila" style="width:100%;"
+                    <rich:dataTable id="tablaAvanceHUm"  style="text-align:left; width:100%;" var="fila" 
                                     value="#{GraficarIndicadores.listaavanceshum}"
                                     >
                         <f:facet name="header">
@@ -237,7 +237,7 @@
                                 <rich:column colspan="4">                                            
                                     <h:outputText value="Tercer giro"/>                                           
                                 </rich:column>
-                                <rich:column colspan="1" breakBefore="true">                                            
+                                <rich:column colspan="1" breakRowBefore="true">                                            
                                     <h:outputText value=" "/>                                           
                                 </rich:column>
                                 <rich:column>                                            

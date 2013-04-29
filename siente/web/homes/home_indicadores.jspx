@@ -377,10 +377,6 @@
                         </h:panelGroup>
                     </h:panelGroup>
                 </h:form>
-
-
-
-
             </ui:define>
         </ui:composition>
     </f:view>
