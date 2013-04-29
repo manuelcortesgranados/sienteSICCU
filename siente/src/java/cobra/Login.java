@@ -10,7 +10,6 @@ import co.com.interkont.cobra.to.JsfUsuario;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import cobra.Supervisor.FacesUtils;
 import java.io.Serializable;
 import java.util.Date;
@@ -18,23 +17,22 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page.  This
- * class contains component definitions (and initialization code) for
- * all components that you have defined on this page, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page. This class
+ * contains component definitions (and initialization code) for all components
+ * that you have defined on this page, as well as lifecycle methods and event
+ * handlers where you may add behavior to respond to incoming events.</p>
  *
  * @author Christian
  */
-public class Login implements Serializable{
+public class Login implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
-     */  
-
+     * <p>Automatically managed component initialization.
+     * <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
+     */
     private void _init() throws Exception {
     }
 
@@ -43,11 +41,8 @@ public class Login implements Serializable{
      * <p>Construct a new Page bean instance.</p>
      */
     public Login() {
-        
-        
     }
 
-    
     /**
      * <p>Return a reference to the scoped data bean.</p>
      *
@@ -80,12 +75,12 @@ public class Login implements Serializable{
 
     }
 
-    public String verificarUsuario() {     
+    public String verificarUsuario() {
         try {
             getSessionBeanCobra().setMensajelogueo("");
-            
 
-           
+
+
             getSessionBeanCobra().setTipologueo(getSessionBeanCobra().getUsuarioService().
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
@@ -139,13 +134,12 @@ public class Login implements Serializable{
 
     public String usuarioSinRegistro() {
         getSessionBeanCobra().getUsuarioService().setUsuarioObra(new JsfUsuario());
-        
+
         getSessionBeanCobra().getUsuarioObra().setUsuLogin("ciudadano");
-       
-        getSessionBeanCobra().getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));       
-        
-        
+
+        getSessionBeanCobra().getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
+
+
         return enviar_action();
     }
 }
-

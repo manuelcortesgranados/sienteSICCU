@@ -3,7 +3,6 @@ package Seguridad;
 import cobra.SessionBeanCobra;
 import java.io.IOException;
 
-import java.util.ResourceBundle;
 import javax.servlet.*;
 import javax.servlet.http.*;
 

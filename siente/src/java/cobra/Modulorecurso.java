@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author FELIPE
  */
-public class Modulorecurso implements Serializable{
+public class Modulorecurso implements Serializable {
 
     private final static int SOLICITUD_ATENCION_HUMANITARIA = 1;
     private final static int SOLICITUD_OBRA = 2;
@@ -29,7 +29,7 @@ public class Modulorecurso implements Serializable{
 
     public RenderRecurso validarrecurso(int modulo) {
 
-        
+
         RenderRecurso renderrecurso = new RenderRecurso();
         JsfUsuarioGrupo grupo = getSessionBeanCobra().getUsuarioService().encontrarGrupoxUsuarioxModulo(getSessionBeanCobra().getUsuarioObra().getUsuId(), modulo);
 
@@ -149,39 +149,39 @@ public class Modulorecurso implements Serializable{
                         if (temprecusro.getRecNmbre().equals("slider_imagenes_ciudadano")) {
                             renderrecurso.setBtnslider_imagenes_ciudadano(false);
                         }
-                        
+
                         if (temprecusro.getRecNmbre().equals("muro_comentarios")) {
                             renderrecurso.setBtnmuro_comentarios(false);
                         }
-                        
+
                         if (temprecusro.getRecNmbre().equals("slider_dashboard_ciudadano")) {
                             renderrecurso.setBtnslider_dashboard(false);
                         }
-                        
-                         if (temprecusro.getRecNmbre().equals("btn_filtrar")) {
+
+                        if (temprecusro.getRecNmbre().equals("btn_filtrar")) {
                             renderrecurso.setBtnfiltro_ciudadano(false);
                         }
-                         
-                          if (temprecusro.getRecNmbre().equals("btn_facebook")) {
+
+                        if (temprecusro.getRecNmbre().equals("btn_facebook")) {
                             renderrecurso.setBtnfacebook(false);
                         }
-                          
+
                         if (temprecusro.getRecNmbre().equals("btn_solicitarValInf")) {
                             renderrecurso.setBtnsolicitarValInf(false);
-                        }  
+                        }
                         if (temprecusro.getRecNmbre().equals("btn_devolvervig")) {
                             renderrecurso.setBtndevolvervig(false);
                         }
                         if (temprecusro.getRecNmbre().equals("btn_eliminarAvance")) {
                             renderrecurso.setBtneliminarAvance(false);
                         }
-                          if (temprecusro.getRecNmbre().equals("ver_contratos")) {
+                        if (temprecusro.getRecNmbre().equals("ver_contratos")) {
                             renderrecurso.setBtnver_contratos(false);
                         }
                         if (temprecusro.getRecNmbre().equals("ver_convenios")) {
                             renderrecurso.setBtnver_convenios(false);
                         }
-                         if (temprecusro.getRecNmbre().equals("ver_proyecto_ciudadano")) {
+                        if (temprecusro.getRecNmbre().equals("ver_proyecto_ciudadano")) {
                             renderrecurso.setVer_proyecto_ciudadano(false);
                         }
                         if (temprecusro.getRecNmbre().equals("btn_miperfil")) {
@@ -221,10 +221,10 @@ public class Modulorecurso implements Serializable{
                             renderrecurso.setVermodificarproyecto(false);
                         }
 
-                         if (temprecusro.getRecNmbre().equals("pnlmovientosfinancieros")) {
+                        if (temprecusro.getRecNmbre().equals("pnlmovientosfinancieros")) {
                             renderrecurso.setPnlmovientosfinancieros(false);
                         }
-                         if (temprecusro.getRecNmbre().equals("pnlseguimientos")) {
+                        if (temprecusro.getRecNmbre().equals("pnlseguimientos")) {
                             renderrecurso.setPnlseguimientos(false);
                         }
                         if (temprecusro.getRecNmbre().equals("pnlcontratointerventoria")) {
@@ -242,7 +242,7 @@ public class Modulorecurso implements Serializable{
                         if (temprecusro.getRecNmbre().equals("btnparticipacion_ciudadano")) {
                             renderrecurso.setBtnparticipacion_ciudadano(false);
                         }
-                         if (temprecusro.getRecNmbre().equals("btn_editarEntidadContrato")) {
+                        if (temprecusro.getRecNmbre().equals("btn_editarEntidadContrato")) {
                             renderrecurso.setBtn_editarEntidadContrato(false);
                         }
                         if (temprecusro.getRecNmbre().equals("mnu_administrador")) {
@@ -276,13 +276,13 @@ public class Modulorecurso implements Serializable{
                             renderrecurso.setBtn_eliminarpoliza(false);
                         }
 
-                        
+
                         if (temprecusro.getRecNmbre().equals("btn_modificarobjetoobra")) {
                             renderrecurso.setBtn_modificarobjetoobra(false);
                         }
-                        
+
                         break;
-                        
+
 
                     case GESTION_FINANCIERA:
                         break;
