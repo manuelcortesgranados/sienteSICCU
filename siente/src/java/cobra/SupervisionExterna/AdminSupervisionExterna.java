@@ -19,6 +19,7 @@ import cobra.Supervisor.FacesUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -35,7 +36,7 @@ import supervision.service.SupervisionExternaServiceAble;
  *
  * @author desarrollo1
  */
-public class AdminSupervisionExterna  {
+public class AdminSupervisionExterna implements Serializable{
 
     private SelectItem[] visitaSelec;
     private UIDataTable tablaSeguimientos = new UIDataTable();
