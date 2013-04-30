@@ -2,28 +2,25 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.graficos;
 
-import java.util.List;
+import java.io.Serializable;
 
 /**
  *
  * @author felipe
  */
-public class Estructuragraphic {
+public class Estructuragraphic implements Serializable {
 
     public JSChart JSChart;
-   
-    
+
     public Estructuragraphic() {
-        
     }
 
     public Estructuragraphic(JSChart JSChart) {
         this.JSChart = JSChart;
-        
-        
+
+
     }
 
     public JSChart getJSChart() {
@@ -33,7 +30,4 @@ public class Estructuragraphic {
     public void setJSChart(JSChart JSChart) {
         this.JSChart = JSChart;
     }
-
-   
-
 }

@@ -5,13 +5,14 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoColumnaPorcentual {
+public class GraficoColumnaPorcentual implements Serializable {
 
     private String tituloCampo;
     private String valorCampo;
@@ -35,14 +36,14 @@ public class GraficoColumnaPorcentual {
         int i = 0;
         while (i < listadatos.size()) {
 
-            scriptcolumnaporcentual = scriptcolumnaporcentual +  listadatos.get(i).getEtiqueta() + ": \"" + listadatos.get(i).getValor()+"\"";
+            scriptcolumnaporcentual = scriptcolumnaporcentual + listadatos.get(i).getEtiqueta() + ": \"" + listadatos.get(i).getValor() + "\"";
             //scriptcolumnaporcentual = scriptcolumnaporcentual + "color: \"" + listadatos.get(i).getDescripcion() ;
             i++;
             if (i < listadatos.size()) {
                 scriptcolumnaporcentual = scriptcolumnaporcentual + ",";
             }
         }
-        scriptcolumnaporcentual = scriptcolumnaporcentual+ "}];";
+        scriptcolumnaporcentual = scriptcolumnaporcentual + "}];";
 
 
         scriptcolumnaporcentual = scriptcolumnaporcentual + "AmCharts.ready(function () {"
@@ -53,42 +54,40 @@ public class GraficoColumnaPorcentual {
                 + "chart" + nombreDiv + ".angle = " + angulo + ";"
                 + "chart" + nombreDiv + ".startDuration = 5;"
                 //"chart"+nombreDiv+".columnWidth = "+0.5+";"+
-               
-                +"var categoryAxis = chart" + nombreDiv + ".categoryAxis;"
+
+                + "var categoryAxis = chart" + nombreDiv + ".categoryAxis;"
                 + "categoryAxis.gridPosition = \"start\";"
                 + //"categoryAxis.axisColor = \"#DADADA\";"+
                 "categoryAxis.axisAlpha = 0;"
                 + "categoryAxis.gridAlpha = 0;"
                 + // "categoryAxis.fillColor = \"#FAFAFA\";"+
                 "var valueAxis = new AmCharts.ValueAxis();"
-               // + "valueAxis.axisColor = \"#DADADA\";"
-                + "valueAxis.stackType = \"100%\";"+
-                "valueAxis.gridAlpha = 0;"
+                // + "valueAxis.axisColor = \"#DADADA\";"
+                + "valueAxis.stackType = \"100%\";"
+                + "valueAxis.gridAlpha = 0;"
                 //+ "valueAxis.minimum = 0;"
                 + "valueAxis.axisAlpha = 0;"
                 + "valueAxis.labelsEnabled = false;"
                 + "chart" + nombreDiv + ".addValueAxis(valueAxis);";
-                
-                i = 0;
-        String graf="";
-        while (i < listadatos.size()) {
-            graf=graf+"var graph = new AmCharts.AmGraph();"
-            + "graph.title = \"" + listadatos.get(i).getEtiqueta() + "\";"
-                + "graph.valueField = \"" + listadatos.get(i).getEtiqueta() + "\";"
-                + "graph.type = \"column\";"
-                + "graph.balloonText = \"[[value]] ([[percents]]%)\";"
-                + "graph.lineAlpha = 0;"
-                //+ "graph.fillColors = \"#bf1c25\";"
-                + "graph.fillAlphas = 1;"
-                + "graph.lineColor = \""+listadatos.get(i).getDescripcion()+"\";"
-                + "graph.fontSize = 4;"
-                + "chart" + nombreDiv + ".addGraph(graph);";
 
-           i++;
+        i = 0;
+        String graf = "";
+        while (i < listadatos.size()) {
+            graf = graf + "var graph = new AmCharts.AmGraph();"
+                    + "graph.title = \"" + listadatos.get(i).getEtiqueta() + "\";"
+                    + "graph.valueField = \"" + listadatos.get(i).getEtiqueta() + "\";"
+                    + "graph.type = \"column\";"
+                    + "graph.balloonText = \"[[value]] ([[percents]]%)\";"
+                    + "graph.lineAlpha = 0;"
+                    //+ "graph.fillColors = \"#bf1c25\";"
+                    + "graph.fillAlphas = 1;"
+                    + "graph.lineColor = \"" + listadatos.get(i).getDescripcion() + "\";"
+                    + "graph.fontSize = 4;"
+                    + "chart" + nombreDiv + ".addGraph(graph);";
+
+            i++;
         }
-                scriptcolumnaporcentual=scriptcolumnaporcentual+graf
-                
-                              
+        scriptcolumnaporcentual = scriptcolumnaporcentual + graf
                 + "chart" + nombreDiv + ".write(\"" + nombreDiv + "\");"
                 + "});"
                 + "</script><div id=\"" + nombreDiv + "\" style=\"width: 100px; height: 80px;\"></div>";
