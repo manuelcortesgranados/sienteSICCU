@@ -9,13 +9,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.io.Serializable;
 
 /**
  *
  * @author JAVJ
  */
-public class FileManager {
+public class FileManager implements Serializable {
 
     private BufferedReader bufferedReader;
     private FileReader fileReader;
@@ -31,9 +31,10 @@ public class FileManager {
     }
 
     /**
-     * Devuelve todos los arhivos que contiene un directorio.
-     * En caso de que el strUrlFolder que se recibe no sea un folder o
-     * no exista devolvera un null.
+     * Devuelve todos los arhivos que contiene un directorio. En caso de que el
+     * strUrlFolder que se recibe no sea un folder o no exista devolvera un
+     * null.
+     *
      * @param strUrlFolder
      * @return
      */
@@ -46,8 +47,9 @@ public class FileManager {
     }
 
     /**
-     * Devuelve true si la ruta pertenece a un archivo.
-     * Devuelve false si es otra cosa
+     * Devuelve true si la ruta pertenece a un archivo. Devuelve false si es
+     * otra cosa
+     *
      * @return
      */
     public boolean isFile(String strUrlFile) {
@@ -56,27 +58,26 @@ public class FileManager {
     }
 
     /**
-     * Recibe la ruta de un archivo y un string que se escribira en este.
-     * En caso de no existir el archivo, se crea, y en caso de existir,
-     * se escribe al final de este.
+     * Recibe la ruta de un archivo y un string que se escribira en este. En
+     * caso de no existir el archivo, se crea, y en caso de existir, se escribe
+     * al final de este.
+     *
      * @return
      */
     public boolean writeInFile(String strText, String strUrl) {
         boolean boReturn = false;
-        
+
         file = new File(strUrl);
         String strAux = "";
 
         try {
             if (file.exists()) {
-                
-                
-            }
-            else{
-                if (file.createNewFile())
+            } else {
+                if (file.createNewFile()) {
                     System.out.println("El fichero se ha creado correctamente");
-                  else
+                } else {
                     System.out.println("No ha podido ser creado el fichero");
+                }
             }
             strAux += strText;
             fileWriter = new FileWriter(file);
@@ -103,7 +104,7 @@ public class FileManager {
             fileWriter = new FileWriter(this.file);
 
         } catch (IOException ex) {
-           return false;
+            return false;
         }
 
         try {
@@ -139,7 +140,4 @@ public class FileManager {
         this.file = new File(urlFile);
         return this.file.delete();
     }
-
-   
-   
 }

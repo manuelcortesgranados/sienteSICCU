@@ -3326,7 +3326,8 @@ public class ValidadorSeguimiento implements Serializable {
     private static final char[] A2Z = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     /**
-     * * returns the excel cell number (eg. C11, E4, AD1305 etc.) for this cell.
+     * * returns the excel cell number (eg. C11, E4, AD1305 etc.) for this
+     * cell.
      */
     public String getCellRefString(int cellNum, int fil) {//cellNum=columna
         StringBuffer retval = new StringBuffer();

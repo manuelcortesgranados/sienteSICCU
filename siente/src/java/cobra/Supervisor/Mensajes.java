@@ -2,16 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.Supervisor;
-
 
 import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.JsfUsuario;
-import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
-
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -19,34 +16,31 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page.  This
- * class contains component definitions (and initialization code) for
- * all components that you have defined on this page, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page. This class
+ * contains component definitions (and initialization code) for all components
+ * that you have defined on this page, as well as lifecycle methods and event
+ * handlers where you may add behavior to respond to incoming events.</p>
  *
  * @version Mensajes.java
  * @version Created on Feb 11, 2009, 1:49:53 PM
  * @author jhon
  */
-
-public class Mensajes  {
+public class Mensajes implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.
+     * <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
-
     // </editor-fold>
     private List<Mensaje> listaMensajesRecibidos;
     private List<Mensaje> listaMensajesEnviados;
@@ -57,12 +51,12 @@ public class Mensajes  {
     private UIDataTable tablaMensajesRecibidos = new UIDataTable();
     private String valorFiltroMensajeEnviado = "";
     private String valorFiltroMensajeRecibido = "";
-    private JsfUsuario usuarioObra;    
+    private JsfUsuario usuarioObra;
     private List<JsfUsuario> listaUsuarios;
     private SelectItem[] selectItemUsuarios;
     private Mensaje mensajeNuevo = new Mensaje();
-    ResourceBundle bundle= getSessionBeanCobra().getBundle();
-    
+    ResourceBundle bundle = getSessionBeanCobra().getBundle();
+
     public List<JsfUsuario> getListaUsuarios() {
         return listaUsuarios;
     }
@@ -167,16 +161,14 @@ public class Mensajes  {
         this.valorFiltroMensajeRecibido = valorFiltroMensajeRecibido;
     }
 
-
     /**
      * <p>Construct a new Page bean instance.</p>
      */
     public Mensajes() {
-        if(getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre()!=null)
-        {
-            this.usuarioObra=getSessionBeanCobra().getUsuarioService().encontrarUsuarioPorId(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo());
+        if (getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre() != null) {
+            this.usuarioObra = getSessionBeanCobra().getUsuarioService().encontrarUsuarioPorId(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo());
 //            usuarioObra=getSessionBeanCobra().getUsuarioService().encontrarUsuarioporCedula(Integer.parseInt(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcedula()));
-             this.mensajeNuevo.setJsfUsuarioByIntusurecibe(new JsfUsuario());
+            this.mensajeNuevo.setJsfUsuarioByIntusurecibe(new JsfUsuario());
             this.mensajeNuevo.setDatefecmensaje(new Date());
             this.mensajeNuevo.setJsfUsuarioByIntusurecibe(usuarioObra);
             this.mensajeNuevo.setJsfUsuarioByIntusuenvia(usuarioObra);
@@ -186,9 +178,7 @@ public class Mensajes  {
             llenarSelectUsuarios();
             llenarTablaMensaejesEnviados();
             llenarTablaMensaejesRecibidos();
-        }
-        else
-        {
+        } else {
 
             try {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.jspx");
@@ -206,11 +196,11 @@ public class Mensajes  {
     }
 
     public void llenarTablaMensaejesRecibidos() {
-          List<Mensaje> mensajesRecibe = getSessionBeanCobra().getUsuarioService().encontrarMensajesRecibidosUsuario(this.usuarioObra.getUsuId());
+        List<Mensaje> mensajesRecibe = getSessionBeanCobra().getUsuarioService().encontrarMensajesRecibidosUsuario(this.usuarioObra.getUsuId());
         this.listaMensajesRecibidos = new ArrayList<Mensaje>();
-        
-        if(mensajesRecibe != null && mensajesRecibe.size() > 0){
-             this.listaMensajesRecibidos.addAll(mensajesRecibe);
+
+        if (mensajesRecibe != null && mensajesRecibe.size() > 0) {
+            this.listaMensajesRecibidos.addAll(mensajesRecibe);
         }
 //        Iterator itrtMensaje = this.usuarioObra.getMensajesForIntusurecibe().iterator();
 //        this.listaMensajesRecibidos = new ArrayList<Mensaje>();
@@ -228,8 +218,8 @@ public class Mensajes  {
         List<Mensaje> mensajesEnvia = getSessionBeanCobra().getUsuarioService().encontrarMensajesEnviadosUsuario(this.usuarioObra.getUsuId());
         this.listaMensajesEnviados = new ArrayList<Mensaje>();
 
-        if(mensajesEnvia != null && mensajesEnvia.size() > 0){
-             this.listaMensajesEnviados.addAll(mensajesEnvia);
+        if (mensajesEnvia != null && mensajesEnvia.size() > 0) {
+            this.listaMensajesEnviados.addAll(mensajesEnvia);
         }
     }
 
@@ -270,13 +260,13 @@ public class Mensajes  {
         this.mensajeEnviadoVer = (Mensaje) tablaMensajesEnviados.getRowData();
         return null;
     }
-    
+
     public String bt_responder_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusurecibe(this.mensajeRecibidoVer.getJsfUsuarioByIntusuenvia());
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusuenvia(this.mensajeRecibidoVer.getJsfUsuarioByIntusurecibe());
-        this.mensajeRecibidoResponder.setStrasuntomensaje(bundle.getString("respuestad")+ this.mensajeRecibidoVer.getStrasuntomensaje());
+        this.mensajeRecibidoResponder.setStrasuntomensaje(bundle.getString("respuestad") + this.mensajeRecibidoVer.getStrasuntomensaje());
         return null;
     }
 
@@ -285,7 +275,7 @@ public class Mensajes  {
         this.mensajeRecibidoResponder.setDatefecmensaje(new Date(System.currentTimeMillis()));
         getSessionBeanCobra().getUsuarioService().guardarOrActualizarMensaje(mensajeRecibidoResponder);
         this.listaMensajesEnviados.add(this.mensajeRecibidoResponder);
-        this.mensajeRecibidoResponder=new Mensaje();
+        this.mensajeRecibidoResponder = new Mensaje();
         this.mensajeRecibidoResponder.setDatefecmensaje(new Date());
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusuenvia(new JsfUsuario());
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusurecibe(new JsfUsuario());
@@ -303,8 +293,8 @@ public class Mensajes  {
         }
         getSessionBeanCobra().getUsuarioService().guardarOrActualizarMensaje(mensajeNuevo);
         this.listaMensajesEnviados.add(this.mensajeNuevo);
-        this.mensajeNuevo=new Mensaje();
-  
+        this.mensajeNuevo = new Mensaje();
+
         this.mensajeNuevo.setDatefecmensaje(new Date());
 //        this.mensajeNuevo.setJsfUsuarioByIntusuenvia(new JsfUsuario());
 //        this.mensajeNuevo.setJsfUsuarioByIntusurecibe(new JsfUsuario());
@@ -333,4 +323,3 @@ public class Mensajes  {
         }
     }
 }
-

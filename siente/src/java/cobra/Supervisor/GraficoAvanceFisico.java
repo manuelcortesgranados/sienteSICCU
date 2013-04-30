@@ -1,6 +1,5 @@
 package cobra.Supervisor;
 
-import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SessionBeanCobra;
@@ -9,6 +8,7 @@ import cobra.graficos.DatoGrafico;
 import cobra.graficos.EstiloGrafico;
 import cobra.graficos.GraficoSeries;
 import cobra.graficos.GraficoSeriesAmCharts;
+import java.io.Serializable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,9 +16,10 @@ import java.util.Date;
 
 /**
  * MBean encargado de gestionar la presentación del gráfico de avance físico
+ *
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoAvanceFisico  {
+public class GraficoAvanceFisico implements Serializable {
 
     private GraficoSeries grafico = new GraficoSeriesAmCharts("graficoAvanceFisico");
 
@@ -48,12 +49,12 @@ public class GraficoAvanceFisico  {
     private void graficar() {
 
         VistaObraMapa vistaObraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
-        
+
         BigDecimal porcentajePlanificado = vistaObraMapa.getDeberiaestar().setScale(2, RoundingMode.HALF_UP);
-        BigDecimal porcentajeEjecutado = vistaObraMapa.getNumvalejecobra().divide(vistaObraMapa.getNumvaltotobra() ,2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
-        
-        if(new Date().after(getAdministrarObraNew().getObra().getDatefecfinobra())) {
-            porcentajePlanificado = BigDecimal.valueOf(100).setScale(2,RoundingMode.HALF_UP);
+        BigDecimal porcentajeEjecutado = vistaObraMapa.getNumvalejecobra().divide(vistaObraMapa.getNumvaltotobra(), 2, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(100));
+
+        if (new Date().after(getAdministrarObraNew().getObra().getDatefecfinobra())) {
+            porcentajePlanificado = BigDecimal.valueOf(100).setScale(2, RoundingMode.HALF_UP);
         }
 
         grafico.setTipoGrafico(GraficoSeries.TIPO_COLUMNAS);

@@ -23,13 +23,13 @@ import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -57,7 +57,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author Jhon Eduard Ortiz S
  */
-public class ModificarProyecto  {
+public class ModificarProyecto implements Serializable {
 
     //<editor-fold defaultstate="collapsed" desc="Constantes">
     //</editor-fold>
@@ -166,11 +166,10 @@ public class ModificarProyecto  {
      */
     BigDecimal ivasobreutilidad;
     /**
-     * Tipo de documento selaeccionado cuando se adiciona un documento a la 
+     * Tipo de documento selaeccionado cuando se adiciona un documento a la
      * modificacipon
      */
     private int tipodoc;
-    
     /**
      * Verdadero si fecha de finalización de alguno de los contratos es
      * posterior o igual la fecha de prorroga de la modificación
@@ -263,7 +262,7 @@ public class ModificarProyecto  {
     public void setValorAdicionAsociadoAContrato(boolean valorAdicionAsociadoAContrato) {
         this.valorAdicionAsociadoAContrato = valorAdicionAsociadoAContrato;
     }
-    
+
     public boolean isVerSeleccionarContrato() {
         return verSeleccionarContrato;
     }
@@ -271,7 +270,7 @@ public class ModificarProyecto  {
     public void setVerSeleccionarContrato(boolean verSeleccionarContrato) {
         this.verSeleccionarContrato = verSeleccionarContrato;
     }
-    
+
     public boolean isFechaContratoValida() {
         return fechaContratoValida;
     }
@@ -518,9 +517,9 @@ public class ModificarProyecto  {
                 historicoobra.getTipomodificacions().add(tipomodificacion);
             }
             getSessionBeanCobra().getCobraService().guardarHistorico(historicoobra, getSessionBeanCobra().getUsuarioObra());
-            
+
             this.verPaso2 = false;
-            if(obra.isBooleantienehijos()) {
+            if (obra.isBooleantienehijos()) {
                 this.verPaso4 = true;
             } else {
                 this.verPaso3 = true;
@@ -571,7 +570,7 @@ public class ModificarProyecto  {
      * @return Resultado correspondiente en el faces-config
      */
     public String btAnteriorPaso4Action() {
-        if(obra.isBooleantienehijos()) {
+        if (obra.isBooleantienehijos()) {
             this.verPaso2 = true;
         } else {
             this.verPaso3 = true;
@@ -605,7 +604,7 @@ public class ModificarProyecto  {
                     }
                 }
                 //Si es una adición de presupuesto o si el valor de la obra disminuyó en la programación del cronograma
-                if(historicoobra.isAdicionpresu() || historicoobra.isDisminucionpresu()) {
+                if (historicoobra.isAdicionpresu() || historicoobra.isDisminucionpresu()) {
                     verSeleccionarContrato = true;
                 } else {
                     verSeleccionarContrato = false;
@@ -641,9 +640,9 @@ public class ModificarProyecto  {
     public String btSiguientePaso5Action() {
         if (validarPaso5()) {
             boolean registroExitoso = registrarModificacion();
-                if (registroExitoso) {
-                    return getAdministrarObraNewBean().iniciardeta();
-                }
+            if (registroExitoso) {
+                return getAdministrarObraNewBean().iniciardeta();
+            }
         }
         return null;
     }
@@ -692,14 +691,15 @@ public class ModificarProyecto  {
 
     /**
      * Acción que se ejecuta al seleccionar un contrato de la lista de contratos
-     * @return 
+     *
+     * @return
      */
     public String btSeleccionarContratoAction() {
         Relacioncontratoobra contselec = (Relacioncontratoobra) tablacontratos.getRowData();
         BigDecimal vlrDisponibleContrato = contselec.getContrato().getNumvlrcontrato().subtract(contselec.getContrato().getNumvlrsumahijos().add(contselec.getContrato().getNumvlrsumaproyectos()));
         if (vlrDisponibleContrato.compareTo(historicoobra.getNumvalorhist()) >= 0) {
             //Si el valor de la obra disminuyó en la programación del cronograma
-            if(historicoobra.isDisminucionpresu()) {
+            if (historicoobra.isDisminucionpresu()) {
                 contselec.setNumvalorrelacion(contselec.getNumvalorrelacion().subtract(cronogramaExcel.getFaltantePorProgramar()));
             } else { //De lo contrario se trata de una adición de presupuesto
                 contselec.setNumvalorrelacion(contselec.getNumvalorrelacion().add(historicoobra.getNumvalorhist()));
@@ -728,6 +728,7 @@ public class ModificarProyecto  {
 
     /**
      * Acción que se ejecuta para modificar un contrato de la lista de contratos
+     *
      * @return
      */
     public String btModificarContratoAction() {
@@ -801,11 +802,11 @@ public class ModificarProyecto  {
                 valido = false;
             }
         }
-        if(!historicoobra.isAdiciontiempo() && !historicoobra.isAdicionpresu() && obra.isBooleantienehijos()) {
+        if (!historicoobra.isAdiciontiempo() && !historicoobra.isAdicionpresu() && obra.isBooleantienehijos()) {
             FacesContext.getCurrentInstance().addMessage(
-                                null,
-                                new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                Propiedad.getValor("modinotipificadaerror"), ""));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    Propiedad.getValor("modinotipificadaerror"), ""));
             valido = false;
         }
         return valido;
@@ -813,6 +814,7 @@ public class ModificarProyecto  {
 
     /**
      * Realiza las validaciones necesarios para el paso 3 de la modificacion
+     *
      * @return
      */
     private boolean validarPaso3() {
@@ -829,6 +831,7 @@ public class ModificarProyecto  {
 
     /**
      * Realiza las validaciones necesarios para el paso 4 de la modificacion
+     *
      * @return
      */
     public boolean validarPaso4() {
@@ -889,7 +892,8 @@ public class ModificarProyecto  {
 
     /**
      * Obtiene el bean encargado de controlar los contratos
-     * @return 
+     *
+     * @return
      */
     protected NuevoContratoBasico getNuevoContratoBasicoBean() {
         return (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
@@ -901,7 +905,8 @@ public class ModificarProyecto  {
 
     /**
      * Obtiene el bean encargado de Modificar los contratos
-     * @return 
+     *
+     * @return
      */
     protected ModificarContrato getModificarContratoBean() {
         return (ModificarContrato) FacesUtils.getManagedBean("Supervisor$ModificarContrato");
@@ -1095,8 +1100,8 @@ public class ModificarProyecto  {
     private boolean registrarModificacion() {
         boolean registroExitoso = false;
         try {
-            if(!obra.isBooleantienehijos()) {
-                if(ultimaAlimentacion != null && ultimaAlimentacion.getDatefecha().compareTo(obra.getDatefecfinobra())==0) {
+            if (!obra.isBooleantienehijos()) {
+                if (ultimaAlimentacion != null && ultimaAlimentacion.getDatefecha().compareTo(obra.getDatefecfinobra()) == 0) {
                     ultimaAlimentacion.setDatefecha(obra.obtenerFechaFinUltimoPeriodoNoProrrogado(cronogramaExcel.getNumDiasProrroga()));
                 }
                 constructorObra = new ConstructorObraConCronogramaExcel(obra, cronogramaExcel, historicoobra);
@@ -1107,20 +1112,20 @@ public class ModificarProyecto  {
             getSessionBeanCobra().getModificarProyectoService().guardarModificacion(obra, historicoobra, ultimaAlimentacion, getSessionBeanCobra().getUsuarioObra());
             registroExitoso = true;
             FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO,
-                Propiedad.getValor("modificacionrealizada"), ""));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                    Propiedad.getValor("modificacionrealizada"), ""));
         } catch (ArchivoExistenteException ex) {
             FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                Propiedad.getValor("cronomodiexistenteerror"), ""));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    Propiedad.getValor("cronomodiexistenteerror"), ""));
             Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(
-                null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                Propiedad.getValor("guardarmodificacionproyectoerror"), ""));
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    Propiedad.getValor("guardarmodificacionproyectoerror"), ""));
             Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
         }
         return registroExitoso;
@@ -1165,11 +1170,12 @@ public class ModificarProyecto  {
 
     /**
      * Almacena en el servidor los documentos relacionados a la obra
+     *
      * @throws ArchivoExistenteException
      */
     public void subirDocumentoModificacion() throws ArchivoExistenteException {
-        String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+obra.getIntcodigoobra());
-        cargadorDocumentos.guardarArchivosTemporales(carpetaDoc,false);
+        String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, "" + obra.getIntcodigoobra());
+        cargadorDocumentos.guardarArchivosTemporales(carpetaDoc, false);
         String rutaWebDoc = cargadorDocumentos.getArchivos().get(0).getRutaWeb();
         this.documentomodificacion.setStrubicacion(rutaWebDoc);
     }
@@ -1265,9 +1271,9 @@ public class ModificarProyecto  {
             } catch (ArchivoExistenteException ex) {
                 Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
                 FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        Propiedad.getValor("docexistenteerror"), ""));
             }
         }
     }
@@ -1289,7 +1295,7 @@ public class ModificarProyecto  {
      * Realiza una copia del cronograma anterior
      */
     public void copiarArchivoCronogramaAnterior() {
-        String ubicacionArchivoDestino = MessageFormat.format(RutasWebArchivos.DOCS_MODI, "" + obra.getIntcodigoobra(),  "" + historicoobra.getOididhistoricoobra());
+        String ubicacionArchivoDestino = MessageFormat.format(RutasWebArchivos.DOCS_MODI, "" + obra.getIntcodigoobra(), "" + historicoobra.getOididhistoricoobra());
         String nombreArchivo = obra.getStrurlcronograma().substring(obra.getStrurlcronograma().lastIndexOf("/"));
         ubicacionArchivoDestino = ubicacionArchivoDestino + nombreArchivo;
         try {
@@ -1303,14 +1309,15 @@ public class ModificarProyecto  {
 
     /**
      * Realiza una copia del cronograma anterior
+     *
      * @throws FileNotFoundException Se lanza si el archivo origen no se
      * encuentra
      * @throws ArchivoExistenteException Se lanza si el archivo destino ya
      * existe y sobreescrivir = false
      */
     public void copiarArchivoCronogramaModificacion() throws FileNotFoundException, ArchivoExistenteException {
-        String ubicacionCronogramaModificacion = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+obra.getIntcodigoobra());
-        cargadorCronograma.guardarArchivosTemporales(ubicacionCronogramaModificacion,false);
+        String ubicacionCronogramaModificacion = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, "" + obra.getIntcodigoobra());
+        cargadorCronograma.guardarArchivosTemporales(ubicacionCronogramaModificacion, false);
         obra.setStrurlcronograma(cargadorCronograma.getArchivos().get(0).getRutaWeb());
         documentomodificacion.setObra(obra);
         Tipodocumento tipodocumento = new Tipodocumento();
@@ -1333,7 +1340,7 @@ public class ModificarProyecto  {
     public String btDescargarDocumentoAction() {
         Documentoobra docdowload = (Documentoobra) tablaDocumentosModificacion.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/"+getSessionBeanCobra().getBundle().getString("versioncobra")+ docdowload.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + docdowload.getStrubicacion());
         } catch (Exception e) {
             Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -1371,6 +1378,7 @@ public class ModificarProyecto  {
 
     /**
      * Visualiza la ventana para modificar un contrato
+     *
      * @param contselec Contrato seleccionado
      * @return String que direcciona a la página de contratos
      */
@@ -1382,6 +1390,7 @@ public class ModificarProyecto  {
 
     /**
      * Cancela la modificación y regresa a detalle de obra
+     *
      * @return
      */
     public String btCancelarModificacionAction() {

@@ -9,10 +9,8 @@ package cobra.Supervisor;
  * @author felipe
  */
 import cobra.SessionBeanCobra;
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.application.NavigationHandler;
 
 import javax.faces.component.UIComponent;
@@ -24,7 +22,7 @@ import javax.faces.event.PhaseEvent;
 
 import javax.faces.event.PhaseId;
 
-public class AppPhaseListener implements PhaseListener {
+public class AppPhaseListener implements PhaseListener, Serializable {
 
     public AppPhaseListener() {
     }
@@ -32,8 +30,8 @@ public class AppPhaseListener implements PhaseListener {
     public void beforePhase(PhaseEvent pe) {
         FacesContext facesContext = pe.getFacesContext();
 
-       // SessionBeanCobra beanone = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
-       
+        // SessionBeanCobra beanone = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
+
 
         if (pe.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 
@@ -42,44 +40,39 @@ public class AppPhaseListener implements PhaseListener {
 
             if (viewId.endsWith(".xhtml")) {
                 String ManagedBeanName = this.getFileName(viewId);
-                
+
                 if (ManagedBeanName != null) {
-                    
-                    if (
-                            //ManagedBeanName.compareTo("administrarObraNew") == 0 || 
+
+                    if ( //ManagedBeanName.compareTo("administrarObraNew") == 0 || 
                             ManagedBeanName.compareTo("detalleObra") == 0
-                            || ManagedBeanName.compareTo("documentoObra")==0 || ManagedBeanName.compareTo("imagenObra")==0
-                            ) {
-                        AdministrarObraNew admin=(AdministrarObraNew) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{Supervisor$AdministrarObraNew}", AdministrarObraNew.class);
-                        if(ManagedBeanName.compareTo("imagenObra")==0)
-                        {
+                            || ManagedBeanName.compareTo("documentoObra") == 0 || ManagedBeanName.compareTo("imagenObra") == 0) {
+                        AdministrarObraNew admin = (AdministrarObraNew) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{Supervisor$AdministrarObraNew}", AdministrarObraNew.class);
+                        if (ManagedBeanName.compareTo("imagenObra") == 0) {
                             admin.setOpcion(4);
-                        }    
-                        
-                        if(ManagedBeanName.compareTo("documentoObra")==0)
-                        {
+                        }
+
+                        if (ManagedBeanName.compareTo("documentoObra") == 0) {
                             admin.setOpcion(3);
                         }
-                        if(ManagedBeanName.compareTo("detalleObra")==0)
-                        {
+                        if (ManagedBeanName.compareTo("detalleObra") == 0) {
                             admin.setOpcion(0);
                         }
-                        
+
                         System.out.println("ManagedBeanNameManagedBeanName = " + ManagedBeanName);
-                        
-                       ManagedBeanName = "Supervisor$AdministrarObraNew";
-                        
+
+                        ManagedBeanName = "Supervisor$AdministrarObraNew";
+
                         SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
                         bean.cargarpermisosmodulo(6);
-                        
-                        
-                        
+
+
+
                     }
-                    
-                     if (ManagedBeanName.compareTo("participacionCiudadano") == 0) {
-                        ManagedBeanName = "Ciudadano$PerfilCiudadano";                         
+
+                    if (ManagedBeanName.compareTo("participacionCiudadano") == 0) {
+                        ManagedBeanName = "Ciudadano$PerfilCiudadano";
                     }
-                    
+
                     if (ManagedBeanName.compareTo("datosBasicos") == 0) {
                         ManagedBeanName = "Supervisor$IngresarNuevaObra";
                     }
@@ -105,7 +98,7 @@ public class AppPhaseListener implements PhaseListener {
                         SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
                         bean.cargarpermisosmodulo(6);
                     }
-                    
+
 
                 }
 
@@ -159,7 +152,7 @@ public class AppPhaseListener implements PhaseListener {
 
             SessionBeanCobra bean = (SessionBeanCobra) fc.getApplication().evaluateExpressionGet(fc, "#{SessionBeanCobra}", SessionBeanCobra.class);
 
-            
+
 
             boolean loginPage = fc.getViewRoot().getViewId().lastIndexOf("login") > -1 ? true : false;
 
@@ -189,18 +182,18 @@ public class AppPhaseListener implements PhaseListener {
     }
 
     /*public String prueba(FacesContext fc)
-    {
+     {
     
     
-    SessionBeanCobra bean = (SessionBeanCobra) fc.getApplication().evaluateExpressionGet(fc, "#{SessionBeanCobra}", SessionBeanCobra.class);
+     SessionBeanCobra bean = (SessionBeanCobra) fc.getApplication().evaluateExpressionGet(fc, "#{SessionBeanCobra}", SessionBeanCobra.class);
     
     
-    Iterator lista=fc.getViewRoot().getFacetsAndChildren();
+     Iterator lista=fc.getViewRoot().getFacetsAndChildren();
     
-    recorrerListaComponentes(lista);   
+     recorrerListaComponentes(lista);   
     
-    return null;
-    } */
+     return null;
+     } */
     private boolean loggedIn() {
 
         //TODO

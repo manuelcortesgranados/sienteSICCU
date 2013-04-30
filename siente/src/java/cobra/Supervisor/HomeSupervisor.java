@@ -11,31 +11,29 @@ import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.Novedad;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Relacioneventoscorreousuario;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import cobra.SessionBeanCobra;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page.  This
- * class contains component definitions (and initialization code) for
- * all components that you have defined on this page, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page. This class
+ * contains component definitions (and initialization code) for all components
+ * that you have defined on this page, as well as lifecycle methods and event
+ * handlers where you may add behavior to respond to incoming events.</p>
  *
  * @version HomeSupervisor.java
  * @version Created on 13/11/2008, 09:42:21 PM
  * @author carlos
  */
-public class HomeSupervisor  {
+public class HomeSupervisor implements Serializable {
 
     private UIDataTable listaPropuestas = new UIDataTable();
     private UIDataTable listaSuspendidas = new UIDataTable();
@@ -63,11 +61,11 @@ public class HomeSupervisor  {
     private UIDataTable tablaNovedades = new UIDataTable();
     private UIDataTable tablaNovedadesListado = new UIDataTable();
     private int opcionov = 0;
-    public boolean esHistorico=false;
-    public boolean onNovedades=false;
+    public boolean esHistorico = false;
+    public boolean onNovedades = false;
     private List<Eventoscorreo> liseventosseleccionados;
     private List<Eventoscorreo> listeventos;
-    private  List<Eventoscorreo> evendisponibles = new ArrayList<Eventoscorreo>();
+    private List<Eventoscorreo> evendisponibles = new ArrayList<Eventoscorreo>();
     private List<Relacioneventoscorreousuario> lisrela;
 
     public boolean isOnNovedades() {
@@ -86,7 +84,6 @@ public class HomeSupervisor  {
         this.lisrela = lisrela;
     }
 
-
     public List<Eventoscorreo> getEvendisponibles() {
         return evendisponibles;
     }
@@ -94,7 +91,6 @@ public class HomeSupervisor  {
     public void setEvendisponibles(List<Eventoscorreo> evendisponibles) {
         this.evendisponibles = evendisponibles;
     }
-
 
     public List<Eventoscorreo> getLiseventosseleccionados() {
         return liseventosseleccionados;
@@ -104,8 +100,6 @@ public class HomeSupervisor  {
         this.liseventosseleccionados = liseventosseleccionados;
     }
 
-
-
     public List<Eventoscorreo> getListeventos() {
         return listeventos;
     }
@@ -113,8 +107,6 @@ public class HomeSupervisor  {
     public void setListeventos(List<Eventoscorreo> listeventos) {
         this.listeventos = listeventos;
     }
-
-
 
     public boolean isEsHistorico() {
         return esHistorico;
@@ -164,7 +156,6 @@ public class HomeSupervisor  {
         this.listaVigentes = listaVigentes;
     }
 
-
     public List<Obra> getObrashistoricasfilt() {
         return obrashistoricasfilt;
     }
@@ -198,9 +189,10 @@ public class HomeSupervisor  {
     }
 
     /**
-     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.
+     * <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -322,7 +314,6 @@ public class HomeSupervisor  {
 //    public void setUsuarioDao(UsuarioDaoInterface usuarioDao) {
 //        this.usuarioDao = usuarioDao;
 //    }
-
     public String getValorFiltroNovedad() {
         return valorFiltroNovedad;
     }
@@ -371,7 +362,6 @@ public class HomeSupervisor  {
 
 
         if (getSessionBeanCobra().getUsuarioObra() != null && getSessionBeanCobra().getUsuarioObra().getTercero() != null) {
-           
         } else {
 
             try {
@@ -420,7 +410,7 @@ public class HomeSupervisor  {
         obrasvigentes = new ArrayList<Obra>();
         obrashistoricas = new ArrayList<Obra>();
         obrassuspendidas = new ArrayList<Obra>();
-      
+
 
         LinkedHashSet obrasusu = new LinkedHashSet(getSessionBeanCobra().getCobraService().encontrarObrasUsuario(getSessionBeanCobra().getUsuarioObra()));
         for (Iterator j = obrasusu.iterator(); j.hasNext();) {
@@ -451,25 +441,23 @@ public class HomeSupervisor  {
 
     }
 
-     public void cargarObrasVigentesThumbnailUsuario() {
+    public void cargarObrasVigentesThumbnailUsuario() {
 
 
-        if(obrasvigentes!=null){
-            
+        if (obrasvigentes != null) {
+
             for (Obra b : obrasvigentes) {
-                      String nombcorto=b.getStrnombreobra().substring(0,20)+"...";
-                      b.setStrnombrecrot(nombcorto);
-                      String urlubica=b.getStrimagenobra().replace(" ", "%20");;
-                      b.setStrimagenobra(urlubica);
+                String nombcorto = b.getStrnombreobra().substring(0, 20) + "...";
+                b.setStrnombrecrot(nombcorto);
+                String urlubica = b.getStrimagenobra().replace(" ", "%20");;
+                b.setStrimagenobra(urlubica);
 
             }
 
 
         }
-      
+
     }
-
-
 
     public String txtPalabra_Clave_processValueChange() {
 
@@ -535,7 +523,7 @@ public class HomeSupervisor  {
     }
 
     public String vigentes_action() {
-        esHistorico=false;
+        esHistorico = false;
         Obra ob = (Obra) listaVigentes.getRowData();
         //obraalimentar= (Obra) listaVigentes.getRowData();
         //getSessionBeanCobra().setCodigoobraalimentar(ob.getIntcodigoobra());
@@ -548,7 +536,7 @@ public class HomeSupervisor  {
     }
 
     public String suspendidas_action() {
-        esHistorico=false;
+        esHistorico = false;
         Obra ob = (Obra) listaSuspendidas.getRowData();
         //obraalimentar= (Obra) listaVigentes.getRowData();
         //getSessionBeanCobra().setCodigoobraalimentar(ob.getIntcodigoobra());
@@ -567,7 +555,7 @@ public class HomeSupervisor  {
     }
 
     public String propuestas_action() throws Exception {
-        esHistorico=false;
+        esHistorico = false;
         Obra ob = (Obra) listaPropuestas.getRowData();
         //obraalimentar= (Obra) listaVigentes.getRowData();
         //getSessionBeanCobra().setCodigoobraalimentar(ob.getIntcodigoobra());
@@ -611,9 +599,9 @@ public class HomeSupervisor  {
     public String llenarTablaNovedades() {
         opcionov = 1;
         this.listaNovedades.clear();
-        listaNovedades = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuario(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo(),5);
-        if(listaNovedades.isEmpty()){
-            onNovedades=true;
+        listaNovedades = getSessionBeanCobra().getUsuarioService().encontrarUltimasNovedadesUsuario(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo(), 5);
+        if (listaNovedades.isEmpty()) {
+            onNovedades = true;
         }
         return null;
     }
@@ -659,13 +647,11 @@ public class HomeSupervisor  {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
 
-    public String verTodaslasnovedades()
-    {
-         this.listaTotalNovedades.clear();
+    public String verTodaslasnovedades() {
+        this.listaTotalNovedades.clear();
         listaTotalNovedades = getSessionBeanCobra().getUsuarioService().encontrarTodasNovedadesUsuario(getSessionBeanCobra().getUsuarioObra().getTercero().getIntcodigo());
         return null;
     }
-
 //    public void correos() {
 //        //lista de todos los eventos que existen
 //        listeventos =getSessionBeanCobra().getUsuarioService().encontrarEventosCorreo();
@@ -711,6 +697,4 @@ public class HomeSupervisor  {
 //        } catch (Exception e) {
 //        }
 //    }
-
 }
-

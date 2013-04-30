@@ -1,6 +1,7 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.utilidades.Propiedad;
+import java.io.Serializable;
 
 /**
  * MBean encargado de gestionar la presentación del gráfico de evolución del
@@ -8,7 +9,7 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
  *
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoEvolucionProyectoSupervisor extends GraficoEvolucionProyecto {
+public class GraficoEvolucionProyectoSupervisor extends GraficoEvolucionProyecto implements Serializable {
 
     public GraficoEvolucionProyectoSupervisor() {
         graficar();

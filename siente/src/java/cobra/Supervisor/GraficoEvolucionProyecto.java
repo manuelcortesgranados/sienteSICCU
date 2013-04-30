@@ -10,7 +10,7 @@ import cobra.graficos.DatoGrafico;
 import cobra.graficos.Grafico;
 import cobra.graficos.GraficoSeries;
 import cobra.graficos.GraficoSeriesAmCharts;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Jhon Eduard Ortiz S
  */
-public abstract class GraficoEvolucionProyecto  {
+public abstract class GraficoEvolucionProyecto implements Serializable {
 
     protected GraficoSeries grafico = new GraficoSeriesAmCharts("graficoEvolucionProyecto");
 
@@ -57,9 +57,9 @@ public abstract class GraficoEvolucionProyecto  {
         BigDecimal acumuladoVlrEjecutado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificado = new BigDecimal(0);
         BigDecimal acumuladoVlrPlanificadoIni = new BigDecimal(0);
-        StringBuilder capitalPeriodoMedida= new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
+        StringBuilder capitalPeriodoMedida = new StringBuilder(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(0, 1).toUpperCase());
         capitalPeriodoMedida.append(getAdministrarObraNew().getObra().getPeriodomedida().getStrdescperiomedida().substring(1).toLowerCase());
-        grafico.setTituloEjeX(Propiedad.getValor("graevuproytituloEjeX")+": "+capitalPeriodoMedida);
+        grafico.setTituloEjeX(Propiedad.getValor("graevuproytituloEjeX") + ": " + capitalPeriodoMedida);
         grafico.setTituloEjeY(Propiedad.getValor("graevuproytituloEjeY"));
 
         grafico.setTipoGrafico(GraficoSeries.TIPO_LINEAS);
@@ -69,7 +69,7 @@ public abstract class GraficoEvolucionProyecto  {
         grafico.setTipoDatoEjeX(Grafico.FECHA);
 
         /**
-         * Se obtienen los periodos de la obra y se ordenan de acuerdo a la 
+         * Se obtienen los periodos de la obra y se ordenan de acuerdo a la
          * fecha de finalización del periodo
          */
         int intcodigoobra = getAdministrarObraNew().getObra().getIntcodigoobra();
@@ -89,16 +89,15 @@ public abstract class GraficoEvolucionProyecto  {
                 }
             }
         });
-        
+
         /**
-         * Se obtienen los periodos de la primera planificación del proyecto y 
+         * Se obtienen los periodos de la primera planificación del proyecto y
          * si existen, se genera la línea correspondiente al planificado inicial
          */
-       
         List<Periodohisto> periodoshisto = getSessionBeanCobra().getModificarProyectoService().obtenerPeriodosPrimerHistoricoObra(intcodigoobra);
 
         if (periodoshisto != null) {
-            
+
             ConjuntoDatosGrafico conjuntoDatosPlanIni = new ConjuntoDatosGrafico();
             conjuntoDatosPlanIni.setCodigo("planini");
             conjuntoDatosPlanIni.setEtiqueta(Propiedad.getValor("graevuproyplaniini"));
@@ -118,10 +117,10 @@ public abstract class GraficoEvolucionProyecto  {
                     }
                 }
             });
-            
+
             boolean esPrimerPeriodo = true;
             for (Periodohisto periodoObra : periodoshisto) {
-                if(esPrimerPeriodo) {
+                if (esPrimerPeriodo) {
                     DatoGrafico datoPlaniIni = new DatoGrafico();
                     datoPlaniIni.setValorX("" + periodoObra.getDatefeciniperiodo().getTime());
                     datoPlaniIni.setValorY("0");
@@ -143,7 +142,7 @@ public abstract class GraficoEvolucionProyecto  {
                 datoPlaniIni.setEtiqueta(stringEtiDatoPlaniActual.toString());
                 conjuntoDatosPlanIni.getListaDatos().add(datoPlaniIni);
             }
-            
+
             grafico.getConjuntosDatosGrafico().add(conjuntoDatosPlanIni);
         }
 
@@ -156,18 +155,18 @@ public abstract class GraficoEvolucionProyecto  {
         conjuntoDatosEjecucionActual.setCodigo("ejeactual");
         conjuntoDatosEjecucionActual.setEtiqueta(Propiedad.getValor("graevuproyejec"));
         conjuntoDatosEjecucionActual.getEstilo().setColorSerie("#3ba7e5");
-        
+
         boolean esPrimerPeriodo = true;
         for (Periodo periodoObra : periodosActuales) {
-            if(esPrimerPeriodo) {
+            if (esPrimerPeriodo) {
                 DatoGrafico datoPlaniActual = new DatoGrafico();
                 datoPlaniActual.setValorX("" + periodoObra.getDatefeciniperiodo().getTime());
                 datoPlaniActual.setValorY("0");
                 StringBuilder stringEtiDatoPlaniActual = new StringBuilder();
                 stringEtiDatoPlaniActual.append(Propiedad.getValor("graevuproyeti1dato"))
-                    .append(" ").append(periodoObra.getDatefeciniperiodo())
-                    .append(" ").append(Propiedad.getValor("graevuproyetidatoplan"))
-                    .append("0");
+                        .append(" ").append(periodoObra.getDatefeciniperiodo())
+                        .append(" ").append(Propiedad.getValor("graevuproyetidatoplan"))
+                        .append("0");
                 datoPlaniActual.setEtiqueta(stringEtiDatoPlaniActual.toString());
                 conjuntoDatosPlanActual.getListaDatos().add(datoPlaniActual);
                 esPrimerPeriodo = false;
@@ -185,25 +184,25 @@ public abstract class GraficoEvolucionProyecto  {
                     .append(periodoObra.getNumvaltotplanif().divide(divisor).setScale(3, RoundingMode.HALF_UP).toPlainString());
             datoPlaniActual.setEtiqueta(stringEtiDatoPlaniActual.toString());
             conjuntoDatosPlanActual.getListaDatos().add(datoPlaniActual);
-            
+
             /**
              * Se obtienen las alimentaciones realizadas para el periodo
              */
-            Iterator alimentacionIterador= getSessionBeanCobra().getCobraService().obtenerAlimentacionxFechaPeriodo(periodoObra.getDatefeciniperiodo(), periodoObra.getDatefecfinperiodo(), intcodigoobra).iterator();
-           
+            Iterator alimentacionIterador = getSessionBeanCobra().getCobraService().obtenerAlimentacionxFechaPeriodo(periodoObra.getDatefeciniperiodo(), periodoObra.getDatefecfinperiodo(), intcodigoobra).iterator();
+
             vlrEjecutado = BigDecimal.ZERO;
             while (alimentacionIterador.hasNext()) {
                 Alimentacion alimenta = (Alimentacion) alimentacionIterador.next();
                 vlrEjecutado = vlrEjecutado.add(alimenta.getNumtotalejec());
-                
+
                 if (!alimenta.getDatefecha().equals(periodoObra.getDatefecfinperiodo())) {
                     /**
                      * Si el sistema está configurado para alimentar por fecha
                      */
                     if (Boolean.valueOf(Propiedad.getValor("varalimentacionxfecha"))) {
                         /**
-                         * Se construye el dato correspondiente a la línea del valor
-                         * ejecutado actual del proyecto
+                         * Se construye el dato correspondiente a la línea del
+                         * valor ejecutado actual del proyecto
                          */
                         DatoGrafico datoEjeActual = new DatoGrafico();
                         datoEjeActual.setValorX("" + alimenta.getDatefecha().getTime());
@@ -220,12 +219,12 @@ public abstract class GraficoEvolucionProyecto  {
                         conjuntoDatosEjecucionActual.getListaDatos().add(datoEjeActual);
                     }
                 }
-                
+
             }
 
             if (!Boolean.valueOf(Propiedad.getValor("varalimentacionxfecha"))) {
                 /**
-                 * Se construye el dato correspondiente a la línea del valor 
+                 * Se construye el dato correspondiente a la línea del valor
                  * ejecutado actual del proyecto
                  */
                 DatoGrafico datoEjeActual = new DatoGrafico();

@@ -32,6 +32,7 @@
  */
 package cobra.Supervisor;
 
+import java.io.Serializable;
 import javax.faces.FactoryFinder;
 import javax.faces.application.Application;
 import javax.faces.application.ApplicationFactory;
@@ -46,7 +47,8 @@ import javax.servlet.http.HttpSession;
 /**
  * JSF utilities.
  */
-public class FacesUtils {
+public class FacesUtils implements Serializable {
+
     /**
      * Get servlet context.
      *
@@ -89,7 +91,7 @@ public class FacesUtils {
     /**
      * Store the managed bean inside the session scope.
      *
-     * @param beanName    the name of the managed bean to be stored
+     * @param beanName the name of the managed bean to be stored
      * @param managedBean the managed bean to be stored
      */
     public static void setManagedBeanInSession(String beanName, Object managedBean) {
@@ -119,7 +121,7 @@ public class FacesUtils {
      * Add information message to a specific client.
      *
      * @param clientId the client id
-     * @param msg      the information message
+     * @param msg the information message
      */
     public static void addInfoMessage(String clientId, String msg) {
         FacesContext.getCurrentInstance().addMessage(clientId, new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg));
@@ -138,7 +140,7 @@ public class FacesUtils {
      * Add error message to a specific client.
      *
      * @param clientId the client id
-     * @param msg      the error message
+     * @param msg the error message
      */
     public static void addErrorMessage(String clientId, String msg) {
         FacesContext.getCurrentInstance().addMessage(clientId, new FacesMessage(FacesMessage.SEVERITY_ERROR, msg, msg));

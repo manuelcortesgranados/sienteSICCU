@@ -10,7 +10,7 @@ import cobra.graficos.EstiloGrafico;
 import cobra.graficos.Grafico;
 import cobra.graficos.GraficoSeries;
 import cobra.graficos.GraficoSeriesAmCharts;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
@@ -21,9 +21,10 @@ import java.util.List;
 /**
  * MBean encargado de gestionar la presentación del gráfico de evolución del
  * contrato
+ *
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoEvolucionContrato  {
+public class GraficoEvolucionContrato implements Serializable {
 
     private GraficoSeries grafico = new GraficoSeriesAmCharts("graficoEvolucionContrato");
 
@@ -48,8 +49,8 @@ public class GraficoEvolucionContrato  {
     }
 
     /**
-     * Genera el grácico de evolución del proyecto estableciendo el código de
-     * la gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
+     * Genera el grácico de evolución del proyecto estableciendo el código de la
+     * gráfica en atributo codigoGrafico del objeto graficoEvolucionproyecto
      */
     private void graficar() {
         BigDecimal divisor = new BigDecimal(1000000);
@@ -69,7 +70,6 @@ public class GraficoEvolucionContrato  {
 
         List<Planificacionpago> planificacionesPago = getSessionBeanCobra().getCobraService().encontrarPlanificacionpagoxContrato(getNuevoContratoBasico().getContrato());
         Collections.sort(planificacionesPago, new Comparator() {
-
             public int compare(Object o1, Object o2) {
                 Planificacionpago p1 = (Planificacionpago) o1;
                 Planificacionpago p2 = (Planificacionpago) o2;
@@ -110,7 +110,6 @@ public class GraficoEvolucionContrato  {
          */
         List<Movimiento> movimientos = getSessionBeanCobra().getCobraService().encontrarMovimientosxContrato(getNuevoContratoBasico().getContrato().getIntidcontrato());
         Collections.sort(movimientos, new Comparator() {
-
             public int compare(Object o1, Object o2) {
                 Movimiento m1 = (Movimiento) o1;
                 Movimiento m2 = (Movimiento) o2;

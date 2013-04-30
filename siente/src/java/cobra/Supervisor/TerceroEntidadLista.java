@@ -2,36 +2,37 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.Supervisor;
+
+import java.io.Serializable;
 
 /**
  *
  * @author desarrollo3
  */
-public class TerceroEntidadLista {
-     int codigo;
-        String strnombre;
+public class TerceroEntidadLista implements Serializable {
 
-        public TerceroEntidadLista(int codigo, String strnombre) {
-            this.codigo = codigo;
-            this.strnombre = strnombre;
-        }
+    int codigo;
+    String strnombre;
 
-        public int getCodigo() {
-            return codigo;
-        }
+    public TerceroEntidadLista(int codigo, String strnombre) {
+        this.codigo = codigo;
+        this.strnombre = strnombre;
+    }
 
-        public void setCodigo(int codigo) {
-            this.codigo = codigo;
-        }
+    public int getCodigo() {
+        return codigo;
+    }
 
-        public String getStrnombre() {
-            return strnombre;
-        }
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
 
-        public void setStrnombre(String strnombre) {
-            this.strnombre = strnombre;
-        }
+    public String getStrnombre() {
+        return strnombre;
+    }
 
+    public void setStrnombre(String strnombre) {
+        this.strnombre = strnombre;
+    }
 }
