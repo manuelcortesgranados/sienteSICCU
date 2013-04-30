@@ -10,7 +10,7 @@ import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
 
-public class RedimensionarImagen {
+public class RedimensionarImagen implements Serializable {
 
     public static void scale(String src, int width, int height, String dest) throws IOException {
         BufferedImage bsrc = ImageIO.read(new File(src));
@@ -18,7 +18,7 @@ public class RedimensionarImagen {
         int heightViejo = bsrc.getHeight();
         int widthViejo = bsrc.getWidth();
 
-        height = (width * heightViejo)/widthViejo;
+        height = (width * heightViejo) / widthViejo;
 
         BufferedImage bdest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = bdest.createGraphics();

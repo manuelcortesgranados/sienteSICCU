@@ -4,22 +4,23 @@
  */
 package cobra;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 
 /**
  *
  * @author carlos
  */
-public class Coordenada {
+public class Coordenada implements Serializable {
+
     private int grados = 0;
     private int minutos = 0;
     private float segundos = 0;
     private double coorddecima;
 
     public Coordenada(int grados, int minutos, float segundos) {
-        this.grados=grados;
-        this.minutos=minutos;
-        this.segundos=segundos;
+        this.grados = grados;
+        this.minutos = minutos;
+        this.segundos = segundos;
         this.convertirCoordenadaDecimal();
     }
 
@@ -27,7 +28,6 @@ public class Coordenada {
         this.coorddecima = coorddecima;
         descomponerCoordenada();
     }
-
 
     public double getCoorddecima() {
         convertirCoordenadaDecimal();
@@ -63,29 +63,25 @@ public class Coordenada {
         this.segundos = segundos;
     }
 
-    public void convertirCoordenadaDecimal()
-    {
+    public void convertirCoordenadaDecimal() {
 
-        
-        double min=((double)minutos)/60;
-        double seg=segundos/3600;        
-        coorddecima=grados+min+segundos/3600;
+
+        double min = ((double) minutos) / 60;
+        double seg = segundos / 3600;
+        coorddecima = grados + min + segundos / 3600;
 
 
     }
 
-    public void descomponerCoordenada()
-    {
-                
-        grados=(int) coorddecima;
-        double min= (coorddecima - grados)*60;        
-        minutos=(int) ((coorddecima - grados) * 60);
-        double seg= (min -minutos)*60;        
-        segundos=(float) seg;
+    public void descomponerCoordenada() {
+
+        grados = (int) coorddecima;
+        double min = (coorddecima - grados) * 60;
+        minutos = (int) ((coorddecima - grados) * 60);
+        double seg = (min - minutos) * 60;
+        segundos = (float) seg;
 
         convertirCoordenadaDecimal();
 
     }
-
-
 }

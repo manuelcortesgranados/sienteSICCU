@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ import org.richfaces.model.UploadedFile;
  * del componente de Subida de Archivos de JSF
  * @author Jhon Eduard Ortiz S
  */
-public class CargadorArchivosWeb {
+public class CargadorArchivosWeb implements Serializable{
 
     /**
      * Listado de archivos cargados en el servidor

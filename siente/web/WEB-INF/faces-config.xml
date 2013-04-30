@@ -82,8 +82,8 @@
     <managed-bean>
         <managed-bean-name>AtencionHumanitaria$AdminSolicitudAtencion</managed-bean-name>
         <managed-bean-class>cobra.AtencionHumanitaria.AdminSolicitudAtencion</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>SessionChsolicitud</managed-bean-name>
@@ -98,12 +98,11 @@
 
     <managed-bean>
         <managed-bean-name>makeList</managed-bean-name>
-        <managed-bean-class>cobra.ListFromCollection
-        </managed-bean-class>
+        <managed-bean-class>cobra.ListFromCollection</managed-bean-class>
+    
         <managed-bean-scope>
             request
-        </managed-bean-scope>
-    </managed-bean>
+        </managed-bean-scope></managed-bean>
 
     <!--  <managed-bean>
         <managed-bean-name>AtencionHumanitaria$CrearSolicitudAtencion</managed-bean-name>
@@ -266,18 +265,20 @@
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
         <managed-bean-class>cobra.Login</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>perfilcontrol</managed-bean-name>
         <managed-bean-class>cobra.DatosGeneralesPerfilControl</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>SessionBeanCobra</managed-bean-name>
         <managed-bean-class>cobra.SessionBeanCobra</managed-bean-class>
+
+    
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
             <property-name>usuarioService</property-name>
@@ -314,14 +315,12 @@
         <managed-property>
             <property-name>modificarProyectoService</property-name>
             <value>#{modificarProyectoService}</value>
-        </managed-property>
-
-    </managed-bean>
+        </managed-property></managed-bean>
     <managed-bean>
         <managed-bean-name>SubirArchivoBean</managed-bean-name>
         <managed-bean-class>cobra.SubirArchivoBean</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-    </managed-bean>
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
 
     <managed-bean>
         <managed-bean-name>GraficarIndicadores</managed-bean-name>
@@ -358,8 +357,8 @@
     <managed-bean>
         <managed-bean-name>Ciudadano$PerfilCiudadano</managed-bean-name>
         <managed-bean-class>cobra.Ciudadano.PerfilCiudadano</managed-bean-class>
-        <managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+    
+        <managed-bean-scope>session</managed-bean-scope></managed-bean>
     <!-- Beans de Administrar entidad -->
     <managed-bean>
         <managed-bean-name>Administrador$AdministrarEntidad</managed-bean-name>

@@ -1,6 +1,7 @@
 package cobra;
 
 import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -9,7 +10,7 @@ import java.util.Date;
  * a la aplicación Web
  * @author Jhon Eduard Ortiz S
  */
-public class ArchivoWeb {
+public class ArchivoWeb implements Serializable{
 
     /**
      * Ubicación del archivo relativa a la aplicación Web.

@@ -6,14 +6,13 @@ package cobra;
 
 import co.com.interkont.cobra.to.ControlPanel;
 import cobra.Supervisor.FacesUtils;
-import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 
 /**
  *
  * @author desarrollo2
  */
-public class DatosGeneralesPerfilControl  implements Serializable {
+public class DatosGeneralesPerfilControl implements Serializable {
 
     public DatosGeneralesPerfilControl() {
     }
@@ -141,20 +140,20 @@ public class DatosGeneralesPerfilControl  implements Serializable {
 
     public String encontrarEtiqueta() {
 
-       
+
         inversiontotal = getSessionBeanCobra().getCobraService().buscarxetiqueta("inversiontotal");
         ejecuciontotal = getSessionBeanCobra().getCobraService().buscarxetiqueta("ejecuciontotal");
         personasbeneficiadas = getSessionBeanCobra().getCobraService().buscarxetiqueta("personasbeneficiadas");
         empleosgenerados = getSessionBeanCobra().getCobraService().buscarxetiqueta("empleosgenerados");
         arriendosentregados = getSessionBeanCobra().getCobraService().buscarxetiqueta("arriendosentregados");
         viviendasreparadas = getSessionBeanCobra().getCobraService().buscarxetiqueta("viviendasreparadas");
-        unidadeshabconstruidas= getSessionBeanCobra().getCobraService().buscarxetiqueta("unidadhabconstruidas");
-        totalinversionconvenio= getSessionBeanCobra().getCobraService().buscarxetiqueta("convenios");
-        obrasaprobadas=getSessionBeanCobra().getCobraService().buscarxetiqueta("aprobadas");
-        obrasenejecucion=getSessionBeanCobra().getCobraService().buscarxetiqueta("enejecucion");
-        obrasfinalizadas=getSessionBeanCobra().getCobraService().buscarxetiqueta("finalizadas");
-        obrassolicitadas=getSessionBeanCobra().getCobraService().buscarxetiqueta("obrassolicitadas");
-        totalpagado=getSessionBeanCobra().getCobraService().buscarxetiqueta("totalpagado");
+        unidadeshabconstruidas = getSessionBeanCobra().getCobraService().buscarxetiqueta("unidadhabconstruidas");
+        totalinversionconvenio = getSessionBeanCobra().getCobraService().buscarxetiqueta("convenios");
+        obrasaprobadas = getSessionBeanCobra().getCobraService().buscarxetiqueta("aprobadas");
+        obrasenejecucion = getSessionBeanCobra().getCobraService().buscarxetiqueta("enejecucion");
+        obrasfinalizadas = getSessionBeanCobra().getCobraService().buscarxetiqueta("finalizadas");
+        obrassolicitadas = getSessionBeanCobra().getCobraService().buscarxetiqueta("obrassolicitadas");
+        totalpagado = getSessionBeanCobra().getCobraService().buscarxetiqueta("totalpagado");
 
         return null;
 
