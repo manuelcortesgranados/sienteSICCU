@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view
+<ui:composition
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-    contentType="text/html">
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+   >
     <interkont:spacer height="20" style="width:100%;"/>
     <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
         <td>
@@ -24,16 +25,7 @@
                         <li><a4j:commandLink value="#{var.header1}" styleClass="consoclaro anchorLink"
                                            style="font-size: 9px;" immediate="true"
                                            action="#{Reportes.reporteSelect}" render="richpanelReportes, headerre"/></li>
-                        <!--<li><a4j:commandLink value="{var.header2}" styleClass="conso anchorLink"
-                                           style="font-size: 9px;" immediate="true"
-                                           action="{Reportes.reporteSelectAh}" render="richpanelReportes, headerre"/></li>
-                        <li><a4j:commandLink value="{var.header3}" styleClass="consoclaro anchorLink"
-                                           style="font-size: 9px;" immediate="true"
-                                           action="{Reportes.reporteSelectEt}" render="richpanelReportes, headerre"/></li>
-                        <li><a4j:commandLink value="{var.header4}" styleClass="conso anchorLink"
-                                           style="font-size: 9px;" immediate="true"
-                                           action="{Reportes.reporteSelectEn}" render="richpanelReportes, headerre"/></li>-->
-                        <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
+                         <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
                                            style="font-size: 9px;" immediate="true"
                                            action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
                     </ul>
@@ -44,4 +36,4 @@
 
 
 
-</f:view>
+</ui:composition>
