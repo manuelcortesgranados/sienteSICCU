@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<ui:composite
-        xmlns:f="http://java.sun.com/jsf/core" 
-        xmlns:ui="http://java.sun.com/jsf/facelets"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:a4j="http://richfaces.org/a4j"
-       xmlns:interkont="http://www.interkont.com/jsf" 
-       xmlns:rich="http://richfaces.org/rich">
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" 
+        xmlns:interkont="http://www.interkont.com/jsf"
+	xmlns:rich="http://richfaces.org/rich" 
+        >
 
     <f:subview id="seguimientos">
         <h:panelGroup id="gpListaSeguimientos" styleClass="centrado">
@@ -16,11 +17,10 @@
                                 rows="10"
                                 var="segumiento"
                                 rowKeyVar="filaSeleccionada"
-                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
-                                onRowMouseOut="this.style.backgroundColor='#FFFFFF'"
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                 sortMode="single"
                                 value="#{SessionBeanCobra.cobraService.listaseguimientos}"
-                                render="panelfootersegui"
                                 style="text-align:center;width:100%;"
                                 styleClass="centrado">
                     <f:facet name="header">
@@ -85,4 +85,4 @@
         </h:panelGroup>
     </f:subview>
 
-</ui:composite>
+</ui:composition>

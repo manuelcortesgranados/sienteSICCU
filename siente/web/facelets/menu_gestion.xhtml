@@ -5,9 +5,9 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"  xmlns:interkont="http://www.interkont.com/jsf"
-    xmlns:c="http://java.sun.com/jstl/core"
-   >
+    xmlns:a4j="http://richfaces.org/a4j"  
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
 
 
     <div class="topbar"><div class="toptitle"> <h:outputText value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
@@ -23,13 +23,13 @@
 
     <rich:toolbar>
         <rich:toolbarGroup id="tbgmenugestion">
-            <h:commandLink styleClass="siente anchorLink"/>
+            <h:commandLink />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}">
-            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
+            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" />
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                <a4j:commandLink styleClass="home anchorLink" onclick="document.location.href='../faces#{modulo.strurlMdloRuta}'" value="Inicio"
+                <a4j:commandLink onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
                                  render="panelBody" immediate="true"/>
             </a4j:repeat>
         </rich:toolbarGroup>
@@ -364,7 +364,7 @@
 
         <rich:dropDownMenu rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_miperfil}">
             <f:facet name="label">
-                <h:outputText value="Mi Perfil" styleClass="miperfil anchorLink"/>
+                <h:outputText value="Mi Perfil"/>
             </f:facet>
 
             
@@ -378,7 +378,7 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
+            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" />
         </rich:toolbarGroup>
 
         
@@ -386,7 +386,7 @@
         <rich:dropDownMenu  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.mnu_administrador}">
 
             <f:facet name="label">
-                <h:outputText value="#{var.administrador}" styleClass="gestionar anchorLink"/>
+                <h:outputText value="#{var.administrador}" />
             </f:facet>
 
             <rich:menuGroup label="Usuario" iconDisabled="icon-inicio-obrach" >   
@@ -453,16 +453,16 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
+            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" />
         </rich:toolbarGroup>
 
         <rich:dropDownMenu rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnayuda}">
             <f:facet name="label">
-                <h:outputText value="Ayuda" styleClass="ayuda anchorLink"/>
+                <h:outputText value="Ayuda" />
             </f:facet>
 
             <rich:menuItem label="Soporte en linea"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
-                           onclick="window.open(document.location.href='#{var.linksoporte}', '_blank')"  iconDisabled="icon-soporte"/>
+                           onclick="window.open(document.location.href='#{var.linksoporte}', '_blank');"  iconDisabled="icon-soporte"/>
             <rich:menuItem label="Tutorial"  immediate="true"
                            action="manual" iconDisabled="icon-tutorial"/>
             <rich:menuItem label="Preguntas Frecuentes" immediate="true"
@@ -470,24 +470,24 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
+            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px"/>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
             <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
-                           styleClass="cerrar anchorLink"/>
+                           />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
+            <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right" rendered="#{var.variconch}">
-            <a target="_blank" href="#{var.linkcliente2}" class="republica anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente2}"></a>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right" >
-            <a target="_blank" href="#{var.linkcliente}" class="ch anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente}"></a>
         </rich:toolbarGroup>
 
     </rich:toolbar>
