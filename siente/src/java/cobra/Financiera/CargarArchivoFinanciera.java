@@ -12,12 +12,8 @@ import co.com.interkont.cobra.to.Registrovalidador;
 import co.com.interkont.cobra.to.Tipomovimiento;
 import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
 import cobra.Supervisor.FacesUtils;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,15 +38,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import cobra.util.RutasWebArchivos;
+import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import org.postgresql.util.PSQLException;
 
 /**
  *
  * @author desarrollo5
  */
-public class CargarArchivoFinanciera  {
+public class CargarArchivoFinanciera implements Serializable {
 
     private final static int TOTAL_COL = 20;
     private List<Movimiento> movimientos = new ArrayList<Movimiento>();
@@ -102,47 +98,47 @@ public class CargarArchivoFinanciera  {
     public void cargarExcelFinanciera() {
 
         /*
-        try {
+         try {
         
-        InputStream inp = null;
-        File docExcel = null;
+         InputStream inp = null;
+         File docExcel = null;
         
-        Iterator arch = getSubirArchivoMovimientos().getArchivosSubidos().iterator();
+         Iterator arch = getSubirArchivoMovimientos().getArchivosSubidos().iterator();
         
-        while (arch.hasNext()) {
-        docExcel = (File) arch.next();
-        }
+         while (arch.hasNext()) {
+         docExcel = (File) arch.next();
+         }
         
-        inp = new FileInputStream(docExcel);
+         inp = new FileInputStream(docExcel);
         
-        if (registro.getFechaarchivo() != null) {
+         if (registro.getFechaarchivo() != null) {
         
-        limpiarlistas();
-        extrarInfoExcelFinanciera(inp);
-        } else {
-        FacesUtils.addErrorMessage("El campo fecha es obligatorio");
-        }
+         limpiarlistas();
+         extrarInfoExcelFinanciera(inp);
+         } else {
+         FacesUtils.addErrorMessage("El campo fecha es obligatorio");
+         }
         
         
-        } catch (FileNotFoundException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvalidFormatException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RequiredAttributesException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FormaterCellException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (FinancieraException ex) {
-        FacesUtils.addErrorMessage(ex.getMessage());
-        Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         } catch (FileNotFoundException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IOException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InvalidFormatException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (RequiredAttributesException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (FormaterCellException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (FinancieraException ex) {
+         FacesUtils.addErrorMessage(ex.getMessage());
+         Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+         }
          */
     }
 
@@ -604,8 +600,8 @@ public class CargarArchivoFinanciera  {
         Movimiento movimiento = getSessionBeanCobra().getFinancieraService().encontrarMovimientoPorComprobante(rowData.getComprobanteFinanciero(), String.valueOf(rowData.getFila()));
 
         /*  if(movimiento!=null){
-        System.out.println("mov"+movimiento.getStrcomprobantefidu());
-        }*/
+         System.out.println("mov"+movimiento.getStrcomprobantefidu());
+         }*/
         //System.out.println("moxx");
 
         BigDecimal valorEjecutado = null;
@@ -794,108 +790,108 @@ public class CargarArchivoFinanciera  {
                 }
             }/* else {
             
-            //Valida que el valor actual del encargo fiduciario sea igual a 0
-            //para asignarle el valor del movimiento
-            if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(BigDecimal.ZERO) == 0) {
-            ordenPago.getEncargofiduciario().setNumsaldoactual(movimiento.getNumvlrmovimiento());
+             //Valida que el valor actual del encargo fiduciario sea igual a 0
+             //para asignarle el valor del movimiento
+             if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(BigDecimal.ZERO) == 0) {
+             ordenPago.getEncargofiduciario().setNumsaldoactual(movimiento.getNumvlrmovimiento());
             
-            } else {
-            
-            
-            if (movimiento.getTipomovimiento().getOidtipomovimiento() == GIRO
-            && movimiento.getTipomovimiento().getOidtipomovimiento() == ANTICIPO) {
-            
-            if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(movimiento.getNumvlrmovimiento()) >= 0) {
-            BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().subtract(movimiento.getNumvlrmovimiento());
-            ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
-            ordenPagos.add(ordenPago);
-            
-            } else {
-            String msg = "El valor actual del encargo fiduciario es menor al valor del movimiento";
-            throw new FinancieraException(msg);
-            }
-            
-            //Valida que el tipo de movimiento sea un DEVOLUCION
-            //para adicionarl al valor actual del encargo fiduciario
-            //el valor del movimiento del excel
-            } else if (movimiento.getTipomovimiento().getOidtipomovimiento() == DEVOLUCION) {
-            
-            BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().add(movimiento.getNumvlrmovimiento());
-            ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
-            ordenPagos.add(ordenPago);
-            }
-            }
-            }
-            } else {
-            
-            Encargofiduciario encargo=null;
-            encargo=getSessionBeanCobra().getFinancieraService().encontrarEncargofiduciario(rowData.getNumeroEncargoFidu());
-            
-            if(encargo!=null){
-            
-            System.out.println("se asocio encargo fiduciario "+rowData.getNumeroEncargoFidu());
-            
-            ordenPago.setEncargofiduciario(encargo);
+             } else {
             
             
-            //Valida que el valor actual del encargo fiduciario sea igual a 0
-            //para asignarle el valor del movimiento
-            if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(BigDecimal.ZERO) == 0) {
-            ordenPago.getEncargofiduciario().setNumsaldoactual(movimiento.getNumvlrmovimiento());
+             if (movimiento.getTipomovimiento().getOidtipomovimiento() == GIRO
+             && movimiento.getTipomovimiento().getOidtipomovimiento() == ANTICIPO) {
             
-            } else {
+             if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(movimiento.getNumvlrmovimiento()) >= 0) {
+             BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().subtract(movimiento.getNumvlrmovimiento());
+             ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
+             ordenPagos.add(ordenPago);
             
-            //Valida que el tipo de movimiento sea un GIRO o ANTICIPO
-            //para restarle al valor actual del encargo fiduciario
-            //el valor del movimiento del excel
-            try {
-            System.out.println("movimiento.getTipomovimiento().getOidtipomovimiento()"+movimiento.getTipomovimiento().getOidtipomovimiento());
-            } catch (Exception e) {
-            }
+             } else {
+             String msg = "El valor actual del encargo fiduciario es menor al valor del movimiento";
+             throw new FinancieraException(msg);
+             }
             
+             //Valida que el tipo de movimiento sea un DEVOLUCION
+             //para adicionarl al valor actual del encargo fiduciario
+             //el valor del movimiento del excel
+             } else if (movimiento.getTipomovimiento().getOidtipomovimiento() == DEVOLUCION) {
             
-            if (movimiento.getTipomovimiento().getOidtipomovimiento() == GIRO
-            && movimiento.getTipomovimiento().getOidtipomovimiento() == ANTICIPO) {
+             BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().add(movimiento.getNumvlrmovimiento());
+             ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
+             ordenPagos.add(ordenPago);
+             }
+             }
+             }
+             } else {
             
-            if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(movimiento.getNumvlrmovimiento()) >= 0) {
-            BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().subtract(movimiento.getNumvlrmovimiento());
-            ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
-            ordenPagos.add(ordenPago);
+             Encargofiduciario encargo=null;
+             encargo=getSessionBeanCobra().getFinancieraService().encontrarEncargofiduciario(rowData.getNumeroEncargoFidu());
             
-            } else {
-            String msg = "El valor actual del encargo fiduciario es menor al valor del movimiento";
-            throw new FinancieraException(msg);
-            }
+             if(encargo!=null){
             
-            //Valida que el tipo de movimiento sea un DEVOLUCION
-            //para adicionarl al valor actual del encargo fiduciario
-            //el valor del movimiento del excel
-            } else if (movimiento.getTipomovimiento().getOidtipomovimiento() == DEVOLUCION) {
+             System.out.println("se asocio encargo fiduciario "+rowData.getNumeroEncargoFidu());
             
-            BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().add(movimiento.getNumvlrmovimiento());
-            ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
-            ordenPagos.add(ordenPago);
-            }
-            }
+             ordenPago.setEncargofiduciario(encargo);
             
             
-            }
-            else{
-            String msg = "El encargo fiduciario no se encuentra creado  ";
-            throw new FinancieraException(msg,rowData.getNumeroEncargoFidu());
-            }
+             //Valida que el valor actual del encargo fiduciario sea igual a 0
+             //para asignarle el valor del movimiento
+             if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(BigDecimal.ZERO) == 0) {
+             ordenPago.getEncargofiduciario().setNumsaldoactual(movimiento.getNumvlrmovimiento());
+            
+             } else {
+            
+             //Valida que el tipo de movimiento sea un GIRO o ANTICIPO
+             //para restarle al valor actual del encargo fiduciario
+             //el valor del movimiento del excel
+             try {
+             System.out.println("movimiento.getTipomovimiento().getOidtipomovimiento()"+movimiento.getTipomovimiento().getOidtipomovimiento());
+             } catch (Exception e) {
+             }
             
             
-            }*/
+             if (movimiento.getTipomovimiento().getOidtipomovimiento() == GIRO
+             && movimiento.getTipomovimiento().getOidtipomovimiento() == ANTICIPO) {
+            
+             if (ordenPago.getEncargofiduciario().getNumsaldoactual().compareTo(movimiento.getNumvlrmovimiento()) >= 0) {
+             BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().subtract(movimiento.getNumvlrmovimiento());
+             ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
+             ordenPagos.add(ordenPago);
+            
+             } else {
+             String msg = "El valor actual del encargo fiduciario es menor al valor del movimiento";
+             throw new FinancieraException(msg);
+             }
+            
+             //Valida que el tipo de movimiento sea un DEVOLUCION
+             //para adicionarl al valor actual del encargo fiduciario
+             //el valor del movimiento del excel
+             } else if (movimiento.getTipomovimiento().getOidtipomovimiento() == DEVOLUCION) {
+            
+             BigDecimal nuevoValorEncargo = ordenPago.getEncargofiduciario().getNumsaldoactual().add(movimiento.getNumvlrmovimiento());
+             ordenPago.getEncargofiduciario().setNumsaldoactual(nuevoValorEncargo);
+             ordenPagos.add(ordenPago);
+             }
+             }
+            
+            
+             }
+             else{
+             String msg = "El encargo fiduciario no se encuentra creado  ";
+             throw new FinancieraException(msg,rowData.getNumeroEncargoFidu());
+             }
+            
+            
+             }*/
 
             movimiento.setStrcomprobantefidu(rowData.getComprobanteFinanciero());
 
             /*Tercero beneficiario = getSessionBeanCobra().getCobraService().encontrarTerceroPorNit(rowData.getNitBeneficiario());
             
-            if (beneficiario == null) {
-            String msg = "El beneficiario con nit " + rowData.getNitBeneficiario() + " no se encuentra creado en el sistema";
-            throw new FinancieraException(msg);
-            }*/
+             if (beneficiario == null) {
+             String msg = "El beneficiario con nit " + rowData.getNitBeneficiario() + " no se encuentra creado en el sistema";
+             throw new FinancieraException(msg);
+             }*/
 
             //   Contratista contratista = getSessionBeanCobra().getCobraService().encontrarContratistaPorNit(rowData.getNitContratista());
 
@@ -1039,22 +1035,18 @@ public class CargarArchivoFinanciera  {
         try {
 
             cargadorArchivoMovimientos.guardarArchivosTemporales(RutasWebArchivos.FINANCIERA, true);
-            ServletContext cont=(ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            
-            String mensaje=getSessionBeanCobra().getFinancieraService().funcion_importar_movimientos_financieros(
-                    
-                    cont.getRealPath(RutasWebArchivos.FINANCIERA)+"/"
+            ServletContext cont = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+
+            String mensaje = getSessionBeanCobra().getFinancieraService().funcion_importar_movimientos_financieros(
+                    cont.getRealPath(RutasWebArchivos.FINANCIERA) + "/"
                     + cargadorArchivoMovimientos.getArchivos().get(0).getNombre(), "2013-03-15");
-            
-            if(mensaje.compareTo("")!=0)
-            {
+
+            if (mensaje.compareTo("") != 0) {
                 FacesUtils.addErrorMessage(mensaje);
-            }
-            else
-            {
+            } else {
                 FacesUtils.addInfoMessage("Se ha validado correctamente el archivo.");
-            }    
-              
+            }
+
         } catch (ArchivoExistenteException ex) {
             Logger.getLogger(CargarArchivoFinanciera.class.getName()).log(Level.SEVERE, null, ex);
         }

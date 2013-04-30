@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"  xmlns:interkont="http://www.interkont.com/jsf"
-    contentType="text/html">
+    xmlns:a4j="http://richfaces.org/a4j"  
+    xmlns:interkont="http://www.interkont.com/jsf"
+ >
     
     <html>
 
@@ -28,15 +28,7 @@
                     font-family: Verdana, Geneva, sans-serif;
                 }
             </style>
-            <!--Start of Zopim Live Chat Script
-<script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-$.src='//cdn.zopim.com/?xhIi6ynK6w15eXomZpg6ajumZp1tTAh3';z.t=+new Date;$.
-type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-</script>-->
-            <!--End of Zopim Live Chat Script-->
+           
         </head>
 
         <body >
@@ -112,11 +104,10 @@ type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
                     <td>
                         <h:form id="form_footer">
                             <ui:include src="/facelets/footer.xhtml"/>
-
                         </h:form>
                     </td>
                 </tr>
             </table>                  
         </body>
     </html>
-</f:view>
+</ui:composition>

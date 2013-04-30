@@ -4,10 +4,11 @@
  */
 package cobra.reportes;
 
+import java.io.Serializable;
+
 /**
  *
  * @author desarrollo8
  */
-public class ReporteDinamico {
-    
+public class ReporteDinamico implements Serializable {
 }

@@ -5,6 +5,7 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -12,12 +13,14 @@ import javax.servlet.ServletContext;
 /**
  * Clase de utilidades para el manejo de archivos en el contexto de una
  * aplicación web
+ *
  * @author Jhon Eduard Ortiz S
  */
-public class ArchivoWebUtil {
+public class ArchivoWebUtil implements Serializable {
 
     /**
      * Obtiene el contexto correspondiente a la petición web incolucrada
+     *
      * @return Contexto Web
      */
     public static ServletContext getServletContext() {
@@ -27,6 +30,7 @@ public class ArchivoWebUtil {
     /**
      * Obtiene la ruta absoluta de un archivo, correspondiente a una ruta
      * relativa a una aplicación web
+     *
      * @param rutaWebRelativa Ruta telativa a la aplicación Web
      * @return Ruta absoluta en el servidor web
      */
@@ -36,8 +40,9 @@ public class ArchivoWebUtil {
 
     /**
      * Copia un archivo relativo a la aplicación web en otra ubicación relativa
-     * a la aplicación web. Si la ubicación destino corresponde a una carpeta, el archivo
-     * conserva el nombre del orígen
+     * a la aplicación web. Si la ubicación destino corresponde a una carpeta,
+     * el archivo conserva el nombre del orígen
+     *
      * @param origen Ubicación origen
      * @param destino Ubicación destino
      * @param cortar Si true, se elimina el archivo origen después de copiarlo
@@ -50,16 +55,17 @@ public class ArchivoWebUtil {
      * existe y sobreescrivir = false
      */
     public static String copiarArchivo(String origen, String destino, boolean cortar, boolean sobreescrivir) throws FileNotFoundException, ArchivoExistenteException {
-        if(destino.substring(destino.length()-1).equals("/")) {
-            destino = destino + origen.substring(origen.lastIndexOf("/")+1);
+        if (destino.substring(destino.length() - 1).equals("/")) {
+            destino = destino + origen.substring(origen.lastIndexOf("/") + 1);
         }
-        ArchivoUtil.copiarArchivo(obtenerRutaAbsoluta(origen), obtenerRutaAbsoluta(destino), cortar,sobreescrivir);
+        ArchivoUtil.copiarArchivo(obtenerRutaAbsoluta(origen), obtenerRutaAbsoluta(destino), cortar, sobreescrivir);
         return destino;
     }
 
     /**
      * Copia un archivo fisico del sistema a una ubicación relativa a la
      * aplicación web
+     *
      * @param origen Ubicación origen
      * @param destino Ubicación destino
      * @param cortar Si true, se elimina el archivo origen después de copiarlo
@@ -78,10 +84,11 @@ public class ArchivoWebUtil {
     /**
      * Elimina el archivo en la ubicación proporcionada en el contexto de la
      * aplicación web
+     *
      * @param origen Ubicación absoluta del archivo
      * @return verdadero si el archivo se eliminpo correctamente
      */
-    public static boolean  eliminarArchivo(String origen) {
+    public static boolean eliminarArchivo(String origen) {
         origen = obtenerRutaAbsoluta(origen);
         return ArchivoUtil.eliminarArchivo(origen);
     }
@@ -89,6 +96,7 @@ public class ArchivoWebUtil {
     /**
      * Obtiene los archivos contenidos en una carpeta en el contexto de la
      * aplicación web
+     *
      * @param ubicacionCarpeta Ubicación absoluta de la carpeta
      * @return Lista de archivos contenidos en la carpeta
      */
@@ -96,13 +104,13 @@ public class ArchivoWebUtil {
         ubicacionCarpeta = obtenerRutaAbsoluta(ubicacionCarpeta);
         return ArchivoUtil.obtenerArchivos(ubicacionCarpeta);
     }
-    
 
     /**
      * Obtiene el archivo correspondiente a la ruta web especificada
+     *
      * @param ubicacion ruta del archivo relativa a la aplicación web
      * @return Archivo o carpeta
-     * @throws ArchivoNoExistenteException Se lanza cuando el archivo 
+     * @throws ArchivoNoExistenteException Se lanza cuando el archivo
      * especificado no existe
      */
     public static File obtenerArchivo(String ubicacion) throws ArchivoNoExistenteException {

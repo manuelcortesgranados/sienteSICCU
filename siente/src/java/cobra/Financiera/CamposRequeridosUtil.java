@@ -4,6 +4,7 @@
  */
 package cobra.Financiera;
 
+import java.io.Serializable;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author desarrollo5
  */
-public class CamposRequeridosUtil {
+public class CamposRequeridosUtil implements Serializable {
 
     private static CamposRequeridosUtil instance = null;
 
@@ -37,14 +38,16 @@ public class CamposRequeridosUtil {
 
     /**
      *
-     * Valida que los campos ingresados en el VO, marcados como obligatorios, no incluyan un valor NULL, o vacio.
-     * Los atributos obligatorios son definidos en el arreglo "nombreGetters".
-     * En este parametros se incluyen los nombres de los getters (metodos GET)
+     * Valida que los campos ingresados en el VO, marcados como obligatorios, no
+     * incluyan un valor NULL, o vacio. Los atributos obligatorios son definidos
+     * en el arreglo "nombreGetters". En este parametros se incluyen los nombres
+     * de los getters (metodos GET)
      *
      * @param in
      * @param nombreGetters
-     * @return mensaje de usuario, que enuncia los valores requeridos NO incluidos dentro del DTO.
-     * 			Si el mensaje es NULL, la validacion fue exitosa.
+     * @return mensaje de usuario, que enuncia los valores requeridos NO
+     * incluidos dentro del DTO. Si el mensaje es NULL, la validacion fue
+     * exitosa.
      */
     public void validarAtributosRequeridos(Object in, String[] nombreGetters) throws RequiredAttributesException {
         ArrayList<String> camposNoIngresados = new ArrayList<String>();
@@ -84,7 +87,9 @@ public class CamposRequeridosUtil {
     }
 
     /**
-     * Metodo utilitaria para crear el mensaje de error basado en un Arraylist con los campos NO ingresados.
+     * Metodo utilitaria para crear el mensaje de error basado en un Arraylist
+     * con los campos NO ingresados.
+     *
      * @param camposNoIngresados
      * @return
      */

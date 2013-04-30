@@ -2,14 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.Financiera;
+
+import java.io.Serializable;
 
 /**
  *
  * @author desarrollo5
  */
-public class RequiredAttributesException extends RuntimeException {
+public class RequiredAttributesException extends RuntimeException implements Serializable {
 
     public RequiredAttributesException(String message, Throwable cause) {
         super(message, cause);

@@ -16,6 +16,7 @@ import co.com.interkont.cobra.to.Tipotercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Utilidades;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -30,7 +31,7 @@ import org.richfaces.component.UIDataTable;
  * @author David Andres Betancourth Botero
  * @author Cristian Daniel Gutierrez S.
  */
-public class Usuario  {
+public class Usuario implements Serializable {
 
     public String username = "";
     public String contrasenaact = "";
@@ -421,24 +422,30 @@ public class Usuario  {
         }
         return null;
     }
-    
+
     /**
-     * Este metodo es utilizado para buscar el usuario por (nombre,usuario,cedula)
+     * Este metodo es utilizado para buscar el usuario por
+     * (nombre,usuario,cedula)
+     *
      * @return Retorna los usuario encontrados con estos criterios
      */
     public void buscarUsuarioporCriterios() {
         listausuarios = new ArrayList<JsfUsuario>();
         listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
     }
+
     /**
-     * Este metodo es utilizado mostrar el Perfil del usuario con la informacion 
+     * Este metodo es utilizado mostrar el Perfil del usuario con la informacion
+     *
      * @return Retorna la pagina gestionusuario
-     */ 
+     */
     public String iniciarperfilusuario() {
         return "gestionusuario";
     }
+
     /**
      * Este metodo es utilizado para cargar toda la informacion del usuario.
+     *
      * @return Retorna La informacion del usuario.
      */
     public String irperfilUsuario() {
@@ -507,7 +514,8 @@ public class Usuario  {
 //
 //    }
     /**
-     * Este metodo es utilizado para cargar el selectitem tipo de Origen 
+     * Este metodo es utilizado para cargar el selectitem tipo de Origen
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarTipoorigenUsuario() {
@@ -520,8 +528,11 @@ public class Usuario  {
         }
         return null;
     }
+
     /**
-     * Este metodo es utilizado para cargar el selectitem de los departamentos del usuario 
+     * Este metodo es utilizado para cargar el selectitem de los departamentos
+     * del usuario
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarDeptosUsuario() {
@@ -535,8 +546,10 @@ public class Usuario  {
             deptosusuariooption[i++] = dep;
         }
     }
+
     /**
-     * Este metodo es utilizado obtener los  municipios pertenecientes al depto
+     * Este metodo es utilizado obtener los municipios pertenecientes al depto
+     *
      * @param coddepto: codigo de la Localidad
      * @param todos : boolean de si tiene todos los departamentos
      * @return Retorna la lista de los municipios.
@@ -560,8 +573,11 @@ public class Usuario  {
         }
         return sel;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios pertenecientes al depto
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios
+     * pertenecientes al depto
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosUsuario() {
@@ -575,8 +591,11 @@ public class Usuario  {
         usuariomod.getTercero().getLocalidadByStrcodigolocalidad().setStrcodigolocalidad("169");
         return null;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios de expedición
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios de
+     * expedición
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosExpedicion() {
@@ -584,8 +603,11 @@ public class Usuario  {
         //usuariomod.getTercero().getLocalidadByStrlocalidadexpdocumento().setStrcodigolocalidad(municipiosexpdocumentooption[0].getValue().toString());        
         return null;
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los municipios de nacimiento
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los municipios de
+     * nacimiento
+     *
      * @return No retorna ningun Valor.
      */
     public String llenarMunicipiosNacimiento() {
@@ -594,8 +616,10 @@ public class Usuario  {
         // usuariomod.getTercero().getLocalidadByStrlocalidadnacimiento().setStrcodigolocalidad(municipiosnacimientooption[0].getValue().toString());      
         return null;
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem del Tipo tercero
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarTipoTercero() {
@@ -609,8 +633,10 @@ public class Usuario  {
         }
 
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem de los cargos
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarCargos() {
@@ -623,8 +649,10 @@ public class Usuario  {
             cargosoption[i++] = c;
         }
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem de Genero
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarGeneros() {
@@ -637,8 +665,10 @@ public class Usuario  {
             generosoption[i++] = genItem;
         }
     }
-     /**
+
+    /**
      * Este metodo es utilizado para cargar el selectitem del Estado Civil
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarEstadoCivil() {
@@ -651,8 +681,11 @@ public class Usuario  {
             estadocivilsoption[i++] = estCiv;
         }
     }
-     /**
-     * Este metodo es utilizado para cargar el selectitem de los Tipos de Identificación
+
+    /**
+     * Este metodo es utilizado para cargar el selectitem de los Tipos de
+     * Identificación
+     *
      * @return No retorna ningun Valor.
      */
     public void llenarTiposIdentificacion() {
@@ -665,9 +698,11 @@ public class Usuario  {
             tipoidentificacionsoption[i++] = estCiv;
         }
     }
-     /**
-     * Este metodo es utilizado habilitar los botones de Guardar y Cancelar
-     * y deshabilitar el boton de Modificar
+
+    /**
+     * Este metodo es utilizado habilitar los botones de Guardar y Cancelar y
+     * deshabilitar el boton de Modificar
+     *
      * @return No retorna ningun Valor.
      */
     public String habilitarModificarUsuario() {
@@ -677,9 +712,11 @@ public class Usuario  {
 
         return null;
     }
-     /**
-     * Este metodo es utilizado habilitar el boton de Modificar
-     * y deshabilitar los botones de Guardar y Cancelar
+
+    /**
+     * Este metodo es utilizado habilitar el boton de Modificar y deshabilitar
+     * los botones de Guardar y Cancelar
+     *
      * @return Retorna el listado de los usuarios.
      */
     public String btnCancelar() {
@@ -688,8 +725,10 @@ public class Usuario  {
         deshabilitarBotonModificar = true;
         return "gestionusuario";
     }
-     /**
+
+    /**
      * Método utilizado Guardar la Modificacion del usuario.
+     *
      * @return No devuelve ningun valor
      */
     public String guardarModificacion() {
@@ -706,8 +745,10 @@ public class Usuario  {
         }
         return null;
     }
+
     /**
      * Método utilizado para Validar el correo del usuario
+     *
      * @return retorna si el correo es valido o invalido
      */
     public boolean validarInformacion() {

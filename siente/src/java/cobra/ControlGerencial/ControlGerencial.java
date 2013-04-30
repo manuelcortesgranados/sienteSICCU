@@ -23,6 +23,7 @@ import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import com.interkont.cobra.util.DatoPie;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -34,17 +35,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page.  This
- * class contains component definitions (and initialization code) for
- * all components that you have defined on this page, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page. This class
+ * contains component definitions (and initialization code) for all components
+ * that you have defined on this page, as well as lifecycle methods and event
+ * handlers where you may add behavior to respond to incoming events.</p>
  *
  * @version IngresarNuevaObra.java
  * @version Created on 16/11/2008, 04:41:01 PM
  * @author Carlos Alberto Loaiza Guerrerro
  */
-public class ControlGerencial  {
+public class ControlGerencial implements Serializable {
 
     private String deptos;
     private String muni;
@@ -97,8 +97,7 @@ public class ControlGerencial  {
     public void setInformaciondash(Dashboard informaciondash) {
         this.informaciondash = informaciondash;
     }
-    
-     private DashboardConvenios informaciondashconvenios = new DashboardConvenios();
+    private DashboardConvenios informaciondashconvenios = new DashboardConvenios();
 
     public DashboardConvenios getInformaciondashconvenios() {
         return informaciondashconvenios;
@@ -107,7 +106,6 @@ public class ControlGerencial  {
     public void setInformaciondashconvenios(DashboardConvenios informaciondashconvenios) {
         this.informaciondashconvenios = informaciondashconvenios;
     }
-    
     private DashboardAh informaciondashah = new DashboardAh();
 
     public DashboardAh getInformaciondashah() {
@@ -116,8 +114,7 @@ public class ControlGerencial  {
 
     public void setInformaciondashah(DashboardAh informaciondashah) {
         this.informaciondashah = informaciondashah;
-    }     
-    
+    }
     /**
      * Numero de proyectos aprobados
      */
@@ -486,7 +483,7 @@ public class ControlGerencial  {
         filtrogeren.setLocalidad("169");
         filtrogeren.setZona(0);
         informaciondash = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboard(filtrogeren);
-        
+
     }
 
     public String iniciargerencial() {
@@ -576,11 +573,11 @@ public class ControlGerencial  {
         return null;
     }
     /*
-    public void calcularInversion() {
-    FiltroGerencial filtroNacional = new FiltroGerencial(0, "0", filtrogeren.getLog());
-    inversion = BigDecimal.valueOf(Double.valueOf(getSessionBeanCobra().getIndicadorService().PieConsolidadoGeneral_InversionTotal(filtroNacional).getValor()));
-    inversionRegion = BigDecimal.valueOf(Double.valueOf(getSessionBeanCobra().getIndicadorService().PieConsolidadoGeneral_InversionTotal(filtrogeren).getValor()));
-    }
+     public void calcularInversion() {
+     FiltroGerencial filtroNacional = new FiltroGerencial(0, "0", filtrogeren.getLog());
+     inversion = BigDecimal.valueOf(Double.valueOf(getSessionBeanCobra().getIndicadorService().PieConsolidadoGeneral_InversionTotal(filtroNacional).getValor()));
+     inversionRegion = BigDecimal.valueOf(Double.valueOf(getSessionBeanCobra().getIndicadorService().PieConsolidadoGeneral_InversionTotal(filtrogeren).getValor()));
+     }
      */
 
     public void generarGraficos() {
@@ -589,13 +586,11 @@ public class ControlGerencial  {
             filtrogeren.setZona(intzona);
             invporregion = true;
             if (intzona == 0) {
-                filtrogeren.setLocalidad("169");                
+                filtrogeren.setLocalidad("169");
                 invporregion = false;
-            }
-             else
-            {
+            } else {
                 filtrogeren.setLocalidad("0");
-            }   
+            }
 
         } else {
             if (!muni.equals("0")) {
@@ -609,7 +604,7 @@ public class ControlGerencial  {
                 filtrogeren.setLocalidad("169");
                 invporregion = false;
             }
-            
+
         }
 
         filtrogeren.setLog(idconsolidadoselec);
@@ -733,8 +728,8 @@ public class ControlGerencial  {
         datoproyectoconsolidado = getSessionBeanCobra().getIndicadorService().PieAvanceObrasTerritoriales(filtrogeren);
         /**
          * TODO: Se convierte null a 0 en datoproyectoconsolidado.getValor() por
-         * excepcion que se estaba presentando, queda pendiente revisar si
-         * es correcto que se presente null en datoproyectoconsolidado.getValor()
+         * excepcion que se estaba presentando, queda pendiente revisar si es
+         * correcto que se presente null en datoproyectoconsolidado.getValor()
          */
         porejecutado = Double.valueOf(datoproyectoconsolidado.getValor().equals("null") ? "0" : datoproyectoconsolidado.getValor()).intValue();
         datoproyectoconsolidado.setValor(String.valueOf(porejecutado));
@@ -804,8 +799,8 @@ public class ControlGerencial  {
     }
 
     /**
-     * Obtiene una lista de objetos de tipo DatosPie con la cantidad de proyectos
-     * correspondiete a cada tipo de servicio de colombia humanitaria
+     * Obtiene una lista de objetos de tipo DatosPie con la cantidad de
+     * proyectos correspondiete a cada tipo de servicio de colombia humanitaria
      */
     public void cargarServiciosAtencionHumanitaria() {
         //getSessionBeanCobra().getIndicadorService().setFaatender(new ArrayList<DatoPie>());
@@ -863,6 +858,7 @@ public class ControlGerencial  {
     /**
      * Carga la información correspondiente a la modal del botón ver + de la
      * sección de proyectos de rehabilitación
+     *
      * @return null
      */
     public String obtenerConsolidadoRehabilitacion() {
@@ -890,7 +886,8 @@ public class ControlGerencial  {
 
     /**
      * Obtiene el valor invertido respecto al total nacional en infraestructura
-     * @return 
+     *
+     * @return
      */
     public BigDecimal getTotalNacionalInvertido() {
         BigDecimal totalNacionalInvertido = BigDecimal.ZERO;
@@ -902,7 +899,8 @@ public class ControlGerencial  {
 
     /**
      * Genera el reporte de balance general para rehabilitacion
-     * @return 
+     *
+     * @return
      */
     public String reportePdfFichaCorto() {
         try {
@@ -933,8 +931,10 @@ public class ControlGerencial  {
     }
 
     /**
-     * Genera el reporte con el listado de entidades territoriales para la modal de rehabilitacion
-     * @return 
+     * Genera el reporte con el listado de entidades territoriales para la modal
+     * de rehabilitacion
+     *
+     * @return
      */
     public String reportePdfFichaConvenio() {
         try {
@@ -995,7 +995,8 @@ public class ControlGerencial  {
 
     /**
      * Genera el reporte de balance general para convenios
-     * @return 
+     *
+     * @return
      */
     public String reportePdfFichaBalanceConvenio() {
         try {
@@ -1027,7 +1028,8 @@ public class ControlGerencial  {
 
     /**
      * Genera el reporte de balance general para atención humanitaria
-     * @return 
+     *
+     * @return
      */
     public String reportePdfFichaBalanceAh() {
         try {
@@ -1056,26 +1058,28 @@ public class ControlGerencial  {
         }
         return null;
     }
-    
+
     /**
      * Carga la información correspondiente a la modal del botón ver + de la
      * sección de convenios
+     *
      * @return null
      */
     public String obtenerConsolidadoConvenios() {
-        
-        informaciondashconvenios= getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardConvenios(filtrogeren);
+
+        informaciondashconvenios = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardConvenios(filtrogeren);
         return null;
-    }   
-    
-     /**
+    }
+
+    /**
      * Carga la información correspondiente a la modal del botón ver + de la
      * sección de Atención Humanitaria
+     *
      * @return null
      */
     public String obtenerConsolidadoAh() {
-        
-        informaciondashah= getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardAh(filtrogeren);
+
+        informaciondashah = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardAh(filtrogeren);
         return null;
     }
 }

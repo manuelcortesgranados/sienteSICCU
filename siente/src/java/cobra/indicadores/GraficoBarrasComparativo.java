@@ -5,13 +5,14 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoBarrasComparativo;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoBarrasComparativo {
+public class GraficoBarrasComparativo implements Serializable {
 
     private String tituloCampo;
     private String valorCampo;
@@ -21,7 +22,6 @@ public class GraficoBarrasComparativo {
     private List<DatoBarrasComparativo> listadatos;
     private String nombreDiv;
     private String scriptbarra3d;
- 
 
     public GraficoBarrasComparativo(String tituloCampo, String valorCampo, String valorCampo2, String depth3D, String angulo, List<DatoBarrasComparativo> listadatos, String nombreDiv, boolean rotate) {
         this.tituloCampo = tituloCampo;
@@ -44,27 +44,24 @@ public class GraficoBarrasComparativo {
             }
         }
         scriptbarra3d = scriptbarra3d + "];";
-        
-        int alto=30*listadatos.size();   
-        if(listadatos.size()<=10)
-        {
-            alto=400;
-        }    
-             
+
+        int alto = 30 * listadatos.size();
+        if (listadatos.size() <= 10) {
+            alto = 400;
+        }
+
         scriptbarra3d = scriptbarra3d + "AmCharts.ready(function () {"
                 + "chart" + nombreDiv + " = new AmCharts.AmSerialChart();"
                 + "chart" + nombreDiv + ".dataProvider = chartData" + nombreDiv + ";"
                 + "chart" + nombreDiv + ".categoryField = \"" + tituloCampo + "\";"
-                + "chart" + nombreDiv + ".rotate = "+rotate+";"
+                + "chart" + nombreDiv + ".rotate = " + rotate + ";"
                 + "chart" + nombreDiv + ".depth3D = " + depth3D + ";"
                 + "chart" + nombreDiv + ".angle = " + angulo + ";"
                 //+ "chart" + nombreDiv + ".columnWidth = " + 0.5 + ";"
-                + "chart" + nombreDiv + ".startDuration = 1;"            
-                + "chart" + nombreDiv + ".plotAreaBorderColor = \"#DADADA\";"  
+                + "chart" + nombreDiv + ".startDuration = 1;"
+                + "chart" + nombreDiv + ".plotAreaBorderColor = \"#DADADA\";"
                 + "chart" + nombreDiv + ".plotAreaBorderAlpha = 1;"
                 + "chart" + nombreDiv + ".marginBottom = 10;"
-                             
-                
                 + "var categoryAxis = chart" + nombreDiv + ".categoryAxis;"
                 + "categoryAxis.gridPosition = \"start\";"
                 //+ "categoryAxis.axisColor = \"#DADADA\";"
@@ -73,23 +70,14 @@ public class GraficoBarrasComparativo {
                 + "categoryAxis.gridAlpha = 0;"
                 + "categoryAxis.labelRotation = 45;"
                 + "categoryAxis.fontSize = 8;"
-                
-                
                 //+ "categoryAxis.fillColor = \"#FAFAFA\";"
-                
-           
-                
-                
+
                 + "var valueAxis = new AmCharts.ValueAxis();"
                 //+ "valueAxis.axisColor = \"#DADADA\";"
                 // //+"valueAxis.title = \"Aprobado miles de pesos, $\";"+
-                +"valueAxis.gridAlpha = 0.1;"
-                +"valueAxis.position = \"left\";"
-                +"valueAxis.tickLength = 0;"
-                
-                
-                
-                
+                + "valueAxis.gridAlpha = 0.1;"
+                + "valueAxis.position = \"left\";"
+                + "valueAxis.tickLength = 0;"
                 //+ "valueAxis.minimum = 0;"
                 //+ "valueAxis.step = 20000000;"
                 //+ "valueAxis.maximum = 60000000;"
@@ -102,12 +90,11 @@ public class GraficoBarrasComparativo {
                 + "graph.lineAlpha = 0;"
                 + "graph.fillColors = \"#ADD981\";"
                 + "graph.fillAlphas = 1;"
-                +"graph.cornerRadiusTop = 22;"
+                + "graph.cornerRadiusTop = 22;"
                 //+ "graph.colorField = \"color\";"
                 //+ "graph.fontSize = 4;"
-                
+
                 + "chart" + nombreDiv + ".addGraph(graph);"
-                
                 + "var graph2 = new AmCharts.AmGraph();"
                 + "graph2.title = \"" + valorCampo2 + "\";"
                 + "graph2.valueField = \"" + valorCampo2 + "\";"
@@ -119,13 +106,11 @@ public class GraficoBarrasComparativo {
                 //+ "graph2.colorField = \"color\";"
                 //+ "graph2.fontSize = 4;"
                 + "chart" + nombreDiv + ".addGraph(graph2);"
-                
-                +"var legend = new AmCharts.AmLegend();"
-                +"chart" + nombreDiv + ".addLegend(legend);"
-                
+                + "var legend = new AmCharts.AmLegend();"
+                + "chart" + nombreDiv + ".addLegend(legend);"
                 + "chart" + nombreDiv + ".write(\"" + nombreDiv + "\");"
                 + "});"
-                + "</script><div id=\"" + nombreDiv + "\" style=\"width: 100%; height: "+alto+"px;\"></div>";
+                + "</script><div id=\"" + nombreDiv + "\" style=\"width: 100%; height: " + alto + "px;\"></div>";
 
 
     }
@@ -193,6 +178,4 @@ public class GraficoBarrasComparativo {
     public void setValorCampo2(String valorCampo2) {
         this.valorCampo2 = valorCampo2;
     }
-    
-    
 }

@@ -27,6 +27,7 @@ import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import javax.faces.model.SelectItem;
  *
  * @author David Andrés Betancourth Botero
  */
-public class Reporte  implements ILifeCycleAware {
+public class Reporte implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String tiposolitxregion;

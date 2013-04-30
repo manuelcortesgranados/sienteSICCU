@@ -2,14 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package cobra.graficos;
+
+import java.io.Serializable;
 
 /**
  * Clase que representa un dato para la gráfica
+ *
  * @author Jhon Eduard Ortiz S
  */
-public class DatoGrafico {
+public class DatoGrafico implements Serializable {
 
     /**
      * Valor que representa el eje x del gráfico
@@ -19,7 +21,6 @@ public class DatoGrafico {
      * Valor que represente el eje Y del gráfico
      */
     private String valorY;
-
     /**
      * Etiqueta relacionada al dato
      */
@@ -73,7 +74,4 @@ public class DatoGrafico {
         hash = 59 * hash + (this.valorX != null ? this.valorX.hashCode() : 0);
         return hash;
     }
-
-    
-
 }

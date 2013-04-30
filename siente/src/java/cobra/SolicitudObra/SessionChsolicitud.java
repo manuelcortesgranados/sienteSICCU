@@ -7,8 +7,9 @@ package cobra.SolicitudObra;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import co.com.interkont.cobra.to.*;
 
-import java.io.File;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,11 +20,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
  * @version Created on 4/10/2010, 05:27:59 PM
  * @author carlos
  */
-public class SessionChsolicitud  {
+public class SessionChsolicitud implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     ResourceBundle bundle = ResourceBundle.getBundle("cobra.properties.Bundle");

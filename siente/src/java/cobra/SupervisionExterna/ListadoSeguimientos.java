@@ -4,7 +4,6 @@
  */
 package cobra.SupervisionExterna;
 
-
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Seguimiento;
 import cobra.SessionBeanCobra;
@@ -12,20 +11,22 @@ import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 
-
 /**
- * Clase encargada de procesar las peticiones de la página de listado de seguimientos
+ * Clase encargada de procesar las peticiones de la página de listado de
+ * seguimientos
+ *
  * @author Jhon Eduard Ortiz S.
  */
-public class ListadoSeguimientos  implements ILifeCycleAware {
+public class ListadoSeguimientos implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
+
     private String id = "";
     private UIDataTable tablaSeguimientos = new UIDataTable();
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
@@ -55,9 +56,10 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
     }
 
     /**
-     * <p>Automatically managed component initialization. <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.
+     * <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -65,11 +67,11 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
 
     public ListadoSeguimientos() {
     }
-    
+
     @Override
     public void prender() {
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        if (id != null ) {
+        if (id != null) {
             if (getObra() != null && id != null) {
                 if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
                     setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(Integer.parseInt(id)));
@@ -78,8 +80,10 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
             }
         }
     }
+
     /**
      * Obtiene el bean que contiene la información general del sistema
+     *
      * @return
      */
     protected SessionBeanCobra getSessionBeanCobra() {
@@ -88,6 +92,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
 
     /**
      * Obtiene el bean que maneja un seguimiento específico
+     *
      * @return
      */
     protected AdminSupervisionExterna getAdminSupervisionExterna() {
@@ -96,6 +101,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
 
     /**
      * LLena los seguimientos realizados a un proyecto
+     *
      * @return
      */
     public String llenarSeguimientosxProyectos() {
@@ -109,6 +115,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
     /**
      * Establece y direcciona a la página que presentará el detalle del
      * seguimiento seleccionado
+     *
      * @return
      */
     public String seguimientoconsul() {
@@ -119,6 +126,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
 
     /**
      * Procesa la petición para descargar el reporte del seguimiento
+     *
      * @return
      */
     public String seguimientoreport() {
