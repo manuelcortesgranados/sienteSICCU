@@ -4,7 +4,6 @@ import cobra.SessionBeanCobra;
 import java.io.IOException;
 import java.io.Serializable;
 
-import java.util.ResourceBundle;
 import javax.servlet.*;
 import javax.servlet.http.*;
 

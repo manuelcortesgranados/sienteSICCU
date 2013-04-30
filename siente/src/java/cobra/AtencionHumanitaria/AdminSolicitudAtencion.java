@@ -36,9 +36,11 @@ import cobra.SessionBeanCobra;
 import cobra.SubirArchivoBean;
 import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
-import cobra.Supervisor.IngresarNuevaObra;import java.io.File;
+import cobra.Supervisor.IngresarNuevaObra;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -54,19 +56,22 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
 import org.richfaces.component.UIDataTable;
+
 /**
- * Clase que permite toda la interacción con el modulo de antecion humanitaria, persistir, consultar, entre otros.
+ * Clase que permite toda la interacción con el modulo de antecion humanitaria,
+ * persistir, consultar, entre otros.
+ *
  * @author Diana Taborda
  */
-public class AdminSolicitudAtencion  {
+public class AdminSolicitudAtencion implements Serializable {
 
     /**
      * Variable para mostrar un selectitem con los departamentos
      */
     private SelectItem[] departamento;
     /**
-     * Variable para mostrar un selectitem con los departamentos
-     * en el filtro avanzado
+     * Variable para mostrar un selectitem con los departamentos en el filtro
+     * avanzado
      */
     private SelectItem[] departamentofiltro;
     /**
@@ -74,8 +79,8 @@ public class AdminSolicitudAtencion  {
      */
     private SelectItem[] municipio;
     /**
-     * Variable para mostrar un selectitem de municipios
-     * que se va a utilizar en el filtro avanzado
+     * Variable para mostrar un selectitem de municipios que se va a utilizar en
+     * el filtro avanzado
      */
     private SelectItem[] municipiofiltro;
     /**
@@ -91,13 +96,12 @@ public class AdminSolicitudAtencion  {
      */
     private SelectItem[] tipoDocumento;
     /**
-     * Variable para mostrar un selectitem con los diferentes
-     * eventos
+     * Variable para mostrar un selectitem con los diferentes eventos
      */
     private SelectItem[] evento;
     /**
-     * Variable para mostrar un selectitem de los eventos y el
-     * periodo a que pertenecen
+     * Variable para mostrar un selectitem de los eventos y el periodo a que
+     * pertenecen
      */
     private SelectItem[] periodoevento;
     /**
@@ -113,18 +117,18 @@ public class AdminSolicitudAtencion  {
      */
     private SelectItem[] subestado;
     /**
-     * Variable para mostrar un selectitem con los diferentes estados
-     * que puede tener una solicitud
+     * Variable para mostrar un selectitem con los diferentes estados que puede
+     * tener una solicitud
      */
     private SelectItem[] estadosolicitud;
     /**
-     * Variable para mostrar un selectitem con los diferentes estados
-     * que puede tener un documentos
+     * Variable para mostrar un selectitem con los diferentes estados que puede
+     * tener un documentos
      */
     private SelectItem[] estadodocumentacion;
     /**
-     * Variable para mostrar un selectitem con los numeros
-     * de uno a cinco para seleccionar la urgencia de la solicitud
+     * Variable para mostrar un selectitem con los numeros de uno a cinco para
+     * seleccionar la urgencia de la solicitud
      */
     private SelectItem[] selectUrgencia;
     /**
@@ -151,12 +155,13 @@ public class AdminSolicitudAtencion  {
      */
     private UIDataTable tablaProductosconsulta = new UIDataTable();
     /**
-     * Variable para hacer binding con la tabla que muestra los datos de
-     * los documentos
+     * Variable para hacer binding con la tabla que muestra los datos de los
+     * documentos
      */
     private UIDataTable tablaDocumentos = new UIDataTable();
     /**
-     * Variable para hacer binding con la tabla que muestra las imagenes de una solicitud
+     * Variable para hacer binding con la tabla que muestra las imagenes de una
+     * solicitud
      */
     private UIDataTable tablaImagenesatencion = new UIDataTable();
     /**
@@ -165,12 +170,13 @@ public class AdminSolicitudAtencion  {
      */
     private UIDataTable tablamovimientos = new UIDataTable();
     /**
-     * Variable para hacer binding con la tabla que se muestra en el home
-     * con el listado de soliciutdes
+     * Variable para hacer binding con la tabla que se muestra en el home con el
+     * listado de soliciutdes
      */
     private UIDataTable tablaproyectosah = new UIDataTable();
     /**
-     * Variable para almacenar el codigo del departamento seleccionado en el selectitem
+     * Variable para almacenar el codigo del departamento seleccionado en el
+     * selectitem
      */
     private String codDepartamento = "";
     /**
@@ -198,23 +204,23 @@ public class AdminSolicitudAtencion  {
      */
     private String mensaje;
     /**
-     * Variable utlizada para mandar como parametro
-     * para filtrar por palabra clave
+     * Variable utlizada para mandar como parametro para filtrar por palabra
+     * clave
      */
     private String txtPalabraClave = "";
     /**
-     * Variable utlizada para contar las solicitudes
-     * que se encuentran registradas en el sistema
+     * Variable utlizada para contar las solicitudes que se encuentran
+     * registradas en el sistema
      */
     private String cantidadSolicitides = "";
     /**
-     * Variable utlizada para contar las solicitudes
-     * que se encuentran registradas en el sistema y en estado aprobadas
+     * Variable utlizada para contar las solicitudes que se encuentran
+     * registradas en el sistema y en estado aprobadas
      */
     private String solicitudesAprobadas = "";
     /**
-     * Variable utlizada para almacenar el municipio
-     * seleccionado en el selectitem
+     * Variable utlizada para almacenar el municipio seleccionado en el
+     * selectitem
      */
     private String strmunicipio = "";
     /**
@@ -226,30 +232,32 @@ public class AdminSolicitudAtencion  {
      */
     private int grupousu;
     /**
-     * Variable utlizada para contar las filas de la tabla del home
-     * Es utilizada para el paginador
+     * Variable utlizada para contar las filas de la tabla del home Es utilizada
+     * para el paginador
      */
     private int totalfilas = 0;
     /**
-     * Variable utlizada para contar las paginas que tiene la tabla del home
-     * Es utilizada para el paginador
+     * Variable utlizada para contar las paginas que tiene la tabla del home Es
+     * utilizada para el paginador
      */
     private int totalpaginas = 0;
     /**
-     * Variable utlizada para mostrar en que pagina se encuentra de la tabla
-     * Es utilizada para el paginador
+     * Variable utlizada para mostrar en que pagina se encuentra de la tabla Es
+     * utilizada para el paginador
      */
     private int pagina = 0;
     /**
      * Utilizada para mostrar si es zona especifica o por departamentos
      */
-    private int vistazonas=0;
+    private int vistazonas = 0;
     /**
-     * Variable utlizada para almacenar el tipo de familia que se selecciono en el selecitem
+     * Variable utlizada para almacenar el tipo de familia que se selecciono en
+     * el selecitem
      */
     private long tipofamiliavalue;
     /**
-     * Variable utlizada para almacenar el estado en que se encuentra la solicitud
+     * Variable utlizada para almacenar el estado en que se encuentra la
+     * solicitud
      */
     private long estado;
     /**
@@ -261,7 +269,8 @@ public class AdminSolicitudAtencion  {
      */
     private boolean vermunicipio = false;
     /**
-     * Variable utlizada para saber si se esta guardando o modificando la solicitud
+     * Variable utlizada para saber si se esta guardando o modificando la
+     * solicitud
      */
     private boolean guardaromodifica = false;
     /**
@@ -277,7 +286,8 @@ public class AdminSolicitudAtencion  {
      */
     private boolean veranteriorreales;
     /**
-     * Variable utlizada para deshabilitar campos del formulario de crear solicitud
+     * Variable utlizada para deshabilitar campos del formulario de crear
+     * solicitud
      */
     private boolean deshformulario = false;
     /**
@@ -289,17 +299,17 @@ public class AdminSolicitudAtencion  {
      */
     private boolean guardar = false;
     /**
-     * Variable utlizada para saber si se sugiere el precio del producto en la caja de texto
+     * Variable utlizada para saber si se sugiere el precio del producto en la
+     * caja de texto
      */
     private boolean sugerir = false;
     /**
-     * Variable utlizada para mostrar si ya la solicitud fue aprobada
-     * por el alto funcionario.
+     * Variable utlizada para mostrar si ya la solicitud fue aprobada por el
+     * alto funcionario.
      */
     private boolean aprobacionAltofun = false;
     /**
-     * Variable utlizada para saber si el usuario puede
-     * registrar solicitudes
+     * Variable utlizada para saber si el usuario puede registrar solicitudes
      */
     private boolean regisolicitud;
     /**
@@ -383,10 +393,10 @@ public class AdminSolicitudAtencion  {
     /*
      * Variable que identifica que no se puedo guardar la solicitud por que no tiene contacto
      */
-    private boolean noguardo=false;
+    private boolean noguardo = false;
 
     /**
-     *Inicio de los Set y Get de las variables anteriores
+     * Inicio de los Set y Get de las variables anteriores
      */
     public BigDecimal getTotalfamilias() {
         return totalfamilias;
@@ -564,6 +574,7 @@ public class AdminSolicitudAtencion  {
     public void setVistazonas(int vistazonas) {
         this.vistazonas = vistazonas;
     }
+
     public boolean isNoguardo() {
         return noguardo;
     }
@@ -573,7 +584,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este metodo es utilizado para cargar las entidades que tiene el usuario que se loguea
+     * Este metodo es utilizado para cargar las entidades que tiene el usuario
+     * que se loguea
+     *
      * @return Retorna las entidades del usuario
      */
     public Tercero getEntidadUsuario() {
@@ -1014,6 +1027,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llamado al service de Atencion Humanitaria
+     *
      * @return
      */
     public AtencionHumanitariaServiceAble getAtencionHumanitaria() {
@@ -1023,6 +1037,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llamado al SessionBeanCobra
+     *
      * @return
      */
     protected SessionBeanCobra getSessionBeanCobra() {
@@ -1031,6 +1046,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llamado al bean FiduFinanciera
+     *
      * @return
      */
     protected FiduFinanciera getFiduFinanciera() {
@@ -1039,12 +1055,13 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llamado al bean IngresarNuevaObra
+     *
      * @return
      */
     protected IngresarNuevaObra getIngresarNuevaObra() {
         return (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
     }
-    
+
     protected AdministrarObraNew getAdministrarObraNew() {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
@@ -1081,8 +1098,10 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Constructor de la pagina, aqui se estan inicializando variables, ademas se esta validando el grupo del
-     * usuario que ingreso a la aplicación para darle ciertos permisos.
+     * Constructor de la pagina, aqui se estan inicializando variables, ademas
+     * se esta validando el grupo del usuario que ingreso a la aplicación para
+     * darle ciertos permisos.
+     *
      * @throws IOException
      */
     public AdminSolicitudAtencion() throws IOException {
@@ -1122,7 +1141,8 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para sumar las solicitudes que tiene el usuario y las que han sido aprobadas.
+     * Método utilizado para sumar las solicitudes que tiene el usuario y las
+     * que han sido aprobadas.
      */
     public void consultarDatosAtencion() {
         cantidadSolicitides = String.valueOf(getSessionBeanCobra().getAtencionhumanitariaService().encontrarSolicitudMaestro().size());
@@ -1132,6 +1152,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar el selectitem de estado de documentación.
+     *
      * @return No devuelve ningun valor
      */
     public String llenarEstadoDocumentacion() {
@@ -1156,8 +1177,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para llenar el selectitem de los departamentos.
-     * Este método se utiliza para el filtro avanzado de atención.
+     * Método utilizado para llenar el selectitem de los departamentos. Este
+     * método se utiliza para el filtro avanzado de atención.
+     *
      * @return No devuelve ningun valor
      */
     public String llenarDepartamentoFiltro() {
@@ -1174,8 +1196,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para llenar el selctitem de municipios.
-     * Se utiliza en el filtro avanzado de atención.
+     * Método utilizado para llenar el selctitem de municipios. Se utiliza en el
+     * filtro avanzado de atención.
+     *
      * @return No devuelve ningun valor
      */
     public String llenarMunicipiosFiltro() {
@@ -1220,7 +1243,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para verificar si el codigo de una localidad es departamento
+     * Método utilizado para verificar si el codigo de una localidad es
+     * departamento
+     *
      * @param local: Codigo de la Localidad
      * @param cant: Cantidad de departamentos
      * @param temporal : Selectitem temporal
@@ -1269,7 +1294,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para verificar si el codigo de una localidad es municipio
+     * Método utilizado para verificar si el codigo de una localidad es
+     * municipio
+     *
      * @param local: Codigo de la Localidad
      * @param cant: Cantidad de departamentos
      * @param temporal : Selectitem temporal
@@ -1288,6 +1315,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar el selectitem de los tipo de documentos
+     *
      * @return No devuelve ningun valor
      */
     public String llenarTipoDocumento() {
@@ -1307,7 +1335,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para llenar el selectitem de tipos de atención humanitaria
+     * Método utilizado para llenar el selectitem de tipos de atención
+     * humanitaria
+     *
      * @return No devuelve ningún valor
      */
     public String llenarTipoah() {
@@ -1326,6 +1356,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar el selectitem de eventos
+     *
      * @return No devuelve ningun valor
      */
     public String llenarEvento() {
@@ -1344,6 +1375,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar el selectitem de estados de una solicitud
+     *
      * @return No devuelve ningún valor
      */
     public String llenarEstadoSolicitud() {
@@ -1364,8 +1396,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este método se utiliza para sugerir el precio de un producto en una caja de texto, según
-     * el producto que hayan escogido en el combo.
+     * Este método se utiliza para sugerir el precio de un producto en una caja
+     * de texto, según el producto que hayan escogido en el combo.
+     *
      * @return No retorna ningún valor
      */
     public String sugerirPrecio() {
@@ -1376,8 +1409,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para llenar el listado de solicitudes en el home, inicializa la variable de ver solicitudes
-     * y llama al paginador.
+     * Método utilizado para llenar el listado de solicitudes en el home,
+     * inicializa la variable de ver solicitudes y llama al paginador.
+     *
      * @return la regla de navegación que lleva al homeatencion.
      */
     public String llenarSolicitudMaestro() {
@@ -1388,8 +1422,10 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este método es utilizado para llenar las solicitudes que no han sido aprobadas.
-     * se le asigna el valor a la variable estado para saber que solo se cargan las de estado 2 e invoca al paginador
+     * Este método es utilizado para llenar las solicitudes que no han sido
+     * aprobadas. se le asigna el valor a la variable estado para saber que solo
+     * se cargan las de estado 2 e invoca al paginador
+     *
      * @return la regla de navegación que lleva al homeatencion.
      */
     public String MostrarPendientes() {
@@ -1401,8 +1437,10 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este método es utilizado para llenar las solicitudes que  han sido aprobadas.
-     * se le asigna el valor a la variable estado para saber que solo se cargan las de estado 1 e invoca al paginador
+     * Este método es utilizado para llenar las solicitudes que han sido
+     * aprobadas. se le asigna el valor a la variable estado para saber que solo
+     * se cargan las de estado 1 e invoca al paginador
+     *
      * @return la regla de navegación que lleva al homeatencion.
      */
     public String MostrarAprobados() {
@@ -1414,8 +1452,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Método utilizado para llenar el combo de tipos de familia, agrupando el producto con el tipo de familia
-     * en un mismo selectitem
+     * Método utilizado para llenar el combo de tipos de familia, agrupando el
+     * producto con el tipo de familia en un mismo selectitem
+     *
      * @return No retorna ningun valor
      */
     public String llenarTipoFamilia() {
@@ -1455,6 +1494,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar el combo de periodo evento.
+     *
      * @return No devuelve ningun valor
      */
     public String llenarPeriodoEvento() {
@@ -1472,8 +1512,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este método es utilizado para llenar el combo de productos.
-     * Tambien desde aqui se invoca el metodo de llenar tipo de familia
+     * Este método es utilizado para llenar el combo de productos. Tambien desde
+     * aqui se invoca el metodo de llenar tipo de familia
+     *
      * @return
      */
     public String llenarProductos() {
@@ -1507,14 +1548,13 @@ public class AdminSolicitudAtencion  {
         return null;
     }
 
-      public String llenarProductos1() {
-      if(getFiltroAh().getInttipoayuda()!= -1){
-        listadoProductos = getSessionBeanCobra().getAtencionhumanitariaService().encontrarProductosxTipoah(getFiltroAh().getInttipoayuda());
-      }
-      else{
-         listadoProductos = getSessionBeanCobra().getAtencionhumanitariaService().encontrarProductosxTipoah(getSessionBeanCobra().getAtencionhumanitariaService().getSolicitudmaestro().getTipoah().getOidcodigotipoah());
-      }
-        
+    public String llenarProductos1() {
+        if (getFiltroAh().getInttipoayuda() != -1) {
+            listadoProductos = getSessionBeanCobra().getAtencionhumanitariaService().encontrarProductosxTipoah(getFiltroAh().getInttipoayuda());
+        } else {
+            listadoProductos = getSessionBeanCobra().getAtencionhumanitariaService().encontrarProductosxTipoah(getSessionBeanCobra().getAtencionhumanitariaService().getSolicitudmaestro().getTipoah().getOidcodigotipoah());
+        }
+
         int a = 0;
         listProdReal = new ArrayList<Productoah>();
         while (a < listadoProductos.size()) {
@@ -1544,7 +1584,9 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Este método es utilizado para comparar si un producto ya existe
-     * @param se recibe un string que se va a comparar con la descripcion del producto
+     *
+     * @param se recibe un string que se va a comparar con la descripcion del
+     * producto
      * @return Devuelve true si el producto existe o false si no existe.
      */
     public boolean verificarExistencia(String descripcion) {
@@ -1568,6 +1610,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utiliza para llenar los combos de tipo evento
+     *
      * @return No devuelve ningun valor
      */
     public String llenarTiposdeEvento() {
@@ -1586,6 +1629,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Método utilizado para llenar un selectitem de urgencia
+     *
      * @return No retorne ningún valor
      */
     public String llenarUrgencia() {
@@ -1614,9 +1658,11 @@ public class AdminSolicitudAtencion  {
 //        }
 //    }
     /**
-     * Este método es utilizado para inicializar los objetos y las variables que se necesitan para crear
-     * una nueva solicitud
-     * @return Devuelve la regla de navegación que lleva a la pagina con el formulario de nueva solicitud
+     * Este método es utilizado para inicializar los objetos y las variables que
+     * se necesitan para crear una nueva solicitud
+     *
+     * @return Devuelve la regla de navegación que lleva a la pagina con el
+     * formulario de nueva solicitud
      */
     public String CrearSoliicitud() {
         getSessionBeanCobra().getAtencionhumanitariaService().getSolicitudmaestro().setPeriodoevento(new Periodoevento());
@@ -1631,9 +1677,12 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Este método es utilizado para asignarle el valor al objeto de solicitud que se selecciono de la tabla
-     * Inicializa las variables y objetos, ademas llena la lista de solicitudes detalle
-     * @return Devuelve la regla de navegacion, que lleva al formulario de crear solicitud, pero cargando los datos
+     * Este método es utilizado para asignarle el valor al objeto de solicitud
+     * que se selecciono de la tabla Inicializa las variables y objetos, ademas
+     * llena la lista de solicitudes detalle
+     *
+     * @return Devuelve la regla de navegacion, que lleva al formulario de crear
+     * solicitud, pero cargando los datos
      */
     public String versolicitud() {
         Solicitudmaestro solicitud = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
@@ -1650,10 +1699,12 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se le asigna el valor de la fila seleccionada a el objeto de solicitud maestro
-     * que va ser modificada, se valida si el usuario puede modificar
-     * @return devuelve la regla de navegacion de crear solicitud si puede modificar, si no retorna la regla de navegación de
-     * el home.
+     * En este método se le asigna el valor de la fila seleccionada a el objeto
+     * de solicitud maestro que va ser modificada, se valida si el usuario puede
+     * modificar
+     *
+     * @return devuelve la regla de navegacion de crear solicitud si puede
+     * modificar, si no retorna la regla de navegación de el home.
      */
     public String identificados_Modif() {
         limpiarSolicitud();
@@ -1684,7 +1735,7 @@ public class AdminSolicitudAtencion  {
             getAtencionHumanitaria().setListadocumentosolicitud(getAtencionHumanitaria().encontrarDocumentosSolicitud(solicitud.getOidcodigosolicitudmaestro()));
             getAtencionHumanitaria().setListadoimagensolicitud(getAtencionHumanitaria().encontrarImagenSolicitud(solicitud.getOidcodigosolicitudmaestro()));
             getAtencionHumanitaria().setCodigosol(true);
-            
+
             calcularValorSolicitudDetalle();
             return "crearatencion";
         } else {
@@ -1694,8 +1745,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se adicionan productos a la lista de solicitud detalle con el codigo de
-     * la localidad a la que pertenece el solicitante.
+     * En este método se adicionan productos a la lista de solicitud detalle con
+     * el codigo de la localidad a la que pertenece el solicitante.
+     *
      * @return No devuelve ningun valor
      */
     public String anadirItem() {
@@ -1726,7 +1778,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se elimina de la lista el producto de la fila que el usuario selecciono.
+     * En este método se elimina de la lista el producto de la fila que el
+     * usuario selecciono.
+     *
      * @return No devuelve ningún valor
      */
     public String eliminarItem() {
@@ -1743,19 +1797,20 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se calcula el valor de la solicitud, sumando todos los items y adicionandole el valor del
-     * porcentaje de interventoria en caso de que tenga.
+     * En este método se calcula el valor de la solicitud, sumando todos los
+     * items y adicionandole el valor del porcentaje de interventoria en caso de
+     * que tenga.
      */
     public void calcularValorSolicitudDetalle() {
 
         int i = 0;
-        totalfamilias= BigDecimal.ZERO;
+        totalfamilias = BigDecimal.ZERO;
         getAtencionHumanitaria().getSolicitudmaestro().setNumvlrtotalparcial(BigDecimal.ZERO);
         while (i < getAtencionHumanitaria().getListadosolicitudDetalle().size()) {
-            
+
             getAtencionHumanitaria().getSolicitudmaestro().setNumvlrtotalparcial(getAtencionHumanitaria().getSolicitudmaestro().getNumvlrtotalparcial().add(getAtencionHumanitaria().getListadosolicitudDetalle().get(i).getNumvlrtotalitem()));
 
-             totalfamilias = totalfamilias.add(getAtencionHumanitaria().getListadosolicitudDetalle().get(i).getNumcantidadsolicitadaitem());
+            totalfamilias = totalfamilias.add(getAtencionHumanitaria().getListadosolicitudDetalle().get(i).getNumcantidadsolicitadaitem());
             i++;
         }
         if (getAtencionHumanitaria().getSolicitudmaestro().isBoolincluyeinterventoria() && sugerir) {
@@ -1769,7 +1824,7 @@ public class AdminSolicitudAtencion  {
             getAtencionHumanitaria().getSolicitudmaestro().setFloatporcentaje(0);
             sugerir = true;
         }
-       
+
 
         valorporcentaje = getAtencionHumanitaria().getSolicitudmaestro().getNumvlrtotalparcial().multiply(
                 BigDecimal.valueOf(getAtencionHumanitaria().getSolicitudmaestro().getFloatporcentaje()).setScale(6, RoundingMode.HALF_UP)).divide(BigDecimal.valueOf(100));
@@ -1924,6 +1979,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Cambia el archivo de la carpeta temporal a la carpeta donde va a quedar.
+     *
      * @param nomarch : es el nombre del archivo a guardar
      * @param URLorigen : Ruta de la carpeta temporal donde esta el archivo
      * @param URLdestino : Ruta donde va a quedar el archivo
@@ -1957,7 +2013,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Adiciona el documento a la lista e invoca el metodo que sube el documento a la carpeta temporal
+     * Adiciona el documento a la lista e invoca el metodo que sube el documento
+     * a la carpeta temporal
+     *
      * @return No retorna ningún valor
      */
     public String subirDocumentoaLista() {
@@ -1973,6 +2031,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Invoca al metodo que sube el acta a la carpeta temporal
+     *
      * @return No devuelve ningun valor.
      */
     public String subirActaaLista() {
@@ -1981,7 +2040,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Invoca al metodo que sube la carta de aprobacion financiera a la carpeta temporal
+     * Invoca al metodo que sube la carta de aprobacion financiera a la carpeta
+     * temporal
+     *
      * @return No devuelve ningun valor.
      */
     public String subirAprobacionaDetalle() {
@@ -1990,7 +2051,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Sube la imagen a la lista, valida que se haya dado nombre y que se haya adjuntado algun archivo
+     * Sube la imagen a la lista, valida que se haya dado nombre y que se haya
+     * adjuntado algun archivo
+     *
      * @return No retorna ningun valor
      */
     public String subirImagenaLista() {
@@ -2019,6 +2082,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Se le asigna la ruta al video.
+     *
      * @return No devuelve ningun valor
      */
     public String subirVideoaSolicitud() {
@@ -2027,8 +2091,10 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Inicializa las variables y el objeto de solicitud maestro, valida si el usuario
-     * puede crear la solicitud, llama metodos de sugerir precio y limpiar solicitud.
+     * Inicializa las variables y el objeto de solicitud maestro, valida si el
+     * usuario puede crear la solicitud, llama metodos de sugerir precio y
+     * limpiar solicitud.
+     *
      * @return retorna la regla de navegacion al formulario de crear solicitud.
      */
     public String crearsolicitudatencion() {
@@ -2063,7 +2129,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Le asigna el valor al objeto seleccionado de la solicitud que se va a eliminar
+     * Le asigna el valor al objeto seleccionado de la solicitud que se va a
+     * eliminar
+     *
      * @return No retorna ningun valor
      */
     public String SolicitudAeliminar() {
@@ -2074,6 +2142,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Elimina la solicitud de la lista y de la base de datos.
+     *
      * @return No devuelve ningun valor
      */
     public String eliminarSolicitud() {
@@ -2088,6 +2157,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Invoca al metodo del paginar que carga las solicitudes en el home.
+     *
      * @return Retorna la regla de navegación que lleva al home atencion.
      */
     public String homeSolicitudes() {
@@ -2099,6 +2169,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Elimina La imagen seleccionada de la lista.
+     *
      * @return No devuelve ningun valor
      */
     public String eliminarImagenLista() {
@@ -2109,6 +2180,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Elimina el documento seleccionado de la lista
+     *
      * @return No retorna ningun valor
      */
     public String eliminarDocumentoLista() {
@@ -2119,6 +2191,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Cancela la solicitud que han digitado y limpia el formulario
+     *
      * @return la regla de navegacion que lleva al home
      */
     public String cancelarSolicitud() {
@@ -2127,17 +2200,19 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Guarda la solicitud maestro, la solicitud detalle, documentos e imagenes que hayan adjuntado.
-     * Valida que se digiten todos los campos obligatorios y al guardar invoca al metodo que limpia el formulario
+     * Guarda la solicitud maestro, la solicitud detalle, documentos e imagenes
+     * que hayan adjuntado. Valida que se digiten todos los campos obligatorios
+     * y al guardar invoca al metodo que limpia el formulario
+     *
      * @return No retorna ningun valor.
      */
     public String guardarSolicitud() {
-        
-        if(getAtencionHumanitaria().getSolicitudmaestro().getTercero().getIntcodigo()==0){
+
+        if (getAtencionHumanitaria().getSolicitudmaestro().getTercero().getIntcodigo() == 0) {
             getAtencionHumanitaria().setMensaje(bundle.getString("solicitanteat"));
-            noguardo=true;
+            noguardo = true;
             return null;
-        }       
+        }
         guardar = false;
 
         if (getAtencionHumanitaria().validarDatosSolicitud()) {
@@ -2174,7 +2249,7 @@ public class AdminSolicitudAtencion  {
                         getAtencionHumanitaria().getSolicitudmaestro().setFloatporcentaje(0);
                     }
 
-                        getAtencionHumanitaria().guardarSolitudMaestro(getAtencionHumanitaria().getSolicitudmaestro());
+                    getAtencionHumanitaria().guardarSolitudMaestro(getAtencionHumanitaria().getSolicitudmaestro());
 
                     getAtencionHumanitaria().setGuardadosol(true);
                     guardar = true;
@@ -2190,7 +2265,7 @@ public class AdminSolicitudAtencion  {
                 }
             } else {
                 guardar = false;
-                
+
                 getAtencionHumanitaria().getMensaje();
             }
 
@@ -2259,6 +2334,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Guarda la aprobacion de la solicitud, cambia el estado de la solicitud
+     *
      * @return No Retorna ningún valor
      */
     public String aprobarSolicitud() {
@@ -2276,6 +2352,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Guarda el video en una carpeta temporal, comprime el video.
+     *
      * @return No retorna ningun valor
      * @throws IOException
      * @throws InterruptedException
@@ -2322,7 +2399,6 @@ public class AdminSolicitudAtencion  {
                 try {
                     final Process process = Runtime.getRuntime().exec(command);
                     new Thread() {
-
                         @Override
                         public void run() {
                             try {
@@ -2337,7 +2413,6 @@ public class AdminSolicitudAtencion  {
                         }
                     }.start();
                     new Thread() {
-
                         @Override
                         public void run() {
                             try {
@@ -2385,6 +2460,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Borra el video que han subido de la carpeta del tomcat.
+     *
      * @return
      */
     public String borrarVideoAtencion() {
@@ -2406,6 +2482,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Borra la imagen del tomcat
+     *
      * @return No retorna nigun valor
      */
     public String borrarImagenAtencion() {
@@ -2425,6 +2502,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Borra el acta que esta subida en el tomcat
+     *
      * @return
      */
     public String borrarActaAtencion() {
@@ -2444,6 +2522,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Elimina la carta de aprobacion que han subido
+     *
      * @return
      */
     public String borrarCartaAprobacion() {
@@ -2463,6 +2542,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Persisite la orden de pago de la solicitud
+     *
      * @return
      */
     public String guardarOrden() {
@@ -2473,6 +2553,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Metodo para filtrar las solicitudes
+     *
      * @return No Retorna Ningun Valor
      */
     public String filtrar_action() {
@@ -2481,8 +2562,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Inicializa variables, objetos, se utiliza para limpiar el formulario
-     * de solicitud maestro.
+     * Inicializa variables, objetos, se utiliza para limpiar el formulario de
+     * solicitud maestro.
+     *
      * @return
      */
     public String limpiarSolicitud() {
@@ -2518,7 +2600,7 @@ public class AdminSolicitudAtencion  {
         mostrar = false;
         numvalortotalitem = BigDecimal.ZERO;
         valorporcentaje = BigDecimal.ZERO;
-        totalfamilias=BigDecimal.ZERO;
+        totalfamilias = BigDecimal.ZERO;
         getAtencionHumanitaria().getSolicituddetalle().setNumvlrunitario(getAtencionHumanitaria().getProductoNuevo().getNumvlrproductoah());
         llenarSolicitantes();
         return "homesolicitud";
@@ -2527,6 +2609,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Calcular el valor que le aprobaron de la solicitud.
+     *
      * @return el valor que dio como resultado del calculo
      */
     public BigDecimal getValoraPagar() {
@@ -2538,8 +2621,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Paginador de la tabla del home, filtra las solicitudes por usuario que se loguio
-     * y por los parametros que se hayan configurado.
+     * Paginador de la tabla del home, filtra las solicitudes por usuario que se
+     * loguio y por los parametros que se hayan configurado.
+     *
      * @return No retorna ningun valor
      */
     public String primerosreales() {
@@ -2585,8 +2669,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Paginador de la tabla del home, filtra las solicitudes por usuario que se loguio
-     * y por los parametros que se hayan configurado.
+     * Paginador de la tabla del home, filtra las solicitudes por usuario que se
+     * loguio y por los parametros que se hayan configurado.
+     *
      * @return No retorna ningun valor
      */
     public String siguientesReales() {
@@ -2629,8 +2714,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Paginador de la tabla del home, filtra las solicitudes por usuario que se loguio
-     * y por los parametros que se hayan configurado.
+     * Paginador de la tabla del home, filtra las solicitudes por usuario que se
+     * loguio y por los parametros que se hayan configurado.
+     *
      * @return No retorna ningun valor
      */
     public String anterioresReales() {
@@ -2672,8 +2758,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Paginador de la tabla del home, filtra las solicitudes por usuario que se loguio
-     * y por los parametros que se hayan configurado.
+     * Paginador de la tabla del home, filtra las solicitudes por usuario que se
+     * loguio y por los parametros que se hayan configurado.
+     *
      * @return No retorna ningun valor
      */
     public String ultimoReales() {
@@ -2719,8 +2806,11 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Asigna el valor a el objeto de Solicitud que han seleccionado en el home para cosnultar
-     * @return la regla de navegacion que direcciona a la pagina de consultar atencion
+     * Asigna el valor a el objeto de Solicitud que han seleccionado en el home
+     * para cosnultar
+     *
+     * @return la regla de navegacion que direcciona a la pagina de consultar
+     * atencion
      */
     public String consultarSolicitud() {
         deshformulario = true;
@@ -2757,6 +2847,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Desactiva el formulario de la solicitud
+     *
      * @return la regla de navegacion que lleva al formulario
      */
     public String ConsultarDatosBasicos() {
@@ -2767,6 +2858,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Carga las imagenes que tiene la solicitud
+     *
      * @return regla de navegacion que lleva a la pagina de imagenes de atencion
      */
     public String ConsultarImagenes() {
@@ -2777,6 +2869,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llena la lista de documentos de la solicitud
+     *
      * @return la regla de navegacion que lleva a la pagina de documentos
      */
     public String ConsultarDocumentos() {
@@ -2787,6 +2880,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Configura el filtro e invoca al paginador
+     *
      * @return No retorna valor
      */
     public String buscar() {
@@ -2798,6 +2892,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Configura el filtro e invoca el paginador
+     *
      * @return No retorna ningun valor
      */
     public String buscarFiltro() {
@@ -2808,7 +2903,9 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llena el listado de los movimientos de la soliciutd.
-     * @param codsolicitud: El codigo de la solicitud de la cual se necesitan los movimientos
+     *
+     * @param codsolicitud: El codigo de la solicitud de la cual se necesitan
+     * los movimientos
      */
     public void movimientosSolicitud(long codsolicitud) {
 
@@ -2817,7 +2914,9 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Se le envian los varoles a un nuevo proyecto que sera creado apartir de una solicitud
+     * Se le envian los varoles a un nuevo proyecto que sera creado apartir de
+     * una solicitud
+     *
      * @return Regla de navegacion que lleva a el formulario de nuevo proyecto
      * @throws Exception
      */
@@ -2866,6 +2965,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llena la lista de proyectos que tiene una solicitud
+     *
      * @return No retorna valor alguno
      */
     public String llenarProyectosxSolicitud() {
@@ -2883,20 +2983,18 @@ public class AdminSolicitudAtencion  {
         return null;
     }
 
-
-
-     public String verProyecto() {
+    public String verProyecto() {
 
         Obra obra = (Obra) tablaproyectosah.getRowData();
         //getIngresarNuevaObra().setObranueva(obra);   
         if (obra.getObra().getTipoestadobra().getIntestadoobra() == 1) {
             getAdministrarObraNew().setObra(obra);
 
-         return "verproyecto";
+            return "verproyecto";
         }
         if (obra.getObra().getTipoestadobra().getIntestadoobra() == 0) {
             getSessionBeanCobra().getCobraService().setSolibol(true);
-            getIngresarNuevaObra().setObjeto(true);           
+            getIngresarNuevaObra().setObjeto(true);
             return "asociarproyectoaatenci";
         }
         return null;
@@ -2904,6 +3002,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Descargar documentos de la solicitud.
+     *
      * @return
      */
     public String bt_download_documento_solicitud() {
@@ -2913,7 +3012,7 @@ public class AdminSolicitudAtencion  {
         getSessionBeanCobra().setUrlAbri(getAtencionHumanitaria().getDocumento().getStrurldocumento());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/"+getSessionBeanCobra().getBundle().getString("versioncobra") +"/" + getAtencionHumanitaria().getDocumento().getStrurldocumento());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + getAtencionHumanitaria().getDocumento().getStrurldocumento());
         } catch (IOException ex) {
             Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -2934,6 +3033,7 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llena el combo con los solicitantes del departamento o del municipio
+     *
      * @return No retorna ningun valor
      */
     public String llenarSolicitantes() {
@@ -2943,13 +3043,13 @@ public class AdminSolicitudAtencion  {
         if (strmunicipio.compareTo("0") == 0) {
 
             listaSolicitante = getSessionBeanCobra().getAtencionhumanitariaService().enconcontrarTerceroSolicitante(codDepartamento, 9);
-            
+
         } else if (strmunicipio.compareTo("0") != 0) {
 
             listaSolicitante = getSessionBeanCobra().getAtencionhumanitariaService().enconcontrarTerceroSolicitante(strmunicipio, 1);
         }
-        
-        
+
+
         solicitante = new SelectItem[listaSolicitante.size()];
         int i = 0;
         for (Tercero tersolicitante : listaSolicitante) {
@@ -2964,12 +3064,14 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Carga el tercero solicitante
+     *
      * @return
      */
     public String cargarSolicitante() {
         getAtencionHumanitaria().getSolicitudmaestro().setTercero(getAtencionHumanitaria().enconcontrarTerceroPorId(getAtencionHumanitaria().getSolicitudmaestro().getTercero().getIntcodigo()));
         return null;
     }
+
     /**
      * Suministrarle al combo las zonas específicas
      */
@@ -2982,5 +3084,4 @@ public class AdminSolicitudAtencion  {
             zonaespe[i++] = zon;
         }
     }
-
 }

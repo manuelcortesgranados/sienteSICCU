@@ -20,7 +20,6 @@ import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tiposolicitante;
 import co.com.interkont.cobra.to.Tipotercero;
 import co.com.interkont.cobra.vista.VistaObraMapa;
-import cobra.Archivo;
 import cobra.ArchivoWeb;
 import cobra.CargadorArchivosWeb;
 import cobra.ControlGerencial.ControlGerencial;
@@ -41,10 +40,10 @@ import com.interkont.cobra.util.DatoPie;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
-import java.text.DateFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +66,7 @@ import org.richfaces.component.UIRepeat;
  * @author Leonardo Montes
  * @author Diana Taborda
  */
-public class PerfilCiudadano  implements ILifeCycleAware {
+public class PerfilCiudadano implements ILifeCycleAware, Serializable {
 
     private String contrasena = "";
     private String codDepartamentoCiudadano = "";
@@ -126,10 +125,11 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     public boolean isCambioFotoCiudadano() {
         return cambioFotoCiudadano;
     }
+
     public void setCambioFotoCiudadano(boolean cambioFotoCiudadano) {
         this.cambioFotoCiudadano = cambioFotoCiudadano;
     }
-    
+
     public UIRepeat getRepeatopinion() {
         return repeatopinion;
     }
@@ -387,7 +387,6 @@ public class PerfilCiudadano  implements ILifeCycleAware {
      * para cargar combos
      */
     public PerfilCiudadano() {
-        
     }
 
     @Override
@@ -405,12 +404,13 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         llenarDepartamentoCiudadano();
         llenarMunicipioCiudadanoModi();
 
-        
+
     }
 
     /**
      * Este método se utiliza para inicializar ciudadano
-     * @return 
+     *
+     * @return
      */
     public String inicializarCiudadano() {
         iniciarCombos();
@@ -500,7 +500,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         if (getSessionBeanCobra().getCiudadanoservice().isBoolmensajeguardar()) {
             try {
                 guardarCiudadano();
-                
+
             } catch (Exception ex) {
                 Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -515,7 +515,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
      * @author Leonardo Montes
      *
      */
-    public void guardarCiudadano()  {
+    public void guardarCiudadano() {
         if (validarusuario()) {
             //inicializar atributos del objeto tercero
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrnombrecompleto(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrnombre());
@@ -539,11 +539,10 @@ public class PerfilCiudadano  implements ILifeCycleAware {
             String rutaFoto = null;
             try {
                 rutaFoto = ArchivoWebUtil.copiarArchivo(
-                        RutasWebArchivos.TMP+nomImagen, 
-                        MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, ""+getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId()), 
-                        true, 
-                        false
-                    );
+                        RutasWebArchivos.TMP + nomImagen,
+                        MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, "" + getSessionBeanCobra().getCiudadanoservice().getCiudadano().getUsuId()),
+                        true,
+                        false);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ArchivoExistenteException ex) {
@@ -574,8 +573,8 @@ public class PerfilCiudadano  implements ILifeCycleAware {
 
     public String MostrarMensaje() {
         getSessionBeanCobra().getCiudadanoservice().setBoolmensajeguardar(false);
-        guardarCiudadano();        
-        
+        guardarCiudadano();
+
         return null;
     }
 
@@ -593,21 +592,20 @@ public class PerfilCiudadano  implements ILifeCycleAware {
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setTiposolicitante(new Tiposolicitante(5));
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setBoolestado(true);
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setBoolobraslocalidad(true);
-            if(cambioFotoCiudadano) {
-                String nuevaRutaWeb = MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, ""+getSessionBeanCobra().getUsuarioObra().getUsuId())+nomImagen;
+            if (cambioFotoCiudadano) {
+                String nuevaRutaWeb = MessageFormat.format(RutasWebArchivos.IMAGENES_CIUDADANO, "" + getSessionBeanCobra().getUsuarioObra().getUsuId()) + nomImagen;
                 try {
                     ArchivoWebUtil.copiarArchivo(
-                            RutasWebArchivos.TMP+nomImagen, 
-                            nuevaRutaWeb, 
-                            true, 
-                            false
-                        );
+                            RutasWebArchivos.TMP + nomImagen,
+                            nuevaRutaWeb,
+                            true,
+                            false);
                 } catch (FileNotFoundException ex) {
                     Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ArchivoExistenteException ex) {
                     Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                    getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrfoto(nuevaRutaWeb);
+                getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setStrfoto(nuevaRutaWeb);
             }
 
             getSessionBeanCobra().getCiudadanoservice().setLocalidad(getSessionBeanCobra().getCiudadanoservice().encontrarLocalidadxPerfil(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getLocalidadByStrlocalidadnacimiento().getStrcodigolocalidad()));
@@ -685,7 +683,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
                                 } else {
                                     contrasena = Encrypter.getInstance().encrypt(getSessionBeanCobra().getCiudadanoservice().getPassword());
                                     getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuPasswd(contrasena);
-                                    
+
                                     return true;
                                 }
 
@@ -749,8 +747,8 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         // boolperfilusuario = false;
         //getSessionBeanCobra().getCiudadanoservice().setImagenComentario("/resources/imgs/bt_user.png");
         getSessionBeanCobra().setVerregistrarse(false);
-        
-        
+
+
     }
 
     /**
@@ -780,20 +778,20 @@ public class PerfilCiudadano  implements ILifeCycleAware {
                 String rutaWeb = cargadorFoto.getArchivos().get(0).getRutaWeb();
                 getSessionBeanCobra().getCiudadanoservice().setPathImaCiu(rutaWeb);
 
-                    try {
+                try {
 
-                        RedimensionarImagen.scale(
-                                ArchivoWebUtil.obtenerRutaAbsoluta(rutaWeb), 
-                                640, 5, 
-                                ArchivoWebUtil.obtenerRutaAbsoluta(rutaWeb));
-                    } catch (IOException ex) {
-                        Logger.getLogger(JsfUsuario.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                } catch (ArchivoExistenteException ex) {
-                    Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
+                    RedimensionarImagen.scale(
+                            ArchivoWebUtil.obtenerRutaAbsoluta(rutaWeb),
+                            640, 5,
+                            ArchivoWebUtil.obtenerRutaAbsoluta(rutaWeb));
+                } catch (IOException ex) {
+                    Logger.getLogger(JsfUsuario.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            cambioFotoCiudadano=true;
+            } catch (ArchivoExistenteException ex) {
+                Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
             }
+            cambioFotoCiudadano = true;
+        }
         return null;
     }
 
@@ -814,7 +812,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         cargadorFoto = new CargadorArchivosWeb();
         if (getSessionBeanCobra().getUsuarioObra() != null) {
             if (getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrfoto() != null) {
-                 getSessionBeanCobra().getCiudadanoservice().setPathImaCiu(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrfoto());
+                getSessionBeanCobra().getCiudadanoservice().setPathImaCiu(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().getStrfoto());
             } else {
                 getSessionBeanCobra().getCiudadanoservice().setPathImaCiu(RutasWebArchivos.FOTO_NO_DISPONIBLE);
             }
@@ -836,7 +834,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     }
 
     public String DatosPanelPersonas() {
-        
+
 
         getControlGerencial().iniciargerencial();
         for (DatoPie dato : getControlGerencial().getListaPersonas()) {
@@ -951,7 +949,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     public String modificarUsuario() {
         getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setCargo(new Cargo(1, ""));
         getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTercero(getSessionBeanCobra().getUsuarioObra().getTercero());
-        if(getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrlocalidadnacimiento().getStrcodigolocalidad().length()>=5) {
+        if (getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrlocalidadnacimiento().getStrcodigolocalidad().length() >= 5) {
             codDepartamentoCiudadano = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrlocalidadnacimiento().getStrcodigolocalidad().substring(0, 5);
         }
         llenarMunicipioCiudadanoModi();
@@ -1031,9 +1029,10 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         }
         return null;
     }
-    
+
     /**
      * Cancela el registro del comentario
+     *
      * @return null
      */
     public String cancelarComentario() {
@@ -1258,7 +1257,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     }
 
     /**
-     * 
+     *
      * @return Volver al Inicio.jspx
      */
     public String volverinicio() {
@@ -1268,7 +1267,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     public String abrirImagen() {
         Opinionciudadano op = (Opinionciudadano) repeatopinion.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/"+getSessionBeanCobra().getBundle().getString("versioncobra")+ op.getStrfotoopinion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + op.getStrfotoopinion());
         } catch (IOException ex) {
             Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1281,7 +1280,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     public String abrirDoc() {
         Opinionciudadano op = (Opinionciudadano) repeatopinion.getRowData();
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" +getSessionBeanCobra().getBundle().getString("versioncobra")+ op.getStrdoc());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + op.getStrdoc());
         } catch (IOException ex) {
             Logger.getLogger(PerfilCiudadano.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1290,13 +1289,11 @@ public class PerfilCiudadano  implements ILifeCycleAware {
 
         return "Download";
     }
-    
-    public String reiniciarMensaje()
-    {
+
+    public String reiniciarMensaje() {
         getSessionBeanCobra().getCiudadanoservice().setMensaje("Debe diligenciar los campos obligatorios.");
         return null;
-    }        
-
+    }
     private int asi_va = 0;
 
     public int getAsi_va() {
@@ -1326,7 +1323,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
     }
     NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
     private List<Contratista> contratistas_slider = new ArrayList<Contratista>();
-    private List<String>list_contratistas_slider = new ArrayList<String>();
+    private List<String> list_contratistas_slider = new ArrayList<String>();
     private int numeroContratistas = 0;
     private String unoContratista = "";
 
@@ -1354,7 +1351,7 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         this.list_contratistas_slider = list_contratistas_slider;
     }
 
-    public String cargarObraSliderImagenes() {    
+    public String cargarObraSliderImagenes() {
         list_contratistas_slider.clear();
         numeroContratistas = 0;
         unoContratista = "";
@@ -1380,12 +1377,12 @@ public class PerfilCiudadano  implements ILifeCycleAware {
         if (contratistas_slider != null) {
             if (!contratistas_slider.isEmpty()) {
                 if (contratistas_slider.size() == 1) {
-                    unoContratista = contratistas_slider.get(0).getStrnombre();                    
+                    unoContratista = contratistas_slider.get(0).getStrnombre();
                     numeroContratistas = 1;
                 } else {
                     for (Contratista cont : contratistas_slider) {
                         if (cont.getStrnombre() != null) {
-                            numeroContratistas ++;
+                            numeroContratistas++;
                             list_contratistas_slider.add(cont.getStrnombre());
                         }
                     }
