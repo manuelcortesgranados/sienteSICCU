@@ -30,7 +30,7 @@
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}">
             <h:graphicImage value="/resources/imgs/menu_middle.png" style="width:1px;height:60px" styleClass="middle"/>
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                <a4j:commandLink styleClass="home anchorLink" onclick="document.location.href='../faces#{modulo.strurlMdloRuta}'" value="Inicio"
+                <a4j:commandLink styleClass="home anchorLink" onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
                                  render="panelBody" immediate="true"/>
             </a4j:repeat>
         </rich:toolbarGroup>
@@ -47,7 +47,7 @@
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
 
                 <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" iconDisabled="#{modulo.striconoInicio}"
-                               onclick="document.location.href='../faces#{modulo.strurlMdloRuta}'" immediate="true" style="width: 250px;"/>
+                               onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" immediate="true" style="width: 250px;"/>
             </a4j:repeat>
         </rich:dropDownMenu>
 
@@ -110,7 +110,7 @@
             </f:facet>
 
             <rich:menuItem label="Soporte en linea"   immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
-                           onclick="document.location.href='http://soportesiente.ning.com'" iconDisabled="icon-soporte"/>
+                           onclick="document.location.href='http://soportesiente.ning.com';" iconDisabled="icon-soporte"/>
             <rich:menuItem label="Tutorial" immediate="true"
                            action="manual" iconDisabled="icon-tutorial"/>
             <rich:menuItem label="Preguntas Frecuentes" immediate="true"
@@ -123,7 +123,7 @@
 
         <rich:toolbarGroup>
             <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
-                           onclick="javascript:Richfaces.showModalPanel('panelCargando')" styleClass="cerrar anchorLink"/>
+                           onclick="javascript:Richfaces.showModalPanel('panelCargando');" styleClass="cerrar anchorLink"/>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>

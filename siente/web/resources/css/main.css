@@ -934,7 +934,8 @@ input.buscador_button {
     border-color: transparent;
 }
 
-.rich-toolbar {
+
+ *.rf-tb{
     margin: 0;
     padding:0;
     background-image:url(../imgs/Cobra_menubar_bg.png);
@@ -948,15 +949,17 @@ input.buscador_button {
     border:none;
     -moz-box-shadow: 3px 3px 3px #777;
     -webkit-box-shadow: 3px 3px 3px #777;
+    border-spacing: 0;
 
 }
-.rich-toolbar .rich-toolbar-item{
+
+.rf-tb  .rf-tb-itm{
     margin:0;
     padding:0;
     vertical-align: middle;
 }
 
-.rich-toolbar .rich-toolbar-item a {
+.rf-tb  .rf-tb-itm a {
     width:auto;
     height:60px;
     float:left;
@@ -975,7 +978,7 @@ input.buscador_button {
     margin-bottom: 0;
 }
 
-.rich-toolbar .rich-toolbar-item a.siente {
+.rf-tb .rf-tb-itm a.siente {
     width: 230px;
     height:60px;
     float:left;
@@ -988,11 +991,11 @@ input.buscador_button {
     margin-bottom: 0px;
     margin-left: 8px;
 }
-.rich-toolbar .rich-toolbar-item a.siente:hover {
+.rf-tb  .rf-tb-itm a.siente:hover {
     background-position: 0 -60px;
 }
 
-.rich-toolbar .rich-toolbar-item a.republica {
+.rf-tb  .rf-tb-itm  a.republica {
     width: 60px;
     height:60px;
     float:right;
@@ -1005,11 +1008,11 @@ input.buscador_button {
     margin-bottom: 0px;
     margin-left: 0px;
 }
-.rich-toolbar .rich-toolbar-item a.republica:hover {
+.rf-tb  .rf-tb-itm a.republica:hover {
     background-position: 0 -60px;
 }
 
-.rich-toolbar .rich-toolbar-item a.ch{
+.rf-tb  .rf-tb-itm a.ch{
     width: 130px;
     height:60px;
     float:right;
@@ -1022,45 +1025,45 @@ input.buscador_button {
     margin-left: 0px;
 }
 
-.rich-toolbar .rich-toolbar-item a.ch:hover {
+.rf-tb  .rf-tb-itm a.ch:hover {
     background-position: 0px -60px;
 }
 
-.rich-toolbar .rich-toolbar-item a.home {
+.rf-tb  .rf-tb-itm a.home {
     background-image: url(../imgs/bt_inicio.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 
 }
-.rich-toolbar .rich-toolbar-item a.home:hover {
+.rf-tb  .rf-tb-itm a.home:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rich-toolbar .rich-toolbar-item a.indicadores{
+.rf-tb  .rf-tb-itm a.indicadores{
     background-image: url(../imgs/bt_indicadores.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 
 }
-.rich-toolbar .rich-toolbar-item a.indicadores:hover {
+.rf-tb  .rf-tb-itm a.indicadores:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rich-toolbar .rich-toolbar-item
-.rich-ddmenu-label{
+.rf-tb .rf-tb-itm .rf-ddm-lbl
+{
     margin:0;
     padding:0;
     vertical-align: middle;
 }
 
-.rich-toolbar .rich-toolbar-item
-.rich-ddmenu-label-select{
+.rf-tb  .rf-tb-itm 
+.rf-ddm-sel{
     background-color: inherit;
     border-color: transparent;
     border: 0px;
@@ -1068,14 +1071,14 @@ input.buscador_button {
     color:inherit;
 }
 
-.rich-toolbar .rich-toolbar-item
-.rich-ddmenu-label .rich-label-text-decor{
+.rf-tb  .rf-tb-itm .rf-ddm-lbl
+.rf-ddm-lbl-dec{
     margin:0;
     padding:0;
 }
 
-.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
-.rich-label-text-decor span{
+.rf-tb  .rf-tb-itm .rf-ddm-lbl
+.rf-ddm-lbl-dec span{
     width:auto;
     height:60px;
     float:left;
@@ -1094,8 +1097,8 @@ input.buscador_button {
     margin-bottom: 0;
 }
 
-.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
-.rich-label-text-decor span.gestionar {
+.rf-tb  .rf-tb-itm .rf-ddm-lbl
+.rf-ddm-lbl-dec span.gestionar {
     background-image: url(../imgs/bt_gestionar.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
@@ -1110,8 +1113,8 @@ input.buscador_button {
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
-.rich-label-text-decor span.home {
+.rf-tb  .rf-tb-itm .rf-ddm-lbl
+.rf-ddm-lbl-dec span.home {
     background-image: url(../imgs/bt_inicio.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
