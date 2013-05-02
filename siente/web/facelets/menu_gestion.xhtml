@@ -58,38 +58,38 @@
                 <h:outputText value="Gestionar" styleClass="gestionar anchorLink"/>
             </f:facet>
 
-            <rich:menuGroup label="#{var.obra}" icon="/resources/imgs/bt_proyecto.png" >               
-                <rich:menuGroup label="Infraestructura" icon="/resources/imgs/bt_soliciobra.png" style="width: 150px;">              
+            <rich:menuGroup label="#{var.obra}" icon="icon-proyecto" >               
+                <rich:menuGroup label="Infraestructura" icon="icon-inicio-obrach" style="width: 150px;">              
 
-                    <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true" 
+                    <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true" 
                                    action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png" style="width: 150px;" 
+                    <rich:menuItem label="#{var.propuestas}" icon="icon-borrador" style="width: 150px;" 
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="0" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.suspendidas}" icon="icon-suspendidos" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="6" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.historicas}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -97,7 +97,7 @@
                         <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
 
-                    <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -106,30 +106,30 @@
                     </rich:menuItem>
                 </rich:menuGroup>
 
-                <rich:menuGroup label="Atención Humanitaria" icon="/resources/imgs/bt_soliciatencion.png" style="width: 150px;" rendered="#{var.varah}">
+                <rich:menuGroup label="Atención Humanitaria" icon="icon-inicio-atencion" style="width: 150px;" rendered="#{var.varah}">
 
-                    <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true" 
+                    <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true" 
                                    action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png" style="width: 150px;" 
+                    <rich:menuItem label="#{var.propuestas}" icon="icon-borrador" style="width: 150px;" 
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="0" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.suspendidas}" icon="icon-suspendidos" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="6" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intcodfase}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.historicas}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -137,7 +137,7 @@
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
 
-                    <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -145,7 +145,7 @@
                         <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
 
-                    <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -154,42 +154,42 @@
                     </rich:menuItem>
                 </rich:menuGroup>
 
-                <rich:menuGroup label="#{var.asociadosaconvenio}" icon="/resources/imgs/bt_convenio.png" style="width: 150px;">
-                    <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true"
+                <rich:menuGroup label="#{var.asociadosaconvenio}" icon="icon-convenio" style="width: 150px;">
+                    <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true"
                                    action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                         <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
 
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png" style="width: 150px;" 
+                    <rich:menuItem label="#{var.propuestas}" icon="icon-borrador" style="width: 150px;" 
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="0" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.suspendidas}" icon="/resources/imgs/bt_pausa.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.suspendidas}" icon="icon-suspendidos" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="6" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
 
                     </rich:menuItem>
-                    <rich:menuItem label="#{var.historicas}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.historicas}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="2" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
 
-                    <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                         <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                     </rich:menuItem>
 
-                    <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                    <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                    action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                         <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                         <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -197,7 +197,7 @@
 
                     </rich:menuItem>
                 </rich:menuGroup>
-                <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intcodfase}" />
@@ -207,26 +207,26 @@
 
             </rich:menuGroup>
 
-            <rich:menuGroup label="Convenio" icon="/resources/imgs/bt_convenio.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
-                <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
+            <rich:menuGroup label="Convenio" icon="icon-convenio" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
+                <rich:menuItem  label="Nuevo" icon="icon-nuevo"
                                 actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"/>
-                <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
+                <rich:menuItem  label="Consultar" icon="icon-consultar"
                                 action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>
             </rich:menuGroup>
 
-            <rich:menuGroup label="Contrato" icon="/resources/imgs/bt_contrato.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
-                <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
+            <rich:menuGroup label="Contrato" icon="icon-contrato" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
+                <rich:menuItem  label="Nuevo" icon="icon-nuevo"
                                 actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
-                <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
+                <rich:menuItem  label="Consultar" icon="icon-consultar"
                                 action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true">
                     <a4j:param assignTo="#{Supervisor$ModificarContrato.permitirGuardar}" value="false"/>
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="Contrato Consultoria" icon="/resources/imgs/bt_consultoria.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
-                <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
+            <rich:menuGroup label="Contrato Consultoria" icon="icon-consultoria" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}">
+                <rich:menuItem  label="Nuevo" icon="icon-nuevo"
                                 actionListener="#{Supervisor$Contrato.iniciarContrConsultoria}" action="nuevoContrato" render="panelBody" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontrato_consultoria}"/>
-                <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
+                <rich:menuItem  label="Consultar" icon="icon-consultar"
                                 action="#{Supervisor$Contrato.contrConsultoria}" immediate="true"/>
             </rich:menuGroup>
         </rich:dropDownMenu>
@@ -236,9 +236,9 @@
                 <h:outputText value="#{var.proyectos}" styleClass="gestionar anchorLink"/>
             </f:facet>
 
-            <rich:menuGroup  label="Infraestructura" icon="/resources/imgs/bt_soliciobra.png" style="width: 150px;">              
+            <rich:menuGroup  label="Infraestructura" icon="icon-inicio-obrach" style="width: 150px;">              
 
-                <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true"
+                <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true"
                                action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -246,7 +246,7 @@
                     <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -254,7 +254,7 @@
                     <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -263,9 +263,9 @@
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="Atención Humanitaria" icon="/resources/imgs/bt_soliciatencion.png" style="width: 150px;" rendered="#{gen.varah}">
+            <rich:menuGroup label="Atención Humanitaria" icon="icon-inicio-atencion" style="width: 150px;" rendered="#{gen.varah}">
 
-                <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true" 
+                <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true" 
                                action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -273,7 +273,7 @@
                     <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -281,7 +281,7 @@
                     <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -290,8 +290,8 @@
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="#{var.conentidadesnacionales}" icon="/resources/imgs/bt_convenio.png" style="width: 150px;" rendered="#{HomeGestion.filtro.verconveniosciudadano}">
-                <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true"
+            <rich:menuGroup label="#{var.conentidadesnacionales}" icon="icon-convenio" style="width: 150px;" rendered="#{HomeGestion.filtro.verconveniosciudadano}">
+                <rich:menuItem label="#{var.vigentes}" icon="icon-vigentes" immediate="true"
                                action="#{HomeGestion.activarvistamapa}" render="panelBody" style="width: 150px;">
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -299,14 +299,14 @@
 
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.terminado}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
                     <a4j:param value="true" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
 
-                <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+                <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                     <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                     <a4j:param value="3" assignTo="#{HomeGestion.filtro.tipointervencion}" />
@@ -314,7 +314,7 @@
 
                 </rich:menuItem>
             </rich:menuGroup>
-            <rich:menuItem label="#{var.todos}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
+            <rich:menuItem label="#{var.todos}" icon="icon-finalizados" style="width: 150px;"
                            action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">
                 <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
                 <a4j:param value="-1" assignTo="#{HomeGestion.filtro.intcodfase}" />
@@ -345,11 +345,11 @@
             </f:facet>
 
             <rich:menuItem  label="Redactar" immediate="true"
-                            action="redactarMensaje" icon="/resources/imgs/bt_msjnuevo.png"/>
+                            action="redactarMensaje" icon="icon-redactar"/>
             <rich:menuItem  label="Recibidos" immediate="true"
-                            action="mensajesRecibidos" icon="/resources/imgs/bt_msjrecibidos.png"/>
+                            action="mensajesRecibidos" icon="icon-recibidos"/>
             <rich:menuItem label="Enviados" immediate="true"
-                           action="mensajesEnviados" icon="/resources/imgs/bt_msjenviados.png"/>
+                           action="mensajesEnviados" icon="icon-enviados"/>
 
         </rich:dropDownMenu>
 
@@ -364,10 +364,10 @@
 
 
 
-            <rich:menuItem label="Cambiar Contraseña" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.usuId!=1287}"
+            <rich:menuItem label="Cambiar Contraseña" icon="icon-miperfil" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.usuId!=1287}"
                            action="#{Perfil$Usuario.initusu}" immediate="true"/>
 
-            <rich:menuItem  label="Mi Perfil Ciudadano" icon="/resources/imgs/bt_editarperfil.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}"
+            <rich:menuItem  label="Mi Perfil Ciudadano" icon="icon-miperfil" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}"
                             action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}" immediate="true"/>
 
         </rich:dropDownMenu>
@@ -384,62 +384,62 @@
                 <h:outputText value="#{var.administrador}" styleClass="gestionar anchorLink"/>
             </f:facet>
 
-            <rich:menuGroup label="Usuario" icon="/resources/imgs/bt_soliciobra.png" >   
-                <rich:menuItem label="Asociar Entidad" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Administrador$AdministrarEntidad.asociarEntidad}"
+            <rich:menuGroup label="Usuario" icon="icon-inicio-obrach" >   
+                <rich:menuItem label="Asociar Entidad" icon="icon-vigentes" immediate="true" action="#{Administrador$AdministrarEntidad.asociarEntidad}"
                                style="width: 150px;">
                 </rich:menuItem>
-                <rich:menuItem label="Administrar proyectos" icon="/resources/imgs/bt_vigentes.png" immediate="true" rendered="false"
+                <rich:menuItem label="Administrar proyectos" icon="icon-vigentes" immediate="true" rendered="false"
                                style="width: 150px;">
                 </rich:menuItem>
-                <rich:menuItem label="Gestionar usuarios" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Perfil$Usuario.iniciarperfilusuario}" rendered="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-            </rich:menuGroup>
-
-            <rich:menuGroup label="Parametricas" icon="/resources/imgs/bt_soliciobra.png" >   
-                <rich:menuItem label="Tipo Polizas" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Contrato Consultoria" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Avence Cualitativo" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Factores de Atraso" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Proyecto" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Imagen" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Aseguradora" icon="/resources/imgs/bt_vigentes.png" immediate="true"
-                               style="width: 150px;">
-                </rich:menuItem>
-                <rich:menuItem label="Tipo Docuemento" icon="/resources/imgs/bt_vigentes.png" immediate="true"
+                <rich:menuItem label="Gestionar usuarios" icon="icon-vigentes" immediate="true" action="#{Perfil$Usuario.iniciarperfilusuario}" rendered="true"
                                style="width: 150px;">
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="#{var.entidad}" icon="/resources/imgs/bt_proyecto.png" >         
-                <rich:menuItem label="#{var.crearentidad}" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Administrador$AdministrarEntidad.ingresarEntidad}"
+            <rich:menuGroup label="Parametricas" icon="icon-inicio-obrach" >   
+                <rich:menuItem label="Tipo Polizas" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Contrato Consultoria" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Avence Cualitativo" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Factores de Atraso" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Proyecto" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Imagen" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Aseguradora" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+                <rich:menuItem label="Tipo Docuemento" icon="icon-vigentes" immediate="true"
+                               style="width: 150px;">
+                </rich:menuItem>
+            </rich:menuGroup>
+
+            <rich:menuGroup label="#{var.entidad}" icon="icon-proyecto" >         
+                <rich:menuItem label="#{var.crearentidad}" icon="icon-vigentes" immediate="true" action="#{Administrador$AdministrarEntidad.ingresarEntidad}"
                                style="width: 150px;">
                 </rich:menuItem>
 
 
 
             </rich:menuGroup>
-            <rich:menuGroup label="Convenio" icon="/resources/imgs/bt_proyecto.png" rendered="false">         
-                <rich:menuItem label="Asociar" icon="/resources/imgs/bt_vigentes.png" immediate="true" 
+            <rich:menuGroup label="Convenio" icon="icon-proyecto" rendered="false">         
+                <rich:menuItem label="Asociar" icon="icon-vigentes" immediate="true" 
                                style="width: 150px;">
                 </rich:menuItem>
 
             </rich:menuGroup>
 
-            <rich:menuGroup label="#{var.contrato}" icon="/resources/imgs/bt_proyecto.png" rendered="false">         
-                <rich:menuItem label="#{var.modificarcontrato}" icon="/resources/imgs/bt_vigentes.png" immediate="true" action="#{Supervisor$Contrato.iniciarDetaContrato}"
+            <rich:menuGroup label="#{var.contrato}" icon="icon-proyecto" rendered="false">         
+                <rich:menuItem label="#{var.modificarcontrato}" icon="icon-vigentes" immediate="true" action="#{Supervisor$Contrato.iniciarDetaContrato}"
                                style="width: 150px; ">
                 </rich:menuItem>
 
@@ -457,11 +457,11 @@
             </f:facet>
 
             <rich:menuItem label="Soporte en linea"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
-                           onclick="window.open(document.location.href='#{var.linksoporte}', '_blank');"  icon="/resources/imgs/bt_soporte.png"/>
+                           onclick="window.open(document.location.href='#{var.linksoporte}', '_blank');"  icon="icon-soporte"/>
             <rich:menuItem label="Tutorial"  immediate="true"
-                           action="manual" icon="/resources/imgs/bt_tutorial.png"/>
+                           action="manual" icon="icon-tutorial"/>
             <rich:menuItem label="Preguntas Frecuentes" immediate="true"
-                           action="pregfrecuentes" icon="/resources/imgs/bt_preguntas.png"/>
+                           action="pregfrecuentes" icon="icon-preguntas"/>
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
