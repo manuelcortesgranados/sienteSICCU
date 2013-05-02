@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel height="200" id="panelGuardado" resizeable="false" width="350" style="padding:0px;"
+                     headerClass="rich-panel-header">
+         <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.guardado}"/>
+            </h:panelGroup>
+        </f:facet>
+         <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelGuardado" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelGuardado" event="onclick" for="panelGuardado" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <h:panelGrid id="layoutGuardado">
+                    <h:outputText value="#{var.laobra}" />
+                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext"/>
+                    <h:outputText value="#{var.hasidoalimentadaexitosa}" />
+                </h:panelGrid>
+                <center>
+                    <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}"
+                                       onclick="javascript:Richfaces.hideModalPanel('panelGuardado')"
+                                          style="font-size: 12px;"
+                                       render="gpPrincipalAlimentar"/>
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</f:view>

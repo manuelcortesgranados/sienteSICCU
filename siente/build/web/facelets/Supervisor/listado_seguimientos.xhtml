@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j" 
+        xmlns:interkont="http://www.interkont.com/jsf"
+	xmlns:rich="http://richfaces.org/rich" 
+        >
+
+    <f:subview id="seguimientos">
+        <h:panelGroup id="gpListaSeguimientos" styleClass="centrado">
+            <h:form target="_blank">
+                <rich:dataTable id="tablaSeguimientos"
+                                rows="10"
+                                var="segumiento"
+                                rowKeyVar="filaSeleccionada"
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                sortMode="single"
+                                value="#{SessionBeanCobra.cobraService.listaseguimientos}"
+                                style="text-align:center;width:100%;"
+                                styleClass="centrado">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column colspan="5">
+                                <h:outputText value="#{var.seguimientos}" />
+                            </rich:column>
+                            <rich:column breakRowBefore="true">
+                                <h:outputText value="#{var.firmainter}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{var.visitadopor}" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{var.fechavisita}" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{var.consultar}" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{var.reporte}" />
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                    <rich:columnGroup >
+                        <rich:column>
+                            <h:outputText value="#{segumiento.strnombrecompleto}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{segumiento.strvisitador}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{segumiento.datefechavisita}">
+                                <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <a4j:commandLink  action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}" execute="@this" >
+                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                            </a4j:commandLink>
+                        </rich:column>
+                        <rich:column> 
+                            <h:commandLink  action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport}" >
+                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                            </h:commandLink>                              
+                        </rich:column>
+                    </rich:columnGroup>
+                    <f:facet name="footer">
+                        <rich:dataScroller for="tablaSeguimientos" render="tablaSeguimientos" ></rich:dataScroller>
+                    </f:facet>
+                </rich:dataTable>
+            </h:form>
+            <center>
+                
+                <h:form target="_blank">
+                    <h:panelGrid columnClasses="panelcenter" >
+                        <h:commandLink styleClass="pdf" action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
+                    </h:panelGrid>
+                </h:form>
+                <h:outputText id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
+            </center>
+        </h:panelGroup>
+    </f:subview>
+
+</ui:composition>

@@ -1,0 +1,87 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_supervision.xhtml">
+            <ui:define name="body">
+                <div id="sliderpanel_outer">
+                    <div id="sliderpanel_inner">
+                        <div id="sliderpanel_items">
+                            <div id="sliderpanel_items">
+                                <h:form id="form_supervision">
+                                    <a4j:repeat  >
+                                        <div class="sliderpanel_element">
+                                            <strong>Información general</strong>
+                                            <a href=".#supervision" class="supervision01 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Informe de visita</strong>
+                                            <a href=".#supervision" class="supervision02 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Información financiera</strong>
+                                            <a href=".#supervision" class="supervision03 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Pólizas contrato de obra</strong>
+                                            <a href=".#supervision" class="supervision04 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Impacto social</strong>
+                                            <a href=".#supervision" class="supervision05 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Ubicación georeferenciada</strong>
+                                            <a href=".#supervision" class="supervision06 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Actividades contractuales</strong>
+                                            <a href=".#supervision" class="supervision07 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Inf. general interventoría</strong>
+                                            <a href=".#supervision" class="supervision08 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Inf. financiera interventoría</strong>
+                                            <a href=".#supervision" class="supervision09 anchorLink"></a>
+
+                                        </div>
+                                        <div class="sliderpanel_element">
+                                            <strong>Pólizas interventoría</strong>
+                                            <a href=".#supervision" class="supervision10 anchorLink"></a>
+
+                                        </div>
+                                    </a4j:repeat>
+
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+            <ui:include src="../SupervisionExterna/modal/InfoGeneralSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/InfoFinancieraSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/ImpactoSocialSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/InformeVisitaSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/UbicacionSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/PolizaContratoSupervision.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/InfoPolizaInterventoria.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/InfoGeneralInterventoria.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/ActividadesContractuales.jspx"/>
+            <ui:include src="../SupervisionExterna/modal/infoFinancieraInterventoria.jspx"/>
+        </ui:composition>
+    </f:view>
+</html>

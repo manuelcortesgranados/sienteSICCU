@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" 
+      xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view>
+        <ui:composition template="/facelets/template_error.xhtml">
+            <ui:define name="head">
+                <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            </ui:define>
+            
+        </ui:composition>
+    </f:view>
+</html>

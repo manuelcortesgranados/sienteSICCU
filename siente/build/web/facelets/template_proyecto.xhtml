@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+    <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>            
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <ui:insert name="head"/>
+
+            <style type="text/css">
+                body,td,th {
+                    margin: 0px;
+                    font-family: Verdana, Geneva, sans-serif;
+                }
+            </style> 
+
+
+        </head>
+
+        <body onload="showModal()">
+            <h:form id="form_menu">
+                <ui:insert name="menu"/>
+            </h:form>
+
+            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+                <tr>
+                    <td width="15%"></td>
+                    <td width="85%">
+                        <div id="header_content">
+                            <div class="ubicacion">
+                                <ui:insert name="title"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <a4j:outputPanel id="panelBody">                        
+                        <ui:insert name="body"/>
+                        <ui:include src="/facelets/ajaxStatus.xhtml" />
+                    </a4j:outputPanel>
+
+                </tr>
+            </table>
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                <tr style="height:15px;"/>
+                <tr>
+                    <td style="width:100%;">
+                        <h:form id="form_footer">
+                            <ui:include src="/facelets/footer.xhtml"/>
+
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</ui:composition>

@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel id="modalpolizacontratosuper"  headerClass="rich-panel-header" height="400" width="600" style="overflow: auto">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="INFORMACIÓN DE POLIZAS" styleClass="txt_header"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalpolizacontratosuper" onclick="javascript:Richfaces.hideModalPanel('modalpolizacontratosuper')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                    <rich:componentControl attachTo="esconder-modalpolizacontratosuper" event="onclick" for="modalpolizacontratosuper" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <center>
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header" >
+                    <h:outputText value="#{var.cumplimiento}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizaC"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaC" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}"/>
+                    <h:outputText id="outFechaVencimientoC" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoC"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}"/>
+                    <h:outputText id="outAseguradoraC" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraC" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}"/>
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.pagossalariosprestaciones}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15">
+                    <h:outputText id="outNumPolizasS"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaS"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}"/>
+                    <h:outputText id="outFechaVencimientosS" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoS"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradorasS" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraS" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.buenmanejodelanticipo}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizasA"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaA"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText id="outFechaVencimientosA" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoA"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradorasA" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraA"  value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}"/>
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.responsabcivilextra}"  />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizasB"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaB"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText id="outFechaVencimientosB" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoB"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradorasB" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraB" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip" >
+                <f:facet name="header">
+                    <h:outputText value="#{var.estabilidadsupervisor}"  />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15">
+                    <h:outputText id="outNumPolizasE"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaE"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText id="outFechaVencimientosE" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoE"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradorasE" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraE" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                </h:panelGrid>
+            </rich:panel>
+
+        </center>
+    </rich:popupPanel>
+
+</html>

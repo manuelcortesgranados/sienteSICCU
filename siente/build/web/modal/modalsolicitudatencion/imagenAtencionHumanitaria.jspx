@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:panelGroup id="gpImagenAtencion" rendered="#{Supervisor$AdministrarObraNew.opcion==4}">
+        <h:form>
+            <h:panelGrid id="panel_imagenesevolucion" style="width:100%;">
+                <rich:panel header="#{var.listaimagenesdeestaobra}">
+                    <h:panelGroup style="width:100%">
+                        <center>
+                            <div style="height: 40px; width: 100%">
+                                <marquee scrolldelay="200" behavior="alternate" style="width: 100%;">
+                                    <rich:message for="txt_strnombre_imagen" styleClass="txt_label_bold"/>
+                                </marquee>
+                            </div>
+                            <h:panelGroup>
+                                <h:outputText  value="#{var.houtbusquedarapida} "/>
+                                <h:inputText value="#{Supervisor$AdministrarObraNew.valorFiltroImagenevolucionobra}" size="52" immediate="true">
+                                    <a4j:ajax event="onkeyup" render="tablaImagenesevolucion" ignoreDupResponses="true"  execute="@this"/>
+                                </h:inputText>
+                            </h:panelGroup>
+                            <interkont:spacer height="20px" style="width:100%;"/>
+                            <h:panelGroup>
+                                <rich:dataTable id="tablaImagenesevolucion"  sortMode="single" style="text-align:left;" value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}" var="currentRow" style="width:100%;" binding="#{Supervisor$AdministrarObraNew.tablaImagenesevolucion}" rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                    <rich:column filterMethod="#{Supervisor$AdministrarObraNew.filtrarImagenesevolucion}" sortBy="#{currentRow.strnombre}" width="470px"
+                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                 sortIconDescending="../resources/images/des.gif" sortOrder="ASCENDING">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.descripcion}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{currentRow.strnombre}"/>
+                                    </rich:column>
+                                    <rich:column sortBy="#{currentRow.datefecha}" width="150px"
+                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                 sortIconDescending="../resources/images/des.gif" sortOrder="ASCENDING">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.fechadelaimagen}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{currentRow.datefecha}">
+                                            <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column style="text-align:center;" width="60px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.Ver}"/>
+                                        </f:facet>
+                                        <h:commandButton action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}"
+                                                         styleClass="btn_lupa"   immediate="true"/>
+                                    </rich:column>
+                                    <rich:column style="text-align:center;" width="60px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.editar}"/>
+                                        </f:facet>
+                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}" image="/resources/botones/lapiz.png"
+                                                           oncomplete="javascript:Richfaces.showModalPanel('mp_editar_imagenevolucion');" title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true"/>
+                                    </rich:column>
+                                    <rich:column style="text-align:center;" width="60px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.eliminar}"/>
+                                        </f:facet>
+                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" styleClass="btn_cerrar" rendered="#{!currentRow.tipoimagen.boolobligatorio}"
+                                                            
+                                                           oncomplete="javascript:Richfaces.showModalPanel('mp_eliminar_imagenevolucion');" title="#{var.eliminar}"  immediate="true"/>
+                                    </rich:column>
+                                    <f:facet name="footer">
+                                        <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                    </f:facet>
+                                </rich:dataTable>
+                            </h:panelGroup>
+                            <interkont:spacer height="20px" style="width:100%;"/>
+                            <rich:dataTable  style="width:100%;">
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="3" >
+                                            <h:outputText value="#{var.subidarapidadeimagenes}"/>
+                                        </rich:column>
+                                        <rich:column breakBefore="true">
+                                            <h:outputText value="#{var.descripcion}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.fechadelaimagen}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.subir}"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <f:facet name="footer">
+                                    <rich:columnGroup >
+                                        <rich:column>
+                                            <h:inputText id="txt_strnombre_imagen" value="#{Supervisor$AdministrarObraNew.imagenevolucionobra.strnombre}"  required="true" requiredMessage="#{var.debeproporcionaadescrip}" size="30"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha" value="#{Supervisor$AdministrarObraNew.imagenevolucionobra.datefecha}" required="true" inputSize="10"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:panelGrid id="panel_subir_imagenevolucion"  columns="3">
+                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true" style="font-size: 10px;" value="#{var.examinar}" styleClass="btn_sec_med"
+                                                                   oncomplete="javascript:Richfaces.showModalPanel('panelUploadImagenevolucion')"/>
+                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirImagenevolucion.files}" var="file" width="30px">
+                                                    <h:outputText id="otxt_nombrearchivo" value=" #{file.onlyName}"/>
+                                                </rich:dataGrid>
+                                                <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_imagenevolucion_action}" image="/resources/botones/mas.png" title="#{var.agregar}"
+                                                                   render="panel_imagenesevolucion, gpImagenModal"
+                                                                   rendered="#{Supervisor$AdministrarObraNew.subirImagenevolucion.size!=0}"/>
+                                            </h:panelGrid>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                            </rich:dataTable>
+                            <interkont:spacer height="20px" style="width:100%;"/>
+                        </center>
+                    </h:panelGroup>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+    </h:panelGroup>
+
+</f:view>

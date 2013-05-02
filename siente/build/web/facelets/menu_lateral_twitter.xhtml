@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf">
+
+    <rich:panel header="Twitter" bodyClass="tool" headerClass="headertool" style="border-style: none; width: 100%">
+
+        <script>
+            function addEnter(textareaId)
+            {
+                var textarea = document.getElementById(textareaId);
+                textarea.value += '\n';
+                textarea.focus();
+            }
+
+            function addBackspace(textareaId)
+            {
+                var textarea = document.getElementById(textareaId);
+                textarea.value = textarea.value.substring(0, textarea.value.length - 1);
+                textarea.focus();
+            }
+
+        </script>
+        <h:inputTextarea id="textarea" binding="#{textarea}" />
+        <input type="button" value="Enter" onclick="addEnter('#{textarea}')" />
+        <input type="button" value="Backspace" onclick="addBackspace('#{textarea}')" />
+
+         </rich:panel>
+</ui:composition>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel height="200" id="panelConfirmarModificacion" resizeable="false" width="350" style="padding:0px;"
+                     headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.confirmarmodi}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelConfirmarModificacion" event="onclick" for="panelConfirmarModificacion" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <center>
+                <h:form>
+                    <h:panelGrid id="layoutConfMod" columnClasses="aiu">
+                        <interkont:spacer height="20"/>
+                        <h:outputText value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="txt_label_bold"/>
+                        <a4j:commandButton id="btCerrarCofMod" value="#{var.aceptar}"
+                                           render="layoutPrincipal, layoutModificar, layoutMatrix, layoutDocOtroSi, layoutDocActaConvenio, layoutDocCronog"
+                                              style="font-size: 12px;">
+                            <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmarModificacion')" />
+                        </a4j:commandButton>
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </rich:panel>
+    </rich:popupPanel>
+</f:view>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="head">
+                <script src="../../amcharts/amcharts.js" type="text/javascript">
+                </script>
+                <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+                <script src="/#{var.versioncobra}/resources/gSlider/js/image-slider.js" type="text/javascript"></script>
+                <link href="/#{var.versioncobra}/resources/gSlider/style/image-slider.css" rel="stylesheet" type="text/css" />
+                <link href="/#{var.versioncobra}/resources/css/tablerocontrol.css" rel="stylesheet" type="text/css" />
+                <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
+                <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
+                <script type="text/javascript">
+                    var $j = jQuery.noConflict();
+
+
+
+                    $j(document).ready(function() {
+                        var $i = jQuery.noConflict();
+                        $i('#slider').slider({ speed: 500 });
+                        $i('#slider2').slider2({ speed: 500, action:true });
+
+                    });
+
+                </script>
+
+                <h:outputScript src="/resources/js/RGraph/RGraph.meter.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.core.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.effects.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.context.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.annotate.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.tooltips.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.zoom.js"/>
+                <h:outputScript src="/resources/js/RGraph/RGraph.common.resizing.js"/>
+            </ui:define>
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="title">
+                <h:outputText value="#{var.tablerodecontrol}"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                
+                <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+                <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard}" id="gpSliderpanelesdash2">
+                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.jspf"/>
+                </h:panelGroup>
+
+                <!--<h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}">
+                    <ui:include src="/facelets/panel_conozca_inversion.xhtml"/>
+                </h:panelGroup>-->
+
+            </ui:define>
+            <ui:define name="body">
+                <h:form id="dashboard">
+
+                    <h:panelGrid columns="1" id="panelgerencial" cellpadding="0" cellspacing="0" width="90%">
+                        <h:outputText value="#{var.texto1_inversion_tablerocontrol}" styleClass="texto1 centrado"/>
+                        <h:panelGrid id="panelcombos" styleClass="centrado" columns="5"  style="margin-top:5px;">
+                            <h:panelGroup styleClass="panelSelectorLocalidad">
+                                <h:selectOneMenu value="#{ControlGerencial.vistaicom}" styleClass="selectLocalidad">
+                                    <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
+                                    <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
+                                    <a4j:ajax event="onchange" render="panelcombos" />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup styleClass="panelSelectorLocalidad" rendered="#{ControlGerencial.vistaicom != 1}">
+                                <h:selectOneMenu value="#{ControlGerencial.deptos}" styleClass="selectLocalidad">
+                                    <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                    <f:selectItems value="#{ControlGerencial.sedeptos}" />
+                                    <a4j:ajax event="onchange" action="#{ControlGerencial.llenarMunici}" render="municipioincom"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup id="municipioincom" styleClass="panelSelectorLocalidad" rendered="#{ControlGerencial.vistaicom != 1}">
+                                <h:selectOneMenu value="#{ControlGerencial.muni}" styleClass="selectLocalidad">
+                                    <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                    <f:selectItems value="#{ControlGerencial.semuni}" />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup styleClass="panelSelectorLocalidad" rendered="#{ControlGerencial.vistaicom == 1}">
+                                <h:selectOneMenu value="#{ControlGerencial.intzona}" styleClass="selectLocalidad">
+                                    <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                    <f:selectItems value="#{ControlGerencial.zonaespecifica}"/>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                            <h:panelGroup >
+                                <h:commandLink value="Graficar" action="#{ControlGerencial.generarGraficos}" styleClass="buttonver" />
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <rich:panel bodyClass="panelTableroControl panelSlider" headerClass="topheader" style="margin-top:20px;">
+                            <f:facet name="header">
+                                <h:outputText value="Los últimos 10 proyectos reportados"/>
+                            </f:facet>
+
+                            <div id="container">
+                                <div id="slider" class="divSlider">
+                                    <a4j:repeat value="#{ControlGerencial.listaimagenesslider}" var="imagen">
+                                        <div>
+                                            <h:graphicImage alt="#{imagen.obra.strnombrecrot}" url="#{var.ipserver}siente#{imagen.strubicacion}" />
+                                            <h:outputLink
+                                                value="#{facesContext.externalContext.requestContextPath}/faces/Supervisor/DetalleObra.jspx?id=#{imagen.obra.intcodigoobra}" >
+                                                <h:outputText value="#{imagen.obra.strnombrecrot}"/>
+                                            </h:outputLink>
+                                        </div>
+                                    </a4j:repeat>
+                                </div>
+                            </div>
+                        </rich:panel>
+                        <h:panelGrid columns="2" cellpadding="0" cellspacing="0" columnClasses="seccion-izq-dashboard,seccion-der-dashboard">
+                            <h:panelGrid cellpadding="0" cellspacing="0" width="90%">
+                                <rich:panel headerClass="topheader" bodyClass="panelTableroControl panelValorInversion">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{(ControlGerencial.invporregion)?'Inversión Total por Región':'Inversión Total Nacional'}"/>
+                                    </f:facet>
+                                    <center>
+                                        <h:panelGrid  style="width:100%;" columns="2" styleClass="invtotal" rendered="#{!ControlGerencial.invporregion}">
+                                            <h:graphicImage url="/resources/imgs/dash_01.png" width="50" height="50" />
+                                            <h:panelGroup >
+                                                <h:outputText value="#{ControlGerencial.informaciondash.inversionTotalNal}">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+
+                                        <h:panelGrid  style="width:100%;" columns="2" styleClass="invtotal" rendered="#{ControlGerencial.invporregion}">
+                                            <h:graphicImage url="/resources/imgs/dash_01.png" width="50" height="50" />
+                                            <h:panelGroup >
+                                                <h:outputText value="#{ControlGerencial.informaciondash.inversionTotalRegion}">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+                                    </center>
+                                    <interkont:spacer height="10"/>
+                                    <h:panelGrid columns="3" columnClasses="panelderecha" style="width:100%;" rendered="false">
+                                        <interkont:spacer width="30"/>
+                                        <h:panelGrid columnClasses="panelderecha" style="width:100%;">
+                                            <h:outputLabel value="#{var.carteracolectiva}" style="color:#003; font-size:16px"/>
+                                            <h:outputText value="#{ControlGerencial.porcentajeCartera}%" style="color:#4169E1; font-size:24px;"/>
+                                            <h:outputLabel value="#{ControlGerencial.totalCartera}" style="color:#666666; font-size:15px;">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputLabel>
+                                        </h:panelGrid>
+
+                                        <h:outputText value="#{ControlGerencial.columnatotalgeneral.scriptcolumnaporcentual}" escape="false"/>
+                                    </h:panelGrid>
+                                    <interkont:spacer height="30"/>
+                                    <h:panelGrid columns="3" columnClasses="panelderecha" style="width:100%;" rendered="false">
+                                        <interkont:spacer width="30"/>
+                                        <h:panelGrid columnClasses="panelderecha" style="width:100%;">
+                                            <h:outputLabel value="#{var.pago} a contratistas" style="color:#003; font-size:16px;"/>
+                                            <h:outputText value="#{ControlGerencial.porcentajePago}%" style="color:#F4A460; font-size:24px;"/>
+                                            <h:outputLabel value="#{ControlGerencial.totalPago}" style="color:#666666; font-size:15px;">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputLabel>
+                                        </h:panelGrid>
+                                        <h:outputText value="#{ControlGerencial.columnapagocontratistas.scriptcolumnaporcentual}" escape="false"/>
+                                    </h:panelGrid>
+                                    <interkont:spacer height="30"/>
+                                    <h:panelGrid columns="3" columnClasses="panelderecha" style="width:100%;" rendered="false">
+                                        <interkont:spacer width="30"/>
+                                        <h:panelGrid columnClasses="panelderecha" style="width:100%;">
+                                            <h:outputLabel value="#{var.legalizacion}" style="color:#003; font-size:16px;"/>
+                                            <h:outputText value="#{ControlGerencial.porcentajeLegalizado}%" style="color:#32CD32; font-size:24px;" />
+                                            <h:outputText value="#{ControlGerencial.totalLegalizado}" style="color:#666666; font-size:15px;">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+                                        <h:outputText value="#{ControlGerencial.columnalegalizacion.scriptcolumnaporcentual}" escape="false"/>
+                                    </h:panelGrid>
+                                    <interkont:spacer height="20"/>
+                                    <interkont:spacer height="40"/>
+                                </rich:panel>
+                            </h:panelGrid>
+                            <h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+                                <rich:panel headerClass="topheader" bodyClass="panelTableroControl panelPersonasHogares">
+                                    <f:facet name="header">
+                                        <h:outputText value="Personas y hogares"/>
+                                    </f:facet>
+                                    <h:panelGrid>
+                                        <h:panelGroup>
+                                            <h:panelGrid columns="2" cellpadding="0" captionStyle="0" styleClass="centrado panelImagenPersonasHogares">
+                                                <h:graphicImage value="/resources/imgs/dash_07.png" styleClass="imagenPersonasHogares"/>
+                                                <h:outputText value="Personas" styleClass="labelPersonasHogares"/>
+                                            </h:panelGrid>
+                                            <h:outputText value="#{ControlGerencial.barraspersonas.scriptGrafico}" escape="false"/>
+                                            <div id="chartpersonas" style="width:380px; height: 60px;"></div>
+                                        </h:panelGroup>
+                                        <h:panelGroup style="padding:1em;">
+                                            <h:panelGrid columns="2" cellpadding="0" captionStyle="0" styleClass="centrado panelImagenPersonasHogares">
+                                                <h:graphicImage value="/resources/imgs/dash_06.png" styleClass="imagenPersonasHogares"/>
+                                                <h:outputText value="Hogares" styleClass="labelPersonasHogares"/>
+                                            </h:panelGrid>
+                                            <h:outputText value="#{ControlGerencial.barrashogares.scriptGrafico}" escape="false"/>
+                                            <div id="charthogares" style="width: 380px; height: 60px;"></div>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </rich:panel>
+                                <rich:panel headerClass="topheader" bodyClass="panelTableroControl panelConvenios">
+                                    <f:facet name="header">
+                                        <h:outputText value="Entidades Nacionales"/>
+                                    </f:facet>
+                                    <h:panelGroup>
+                                        <h:outputText value="#{ControlGerencial.informaciondash.inversionConvenios}" styleClass="tituloValor">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+
+                                        <h:inputHidden id="estaen" value="#{ControlGerencial.informaciondash.intPorcentageEje}" />
+                                        <script>
+                                            function init(){
+                                                var estaen=document.getElementById("dashboard:estaen").value;
+                                                var min = 0;
+                                                var max = 100;
+
+                                                var meterds = new RGraph.Meter('meterds', min, max, estaen);
+
+                                                var grad1 = meterds.context.createRadialGradient(meterds.canvas.width / 2,meterds.canvas.height - 25,0,meterds.canvas.width / 2,meterds.canvas.height - 25,200);
+                                                grad1.addColorStop(0, 'green');
+                                                grad1.addColorStop(1, 'white');
+
+                                                var grad2 = meterds.context.createRadialGradient(meterds.canvas.width / 2, meterds.canvas.height - 25,0,meterds.canvas.width / 2, meterds.canvas.height - 25,200);
+                                                grad2.addColorStop(0, 'yellow');
+                                                grad2.addColorStop(1, 'white');
+
+                                                var grad3 = meterds.context.createRadialGradient(meterds.canvas.width / 2, meterds.canvas.height - 25,0,meterds.canvas.width / 2, meterds.canvas.height - 25,200);
+                                                grad3.addColorStop(0, 'red');
+                                                grad3.addColorStop(1, 'white');
+
+                                                meterds.Set('chart.labels.position', 'inside');
+                                                meterds.Set('chart.title.vpos', 0.5);
+                                                meterds.Set('chart.title.color', 'black');
+                                                meterds.Set('chart.green.color', grad1);
+                                                meterds.Set('chart.yellow.color', grad2);
+                                                meterds.Set('chart.red.color', grad3);
+                                                meterds.Set('chart.background.color', 'white');
+                                                meterds.Set('chart.background.color', 'red');
+                                                meterds.Set('chart.border', false);
+                                                meterds.Set('chart.needle.linewidth', 5);
+                                                meterds.Set('chart.needle.tail', true);
+                                                meterds.Set('chart.tickmarks.big.num', 0);
+                                                meterds.Set('chart.tickmarks.small.num', 0);
+                                                meterds.Set('chart.segment.radius.start', 90);
+                                                meterds.Set('chart.needle.radius', 50);
+                                                meterds.Set('chart.needle.linewidth', 2);
+                                                meterds.Set('chart.linewidth.segments', 9);
+                                                meterds.Set('chart.strokestyle', 'white');
+                                                meterds.Set('chart.text.size', 7);
+                                                RGraph.Effects.Meter.Grow(meterds);
+                                            }
+                                            window.onload = init;
+                                        </script>
+
+                                        <div id="popUpDiv">
+                                            <div id="capaContent">
+                                                <div>
+                                                    <canvas id="meterds" width="270" height="137">
+                                                        <div class="canvasfallback">[No canvas support]</div></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <h:outputText styleClass="txt_outtext"
+                                                          style="font-size:1.5em; color:#336699;"
+                                                          value="Porcentaje de Inversión: " />
+                                            <h:outputText id="stEstado" styleClass="tituloValor"
+                                                          value="#{ControlGerencial.informaciondash.porInversionConvenios}"><!--llamar metodo-->
+                                                <f:convertNumber type="percent"/>
+                                            </h:outputText>
+                                        </div>
+
+
+                                    </h:panelGroup>
+                                    <interkont:spacer height="40" />
+                                    <h:panelGroup>
+                                        <a4j:commandLink rendered="#{var.vermasdashboard}" value="#{var.ver}+" styleClass="buttonver anchorLink" style="text-align:right" render="modalDashboardConveniosInfo"
+                                                         action="#{ControlGerencial.obtenerConsolidadoConvenios}" oncomplete="javascript:Richfaces.showModalPanel('modalDashboard_entesnacionales');"></a4j:commandLink>
+                                    </h:panelGroup>
+                                </rich:panel>
+
+                                <rich:panel  headerClass="topheader" bodyClass="panelTableroControl panelRehabilitacion">
+                                    <f:facet name="header">
+                                        <h:outputText value="Entes Territoriales"/>
+                                    </f:facet>
+                                    <h:panelGrid style="width:100%;" rowClasses="cell-top">
+                                        <h:panelGroup>
+                                            <center>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <h:outputLabel value="#{var.dashinvtipoproyecto}" style="color:#003; font-size:12px; font-weight: bold;"/>
+                                                    <h:outputText value="#{ControlGerencial.piecontrol.scriptPieDashboard}" escape="false"/>
+                                                    <div id="proyectospie" style="width: 350px; height: 220px; text-align: left;"></div>
+                                                </h:panelGrid>
+                                                <h:outputText value="#{ControlGerencial.informaciondash.inversionObra}" styleClass="tituloValor">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                                <h:panelGrid columnClasses="panelcenter" style="vertical-align:top" rendered="false">
+                                                    <h:outputLabel value="#{var.ejecuciontotal}" style="color:#003; font-size:12px; font-weight: bold;"/>
+                                                    <h:outputText value="#{ControlGerencial.columnaproyectoconsolidado.scriptcolumnaporcentual}" escape="false"/>
+                                                </h:panelGrid>
+                                            </center>                                            
+                                        </h:panelGroup>
+                                        <interkont:spacer height="10" />
+                                        <h:panelGroup>
+                                            <a4j:commandLink rendered="#{var.vermasdashboard}"  value="#{var.ver}+" action="#{ControlGerencial.obtenerConsolidadoRehabilitacion}" styleClass="buttonver anchorLink" style="text-align:right" oncomplete="javascript:Richfaces.showModalPanel('modalDashboard_rehabilitacion');" render="pgInfoModalRehabilitacion"></a4j:commandLink>
+                                        </h:panelGroup>
+
+
+                                    </h:panelGrid>
+                                </rich:panel>
+                                <rich:panel  headerClass="topheader" bodyClass="panelTableroControl panelAtencion">
+                                    <f:facet name="header">
+                                        <h:outputText value="Atención humanitaria"/>
+                                    </f:facet>
+
+                                    <h:panelGroup>
+
+                                        <ul style="list-style-type:none;  text-align: left; padding: 0em; margin: 0em ; line-height: 2.55em">
+                                            <interkont:spacer height="50"/>
+                                            <a4j:repeat value="#{ControlGerencial.listaServiciosAHAtendidas}" var="item">
+
+                                                <li class="liItemAtencion">
+                                                    <h:outputText value="#{item.etiqueta}:" styleClass="labelItemAtencion" />
+
+                                                    <h:outputText value="#{item.valormoney}" styleClass="valorItemAtencion">
+                                                        <f:convertNumber pattern="###,###"/>
+                                                    </h:outputText>
+
+                                                </li>
+
+                                            </a4j:repeat>
+
+                                        </ul>
+
+                                    </h:panelGroup>
+
+                                    
+                                    <h:panelGrid>
+                                        <interkont:spacer height="20" style="width:100%;"/>
+                                        <h:outputText value="#{ControlGerencial.informaciondash.inversionAh}" styleClass="tituloValor">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                        <interkont:spacer height="5" />                                        
+                                        <h:panelGroup>
+                                            <a4j:commandLink  rendered="#{var.vermasdashboard}"  action="#{ControlGerencial.obtenerConsolidadoAh}"
+                                                              value="#{var.ver}+" styleClass="buttonver anchorLink" style="text-align:right" 
+                                                              oncomplete="javascript:Richfaces.showModalPanel('modalDashboard_ah');" render="modalDashboardAhInfo"></a4j:commandLink>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </rich:panel>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+                <ui:include src="/ControlGerencial/modalDashboard/modalDashboardRehabilitacion.jspx"/>
+                <ui:include src="/ControlGerencial/modalDashboard/modalDashboardConvenios.jspx"/>
+                <ui:include src="/ControlGerencial/modalDashboard/modalDashboardAtencionH.jspx"/>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

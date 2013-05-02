@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+   >
+
+    <rich:panel header="Atención Humanitaria" id="menuAtencion" bodyClass="tool" style="border-style: none;">
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" > 
+                <h:commandLink styleClass="consatencion anchorLink" immediate="true"
+                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}"                               
+                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
+                <h:commandLink styleClass="text" value="Registrar Solicitud"
+                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}"
+                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="consobra anchorLink" immediate="true"
+                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
+                <h:commandLink styleClass="text" value="Consultar Solicitudes"
+                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
+
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >  
+                <h:commandLink styleClass="reportes anchorLink" immediate="true" action="irreportesdetalle" />
+                <a4j:commandLink styleClass="text" value="Reporte"  action="irreportesdetalle"/>
+            </h:panelGrid>
+            
+
+        </h:panelGrid>
+    </rich:panel>
+
+    <interkont:spacer height="5px"/>
+
+</ui:composition>

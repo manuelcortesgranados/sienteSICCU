@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+>
+<script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+
+            <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider_ciu.js" type="text/javascript"></script>
+
+            <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider_ciu.css" rel="stylesheet" type="text/css" />
+
+
+            <script  language="javascript"></script>
+            <script type="text/javascript">
+                var $jpanel = jQuery.noConflict();
+                $jpanel(document).ready(function() {
+                    var $i = jQuery.noConflict();
+                    $i('#slider3').slider3({
+                        speed: 1800
+
+                    });
+
+                });
+
+            </script>
+
+    <rich:panel header="Administrar Proyecto" id="menuAdministrar" bodyClass="admin" style="border-style: none;" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.ver_proyecto_ciudadano}">
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
+                <h:commandLink styleClass="verdocs anchorLink" action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+                <h:commandLink styleClass="text" value="Detalle" action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+            </h:panelGrid>
+            
+
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro==null and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                <h:commandLink styleClass="aliobra anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                               immediate="true"/>
+                <a4j:commandLink styleClass="text" value="Reportar Avance" action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                                 render="panelBody" immediate="true" />                
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"> 
+                <h:commandLink styleClass="aliobra anchorLink" action="#{Supervisor$SeguimientosAh.iniciarSeguimientosAh}"
+                               immediate="true"/>
+                <a4j:commandLink styleClass="text" value="Seguimientos Atención Humanitaria" action="#{Supervisor$SeguimientosAh.iniciarSeguimientosAh}"
+                                 render="panelBody" immediate="true" />
+
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                <h:commandLink styleClass="modificar anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                               immediate="true" />
+                <h:commandLink styleClass="text" value="Modificar" action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                               immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnevolucion and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                <h:commandLink styleClass="evolucion anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
+                               immediate="true" />
+                <h:commandLink styleClass="text" value="Evolucion" action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
+                               immediate="true" />
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndocumentos}"> 
+                <h:commandLink styleClass="mproyectos anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true" />
+                <h:commandLink styleClass="text" value="Documentos" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnimagenes}"> 
+                <h:commandLink styleClass="verfotos anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+                <h:commandLink styleClass="text" value="Imagenes" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnvideos}"> 
+                <h:commandLink styleClass="vervideos anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarVideos}" immediate="true" />
+                <h:commandLink styleClass="text" value="Videos" action="#{Supervisor$AdministrarObraNew.iniciarVideos}" immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfinalizar}"> 
+                <h:commandLink styleClass="finalizar anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                               immediate="true" />
+                <h:commandLink styleClass="text" value="Finalizar" action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                               immediate="true" />
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnasociar_consultoria}" >
+                <h:commandLink styleClass="asoconvenio anchorLink" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                               immediate="true"/>
+                <h:commandLink styleClass="text" value="Asociar Contratos" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                               immediate="true"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null}">
+                <h:commandLink styleClass="solvalinfo anchorLink"  action="#{Supervisor$AdministrarObraNew.iniciarSolicitarValidacion}"/>
+                <a4j:commandLink styleClass="text" value="Solicitar validar información" action="#{Supervisor$AdministrarObraNew.iniciarSolicitarValidacion}"
+                                 render="panelBody"/>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <h:commandLink styleClass="cambiarestado anchorLink"  action="cambiarestado"/>
+                <a4j:commandLink styleClass="text" value="Cambiar estado del proyecto" action="cambiarestado"
+                                 render="panelBody"/>
+            </h:panelGrid>
+
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <h:commandLink styleClass="eliminarrepo anchorLink"  action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"/>
+                <a4j:commandLink styleClass="text" value="Eliminar último avance" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"
+                                 render="panelBody"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra !=null and SessionBeanCobra.usuarioObra.renderrecurso.btnhistorevinformacion}">
+
+                <a4j:commandLink  styleClass="historialvalidacion"  execute="@this" immediate="true"
+                                action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}" />                                    
+
+                <a4j:commandLink styleClass="text"  execute="@this" immediate="true"
+                                 value="Historial revisiones de información" action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}"  />
+
+
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$AdministrarObraNew.obra.obra}">
+                <a4j:commandLink execute="@this" styleClass="proysuperior anchorLink" rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra == 0}"
+                                 immediate="true" id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';">
+                </a4j:commandLink>
+                <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
+                                 onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';" 
+                                 rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra == 0}"/>
+                <a4j:commandLink execute="@this" styleClass="proysuperior anchorLink" rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra >= 1}"
+                            immediate="true" onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';">
+                </a4j:commandLink>
+                <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
+                                 onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$AdministrarObraNew.obra.obra.intcodigoobra}';"
+                                 rendered="#{Supervisor$AdministrarObraNew.obra.obra.tipoestadobra.intestadoobra >= 1}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" 
+                         rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <a4j:commandLink  execute="@this" styleClass="subproyecto anchorLink" action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true"  />
+                <a4j:commandLink  styleClass="text" value="#{var.nuevosubproyecto}" action="#{Supervisor$IngresarNuevaObra.crearSubProyecto}" render="panelBody" immediate="true" />
+            </h:panelGrid>
+
+        </h:panelGrid>
+    </rich:panel>
+
+    <interkont:spacer height="5px"/>
+
+    <rich:panel header="#{var.datosgenerales}" bodyClass="rich-panel-grid-body" rendered="#{!SessionBeanCobra.cobraService.ciu}">
+        <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
+            <interkont:spacer height="5"/>
+            <interkont:spacer height="5"/>
+            <interkont:spacer/><interkont:spacer />
+            <interkont:spacer width="5"/>
+            <h:outputText id="stEstadoDetalle"  value="#{var.estado}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stEstado" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                <f:convertNumber  maxFractionDigits="2" pattern="###.## %"/>
+            </h:outputText>
+            <interkont:spacer width="5"/>
+            <h:outputText id="stContratistaDetalle"  value="#{var.houtcontratis}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stContratanteDetalle" styleClass="txt_outtext" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stInterventorDetalle"  value="#{var.houtsupervisor}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stInterventorDeta" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.strinterventor}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stNumContratoDetalle"  value="#{var.houtnrocontrato}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stNumContratoDeta"  styleClass="txt_outtext" value="#{Supervisor$DetalleObra.idcontratos}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stPlazoDetalle"  value="#{var.plazo}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stPlazoDeta" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stFecIni"  value="#{var.fechadeinicio}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" >
+                <f:convertDateTime pattern="yyyy-MMM-dd"/>
+            </h:outputText>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stFecFin"  value="#{var.fechadefinalizacion}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" >
+                <f:convertDateTime pattern="yyyy-MMM-dd"/>
+            </h:outputText>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stValorDetalle"  value="#{var.valor} del proyecto"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stValorTotalDeta" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                <f:convertNumber pattern="$#,###"/>
+            </h:outputText>
+
+            <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <h:outputLabel value="Sector:" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <interkont:spacer width="5" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.contrato.tercero.sector.strnombre}" rendered="#{Supervisor$AdministrarObraNew.obra.contrato.booltipocontratoconvenio}"/>
+
+            <interkont:spacer width="5" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+            <h:outputText id="stCodigoSolicitud"  value="#{var.totalobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+
+            <interkont:spacer width="10" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}"/>
+            <h:outputText id="stOtTextcodsol" styleClass="txt_outtext" value="#{Supervisor$DetalleObra.valorinterventoria +Supervisor$AdministrarObraNew.obra.numvaltotobra}" rendered="#{not empty Supervisor$AdministrarObraNew.obra.solicitud_obra}">
+                <f:convertNumber pattern="$#,###"/>
+            </h:outputText>
+        </h:panelGrid>
+    </rich:panel>
+    <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+        <ui:include src="/facelets/Informacion_general_Participacion.xhtml" />
+    </h:panelGroup>
+    <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_proyecto_ciudadano}">
+        <ui:include src="/Ciudadano/Slider_informacion_general_ciud.jspf"/>
+    </h:panelGroup>
+</ui:composition>

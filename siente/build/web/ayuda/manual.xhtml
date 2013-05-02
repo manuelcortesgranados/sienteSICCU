@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_external.xhtml">
+
+            <ui:define name="head">
+                <link href="#{facesContext.externalContext.requestContextPath}/resources/js/slider/default.css" rel="stylesheet" type="text/css" media="screen,projection"/>
+                <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection"/>
+                <link href="#{facesContext.externalContext.requestContextPath}/resources/cssfonade/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection"/>
+
+                <style type="text/css">/* Chili -- js */
+                    .js__ml_comment { color: gray; }
+                    .js__sl_comment { color: green; }
+                    .js__string { color: teal; }
+                    .js__num { color: red; }
+                    .js__reg_exp { color: maroon; }
+                    .js__brace { color: red; font-weight: bold; }
+                    .js__statement { color: navy; font-weight: bold; }
+                    .js__error { color: Coral; }
+                    .js__object { color: DeepPink; }
+                    .js__property { color: Purple; font-weight: bold; }
+                    .js__function { color: olive; }
+                    .js__operator { color: RoyalBlue; font-weight: bold; }
+                    .js__liveconnect { text-decoration: overline; }</style>
+
+            </ui:define>
+
+            <ui:define name="body">
+                <h:panelGroup rendered="#{var.varpreguntasiente}">
+                <div id="one" class="contentslider" style="width: 900px; height: 400px; ">
+
+                    <div class="cs_wrapper">
+                        <div class="cs_slider">
+
+                            <div class="cs_article" id="contenido" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Manual de uso</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article01.jpg" alt="Artist&#39;s interpretation of article headline"/>
+                                </a>
+                                <p>
+				A continuación encontrará; las instrucciones para el manejo y la adecuada manipulación del sistema SIENTE (Sistema de Información Estratégico
+                                    para la Nación y el Territorio). En este manual se explica de manera detallada y paso a paso cuales son las funciones que usted podría; llevar a
+                                    cabo en el sistema para mantener actualizada la información de cada uno de  #{var.textoobra}s y así; facilitar el acceso a los mismos por parte de cada
+                                    una de las partes interesadas.
+                                </p>
+                                <p>
+				SIENTE, es un sistema WEB 2.0 construido por Colombia Humanitaria que le permite al país ejercer control en línea y tiempo real sobre todos
+                                    #{var.textoobra}s que se ejecutan en Colombia para atender la ola invernal.
+                                </p>
+                            </div><!-- End cs_article -->
+
+
+                            <div class="cs_article" id="contenido" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Contenido</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article02.jpg" alt="Artist&#39;s interpretation of article headline"/>
+                                </a><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                <p>
+                                    <a href="#title01">Qué; se puede hacer con SIENTE?</a><br />
+                                    <a href="#title02">Características generales</a><br />
+                                </p><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+                            </div><!-- End cs_article -->
+
+
+                            <div class="cs_article" id="title01" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Que se puede hacer con SIENTE?</a> </h2>
+                                <a name="#title01">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article03.jpg" alt="Artist&#39;s interpretation of article headline"/>
+                                </a>
+                                <p>1.    Observar, gestionar y controlar todas #{var.textoobra} en ejecución para la atención de la ola invernal.</p>
+                                <p>2.    Permitir que alcaldes y gobernadores que representen a las poblaciones afectadas por la ola invernal puedan solicitar #{var.textoobra}s necesarios para dar
+                                    atención a las necesidades mas inmediatas (atención humanitaria) o para realizar obras de reparación o mitigación de los problemas
+                                    causados (rehabilitación).</p>
+
+                            </div><!-- End cs_article -->
+
+
+
+                            <div class="cs_article" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Que se puede hacer con SIENTE?</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article04.jpg" alt="Artist&#39;s interpretation of article headline"/></a>
+                                <p>3.    Monitorear y encontrar fácilmente #{var.textoobra}s a través de un mapa Geo-referenciado y un avanzado filtro de búsqueda.</p>
+                                <p>4.    Proyectar, alimentar, administrar, modificar y finalizar en línea la información de todas #{var.textoobra}s del país generando al
+                                    mismo tiempo reportes automatizados y personalizados que pueden ser descargados e impresos.</p>
+
+                            </div><!-- End cs_article -->
+
+
+                            <div class="cs_article" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Que se puede hacer con SIENTE?</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article05.jpg" alt="Artist&#39;s interpretation of article headline"/></a>
+                                <p>5.     Navegar en línea por la evolución fotográfica y audiovisual de #{var.textoobra}s. Así; como acceder a la documentación
+                                    contractual
+                                    de los mismos vía web.</p>
+                                <p>6.     Permitirle a los colombianos registrar sus opiniones quejas y felicitaciones con respecto a #{var.textoobra}s generando con ello una transparencia permanente y
+                                    una interacción continua con la ciudadanía.</p>
+                                <p>7.    Observar y controlar el cumplimiento de contratistas, interventores, y supervisores a través de un avanzado sistema de alarma.</p>
+
+                            </div><!-- End cs_article -->
+
+
+                            <div class="cs_article" id="title03" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Características generales</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article06.jpg" alt="Artist&#39;s interpretation of article headline"/>
+                                </a>
+                                <p>1.    Creación y administración de #{var.solicitudproyecto}s.</p>
+                                <p>2.    Gestión Documental de los #{var.solicitudproyecto}s.</p>
+                                <p>3.    Generación de indicadores y reportes de #{var.solicitudproyecto}s específicos o globales.</p>
+                                <p>4.    Alarmas que se activan cuando detectan situaciones atípicas.</p>
+                                <p>5.    Acceso y administración de Videos de los distintos #{var.solicitudproyecto}s.</p>
+
+                            </div><!-- End cs_article -->
+
+
+                            <div class="cs_article" style="width: 900px; height: 400px; ">
+                                <h2> <a href="#">Características generales</a> </h2>
+                                <a href="#">
+                                    <img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article07.jpg" alt="Artist&#39;s interpretation of article headline"/>
+                                </a>
+                                <p>6.    Acceso y administración de fotografías de los distintos #{var.solicitudproyecto}s.</p>
+                                <p>7.    Solicitudes de atención humanitaria o de obras civil por parte de alcaldes y gobernadores.</p>
+                                <p>8.    Administración y gestión de convenios y contratos.</p>
+                                <p>9.    Georeferenciación de #{var.solicitudproyecto}s en Colombia.</p>
+                                <p>10.   Envío de mensajes entre los usuarios del sistema y los ciudadanos.</p>
+                                <p>11.   Gestión financiera de los #{var.solicitudproyecto}s que se ejecutan.</p>
+
+                            </div><!-- End cs_article -->
+
+
+                        </div><!-- End contentslider --><!-- End contentslider -->
+
+
+                    </div><!-- End cs_slider -->
+                </div><!-- End cs_wrapper -->
+                </h:panelGroup>
+                <h:panelGroup rendered="#{var.varpreguntacobra}">
+                    <div id="one" class="contentslider" style="width: 900px; height: 400px; ">
+
+		  <div class="cs_wrapper">
+				<div class="cs_slider">
+
+					<div class="cs_article" id="contenido" style="width: 900px; height: 400px; ">
+					  <h2> <a href="#">Manual de uso</a> </h2>
+						<a href="#">
+							<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article01.jpg" alt="Artist&#39;s interpretation of article headline" />
+						</a>
+					  <p>
+							A continuación encontrará; las instrucciones para el manejo y la adecuada manipulación del sistema. En este manual se explica de manera detallada y paso a paso cuales son las funciones que usted podría llevar a cabo en el sistema para mantener actualizada la información de cada uno de los #{var.textoobra}s y así facilitar el acceso a los mismos por parte de cada una de las partes interesadas.
+						</p>
+						<!--<p>
+							Es un sistema WEB 2.0 construido por FONADE que le permite al país ejercer control en línea y tiempo real sobre todos los proyectos que se ejecutan en Colombia para atender la ola invernal?????.
+						</p>-->
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+			<div class="cs_article" id="contenido" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Contenido</a> </h2>
+						<a href="#">
+							<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article02.jpg" alt="Artist&#39;s interpretation of article headline"/>
+						</a><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+						<p>
+							<a href="#title01">Qué; se puede hacer con COBRA?</a><br />
+                            <a href="#title02">Características generales</a><br />
+						</p><br /><br /><br /><br /><br /><br /><br /><br /><br />
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+				  </div><!-- End cs_article -->
+
+
+
+
+
+
+
+			  <div class="cs_article" id="title01" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Qué se puede hacer con COBRA?</a> </h2>
+						<a name="#title01">
+							<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article03.jpg" alt="Artist&#39;s interpretation of article headline"/>
+						</a>
+						<p>1.    Observar, gestionar y controlar todos #{var.textoobra}s que se ejecutan por <h:outputText  value=" #{var.nombreclientesistema}"/>.</p>
+						<p>2.    Monitorear y encontrar fácilmente #{var.textoobra}s a través de un mapa Geo-referenciado y un avanzado filtro de búsqueda.</p>
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+			  <div class="cs_article" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Qué se puede hacer con COBRA?</a> </h2>
+						<a href="#">
+							<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article04.jpg" alt="Artist&#39;s interpretation of article headline"/></a>
+                                                <p>3.    Proyectar, alimentar, administrar, modificar y finalizar en línea la información de todos #{var.textoobra}s de <h:outputText  value=" #{var.nombreclientesistema}"/> generando al mismo tiempo reportes automatizados y personalizados que pueden ser descargados e impresos.</p>
+						<p>4.    Navegar en línea por la evolución fotográfica y audiovisual de #{var.textoobra}s. Así como acceder a la documentación contractual de los mismos, vía web.</p>
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+			  <div class="cs_article" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Que se puede hacer con COBRA?</a> </h2>
+						<a href="#">
+						<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article05.jpg" alt="Artist&#39;s interpretation of article headline"/></a>
+						<p>5.     Permitirle a las partes interesadas registrar sus opiniones, quejas y felicitaciones con respecto a #{var.textoobra}s generando con ello una transparencia permanente y una interacción continua con los interesados.</p>
+                                                <p>6.     Observar y controlar el cumplimiento de contratistas, interventores, y supervisores a través de un avanzado sistema de alarma</p>
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+					<div class="cs_article" id="title03" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Características generales</a> </h2>
+						<a href="#">
+						<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article06.jpg" alt="Artist&#39;s interpretation of article headline"/>
+						</a>
+						<p>1.    Creación y administración de #{var.solicitudproyecto}s.</p>
+                                                <p>2.    Gestión Documental de #{var.textoobra}.</p>
+                                                <p>3.    Generación de indicadores y reportes de #{var.solicitudproyecto}s específicos o globales.</p>
+                                                <p>4.    Alarmas que se activan cuando detectan situaciones atípicas.</p>
+                                                <p>5.    Acceso y administración de videos de los distintos #{var.solicitudproyecto}s.</p>
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+					<div class="cs_article" style="width: 900px; height: 400px; ">
+						<h2> <a href="#">Características generales</a> </h2>
+						<a href="#">
+						<img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/article07.jpg" alt="Artist&#39;s interpretation of article headline"/>
+						</a>
+                                            <p>6.    Acceso y administración de fotografías de los distintos #{var.solicitudproyecto}s.</p>
+                                            <p>7.    Solicitudes de atención humanitaria o de obras civiles por parte de alcaldes y gobernadores.</p>
+                                            <p>8.    Administración y gestión de convenios y contratos.</p>
+                                            <p>9.    Geo-referenciación de #{var.solicitudproyecto}s en Colombia.</p>
+                                            <p>10.   Envío de mensajes entre los usuarios del sistema y los ciudadanos.</p>
+                                            <p>11.   Gestión financiera de los #{var.solicitudproyecto}s que se ejecutan.</p>
+						<a href="#contenido" class="readmore">Regresar al contenido</a>
+					</div><!-- End cs_article -->
+
+
+
+
+
+
+
+            </div><!-- End contentslider --><!-- End contentslider -->
+
+
+
+			</div><!-- End cs_slider -->
+			</div><!-- End cs_wrapper -->
+
+                </h:panelGroup>
+                <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider/jquery.min.js"></script>
+                <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider/jquery.easing.1.3.js"></script>
+                <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/jquery.ennui.contentslider.js"></script>
+                <script type="text/javascript">
+                    $(function() {
+                        $('#one').ContentSlider({
+                            width : '900px',
+                            height : '400px',
+                            speed : 800,
+                            easing : 'easeInOutBack'
+                        });
+                    });
+
+                </script>
+                <script src="#{facesContext.externalContext.requestContextPath}/resources/js/slider/jquery.chili-2.2.js" type="text/javascript"></script>
+                <script src="#{facesContext.externalContext.requestContextPath}/resources/js/slider/recipes.js" type="text/javascript"></script>
+
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

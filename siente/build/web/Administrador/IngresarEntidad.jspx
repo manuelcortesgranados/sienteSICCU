@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+
+        <ui:composition template="/facelets/template_main.xhtml">
+
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            </ui:define>
+
+            <!-- <ui:define name="head">
+                 <title><h:outputText value="#{var.ingresarentidad}"></h:outputText></title>
+            <h:outputScript src="/resources/script_supervisor.js"/>
+        </ui:define>
+            -->
+
+            <div id="header_content" >
+                <div class="star">
+                    <h:outputText value="#{var.ingresarentidad}" />
+                </div>
+            </div>
+
+            <ui:define name="body">
+                <h:form>
+                    <h:panelGroup>
+
+                        <h:panelGrid >
+                            <interkont:spacer style="width:100%;" height="20"/>
+
+                            <h:panelGroup style="width:100%">
+                                <center>
+                                    <h:panelGrid columns="2">
+                                        <h:panelGrid columns="2" >
+                                            <h:outputLabel id="lblcedonitenti" value="#{var.nit} *"  />
+                                            <h:panelGrid columns="2" >
+                                                <h:inputText id="cednitentidad"  required="true"  value="#{Administrador$AdministrarEntidad.tercero.intcedula}">
+                                                </h:inputText>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <rich:message for="cednitentidad"  styleClass="tab-login-label-error"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:outputLabel id="lblnomenti" value="#{var.nombre} #{var.entidad} : *" />
+                                            <h:panelGrid columns="2" >
+                                                <h:inputText id="inptnomenti" required="true" value="#{Administrador$AdministrarEntidad.tercero.strnombre}">
+                                                </h:inputText>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <rich:message for="inptnomenti"  styleClass="tab-login-label-error"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:outputLabel id="lbltelenti" value="#{var.telefono} : *" />
+                                            <h:panelGrid columns="2" >
+                                                <h:inputText id="inpttelenti"  required="true" value="#{Administrador$AdministrarEntidad.tercero.strtelefono1}">
+                                                    <f:validateLongRange minimum="0" />
+                                                </h:inputText>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <rich:message for="inpttelenti"  styleClass="tab-login-label-error"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:outputLabel id="lblemailenti" value="#{var.email} : *" />
+                                            <h:panelGrid columns="2" >
+                                                <h:inputText id="inptemailenti"  required="true" value="#{Administrador$AdministrarEntidad.tercero.stremail}">
+                                                </h:inputText>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <rich:message for="inptemailenti"  styleClass="tab-login-label-error"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:outputLabel id="lbtipoorigenentidad"  value="#{var.tipoorigen} : *"  for="combotipoorigenentidad" />
+                                            <h:panelGrid columns="2" >
+                                                <h:panelGroup id="gptipoorigenentidad">
+                                                    <h:selectOneMenu id="combotipoorigenentidad" styleClass="fill"
+                                                                     value="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen}">
+                                                        <f:selectItems value="#{Administrador$AdministrarEntidad.tipoOrigenEntidad}"/>
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
+                                                <h:panelGrid columnClasses="panelcenter">
+                                                    <rich:message for="inptemailenti"  styleClass="tab-login-label-error"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                            <h:outputLabel id="lblubicacionenti"  value="#{var.departamento} : "  for="combodepartamentoEntidad"/>
+                                            <h:selectOneMenu id="combodepartamentoEntidad" value="#{Administrador$AdministrarEntidad.codDepartamentoEntidad}" styleClass="fill">
+                                                <f:selectItems value="#{Administrador$AdministrarEntidad.departamentoEntidad}" />
+                                                <a4j:ajax execute="combodepartamentoEntidad" event="onchange" action="#{Administrador$AdministrarEntidad.llenarMunicipioEntidadModi}"
+                                                             render="gpMuniEntidad" />
+                                            </h:selectOneMenu>
+                                            <h:outputLabel id="lblubicacionmunienti"  value="#{var.municipio} : "  for="combomunicipioentidad" />
+                                            <h:panelGroup id="gpMuniEntidad">
+                                                <h:selectOneMenu id="combomunicipioentidad" styleClass="fill"
+                                                                 value="#{Administrador$AdministrarEntidad.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}">
+                                                    <f:selectItems value="#{Administrador$AdministrarEntidad.municipioEntidad}"/>
+                                                </h:selectOneMenu>
+                                            </h:panelGroup>
+
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </center>
+                            </h:panelGroup>
+                            <interkont:spacer style="width:100%;" height="15"/>
+                            <h:panelGroup style="width:100%">
+                                <center>
+                                    <h:panelGrid columns="2">
+                                        <h:commandButton id="btnGuardarEntidad"  value="#{var.guardar}" action="#{Administrador$AdministrarEntidad.enviarDatos}" >
+                                        </h:commandButton>
+                                        <h:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true">
+                                        </h:commandButton>
+                                    </h:panelGrid>
+                                </center>
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

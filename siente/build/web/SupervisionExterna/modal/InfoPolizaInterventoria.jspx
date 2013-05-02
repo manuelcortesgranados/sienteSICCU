@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel id="modalpolizainterventoriasuper"  headerClass="rich-panel-header" height="400" width="600" style="overflow: auto">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="INFORMACIÓN DE POLIZAS DE INTERVENTORIA" styleClass="txt_header"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalpolizainterventoriasuper" onclick="javascript:Richfaces.hideModalPanel('modalpolizainterventoriasuper')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                    <rich:componentControl attachTo="esconder-modalpolizainterventoriasuper" event="onclick" for="modalpolizainterventoriasuper" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <center>
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.cumplimiento}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizaIntC"  value="#{var.numPolizaContrato}:"  />
+                    <h:outputText id="inNumPolizaIntC"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText id="outFechaVencimientoIntC" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoIntC" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradoraIntC" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraIntC" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}"/>
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.calidadservicio}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15">
+                    <h:outputText id="outNumPolizasIntS"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaIntS"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText id="outFechaVencimientosIntS" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoIntS"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}"/>
+                    <h:outputText id="outAseguradorasIntS" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraIntS" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}"/>
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.buenmanejodelanticipo}" />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizasIntA"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaIntA"  value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}"/>
+                    <h:outputText id="outFechaVencimientosIntA" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoIntA"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}"/>
+                    <h:outputText id="outAseguradorasIntA" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraIntA" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.pagossalariosprestaciones}"  />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15" >
+                    <h:outputText id="outNumPolizasIntB"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaIntB"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outFechaVencimientosIntB" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoIntB"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}"/>
+                    <h:outputText id="outAseguradorasIntB" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraIntB" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                </h:panelGrid>
+            </rich:panel>
+
+            <rich:panel headerClass="tooltip">
+                <f:facet name="header">
+                    <h:outputText value="#{var.responsabcivilextra}"  />
+                </f:facet>
+                <h:panelGrid  columns="2" cellspacing="15">
+                    <h:outputText id="outNumPolizasIntE"  value="#{var.numPolizaContrato}:" />
+                    <h:outputText id="inNumPolizaIntE"  value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outFechaVencimientosIntE" value="#{var.fechaVencimiento}:" />
+                    <h:outputText id="inFechaVencimientoIntE"   value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText id="outAseguradorasIntE" value="#{var.entidadPoliza}:"/>
+                    <h:outputText id="inAseguradoraIntE" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}"/>
+                </h:panelGrid>
+            </rich:panel>
+
+        </center>
+    </rich:popupPanel>
+
+</html>

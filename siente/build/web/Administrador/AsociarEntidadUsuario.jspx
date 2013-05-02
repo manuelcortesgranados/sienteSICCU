@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Prueba -->
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:composition template="/facelets/template_main.xhtml">
+        <ui:define name="head">
+
+        </ui:define>
+        <ui:define name="title">
+            <h:outputText value="#{var.asociarentidadusuario}"/>
+        </ui:define>
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </ui:define>
+        <ui:define name="body">
+            <h:form>
+                <rich:panel id="pgasociarEntidadUsuario"  >
+                    <center>
+                        <h:panelGrid style="width:100%;">
+                            <interkont:spacer height="20" style="width:100%;"/>
+                            <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="consulconvenio">
+
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
+                                    <rich:comboBox selectFirstOnUpdate="false" width="400"
+                                                   defaultLabel="Ingrese Entidad" value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}" >                                                                                
+                                        <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
+                                        <a4j:ajax event="onchange" action="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
+                                    </rich:comboBox>  
+                                </h:panelGrid>
+
+                                <h:panelGrid id="prueba" columns="3">
+                                    <h:outputText value="#{var.Usuario}"/>
+                                    <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
+                                    <rich:message for="txtusu_login" styleClass="error_texto"/>
+                                </h:panelGrid>                                    
+                               <br/>
+                               <br/>
+                                
+                                 <a4j:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true">
+                                     <a4j:commandButton id="guardar_contrato" action="#{Administrador$AdministrarEntidad.asociarEntidadUsuario}" value="#{var.asociar}" render="consulconvenio,prueba,pgasociarEntidadUsuario" > 
+                                 </a4j:commandButton>
+                                 </a4j:commandButton>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                    </center>                       
+                </rich:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</f:view>   

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="modalImagenCorreo" autosized="true" style="padding:0px;"
+         headerClass="rich-panel-header">
+         <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.imagen}"/>
+            </h:panelGroup>
+        </f:facet>
+         <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_modalImagen" event="onclick" for="modalImagenCorreo" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+            <h:form id="formImagen">
+                <h:panelGroup id="panelImagen" >
+                    <h:panelGrid columnClasses="top,top" columns="2" rendered="#{SessionBeanCobra.ciudadanoservice.vermodalimagen}">
+
+                        <rich:fileUpload
+                                id="upload"
+                                fileUploadListener="#{Ciudadano$PerfilCiudadano.cargadorFoto.listener}"
+                                acceptedTypes="jpg, jpeg, gif, png, bmp"
+                                immediateUpload="true"
+                                maxFilesQuantity="1" 
+                                listWidth="250" 
+                                listHeight="150"
+                                autoclear="true"
+                                addControlLabel="#{var.adicionar}"
+                                doneLabel="#{var.hecho}"
+                                uploadControlLabel="#{var.subir}"
+                                clearAllControlLabel="#{var.borrartodo}"
+                                clearControlLabel="#{var.eliminar}">
+                            <a4j:ajax event="onuploadcomplete" render="info"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="info">
+                            <center>
+                                <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorFoto.archivos}" var="file">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                            <h:panelGrid columns="1">
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
+                                                   render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
+                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
+                                                   value="#{var.aceptar}" onclick="javascript:Richfaces.hideModalPanel('modalImagenCorreo')" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
+                                                   render="pgfotografia"
+                                                      style="font-size: 12px;"/>
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:form>
+    </rich:popupPanel>
+</f:view>

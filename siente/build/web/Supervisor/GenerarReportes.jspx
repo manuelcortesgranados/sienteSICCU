@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="head">
+                <title>Cobra - Supervisor</title>
+                <h:outputScript src="/resources/script_supervisor.js"/>
+            </ui:define>
+            <ui:define name="body">
+
+                <h:form >
+                    <rich:panel style="width:100%;" id="layoutAlimentar" header="#{var.reporte}">
+
+                    <interkont:spacer height="30"/>
+                    <center>
+                        <h:panelGrid id="panelReporte" columns="3">
+
+                            <h:commandLink styleClass="pdf anchorLink" action="#{Supervisor$DetalleObra.reportePdf}" />
+                            <a4j:commandLink styleClass="excel anchorLink" action="#{Supervisor$DetalleObra.reporteExcel}"/>
+                            <a4j:commandLink styleClass="word anchorLink" action="#{Supervisor$DetalleObra.reporteWord}"/>
+
+                        </h:panelGrid>
+                    </center>
+                    
+                    </rich:panel>
+                </h:form>           
+                
+            </ui:define>
+        </ui:composition>
+
+    </f:view>
+</html>

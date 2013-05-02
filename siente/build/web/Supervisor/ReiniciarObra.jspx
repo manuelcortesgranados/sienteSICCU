@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="title">
+                <h:outputText value="#{var.reiniciarlaobra}"/>
+                <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            </ui:define>
+
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+            </ui:define>
+
+            <ui:define name="head">
+                <rich:page title="Vista #{var.proyecto} thumbnails"></rich:page>
+                <h:outputScript src="/resources/script_supervisor.js"/>
+            </ui:define>
+
+            <ui:define name="body">
+                <h:form>
+                    <h:panelGrid id="panelReiniciarObra" style="width:100%" >
+                        <h:panelGroup id="layoutReiniciarObra">
+                            <h:outputText rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}" value="#{var.solosepuedereiniciar}" styleClass="mensaje_error"/>
+                            <interkont:spacer width="20"/>
+                            <a4j:commandButton id="bt_VolverModif_reinicio" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
+                                               render="layoutReiniciarObra" value="#{var.volver}"
+                                               styleClass="btn_sec_peq"   style="font-size: 12px;" execute="@this">
+                                <a4j:ajax event="oncomplete" />
+                            </a4j:commandButton>
+                            <interkont:spacer style="width:100%;" height="22"/>
+                            <rich:panel header="#{var.reiniciarobra}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}">
+                                <center>
+                                    <h:outputText styleClass="txt_label_bold" value="#{var.laobrafuesuspendida} " />
+                                    <h:outputText styleClass="txt_label_bold" value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}">
+                                        <f:convertDateTime type="date" dateStyle="medium"/>
+                                    </h:outputText>
+                                    <interkont:spacer height="20" />
+                                    <h:panelGrid columns="2" cellspacing="15">
+                                        <h:outputText  value="#{var.ingreselafechadereinicio} "/>
+                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="date_Reinicio" inputSize="10"
+                                                       value="#{Supervisor$SuspenderObra.reinicio.datefecobrahist}">
+                                        </rich:calendar>
+                                    </h:panelGrid>
+                                    <h:panelGrid id="panel_subirActaReinicio" columns="2">
+                                        <a4j:commandButton id="adjuntarActaReinicio" value="#{var.adjuentaractaderei}" render="layoutDocActaReinicio"
+                                                           styleClass="btn_pri_col"   style="font-size: 10px;"
+                                                           onclick="javascript:Richfaces.showModalPanel('panelUploadActaReinicio')" />
+                                        <rich:panel>
+                                            <h:outputText rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos==0}" value="#{var.nohasubidoningun}"/>
+                                            <center>
+                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaReinicio.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"
+                                                               style="height: 20px; width: 300px; background-color: #FFFFFF; -rave-layout: grid">
+                                                    <h:outputText value=" #{file.nombre}" />
+                                                    <interkont:spacer height="8" width="15"/>
+                                                    <h:graphicImage url="/resources/botones/chulo.png" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"/>
+                                                </rich:dataGrid>
+                                            </center>
+                                        </rich:panel>
+                                    </h:panelGrid>
+                                    <center>
+                                        <h:panelGrid columns="2">
+                                            <a4j:commandButton id="btn_reiniciar_obra" action="#{Supervisor$SuspenderObra.reiniciarObra}" value="#{var.reiniciarlaobra}"
+                                                               styleClass="btn_pri_inm"   style="font-size: 12px;">
+                                                <a4j:ajax event="oncomplete" render="layoutConfReinicio" onsubmit="javascript:Richfaces.showModalPanel('panelConfirmarReinicio');"/>
+                                            </a4j:commandButton>
+                                            <h:commandButton id="btn_cancelar_reinicio" value="#{var.cancelar}"    style="font-size: 12px;" action="#{Supervisor$SuspenderObra.cancelarReinicio}">
+                                                <a4j:ajax event="oncomplete" render="layoutConfReinicio,layoutReiniciarObra" />
+                                            </h:commandButton>
+                                        </h:panelGrid>
+                                    </center>
+                                </center>
+                            </rich:panel>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:form>
+                <ui:include src="/modal/panelConfirmarReinicioModal.jspx"/>
+                <ui:include src="/modal/panelUploadActaReinicioModal.jspx"/>
+
+            </ui:define>
+
+        </ui:composition>
+    </f:view>
+</html>

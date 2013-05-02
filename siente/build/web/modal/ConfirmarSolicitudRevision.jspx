@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="confirmarSolicitudRevision" autosized="true" 
+                      headerClass="sliderich" styleClass="sliderichcontentblue" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="Solicitar revisión de reporte de avance"/>
+            </h:panelGroup>
+        </f:facet>
+
+        <h:form>           
+            <center>
+                <h:panelGrid id="pgconfirmarSolicituRevision" width="300px" styleClass="sliderichcontentblue" cellpadding="0" cellspacing="0" >
+                    <h:panelGroup>
+                        <center>
+                            <h:outputText styleClass="vtitle23" value="Está completamente seguro de haber registrado satisfactoriamente
+                                          dicho informe cumpliendo con los requisitos establecidos en las circulares 33, 36, 53 y 65 para efectos de autorización de desembolsos?" />
+                        </center>
+                    </h:panelGroup>
+                    <interkont:spacer height="10" />
+                    <center>
+                        <h:panelGroup>
+                             <a4j:commandButton id="BTaceptarRevision" value="SI " styleClass="buttonform" action="#{Supervisor$AdministrarObraNew.solicitarValidacion}" >
+                                <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('confirmarSolicitudRevision')" render="validarinfo"/>
+                            </a4j:commandButton>
+                            <interkont:spacer width="10"/>
+                            <a4j:commandButton id="BTnoaceptarRevision" value="NO" styleClass="buttonform" >
+                                <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('confirmarSolicitudRevision')"/>
+                            </a4j:commandButton>
+                        </h:panelGroup>
+                    </center>
+                </h:panelGrid>
+            </center>
+
+        </h:form>
+    </rich:popupPanel>
+
+</f:view>

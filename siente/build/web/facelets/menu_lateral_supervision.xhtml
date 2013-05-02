@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
+  >
+
+
+    <rich:panel header="Supervision Externa" id="menuSupervisionExterna" bodyClass="tool" style="border-style: none;">
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" > 
+                <h:commandLink styleClass="registrarmatriz anchorLink" immediate="true" action="#{Supervision$Externa.registrarMatriz}"/>
+                <h:commandLink styleClass="text" value="Registrar Matriz"
+                               action="#{Supervision$Externa.registrarMatriz}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" > 
+                <h:commandLink styleClass="proyectosnew anchorLink" immediate="true" action="#{Supervision$Externa.verRegistros}" />
+                <h:commandLink styleClass="text" value="Mis proyectos"
+                               action="#{Supervision$Externa.verRegistros}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="false"> 
+                <h:commandLink styleClass="reportes anchorLink" immediate="true" disabled="false"/>
+                <a4j:commandLink styleClass="text" value="Reporte" disabled="false"/>
+            </h:panelGrid>
+        </h:panelGrid>
+
+    </rich:panel>
+
+    <interkont:spacer height="5px"/>
+
+    <rich:panel id="perfilSolicitante" header="Mi Perfil - #{SessionBeanCobra.usuarioObra.tercero.strnombre}  #{SessionBeanCobra.usuarioObra.tercero.strapellido1}  #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
+                bodyClass="tool" style="border-style: none;">
+        <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
+            <interkont:spacer width="5"/>
+            <h:outputText id="stSolicitudesTotales"  value="#{var.proyectos}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stSolTotales" styleClass="txt_outtext" value="#{Supervision$Externa.cantidadRegistros}"/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stSolicituesAprobadas"  value="#{var.solaprobadas}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stSolAprobadas" styleClass="txt_outtext"  value="#{Supervision$Externa.totalSolicituesApro}" />
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stMensajesPendientes"  value="#{var.mensajependiente}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stMenPendientes" styleClass="txt_outtext" value=""/>
+
+            <interkont:spacer width="5"/>
+            <h:outputText id="stAlarmas"  value="#{var.alarmas}"/>
+            <interkont:spacer width="10"/>
+            <h:outputText id="stAl" styleClass="txt_outtext" value=""/>
+        </h:panelGrid>
+    </rich:panel>
+
+</ui:composition>

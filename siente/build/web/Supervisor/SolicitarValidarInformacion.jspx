@@ -1,0 +1,87 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets" locale="#{var.rcalendarlocale}">
+    <ui:composition template="/facelets/template_main.xhtml">
+
+        <ui:define name="head">
+            <title>Solicitar Validación de Información</title>
+            <h:outputScript src="/resources/script_supervisor.js"/>
+            <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        </ui:define>
+
+        <ui:define name="title">
+            <h:outputText  value="#{var.solicitarrevision}"/>
+            <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        </ui:define>
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </ui:define>
+        <ui:define name="body">
+
+
+            <center>
+                <h:panelGroup id="validarinfo">
+                    <interkont:spacer style="width:100%;" height="120"/>
+                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;">
+
+                        <h:panelGrid  rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}" columnClasses="panelcenter">
+                            <h:outputText value="SOLICITAR REVISION DE INFORME DE AVANCE" styleClass="vtitle02"/>
+                            <interkont:spacer style="width:100%;" height="15" />
+                            <h:panelGroup>
+                                <h:panelGrid columnClasses="panelcenter" style="width:100%;">
+                                    <h:outputText value="Informe a validar" styleClass="vtitle03"/>
+                                    <h:outputText value="#{Supervisor$AdministrarObraNew.informeavalidar.strdescripcion} #{Supervisor$AdministrarObraNew.informeavalidar.porcentaje}" styleClass="vtitle02"/>
+                                </h:panelGrid>
+                                
+                            </h:panelGroup>
+                            <interkont:spacer style="width:100%;" height="15" />
+                            <h:panelGroup rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}">
+                                <h:outputText value="En este momento " styleClass="vtitle03"/>
+                                <h:outputText value="usted " styleClass="vtitle16"/>
+                                <h:outputText value="se encuentra Solicitando la Revisión del Informe de Avance por parte de Colombia Humanitaria. " styleClass="vtitle03"/>
+                            </h:panelGroup>
+                            <h:outputText value="#{var.yaseencuentraenvalidacion}" styleClass="vtitle03" rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
+                            <interkont:spacer style="width:100%;" height="20" rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
+                            <h:panelGrid columnClasses="panelcenter" style="width:100%;" rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}">
+                                <h:form  id="form_validarinfo">
+                                    <a4j:commandLink value="#{var.solicitarrevision}" 
+                                                     styleClass="buttonform" onclick="javascript:Richfaces.showModalPanel('confirmarSolicitudRevision')">
+                                    </a4j:commandLink>  
+                                </h:form>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+
+
+                        <h:panelGrid columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra == null}"
+                                     cellspacing="10" cellpadding="10" style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;">
+                            <interkont:spacer height="200"/>
+                            <h:outputText value="#{var.nodisponibletipoproyecto}" styleClass="vtitle03"/>
+
+                        </h:panelGrid>                        
+                        <interkont:spacer style="width:100%;" height="20"/>
+                        <h:panelGrid columnClasses="panelcenter" style="width:100%;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}">
+                            <h:form target="_blank">
+                                <h:commandLink  styleClass="buttonform"
+                                                value="#{var.reporte} historial de revisiones de información" action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}" />                                    
+                            </h:form>
+                        </h:panelGrid>
+                        <interkont:spacer style="width:100%;" height="30"/>
+
+                    </h:panelGrid>
+                </h:panelGroup>
+            </center>
+
+
+            <ui:include src="/modal/ConfirmarSolicitudRevision.jspx"/>
+        </ui:define>
+
+    </ui:composition>
+</f:view>

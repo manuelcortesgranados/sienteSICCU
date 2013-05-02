@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <f:view locale="#{var.rcalendarlocale}">
+        <ui:composition template="/facelets/template_main.xhtml">
+            <ui:define name="head">
+                <title>Cobra - Supervisor</title>
+                <h:outputScript src="/resources/script_supervisor.js"/>
+            </ui:define>
+            <ui:define name="title">
+                <h:outputText value="#{var.modificarobra}"/>                
+                <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            </ui:define>
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+            </ui:define>
+            <ui:define name="body">
+                <a4j:region id="arModificar">
+                    <h:panelGrid id="layoutModificar" style="width:100%">
+                        <h:form id="form_modificar">
+                            <h:panelGrid id="panel_ModiInicial" style="width:100%;" columns="4">
+                                <interkont:spacer height="50"/>
+                                <center>
+                                    <h:panelGrid columns="3" styleClass="centrado" style="margin-top:5em;">
+                                        <h:panelGrid id="panelProrroga" width="20" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}">
+                                            <a4j:commandLink id="bt_Modif" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"
+                                                             styleClass="prorroga anchorLink"   style="font-size: 10px;"
+                                                             action="#{Supervisor$AdministrarObraNew.mostrarModificar}" render="layoutModificar, layoutDocActaConvenio, layoutDocCronog">
+                                            </a4j:commandLink>
+                                            <h:outputText value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
+                                        </h:panelGrid>
+
+                                        <interkont:spacer width="50px" rendered="false" />
+                                        <h:panelGrid id="panelSuspencion" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}">
+                                            <a4j:commandLink id="bt_suspension" styleClass="suspension anchorLink"   style="font-size: 10px;"
+                                                             action="#{Supervisor$AdministrarObraNew.mostrarSuspender}"
+                                                             render="layoutModificar, layoutSuspenderObra, layoutDocActaSuspension">
+                                            </a4j:commandLink>
+                                            <h:outputText value="#{var.suspenderobra}"/>
+                                        </h:panelGrid>
+                                        <h:panelGrid rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}" columns="1">
+                                            <a4j:commandLink id="bt_reinicio" styleClass="reiniciar anchorLink"   style="font-size: 10px;"
+                                                             action="#{Supervisor$SuspenderObra.cargarReinicio}"
+                                                             render="layoutModificar,layoutDocActaSuspension">
+                                            </a4j:commandLink>
+                                            <h:outputText value="#{var.reiniciarlaobra}"/>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </center>
+                            </h:panelGrid>
+
+                        </h:form>
+                    </h:panelGrid>
+
+
+
+                    <a4j:status id="statusmod"
+                                onstart="#{rich:component('panelCargando')}.show();"
+                                onstop="#{rich:component('panelCargando')}.hide()" for="arModificar"/>
+
+                </a4j:region>
+            </ui:define>
+        </ui:composition>
+
+    </f:view>
+</html>

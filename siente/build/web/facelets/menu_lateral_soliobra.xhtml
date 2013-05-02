@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodyClass="tool" style="border-style: none;" rendered="false">
+
+        <a4j:commandLink styleClass="ghost anchorlink"/>
+
+        
+
+        <a4j:commandLink styleClass="ghost anchorlink"/>
+        <a4j:commandLink styleClass="text" value="Consultar Solicitudes Aprobadas"  action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}" 
+
+                         render="panelBody"/>
+
+        <!--<a4j:commandLink styleClass="text" value="Reporte" />-->
+        <div style="clear: both" />
+    </rich:panel>
+
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="tool" style="border-style: none;">
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="consatencion anchorLink" immediate="true"
+                               action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
+                <h:commandLink styleClass="text" value="Registrar Solicitud"
+                               action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="consobra anchorLink" immediate="true" action="cancelarSolicitud"/>
+                <a4j:commandLink styleClass="text" value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
+                                 render="panelBody"/>
+            </h:panelGrid>
+            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="reportes anchorLink" immediate="true" action="irreportesdetalle"/>
+                <a4j:commandLink styleClass="text" value="Reporte"  action="irreportesdetalle"/>
+            </h:panelGrid>
+
+
+        </h:panelGrid>
+    </rich:panel>
+
+    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="tool" style="border-style: none;">
+        <h:panelGrid columns="2" columnClasses="labelsDatos,labelsDatos" cellpadding="1px"  >
+            <h:outputText id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
+            <h:outputText id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
+
+            <h:outputText id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
+            <h:outputText id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
+
+         
+        </h:panelGrid>
+    </rich:panel>
+</ui:composition>

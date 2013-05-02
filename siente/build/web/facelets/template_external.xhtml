@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+    <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+
+            <ui:insert name="head"/>
+
+            <style type="text/css">
+                body,td,th {
+                    margin: 0px;
+                    font-family: Verdana, Geneva, sans-serif;
+                }
+            </style>
+        </head>
+
+        <body>
+            <h:form id="form_menu">
+                <ui:include src="/facelets/menu_external.xhtml"/>
+            </h:form>
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                <interkont:spacer height="20px"/>
+                <tr>
+                    <td style="width:100%;">
+                       <ui:insert name="body"/>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</ui:composition>

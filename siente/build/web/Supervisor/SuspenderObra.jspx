@@ -1,0 +1,118 @@
+
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets" locale="#{var.rcalendarlocale}">
+
+    <ui:composition template="/facelets/template_main.xhtml">
+        <ui:define name="title">
+            <h:outputText  value="#{var.reiniciarlaobra}"/>                        
+            <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        </ui:define>
+
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </ui:define>
+
+        <ui:define name="head">
+            <rich:page title="Vista #{var.proyecto} thumbnails"></rich:page>
+            <h:outputScript src="/resources/script_supervisor.js"/>
+
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form>
+
+                <h:panelGrid id="panelSuspenderObra" style="width:100%" >
+                    <h:panelGroup id="layoutSuspenderObra">
+                        <interkont:spacer width="20"/>
+
+                        <interkont:spacer style="width:100%;" height="22"/>
+                        <rich:panel header="#{Supervisor$AdministrarObraNew.nombrePanelSuspension}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 || AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}">
+                            <center>
+                                <h:panelGrid style="width:100%" columns="2">
+
+                                    <h:outputText  value="#{var.ingreselafechadeini} "/>
+                                    <h:panelGroup>
+                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="date_iniSuspe" 
+                                                       inputSize="10"  value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}" >
+                                        </rich:calendar>
+                                    </h:panelGroup>
+
+                                    <h:outputText  value="#{var.ingreselafechadefinali}"/>
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="date_finSuspe"
+                                                   inputSize="10"  value="#{Supervisor$SuspenderObra.suspension.datefecfinhist}" >
+                                    </rich:calendar>
+
+                                    <h:outputText  value="#{var.ingreselajustificacion} "/>
+                                    <h:inputTextarea id="txtrazonSusp" value="#{Supervisor$SuspenderObra.suspension.strrazonmodif}" cols="60" rows="6" >
+                                        <rich:message styleClass="mensaje_error" for="txtrazonSusp"/>
+                                    </h:inputTextarea>
+
+
+                                    <a4j:commandButton id="adjuntarActaSuspension" value="#{var.adjuntaractadesuspen}" render="layoutDocActaSuspension"
+                                                       styleClass="btn_pri_inm"   style="font-size: 10px;"
+                                                       onclick="javascript:Richfaces.showModalPanel('panelUploadActaSuspension')" />
+                                    <h:panelGroup id="panel_subirActaSuspension">
+                                        <rich:panel>
+                                            <h:outputText rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nohasubidoningun}"/>
+                                            <center>
+                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaSuspension.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}"
+                                                               style="height: 20px; width: 300px; background-color: #FFFFFF; -rave-layout: grid">
+                                                    <h:outputText value=" #{file.nombre}" />
+                                                    <interkont:spacer height="8" width="15"/>
+                                                    <h:graphicImage rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}"/>
+                                                </rich:dataGrid>
+                                            </center>
+                                        </rich:panel>
+                                    </h:panelGroup>
+                                    <center>
+
+                                        <h:panelGroup>
+
+                                            <a4j:commandButton id="btn_registrar_suspension" action="#{Supervisor$SuspenderObra.registrarSuspension}" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
+                                                               value="#{var.registrarSuspension}"
+                                                               styleClass="btn_pri_inm"   style="font-size: 12px;" render="layoutConfSuspension">
+                                                <a4j:ajax event="oncomplete" render="layoutConfSuspension,panelSuspenderObra" onsubmit="javascript:Richfaces.showModalPanel('panelConfirmarSuspension');"/>
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton id="btn_registrar_suspension1" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
+                                                               action="#{Supervisor$SuspenderObra.registrarSuspension}" value="#{var.registrarSuspension}"
+                                                               styleClass="btn_pri_inm"   style="font-size: 12px;" render="layoutConfSuspension,panelSuspenderObra">
+                                            </a4j:commandButton>
+
+                                            <interkont:spacer width="10"/>
+                                            <h:commandButton id="btn_cancelar_suspension" value="#{var.cancelar}" 
+                                                             style="font-size: 12px;" action="#{Supervisor$SuspenderObra.cancelarSuspension}"
+                                                             onclick="javascript:Richfaces.showModalPanel('panelCargando')">
+                                                <a4j:ajax event="oncomplete" render="layoutConfSuspension" onsubmit="javascript:Richfaces.hideModalPanel('panelCargando');"/>
+                                            </h:commandButton>
+                                        </h:panelGroup>
+
+
+
+
+                                    </center>
+                                </h:panelGrid>
+                            </center>
+                        </rich:panel>
+                    </h:panelGroup>
+                </h:panelGrid>
+
+            </h:form>
+
+            <ui:include src="/modal/panelConfirmarSuspensionModal.jspx"/>
+            <ui:include src="/modal/panelUploadActaSuspensionModal.jspx"/>
+        </ui:define>
+
+    </ui:composition>
+</f:view>
+
+

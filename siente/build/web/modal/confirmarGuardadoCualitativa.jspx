@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfGuardadoCualitativa" moveable="true" resizeable="false" autosized="true" headerClass="rich-panel-header">
+         <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.atencion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfGuardadoCualitativa" styleClass="cerrar"
+                                       title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelConfGuardadoCualitativa" event="onclick" for="panelConfGuardadoCualitativa" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <center>
+            <h:form ajaxSingle="false" >
+                <h:panelGrid id="layoutMensajeCualitativa" width="300px" style="height:150px;" columnClasses="panelcenter">
+                    <h:outputText value="#{Supervisor$Alimentar.mensaje}" styleClass="txt_label_bold" style="font-size: 13px;"/>
+                    <a4j:commandButton value="#{var.aceptar}" id="aceptarCuali" render="Cualitativa, tablaAvancesCualitativos"
+                                       action="#{Supervisor$Alimentar.limpiarCualitativa}"/>
+                    <rich:componentControl attachTo="aceptarCuali" event="onclick" for="panelConfGuardadoCualitativa" operation="hide"/>
+                </h:panelGrid>
+            </h:form>
+        </center>
+
+    </rich:popupPanel>
+
+</f:view>

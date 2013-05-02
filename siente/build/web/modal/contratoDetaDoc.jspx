@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.documento}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelContratoDoc" event="onclick" for="panelContratoDoc" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel style="overflow-y:scroll;height:350px" >
+            <h:form id="fcontrato" target="_blank">
+            <center>
+
+                <h:panelGrid  style="width:100%;" >
+                    <rich:dataTable id="tabladocumento" style="width:100%;" sortMode="single" style="text-align:left;" value="#{Supervisor$Contrato.listadocuContrato}"
+                                    var="currentRow"   binding="#{Supervisor$Contrato.tabladocuContrato}">
+                        <rich:column id="strnombreimg"  width="120px">
+                            <f:facet name="header">
+
+                                <h:outputText value="#{var.nombreah}"/>
+                            </f:facet>
+                            <h:outputText id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                        </rich:column>
+
+                        <rich:column id="strfecha"  width="120px">
+                            <f:facet name="header">
+
+                                <h:outputText value="#{var.fecha}"/>
+                            </f:facet>
+                            <h:outputText id="st_strfecha" value="#{currentRow.datefecha}"/>
+                        </rich:column>
+
+                        <rich:column style="text-align:center;" width="60px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.Ver}"/>
+                            </f:facet>
+                            <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action}" immediate="true">
+                            </h:commandButton>
+                        </rich:column>
+
+
+                    </rich:dataTable>
+                </h:panelGrid>
+                <center>
+                    <h:panelGrid columns="5">
+                        <a4j:commandButton id="confirmarContrato"  value="#{var.aceptar}"
+                                            style="font-size: 12px;"/>
+                        <rich:componentControl for="panelContratoDoc" attachTo="confirmarContrato" operation="hide" event="onclick"/>
+                    </h:panelGrid>
+                </center>
+
+
+            </center>
+            </h:form>
+        </rich:panel>
+        <rich:hotKey key="esc"  handler="javascript:Richfaces.hideModalPanel('panelContratoDoc')" />
+    </rich:popupPanel>
+
+</f:view>

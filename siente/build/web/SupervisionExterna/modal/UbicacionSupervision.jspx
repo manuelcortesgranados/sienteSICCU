@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <rich:popupPanel id="modalubicacionsupervision"  headerClass="rich-panel-header" height="108" width="368" moveable="false">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Ubicación Georeferenciada" styleClass="txt_header"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalubicacionsupervision" onclick="javascript:Richfaces.hideModalPanel('modalubicacionsupervision')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                    <rich:componentControl attachTo="esconder-modalubicacionsupervision" event="onclick" for="modalubicacionsupervision" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGrid columns="2">
+            <rich:panel  bodyClass="inpanelBody"  style="background-color:#C1D1E7">
+                <h:outputText id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="tooltip"/>
+            </rich:panel>
+            <rich:panel  bodyClass="inpanelBody">
+                <h:outputText id="verLatitudNorte" value="#{Supervision$Externa.objetoSeguimiento.strlatitud}"/>
+            </rich:panel>
+            <rich:panel  bodyClass="inpanelBody"  style="background-color:#C1D1E7">
+                <h:outputText id="titLatitudEste" value="#{var.longitudeste}" styleClass="tooltip"/>
+            </rich:panel>
+            <rich:panel  bodyClass="inpanelBody">
+                <h:outputText id="verLongitudEste" value="#{Supervision$Externa.objetoSeguimiento.strlongitud}"/>
+            </rich:panel>
+        </h:panelGrid>
+    </rich:popupPanel>
+
+</html>
+

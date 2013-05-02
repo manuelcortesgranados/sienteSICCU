@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
+    <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <ui:insert name="head"/>
+        </head>
+
+        <body>
+            <center>
+                <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
+                    <tr>
+                        <td height="50"/>
+                    </tr>
+                    <tr>
+                        <td align="center"></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
+                                <tr>
+                                    <td height="50"/>
+                                </tr>
+                                <tr>
+                                    <td><div id="logo"></div><div id="logo_ch"></div></td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center">
+                                         <h:form>
+                                        <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td align="center" class="colorTexto">La session ha vencido.<br />Debido a más de 30 minutos de inactividad
+                                                    </td>
+                                                <td><div class="regresar">
+                                                       
+                                                        <a4j:commandLink styleClass="regresar anchorLink" 
+                                                                         action="cerrarSession"/>                                                       
+                                                        
+                                                    </div></td>
+                                            </tr>
+                                        </table>
+                                     </h:form></td>
+                                </tr>
+                                <h:panelGroup rendered="#{var.logologin}">
+                                <tr>
+                                    <td class="text02" align="center">
+                                        <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
+                                    </td>
+                                </tr>
+                                </h:panelGroup>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center"></td>
+                    </tr>
+                    <tr>
+                        <td height="40px"></td>
+                    </tr>
+                </table>
+            </center>
+
+            <div id="login_image"></div>
+        <h:panelGroup rendered="#{var.logologin}">
+            <div class="social">
+                <a href="#{var.btnfacebook}" class="fb anchorLink" target="_blank"></a>
+                <a href="#{var.btntwitter}" class="tw anchorLink" target="_blank"></a>
+                <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
+            </div>
+        </h:panelGroup>
+        </body>
+    </html>
+</ui:composition>

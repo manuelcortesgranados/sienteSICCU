@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="mp_cronograma" moveable="false" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.cronograma}"/>
+            </h:panelGroup>
+        </f:facet>
+         <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_cronograma" styleClass="cerrar"
+                                       title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_mp_cronograma" event="onclick" for="mp_cronograma" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
+            <center>
+                <h:form>
+                    <h:panelGroup id="layoutCron">
+                        <interkont:spacer height="25"/>
+                        <h:panelGroup>
+                            <h:outputText styleClass="txt_outtext" value="#{var.aldarclickenelboto}"/>
+                            <h:outputText styleClass="txt_label_bold" value="#{var.cobra} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.vaagenerar} "/>
+                            <h:outputText styleClass="txt_label_bold" value="#{var.cronograma} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.en} "/>
+                            <h:outputText styleClass="txt_label_bold" value="#{var.excel} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.queusteddebera} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.unavezdiligenciado}"/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.alsistemaeimporte} "/>
+                            <h:outputText styleClass="txt_label_bold" value="#{var.cobra} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.puedahacer} "/>
+                            <h:outputText styleClass="txt_outtext" value="#{var.laproyeccion} "/>
+                            <h:outputText styleClass="txt_outtext" value="(#{var.recuerdequedebeguar})"/>
+                        </h:panelGroup>
+                        <center>
+                            <interkont:spacer height="35px" style="width:100%;"/>
+                            <h:panelGrid columns="2" style="width:100%;">
+                                <h:outputText styleClass="txt_label_bold" value="#{var.nota} "/>
+                                <h:outputText styleClass="txt_outtext" value="#{var.silodeseapuedecerrar}"/>
+                            </h:panelGrid>
+                            <interkont:spacer height="25px" style="width:100%;"/>
+                            <h:commandButton onclick="javascript:Richfaces.hideModalPanel('mp_cronograma')"
+                                             action="Download"
+                                             id="btn_generar_cronograma2" value="#{var.generarcronograma}" styleClass="btn_pri_inm"   style="font-size:12px;">
+                            </h:commandButton>
+                        </center>
+                    </h:panelGroup>
+                </h:form>
+            </center>
+        </rich:panel>
+    </rich:popupPanel>
+</f:view>

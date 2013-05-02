@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+
+    <f:view locale="#{var.rcalendarlocale}"  >
+        <ui:composition template="/facelets/template_indicadores.xhtml">
+            <ui:define name="head">
+                <title>Cobra - Home Indicadores</title>
+
+
+                <script src="../../amcharts/amcharts.js" type="text/javascript">
+                    
+                </script>
+
+
+            </ui:define>
+
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml" />
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <h:form execute="@this">
+                    <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                    
+                </h:form>
+                <h:form>
+                    <ui:include src="/facelets/menu_lateral_indicadores.xhtml"/>
+                </h:form>
+
+            </ui:define>
+            <ui:define name="body">
+
+                <h:form id="form_indicadores">
+                    <h:panelGrid columns="1">
+                        <h:graphicImage url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
+
+                        <h:panelGrid columns="2" >
+                            <h:outputText value="Fecha de consolidación:"/>
+
+                            <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.idconsolidadoselec}"  >
+                                <f:selectItems value="#{GraficarIndicadores.itemsCortes}"/>
+
+                            </h:selectOneMenu>
+                            <h:outputText value="Indicador: "/>                           
+
+                            <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==0}">
+                                <f:selectItem itemValue="0" itemLabel="Presupuesto en ejecución" />
+                                <!--<f:selectItem itemValue="1" itemLabel="Consolidado general" />-->
+                                <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==1}">
+                                <f:selectItem itemValue="2" itemLabel="Avance atención humanitaria" />
+                                <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==2}">
+                                <f:selectItem itemValue="3" itemLabel="Avance #{var.proyecto}s con Entidades Territoriales en el País" />
+                                <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                            </h:selectOneMenu>
+                            <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==3}">
+                                <f:selectItem itemValue="4" itemLabel="Avance #{var.proyecto}s con Entidades Nacionales en el País" />
+                                <f:selectItem itemValue="5" itemLabel="Avance de ejecución financiera de #{var.proyecto}s con Entidades Nacionales en el País" />
+
+                                <f:selectItem itemValue="6" itemLabel="Avance Convenios con Entidades Nacionales en el País" />
+                                <a4j:ajax event="onchange" action="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
+                            </h:selectOneMenu>
+
+                            <h:panelGroup id="cmbLoc" >
+
+                                <h:selectOneMenu id="cmbselec" value="#{GraficarIndicadores.filtrolocalidad.filtroselec}"  rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}" onchange="submit()" style="width:200px;">
+                                    <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
+                                    <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
+
+
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                                <h:panelGrid id="cmbOpcion" columns="2">
+                                <h:panelGrid id="panelcombosindica" columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}">
+
+                                    <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec !=1}">
+                                        <h:panelGroup >
+                                            <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"   style="width:200px;" >
+                                                <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                                <f:selectItems value="#{GraficarIndicadores.sedeptos}" />
+                                                <a4j:ajax event="onchange" action="#{GraficarIndicadores.llenarMunicipios}" render="municipioincomindica"/>
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                        <interkont:spacer width="10"/>
+                                        <h:panelGroup id="municipioincomindica" >
+                                            <h:selectOneMenu id="cmbmuni" value="#{GraficarIndicadores.filtrolocalidad.muniselec}"  style="width:200px;">
+                                                <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                                <f:selectItems value="#{GraficarIndicadores.semuni}" />
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+
+                                    <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec == 1}" >
+                                        <h:panelGroup >
+                                            <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.intzona}"  style="width:200px;">
+                                                <f:selectItem itemValue="0" itemLabel="Todos"/>
+                                                <f:selectItems value="#{GraficarIndicadores.zonaespecifica}"/>
+                                            </h:selectOneMenu>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+
+                                </h:panelGrid>
+                                <h:commandButton value="Graficar" action="#{GraficarIndicadores.iniciarGrafico}"/>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                    <h:panelGroup id="gpIndicadores">
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==0}">
+                            <h:outputText value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
+                            <div id="presupuestoejec" style="width: 100%; height: 600px;"></div>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==1}">
+
+                            <rich:dataTable id="tablaConsolGen"  style="text-align:left;" var="fila" style="width:100%;"
+                                            value="#{GraficarIndicadores.listaconsolidadosgen}"
+                                            >
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="3">                                            
+                                            <h:outputText value="Estado de avance y resultados"/>                                           
+                                        </rich:column>
+                                        <rich:column colspan="6">                                            
+                                            <h:outputText value="Nacional"/>                                           
+                                        </rich:column>
+
+                                        <rich:column colspan="1" breakBefore="true">                                            
+                                            <h:outputText value=" "/>                                           
+                                        </rich:column>
+
+                                        <rich:column colspan="1" >                                            
+                                            <h:outputText value="Aprobado miles de pesos"/>                                           
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Tipo"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Número"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Terminados"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Giro %"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="% Avance físico"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Resultados familias atendidas"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Empleos directos"/>                                            
+                                        </rich:column>
+
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <rich:columnGroup id="cuerpo">
+                                    <rich:column>
+
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:panelGrid columns="2">
+                                            <h:outputText value="#{fila.valorAprobado}"  >
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+                                            <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
+                                        </h:panelGrid>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.id.tipoEtiqueta}"/>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetas}"/>
+
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetasTer}" >
+
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.numGiro}" > 
+                                            <f:convertNumber pattern="###,###.##" />
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.numAvanFisico}" > 
+                                            <f:convertNumber pattern="###,###.##" />
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.famAtendi}" >
+
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.empleDirec}" >
+
+                                        </h:outputText>
+                                    </rich:column>
+
+                                </rich:columnGroup>
+
+                            </rich:dataTable>
+
+                        </h:panelGroup>
+
+
+
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==2}">
+
+                            <rich:dataTable id="tablaAvanceHUm"  style="text-align:left;" var="fila" style="width:100%;"
+                                            value="#{GraficarIndicadores.listaavanceshum}"
+                                            >
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="2">                                            
+                                            <h:outputText value=" "/>                                           
+                                        </rich:column>
+                                        <rich:column colspan="4">                                            
+                                            <h:outputText value="Primer giro"/>                                           
+                                        </rich:column>
+                                        <rich:column colspan="4">                                            
+                                            <h:outputText value="Segundo giro"/>                                           
+                                        </rich:column>
+                                        <rich:column colspan="4">                                            
+                                            <h:outputText value="Tercer giro"/>                                           
+                                        </rich:column>
+                                        <rich:column colspan="1" breakBefore="true">                                            
+                                            <h:outputText value=" "/>                                           
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Aprobado en  millones de pesos"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Recursos aprobados"/>                                            
+                                        </rich:column>
+                                         <rich:column>                                            
+                                            <h:outputText value="Familias atender"/>                                            
+                                        </rich:column>
+                                         <rich:column>                                            
+                                            <h:outputText value="Familias atendidas"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="% avance"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Recursos aprobados"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Familias atender"/>                                            
+                                        </rich:column>
+                                         <rich:column>                                            
+                                            <h:outputText value="Familias atendidas"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="% avance"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Recursos aprobados"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="Familias atender"/>                                            
+                                        </rich:column>
+                                         <rich:column>                                            
+                                            <h:outputText value="Familias atendidas"/>                                            
+                                        </rich:column>
+                                        <rich:column>                                            
+                                            <h:outputText value="% avance"/>                                            
+                                        </rich:column>
+
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <rich:columnGroup id="cuerpo">
+                                    <rich:column>
+
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:panelGrid columns="2">
+                                            <h:outputText value="#{fila.pgValorAprobado}"  >
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+                                            <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
+                                        </h:panelGrid>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.pgRecursosAprobados}" >
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtender}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtendidas}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.pgPorcentajeAvance}" >
+                                            <f:convertNumber pattern="###,###.##" />
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.sgRecursosAprobados}" >
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtender}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtendidas}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.sgPorcentajeAvance}" >
+                                            <f:convertNumber pattern="###,###.##"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.tgRecursosAprobados}" >
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtender}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtendidas}" >                                            
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>                                        
+                                        <h:outputText  styleClass="txt_outtext" value="#{fila.tgPorcentajeAvance}" >
+                                            <f:convertNumber pattern="###,###.##" />
+                                        </h:outputText>
+                                    </rich:column>
+
+                                </rich:columnGroup>
+
+                            </rich:dataTable>
+
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==3}">
+                            <h:outputText value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==4}">
+                            <h:outputText value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
+
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==5}">
+                            <h:outputText value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
+
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==6}">
+                            <h:outputText value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
+
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </f:view>
+</html>

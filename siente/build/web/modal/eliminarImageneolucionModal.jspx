@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp_eliminar_imagenevolucion" moveable="false" height="150" width="350" style="padding:0px;"
+                     headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.eliminarimagen}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" styleClass="cerrar"
+                                       title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_mp_eliminar_imagenevolucion" event="onclick" for="mp_eliminar_imagenevolucion" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <h:panelGrid style="width:100%;" id="gpImagenModalEliminar">
+                    <interkont:spacer height="10"/>
+                    <h:outputText id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
+                    <interkont:spacer height="20"/>
+                    <h:panelGrid columns="2" style="width:100%;" style="text-align:center;">
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="btn_sec_gra"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion');" value="#{var.aceptar}"
+                                           render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
+                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion')"/>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+    
+</f:view>

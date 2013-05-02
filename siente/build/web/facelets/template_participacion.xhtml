@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+   >
+    <html>
+
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+           <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>
+            <ui:insert name="head"/>
+
+            <style type="text/css">
+                body,td,th {
+                    margin: 0px;
+                    font-family: Verdana, Geneva, sans-serif;
+                }
+            </style>
+
+            <!--Start of Zopim Live Chat Script
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+$.src='//cdn.zopim.com/?xhIi6ynK6w15eXomZpg6ajumZp1tTAh3';z.t=+new Date;$.
+type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+</script>-->
+<!--End of Zopim Live Chat Script-->
+        </head>
+
+        <body >
+            <h:form id="form_menu">
+                <ui:insert name="menu"/>
+            </h:form>
+
+            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1">
+                <tr>
+                    <td width="15%"></td>
+                    
+                </tr>
+                <tr>
+                    <td rowspan="6" valign="top" style="height:400px;">
+                        <h:form id="form_menu_lateral">
+                            <ui:insert name="menu_lateral"/>
+                        </h:form>
+                    </td>
+                    <td valign="top" height="35">
+                        <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td style="width:100%;">
+                                    <a4j:outputPanel id="panelBody">
+                                        <rich:messages id="messages" globalOnly="true"
+                                                       styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                       >
+                                            <f:facet name="infoMarker">
+                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                            </f:facet>
+                                            <f:facet name="warnMarker">
+                                                <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                            </f:facet>
+                                            <f:facet name="errorMarker">
+                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            </f:facet>
+                                            <f:facet name="fatalMarker">
+                                                <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            </f:facet>
+                                        </rich:messages>
+                                        <ui:insert name="menusuperior"/>
+                                        <ui:insert name="body" />
+                                        <ui:include src="/facelets/ajaxStatus.xhtml" />
+                                    </a4j:outputPanel>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="tablafooter">
+                <tr style="height:15px;"/>
+                <tr>
+                    <td style="width:100%;">
+                        <h:form id="form_footer">
+                            <ui:include src="/facelets/footer.xhtml"/>
+
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>
+</ui:composition>

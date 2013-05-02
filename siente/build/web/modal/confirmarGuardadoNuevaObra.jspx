@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfGuardadoTemporal" moveable="true" resizeable="false"  height="300" width="400" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.confirmarguardadot}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfGuardadoTemporal" styleClass="cerrar"
+                                       title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_panelConfGuardadoTemporal" event="onclick" for="panelConfGuardadoTemporal" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        
+
+        <interkont:spacer style="width:100%;" height="50"/>
+            <center>
+                <h:form ajaxSingle="false" >
+                    <h:panelGrid id="layoutMensajepaso1" columnClasses="columna_derecha">
+                    <!--<h:outputText value="#{Supervisor$IngresarNuevaObra.mensaje}" styleClass="txt_label_bold" style="font-size: 13px;"/>-->
+                    <a4j:commandButton value="#{var.aceptar}" id="btAceptarConf" action="#{Supervisor$IngresarNuevaObra.limpiarMensaje}" immediate="true" ajaxSingle="false"/> 
+                    <rich:componentControl attachTo="btAceptarConf" event="onclick" for="panelConfGuardadoTemporal" operation="hide"/>
+                </h:panelGrid>
+                </h:form>
+            </center>
+        
+    </rich:popupPanel>
+</f:view>
