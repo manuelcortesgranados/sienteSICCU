@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -18,8 +18,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder-mp-listado-planificacion-pagos" event="onclick"  for="mp-listado-planificacion-pagos" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-planificacion-pagos')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -56,30 +56,28 @@
                                     rows="5"
                                     var ="planificacion"
                                     binding="#{Supervisor$Contrato.tablaplanificacionpagos}"
-                                    onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
-                                    render="panelfooterplan"
-                                    width="600px"
-                                    style="text-align:center;">
+                                    style="text-align:center; width: 600px;">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column width="150px" breakBefore="true" colspan="3">
+                                <rich:column style="width:150px;" breakRowBefore="true" colspan="3">
                                     <h:outputText value="#{var.numero} de Actas Parciales"/>
                                 </rich:column>
-                                <rich:column width="150px" breakBefore="true">
+                                <rich:column style="width:150px;" breakRowBefore="true">
                                     <h:outputText value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width:150px;">
                                     <h:outputText value="#{var.valor} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width:150px;">
                                     <h:outputText value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
-                            <rich:column  width="150px" breakBefore="true">
+                            <rich:column  style="width:150px;" breakRowBefore="true">
                                 <h:outputText value="% #{planificacion.numvlrporcentage}"/>
                             </rich:column>
                             <rich:column>
@@ -100,4 +98,4 @@
         </rich:panel>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

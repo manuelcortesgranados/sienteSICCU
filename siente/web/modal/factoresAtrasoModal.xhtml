@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
-
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="modalFactoresAtraso"  headerClass="rich-panel-header" width="300" autosized="true">
         <f:facet name="header" >
@@ -18,15 +19,15 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_modalFactoresAtraso" event="onclick" for="modalFactoresAtraso" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFactoresAtraso')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <rich:panel>
             <center>
-                <rich:dataTable id="tablaFactores" onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                <rich:dataTable id="tablaFactores" onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
                                 binding="#{Supervisor$DetalleObra.tablafactoratraso}"
                                 value="#{SessionBeanCobra.cobraService.factoratrasos}"
                                 var="regist" style="width:100%;">
@@ -51,6 +52,5 @@
                 </rich:dataTable>
             </center>
         </rich:panel>
-    </rich:popupPanel>
-
-</f:view>
+    </rich:popupPanel>     
+</ui:composition>

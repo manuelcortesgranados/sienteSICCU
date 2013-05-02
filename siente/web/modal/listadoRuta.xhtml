@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
-
 
     <rich:popupPanel id="mp-listado-rutas" moveable="true" headerClass="rich-panel-header" autosized="true">
         <f:facet name="header" >
@@ -17,9 +16,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-rutas" onclick="javascript:Richfaces.hideModalPanel('mp-listado-rutas')" immediate="true"
+                    <a4j:commandButton id="esconder-mp-listado-rutas" onclick="#{rich:component('mp-listado-rutas')}.hide(); return false;" immediate="true"
                                        styleClass="btn_cerrar"  />
-                    <rich:componentControl attachTo="esconder-mp-listado-rutas" event="onclick" for="mp-listado-rutas" operation="hide"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -40,13 +38,11 @@
                                     rows="5"
                                     var ="rutarow"
                                     binding="#{Supervisor$EntidadConvenio.tablarutas}"
-                                    onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
-                                    onRowMouseOut="this.style.backgroundColor='#FFFFFF'"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                    onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
                                     value="#{Supervisor$EntidadConvenio.listaruta}"
-                                    render="panelfooter"
-                                    width="600px"
-                                    style="text-align:center;">
+                                    style="text-align:center; width: 600px;">
 
                         <f:facet name="header">
                             <rich:columnGroup>
@@ -55,7 +51,7 @@
                                     <h:outputText value="#{var.rutas} encontradas #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
                                 </rich:column>
 
-                                <rich:column width="200px" breakBefore="true">
+                                <rich:column width="200px" breakRowBefore="true">
                                     <h:outputText value="#{var.codigotramo}"/>
                                 </rich:column>
                                 <rich:column width="200px">
@@ -67,7 +63,7 @@
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoRutas">
-                            <rich:column  width="200px" breakBefore="true">
+                            <rich:column  width="200px" breakRowBefore="true">
                                 <h:outputText value="#{rutarow.strcodigotramo}"/>
                             </rich:column>
                             <rich:column>
@@ -77,26 +73,26 @@
                                 <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$IngresarNuevaObra.seleccionruta}"
                                                    render="pginvias"
                                                    oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-rutas');" >
-                                    <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-rutas')" render="pginvias"/>
+                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-rutas')" render="pginvias"/>
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:columnGroup>
                         <f:facet name="footer">
                             <rich:columnGroup>
-                                <rich:column colspan="7" breakBefore="true">
+                                <rich:column colspan="7" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
                                             <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.primeroRuta}">
-                                                <a4j:ajax event="oncomplete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.anteriorRuta}">
-                                                <a4j:ajax event="oncomplete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.siguienteRuta}">
-                                                <a4j:ajax event="oncomplete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.ultimoRuta}">
-                                                <a4j:ajax event="oncomplete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
                                             </a4j:commandButton>
                                         </h:panelGrid>
                                     </center>
@@ -108,8 +104,7 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
-
+</ui:composition>
 
 
 

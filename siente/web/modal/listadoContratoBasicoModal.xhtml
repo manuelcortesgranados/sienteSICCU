@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -18,9 +18,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-contratos" onclick="javascript:Richfaces.hideModalPanel('mp-listado-contratos')" immediate="true" 
-                                       styleClass="btn_cerrar"  />
-                    <rich:componentControl attachTo="esconder-mp-listado-contratos" event="onclick" for="mp-listado-contratos" operation="hide"/>
+                    <a4j:commandButton id="esconder-mp-listado-contratos"  immediate="true" 
+                                       styleClass="btn_cerrar"  onclick="#{rich:component('mp-listado-contratos')}.hide(); return false"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -44,7 +43,9 @@
                 <h:panelGrid style="width:100%;">
                     <interkont:spacer height="20" style="width:100%;"/>
                     <h:panelGroup id="panel-filtro-novedades">
-                        <a4j:ajax event="onclik" render="tabla-listado-contratospa" ignoreDupResponses="true" execute="@this"/>
+                        <a4j:ajax event="click" render="tabla-listado-contratospa" execute="@this">
+                            <a4j:queue ignoreDupResponses="true"/>
+                        </a4j:ajax>
                     </h:panelGroup>
                     <h:outputText value="Debe diligenciar el campo Entidad Contratante" style="color: red" rendered="#{Supervisor$Contrato.contrato.tercero.intcodigo==0}"/>
                     <interkont:spacer height="10px" style="width:100%;"/>
@@ -54,7 +55,7 @@
                                         binding="#{Supervisor$Contrato.tablacontrapadrebindin}"
                                         value="#{Supervisor$Contrato.listacontratos}"
 
-                                        sortMode="single"  var="currentRow" width="800px" rows="6"
+                                        sortMode="single"  var="currentRow" style="width: 800px;" rows="6"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
 
                             <f:facet name="header">
@@ -64,36 +65,36 @@
                                         <h:outputText value="#{var.conveniosporcontratante} #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}"  rendered="#{Supervisor$Contrato.preguntacontrato==2}" />
                                     </rich:column>
 
-                                    <rich:column width="150px" breakBefore="true">
+                                    <rich:column style="width: 150px;" breakRowBefore="true">
                                         <h:outputText id="txtnumerocc" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                                         <h:outputText id="txtnumeroc" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                                     </rich:column>
 
-                                    <rich:column width="150px" >
+                                    <rich:column style="width: 150px;" >
                                         <h:outputText value="#{var.nombre} "/>
                                     </rich:column>
 
-                                    <rich:column width="150px" >
+                                    <rich:column style="width: 150px;"  >
                                         <h:outputText value="#{var.valor} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                                         <h:outputText value="#{var.valor} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                                     </rich:column>
-                                    <rich:column width="150px" >
+                                    <rich:column style="width: 150px;"  >
                                         <h:outputText value="#{var.vlrdispo}"/>
                                     </rich:column>
-                                    <rich:column width="150px" >
+                                    <rich:column style="width: 150px;"  >
                                         <h:outputText value="#{var.datefechaini}"/>
                                     </rich:column>
-                                    <rich:column width="150px" >
+                                    <rich:column style="width: 150px;" >
                                         <h:outputText value="#{var.datefechafin}"/>
                                     </rich:column>
-                                    <rich:column width="150px">
+                                    <rich:column style="width: 150px;" >
                                         <h:outputText value="#{var.seleccionar}"/>
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
 
                             <rich:columnGroup id="cuerpoContrato">
-                                <rich:column width="150px" breakBefore="true">
+                                <rich:column style="width: 150px;" breakRowBefore="true">
                                     <h:outputText value="#{currentRow.strnumcontrato}"/>
                                 </rich:column>
                                 <rich:column >
@@ -125,20 +126,20 @@
 
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="9" breakBefore="true">
+                                    <rich:column colspan="9" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
                                                 <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                             </h:panelGrid>
                                         </center>
@@ -153,7 +154,7 @@
                                         binding="#{Supervisor$Contrato.tablacontrapadrebindinContratista}"
                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
 
-                                        sortMode="single"  var="currentRow" width="800px" rows="6"
+                                        sortMode="single"  var="currentRow" style="widh: 800px;" rows="6"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
 
                             <f:facet name="header">
@@ -163,7 +164,7 @@
                                         <h:outputText value="#{var.conveniosporcontratista} #{Supervisor$Contrato.totalfilasContratista} #{var.paginaCiu} #{Supervisor$Contrato.paginaContratista} #{var.deCiu} #{Supervisor$Contrato.totalpaginasContratista}"  rendered="#{Supervisor$Contrato.preguntacontrato==2}" />
                                     </rich:column>
 
-                                    <rich:column width="150px" breakBefore="true">
+                                    <rich:column width="150px" breakRowBefore="true">
                                         <h:outputText value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                                         <h:outputText value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                                     </rich:column>
@@ -192,7 +193,7 @@
                             </f:facet>
 
                             <rich:columnGroup id="cuerpoContratoContratista">
-                                <rich:column width="150px" breakBefore="true">
+                                <rich:column width="150px" breakRowBefore="true">
                                     <h:outputText value="#{currentRow.strnumcontrato}"/>
                                 </rich:column>
                                 <rich:column >
@@ -224,20 +225,20 @@
 
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="9" breakBefore="true">
+                                    <rich:column colspan="9" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
                                                 <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                                 <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}">
-                                                    <a4j:ajax event="oncomplete" render="tabla-listado-contratospad"/>
+                                                    <a4j:ajax event="complete" render="tabla-listado-contratospad"/>
                                                 </a4j:commandButton>
                                             </h:panelGrid>
                                         </center>
@@ -250,4 +251,4 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
+</ui:composition>
