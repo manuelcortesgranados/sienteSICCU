@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <rich:popupPanel id="modalinformacionfinancieraInterv" headerClass="rich-panel-header" height="260" width="425" moveable="false">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="Información Financiera de Interventoría" styleClass="txt_header" />
+            </h:panelGroup>
+        </f:facet>
+        
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalinformacionfinancieraInterv" 
+                                       onclick="#{rich:component('modalinformacionfinancieraInterv')}.hide();
+                                               return false;" 
+                                       title="#{var.cerrar}" immediate="true" styleClass="btn_cerrar" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:panelGrid columns="2">
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titValorContratoInterv" value="#{var.valorcontratosupervisor}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inValorContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titValorPagadoActasInterv" value="#{var.valortotalpagadoactas}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inValorPagadoActasInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlrpagoactasinter}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titValorAnticipoInterv" value="#{var.valoranticipo}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inValorAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titSaldoPagarContratoInterv" value="#{var.saldopagarcontrato}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inSaldoPagarContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numsaldoxpagarcontrinter}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titTotalAmortizadoAnticipoInterv" value="#{var.totalamortizado}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inTotalAmortizadoAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titSaldoPorAmortizarInterv" value="#{var.saldoamortizaranticipo}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="inSaldoPorAmortizarInterv" value="#{Supervision$Externa.objetoSeguimiento.numsaldoxamortizaranticipointer}">
+                    <f:convertNumber pattern="$ ###,###.##" />
+                </h:outputText>
+            </rich:panel>
+        </h:panelGrid>
+    </rich:popupPanel>
+</ui:composition>

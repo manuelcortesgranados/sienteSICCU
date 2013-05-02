@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="modalubicacionsupervision" headerClass="rich-panel-header" height="108" width="368" moveable="false">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="Ubicación Georeferenciada" styleClass="txt_header" />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-modalubicacionsupervision"
+                                       onclick="#{rich:component('modalubicacionsupervision')}.hide();
+                                               return false;"
+                                       title="#{var.cerrar}" immediate="true" styleClass="btn_cerrar" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:panelGrid columns="2">
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="tooltip" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="verLatitudNorte" value="#{Supervision$Externa.objetoSeguimiento.strlatitud}" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
+                <h:outputText id="titLatitudEste" value="#{var.longitudeste}" styleClass="tooltip" />
+            </rich:panel>
+            <rich:panel bodyClass="inpanelBody">
+                <h:outputText id="verLongitudEste" value="#{Supervision$Externa.objetoSeguimiento.strlongitud}" />
+            </rich:panel>
+        </h:panelGrid>
+    </rich:popupPanel>
+</ui:composition>
