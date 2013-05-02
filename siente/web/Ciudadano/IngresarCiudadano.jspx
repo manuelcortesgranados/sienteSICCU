@@ -14,7 +14,7 @@
         xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
     <ui:composition template="/facelets/template_ingreso_ciudadano.xhtml">
-
+prueba daniela
 
 
 
