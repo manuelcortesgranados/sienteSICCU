@@ -2026,7 +2026,7 @@ public class HomeGestion implements Serializable {
                 String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/DetalleObra.jspx";
                 String urlDocumento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/DocumentoObra.jspx";
                 String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/ImagenObra.jspx";
-                String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Ciudadano/ParticipacionCiudadano.jspx";
+                String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Ciudadano/ParticipacionCiudadano.xhtml";
                 BigDecimal porcentaje = BigDecimal.valueOf(0);
                 if (obra.getNumvalejecobra() != null && obra.getTipoestadobra().getIntestadoobra() > 0) {
                     porcentaje = obra.getNumvalejecobra();

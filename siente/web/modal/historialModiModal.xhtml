@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:panelGroup id="panelprorroga" style="padding: 0px;">
+
+        <h:panelGrid  style="width:100%;" >
+            <center>
+                <f:facet name="header">
+                    <h:outputLabel value="#{var.prorroga}">
+
+                    </h:outputLabel>
+                </f:facet>
+
+                <rich:dataTable id="tablahistoria" sortMode="single" style="text-align:left; width:100%;"
+                                value="#{Supervisor$AdministrarObraNew.listahistorico}"
+                                var="_row" >
+                    <rich:column id="tc_strfecha"  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.fecha} "/>
+                        </f:facet>
+                        <h:outputText id="st_strfechahis" value="#{_row.datefechist}"/>
+                    </rich:column>
+
+                    <rich:column id="tc_strdias"  width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.diasadicionales} "/>
+                        </f:facet>
+                        <h:outputText id="st_strdias" value="#{_row.intplazoobra}"/>
+                    </rich:column>
+
+                    <rich:column id="tc_strfechater" width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.fechaterminacion}"/>
+                        </f:facet>
+                        <h:outputText id="st_strfecha" value="#{_row.datefecfinhist}"/>
+                    </rich:column>
+
+                    <rich:column id="tc_estado" width="120px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.estado}"/>
+                        </f:facet>
+                        <h:outputText  value="#{_row.booltieneespe}"/>
+                    </rich:column>
+
+
+                </rich:dataTable>
+            </center>
+        </h:panelGrid>
+
+    </h:panelGroup>
+</ui:composition>

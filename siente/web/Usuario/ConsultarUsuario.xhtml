@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml">
+
+    <ui:define name="head" />
+
+    <ui:define name="title">
+        <h:outputText value="Consultar usuario" />
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+        <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <rich:panel id="pgcontratoconvenio">
+                <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <div class="buscador">
+                                <div id="buscador_space">
+                                    <label>
+                                        <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this);" onblur="clearText(this);" onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
+                                        <h:commandButton type="button" action="#{Perfil$Usuario.buscarUsuarioporCriterios}" id="filtrar"  value="#{var.buscar}">
+                                            <a4j:ajax render="tabla-listado-buscarusuario" execute="@this" oncomplete="true" />
+                                        </h:commandButton>
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <center>
+                    <h:panelGrid style="width:100%;" >
+                        <interkont:spacer height="30" style="width:100%;" />
+                        <rich:dataTable id="tabla-listado-buscarusuario"
+                                        binding="#{Perfil$Usuario.tablabuscarusuarios}"
+                                        value="#{Perfil$Usuario.listausuarios}"
+                                        sortMode="single" var="currentRow" style="width:100%;" rows="10"
+                                        rowClasses="cabezo_tabla01, cabezo_tabla02">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column colspan="5">
+                                        <h:outputText value="Usuarios encontrados" />
+                                    </rich:column>
+                                    <rich:column breakRowBefore="true">
+                                        <h:outputText value="Nombre completo" />
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:outputText value="Login" />
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:outputText value="Cédula" />
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:outputText value="Perfil usuario" />
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:outputText value="Ver" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup id="cuerpoUsuarios">
+                                <rich:column breakRowBefore="true">
+                                    <h:outputText value="#{currentRow.tercero.strnombrecompleto}" />
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{currentRow.usuLogin}" />
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{currentRow.tercero.intcedula}" />
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                </rich:column>
+                                <rich:column>
+                                    <a4j:commandLink style="font-size: 10px;" action="#{Perfil$Usuario.irperfilUsuario}">
+                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                    </a4j:commandLink>
+                                </rich:column>
+                            </rich:columnGroup>
+
+                        </rich:dataTable>
+                        <rich:columnGroup>
+                            <rich:column colspan="7" breakRowBefore="true">
+                                <center>
+                                    <rich:dataScroller for="tabla-listado-buscarusuario" render="tabla-listado-buscarusuario" />
+                                </center>
+                            </rich:column>
+                        </rich:columnGroup>
+                        <interkont:spacer height="10px" style="width:100%;" />                            
+                    </h:panelGrid>
+                </center>
+            </rich:panel>
+        </h:form>
+    </ui:define>
+</ui:composition>

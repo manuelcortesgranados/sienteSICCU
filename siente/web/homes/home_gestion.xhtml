@@ -72,7 +72,7 @@
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                 <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
-                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.jspf"/>
+                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
                 </h:panelGroup>
 
                     <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
@@ -311,9 +311,9 @@
                     </h:panelGrid>
                 </h:form>
            <!--Se deben arregla y habilitar NOOOOOO BORRARRRRR     
-                <ui:include src="/Ciudadano/Sliderimagenes.jspf"/>
+                <ui:include src="/Ciudadano/Sliderimagenes.xhtml"/>
                 <f:subview id="murocomentarios"  >
-                    <ui:include src="/Ciudadano/Muro_Comentarios.jspf"/>
+                    <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
                 </f:subview>
 -->
                <a4j:region>
@@ -324,17 +324,17 @@
                     </h:form>
                 </a4j:region>
 <!--Se deben arregla y habilitar NOOOOOO BORRARRRRR 
-                <ui:include src="/modal/modalFiltroAvanzado.jspx"/>
-                <ui:include src="/modal/modalFiltroAvanzadoCiud.jspx"/>
+                <ui:include src="/modal/modalFiltroAvanzado.xhtml"/>
+                <ui:include src="/modal/modalFiltroAvanzadoCiud.xhtml"/>
 -->
 
                 <!--
-                <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalAlojamientos.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.jspx"/>
-                <ui:include src="/reportes/modalreporte/modalreportehome.jspx"/>-->
+                <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalAlojamientos.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.xhtml"/>
+                <ui:include src="/reportes/modalreporte/modalreportehome.xhtml"/>-->
             </ui:define>
 
 </ui:composition>

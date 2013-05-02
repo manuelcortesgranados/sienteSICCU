@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+    <rich:popupPanel id="mp-listado-tercero" moveable="true" width="1300" height="420" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.rpanhea_listadotercero}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <rich:panel id="gpOrdenPago">
+
+            <h:form id="form-mp-listado-tercero">
+                <h:panelGrid style="width:100%;">
+                    <interkont:spacer height="20" style="width:100%;"/>
+
+                    <interkont:spacer height="10px" style="width:100%;"/>
+                    <rich:panel id="pl-tabla-listado-tercero" style="overflow: auto;width: 100%; height: 300px;">
+
+                        <h:panelGrid columns="2">
+                            <h:outputText value="#{var.buscarpalabraclave} " style="font-size:12px"/>
+                            <h:inputText value="#{Financiera$FiduFinanciera.financieraService.tercero.strnombre}" size="100">
+                                <a4j:ajax event="keyup" render="tablaTercero" listener="#{Financiera$FiduFinanciera.filtrar}"/>
+                            </h:inputText>
+                        </h:panelGrid>
+
+
+                        <interkont:spacer height="20" style="width:100%;"/>
+                        <rich:dataTable id="tablaTercero"
+                                        rows="10"
+                                        var ="_Tercero"
+                                        binding="#{Financiera$FiduFinanciera.tablaTerceroListado}"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        sortMode="single"
+                                        value="#{Financiera$FiduFinanciera.financieraService.listaTercero}"
+                                        style="text-align:center; width: 100%;">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+
+
+                                    <rich:column colspan="4">
+                                        <h:outputText value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
+                                    </rich:column>
+                                    <rich:column colspan="4" breakRowBefore="true">
+                                        <center>
+                                            <h:panelGrid columns="4">
+                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.primerosreales}"
+                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.anterioresReales}"
+                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.siguientesReales}"
+                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.ultimoReales}"
+                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                            </h:panelGrid>
+                                        </center>
+                                    </rich:column>
+                                    <rich:column width="150px" breakRowBefore="true">
+                                        <h:outputText value="#{var.cedulaContratista}"/>
+                                    </rich:column>
+                                    <rich:column width="150px">
+                                        <h:outputText value="#{var.nombre}" />
+                                    </rich:column>
+                                    <rich:column width="150px">
+                                        <h:outputText value="#{var.apellidoContratista}" />
+                                    </rich:column>
+                                    <rich:column width="150px">
+                                        <h:outputText value="#{var.SELECCION}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup id="CuerpoOpi">
+                                <rich:column  width="150px" breakRowBefore="true">
+                                    <h:outputText value="#{_Tercero.intcedula}"/>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{_Tercero.strnombre}"/>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{_Tercero.strapellido1}"/>
+                                </rich:column>
+                                <rich:column >
+                                    <a4j:commandButton id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP}"
+                                                       render="soliOrden" title="#{var.agregar}" onclick="javascript:Richfaces.hideModalPanel('mp-listado-tercero')" >
+
+                                    </a4j:commandButton>
+
+
+                                </rich:column>
+                            </rich:columnGroup>
+
+                        </rich:dataTable>
+                        <interkont:spacer height="20"/>
+                    </rich:panel>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</ui:composition>

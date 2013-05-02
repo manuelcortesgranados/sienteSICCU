@@ -40,7 +40,7 @@
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                 <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard}">
-                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.jspf"/>
+                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}">

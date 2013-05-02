@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-listado-encargo" moveable="true" width="600" height="500" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.listadoencargo}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-listado-encargo" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-encargo')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <center>
+            <h:form>
+                <h:panelGrid columns="3">
+                    <h:outputText value="#{var.consultar} #{var.numeroencargo} " style="font-size:12px"/>
+                    <rich:inputNumberSpinner enableManualInput="true" minValue="0" value="#{Financiera$FiduFinanciera.intencargofidu}"
+                                             inputSize="10" maxValue="1000000" onfocus="clearText(this)" onblur="clearText(this)" />
+
+                    <a4j:commandButton render="tablaEncargo" action="#{Financiera$FiduFinanciera.filtrarEncargo}" value="Buscar"/>
+
+                </h:panelGrid>
+            </h:form>
+        </center>
+
+        <rich:panel id="gpEncargo">
+            <h:form id="form-mp-listado-encargo">
+                <h:panelGrid style="width:100%;">
+                     <interkont:spacer height="5" style="width:100%;"/>
+                        <rich:dataTable id="tablaEncargo"
+                                        rows="5"
+                                        var ="_Encargo"
+                                        binding="#{Financiera$FiduFinanciera.tablaEncargoListado}"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                        sortMode="single"
+                                        value="#{Financiera$FiduFinanciera.financieraService.listaencargo}"
+                                        style="text-align:center; width:100%;;">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column colspan="7">
+                                        <h:outputText value="#{var.listadoencargo} #{Financiera$FiduFinanciera.totalfilasencargo} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina} #{var.deCiu} #{Financiera$FiduFinanciera.totalpaginasencargo}" />
+                                    </rich:column>
+                                    <rich:column width="250px" breakRowBefore="true">
+                                        <h:outputText value="#{var.numeroencargo}"/>
+                                    </rich:column>
+
+                                    <rich:column width="250px">
+                                        <h:outputText value="#{var.fechaapertura}"/>
+                                    </rich:column>
+                                    <rich:column width="250px">
+                                        <h:outputText value="#{var.saldoinicial}"/>
+                                    </rich:column>
+                                    <rich:column width="250px">
+                                        <h:outputText value="#{var.saldoactual}"/>
+                                    </rich:column>
+                                    <rich:column width="250px">
+                                        <h:outputText value="#{var.SELECCION}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup id="CuerpoOpi">
+                                <rich:column  width="250px" breakRowBefore="true">
+                                    <h:outputText value="#{_Encargo.intnumencargofiduciario}"/>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{_Encargo.datefechaaperturaencargofiduciario}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{_Encargo.numsaldoinicial}">
+                                        <f:convertNumber pattern="$ ###,###"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  value="#{_Encargo.numsaldoactual}">
+                                        <f:convertNumber pattern="$ ###,###"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column >
+                                    <a4j:commandButton id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo}"
+                                                       title="#{var.agregar}" render="encargoorden" value="Seleccionar"
+                                                       onclick="javascript:Richfaces.hideModalPanel('mp-listado-encargo')" >
+                                    </a4j:commandButton>
+                                </rich:column>
+                            </rich:columnGroup>
+                            <f:facet name="footer">
+                                <rich:columnGroup>
+                                    <rich:column colspan="7" breakRowBefore="true">
+                                        <center>
+                                            <h:panelGrid columns="4">
+                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.primerosrealesEncargo}"/>
+                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.anterioresRealesEncargo}"/>
+                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.siguientesRealesEncargo}"/>
+                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.ultimoRealesEncargo}"/>
+                                            </h:panelGrid>
+                                        </center>
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+
+                        </rich:dataTable>
+                        <interkont:spacer height="20"/>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</ui:composition>
