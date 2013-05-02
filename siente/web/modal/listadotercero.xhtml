@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+        xmlns:ui="http://java.sun.com/jsf/facelets" >
 
     <rich:popupPanel id="mp-listado-tercero" moveable="true" width="1300" height="420" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -17,8 +17,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_mp-listado-tercero" event="onclick" for="mp-listado-tercero" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -35,7 +34,7 @@
                         <h:panelGrid columns="2">
                             <h:outputText value="#{var.buscarpalabraclave} " style="font-size:12px"/>
                             <h:inputText value="#{Financiera$FiduFinanciera.financieraService.tercero.strnombre}" size="100">
-                                <a4j:ajax event="onkeyup" render="tablaTercero" action="#{Financiera$FiduFinanciera.filtrar}"/>
+                                <a4j:ajax event="keyup" render="tablaTercero" listener="#{Financiera$FiduFinanciera.filtrar}"/>
                             </h:inputText>
                         </h:panelGrid>
 
@@ -45,12 +44,10 @@
                                         rows="10"
                                         var ="_Tercero"
                                         binding="#{Financiera$FiduFinanciera.tablaTerceroListado}"
-                                        onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Financiera$FiduFinanciera.financieraService.listaTercero}"
-                                        render="panelfooter"
-                                        style="width:100%;"
-                                        style="text-align:center;">
+                                        style="text-align:center; width: 100%;">
                             <f:facet name="header">
                                 <rich:columnGroup>
 
@@ -58,7 +55,7 @@
                                     <rich:column colspan="4">
                                         <h:outputText value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                     </rich:column>
-                                    <rich:column colspan="4" breakBefore="true">
+                                    <rich:column colspan="4" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
                                                 <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.primerosreales}"
@@ -72,7 +69,7 @@
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>
-                                    <rich:column width="150px" breakBefore="true">
+                                    <rich:column width="150px" breakRowBefore="true">
                                         <h:outputText value="#{var.cedulaContratista}"/>
                                     </rich:column>
                                     <rich:column width="150px">
@@ -87,7 +84,7 @@
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
-                                <rich:column  width="150px" breakBefore="true">
+                                <rich:column  width="150px" breakRowBefore="true">
                                     <h:outputText value="#{_Tercero.intcedula}"/>
                                 </rich:column>
                                 <rich:column >
@@ -114,4 +111,4 @@
         </rich:panel>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

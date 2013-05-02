@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <h:panelGroup id="panelprorroga" style="padding: 0px;">
 
@@ -17,7 +18,7 @@
                     </h:outputLabel>
                 </f:facet>
 
-                <rich:dataTable id="tablahistoria" style="width:100%;" sortMode="single" style="text-align:left;"
+                <rich:dataTable id="tablahistoria" sortMode="single" style="text-align:left; width:100%;"
                                 value="#{Supervisor$AdministrarObraNew.listahistorico}"
                                 var="_row" >
                     <rich:column id="tc_strfecha"  width="120px">
@@ -54,4 +55,4 @@
         </h:panelGrid>
 
     </h:panelGroup>
-</f:view>
+</ui:composition>

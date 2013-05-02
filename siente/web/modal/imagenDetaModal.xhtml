@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"> 
+
+    <h:panelGroup id="panelImagenes" style="padding: 0px;">
+        <center>            
+            <h:panelGrid width="60%" style="text-align:center;">
+                <h:panelGrid styleClass="detalleproyecto" columns="2"
+                             columnClasses="column-grid-panel,column-grid-panel,column-grid-panel">
+                    <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" styleClass="rich-panel-grid-imgs"  headerClass="font-header-panel">
+                        <h:panelGrid columns="1" style="width:100%;">
+                            <h:panelGroup id="ima2">
+                                <h:graphicImage value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
+                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                height="140" width="190"/>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                     <!--   <rich:effect event="onclick"  type="Highlight" params="duration:0.8" />
+                        <rich:effect event="onclick"  for="highlightbox"  type="Appear" params="delay:3.0,duration:0.5" />-->
+                    </rich:panel>
+                    <rich:panel header="#{var.asiahora}" bodyClass="rich-panel-grid-body-imgs" styleClass="rich-panel-grid-imgs" headerClass="font-header-panel">
+                        <h:panelGrid columns="1" style="width:100%;">
+                            <h:panelGroup id="ima1">
+
+                                <h:graphicImage id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="javascript:Richfaces.showModalPanel('modalImagenvermas')" />
+
+
+
+                                <h:graphicImage id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                height="140" width="190" rendered="#{!Supervisor$DetalleObra.boolimg}"/>
+
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <!--<rich:effect event="onclick"  type="Highlight" params="duration:0.8" />
+                        <rich:effect event="onclick"  for="highlightbox"  type="Appear" params="delay:3.0,duration:0.5" />-->
+                    </rich:panel>
+                </h:panelGrid>
+            </h:panelGrid>
+        </center> 
+    </h:panelGroup>
+</ui:composition>
