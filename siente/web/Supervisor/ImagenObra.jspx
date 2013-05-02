@@ -158,7 +158,7 @@
                                 <rich:collapsiblePanel id="singleslideimage" switchType="client" label="#{var.verimagenes}" opened="false"  immediate="true" execute="@this"  >
                                     <a4j:ajax event="onexpand" render="panelImagenes"  />
                                     <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
-                                        <ui:include src="SliderImagenes.jspx"/>
+                                        <ui:include src="SliderImagenes.xhtml"/>
                                     </h:panelGroup>
                                 </rich:collapsiblePanel>
 

@@ -448,7 +448,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>participacionciu</from-outcome>
-            <to-view-id>/Ciudadano/ParticipacionCiudadano.jspx</to-view-id>
+            <to-view-id>/Ciudadano/ParticipacionCiudadano.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>doc_atencion</from-outcome>
@@ -981,7 +981,7 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>modificarperfil</from-outcome>
-            <to-view-id>/Ciudadano/ModificarUsuario.jspx</to-view-id>
+            <to-view-id>/Ciudadano/ModificarUsuario.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -989,7 +989,7 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>miperfil</from-outcome>
-            <to-view-id>/Ciudadano/MiPerfilCiudadano.jspx</to-view-id>
+            <to-view-id>/Ciudadano/MiPerfilCiudadano.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>
@@ -998,7 +998,7 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>ingresarciudadano</from-outcome>
-            <to-view-id>/Ciudadano/IngresarCiudadano.jspx</to-view-id>
+            <to-view-id>/Ciudadano/IngresarCiudadano.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
