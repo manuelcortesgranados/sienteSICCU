@@ -761,26 +761,26 @@
 
     <!--Inicio de reglas de Navegación Supervisión Externa -->
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registrarMatriz</from-outcome>
-            <to-view-id>/SupervisionExterna/RegistroMatriz.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>detalleSeguimiento</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/RegistroMatriz.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/RegistroMatriz.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -788,27 +788,27 @@
         <from-view-id>/Supervisor/DetalleObra.jspx</from-view-id>
         <navigation-case>
             <from-outcome>consuldetaseguimi</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/ListadoSeguimientos.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/ListadoSeguimientos.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>consuldetaseguimi</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registrarMatriz</from-outcome>
-            <to-view-id>/SupervisionExterna/RegistroMatriz.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>volverdetalle</from-outcome>
@@ -847,7 +847,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>seguimiento</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>volver</from-outcome>
