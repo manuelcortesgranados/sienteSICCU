@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -22,9 +24,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalDashboard_ah" styleClass="style-modal-dialog-button-close"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_modalDashboard_ah" event="onclick" for="modalDashboard_ah" operation="hide"/>
-                </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modalDashboard_ah')}.hide(); return false;"/>
+                      </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form target="_blank">
@@ -98,8 +99,8 @@
                     </h:panelGrid>
                     <interkont:spacer height="20" />
                     <h:panelGrid  columns="2" style="text-align: left;margin-left: 40px;">
-                        <h:commandButton id="resumengeneral_rehabilitacion" value="#{var.resumengeneralboton}" action="#{ControlGerencial.reportePdfFichaBalanceAh}" styleClass="style-modal-button button-dash-board" style="width:50;">
-                            <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.hideModalPanel('modalDashboard_ah');" />
+                        <h:commandButton id="resumengeneral_rehabilitacion" value="#{var.resumengeneralboton}" action="#{ControlGerencial.reportePdfFichaBalanceAh}" styleClass="style-modal-button button-dash-board" style="width:50px;">
+                            <a4j:ajax event="oncomplete" onbeforesubmit="javascript:Richfaces.hideModalPanel('modalDashboard_ah');" />
                         </h:commandButton>
                     </h:panelGrid>
                 </center>
@@ -107,4 +108,4 @@
         </h:form>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>
