@@ -1,11 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:m="http://code.google.com/p/gmaps4jsf/">
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
     <rich:popupPanel id="panelRelacionContrato" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -18,8 +20,8 @@
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContrato">
                     <a4j:commandLink id="esconder_panelRelacionContrato" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelRelacionContrato" event="onclick" for="panelRelacionContrato" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRelacionContrato')}.hide();
+                                             return false;"/>
                 </h:form>
             </h:panelGroup>
 
@@ -55,11 +57,11 @@
                         <h:outputText value="$" styleClass="titulo3_filtro_busqueda"/>
                         <rich:inputNumberSpinner minValue="0" value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalorrelacion}" inputSize="30"
                                                  maxValue="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo}" >
-                           
+
                         </rich:inputNumberSpinner>
                     </h:panelGrid>
                     <h:outputText value="#{Supervisor$IngresarNuevaObra.relacioncontrato.mensaje}" style="color: #ed0606;" />                   
-                    
+
                     <h:panelGrid columns="2" >
 
                         <a4j:commandButton id="BTaceptarRelacion"  value="Asociar"   rendered="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible>0 and Supervisor$IngresarNuevaObra.valortotalobra>0 and Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo>0}"                                        
@@ -75,4 +77,4 @@
             </rich:panel>
         </h:form>
     </rich:popupPanel>
-</f:view>
+</ui:composition>

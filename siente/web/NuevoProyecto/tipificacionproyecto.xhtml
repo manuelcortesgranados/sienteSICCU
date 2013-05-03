@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -11,8 +13,8 @@
     <f:view locale="#{var.rcalendarlocale}">
         <ui:composition template="/facelets/template_proyecto.xhtml">
             <ui:define name="head">
-                <rich:page title="Nuevo #{var.proyecto} - Supervisor"></rich:page>
-                <h:outputScript src="/resources/script_supervisor.js"/>
+                <title>Nuevo #{var.proyecto} - Supervisor</title>
+                <h:outputScript library="js" name="/resources/script_supervisor.js"/>
             </ui:define>
             <ui:define name="title">
                 <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
@@ -38,7 +40,7 @@
                                         </h:panelGroup>
                                     </f:facet>
 
-                                    <rich:collapsiblePanel  label="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
+                                    <rich:collapsiblePanel  header="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
 
 
                                         <rich:panel  id="gpTotalProyectosPadres" >                            
@@ -57,7 +59,7 @@
                                                         <h:selectOneMenu id="cmbIncluyeSubproyectos" value="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" rendered="#{var.permitirSubproyectos}">
                                                             <f:selectItem itemValue="false" itemLabel="No"/>
                                                             <f:selectItem itemValue="true" itemLabel="Si"/>
-                                                            <a4j:ajax event="onchange" action="#{Supervisor$IngresarNuevaObra.fnEsProyectoPadre}"/>
+                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.fnEsProyectoPadre}"/>
                                                         </h:selectOneMenu>
                                                     </h:panelGrid>
                                                 </h:panelGroup>
@@ -140,7 +142,7 @@
                                     </rich:collapsiblePanel>
                                     <!--paso 2 fase tipo subtipo-->
                                     
-                                    <rich:collapsiblePanel label="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
+                                    <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
 
                                         <center>
                                             <h:panelGrid id="pgtipi" columns="1" style="width:100%;">
@@ -150,7 +152,7 @@
                                                     </f:facet>
 
                                                     <rich:dataGrid id="tablatipoah" value="#{SessionBeanCobra.cobraService.fase}" var="fase" 
-                                                                   columns="#{var.column}" width="50%" >
+                                                                   columns="#{var.column}" style=" width: 50%" >
                                                         <center>
                                                             <h:panelGrid columns="1" styleClass="panelcenter" >
                                                                 <h:graphicImage url="/resources/imgs/#{fase.intidfase}fase.png" />
@@ -159,7 +161,7 @@
                                                                     <center>
                                                                         <h:selectOneRadio id="bt11"  value="#{Supervisor$IngresarNuevaObra.tiahselect}" >
                                                                             <f:selectItem itemValue="#{fase.intidfase}" />
-                                                                            <a4j:ajax event="onchange" action="#{Supervisor$IngresarNuevaObra.llenarClaseObra}" execute="@this"
+                                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.llenarClaseObra}" execute="@this"
                                                                                          render="tablatipoah, tiposoli, panelTipo,panelSubTipo"  />
                                                                         </h:selectOneRadio>
                                                                     </center>
@@ -172,7 +174,7 @@
                                                         <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                             <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
                                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />
-                                                                <a4j:ajax event="onchange" execute="tiposoli" render="tiposoli, panelTipo" execute="@this"/>
+                                                                <a4j:ajax event="change" execute="@this, tiposoli" render="tiposoli, panelTipo" />
                                                             </h:selectOneMenu>
                                                         </h:panelGroup>
                                                     </h:panelGrid>
@@ -192,7 +194,7 @@
                                                                         <center>
                                                                             <h:selectOneRadio id="bt12" value="#{Supervisor$IngresarNuevaObra.tiproyectoselec}">
                                                                                 <f:selectItem itemValue="#{tipoproyecto.intidtipoproyecto}" />
-                                                                                <a4j:ajax event="onchange" action="#{Supervisor$IngresarNuevaObra.seleccionarsubtipo}" execute="@this" execute="panelSubTipo"
+                                                                                <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.seleccionarsubtipo}" execute="@this,s panelSubTipo"
                                                                                              render="panelSubTipo, tablasubtipoah" />
                                                                             </h:selectOneRadio>
                                                                         </center>
@@ -220,7 +222,7 @@
                                                                             <center>
                                                                                 <h:selectOneRadio  value="#{Supervisor$IngresarNuevaObra.subtiposelec}" >
                                                                                     <f:selectItem itemValue="#{tipoobra.inttipoobra}" />
-                                                                                    <a4j:ajax event="onchange" action="#{Supervisor$IngresarNuevaObra.cambioSubtipo}" 
+                                                                                    <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.cambioSubtipo}" 
                                                                                                  render="tablatipoobra" execute="@this" />
                                                                                 </h:selectOneRadio>
                                                                             </center>
@@ -248,8 +250,7 @@
                                         <a4j:outputPanel id="panelErrorTip">
                                             <rich:messages id="messagesTip" globalOnly="true"
                                                            styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                                           infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                                           errorLabelClass="error_texto">
+                                                           >
                                                 <f:facet name="infoMarker">
                                                     <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                                 </f:facet>
@@ -277,5 +278,5 @@
             </ui:define>
         </ui:composition>
     </f:view>
-</html>
+</ui:composition>
 

@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -17,8 +18,7 @@
             
                 <h:panelGroup>
                     <a4j:commandButton id="esconder_mp_cronograma" oncomplete="javascript:Richfaces.hideModalPanel('mp_cronograma');" title="#{var.cerrar}" immediate="true"
-                                       styleClass="btn_cerrar"  />
-                    <rich:componentControl attachTo="esconder_mp_cronograma" event="onclick" for="mp_cronograma" operation="hide"/>
+                                       styleClass="btn_cerrar"  onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             
         </f:facet>
@@ -63,7 +63,7 @@
                 </h:panelGroup>
             
         </rich:panel>
-        <rich:hotKey key="esc"  handler="javascript:Richfaces.hideModalPanel('mp_cronograma')" />
+        <rich:hotKey key="esc"  onkeyup="javascript:Richfaces.hideModalPanel('mp_cronograma')" />
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

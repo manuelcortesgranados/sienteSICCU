@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -31,12 +33,11 @@
                                        />
 
                     <h:commandButton id="BTaceptarDocFin2" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
-                                     action="#{Supervisor$IngresarNuevaObra.finalizarModal_action}"   >
-                        <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.hideModalPanel('panelConfirmaGuardar')" />
+                                     action="#{Supervisor$IngresarNuevaObra.finalizarModal_action}" onclick="#{rich:component('panelConfirmaGuardar')}.hide(); return false;"  >
                     </h:commandButton>
                 </h:panelGrid>
            
         </rich:panel>
         </h:form>
     </rich:popupPanel>
-</f:view>
+</ui:composition>
