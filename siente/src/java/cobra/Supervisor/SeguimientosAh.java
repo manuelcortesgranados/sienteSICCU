@@ -9,29 +9,29 @@ import co.com.interkont.cobra.to.seguimientosah.AlberguesMunicipal;
 import co.com.interkont.cobra.to.seguimientosah.ArriendoMuni;
 import co.com.interkont.cobra.to.seguimientosah.AsishumaMunicipal;
 import cobra.SessionBeanCobra;
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+import javax.faces.FacesException;
 
 /**
- * <p>Fragment bean that corresponds to a similarly named JSP page fragment.
- * This class contains component definitions (and initialization code) for all
- * components that you have defined on this fragment, as well as lifecycle
- * methods and event handlers where you may add behavior to respond to incoming
- * events.</p>
+ * <p>Fragment bean that corresponds to a similarly named JSP page
+ * fragment.  This class contains component definitions (and initialization
+ * code) for all components that you have defined on this fragment, as well as
+ * lifecycle methods and event handlers where you may add behavior
+ * to respond to incoming events.</p>
  *
  * @version SeguimientosAh.java
  * @version Created on 4-sep-2010, 10:21:32
- * @author carlosalbertoloaizaguerrero
+ * @author carlosalbertoloaizaguerrero 
  */
-public class SeguimientosAh implements Serializable {
+public class SeguimientosAh  {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
-
-    private List<AhGlobal> listaglobalah = new ArrayList<AhGlobal>();
+    private List<AhGlobal> listaglobalah= new ArrayList<AhGlobal>();
     private List<AsishumaMunicipal> listaasishummuni = new ArrayList<AsishumaMunicipal>();
-    private List<ArriendoMuni> listaarriendomuni = new ArrayList<ArriendoMuni>();
-    private List<AlberguesMunicipal> listaalberguesmuni = new ArrayList<AlberguesMunicipal>();
+    private List<ArriendoMuni> listaarriendomuni= new ArrayList<ArriendoMuni>();
+    private List<AlberguesMunicipal> listaalberguesmuni= new ArrayList<AlberguesMunicipal>();
 
     public List<AlberguesMunicipal> getListaalberguesmuni() {
         return listaalberguesmuni;
@@ -49,6 +49,7 @@ public class SeguimientosAh implements Serializable {
         this.listaarriendomuni = listaarriendomuni;
     }
 
+    
     public List<AsishumaMunicipal> getListaasishummuni() {
         return listaasishummuni;
     }
@@ -64,33 +65,38 @@ public class SeguimientosAh implements Serializable {
     public void setListaglobalah(List<AhGlobal> listaglobalah) {
         this.listaglobalah = listaglobalah;
     }
-
+    
+    
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization. <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
     // </editor-fold>
 
     public SeguimientosAh() {
+        
     }
+
+    
 
     protected AdministrarObraNew getAdministrarObraNew() {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
-
-    protected SessionBeanCobra getSessionBeanCobra() {
+    
+     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
 
-    public String iniciarSeguimientosAh() {
-        listaglobalah = getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosGlobalAhxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
-        listaasishummuni = getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosAsistenciaHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
-        listaarriendomuni = getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosArriendoHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
-        listaalberguesmuni = getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosAlberguesHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
+    public String iniciarSeguimientosAh()
+    {
+        listaglobalah= getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosGlobalAhxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
+        listaasishummuni=getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosAsistenciaHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
+        listaarriendomuni=getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosArriendoHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
+        listaalberguesmuni= getSessionBeanCobra().getCobraService().obtenerUltimosSeguimientosAlberguesHumanMpalxSolicitud(getAdministrarObraNew().getObra().getSolicitudmaestro().getOidcodigosolicitudmaestro());
         return "seguimientosah";
-    }
+    }        
+   
 }

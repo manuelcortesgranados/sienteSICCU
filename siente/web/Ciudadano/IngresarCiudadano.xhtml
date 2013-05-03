@@ -65,9 +65,7 @@
                             <h:outputText value="#{var.username}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
                             <h:panelGrid columns="1">
                                 <h:inputText  id="textusuario" size="25" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" />
-
                             </h:panelGrid>
-
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
 
@@ -124,8 +122,8 @@
                 </h:panelGrid>
             </center>
         </h:form>
-        <ui:include src="../Ciudadano/modalCiudadano/ImagenCiudadano.jspx"/>
+        <ui:include src="../Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
         <ui:include src="../Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
-        <ui:include src="../Ciudadano/modalCiudadano/GuardarCiudadano.jspx"/>
+        <ui:include src="../Ciudadano/modalCiudadano/GuardarCiudadano.xhtml"/>
     </ui:define>
 </ui:composition>

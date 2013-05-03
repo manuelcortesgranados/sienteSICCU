@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:fb='http://www.facebook.com/2008/fbml'
-   >
+    contentType="text/html">
 
     <rich:panel header="Facebook" bodyClass="tool" headerClass="headertool" style="border-style: none; width: 100%" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfacebook}">
+        <!--&frasl;&amp;appId=313539815403577"-->
+
+        <!--<div id="fb-root"></div>
+        <script>
+          // Load the SDK Asynchronously
+          (function(d){
+             var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement('script'); js.id = id; js.async = true;
+             js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+             ref.parentNode.insertBefore(js, ref);
+           }(document));
+        </script>
+
+        <div class="fb-like" data-href="http://www.facebook.com/SienteColombia" data-send="true" data-width="450" data-show-faces="true" data-font="lucida grande"></div>-->
+
+
         <div id="fb-root"></div>
         <script>
             var j = jQuery.noConflict();
@@ -58,4 +75,4 @@
         <div class="pru" id="pru" />
 
     </rich:panel>
-</ui:composition>
+</f:view>

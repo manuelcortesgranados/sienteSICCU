@@ -30,6 +30,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import cobra.SessionBeanCobra;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import cobra.Supervisor.FacesUtils;
+import cobra.Supervisor.ILifeCycleAware;
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -41,21 +42,23 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.ServletContext;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page. This class
- * contains component definitions (and initialization code) for all components
- * that you have defined on this page, as well as lifecycle methods and event
- * handlers where you may add behavior to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page.  This
+ * class contains component definitions (and initialization code) for
+ * all components that you have defined on this page, as well as
+ * lifecycle methods and event handlers where you may add behavior
+ * to respond to incoming events.</p>
  *
  * @version AdministrarObraNew.java
  * @version Created on 28-oct-2010, 1:04:30
  * @author oija
  */
-public class ValidadorSeguimiento implements Serializable {
+public class ValidadorSeguimiento  implements Serializable{
 
     List<SolicitudObrach> lsSolicitudObrach = new ArrayList<SolicitudObrach>();
     List<Tipovisita> lstipoVisita = new ArrayList<Tipovisita>();
@@ -378,10 +381,9 @@ public class ValidadorSeguimiento implements Serializable {
 
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -419,7 +421,7 @@ public class ValidadorSeguimiento implements Serializable {
             }
             numFilasLlenas = numFilasLlenas - 1;
 
-
+           
 
             //aca leo en obrasch.solicitud_obrach.strconsecutivo
             listaSegui.clear();/*empieza desde la fila 6 y le suma 5 que son en blanco desde la fila inicial hasta donde debe empezar*/
@@ -3123,18 +3125,20 @@ public class ValidadorSeguimiento implements Serializable {
                         break;
                     }
 
-                    cell = fila.getCell(219);
-
-                    if (tipoCampoExcel(cell) == 0) {
-                        newseSeguimiento.setStrestadofinal(cell.getStringCellValue());
+                    cell= fila.getCell(219);
+                    
+                    if(tipoCampoExcel(cell)==0)
+                    {
+                       newseSeguimiento.setStrestadofinal(cell.getStringCellValue()); 
                     }
-
-                    cell = fila.getCell(220);
-
-                    if (tipoCampoExcel(cell) == 1) {
-                        newseSeguimiento.setNumestadofinal(BigDecimal.valueOf(cell.getNumericCellValue()));
+                    
+                    cell= fila.getCell(220);
+                    
+                    if(tipoCampoExcel(cell)==1)
+                    {
+                       newseSeguimiento.setNumestadofinal(BigDecimal.valueOf(cell.getNumericCellValue())); 
                     }
-
+                    
 
                     listaSegui.add(newseSeguimiento);//adicciono el seguimiento actual
                     //poliza contrato 1
@@ -3325,10 +3329,7 @@ public class ValidadorSeguimiento implements Serializable {
     }
     private static final char[] A2Z = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
-    /**
-     * * returns the excel cell number (eg. C11, E4, AD1305 etc.) for this
-     * cell.
-     */
+    /** * returns the excel cell number (eg. C11, E4, AD1305 etc.) for this cell. */
     public String getCellRefString(int cellNum, int fil) {//cellNum=columna
         StringBuffer retval = new StringBuffer();
         int tempcellnum = cellNum;

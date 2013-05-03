@@ -4,13 +4,11 @@
  */
 package cobra;
 
-import java.io.Serializable;
-
 /**
  *
  * @author desarrollo5
  */
-public enum ModuloMenu implements Serializable {
+public enum ModuloMenu {
 
     HOME,
     ADMINISTRAR,

@@ -5,14 +5,14 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
-import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoPie implements Serializable {
+public class GraficoPie {
+
 
     private String tituloCampo;
     private String valorCampo;
@@ -26,18 +26,18 @@ public class GraficoPie implements Serializable {
     private String scriptPie;
     private String descriptionField;
     /*
-     alphaField	String	Name of the field in chart's dataProvider which holds slice's alpha.
-     colorField	String	Name of the field in chart's dataProvider which holds slice's color.
-     descriptionField	String	Name of the field in chart's dataProvider which holds a string with description.
-     pulledField	String	Name of the field in chart's dataProvider which holds a boolean value telling the chart whether this slice must be pulled or not.
-     titleField	String	Name of the field in chart's dataProvider which holds slice's title.
-     urlField	String	Name of the field in chart's dataProvider which holds url which would be accessed if the user clicks on a slice.
-     valueField	String	Name of the field in chart's dataProvider which holds slice's value.
-     visibleInLegendField	String	Name of the field in chart's dataProvider which holds boolean variable defining whether this data item should have an entry in the legend.
+    alphaField	String	Name of the field in chart's dataProvider which holds slice's alpha.
+colorField	String	Name of the field in chart's dataProvider which holds slice's color.
+descriptionField	String	Name of the field in chart's dataProvider which holds a string with description.
+pulledField	String	Name of the field in chart's dataProvider which holds a boolean value telling the chart whether this slice must be pulled or not.
+titleField	String	Name of the field in chart's dataProvider which holds slice's title.
+urlField	String	Name of the field in chart's dataProvider which holds url which would be accessed if the user clicks on a slice.
+valueField	String	Name of the field in chart's dataProvider which holds slice's value.
+visibleInLegendField	String	Name of the field in chart's dataProvider which holds boolean variable defining whether this data item should have an entry in the legend.
 
-     */
+    */
 
-    public GraficoPie(String tituloCampo, String valorCampo, String descriptionField, String colorLinea, String lineaAlpha, String puntosLinea, String depth3D, String angulo, List<DatoPie> listadatos, String nombreDiv) {
+    public GraficoPie(String tituloCampo, String valorCampo, String descriptionField, String colorLinea, String lineaAlpha, String puntosLinea, String depth3D, String angulo, List<DatoPie> listadatos, String nombreDiv)  {
         this.tituloCampo = tituloCampo;
         this.valorCampo = valorCampo;
         this.colorLinea = colorLinea;
@@ -46,52 +46,54 @@ public class GraficoPie implements Serializable {
         this.depth3D = depth3D;
         this.angulo = angulo;
         this.listadatos = listadatos;
-        this.nombreDiv = nombreDiv;
-        this.descriptionField = descriptionField;
+        this.nombreDiv=nombreDiv;
+        this.descriptionField=descriptionField;
 
-        scriptPie = "<script type=\"text/javascript\">var chart;var chartData = [";
-        int i = 0;
-        while (i < listadatos.size()) {
+        scriptPie="<script type=\"text/javascript\">var chart;var chartData = [";
+        int i=0;
+        while(i<listadatos.size())
+        {
 
-            scriptPie = scriptPie + "{" + tituloCampo + ": \"" + listadatos.get(i).getEtiqueta() + "\",";
-            scriptPie = scriptPie + valorCampo + ": " + listadatos.get(i).getValor() + ", ";
-            scriptPie = scriptPie + "show: true, ";
+            scriptPie=scriptPie+"{"+tituloCampo+": \""+listadatos.get(i).getEtiqueta() +"\",";
+            scriptPie=scriptPie+valorCampo+": "+listadatos.get(i).getValor()+", ";
+            scriptPie=scriptPie+"show: true, ";
 
-            scriptPie = scriptPie + descriptionField + ": \"" + listadatos.get(i).getDescripcion();
-            scriptPie = scriptPie + "\"}";
+            scriptPie=scriptPie+descriptionField+": \""+listadatos.get(i).getDescripcion();
+            scriptPie=scriptPie+"\"}";
 
             i++;
-            if (i < listadatos.size()) {
-                scriptPie = scriptPie + ",";
+            if(i<listadatos.size())
+            {
+                scriptPie=scriptPie+",";
             }
         }
-        scriptPie = scriptPie + "];";
+        scriptPie=scriptPie+"];";
 
-        scriptPie = scriptPie + "AmCharts.ready(function () {";
-        scriptPie = scriptPie + "var legend = new AmCharts.AmLegend();"
+        scriptPie=scriptPie+"AmCharts.ready(function () {";
+        scriptPie=scriptPie+"var legend = new AmCharts.AmLegend();"
                 + "legend.borderColor = \"black\";legend.align = \"center\";";
-        //+ "legend.addListener(\"clickLabel\", function (event) {window.location.href = event.dataItem.url;}"
-        //+ ");";
+                //+ "legend.addListener(\"clickLabel\", function (event) {window.location.href = event.dataItem.url;}"
+                //+ ");";
 
-        scriptPie = scriptPie + "chart = new AmCharts.AmPieChart();";
-        scriptPie = scriptPie + "chart.dataProvider = chartData;";
-        scriptPie = scriptPie + "chart.titleField = \"" + tituloCampo + "\";";
-        scriptPie = scriptPie + "chart.valueField = \"" + valorCampo + "\";";
-        scriptPie = scriptPie + "chart.descriptionField = \"" + descriptionField + "\";";
+        scriptPie=scriptPie+"chart = new AmCharts.AmPieChart();";
+        scriptPie=scriptPie+"chart.dataProvider = chartData;";
+        scriptPie=scriptPie+"chart.titleField = \""+tituloCampo+"\";";
+        scriptPie=scriptPie+"chart.valueField = \""+valorCampo+"\";";
+        scriptPie=scriptPie+"chart.descriptionField = \""+descriptionField+"\";";
 
 
-        scriptPie = scriptPie + "chart.outlineColor = \"" + colorLinea + "\";";
-        scriptPie = scriptPie + "chart.outlineAlpha = " + lineaAlpha + ";";
-        scriptPie = scriptPie + "chart.outlineThickness = " + puntosLinea + ";";
-        scriptPie = scriptPie + "chart.depth3D = " + depth3D + ";";
-        scriptPie = scriptPie + "chart.angle = " + angulo + ";";
-        scriptPie = scriptPie + "chart.minRadius = " + 200 + ";";
-        scriptPie = scriptPie + "chart.visibleInLegendField = \"show\";";
-        scriptPie = scriptPie + "chart.labelsEnabled = true;";
-        scriptPie = scriptPie + "chart.labelRadius = 5;";
-        scriptPie = scriptPie + "chart.addLegend(legend);";
+        scriptPie=scriptPie+"chart.outlineColor = \""+colorLinea+"\";";
+        scriptPie=scriptPie+"chart.outlineAlpha = "+lineaAlpha+";";
+        scriptPie=scriptPie+"chart.outlineThickness = "+puntosLinea+";";
+        scriptPie=scriptPie+"chart.depth3D = "+depth3D+";";
+        scriptPie=scriptPie+"chart.angle = "+angulo+";";
+        scriptPie=scriptPie+"chart.minRadius = "+200+";";
+        scriptPie=scriptPie+"chart.visibleInLegendField = \"show\";";
+         scriptPie=scriptPie+"chart.labelsEnabled = true;";
+         scriptPie=scriptPie+"chart.labelRadius = 5;";
+        scriptPie=scriptPie+"chart.addLegend(legend);";
 
-        scriptPie = scriptPie + "chart.write(\"" + nombreDiv + "\");});</script>";
+        scriptPie=scriptPie+"chart.write(\""+nombreDiv+"\");});</script>";
 
 
     }
@@ -183,4 +185,10 @@ public class GraficoPie implements Serializable {
     public void setDescriptionField(String descriptionField) {
         this.descriptionField = descriptionField;
     }
+
+
+
+
+
+
 }

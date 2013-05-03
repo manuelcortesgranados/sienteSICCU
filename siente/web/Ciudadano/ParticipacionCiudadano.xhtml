@@ -12,21 +12,252 @@
     template="/facelets/template_main.xhtml">
 
     <ui:define name="head">
-        <title>Cobra - Home Gestion</title>
-        <ui:include src="/includes/google_maps_key.xhtml" />
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="Financiera"/>
+        <script language="JavaScript">
+
+            function maximaLongitud(texto,maxlong)
+            {
+                var out_value;
+
+                if (texto.value.length > maxlong)
+                {
+                    in_value = texto.value;
+                    out_value = in_value.substring(0,maxlong);
+                    texto.value = out_value;
+                    return false;
+                }
+                return true;
+            }
+
+            function borrar_campo()
+            { if (document.getElementById("frmparticiapcioncomentario:iacomentario2").value == "Escriba Su Comentario")
+                    document.getElementById("frmparticiapcioncomentario:iacomentario2").value ="";
+            }
+
+        </script>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_financiera.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+    </ui:define>
+    <ui:define name="menusuperior">
+        <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+            <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
-        <h:form id="form_financiera">
+        <h:panelGrid columns="1" style="border-left:#F4F4F4 thin solid; width:100%;" id="pgPrincipalComentario">
+            <h:panelGrid columns="2" style="float:right;">
+                <h:panelGrid>
+                    <h:outputText value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}"/>
+                    <h:outputText value="#{SessionBeanCobra.ciudadanoservice.municipio} #{SessionBeanCobra.ciudadanoservice.departamento}" />
+                </h:panelGrid>
+                <h:graphicImage styleClass="picborder3" url="#{SessionBeanCobra.usuarioObra.tercero.strfoto}"  style="float:right; width: 90px; height: 70px"/>
+            </h:panelGrid>
+            <rich:panel>
+                <div id="header_content" >
+                    <div class="star">
+                        <h:outputText value="#{var.participacion}" />
+                    </div>
+                </div>
+            </rich:panel>
+            <rich:panel >
+                <center>
+                    <h:panelGrid columns="3" style="width: 90%;" cellspacing="0" cellpadding="4" styleClass="blueframe2">
+                        <h:graphicImage  value="/resources/imgs/p_controlar.png" style="width: 37px; height: 37px;" ></h:graphicImage>
+                        <h:outputText styleClass="vtitle02" value="#{var.ayudenos}"></h:outputText>
+                        <h:outputText styleClass="vtitle13" value="#{var.utilice}"></h:outputText>
+                    </h:panelGrid>
+                </center>
+            </rich:panel>
+            <h:panelGrid columns="2" rowClasses="rowtop" style="width:100%;" >
+                <rich:panel>
+                    <div id="header_content" >
+                        <div class="comentario">
+                            <h:outputText value="#{var.miopinion}" />
+                        </div>
+                    </div>
+                </rich:panel>
+                <rich:panel>
+                    <div id="header_content" >
+                        <div class="star">
+                            <h:outputText value="#{var.participacion}" />
+                        </div>
+                    </div>
+                </rich:panel>
+                <h:form id="frmparticiapcioncomentario">
+                    <h:panelGrid columns="1" style="border-right:#F4F4F4 thin solid; width: 100%;"  >
+                        <h:outputText styleClass="vtitle02" value="#{var.paso} 1" />
+                        <h:outputText styleClass="vtitle09" value="#{var.aseguresedeelegir}" />
+                        <h:panelGrid   style="width:100%;" columnClasses="panelderecha">
+                            <h:panelGroup>
+                                <a4j:commandLink  styleClass="p_quejese anchorLink" action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
+                                <a4j:commandLink  styleClass="p_opine anchorLink" action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
+                                <a4j:commandLink  styleClass="p_felicite anchorLink" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
+                            </h:panelGroup>
+                        </h:panelGrid><br/>
+                        <a4j:region id="idregion_par">
+                            <h:panelGrid columns="2" style="width:100%;" columnClasses="panelu, panelj" cellspacing="0" cellpadding="0" >
+                                <h:panelGrid id="panelopinion_par" style="width:100%; height:135px;" columns="1" styleClass="blueframe2" cellpadding="0" cellspacing="0">
+                                    <h:outputText styleClass="vtitle13" value="#{Ciudadano$PerfilCiudadano.nombretitulo}"></h:outputText>
+                                    <h:commandLink styleClass="p_felicitar anchorlink" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}"></h:commandLink>
+                                    <h:commandLink styleClass="p_opinar anchorlink" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 2}"></h:commandLink>
+                                    <h:commandLink styleClass="p_quejarse anchorlink" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 1}"></h:commandLink>
+                                </h:panelGrid>
+                                <h:panelGroup>
+                                    <a4j:status id="idstatuscomentario2"/>
+                                    <h:outputText id="idcontarmensaje2" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" styleClass="vtitle12" style="float:right;" /><br/>
+                                    <h:inputTextarea  id="iacomentario2" styleClass="commentframe" rows="5" cols="40" onkeydown="return maximaLongitud(this,400)" style="width:95%;height:135px;" 
+                                                      value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo(this);" >
+                                        <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje2" status="idstatuscomentario2" />
+                                    </h:inputTextarea>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </a4j:region>
+                        <h:outputText styleClass="vtitle09" value="#{var.ingresesu}" ></h:outputText>
+                        <h:outputText styleClass="vtitle09" value="#{var.nota}"></h:outputText><br/><br/>
+                        <h:outputText styleClass="vtitle02" value="#{var.paso} 2" />
+                        <h:outputText styleClass="vtitle09" value="#{var.contenido}" />
+                        <h:panelGrid style="width:100%;" >
+                            <h:panelGrid id="layoutImaCiu_par" columns="3" style="width:100%;" columnClasses="panelizquierda,panelderecha">
+                                <h:inputText size="20"  id="txtfotografia" styleClass="buscador_field_" readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strfotoopinion}"  />
+                                <interkont:spacer width="30"/>
+                                <a4j:commandLink id="btimg" onclick="javascript:Richfaces.showModalPanel('modalImagenCiu')"
+                                                 styleClass="p_examinar anchorLink" />
+                            </h:panelGrid>
+                            <!--  <h:panelGrid columns="3" style="width:100%;" columnClasses="panelizquierda,panelderecha">
+                                <h:inputText size="20" id="txtvideo" styleClass="buscador_field_" readonly="true" value="#{var.nombrevideo}..."   />
+                                <interkont:spacer width="30"/>
+                                <h:commandLink styleClass="p_examinar anchorLink" ></h:commandLink>
+                            </h:panelGrid>-->
+                            <h:panelGrid id="layoutDocCiu_par" columns="3" columnClasses="panelizquierda,panelderecha" style="width:100%;">
+                                <h:inputText size="20" id="txtdocumen" styleClass="buscador_field_" readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strdoc}" />
+                                <interkont:spacer width="30"/>
+                                <a4j:commandLink id="btnacta" onclick="javascript:Richfaces.showModalPanel('panelDocCiu')"
+                                                 styleClass="p_examinar anchorLink"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                        <br/><br/>
+                        <h:outputText styleClass="vtitle02" value="#{var.paso} 3" />
+                        <h:outputText styleClass="vtitle09" value="#{var.privacidad}" />
+                        <h:outputText styleClass="vtitle19" value="#{var.desea}" />
+                        <h:selectOneRadio id="boolcomentario" styleClass="vtitle19" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolcomentariooculto}"  >
+                            <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
+                            <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
+                        </h:selectOneRadio><br/><br/>
+                        <h:outputText styleClass="vtitle19" value="#{var.desea2}" />
+                        <h:selectOneRadio id="boolidentidad" styleClass="vtitle19"  value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolidentidadoculta}"  >
+                            <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
+                            <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
+                        </h:selectOneRadio>
+                        <h:panelGrid  style="width:100%;" columnClasses="panelderecha">
+                            <h:panelGroup>
+                                <a4j:commandLink styleClass="p_cancelar anchorLink" action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
+                                <a4j:commandLink styleClass="publicar anchorLink" action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
+                                </a4j:commandLink>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+                <h:panelGrid columns="1" style="width:100%;" >
+                    <h:form>
+                        <h:panelGroup>
+                            <center>
+                                <h:panelGrid columns="4" id="paneltipoopinion"  columnClasses="panelcenter" cellpadding="0" cellspacing="0">
+                                    <h:panelGrid  styleClass="blueframe2" style="width:25%" >
+                                        <h:outputText styleClass="vtitle13" value="#{var.felicitacion}ciones"></h:outputText>
+                                        <h:commandLink styleClass="p_felicitar anchorlink" action="#{Ciudadano$PerfilCiudadano.llenarlistaFelicitacion}"/>
+                                        <h:outputText styleClass="vtitle02" value="#{Ciudadano$PerfilCiudadano.felicitar}"></h:outputText>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" styleClass="blueframe2" style="width:25%">
+                                        <h:outputText styleClass="vtitle13" value="#{var.opinar}iones"></h:outputText>
+                                        <h:commandLink styleClass="p_opinar anchorlink" action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}"/>
+                                        <h:outputText styleClass="vtitle02" value="#{Ciudadano$PerfilCiudadano.opinar}"></h:outputText>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" styleClass="blueframe2" style="width:25%">
+                                        <h:outputText styleClass="vtitle13" value="#{var.quejas}as"></h:outputText>
+                                        <h:commandLink styleClass="p_quejarse anchorlink" action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"/>
+                                        <h:outputText styleClass="vtitle02" value="#{Ciudadano$PerfilCiudadano.quejarse}"></h:outputText>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" styleClass="blueframe2" style="width:25%">
+                                        <h:outputText styleClass="vtitle13" value="#{var.todos}"></h:outputText>
+                                        <h:commandLink styleClass="p_todos anchorlink" action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"/>
+                                        <h:outputText styleClass="vtitle02" value="#{Ciudadano$PerfilCiudadano.todos}"></h:outputText>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </center>
+                        </h:panelGroup>
+                        <rich:panel>
+                            <div id="header_content" >
+                                <div class="comentario">
+                                    <h:outputText value="#{var.opiniondelciudadano}" />
+                                </div>
+                            </div>
+                        </rich:panel>
+                    </h:form>
+                    <h:form target="_blank">
+                        <h:panelGrid columns="3" >
+                            <h:panelGrid id="pgcomentario_par" >
+                                <a4j:repeat id="rpcomentario_par" value="#{Ciudadano$PerfilCiudadano.listopinion}"  binding="#{Ciudadano$PerfilCiudadano.repeatopinion}" var="rowcomentario_par" rows="4"  >
+                                    <h:panelGrid columns="3">
+                                        <h:panelGrid columns="3"  >
+                                            <h:panelGrid styleClass="commentframe">
+                                                <h:graphicImage url="#{var.ipserver}siente#{rowcomentario_par.jsfUsuario.tercero.strfoto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" style="width: 85px; height: 65px;"/>
+                                                <h:graphicImage url="/resources/imgs/bt_user.png" rendered="#{rowcomentario_par.boolidentidadoculta}" style="width: 85px; height: 65px;"/>
+                                                <interkont:spacer width="30"/>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                        <h:graphicImage url="/resources/imgs/com_arrow.png" style="width: 20px; height: 26px;"/>
+                                        <h:panelGrid styleClass="commentuser"  style="width: 370px;">
+                                            <h:panelGrid columns="3">
+                                                <h:panelGroup>
+                                                    <h:outputText id="idstrnombre_par" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" styleClass="vtitle03"/>
+                                                    <h:outputText id="idstrnombre_par_n" value="Anonimo" rendered="#{rowcomentario_par.boolidentidadoculta}" styleClass="vtitle03"/>
 
-        </h:form>
+                                                </h:panelGroup>
+                                                <interkont:spacer width="10"/>
+                                                <h:outputText id="iddate_par" value="#{rowcomentario_par.datefechaopinion}" styleClass="vtitle09">
+                                                    <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
+                                                </h:outputText>
+                                            </h:panelGrid>
+                                            <h:panelGrid >
+                                                <h:outputLabel  id="idcomentario_par" value="#{rowcomentario_par.stropinion}"
+                                                                style="align:justify; padding:10px;" />
+                                            </h:panelGrid>
+
+                                            <h:panelGrid style="width:100%;" columnClasses="panelderecha" >
+                                                <h:panelGroup>
+                                                    <h:commandLink target="_blank" action="#{Ciudadano$PerfilCiudadano.abrirImagen}" styleClass="p_imagen anchorLink" rendered="#{rowcomentario_par.strfotoopinion != null}"></h:commandLink>
+                                                    <h:commandLink target="_blank" styleClass="p_video anchorLink" rendered="#{rowcomentario_par.strvideo != null}"></h:commandLink>
+                                                    <h:commandLink target="_blank"  action="#{Ciudadano$PerfilCiudadano.abrirDoc}" styleClass="p_documento" rendered="#{rowcomentario_par.strdoc != null}" ></h:commandLink>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                        <h:panelGroup></h:panelGroup>
+                                        <h:panelGroup></h:panelGroup>
+                                        <h:panelGrid style="width:100%;" columnClasses="panelderecha">
+                                            <h:panelGroup rendered="false">
+                                                <h:commandLink styleClass="social_fb_like anchorLink"  ></h:commandLink>
+                                                <h:commandLink styleClass="social_tw_tweet anchorLink" ></h:commandLink>
+                                            </h:panelGroup>
+
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+
+                                </a4j:repeat>
+                                <rich:dataScroller for="rpcomentario_par" render="pgcomentario_par"/>
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                    </h:form>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:panelGrid>
+        <ui:include src="/modal/panelImagenciudadanoModal.xhtml"/>
+        <ui:include src="/modal/paneldocumeciudadanoModal.xhtml"/>
+
     </ui:define>
+
 </ui:composition>

@@ -40,7 +40,6 @@ import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.IngresarNuevaObra;
 import java.io.File;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,7 +55,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author David Andrés Betancourth Botero
  */
-public class GestionarSolicitudObra implements Serializable{
+public class GestionarSolicitudObra  {
 
     private int eventovalue;
     private int valuegrupo;

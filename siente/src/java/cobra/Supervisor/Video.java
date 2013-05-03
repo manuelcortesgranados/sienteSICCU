@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import cobra.SessionBeanCobra;
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author felipe
  */
-public class Video implements Serializable {
+public class Video  {
 
     private List<Videoevolucionobra> listadoVideos = new ArrayList<Videoevolucionobra>();
 
@@ -28,7 +29,7 @@ public class Video implements Serializable {
     }
 
     public Video() {
-        int codobra = 186;
+        int codobra=186;
         cargarvideoobra(codobra);
     }
 
@@ -44,7 +45,9 @@ public class Video implements Serializable {
 
     }
 
-    protected SessionBeanCobra getSessionBeanCobra() {
+     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
+
+
 }

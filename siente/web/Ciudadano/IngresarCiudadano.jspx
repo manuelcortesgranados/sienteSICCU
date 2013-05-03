@@ -158,7 +158,7 @@
                 </center>
             </h:form>
             <ui:include src="../Ciudadano/modalCiudadano/ImagenCiudadano.jspx"/>
-            <ui:include src="../Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
+            <ui:include src="../Ciudadano/modalCiudadano/ConfirmarCiudadano.jspx"/>
             <ui:include src="../Ciudadano/modalCiudadano/GuardarCiudadano.jspx"/>
         </ui:define>
     </ui:composition>

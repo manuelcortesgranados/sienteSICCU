@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalFactoresAtraso"  headerClass="rich-panel-header" width="300" autosized="true">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_modalFactoresAtraso" event="onclick" for="modalFactoresAtraso" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel>
+            <center>
+                <rich:dataTable id="tablaFactores" onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                                binding="#{Supervisor$DetalleObra.tablafactoratraso}"
+                                value="#{SessionBeanCobra.cobraService.factoratrasos}"
+                                var="regist" style="width:100%;">
+                    <f:facet name="header">
+                        <rich:columnGroup >
+                            <rich:column width="150px" >
+                                <h:outputText value="#{var.houtfactor}"/>
+                            </rich:column>
+                            <rich:column width="140px">
+                                <h:outputText value="#{var.houttipofactor}"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                    <rich:columnGroup id="Cuerpo">
+                        <rich:column id="descripcion" width="150px">
+                            <h:outputText value="#{regist.strdescfactor}"/>
+                        </rich:column>
+                        <rich:column id="tipfactor" width="140px">
+                            <h:outputText value="#{regist.tipofactoratraso.strdesctipoatraso}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </rich:dataTable>
+            </center>
+        </rich:panel>
+    </rich:popupPanel>
+
+</f:view>

@@ -104,7 +104,7 @@
 
 
                             </td>
-                                                 <td  style="width:16%"><table style="width: 150px" border="0" cellspacing="5" cellpadding="0">
+                            <td width="16%"><table width="150" border="0" cellspacing="5" cellpadding="0">
                                     <tr>
                                         <td class="text01">Vistas</td>
                                         <td><div class="buttonsmall">
@@ -158,7 +158,7 @@
                                           jsVariable="#{marker.jsVariable}"
                                           draggable="false">
 
-                                    <m:icon imageURL="#{marker.icon}"  style="width:20px" height="34" shadowHeight="25"  shadowWidth="40" />
+                                    <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
                                     <m:htmlInformationWindow htmlText="#{marker.informationWindow}"/>
 
                                 </m:marker>
@@ -215,69 +215,69 @@
                                     <rich:column colspan="9">
                                         <h:outputText value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
                                     </rich:column>
-                                    <rich:column id="estadoObra" breakRowBefore="true"  style="width:180px">
+                                    <rich:column id="estadoObra" breakBefore="true" width="180px">
                                         <h:outputText value="Ubicación" />
                                     </rich:column>
-                                    <rich:column id="nombreObra"  style="width: 350px">
+                                    <rich:column id="nombreObra"   width="350px">
                                         <h:outputText value="Nombre Obra" />
                                     </rich:column>
-                                    <rich:column id="nombreConvenio" rendered="#{HomeGestion.filtro.tipointervencion==3 or HomeGestion.filtro.tipointervencion==-1}"   style="width:100px">
+                                    <rich:column id="nombreConvenio" rendered="#{HomeGestion.filtro.tipointervencion==3 or HomeGestion.filtro.tipointervencion==-1}"  width="100px">
                                         <h:outputText value="Convenio" />
                                     </rich:column>
-                                    <rich:column id="tipoObra"  style="width:100px">
+                                    <rich:column id="tipoObra" width="100px">
                                         <h:outputText value="Tipo Obra" />
                                     </rich:column>
-                                    <rich:column id="valorObra"  style="width:80px">
+                                    <rich:column id="valorObra" width="80px">
                                         <h:outputText value="Valor" />
                                     </rich:column>
-                                    <rich:column id="duracionObra"  style="width:60px">
+                                    <rich:column id="duracionObra" width="60px">
                                         <h:outputText value="Duración" />
                                     </rich:column>
-                                    <rich:column id="avanceObra"  style="width:50px">
+                                    <rich:column id="avanceObra" width="50px">
                                         <h:outputText value="Avance" />
                                     </rich:column>
-                                    <rich:column id="verObra"  style="width:50px">
+                                    <rich:column id="verObra" width="50px">
                                         <h:outputText value="Tipo de intervención" />
                                     </rich:column>
-                                    <rich:column  style="width:50px">
+                                    <rich:column width="50px">
                                         <h:outputText value="Seguimientos" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup>
-                                <rich:column id="estadoObras"  style="width:180px">
+                                <rich:column id="estadoObras" width="180px">
                                     <rich:list var="loc" value="#{obra.listalocalidades}" rows="5">
                                         <h:outputText value="#{loc.strdepartamento}-#{loc.strmunicipio}" rendered="#{loc.strcodigolocalidad!='169'}"/>
                                         <h:outputText value="#{loc.strpais}" rendered="#{loc.strcodigolocalidad=='169'}"/>
                                     </rich:list>
                                 </rich:column>
-                                <rich:column id="nombreObras"  style="width:400px">
+                                <rich:column id="nombreObras" width="400px">
                                     <h:outputText id="otxt-nombreObras" value="#{obra.strnombreobra}"/>
                                 </rich:column>
-                                <rich:column id="nombreConvenios" rendered="#{obra.contrato !=null or HomeGestion.filtro.tipointervencion==-1}"   style="width:100px">
+                                <rich:column id="nombreConvenios" rendered="#{obra.contrato !=null or HomeGestion.filtro.tipointervencion==-1}"  width="100px">
                                     <h:outputText id="otxt-nombreconvenio" value="#{obra.contrato.strnombre}" rendered="#{obra.contrato !=null}"/>
                                     <h:outputText id="otxt-nonombreconvenio" value="N/A" rendered="#{obra.contrato ==null}"/>
                                 </rich:column>
-                                <rich:column id="tipoObras"  style="width:100px">
+                                <rich:column id="tipoObras" width="100px">
                                     <h:outputText id="otxt-tipoObras" value="#{obra.tipoobra.strdesctipoobra}"/>
                                 </rich:column>
-                                <rich:column id="valorObras"  style="width:80px">
+                                <rich:column id="valorObras" width="80px">
                                     <h:outputText id="otxt-valorObras" value="#{obra.numvaltotobra}">
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </rich:column>
-                                <rich:column id="duracionObras"  style="width:60px">
+                                <rich:column id="duracionObras" width="60px">
                                     <h:outputText id="otxt-duracionObras" value="#{obra.intplazoobra/30}">
                                         <f:convertNumber pattern="###,### meses"/>
                                     </h:outputText>
                                 </rich:column>
-                                <rich:column id="avanceObras"  style="width:50px" styleClass="text-align: center;">
+                                <rich:column id="avanceObras" width="50px" styleClass="text-align: center;">
                                     <h:outputText id="otxt-avanceObras" value="#{obra.numvalavanfisicodeclarado}">
                                         <f:convertNumber maxFractionDigits="2" />
                                     </h:outputText>
                                     <h:outputText value=" %"/>
                                 </rich:column>
-                                <rich:column id="verDetalles"  style="width:50px">
+                                <rich:column id="verDetalles" width="50px">
                                     <h:outputText value="Convenio" rendered="#{obra.contrato !=null}"/>
                                     <h:outputText value="Infraestructura " rendered="#{obra.solicitud_obra !=null}"/>
                                     <h:outputText value="Atención humanitaria " rendered="#{obra.solicitudmaestro !=null}"/>
@@ -288,7 +288,7 @@
                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
-                                <rich:column id="verSeguimientos"  style="width:50px">
+                                <rich:column id="verSeguimientos" width="50px">
                                     <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0 and obra.solicitud_obra !=null}" onclick="document.location.href='../faces/SupervisionExterna/ListadoSeguimientos.jspx?id=#{obra.intcodigoobra}';">
                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                     </a4j:commandLink>
@@ -296,7 +296,7 @@
                             </rich:columnGroup>
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="9" breakRowBefore="true" style="text-align: center;">
+                                    <rich:column colspan="9" breakBefore="true" style="text-align: center;">
                                         <center>
                                             <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="tablObrasVigentes" action="#{HomeGestion.primeroListProyectos}"/>
                                             <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!HomeGestion.veranteriorobra}" render="tablObrasVigentes" action="#{HomeGestion.anterioresProyectos}"/>

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf" 
     xmlns:interkont="http://www.interkont.com/jsf"
-    >
+    contentType="text/html">
 
     
     <interkont:spacer  height="10"/>
@@ -23,7 +24,7 @@
             <h:graphicImage  url="/resources/imgs/star_a.png"/>
             <h:graphicImage  url="/resources/imgs/star_a.png"/>
         </h:panelGrid>
-        <h:panelGrid styleClass="vtitle22" style="padding:5px; border-top:#FFF thin solid; border-bottom:#FFF thin solid;">
+        <h:panelGrid styleClass="vtitle22" style="padding:5; border-top:#FFF thin solid; border-bottom:#FFF thin solid;">
             <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
         </h:panelGrid>
         <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda">
@@ -53,4 +54,4 @@
 
     <interkont:spacer height="5px"/>
 
-</ui:composition>
+</f:view>

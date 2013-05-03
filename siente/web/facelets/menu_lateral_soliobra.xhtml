@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:interkont="http://www.interkont.com/jsf"
-    >
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
 
     <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodyClass="tool" style="border-style: none;" rendered="false">
 
@@ -46,6 +46,10 @@
         </h:panelGrid>
     </rich:panel>
 
+
+
+
+
     <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="tool" style="border-style: none;">
         <h:panelGrid columns="2" columnClasses="labelsDatos,labelsDatos" cellpadding="1px"  >
             <h:outputText id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
@@ -54,7 +58,11 @@
             <h:outputText id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
             <h:outputText id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
 
-         
+          <!--  <h:outputText id="textProyectos"  value="#{var.misobras}: "/>
+            <h:outputText id="numProyectos"  />
+
+            <h:outputText id="textMensaje"  value="#{var.mensajes}: "/>
+            <h:outputText id="numMensaje"  />-->
         </h:panelGrid>
     </rich:panel>
-</ui:composition>
+</f:view>
