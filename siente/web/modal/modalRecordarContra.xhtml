@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -22,13 +24,11 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_panelRecordarContra" styleClass="style-modal-dialog-button-close"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelRecordarContra" event="onclick" for="panelRecordarContra" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRecordarContra')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <!-- <h:panelGroup layout="block" styleClass="modal-body">-->
                 <h:panelGroup layout="block" styleClass="serch-advanced-body">
                     <h:panelGroup layout="block" styleClass="serch-advanced-header">
                         <h:panelGrid style="width:100%;">
@@ -52,8 +52,7 @@
 
                     </h:panelGroup>
                 </h:panelGroup>
-                <!-- </h:panelGroup>-->
         </h:form>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

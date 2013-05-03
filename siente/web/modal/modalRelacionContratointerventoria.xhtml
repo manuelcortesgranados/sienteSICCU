@@ -1,6 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -18,9 +21,8 @@
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContratoInterventoria">
                     <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelRelacionContratoInterventoria" event="onclick" for="panelRelacionContratoInterventoria" operation="hide"/>
-                </h:form>
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;"/></h:form>
             </h:panelGroup>
 
         </f:facet>
@@ -63,17 +65,17 @@
 
                         <a4j:commandButton id="BTaceptarRelacioninter"  value="Asociar"
                                            rendered="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible>0 and Supervisor$AdministrarObraNew.obra.numvaltotobra>0 and Supervisor$AsociarContratos.relacioncontratointer.numvalormaximo>0}"
-                                            action="#{Supervisor$AsociarContratos.asociarContrato}">
-                            <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.hideModalPanel('mp-listado-contratos-asociar');
-                                           javascript:Richfaces.hideModalPanel('panelRelacionContratoInterventoria')" render="pgdatacontratos,pgcontrat1aso"/>
+                                           action="#{Supervisor$AsociarContratos.asociarContrato}"
+                                           oncomplete="#{rich:component('panelRecordarContra')}.hide();"
+                                           render="pgdatacontratos,pgcontrat1aso">
                         </a4j:commandButton>
                         <a4j:commandButton id="BTcancelarRelacion"  value="#{var.cancelar}"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratos-asociar');
-                                           javascript:Richfaces.hideModalPanel('panelRelacionContratoInterventoria')" />
+                                           onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); 
+                                          #{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;" />
                     </h:panelGrid>
                 </h:panelGroup>
 
             </rich:panel>
         </h:form>
     </rich:popupPanel>
-</f:view>
+</ui:composition>

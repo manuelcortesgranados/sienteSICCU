@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -18,9 +20,10 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modaltablaproyectos" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_modaltablaproyectos" event="onclick" for="modaltablaproyectos" operation="hide"/>
-                </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('modaltablaproyectos')}.hide(); return false;"
+                                     />
+                     </h:panelGroup>
             </h:form>
         </f:facet>
 
@@ -29,11 +32,12 @@
                 <rich:dataTable id="tablaproyectos"
                                 binding="#{SolicitudObra$GestionarSolicitudObra.tablaProyectosAso}"
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
-                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
-                                var="currentRow" style="width:100%;">
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                rowKeyVar="filaSeleccionada"
+                                 var="currentRow" style="width:100%;">
                     <f:facet name="header">
                         <rich:columnGroup>
-                            <rich:column  breakBefore="true">
+                            <rich:column  breakRowBefore="true">
                                 <h:outputText value="#{var.nombreobra}"/>
                             </rich:column>
                             <rich:column>
@@ -55,7 +59,7 @@
                     </f:facet>
                     <rich:columnGroup>
                         <rich:columnGroup>
-                            <rich:column  breakBefore="true">
+                            <rich:column  breakRowBefore="true">
                                 <h:outputText value="#{currentRow.strnombreobra}"/>
                             </rich:column>
                             <rich:column>
@@ -74,16 +78,17 @@
                             </rich:column>
                              <rich:column>
                                 <a4j:commandLink  title="#{var.ver} #{var.proyecto}" style="font-size:11px;"
-                                                   action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli}">
+                                                   action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli}"
+                                                   oncomplete="">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                                    <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.hideModalPanel('modaltablaproyectos')"/>
+                                    <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.hide();"/>
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:columnGroup>
                     </rich:columnGroup>
                     <f:facet name="footer">
                         <rich:columnGroup>
-                            <rich:column colspan="7" breakBefore="true" style="text-align: center;">
+                            <rich:column colspan="7" breakRowBefore="true" style="text-align: center;">
                                 <rich:dataScroller id="scrolltablaproyectos" for="tablaproyectos" render="tablaproyectos"/>
                             </rich:column>
                         </rich:columnGroup>
@@ -94,4 +99,4 @@
 
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" 
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -18,17 +20,17 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalVideo" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_modalVideo" event="onclick" for="modalVideo" operation="hide"/>
-                </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('modalVideo')}.hide(); return false;"/>
+                     </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
-          <h:graphicImage value="/resources/imgs/Logo_republica.png" width="185px" /><!--#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}  rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"-->
+          <h:graphicImage value="/resources/imgs/Logo_republica.png" width="185px" />
                         <h:panelGroup rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}">
-                            <!-- <h:outputText value="#{var.imgnodispo}" styleClass="txt_outtext"/>-->
+                          
                         </h:panelGroup>
         </center>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>
