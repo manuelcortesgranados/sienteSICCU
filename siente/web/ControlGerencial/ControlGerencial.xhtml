@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -32,14 +33,14 @@
 
                 </script>
 
-                <h:outputScript src="/resources/js/RGraph/RGraph.meter.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.core.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.effects.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.context.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.annotate.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.tooltips.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.zoom.js"/>
-                <h:outputScript src="/resources/js/RGraph/RGraph.common.resizing.js"/>
+                <h:outputScript  name="RGraph.meter.js" library="js/RGraph" />
+                <h:outputScript  name="RGraph.common.core.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.effects.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.context.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.annotate.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.tooltips.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph" />
+                <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
             </ui:define>
             <ui:define name="menu">
                 <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -69,14 +70,14 @@
                                 <h:selectOneMenu value="#{ControlGerencial.vistaicom}" styleClass="selectLocalidad">
                                     <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
                                     <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
-                                    <a4j:ajax event="onchange" render="panelcombos" />
+                                    <a4j:ajax event="change" render="panelcombos" />
                                 </h:selectOneMenu>
                             </h:panelGroup>
                             <h:panelGroup styleClass="panelSelectorLocalidad" rendered="#{ControlGerencial.vistaicom != 1}">
                                 <h:selectOneMenu value="#{ControlGerencial.deptos}" styleClass="selectLocalidad">
                                     <f:selectItem itemValue="0" itemLabel="Todos"/>
                                     <f:selectItems value="#{ControlGerencial.sedeptos}" />
-                                    <a4j:ajax event="onchange" action="#{ControlGerencial.llenarMunici}" render="municipioincom"/>
+                                    <a4j:ajax event="change" listener="#{ControlGerencial.llenarMunici}" render="municipioincom"/>
                                 </h:selectOneMenu>
                             </h:panelGroup>
                             <h:panelGroup id="municipioincom" styleClass="panelSelectorLocalidad" rendered="#{ControlGerencial.vistaicom != 1}">
@@ -365,4 +366,4 @@
             </ui:define>
         </ui:composition>
     </f:view>
-</html>
+</ui:composition>
