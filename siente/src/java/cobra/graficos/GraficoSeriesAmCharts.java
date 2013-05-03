@@ -2,16 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cobra.graficos;
 
-import java.io.Serializable;
+package cobra.graficos;
 
 /**
  * Clase que permite la generación de un gráfico de líneas de amcharts
- *
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable {
+public  class GraficoSeriesAmCharts extends GraficoSeries {
 
     private String nombreDiv;
 
@@ -40,25 +38,25 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
         for (DatoGraficoMultiple datoGraficoMultiple : datosGraficoMultiple) {
             script.append("{\n");
             for (ValorGraficoMultiple valorGraficoMultiple : datoGraficoMultiple.getValoresY()) {
-                if (valorGraficoMultiple.getValor() != null) {
+                if(valorGraficoMultiple.getValor() != null) {
                     script.append("etiqueta").append(valorGraficoMultiple.getCodigoConjuntoDatos()).append(":'").append(valorGraficoMultiple.getEtiqueta()).append("',\n");
                     script.append("valor").append(valorGraficoMultiple.getCodigoConjuntoDatos()).append(":'").append(valorGraficoMultiple.getValor()).append("',\n");
                 }
             }
-            if (tipoDatoEjeX == Grafico.FECHA) {
+            if(tipoDatoEjeX == Grafico.FECHA){
                 script.append("valorX: ").append("new Date(").append(datoGraficoMultiple.getValorX()).append(")\n");
             } else {
                 script.append("valorX: '").append(datoGraficoMultiple.getValorX()).append("'\n");
             }
             script.append("}\n");
-            if (countDatosGraficoMultiple < datosGraficoMultiple.size()) {
-                script.append(",\n");
-            }
+                if (countDatosGraficoMultiple < datosGraficoMultiple.size()) {
+                    script.append(",\n");
+                }
             countDatosGraficoMultiple++;
         }
         script.append("];");
         script.append("\n\n");
-
+        
         //Fin del código del datasource
         script.append("AmCharts.ready(function () {");
         script.append("\n\n");
@@ -69,27 +67,27 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
 //                .append("/faces/amcharts/images/';\n");
         script.append(nombreDiv).append(".dataProvider = ").append(nombreDiv).append("Data;\n");
         script.append(nombreDiv).append(".categoryField = 'valorX';\n");
-        if (estilo.isAnimado()) {
+        if(estilo.isAnimado()) {
             script.append(nombreDiv).append(".startDuration = 2;\n");
         }
         // the following lines makes chart 3D
-        if (estilo.isTresD()) {
+        if(estilo.isTresD()) {
             script.append(nombreDiv).append(".depth3D = 20").append(";\n");
             script.append(nombreDiv).append(".angle = 30").append(";\n");
         }
-        if (titulo != null) {
+        if(titulo != null) {
             script.append(nombreDiv).append(".addTitle('").append(titulo).append("');");
         }
 
-        if (estilo.getColorTexto() != null) {
+        if(estilo.getColorTexto() != null) {
             script.append(nombreDiv).append(".color='").append(estilo.getColorTexto()).append("';");
         }
 
-        if (estilo.getTamanoTexto() != null) {
+        if(estilo.getTamanoTexto() != null) {
             script.append(nombreDiv).append(".fontSize='").append(estilo.getTamanoTexto()).append("';");
         }
 
-        if (estilo.getTipoTexto() != null) {
+        if(estilo.getTipoTexto() != null) {
             script.append(nombreDiv).append(".fontFamily='").append(estilo.getTipoTexto()).append("';");
         }
 
@@ -98,7 +96,7 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
         // AXES
         // category
         script.append("var categoryAxis = ").append(nombreDiv).append(".categoryAxis;\n");
-        if (tipoDatoEjeX == Grafico.FECHA) {
+        if(tipoDatoEjeX == Grafico.FECHA){
             script.append("categoryAxis.parseDates = true;\n");
             script.append("categoryAxis.minPeriod = 'DD';\n");
 //            script.append("categoryAxis.equalSpacing = true;\n");
@@ -116,27 +114,27 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
         if (tituloEjeY != null) {
             script.append("valueAxis.title = '").append(tituloEjeY).append("';\n");
         }
-        if (estilo.getColorEjeY() != null) {
+        if (estilo.getColorEjeY() != null ) {
             script.append("valueAxis.axisColor = '").append(estilo.getColorEjeY()).append("';\n");
         }
-
-        if (estilo.getTipoPila() != null) {
+        
+        if(estilo.getTipoPila() != null) {
             script.append("valueAxis.stackType = '").append(estilo.getTipoPila()).append("';\n");
         }
-
-        if (valorYMaximo != null) {
+        
+        if(valorYMaximo != null) {
             script.append("valueAxis.maximum = '").append(valorYMaximo).append("';\n");
         }
-
+        
         script.append("valueAxis.dashLength = 2;\n");
         script.append("valueAxis.axisThickness = 2;\n");
         script.append("valueAxis.gridAlpha = 0.15;\n");
 
-        if (estilo.isOcultarEjeY()) {
+        if(estilo.isOcultarEjeY()) {
             script.append("valueAxis.labelsEnabled = false;\n");
             script.append("valueAxis.axisAlpha = 0;\n");
         }
-
+        
         script.append(nombreDiv).append(".addValueAxis(valueAxis);");
         script.append("\n\n");
 
@@ -145,85 +143,85 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
             script.append("var graph").append(conjuntoDatosGrafico.getCodigo())
                     .append(" = new AmCharts.AmGraph();\n");
 
-            if (tipoGrafico == TIPO_COLUMNAS) {
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo())
-                        .append(".type = 'column'").append(";\n");
+                    if(tipoGrafico == TIPO_COLUMNAS) {
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo())
+                                .append(".type = 'column'").append(";\n");
 
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo())
-                        .append(".lineAlpha = 0").append(";\n");
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo())
+                                .append(".lineAlpha = 0").append(";\n");
 
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo())
-                        .append(".fillAlphas = 0.8").append(";\n");
-            }
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo())
+                                .append(".fillAlphas = 0.8").append(";\n");
+                    }
+                    
+                    if(conjuntoDatosGrafico.getEstilo().getColorTexto() != null) {
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo())
+                            .append(".color = '").append(conjuntoDatosGrafico.getEstilo().getColorTexto()).append("';\n");
+                    }
 
-            if (conjuntoDatosGrafico.getEstilo().getColorTexto() != null) {
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo())
-                        .append(".color = '").append(conjuntoDatosGrafico.getEstilo().getColorTexto()).append("';\n");
-            }
-
-            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-            script.append(".valueAxis = valueAxis").append(";\n");
-
-            if (conjuntoDatosGrafico.getEtiqueta() != null) {
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                script.append(".title = '");
-                script.append(conjuntoDatosGrafico.getEtiqueta()).append("';\n");
-            }
-
-            if (tipoGrafico == TIPO_LINEAS) {
-                if (conjuntoDatosGrafico.getEstilo().getColorSerie() != null) {
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                    script.append(".lineColor = '");
-                    script.append(conjuntoDatosGrafico.getEstilo().getColorSerie()).append("';\n");
-                }
+                    script.append(".valueAxis = valueAxis").append(";\n");
 
-                if (conjuntoDatosGrafico.getEstilo().getFigura() != null) {
+                    if (conjuntoDatosGrafico.getEtiqueta() != null) {
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                        script.append(".title = '");
+                        script.append(conjuntoDatosGrafico.getEtiqueta()).append("';\n");
+                    }
+
+                    if (tipoGrafico == TIPO_LINEAS) {
+                        if (conjuntoDatosGrafico.getEstilo().getColorSerie() != null) {
+                            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                            script.append(".lineColor = '");
+                            script.append(conjuntoDatosGrafico.getEstilo().getColorSerie()).append("';\n");
+                        }
+
+                        if(conjuntoDatosGrafico.getEstilo().getFigura() != null) {
+                            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                            script.append(".bullet = '");
+                            script.append(conjuntoDatosGrafico.getEstilo().getFigura()).append("';\n");
+                        }
+                    }
+
+                    if (conjuntoDatosGrafico.getEstilo().getColorSerie() != null) {
+                        if(conjuntoDatosGrafico.getEstilo().getColorSerie2() == null) {
+                            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                            script.append(".fillColors = ['");
+                            script.append(conjuntoDatosGrafico.getEstilo().getColorSerie());
+                            script.append("'];\n");
+                        } else {
+                            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                            script.append(".fillColors = ['");
+                            script.append(conjuntoDatosGrafico.getEstilo().getColorSerie());
+                            script.append("','");
+                            script.append(conjuntoDatosGrafico.getEstilo().getColorSerie2());
+                            script.append("'];\n");
+                        }
+                    }
+
+                    if(estilo.isPorcentaje()) {
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                        script.append(".labelText = '[[");
+                        script.append("valor").append(conjuntoDatosGrafico.getCodigo());
+                        script.append("]]%'").append(";\n");
+
+                        script.append("graph").append(conjuntoDatosGrafico.getCodigo());
+                        script.append(".balloonText = '[[");
+                        script.append("valor").append(conjuntoDatosGrafico.getCodigo());
+                        script.append("]]%'").append(";\n");
+                    }
+
                     script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                    script.append(".bullet = '");
-                    script.append(conjuntoDatosGrafico.getEstilo().getFigura()).append("';\n");
-                }
-            }
+                    script.append(".valueField = 'valor");
+                    script.append(conjuntoDatosGrafico.getCodigo()).append("';");
+                    script.append("\n\n");
 
-            if (conjuntoDatosGrafico.getEstilo().getColorSerie() != null) {
-                if (conjuntoDatosGrafico.getEstilo().getColorSerie2() == null) {
-                    script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                    script.append(".fillColors = ['");
-                    script.append(conjuntoDatosGrafico.getEstilo().getColorSerie());
-                    script.append("'];\n");
-                } else {
-                    script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                    script.append(".fillColors = ['");
-                    script.append(conjuntoDatosGrafico.getEstilo().getColorSerie());
-                    script.append("','");
-                    script.append(conjuntoDatosGrafico.getEstilo().getColorSerie2());
-                    script.append("'];\n");
-                }
-            }
-
-            if (estilo.isPorcentaje()) {
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                script.append(".labelText = '[[");
-                script.append("valor").append(conjuntoDatosGrafico.getCodigo());
-                script.append("]]%'").append(";\n");
-
-                script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-                script.append(".balloonText = '[[");
-                script.append("valor").append(conjuntoDatosGrafico.getCodigo());
-                script.append("]]%'").append(";\n");
-            }
-
-            script.append("graph").append(conjuntoDatosGrafico.getCodigo());
-            script.append(".valueField = 'valor");
-            script.append(conjuntoDatosGrafico.getCodigo()).append("';");
-            script.append("\n\n");
-
-            script.append(nombreDiv).append(".addGraph(graph");
-            script.append(conjuntoDatosGrafico.getCodigo()).append(");");
-            script.append("\n\n");
+                    script.append(nombreDiv).append(".addGraph(graph");
+                    script.append(conjuntoDatosGrafico.getCodigo()).append(");");
+                    script.append("\n\n");
         }
 
         // CURSOR
-        if (estilo.isVerCursor()) {
+        if(estilo.isVerCursor()) {
             script.append("var chartCursor = new AmCharts.ChartCursor();\n");
             script.append("chartCursor.cursorPosition = 'mouse';\n");
             script.append(nombreDiv).append(".addChartCursor(chartCursor);");
@@ -231,14 +229,14 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
         }
 
         // SCROLLBAR
-        if (estilo.isVerScroll()) {
+        if(estilo.isVerScroll()) {
             script.append("var chartScrollbar = new AmCharts.ChartScrollbar();\n");
             script.append(nombreDiv).append(".addChartScrollbar(chartScrollbar);");
             script.append("\n\n");
         }
 
         // LEGEND
-        if (estilo.isVerLeyenda()) {
+        if(estilo.isVerLeyenda()) {
             script.append("var legend = new AmCharts.AmLegend();\n");
             script.append(nombreDiv).append(".addLegend(legend);\n");
         }
@@ -246,8 +244,9 @@ public class GraficoSeriesAmCharts extends GraficoSeries implements Serializable
         script.append(nombreDiv).append(".write('").append(nombreDiv).append("');\n");
         script.append("});\n");
         script.append("</script>\n");
-
+        
         scriptGrafico = script.toString();
 
     }
+
 }

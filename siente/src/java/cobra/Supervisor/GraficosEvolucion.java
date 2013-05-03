@@ -12,12 +12,12 @@ import cobra.graficos.Datasets;
 import cobra.graficos.Estructuragraphic;
 import cobra.graficos.JSChart;
 import cobra.graficos.Optionset;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.google.gson.Gson;
-import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,11 +31,11 @@ import javax.servlet.ServletContext;
  *
  * @author felipe
  */
-public class GraficosEvolucion implements Serializable {
+public class GraficosEvolucion  {
 
     public String rutaGrafico = "";
     public List<Movimiento> movimientos;
-
+ 
     public GraficosEvolucion() {
         GenerarJson();
     }
@@ -284,8 +284,8 @@ public class GraficosEvolucion implements Serializable {
             while (ite.hasNext()) {
                 /*Calendar cal=Calendar.getInstance();
 
-                 cal.setTime(planitemp.getDatefechapago());
-                 // System.out.println("numero = " + cal.getTimeInMillis()+"fecha: " +cal.getTime());*/
+                cal.setTime(planitemp.getDatefechapago());
+                // System.out.println("numero = " + cal.getTimeInMillis()+"fecha: " +cal.getTime());*/
 
                 periodo = String.valueOf(i);
 
@@ -323,7 +323,7 @@ public class GraficosEvolucion implements Serializable {
 
         FileManager filejson = new FileManager();
         filejson.writeInFile(temp, realArchivoPath);
-        this.rutaGrafico = "/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/json/datafinanciera.json";
+        this.rutaGrafico = "/"+getSessionBeanCobra().getBundle().getString("versioncobra")+ "/resources/json/datafinanciera.json";
 
 
     }

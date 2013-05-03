@@ -5,14 +5,13 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
-import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoPieDashboard implements Serializable {
+public class GraficoPieDashboard {
 
     private String tituloCampo;
     private String valorCampo;
@@ -26,14 +25,14 @@ public class GraficoPieDashboard implements Serializable {
     private String scriptPieDashboard;
     private String descriptionField;
     /*
-     alphaField	String	Name of the field in chart's dataProvider which holds slice's alpha.
-     colorField	String	Name of the field in chart's dataProvider which holds slice's color.
-     descriptionField	String	Name of the field in chart's dataProvider which holds a string with description.
-     pulledField	String	Name of the field in chart's dataProvider which holds a boolean value telling the chart whether this slice must be pulled or not.
-     titleField	String	Name of the field in chart's dataProvider which holds slice's title.
-     urlField	String	Name of the field in chart's dataProvider which holds url which would be accessed if the user clicks on a slice.
-     valueField	String	Name of the field in chart's dataProvider which holds slice's value.
-     visibleInLegendField	String	Name of the field in chart's dataProvider which holds boolean variable defining whether this data item should have an entry in the legend.
+    alphaField	String	Name of the field in chart's dataProvider which holds slice's alpha.
+    colorField	String	Name of the field in chart's dataProvider which holds slice's color.
+    descriptionField	String	Name of the field in chart's dataProvider which holds a string with description.
+    pulledField	String	Name of the field in chart's dataProvider which holds a boolean value telling the chart whether this slice must be pulled or not.
+    titleField	String	Name of the field in chart's dataProvider which holds slice's title.
+    urlField	String	Name of the field in chart's dataProvider which holds url which would be accessed if the user clicks on a slice.
+    valueField	String	Name of the field in chart's dataProvider which holds slice's value.
+    visibleInLegendField	String	Name of the field in chart's dataProvider which holds boolean variable defining whether this data item should have an entry in the legend.
 
      */
 
@@ -79,7 +78,7 @@ public class GraficoPieDashboard implements Serializable {
         scriptPieDashboard = scriptPieDashboard + "chart.outlineColor = \"" + colorLinea + "\";\n";
         scriptPieDashboard = scriptPieDashboard + "chart.outlineAlpha = " + lineaAlpha + ";\n";
         scriptPieDashboard = scriptPieDashboard + "chart.outlineThickness = " + puntosLinea + ";\n";
-        scriptPieDashboard = scriptPieDashboard + "chart.depth3D = " + depth3D + ";\n";
+        scriptPieDashboard = scriptPieDashboard + "chart.depth3D = "+depth3D+";\n";
         scriptPieDashboard = scriptPieDashboard + "chart.angle = " + angulo + ";\n";
         scriptPieDashboard = scriptPieDashboard + "chart.minRadius = " + 10 + ";\n";
         scriptPieDashboard = scriptPieDashboard + "chart.startDuration = 3;\n";

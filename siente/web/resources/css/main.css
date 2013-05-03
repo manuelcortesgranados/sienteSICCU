@@ -887,7 +887,7 @@ input.buscador_button {
     border-style: none;
 }
 
- .rf-p-hdr{
+.rich-panel-header{
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     background-position: left top;
@@ -934,8 +934,7 @@ input.buscador_button {
     border-color: transparent;
 }
 
-
-.rf-tb {
+.rich-toolbar {
     margin: 0;
     padding:0;
     background-image:url(../imgs/Cobra_menubar_bg.png);
@@ -949,19 +948,15 @@ input.buscador_button {
     border:none;
     -moz-box-shadow: 3px 3px 3px #777;
     -webkit-box-shadow: 3px 3px 3px #777;
-    border-spacing: 0;
 
 }
-
-
-
-.rf-tb  .rf-tb-itm{
+.rich-toolbar .rich-toolbar-item{
     margin:0;
     padding:0;
     vertical-align: middle;
 }
 
-.rf-tb  .rf-tb-itm a {
+.rich-toolbar .rich-toolbar-item a {
     width:auto;
     height:60px;
     float:left;
@@ -980,7 +975,7 @@ input.buscador_button {
     margin-bottom: 0;
 }
 
-.rf-tb .rf-tb-itm a.siente {
+.rich-toolbar .rich-toolbar-item a.siente {
     width: 230px;
     height:60px;
     float:left;
@@ -993,11 +988,11 @@ input.buscador_button {
     margin-bottom: 0px;
     margin-left: 8px;
 }
-.rf-tb  .rf-tb-itm a.siente:hover {
+.rich-toolbar .rich-toolbar-item a.siente:hover {
     background-position: 0 -60px;
 }
 
-.rf-tb  .rf-tb-itm  a.republica {
+.rich-toolbar .rich-toolbar-item a.republica {
     width: 60px;
     height:60px;
     float:right;
@@ -1010,11 +1005,11 @@ input.buscador_button {
     margin-bottom: 0px;
     margin-left: 0px;
 }
-.rf-tb  .rf-tb-itm a.republica:hover {
+.rich-toolbar .rich-toolbar-item a.republica:hover {
     background-position: 0 -60px;
 }
 
-.rf-tb  .rf-tb-itm a.ch{
+.rich-toolbar .rich-toolbar-item a.ch{
     width: 130px;
     height:60px;
     float:right;
@@ -1027,44 +1022,45 @@ input.buscador_button {
     margin-left: 0px;
 }
 
-.rf-tb  .rf-tb-itm a.ch:hover {
+.rich-toolbar .rich-toolbar-item a.ch:hover {
     background-position: 0px -60px;
 }
 
-.rf-tb  .rf-tb-itm a.home {
+.rich-toolbar .rich-toolbar-item a.home {
     background-image: url(../imgs/bt_inicio.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 
 }
-.rf-tb  .rf-tb-itm a.home:hover {
+.rich-toolbar .rich-toolbar-item a.home:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm a.indicadores{
+.rich-toolbar .rich-toolbar-item a.indicadores{
     background-image: url(../imgs/bt_indicadores.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 
 }
-.rf-tb  .rf-tb-itm a.indicadores:hover {
+.rich-toolbar .rich-toolbar-item a.indicadores:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-{
+.rich-toolbar .rich-toolbar-item
+.rich-ddmenu-label{
     margin:0;
     padding:0;
     vertical-align: middle;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-itm-sel{
+.rich-toolbar .rich-toolbar-item
+.rich-ddmenu-label-select{
     background-color: inherit;
     border-color: transparent;
     border: 0px;
@@ -1072,14 +1068,14 @@ input.buscador_button {
     color:inherit;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec{
+.rich-toolbar .rich-toolbar-item
+.rich-ddmenu-label .rich-label-text-decor{
     margin:0;
     padding:0;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span{
     width:auto;
     height:60px;
     float:left;
@@ -1098,15 +1094,15 @@ input.buscador_button {
     margin-bottom: 0;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.gestionar {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.gestionar {
     background-image: url(../imgs/bt_gestionar.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
 
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
 .rich-label-text-decor span.gestionar:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
@@ -1114,103 +1110,102 @@ input.buscador_button {
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.home {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.home {
     background-image: url(../imgs/bt_inicio.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.home:hover {
+
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.home:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.indicadores {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.indicadores {
     background-image: url(../imgs/bt_indicadores.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
-
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.indicadores:hover {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.indicadores:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.mensajes {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.mensajes {
     background-image: url(../imgs/bt_mensajes.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.mensajes:hover {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.mensajes:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.miperfil {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.miperfil {
     background-image: url(../imgs/bt_miperfil.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.miperfil:hover {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.miperfil:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.ayuda {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.ayuda {
     background-image: url(../imgs/bt_ayuda.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
-.rf-tb  .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lbl-dec span.ayuda:hover {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-label-text-decor span.ayuda:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
- 
-.rf-tb  .rf-tb-itm a.cerrar {
+.rich-toolbar .rich-toolbar-item a.cerrar {
     background-image: url(../imgs/bt_cerrar_over.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
 }
-.rf-tb  .rf-tb-itm a.cerrar:hover {
+.rich-toolbar .rich-toolbar-item a.cerrar:hover {
     background-color:#004670;
     -moz-opacity: 0.9;
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg {
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg {
     position:absolute;
     visibility:hidden;
     top:60px;
 }
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg{
-visibility:visible;
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg{
+    visibility:visible;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg{
     width:180px;
     height:30px;
     float:left;
@@ -1219,7 +1214,7 @@ visibility:visible;
     background-position: 3% 50%;
     font-size:13px;
     line-height:30px;
-    text-indent:10px;
+    text-indent:25px;
     font-style:italic;
     font-weight:500;
     color:#003;
@@ -1228,8 +1223,8 @@ visibility:visible;
     margin-bottom: 0;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border{
     left: 0;
     top: 0px;
     width: 182px;
@@ -1239,8 +1234,8 @@ visibility:visible;
     position: absolute;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg{
     left: 0;
     top: 60px;
     width: 182px;
@@ -1250,8 +1245,8 @@ visibility:visible;
     position: absolute;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg .rf-ddm-itm{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg .rich-menu-item{
     border-left: #C1D1E7 thin solid;
     border-right: #C1D1E7 thin solid;
     border-top: #C1D1E7 thin solid;
@@ -1260,8 +1255,8 @@ visibility:visible;
     -webkit-box-shadow: 3px 3px 1px #777;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg .rf-ddm-itm{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg .rich-menu-group{
     border-left: #C1D1E7 thin solid;
     border-right: #C1D1E7 thin solid;
     border-top: #C1D1E7 thin solid;
@@ -1270,25 +1265,23 @@ visibility:visible;
     -webkit-box-shadow: 3px 3px 1px #777;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg  .rf-ddm-itm-sel{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg .rich-menu-item-hover{
     background-color:#F90;
     color:#003;
-    background-image: none;
 }
 
-.rf-tb .rf-tb-itm .rf-ddm-lbl
-.rf-ddm-lst .rf-ddm-lst-bg .rf-ddm-itm-sel{
+.rich-toolbar .rich-toolbar-item .rich-ddmenu-label
+.rich-menu-list-border .rich-menu-list-bg .rich-menu-group-hover{
     background-color:#F90;
     color:#003;
-    background-image: none;
+}
+.rich-menu-item-icon img{
+    float: left
 }
 
-.rf-ddm-itm .rf-ddm-itm-ic img{
-    float: left;
-    width:25px;
-    height:25px;
-       
+.rich-menu-group-icon img{
+    float: left
 }
 
 .rich-stglpanel{

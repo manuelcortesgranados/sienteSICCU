@@ -1,39 +1,47 @@
 package cobra;
 
+import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Puntoreferencia;
+import co.com.interkont.cobra.vista.VistaObraMapa;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ValueChangeEvent;
 
 import com.googlecode.gmaps4jsf.component.marker.Marker;
+import com.googlecode.gmaps4jsf.component.marker.MarkerValue;
+import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
+import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  *
  * @author David Andrés Betancourth Botero
  */
-public class Marcador extends Marker implements Serializable {
-    //private Obra obra;
-
-    private int tipo;
-    public String icon = "";
-    private List<Puntoreferencia> listapuntosruta = new ArrayList<Puntoreferencia>();
-    private String informationWindow;
-    private boolean verlinea = false;
-    //private VistaObraMapa vistaobra;
+public class Marcador extends Marker implements Serializable
+{
+        //private Obra obra;
+        private int tipo;
+        public String icon="";
+        private List<Puntoreferencia> listapuntosruta = new ArrayList<Puntoreferencia>();
+        private String informationWindow;
+        private boolean verlinea=false;
+        //private VistaObraMapa vistaobra;
         /*
-     public void update(ValueChangeEvent event) throws AbortProcessingException {
-     try {
-     Cloner cloner = new Cloner();
-     MarkerValue value = (MarkerValue) cloner.deepClone(event.getNewValue());
+        public void update(ValueChangeEvent event) throws AbortProcessingException {
+            try {
+            Cloner cloner = new Cloner();
+            MarkerValue value = (MarkerValue) cloner.deepClone(event.getNewValue());
 
-     String message = value.toString();
+            String message = value.toString();
 
-     PlaceMark placeMark = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(value.getLatitude(), value.getLongitude());
-     String direccion = placeMark.getAddress();
-     } catch(Exception e) {
+            PlaceMark placeMark = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(value.getLatitude(), value.getLongitude());
+            String direccion = placeMark.getAddress();
+        } catch(Exception e) {
 
-     }
-     }*/
+        }
+    }*/
 
     public String getInformationWindow() {
 
@@ -54,7 +62,7 @@ public class Marcador extends Marker implements Serializable {
 //        }
 //
 //        NumberFormat money = NumberFormat.getCurrencyInstance();
-
+        
 //        informationWindow = "<table  style=\"text-align: center; width: 100%;\" border=\"1\" cellpadding=\"2\" cellspacing=\"2\">"+
 //                    "<tbody><tr><td><img src=\"/Cobra/" + obra.getStrimagenobra() + "\" width=\"160\" height=\"130\" align=\"middle\">"+
 //                    "</td><td><br><u><a href=\"/Cobra/faces/Ciudadano/DetalleCiudadano?id=" + obra.getIntcodigoobra() + "\"><b>ACCEDER A LA OBRA</b></a></u></td></tr></tbody></table>";
@@ -76,6 +84,7 @@ public class Marcador extends Marker implements Serializable {
 //    public void setObra(Obra obra) {
 //        this.obra = obra;
 //    }
+
     public static String stringToHTMLString(String string) {
         StringBuffer sb = new StringBuffer(string.length());
         // true if last char was blank
@@ -83,7 +92,8 @@ public class Marcador extends Marker implements Serializable {
         int len = string.length();
         char c;
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len; i++)
+            {
             c = string.charAt(i);
             if (c == ' ') {
                 // blank gets extra work,
@@ -93,39 +103,41 @@ public class Marcador extends Marker implements Serializable {
                 if (lastWasBlankChar) {
                     lastWasBlankChar = false;
                     sb.append("&nbsp;");
-                } else {
+                    }
+                else {
                     lastWasBlankChar = true;
                     sb.append(' ');
+                    }
                 }
-            } else {
+            else {
                 lastWasBlankChar = false;
                 //
                 // HTML Special Chars
-                if (c == '"') {
+                if (c == '"')
                     sb.append("&quot;");
-                } else if (c == '&') {
+                else if (c == '&')
                     sb.append("&amp;");
-                } else if (c == '<') {
+                else if (c == '<')
                     sb.append("&lt;");
-                } else if (c == '>') {
+                else if (c == '>')
                     sb.append("&gt;");
-                } else if (c == '\n') // Handle Newline
-                {
+                else if (c == '\n')
+                    // Handle Newline
                     sb.append("&lt;br/&gt;");
-                } else {
+                else {
                     int ci = 0xffff & c;
-                    if (ci < 160) // nothing special only 7 Bit
-                    {
+                    if (ci < 160 )
+                        // nothing special only 7 Bit
                         sb.append(c);
-                    } else {
+                    else {
                         // Not 7 Bit use the unicode system
                         sb.append("&#");
                         sb.append(new Integer(ci).toString());
                         sb.append(';');
+                        }
                     }
                 }
             }
-        }
         return sb.toString();
     }
 
@@ -160,6 +172,7 @@ public class Marcador extends Marker implements Serializable {
     public void setVerlinea(boolean verlinea) {
         this.verlinea = verlinea;
     }
+
 //    public VistaObraMapa getVistaobra() {
 //        return vistaobra;
 //    }
@@ -167,4 +180,10 @@ public class Marcador extends Marker implements Serializable {
 //    public void setVistaobra(VistaObraMapa vistaobra) {
 //        this.vistaobra = vistaobra;
 //    }
+    
+    
+    
+    
+    
+    
 }

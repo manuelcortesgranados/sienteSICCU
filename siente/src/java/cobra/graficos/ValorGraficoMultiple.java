@@ -2,22 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cobra.graficos;
 
-import java.io.Serializable;
+package cobra.graficos;
 
 /**
  * Clase que represente un valor para graficos múltples
- *
  * @author Jhon Eduard Ortiz S
  */
-public class ValorGraficoMultiple implements Serializable {
+public class ValorGraficoMultiple {
 
     /**
      * Identificador del conjunto de datos al que pertenece el valor (No debe
      * contener espacios en blanco)
      */
     private String codigoConjuntoDatos;
+
     /**
      * Valor correspondiente al eje Y del gráfico
      */
@@ -53,4 +52,5 @@ public class ValorGraficoMultiple implements Serializable {
 
     public ValorGraficoMultiple() {
     }
+
 }

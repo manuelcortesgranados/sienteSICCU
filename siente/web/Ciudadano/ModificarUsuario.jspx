@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <ui:composition template="/facelets/template_main.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{var.editarmiperfil}"/>
+        </ui:define>
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+             <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </ui:define>
+        <ui:define name="body">
+
+
+            <h:form>
+                <h:panelGrid columns="2"  style="width:100%;" id="modif_ciudadano">
+                    <h:panelGrid  style="background:#F2F7FA;" style="width:100%;"  id="layoutImagenDetalleCiu" columnClasses="panelcenter">
+                        <h:graphicImage id="imgPeriodo" url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  height="113" styleClass="picborder" />
+                        <h:panelGrid columns="2">
+                            <interkont:spacer width="150"/>
+                            <a4j:commandLink id="btAdjuntarImagen"
+                                             onclick="javascript:Richfaces.showModalPanel('modalImagenCiu')"
+                                             styleClass="p_examinar anchorLink"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="2"  width="50%" columnClasses="panelizquierda,panelizquierda" cellspacing="5">
+
+                        <h:outputText id="lblnombreciudadano"  value="#{var.nombre}:" styleClass="vtitle19"/>
+                        <h:inputText styleClass="fill" size="25" maxlength="250" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombrecompleto}"/>
+
+
+                        <h:outputText id="lblcontraseña"  value="#{var.contrasena}" styleClass="vtitle19" />
+                        <h:panelGroup>
+                           
+                            <a4j:commandButton oncomplete="javascript:Richfaces.showModalPanel('mp-cambiar-contrasena');"
+                                               value="#{var.cambiar}" immediate="true" >
+
+                            </a4j:commandButton>
+                        </h:panelGroup>
+
+                        <h:outputText id="lblcorreoelectronico"  value="#{var.correo}" styleClass="vtitle19"/>
+                        <h:inputText  size="25" maxlength="250" styleClass="fill"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}"/>
+
+                        <h:outputText id="lblCedula"  value="#{var.cedula}" styleClass="vtitle19" />
+                        <h:inputText  size="25" maxlength="250" styleClass="fill" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.intcedula}"/>
+
+                        <h:outputText id="lblfecnacimiento"  value="#{var.fechadeNacimiento}:" styleClass="vtitle19"/>
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  styleClass="fill"
+                                       value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.datefechanacimiento}"/>
+
+                        <h:outputLabel id="lblubicacion"  value="#{var.departamento}" styleClass="vtitle19" for="combodepartamentoCiudadano"/>
+                        <h:selectOneMenu id="combodepartamentoCiudadano" value="#{Ciudadano$PerfilCiudadano.codDepartamentoCiudadano}" styleClass="fill">
+                            <f:selectItems value="#{Ciudadano$PerfilCiudadano.departamentoCiudadano}" />
+                            <a4j:ajax execute="combodepartamentoCiudadano" event="onchange" action="#{Ciudadano$PerfilCiudadano.llenarMunicipioCiudadano}"
+                                         render="gpMuniCiudadano" />
+                        </h:selectOneMenu>
+                        <h:outputLabel id="lblubicacionmuni"  value="#{var.municipio}" styleClass="vtitle19" for="combomunicipiociudadano" />
+                        <h:panelGroup id="gpMuniCiudadano">
+                            <h:selectOneMenu id="combomunicipiociudadano" styleClass="fill"
+                                             value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}">
+                                <f:selectItems value="#{Ciudadano$PerfilCiudadano.municipioCiudadano}"/>
+                            </h:selectOneMenu>
+                        </h:panelGroup>
+
+
+
+                        <h:outputText id="lblcelular"  value="#{var.celular}" styleClass="vtitle19" />
+                        <h:inputText  size="25" maxlength="250" id="txcelular" styleClass="fill" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtelefono1}"/>
+
+                        <h:outputText id="lblcuentaFacebook"  value="#{var.cuentaFacebook}" styleClass="vtitle19" />
+                        <h:inputText  size="25" maxlength="250" id="txtcuentaFacebook" styleClass="fill" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strfacebook}"/>
+
+
+                        <h:outputText id="lblcuentaTwitter"  value="#{var.cuentaTwitter}" styleClass="vtitle19" />
+                        <h:inputText  size="25" maxlength="250" id="txtcuentaTwitter" styleClass="fill" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtwiter}"/>
+                        <h:panelGrid columns="3">
+                            <interkont:spacer width="50"/>
+                            <a4j:commandLink id="btnModificar"  styleClass="p_guardar anchorLink" action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}" render="pgmiperfil">
+                            </a4j:commandLink>
+                            <a4j:commandLink id="btncancelar"  styleClass="p_cancelar anchorLink" action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
+                            </a4j:commandLink>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                </h:panelGrid>
+
+
+            </h:form>
+
+
+            <ui:include src="../Ciudadano/modalCiudadano/cambiarContraseña.jspx"/>
+            <ui:include src="../Ciudadano/modalCiudadano/ImagenModalCiudadano.jspx"/>
+        </ui:define>
+    </ui:composition>
+
+</f:view>

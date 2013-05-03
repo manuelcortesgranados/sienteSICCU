@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -26,7 +25,7 @@ import org.apache.poi.ss.usermodel.Workbook;
  *
  * @author OTHAN
  */
-public class ReporteUsuariosXls extends ConstructorWorkbook implements Serializable {
+public class ReporteUsuariosXls extends ConstructorWorkbook {
 
     public static final int FILA_UNO = 4;
     public static final int COL_CODIGO_SIENTE = 0;

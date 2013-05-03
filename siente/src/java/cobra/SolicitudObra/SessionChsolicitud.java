@@ -7,9 +7,8 @@ package cobra.SolicitudObra;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import co.com.interkont.cobra.to.*;
 
-
+import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,27 +19,30 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <p>Session scope data bean for your application. Create properties here to
- * represent cached data that should be made available across multiple HTTP
- * requests for an individual user.</p>
+ * <p>Session scope data bean for your application.  Create properties
+ *  here to represent cached data that should be made available across
+ *  multiple HTTP requests for an individual user.</p>
  *
- * <p>An instance of this class will be created for you automatically, the first
- * time your application evaluates a value binding expression or method binding
- * expression that references a managed bean using this class.</p>
+ * <p>An instance of this class will be created for you automatically,
+ * the first time your application evaluates a value binding expression
+ * or method binding expression that references a managed bean using
+ * this class.</p>
  *
  * @version SessionBean1.java
  * @version Created on 4/10/2010, 05:27:59 PM
  * @author carlos
  */
-public class SessionChsolicitud implements Serializable {
+public class SessionChsolicitud  {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     ResourceBundle bundle = ResourceBundle.getBundle("cobra.properties.Bundle");
@@ -116,7 +118,7 @@ public class SessionChsolicitud implements Serializable {
     public void setUrlbirt(String urlbirt) {
         this.urlbirt = urlbirt;
     }
-
+    
     public int getGrupo() {
         return grupo;
     }
@@ -549,6 +551,7 @@ public class SessionChsolicitud implements Serializable {
         this.itemsTipoObra = itemsTipoObra;
     }
 
+   
 //    public Solicituddetalle solicituddetalle = new Solicituddetalle();
     public SelectItem[] getItemsEstadoDocumentacion() {
         return itemsEstadoDocumentacion;
@@ -631,10 +634,9 @@ public class SessionChsolicitud implements Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -644,8 +646,8 @@ public class SessionChsolicitud implements Serializable {
      * <p>Construct a new session data bean instance.</p>
      */
     public SessionChsolicitud() {
-        urlbirt = getBundle().getString("ipserver");
-
+        urlbirt= getBundle().getString("ipserver");
+       
     }
 
     public String cerrarSession_action() {
@@ -655,6 +657,7 @@ public class SessionChsolicitud implements Serializable {
         ((HttpSession) ctx.getSession(false)).invalidate();
         return "cerrarSession";
     }
+
 
     public void llenarListaEstadoSolicitudCh() {
         List<Estadosolicitudch> lista = solicitudService.getLista(Estadosolicitudch.class, "oidestadosolicitud");
@@ -846,7 +849,7 @@ public class SessionChsolicitud implements Serializable {
         if (reporteSeleccionado == 1 || reporteSeleccionado == 2 || reporteSeleccionado == 3 || reporteSeleccionado == 4 || reporteSeleccionado == 5) {
             try {
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -854,7 +857,7 @@ public class SessionChsolicitud implements Serializable {
             //else if(reporteSeleccionado==6 && regionesta==0 && localidadseleccionada.equals("")){
             try {
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/ch_totaprtipobr.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
@@ -863,7 +866,7 @@ public class SessionChsolicitud implements Serializable {
             //else if(reporteSeleccionado==6 && regionesta==1 && localidadseleccionada==""){//total aprobado por regiones+origen regional
             try {
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/ch_totaprtipobr.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
@@ -874,7 +877,7 @@ public class SessionChsolicitud implements Serializable {
                 List<Localidad> listadepto = solicitudService.filtroBuscarDepto(localidadseleccionada);
                 // namerepro="ch_totaprtipsol";
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/ch_totaprtipobr.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
@@ -887,7 +890,7 @@ public class SessionChsolicitud implements Serializable {
                 List<Localidad> listamuni = solicitudService.filtroxMunicipio(munifiltroseleccioando);
                 // namerepro="ch_totaprtipsol";
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listamuni.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listamuni.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
 //                }else {//r007
 //                    List<Localidad> listadepto=solicitudService.filtroxMunicipio(munifiltroseleccioando);
 //                    namerepro="ch_totaprtipsol";
@@ -902,7 +905,7 @@ public class SessionChsolicitud implements Serializable {
             namerepro = "ch_totaprtipsol";
             try {
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -910,7 +913,7 @@ public class SessionChsolicitud implements Serializable {
             try {
                 namerepro = "ch_totaprtipsol";
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -919,7 +922,7 @@ public class SessionChsolicitud implements Serializable {
                 namerepro = "ch_totaprtipsol";
                 List<Localidad> listadepto = solicitudService.filtroBuscarDepto(localidadseleccionada);
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/"+namerepro+".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8")+"&Localidad="+listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/ch_totaprtipobr.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
@@ -930,7 +933,7 @@ public class SessionChsolicitud implements Serializable {
                 namerepro = "ch_totaprtipsol";
                 List<Localidad> listadepto = solicitudService.filtroxMunicipio(munifiltroseleccioando);
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -938,14 +941,14 @@ public class SessionChsolicitud implements Serializable {
             try {
                 List<Localidad> listadepto = solicitudService.filtroxMunicipio(munifiltroseleccioando);
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (reporteSeleccionado == 8 && origen.equals("2")) {//regio
             try {
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Region=" + reg);//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -953,7 +956,7 @@ public class SessionChsolicitud implements Serializable {
             try {
                 List<Localidad> listadepto = solicitudService.filtroBuscarDepto(localidadseleccionada);
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/"+namerepro+".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8")+"&Localidad="+listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
                 //FacesContext.getCurrentInstance().getExternalContext().redirect(("/birt/run?__report=report/ReportesCh/ch_totaprtipobr.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8"));
             } catch (IOException ex) {
@@ -963,19 +966,19 @@ public class SessionChsolicitud implements Serializable {
             try {
                 List<Localidad> listadepto = solicitudService.filtroxMunicipio(munifiltroseleccioando);
                 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinireporte), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinreporte), "UTF-8") + "&Localidad=" + listadepto.get(0).getStrcodigolocalidad());//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (reporteSeleccionado == 9) {//muni
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&inttiposolicitud=") + tipototsolaprotipdepvlrsele);//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&inttiposolicitud=") + tipototsolaprotipdepvlrsele);//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (reporteSeleccionado == 10) {//muni
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&inttiposolicitud=") + tipototsolaprotipdepvlrsele);//+"&Localidad="+loc+"&Region="+reg
+                FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/ReportesCh/" + namerepro + ".rptdesign&__format=pdf&inttiposolicitud=") + tipototsolaprotipdepvlrsele);//+"&Localidad="+loc+"&Region="+reg
             } catch (IOException ex) {
                 Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -986,7 +989,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfSolpreVSApro() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_SolicitudesPreVsApro.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposolitodossolivsapro + "&fechaini=" + URLEncoder.encode(df.format(fecinitodossolivsapro), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfintodossolivsapro), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_SolicitudesPreVsApro.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposolitodossolivsapro + "&fechaini=" + URLEncoder.encode(df.format(fecinitodossolivsapro), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfintodossolivsapro), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -997,7 +1000,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfsolapro() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_TotalAproObrasMayoMeno.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinisolapro), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolapro), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_TotalAproObrasMayoMeno.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinisolapro), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolapro), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1007,7 +1010,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfregio() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_TotalAproTipoSoliPorRegion.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposolitxregion + "&fechaini=" + URLEncoder.encode(df.format(fecinisolregi), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolregi), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_TotalAproTipoSoliPorRegion.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposolitxregion + "&fechaini=" + URLEncoder.encode(df.format(fecinisolregi), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolregi), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1017,7 +1020,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfaproxtipo() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_TotalAproPorTipoObra.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinisolaprotipo), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolaprotipo), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_TotalAproPorTipoObra.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinisolaprotipo), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolaprotipo), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1027,7 +1030,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfSolresumen() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_ResumenPorTipoSolicitud.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposoliresumen + "&fechaini=" + URLEncoder.encode(df.format(fecinisolresumen), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolresumen), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_ResumenPorTipoSolicitud.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tiposoliresumen + "&fechaini=" + URLEncoder.encode(df.format(fecinisolresumen), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinsolresumen), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1038,7 +1041,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfSoltotaprotipo() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_TotalAproTipoSolicitud.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinitotaprotipo), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfintotaprotipo), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_TotalAproTipoSolicitud.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(fecinitotaprotipo), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfintotaprotipo), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1049,7 +1052,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdfaproxtipodeobra() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_AproObrasMayoMeno.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(feciniaproxtipodeobra), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinaproxtipodeobra), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_AproObrasMayoMeno.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&fechaini=" + URLEncoder.encode(df.format(feciniaproxtipodeobra), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinaproxtipodeobra), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1060,7 +1063,7 @@ public class SessionChsolicitud implements Serializable {
     public String reportePdftotsolaprotipdepvlr() {
         try {
             SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt + "/birt/run?__report=report/obraschreport/ReporteCh_TotalApro.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinitotsolaprotipdepvlr), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinatotsolaprotipdepvlr), "UTF-8"));
+            FacesContext.getCurrentInstance().getExternalContext().redirect((urlbirt+"/birt/run?__report=report/obraschreport/ReporteCh_TotalApro.rptdesign&__format=pdf&Tipo%20Solicitud=") + "&TipoSolicitud=" + tipototsolaprotipdepvlrsele + "&fechaini=" + URLEncoder.encode(df.format(fecinitotsolaprotipdepvlr), "UTF-8") + "&fechafin=" + URLEncoder.encode(df.format(fecfinatotsolaprotipdepvlr), "UTF-8"));
         } catch (IOException ex) {
             Logger.getLogger(SessionChsolicitud.class.getName()).log(Level.SEVERE, null, ex);
         }

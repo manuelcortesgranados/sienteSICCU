@@ -7,7 +7,6 @@ package cobra.restaurarpassword;
 import Seguridad.Encrypter;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
-import java.io.Serializable;
 
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -17,13 +16,13 @@ import java.util.regex.Pattern;
  *
  * @author desarrollo3
  */
-public class RestaurarPassword implements Serializable {
+public class RestaurarPassword  {
 
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private String contrasenanuev;
     private String contrasenanuevcomf;
-    private boolean buttonRegresar = false;
-    private boolean buttonEnviar = true;
+    private boolean  buttonRegresar = false;
+    private boolean  buttonEnviar = true;
 
     public ResourceBundle getBundle() {
         return bundle;
@@ -48,7 +47,7 @@ public class RestaurarPassword implements Serializable {
     public void setButtonRegresar(boolean buttonRegresar) {
         this.buttonRegresar = buttonRegresar;
     }
-
+    
     public String getContrasenanuev() {
         return contrasenanuev;
     }
@@ -68,8 +67,8 @@ public class RestaurarPassword implements Serializable {
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
-
-    public String enviarDatos() {
+    
+    public String enviarDatos(){
         return validarpass();
     }
 
@@ -77,7 +76,7 @@ public class RestaurarPassword implements Serializable {
         Pattern p;
         Matcher m;
         boolean resultado = false;
-        try {
+        try {            
             String contranuev = "";
             if (contrasenanuev.equals(contrasenanuevcomf)) {
                 p = Pattern.compile("[^A-Za-z0-9]+");
@@ -97,7 +96,7 @@ public class RestaurarPassword implements Serializable {
                     getSessionBeanCobra().getCobraService().guardarOrActualizarusernamecontrasenausu(getSessionBeanCobra().getUsuarioService().getUsuarioObra());
                     getSessionBeanCobra().getUsuarioService().cancelarkeysolicitud(getSessionBeanCobra().getUsuarioService().getUsuarioObra());
                     FacesUtils.addInfoMessage(bundle.getString("ingresocorrecto"));
-                    buttonRegresar = true;
+                    buttonRegresar =  true;
                     buttonEnviar = false;
                 }
             } else {
@@ -107,8 +106,8 @@ public class RestaurarPassword implements Serializable {
         }
         return null;
     }
-
-    public String regresarInicio() {
+    
+    public String regresarInicio(){
         return "cerrarSession";
     }
 }

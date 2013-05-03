@@ -44,6 +44,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.component.UIComponent;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -401,7 +402,7 @@ public class SessionBeanCobra implements Serializable {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
-    public void llenadodatos() {
+       public void llenadodatos() {
         //setNombreUsuario(getUsuarioObra().getStrnombre() + " " + getUsuarioObra().getStrapellidos());
 
         //System.out.println(utilDate);
@@ -483,7 +484,7 @@ public class SessionBeanCobra implements Serializable {
         }
     }
 
-    public String actualizarPasswords() {
+    public String actualizarPasswords() {        
 
         usuarioService.actualizarContrasenas(codinicial, codfinal);
         return null;
@@ -504,7 +505,7 @@ public class SessionBeanCobra implements Serializable {
 
     }
 
-    public String mirarImagenes() {
+    public String mirarImagenes() {       
 
         String path = "";
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -558,13 +559,13 @@ public class SessionBeanCobra implements Serializable {
                 System.out.println(+img.getIntidimagen() + ";" + img.getStrubicacion() + ";" + img.getStrubicacion().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-/._(%20)]+", "%20"));
                 img.setStrnombrearchivo(img.getStrnombrearchivo().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-/._(%20)]+", "%20"));
                 img.setStrubicacion(img.getStrubicacion().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-/._(%20)]+", "%20"));
-                // System.out.println("strnombre = " + img.getStrubicacion());
+               // System.out.println("strnombre = " + img.getStrubicacion());
                 i++;
                 getCobraService().guardarImagen(img);
-
+               
             }
         }
-        System.out.println("i = " + i);
+         System.out.println("i = " + i);
         return null;
     }
 
@@ -1056,7 +1057,7 @@ public class SessionBeanCobra implements Serializable {
         while (lista.hasNext()) {
             UIComponent objeto = (UIComponent) lista.next();
             System.out.println("objeto = " + objeto.getId());
-            System.out.println("Num hijos" + objeto.getId() + " " + objeto.getChildCount());
+            System.out.println("Num hijos"+objeto.getId()+" "+objeto.getChildCount());
 
 //            if (objeto.getId().compareTo("btSoporte") == 0) {
 //                //System.out.println("objeto rendered inicial = "+objeto.getId());
@@ -1070,16 +1071,16 @@ public class SessionBeanCobra implements Serializable {
         }
     }
 
-    public String ciudadanosinregistro() {
-        if (getUsuarioService().getUsuarioObra().getUsuLogin().equals("ciudadano")) {
-            ciudadano = false;
+     public String ciudadanosinregistro (){
+            if (getUsuarioService().getUsuarioObra().getUsuLogin().equals("ciudadano")){
+                ciudadano=false;
             //System.out.println("this = " + getUsuarioService().getUsuarioObra().getUsuLogin());
         }
         return null;
     }
 
-    public void numeroobraseguidas() {
-        obraseguida = getCiudadanoservice().numeroobrasseguidas(getUsuarioService().getUsuarioObra().getUsuId());
+       public  void numeroobraseguidas (){
+         obraseguida= getCiudadanoservice().numeroobrasseguidas(getUsuarioService().getUsuarioObra().getUsuId());
 
     }
 }
