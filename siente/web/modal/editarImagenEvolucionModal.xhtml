@@ -11,32 +11,50 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel id="mp_eliminar_imagenevolucion" moveable="false" height="150" width="350" style="padding:0px;"
-                     headerClass="rich-panel-header">
+    <rich:popupPanel id="mp_editar_imagenevolucion" moveable="false" width="592" height="430" style="padding:0px;" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.eliminarimagen}"/>
+                <h:outputText value="#{var.editarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
+                    <a4j:commandLink id="esconder_mp_editar_imagenevolucion" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar_imagenevolucion')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
-            <h:form>
-                <h:panelGrid style="width:100%;" id="gpImagenModalEliminar">
-                    <interkont:spacer height="10"/>
-                    <h:outputText id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
-                    <interkont:spacer height="20"/>
-                    <h:panelGrid columns="2" style="text-align:center;width:100%;">
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="btn_sec_gra"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion');" value="#{var.aceptar}"
-                                           render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion')"/>
+
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>              
+                <h:panelGrid style="width:100%;" id="gpImagenModalEditar">
+                    <interkont:spacer height="70px"/>
+                    <h:panelGrid id="pg_campos_editar_imagenevolucion" columns="3" style="text-align:left; width:100%;">
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="#{var.nombre}"/>
+                        <h:inputText id="txt_strnombre_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.strnombre}" required="true">
+                            <h:message for="txt_strnombre_imgev_ed"/>
+                        </h:inputText>
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="#{var.tipo}"/>
+                        <h:selectOneMenu id="select_tipoimageneditar" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.tipoimagen.intidtipoimagen}">
+                            <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoImagen}" />
+                        </h:selectOneMenu>
+
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="#{var.fecha}" />
+                        <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.datefecha}" required="true">
+                        </rich:calendar>
+                    </h:panelGrid>
+                    <interkont:spacer height="80px"/>
+                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" styleClass="btn_sec_gra"
+                                           value="#{var.aceptar}"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_editar_imagenevolucion');"
+                                           render="panel_imagenesevolucion" title="#{var.aceptar}"/>
+                        <a4j:commandButton onclick="javascript:Richfaces.hideModalPanel('mp_editar_imagenevolucion')" styleClass="btn_sec_gra" value="#{var.cancelar}"/>
+
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

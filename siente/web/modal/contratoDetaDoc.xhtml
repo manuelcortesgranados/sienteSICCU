@@ -11,45 +11,61 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700px" style="padding:0px; "
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
-        <f:facet name="header" >           
+    <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="Ciudadano"/>
+                <h:outputText value="#{var.documento}"/>
             </h:panelGroup>
-            <h:panelGroup style="width:100%">
-                <h:panelGrid columns="2">
-                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
-                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
-                </h:panelGrid>
-            </h:panelGroup>
-        </f:facet>        
-        <h:form>
-            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
-                <center>                    
-                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
-
-                        <h:panelGroup>
-                            <center>
-                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
-                            </center>
-                        </h:panelGroup>
-                        <h:panelGroup>
-                            <interkont:spacer width="120"/>
-
-
-                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelContratoDoc')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel style="overflow-y:scroll;height:350px" >
+            <h:form id="fcontrato" target="_blank">
+                <center>
+                    <h:panelGrid  style="width:100%;" >
+                        <rich:dataTable id="tabladocumento" sortMode="single" style="text-align:left; width:100%;" value="#{Supervisor$Contrato.listadocuContrato}"
+                                        var="currentRow"   binding="#{Supervisor$Contrato.tabladocuContrato}">
+                            <rich:column id="strnombreimg"  width="120px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombreah}"/>
+                                </f:facet>
+                                <h:outputText id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                            </rich:column>
+                            <rich:column id="strfecha"  width="120px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.fecha}"/>
+                                </f:facet>
+                                <h:outputText id="st_strfecha" value="#{currentRow.datefecha}"/>
+                            </rich:column>
+                            <rich:column style="text-align:center;" width="60px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.Ver}"/>
+                                </f:facet>
+                                <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action}" immediate="true">
+                                </h:commandButton>
+                            </rich:column>
+                        </rich:dataTable>
+                    </h:panelGrid>
+                    <center>
+                        <h:panelGrid columns="5">
+                            <a4j:commandButton id="confirmarContrato"  value="#{var.aceptar}"
+                                               style="font-size: 12px;">
+                                <rich:componentControl target="panelContratoDoc" operation="hide" event="onclick"/>
                             </a4j:commandButton>
 
-                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
-                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
+                        </h:panelGrid>
+                    </center>
 
-                        </h:panelGroup>
-                    </h:panelGrid>
+
                 </center>
-            </rich:panel>
-        </h:form>
+            </h:form>
+        </rich:panel>
+        <rich:hotKey key="esc"  onkeyup="javascript:Richfaces.hideModalPanel('panelContratoDoc')" />
     </rich:popupPanel>
 </ui:composition>
