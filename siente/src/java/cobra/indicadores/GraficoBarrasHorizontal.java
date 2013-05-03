@@ -1,15 +1,16 @@
+
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
 /**
  *
- * @author
+ * @author 
  */
-public class GraficoBarrasHorizontal implements Serializable {
+public class GraficoBarrasHorizontal {
+
 
     private String scriptGrafico;
     private String nombreDiv;
@@ -56,13 +57,14 @@ public class GraficoBarrasHorizontal implements Serializable {
     public void setScriptGrafico(String scriptGrafico) {
         this.scriptGrafico = scriptGrafico;
     }
+ 
 
-    public GraficoBarrasHorizontal(String nombreDiv, String colorBarra, String colorLabel, List<DatoPie> listadatos) {
-
-
+    public GraficoBarrasHorizontal(String nombreDiv, String colorBarra, String colorLabel,List<DatoPie> listadatos) {
+        
+        
         StringBuilder scriptGraf = new StringBuilder();
         scriptGraf.append("<script type=\"text/javascript\">\n");
-
+       
         //Código que configura el datasource del gráfico
         scriptGraf.append("var ").append(nombreDiv).append("Data = [\n");
         for (Iterator<DatoPie> it = listadatos.iterator(); it.hasNext();) {
@@ -101,7 +103,7 @@ public class GraficoBarrasHorizontal implements Serializable {
         scriptGraf.append("categoryAxis.gridAlpha = 0;\n");
         scriptGraf.append("categoryAxis.axisAlpha = 0;\n");
         scriptGraf.append("categoryAxis.labelsEnabled = true;\n");
-        scriptGraf.append("categoryAxis.axisColor = \"#AA975E\";\n");
+         scriptGraf.append("categoryAxis.axisColor = \"#AA975E\";\n");
         // value
         scriptGraf.append("var valueAxis = new AmCharts.ValueAxis();\n");
         scriptGraf.append("valueAxis.gridAlpha = 0;\n");
@@ -131,5 +133,5 @@ public class GraficoBarrasHorizontal implements Serializable {
         scriptGraf.append("</script>\n");
         scriptGrafico = scriptGraf.toString();
 
-    }
+    }  
 }

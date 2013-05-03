@@ -11,7 +11,6 @@ import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -26,23 +26,23 @@ import javax.servlet.http.HttpSession;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page. This class
- * contains component definitions (and initialization code) for all components
- * that you have defined on this page, as well as lifecycle methods and event
- * handlers where you may add behavior to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page.  This
+ * class contains component definitions (and initialization code) for
+ * all components that you have defined on this page, as well as
+ * lifecycle methods and event handlers where you may add behavior
+ * to respond to incoming events.</p>
  *
  * @version Mensajes.java
  * @version Created on Feb 11, 2009, 1:49:53 PM
  * @author jhon
  */
-public class Mensajes implements Serializable {
+public class Mensajes {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -261,7 +261,7 @@ public class Mensajes implements Serializable {
         // case name where null will return to the same page.
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpSession session = (HttpSession) context.getSession(true);
-        this.mensajeRecibidoVer = (Mensaje) session.getAttribute("mensajeRecibidoVer");
+        this.mensajeRecibidoVer = (Mensaje)session.getAttribute("mensajeRecibidoVer");
 
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusurecibe(this.mensajeRecibidoVer.getJsfUsuarioByIntusuenvia());
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusuenvia(this.mensajeRecibidoVer.getJsfUsuarioByIntusurecibe());
@@ -276,11 +276,11 @@ public class Mensajes implements Serializable {
 
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpSession session = (HttpSession) context.getSession(true);
-        Mensaje mensajeRecibido = (Mensaje) session.getAttribute("mensajeRecibidoResponder");
+        Mensaje mensajeRecibido = (Mensaje)session.getAttribute("mensajeRecibidoResponder");
 
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusurecibe(mensajeRecibido.getJsfUsuarioByIntusuenvia());
         this.mensajeRecibidoResponder.setJsfUsuarioByIntusuenvia(mensajeRecibido.getJsfUsuarioByIntusurecibe());
-
+        
         this.mensajeRecibidoResponder.setDatefecmensaje(new Date(System.currentTimeMillis()));
         getSessionBeanCobra().getUsuarioService().guardarOrActualizarMensaje(this.mensajeRecibidoResponder);
         this.listaMensajesEnviados.add(this.mensajeRecibidoResponder);
@@ -339,3 +339,4 @@ public class Mensajes implements Serializable {
         }
     }
 }
+

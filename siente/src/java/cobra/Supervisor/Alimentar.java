@@ -37,7 +37,6 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -46,12 +45,14 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
@@ -59,18 +60,18 @@ import javax.faces.model.SelectItem;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Fragment bean that corresponds to a similarly named JSP page fragment.
- * This class contains component definitions (and initialization code) for all
- * components that you have defined on this fragment, as well as lifecycle
- * methods and event handlers where you may add behavior to respond to incoming
- * events.</p>
+ * <p>Fragment bean that corresponds to a similarly named JSP page
+ * fragment.  This class contains component definitions (and initialization
+ * code) for all components that you have defined on this fragment, as well as
+ * lifecycle methods and event handlers where you may add behavior
+ * to respond to incoming events.</p>
  *
  * @version Alimentar.java
  * @version Created on 13-oct-2010, 22:27:32
  * @author carlosalbertoloaizaguerrero
  * @author David Andrés Betancourth Botero
  */
-public class Alimentar implements Serializable {
+public class Alimentar {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
@@ -125,7 +126,7 @@ public class Alimentar implements Serializable {
     private CargadorArchivosWeb cargadorActaPrecios = new CargadorArchivosWeb();
     private boolean vertodoalimentar = true;
     private Date fechaAlimentacion;
-    private List<Periodo> lstAlimentacionxfecha;
+   private  List<Periodo> lstAlimentacionxfecha;
 
     public List<Periodo> getLstAlimentacionxfecha() {
         return lstAlimentacionxfecha;
@@ -135,6 +136,7 @@ public class Alimentar implements Serializable {
         this.lstAlimentacionxfecha = lstAlimentacionxfecha;
     }
 
+
     public Date getFechaAlimentacion() {
         return fechaAlimentacion;
     }
@@ -142,6 +144,8 @@ public class Alimentar implements Serializable {
     public void setFechaAlimentacion(Date fechaAlimentacion) {
         this.fechaAlimentacion = fechaAlimentacion;
     }
+
+    
 
     public boolean isVertodoalimentar() {
         return vertodoalimentar;
@@ -450,7 +454,7 @@ public class Alimentar implements Serializable {
     }
 
     public String getPathImagen() {
-        if (cargadorImagen.getArchivoWeb() != null) {
+        if(cargadorImagen.getArchivoWeb()!=null) {
             return cargadorImagen.getArchivoWeb().getRutaWeb();
         } else {
             return RutasWebArchivos.IMG_NO_DISPONIBLE;
@@ -574,22 +578,21 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization. <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
     // </editor-fold>
 
     public Alimentar() {
-        limpiarAlimentar();
+        limpiarAlimentar();       
     }
 
+    
     /**
      * Asigna a factorselec con el nuevo valor del factor de atraso
-     *
      * @param evt
      * @return null
      */
@@ -604,9 +607,7 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * Llenado LlenarFactores (Tipos de Factores) y asignacion a la variable
-     * avisocambio
-     *
+     * Llenado  LlenarFactores (Tipos de Factores) y asignacion a la variable  avisocambio
      * @return null
      */
     public String combotipoCambio_action() {
@@ -617,8 +618,7 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * Obtiene el codigo del tipo de atraso y se asigna a la variable
-     * tipofactorselec
+     * Obtiene el codigo del tipo de atraso y se asigna a la variable tipofactorselec
      */
     public void LlenarTipoFactoratraso() {
         //TipofactoratrasoDaoInterface o = new TipofactoratrasoDao();
@@ -643,7 +643,6 @@ public class Alimentar implements Serializable {
 
     /**
      * A la lista factores le adiciona el id del factor seleccionado
-     *
      * @return null
      */
     public String agregar_action() {
@@ -658,8 +657,7 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * Verifica el id de atraso seleccionado
-     *
+     * Verifica el id de atraso seleccionado 
      * @param id factor de atraso
      * @return
      */
@@ -674,7 +672,6 @@ public class Alimentar implements Serializable {
 
     /**
      * Elimina el factor atraso seleccionado
-     *
      * @return null
      */
     public String removerFactor() {
@@ -733,7 +730,7 @@ public class Alimentar implements Serializable {
         alimentacion.setNumempdirectos(0);
         alimentacion.setNumempindirectos(0);
         alimentacion.setNumhabafectados(0);
-
+        
     }
 
     /*
@@ -760,12 +757,13 @@ public class Alimentar implements Serializable {
         totales[3] = BigDecimal.valueOf(0);
     }
 
-    public void cargaListaPeridos() {
-        lstAlimentacionxfecha = new ArrayList<Periodo>();
-        fechaAlimentacion = null;
+    public void cargaListaPeridos()
+    {
+        lstAlimentacionxfecha=new ArrayList<Periodo>();
+        fechaAlimentacion=null;
         getSessionBeanCobra().getCobraService().setPeriodos(getSessionBeanCobra().getCobraService().encontrarPeriodosObra(getAdministrarObraNew().getObra()));
         lstAlimentacionxfecha = getSessionBeanCobra().getCobraService().getPeriodos();
-        fechaAlimentacion = lstAlimentacionxfecha.get(0).getDatefeciniperiodo();
+        fechaAlimentacion=lstAlimentacionxfecha.get(0).getDatefeciniperiodo();
     }
 
 
@@ -776,29 +774,32 @@ public class Alimentar implements Serializable {
         mensajefecha = "";
         fechavalida = false;
         registrosmatrix = new ArrayList<Relacionalimentacionactividad>();
-        setDesviado(false);
-        setDesviacion(0);
-        if (bundle.getString("varalimentacionxfecha").equals("true")) {
-            fechaescogida = -1;
-
-            for (int i = 0; i < lstAlimentacionxfecha.size(); i++) {
-
-                if (fechaAlimentacion.compareTo(lstAlimentacionxfecha.get(i).getDatefeciniperiodo()) >= 0 && fechaAlimentacion.compareTo(lstAlimentacionxfecha.get(i).getDatefecfinperiodo()) <= 0) {
-
-                    fechaescogida = lstAlimentacionxfecha.get(i).getIntidperiodo();
-
-                }
-            }
-            if (fechaescogida == -1) {
-                FacesUtils.addErrorMessage(bundle.getString("noestaperiodofecha"));
-            }
+         setDesviado(false);
+         setDesviacion(0);
+        if( bundle.getString("varalimentacionxfecha").equals("true")){
+         fechaescogida =-1;
+         
+         for(int i=0;i<lstAlimentacionxfecha.size();i++)
+         {
+            
+             if(fechaAlimentacion.compareTo(lstAlimentacionxfecha.get(i).getDatefeciniperiodo()) >=0 && fechaAlimentacion.compareTo(lstAlimentacionxfecha.get(i).getDatefecfinperiodo())<=0 )
+             {
+                 
+                 fechaescogida=lstAlimentacionxfecha.get(i).getIntidperiodo();
+                 
+             }
+         }
+         if(fechaescogida==-1){
+            FacesUtils.addErrorMessage(bundle.getString("noestaperiodofecha"));
+         }
         }
         if (fechaescogida != -1) {
-
+            
             getSessionBeanCobra().getCobraService().setPeriodo(getSessionBeanCobra().getCobraService().encontrarPeriodoxid(fechaescogida));
-            if (bundle.getString("varalimentacionxfecha").equals("true")) {
+            if( bundle.getString("varalimentacionxfecha").equals("true")){
                 getAlimentacion().setDatefecha(fechaAlimentacion);
-            } else {
+            }else
+            {
                 getAlimentacion().setDatefecha(getSessionBeanCobra().getCobraService().getPeriodo().getDatefecfinperiodo());
             }
             LlenarTipoFactoratraso();
@@ -903,34 +904,35 @@ public class Alimentar implements Serializable {
             }
         }
         return null;
-
+        
     }
 
     /*
      * Metodo  trae los datos del sin avance.
      */
     public String cambioMatrix() {
-        String cual = calcularTodaMatrix();
+        String cual=calcularTodaMatrix();
+        
+        if(!validezalimentacion)
+        {    
+        if (fechavalida) {
+            //getAlimentacion().setNumtotalproyacu(getAdministrarObraNew().getObra().getValorProyectadoenFecha(getAlimentacion().getDatefecha()));
+            //desviado=validar
+            if (getAlimentacion().getNumtotalproyacu().compareTo(BigDecimal.valueOf(0)) != 0) {
+                //getAlimentacion().setSemaforo(getAdministrarObraNew().getObra().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
+                getAlimentacion().setSemaforo(getSessionBeanCobra().getCobraService().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]),
+                        getAlimentacion().getNumtotalproyacu(), getAdministrarObraNew().getObra().getTipoobra(), getAdministrarObraNew().getObra().getNumvaltotobra()));
 
-        if (!validezalimentacion) {
-            if (fechavalida) {
-                //getAlimentacion().setNumtotalproyacu(getAdministrarObraNew().getObra().getValorProyectadoenFecha(getAlimentacion().getDatefecha()));
-                //desviado=validar
-                if (getAlimentacion().getNumtotalproyacu().compareTo(BigDecimal.valueOf(0)) != 0) {
-                    //getAlimentacion().setSemaforo(getAdministrarObraNew().getObra().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
-                    getAlimentacion().setSemaforo(getSessionBeanCobra().getCobraService().getSemaforoAlimentacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]),
-                            getAlimentacion().getNumtotalproyacu(), getAdministrarObraNew().getObra().getTipoobra(), getAdministrarObraNew().getObra().getNumvaltotobra()));
-
-                    setDesviacion(getAdministrarObraNew().getObra().getCalcularPorcentajeDesviacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
-                    setDesviado(getAlimentacion().getSemaforo().isBooleanatraso());
-                } else {
-                    getAlimentacion().setSemaforo(new Semaforo(1, null, 0, 0, "/resources/botones/verde.png", false));
-                    setDesviado(false);
-                    setDesviacion(0);
-                }
-                editarActividades = false;
+                setDesviacion(getAdministrarObraNew().getObra().getCalcularPorcentajeDesviacion(getAdministrarObraNew().getObra().getNumvalejecobra().add(totales[1]), getAlimentacion().getNumtotalproyacu()));
+                setDesviado(getAlimentacion().getSemaforo().isBooleanatraso());
+            } else {
+                getAlimentacion().setSemaforo(new Semaforo(1, null, 0, 0, "/resources/botones/verde.png", false));
+                setDesviado(false);
+                setDesviacion(0);
             }
+            editarActividades = false;
         }
+}
         return null;
     }
 
@@ -975,17 +977,22 @@ public class Alimentar implements Serializable {
 
         return null;
     }
-
-    public String calcularTodaMatrix() {
-
-        int i = 0;
-        while (i < registrosmatrix.size()) {
-            registrosmatrix.get(i).calcularNumvalEjec();
-            i++;
+    
+    
+    public String calcularTodaMatrix()
+    {
+        
+        int i=0;
+        while(i<registrosmatrix.size())
+        {
+          registrosmatrix.get(i).calcularNumvalEjec();
+            i++;  
         }
         CalculoTotales();
         return null;
-    }
+    }       
+    
+    
 
     /*
      * Suma todos los totales de la alimentación.
@@ -1060,18 +1067,18 @@ public class Alimentar implements Serializable {
             try {
                 cargadorImagen.getArchivoWeb().cambiarNombre(null, true);
                 cargadorImagen.guardarArchivosTemporales(RutasWebArchivos.TMP, false);
-                nomImagen = cargadorImagen.getArchivoWeb().getNombre();
-                String rutaAbsolutaImg = ArchivoWebUtil.obtenerRutaAbsoluta(cargadorImagen.getArchivoWeb().getRutaWeb());
-                try {
-                    RedimensionarImagen.scale(rutaAbsolutaImg, 640, 5, rutaAbsolutaImg);
-                } catch (IOException ex) {
-                    Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    nomImagen = cargadorImagen.getArchivoWeb().getNombre();
+                    String rutaAbsolutaImg = ArchivoWebUtil.obtenerRutaAbsoluta(cargadorImagen.getArchivoWeb().getRutaWeb()) ;
+                    try {
+                        RedimensionarImagen.scale(rutaAbsolutaImg, 640, 5, rutaAbsolutaImg);
+                    } catch (IOException ex) {
+                        Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+                    }
             } catch (ArchivoExistenteException ex) {
                 FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
                 Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -1098,15 +1105,15 @@ public class Alimentar implements Serializable {
      */
     public String guardarVideoTemporal() throws IOException, InterruptedException {
         String carpetaDoc = RutasWebArchivos.TMP;
-        if (!cargadorVideo.getArchivos().isEmpty()) {
+        if(!cargadorVideo.getArchivos().isEmpty()){
             try {
                 cargadorVideo.getArchivoWeb().cambiarNombre(null, true);
                 cargadorVideo.guardarArchivosTemporales(carpetaDoc, false);
             } catch (ArchivoExistenteException ex) {
                 FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
                 Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
             }
             hayvideo = true;
@@ -1151,17 +1158,21 @@ public class Alimentar implements Serializable {
                             } else {
                                 estadoalimentar = 1;
                             }
-
-                            if (isDesviado()) {
-
-                                if (listaFactores.isEmpty()) {
-                                    estadoalimentar = 0;
+                            
+                            if(isDesviado())
+                            {
+                               
+                                if(listaFactores.isEmpty())
+                                {
+                                    estadoalimentar=0;
                                     mensajefin = bundle.getString("debejustificar");//"Debe justificar los factores de atraso";
-                                } else {
-                                    estadoalimentar = 1;
                                 }
-                            }
-
+                                else
+                                {
+                                    estadoalimentar=1;
+                                }    
+                            }    
+                            
 //                            if ((isDesviado() && !getListaFactores().isEmpty()) || !isDesviado()) {
 //                                estadoalimentar = 1;
 //                            } else {
@@ -1204,9 +1215,9 @@ public class Alimentar implements Serializable {
                 guardarAlimentar();
             } catch (ArchivoExistenteException ex) {
                 FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
                 Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -1237,7 +1248,7 @@ public class Alimentar implements Serializable {
      */
     public void guardarAlimentar() throws ArchivoExistenteException {
         String rutaActa = null;
-        String rutaWebVideo = null;
+        String rutaWebVideo=null;
         String rutaWebImg = null;
 
         getAlimentacion().setIntidalimenta(0);
@@ -1248,7 +1259,7 @@ public class Alimentar implements Serializable {
 
         if (urlacta != null && urlacta.compareTo("") != 0) {
             cargadorActa.getArchivoWeb().cambiarNombre(null, true);
-            cargadorActa.guardarArchivosTemporales(MessageFormat.format(RutasWebArchivos.DOCS_OBRA, "" + getAdministrarObraNew().getObra().getIntcodigoobra()), false);
+            cargadorActa.guardarArchivosTemporales(MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+getAdministrarObraNew().getObra().getIntcodigoobra()), false);
             rutaActa = cargadorActa.getArchivoWeb().getRutaWeb();
 
             Tipodocumento tipdoc = new Tipodocumento(10, "ACTA PARCIAL", false);
@@ -1279,16 +1290,16 @@ public class Alimentar implements Serializable {
         try {
             //agrego imagen
             rutaWebImg = ArchivoWebUtil.copiarArchivo(
-                    cargadorImagen.getArchivoWeb().getRutaWeb(),
-                    MessageFormat.format(RutasWebArchivos.IMGS_OBRA_ALIMENTACION, "" + getAdministrarObraNew().getObra().getIntcodigoobra()),
+                    cargadorImagen.getArchivoWeb().getRutaWeb(), 
+                    MessageFormat.format(RutasWebArchivos.IMGS_OBRA_ALIMENTACION, ""+getAdministrarObraNew().getObra().getIntcodigoobra()),
                     true, true);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ArchivoExistenteException ex) {
             FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
             Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -1315,130 +1326,135 @@ public class Alimentar implements Serializable {
 
 
         if (hayvideo == true) {
-            String command = "ffmpeg2theora " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb()) + " -o " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.ogv");
-            try {
-                final Process process = Runtime.getRuntime().exec(command);
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            InputStream is = process.getInputStream();
-                            byte[] buffer = new byte[1024];
-                            for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                                System.out.write(buffer, 0, count);
+                String command = "ffmpeg2theora " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb()) + " -o " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.ogv");
+                try {
+                    final Process process = Runtime.getRuntime().exec(command);
+                    new Thread() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                InputStream is = process.getInputStream();
+                                byte[] buffer = new byte[1024];
+                                for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                                    System.out.write(buffer, 0, count);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            InputStream is = process.getErrorStream();
-                            byte[] buffer = new byte[1024];
-                            for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                                System.err.write(buffer, 0, count);
+                    }.start();
+                    new Thread() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                InputStream is = process.getErrorStream();
+                                byte[] buffer = new byte[1024];
+                                for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                                    System.err.write(buffer, 0, count);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
+                    }.start();
 
-                int returnCode = process.waitFor();
+                    int returnCode = process.waitFor();
 
-                command = "ffmpeg -i " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb()) + " " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.mp4");
-                final Process process1 = Runtime.getRuntime().exec(command);
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            InputStream is = process1.getInputStream();
-                            byte[] buffer = new byte[1024];
-                            for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                                System.out.write(buffer, 0, count);
+                    command = "ffmpeg -i " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb()) + " " + ArchivoWebUtil.obtenerRutaAbsoluta(cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.mp4");
+                    final Process process1 = Runtime.getRuntime().exec(command);
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                InputStream is = process1.getInputStream();
+                                byte[] buffer = new byte[1024];
+                                for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                                    System.out.write(buffer, 0, count);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            InputStream is = process1.getErrorStream();
-                            byte[] buffer = new byte[1024];
-                            for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                                System.err.write(buffer, 0, count);
+                    }.start();
+                    new Thread() {
+
+                        @Override
+                        public void run() {
+                            try {
+                                InputStream is = process1.getErrorStream();
+                                byte[] buffer = new byte[1024];
+                                for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                                    System.err.write(buffer, 0, count);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                }.start();
+                    }.start();
 
-                int returnCode1 = process1.waitFor();
-
-                ArchivoWebUtil.eliminarArchivo(cargadorVideo.getArchivoWeb().getRutaWeb());
-
-                rutaWebVideo = ArchivoWebUtil.copiarArchivo(
-                        cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.mp4",
-                        MessageFormat.format(RutasWebArchivos.VIDEOS_ALIMENTACION_OBRA, "" + getAdministrarObraNew().getObra().getIntcodigoobra()),
-                        true, true);
-
-                ArchivoWebUtil.copiarArchivo(
-                        cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.ogv",
-                        MessageFormat.format(RutasWebArchivos.VIDEOS_ALIMENTACION_OBRA, "" + getAdministrarObraNew().getObra().getIntcodigoobra()),
-                        true, true);
-
-                /*pathVideo = URL + nuevonombre + ".mp4";
-                 nombreVideo = URL + nuevonombre;
-                 command = "ffmpeg -i " + URLFINAL + URL + nuevonombre + ".flv " getIn URLFINAL + URL + nuevonombre + ".mp4";
-                 System.out.println("input = "+URLFINAL + URL + nuevonombre + ".flv");
-                 System.out.println("output = " +URLFINAL + URL + nuevonombre + ".mp4");
-                 final Process process1 = Runtime.getRuntime().exec(command);
-                 new Thread() {
+                    int returnCode1 = process1.waitFor();
                     
-                 @Override
-                 public void run() {
-                 try {
-                 InputStream is = process1.getInputStream();
-                 byte[] buffer = new byte[1024];
-                 for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                 System.out.write(buffer, 0, count);
-                 }
-                 } catch (Exception e) {
-                 e.printStackTrace();
-                 }
-                 }
-                 }.start();
-                 new Thread() {
-                    
-                 @Override
-                 public void run() {
-                 try {
-                 InputStream is = process1.getErrorStream();
-                 byte[] buffer = new byte[1024];
-                 for (int count = 0; (count = is.read(buffer)) >= 0;) {
-                 System.err.write(buffer, 0, count);
-                 }
-                 } catch (Exception e) {
-                 e.printStackTrace();
-                 }
-                 }
-                 }.start();
-                    
-                 int returnCode1 = process1.waitFor();
-                 //System.out.println("termina = " );*/
-                if (!cargadorVideo.getArchivos().isEmpty()) {
                     ArchivoWebUtil.eliminarArchivo(cargadorVideo.getArchivoWeb().getRutaWeb());
+
+                    rutaWebVideo = ArchivoWebUtil.copiarArchivo(
+                            cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.mp4", 
+                            MessageFormat.format(RutasWebArchivos.VIDEOS_ALIMENTACION_OBRA, ""+getAdministrarObraNew().getObra().getIntcodigoobra()),
+                            true, true
+                    );
+                    
+                    ArchivoWebUtil.copiarArchivo(
+                            cargadorVideo.getArchivoWeb().getRutaWeb().substring(0, cargadorVideo.getArchivoWeb().getRutaWeb().lastIndexOf(".")) + "_Convertido.ogv", 
+                            MessageFormat.format(RutasWebArchivos.VIDEOS_ALIMENTACION_OBRA, ""+getAdministrarObraNew().getObra().getIntcodigoobra()),
+                            true, true
+                    );
+                    
+                    /*pathVideo = URL + nuevonombre + ".mp4";
+                    nombreVideo = URL + nuevonombre;
+                    command = "ffmpeg -i " + URLFINAL + URL + nuevonombre + ".flv " getIn URLFINAL + URL + nuevonombre + ".mp4";
+                    System.out.println("input = "+URLFINAL + URL + nuevonombre + ".flv");
+                    System.out.println("output = " +URLFINAL + URL + nuevonombre + ".mp4");
+                    final Process process1 = Runtime.getRuntime().exec(command);
+                    new Thread() {
+                    
+                    @Override
+                    public void run() {
+                    try {
+                    InputStream is = process1.getInputStream();
+                    byte[] buffer = new byte[1024];
+                    for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                    System.out.write(buffer, 0, count);
+                    }
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                    }
+                    }
+                    }.start();
+                    new Thread() {
+                    
+                    @Override
+                    public void run() {
+                    try {
+                    InputStream is = process1.getErrorStream();
+                    byte[] buffer = new byte[1024];
+                    for (int count = 0; (count = is.read(buffer)) >= 0;) {
+                    System.err.write(buffer, 0, count);
+                    }
+                    } catch (Exception e) {
+                    e.printStackTrace();
+                    }
+                    }
+                    }.start();
+                    
+                    int returnCode1 = process1.waitFor();
+                    //System.out.println("termina = " );*/
+                    if (!cargadorVideo.getArchivos().isEmpty()) {
+                        ArchivoWebUtil.eliminarArchivo(cargadorVideo.getArchivoWeb().getRutaWeb());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
 
 
@@ -1689,7 +1705,7 @@ public class Alimentar implements Serializable {
      * Inicializar el diligenciamiento de actividades no previstas.
      */
     public void inicializarAdicionActividades() {
-        pathActaPrecios = "";
+        pathActaPrecios="";
         llenarTiposCosto();
         inicializarActividad();
         cargadorActaPrecios = new CargadorArchivosWeb();
@@ -1706,7 +1722,7 @@ public class Alimentar implements Serializable {
                 && !actividadobra.getStrtipounidadmed().equals("")
                 && !actividadobra.getCalcularValorUnitario().equals(0)) {
 
-            actividadobra = modificarCadenaLarga(actividadobra);
+            actividadobra=modificarCadenaLarga(actividadobra);            
             carcularValortotal();
             actividadobra.setFloatcantidadejecutao(Double.valueOf(0));
             actividadobra.setFloatcantplanifao(Double.valueOf(0));
@@ -1734,28 +1750,28 @@ public class Alimentar implements Serializable {
             inicializarActividad();
         }
     }
-
-    public Actividadobra modificarCadenaLarga(Actividadobra actividadobra) {
-        if (actividadobra.getStrdescactividad().length() > 40) {
-            int cantidad = actividadobra.getStrdescactividad().length() / 20;
-            StringTokenizer espaciosCadena = new StringTokenizer(actividadobra.getStrdescactividad());
-            if (espaciosCadena.countTokens() == 1) {
-                StringBuilder palabraEspacios = new StringBuilder();
-                int inicio = 0;
-                int fin = 20;
-                while (cantidad > 0) {
-                    palabraEspacios.append(actividadobra.getStrdescactividad().substring(inicio, fin) + '\n');
-                    inicio = fin + 1;
-                    fin += 20;
-                    if (fin > actividadobra.getStrdescactividad().length()) {
-                        fin = actividadobra.getStrdescactividad().length();
-                    }
-                    cantidad--;
-                }
-                actividadobra.setStrdescactividad(palabraEspacios.toString());
+    
+    public Actividadobra modificarCadenaLarga(Actividadobra actividadobra){
+        if(actividadobra.getStrdescactividad().length()>40){
+            int cantidad=actividadobra.getStrdescactividad().length()/20;
+            StringTokenizer espaciosCadena=new StringTokenizer(actividadobra.getStrdescactividad());
+            if(espaciosCadena.countTokens()==1){
+               StringBuilder palabraEspacios=new StringBuilder();
+               int inicio=0;
+               int fin=20;
+               while(cantidad>0){
+                   palabraEspacios.append(actividadobra.getStrdescactividad().substring(inicio, fin)+'\n');
+                   inicio=fin+1;
+                   fin+=20;
+                   if(fin>actividadobra.getStrdescactividad().length()){
+                    fin=actividadobra.getStrdescactividad().length();
+                   }                   
+                   cantidad--;
+               }                   
+               actividadobra.setStrdescactividad(palabraEspacios.toString());
             }
-        }
-        return actividadobra;
+         }
+        return  actividadobra;
     }
 
     /**
@@ -1770,29 +1786,29 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * Guardar el Documento. Trasladar el documento de la carpeta temporal, a la
-     * vigente. Encontrar si el nombre el documento contiene espacios en blanco
-     * para remplazarlos %20.
+     * Guardar el Documento.
+     * Trasladar el documento de la carpeta temporal, a la vigente.
+     * Encontrar si el nombre el documento contiene espacios en blanco para remplazarlos %20.
      */
     public void guardarArchiActaPrecios() {
         try {
             ArchivoWebUtil.copiarArchivo(cargadorActaPrecios.getArchivoWeb().getRutaWeb(),
-                    MessageFormat.format(RutasWebArchivos.DOCS_OBRA, "" + getAdministrarObraNew().getObra().getIntcodigoobra()),
-                    true, true);
-        } catch (FileNotFoundException ex) {
+                                MessageFormat.format(RutasWebArchivos.DOCS_OBRA, ""+getAdministrarObraNew().getObra().getIntcodigoobra()),
+                                true, true
+                        );
+        } catch (FileNotFoundException ex) {             
             Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ArchivoExistenteException ex) {
             FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
             Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Obtener el Objeto de Historico Obra.
-     *
      * @return Objeto de Historico Obra.
      */
     public Historicoobra guardarHistoricoObra() {
@@ -1811,7 +1827,6 @@ public class Alimentar implements Serializable {
 
     /**
      * Obtener el Objeto de Documento Obra.
-     *
      * @return Objeto de Documento Obra.
      */
     public Documentoobra guardarDocumentoObra() {
@@ -1826,7 +1841,6 @@ public class Alimentar implements Serializable {
 
     /**
      * Obtener la Relacion Historico Obra x Documento.
-     *
      * @return Objeto Relacion Historico Obra x Documento.
      */
     public Relacionhistoobradocu guardarRelacionhistoobradocu() {
@@ -1876,8 +1890,7 @@ public class Alimentar implements Serializable {
     }
 
     /**
-     * Borrar Documento de Acta de Precios de la Carpeta donde fue almacenado
-     * con anterioridad.
+     * Borrar Documento de Acta de Precios de la Carpeta donde fue almacenado con anterioridad.
      */
     public String borrarActadePrecios() {
         if (!cargadorActaPrecios.getArchivos().isEmpty()) {
@@ -1902,9 +1915,9 @@ public class Alimentar implements Serializable {
                 }
             } catch (ArchivoExistenteException ex) {
                 FacesContext.getCurrentInstance().addMessage(
-                        null,
-                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        Propiedad.getValor("docexistenteerror"), ""));
+                                        null,
+                                        new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                        Propiedad.getValor("docexistenteerror"), ""));
                 Logger.getLogger(Alimentar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

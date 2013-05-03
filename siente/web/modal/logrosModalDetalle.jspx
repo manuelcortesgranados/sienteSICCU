@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalLogrosDetalle" autosized="true"  headerClass="rich-panel-header" styleClass="detalleproyecto" width="500">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalLogros" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_modalLogros" event="onclick" for="modalLogrosDetalle" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form prependId="false" >
+            <rich:panel>
+                <rich:dataTable id="tablaLogrosDet"                                
+                                value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
+                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                rows="5"
+                                var="currentRow"  style="width:100%;">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column  colspan="4" breakBefore="true">
+                                <h:outputText value="#{var.logro}s"/>
+                            </rich:column>
+                            <rich:column  breakBefore="true">
+                                <h:outputText id="tipodet" value="#{var.tipo}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText id="logrodet" value="#{var.logro}"/>
+                            </rich:column>
+                            <rich:column rendered="false">
+                                <h:outputText id="usuariodet" value="#{var.username}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText id="fechadet" value="#{var.fecha}"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                    <rich:columnGroup>
+                        <rich:column breakBefore="true">
+                            <h:outputText id="tipologrodet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:inputTextarea cols="60" rows="2" value="#{currentRow.strlogro}" readonly="true"  />
+                        </rich:column>
+                        <rich:column rendered="false">
+                            <h:outputText id="strusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                                          #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText id="datefechadet" value="#{currentRow.alimentacion.datefecha}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                    <f:facet name="footer">
+                        <rich:columnGroup>
+                            <rich:column colspan="4" breakBefore="true" style="text-align: center;">
+                                <rich:dataScroller id="scrolltablalogrosdet" for="tablaLogrosDet" render="tablaLogrosDet"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                </rich:dataTable>
+            </rich:panel>
+        </h:form>
+
+    </rich:popupPanel>
+
+</f:view>

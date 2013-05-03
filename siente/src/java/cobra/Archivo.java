@@ -1,8 +1,6 @@
 package cobra;
 
-import java.io.Serializable;
-
-public class Archivo implements Serializable{
+public class Archivo {
     private String name;
     private String onlyName;
     private String mime;

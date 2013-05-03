@@ -4,7 +4,6 @@
  */
 package cobra.graficos;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,23 +13,25 @@ import java.util.List;
 /**
  * Clase que permite la generación de un gráfico de series (Líneas, Barras,
  * columnas...)
- *
  * @author Jhon Eduard Ortiz S
  */
-public abstract class GraficoSeries extends Grafico implements Serializable {
+public abstract class GraficoSeries extends Grafico {
 
     /**
      * Grafico de columnas
      */
     public static int TIPO_COLUMNAS = 1;
+
     /**
      * Gráfico de líneas
      */
     public static int TIPO_LINEAS = 2;
+
     /**
      * Tipo de gráfico (1 = Columnas, 2 = Líneas)
      */
     protected int tipoGrafico;
+
     /**
      * Conjunto de datos que se presentarán en el gráfico, cada elemento de la
      * lista corresponde a una de las series que se presentarán en el gráfico
@@ -44,9 +45,9 @@ public abstract class GraficoSeries extends Grafico implements Serializable {
     protected List<DatoGraficoMultiple> datosGraficoMultiple = new ArrayList<DatoGraficoMultiple>();
 
     /**
-     * Carga los datos que provienen de varios conjuntos de datos,mezclando en
-     * un solo objeto los valores correspondientes a varias líneas para el mismo
-     * ítem del eje Y
+     * Carga los datos que provienen de varios conjuntos de datos,mezclando
+     * en un solo objeto los valores correspondientes a varias líneas para el
+     * mismo ítem del eje Y
      */
     public void cargarDatosGraficoMultiple() {
         for (ConjuntoDatosGrafico conjuntoDatosGrafico : conjuntosDatosGrafico) {
@@ -68,6 +69,7 @@ public abstract class GraficoSeries extends Grafico implements Serializable {
         }
         if (tipoDatoEjeX == Grafico.CADENA || tipoDatoEjeX == Grafico.FECHA) {
             Collections.sort(datosGraficoMultiple, new Comparator() {
+
                 public int compare(Object o1, Object o2) {
                     DatoGraficoMultiple obj1 = (DatoGraficoMultiple) o1;
                     DatoGraficoMultiple obj2 = (DatoGraficoMultiple) o2;
@@ -85,6 +87,7 @@ public abstract class GraficoSeries extends Grafico implements Serializable {
 
         if (tipoDatoEjeX == Grafico.NUMERO) {
             Collections.sort(datosGraficoMultiple, new Comparator() {
+
                 public int compare(Object o1, Object o2) {
                     DatoGraficoMultiple obj1 = (DatoGraficoMultiple) o1;
                     DatoGraficoMultiple obj2 = (DatoGraficoMultiple) o2;

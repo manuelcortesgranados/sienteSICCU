@@ -15,9 +15,9 @@ import cobra.Archivo;
 import cobra.SessionBeanCobra;
 import cobra.SubirArchivoBean;
 import cobra.Supervisor.FacesUtils;
+
 import financiera.service.FinancieraServiceAble;
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -32,7 +32,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo10
  */
-public class FiduFinanciera implements Serializable{
+public class FiduFinanciera  {
 
     private List<Encargofiduciario> listaencargofiducario = new ArrayList<Encargofiduciario>();
     private SubirArchivoBean subirDocumento = new SubirArchivoBean(1, true, false);

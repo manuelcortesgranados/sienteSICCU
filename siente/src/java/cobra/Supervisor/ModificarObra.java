@@ -22,13 +22,13 @@ import co.com.interkont.cobra.to.Tiponovedad;
 import cobra.Archivo;
 import cobra.SessionBeanCobra;
 import cobra.SubirArchivoBean;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 //import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -59,17 +60,17 @@ import org.apache.poi.ss.util.CellReference;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Fragment bean that corresponds to a similarly named JSP page fragment.
- * This class contains component definitions (and initialization code) for all
- * components that you have defined on this fragment, as well as lifecycle
- * methods and event handlers where you may add behavior to respond to incoming
- * events.</p>
+ * <p>Fragment bean that corresponds to a similarly named JSP page
+ * fragment.  This class contains component definitions (and initialization
+ * code) for all components that you have defined on this fragment, as well as
+ * lifecycle methods and event handlers where you may add behavior
+ * to respond to incoming events.</p>
  *
  * @version ModificarObra.java
  * @version Created on 3/11/2010, 12:11:49 AM
  * @author carlos
  */
-public class ModificarObra implements Serializable {
+public class ModificarObra  {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private Historicoobra historicoobra = new Historicoobra();
@@ -375,10 +376,9 @@ public class ModificarObra implements Serializable {
     }
 
     /**
-     * <p>Automatically managed component initialization.
-     * <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code
-     * inserted here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization. <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code inserted
+     * here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -386,6 +386,7 @@ public class ModificarObra implements Serializable {
 
     public ModificarObra() {
     }
+
 
     public void iniciarModificar() {
         historicoobra = new Historicoobra();
@@ -428,7 +429,7 @@ public class ModificarObra implements Serializable {
     }
 
     public void generarCronogramaModificacion(String ArchivoPath, String realArchivoPath) throws FileNotFoundException, IOException, Exception {
-
+        
         //Date fechaUltimaAlimentacion = getAdministrarObraNew().getObra().getFechaUltimaActaParcial();
         Alimentacion ultalim = getSessionBeanCobra().getCobraService().obtenerUltimaalimentacion(getAdministrarObraNew().getObra().getIntcodigoobra());
         Date fechaUltimaAlimentacion = null;
@@ -512,21 +513,21 @@ public class ModificarObra implements Serializable {
 
 //**codigo para crear nueva hoja con listas desplegables
 /*
-             Sheet sheetxx = wb.createSheet("hoja  Valida");
-             CellRangeAddressList addressListxc = new CellRangeAddressList(0, 0, 0, 0);
-             String[] excelListValues = new String[]{"obra mayor", "obra menor", "Jason", "agua", "Greg"};
-             DVConstraint dvConstraintsxx = DVConstraint.createExplicitListConstraint(excelListValues);//DVConstraint dvConstraints = DVConstraint.createFormulaListConstraint("$B$1:$D$1");
-             DataValidation dataValidationxx = new HSSFDataValidation(addressListxc, dvConstraintsxx);
-             dataValidationxx.setSuppressDropDownArrow(false);
-             sheetxx.addValidationData(dataValidationxx);
+            Sheet sheetxx = wb.createSheet("hoja  Valida");
+            CellRangeAddressList addressListxc = new CellRangeAddressList(0, 0, 0, 0);
+            String[] excelListValues = new String[]{"obra mayor", "obra menor", "Jason", "agua", "Greg"};
+            DVConstraint dvConstraintsxx = DVConstraint.createExplicitListConstraint(excelListValues);//DVConstraint dvConstraints = DVConstraint.createFormulaListConstraint("$B$1:$D$1");
+            DataValidation dataValidationxx = new HSSFDataValidation(addressListxc, dvConstraintsxx);
+            dataValidationxx.setSuppressDropDownArrow(false);
+            sheetxx.addValidationData(dataValidationxx);
 
-             Sheet hoja = wb.createSheet("hoja oija");
-             CellRangeAddressList listaDir = new CellRangeAddressList(0, 0, 0, 0);
-             String[] excellista = new String[]{"obra mayor", "obra menor", "Jason", "agua", "Greg"};
-             DVConstraint crearlista = DVConstraint.createExplicitListConstraint(excellista);//DVConstraint dvConstraints = DVConstraint.createFormulaListConstraint("$B$1:$D$1");
-             DataValidation validaciondatos = new HSSFDataValidation(listaDir, crearlista);
-             validaciondatos.setSuppressDropDownArrow(false);
-             hoja.addValidationData(validaciondatos);
+            Sheet hoja = wb.createSheet("hoja oija");
+            CellRangeAddressList listaDir = new CellRangeAddressList(0, 0, 0, 0);
+            String[] excellista = new String[]{"obra mayor", "obra menor", "Jason", "agua", "Greg"};
+            DVConstraint crearlista = DVConstraint.createExplicitListConstraint(excellista);//DVConstraint dvConstraints = DVConstraint.createFormulaListConstraint("$B$1:$D$1");
+            DataValidation validaciondatos = new HSSFDataValidation(listaDir, crearlista);
+            validaciondatos.setSuppressDropDownArrow(false);
+            hoja.addValidationData(validaciondatos);
              *
              */
 //HSSFCell cell1Cell=new HSSFCell
@@ -1178,7 +1179,7 @@ public class ModificarObra implements Serializable {
                                                     mensajeModificacion = bundle.getString("laformuladevaloren") + filames.getStringCellValue() + bundle.getString("enlafila") + (i + 1) + bundle.getString("hasigomodificada");
                                                     return false;
                                                 }
-
+                                                
                                                 suma = suma.add(new BigDecimal(celdaTotalPeriodo.getNumericCellValue()));
                                                 colActual = colActual + 2;
                                             }
@@ -1508,10 +1509,9 @@ public class ModificarObra implements Serializable {
     }
 
     /**
-     * Asigna la obra actual a una obra historica Asigna los periodos de la obra
-     * modificada en el cronograma a la obra actual Actualiza las actividades de
-     * la obra modificada con la obra actual
-     *
+     * Asigna la obra actual a una obra historica
+     * Asigna los periodos de la obra modificada en el cronograma a la obra actual
+     * Actualiza las actividades de la obra modificada con la obra actual
      * @param gcXLS
      */
     private void mapearCronograma() {
@@ -1599,7 +1599,7 @@ public class ModificarObra implements Serializable {
 
 
 
-        getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+        getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(),-1);
 
         int i = 0;
 
@@ -1732,7 +1732,7 @@ public class ModificarObra implements Serializable {
     }
 
     public String registrarModificacion() {
-
+        
         mensajeModificacion = "";
 
         if (cronovalido) {
@@ -1779,7 +1779,7 @@ public class ModificarObra implements Serializable {
                     archivo.delete();
                 }
                 getSessionBeanCobra().getCobraService().borrarDocumento(otroSi);
-
+                
                 subirOtroSi.borrarDatosSubidos();
             }
             if (actaConvenio != null && actaConvenio.getStrubicacion() != null && actaConvenio.getStrubicacion().compareTo("") != 0) {
@@ -1800,7 +1800,7 @@ public class ModificarObra implements Serializable {
             subirCronograma.borrarDatosSubidos();
             getAdministrarObraNew().getObra().setTipoestadobra(new Tipoestadobra(1));
             getSessionBeanCobra().getCobraService().borrarHistorico(historicoobra);
-            getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(),-1);
 
 //            if (otroSi != null && otroSi.getStrubicacion() != null && otroSi.getStrubicacion().compareTo("") != 0) {
 ////                getSessionBeanCobra().getCobraService().borrarDocumento(otroSi);
@@ -1817,7 +1817,7 @@ public class ModificarObra implements Serializable {
 
             getAdministrarObraNew().mostrarMenuModificar();
             mensajeModificacion = bundle.getString("sehacancelado");
-
+            
 
             tipificacionValida = false;
         }
@@ -1854,7 +1854,6 @@ public class ModificarObra implements Serializable {
 
     /**
      * Valida los datos de la tipificación
-     *
      * @return
      */
     public boolean validarTipificacion() {
@@ -2250,7 +2249,7 @@ public class ModificarObra implements Serializable {
             getAdministrarObraNew().getObra().setTipoestadobra(new Tipoestadobra(3));
             ///Guardando fisicamente el otro si
             getSessionBeanCobra().getCobraService().guardarHistorico(historicoobra, getSessionBeanCobra().getUsuarioObra());
-            getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
+            getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(),-1);
 
             if (verSoportes) {
                 //if (otroSi == null) {
@@ -2377,6 +2376,7 @@ public class ModificarObra implements Serializable {
 
         return null;
     }
+
     /**
      * Si true, se visualizará el paso 1 de modificar proyecto
      */
@@ -2389,6 +2389,7 @@ public class ModificarObra implements Serializable {
     public void setVerPaso1(boolean verPaso1) {
         this.verPaso1 = verPaso1;
     }
+
     /**
      * Si true, se visualizará el paso 2 de modificar proyecto
      */
@@ -2401,6 +2402,7 @@ public class ModificarObra implements Serializable {
     public void setVerPaso2(boolean verPaso2) {
         this.verPaso2 = verPaso2;
     }
+
     /**
      * Si true, se visualizará el paso 3 de modificar proyecto
      */
@@ -2413,6 +2415,7 @@ public class ModificarObra implements Serializable {
     public void setVerPaso3(boolean verPaso3) {
         this.verPaso3 = verPaso3;
     }
+
     /**
      * Determina si se realizará prórroga en la modificación
      */
@@ -2425,6 +2428,7 @@ public class ModificarObra implements Serializable {
     public void setRealizarProrroga(boolean realizarProrroga) {
         this.realizarProrroga = realizarProrroga;
     }
+
     /**
      * Determina si se realizará adición de presupuesto en la modificación
      */
@@ -2437,6 +2441,7 @@ public class ModificarObra implements Serializable {
     public void setAdicionarPresupuesto(boolean adicionarPresupuesto) {
         this.adicionarPresupuesto = adicionarPresupuesto;
     }
+
     /**
      * Determina si se realizará adición de actividades en la modificación
      */
@@ -2449,6 +2454,7 @@ public class ModificarObra implements Serializable {
     public void setAdicionarActividades(boolean adicionarActividades) {
         this.adicionarActividades = adicionarActividades;
     }
+
     /**
      * Determina si se realizará cambio de precios en la modificación
      */
@@ -2464,7 +2470,6 @@ public class ModificarObra implements Serializable {
 
     /**
      * Continúa en el paso 2 de modificar proyecto
-     *
      * @return
      */
     public String btSiguientePaso1Action() {
@@ -2475,7 +2480,6 @@ public class ModificarObra implements Serializable {
 
     /**
      * Regresa al paso 1 de modificar proyecto
-     *
      * @return Resultado correspondiente en el faces-config
      */
     public String btAnteriorPaso2Action() {
@@ -2486,7 +2490,6 @@ public class ModificarObra implements Serializable {
 
     /**
      * Continúa en el paso 3 de modificar proyecto
-     *
      * @return
      */
     public String btSiguientePaso2Action() {
@@ -2497,7 +2500,6 @@ public class ModificarObra implements Serializable {
 
     /**
      * Regresa al paso 1 de modificar proyecto
-     *
      * @return Resultado correspondiente en el faces-config
      */
     public String btAnteriorPaso3Action() {
@@ -2508,10 +2510,10 @@ public class ModificarObra implements Serializable {
 
     /**
      * Continúa en el paso 3 de modificar proyecto
-     *
      * @return
      */
     public String btSiguientePaso3Action() {
         return null;
     }
+
 }

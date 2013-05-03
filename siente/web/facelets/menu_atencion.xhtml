@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" 
-    xmlns:interkont="http://www.interkont.com/jsf"
-    >
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:c="http://java.sun.com/jstl/core"
+    contentType="text/html">
 
 
     <div class="topbar"><div class="toptitle"><h:outputText value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
@@ -44,9 +44,9 @@
                 <h:outputText value="Inicio" styleClass="home anchorLink"/>
             </f:facet>
 
-            <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
+            <a4j:repeat items="#{SessionBeanCobra.modulos}" var="modulo">
 
-                <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" iconDisabled="#{modulo.striconoInicio}"
+                <rich:menuItem submitMode="ajax" render="form_menu" value="#{modulo.strmodNmbre}" iconClass="#{modulo.striconoInicio}"
                                onclick="document.location.href='../faces#{modulo.strurlMdloRuta}'" immediate="true" style="width: 250px;"/>
             </a4j:repeat>
         </rich:dropDownMenu>
@@ -60,22 +60,23 @@
                 <h:outputText value="Gestionar" styleClass="gestionar anchorLink"/>
             </f:facet>
 
-            <rich:menuGroup label="Solicitud Atención" iconDisabled="icon-atencion">
-                <rich:menuItem  label="Nuevo" iconDisabled="icon-nuevo"
+            <rich:menuGroup value="Solicitud Atención" iconClass="icon-atencion">
+                <rich:menuItem  value="Nuevo" iconClass="icon-nuevo"
                                 action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}" render="panelBody" immediate="true"/>
 
-               
-                <rich:menuGroup label="Consultar" iconDisabled="icon-consultar">
+                action="nuevoSolicitudAtencion" render="panelBody" immediate="true"/>
 
-                    <rich:menuItem label="Mis Solicitudes" iconDisabled="icon-suspendidos" action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarSolicitudMaestro}"
+                <rich:menuGroup value="Consultar" iconClass="icon-consultar">
+
+                    <rich:menuItem value="Mis Solicitudes" iconClass="icon-suspendidos" action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarSolicitudMaestro}"
                                    immediate="true" render="panelBody">
 
                     </rich:menuItem>
-                    <rich:menuItem label="Pendientes" iconDisabled="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarPendientes}"
+                    <rich:menuItem value="Pendientes" iconClass="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarPendientes}"
                                    immediate="true" render="panelBody">
                     </rich:menuItem>
 
-                    <rich:menuItem label="Aprobadas" iconDisabled="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarAprobados}"
+                    <rich:menuItem value="Aprobadas" iconClass="icon-finalizados" action="#{AtencionHumanitaria$AdminSolicitudAtencion.MostrarAprobados}"
                                    immediate="true" render="panelBody">
 
                     </rich:menuItem>
@@ -96,7 +97,7 @@
             <!--<rich:menuItem  value="Editar Perfil" iconClass="icon-miperfil"
                             action="#{ddmenu.doSaveAll}" immediate="true"/>-->
 
-            <rich:menuItem label="Cambiar Contraseña" iconDisabled="icon-miperfil" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"
+            <rich:menuItem submitMode="ajax" value="Cambiar Contraseña" iconClass="icon-miperfil" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"
                            action="#{Perfil$Usuario.initusu}" immediate="true"/>
         </rich:dropDownMenu>
 
@@ -109,12 +110,12 @@
                 <h:outputText value="Ayuda" styleClass="ayuda anchorLink"/>
             </f:facet>
 
-            <rich:menuItem label="Soporte en linea"   immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
-                           onclick="document.location.href='http://soportesiente.ning.com'" iconDisabled="icon-soporte"/>
-            <rich:menuItem label="Tutorial" immediate="true"
-                           action="manual" iconDisabled="icon-tutorial"/>
-            <rich:menuItem label="Preguntas Frecuentes" immediate="true"
-                           action="pregfrecuentes" iconDisabled="icon-preguntas"/>
+            <rich:menuItem value="Soporte en linea" target="_blank" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
+                           onclick="document.location.href='http://soportesiente.ning.com'" iconClass="icon-soporte"/>
+            <rich:menuItem value="Tutorial" target="_blank" immediate="true"
+                           action="manual" iconClass="icon-tutorial"/>
+            <rich:menuItem value="Preguntas Frecuentes" immediate="true"
+                           action="pregfrecuentes" iconClass="icon-preguntas"/>
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
@@ -140,4 +141,4 @@
 
     </rich:toolbar>
 
-</ui:composition>
+</f:view>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf" xmlns:rich="http://richfaces.org/rich">
+
+    <f:subview id="InfoGeneral" >
+
+
+
+        <rich:panel id="infogeneralCiudadano"   >
+            <div id="container3"  >
+                <center>
+                    <div id="slider3">
+
+                        <div>
+                            <rich:panel header="Semaforo" styleClass="sliderichcontentblue3">
+                                <h:panelGroup >
+                                    <center>
+                                        <h:graphicImage id="imgSemaObra"
+                                                                    value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
+                                                                    rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
+                                        <h:graphicImage value="#{var.noinfo}" height="100px"
+                                                        rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
+                                        <interkont:spacer width="80%" height="5" />
+                                        <center>
+                                            <h:outputText value="#{Supervisor$DetalleObra.semaforo}" styleClass="titletool3" />
+                                        </center>
+                                        
+                                    </center>
+                                </h:panelGroup>
+                            </rich:panel>
+
+                        </div>
+                        <div>
+
+                            <rich:panel header="Tipo #{var.proyecto}" styleClass="sliderichcontentblue3" >
+                                <h:panelGroup >
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup>
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" styleClass="titletool3" style="font-size:18px;"  >
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </rich:panel>
+
+                        </div>
+                        <div >
+
+                            <rich:panel header="Valor Actual" styleClass="sliderichcontentblue3" >
+                                <h:panelGroup>
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup >
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="titletool3" style="font-size:18px;">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </rich:panel>
+
+                        </div>
+                        <div >
+
+                            <rich:panel header="Ente que lo ejecuta" styleClass="sliderichcontentblue3" >
+                                <h:panelGrid columns="1">
+                                    <interkont:spacer width="20" height="10" />
+                                    <h:outputText value="#{Supervisor$DetalleObra.contratistanombrecomple}" styleClass="titletool3" />
+                                </h:panelGrid>
+                            </rich:panel>
+
+                        </div>
+                        <div >
+
+                            <rich:panel header="Visitas #{var.textoobra4}" styleClass="sliderichcontentblue3" >
+                                <h:panelGroup>
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup  styleClass="panelcenter">
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" styleClass="titletool3" style="font-size:18px;" >
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </rich:panel>
+
+                        </div>
+                        <div >
+
+                            <rich:panel header="Personas Inscritas" styleClass="sliderichcontentblue3"  >
+                                <h:panelGroup>
+                                    <interkont:spacer width="4"  height="50"/>
+                                    <h:panelGroup styleClass="panelcenter" >
+                                        <h:outputText value="#{Supervisor$DetalleObra.listasegudires}" styleClass="titletool3" style="font-size:18px;">
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </rich:panel>
+
+                        </div>
+
+
+
+                    </div>            </center>
+            </div>
+        </rich:panel>
+
+    </f:subview>
+
+</jsp:root>

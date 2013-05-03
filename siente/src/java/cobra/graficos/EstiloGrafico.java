@@ -2,16 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cobra.graficos;
 
-import java.io.Serializable;
+package cobra.graficos;
 
 /**
  * Clase engargada de establecer el estilo de un elemento del gráfico
- *
  * @author Jhon Eduard Ortiz S
  */
-public class EstiloGrafico implements Serializable {
+public class EstiloGrafico {
 
     private String colorFondo;
     private String colorTexto;
@@ -38,7 +36,7 @@ public class EstiloGrafico implements Serializable {
     public void setAnimado(boolean animado) {
         this.animado = animado;
     }
-
+    
     public String getColorEjeX() {
         return colorEjeX;
     }
@@ -166,7 +164,7 @@ public class EstiloGrafico implements Serializable {
     public void setTipoPila(String tipoPila) {
         this.tipoPila = tipoPila;
     }
-
+    
     public EstiloGrafico() {
     }
 }

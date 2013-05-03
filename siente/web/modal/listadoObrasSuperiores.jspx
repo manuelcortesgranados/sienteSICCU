@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-listado-proyectosPadres" headerClass="rich-panel-header" autosized="true">
+        <f:facet name="header">
+            <h:panelGroup >
+                <h:outputText value="#{var.encontrarPadreProyecto}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-listado-proyectosPadres" styleClass="cerrar"
+                                       title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder_mp-listado-proyectosPadres" event="onclick" for="mp-listado-proyectosPadres" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel  id="gpTotalProyectosPadre" >
+            <h:form id="form-mp-listado-proyectosPadres">
+                <h:panelGrid style="width:100%;">
+                    <interkont:spacer height="20" style="width:100%;"/>
+                    <h:panelGroup id="panel-filtro-proyectosPadres">
+                        <h:outputText  value="#{var.buscarProyecto} "/>
+                        <h:inputText  id="filtro-proyectosPadres" value="#{Supervisor$IngresarNuevaObra.valorFiltroObra}" immediate="true">
+                            <a4j:ajax event="onblur" render="tabla-listado-proyectosPadres" ignoreDupResponses="true" execute="@this" />
+                        </h:inputText>
+
+                        <f:facet name="header">
+                            <h:outputText value="#{var.filtrar}"/>
+                        </f:facet>
+                        <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
+                        <a4j:ajax event="onclik" render="tabla-listado-proyectosPadres" ignoreDupResponses="true" execute="@this"/>
+                    </h:panelGroup>
+                    <interkont:spacer height="10px" style="width:100%;"/>
+                    <rich:panel id="pl-tabla-listado-proyectosPadres"  >
+                        <rich:dataTable id="tabla-listado-proyectosPadres" sortMode="single" style="text-align:left;" value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}" var="currentRow" width="800px"
+                                        binding="#{Supervisor$IngresarNuevaObra.tablaObrasPadres}" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                            <rich:column filterMethod="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  width="110px"
+                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif" sortOrder="DESCENDING"
+                                         sortIconDescending="../resources/images/des.gif">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.numero}"/>
+                                </f:facet>
+                                <h:outputText id="otxt_numobra-listado" value="#{currentRow.intcodigoobra}"/>
+                            </rich:column>
+                            <rich:column id="nombrecontratista"  width="150px"
+                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                         sortIconDescending="../resources/images/des.gif">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.nombre}"/>
+                                </f:facet>
+                                <h:outputText id="otxt_strnombreobra-listado" value="#{currentRow.strnombreobra}"/>
+                            </rich:column>
+                            <rich:column id="seleccionar" width="120px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.seleccionar}"/>
+                                </f:facet>
+                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre}"
+                                                   render="gpproyectoSeleccionado, mp-proyectosPadres"
+                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadres');" >
+                                    <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadres')" render="gpproyectoSeleccionado"/>
+                                </a4j:commandButton>
+                            </rich:column>
+
+                            <f:facet name="footer">
+                                <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                            </f:facet>
+                        </rich:dataTable>
+                    </rich:panel>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</f:view>

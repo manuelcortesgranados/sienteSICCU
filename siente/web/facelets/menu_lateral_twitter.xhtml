@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:interkont="http://www.interkont.com/jsf">
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
 
     <rich:panel header="Twitter" bodyClass="tool" headerClass="headertool" style="border-style: none; width: 100%">
 
@@ -30,5 +31,9 @@
         <input type="button" value="Enter" onclick="addEnter('#{textarea}')" />
         <input type="button" value="Backspace" onclick="addBackspace('#{textarea}')" />
 
-         </rich:panel>
-</ui:composition>
+        <!--  <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+          <p><a href="https://twitter.com/intent/tweet?in_reply_to=51113028241989632">Reply</a></p>
+          <p><a href="https://twitter.com/intent/retweet?tweet_id=51113028241989632">Retweet</a></p>
+          <p><a href="https://twitter.com/intent/favorite?tweet_id=51113028241989632">Favorite</a></p>-->
+    </rich:panel>
+</f:view>

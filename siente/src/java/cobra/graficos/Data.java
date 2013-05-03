@@ -2,26 +2,28 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cobra.graficos;
 
-import java.io.Serializable;
+package cobra.graficos;
 
 /**
  *
  * @author felipe
  */
-public class Data implements Serializable {
+public class Data {
 
-    public String unit;
-    public String value;
 
-    public Data() {
-    }
+        public String unit;
+        public String value;
 
-    public Data(String unit, String value) {
+        public Data() {
 
-        this.unit = unit;
-        this.value = value;
+        }
 
-    }
+        public Data(String unit, String value) {
+
+            this.unit = unit;
+            this.value = value;
+
+        }
+
 }
