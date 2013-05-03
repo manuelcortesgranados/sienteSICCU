@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:m="http://code.google.com/p/gmaps4jsf/" locale="#{var.rcalendarlolocalecale}">
-
-    <ui:composition template="/facelets/template_proyecto.xhtml">
+        xmlns:m="http://code.google.com/p/gmaps4jsf/" template="/facelets/template_proyecto.xhtml" >
+    
         <ui:define name="head">
             <ui:include src="/includes/google_maps_key.jspx" />
             <!--
@@ -70,9 +70,9 @@
                 <td valign="top" height="35" style="width: 80%">
                     <rich:panel id="pgubicolo" header="#{var.ubicacionproyectocolo}" >
                         <a4j:outputPanel id="panelMapa"  style="width: 100%" >
-                            <h:form  execute="@this" id="fr">
+                            <h:form id="fr">
 
-                                <rich:separator height="5" width="25"  style="background-image:none"/>
+                                <hr style="background-image:none; height:5px; width: 25px;"/>
                                 <h:panelGrid columns="3" >
                                     <interkont:spacer width="385" height="5"/>
                                     <h:outputLabel id="lbllugarproyecto"  value="#{var.zonaubi}" for="combolugarproyecto" />
@@ -81,14 +81,14 @@
                                         <a4j:ajax event="onchange" render="gpLblComuna, gpCmbComuna, gpLblBarrio" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
-                                <rich:separator height="5" width="25"  style="background-image:none"/>
-                                <rich:collapsiblePanel id="simpleToggleSelecMapa" label="#{var.ubicacionproyectogeogra}"  >
+                                <hr style="background-image:none; height:5px; width: 25px;"/>
+                                <rich:collapsiblePanel id="simpleToggleSelecMapa" header="#{var.ubicacionproyectogeogra}"  >
 
-                                    <rich:panel id="gpDirMapa" style="width: 100%px;">
+                                    <rich:panel id="gpDirMapa" style="width: 100%;">
                                         <h:outputText value="#{var.selevisu} "/>
 
-                                        <m:map id="panelMapa" style="width:100%;" renderOnWindowLoad="false" autoReshape="#{Supervisor$IngresarNuevaObra.redibujarmapa}" enableScrollWheelZoom="true"
-                                                   height="450px"  latitude="#{Supervisor$IngresarNuevaObra.latitudmapa}" longitude="#{Supervisor$IngresarNuevaObra.longitudmapa}" zoom="#{Supervisor$IngresarNuevaObra.zoom}"
+                                        <m:map id="panelMapa" style="width:100%; height: 450px;" renderOnWindowLoad="false" autoReshape="#{Supervisor$IngresarNuevaObra.redibujarmapa}" enableScrollWheelZoom="true"
+                                                    latitude="#{Supervisor$IngresarNuevaObra.latitudmapa}" longitude="#{Supervisor$IngresarNuevaObra.longitudmapa}" zoom="#{Supervisor$IngresarNuevaObra.zoom}"
                                                jsVariable="map"  type="G_NORMAL_MAP" >
                                             <m:polyline lineWidth="3" hexaColor="#ff0000" geodesic="true" >
                                                 <a4j:repeat id="idinvias"  var="point" value="#{Supervisor$EntidadConvenio.listapuntosruta}"  >
@@ -113,9 +113,9 @@
                                         </m:map>
                                         <h:inputHidden id="txthiden" value="#{Supervisor$IngresarNuevaObra.jsVariable}" />
                                         <h:inputHidden id="txtzoomhiden" value="#{Supervisor$IngresarNuevaObra.jsZoon}" />
-                                        <a4j:jsFunction name="renderDireccion" render="gpDirMapa,layoutLugar,panelMapa,pgubicolo" ajaxSingle="false" />
+                                        <a4j:jsFunction name="renderDireccion" render="gpDirMapa,layoutLugar,panelMapa,pgubicolo" execute="false" />
                                         <a4j:jsFunction name="funmapCapturaLatLon" onbeforedomupdate="fun()" >
-                                            <a4j:ajax event="oncomplete" action="#{Supervisor$IngresarNuevaObra.capturaZoom}" />
+                                            <a4j:ajax event="oncomplete" listener="#{Supervisor$IngresarNuevaObra.capturaZoom}" />
                                         </a4j:jsFunction>
                                         <interkont:spacer width="10"/>
                                         <h:panelGrid id="gpOpMapa">
@@ -151,7 +151,7 @@
                                                                 <h:outputLabel value="#{var.longitud}:" styleClass="txt_header_outtext" />
                                                                 <h:inputText id="txtlongitudAdress" styleClass="txtlongitudAdress" value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
                                                             </h:panelGroup>
-                                                            <rich:hotKey id="myKey" key="return" handler="#{rich:element('newpunto')}.click()" selector="#txtAddress" />
+                                                            <rich:hotKey id="myKey" key="return" onkeyup="#{rich:element('newpunto')}.click()" selector="#txtAddress" />
                                                         </h:panelGrid>
                                                         <h:panelGrid columns="2" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==2}">
 
@@ -177,50 +177,45 @@
                                                 <a4j:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
                                                                    render="layoutLugar,gpDirMapa">
                                                 </a4j:commandButton>
-                                                <rich:hotKey id="Keyconf" key="return" handler="#{rich:element('confpunto')}.click()" selector="#txtAddress" />
+                                                <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click()" selector="#txtAddress" />
                                             </h:panelGroup>
                                         </h:panelGrid>
                                         <h:panelGroup id="layoutLugar" >
 
                                             
-                                                <rich:dataTable id="datamarkers"  rows="4" style="text-align:left;" binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
-                                                                var="lalo" style="width:100%;" value="#{Supervisor$IngresarNuevaObra.marli}" >
-                                                    <rich:column id="co1" width="100px"
-                                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                                 sortIconDescending="../resources/images/des.gif">
+                                                <rich:dataTable id="datamarkers"  rows="4" style="text-align:left; width:100%;" binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
+                                                                var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
+                                                    <rich:column id="co1" style="width: 100px;"
+                                                                 >
                                                         <f:facet name="header">
                                                             <h:outputText value="#{var.longitud}" />
                                                         </f:facet>
                                                         <h:outputText id="otxt-la" value="#{lalo.longitude}"/>
                                                     </rich:column>
-                                                    <rich:column id="co2" width="100px"
-                                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                                 sortIconDescending="../resources/images/des.gif">
+                                                    <rich:column id="co2" style="width: 100px;"
+                                                                >
                                                         <f:facet name="header">
                                                             <h:outputText value="#{var.latitud}" />
                                                         </f:facet>
                                                         <h:outputText id="otxt-lo" value="#{lalo.latitude}"/>
                                                     </rich:column>
-                                                    <rich:column id="co3" width="300px"
-                                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                                 sortIconDescending="../resources/images/des.gif">
+                                                    <rich:column id="co3" style="width: 100px;"
+                                                                 >s
                                                         <f:facet name="header">
                                                             <h:outputText value="Direccion" />
                                                         </f:facet>
                                                         <h:outputText id="otxt-di" value="#{lalo.address}"/>
                                                     </rich:column>
-                                                    <rich:column id="co5" width="300px"
-                                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                                 sortIconDescending="../resources/images/des.gif">
+                                                    <rich:column id="co5" style="width: 300px;"
+                                                                 >
                                                         <f:facet name="header">
                                                             <h:outputText value="Tipo" />
                                                         </f:facet>
                                                         <h:outputText  value="Primario" rendered="#{lalo.tipo==0}"/>
                                                         <h:outputText  value="Secundario" rendered="#{lalo.tipo==1}"/>
                                                     </rich:column>
-                                                    <rich:column id="co4" width="300px"
-                                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                                 sortIconDescending="../resources/images/des.gif">
+                                                    <rich:column id="co4" style="width: 300px;"
+                                                                 >
                                                         <f:facet name="header">
                                                             <h:outputText value="#{var.eliminar}" />
                                                         </f:facet>
@@ -236,7 +231,7 @@
                                     </rich:panel>
 
                                 </rich:collapsiblePanel>
-                                <rich:collapsiblePanel id="simpleToggleSelecLocalidad" label="#{var.relaccioneloca}" switchType="ajax" opened="true">
+                                <rich:collapsiblePanel id="simpleToggleSelecLocalidad" header="#{var.relaccioneloca}" switchType="ajax" expanded="true">
                                     <rich:panel id="gpDirLocalidades3" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}">
                                         <h:panelGrid columns="4">
                                             <interkont:spacer width="385" height="5"/>
@@ -246,7 +241,7 @@
 
                                             <h:selectOneMenu id="comboclasificacionproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen}" disabled="#{Supervisor$IngresarNuevaObra.tipoOrigenSoloLectura}">
                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoOrigenes}" />
-                                                <a4j:ajax event="onchange" execute="@this"  render="panelLocalidadProyecto" action="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
+                                                <a4j:ajax event="onchange" execute="@this"  render="panelLocalidadProyecto" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
                                             </h:selectOneMenu>
                                         </h:panelGrid>
                                     </rich:panel>
@@ -263,8 +258,8 @@
 
                                                     <h:selectOneMenu id="combodepartamentoproyecto" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Supervisor$IngresarNuevaObra.codDepartamento}" >
                                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.departamento}" />
-                                                        <a4j:ajax execute="combodepartamentoproyecto" event="onchange" action="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
-                                                                     render="panelmunipioproyecto" execute="@this"/>
+                                                        <a4j:ajax execute="@this, combodepartamentoproyecto" event="onchange" listener="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
+                                                                     render="panelmunipioproyecto" />
                                                     </h:selectOneMenu>
                                                 </h:panelGrid>
                                             </h:panelGroup>
@@ -296,7 +291,7 @@
                                             <h:panelGrid columns="2">
                                                 <interkont:spacer width="485" height="5"/>
                                                 <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarLocalidad}" render="layoutLocalidades" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
-                                                                    value="#{var.agregar}"  execute="@this" execute="combodepartamentoproyecto,combomunicipioproyecto,comboregion"
+                                                                    value="#{var.agregar}" execute=" @this, combodepartamentoproyecto,combomunicipioproyecto,comboregion"
                                                                     style="font-size:12px;" disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                             </h:panelGrid>
                                         </h:panelGroup>  
@@ -305,9 +300,9 @@
                                         <rich:panel id="layoutLocalidades" header="#{var.localidades}" styleClass="rich-panel-body" style="padding:0px;" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
                                             <h:panelGroup style="overflow:auto; height: 180px; width: 520px">
                                                 <rich:dataTable id="tablaLocalidades" rows="4" var ="_localidad" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}"
-                                                                onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'" sortMode="single"   binding="#{Supervisor$IngresarNuevaObra.tablalocalidades}"
-                                                                value="#{Supervisor$IngresarNuevaObra.listaLocalidades}" style="width:100%;" render="dsLocalidades" style="text-align:center;">
+                                                                onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                                                onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"   binding="#{Supervisor$IngresarNuevaObra.tablalocalidades}"
+                                                                value="#{Supervisor$IngresarNuevaObra.listaLocalidades}" style="text-align:center; width:100%;;">
                                                     <f:facet name="header">
                                                         <rich:columnGroup>
                                                             <rich:column width="150px">
@@ -365,8 +360,7 @@
                                 <a4j:outputPanel id="panelErrorUb">
                                     <rich:messages id="messagesUb" globalOnly="true"
                                                    styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                                   infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                                   errorLabelClass="error_texto">
+                                                  >
                                         <f:facet name="infoMarker">
                                             <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                         </f:facet>
@@ -391,6 +385,5 @@
                 </td>
                 </tr>
             </table>
-        </ui:define>
-    </ui:composition>
-</f:view>
+        </ui:define> 
+</ui:composition>

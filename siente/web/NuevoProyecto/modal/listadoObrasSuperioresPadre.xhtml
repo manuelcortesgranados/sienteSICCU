@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-listado-proyectosPadresPadre" moveable="true" width="1000" height="500" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-listado-proyectosPadresPadre" moveable="true" style="width: 1000; height: 500;" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{var.encontrarPadreProyecto}" styleClass="txt_header" />
@@ -17,8 +18,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-proyectosPadresPadre" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder-mp-listado-proyectosPadresPadre" event="onclick" for="mp-listado-proyectosPadresPadre" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-proyectosPadresPadre')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -47,19 +47,17 @@
                                     rows="5"
                                     var ="ObraPadre"
                                     binding="#{Supervisor$IngresarNuevaObra.tablaObrasPadres}"
-                                    onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}"
-                                    render="panelfooter"
-                                    style="width:100%;"
-                                    style="text-align:center;">
+                                    style="text-align:center; width:100%;">
                         <f:facet name="header">
                             <rich:columnGroup>
 
                                 <rich:column colspan="5">
                                     <h:outputText value="#{var.misolicitues} #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina}#{var.deCiu}#{Supervisor$IngresarNuevaObra.totalpaginas}" />
                                 </rich:column>
-                                <rich:column colspan="5" breakBefore="true">
+                                <rich:column colspan="5" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
                                             <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorreales}" render="tablaObrasPadre" action="#{Supervisor$IngresarNuevaObra.primerosreales}"/>
@@ -69,25 +67,25 @@
                                         </h:panelGrid>
                                     </center>
                                 </rich:column>
-                                <rich:column width="150px" breakBefore="true">
+                                <rich:column style="width: 150px;" breakRowBefore="true">
                                     <h:outputText value="#{var.numero}"/>
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width: 150px;">
                                     <h:outputText value="#{var.fecha}s" />
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width: 150px;">
                                     <h:outputText value="#{var.valortotal}" />
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width: 150px;">
                                     <h:outputText value="#{var.nombre}" />
                                 </rich:column>
-                                <rich:column width="150px">
+                                <rich:column style="width: 150px;">
                                     <h:outputText value="#{var.seleccionar}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoObraPadres">
-                            <rich:column  width="150px" breakBefore="true">
+                            <rich:column  style="width: 150px;" breakRowBefore="true">
                                 <h:outputText value="#{ObraPadre.intcodigoobra}"/>
                             </rich:column>
                             <rich:column >
@@ -116,4 +114,4 @@
         </rich:panel>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

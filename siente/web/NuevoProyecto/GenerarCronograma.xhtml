@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
     <f:view >
 
         <ui:composition template="/facelets/template_proyecto.xhtml">
             <ui:define name="head">
-                <rich:page title="Nuevo #{var.proyect} - Supervisor"></rich:page>
-                
+                <title>Nuevo #{var.proyect} - Supervisor </title>
+
             </ui:define>
             <ui:define name="title">
                 <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.cronogramavalidacion}"/>
@@ -39,7 +40,7 @@
                                     <interkont:spacer width="20"/>
 
                                     <h:panelGrid id="layoutPaso2" style="width:100%;">
-                                        <rich:collapsiblePanel switchType="client"  opened="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
+                                        <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
                                             <center>
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.pgenerarcronograma}"/>
@@ -50,10 +51,10 @@
                                                         <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                                     </h:panelGroup>
                                                     <a4j:commandLink id="generarcronograma" styleClass="excel anchorlink" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
-                                                                     action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}"                         
+                                                                     action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}"                          
                                                                      >
 
-                                                        <a4j:ajax event="oncomplete" onsubmit="javascript:Richfaces.showModalPanel('mp_cronograma')" render="layoutCron"/>
+                                                        <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.showModalPanel('mp_cronograma')" render="layoutCron"/>
                                                     </a4j:commandLink>
 
 
@@ -62,7 +63,7 @@
                                                 <h:outputLabel value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                             </center>
                                         </rich:collapsiblePanel>
-                                        <rich:collapsiblePanel switchType="client" label="#{var.subircronograma}" opened="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
+                                        <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
                                             <center>
                                                 <h:panelGrid columns="1" style="align:center;">
                                                     <h:outputLabel value="#{var.importeelcronograma}" styleClass="txt_label_bold"/>
@@ -95,7 +96,7 @@
                                                 </h:panelGroup>
                                             </center>
                                         </rich:collapsiblePanel>
-                                        <rich:collapsiblePanel label="#{var.presupuesto}" switchType="client" opened="true" id="stpPresupuesto" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" >
+                                        <rich:collapsiblePanel header="#{var.presupuesto}" switchType="client" expanded="true" id="stpPresupuesto" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" >
                                             <f:facet name="header">
                                                 <h:outputText value="#{var.presupuesto}"/>
                                             </f:facet>
@@ -115,7 +116,7 @@
                                                         <h:selectOneMenu id="cmbanalisisprecio" value="#{Supervisor$IngresarNuevaObra.obranueva.boolincluyeaiu}"  >
                                                             <f:selectItem itemValue="false" itemLabel="No"/>
                                                             <f:selectItem itemValue="true" itemLabel="Si"/> 
-                                                            <a4j:ajax event="onchange" action="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="layoutCostoTotal" >
+                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="layoutCostoTotal" >
 
                                                             </a4j:ajax>    
                                                         </h:selectOneMenu>
@@ -124,7 +125,7 @@
 
                                                         <h:selectOneMenu id="combotipocosto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto}"  >
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoCostoOption}" />
-                                                            <a4j:ajax event="onchange"  action="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" >
+                                                            <a4j:ajax event="change"  listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" >
 
                                                             </a4j:ajax>     
                                                         </h:selectOneMenu>
@@ -140,32 +141,32 @@
                                                             </h:outputText>
                                                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
                                                                 <f:convertNumber pattern="###,###"/>
-                                                                <a4j:ajax event="onchange"  action="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
+                                                                <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
                                                             </h:inputText>
                                                         </h:panelGroup>
 
                                                         <h:outputLabel id="lbladministracion"  value="#{var.administracion} (%):" />
                                                         <rich:inputNumberSpinner id="admini"  value="#{Supervisor$IngresarNuevaObra.obranueva.floatporadmon}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
-                                                            <a4j:ajax event="onchange" render="layoutCostoTotal" action="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                                         </rich:inputNumberSpinner>                                                    
                                                         <h:outputLabel id="lblImprevistos"  value="#{var.imprevistos} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
                                                         <rich:inputNumberSpinner id="imprevistos" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporimprevi}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"  >
-                                                            <a4j:ajax event="onchange" render="layoutCostoTotal" action="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                                         </rich:inputNumberSpinner>
                                                         <h:outputLabel id="lblUtilidad"  value="Utilidad (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
                                                         <rich:inputNumberSpinner id="utilidad" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporutilidad}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}" >
-                                                            <a4j:ajax event="onchange" render="layoutCostoTotal" action="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                                         </rich:inputNumberSpinner>                                                    
                                                         <h:outputLabel id="lblIva"  value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
 
                                                         <h:outputLabel id="lblIvaAdmon"  value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto!=1}"/>
                                                         <rich:inputNumberSlider id="ivautilidad" maxValue="16" step="1"
-                                                                                value="#{Supervisor$IngresarNuevaObra.obranueva.floatporivasobreutil}" width="90" >
-                                                            <a4j:ajax event="onchange" render="layoutCostoTotal" action="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                                                                value="#{Supervisor$IngresarNuevaObra.obranueva.floatporivasobreutil}" style="width: 90px;">
+                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                                         </rich:inputNumberSlider>                                                    
                                                         <h:outputLabel id="lblotros"  value="#{var.otros} (%):" />
                                                         <rich:inputNumberSpinner id="otros" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporotros}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
-                                                            <a4j:ajax event="onchange" render="layoutCostoTotal" action="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                                         </rich:inputNumberSpinner>
 
                                                         <h:outputLabel id="lblCostoTotal"  value="#{var.costototal}:"/>
@@ -193,8 +194,7 @@
                                             <a4j:outputPanel id="panelErrorGen">
                                                 <rich:messages id="messagesGen" globalOnly="true"
                                                                styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                                               infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                                               errorLabelClass="error_texto">
+                                                               >
                                                     <f:facet name="infoMarker">
                                                         <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                                     </f:facet>
@@ -221,4 +221,4 @@
             </ui:define>
         </ui:composition>
     </f:view>
-</html>
+</ui:composition>

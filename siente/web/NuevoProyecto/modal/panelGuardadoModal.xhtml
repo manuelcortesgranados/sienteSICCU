@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -18,8 +19,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_panelGuardado" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelGuardado" event="onclick" for="panelGuardado" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelGuardado')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -39,4 +39,4 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
+</ui:composition>
