@@ -1,7 +1,15 @@
-
-<jsp:root version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:jsp="http://java.sun.com/JSP/Page"
-          xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf" xmlns:rich="http://richfaces.org/rich"  xmlns:m="http://code.google.com/p/gmaps4jsf/">
-    <jsp:directive.page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" />
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    >
 
     <rich:popupPanel id="panelPolizaContrato" autosized="true"
                      headerClass="rich-panel-header">
@@ -13,9 +21,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="cerrar"
-                                       title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelPolizaContrato" event="onclick" for="panelPolizaContrato" operation="hide"/>
+                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelPolizaContrato')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -29,45 +36,44 @@
                     <h:panelGrid columns="3" style="width: 100%;">
                         <h:panelGrid styleClass="vineta"/>
                         <h:outputLabel id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" for="comboTipoPoliza">
-                            
+
                         </h:outputLabel>
                         <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.strdescripcion}"/>
-                        
+
 
                         <h:panelGrid styleClass="vineta"/>
-                        
+
                         <h:outputLabel  id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" for="numPolizaContrato">
-                            
+
                         </h:outputLabel>
-                        
+
                         <h:outputText  value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}"/>
-                        
+
 
                         <h:panelGrid styleClass="vineta"/>
-                         <h:outputLabel id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza">
+                        <h:outputLabel id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza">
                             <rich:message for="calendarVenciPoliza" style="color: #ed0606;"/>
                         </h:outputLabel>      
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$IngresarNuevaObra.polizacontrato.datefechavecimiento}" required="true"/>
-                       
+
                         <h:panelGrid styleClass="vineta"/>
                         <h:outputLabel id="lblEntidadPoliza"  value="#{var.entidadPoliza}" for="comboentidadPoliza">
                         </h:outputLabel>
                         <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.entidad.strnombreentidad}"/>
-                        
-                        
+
+
                     </h:panelGrid>
                 </h:panelGrid>
-                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" width="60%">
+                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 60%;" >
                     <h:panelGrid style="width: 10px;"/>
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="tablaPolizas, gpPolizaContrato"
                                        execute="@this" style="font-size: 10px;" styleClass="btn_sec_gig"  />
                 </h:panelGrid>
 
-                
-                
+
+
             </h:form>
         </h:panelGroup>
     </rich:popupPanel>
-                
-</jsp:root>
+</ui:composition>
