@@ -419,11 +419,11 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>gestionusuario</from-outcome>
-            <to-view-id>/Usuario/ConsultarUsuario.jspx</to-view-id>
+            <to-view-id>/Usuario/ConsultarUsuario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>perfilusuario</from-outcome>
-            <to-view-id>/Usuario/PerfilUsuario.jspx</to-view-id>
+            <to-view-id>/Usuario/PerfilUsuario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -517,7 +517,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>cambiocontra</from-outcome>
-            <to-view-id>/Usuario/Cambiarcontrasena.jspx</to-view-id>
+            <to-view-id>/Usuario/Cambiarcontrasena.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>homesolicitud</from-outcome>
