@@ -2,18 +2,19 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:a4j="http://richfaces.org/a4j" 
+      xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:m="http://code.google.com/p/gmaps4jsf/"  
-                template="/facelets/template_main.xhtml">
+      template="/facelets/template_main.xhtml">
 
    <ui:define name="head">
-                <title>Cobra - Home Gestion</title>
-                <ui:include src="/includes/google_maps_key.jspx" />
+            <title>Cobra - Home Gestion</title>
+                <ui:include src="/includes/google_maps_key.xhtml" />
                 <script type="text/javascript">
 
                     var _gaq = _gaq || [];
@@ -71,7 +72,7 @@
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                 <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
                 <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
-                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.jspf"/>
+                    <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
                 </h:panelGroup>
 
                     <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
@@ -310,9 +311,9 @@
                     </h:panelGrid>
                 </h:form>
            <!--Se deben arregla y habilitar NOOOOOO BORRARRRRR     
-                <ui:include src="/Ciudadano/Sliderimagenes.jspf"/>
+                <ui:include src="/Ciudadano/Sliderimagenes.xhtml"/>
                 <f:subview id="murocomentarios"  >
-                    <ui:include src="/Ciudadano/Muro_Comentarios.jspf"/>
+                    <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
                 </f:subview>
 -->
                <a4j:region>
@@ -323,17 +324,17 @@
                     </h:form>
                 </a4j:region>
 <!--Se deben arregla y habilitar NOOOOOO BORRARRRRR 
-                <ui:include src="/modal/modalFiltroAvanzado.jspx"/>
-                <ui:include src="/modal/modalFiltroAvanzadoCiud.jspx"/>
+                <ui:include src="/modal/modalFiltroAvanzado.xhtml"/>
+                <ui:include src="/modal/modalFiltroAvanzadoCiud.xhtml"/>
 -->
 
                 <!--
-                <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalAlojamientos.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.jspx"/>
-                <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.jspx"/>
-                <ui:include src="/reportes/modalreporte/modalreportehome.jspx"/>-->
+                <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalAlojamientos.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.xhtml"/>
+                <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.xhtml"/>
+                <ui:include src="/reportes/modalreporte/modalreportehome.xhtml"/>-->
             </ui:define>
 
 </ui:composition>
