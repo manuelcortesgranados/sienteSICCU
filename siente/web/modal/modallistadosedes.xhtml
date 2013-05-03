@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" 
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -17,9 +19,9 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp-listado-sedeseducativas" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_mp-listado-sedeseducativas" event="onclick" for="mp-listado-sedeseducativas" operation="hide"/>
-                </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;"/>
+                      </h:panelGroup>
             </h:form>
         </f:facet>
 
@@ -37,7 +39,7 @@
                                 <f:selectItem itemValue="1" itemLabel="Codigo DANE"/>
                                 <f:selectItem itemValue="2" itemLabel="Nombre Institución"/>
                                 <f:selectItem itemValue="3" itemLabel="Nombre Sede"/>
-                                <a4j:ajax event="onchange" action="#{Supervisor$EntidadConvenio.buscarSede}" render="palabrabus,parametro" />
+                                <a4j:ajax event="change" listener="#{Supervisor$EntidadConvenio.buscarSede}" render="palabrabus,parametro" />
                             </h:selectOneMenu>
 
                             <h:panelGroup id="parametro">
@@ -55,19 +57,18 @@
                         <rich:dataTable id="tablasedeseducativas"
                                         rows="3"
                                         var ="sede"
+                                        rowKeyVar="filaSeleccionada"
                                         binding="#{Supervisor$EntidadConvenio.tablasedes}"
-                                        onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
-                                        render="panelfooter"
-                                        style="width:100%;"
-                                        style="text-align:center;">
+                                        style="text-align:center;width:100%;">
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
                                         <h:outputText value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
                                     </rich:column>
-                                    <rich:column width="200px" breakBefore="true">
+                                    <rich:column width="200px" breakRowBefore="true">
                                         <h:outputText value="#{var.codigodane}"/>
                                     </rich:column>
                                     <rich:column width="200px">
@@ -85,7 +86,7 @@
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
-                                <rich:column  width="200px" breakBefore="true">
+                                <rich:column  width="200px" breakRowBefore="true">
                                     <h:outputText value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
                                 </rich:column>
                                 <rich:column width="200px">
@@ -106,7 +107,7 @@
                             </rich:columnGroup>
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="5" breakBefore="true">
+                                    <rich:column colspan="5" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
                                                 <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.primeroSedes}"/>
@@ -126,4 +127,4 @@
        
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

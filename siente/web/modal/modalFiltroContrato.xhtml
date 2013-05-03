@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
@@ -19,13 +21,12 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_panelFiltroContrato" styleClass="cerrarbusqueda"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelFiltroContrato" event="onclick" for="panelFiltroContrato" operation="hide"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGrid id="gppanelFiltroAvanzadoContrato" style="background-color: #FFFFFF;" style="width:100%;" columnClasses="panelcenter">
+            <h:panelGrid id="gppanelFiltroAvanzadoContrato" style="background-color: #FFFFFF;width:100%;"  columnClasses="panelcenter">
                 <center>
                     <h:panelGrid columns="2">
                         <h:inputText size="35" style="width: 550px" id="lblNombreContrato"
@@ -34,7 +35,7 @@
                     </h:panelGrid>
 
 
-                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelcenter" style="width:100%;" style="background-color: #FFFFFF;">
+                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelcenter"  style="background-color: #FFFFFF;width:100%;">
 
                         <h:outputLabel  id="label_donde" value="Cual es el Número de #{Supervisor$Contrato.tipoContCon}?" styleClass="titulo3_filtro_busqueda" />
                         <h:inputText size="25" value="#{Supervisor$Contrato.filtrocontrato.strnumcontrato}"/>
@@ -46,7 +47,7 @@
                         <h:inputText size="25" value="#{Supervisor$Contrato.filtrocontrato.contratista}"/>
 
                     </h:panelGrid>
-                    <h:panelGrid columns="4" columnClasses="panelizquierda, panelcenter" style="width:100%;" style="background-color: #FFFFFF;">
+                    <h:panelGrid columns="4" columnClasses="panelizquierda, panelcenter"  style="background-color: #FFFFFF;width:100%;">
                         <h:outputLabel  id="lblvalrocontrato"  value="Valor del #{Supervisor$Contrato.tipoContCon}?" styleClass="titulo3_filtro_busqueda"/>
 
                         <h:inputText value="#{Supervisor$Contrato.filtrocontrato.costoInit}" size="8" id="txtCuantiaini" >
@@ -63,19 +64,18 @@
 
                         <h:outputLabel  id="lblperiodo"  value="#{var.periodoejecucionentre}?" styleClass="titulo3_filtro_busqueda"/>
 
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fec"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"   id="fec"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMin}">
 
                         </rich:calendar>
                         <h:outputLabel  id="labely" value=" #{var.y} " styleClass="titulo3_filtro_busqueda"/>
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fech"
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  id="fech"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMax}">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="10" /><interkont:spacer height="10" />
-                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" styleClass="busquedavanzada2 anchorLink">
-                        <a4j:ajax event="onclick" render="tabla-listado-contratoconvenio" ignoreDupResponses="true" execute="@this"/>
-                        <rich:componentControl attachTo="filtrar" event="onclick" for="panelFiltroContrato" operation="hide"/>
+                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" styleClass="busquedavanzada2 anchorLink" onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;">
+                        <a4j:ajax event="click" render="tabla-listado-contratoconvenio"  execute="@this" />
                     </h:commandLink>
                     <br/>
                     <br/>
@@ -83,4 +83,4 @@
             </h:panelGrid>
         </h:form>
     </rich:popupPanel>
-</f:view>
+</ui:composition>
