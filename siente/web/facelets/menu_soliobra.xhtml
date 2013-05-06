@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<f:view
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-    xmlns:c="http://java.sun.com/jstl/core"
-    contentType="text/html">
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    >
 
 
     <div class="topbar"><div class="toptitle"><h:outputText value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
@@ -44,9 +43,9 @@
                 <h:outputText value="Inicio" styleClass="home anchorLink"/>
             </f:facet>
 
-            <a4j:repeat items="#{SessionBeanCobra.modulos}" var="modulo">
+            <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
 
-                <rich:menuItem submitMode="ajax" render="form_menu" value="#{modulo.strmodNmbre}" iconClass="#{modulo.striconoInicio}"
+                <rich:menuItem mode="ajax" render="form_menu" label="#{modulo.strmodNmbre}" iconDisabled="#{modulo.striconoInicio}"
                                onclick="document.location.href='../faces#{modulo.strurlMdloRuta}'" immediate="true" style="width: 250px;"/>
             </a4j:repeat>
         </rich:dropDownMenu>
@@ -60,14 +59,14 @@
                 <h:outputText value="Gestionar" styleClass="gestionar anchorLink"/>
             </f:facet>
 
-            <rich:menuGroup value="Solicitud Obra" iconClass="icon-obrach">
-                <rich:menuItem  value="Nueva Solicitud" iconClass="icon-nuevo"
+            <rich:menuGroup label="Solicitud Obra" iconDisabled="con-obrach">
+                <rich:menuItem  label="Nueva Solicitud" iconDisabled="icon-nuevo"
                                 action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"
                                 rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo==5}"
                                 render="panelBody" immediate="true"/>
 
-                <rich:menuGroup value="Consultar" iconClass="icon-consultar">                    
-                    <rich:menuItem value="Total Solicitudes" iconClass="icon-finalizados"
+                <rich:menuGroup label="Consultar" iconDisabled="icon-consultar">                    
+                    <rich:menuItem label="Total Solicitudes" iconDisabled="icon-finalizados"
                                    immediate="true" render="panelBody"
                                    action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
                                    rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo==7 ||
@@ -75,7 +74,7 @@
                                                SolicitudObra$GestionarSolicitudObra.valuegrupo==9}" style="width: 250px;">
                     </rich:menuItem>
 
-                    <rich:menuItem value="Solicitudes Aprobadas" iconClass="icon-suspendidos"
+                    <rich:menuItem label="Solicitudes Aprobadas" iconDisabled="icon-suspendidos"
                                    action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}"
                                    immediate="true" render="panelBody"
                                    rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo==6 ||
@@ -109,12 +108,12 @@
                 <h:outputText value="Ayuda" styleClass="ayuda anchorLink"/>
             </f:facet>
 
-            <rich:menuItem value="Soporte en linea" target="_blank" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
-                           onclick="document.location.href='http://soportesiente.ning.com'" iconClass="icon-soporte"/>
-            <rich:menuItem value="Tutorial" target="_blank" immediate="true"
-                           action="manual" iconClass="icon-tutorial"/>
-            <rich:menuItem value="Preguntas Frecuentes" immediate="true"
-                           action="pregfrecuentes" iconClass="icon-preguntas"/>
+            <rich:menuItem label="Soporte en linea"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
+                           onclick="document.location.href='http://soportesiente.ning.com'" iconDisabled="icon-soporte"/>
+            <rich:menuItem label="Tutorial" immediate="true"
+                           action="manual" iconDisabled="icon-tutorial"/>
+            <rich:menuItem label="Preguntas Frecuentes" immediate="true"
+                           action="pregfrecuentes" iconDisabled="icon-preguntas"/>
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
@@ -140,4 +139,4 @@
 
     </rich:toolbar>
 
-</f:view>
+</ui:composition>
