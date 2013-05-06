@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+    <ui:composition template="/facelets/template_main.xhtml">
+        <ui:define name="head">
+            <title>Asociar Contratos</title>
+            <h:outputScript name="script_supervisor.js"/>
+        </ui:define>
+        <ui:define name="title">
+            <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
+        </ui:define>
+
+
+        <ui:define name="menu">
+            <ui:include src="/facelets/menu_gestion.xhtml"/>
+        </ui:define>
+        <ui:define name="menu_lateral">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </ui:define>
+
+        <ui:define name="body" >
+            <h:form>
+
+                <rich:panel id="pgcontrat1aso" header="#{var.asociacioncontrato}" >
+                    <center>
+                        <interkont:spacer height="35" style="width:100%;"/>
+
+                        <h:panelGrid id="pgconveniocontrato" columns="3"  >                            
+                            <a4j:commandLink value="Asociar contrato" rendered="#{SessionBeanCobra.usuarioService.usuarioObra.usuId !=17}"
+                                             styleClass="asociarcontrato anchorLink"
+                                             action="#{Supervisor$AsociarContratos.llenarContratos}" 
+                                             oncomplete="">
+                                <a4j:ajax event="complete" render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();"/>
+                            </a4j:commandLink>
+
+
+
+                            <a4j:commandLink value="Interventoria" 
+                                             styleClass="interventoria anchorLink"
+                                             action="#{Supervisor$AsociarContratos.llenarContratosIntervento}" >
+                                <a4j:ajax event="complete" render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show()"/>
+                            </a4j:commandLink>
+
+                        </h:panelGrid>
+
+                        <h:panelGrid id="pgdatacontratos">
+                            <center>
+                                <rich:dataTable id="datacontratosaso"  rows="10" style="text-align:left;width:100%;"  var="contrarow"
+                                                value="#{Supervisor$AsociarContratos.listacontratosobra}"
+                                                binding="#{Supervisor$AsociarContratos.tablacontratos}"
+                                                rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}">
+                                    <rich:column id="cocontr1" width="100px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Número contrato" />
+                                        </f:facet>
+                                        <h:outputText id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                    </rich:column>
+                                    <rich:column id="co2" width="100px" style="text-align: right;">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.valor}" />
+                                        </f:facet>
+                                        <h:outputText id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                            <f:convertNumber pattern="$ ###,###,###"/>
+
+                                        </h:outputText>
+                                    </rich:column>
+
+                                    <rich:column id="vlcongtrhijosse"  width="150px"
+                                                 style="text-align: right;" >
+                                        <f:facet name="header">
+                                            <h:outputText value="Valor Disponible"/>
+                                        </f:facet>
+                                        <h:outputText id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
+                                            <f:convertNumber pattern="$###,###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="fechaincontse"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.datefechaini}"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{contrarow.contrato.datefechaini}"/>
+                                    </rich:column>
+                                    <rich:column id="fechaficontse"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.datefechafin}"/>
+                                        </f:facet>
+                                        <h:outputText  value="#{contrarow.contrato.datefechafin}"/>
+                                    </rich:column>
+                                    <rich:column id="tipocontrato"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Tipo Contrato"/>
+                                        </f:facet>
+                                        <h:outputText  value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
+                                        <h:outputText  value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                                    </rich:column>
+                                    <rich:column id="desasociar"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText value="Desasociar"/>
+                                        </f:facet>
+                                        <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria}"
+                                                           render="datacontratosaso,pgcontrat1aso">
+
+                                        </a4j:commandButton>
+                                    </rich:column>
+                                    <f:facet name="footer">
+                                        <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                    </f:facet>
+                                </rich:dataTable>
+                            </center>
+                        </h:panelGrid>
+
+                        <a4j:outputPanel id="panelErrorAsoCont">
+                            <rich:messages id="messagesAsoCon" globalOnly="true"
+                                           styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                           >
+                                <f:facet name="infoMarker">
+                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                </f:facet>
+                                <f:facet name="warnMarker">
+                                    <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                </f:facet>
+                                <f:facet name="errorMarker">
+                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                                <f:facet name="fatalMarker">
+                                    <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                            </rich:messages>
+
+                        </a4j:outputPanel>
+
+
+                    </center>
+                </rich:panel>
+
+            </h:form>
+            <ui:include src="/modal/listadoContratoAsociar.jspx"/>
+            <ui:include src="../modal/modalRelacionContratointerventoria.jspx"/>
+        </ui:define>
+    </ui:composition>
+</ui:composition>

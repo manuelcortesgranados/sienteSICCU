@@ -1,0 +1,612 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml">
+
+
+    <ui:define name="head">
+        <title>Cobra - Supervisor</title>
+        <h:outputScript name="script_supervisor.js" />
+        <h:outputScript name="validarletra.js"  library="js"/>
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="Reportar avance"/>
+
+        <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="alimentaravance">
+            <h:panelGroup id="gpPrincipalAlimentar" rendered="#{Supervisor$Alimentar.vertodoalimentar}">
+                <rich:collapsiblePanel switchType="ajax" id="gpAlimentarObra" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    <f:facet name="header">
+                        <h:outputText value="#{var.definirperiodoavance}"/>
+                    </f:facet>
+
+                    <h:panelGrid id="gpBasicos" columns="2" style="width:100%;">
+                        <h:panelGrid columns="2" style="width:100%;" columnClasses="panelizquierda,panelcenter">
+                            <h:panelGroup style="width:100%;">
+                                <h:panelGrid id="valores" columns="2">
+                                    <h:outputText value="#{var.esteavanceposeeacta}"/>
+                                    <h:selectOneMenu id="cmbcontrato" value="#{Supervisor$Alimentar.subiracta}" >
+                                        <f:selectItem itemValue="true" itemLabel="Si"/>
+                                        <f:selectItem itemValue="false" itemLabel="No"/>
+                                        <a4j:ajax event="valueChange"  render="gpSubirDocumentos" execute="@this">
+                                        </a4j:ajax>
+                                    </h:selectOneMenu>
+
+
+                                    <h:outputLabel  value="#{var.fechadelacta}" for="fechaalimentacion" />
+                                    <h:selectOneMenu id="fecInfo" value="#{Supervisor$Alimentar.fechaescogida}" style="width: 200px;" rendered="#{var.varalimentacionxperiodo}">
+                                        <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
+                                        <f:selectItems value="#{Supervisor$Alimentar.periodos}"/>
+                                        <a4j:ajax event="valueChange" listener="#{Supervisor$Alimentar.fechaCambio}" execute="@this,layoutComentario" 
+                                                  render="alimentaravance,valores,layoutComentario, layoutEjecutado, layoutComentafactor, layoutFactores, gpErrorAlimentar, pnActividades"/>
+
+                                    </h:selectOneMenu>
+                                    <h:panelGrid columns="2" rendered="#{var.varalimentacionxfecha}">
+                                        <rich:calendar  required="true" datePattern="yyyy-MM-dd"  id="fechaalimentacion" inputSize="10" value="#{Supervisor$Alimentar.fechaAlimentacion}"
+                                                        onchange="#{Supervisor$Alimentar.fechaCambio}" direction="topRight" >
+                                                  </rich:calendar>
+                                        <rich:message for="fechaalimentacion" styleClass="error_texto"/>
+                                    </h:panelGrid>
+
+                                    <interkont:spacer width="10"/>
+                                    <h:panelGroup id="gpErrorAlimentar">
+                                        <blink>
+                                            <h:outputText value="#{Supervisor$Alimentar.mensajefecha}" rendered="#{!Supervisor$Alimentar.fechavalida}" style="color: #ed0606;"/>
+                                        </blink>
+                                    </h:panelGroup>
+
+                                    <h:outputText  value="#{var.valorproyectado}:"/>
+                                    <h:outputText id="labelValorProyectado" styleClass="txt_outtext" value="#{Supervisor$Alimentar.alimentacion.numtotalproyacu}">
+                                        <f:convertNumber pattern="$ ###,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                    </h:outputText>
+
+                                </h:panelGrid>
+
+
+                                <h:panelGrid id="layoutEjecutado" columns="3">
+                                    <h:outputText  value="#{var.valortotalejecutado}:"/>
+                                    <h:panelGroup id="valorEjecutado">
+                                        <h:outputText id="labelValorEjecutado" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
+                                            <f:convertNumber pattern="$ ###,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                    <interkont:spacer width="15"/>
+                                    <h:outputText id="stDesviacion"
+                                                  value="#{var.desviacion}"/>
+                                    <h:outputText id="lblDesviacion"
+                                                  styleClass="txt_outtext" value="#{Supervisor$Alimentar.desviacion} %"/>
+                                    <interkont:spacer width="10" rendered="#{!Supervisor$Alimentar.fechavalida}"/>
+                                    <h:graphicImage id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
+                                                    url="#{Supervisor$Alimentar.alimentacion.semaforo.strimagen}"/>
+                                    <interkont:spacer width="15" rendered="#{Supervisor$Alimentar.fechavalida}"/>
+
+                                    <a4j:commandButton id="btIngresar" value="#{var.cuantificaractividades}" action="#{Supervisor$Alimentar.habilitarEdicionActividades}" render="gpPrincipalAlimentar"
+                                                       rendered="#{Supervisor$Alimentar.fechavalida}" />
+
+                                </h:panelGrid>
+                            </h:panelGroup>
+
+                            <rich:panel header="#{var.comentarioobra}" style="background-color:#ECEBEA; padding: 0px;"  >
+                                <center>
+                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" border="1"  >
+
+                                        <h:inputTextarea cols="60" id="comentSem"  rows="8" styleClass="txtlabel" value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
+                                        <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+
+                                    </h:panelGrid>
+                                </center>
+                            </rich:panel>
+                        </h:panelGrid>
+
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
+                <h:panelGroup id="pnActividades" rendered="#{Supervisor$Alimentar.editarActividades}">
+                    <rich:collapsiblePanel  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.actividadesproyecto}"/>
+                        </f:facet>
+                        <rich:panel id="layoutTablaMatrix" >
+                            <h:panelGrid columns="2" style="width:100%;">
+                                <rich:dataTable  id="datosgeneralesAlimentar" style="width:100%;">
+
+                                    <f:facet name="header">
+                                        <rich:columnGroup>
+                                            <rich:column   style="width:100%;" colspan="5">
+
+                                            </rich:column>
+
+                                            <rich:column  breakRowBefore="true" width="160px">
+                                                <h:outputText value="#{var.valorproyecto}"/>
+                                            </rich:column>
+                                            <rich:column  width="150px">
+                                                <h:outputText value="#{var.valorejecutadofecha}"/>
+                                            </rich:column>
+                                            <rich:column   width="150px">
+                                                <h:outputText value="#{var.valorejeesteeporte}"/>
+                                            </rich:column>
+                                            <rich:column   width="150px">
+                                                <h:outputText value="#{var.valorejecutadoacumulado}"/>
+                                            </rich:column>
+                                            <rich:column   width="150px">
+                                                <h:outputText value="#{var.porcentajeavanceacum}"/>
+                                            </rich:column>                                                
+
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                    <rich:columnGroup>
+                                        <rich:column style="text-align: center;"></rich:column>
+                                    </rich:columnGroup>
+                                    <f:facet name="footer">
+                                        <rich:columnGroup>
+                                            <rich:column style="text-align: center;">
+                                                <h:outputText id="stvaltotal2" styleClass="matrixvalor " value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column style="text-align: center;">
+                                                <h:outputText id="stvaleje2" styleClass="matrixvalor " value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column style="text-align: center;">
+                                                <h:outputText id="stvalejecreporte2" styleClass="matrixvalor " value="#{Supervisor$Alimentar.totales[1]}">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column style="text-align: center;">
+                                                <h:outputText id="stvalejecacum2" styleClass="matrixvalor " value="#{Supervisor$Alimentar.totales[1]+Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column style="text-align: center;">
+                                                <h:outputText id="stporceporeje2" styleClass="matrixvalor " value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1])/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                    <f:convertNumber pattern="###.## %"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+
+                                </rich:dataTable>
+                                <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
+                                    <a4j:commandLink styleClass="cambiarestado anchorLink"  action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
+                                                     render="layoutTablaMatrix, layoutComentafactor"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+
+                            <interkont:spacer height="10" style="width:100%;"/>
+                            <center>
+                                <a4j:commandButton value="#{var.adicionar} #{var.houtitem}s #{var.no} #{var.previstos}"
+                                                   action="#{Supervisor$Alimentar.inicializarAdicionActividades}"
+                                                   onclick="#{rich:component(modalAdicioarActividades)}.hide();
+                                                                   return false;" 
+                                                   render="panelAdicionarActividades">
+                                </a4j:commandButton>
+                            </center>
+
+
+                            <rich:dataTable binding="#{Supervisor$Alimentar.listaActividades}" id="listaActividadesAlimentar"
+                                            onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                            onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                                            value="#{Supervisor$Alimentar.registrosmatrix}" var="registros" 
+                                            style="width:100%;">
+
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column id= "actividades" colspan="1" width="120px">
+                                            <h:outputText value="#{var.actividades}"/>
+                                        </rich:column>
+                                        <rich:column id= "total" colspan="4" >
+                                            <h:outputText value="#{var.totalactividad}"/>
+                                        </rich:column>
+                                        <rich:column id= "totalEjecutado" colspan="3" >
+                                            <h:outputText value="#{var.totalejecutado}"/>
+                                        </rich:column>
+
+                                        <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="260px">
+                                            <h:outputText value="#{var.descripcion}" style="width:260px"/>
+                                        </rich:column>
+                                        <rich:column id= "unidad" rowspan="2" width="25px">
+                                            <h:outputText value="#{var.unidad}"/>
+                                        </rich:column>
+                                        <rich:column id= "valorUnitario" rowspan="2" width="25px">
+                                            <h:outputText value="#{var.valorunitaio}"/>
+                                        </rich:column>
+                                        <rich:column id= "cantidad" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.cantidad}"/>
+                                        </rich:column>
+                                        <rich:column id= "precio" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.valorprogramado}"/>
+                                        </rich:column>
+                                        <rich:column id= "cantidad2" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.cantidadejecutada}"/>
+                                        </rich:column>
+                                        <rich:column id= "precio2" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.valorejecutadoreporte}"/>
+                                        </rich:column>                                           
+                                        <rich:column id= "cantidad3" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.porcentajeavance}"/>
+                                        </rich:column>
+                                        <rich:column id= "precio3" rowspan="2" width="30px">
+                                            <h:outputText value="#{var.ingresarcantidadde}"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+
+                                <rich:columnGroup binding="#{Supervisor$Alimentar.cuerpo}" id="Cuerpo">
+                                    <rich:column id="Descripcion" width="250px">
+                                        <rich:panel style="width:250px"> 
+
+                                            <h:outputText value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
+                                            <h:outputText value="#{registros.actividadobra.strdescactividad}"  style="font-weight: bold; color:red;" rendered="#{registros.actividadobra.boolimprevisto}"/>
+
+                                        </rich:panel> 
+                                    </rich:column>
+                                    <rich:column id="Unidad" style="text-align: center;" >
+                                        <h:outputText value="#{registros.actividadobra.strtipounidadmed}" styleClass="matrixvalor "/>
+                                    </rich:column>
+                                    <rich:column id="Precio" style="text-align: right;">
+                                        <h:outputText value="#{registros.actividadobra.numvalorplanifao}" styleClass="matrixvalor ">
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="Cantidad2" style="text-align: right;">
+                                        <h:outputText value="#{registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor "/>
+                                    </rich:column>
+                                    <rich:column id="TotalActividad" style="text-align: right;">
+                                        <h:outputText value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="CantFaltAct" style="text-align: right;">
+                                        <h:outputText id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" styleClass="matrixvalor "/>
+                                    </rich:column>
+
+                                    <rich:column id="ValorEjec" style="text-align: right;">
+                                        <h:outputText id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" styleClass="matrixvalor ">
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="ValorFaltanAct" style="text-align: right;">                                          
+
+
+                                        <h:outputText id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
+                                            <f:convertNumber type="percent"/>
+                                        </h:outputText>
+
+                                    </rich:column>
+                                    <rich:column id="CantidadEjec" style="text-align: right;">
+                                        <h:panelGrid styleClass="tablamenuact" cellpadding="0" cellspacing="0" columns="2" > 
+                                            <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
+
+                                                <f:validateDoubleRange minimum="0" />
+                                            </h:inputText>
+                                            <a4j:commandLink styleClass="actualizaralim anchorLink"  action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
+                                                             render="layoutTablaMatrix, layoutComentafactor"/>
+
+                                        </h:panelGrid>
+                                        <rich:message  for="txtCantEjec" styleClass="error_texto"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+
+                                <f:facet name="footer">
+                                    <rich:columnGroup id="pie">
+                                        <rich:column colspan="3">TOTALES
+                                        </rich:column>
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+                                        <rich:column style="text-align: right;">
+                                            <h:outputText id="Pie0" value="#{Supervisor$Alimentar.totales[0]}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+
+                                        <rich:column style="text-align: right;">
+                                            <h:outputText id="Pie1" value="#{Supervisor$Alimentar.totales[1]}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+
+                                        <rich:column>
+                                            <interkont:spacer width="2"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                            </rich:dataTable>
+
+
+
+
+                            <rich:collapsiblePanel id="pncual" switchType="ajax"  style="text-align:center;">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.avancescualitativos}"/>
+                                </f:facet>
+
+                                <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;" >
+                                    <interkont:spacer width="17"/>
+                                    <interkont:spacer height="14"/>
+                                    <interkont:spacer height="14"/>
+                                    <interkont:spacer height="20"/>
+                                    <h:panelGrid columns="3" id="Cualitativa" style="width: 100%;" >
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel id="txtAspectoEvaluar"  value="#{var.aspectoEvaluar}" for="txtAspectoEvaluar">
+                                            <rich:message for="txtAspectoEvaluar" style="color: #ed0606;"/>
+                                        </h:outputLabel>
+                                        <h:selectOneMenu id="comboAspectoEvaluar" value="#{Supervisor$Alimentar.ali.tipocualitativa.intidtipocualificacion}" >
+                                            <f:selectItems value="#{Supervisor$Alimentar.itemstipoculitativa}"/>
+                                        </h:selectOneMenu>
+
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel id="lblLogroProyecto"  value="#{var.logroProyecto}" />
+                                        <h:inputTextarea cols="55" id="txtLogroProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strlogro}"/>
+
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
+                                        <h:inputTextarea cols="55" id="txtDificultadProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strdificultad}"/>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;">
+                                    <h:panelGrid style="width: 10px;"/>
+                                    <a4j:commandButton value="#{var.agregar}" id="agregar_avance" execute="@this,Cualitativa" 
+                                                       action="#{Supervisor$Alimentar.agregarAlimentacionCualitativa}"
+                                                       oncomplete="#{rich:component('panelConfGuardadoCualitativa')}.show();"
+                                                       render="Cualitativa,tablaAvancesCualitativos,layoutMensajeCualitativa"
+                                                       >
+                                    </a4j:commandButton>
+                                </h:panelGrid>
+
+                                <center>
+                                    <h:panelGroup  id="tablaAvancesCualitativos">
+                                        <center>
+                                            <rich:dataTable sortMode="single" style="text-align:left;width:800px" 
+                                                            value ="#{Supervisor$Alimentar.listitemculi}" var="row" rendered="#{not empty Supervisor$Alimentar.listitemculi}" binding="#{Supervisor$Alimentar.tablaEliminarItemCualita}">
+
+                                                <rich:column id="tc-strAspectoEvualuar" width="600px"
+                                                             >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{var.tipologro}" />
+                                                    </f:facet>
+                                                    <h:outputText id="otxt-strAspectoEvualuar" value="#{row.tipocualitativa.strnombre}"/>
+                                                </rich:column>
+                                                <rich:column id="tc-strAspectoEvualuar1" width="600px"
+                                                             >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{var.logro}" />
+                                                    </f:facet>
+                                                    <h:inputTextarea id="otxt-strAspectoEvualuar1" value="#{row.strlogro}" readonly="true" cols="35" rows="3" />
+                                                </rich:column>
+                                                <rich:column id="tc-strAspectoEvualuar2" width="600px"
+                                                             >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{var.dificultad}" />
+                                                    </f:facet>
+                                                    <h:inputTextarea id="otxt-strAspectoEvualuar2" value="#{row.strdificultad}" readonly="true" cols="35" rows="3" />
+                                                </rich:column>
+                                                <rich:column id="tc-streliminarAvance" width="200px"
+                                                             >
+                                                    <f:facet name="header">
+                                                        <h:outputText value="#{var.eliminar}" />
+                                                    </f:facet>
+
+                                                    <a4j:commandLink execute="@this" value="#{var.eliminar}" action="#{Supervisor$Alimentar.removerAlimentacionCualitativa}"
+                                                                     render="tablaAvancesCualitativos" >
+
+                                                    </a4j:commandLink>
+                                                </rich:column>
+                                            </rich:dataTable>
+                                        </center>
+                                    </h:panelGroup>
+                                </center>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="ajax">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.impactoSocial}"/>
+                                </f:facet>
+                                <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" width="60%">
+                                    <interkont:spacer width="17" height="14"/>
+                                    <interkont:spacer height="14"/>
+                                    <interkont:spacer height="14"/>
+                                    <interkont:spacer height="20"/>
+                                    <h:panelGrid columns="3" style="width: 60%;">
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                                        <h:outputLabel id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                        <rich:inputNumberSpinner  id="numHabitantes" value="#{Supervisor$Alimentar.alimentacion.numhabafectados}" minValue="0" maxValue="50000000" />
+
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel   value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <rich:inputNumberSpinner  id="numEmpleoDirecto" value="#{Supervisor$Alimentar.alimentacion.numempdirectos}" minValue="0" maxValue="50000000" />
+
+                                        <h:panelGrid styleClass="vineta"/>
+                                        <h:outputLabel  value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <rich:inputNumberSpinner  id="numEmpleoInDirecto" value="#{Supervisor$Alimentar.alimentacion.numempindirectos}" minValue="0" maxValue="50000000" />
+
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <center>
+                                <h:panelGrid id="layoutError">
+                                    <rich:messages style="color: #ed0606;"/>
+                                    <h:outputText style="color: #ed0606;" value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
+                                    <a4j:commandButton id="BTaceptarMatrix" rendered="#{!Supervisor$Alimentar.validezalimentacion}" render="gpPrincipalAlimentar"
+                                                       action="#{Supervisor$Alimentar.cambioMatrix}" value="#{var.aceptar}"                      />
+
+                                </h:panelGrid>
+                            </center>
+                        </rich:panel>
+                    </rich:collapsiblePanel>
+                </h:panelGroup>
+                <h:panelGrid id="layoutComentafactor" columns="2" columnClasses="top_align" style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+
+                    <rich:collapsiblePanel id="layoutFactores" style="width:100%;" rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.atencion}"/>
+                        </f:facet>
+
+                        <h:outputText  value="#{var.factoresdeatraso}"/>
+                        <h:panelGrid columns="3" columnClasses="labelsDatos,labelsDatos, labelsDatos ">
+                            <h:outputText  value="#{var.tipodefactoratraso}"/>
+                            <h:selectOneMenu id="select_tipofactor" value="#{Supervisor$Alimentar.tipofactorselec}"  >
+                                <f:selectItems value="#{Supervisor$Alimentar.tipoFactorOption}" />
+                                <a4j:ajax event="valueChange" render="layoutFactor" listener="#{Supervisor$Alimentar.combotipoCambio_action}" execute="@this"/>
+                            </h:selectOneMenu>
+                            <interkont:spacer width="45"/>
+                            <h:outputText  value="#{var.houtfactoresdeatraso}"/>
+                            <h:panelGroup id="layoutFactor">
+                                <h:panelGrid>
+                                    <h:selectOneMenu id="select_factor" value="#{Supervisor$Alimentar.factorselec}" >
+                                        <f:selectItems value="#{Supervisor$Alimentar.factoresOption}" />
+                                    </h:selectOneMenu>
+                                    <a4j:commandButton  action="#{Supervisor$Alimentar.agregar_action}"  render="pgFactores"
+                                                        value="#{var.btnanadirmas}"
+                                                        style="font-size:12px;"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="1" id="pgFactores" >
+                            <h:panelGroup style="overflow:auto; height: 180px; width: 80%">
+                                <rich:dataTable id="tablaFactores" binding="#{Supervisor$Alimentar.tablaFactores}" rows="4"
+                                                onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                                onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                                                value="#{Supervisor$Alimentar.listaFactores}" var="registros"  style="text-align:center;width:400px">
+                                    <f:facet name="header">
+                                        <rich:columnGroup>
+                                            <rich:column width="150px" >
+                                                <h:outputText value="#{var.houtfactor}"/>
+                                            </rich:column>
+                                            <rich:column width="150px">
+                                                <h:outputText value="#{var.houttipofactor}"/>
+                                            </rich:column>
+                                            <rich:column width="100px">
+                                                <h:outputText value="#{var.eliminar}"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                    <rich:columnGroup id="Cuerpo">
+                                        <rich:column id="descripcion" width="150px">
+                                            <h:outputText value="#{registros.strdescfactor}"/>
+                                        </rich:column>
+                                        <rich:column id="tipfactor" width="150px">
+                                            <h:outputText value="#{registros.tipofactoratraso.strdesctipoatraso}"/>
+                                        </rich:column>
+                                        <rich:column id="Eliminar" width="100">
+                                            <a4j:commandButton id="btEliminar" value="#{var.eliminar}" immediate="true"
+                                                               action="#{Supervisor$Alimentar.removerFactor}" render="pgFactores" />
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                    <f:facet name="footer">
+                                        <rich:columnGroup >
+                                            <rich:column colspan="3">
+                                                <rich:dataScroller id="dsfactores" for="tablaFactores" render="tablaFactores"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                </rich:dataTable>
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+                    </rich:collapsiblePanel>
+                </h:panelGrid>
+
+                <rich:collapsiblePanel switchType="ajax" id="gpSubirImagen" expanded="false"  style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    <f:facet name="header">
+                        <h:outputText value="#{var.anadirimagen}"/>
+                    </f:facet>
+                    <h:panelGrid id="layoutImagenDetalle" styleClass="fondo_foto" style="text-align:center;">
+                        <h:graphicImage id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
+                        <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
+                                           onclick="#{rich:component('modalImagen')}.show();"
+                                           styleClass="btn_pri_gra"   style="font-size:12px;"/>
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
+                <rich:collapsiblePanel switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}" style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    <f:facet name="header">
+                        <h:outputText value="#{var.anadirotrosdoc}"/>
+                    </f:facet>
+                    <center>
+                        <h:panelGrid id="layoutActa" columns="6">
+                            <h:outputLabel id="lblActa"  value="#{var.acta}:" for="txtActa">
+                                <rich:message for="txtActa"/>
+                            </h:outputLabel>
+                            <interkont:spacer width="42"/>
+
+                            <h:inputText size="40" id="txtActa" readonly="true" value="#{Supervisor$Alimentar.urlacta}" />
+                            <a4j:commandButton id="btActa" value="#{var.examinar}" immediate="true"
+                                               onclick="#{rich:component('panelActa')}.show();"
+                                               style="font-size:12px;"/>
+                        </h:panelGrid>
+                    </center>
+                </rich:collapsiblePanel>
+
+                <rich:collapsiblePanel id="pnVideo" switchType="ajax" expanded="false" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    <f:facet name="header">
+                        <h:outputText value="#{var.houtvideo}"/>
+                    </f:facet>
+                    <center>
+                        <h:panelGrid id="layoutVideoMemoria" columns="3">
+                            <h:panelGroup>
+                                <h:outputLabel id="lblVideo"  value="#{var.video}:">
+                                    <rich:message for="lblVideo"/>
+                                </h:outputLabel>
+                            </h:panelGroup>
+
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorVideo.archivos}" var="file" style="width:30px">
+                                <h:inputText id="otxt_nombreVideo" value=" #{file.nombre}" disabled="true" size="60"/>
+                            </rich:dataGrid>
+                            <a4j:commandButton id="btVideo" value="#{var.examinar}" immediate="true"
+                                               onclick="#{rich:component('modalVideo')}.show();"
+                                               style="font-size:12px;"/>
+                            <interkont:spacer width="15"/>
+                        </h:panelGrid>
+                    </center>
+                </rich:collapsiblePanel>
+
+
+
+
+                <h:panelGrid style ="width:100%;text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    <a4j:commandButton id="btFinAlimenta" value="#{var.finalizar}" immediate="true" 
+                                       action="#{Supervisor$Alimentar.validarAlimentar}" render="layoutGuardar"
+                                       oncomplete="#{rich:component('panelConfirmaGuardar')}.show();"
+                                       style="font-size:12px;">
+                    </a4j:commandButton>
+                </h:panelGrid>
+            </h:panelGroup>
+        </h:form>
+        <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
+        <ui:include src="/modal/panelGuardadoModal.xhtml"/>
+        <ui:include src="/modal/panelImagenModal.xhtml"/>
+        <ui:include src="/modal/panelVideoModal.xhtml"/>
+        <ui:include src="/modal/panelActaAlimentacionModal.xhtml"/>
+        <ui:include src="/modal/confirmarGuardadoCualitativa.xhtml"/>                
+        <ui:include src="/modal/alimentacion/modalAdicionarActividaes.xhtml"/>
+        <ui:include src="/modal/alimentacion/panelActaPrecios.xhtml"/>
+    </ui:define>
+
+</ui:composition>

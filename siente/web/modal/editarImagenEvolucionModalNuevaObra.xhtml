@@ -22,9 +22,8 @@
                     <a4j:commandLink id="esconder_mp_editar_imagenevolucion" styleClass="cerrar" 
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar_imagenevolucion')}.hide(); return false;"/>
                     <a4j:commandLink id="esconder_mp_editar_imagenevolucion" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_mp_editar_imagenevolucion" event="onclick" for="mp_editar_imagenevolucion" operation="hide"/>
-                </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar_imagenevolucion')}.hide(); return false;" />
+                      </h:panelGroup>
             </h:form>
         </f:facet>
         <rich:panel styleClass="rich-panel-body" style="padding:0px;">
