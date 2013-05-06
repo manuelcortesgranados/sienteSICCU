@@ -6,12 +6,11 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:m="http://code.google.com/p/gmaps4jsf/"
-      template="/facelets/template_main.xhtml">
+      xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
 
     <f:view locale="#{var.rcalendarlocale}">
-        <ui:composition >
+        <ui:composition template="/facelets/template_main.xhtml">
             <ui:define name="head">
                 <title>Cobra - Home Gestion</title>
                 <ui:include src="/includes/google_maps_key.jspx" />

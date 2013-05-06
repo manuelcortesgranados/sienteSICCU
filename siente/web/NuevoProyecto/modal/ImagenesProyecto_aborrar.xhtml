@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">
+
+    
+            <ui:define name="head">
+                <title>Siente - Supervisor</title>
+                <h:outputScript library="js" name="script_supervisor.js"/>
+            </ui:define>
+            <ui:define name="body">
+                <h:form>
+                    <rich:panel>
+                        <f:facet name="header">
+                            <h:outputText value="#{var.subirimagenes}"/>
+                        </f:facet>
+                        <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
+                            <h:outputText value="#{var.subalasimagenesantes}"/>
+                            <h:panelGrid columns="2" style="width:100%;">
+
+                                <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="rich-panel-grid-body">
+                                    <center>
+                                        <h:panelGrid id="layoutImagen" styleClass="fondo_foto" columnClasses="aiu">
+
+                                            <a4j:commandLink id="btAdjuntarImagen" styleClass="anadirimagen anchorlink" >
+                                                <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenProyecto')"/>
+                                            </a4j:commandLink>
+
+                                            <h:outputText id="ImagenAtencionppal" value="#{var.nombre}"/>
+                                            <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
+
+                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
+                                                <h:inputText id="nombreImagen" value=" #{file.onlyName}" disabled="true" size="18"/>
+                                            </rich:dataGrid>
+                                        </h:panelGrid>
+                                        <center>
+                                            <h:panelGrid>
+                                                <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" styleClass="buttontxt" value="#{var.subir}"
+                                                                 action="#{Supervisor$IngresarNuevaObra.subirImagenaPrincipal}"
+                                                                 render="tablaImagenes,spimagen,panelImagenProyecto"/>
+                                            </h:panelGrid>
+                                        </center>
+                                    </center>
+                                </rich:panel>
+                                <rich:panel id="imagensecundaria" header="#{var.imagensecundaria}" bodyClass="rich-panel-grid-body" >
+                                    <center>
+                                        <h:panelGrid id="panel_subirImagen"  columns="1" >
+                                            <a4j:commandLink id="adjuntarImagen" styleClass="anadirimagen anchorlink" >
+                                                <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenProyecto')"/>
+                                            </a4j:commandLink>
+
+
+                                            <h:outputText id="ImagenAtencion" value="#{var.descripcionImagen}"/>
+                                            <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
+
+                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
+                                                <h:inputText id="otxt_nombreImagen" value=" #{file.onlyName}" disabled="true" size="18"/>
+                                            </rich:dataGrid>
+                                        </h:panelGrid>
+                                    </center>
+                                    <center>
+                                        <h:panelGrid>
+                                            <a4j:commandLink id="bt_agregarImagen"  title="#{var.subir}" styleClass="buttontxt" value="#{var.subir}"
+                                                             action="#{Supervisor$IngresarNuevaObra.subirImagenaLista}"
+                                                             render="tablaImagenes,spimagen,panelImagenProyecto"/>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:panel>
+                            </h:panelGrid>
+                            <h:panelGroup>
+                                <rich:dataTable id="tablaImagenes" value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
+                                                var="currentRow" style="width:100%;" binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}" rows="3" >
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.imgseleccionadas}"/>
+                                    </f:facet>
+                                    <rich:column breakRowBefore="true" style="text-align:center; width: 100px;" >
+                                        <f:facet name="header" >
+                                            <h:outputText value="#{var.tipo}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                    </rich:column>
+
+                                    <rich:column  style="text-align:center; width: 100px;">
+                                        <f:facet name="header" >
+                                            <h:outputText value="#{var.nombreah}"/>
+                                        </f:facet>
+                                        <h:outputText value="#{currentRow.strnombre}"/>
+                                    </rich:column>
+                                    <rich:column style="text-align:center; width: 100px;" id="Imagen">
+                                        <f:facet name="header" >
+                                            <h:outputText value="#{var.imagen}"/>
+                                        </f:facet>
+
+                                        <h:graphicImage value="#{currentRow.strubicacion}" style="width: 70px;" />
+                                    </rich:column>
+
+                                    <rich:column style="text-align:center; width: 60px;">
+                                        <f:facet name="header">
+                                            <h:outputText value="#{var.eliminar}"/>
+                                        </f:facet>
+                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}" styleClass="btn_pri_inm" 
+                                                            style="font-size:12px;" render="tablaImagenes"
+                                                           action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
+                                    </rich:column>
+                                    <f:facet name="footer">
+                                        <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                    </f:facet>
+                                </rich:dataTable>
+
+
+                            </h:panelGroup>
+                            <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}" value="#{var.guardarbo}"
+                                               />
+                            <h:commandButton   value="#{var.continuar}"
+                                               action="#{Supervisor$IngresarNuevaObra.paso4}"   >
+                            </h:commandButton>
+
+                            <a4j:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                               action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                            </a4j:commandButton>
+                            <h:commandButton   value="Guardar"
+                                               action="#{Supervisor$IngresarNuevaObra.Finalizar_action}"   >
+                            </h:commandButton>
+                        </rich:collapsiblePanel>
+                    </rich:panel>
+
+                </h:form>
+                <ui:include src="/modal/paneImagenModal.jspx"/>
+                <ui:include src="/modal/panelUploadImagenevolucionNuevaObra.jspx"/>
+                <ui:include src="/modal/eliminarImageneolucionModalNuevaObra.jspx"/>
+                <ui:include src="/modal/editarImagenEvolucionModalNuevaObra.jspx"/>
+                <ui:include src="../NuevoProyecto/modal/panelImagenProyecto.jspx"/>
+                <ui:include src="../NuevoProyecto/modal/modalImagen.jspx"/>
+            </ui:define>   
+</ui:composition>

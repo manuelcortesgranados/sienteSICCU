@@ -1,12 +1,11 @@
 /**
- *
+ * 
  */
 package cobra;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -19,7 +18,7 @@ import org.richfaces.model.UploadedFile;
  * @author Carlos Loaiza
  *
  */
-public class SubirArchivoBean implements Serializable {
+public class SubirArchivoBean {
 
     private ArrayList<Archivo> files = new ArrayList<Archivo>();
     private ArrayList<File> archivosSubidos = new ArrayList<File>();
@@ -66,7 +65,7 @@ public class SubirArchivoBean implements Serializable {
     }
 
     public synchronized void listener(FileUploadEvent event) throws Exception {
-        final UploadedFile item = event.getUploadedFile();
+       final UploadedFile item = event.getUploadedFile();
         Archivo file = new Archivo();
 
 
@@ -139,7 +138,6 @@ public class SubirArchivoBean implements Serializable {
 
     /**
      * Obtiene el primer archivo del fileuoload
-     *
      * @return
      */
     public File obtenerPrimerArchivo() {
@@ -216,12 +214,12 @@ public class SubirArchivoBean implements Serializable {
 
     }
     /*
-     public ArrayList<UploadedFile> getArchivos() {
-     return archivos;
-     }
+    public ArrayList<UploadedFile> getArchivos() {
+    return archivos;
+    }
 
-     public void setArchivos(ArrayList<UploadedFile> archivos) {
-     this.archivos = archivos;
-     }
+    public void setArchivos(ArrayList<UploadedFile> archivos) {
+    this.archivos = archivos;
+    }
      */
 }

@@ -13,11 +13,11 @@ import co.com.interkont.cobra.to.Polizacontrato;
 import co.com.interkont.cobra.to.Tipodocumento;
 import co.com.interkont.cobra.to.Tipomodificacion;
 import cobra.CargadorArchivosWeb;
+
 import cobra.SessionBeanCobra;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.IOException;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
@@ -36,7 +36,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo5
  */
-public class ModificarContrato implements Serializable {
+public class ModificarContrato   {
 
     private Modificacioncontrato modificarcontrato = new Modificacioncontrato();
     private int cual = 1;
@@ -55,6 +55,7 @@ public class ModificarContrato implements Serializable {
     private BigDecimal valorModificadocontrato;
     private boolean permitirGuardar = false;
     StringBuilder renderVar = new StringBuilder("strcontrcontrato");
+
 
     public BigDecimal getValorModificadocontrato() {
         return valorModificadocontrato;
@@ -611,7 +612,7 @@ public class ModificarContrato implements Serializable {
     }
 
     private String limpiarModificarContrato() {
-
+        
         modificarcontrato = new Modificacioncontrato();
         modificarcontrato.setNumnuevorecursosch(getNuevoContratoBasico().getContrato().getNumrecursosch());
         modificarcontrato.setNumnuevorecursospropios(getNuevoContratoBasico().getContrato().getNumrecursospropios());
@@ -851,4 +852,7 @@ public class ModificarContrato implements Serializable {
     public void setPermitirGuardar(boolean permitirGuardar) {
         this.permitirGuardar = permitirGuardar;
     }
+
+
+
 }

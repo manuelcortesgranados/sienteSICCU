@@ -4,13 +4,13 @@
  */
 package email;
 
-import java.io.Serializable;
+import cobra.EnvioCorreosCobra;
 
 /**
  *
  * @author carlosloaiza
  */
-public class Emailsautomaticos implements Serializable{
+public class Emailsautomaticos {
 
     /**
      * @param args the command line arguments

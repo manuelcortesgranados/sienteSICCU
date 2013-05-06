@@ -47,11 +47,12 @@ import co.com.interkont.cobra.to.Relacionalimentacionactividad;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
 import co.com.interkont.cobra.to.Relacionobraseguidor;
 import co.com.interkont.cobra.to.Seguimiento;
+import co.com.interkont.cobra.to.Semaforo;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.vista.VistaObraMapa;
+import cobra.AtencionHumanitaria.AdminSolicitudAtencion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
-import java.io.Serializable;
 import javax.faces.context.FacesContext;
 
 /**
@@ -65,7 +66,7 @@ import javax.faces.context.FacesContext;
  * @version Created on 13-oct-2010, 13:53:10
  * @author carlosalbertoloaizaguerrero
  */
-public class DetalleObra implements Serializable {
+public class DetalleObra  {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String strimagenobraproyectada = "";
@@ -133,11 +134,13 @@ public class DetalleObra implements Serializable {
     private UIDataTable tablalistaavances = new UIDataTable();
     private int listasegudires;
     private List<Beneficiario> lstbeneficiario;
-    private int totalben = 0;
+    private int totalben=0;
     private List<Actividadobra> listactividades = new ArrayList<Actividadobra>();
     private BigDecimal totalprogramado;
     private BigDecimal totalejecutado;
-    private boolean permitirvalidar = true;
+
+    private boolean permitirvalidar=true;
+    
     /**
      * Lista de proyectos hijos de este proyecto cuando se trata de un proyecto
      * padre
@@ -459,6 +462,7 @@ public class DetalleObra implements Serializable {
     public String getFinentrega() {
         return finentrega;
     }
+    
 
     public void setFinentrega(String finentrega) {
         this.finentrega = finentrega;
@@ -1050,8 +1054,8 @@ public class DetalleObra implements Serializable {
     }
 
     public void iniciardetalle() {
-        getAdministrarObraNew().modificarObjetoObra = false;
-        getAdministrarObraNew().btn_habilitarModificarObjeto = true;
+        getAdministrarObraNew().modificarObjetoObra =false;
+        getAdministrarObraNew().btn_habilitarModificarObjeto=true;
         obraMapa = getSessionBeanCobra().getCobraService().obtenerVistaObraMapaxid(getAdministrarObraNew().getObra().getIntcodigoobra());
         limpiardetalle();
         if (getSessionBeanCobra().getCobraService().isCiu()) {
@@ -1294,7 +1298,7 @@ public class DetalleObra implements Serializable {
         }
         if (getStrimagenActual().compareTo("") != 0 && getStrimagenActual() != null) {
             getStrimagenActual();
-            boolimg = true;
+            boolimg=true;
         } else {
             setStrimagenActual(bundle.getString("noimagen"));
             boolimg = false;
@@ -1767,7 +1771,6 @@ public class DetalleObra implements Serializable {
 
     /**
      * Carga el listado de proyectos hijos del proyecto actual
-     *
      * @return
      */
     public String cargarSubProyectos() {
@@ -1779,4 +1782,5 @@ public class DetalleObra implements Serializable {
         boolimg = true;
         return null;
     }
+    
 }

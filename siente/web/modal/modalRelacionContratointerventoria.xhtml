@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+    <rich:popupPanel id="panelRelacionContratoInterventoria" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Asociar Contrato de Interventoria"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+
+            <h:panelGroup>
+                <h:form id="formCerrarRelacionContratoInterventoria">
+                    <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;"/></h:form>
+            </h:panelGroup>
+
+        </f:facet>
+        <h:form id="frmpanelRelacionContratoInterventoria">
+            <rich:panel style="padding:0px; width:300px; height:250px;">
+
+                <h:panelGroup id="layoutpanelRelacionContratoInterventoria">
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="Contrato Nº:" styleClass="titulo3_filtro_busqueda"/>                        
+                        <h:outputText value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText value="Valor contrato:" styleClass="titulo3_filtro_busqueda"/>                        
+                        <h:outputText value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>                        
+                        <h:outputText value="Valor #{var.solicitudproyecto}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>
+
+                    </h:panelGrid>
+
+                    <interkont:spacer height="30"/>   
+                    <h:outputText value="Este contrato posee disponibilidad" styleClass="titulo3_filtro_busqueda" />
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="por" styleClass="titulo3_filtro_busqueda"/> 
+                        <h:outputText value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>
+                    </h:panelGrid>
+                    <h:outputText value="Qué valor desea asociar a este #{var.solicitudproyecto}?" styleClass="titulo3_filtro_busqueda"/>
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="$" styleClass="titulo3_filtro_busqueda"/>
+                        <rich:inputNumberSpinner minValue="0" value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalorrelacion}" inputSize="30"
+                                                 maxValue="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}"/>
+                    </h:panelGrid>
+                    <h:outputText value="#{Supervisor$AsociarContratos.relacioncontratointer.mensaje}" style="color: #ed0606;" />
+                   
+                    
+                    <h:panelGrid columns="2" >
+
+                        <a4j:commandButton id="BTaceptarRelacioninter"  value="Asociar"
+                                           rendered="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible>0 and Supervisor$AdministrarObraNew.obra.numvaltotobra>0 and Supervisor$AsociarContratos.relacioncontratointer.numvalormaximo>0}"
+                                           action="#{Supervisor$AsociarContratos.asociarContrato}"
+                                           oncomplete="#{rich:component('panelRecordarContra')}.hide();"
+                                           render="pgdatacontratos,pgcontrat1aso">
+                        </a4j:commandButton>
+                        <a4j:commandButton id="BTcancelarRelacion"  value="#{var.cancelar}"
+                                           onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); 
+                                          #{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;" />
+                    </h:panelGrid>
+                </h:panelGroup>
+
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

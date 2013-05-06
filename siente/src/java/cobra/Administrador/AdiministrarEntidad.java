@@ -4,6 +4,7 @@
  */
 package cobra.Administrador;
 
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Tercero;
@@ -16,7 +17,6 @@ import co.com.interkont.cobra.to.Tipotercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.TerceroEntidadLista;
 import cobra.Supervisor.FacesUtils;
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +38,7 @@ import javax.faces.model.SelectItem;
  *
  * @author desarrollo3
  */
-public class AdiministrarEntidad implements Serializable {
+public class AdiministrarEntidad  {
 
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private Tercero tercero;
@@ -55,7 +55,7 @@ public class AdiministrarEntidad implements Serializable {
     private int codigoEntidad;
     private String login;
     private List<JsfUsuario> lstjsf;
-    private boolean entidadvalida = false;
+    private boolean entidadvalida=false;
 
     public boolean isEntidadvalida() {
         return entidadvalida;
@@ -63,7 +63,8 @@ public class AdiministrarEntidad implements Serializable {
 
     public void setEntidadvalida(boolean entidadvalida) {
         this.entidadvalida = entidadvalida;
-    }
+    }    
+    
 
     public JsfUsuario getJsfUsuario() {
         return jsfUsuario;
@@ -98,7 +99,7 @@ public class AdiministrarEntidad implements Serializable {
     }
 
     public AdiministrarEntidad(String codDepartamentoEntidad, JsfUsuario usuarioEntidad, Tercero entidadUsuario, SelectItem[] lstEntidad, Terceroentidad terceroEntidad) {
-
+         
         this.codDepartamentoEntidad = codDepartamentoEntidad;
         this.usuarioEntidad = usuarioEntidad;
         this.entidadUsuario = entidadUsuario;
@@ -158,7 +159,7 @@ public class AdiministrarEntidad implements Serializable {
     private SelectItem[] TipoOrigenEntidad;
 
     public AdiministrarEntidad() {
-        // limpiartercero();
+       // limpiartercero();
     }
 
     public SelectItem[] getTipoOrigenEntidad() {
@@ -297,7 +298,7 @@ public class AdiministrarEntidad implements Serializable {
             DepartamentoEntidad[i++] = dep;
         }
         return null;
-
+        
     }
 
     /**
@@ -373,7 +374,7 @@ public class AdiministrarEntidad implements Serializable {
     public boolean verificarUsuario() {
 
         lstjsf = getSessionBeanCobra().getUsuarioService().buscarUsuario(login);
-        if (!lstjsf.isEmpty()) {
+        if (!lstjsf.isEmpty() ) {
             jsfUsuario = lstjsf.get(0);
             return true;
         }
@@ -383,30 +384,31 @@ public class AdiministrarEntidad implements Serializable {
 
     public void asociarEntidadUsuario() {
 
+       
+        if(entidadvalida)
+            {
+        
+        if (verificarUsuario()) {
+          //getTerceroEntidad().getId().setIntcodigoentidad(codigoEntidad);
+            getTerceroEntidad().getId().setIntcodigotercero(jsfUsuario.getTercero().getIntcodigo());
 
-        if (entidadvalida) {
+            Terceroentidad entidadUsuarioasociado = getSessionBeanCobra().getCobraService().encontrarEntidadUsuario(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo());
 
-            if (verificarUsuario()) {
-                //getTerceroEntidad().getId().setIntcodigoentidad(codigoEntidad);
-                getTerceroEntidad().getId().setIntcodigotercero(jsfUsuario.getTercero().getIntcodigo());
+            if (entidadUsuarioasociado == null ) {
+                System.out.println("codigo :" + getTerceroEntidad().getId().getIntcodigotercero()) ;
+                getSessionBeanCobra().getCobraService().guardarEntidadUsuario(new Terceroentidad(new TerceroentidadId(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo())));
+                FacesUtils.addInfoMessage(bundle.getString("asociarentidadvalida"));
+                limpiarEntidad();
 
-                Terceroentidad entidadUsuarioasociado = getSessionBeanCobra().getCobraService().encontrarEntidadUsuario(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo());
-
-                if (entidadUsuarioasociado == null) {
-                    System.out.println("codigo :" + getTerceroEntidad().getId().getIntcodigotercero());
-                    getSessionBeanCobra().getCobraService().guardarEntidadUsuario(new Terceroentidad(new TerceroentidadId(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo())));
-                    FacesUtils.addInfoMessage(bundle.getString("asociarentidadvalida"));
-                    limpiarEntidad();
-
-                } else {
-                    FacesUtils.addErrorMessage(bundle.getString("usuarioasociado"));
-                    //limpiarEntidad();
-                }
             } else {
-                FacesUtils.addErrorMessage(bundle.getString("usuarionoexiste"));
+                FacesUtils.addErrorMessage(bundle.getString("usuarioasociado"));
                 //limpiarEntidad();
             }
-
+        } else {
+            FacesUtils.addErrorMessage(bundle.getString("usuarionoexiste"));
+            //limpiarEntidad();
+        }
+        
         } else {
             FacesUtils.addErrorMessage(bundle.getString("entidadvalida"));
             //limpiarEntidad();
@@ -419,14 +421,15 @@ public class AdiministrarEntidad implements Serializable {
         tercero.setTipoOrigen(new Tipoorigen());
         tercero.setLocalidadByStrcodigolocalidad(new Localidad());
     }
-
+    
+    
     public void limpiarEntidad() {
-
-        login = "";
+       
+        login="";
         entidadUsuario = new Tercero();
         entidadUsuario.setIntcodigo(codigoEntidad);
 
-
+        
     }
 ////    public void limpiarAsociacionEntidadUsuario() {
 ////        terceroEntidad = new Terceroentidad(new TerceroentidadId().setIntcodigoentidad()); 
@@ -441,14 +444,14 @@ public class AdiministrarEntidad implements Serializable {
      */
     public void comboEntidades() {
 
-        entidadvalida = comboEntidadesGuardar();
+        entidadvalida=comboEntidadesGuardar();
         System.out.println("entidadvalida = " + entidadvalida);
 
         if (comboEntidadesGuardar()) {
-            //primeroDetcontrato();
+             //primeroDetcontrato();
 //            primeroDetcontratoContratista();
         } else {
-            limpiartercero();
+              limpiartercero();
 //            getContrato().getTercero().setIntcodigo(0);
 //            listacontratos = new ArrayList<Contrato>();
 //            listacontratoscontratista = new ArrayList<Contrato>();
@@ -462,15 +465,15 @@ public class AdiministrarEntidad implements Serializable {
      */
     public boolean comboEntidadesGuardar() {
         if (getEntidadUsuario().getStrnombrecompleto() != null) {
-
+           
             Iterator ite = temporalEntidadUsuario.iterator();
             int idtercero = 0;
             while (ite.hasNext()) {
                 TerceroEntidadLista tempter = (TerceroEntidadLista) ite.next();
 
-                if (getEntidadUsuario().getStrnombrecompleto().equals(tempter.getStrnombre())) {
+                if (getEntidadUsuario().getStrnombrecompleto().equals(tempter.getStrnombre())) {                   
                     idtercero = tempter.getCodigo();
-
+                  
                 }
             }
             if (idtercero != 0) {
@@ -480,4 +483,5 @@ public class AdiministrarEntidad implements Serializable {
         }
         return false;
     }
+    
 }

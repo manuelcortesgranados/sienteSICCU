@@ -82,8 +82,8 @@
     <managed-bean>
         <managed-bean-name>AtencionHumanitaria$AdminSolicitudAtencion</managed-bean-name>
         <managed-bean-class>cobra.AtencionHumanitaria.AdminSolicitudAtencion</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>SessionChsolicitud</managed-bean-name>
@@ -98,11 +98,12 @@
 
     <managed-bean>
         <managed-bean-name>makeList</managed-bean-name>
-        <managed-bean-class>cobra.ListFromCollection</managed-bean-class>
-    
+        <managed-bean-class>cobra.ListFromCollection
+        </managed-bean-class>
         <managed-bean-scope>
             request
-        </managed-bean-scope></managed-bean>
+        </managed-bean-scope>
+    </managed-bean>
 
     <!--  <managed-bean>
         <managed-bean-name>AtencionHumanitaria$CrearSolicitudAtencion</managed-bean-name>
@@ -265,20 +266,18 @@
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
         <managed-bean-class>cobra.Login</managed-bean-class>
-    
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>perfilcontrol</managed-bean-name>
         <managed-bean-class>cobra.DatosGeneralesPerfilControl</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>SessionBeanCobra</managed-bean-name>
         <managed-bean-class>cobra.SessionBeanCobra</managed-bean-class>
-
-    
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
             <property-name>usuarioService</property-name>
@@ -315,12 +314,14 @@
         <managed-property>
             <property-name>modificarProyectoService</property-name>
             <value>#{modificarProyectoService}</value>
-        </managed-property></managed-bean>
+        </managed-property>
+
+    </managed-bean>
     <managed-bean>
         <managed-bean-name>SubirArchivoBean</managed-bean-name>
         <managed-bean-class>cobra.SubirArchivoBean</managed-bean-class>
-    
-        <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>GraficarIndicadores</managed-bean-name>
@@ -357,8 +358,8 @@
     <managed-bean>
         <managed-bean-name>Ciudadano$PerfilCiudadano</managed-bean-name>
         <managed-bean-class>cobra.Ciudadano.PerfilCiudadano</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope></managed-bean>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
     <!-- Beans de Administrar entidad -->
     <managed-bean>
         <managed-bean-name>Administrador$AdministrarEntidad</managed-bean-name>
@@ -418,11 +419,11 @@
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>gestionusuario</from-outcome>
-            <to-view-id>/Usuario/ConsultarUsuario.jspx</to-view-id>
+            <to-view-id>/Usuario/ConsultarUsuario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>perfilusuario</from-outcome>
-            <to-view-id>/Usuario/PerfilUsuario.jspx</to-view-id>
+            <to-view-id>/Usuario/PerfilUsuario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -496,7 +497,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>indicadores</from-outcome>
-            <to-view-id>/homes/home_indicadores.xhtml</to-view-id>
+            <to-view-id>/homes/home_indicadores.jspx</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>detalleContrato</from-outcome>
@@ -516,7 +517,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>cambiocontra</from-outcome>
-            <to-view-id>/Usuario/Cambiarcontrasena.jspx</to-view-id>
+            <to-view-id>/Usuario/Cambiarcontrasena.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>homesolicitud</from-outcome>
@@ -657,7 +658,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>volver</from-outcome>
-            <to-view-id>/Inicio.xhtml</to-view-id>
+            <to-view-id>/Inicio.jspx</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultarContratoConvenio</from-outcome>
@@ -760,26 +761,26 @@
 
     <!--Inicio de reglas de Navegación Supervisión Externa -->
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registrarMatriz</from-outcome>
-            <to-view-id>/SupervisionExterna/RegistroMatriz.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>detalleSeguimiento</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/RegistroMatriz.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/RegistroMatriz.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -787,27 +788,27 @@
         <from-view-id>/Supervisor/DetalleObra.jspx</from-view-id>
         <navigation-case>
             <from-outcome>consuldetaseguimi</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/ListadoSeguimientos.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/ListadoSeguimientos.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>consuldetaseguimi</from-outcome>
-            <to-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/SupervisionExterna/SeguimientosRegistros.jspx</from-view-id>
+        <from-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>registrarMatriz</from-outcome>
-            <to-view-id>/SupervisionExterna/RegistroMatriz.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/RegistroMatriz.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>proyectosSupervision</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>volverdetalle</from-outcome>
@@ -846,7 +847,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>seguimiento</from-outcome>
-            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.jspx</to-view-id>
+            <to-view-id>/SupervisionExterna/HomeSupervisionExterna.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>volver</from-outcome>
@@ -870,7 +871,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>financiera</from-outcome>
-            <to-view-id>/homes/home_financiera.xhtml</to-view-id>
+            <to-view-id>/homes/home_financiera.jspx</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>reportes</from-outcome>

@@ -1,0 +1,62 @@
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+    <ui:composition template="/facelets/template_home.xhtml">
+        <ui:define name="body">
+            <h:form>
+
+                <h:panelGrid columns="2" rendered="#{SessionBeanCobra.usuarioObra.usuId==1 and false}">
+                    <h:outputText value="Código JsfUsuario Inicial:"/>
+                    <h:inputText value="#{SessionBeanCobra.codinicial}"/>
+                    <h:outputText value="Código JsfUsuario Final:"/>
+                    <h:inputText value="#{SessionBeanCobra.codfinal}"/>
+                    <h:commandButton value="Actualizar Contraseñas"  action="#{SessionBeanCobra.actualizarPasswords}" />
+                    <h:commandButton value="Imprimir Usuarios activos" action="#{SessionBeanCobra.usuarioService.imprimirUsuarios}"/>
+                    <h:commandButton value="Verificar Logueos" action="#{SessionBeanCobra.usuarioService.verificarLogueos}"/>
+                    <h:commandButton value="Mirar Imagenes" action="#{SessionBeanCobra.mirarImagenes}"/>
+                    <h:commandButton value="caracter especial img" action="#{SessionBeanCobra.mirarImg}"/>
+                    <h:commandButton value="caracter especial doc" action="#{SessionBeanCobra.mirardoc}"/>
+                    <h:commandButton value="borrar lo en" action="#{SessionBeanCobra.mirarDocnosrv}"/>
+                    <h:commandButton value="Arreglar alimentaciones" action="#{SessionBeanCobra.arreglarsumasAlimentaciones}"/>
+                    <h:commandButton value="Periodos educación" action="#{SessionBeanCobra.crearPeriodosEducacion}"/>
+                    <h:commandButton value="relación Periodos educación" action="#{SessionBeanCobra.crearRelacionPeriodosEducacion}"/>
+                    <h:commandButton value="Generar Usuarios Obra" action="#{SessionBeanCobra.generarUsuariosObra}"/>
+
+                </h:panelGrid>
+
+            </h:form>
+
+            <h:panelGroup layout="block" styleClass="sliderpanel_element" id="product_gallery">
+                <h:panelGroup layout="block"  id="sliderpanel_outer">
+                    <h:panelGroup layout="block"  id="sliderpanel_inner">
+                        <h:panelGroup layout="block" id="sliderpanel_items">
+                            <h:form id="form_home" prependId="false">
+                                <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
+                                    <h:panelGroup layout="block" styleClass="sliderpanel_element" >
+
+                                        <h:panelGroup layout="block" styleClass="textomodulo">
+
+                                            <h:outputText value="#{modulo.strmodNmbre}" />
+
+                                        </h:panelGroup>
+                                        <h:outputLink styleClass="#{modulo.strestilo} anchorLink"
+                                                      value="#{facesContext.externalContext.requestContextPath}/faces#{modulo.strurlMdloRuta}">
+
+                                        </h:outputLink>
+                                    </h:panelGroup>
+                                </a4j:repeat>
+                            </h:form>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+
+            </h:panelGroup>
+        </ui:define>
+
+    </ui:composition>
+</f:view>

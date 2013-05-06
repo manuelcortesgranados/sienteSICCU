@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelImagenProyecto" autosized="true" style="padding:0px;">
+        <rich:panel header="#{var.seleccionarimagen}" styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                    <a4j:commandButton id="esconder_panelImagenProyecto" onclick="javascript:Richfaces.hideModalPanel('panelImagenProyecto')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                </h:panelGroup>
+                <h:panelGroup id="gpImagen">
+                    <h:panelGrid columnClasses="top,top" columns="2">
+                        <rich:fileUpload 
+                            id="uploadImagen" 
+                            fileUploadListener="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.listener}"
+                            acceptedTypes="jpg, jpeg, gif, png, bmp"
+                            immediateUpload="true"
+                            maxFilesQuantity="1"
+                            style="width: 250px;"
+                            listHeight="150"                            
+                            addLabel="#{var.adicionar}"
+                            doneLabel="#{var.hecho}"
+                            uploadLabel="#{var.subir}"
+                            clearAllLabel="#{var.borrartodo}"
+                            clearLabel="#{var.eliminar}"
+                            disabled="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.numArchivos>0}"
+                            >
+                            <a4j:ajax event="uploadcomplete" render="info_imagen,panel_subirImagen"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="info_imagen">
+                            <center>
+                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.archivos}" var="file">
+                                        <rich:panel>
+                                            <h:panelGrid columns="1">
+
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <br/>
+                                <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.borrarImagenPrincipal}" render="info_imagen, uploadImagen, spimagen"
+                                                   rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.numArchivos>0}" value="#{var.boarcsub}"
+                                                   styleClass="btn_pri_inm"   style="font-size:12px;"/>
+                                <h:commandButton value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.numArchivos>0}"
+                                                   onclick="javascript:Richfaces.hideModalPanel('panelImagenProyecto')" 
+                                                      style="font-size:12px;"/>
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                </h:panelGroup>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</ui:composition>

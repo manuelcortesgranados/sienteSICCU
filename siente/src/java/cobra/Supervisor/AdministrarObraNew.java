@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package cobra.Supervisor;
-
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -38,7 +37,6 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -50,11 +48,13 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import org.omg.PortableInterceptor.NON_EXISTENT;
 import org.richfaces.component.UIDataTable;
 
 /**
@@ -67,7 +67,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on 28-oct-2010, 1:04:30
  * @author carlosalbertoloaizaguerrero
  */
-public class AdministrarObraNew implements ILifeCycleAware, Serializable {
+public class AdministrarObraNew  implements ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     //private Obra obra = new Obra();
@@ -152,17 +152,18 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private ArrayList<Relacioncontratoobra> listaContratoInterventoria;
     private List<Marcador> listamarcadores = new ArrayList<Marcador>();
     private String nombreImpactoSocial;
-    private int cantidadColumnas = 3;
+    private int cantidadColumnas=3;
     public boolean btn_habilitarModificarObjeto = true;
-    public boolean modificarObjetoObra = false;
+    public boolean modificarObjetoObra=false;
 
     public int getCantidadColumnas() {
-
-        if (listaVideoObra.size() < 3) {
+        
+        if(listaVideoObra.size() < 3) {
             return listaVideoObra.size();
-        } else {
-
-            return cantidadColumnas;
+        }
+        else {
+            
+            return cantidadColumnas ;
         }
     }
 
@@ -303,7 +304,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public Boolean getMostrarvideo() {
-        System.out.println("mostrarvideo" + mostrarvideo);
+        System.out.println("mostrarvideo"+mostrarvideo);
         return mostrarvideo;
     }
 
@@ -792,23 +793,21 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setModificarObjetoObra(boolean modificarObjetoObra) {
         this.modificarObjetoObra = modificarObjetoObra;
     }
-
-    public void habilitarBotonModificarObjeto() {
+    
+        public void habilitarBotonModificarObjeto() {
         btn_habilitarModificarObjeto = false;
         modificarObjetoObra = true;
 
     }
-
-    public void habilitarBtnCancelar() {
+      public void habilitarBtnCancelar(){
         btn_habilitarModificarObjeto = true;
         modificarObjetoObra = false;
-    }
-
-    public void guardarModificacionObjeto() {
+      }
+      public void guardarModificacionObjeto(){
         btn_habilitarModificarObjeto = true;
-        modificarObjetoObra = false;
-        getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
-    }
+        modificarObjetoObra = false; 
+         getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
+      }
 
     public String getNombrePanelSuspension() {
         if (getObra() != null) {
@@ -1638,23 +1637,26 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         listaVideoObra = getSessionBeanCobra().getCobraService().obtenerVideoxObra(getObra().getIntcodigoobra());
         if (listaVideoObra.size() <= 0) {
             mostrarvideo = true;
-        } else {
+        }
+        else
+        {
             mostrarvideo = false;
         }
         return "adminvideoobra";
     }
-
-    public String cantidadColumnasVideos() {
-        cantidadColumnas = 3;
-        String columnas = "3";
-        if (listaVideoObra.size() < 3) {
-            columnas = listaVideoObra.size() + "";
-            return columnas;
-        } else {
-
+    public String cantidadColumnasVideos()
+    {
+        cantidadColumnas=3;
+        String columnas="3";
+        if(listaVideoObra.size() < 3) {
+            columnas=listaVideoObra.size()+"";
             return columnas;
         }
-
+        else {
+            
+            return columnas ;
+        }
+        
     }
 
     public String iniciardeta() {

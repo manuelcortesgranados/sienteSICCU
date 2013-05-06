@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:m="http://code.google.com/p/gmaps4jsf/">
+
+    <rich:popupPanel id="panelRelacionContrato" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Diligenciar relación #{var.solicitudproyecto} con contrato"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+
+            <h:panelGroup>
+                <h:form id="formCerrarRelacionContrato">
+                    <a4j:commandLink id="esconder_panelRelacionContrato" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRelacionContrato')}.hide();
+                                             return false;"/>
+                </h:form>
+            </h:panelGroup>
+
+        </f:facet>
+        <h:form id="frmpanelRelacionContrato">
+            <rich:panel style="padding:0px; width:300px; height:250px;">
+
+                <h:panelGroup id="layoutpanelRelacionContrato">
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="Contrato Nº:" styleClass="titulo3_filtro_busqueda"/>                        
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.strnumcontrato}" styleClass="titulo3_filtro_busqueda"/> 
+                        <h:outputText value="Valor contrato:" styleClass="titulo3_filtro_busqueda"/>                        
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.numvlrcontrato}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>                        
+                        <h:outputText value="Valor #{var.solicitudproyecto}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.valortotalobra}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>
+
+                    </h:panelGrid>
+
+                    <interkont:spacer height="30"/>   
+                    <h:outputText value="Este contrato posee disponibilidad" styleClass="titulo3_filtro_busqueda" />
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="por" styleClass="titulo3_filtro_busqueda"/> 
+                        <h:outputText value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible}" styleClass="titulo3_filtro_busqueda">
+                            <f:convertNumber pattern="$#,###.00"/>
+                        </h:outputText>
+                    </h:panelGrid>
+                    <h:outputText value="Qué valor desea asociar a #{var.textobra6}?" styleClass="titulo3_filtro_busqueda"/>
+                    <h:panelGrid columns="2" columnClasses="panelcenter" style="width:100%;">
+                        <h:outputText value="$" styleClass="titulo3_filtro_busqueda"/>
+                        <rich:inputNumberSpinner minValue="0" value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalorrelacion}" inputSize="30"
+                                                 maxValue="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo}" >
+
+                        </rich:inputNumberSpinner>
+                    </h:panelGrid>
+                    <h:outputText value="#{Supervisor$IngresarNuevaObra.relacioncontrato.mensaje}" style="color: #ed0606;" />                   
+
+                    <h:panelGrid columns="2" >
+
+                        <a4j:commandButton id="BTaceptarRelacion"  value="Asociar"   rendered="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible>0 and Supervisor$IngresarNuevaObra.valortotalobra>0 and Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo>0}"                                        
+                                           render="pgdatacontratos" action="#{Supervisor$IngresarNuevaObra.asociarContrato}"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratos');
+                                           javascript:Richfaces.hideModalPanel('panelRelacionContrato')" />
+                        <a4j:commandButton id="BTcancelarRelacion"  value="#{var.cancelar}"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratos');
+                                           javascript:Richfaces.hideModalPanel('panelRelacionContrato')" />
+                    </h:panelGrid>
+                </h:panelGroup>
+
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

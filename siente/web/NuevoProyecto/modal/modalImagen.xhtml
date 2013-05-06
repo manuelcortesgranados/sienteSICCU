@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalImagen" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder-mp-imagen" onclick="javascript:Richfaces.hideModalPanel('modalImagen')" immediate="true"
+                                       styleClass="btn_cerrar"  />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel id="panelImagen" header="#{var.imagen}">
+                <h:panelGroup style="width: 100%">
+                    <h:graphicImage url="#{Supervisor$IngresarNuevaObra.pathImagen}" style="height: 500px; width: 500px;" />
+                </h:panelGroup>
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+
+</f:view>

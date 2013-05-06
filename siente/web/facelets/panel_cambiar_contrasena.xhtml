@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition
+<f:view
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" 
-    xmlns:interkont="http://www.interkont.com/jsf"
-  >
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    contentType="text/html">
 
     <rich:panel id="cambiocontrasena">
 
-        <h:form id="form_cambiocontra">
+        <h:form id="form_cambiocontra" execute="@this">
 
             1. la longitud de el campo contraseña es de 11 caracteres.
             <h:panelGrid id="cambiocontra" columnClasses="aiu" columns="2" >
@@ -60,4 +59,4 @@
         </h:form>
 
     </rich:panel>
-</ui:composition>
+</f:view>

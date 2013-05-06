@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalFormularioValidarAlimentacion"  autosized="true" width="700" headerClass="rich-panel-header" styleClass="detalleproyecto" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.listachequeo} "/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide(); return false;"/>
+                     </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        
+           <center>
+            <h:form id="frmformularioValidarAlimentacion">
+                <rich:panel id="listarchequeo" style="height: 450px; overflow: auto;" >
+                    <rich:dataTable 
+                                    style="text-align:left; line-height:15px; font-size:8px;width:100%;"
+                                    var="row" 
+                                    value="#{Supervisor$DetalleObra.listaverificacion}"
+                                    onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"                                    
+                                    rowKeyVar="filaSeleccionada"
+                                    >
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column colspan="3">
+                                    <h:outputText value="Listado de Chequeo" />
+                                </rich:column>
+                                <rich:column breakRowBefore="true">
+                                    <h:outputText value="Categoría"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="Descripción"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="Cumple"/>
+                                </rich:column>
+                               
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:columnGroup>
+                            <rich:column breakRowBefore="true">
+                                <h:outputLabel id="lblcategoria" styleClass="txt_outtext" value="#{row.tipoverificacion.strdescripcion}" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputLabel id="lbldescripcion" styleClass="txt_outtext" value="#{row.strdescripcion}" />
+                            </rich:column>
+                            <rich:column>
+                                <h:selectBooleanCheckbox id="chkchequeo" styleClass="txt_outtext" value="#{row.respuesta}"/>
+                            </rich:column>                            
+                        </rich:columnGroup>
+                        
+                    </rich:dataTable>
+                </rich:panel>
+                    <a4j:commandButton value="#{var.guardar}" action="#{Supervisor$DetalleObra.guardarListaVerificacion}" oncomplete="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();"/>
+                    <a4j:commandButton value="#{var.cancelar}" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hidden(); return false;"/>
+                
+            </h:form>
+        </center>
+        
+
+    </rich:popupPanel>
+   
+
+</ui:composition>
