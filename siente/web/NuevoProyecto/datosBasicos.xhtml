@@ -40,10 +40,7 @@
                                     <h:outputText value="#{var.pasosIniciales}" styleClass="txt_header" />
                                 </h:panelGroup>
                             </f:facet>
-                            <!--paso 1 de Proyecto y Subproyecto-->
-
-
-                            <!--paso 3 datos basicos-->
+                           
                             <rich:collapsiblePanel switchType="ajax" header="3. #{var.datosbasicos}"  >
                                 <h:outputText style="font-size:8px;float:right;" value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
                                 <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
@@ -274,8 +271,8 @@
                 </tr>
             </table>
         </h:form>
-        <ui:include src="/modal/modallistadosedes.jspx"/>
-        <ui:include src="/modal/listadoRuta.jspx"/>
+        <ui:include src="/modal/modallistadosedes.xhtml"/>
+        <ui:include src="/modal/listadoRuta.xhtml"/>
     </ui:define>
 </ui:composition>
 
