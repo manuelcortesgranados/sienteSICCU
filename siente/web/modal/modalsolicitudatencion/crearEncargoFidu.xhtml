@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelCrearEnc" autosized="true" width="400" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="#{var.crear}" styleClass="txt_header" />
+            </h:panelGroup>
+        </f:facet>
+
+        <rich:panel id="panelCrearEncFidu">
+            <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%;">
+                <a4j:commandButton id="esconder_panelCrearEnc" 
+                                   onclick="#{rich:component('panelCrearEnc')}.hide();
+                                           return false;"
+                                   title="#{var.cerrar}" immediate="true" styleClass="btn_cerrar" />
+            </h:panelGroup>
+
+            <h:form>
+                <h:panelGrid id="mos" columns="2" style="width: 100%;" columnClasses="panelizquierda, panelizquierda">
+                    <h:outputLabel id="lblnumeroencargo" value="#{var.numeroencargo}" />
+                    <h:inputText id="txtNumeroencargo" required="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.intnumencargofiduciario}" />
+
+                    <h:outputText id="lblfecha"  value="#{var.fecha}" />
+                    <h:panelGroup id="layoutFechaEncargo">
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
+                                       required="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
+                            <a4j:ajax event="change" />
+                        </rich:calendar>
+                    </h:panelGroup>
+
+                    <h:outputLabel id="lblvalorencargo"  value="#{var.valorencargo}" />
+                    <rich:inputNumberSpinner id="valorcrodenpagoAH" minValue="0" maxValue="5000000000" inputSize="10"
+                                             value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.numsaldoinicial}" />
+                </h:panelGrid>
+
+                <center>
+                    <h:panelGrid id="botones" columns="2">
+                        <a4j:commandButton id="crearencargo" styleClass="btn_pri_inm" value="#{var.crear}" 
+                                           onclick="#{rich:component('panelCrearEnc')}.hide();
+                                           return false;"
+                                           render="panelAprobacionFinanciera" />
+                        <a4j:commandButton id="Cancelarencargo" styleClass="btn_pri_inm" value="#{var.cancelar}" 
+                                           onclick="#{rich:component('panelCrearEnc')}.hide();
+                                           return false;" />
+                    </h:panelGrid>
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>
