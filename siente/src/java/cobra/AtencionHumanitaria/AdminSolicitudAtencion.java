@@ -1651,14 +1651,21 @@ public class AdminSolicitudAtencion  {
 
     /**
      * En este método se le asigna el valor de la fila seleccionada a el objeto de solicitud maestro
-     * que va ser modificada, se valida si el usuario puede modificar
+ que va ser modificada, se valida si el usuario puede
+     * modificar
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return devuelve la regla de navegacion de crear solicitud si puede modificar, si no retorna la regla de navegación de
      * el home.
      */
-    public String identificados_Modif() {
+    public String identificados_Modif(int filaSeleccionada) {
+
         limpiarSolicitud();
 
-        Solicitudmaestro solicitud = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+
         getAtencionHumanitaria().setSolicitudmaestro(solicitud);
         deshformulario = false;
         editarsolicitud = true;
@@ -2063,12 +2070,16 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Le asigna el valor al objeto seleccionado de la solicitud que se va a eliminar
+     * Le asigna el valor al objeto seleccionado de la solicitud que se va a
+     * eliminar
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No retorna ningun valor
      */
-    public String SolicitudAeliminar() {
-        solicitudaborrar = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
-
+    public String SolicitudAeliminar(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        solicitudaborrar = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
         return null;
     }
 
@@ -2719,13 +2730,19 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * Asigna el valor a el objeto de Solicitud que han seleccionado en el home para cosnultar
+     * Asigna el valor a el objeto de Solicitud que han seleccionado en el home
+     * para cosnultar
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return la regla de navegacion que direcciona a la pagina de consultar atencion
      */
-    public String consultarSolicitud() {
+    public String consultarSolicitud(int filaSeleccionada) {
         deshformulario = true;
         mostrar = true;
-        Solicitudmaestro solicitud = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+
         getAtencionHumanitaria().setSolicitudmaestro(solicitud);
 
         if (solicitud.getSubestadosolicitudch().getEstadosolicitudch().getOidestadosolicitud() == 1) {
@@ -2866,11 +2883,16 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Llena la lista de proyectos que tiene una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No retorna valor alguno
      */
-    public String llenarProyectosxSolicitud() {
+    public String llenarProyectosxSolicitud(int filaSeleccionada) {
 
-        Solicitudmaestro solicitud_mestro = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud_mestro = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getCobraService().encontrarSoliProyecto(solicitud_mestro.getOidcodigosolicitudmaestro()));
         if (getSessionBeanCobra().getSolicitudService().getListaproyectoasoci().size() > 0) {
 
