@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-ConsolidadoConvenios" width="1100" height="400" headerClass="rich-panel-header" style="overflow: auto;">
+        <f:facet name="header">
+            <h:panelGroup >
+                <h:outputText value="#{var.convenio}s" styleClass="txt_header" />
+            </h:panelGroup>
+        </f:facet>
+        
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_ConsolidadoConvenios" styleClass="cerrar"
+                                     onclick="#{rich:component('mp-ConsolidadoConvenios')}.hide();
+                                             return false;"
+                                     title="#{var.cerrar}" immediate="true" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        
+        <h:form target="_blank">
+            <rich:panel>                
+                <h:panelGrid columns="1">
+                    <h:outputText value="1. Convenios en ejecución con entidades nacionales"
+                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:graphicImage id="imgconsconvenio4" width="1000" value="#{var.imgconvenio4}" />
+
+                    <h:outputText value="2. Convenios con otras entidades"
+                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:graphicImage id="imgconsconvenio5" width="1000" value="#{var.imgconvenio5}" />
+
+                    <h:outputText value="3. #{var.proyecto}s  vs. #{var.solicitudproyecto}s terminados"
+                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:graphicImage id="imgconsconvenio2" value="#{var.imgconvenio2}" />
+
+                    <h:outputText value="4. Recursos Programados vs. Recursos Ejecutados declarados"
+                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:graphicImage id="imgconsconvenio1" value="#{var.imgconvenio1}" />
+
+                    <h:outputText value="5. Otras actividades"
+                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:graphicImage id="imgconsconvenio6" width="1000" value="#{var.imgconvenio6}" />
+                   
+                    <h:graphicImage id="imgconsconvenio3" width="1000" value="#{var.imgconvenio3}" />
+                </h:panelGrid>
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

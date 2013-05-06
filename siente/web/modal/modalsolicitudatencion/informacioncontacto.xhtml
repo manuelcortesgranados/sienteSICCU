@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelinformacioncontacto" autosized="true" width="300" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup >
+                <center>
+                    <h:outputText value="#{var.infocontacto}" styleClass="txt_header" />
+                </center>
+            </h:panelGroup>
+        </f:facet>
+
+        <rich:panel >
+            <h:form>
+                <center>
+                    <h:panelGrid columns="2" id="infocontacto">
+                        <h:outputText value="#{var.nombreah}" />
+                        <h:inputText id="nombreahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}" disabled="true" />
+
+                        <h:outputText value="#{var.apellidoah}" />
+                        <h:inputText id="apellidoahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}" disabled="true" />
+
+                        <h:outputText value="#{var.cedulaah}" />
+                        <h:inputText id="cedulaahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.intcedula}" disabled="true" />
+
+                        <h:outputText value="#{var.departamento}" />
+                        <h:inputText id="departamentosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
+
+                        <h:outputText value="#{var.municipio}" />
+                        <h:inputText id="municipiosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
+
+                        <h:outputText value="#{var.entidadah}" />
+                        <h:inputText id="entidad" disabled="true" />
+
+                        <h:outputText value="#{var.CARGO}" />
+                        <h:inputText id="cargosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.cargo.strdescripcion}" disabled="true" />
+
+                        <h:outputText value="#{var.mail}" />
+                        <h:inputText id="mailsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.stremail}" disabled="true" />
+
+                        <h:outputText value="#{var.telefonoah}" />
+                        <h:inputText id="telefonosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strtelefono1}" disabled="true" />
+
+                        <h:outputText value="#{var.celular}" />
+                        <h:inputText id="celularsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strmovil}" disabled="true" />
+                    </h:panelGrid>
+
+                    <a4j:commandButton id="btn_aceptar" value="#{var.aceptar}"
+                                       onclick="#{rich:component('panelinformacioncontacto')}.hide();
+                                               return false;"
+                                       style="font-size: 12px;" />
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>
