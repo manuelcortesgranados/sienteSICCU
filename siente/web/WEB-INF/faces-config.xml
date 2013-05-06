@@ -477,7 +477,7 @@
         <from-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.jspx</from-view-id>
         <navigation-case>
             <from-outcome>verproyecto</from-outcome>
-            <to-view-id>/Supervisor/DetalleObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -546,7 +546,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>asociarcontratos</from-outcome>
-            <to-view-id>/Supervisor/AsociarContratos.jspx</to-view-id>
+            <to-view-id>/Supervisor/AsociarContratos.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>documentocontrato</from-outcome>
@@ -602,11 +602,11 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>adminalimentar</from-outcome>
-            <to-view-id>/Supervisor/Alimentar.jspx</to-view-id>
+            <to-view-id>/Supervisor/Alimentar.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>admindetalleObra</from-outcome>
-            <to-view-id>/Supervisor/DetalleObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>adminfinalizar</from-outcome>
@@ -686,7 +686,7 @@
         <from-view-id>/homes/home_gestion.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>admindetalleObra</from-outcome>
-            <to-view-id>/Supervisor/DetalleObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>nuevaobra</from-outcome>
@@ -785,7 +785,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/DetalleObra.jspx</from-view-id>
+        <from-view-id>/Supervisor/DetalleObra.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>consuldetaseguimi</from-outcome>
             <to-view-id>/SupervisionExterna/SeguimientosRegistros.xhtml</to-view-id>
@@ -812,7 +812,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>volverdetalle</from-outcome>
-            <to-view-id>/Supervisor/DetalleObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <!--Fin reglas de Navegación Supervisión Externa  -->
@@ -820,7 +820,7 @@
 
     <!-- Inicio de Reglas de Navegacion generales para Cobra -->
     <navigation-rule>
-        <from-view-id>/Inicio.jspx</from-view-id>
+        <from-view-id>/Inicio.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>fallo</from-outcome>
             <to-view-id>/Inicio.jspx</to-view-id>
@@ -923,7 +923,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>verproyectocomple</from-outcome>
-            <to-view-id>/Supervisor/DetalleObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/DetalleObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
