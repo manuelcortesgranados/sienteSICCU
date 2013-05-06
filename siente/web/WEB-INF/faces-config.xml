@@ -461,7 +461,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>consultar_atencion</from-outcome>
-            <to-view-id>/AtencionHumanitaria/ConsultarSolicitud.jspx</to-view-id>
+            <to-view-id>/AtencionHumanitaria/ConsultarSolicitud.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
