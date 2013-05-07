@@ -71,7 +71,7 @@
                                                render="layoutImagenDetalleCiu, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
                                                styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                             <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
-                                               value="#{var.aceptar}" onclick="javascript:Richfaces.hideModalPanel('modalImagenCiu')" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
+                                               value="#{var.aceptar}" onclick="#{rich:component('modalImagenCiu')}.hide()" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
                                                render="layoutImagenDetalleCiu"
                                                style="font-size: 12px;"/>
                         </center>
