@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfGuardadoTemporal" moveable="true" resizeable="false"  height="300" width="400" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.confirmarguardadot}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfGuardadoTemporal" styleClass="cerrar"
+                                     title="#{var.cerrar}" onclick="#{rich:component('panelConfGuardadoTemporal')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+
+        <interkont:spacer style="width:100%;" height="50"/>
+        <center>
+            <h:form>
+                <h:panelGrid id="layoutMensajepaso1" columnClasses="columna_derecha">
+                    <a4j:commandButton value="#{var.aceptar}" id="btAceptarConf" action="#{Supervisor$IngresarNuevaObra.limpiarMensaje}" onclick="#{rich:component('panelConfGuardadoTemporal')}.hide();"/>
+                </h:panelGrid>
+            </h:form>
+        </center>
+
+    </rich:popupPanel>
+</ui:composition>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfirmarSolicitud" autosized="true" width="200" headerClass="rich-panel-header">
+        <rich:panel>
+            <f:facet name="header">
+                <h:panelGroup>
+                    <h:outputText value= "#{var.atencion}" />
+                    <interkont:spacer width="105" />
+                    <a4j:commandButton id="esconder_panelConfirmarSolicit"
+                                       onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
+                                               return false;"
+                                       immediate="true" styleClass="btn_cerrar" />
+                </h:panelGroup>
+            </f:facet>
+
+            <center> 
+                <h:outputText value="#{var.estasegurodeenviar}" />
+                <h:panelGrid columns="2" id="layoutGuardar">
+                    <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
+                                       oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
+                                       style="font-size: 12px;" />
+
+                    <a4j:commandButton id="BTaceptarDoc" value="#{var.no}" style="font-size: 12px;"
+                                       onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
+                                               return false;" />
+                </h:panelGrid>
+            </center> 
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>
