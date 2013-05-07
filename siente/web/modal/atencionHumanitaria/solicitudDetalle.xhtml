@@ -81,8 +81,8 @@
                             <rich:column>
                                 <a4j:commandButton  value="#{var.agregar}"                                          
                                                     action="#{CrearSolicitudAtencion$Solicitud.anadirItem}"
-                                                    onclick="javascript:Richfaces.showModalPanel('panelCargando');" style="font-size:11px;"
-                                                    oncomplete="javascript:Richfaces.hideModalPanel('panelCargando');"
+                                                    onclick="#{rich:component('panelCargando')}.show();" style="font-size:11px;"
+                                                    oncomplete="#{rich:component('panelCargando')}.hide());"
                                                     render="ToggleAtencionHumanitaria, tablaSolicitudDetalle, gpvalortotalmaestro"
                                                     styleClass="btn_pri_gig"  />
                             </rich:column>  

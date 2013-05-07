@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadActaConvenio" autosized="true"  style="padding:0px;" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -13,12 +14,15 @@
                 <h:outputText value="#{var.seleccionaractadeconvenio}"/>
             </h:panelGroup>
         </f:facet>
-         <f:facet name="controls">
+        <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadActaConvenio" styleClass="cerrar"
-                                       title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelUploadActaConvenio" event="onclick" for="panelUploadActaConvenio" operation="hide"/>
+
+                    <a4j:commandLink id="esconder_panelUploadActaConvenio" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadActaConvenio')}.hide();
+                                             return false;"/>
+
+
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -26,11 +30,10 @@
             <h:form id="formActaConvenio">
                 <h:panelGroup id="layoutDocActaConvenio">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addControlLabel="#{var.adicionar}" allowFlash="#{Supervisor$ModificarObra.subirActaConvenio.useFlash}"
-                                         clearAllControlLabel="#{var.borrartodo}" clearControlLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{Supervisor$ModificarObra.subirActaConvenio.listener}" id="uploadActaConvenio" immediateUpload="#{Supervisor$ModificarObra.subirActaConvenio.autoSubida}"
-                                         listHeight="150" listWidth="250" maxFilesQuantity="#{Supervisor$ModificarObra.subirActaConvenio.cantidadSubidas}" uploadControlLabel="#{var.subir}">
-                            <a4j:ajax event="onuploadcomplete" render="infoActaConvenio, layoutDocActaConvenio"/>
+                                         style="height: 150px; width: 250px" maxFilesQuantity="#{Supervisor$ModificarObra.subirActaConvenio.cantidadSubidas}" uploadLabel="#{var.subir}">
+                            <a4j:ajax event="uploadcomplete" render="infoActaConvenio, layoutDocActaConvenio"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoActaConvenio">
                             <center>
@@ -59,9 +62,9 @@
                                                    rendered="#{Supervisor$ModificarObra.subirActaConvenio.size>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton id="BTaceptarActaConvenio" value="#{var.aceptar}" rendered="#{Supervisor$ModificarObra.subirActaConvenio.size>0}"
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadActaConvenio')"
+                                                   onclick="#{rich:component('panelUploadActaConvenio')}.hide();"
                                                    render="panel_subirActaConvenio"
-                                                      style="font-size: 12px;"/>
+                                                   style="font-size: 12px;"/>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
@@ -70,4 +73,4 @@
         </rich:panel>
     </rich:popupPanel>
 
-</f:view>
+</ui:composition>

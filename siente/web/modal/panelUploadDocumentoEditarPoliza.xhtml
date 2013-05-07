@@ -1,37 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadDocumentopoliza" autosized="true" style="padding:0px;">
 
         <rich:panel header="Seleccionar Documento" styleClass="rich-panel-body" style="padding:0px;">
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
-                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="javascript:Richfaces.hideModalPanel('panelUploadDocumentopoliza')"
+
+                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide());"
                                        styleClass="btn_cerrar"  />
+
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
-                                id="uploadDocumento"
-                                fileUploadListener="#{Supervisor$ModificarContrato.cargadorPoliza.listener}"
-                                acceptedTypes="*"
-                                immediateUpload="true"
-                                maxFilesQuantity="1" 
-                                listWidth="250" 
-                                listHeight="150"
-                                autoclear="true"
-                                addControlLabel="#{var.adicionar}"
-                                doneLabel="#{var.hecho}"
-                                uploadControlLabel="#{var.subir}"
-                                clearAllControlLabel="#{var.borrartodo}"
-                                clearControlLabel="#{var.eliminar}">
-                            <a4j:ajax event="onuploadcomplete" render="info_documento"/>
+                            id="uploadDocumento"
+                            fileUploadListener="#{Supervisor$ModificarContrato.cargadorPoliza.listener}"
+                            acceptedTypes="*"
+                            immediateUpload="true"
+                            maxFilesQuantity="1" 
+                            addLabel="#{var.adicionar}"
+                            doneLabel="#{var.hecho}"
+                            uploadLabel="#{var.subir}"
+                            clearAllLabel="#{var.borrartodo}"
+                            clearLabel="#{var.eliminar}"
+                            style="width: 250px; height:150px">
+                            <a4j:ajax event="uploadcomplete" render="info_documento"/>
                         </rich:fileUpload>
 
                         <h:panelGroup id="info_documento">
@@ -60,9 +61,9 @@
                                                    rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
                                 <a4j:commandButton value="#{var.aceptar}"
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadDocumentopoliza')" render="pgdocumentosModi"
-                                                      style="font-size:12px;"
-                                                      rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}"/>
+                                                   onclick="#{rich:component('panelUploadDocumentopoliza')}.hide();" render="pgdocumentosModi"
+                                                   style="font-size:12px;"
+                                                   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}"/>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
@@ -70,4 +71,4 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
+</ui:composition>

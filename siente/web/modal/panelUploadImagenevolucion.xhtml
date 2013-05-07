@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadImagenevolucion" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -13,12 +14,14 @@
                 <h:outputText value="#{var.seleccionarimagen}"/>
             </h:panelGroup>
         </f:facet>
-         <f:facet name="controls">
+        <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadImagenevolucion" styleClass="cerrar"
-                                       title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelUploadImagenevolucion" event="onclick" for="panelUploadImagenevolucion" operation="hide"/>
+
+                    <a4j:commandLink id="esconder_panelUploadImagenevolucion" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadImagenevolucion')}.hide();
+                                             return false;"/>
+
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -27,20 +30,18 @@
                 <h:panelGroup id="gpImagenModal">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
-                                id="uploadImagenevolucion"
-                                fileUploadListener="#{Supervisor$AdministrarObraNew.cargadorImagenes.listener}"
-                                acceptedTypes="jpg, jpeg, gif, png, bmp"
-                                immediateUpload="true"
-                                maxFilesQuantity="1" 
-                                listWidth="250" 
-                                listHeight="150"
-                                autoclear="true"
-                                addControlLabel="#{var.adicionar}"
-                                doneLabel="#{var.hecho}"
-                                uploadControlLabel="#{var.subir}"
-                                clearAllControlLabel="#{var.borrartodo}"
-                                clearControlLabel="#{var.eliminar}">
-                            <a4j:ajax event="onuploadcomplete" render="info_imagenevolucion, panel_subir_imagenevolucion"/>
+                            id="uploadImagenevolucion"
+                            fileUploadListener="#{Supervisor$AdministrarObraNew.cargadorImagenes.listener}"
+                            acceptedTypes="jpg, jpeg, gif, png, bmp"
+                            immediateUpload="true"
+                            maxFilesQuantity="1" 
+                            addLabel="#{var.adicionar}"
+                            doneLabel="#{var.hecho}"
+                            uploadLabel="#{var.subir}"
+                            clearAllLabel="#{var.borrartodo}"
+                            clearLabel="#{var.eliminar}"
+                            style="width: 250px; height:150px;">
+                            <a4j:ajax event="uploadcomplete" render="info_imagenevolucion, panel_subir_imagenevolucion"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_imagenevolucion">
                             <center>
@@ -69,9 +70,9 @@
                                                    rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}"
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadImagenevolucion')"
+                                                   onclick="#{rich:component('panelUploadImagenevolucion')}.hide();"
                                                    render="panel_subir_imagenevolucion"
-                                                      style="font-size:12px;"/>
+                                                   style="font-size:12px;"/>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
@@ -80,4 +81,4 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
+</ui:composition>

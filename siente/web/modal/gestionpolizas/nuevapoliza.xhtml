@@ -64,7 +64,7 @@
 
                 <a4j:commandButton value="#{var.editar}"   action="#{Supervisor$Contrato.insertarPoliza}" style="left:120%"
                                    render="polizasContrato,mp_nueva_poliza"  rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
-                                   oncomplete="javascript:Richfaces.hideModalPanel('mp_nueva_poliza');">
+                                   oncomplete="#{rich:component('mp_nueva_poliza')}.hide();">
                 </a4j:commandButton>
 
 

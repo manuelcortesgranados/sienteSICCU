@@ -1,23 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
     <rich:popupPanel id="panelUploadCronograma" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  value="#{var.cargarcronograma}"/>
             </h:panelGroup>
         </f:facet>
-         <f:facet name="controls">
+        <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="cerrar"
-                                       title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_panelUploadCronograma" event="onclick" for="panelUploadCronograma" operation="hide"/>
+
+                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadCronograma')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -25,11 +28,18 @@
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="xls, xlsx" addControlLabel="#{var.adicionar}" allowFlash="#{Supervisor$ModificarObra.subirCronograma.useFlash}"
-                                         clearAllControlLabel="#{var.borrartodo}" clearControlLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$ModificarObra.subirCronograma.listener}" id="uploadCrono" immediateUpload="#{Supervisor$ModificarObra.subirCronograma.autoSubida}"
-                                         listHeight="150" listWidth="250" maxFilesQuantity="#{Supervisor$ModificarObra.subirCronograma.cantidadSubidas}" uploadControlLabel="#{var.subir}">
-                            <a4j:ajax event="onuploadcomplete" render="infoCrono, layoutDocCronog"/>
+                        <rich:fileUpload acceptedTypes="xls, xlsx" 
+                                         addLabel="#{var.adicionar}" 
+                                         clearAllLabel="#{var.borrartodo}"
+                                         clearLabel="#{var.eliminar}"
+                                         doneLabel="#{var.hecho}"
+                                         fileUploadListener="#{Supervisor$ModificarObra.subirCronograma.listener}"
+                                         id="uploadCrono" 
+                                         immediateUpload="#{Supervisor$ModificarObra.subirCronograma.autoSubida}"
+                                         maxFilesQuantity="#{Supervisor$ModificarObra.subirCronograma.cantidadSubidas}" 
+                                         uploadLabel="#{var.subir}"
+                                         style="height: 150px; width: 250px">
+                            <a4j:ajax event="uploadcomplete" render="infoCrono, layoutDocCronog"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoCrono">
                             <center>
@@ -58,9 +68,9 @@
                                                    rendered="#{Supervisor$ModificarObra.subirCronograma.size>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton id="BTaceptarCrono" value="#{var.validar}" rendered="#{Supervisor$ModificarObra.subirCronograma.size>0}"
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadCronograma');"
+                                                   onclick="#{rich:component('panelUploadCronograma')}.hide();"
                                                    render="panel_subirCronograma, layoutRegTip" action="#{Supervisor$ModificarObra.validarCrono}"
-                                                      style="font-size: 12px;"/>
+                                                   style="font-size: 12px;"/>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
@@ -68,4 +78,4 @@
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-</f:view>
+</ui:composition>

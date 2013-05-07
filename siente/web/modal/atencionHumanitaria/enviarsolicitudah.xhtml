@@ -19,9 +19,8 @@
                     <h:outputText value= "#{var.atencion}"/>
                     <interkont:spacer style="width: 105px"/>
 
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="btn_cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
-                                             return false;"/>
+                    <a4j:commandButton id="esconder_panelConfirmarSolicitud" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();" immediate="true"
+                                       styleClass="btn_cerrar"  />
 
                 </h:panelGroup>
 
@@ -34,12 +33,12 @@
 
 
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmarSolicitud')"
+                                       oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
                                        style="font-size: 12px;"/>
 
                     <a4j:commandButton id="BTaceptarDoc" value="#{var.no}"   
                                        style="font-size: 12px;">
-                        <a4j:ajax event="click"   onbeforesubmit="javascript:Richfaces.hideModalPanel('panelConfirmarSolicitudAH')" />
+                        <a4j:ajax event="click"   onbeforesubmit="#{rich:component('panelConfirmarSolicitudAH')}.hide();" />
                     </a4j:commandButton>
 
 

@@ -1,26 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-
-    <f:view>
-
-    <rich:popupPanel id="mp-listado-novedades" moveable="true" width="500" height="420" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-listado-novedades" moveable="true"  style="width:500px; height: 420px" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="#{var.rpanhea_listadocompletonpvedades}"/>
             </h:panelGroup>
         </f:facet>
-         <f:facet name="controls">
+        <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-novedades" styleClass="cerrar"
-                                       title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_mp-listado-novedades" event="onclick" for="mp-listado-novedades" operation="hide"/>
+                    <a4j:commandLink id="esconder_mp-listado-novedades" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-novedades')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -31,31 +30,25 @@
                     <h:panelGroup id="panel-filtro-novedades">
                         <h:outputText  value="#{var.houtbusquedarapida} "/>
                         <h:inputText value="#{Supervisor$HomeSupervisor.valorFiltroNovedad}" id="filtro-novedades">
-                            <a4j:ajax event="onkeyup" render="tabla-listado-novedades" ignoreDupResponses="true" />
+                            <a4j:ajax event="keyup" render="tabla-listado-novedades" />
                         </h:inputText>
                     </h:panelGroup>
                     <interkont:spacer height="10px" style="width:100%;"/>
                     <rich:panel id="pl-tabla-listado-novedades" style="overflow: auto;width: 100%; height: 300px;">
-                        <rich:dataTable id="tabla-listado-novedades"  sortMode="single" style="text-align:left; background-color: #000000;" value="#{Supervisor$HomeSupervisor.listaTotalNovedades}" var="currentRow" width="440px" rows="7" binding="#{Supervisor$HomeSupervisor.tablaNovedadesListado}" rowClasses="cabezo_tabla01, cabezo_tabla02">
-                            <rich:column id="tc-datefechanovedad-listado" filterMethod="#{Supervisor$HomeSupervisor.filtrarNovedades}" sortBy="#{currentRow.datefechanovedad}" width="110px"
-                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif" sortOrder="DESCENDING"
-                                         sortIconDescending="../resources/images/des.gif">
+                        <rich:dataTable id="tabla-listado-novedades"  sortMode="single" style="text-align:left; background-color: #000000; width: 440px" value="#{Supervisor$HomeSupervisor.listaTotalNovedades}" var="currentRow" rows="7" binding="#{Supervisor$HomeSupervisor.tablaNovedadesListado}" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                            <rich:column id="tc-datefechanovedad-listado" filterExpression="#{Supervisor$HomeSupervisor.filtrarNovedades}" sortBy="#{currentRow.datefechanovedad}" width="110px">
                                 <f:facet name="header">
                                     <h:outputText value="#{var.houtfechayhora}"/>
                                 </f:facet>
                                 <h:outputText id="otxt_datefechanovedad-listado" value="#{currentRow.datefechanovedad}"/>
                             </rich:column>
-                            <rich:column id="tc-strnombreobra-listado" sortBy="#{currentRow.obra.strnombreobra}" width="150px"
-                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                         sortIconDescending="../resources/images/des.gif">
+                            <rich:column id="tc-strnombreobra-listado" sortBy="#{currentRow.obra.strnombreobra}"   style="width: 150px">
                                 <f:facet name="header">
                                     <h:outputText value="#{var.houtnombreobra}"/>
                                 </f:facet>
                                 <h:outputText id="otxt_strnombreobra-listado" value="#{currentRow.obra.strnombreobra}"/>
                             </rich:column>
-                            <rich:column id="tc-strtiponovedad-listado" sortBy="#{currentRow.tiponovedad.strtiponovedad}" width="120px"
-                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                         sortIconDescending="../resources/images/des.gif">
+                            <rich:column id="tc-strtiponovedad-listado" sortBy="#{currentRow.tiponovedad.strtiponovedad}" style="width: 120px">
                                 <f:facet name="header">
                                     <h:outputText value="#{var.tipo}"/>
                                 </f:facet>
@@ -78,5 +71,5 @@
         </rich:panel>
     </rich:popupPanel>
 
-    </f:view>
-</html>
+
+</ui:composition> 
