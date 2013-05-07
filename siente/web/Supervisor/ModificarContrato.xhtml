@@ -1,0 +1,544 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <title>Modificar Contrato</title>
+        <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <h:outputScript library="/resources/script_supervisor.js" name=""/>
+        <h:outputScript library="/resources/js/csspopup.js" name=""/>
+        <h:outputScript library="/resources/js/jquery.timers-1.0.0.js" name=""/>
+        <h:outputScript library="/resources/js/validarletra.js" name=""/>
+        <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="#{var.modificarcontrato}"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+    </ui:define>
+    <ui:define name="body">
+
+        <rich:panel id="modificar">
+            <f:facet name="header" >
+                <h:panelGroup >
+                    <h:outputText value="#{var.modificarcontrato}" styleClass="txt_header" />
+                </h:panelGroup>
+            </f:facet>
+            <h:form prependId="false" >
+                <h:inputHidden id="finfecha" value="#{Supervisor$Contrato.finentrega}" />
+            </h:form>
+            <h:form id="form_modifi_contrato" >
+                <h:panelGrid id="layoutdetalleModificar"  style="text-align:center;width:100%;" rendered="true">
+                    <h:panelGrid id="detallecontrato" styleClass="tipo" columns="4"
+                                 columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
+                        <rich:panel  id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel"
+                                     rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                            <h:panelGrid columns="1" style="width:100%;">
+                                <interkont:spacer height="30"/>
+                                <h:panelGroup>
+                                    <center>
+                                        <h:outputText id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}" style="font-size:30px; color:#336699; font-weight: bold;"/>
+                                    </center>
+                                </h:panelGroup>
+                                <interkont:spacer height="20"/>
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <interkont:spacer height="50"/>
+
+                            <h:panelGrid columns="1" style="width:100%;" columnClasses="column-grid-detail">
+                                <h:panelGroup>
+                                    <h:panelGrid columns="1">
+                                        <h:outputText id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}"  styleClass="txt_outtext" style="font-size:16px; color:#336699; font-weight: bold;"   >
+                                            <f:convertNumber pattern="$ ###,###"/>
+                                        </h:outputText>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" style="width:100%;">
+                                <h:outputText value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" style="font-size:30px; color:#336699; font-weight: bold;"/>
+                                <h:outputText value="desde" style="font-size:10px; color:#666666;"/>
+                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechaini}" style="font-size:10px; color:#666666;">
+                                    <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                </h:outputText>
+                                <h:outputText value="#{var.diashasta}" style="font-size:10px; color:#666666;"/>
+                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechafin}" style="font-size:10px; color:#666666;">
+                                    <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                </h:outputText>
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <script type="text/javascript" language="JavaScript">
+
+                                jQuery(document).ready(function() {
+
+
+                                    var j = jQuery.noConflict();
+                                    var timefalta=document.getElementById("finfecha").value;
+                                    var futuro = new Date (timefalta);
+                                    var actualiza = 1000;
+
+                                    j("#refreshMe").everyTime(actualiza,function(i){
+                                        var ahora = new Date();
+                                        var faltan = futuro - ahora;
+
+                                        if (faltan > 0){
+                                            var segundos = Math.round(faltan/1000);
+                                            var minutos = Math.floor(segundos/60);
+                                            var segundos_s = segundos%60;
+                                            var horas = Math.floor(minutos/60);
+                                            var minutos_s = minutos%60;
+                                            var dias = Math.floor(horas/24);
+                                            var horas_s = horas%24;
+
+                                            var cuentaRegresiva='<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">'+dias+'</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">'+horas_s+'</h2></td><td><h2 align="center" style="color:#336699">'+minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">'+segundos_s+'</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
+
+                                            j('#refreshMe').html(cuentaRegresiva);
+
+                                        }
+                                        else {
+                                            var dias=0;
+                                            var horas_s=0;
+                                            var minutos_s=00;
+                                            var segundos_s=00;
+                                            var cuentaRegresiva='<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">'+dias+'</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">'+horas_s+'</h2></td><td><h2 align="center" style="color:#336699">'+minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">'+segundos_s+'</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
+
+                                            j('#refreshMe').html(cuentaRegresiva) ;
+                                            return true;
+                                        }
+
+                                    })
+
+
+                                });
+                            </script>
+
+                            <div id="refreshMe" style="font-size: 12pt">
+                                <center><table style="width: 149px;" border="0"><tr><td style="width: 45px"></td><td style="width: 49px">
+                                                <h1 align="center" style="color:#336699">0</h1></td><td style="width: 41px"></td></tr><tr><td style="width: 20px"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center></div>
+
+                        </rich:panel>
+                    </h:panelGrid>
+                </h:panelGrid>
+                <interkont:spacer height="20px" style="width:100%;"/>
+
+                <rich:collapsiblePanel label="#{var.registrarmodificacion}" switchType="client">
+                    <h:panelGroup id="pgprincipal">                            
+                        <rich:panel rendered="#{Supervisor$ModificarContrato.cual==1}">
+                            <f:facet name="header" >
+                                <h:panelGroup >
+                                    <h:outputText value="1.#{var.prorrogascontrato}" styleClass="txt_header" />
+                                </h:panelGroup>
+                            </f:facet>
+                            <h:panelGrid id="modificar1" columnClasses="aiu" columns="2" >
+                                <h:outputLabel id="lblFecmodi"  value="#{var.fechamodificacion}:" for="fecmodifi"/>
+                                <h:panelGrid columns="5">
+                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecmodifi" inputSize="10"
+                                                    value="#{Supervisor$ModificarContrato.modificarcontrato.datefechamodificacionseleccionada}" required="true">
+                                    </rich:calendar>
+                                    <rich:message for="fecmodifi" style="color: red"/>
+                                </h:panelGrid>
+                                <h:outputLabel value="#{var.modificarprorrogarcontrato}:"/>
+                                <h:selectOneMenu id="prorroga" value="#{Supervisor$ModificarContrato.modificarcontrato.prorroga}"  >
+                                    <f:selectItem itemValue="0" itemLabel="No"/>
+                                    <f:selectItem itemValue="1" itemLabel="Adicionar plazo"/>
+                                    <f:selectItem itemValue="2" itemLabel="Disminuir plazo"/>
+                                    <a4j:ajax event="change" render="pgprorroga, pgprorrogalabel"  execute="@this">
+                                    </a4j:ajax>
+                                </h:selectOneMenu>
+                                <h:panelGroup id="pgprorrogalabel">
+                                    <h:outputLabel id="lblFectermi"  value="#{var.nuevafechatermincacion}:" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"/>
+                                </h:panelGroup>
+                                <h:panelGroup id="pgprorroga">
+                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fectermi" inputSize="10" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"
+                                                    value="#{Supervisor$ModificarContrato.modificarcontrato.datefechafinalizacion}">
+                                    </rich:calendar>
+
+                                </h:panelGroup>
+
+
+                                <h:outputText id="justificar"  value="#{var.porfavorjustifique}:" />
+                                <h:panelGrid columns="2">
+                                    <h:inputTextarea required="true" requiredMessage="#{var.justimodcontratoreq}"  id="textjustificar" cols="75" rows="4" value="#{Supervisor$ModificarContrato.modificarcontrato.strrazonmodificacion}">
+                                        <f:validateLength maximum="255"/>
+                                    </h:inputTextarea>
+                                    <rich:message for="textjustificar" style="color: red"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                        </rich:panel>
+                        <rich:panel  rendered="#{Supervisor$ModificarContrato.cual==2}">
+                            <f:facet name="header" >
+                                <h:panelGroup >
+                                    <h:outputText value="2.#{var.presupuestocontrato}" styleClass="txt_header" />
+                                </h:panelGroup>
+                            </f:facet>
+                            <h:panelGrid id="modificar2" columnClasses="aiu" columns="2" >
+                                <h:outputLabel value="#{var.modificarpresupuestocontrato}"/>
+                                <h:selectOneMenu id="presupuesto" immediate="true" value="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto}">
+                                    <f:selectItem itemValue="0" itemLabel="No"/>
+                                    <f:selectItem itemValue="1" itemLabel="Adicionar"/>
+                                    <f:selectItem itemValue="2" itemLabel="Disminuir"/>
+                                    <a4j:ajax event="change" render="pgpresupuesto" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
+                                </h:selectOneMenu>
+
+                                <h:panelGroup id="pgpresupuesto">
+                                    <h:panelGrid id="pgpresupuesto1" rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto!=0}" columns="2">
+
+                                        <h:outputLabel  id="lblnumvlractual"  value=" #{var.presupuestoactual}:" rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto!=3}"  />
+                                        <h:outputLabel  id="lblnumvlractumostrar"  value="#{Supervisor$Contrato.contrato.numvlrcontrato}"  rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto!=3}">
+                                            <f:convertNumber pattern="$ ###,###"/>
+                                        </h:outputLabel>
+                                        <h:outputText id="lblnumrecursospropios"  value="#{var.numrecursospropios} (Entidad Contratante):"/>
+                                        <h:inputText id="innumrecursospropios"
+                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursospropios}"
+                                                     size="20"  maxlength="20"
+                                                     onkeypress="return validar(event)">
+                                            <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
+                                            <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                        </h:inputText>
+                                        <h:outputText id="lblnumrecursosch"  value="#{var.numrecursosch}:" rendered="#{var.varrecurosoch}" />
+                                        <h:inputText id="innumrecursosch" rendered="#{var.varrecurosoch}"
+                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursosch}"
+                                                     size="20"  maxlength="20"
+                                                     onkeypress="return validar(event)">
+                                            <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
+                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                        </h:inputText>
+                                        <h:outputText id="lblnumrecursoster"  value="#{var.numrecursoster}:"/>
+                                        <h:inputText id="innumrecursoster"
+                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursostercero}"
+                                                     size="20"  maxlength="20"
+                                                     onkeypress="return validar(event)">
+                                            <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
+                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                        </h:inputText>
+
+                                        <h:outputText id="lblnumvlrtotal"  value="#{var.presupuestoconadicion}:"/>
+                                        <h:panelGroup id="pgnumvlrtotal">
+                                            <h:inputText id="innumvlrtotal"  value="#{Supervisor$ModificarContrato.modificarcontrato.numvlrnuevo}"
+                                                         size="20"  maxlength="20" disabled="true">
+                                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
+                                            </h:inputText>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </rich:panel>
+                        <rich:panel  rendered="#{Supervisor$ModificarContrato.cual==3}">
+                            <f:facet name="header" >
+                                <h:panelGroup >
+                                    <h:outputText value="3.#{var.polizas}" styleClass="txt_header" />
+                                </h:panelGroup>
+                            </f:facet>
+
+                            <h:outputLabel value="#{var.modificarpolizascontrato}"/>
+
+                            <h:selectOneMenu id="polizas" immediate="true" value="#{Supervisor$ModificarContrato.modificarcontrato.polizas}">
+                                <f:selectItem itemValue="0" itemLabel="No"/>
+                                <f:selectItem itemValue="1" itemLabel="Si"/>
+                                <a4j:ajax event="change" render="gpPolizasMod" listener="#{Supervisor$ModificarContrato.llenarPolizas}" execute="@this"/>
+                            </h:selectOneMenu>
+                            <interkont:spacer height="15" style="width:100%;"/>
+
+                            <h:panelGroup id="gpPolizasMod" > 
+                                <rich:panel  rendered="#{Supervisor$ModificarContrato.modificarcontrato.polizas==1}">
+                                    <f:facet name="header" >
+                                        <h:panelGroup >
+                                            <h:outputText value="#{var.polizas}" styleClass="txt_header" />
+                                        </h:panelGroup>
+                                    </f:facet>
+
+
+                                    <h:panelGrid id="gpPolizaModi" columns="2"  style="width:100%;" >
+
+                                        <h:outputLabel id="lblTipoPolizaModi"  value="#{var.tipoPolizaContrato}:" for="comboTipoPolizaModi">
+
+                                        </h:outputLabel>
+                                        <h:selectOneMenu id="comboTipoPolizaModi" value="#{Supervisor$Contrato.tipointpoli}">
+                                            <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>                                           
+                                        </h:selectOneMenu>
+
+                                        <h:outputLabel  id="lblnumPolizaContratoModi"  value=" #{var.numPolizaContrato}:" for="numPolizaContratoModi">
+                                        </h:outputLabel>
+                                        <h:inputText id="numPolizaContratoModi" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}"  />
+                                        <h:outputLabel id="lblVencimientoPolizaModi"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPolizaModi">
+
+                                        </h:outputLabel>
+
+                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPolizaModi" inputSize="10"
+                                                       value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
+
+
+                                        <h:outputLabel id="lblEntidadPolizaModi"  value=" #{var.entidadPoliza}:" for="comboentidadPolizaModi">
+                                        </h:outputLabel>
+                                        <h:selectOneMenu id="comboentidadPolizaModi" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
+                                            <f:selectItems value="#{Supervisor$Contrato.companias}"/>
+                                        </h:selectOneMenu>
+
+                                        <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" style="width:100%;" >
+                                            <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaModi,pgpoliza,tblaPolizasModi"
+                                                               >
+                                                <a4j:ajax event="click" render="pgpoliza" immediate="true"/>
+                                            </a4j:commandButton>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGroup id="pgpoliza">
+                                        <rich:dataTable id="tblaPolizasModi" sortMode="single" style="text-align:left; width: 500px" var="localRow"                                                           
+                                                        value="#{Supervisor$Contrato.listaPolizacontratos}"
+                                                        binding="#{Supervisor$ModificarContrato.tablaPolizasbin}">
+                                            <rich:column id="tc-strTipoPolizaModi" width="100px"
+                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.tipoPolizaContrato}"/>
+                                                </f:facet>
+                                                <h:outputText id="otxt-TipoPolizaModi" styleClass="txt_outtext" value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                            </rich:column>
+                                            <rich:column id="tc-strnumPolizaModi" width="100px"
+                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.numPolizaContrato}" />
+                                                </f:facet>
+                                                <h:outputText id="otxt-strnumPolizaModi" value="#{localRow.strnumpoliza}"/>
+                                            </rich:column>
+
+                                            <rich:column id="tc-strVencimientoPolizaModi" width="100px"
+                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.fecha} #{var.vencimientoPoliza}" />
+                                                </f:facet>
+                                                <h:outputText id="otxt-strVencimientoPolizaModi" value="#{localRow.datefechavecimiento}">
+                                                    <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                                </h:outputText>
+                                            </rich:column>
+
+                                            <rich:column id="tc-strEntidadContr" width="100px"
+                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.entidadPoliza}" />
+                                                </f:facet>
+                                                <h:outputText id="otxt-strEntidadModi" value="#{localRow.aseguradora.strnombreentidad}"/>
+                                            </rich:column>
+                                            <rich:column id="otxt-Editar" width="100px" sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.editar}" />
+                                                </f:facet>
+                                                <a4j:commandButton id="btnPolizas" value="#{var.editar}"
+                                                                   action="#{Supervisor$ModificarContrato.seleccionareditarPoliza}" render="rpPolizas">
+                                                    <a4j:ajax event="complete"
+                                                              oncomplete="javascript:Richfaces.showModalPanel('mp-editar-polizas')"
+                                                              immediate="true"/>
+                                                </a4j:commandButton>
+
+                                            </rich:column>
+                                            <rich:column id="tc-streliminarPolizaModi" width="250px"
+                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
+                                                         sortIconDescending="../resources/images/des.gif">
+                                                <f:facet name="header">
+                                                    <h:outputText value="#{var.eliminar}" />
+                                                </f:facet>
+                                                <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" immediate="true"
+                                                                   action="#{Supervisor$ModificarContrato.eliminarPoliza}">
+                                                </a4j:commandButton>
+                                            </rich:column>
+
+
+                                        </rich:dataTable>
+                                    </h:panelGroup>
+
+                                    <h:panelGrid id="pgdocumentosModi" columns="6">
+                                        <h:outputLabel id="lblPoliza"  value="#{var.anadirpolizas}:" for="txtPoliza">
+                                            <rich:message for="txtPoliza"/>
+                                        </h:outputLabel>
+                                        <interkont:spacer width="42"/>
+
+                                        <h:inputText size="40" id="txtPoliza" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoPoliza}" />
+                                        <a4j:commandButton id="bt_agregarModi" value="#{var.examinar}"
+                                                           onclick="javascript:Richfaces.showModalPanel('panelUploadDocumentopoliza')"
+                                                           style="font-size:12px;"/>
+                                    </h:panelGrid>
+
+                                </rich:panel> 
+                                <h:panelGrid id="pgdocumentosOtrosi" columns="6" rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto>=1 or Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}" >
+                                    <h:outputLabel id="lblOtrosi"  value="#{var.adjuntarotrosi}:" for="txtOtrosi">
+                                        <rich:message for="txtOtrosi"/>
+                                    </h:outputLabel>
+                                    <interkont:spacer width="42"/>
+
+                                    <h:inputText size="40" id="txtOtrosi" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoOtroSi}" />
+                                    <a4j:commandButton id="bt_agregarOtrosi" value="#{var.examinar}"  render="gpUploadDocAt"
+                                                       onclick="javascript:Richfaces.showModalPanel('panelUploadDocumentoOtrosi')"
+                                                       style="font-size:12px;"/>
+                                </h:panelGrid>
+                            </h:panelGroup>
+
+                        </rich:panel>
+
+                        <rich:panel  rendered="#{Supervisor$ModificarContrato.cual==4}">
+                            <f:facet name="header" >
+                                <h:panelGroup >
+                                    <h:outputText value="4.#{var.outformapago}" styleClass="txt_header" />
+                                </h:panelGroup>
+                            </f:facet>
+                            <h:outputLabel value="#{var.modificarpagoscontrato}"/>
+
+                            <h:selectOneMenu id="pagos" immediate="true" value="#{Supervisor$ModificarContrato.modificarcontrato.planificacion}">
+                                <f:selectItem itemValue="0" itemLabel="No"/>
+                                <f:selectItem itemValue="1" itemLabel="Si"/>
+                                <a4j:ajax event="change" render="gpPagosMod"  execute="@this" listener="#{Supervisor$Contrato.llenarplanificacionpagos}"/>
+                            </h:selectOneMenu>
+                            <interkont:spacer height="15" style="width:100%;"/>
+
+
+                            <h:panelGroup id="gpPagosMod" > 
+                                <rich:panel  rendered="#{Supervisor$ModificarContrato.modificarcontrato.planificacion==1}">
+                                    <f:facet name="header" >
+                                        <h:panelGroup >
+                                            <h:outputText value="Planificación de pagos" styleClass="txt_header" />
+                                        </h:panelGroup>
+                                    </f:facet>
+
+                                    <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+
+                                        <h:outputLabel value="#{var.formadepago}:"/>
+                                        <interkont:spacer width="20"/>
+                                        <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+
+                                        <h:outputLabel value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                                        <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                                        <h:outputLabel styleClass="txt_outtext" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+
+                                        <h:outputLabel value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+
+                                        <h:outputLabel value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                                            <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                        </h:outputText>
+
+                                    </h:panelGrid>
+
+                                    <h:panelGrid style="width:100%;" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                                        <interkont:spacer height="5" style="width:100%;"/>
+                                        <rich:dataTable id="tablaPlanificacion"
+                                                        rows="5"
+                                                        var ="planificacion"
+                                                        binding="#{Supervisor$Contrato.tablaplanificacionpagos}"
+                                                        onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                                        sortMode="single"
+                                                        value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
+                                                        render="panelfooterplan"
+                                                        style="text-align:center; width: 600px;">
+                                            <f:facet name="header">
+                                                <rich:columnGroup>
+                                                    <rich:column style="width : 150px" breakRowBefore="true" colspan="3">
+                                                        <h:outputText value="#{var.numero} de Actas Parciales"/>
+                                                    </rich:column>
+                                                    <rich:column style="width : 150px" breakRowBefore="true">
+                                                        <h:outputText value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                                    </rich:column>
+                                                    <rich:column style="width : 150px">
+                                                        <h:outputText value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                                    </rich:column>
+                                                    <rich:column style="width : 150px">
+                                                        <h:outputText value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                                    </rich:column>
+                                                    <rich:column style="width : 150px">
+                                                        <h:outputText value="#{var.editar}" />
+                                                    </rich:column>
+                                                </rich:columnGroup>
+                                            </f:facet>
+                                            <rich:columnGroup>
+                                                <rich:column  style="width : 150px" breakRowBefore="true">
+                                                    <h:outputText value="% #{planificacion.numvlrporcentage}"/>
+                                                </rich:column>
+                                                <rich:column>
+                                                    <h:outputText value="#{planificacion.numvlrpago}">
+                                                        <f:convertNumber pattern="$###,###"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <h:outputText value="#{planificacion.datefechapago}">
+                                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                                    </h:outputText>
+                                                </rich:column>
+                                                <rich:column >
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto}" render="mp-crear-girodirecto">
+                                                        <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.showModalPanel('mp-crear-girodirecto')" />
+                                                    </a4j:commandButton>
+                                                </rich:column>
+                                            </rich:columnGroup>
+
+                                        </rich:dataTable>                                            
+                                    </h:panelGrid>
+                                </rich:panel>
+                            </h:panelGroup>
+
+                        </rich:panel>
+                        <a4j:commandButton   value="#{var.cancelar}" action="#{Supervisor$ModificarContrato.volverContrato}" immediate="true" render="pgprincipal"/>
+                        <a4j:commandButton   value="#{var.volver}"  action="#{Supervisor$ModificarContrato.volver}" rendered="#{Supervisor$ModificarContrato.cual!=1}" render="pgprincipal"/>
+                        <a4j:commandButton  value="#{var.siguienteCiu}" action="#{Supervisor$ModificarContrato.siguiente}" rendered="#{Supervisor$ModificarContrato.cual!=3}" render="pgprincipal" />
+                        <a4j:commandButton  value="#{var.finalizar}" action="#{Supervisor$ModificarContrato.guardarModificarContrato}" rendered="#{Supervisor$ModificarContrato.cual==3}" render="pgprincipal, layoutdetalleModificar" />
+                        <a4j:outputPanel id="panelErrorModpolizas">
+                            <rich:messages id="messagesModPolizas" globalOnly="true"
+                                           styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                           infoLabelClass="info_texto" warnLabelClass="warn_texto"
+                                           errorLabelClass="error_texto">
+                                <f:facet name="infoMarker">
+                                    <h:graphicImage style="width : 20px; height: 20px;" url="/resources/imgs/msginfo.png" />
+                                </f:facet>
+                                <f:facet name="warnMarker">
+                                    <h:graphicImage style="width : 20px; height: 10px;" url="/resources/imgs/msgwarn.png" />
+                                </f:facet>
+                                <f:facet name="errorMarker">
+                                    <h:graphicImage style="width : 20px; height: 20px;" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                                <f:facet name="fatalMarker">
+                                    <h:graphicImage  style="width : 20px; height: 20px;" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                            </rich:messages>
+
+                        </a4j:outputPanel>
+
+                    </h:panelGroup>
+
+                </rich:collapsiblePanel>
+            </h:form>
+
+        </rich:panel>
+        <ui:include src="/modal/editarPoliza.xhtml"/>
+        <ui:include src="/modal/panelUploadDocumentoEditarPoliza.xhtml"/>
+        <ui:include src="/modal/panelUploadDocumentoEditarOtrosi.xhtml"/>
+    </ui:define>
+
+</ui:composition>

@@ -383,7 +383,7 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
-        <from-view-id>/Supervisor/ModificarContrato.jspx</from-view-id>
+        <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>consultarContrato</from-outcome>
             <to-view-id>/Supervisor/consultarContratoConvenioDetalle.jspx</to-view-id>
@@ -394,7 +394,7 @@
         <from-view-id>/ModificarProyecto/ModificarProyecto.jspx</from-view-id>
         <navigation-case>
             <from-outcome>consultarContratoModificar</from-outcome>
-            <to-view-id>/Supervisor/ModificarContrato.jspx</to-view-id>
+            <to-view-id>/Supervisor/ModificarContrato.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -590,7 +590,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>adminimaginobra</from-outcome>
-            <to-view-id>/Supervisor/ImagenObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/ImagenObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>adminvideoobra</from-outcome>
@@ -598,7 +598,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>adminmodificarObra</from-outcome>
-            <to-view-id>/Supervisor/InicioModificarObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>adminalimentar</from-outcome>
@@ -610,7 +610,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>adminfinalizar</from-outcome>
-            <to-view-id>/Supervisor/FinalizarObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/FinalizarObra.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>nuevoProyecto</from-outcome>
@@ -622,7 +622,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>modificarContrato</from-outcome>
-            <to-view-id>/Supervisor/ModificarContrato.jspx</to-view-id>
+            <to-view-id>/Supervisor/ModificarContrato.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>gestion</from-outcome>
@@ -695,7 +695,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/FinalizarObra.jspx</from-view-id>
+        <from-view-id>/Supervisor/FinalizarObra.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>finalizarhomeObra</from-outcome>
             <to-view-id>/homes/home_gestion.xhtml</to-view-id>
@@ -703,7 +703,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/InicioModificarObra.jspx</from-view-id>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>suspenderObra</from-outcome>
             <to-view-id>/Supervisor/SuspenderObra.jspx</to-view-id>
@@ -714,14 +714,14 @@
         <from-view-id>/Supervisor/SuspenderObra.jspx</from-view-id>
         <navigation-case>
             <from-outcome>menumodificar</from-outcome>
-            <to-view-id>/Supervisor/InicioModificarObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/Supervisor/ReiniciarObra.jspx</from-view-id>
         <navigation-case>
             <from-outcome>volveriniciomodificar</from-outcome>
-            <to-view-id>/Supervisor/InicioModificarObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -729,12 +729,12 @@
         <from-view-id>/Supervisor/ReiniciarObra.jspx</from-view-id>
         <navigation-case>
             <from-outcome>reiniciarproyecto</from-outcome>
-            <to-view-id>/Supervisor/InicioModificarObra.jspx</to-view-id>
+            <to-view-id>/Supervisor/InicioModificarObra.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/InicioModificarObra.jspx</from-view-id>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>menumodificarbutton</from-outcome>
             <to-view-id>/ModificarProyecto/ModificarProyecto.jspx</to-view-id>
@@ -742,7 +742,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/ModificarContrato.jspx</from-view-id>
+        <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>modificarProyecto</from-outcome>
             <to-view-id>/ModificarProyecto/ModificarProyecto.jspx</to-view-id>
@@ -750,7 +750,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/Supervisor/InicioModificarObra.jspx</from-view-id>
+        <from-view-id>/Supervisor/InicioModificarObra.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>reiniciarObra</from-outcome>
             <to-view-id>/Supervisor/ReiniciarObra.jspx</to-view-id>
