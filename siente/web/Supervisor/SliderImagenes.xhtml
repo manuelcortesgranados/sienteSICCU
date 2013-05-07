@@ -1,17 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
     
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets" locale="#{var.rcalendarlocale}">
-        
+      xmlns:ui="http://java.sun.com/jsf/facelets">        
 
          
       
-       <h:outputScript src="/resources/js/sliderman.1.3.6.js"/>
+    <h:outputScript library="js" name="/resources/js/sliderman.1.3.6.js"/>
 
    
         <h:panelGroup id="panelImagenes" style="padding: auto;">
@@ -49,5 +50,5 @@
           
         </h:panelGroup>
      
-    </f:view>
+</ui:composition>
 

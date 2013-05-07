@@ -1,18 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/facelets/template_main.xhtml">
 
-    <f:view locale="#{var.rcalendarlocale}">
-        <ui:composition template="/facelets/template_main.xhtml">
             <ui:define name="head">
                 <title>Cobra - Supervisor</title>
-                <h:outputScript src="/resources/script_supervisor.js"/>
+                <h:outputScript library="js" name="/resources/script_supervisor.js"/>
             </ui:define>
 
             <ui:define name="menu">
@@ -28,13 +27,13 @@
             </ui:define>
             <ui:define name="body">
                 <h:form>
-                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single" style="text-align:left;"  var="currentRow" style="width:100%;"  rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
+                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single" style="text-align:left; width:100%;"  var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column  colspan="16" breakBefore="true">
+                                <rich:column  colspan="16" breakRowBefore="true">
                                     <h:outputText value="#{var.seguimientoglobal}"/>
                                 </rich:column>
-                                <rich:column  colspan="8" breakBefore="true">
+                                <rich:column  colspan="8" breakRowBefore="true">
                                     <h:outputText value="#{var.familiasaatenderseg}"/>
                                 </rich:column>
                                 <rich:column  colspan="4">
@@ -43,7 +42,7 @@
                                 <rich:column  colspan="4">
                                     <h:outputText value="#{var.avancedeclaradoseg}"/>
                                 </rich:column>
-                                <rich:column  breakBefore="true">
+                                <rich:column  breakRowBefore="true">
                                     <h:outputText value="#{var.numsolicitudch}"/>                                                
                                 </rich:column>
                                 <rich:column  >
@@ -94,7 +93,7 @@
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
-                            <rich:column  breakBefore="true" styleClass="panelderecha">
+                            <rich:column  breakRowBefore="true" styleClass="panelderecha">
                                 <h:outputText  value="#{currentRow.numSolicitud}" />
                             </rich:column>
                             <rich:column   styleClass="panelderecha">
@@ -159,15 +158,15 @@
                     </rich:dataTable>
 
                     <interkont:spacer height="20" style="width:100%;"/>
-                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single" style="text-align:left;"  
-                                    var="currentRow" style="width:100%;"  rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
+                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaasishummuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column  colspan="6" breakBefore="true">
+                                <rich:column  colspan="6" breakRowBefore="true">
                                     <h:outputText value="#{var.seguimientoahmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakBefore="true" styleClass="panelcenter">
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
                                     <h:outputText value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
                                 <rich:column  styleClass="panelcenter">
@@ -192,7 +191,7 @@
                         </f:facet>
 
 
-                        <rich:column  breakBefore="true" styleClass="panelcenter">                                    
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
                             <h:outputText value="#{currentRow.numSolicitud}"/>                                                
                         </rich:column>
                         <rich:column  styleClass="panelcenter">                                    
@@ -219,15 +218,15 @@
                     </rich:dataTable>
 
                      <interkont:spacer height="20" style="width:100%;"/>
-                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single" style="text-align:left;"  
-                                    var="currentRow" style="width:100%;"  rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
+                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaarriendomuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column  colspan="7" breakBefore="true">
+                                <rich:column  colspan="7" breakRowBefore="true">
                                     <h:outputText value="#{var.seguimientoarriendosmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakBefore="true" styleClass="panelcenter">
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
                                     <h:outputText value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
                                 <rich:column  styleClass="panelcenter">
@@ -252,7 +251,7 @@
                         </f:facet>
 
 
-                        <rich:column  breakBefore="true" styleClass="panelcenter">                                    
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
                             <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
                         <rich:column  styleClass="panelcenter">                                    
@@ -284,14 +283,14 @@
                     
                      <interkont:spacer height="20" style="width:100%;"/>
                     <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single" style="text-align:left;"  
-                                    var="currentRow" style="width:100%;"  rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaalberguesmuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column  colspan="6" breakBefore="true">
+                                <rich:column  colspan="6" breakRowBefore="true">
                                     <h:outputText value="#{var.seguimientoalberguesmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakBefore="true" styleClass="panelcenter">
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
                                     <h:outputText value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
                                 <rich:column  styleClass="panelcenter">
@@ -313,7 +312,7 @@
                         </f:facet>
 
 
-                        <rich:column  breakBefore="true" styleClass="panelcenter">                                    
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
                             <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
                         <rich:column  styleClass="panelcenter">                                    
@@ -339,8 +338,5 @@
                     </rich:dataTable>
                     
                 </h:form>
-            </ui:define>
-        </ui:composition>
-
-    </f:view>
-</html>
+            </ui:define>       
+</ui:composition>

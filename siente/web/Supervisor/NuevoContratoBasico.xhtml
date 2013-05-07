@@ -1,16 +1,19 @@
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+        template="/facelets/template_main.xhtml"
         >
-
-    <ui:composition template="/facelets/template_main.xhtml">
+    
         <ui:define name="head">
-            <h:outputScript src="/resources/script_supervisor.js"/>
-            <h:outputScript src="/resources/js/validarletra.js"/>
+            <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+            <h:outputScript library="js" name="/resources/js/validarletra.js"/>
         </ui:define>
         <ui:define name="title">
             <h:outputText value="Ingresar nuevo #{Supervisor$Contrato.tipoContCon}"/>
@@ -34,7 +37,7 @@
                                 <f:selectItems value="#{Supervisor$Contrato.eventoItem}" />
                             </h:selectOneMenu>                                                 
                             <h:outputText rendered="#{!var.aplicaContralorias}" value="#{var.escogerPeriodocontrato} "/>
-                             <h:outputText rendered="#{var.aplicaContralorias}"  value="#{var.escogerEventocontrato} "/>
+                            <h:outputText rendered="#{var.aplicaContralorias}"  value="#{var.escogerEventocontrato} "/>
                             <h:selectOneMenu  id="cmbPeriodoProyecto" value="#{Supervisor$Contrato.contrato.periodoevento.intidperiodoevento}" immediate="true">
                                 <f:selectItems value="#{Supervisor$Contrato.periodoEventoItem}" />
                             </h:selectOneMenu>
@@ -56,8 +59,8 @@
                                 <f:selectItem itemValue="0" itemLabel="No"/>
                                 <f:selectItem itemValue="1" itemLabel="Pertenece a Contrato Superior"/>
                                 <f:selectItem itemValue="2" itemLabel="Pertenece a Convenio Superior"/>
-                                <a4j:ajax event="onchange"  action="#{Supervisor$Contrato.cambiarContrPadre}" 
-                                             render="pgconveniocontrato" execute="@this" execute="pgconveniocontrato" >
+                                <a4j:ajax event="change"  listener="#{Supervisor$Contrato.cambiarContrPadre}" 
+                                          render="pgconveniocontrato" execute="@this, pgconveniocontrato" >
                                 </a4j:ajax>
                             </h:selectOneMenu>
                         </h:panelGrid>
@@ -66,33 +69,33 @@
                             <h:selectOneMenu id="cmbcontrato2"  value="#{Supervisor$Contrato.preguntacontrato}" immediate="true">
                                 <f:selectItem itemValue="0" itemLabel="No"/>
                                 <f:selectItem itemValue="2" itemLabel="Si"/>
-                                <a4j:ajax event="onchange"  action="#{Supervisor$Contrato.cambiarContrPadre}" 
-                                             execute="@this" execute="pgconveniocontrato" render="pgconveniocontrato" >
+                                <a4j:ajax event="change" listener="#{Supervisor$Contrato.cambiarContrPadre}" 
+                                           execute="@this, pgconveniocontrato" render="pgconveniocontrato" >
                                 </a4j:ajax>
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <h:panelGroup id="pgconveniocontrato" >
                             <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==1}" >
                                 <h:outputText  value="Seleccione el #{Supervisor$Contrato.tipoContCon} superior al que pertenece el #{Supervisor$Contrato.tipoContCon}:  " />
-                                <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this" execute="gpTotalCont, cmbEntContra"
+                                <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra"
                                                    styleClass="btn_pri_gra" style="font-size:12px;"                                                   
-                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont">
-                                    <a4j:ajax event="oncomplete" execute="@this" execute="gpTotalCont, cmbEntContra" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratos')" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
+                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont" >
+                                    <a4j:ajax event="complete" execute="@this, gpTotalCont, cmbEntContra" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratos')" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
                                 </a4j:commandButton>
                             </h:panelGrid>
 
                             <h:panelGrid  columns="2" rendered="#{Supervisor$Contrato.preguntacontrato==2}">
                                 <h:outputText  value="Seleccione el Convenio superior al que pertenece el Convenio:  " />
-                                <a4j:commandButton value="Seleccionar convenio" execute="@this" execute="gpTotalCont, cmbEntContra"
+                                <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra"
                                                    styleClass="btn_pri_gra" style="font-size:12px;"                                                   
                                                    action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont">
-                                    <a4j:ajax execute="@this" execute="gpTotalCont, cmbEntContra" event="oncomplete" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratos')" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
+                                    <a4j:ajax execute="@this, gpTotalCont, cmbEntContra" event="complete" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratos')" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
                                 </a4j:commandButton>
                             </h:panelGrid>
                         </h:panelGroup>
 
                     </center>
-                    <rich:collapsiblePanel id="tpDatosBasicos" label="1. #{var.datosbasicos}" opened="true" switchType="client" immediate="true" >
+                    <rich:collapsiblePanel id="tpDatosBasicos" header="1. #{var.datosbasicos}" expanded="true" switchType="client" immediate="true" >
                         <h:panelGroup id="gpContSelec">
                             <h:panelGrid id="rpconpasel" rendered="#{Supervisor$Contrato.varmostrarcontrpa==1}" >
                                 <f:facet name="header">
@@ -102,7 +105,7 @@
                                 <center>
                                     <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}"
                                                     sortMode="single"  var="currentRow" style="width:100%;" rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02">
-                                        <rich:column width="150px" breakBefore="true">
+                                        <rich:column style="width: 150px;" breakRowBefore="true">
                                             <f:facet name="header">
                                                 <h:outputText id="txtnumerocc" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                                                 <h:outputText id="txtnumeroc" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
@@ -110,7 +113,7 @@
                                             <h:outputText value="#{currentRow.strnumcontrato}"/>
                                         </rich:column>
 
-                                        <rich:column id="nombrecontratopase"  width="100px">
+                                        <rich:column id="nombrecontratopase" style="width: 100px;">
                                             <f:facet name="header">
                                                 <h:outputText value="#{var.nombre}"/>
                                             </f:facet>
@@ -170,8 +173,8 @@
                                             <f:facet name="header">
                                                 <h:outputText value="#{var.eliminar}"/>
                                             </f:facet>
-                                            <a4j:commandButton action="#{Supervisor$Contrato.eliminarItemPadreSele}" execute="@this"
-                                                               render="gpContSelec,cmbEntContra" execute="gpContSelec,cmbEntContra"  styleClass="eliminaravanzada"/>
+                                            <a4j:commandButton action="#{Supervisor$Contrato.eliminarItemPadreSele}"
+                                                               render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra"  styleClass="eliminaravanzada"/>
                                         </rich:column>
                                     </rich:dataTable>
                                 </center>
@@ -204,10 +207,10 @@
 
                                         <h:outputLabel id="cmbEntidadContratante"  value="(*)#{var.entidadcontratante}"/>
                                         <h:panelGroup id="cmbEntContra" styleClass="consulconvenio">
-                                            <rich:comboBox selectFirstOnUpdate="false" width="400" disabled="#{Supervisor$Contrato.contrpadre != null or Supervisor$Contrato.boolnumencargosoli}"
+                                            <rich:select style="width: 400px;" disabled="#{Supervisor$Contrato.contrpadre != null or Supervisor$Contrato.boolnumencargosoli}"
                                                            defaultLabel="Ingrese Entidad" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                                                 <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-                                            </rich:comboBox>
+                                            </rich:select>
                                         </h:panelGroup>
                                         <h:outputLabel id="lblnumerocencar"  value="#{var.numeroencargo}:"
                                                        rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
@@ -215,9 +218,9 @@
                                         <h:panelGroup id="gpencargoseleecionado" rendered="#{SessionBeanCobra.cobraService.proyectoContrato.solicitud_obra == null and
                                                                                              SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}">
                                             <a4j:commandButton id="btnBuscarnumencargo" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarEncargoFiduciario}" disabled="#{Supervisor$Contrato.boolnumencargosoli}"
-                                                               render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true" execute="@this" execute="mp-listado-numencargo,tabla-listado-numencargo"
+                                                               render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true" execute="@this, mp-listado-numencargo,tabla-listado-numencargo"
                                                                oncomplete="javascript:Richfaces.showModalPanel('mp-listado-numencargo')" >
-                                                <a4j:ajax event="oncomplete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-numencargo')" render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true"/>
+                                                <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-numencargo')" render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true"/>
                                             </a4j:commandButton>
                                             <interkont:spacer width="15"/>
                                             <h:inputText  id="txtNumencar" size="15" maxlength="250" disabled="true" value="#{Supervisor$Contrato.encargofiduciario.intnumencargofiduciario}" >
@@ -231,15 +234,15 @@
                                         </h:panelGrid>
                                         <h:outputLabel id="lblFecsusc"  value="#{var.fechasus}:" for="fecIniContrato"/>
                                         <h:panelGrid columns="2">
-                                            <rich:calendar execute="@this"  required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
-                                                <a4j:ajax action="#{Supervisor$Contrato.feciniCambio}" event="onchanged" render="gpDuracion" execute="@this" execute="gpDuracion"/>
+                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                                                <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="changed" render="gpDuracion" execute="@this, gpDuracion"/>
                                             </rich:calendar>
                                             <rich:message for="fecIniContrato" styleClass="error_texto"/>
                                         </h:panelGrid>
                                         <h:outputLabel id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato"/>
                                         <h:panelGrid columns="2">
-                                            <rich:calendar execute="@this"  required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
-                                                <a4j:ajax action="#{Supervisor$Contrato.fechaCambio}" event="onchanged" render="gpDuracion" execute="@this" />
+                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
+                                                <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="changed" render="gpDuracion" execute="@this" />
                                             </rich:calendar>
                                             <rich:message for="fecfinContrato" styleClass="error_texto"/>
                                         </h:panelGrid>
@@ -272,16 +275,16 @@
                                             <h:inputText  id="txtcontratista" size="25" maxlength="250" disabled="true" value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}">
                                             </h:inputText>                                            
                                             <a4j:commandButton id="btnBuscarcontratista" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarContratistaContrato}"
-                                                               render="mp-listado-contratistas,tablaContratistas" execute="@this" execute="mp-listado-contratistas,tablaContratistas"
+                                                               render="mp-listado-contratistas,tablaContratistas" execute="@this, mp-listado-contratistas,tablaContratistas"
                                                                oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratistas')">
-                                                <a4j:ajax event="oncomplete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratistas')" 
-                                                             render="mp-listado-contratistas,tablaContratistas,gpTotalContratistas" execute="@this" execute="mp-listado-contratistas,tablaContratistas"/>
+                                                <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratistas')" 
+                                                          render="mp-listado-contratistas,tablaContratistas,gpTotalContratistas" execute="@this, mp-listado-contratistas,tablaContratistas"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btnCrearcontratista" value="#{var.crearcontratista}" 
                                                                action="#{Supervisor$Contrato.inicializarContratista}" execute="@this"  >
-                                                <a4j:ajax event="oncomplete"
-                                                             oncomplete="javascript:Richfaces.showModalPanel('mp-crear-contratista')"
-                                                             render="rpContratista" execute="@this" execute="rpContratista" />
+                                                <a4j:ajax event="complete"
+                                                          oncomplete="javascript:Richfaces.showModalPanel('mp-crear-contratista')"
+                                                          render="rpContratista" execute="@this, rpContratista" />
                                             </a4j:commandButton>
                                         </h:panelGroup>
 
@@ -289,7 +292,7 @@
                                         <h:panelGrid columns="2">
                                             <h:inputText id="innumrecursospropios"  value="#{Supervisor$Contrato.contrato.numrecursospropios}"
                                                          size="20"  maxlength="20" required="true" >
-                                                <a4j:ajax event="onchange" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" action="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                                <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                             </h:inputText>
                                             <rich:message for="innumrecursospropios" styleClass="error_texto"/>
@@ -298,7 +301,7 @@
                                         <h:panelGrid columns="2" rendered="#{var.varrecurosoch}">
                                             <h:inputText id="innumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}"
                                                          size="20"  maxlength="20" required="true">
-                                                <a4j:ajax event="onchange" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" action="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                                <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                             </h:inputText>
                                             <rich:message for="innumrecursosch" styleClass="error_texto"/>
@@ -307,7 +310,7 @@
                                         <h:panelGrid columns="2">
                                             <h:inputText id="innumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}"
                                                          size="20"  maxlength="20" required="true">
-                                                <a4j:ajax event="onchange" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" action="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
+                                                <a4j:ajax event="change" render="gpValContrato,stpformadepago,gpPrincipalFormaPago" listener="#{Supervisor$Contrato.calcularValor}" execute="@this"/>
                                                 <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                             </h:inputText>
                                             <rich:message for="innumrecursoster" styleClass="error_texto"/>
@@ -324,11 +327,11 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="stpformadepago"  switchType="ajax" opened="false">
+                    <rich:collapsiblePanel id="stpformadepago"  switchType="ajax" expanded="false">
                         <f:facet name="header">
                             <h:outputText value="2. #{var.outformapago}"/>
                         </f:facet>
-                        <a4j:ajax event="onexpand"  render="gpPrincipalFormaPago" />
+                        <a4j:ajax event="expand"  render="gpPrincipalFormaPago" />
                         <center>
                             <h:outputLabel rendered="#{Supervisor$Contrato.contrato.numvlrcontrato==0}" value="#{var.debediligenciarvalorcontrato}" />
                         </center>
@@ -338,8 +341,8 @@
                                     <h:outputText id="lblformaPagoC"  value="(*)#{var.formadepago}:"/>
                                     <h:selectOneMenu id="cmbformaPagoC" value="#{Supervisor$Contrato.contrato.formapago.intidformapago}" >
                                         <f:selectItems value="#{Supervisor$Contrato.formaPago}" />
-                                        <a4j:ajax event="onchange" render="gpFormas, gpCuotas" action="#{Supervisor$Contrato.validacionFormadePago}"  >
-                                            <a4j:ajax event="oncomplete" render="gpFormas, gpCuotas,pgformapago,stpformadepago" />
+                                        <a4j:ajax event="change" render="gpFormas, gpCuotas" listener="#{Supervisor$Contrato.validacionFormadePago}"  >
+                                            <a4j:ajax event="complete" render="gpFormas, gpCuotas,pgformapago,stpformadepago" />
                                         </a4j:ajax>                                        
                                     </h:selectOneMenu>
                                 </h:panelGrid>
@@ -358,7 +361,7 @@
                                             <rich:inputNumberSpinner id = "poranti" value = "#{Supervisor$Contrato.porcentapagoanticipo}"
                                                                      rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
                                                                      minValue="0" maxValue="100" inputSize="10" >
-                                                <a4j:ajax event="onchange"  action="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
+                                                <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
                                             </rich:inputNumberSpinner>
                                             <h:outputText value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"/>
                                         </h:panelGrid>
@@ -366,17 +369,17 @@
                                         <h:outputText id = "vlranti" value = "#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                                             <f:convertNumber pattern="$ ###,###,###"/>
                                         </h:outputText>                                   
-                                            <h:outputText value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
-                                            <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
-                                                            inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"  />
+                                        <h:outputText value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
+                                        <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
+                                                        inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"  />
 
-                                            <h:outputText id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
-                                            <rich:inputNumberSpinner id="innumactasparciales"  minValue="0" maxValue="100" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2}"
-                                                                     inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
-                                                <a4j:ajax event="onchange"  action="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas" />
+                                        <h:outputText id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
+                                        <rich:inputNumberSpinner id="innumactasparciales"  minValue="0" maxValue="100" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2}"
+                                                                 inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
+                                            <a4j:ajax event="change"  listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas" />
 
-                                                <a4j:ajax event="oncomplete"  render="gpCuotas"/>
-                                            </rich:inputNumberSpinner>                                       
+                                            <a4j:ajax event="complete"  render="gpCuotas"/>
+                                        </rich:inputNumberSpinner>                                       
                                     </h:panelGrid>
                                     <h:panelGrid id="gpCuotas"  rendered="#{var.fechaformapago}">
 
@@ -411,7 +414,7 @@
                         </h:panelGroup>
 
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="rsgtpoliz" switchType="ajax" opened="false" style="width:100%;" action="#{Supervisor$Contrato.instanciarPolizar}" immediate="true" execute="@this">
+                    <rich:collapsiblePanel id="rsgtpoliz" switchType="ajax" expanded="false" style="width:100%;" toggleListener="#{Supervisor$Contrato.instanciarPolizar}" immediate="true">
                         <f:facet name="header">
                             <h:outputText value="3. #{var.anadirpolizas}:"/>
                         </f:facet>
@@ -424,7 +427,7 @@
                                 </h:outputLabel>
                                 <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
                                     <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>
-                                    <a4j:ajax event="onchage" action="#{Supervisor$Contrato.probar}" />
+                                    <a4j:ajax event="onchage" listener="#{Supervisor$Contrato.probar}" />
                                 </h:selectOneMenu>
 
                                 <h:outputLabel  id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
@@ -448,31 +451,29 @@
                                 <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" style="width:100%;" rendered="#{Supervisor$Contrato.verEliminar==0}">
                                     <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas"
                                                        >
-                                        <a4j:ajax event="onclick" render="pgpolis" immediate="true"/>
+                                        <a4j:ajax event="click" render="pgpolis" immediate="true"/>
                                     </a4j:commandButton>
                                 </h:panelGrid>
                             </h:panelGrid>
                             <interkont:spacer height="14"/>
                             <h:panelGrid id="pgpolis">
-                                <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" rows="4" style="text-align:left;" value="#{Supervisor$Contrato.listapolizas}"
-                                                var="registro" style="width:100%;" binding="#{Supervisor$Contrato.tablaPolizasbin}" >
+                                <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" rows="4" style="text-align:left; width:100%;" value="#{Supervisor$Contrato.listapolizas}"
+                                                var="registro" binding="#{Supervisor$Contrato.tablaPolizasbin}" >
                                     <rich:column id="tc-strTipoPoliza" width="100px">
                                         <f:facet name="header">
                                             <h:outputText value="#{var.tipoPolizaContrato}:" />
                                         </f:facet>
                                         <h:outputText id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
                                     </rich:column>
-                                    <rich:column id="tc-strnumPolizaContrato" width="100px"
-                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                 sortIconDescending="../resources/images/des.gif">
+                                    <rich:column id="tc-strnumPolizaContrato" style="width: 100px;"
+                                                >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.numPolizaContrato}:" />
                                         </f:facet>
                                         <h:outputText id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
                                     </rich:column>
                                     <rich:column id="tc-strVencimientoPoliza" width="100px"
-                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                 sortIconDescending="../resources/images/des.gif">
+                                                 >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.vencimientoPoliza}:" />
                                         </f:facet>
@@ -480,17 +481,15 @@
                                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                                         </h:outputText>
                                     </rich:column>
-                                    <rich:column id="tc-strEntidadPoliza" width="100px"
-                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                 sortIconDescending="../resources/images/des.gif">
+                                    <rich:column id="tc-strEntidadPoliza" style="width: 100px;"
+                                                >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.entidadPoliza}:" />
                                         </f:facet>
                                         <h:outputText id="otxt-strEntidadPoliza" value="#{registro.aseguradora.strnombreentidad}"/>
                                     </rich:column>
                                     <rich:column id="tc-streliminarPoliza" width="250px"
-                                                 sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                 sortIconDescending="../resources/images/des.gif">
+                                                 >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.eliminar}" />
                                         </f:facet>
@@ -505,7 +504,7 @@
                             </h:panelGrid>
                         </center>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="stpdocuemntos"  switchType="ajax" opened="false" immediate="true" execute="@this" >
+                    <rich:collapsiblePanel id="stpdocuemntos"  switchType="ajax" expanded="false" immediate="true">
                         <f:facet name="header">
                             <h:outputText value="4. #{var.documento}"/>
                         </f:facet>
@@ -527,10 +526,10 @@
                             </a4j:commandLink>                          
 
                         </h:panelGrid>
-                        <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" width="300px">
+                        <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" style="width: 300px;">
                             <h:outputText id="txt_nombrearchivocc" value=" #{file.nombre}"/>
                         </rich:dataGrid>
-                        <rich:dataTable id="tablaDocumentoscont"  sortMode="single" style="text-align:left;"  var="currentRow" style="width:100%;"
+                        <rich:dataTable id="tablaDocumentoscont"  sortMode="single" style="text-align:left; width:100%;"  var="currentRow"
                                         binding="#{Supervisor$Contrato.tablaDocumentos}" rows="7"
                                         value="#{Supervisor$Contrato.listadocumentos}">
                             <f:facet name="header" >
@@ -538,7 +537,7 @@
                                     <rich:column colspan="5">
                                         <h:outputText value="#{var.docseleccionados}"/>
                                     </rich:column>
-                                    <rich:column breakBefore="true">
+                                    <rich:column breakRowBefore="true">
                                         <h:outputText value="#{var.tipoDocumento}:"/>
                                     </rich:column>
                                     <rich:column>
@@ -562,7 +561,7 @@
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="4" breakBefore="true" style="text-align: center;">
+                                    <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
                                         <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont" render="tablaDocumentoscont"/>
                                     </rich:column>
                                 </rich:columnGroup>
@@ -582,19 +581,18 @@
                     <a4j:outputPanel id="panelErrorNuevocont">
                         <rich:messages id="messagesNuevocont" globalOnly="true"
                                        styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                       infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                       errorLabelClass="error_texto">
+                                      >
                             <f:facet name="infoMarker">
-                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msginfo.png" />
                             </f:facet>
                             <f:facet name="warnMarker">
-                                <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                <h:graphicImage style="height: 10px; width: 20px;" url="/resources/imgs/msgwarn.png" />
                             </f:facet>
                             <f:facet name="errorMarker">
-                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
                             </f:facet>
                             <f:facet name="fatalMarker">
-                                <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
                             </f:facet>
                         </rich:messages>
                     </a4j:outputPanel>
@@ -606,6 +604,5 @@
             <ui:include src="/modal/listadoNumeroEncargo.jspx"/>
             <ui:include src="/modal/listadoContratistas.jspx"/>
             <ui:include src="/modal/crearcontratista.jspx"/>
-        </ui:define>
-    </ui:composition>
-</f:view>
+        </ui:define>    
+</ui:composition>
