@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+    
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets">        
+
+         
+      
+    <h:outputScript library="js" name="/resources/js/sliderman.1.3.6.js"/>
+
+   
+        <h:panelGroup id="panelImagenes" style="padding: auto;">
+          
+        <script type="text/javascript">
+            effectsDemo2 = 'fade';
+           var demoSlider_2 = Sliderman.slider({container: 'SliderName_2', width: 700, height: 450, effects: effectsDemo2,
+	    display: {
+							autoplay: 5000,
+							loading: {background: '#000000', opacity: 0.5, image: '/cobracali/resources/images/loading.gif'},
+							buttons: {hide: true, opacity: 1, prev: {className: 'SliderNamePrev_2', label: ''}, next: {className: 'SliderNameNext_2', label: ''}},
+							description: {hide: true, background: '#000000', opacity: 0.4, height: 50, position: 'bottom'},
+							navigation: {container: 'SliderNameNavigation_2', label: '<img src="/cobracali/resources/images/clear.gif" />'}
+	       }
+	   });
+        </script>
+
+       <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css"/>
+
+      
+          <center>
+              <div id="SliderName_2" class="SliderName_2" style="float: none">
+           <a4j:repeat value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}" var="item" >
+            <h:graphicImage width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
+           <div class="SliderName_2Description"><h:outputText value="#{item.strnombre} - #{item.datefecha}"/></div>
+
+           </a4j:repeat>
+
+         </div>
+       </center>
+         <div class="c"></div>
+         <div id="SliderNameNavigation_2"></div>
+         <div class="c"></div>
+
+          
+        </h:panelGroup>
+     
+</ui:composition>
+

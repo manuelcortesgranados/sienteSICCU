@@ -1,0 +1,342 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/facelets/template_main.xhtml">
+
+            <ui:define name="head">
+                <title>Cobra - Supervisor</title>
+                <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+            </ui:define>
+
+            <ui:define name="menu">
+                <ui:include src="/facelets/menu_gestion.xhtml"/>
+            </ui:define>
+            <ui:define name="menu_lateral">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+            </ui:define>
+            <ui:define name="title">
+                <h:outputText value="#{var.seguimientosah}"/>
+                <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            </ui:define>
+            <ui:define name="body">
+                <h:form>
+                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single" style="text-align:left; width:100%;"  var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column  colspan="16" breakRowBefore="true">
+                                    <h:outputText value="#{var.seguimientoglobal}"/>
+                                </rich:column>
+                                <rich:column  colspan="8" breakRowBefore="true">
+                                    <h:outputText value="#{var.familiasaatenderseg}"/>
+                                </rich:column>
+                                <rich:column  colspan="4">
+                                    <h:outputText value="#{var.familiasaatendidasseg}"/>
+                                </rich:column>
+                                <rich:column  colspan="4">
+                                    <h:outputText value="#{var.avancedeclaradoseg}"/>
+                                </rich:column>
+                                <rich:column  breakRowBefore="true">
+                                    <h:outputText value="#{var.numsolicitudch}"/>                                                
+                                </rich:column>
+                                <rich:column  >
+                                    <h:outputText value="#{var.mercyaseoiniporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.mercyaseoajusporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.arriendosiniporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.arriendosajusporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.alberguesiniporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.alberguesajusporate}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.repviviendaporate}"/>                                                
+                                </rich:column>
+                                <rich:column  >
+                                    <h:outputText value="#{var.mecryaseoatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.arriendosatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.alberguesatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.repviviendaatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.mecryaseoatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.arriendosatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.alberguesatendidas}"/>                                                
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{var.repviviendaatendidas}"/>                                                
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:columnGroup id="cuerpo">
+                            <rich:column  breakRowBefore="true" styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.numSolicitud}" />
+                            </rich:column>
+                            <rich:column   styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.mercAseoini}" />
+                            </rich:column>
+                            <rich:column   styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.mercAseoajuste}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.arriendoIni}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.arriendoAjust}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.albergueIni}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.albergueAjuste}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.repVivienda}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.mercAseo}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.arriendo}" />
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.albergue}" />
+                            </rich:column>    
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.reparacionVivienda}" />
+                            </rich:column>    
+
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.numvaldeclaradomeryaseo/100}" >
+                                    <f:convertNumber pattern="###.## %"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.numvaldeclaradoarriendo/100}" >
+                                    <f:convertNumber pattern="###.## %"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.numvaldeclaradoalbergues/100}" >
+                                    <f:convertNumber pattern="###.## %"/>
+                                </h:outputText>
+                            </rich:column>    
+                            <rich:column styleClass="panelderecha">
+                                <h:outputText  value="#{currentRow.numvaldeclaradorepvivienda/100}" >
+                                    <f:convertNumber pattern="###.## %"/>
+                                </h:outputText>
+                            </rich:column>    
+
+                        </rich:columnGroup>
+                        <f:facet name="footer">
+                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                        </f:facet>
+                    </rich:dataTable>
+
+                    <interkont:spacer height="20" style="width:100%;"/>
+                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
+                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaasishummuni)>0}">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column  colspan="6" breakRowBefore="true">
+                                    <h:outputText value="#{var.seguimientoahmunicipal}"/>
+                                </rich:column>
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
+                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                </rich:column>
+                                <rich:column  styleClass="panelcenter">
+                                    <h:outputText value="#{var.departamento}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelcenter">
+                                    <h:outputText value="#{var.municipio}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelcenter">
+                                    <h:outputText value="#{var.codigodaneah}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.numtotalfambenmeryaseo}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.valrepayudentreg}" >
+                                        
+                                    </h:outputText>
+                                                                                                 
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+
+
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
+                            <h:outputText value="#{currentRow.numSolicitud}"/>                                                
+                        </rich:column>
+                        <rich:column  styleClass="panelcenter">                                    
+                            <h:outputText value="#{currentRow.nomDep}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelcenter">
+                            <h:outputText value="#{currentRow.nomMunicipio}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelcenter">
+                            <h:outputText value="#{currentRow.codMupio}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
+                                <f:convertNumber pattern="$###,###"/>
+                            </h:outputText>
+                        </rich:column>
+
+                        <f:facet name="footer">
+                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                        </f:facet>
+                    </rich:dataTable>
+
+                     <interkont:spacer height="20" style="width:100%;"/>
+                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
+                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaarriendomuni)>0}">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column  colspan="7" breakRowBefore="true">
+                                    <h:outputText value="#{var.seguimientoarriendosmunicipal}"/>
+                                </rich:column>
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
+                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                </rich:column>
+                                <rich:column  styleClass="panelcenter">
+                                    <h:outputText value="#{var.departamento}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelcenter">
+                                    <h:outputText value="#{var.municipio}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelcenter">
+                                    <h:outputText value="#{var.codigodaneah}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.numfambenarriendos}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.numfambeneficiadasarriendos}" />             
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.valrepayudentregarrien}" />             
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+
+
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
+                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        </rich:column>
+                        <rich:column  styleClass="panelcenter">                                    
+                            <h:outputText value="#{currentRow.nomDep}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelcenter">
+                            <h:outputText value="#{currentRow.nomMuni}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelcenter">
+                            <h:outputText value="#{currentRow.codMpio}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.numFamiliabeneficiar}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.numFamiliabeneficiada}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.valAyudaentregada}"> 
+                                <f:convertNumber pattern="$###,###"/>
+                            </h:outputText>
+                        </rich:column>
+
+                        <f:facet name="footer">
+                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                        </f:facet>
+                    </rich:dataTable>
+
+                    
+                     <interkont:spacer height="20" style="width:100%;"/>
+                    <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single" style="text-align:left;"  
+                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
+                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaalberguesmuni)>0}">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column  colspan="6" breakRowBefore="true">
+                                    <h:outputText value="#{var.seguimientoalberguesmunicipal}"/>
+                                </rich:column>
+                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
+                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                </rich:column>
+                                <rich:column  styleClass="panelcenter">
+                                    <h:outputText value="#{var.departamento}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelcenter">
+                                    <h:outputText value="#{var.municipio}" />                                                
+                                </rich:column>                                
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.unidhabaconstruir}" />                                                
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.unidhabaconstruidos}" />             
+                                </rich:column>
+                                <rich:column styleClass="panelderecha">
+                                    <h:outputText value="#{var.unidhabenconstr}" />             
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+
+
+                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
+                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        </rich:column>
+                        <rich:column  styleClass="panelcenter">                                    
+                            <h:outputText value="#{currentRow.strdepartamento}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelcenter">
+                            <h:outputText value="#{currentRow.strmunicipio}"/>                                                
+                        </rich:column>
+                       
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.intuniConstruir}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.intuniConstruidas}"/>                                                
+                        </rich:column>
+                        <rich:column styleClass="panelderecha">
+                            <h:outputText value="#{currentRow.intuniProConstruccion}"/>
+                        </rich:column>
+
+                        <f:facet name="footer">
+                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                        </f:facet>
+                    </rich:dataTable>
+                    
+                </h:form>
+            </ui:define>       
+</ui:composition>

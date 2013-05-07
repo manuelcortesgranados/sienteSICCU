@@ -8,43 +8,48 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadDocumento" autosized="true" style="padding:0px;">
+    <rich:popupPanel id="panelUploadDocumentopoliza" autosized="true" style="padding:0px;">
 
-        <rich:panel header="Seleccionar documento" styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel header="Seleccionar Documento" styleClass="rich-panel-body" style="padding:0px;">
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
 
-                    <a4j:commandButton id="esconder_panelUploadDocumento" onclick="#{rich:component('panelUploadDocumento')}.hide();
-                            return false;"
+                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide());"
                                        styleClass="btn_cerrar"  />
+
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.listener}" id="uploadDocumento"
-                                         immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.cantidadSubidas}"
-                                         uploadLabel="#{var.subir}"
-                                         style="width: 250px">
-                            <a4j:ajax event="uploadcomplete" render="info_documento, panel_subir"/>
+                        <rich:fileUpload
+                            id="uploadDocumento"
+                            fileUploadListener="#{Supervisor$ModificarContrato.cargadorPoliza.listener}"
+                            acceptedTypes="*"
+                            immediateUpload="true"
+                            maxFilesQuantity="1" 
+                            addLabel="#{var.adicionar}"
+                            doneLabel="#{var.hecho}"
+                            uploadLabel="#{var.subir}"
+                            clearAllLabel="#{var.borrartodo}"
+                            clearLabel="#{var.eliminar}"
+                            style="width: 250px; height:150px">
+                            <a4j:ajax event="uploadcomplete" render="info_documento"/>
                         </rich:fileUpload>
+
                         <h:panelGroup id="info_documento">
                             <center>
                                 <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.files}" var="file">
+                                    <h:outputText rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarContrato.cargadorPoliza.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
-
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
                                                     <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -52,13 +57,13 @@
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
                                 <br/>
-                                <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.borrarDatosSubidos}" render="info_documento, uploadDocumento, panel_subir"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" value="#{var.boarcsub}"
+                                <a4j:commandButton action="#{Supervisor$ModificarContrato.borrarPoliza}" render="info_documento, uploadDocumento, pgdocumentosModi"
+                                                   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
-                                <a4j:commandButton value="#{var.aceptar}" 
-                                                   onclick="#{rich:component('panelUploadDocumento')}.hide();" render="panel_subir,tablaDocumentos"
+                                <a4j:commandButton value="#{var.aceptar}"
+                                                   onclick="#{rich:component('panelUploadDocumentopoliza')}.hide();" render="pgdocumentosModi"
                                                    style="font-size:12px;"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" />
+                                                   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}"/>
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

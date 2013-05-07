@@ -8,51 +8,45 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalActaPrecios" autosized="true" style="padding:0px;"
-                     headerClass="rich-panel-header">
-        <f:facet name="header" >
-            <h:panelGroup >
-                <h:outputText value="#{var.acta} #{var.deCiu} Precios"/>
-            </h:panelGroup>
-        </f:facet>
+    <rich:popupPanel id="modalImagen" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalActaPrecios" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalActaPrecios')}.hide();
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="Acta de Precios" styleClass="rich-panel-body" style="padding:0px;">
-            <h:form>
-                <h:panelGroup>
-                    <h:panelGrid id="faltarender" columnClasses="top,top" columns="2">
+        <rich:panel header="#{var.imagen}" styleClass="rich-panel-body" style="padding:0px;">           
+            <h:form id="formImagen">
+                <h:panelGroup id="panelImagen">
+                    <h:panelGrid columnClasses="top,top" columns="2">
 
                         <rich:fileUpload
-                            id="uploadActas"
-                            fileUploadListener="#{Supervisor$Alimentar.cargadorActaPrecios.listener}"
-                            acceptedTypes="*"
+                            id="upload"
+                            fileUploadListener="#{Supervisor$Alimentar.cargadorImagen.listener}"
+                            acceptedTypes="jpg, jpeg, gif, png, bmp"
                             immediateUpload="true"
-                            maxFilesQuantity="1" 
-                            listHeight="150"
+                            maxFilesQuantity="1"                         
                             addLabel="#{var.adicionar}"
                             doneLabel="#{var.hecho}"
                             uploadLabel="#{var.subir}"
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}"
-                            style="width:250">
-                            <a4j:ajax event="uploadcomplete" render="infoActas"/>
+                            style="width: 250px;height: 150px">
+                            <a4j:ajax event="uploadcomplete" render="info"/>
                         </rich:fileUpload>
-                        <h:panelGroup id="infoActas">
+                        <h:panelGroup id="info">
                             <center>
                                 <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActaPrecios.archivos}" var="file">
+                                    <h:outputText rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorImagen.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
@@ -66,14 +60,12 @@
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
-                                <a4j:commandButton id="borrarDatos_ActaPrecios" action="#{Supervisor$Alimentar.borrarActadePrecios}"
-                                                   render="layoutActasDetalle, validarguardar, infoActas, informa, uploadActas"
-                                                   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}" value="#{var.boarcsub}"
+                                <a4j:commandButton id="borrarDatos_Imagen" action="#{Supervisor$Alimentar.borrarImagenAlimenta}"
+                                                   render="layoutImagenDetalle, info, upload" rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
-                                <a4j:commandButton action="#{Supervisor$Alimentar.guardarActadePrecios}"
-                                                   value="#{var.aceptar}" onclick="#{rich:component('modalActaPrecios')}.hide());"
-                                                   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}"
-                                                   render="layoutActasDetalle,validarguardar"
+                                <a4j:commandButton action="#{Supervisor$Alimentar.guardarImagenTemporal}" id="BTaceptarImagen"
+                                                   value="#{var.aceptar}" onclick="#{rich:component('modalImagen')}.hide();" rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos>0}"
+                                                   render="layoutImagenDetalle"
                                                    style="font-size: 12px;"/>
                             </center>
                         </h:panelGroup>

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelUploadImagenevolucion" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.seleccionarimagen}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+
+                    <a4j:commandLink id="esconder_panelUploadImagenevolucion" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadImagenevolucion')}.hide();
+                                             return false;"/>
+
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <h:panelGroup id="gpImagenModal">
+                    <h:panelGrid columnClasses="top,top" columns="2">
+                        <rich:fileUpload
+                            id="uploadImagenevolucion"
+                            fileUploadListener="#{Supervisor$AdministrarObraNew.cargadorImagenes.listener}"
+                            acceptedTypes="jpg, jpeg, gif, png, bmp"
+                            immediateUpload="true"
+                            maxFilesQuantity="1" 
+                            addLabel="#{var.adicionar}"
+                            doneLabel="#{var.hecho}"
+                            uploadLabel="#{var.subir}"
+                            clearAllLabel="#{var.borrartodo}"
+                            clearLabel="#{var.eliminar}"
+                            style="width: 250px; height:150px;">
+                            <a4j:ajax event="uploadcomplete" render="info_imagenevolucion, panel_subir_imagenevolucion"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="info_imagenevolucion">
+                            <center>
+                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                            <h:panelGrid columns="1">
+
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <br/>
+                                <a4j:commandButton action="#{Supervisor$AdministrarObraNew.cargadorImagenes.borrarDatosSubidos}" render="info_imagenevolucion, uploadImagenevolucion, gpImagenModal"
+                                                   rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}" value="#{var.boarcsub}"
+                                                   styleClass="btn_pri_inm"   style="font-size:12px;"/>
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}"
+                                                   onclick="#{rich:component('panelUploadImagenevolucion')}.hide();"
+                                                   render="panel_subir_imagenevolucion"
+                                                   style="font-size:12px;"/>
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                </h:panelGroup>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>
