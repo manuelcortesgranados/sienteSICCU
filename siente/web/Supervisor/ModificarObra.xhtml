@@ -128,8 +128,8 @@
                                             </rich:dataGrid>
                                         </h:panelGrid>
                                         <h:panelGroup id="tablaPolizas" >
-                                            <rich:dataTable id="dtPolizas"  rows="6" style="text-align:left;"  binding="#{Supervisor$ModificarObra.tablapolizas}"
-                                                            var="registro" style="width:100%;" value="#{Supervisor$ModificarObra.listapolizas}">
+                                            <rich:dataTable id="dtPolizas"  rows="6" style="text-align:left; width:100%;"  binding="#{Supervisor$ModificarObra.tablapolizas}"
+                                                            var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
                                                 <rich:column id="tc-strTipoPoliza" width="100px">
                                                     <f:facet name="header">
                                                         <h:outputText value="#{var.tipoPolizaContrato}" />
