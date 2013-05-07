@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+<rich:popupPanel id="panelCDP" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.seleccionarcdp}"/>
+            </h:panelGroup>
+        </f:facet>
+         <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelCDP" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelCDP')}.hide();
+                                             return false;"/>                   
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form id="formCDP">
+                <h:panelGroup id="layoutCDP">
+                    <h:panelGrid columnClasses="top,top" columns="2">
+                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" 
+                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                         fileUploadListener="#{Supervisor$IngresarNuevaObra.subirCDP.listener}" id="uploadCDP" immediateUpload="#{Supervisor$IngresarNuevaObra.subirCDP.autoSubida}"
+                                         listHeight="150" style="width: 250px;"  maxFilesQuantity="#{Supervisor$IngresarNuevaObra.subirCDP.cantidadSubidas}" uploadLabel="#{var.subir}">
+                            <a4j:ajax event="uploadcomplete" render="infoCDP, layoutCDP"/>
+                        </rich:fileUpload>
+                        <h:panelGroup id="infoCDP">
+                            <center>
+                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                    <f:facet name="header">
+                                        <h:outputText value="#{var.arcsub}"/>
+                                    </f:facet>
+                                    <h:outputText rendered="#{Supervisor$IngresarNuevaObra.subirCDP.size==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirCDP.files}" var="file">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                            <h:panelGrid columns="1">
+                                                <h:panelGrid columns="2">
+                                                    <h:outputText value="#{var.nomarc}"/>
+                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{var.taarc}"/>
+                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                </h:panelGrid>
+                                            </h:panelGrid>
+                                        </rich:panel>
+                                    </rich:dataGrid>
+                                </rich:panel>
+                                <interkont:spacer height="3"/>
+                                <br/>
+                                <a4j:commandButton id="bt_borrar_cdp" action="#{Supervisor$IngresarNuevaObra.cambioDocumento}" render="infoCDP, uploadCDP, layoutCDP"
+                                                   rendered="#{Supervisor$IngresarNuevaObra.subirCDP.size>0}" value="#{var.boarcsub}"
+                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                <a4j:commandButton id="BTaceptarCDP" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.subirCDP.size>0}"
+                                                   onclick="#{rich:component('panelCDP')}.hide();"
+                                                  render="layoutDocNuevaObra" action="#{Supervisor$IngresarNuevaObra.guardarArchivoTemporal}"
+                                                      style="font-size: 12px;"/>
+                            </center>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>
+

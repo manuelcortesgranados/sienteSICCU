@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel height="220" id="panelConfirmarSuspension" resizeable="false" width="350" style="padding:0px;"
+        headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.confirmarsus}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfirmarSuspension" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSuspension')}.hide();
+                                             return false;"/>
+                    
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <center>
+                    <h:panelGrid id="layoutConfSuspension" styleClass="rich-panel-body"  style="text-align:center;width:100%;">
+                        <interkont:spacer height="20px"/>
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehasuspendido}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelact}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.debeingresarlajusti}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechafinaldesus}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.lafechainicialdesus}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==5}"      value="#{var.lafechasuspdebesermenor}" />
+                        <h:outputText rendered="#{Supervisor$SuspenderObra.datoInvalido==6}"      value="#{var.debeingresarlasfechasdeini}" />
+                        <interkont:spacer height="20px"/>
+                        <a4j:commandButton id="btCerrarCofSus" value="#{var.aceptar}" render="layoutModificar" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
+                                           onclick="#{rich:component('panelConfirmarSuspension')}.hide();" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
+                                              style="font-size: 12px;">
+                            <a4j:ajax event="complete" render="layoutConfSuspension,layoutModificar"/>
+                        </a4j:commandButton>
+                        <a4j:commandButton id="btCerrarCofSusDos" value="#{var.aceptar}" render="layoutModificar" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
+                                           onclick="#{rich:component('panelConfirmarSuspension')}.hide();"
+                                              style="font-size: 12px;">
+                            <a4j:ajax event="complete" render="layoutConfSuspension,layoutModificar"/>
+                        </a4j:commandButton>
+                    </h:panelGrid>
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</f:view>
