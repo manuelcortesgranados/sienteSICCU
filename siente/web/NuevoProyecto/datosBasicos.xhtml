@@ -58,15 +58,15 @@
                                         <rich:message for="fecIni" style="color: #ed0606;"/>
                                     </h:outputLabel>
 
-                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
-                                        <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="onchanged" render="layoutPeriodo" />
+                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
+                                        <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="changed" render="layoutPeriodo" />
                                     </rich:calendar>
 
                                     <h:outputLabel id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
                                     <h:panelGroup id="layoutFechaFin" >
-                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
-                                            <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="onchanged" render="layoutPeriodo"/>
+                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
+                                            <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="changed" render="layoutPeriodo"/>
                                         </rich:calendar>
                                     </h:panelGroup>
                                     <h:outputLabel  value="#{var.periodomedida}"/>
@@ -83,7 +83,7 @@
                                         <h:inputText  size="15" id="plazodias" value="#{Supervisor$IngresarNuevaObra.obranueva.intplazoobra}" disabled="true">
                                             <f:validateLongRange minimum="0"/>
                                             <f:validateLength maximum="6" minimum="1"/>
-                                            <a4j:ajax event="onchange" listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" render="layoutPeriodo"/>
+                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" render="layoutPeriodo"/>
                                         </h:inputText>
                                     </h:panelGroup>
 
@@ -93,8 +93,8 @@
                                                        defaultLabel="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
                                                        disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.terceroOption}" />
-                                            <a4j:ajax event="onchange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" >
-                                                <a4j:ajax event="oncomplete" render="gpentidadministerios" />
+                                            <a4j:ajax event="eventChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" >
+                                                <a4j:ajax event="complete" render="gpentidadministerios" />
                                             </a4j:ajax>
                                         </rich:select>
                                     </h:panelGroup>
@@ -122,7 +122,7 @@
                                         <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  
                                                            render="mp-listado-rutas,tabla-listado-ruta" immediate="true"
                                                            oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')">
-                                            <a4j:ajax event="oncomplete" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')" render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"/>
+                                            <a4j:ajax event="complete" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')" render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"/>
                                         </a4j:commandButton>
                                         <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
                                         </a4j:commandButton>
@@ -137,7 +137,7 @@
                                             <a4j:commandButton id="btnBus" value="#{var.buscar} Sede Educativa" action="#{Supervisor$EntidadConvenio.llenarlistaSedes}"
                                                                render="mp-listado-sedeseducativas,tablasedeseducativas" immediate="true"
                                                                oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')">
-                                                <a4j:ajax event="oncomplete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')" render="tablasedeseducativas"/>
+                                                <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')" render="tablasedeseducativas"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btndesasociarrSede" value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarSede}" render="gpEducacion,layoutPrincipalTab,mp-proyectosPadres"
                                                                rendered="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa!=null}" >
@@ -161,15 +161,15 @@
                                     <h:outputText value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
                                     <h:outputText value="#{var.otrosactores}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
                                     <rich:inputNumberSpinner id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" />
-                                    <rich:tooltip value="#{var.numbeneficiarios}" followMouse="true" direction="top-right" horizontalOffset="5"
+                                    <rich:tooltip value="#{var.numbeneficiarios}" followMouse="true" direction="topRight" horizontalOffset="5"
                                                   verticalOffset="5" layout="block"/>
 
                                     <h:outputText value="#{var.numempleosdirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
                                     <h:outputText value="#{var.institucionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
                                     <rich:inputNumberSpinner id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20" />
-                                    <rich:tooltip value="#{var.numempleosdirectos}"  followMouse="true" direction="top-right" horizontalOffset="5"
+                                    <rich:tooltip value="#{var.numempleosdirectos}"  followMouse="true" direction="topRight" horizontalOffset="5"
                                                   verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                    <rich:tooltip value="#{var.institucionesfortalecidas}" followMouse="true" direction="top-right" horizontalOffset="5"
+                                    <rich:tooltip value="#{var.institucionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
                                                   verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
 
                                     <h:outputText value="#{var.numempleosindirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
@@ -177,9 +177,9 @@
                                     <rich:inputNumberSpinner id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
                                                              maxValue="50000000" inputSize="20" />
 
-                                    <rich:tooltip value="#{var.numempleosindirectos}" followMouse="true" direction="top-right" horizontalOffset="5"
+                                    <rich:tooltip value="#{var.numempleosindirectos}" followMouse="true" direction="topRight" horizontalOffset="5"
                                                   verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                    <rich:tooltip value="#{var.organizacionesfortalecidas}" followMouse="true" direction="top-right" horizontalOffset="5"
+                                    <rich:tooltip value="#{var.organizacionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
                                                   verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
 
 
