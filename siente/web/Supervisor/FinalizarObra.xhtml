@@ -69,7 +69,6 @@
                             <h:panelGroup>
                                 <center><interkont:spacer height="25px;"/>
                                     <h:panelGrid id="finPaso1"  style="width:100%;" columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1}">
-
                                         <h:panelGroup>
                                             <h:outputText styleClass="txt_outtext_bold" value="#{var.registrar} "/>
                                             <h:outputText styleClass="txt_outtext_bold" value="#{var.elrecibofinaldeobra}"/>
@@ -77,9 +76,8 @@
                                         <h:outputText styleClass="txt_outtext_bold" value="#{var.antesderegistrarelrecibofinal}"/>
                                         <interkont:spacer height="10px;"/>
                                         <h:panelGrid id="layoutActaRecFin" columns="2" width="500" columnClasses="labelsDetalle">
-
                                             <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true" style="font-size: 10px;"  styleClass="btn_sec_gra"
-                                                               onclick="javascript:Richfaces.showModalPanel('panelActaRecFin')" />
+                                                               onclick="#{rich:component('panelActaRecFin')}.show()" />
                                             <h:inputText size="40" id="txtActaRecFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactarecfin}" />
                                             <h:outputText  value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActaRecfin" value="#{Supervisor$AdministrarObraNew.obra.datefecrecfin}"/>
@@ -126,7 +124,7 @@
                                         <h:outputText  value="#{var.antesderegistrarlaliquidacion}"/>
                                         <h:panelGrid id="layoutActaFin" columns="2" width="500" columnClasses="labelsDetalle">
                                             <a4j:commandButton id="btActaFin" styleClass="btn_sec_gra" value="#{var.examinar}"  immediate="true"
-                                                               onclick="javascript:Richfaces.showModalPanel('panelActaFin')" />
+                                                               onclick="#{rich:component('panelActaFin')}.show()" />
                                             <h:inputText size="40" id="txtActaFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactafin}" />
                                             <h:outputText  value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}"/>
@@ -137,7 +135,7 @@
                                         </h:panelGroup>
                                         <a4j:commandButton id="BTaceptarFinPaso3" styleClass="btn_sec_peq" value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
                                                            render="gpErrorFin, layoutConfFin"  >
-                                            <a4j:ajax event="complete" oncomplete="javascript:Richfaces.showModalPanel('panelConfirmaFin')" />
+                                            <a4j:ajax event="complete" oncomplete="#{rich:component('panelConfirmaFin')}.show()" />
                                         </a4j:commandButton>
 
                                         <interkont:spacer height="30" width="200"/>

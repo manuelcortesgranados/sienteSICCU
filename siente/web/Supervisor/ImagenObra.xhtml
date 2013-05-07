@@ -69,7 +69,6 @@
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                                 <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
                                                 <rich:jQuery selector="#Imagen img" query="mouseout(function(){normalPic(this)})"/>
-
                                                 <rich:jQuery name="enlargePic" timing="onJScall" query="stop().animate({width:'100px' })" />
                                                 <rich:jQuery name="normalPic" timing="onJScall" query="stop().animate({width:'70px'})" />
                                             </h:commandLink>
@@ -111,7 +110,7 @@
                                         </f:facet>
                                         <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" execute="@this"
-                                                         oncomplete="javascript:Richfaces.showModalPanel('mp_editar_imagenevolucion');"
+                                                         oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show()"
                                                          title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true">
                                             <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                         </a4j:commandLink>
@@ -123,7 +122,7 @@
                                         <h:selectBooleanCheckbox styleClass="CheckEstablecerValla#{currentRow.intidimagen}"  value="#{currentRow.booleanvalla}" 
                                                                  disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction}" event="change" 
-                                                      oncomplete="javascript:Richfaces.showModalPanel('mp_confirmarEstablecerVallaModal');"
+                                                      oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.show()"
                                                       render="panelGridConfEstablecerValla" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
                                     </rich:column>
@@ -134,7 +133,7 @@
                                         <h:selectBooleanCheckbox styleClass="CheckEstablecerImagenActual#{currentRow.intidimagen}"  value="#{currentRow.booleanactual}" 
                                                                  disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction}" event="change" 
-                                                      oncomplete="javascript:Richfaces.showModalPanel('mp_confirmarEstablecerImagenActualModal');"
+                                                      oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.show()"
                                                       render="panelGridConfEstablecerImagenActual" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
                                     </rich:column>
@@ -157,10 +156,10 @@
                             <interkont:spacer height="20px"/>
 
 
-                            <rich:collapsiblePanel id="singleslideimage" switchType="client" label="#{var.verimagenes}" opened="false"  immediate="true" execute="@this"  >
-                                <a4j:ajax event="onexpand" render="panelImagenes"  />
+                            <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true" execute="@this"  >
+                                <a4j:ajax event="expand" render="panelImagenes"  />
                                 <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
-                                    <ui:include src="SliderImagenes.jspx"/>
+                                    <ui:include src="SliderImagenes.xhtml"/>
                                 </h:panelGroup>
                             </rich:collapsiblePanel>
 
@@ -208,8 +207,8 @@
                                         <rich:column style="text-align:center;">
                                             <h:panelGrid id="panel_subir_imagenevolucion"  columns="3">
                                                 <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true" style="font-size: 10px;" value="#{var.examinar}" styleClass="btn_sec_med"
-                                                                   oncomplete="javascript:Richfaces.showModalPanel('panelUploadImagenevolucion')"/>
-                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file" width="30px">
+                                                                   oncomplete="#{rich:component('panelUploadImagenevolucion')}.show()"/>
+                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file" style="width: 30px">
                                                     <h:outputText id="otxt_nombrearchivo" value=" #{file.nombre}"/>
                                                 </rich:dataGrid>
                                                 <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_imagenevolucion_action}"

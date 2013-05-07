@@ -142,7 +142,7 @@
                 </h:panelGrid>
                 <interkont:spacer height="20px" style="width:100%;"/>
 
-                <rich:collapsiblePanel label="#{var.registrarmodificacion}" switchType="client">
+                <rich:collapsiblePanel header="#{var.registrarmodificacion}" switchType="client">
                     <h:panelGroup id="pgprincipal">                            
                         <rich:panel rendered="#{Supervisor$ModificarContrato.cual==1}">
                             <f:facet name="header" >
@@ -308,26 +308,20 @@
                                         <rich:dataTable id="tblaPolizasModi" sortMode="single" style="text-align:left; width: 500px" var="localRow"                                                           
                                                         value="#{Supervisor$Contrato.listaPolizacontratos}"
                                                         binding="#{Supervisor$ModificarContrato.tablaPolizasbin}">
-                                            <rich:column id="tc-strTipoPolizaModi" width="100px"
-                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="tc-strTipoPolizaModi" width="100px">
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.tipoPolizaContrato}"/>
                                                 </f:facet>
                                                 <h:outputText id="otxt-TipoPolizaModi" styleClass="txt_outtext" value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                             </rich:column>
-                                            <rich:column id="tc-strnumPolizaModi" width="100px"
-                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="tc-strnumPolizaModi" width="100px">
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.numPolizaContrato}" />
                                                 </f:facet>
                                                 <h:outputText id="otxt-strnumPolizaModi" value="#{localRow.strnumpoliza}"/>
                                             </rich:column>
 
-                                            <rich:column id="tc-strVencimientoPolizaModi" width="100px"
-                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="tc-strVencimientoPolizaModi" width="100px">
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.fecha} #{var.vencimientoPoliza}" />
                                                 </f:facet>
@@ -336,30 +330,25 @@
                                                 </h:outputText>
                                             </rich:column>
 
-                                            <rich:column id="tc-strEntidadContr" width="100px"
-                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="tc-strEntidadContr" width="100px">
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.entidadPoliza}" />
                                                 </f:facet>
                                                 <h:outputText id="otxt-strEntidadModi" value="#{localRow.aseguradora.strnombreentidad}"/>
                                             </rich:column>
-                                            <rich:column id="otxt-Editar" width="100px" sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="otxt-Editar" width="100px" >
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.editar}" />
                                                 </f:facet>
                                                 <a4j:commandButton id="btnPolizas" value="#{var.editar}"
                                                                    action="#{Supervisor$ModificarContrato.seleccionareditarPoliza}" render="rpPolizas">
-                                                    <a4j:ajax event="complete"
-                                                              oncomplete="javascript:Richfaces.showModalPanel('mp-editar-polizas')"
+                                                    <a4j:ajax event="complete" 
+                                                              oncomplete="#{rich:component('mp-editar-polizas')}.show()"
                                                               immediate="true"/>
                                                 </a4j:commandButton>
 
                                             </rich:column>
-                                            <rich:column id="tc-streliminarPolizaModi" width="250px"
-                                                         sortIcon="../resources/images/ascdes.gif" sortIconAscending="../resources/images/asc.gif"
-                                                         sortIconDescending="../resources/images/des.gif">
+                                            <rich:column id="tc-streliminarPolizaModi" width="250px">
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.eliminar}" />
                                                 </f:facet>
@@ -380,7 +369,7 @@
 
                                         <h:inputText size="40" id="txtPoliza" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoPoliza}" />
                                         <a4j:commandButton id="bt_agregarModi" value="#{var.examinar}"
-                                                           onclick="javascript:Richfaces.showModalPanel('panelUploadDocumentopoliza')"
+                                                           onclick="#{rich:component('panelUploadDocumentopoliza')}.show()"
                                                            style="font-size:12px;"/>
                                     </h:panelGrid>
 
@@ -393,7 +382,7 @@
 
                                     <h:inputText size="40" id="txtOtrosi" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoOtroSi}" />
                                     <a4j:commandButton id="bt_agregarOtrosi" value="#{var.examinar}"  render="gpUploadDocAt"
-                                                       onclick="javascript:Richfaces.showModalPanel('panelUploadDocumentoOtrosi')"
+                                                       onclick="#{rich:component('panelUploadDocumentoOtrosi')}.show()"
                                                        style="font-size:12px;"/>
                                 </h:panelGrid>
                             </h:panelGroup>
@@ -494,7 +483,7 @@
                                                 </rich:column>
                                                 <rich:column >
                                                     <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto}" render="mp-crear-girodirecto">
-                                                        <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.showModalPanel('mp-crear-girodirecto')" />
+                                                        <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-crear-girodirecto')}.show()" />
                                                     </a4j:commandButton>
                                                 </rich:column>
                                             </rich:columnGroup>
