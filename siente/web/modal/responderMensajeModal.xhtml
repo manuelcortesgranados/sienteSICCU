@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp_responder" moveable="false" autosized="true" style="padding: 0px;" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="#{var.rpanhea_responder}" styleClass="txt_header" />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_responder" styleClass="cerrar"
+                                     onclick="#{rich:component('mp_responder')}.hide();
+                                             return false;"
+                                     title="#{var.cerrar}" immediate="true" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form id="form_responder">
+                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                    <a4j:commandButton id="esconder_mp_responder" 
+                                       onclick="#{rich:component('mp_responder')}.hide();
+                                             return false;" immediate="true" />
+                </h:panelGroup>
+                
+                <h:panelGrid style="width:100%;">
+                    <interkont:spacer height="20" style="width:100%;" />
+                    
+                    <h:panelGrid id="pg_camposResponder" columns="3" style="text-align: left; width: 100%;">
+                        <interkont:spacer width="10" />
+                        
+                        <h:outputLabel value="#{var.houtfechayhora}" />
+                        <h:inputText id="txt-datefecmensaje-respuesta" value="#{Mensajes.mensajeRecibidoResponder.datefecmensaje}" size="65" readonly="true">
+                            <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
+                        </h:inputText>
+                        
+                        <interkont:spacer width="10" />
+                        
+                        <h:outputLabel value="#{var.houtdestinatario}" />
+                        <h:inputText id="txt_fkusuariorecibe_respuesta" value="#{Mensajes.mensajeRecibidoResponder.jsfUsuarioByIntusurecibe.usuId} #{Mensajes.mensajeRecibidoResponder.jsfUsuarioByIntusurecibe.tercero.strapellido1}" size="65" readonly="true" />
+                        
+                        <interkont:spacer width="10" />
+                        
+                        <h:outputLabel value="#{var.houtasunto}" />
+                        <h:inputText id="txt_asunto_respuesta" value="#{Mensajes.mensajeRecibidoResponder.strasuntomensaje}" size="65" maxlength="250">
+                            <h:message for="txt_asunto_respuesta" />
+                        </h:inputText>
+                        
+                        <interkont:spacer width="10" />
+                        
+                        <h:outputLabel value="#{var.houtmensaje}" />
+                        <h:inputTextarea id="txt_strtextomensaje_respuesta" value="#{Mensajes.mensajeRecibidoResponder.strtextomensaje}" cols="74" rows="14" required="true">
+                            <h:message for="txt_strtextomensaje_respuesta" />
+                        </h:inputTextarea>
+                    </h:panelGrid>
+                </h:panelGrid>
+                
+                <interkont:spacer height="10" style="width:100%;" />
+                
+                <center>
+                    <a4j:commandButton action="#{Mensajes.aceptar_responder_action}" id="bt_aceptarResponder"
+                                       oncomplete="#{rich:component('mp_responder')}.hide(); #{rich:component('mp_ver')}.hide();"
+                                       value="#{var.enviar}" render="pl_tabla_enviados" title="Enviar" />
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>

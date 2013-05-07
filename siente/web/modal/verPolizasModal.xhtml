@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelVerPolizaModal" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="#{var.verpolizas}" />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelVerPolizaModal" styleClass="cerrar"
+                                     onclick="#{rich:component('panelVerPolizaModal')}.hide();
+                                             return false;"
+                                     title="#{var.cerrar}" immediate="true" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <rich:panel>
+            <h:form prependId="false">
+                <interkont:spacer height="14" />
+
+                <rich:dataTable id="tablaPolizas" sortMode="single" style="text-align: left; width: 500px;" var="localRow" 
+                                value="#{Supervisor$AdministrarObraNew.listaPolizacontratos}">
+                    <rich:column id="tc-strTipoPoliza" width="100px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.tipoPolizaContrato}" />
+                        </f:facet>
+
+                        <h:outputText id="otxt-strTipoPoliza" styleClass="txt_outtext" value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                    </rich:column>
+
+                    <rich:column id="tc-strnumPolizaContrato1" width="100px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.numPolizaContrato}" />
+                        </f:facet>
+
+                        <h:outputText id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
+                    </rich:column>
+
+                    <rich:column id="tc-strEntidad" width="100px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.entidad}" />
+                        </f:facet>
+
+                        <h:outputText id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
+                    </rich:column>
+
+                    <rich:column id="tc-strVencimientoPoliza" width="100px">
+                        <f:facet name="header">
+                            <h:outputText value="#{var.vencimientoPoliza}" />
+                        </f:facet>
+
+                        <h:outputText id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
+                    </rich:column>
+                </rich:dataTable>
+
+                <br />
+                <center>
+                    <h:panelGrid columns="5">
+                        <a4j:commandButton id="confirmarPoliza" render="layoutLugar" value="#{var.aceptar}"
+                                           onclick="#{rich:component('panelVerPolizaModal')}.hide();
+                                             return false;"
+                                           style="font-size: 12px;" />
+                    </h:panelGrid>
+                </center>
+            </h:form>
+        </rich:panel>
+        <rich:hotKey key="esc" onkeyup="#{rich:component('panelVerPolizaModal')}.hide();
+                                             return false;" />
+    </rich:popupPanel>
+</ui:composition>

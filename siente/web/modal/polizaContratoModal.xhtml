@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelPolizaContrato" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="#{var.agregarPoliza}" />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="cerrar"
+                                     onclick="#{rich:component('panelPolizaContrato')}.hide();
+                                             return false;"
+                                     title="#{var.cerrar}" immediate="true" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:panelGroup id="gpPolizaContratoModal">
+            <h:form>
+                <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;">
+                    <interkont:spacer width="17" />
+                    <interkont:spacer height="14" />
+                    <interkont:spacer height="14" />
+                    <interkont:spacer height="20" />
+                    <h:panelGrid columns="3" style="width: 400px;">
+                        <h:panelGrid styleClass="vineta" />
+
+                        <h:outputLabel id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" />
+                        <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.tipopoliza.strdesctipopoliza}" />
+
+                        <h:panelGrid styleClass="vineta" />
+
+                        <h:outputLabel  id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" />
+                        <h:outputText  value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}" />
+
+                        <h:panelGrid styleClass="vineta" />
+
+                        <h:outputLabel id="lblVencimientoPoliza" value="#{var.vencimientoPoliza}" />
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
+                                       value="#{Supervisor$ModificarObra.polizaeditar.datefechavecimiento}" />
+
+                        <h:panelGrid styleClass="vineta" />
+
+                        <h:outputLabel id="lblEntidadPoliza" value="#{var.entidadPoliza}" />
+                        <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.aseguradora.strnombreentidad}" /><!--entidad.strnombreentidad-->
+                    </h:panelGrid>
+                </h:panelGrid>
+
+                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" width="60%">
+                    <h:panelGrid style="width: 10px;" />
+                    
+                    <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="panel_botonsoporte"
+                                       oncomplete="javascript:Richfaces.hideModalPanel('panelPolizaContrato');"
+                                       action="#{Supervisor$ModificarObra.modificarPoliza}" style="font-size: 10px;" styleClass="btn_sec_gig" />
+                </h:panelGrid>
+            </h:form>
+        </h:panelGroup>
+    </rich:popupPanel>
+</ui:composition>
