@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main_zoom.xhtml">
+
+    <ui:define name="head">
+        <title>Zoom Mapas</title>
+        
+        <h:outputScript name="jquery-1.6.js" library="js" />
+        
+        <h:outputScript name="jquery.jqzoom-core.js" library="js" />
+
+        <link href="/#{var.versioncobra}/resources/css/jquery.jqzoom.css" rel="stylesheet" type="text/css" />
+    </ui:define>
+
+    <ui:define name="title">
+        <h:inputHidden id="srcimg2" value="#{var.img2}" />
+        <h:inputHidden id="posix" value="#{var.posix}" />
+        <h:inputHidden id="posiy" value="#{var.posiy}" />
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="body">
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var posix1 = parseInt($('#posix').val());
+                var posiy1 = parseInt($('#posiy').val());
+                var srcimg = $('#srcimg2').val();
+
+                $('#img2').attr('href', srcimg);
+
+                $('.jqzoom').jqzoom({
+                    zoomType: 'drag',
+                    lens: false,
+                    zoomWidth: 800,
+                    zoomHeight: 600,
+                    position: 'left',
+                    posix: posix1,
+                    posiy: posiy1,
+                    preloadImages: true
+                });
+            });
+        </script>
+
+        <div class="clearfix" id="content">
+            <div class="clearfix">
+                <a id="img2" href="" class="jqzoom" rel='gal1' title="triumph">
+                    <h:graphicImage value="#{var.img1}" title="triumph" style="border: 4px solid #666;" />
+                </a>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

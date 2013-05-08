@@ -84,13 +84,7 @@
                     <interkont:spacer height="5"/>
                     <h:outputText id="lblcelular"  value="#{var.celular}"  styleClass="vtitle19" style=" float:left;"/>
                     <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" styleClass="vtitle20" style=" float:left; position:relative"/>
-                    <!--
-                    <h:outputText id="lblprofesion"  value="#{var.profesion}"  styleClass="vtitle19" style="float:left;"/>
-                    <h:outputLabel  value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.cargo.strdescripcion}" styleClass="vtitle20" style=" float:left; position:relative;"/>
-
-                    <interkont:spacer height="5"/>
-                    <interkont:spacer height="5"/>
-                    -->
+                  
                 </h:panelGrid>
                 <h:panelGrid  style="width:100%;">
                     <h:panelGrid columns="2" styleClass="stable" bgcolor="#F2F7FA" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" style="width:100%;">
@@ -130,7 +124,7 @@
         <h:form>
             <h:panelGrid columns="2" id="pgcontenido">
                 <rich:panel styleClass="blueframe" >
-                    <h:outputLabel value="#{var.proyecto}s que sigo" styleClass="vtitle13" style="padding-top:15px; padding-bottom:10px;"/>
+                    <h:outputLabel value="#{var.proyecto}" styleClass="vtitle13" style="padding-top:15px; padding-bottom:10px;"/>
                     <h:panelGrid columns="3">
                         <h:graphicImage style="float:left; height: 70px" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  width="70" />
                         <h:outputLabel value="#{SessionBeanCobra.obraseguida}" styleClass="vtitle15" style="float:left; width:30px; padding-top:10px; padding-left:30px;"/>
@@ -153,15 +147,7 @@
                         <h:outputLabel value="Ver imágenes" styleClass="vtitle14" style="float:left; width:100px; padding-right:-5px; padding-top:10px;"/>
                     </h:panelGrid>
                 </rich:panel>
-
-                <!-- <rich:panel styleClass="blueframe" >
-                    <h:outputLabel value="Videos" styleClass="vtitle13" style="padding-top:15; padding-bottom:10;"/>
-                    <h:panelGrid columns="3">
-                        <h:graphicImage style="float:left;" url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_04.png"  width="70" height="70"/>
-                        <h:outputLabel value="#{SessionBeanCobra.ciudadanoservice.intvideo}" styleClass="vtitle15" style="float:left; width:30; padding-top:10; padding-left:30;"/>
-                        <h:outputLabel value="Fotos" styleClass="vtitle14" style="float:left; width:100; padding-right:-5px; padding-top:10;"/>
-                    </h:panelGrid>
-                </rich:panel>-->
+              
             </h:panelGrid>
         </h:form>
         <div id="header_content">
@@ -229,3 +215,4 @@
 
     </ui:define>
 </ui:composition>
+

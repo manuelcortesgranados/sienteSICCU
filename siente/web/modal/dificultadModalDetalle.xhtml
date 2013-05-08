@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -11,45 +11,72 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700px" style="padding:0px; "
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
-        <f:facet name="header" >           
+    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" width="500">
+        <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="Ciudadano"/>
+                <h:outputText value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
-            <h:panelGroup style="width:100%">
-                <h:panelGrid columns="2">
-                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
-                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
-                </h:panelGrid>
-            </h:panelGroup>
-        </f:facet>        
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDificultadDetalle')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
         <h:form>
-            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
-                <center>                    
-                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
-
-                        <h:panelGroup>
-                            <center>
-                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
-                            </center>
-                        </h:panelGroup>
-                        <h:panelGroup>
-                            <interkont:spacer width="120"/>
-
-
-                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
-                            </a4j:commandButton>
-
-                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
-                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
-
-                        </h:panelGroup>
-                    </h:panelGrid>
-                </center>
+            <rich:panel>
+                <rich:dataTable id="tablaDificultadDet"                                
+                                value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
+                                onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                rows="5"
+                                var="currentRow"  width="80%">
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column  colspan="4" breakRowBefore="true">
+                                <h:outputText value="#{var.dificultad}es"/>
+                            </rich:column>
+                            <rich:column  breakRowBefore="true">
+                                <h:outputText id="tipodifdet" value="#{var.tipo}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText id="dificultadodet" value="#{var.dificultad}"/>
+                            </rich:column>
+                            <rich:column >
+                                <h:outputText id="fechadet" value="#{var.fecha}"/>
+                            </rich:column>
+                            <rich:column rendered="false">
+                                <h:outputText id="usuariodifdet" value="#{var.usuario}"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                    <rich:columnGroup>
+                        <rich:column  breakRowBefore="true">
+                            <h:outputText id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:inputTextarea cols="60" rows="2" id="strdificultaddet" value="#{currentRow.strdificultad}" readonly="true" />
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
+                        </rich:column>
+                        <rich:column rendered="false">
+                            <h:outputText id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                                          #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                    <f:facet name="footer">
+                        <rich:columnGroup id="groupdificultades">
+                            <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
+                                <rich:dataScroller id="scrolltablaDificultadDet" for="tablaDificultadDet" render="tablaDificultadDet"/>
+                            </rich:column>
+                        </rich:columnGroup>
+                    </f:facet>
+                </rich:dataTable>
             </rich:panel>
         </h:form>
+
     </rich:popupPanel>
 </ui:composition>

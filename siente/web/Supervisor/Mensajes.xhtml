@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    >
+
+    <ui:define name="head">
+        <title>Cobra - Supervisor - Buzón de Mensajes</title>
+
+    </ui:define>
+    <ui:define name="footer">
+        <ui:include src="/facelets/footer.xhtml" />
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{var.houtbuzondemensajes}"/>                              
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form1">
+            
+            <center>
+                <h:panelGrid columns="5" style="clear:both;">
+                    <h:outputLabel id="label_ubicacion" styleClass="txt_header_outtext" value="#{var.houtbuzondemensajes}"/>
+                </h:panelGrid>
+            </center>
+            <h:panelGrid id="layoutPrincipal" style="left:0px; height: 350px; width: 1024px" styleClass="principal">
+                <interkont:spacer height="10px"/>
+                <h:panelGrid id="pg_nuevo" style="text-align:left; width:100%;">
+                    <a4j:commandButton id="bt_nuevo" onclick="#{rich:component('mp_nuevo')}.show()" value="#{var.btnenviarmensaje}" immediate="true"
+                                       styleClass="btn_pri_gra"   style="font-size:12px;"/>
+                </h:panelGrid>
+                <interkont:spacer height="10px"/>
+                <rich:tabPanel id="tabAlimentar" tabActiveHeaderClass="btn_sec_med"
+                               tabInactiveHeaderClass="btn_pri_med" style="height: 350px; width: 1024px;" switchType="client">
+                    <rich:tab header="#{var.rtab_recibidos}" style="width: 181px;">
+                        <h:panelGroup style="width:100%">
+                            <center>
+                                <h:panelGroup id="panel_filtro_recibidos">
+                                    <h:outputText styleClass="txt_label_bold" value="#{var.houtbusquedarapida} "/>
+                                    <h:inputText value="#{Supervisor$Mensajes.valorFiltroMensajeRecibido}" id="filtroRecibidos" size="52">
+                                        <a4j:ajax event="keyup" render="tablaMensajesRecibidos" />
+                                    </h:inputText>
+                                </h:panelGroup>
+                                <interkont:spacer height="10px" style="width:100%;"/>
+                                <h:panelGroup id="pl_tabla">
+                                    <rich:dataTable id="tablaMensajesRecibidos" sortMode="single" style="text-align:left; width: 800px;" value="#{Supervisor$Mensajes.listaMensajesRecibidos}" var="currentRow" rows="10" binding="#{Supervisor$Mensajes.tablaMensajesRecibidos}">
+                                        <rich:column filterExpression="#{Supervisor$Mensajes.filtrarMensajesRecibidos}" id="tc-strasuntomensaje" sortBy="#{currentRow.datefecmensaje}" width="300px"
+                                                    >
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.houtasunto}"/>
+                                            </f:facet>
+                                            <h:outputText id="otxt-strasuntomensajerecibido" value="#{currentRow.strasuntomensaje}"/>
+                                        </rich:column>
+                                        <rich:column id="tc-fkusuarioenviarecibido" sortBy="#{currentRow.jsfUsuarioByFkusuarioenvia}" width="230px"
+                                                     >
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.houtremitente}"/>
+                                            </f:facet>
+                                            <h:outputText id="st_fkusuarioenvia" value="#{currentRow.jsfUsuarioByIntusuenvia.tercero.strnombre}"/>
+                                        </rich:column>
+                                        <rich:column id="tc-datefecmensajerecibido" sortBy="#{currentRow.datefecmensaje}" width="150px"
+                                                    >
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.Fecha}"/>
+                                            </f:facet>
+                                            <h:outputText id="otxt-fkdatefecmensajerecibido" value="#{currentRow.datefecmensaje}">
+                                                <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column    id="tc-verrecibidos" style="text-align:center;" width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.Ver}"/>
+                                            </f:facet>
+                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verrecibidos_action}" id="bt-ver-recibidos" oncomplete="#{rich:component('mp_ver')}.show()" title="#{var.Ver}"  immediate="true" render="pg_camposVer"
+                                                               styleClass="btn_lupa"  />
+                                        </rich:column>
+                                        <f:facet name="footer">
+                                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                        </f:facet>
+                                    </rich:dataTable>
+                                </h:panelGroup>
+                            </center>
+                        </h:panelGroup>
+                    </rich:tab>
+                    <rich:tab header="#{var.rtab_enviados}" style="width: 180px;">
+                        <h:panelGroup style="width:100%">
+                            <center>
+                                <h:panelGroup id="panel_filtro_enviados">
+                                    <h:outputText styleClass="txt_label_bold" value="#{var.houtbusquedarapida} "/>
+                                    <h:inputText value="#{Supervisor$Mensajes.valorFiltroMensajeEnviado}" id="filtroEnviados" size="52">
+                                        <a4j:ajax event="keyup" render="tablaMensajesEnviados" />
+                                    </h:inputText>
+                                </h:panelGroup>
+                                <interkont:spacer height="10px" style="width:100%;"/>
+                                <h:panelGroup id="pl_tabla_enviados">
+                                    <rich:dataTable id="tablaMensajesEnviados" sortMode="single" style="text-align:left; width: 800px;" value="#{Supervisor$Mensajes.listaMensajesEnviados}" var="currentRow" rows="10" binding="#{Supervisor$Mensajes.tablaMensajesEnviados}">
+                                        <rich:column filterExpression="#{Supervisor$Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
+                                                    >
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.houtasunto}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{currentRow.strasuntomensaje}"/>
+                                        </rich:column>
+                                        <rich:column sortBy="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombre}" width="300px"
+                                                    >
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.houtremitente}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombre} #{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}"/>
+                                        </rich:column>
+                                        <rich:column sortBy="#{currentRow.datefecmensaje}" width="140px">
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.Fecha}"/>
+                                            </f:facet>
+                                            <h:outputText value="#{currentRow.datefecmensaje}">
+                                                <f:convertDateTime pattern="dd-MMM-yy hh:mm:ss"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column  style="text-align:center;" width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText value="#{var.Ver}"/>
+                                            </f:facet>
+                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verenviados_action}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show()" title="#{var.Ver}"  immediate="true" render="pg_camposVerEnviados"
+                                                               styleClass="btn_lupa"  />
+                                        </rich:column>
+                                        <f:facet name="footer">
+                                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                        </f:facet>
+                                    </rich:dataTable>
+                                </h:panelGroup>
+                            </center>
+                        </h:panelGroup>
+                    </rich:tab>
+                </rich:tabPanel>
+            </h:panelGrid>
+        </h:form>
+        <ui:include src="/modal/verRecibidosModal.xhtml" />
+        <ui:include src="/modal/verEnviadosModal.xhtml" />
+        <ui:include src="/modal/responderMensajeModal.xhtml" />
+        <ui:include src="/modal/nuevoMensajeModal.xhtml" />
+    </ui:define>
+
+</ui:composition>

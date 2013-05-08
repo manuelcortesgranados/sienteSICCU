@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -44,13 +44,13 @@
                                 <div>
                                     <a4j:commandLink     action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"
                                                          render="gpDetaObraModal">
-                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="javascript:Richfaces.showModalPanel('modalDetalleObra')"  immediate="true"/>
+                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show()"  immediate="true"/>
                                         <h:graphicImage url="#{var.ipserver}#{var.versioncobra}#{imagen.strubicacion}" />
                                     </a4j:commandLink>
 
                                     <a4j:commandLink    value="#{imagen.obra.strnombrecrot}" action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"                                               
                                                         render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal">
-                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="javascript:Richfaces.showModalPanel('modalDetalleObra')"  immediate="true"/>
+                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show()"  immediate="true"/>
                                     </a4j:commandLink>
 
                                 </div>

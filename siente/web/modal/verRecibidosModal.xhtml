@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp_ver" moveable="false" autosized="true" style="padding: 0px;" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText value="#{var.rpanhea_vermensajerecibido}" />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp_ver" styleClass="cerrar"
+                                     onclick="#{rich:component('mp_ver')}.hide();
+                                             return false;"
+                                     title="#{var.cerrar}" immediate="true" />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form id="form_ver">
+                <h:panelGrid style="width:100%;">
+                    <interkont:spacer height="20" style="width:100%;" />
+
+                    <h:panelGrid id="pg_camposVer" columns="3" style="text-align: left; width: 100%;">
+                        <interkont:spacer width="10" />
+
+                        <h:outputLabel value="#{var.houtfechayhora}" />
+                        <h:inputText id="txt-datefecmensaje-ver" value="#{Mensajes.mensajeRecibidoVer.datefecmensaje}" size="65" readonly="true">
+                            <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
+                        </h:inputText>
+
+                        <interkont:spacer width="10" />
+
+                        <h:outputLabel value="#{var.houtremitente}" />
+                        <h:inputText id="txt_fkusuariorecibe_ver" value="#{Mensajes.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strnombre} #{Mensajes.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strapellido1}" readonly="true" />
+
+                        <interkont:spacer width="10" />
+
+                        <h:outputLabel value="#{var.houtasunto}" />
+                        <h:inputText id="txt_asunto_ver" value="#{Mensajes.mensajeRecibidoVer.strasuntomensaje}" size="65" readonly="true" />
+
+                        <interkont:spacer width="10" />
+
+                        <h:outputLabel value="#{var.houtmensaje}" />
+                        <h:inputTextarea id="txt_strtextomensaje_ver" value="#{Mensajes.mensajeRecibidoVer.strtextomensaje}" cols="74" rows="14" readonly="true" />
+                    </h:panelGrid>
+                </h:panelGrid>
+
+                <interkont:spacer height="10" style="width:100%;" />
+
+                <center>
+                    <a4j:commandButton action="#{Mensajes.bt_responder_action}" id="bt-responder"
+                                       oncomplete="#{rich:component('mp_responder')}.show();"
+                                       value="#{var.btnresponder}" render="pg_camposResponder" title="#{var.btnresponder}" />
+                </center>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+</ui:composition>

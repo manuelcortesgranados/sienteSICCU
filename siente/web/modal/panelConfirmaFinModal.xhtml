@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel height="200" id="panelConfirmaFin" resizeable="false" width="350" style="padding:0px;" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.confirmarfinalizacion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelConfirmaFin" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaFin')}.hide();return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <interkont:spacer height="20"/>
+                <h:panelGrid id="layoutConfFin" >
+                    <h:outputText styleClass="mensaje_error" value="#{var.estaseguroderegistrar}" rendered="#{Supervisor$AdministrarObraNew.verFin}"/>
+                    <h:outputText styleClass="mensaje_error" value="#{Supervisor$AdministrarObraNew.mensajefinaliza}" rendered="#{!Supervisor$AdministrarObraNew.verFin}"/>
+
+                    <a4j:commandButton id="BTaceptarFin" value="#{var.aceptar}"
+                                       onclick="#{rich:component('panelConfirmaFin')}.hide();return false;" rendered="#{!Supervisor$AdministrarObraNew.verFin}"
+                                          style="font-size:12px;"/>
+                    <h:panelGroup>
+                        <a4j:commandButton id="BTaceptarFinaliza" value="#{var.si}" action="#{Supervisor$AdministrarObraNew.registrarLiquidacion}"
+                                         onclick="#{rich:component('panelConfirmaFin')}.hide(); #{rich:component('panelFinalizado')}.show();"
+                                           rendered="#{Supervisor$AdministrarObraNew.verFin}"
+                                              style="font-size:12px;">
+                            <a4j:ajax oncomplete="true"  onbeforesubmit="#{rich:component('panelCargando')}.hide;" />
+                        </a4j:commandButton>
+                        <a4j:commandButton id="BTcancelarFinaliza" value="#{var.no}"
+                                           onclick="#{rich:component('panelConfirmaFin')}.hide;return false;" rendered="#{Supervisor$AdministrarObraNew.verFin}"
+                                              style="font-size:12px;"/>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</ui:composition>

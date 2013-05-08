@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -10,7 +10,7 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-
+ 
     <rich:popupPanel  id="modalDetalleObra" autosized="true" resizeable="false" width="700" style="padding:0px;"
                       headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
         <f:facet name="header" >            
@@ -175,7 +175,7 @@
                                     <h:outputText value="Comentarios" style="font-size:12px;"></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
-                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.jspx?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
+                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
                                 <h:graphicImage value="/resources/imgs/valla/btn_fotos.png"/>
                                 <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 100px;">

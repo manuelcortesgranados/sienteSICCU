@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition   
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -39,12 +39,12 @@
 
 
                             <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
+                                <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide()" render="gpLogPrinci"/>
                             </a4j:commandButton>
 
                             <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
                                                action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
+                                               onclick="#{rich:component('confirmarCiudadano')}.hide()"/>
 
                         </h:panelGroup>
                     </h:panelGrid>

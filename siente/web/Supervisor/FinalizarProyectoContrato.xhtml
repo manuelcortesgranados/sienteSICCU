@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    template="/facelets/template_main.xhtml">
+    <ui:define name="head">
+        <title>Cobra - Supervisor</title>
+        <h:outputScript library="/resources/script_supervisor.js" name="scrip_supervisor"/>
+    </ui:define>
+    <ui:define name="body">
+
+        <h:form >
+            <rich:panel style="width:100%;" id="layoutAlimentar" header="#{var.veravanceyfinalizarmontaje}">
+                <interkont:spacer height="10"/>
+
+                <rich:collapsiblePanel id="FinalizarContrato">
+                    <f:facet name="header">
+                        <h:outputText value="2. #{var.FINALIZAR}"/>
+                    </f:facet>
+                    <h:panelGrid id="panelFinalizar" columns="1">
+
+                                <!--<h:outputText value="#{Supervisor$IngresarNuevaObra.mensaje}"/>-->
+
+                    </h:panelGrid>
+
+
+                </rich:collapsiblePanel>
+
+                <center>
+                    <a4j:commandButton id="Finalizar" value="#{var.finalizar}"/>
+                </center>
+            </rich:panel>
+        </h:form>             
+    </ui:define>
+</ui:composition>

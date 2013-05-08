@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -124,18 +124,14 @@
                             <h:panelGrid id="layoutImaCiu_par" columns="3" style="width:100%;" columnClasses="panelizquierda,panelderecha">
                                 <h:inputText size="20"  id="txtfotografia" styleClass="buscador_field_" readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strfotoopinion}"  />
                                 <interkont:spacer width="30"/>
-                                <a4j:commandLink id="btimg" onclick="javascript:Richfaces.showModalPanel('modalImagenCiu')"
+                                <a4j:commandLink id="btimg" onclick="#{rich:component('modalImagenCiu')}.show()"
                                                  styleClass="p_examinar anchorLink" />
                             </h:panelGrid>
-                            <!--  <h:panelGrid columns="3" style="width:100%;" columnClasses="panelizquierda,panelderecha">
-                                <h:inputText size="20" id="txtvideo" styleClass="buscador_field_" readonly="true" value="#{var.nombrevideo}..."   />
-                                <interkont:spacer width="30"/>
-                                <h:commandLink styleClass="p_examinar anchorLink" ></h:commandLink>
-                            </h:panelGrid>-->
+                         
                             <h:panelGrid id="layoutDocCiu_par" columns="3" columnClasses="panelizquierda,panelderecha" style="width:100%;">
                                 <h:inputText size="20" id="txtdocumen" styleClass="buscador_field_" readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strdoc}" />
                                 <interkont:spacer width="30"/>
-                                <a4j:commandLink id="btnacta" onclick="javascript:Richfaces.showModalPanel('panelDocCiu')"
+                                <a4j:commandLink id="btnacta" onclick="#{rich:component('panelDocCiu')}.show()"
                                                  styleClass="p_examinar anchorLink"/>
                             </h:panelGrid>
                         </h:panelGrid>

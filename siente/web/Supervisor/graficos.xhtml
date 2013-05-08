@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <title>Gráficos</title>
+        
+        <h:outputScript name="script_supervisor.js" />
+        <h:outputScript name="jscharts.js" library="js" />
+    </ui:define>
+
+    <ui:define name="body">
+        <h:inputHidden id="grafico" value="#{Supervisor$Graficos.rutaGrafico}" />
+
+        <div id="graph">Loading...</div>
+        <script type='text/javascript'>
+            var myChart = new JSChart('graph', 'line');
+            myChart.setDataJSON(document.getElementById("grafico").value);
+            myChart.draw();
+
+            function callback() {
+                alert('User click');
+            }
+        </script>
+    </ui:define>
+</ui:composition>

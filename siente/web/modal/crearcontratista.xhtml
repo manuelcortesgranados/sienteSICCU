@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition   
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -11,45 +11,131 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700px" style="padding:0px; "
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
-        <f:facet name="header" >           
+    <rich:popupPanel id="mp-crear-contratista" moveable="true" autosized="true"  headerClass="rich-panel-header">
+        <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="Ciudadano"/>
+                <h:outputText value="#{var.crearcontratista}"/>
             </h:panelGroup>
-            <h:panelGroup style="width:100%">
-                <h:panelGrid columns="2">
-                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
-                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
-                </h:panelGrid>
-            </h:panelGroup>
-        </f:facet>        
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_mp-crear-contratista" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-contratista')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
         <h:form>
-            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
-                <center>                    
-                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
+            <rich:panel id="rpContratista">
+                <center>
+                    <h:panelGrid columns="4"  style="width:100%;" >
 
-                        <h:panelGroup>
-                            <center>
-                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
-                            </center>
-                        </h:panelGroup>
-                        <h:panelGroup>
-                            <interkont:spacer width="120"/>
+                        <h:outputText id="lbltipoContratistaCrea"  value="#{var.tipoContratista}" />
+                        <h:selectOneMenu id="cmbtipoContratistaCrea" value="#{Supervisor$Contrato.contratista.tipotercero.intcodigotipotercero}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
+                            <f:selectItems value="#{Supervisor$Contrato.tipoTerceroOPtion}" />
+                            <a4j:ajax event="change" listener="#{Supervisor$Contrato.cambiarPersona}" execute="@this" render="rpContratista" />
+                        </h:selectOneMenu>
+
+                        <h:outputText id="lbltelefonoMovilCrea"  value="(*)#{var.telefonoMovil}"/>
+                        <h:panelGrid columns="2">
+                            <h:inputText  size="25" maxlength="15" id="txtelefonoMovilCrea" value="#{Supervisor$Contrato.contratista.strmovil}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
+                            <rich:message for="txtelefonoMovilCrea" style="color: red"/>
+                        </h:panelGrid>
 
 
-                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
-                            </a4j:commandButton>
+                        <h:outputText id="lblemailContratistaCrea"  value="#{var.correo}"/>
+                        <h:inputText  size="25" maxlength="250" id="txtemailContratistaCrea" value="#{Supervisor$Contrato.contratista.stremail}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
-                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
-                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
+                        <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
+                        <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
 
-                        </h:panelGroup>
+                        <h:outputLabel id="lbltipoidContratista"  value="#{var.tipodeIdentificacion}" for="combotipoidcontratista" />
+                        <h:selectOneMenu id="combotipoidcontratista" value="#{Supervisor$Contrato.contratista.tipoidentificacion.intcodigotipoiden}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
+                            <f:selectItems value="#{Supervisor$Contrato.tipoIdentificacionOption}"/>
+                        </h:selectOneMenu>
+
+
+                        <h:outputLabel id="lblcedulaContratistaCrea"  value="(*)#{var.cedulaContratista}" />
+                        <h:panelGrid columns="2" >
+                            <rich:inputNumberSpinner id="txtcedulaContratistaCrea" value="#{Supervisor$Contrato.contratista.intcedula}" minValue="0" maxValue="4000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
+                            <rich:message for="txtcedulaContratistaCrea" style="color: red"/>
+                        </h:panelGrid>
+
+                        <h:outputText id="lbldirecionContratistaCrea"  value="(*)#{var.label_direccion}"/>
+                        <h:panelGrid columns="2">
+                            <h:inputText  size="25" maxlength="250" id="txtdirecionContratistaCrea" value="#{Supervisor$Contrato.contratista.strdireccionprincipal}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
+                            <rich:message for="txtdirecionContratistaCrea" style="color: red"/>
+                        </h:panelGrid>
+
+                        <h:outputText id="lbldigitoVerificacionCrea"  value="#{var.digitoVerificacion}"/>
+                        <rich:inputNumberSpinner id="txtdigitoVerificacionCrea" value="#{Supervisor$Contrato.contratista.intdigitoverificacion}" minValue="0" maxValue="9" inputSize="20" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
+
+                        <h:outputText id="lblnombreComtratistaCrea"  value="(*)#{var.nombre}" />
+                        <h:panelGrid columns="2">
+                            <h:inputText  size="25" maxlength="250" id="txtnombreComtratistaCrea" value="#{Supervisor$Contrato.contratista.strnombre}"  required="true" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
+                            <rich:message for="txtnombreComtratistaCrea" style="color: red"/>
+                        </h:panelGrid>
+
+                        <h:outputText id="lblwebContratistaCrea"  value="#{var.paginaWeb}:"/>
+                        <h:inputText  size="25" maxlength="250" id="txtwebContratistaCrea" value="#{Supervisor$Contrato.contratista.strpaginaweb}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"  />
+
+                        <h:outputText id="lblprimerApellidoCrea"  value="#{var.primerApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
+                        <h:inputText  size="25" maxlength="250" id="txtprimerApellidoCrea" value="#{Supervisor$Contrato.contratista.strapellido1}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
+
+                        <h:outputText id="lbltwitterContratistaCrea"  value="#{var.cuentaTwitter}:"/>
+                        <h:inputText  size="25" maxlength="250" id="txtwitterContratistaCrea" value="#{Supervisor$Contrato.contratista.strtwiter}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
+
+                        <h:outputText id="lblsegundoApellidoCrea"  value="#{var.segundoApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
+                        <h:inputText  size="25" maxlength="250" id="txtsegundoApellidoCrea" value="#{Supervisor$Contrato.contratista.strapellido2}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
+
+                        <h:outputText id="lblfacebookContratistaCrea"  value="#{var.cuentaFacebook}:"/>
+                        <h:inputText  size="25" maxlength="250" id="txtfacebookContratistaCrea" value="#{Supervisor$Contrato.contratista.strfacebook}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
+
+                        <h:outputText id="lbltelefonoFijoCrea"  value="#{var.telefonoFijo}"/>
+                        <h:inputText  size="25" maxlength="15" id="txtelefonoFijoCrea" value="#{Supervisor$Contrato.contratista.strtelefono1}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
+
                     </h:panelGrid>
+
+                    <a4j:commandButton value="#{var.registrar}" action="#{Supervisor$Contrato.guardarContratista}"
+                                       render="rpContratista"
+                                       rendered="#{!Supervisor$Contrato.boolcrearcontratista}"
+                                       >
+                    </a4j:commandButton>
+
+                    <interkont:spacer width="10"/>
+                    <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcrearcontratista}"
+                                       rendered="#{Supervisor$Contrato.boolcrearcontratista}"
+                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-contratista')">
+                    </a4j:commandButton>
+                    <interkont:spacer width="10"/>
+                    <a4j:commandButton value="#{var.cancelar}"
+                                       immediate="true"
+                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-contratista');" rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
+                    </a4j:commandButton>
+
                 </center>
+                <a4j:outputPanel id="panelErrorNuevocontratista">
+                    <rich:messages id="messagesNuevocontratista" globalOnly="true"
+                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                   infoLabelClass="info_texto" warnLabelClass="warn_texto"
+                                   errorLabelClass="error_texto">
+                        <f:facet name="infoMarker">
+                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msginfo.png" />
+                        </f:facet>
+                        <f:facet name="warnMarker">
+                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgwarn.png" />
+                        </f:facet>
+                        <f:facet name="errorMarker">
+                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                        <f:facet name="fatalMarker">
+                            <h:graphicImage  style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                        </f:facet>
+                    </rich:messages>
+
+                </a4j:outputPanel>
             </rich:panel>
+
         </h:form>
-    </rich:popupPanel>
+    </rich:popupPanel>   
 </ui:composition>

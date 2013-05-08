@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition   
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -71,7 +71,7 @@
                                                render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
                                                styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                             <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
-                                               value="#{var.aceptar}" onclick="javascript:Richfaces.hideModalPanel('modalImagenCorreo')" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
+                                               value="#{var.aceptar}" onclick="#{rich:component('modalImagenCorreo')}.hide()" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
                                                render="pgfotografia"
                                                style="font-size: 12px;"/>
                         </center>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelUbicacion" style="padding: 0px;">
+        <center>   
+            <h:panelGrid columns="3" style="width:100%;">
+                <interkont:spacer width="100" />
+                <h:panelGroup>
+                    <h:graphicImage value="#{var.ubicacionproyect}" />                    
+                    <h:panelGrid columns="3" style="font-size:8pt; color:#666666;" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                        <h:outputLabel id="strZona" value="#{var.zona}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" />
+                        <h:outputLabel id="strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
+
+                        <h:outputLabel id="strComuna" value="#{var.comuna}" style="font-weight: bold;" rendered="false" />
+                        <h:outputLabel id="strComunaOut" value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" rendered="false" />
+
+                        <h:outputLabel id="strBarrio" value="#{var.barrio}" style="font-weight: bold;" rendered="false" />
+                        <h:outputLabel id="strBarrioOut" value="#{Supervisor$AdministrarObraNew.obra.strbarrio}" rendered="false" />
+
+                        <h:outputLabel id="strDireccionProyecto" value="#{var.label_direccion}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" />
+                        <h:outputLabel id="strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
+
+                        <h:outputLabel id="strLatitud"  value="#{var.latitud}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" />
+                        <h:panelGrid>
+                            <!-- # {SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}-->
+                            <rich:inplaceInput  id="inplaceInputLatitud" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" showControls="true" rendered="false">
+                                <a4j:ajax listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}" rendered="false" render="panelUbicacion,mapastatic,tabla" />
+                            </rich:inplaceInput>
+                            <h:outputLabel id="Latitud" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}" />
+                        </h:panelGrid>     
+
+                        <h:outputLabel id="strLongitud" value="#{var.longitud}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" />
+                        <h:panelGrid>
+                            <!-- # {SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}-->
+                            <rich:inplaceInput id="inplaceInputLongitud" showControls="true" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="false">
+                                <a4j:ajax  listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}"  rendered="false" render="panelUbicacion,mapastatic,tabla" />
+                            </rich:inplaceInput> 
+                            <h:outputLabel id="Longitud" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}" />
+                        </h:panelGrid>
+
+                        <h:outputLabel id="strRuta" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{var.rutas}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.boolruta}" />
+
+                        <h:outputLabel id="strRutaOut" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{Supervisor$AdministrarObraNew.obra.ruta.strnombretramo}" />
+
+                        <h:outputLabel id="strSede" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.sede}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
+                        <h:outputLabel id="strSedeOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.strnombre}" />
+
+                        <h:outputLabel id="strInstitucion" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.institucion} Educativa" style="font-weight: bold;" />
+                        <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
+                        <h:outputLabel id="strInstitucionOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.strnombre}" />
+
+                        <h:outputLabel id="strLocalidad" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.departamento}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
+                        <h:outputLabel id="strLocalidadOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strdepartamento}" />
+
+                        <h:outputLabel id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}" style="font-weight: bold;" />
+                        <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
+                        <h:outputLabel id="strMunicipioOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
+                    </h:panelGrid>
+
+                    <h:panelGroup>
+                        <h:message for="inplaceInputLatitud" showDetail="true" />
+                        <h:message for="inplaceInputLongitud" showDetail="true" />
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGrid columns="1" id="mapastatic" style="width:100%;" columnClasses="panelizquierda">
+                    <h:graphicImage height="100%" value="#{Supervisor$AdministrarObraNew.ubicacionmapa}" width="400px"
+                                    style="border-radius: 10px; box-shadow: 2px 2px 5px #999;" />
+                </h:panelGrid>
+            </h:panelGrid>
+
+            <h:panelGrid id="pgtablapuntos" width="80%">
+                <center>
+                    <rich:dataTable id="tablapuntos" sortMode="single" style="text-align: left; width: 100%;"
+                                    value="#{Supervisor$AdministrarObraNew.listaPuntoObra}"
+                                    var="_row"
+                                    rendered="#{Supervisor$AdministrarObraNew.puntootro}">
+                        <f:facet name="header">
+                            <h:outputLabel value="#{var.otrospuntos}" />
+                        </f:facet>
+
+                        <rich:column id="tc_strdireccion"  width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.direccion}" />
+                            </f:facet>
+
+                            <h:outputText id="st_strdireccion" value="#{_row.obra.strdireccion}" />
+                        </rich:column>
+
+                        <rich:column id="tc_strlatitud" width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.latitud}" />
+                            </f:facet>
+
+                            <h:outputText id="st_strlatitud" value="#{_row.strlatitud}" />
+                        </rich:column>
+
+                        <rich:column id="tc_strlongitud"  width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.longitud}" />
+                            </f:facet>
+
+                            <h:outputText id="st_strlongitud" value="#{_row.strlongitud}" />
+                        </rich:column>
+                    </rich:dataTable>
+                </center>
+            </h:panelGrid>
+
+            <h:panelGrid width="95%">
+                <center>
+                    <rich:dataTable id="tabla" sortMode="single" style="text-align: left; width: 95%;"
+                                    styleClass="table-detalle" var="row"
+                                    value="#{Supervisor$AdministrarObraNew.obra}"
+                                    rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos==false}">
+                        <f:facet name="header">
+                            <h:outputLabel value="#{var.subproyectos}" />
+                        </f:facet>
+
+                        <rich:column id="tc_direccion" width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.direccion}" />
+                            </f:facet>
+                            
+                            <h:outputText id="st_direccion" value="#{row.strdireccion}" />
+                        </rich:column>
+
+                        <rich:column id="tc_nombre" width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.nombre}" />
+                            </f:facet>
+                            
+                            <h:outputText id="st_nombre" style="line-height:15px;" value="#{row.strnombreobra}" />
+                        </rich:column>
+
+                        <rich:column id="tc_floatlatitud" width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.latitud}" />
+                            </f:facet>
+                            
+                            <h:outputText id="st_floatlatitud" value="#{row.floatlatitud}" />
+                        </rich:column>
+
+                        <rich:column id="tc_floatlongitud"  width="120px">
+                            <f:facet name="header">
+                                <h:outputText value="#{var.longitud}" />
+                            </f:facet>
+                            
+                            <h:outputText id="st_floatlongitud" value="#{row.floatlongitud}" />
+                        </rich:column>
+                    </rich:dataTable>
+                </center>
+            </h:panelGrid>
+        </center>
+    </rich:popupPanel>
+</ui:composition>

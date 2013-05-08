@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition   
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -11,36 +11,49 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel id="mp_eliminar" moveable="false" height="150" width="350" style="padding:0px;"
-                     headerClass="rich-panel-header">
+     <rich:popupPanel id="mp_editar" moveable="false" width="592" height="430" style="padding:0px;" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.eleimardocumento}"/>
+                <h:outputText value="#{var.editardocuento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
+                    <a4j:commandLink id="esconder_mp_editar" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
+
         <rich:panel styleClass="rich-panel-body" style="padding:0px;">
             <h:form>
                 <h:panelGrid style="width:100%;">
-                    <interkont:spacer height="10"/>
-                    <h:outputText id="st_confirmacionEliminar" value="#{var.estaseguroeliminardocumento}" />
-                    <interkont:spacer height="20"/>
-                    <h:panelGrid columns="2"  style="text-align:center;width:100%;">
-                        <a4j:commandButton id="aceptar_eliminar_documento" action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_documento_action}"
-                                           value="#{var.aceptar}"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_eliminar');"
-                                           render="panel_documentos" title="#{var.aceptar}"
-                                           style="font-size:12px;"/>
-                        <a4j:commandButton id="cancelar_eliminar_documento" title="#{var.cancelar}"
-                                           value="#{var.cancelar}" onclick="javascript:Richfaces.hideModalPanel('mp_eliminar');"
-                                           style="font-size:12px;"/>
+                    <interkont:spacer height="70px"/>
+                    <h:panelGrid id="pg_campos_editar_documento" columns="3" style="text-align:left;width:100%;">
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="#{var.nombre}" />
+                        <h:inputText id="txt_strnombre_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.strnombre}" required="true">
+                            <h:message for="txt_strnombre_ed"/>
+                        </h:inputText>
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="Tipo:" />
+                        <h:selectOneMenu id="select_tipodocumento2" value="#{Supervisor$AdministrarObraNew.documentoobraEd.tipodocumento.inttipodoc}">
+                            <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoDocumento}" />
+                        </h:selectOneMenu>
+                        <interkont:spacer width="60"/>
+                        <h:outputLabel value="#{var.fecha}" />
+                        <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.datefecha}" required="true">
+                        </rich:calendar>
+                    </h:panelGrid>
+                    <interkont:spacer height="80px"/>
+                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_documento_action}" id="bt_aceptarEliminar"
+                                           styleClass="btn_sec_gra" value="#{var.aceptar}"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_editar');"
+                                           render="panel_docu"  title="#{var.aceptar}"/>
+                        <a4j:commandButton styleClass="btn_sec_gra" value="#{var.cancelar}" oncomplete="javascript:Richfaces.hideModalPanel('mp_editar');"/>
+
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -94,7 +94,7 @@
                                 <h:outputText value="#{var.ingresar} #{var.fotografia}" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
                                 <a4j:commandLink  >   
                                     <h:graphicImage url="#{Ciudadano$PerfilCiudadano.pathImaCiu}"  styleClass="panelmiddle" style="width: 50px; height: 50px;" 
-                                                    onclick="javascript:Richfaces.showModalPanel('modalImagenCorreo')"                    
+                                                    onclick="#{rich:component('mp-crear-modalImagenCorreo')}.show()"                    
                                                     />
                                 </a4j:commandLink>    
                             </h:panelGroup> 
@@ -108,7 +108,7 @@
                                     <h:commandLink  styleClass="buttonform" value="#{var.cancelar}" action="#{Ciudadano$PerfilCiudadano.regresar}" immediate="true">
                                     </h:commandLink> 
                                     <a4j:commandLink id="btnGuardarCiudadano" value="#{var.registrarme}"  styleClass="buttonform" action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano">
-                                        <a4j:ajax event="complete" oncomplete="javascript:Richfaces.showModalPanel('confirmarCiudadano')"   />
+                                        <a4j:ajax event="complete" oncomplete="#{rich:component('confirmarCiudadano')}.show()"   />
                                     </a4j:commandLink>
 
                                 </h:panelGrid>

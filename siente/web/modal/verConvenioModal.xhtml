@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <rich:panel id="panelConvenio" style="padding: 0px;">
+        <center>
+            <h:panelGrid columns="3">
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="strnombrec" value="#{var.nombreConvenio}" />
+                <h:outputLabel id="strnombretxt" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.strnombre}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="datefechainiC" value="#{var.datefechaini}" />
+                <h:outputLabel id="datefechaftxt" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.datefechaini}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="datefechafinC" value="#{var.datefechafin}" />
+                <h:outputLabel id="datefechafintxt" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.datefechafin}" >
+                </h:outputLabel>
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="intduracionC" value="#{var.intduracion}" />
+                <h:outputLabel id="intduraciontxt" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.intduracion}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputLabel id="lblFormaPagoConvenio" value="#{var.formadepago}" />
+                <h:outputLabel id="formapagoConvenio" styleClass="txt_outtext"  value="#{Supervisor$AdministrarObraNew.obra.convenio.strformapago}"  />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="numrecursosproyectoC" value="#{var.numrecursosproyecto}" />
+                <h:outputLabel id="numrecursosproyectotxt" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.numrecursosproyecto}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="numotrosrecursosC" value="#{var.numotrosrecursos}" />
+                <h:outputLabel id="numotrosrecursost" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.numotrosrecursos}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="numrecursoschC" value="#{var.numrecursosch}" />
+                <h:outputLabel id="numrecursoscht" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.numrecursosch}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="txttoalrecu" value="#{var.totrecur}" />
+                <h:outputLabel id="txttoalreculb" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.numrecursosch+Supervisor$AdministrarObraNew.obra.convenio.numrecursosproyecto+Supervisor$AdministrarObraNew.obra.convenio.numotrosrecursos}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="textobjetoC" value="#{var.textobjeto}" />
+                <h:inputTextarea id="textobjetot" cols="23" rows="4" disabled="true" value="#{Supervisor$AdministrarObraNew.obra.convenio.textobjeto}" />
+
+                <h:panelGrid styleClass="vineta" />
+                <h:outputText id="intnumeroencargoC" value="#{var.intnumeroencargo}" />
+                <h:outputLabel id="intnumeroencargot" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.convenio.intnumeroencargo}" />
+                <interkont:spacer width="35" height="55" />
+                <br/>
+            </h:panelGrid>
+        </center>
+    </rich:panel>
+</ui:composition>

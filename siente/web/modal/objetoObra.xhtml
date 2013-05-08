@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalObjeto" width="400"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.objeto}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup >
+                    <a4j:commandLink id="esconder_modalobjeto" styleClass="cerrar"  render="form_editar"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalObjeto')}.hide(); return false;"/>                    
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+
+        <h:form>
+            <rich:panel>
+                <h:panelGrid columns="1" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_modificarobjetoobra}">
+                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
+                </h:panelGrid>
+                <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_modificarobjetoobra}"  >
+                    <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$AdministrarObraNew.btn_habilitarModificarObjeto}">
+                       <h:outputText   id="txtObjeto"  styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
+                            <br/>
+                            <br/>
+                        <a4j:commandLink id = "btn_editarObjetoObra"   action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
+                            <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                        </a4j:commandLink>
+                    </h:panelGroup>
+                    <h:panelGroup  id="txthabilitarModificar" rendered="#{Supervisor$AdministrarObraNew.modificarObjetoObra}" >
+                        <h:inputTextarea  required="true" id="habilitarObjeto" rows="4" cols="40" value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
+                        <a4j:commandLink   id="bt_editarpolizas1"  action="#{Supervisor$AdministrarObraNew.guardarModificacionObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
+                            <br/>
+                            <br/>
+                            <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                        </a4j:commandLink>  
+                        <rich:message for="habilitarObjeto" style="color: red;"/>  
+                    </h:panelGroup>
+                </h:panelGroup>
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

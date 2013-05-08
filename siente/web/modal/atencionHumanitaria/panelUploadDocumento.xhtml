@@ -14,9 +14,9 @@
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
 
-                    <a4j:commandLink id="esconder_panelUploadDocumento" styleClass="btn_cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadDocumento')}.hide();
-                                             return false;"/>
+                    <a4j:commandButton id="esconder_panelUploadDocumento" onclick="#{rich:component('panelUploadDocumento')}.hide();
+                            return false;"
+                                       styleClass="btn_cerrar"  />
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -56,7 +56,7 @@
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
                                 <a4j:commandButton value="#{var.aceptar}" 
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadDocumento')" render="panel_subir,tablaDocumentos"
+                                                   onclick="#{rich:component('panelUploadDocumento')}.hide();" render="panel_subir,tablaDocumentos"
                                                    style="font-size:12px;"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" />
                             </center>
