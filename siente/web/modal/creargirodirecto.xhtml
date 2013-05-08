@@ -83,12 +83,12 @@
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcreargiro}"
                                        render="pngirodirecto" rendered="#{Supervisor$Contrato.boolcreargiro}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-girodirecto')">
+                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.hide(); return false;">
                     </a4j:commandButton>
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.cancelar}"  action="#{Supervisor$Contrato.limpiarGirodirecto}"
                                        render="pngirodirecto" immediate="true"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-girodirecto');" rendered="#{!Supervisor$Contrato.boolcreargiro}" >
+                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.hide(); return false;" rendered="#{!Supervisor$Contrato.boolcreargiro}" >
                     </a4j:commandButton>
 
                 </center>

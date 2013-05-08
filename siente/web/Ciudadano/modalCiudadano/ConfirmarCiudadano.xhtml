@@ -39,12 +39,12 @@
 
 
                             <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide()" render="gpLogPrinci"/>
+                                <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide(); return false;" render="gpLogPrinci"/>
                             </a4j:commandButton>
 
                             <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
                                                action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="#{rich:component('confirmarCiudadano')}.hide()"/>
+                                               onclick="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
 
                         </h:panelGroup>
                     </h:panelGrid>

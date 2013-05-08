@@ -105,12 +105,12 @@
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcrearcontratista}"
                                        rendered="#{Supervisor$Contrato.boolcrearcontratista}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-contratista')">
+                                       oncomplete="#{rich:component('mp-crear-contratista')}.hide(); return false;">
                     </a4j:commandButton>
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.cancelar}"
                                        immediate="true"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('mp-crear-contratista');" rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
+                                       oncomplete="#{rich:component('mp-crear-contratista')}.hide(); return false;" rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
                     </a4j:commandButton>
 
                 </center>

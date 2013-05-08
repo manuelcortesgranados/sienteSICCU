@@ -50,9 +50,9 @@
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_documento_action}" id="bt_aceptarEliminar"
                                            styleClass="btn_sec_gra" value="#{var.aceptar}"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_editar');"
+                                           oncomplete="#{rich:component('mp_editar')}.hide(); return false;"
                                            render="panel_docu"  title="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="btn_sec_gra" value="#{var.cancelar}" oncomplete="javascript:Richfaces.hideModalPanel('mp_editar');"/>
+                        <a4j:commandButton styleClass="btn_sec_gra" value="#{var.cancelar}" oncomplete="#{rich:component('mp_editar')}.hide(); return false;"/>
 
                     </h:panelGrid>
                 </h:panelGrid>

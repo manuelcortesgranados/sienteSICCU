@@ -86,7 +86,7 @@
                         </f:facet>
                         <a4j:commandLink id="verpoliza" style="font-size: 10px;" 
                                          action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
-                                         onclick="javascript:Richfaces.showModalPanel('panelVerPolizaModal')">
+                                         onclick="#{rich:component('panelVerPolizaModal')}.show(); return true;">
                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
@@ -99,7 +99,7 @@
                         </f:facet>
                         <a4j:commandLink id="vercosto" style="font-size: 10px;" 
                                          render="panelContrato"
-                                         onclick="javascript:Richfaces.showModalPanel('panelCostoContrato')">
+                                         onclick="#{rich:component('panelCostoContrato')}.show(); return true;">
                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>

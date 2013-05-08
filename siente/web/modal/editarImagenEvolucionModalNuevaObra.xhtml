@@ -45,9 +45,9 @@
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
                         <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" styleClass="btn_sec_gra"
                                            value="#{var.aceptar}"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_editar_imagenevolucion');"
+                                           oncomplete="#{rich:component('mp_editar_imagenevolucion')}.hide(); return false;"
                                            render="panel_imagenesevolucion" title="#{var.aceptar}"/>
-                        <a4j:commandButton onclick="javascript:Richfaces.hideModalPanel('mp_editar_imagenevolucion')" styleClass="btn_sec_gra" value="#{var.cancelar}"/>
+                        <a4j:commandButton onclick="#{rich:component('mp_editar_imagenevolucion')}.hide(); return false;" styleClass="btn_sec_gra" value="#{var.cancelar}"/>
 
                     </h:panelGrid>
                 </h:panelGrid>

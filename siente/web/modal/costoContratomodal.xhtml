@@ -51,12 +51,6 @@
                             </h:outputText>
                         </rich:column>
 
-                        <!-- <rich:column id="tc_stContratistaObra"  width="120px">
-                            <f:facet name="header">
-                                <h:outputText value="#{var.houtcontratis}"/>
-                            </f:facet>
-                            <h:outputText id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
-                        </rich:column>-->
 
                         <rich:column id="tc_floatporadmon"  style="width: 120px;" >
                             <f:facet name="header">
@@ -115,6 +109,6 @@
 
             </center>
         </rich:panel>
-        <rich:hotKey key="esc" onkeyup="javascript:Richfaces.hideModalPanel('panelCostoContrato')" />
+        <rich:hotKey key="esc" onkeyup="#{rich:component('panelCostoContrato')}.hide()" />
     </rich:popupPanel>
 </ui:composition>

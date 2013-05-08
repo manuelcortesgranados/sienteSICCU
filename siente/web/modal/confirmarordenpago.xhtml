@@ -33,10 +33,10 @@
                 <h:form>
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
                         <h:commandButton  action="#{Financiera$FiduFinanciera.confirmaOrden}" value="#{var.aceptar}" rendered="#{Financiera$FiduFinanciera.financieraService.guardado}"
-                                          onclick="javascript:Richfaces.hideModalPanel('panelConfirmaOrden');" />
+                                          onclick="#{rich:component('panelConfirmaOrden')}.hide(); return false;"  />
                         <h:form >
                             <a4j:commandButton id="aceptar"
-                                               value="#{var.aceptar}" oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaOrden');" rendered="#{!Financiera$FiduFinanciera.financieraService.guardado}"
+                                               value="#{var.aceptar}" oncomplete="#{rich:component('panelConfirmaOrden')}.hide(); return false;" rendered="#{!Financiera$FiduFinanciera.financieraService.guardado}"
                                                title="#{var.aceptar}" execute="@this"
                                                style="font-size:12px;"/>
                         </h:form>

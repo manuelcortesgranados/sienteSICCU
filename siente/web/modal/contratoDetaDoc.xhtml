@@ -66,6 +66,6 @@
                 </center>
             </h:form>
         </rich:panel>
-        <rich:hotKey key="esc"  onkeyup="javascript:Richfaces.hideModalPanel('panelContratoDoc')" />
+        <rich:hotKey key="esc"  onkeyup="#{rich:component('panelContratoDoc')}.hide()" />
     </rich:popupPanel>
 </ui:composition>

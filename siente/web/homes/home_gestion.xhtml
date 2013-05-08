@@ -96,10 +96,10 @@
                                         </label>
                                     </div></div></td>
                             <td><a4j:commandLink styleClass="busquedavanzada anchorLink" render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                             oncomplete="#{rich:component('panelFiltroAvanzado')}.show()"/>
+                                             oncomplete="#{rich:component('panelFiltroAvanzado')}.show(); return true;"/>
 
                                 <a4j:commandLink styleClass="filtrar anchorLink" render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                                 oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show()"/>
+                                                 oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show(); return true;"/>
 
 
                             </td>
