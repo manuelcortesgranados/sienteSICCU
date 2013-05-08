@@ -1653,7 +1653,6 @@ public class AdminSolicitudAtencion  {
      * En este método se le asigna el valor de la fila seleccionada a el objeto de solicitud maestro
  que va ser modificada, se valida si el usuario puede
      * modificar
-     *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
      * @return devuelve la regla de navegacion de crear solicitud si puede modificar, si no retorna la regla de navegación de

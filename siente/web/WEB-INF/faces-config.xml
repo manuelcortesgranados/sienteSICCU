@@ -410,7 +410,7 @@
         <from-view-id>/*</from-view-id>
         <navigation-case>
             <from-outcome>crearatencion</from-outcome>
-            <to-view-id>/AtencionHumanitaria/GenerarAtencionHumanitaria.jspx</to-view-id>
+            <to-view-id>/AtencionHumanitaria/GenerarAtencionHumanitaria.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
@@ -521,7 +521,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>homesolicitud</from-outcome>
-            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.jspx</to-view-id>
+            <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>cancelarSolicitudAtencion</from-outcome>

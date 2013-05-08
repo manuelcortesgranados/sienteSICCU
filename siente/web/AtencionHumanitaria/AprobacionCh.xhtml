@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+        <title>Atención Humanitaria</title>
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{var.generarsolicitudah}"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_atencion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_atencion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_registrar_atencion_hum.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_perfil_atencion_hum.xhtml"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form_imagenes" target="_blank">
+
+
+            <rich:collapsiblePanel id="AprobacionAsesorch" switchType="ajax">
+
+                <f:facet name="header">
+                    <h:outputText value="#{var.aprobacionfuncionarioasesor}"/>
+                </f:facet>
+                <interkont:spacer height="3"/>
+
+                <center>
+                    <h:panelGrid id="panelAprobacionFuncionario" columns="2" columnClasses="panelizquierda, panelizquierda" >
+                        <h:outputText value="#{var.estadodocumentacion}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="estadodocumentacion" value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadodoc}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadodocumentacion}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Completo"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolestadodocumentacion}"/>
+
+
+                        <h:outputLabel value="Incompleto"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolestadodocumentacion}" />
+
+                        <h:outputText value="#{var.lasolicitudesviable}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="solicitudviable" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItem itemValue="0" itemLabel="Si"/>
+                            <f:selectItem itemValue="1" itemLabel="No"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="Si"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"/>
+
+                        <h:outputLabel value="No"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"/>
+
+
+                        <h:outputText value=" #{var.estadosolicitud}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="estadosolicitudAH"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.estadoSolicitudch.oidestadosolicitud}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadosolicitud}"/>
+                            <a4j:ajax event="change" render="DatosBasicos,panelAprobacionFuncionario" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarSubestado}" execute="@this, estadosolicitudAH"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" />
+
+                        <h:outputText value="#{var.definirestadodelproceso}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="estadodelprocesoAH"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.subestadoSolicitudch.intoidsubestadosolicitud}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.subestado}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.strdescripcion}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" />
+
+                        <h:outputText value="#{var.aprobartotalidadpresupuesto}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="aprobarpresupuestoAH" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItem itemValue="0" itemLabel="Si"/>
+                            <f:selectItem itemValue="1" itemLabel="No"/>
+                        </h:selectOneMenu>
+
+                        <h:outputLabel value="Si"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"/>
+
+                        <h:outputLabel value="No"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"/>
+
+
+                        <h:outputText value="#{var.valoraprobado}:" styleClass="titulo3_filtro_busqueda"/>
+                        <rich:inputNumberSpinner minValue="0" maxValue="5000000000"
+                                                 inputSize="10" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
+                                                 rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+
+                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:convertNumber pattern="$ ###,###"/>
+                        </h:outputLabel>
+
+                        <h:outputText value="#{var.observaciones}" styleClass="titulo3_filtro_busqueda"/>
+                        <h:inputTextarea id="valoraprobadoAH" rows="3" cols="20" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservaciones}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+
+                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservaciones}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+
+                        </h:outputLabel>
+
+                        <h:outputText value="#{var.aprobadojuntadirectiva}?" styleClass="titulo3_filtro_busqueda"/>
+                        <h:selectOneMenu id="aprobadojuntaAH" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"
+                                         rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:selectItem itemValue="0" itemLabel="Si"/>
+                            <f:selectItem itemValue="1" itemLabel="No"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="Si"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"/>
+
+                        <h:outputLabel value="No"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"/>
+
+
+                        <h:outputText  value="#{var.fechajuntadirectiva}" styleClass="titulo3_filtro_busqueda"/>
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                                       value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}" inputSize="10" immediate="true">
+
+                        </rich:calendar>
+                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputLabel>
+
+
+                        <h:outputText  value="#{var.actajuntadirectiva}:" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" styleClass="titulo3_filtro_busqueda"/>
+
+                        <h:panelGrid id="panel_subirActa"  columns="6" columnClasses=",,,buttonsmall" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==11 }">
+
+                            <a4j:commandButton id="adjuntarActa" styleClass="btn_sec_gra" value="#{var.examinar}" style="font-size: 10px;"
+                                               onclick="#{rich:component('panelUploadActa')}.show(); return false;" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" >
+                            </a4j:commandButton>
+                            <h:outputText id="txtActaRuta" value="#{var.rutadocumento}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                            <h:inputText id="inputDescActa" value=" #{file.onlyName}" disabled="true" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                            <a4j:commandLink id="bt_agregarActa" styleClass="anadir anchorLink" title="#{var.agregar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                                             action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActaaLista}"
+                                             render="panelAprobacionFuncionario,panelUploadActa"/>
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.files}" var="file" style="width: 30px">
+                                <h:outputText id="otxt_nombreActa" value=" #{file.onlyName}"  rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                            </rich:dataGrid>
+
+                        </h:panelGrid>
+
+
+                        <h:panelGroup rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu >11}">
+                            <a4j:commandButton id="examinarjuntaApro" value="#{var.ver}" action="#{AtencionHumanitaria$AdminSolicitudAtencion.bt_download_documento_solicitud}"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </center>
+
+                <center>
+                    <h:panelGrid columns="2">
+                        <a4j:commandButton id="guardarAH" styleClass="btn_pri_inm" value="#{var.guardar}"
+                                           rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                                           action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"
+                                           oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"
+                                           render="layoutConfirmarGuardadoAtencion"/>
+                        <a4j:commandButton id="CancelarAH" styleClass="btn_pri_inm" value="#{var.cancelar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                                           oncomplete="#{rich:component('panelCancelarSolicitud')}.show(); return false;"/>
+                    </h:panelGrid>
+                </center>
+            </rich:collapsiblePanel>
+        </h:form>
+    </ui:define>
+</ui:composition>
