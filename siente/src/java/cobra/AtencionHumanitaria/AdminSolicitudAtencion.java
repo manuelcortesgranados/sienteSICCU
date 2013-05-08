@@ -147,11 +147,6 @@ public class AdminSolicitudAtencion  {
     private UIDataTable tablaProductos = new UIDataTable();
     /**
      * Variable para hacer binding con la tabla que muestra los datos de
-     * productos en el jspx de consulta
-     */
-    private UIDataTable tablaProductosconsulta = new UIDataTable();
-    /**
-     * Variable para hacer binding con la tabla que muestra los datos de
      * los documentos
      */
     private UIDataTable tablaDocumentos = new UIDataTable();
@@ -410,14 +405,6 @@ public class AdminSolicitudAtencion  {
 
     public void setSolicitudaborrar(Solicitudmaestro solicitudaborrar) {
         this.solicitudaborrar = solicitudaborrar;
-    }
-
-    public UIDataTable getTablaProductosconsulta() {
-        return tablaProductosconsulta;
-    }
-
-    public void setTablaProductosconsulta(UIDataTable tablaProductosconsulta) {
-        this.tablaProductosconsulta = tablaProductosconsulta;
     }
 
     public SelectItem[] getMunicipiofiltro() {
