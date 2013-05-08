@@ -302,8 +302,9 @@
                                                     <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
                                                                    value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
 
-                                                    <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                                                    <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                                    <h:outputText value="#{var.otrosactores}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                                    <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                                    <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
                                                 </center>
                                                 <h:panelGroup id="layoutEmpleoGenerados">
                                                     <center>
@@ -329,7 +330,7 @@
                                                             <h:panelGroup>
                                                                 <center>
                                                                     <h:outputText value="#{var.imp_indirec}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                                    <h:outputText value="#{var.imp_acto}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                                                    <h:outputText value="#{var.organizacionesfortalecidas}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                                                 </center>
                                                             </h:panelGroup>
                                                         </h:panelGrid>
