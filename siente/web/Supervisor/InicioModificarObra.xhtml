@@ -67,8 +67,8 @@
 
 
             <a4j:status id="statusmod"
-                        onstart="#{rich:component('panelCargando')}.show();"
-                        onstop="#{rich:component('panelCargando')}.hide()" for="arModificar"/>
+                        onstart="#{rich:component('panelCargando')}.show(); return true;"
+                        onstop="#{rich:component('panelCargando')}.hide(); return false;" for="arModificar"/>
 
         </a4j:region>
     </ui:define>

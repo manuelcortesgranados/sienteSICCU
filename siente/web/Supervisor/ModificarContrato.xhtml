@@ -343,7 +343,7 @@
                                                 <a4j:commandButton id="btnPolizas" value="#{var.editar}"
                                                                    action="#{Supervisor$ModificarContrato.seleccionareditarPoliza}" render="rpPolizas">
                                                     <a4j:ajax event="complete" 
-                                                              oncomplete="#{rich:component('mp-editar-polizas')}.show()"
+                                                              oncomplete="#{rich:component('mp-editar-polizas')}.show(); return true;"
                                                               immediate="true"/>
                                                 </a4j:commandButton>
 
@@ -369,7 +369,7 @@
 
                                         <h:inputText size="40" id="txtPoliza" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoPoliza}" />
                                         <a4j:commandButton id="bt_agregarModi" value="#{var.examinar}"
-                                                           onclick="#{rich:component('panelUploadDocumentopoliza')}.show()"
+                                                           onclick="#{rich:component('panelUploadDocumentopoliza')}.show(); return true;"
                                                            style="font-size:12px;"/>
                                     </h:panelGrid>
 
@@ -382,7 +382,7 @@
 
                                     <h:inputText size="40" id="txtOtrosi" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoOtroSi}" />
                                     <a4j:commandButton id="bt_agregarOtrosi" value="#{var.examinar}"  render="gpUploadDocAt"
-                                                       onclick="#{rich:component('panelUploadDocumentoOtrosi')}.show()"
+                                                       onclick="#{rich:component('panelUploadDocumentoOtrosi')}.show(); return true;"
                                                        style="font-size:12px;"/>
                                 </h:panelGrid>
                             </h:panelGroup>
@@ -482,7 +482,7 @@
                                                 </rich:column>
                                                 <rich:column >
                                                     <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto}" render="mp-crear-girodirecto">
-                                                        <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-crear-girodirecto')}.show()" />
+                                                        <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-crear-girodirecto')}.show(); return true;" />
                                                     </a4j:commandButton>
                                                 </rich:column>
                                             </rich:columnGroup>

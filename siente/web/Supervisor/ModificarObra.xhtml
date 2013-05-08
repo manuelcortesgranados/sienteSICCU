@@ -89,7 +89,7 @@
                                                 </h:panelGroup>
                                                 <h:panelGrid id="panel_subirActaConvenio"  columns="2">
                                                     <a4j:commandButton id="adjuntarActaConvenio" styleClass="btn_pri_inm" value="#{var.adjuntaractadeconvenio}" style="font-size: 10px;" rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}"
-                                                                       onclick="#{rich:component('panelUploadActaConvenio')}.show()" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
+                                                                       onclick="#{rich:component('panelUploadActaConvenio')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
 
                                                     <rich:panel rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}">
                                                         <h:outputText rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nohasubidoningun}"/>
@@ -122,7 +122,7 @@
                                         <h:panelGrid id="panel_subirOtroSi"  columns="2" width="80%">
                                             <a4j:commandButton id="adjuntarOtroSi" value="#{var.adjuntarotrosi}" styleClass="btn_pri_inm"   style="font-size:12px;"
                                                                immediate="true"
-                                                               onclick="#{rich:component('panelUploadOtroSi')}.show()" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
+                                                               onclick="#{rich:component('panelUploadOtroSi')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.files}" var="file" style="width:100%;">
                                                 <h:outputText id="txt_nombreArchivoOtroSi" value=" #{file.onlyName}"/>
                                             </rich:dataGrid>
@@ -159,7 +159,7 @@
                                                 <rich:column id="tc-streliminarPoliza" width="250px">
                                                     <f:facet name="header"/>
                                                     <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
-                                                                       oncomplete="#{rich:component('panelPolizaContrato')}.show()"   render="gpPolizaContratoModal"/>
+                                                                       oncomplete="#{rich:component('panelPolizaContrato')}.show(); return true;"   render="gpPolizaContratoModal"/>
                                                 </rich:column>
                                                 <f:facet name="footer">
                                                     <rich:dataScroller id="dspolizas" for="dtPolizas"/>
@@ -195,16 +195,16 @@
                                                            value="#{var.generarcronograma}" action="#{Supervisor$ModificarObra.generarCronograma}"
                                                            styleClass="btn_pri_inm"   style="font-size: 12px;"
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}">
-                                            <a4j:ajax event="complete"  onbeforesubmit="#{rich:component('mp_cronogramaMod')}.show()" render="layoutCronMod"/>
+                                            <a4j:ajax event="complete"  onbeforesubmit="#{rich:component('mp_cronogramaMod')}.show(); return true;" render="layoutCronMod"/>
                                         </a4j:commandButton>
                                         <a4j:commandButton id="boton_tipificar_modificacion" action="#{Supervisor$ModificarObra.registrarTipificacion}" value="#{var.tipificarmodificacion}"
                                                            rendered="#{!Supervisor$ModificarObra.tipificacionValida}" render="layoutAdministrar"
                                                            styleClass="btn_pri_gig"   style="font-size: 12px;">
-                                            <a4j:ajax event="oncomplete"  onbeforesubmit="#{rich:component('panelConfirmarTipificacion')}.show()" render="layoutAdministrar"/>
+                                            <a4j:ajax event="oncomplete"  onbeforesubmit="#{rich:component('panelConfirmarTipificacion')}.show(); return true;" render="layoutAdministrar"/>
                                         </a4j:commandButton>
 
                                         <a4j:commandButton id="btn_subir_diligenciado" value="#{var.subirarchivodiligenciado}" styleClass="btn_pri_col"   style="font-size:12px;"
-                                                           rendered="#{Supervisor$ModificarObra.tipificacionValida}" onclick="#{rich:component('panelUploadCronograma')}.show()" render="layoutDocCronog"/>
+                                                           rendered="#{Supervisor$ModificarObra.tipificacionValida}" onclick="#{rich:component('panelUploadCronograma')}.show(); return false;" render="layoutDocCronog"/>
                                     </h:panelGrid>
                                     <rich:panel rendered="#{Supervisor$ModificarObra.tipificacionValida}">
 
@@ -231,7 +231,7 @@
                                         <a4j:commandButton id="btn_registrar_modificacion" value="#{var.registrarmodificacion}" styleClass="btn_pri_inm"   style="font-size:12px;"
                                                            action="#{Supervisor$ModificarObra.registrarModificacion}" render="layoutConfMod"
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida and Supervisor$ModificarObra.cronovalido}" >
-                                            <a4j:ajax event="complete" render="layoutPrincipal, layoutModificar, layoutMatrix, layoutConfMod" onbeforesubmit="#{rich:component('panelConfirmarModificacion')}.show()"/>
+                                            <a4j:ajax event="complete" render="layoutPrincipal, layoutModificar, layoutMatrix, layoutConfMod" onbeforesubmit="#{rich:component('panelConfirmarModificacion')}.show();return true;"/>
                                         </a4j:commandButton>
                                     </h:panelGroup>
                                 </h:panelGrid>
