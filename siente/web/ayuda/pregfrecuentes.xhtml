@@ -1,133 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:rich="http://richfaces.org/rich">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/facelets/template_main.xhtml">
 
-    <f:view locale="#{var.rcalendarlocale}">
-        <ui:composition template="/facelets/template_main.xhtml">
-            <ui:define name="head">
-<!--
-                <script src="#{facesContext.externalContext.requestContextPath}/resources/js/accordion/jquery.min.js" type="text/javascript"/>
-                <script src="#{facesContext.externalContext.requestContextPath}/resources/js/accordion/jquery-ui.min.js" type="text/javascript"/>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                            $("#accordion").accordion();
-                     });
-                </script>
--->
-            </ui:define>
-            <ui:define name="title">
-                <h:outputText value="#{var.pregfrecuentes}"/>
-            </ui:define>
-            <ui:define name="menu">
-                <ui:include src="/facelets/menu_gestion.xhtml"/>
-            </ui:define>
-            <ui:define name="menu_lateral">
-                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            </ui:define>
-            <ui:define name="body">
-                <h:form>                    
+    <ui:define name="head">
+        <!--
+                        <script src="#{facesContext.externalContext.requestContextPath}/resources/js/accordion/jquery.min.js" type="text/javascript"/>
+                        <script src="#{facesContext.externalContext.requestContextPath}/resources/js/accordion/jquery-ui.min.js" type="text/javascript"/>
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                    $("#accordion").accordion();
+                             });
+                        </script>
+        -->
+    </ui:define>
+    
+    <ui:define name="title">
+        <h:outputText value="#{var.pregfrecuentes}"/>
+    </ui:define>
+    
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+    </ui:define>
+    
+    <ui:define name="body">
+        <h:form>                    
+            <rich:accordion  width="98%" rendered="#{var.varpreguntasiente}" >
+                <rich:accordionItem 
+                    header="Qué es SIENTE?" >
+                    Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el  seguimiento y el control sobre los  recursos y #{var.solicitudproyecto}s a través de los cuales el país se recupera.
+                </rich:accordionItem>
 
-                    <rich:accordion  width="98%" rendered="#{var.varpreguntasiente}" >
-                        <rich:accordionItem
-                            label="Qué es SIENTE?" >
-                           Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el  seguimiento y el control sobre los  recursos y #{var.solicitudproyecto}s a través de los cuales  el país se recupera.
-                        </rich:accordionItem>
-                         <rich:accordionItem 
-                            label="Cómo funciona SIENTE?">
-                           Para funcionar SIENTE se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear los #{var.solicitudproyecto}s que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los distintos #{var.solicitudproyecto}s que se ejecutan.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cualquier persona puede participar en SIENTE?">
-                           SI. SIENTE además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a los #{var.solicitudproyecto}s en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de los #{var.solicitudproyecto}s, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre los #{var.solicitudproyecto}s. Con Siente los ciudadanos también podrán denunciar o  subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
-                        </rich:accordionItem>
-                         <rich:accordionItem
-                            label="Cómo se cambia un #{var.solicitudproyecto} en ejecución al estado en ejecución incompleto?">
-                           En el menú administrar #{var.solicitudproyecto} hay un botón llamado cambiar estado del #{var.solicitudproyecto}, allí aparecerá una advertencia indicando si se pasa el #{var.solicitudproyecto} a “EN EJECUCION INCOMPLETA” se borrará todos los avances ingresados a este.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se crea y asocia un contrato de interventoria?">
-                           El contrato de interventoria se crea ingresando por el menú: GESTIONAR—CONTRATO CONSULTORIA –NUEVO. Se deben diligenciar todos los campos obligatorios (marcados con *) y se finaliza haciendo click en el boton guardar, ante lo cual el sistema validará si la información esta diligenciada completamente y de ser así informará que el contrato ha sido guardado. Para la asociación de este contrato al #{var.solicitudproyecto}, este debe estar en el estado en ejecución y se debe seleccionar el boton ¨asociar contratos¨ buscar el contrato correspondiente e ingresar el valor de dicho contrato que se va a asociar al #{var.solicitudproyecto}.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se crea un contrato de obra?">
-                           El contrato se crea ingresando por el menú: gestionar—contrato—nuevo, allí se deben diligenciar todos los campos obligatorios (dichos campos están precedidos por un *) y se finaliza haciendo click en el boton guardar, ante lo cual el sistema validará si la información esta diligenciada completamente y de ser así informará que el contrato ha sido guardado.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se asocia un contrato de obra al #{var.solicitudproyecto}?">
-                           El contrato creado se asocia teniendo muy en cuenta primero la entidad a la que pertenece el #{var.solicitudproyecto} y crearlo en la misma entidad, después ingresa al #{var.solicitudproyecto} y en el menú proyecto hay un botón llamado contrato allí, ahí otro botón llamado asociar contrato y asocia el valor del #{var.solicitudproyecto}.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se crea un contrato asociado a un convenio?">
-                           Ingresamos a GESTIONAR—CONTRATO--NUEVO en la opción “El Contrato pertenece a un Contrato o convenio superio?” respondemos “SI”,  ante lo cual el sistema solicitará “Seleccione el Convenio superior al que pertenece el Convenio:”, y se debe seleccionar el convenio correspondiente.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se diligencia el cronograma o programación del #{var.solicitudproyecto}?">
-                           Una vez se descarga el formato de cronograma generado por Siente, se deben diligenciar las actividades a desarrollar en el #{var.textoobra2} con su correspondiente unidad de medida, cantidad y valor unitario, el valor final se calcula automáticamente mediante una formula y esta no debe ser modificada. Posterior a esto se deben diligenciar en los periodos generados a la derecha de la hoja de calculo, las cantidades de actividad programadas para ejecutar en cada uno de los periodos (siempre la sumatoria de la cantidad programada en los periodos debe ser igual a la cantidad total estipulada para la actividad). Recomendaciones generales:
-                        <br/>- Nunca adicionar columnas o filas al formato.
-                        <br/>- Nunca incorporar informacion adicional a la que el formato solicita.
-                        <br/>- Nunca hacer uso de las celdas que se encuentran alrededor o por fuera de la informacion solicitada.
-                        <br/>- No se debe modificar ninguna de las formulas que se generan por defecto al generar el archivo.
-                        <br/>- En el diligenciamiento de cantidades o valores no se deben usar formulas, solo se deben incluir valores numericos.
-                        <br/>- El archivo se puede guardar con el nombre que usted considere pertinente pero es fundamental que  el formato sea excel 97-2003 (.xls), igual como se genera desde el aplicativo.
-                        <br/>- Nunca adicionar columnas o filas al formato.
-                        <br/>- Nunca incorporar informacion adicional a la que el formato solicita.
-                        <br/>- Nunca hacer uso de las celdas que se encuentran alrededor o por fuera de la informacion solicitada.
-                        <br/>- No se debe modificar ninguna de las formulas que se generan por defecto al generar el archivo.
-                        <br/>- En el diligenciamiento de cantidades o valores no se deben usar formulas, solo se deben incluir valores numericos.
-                        <br/>- El archivo se puede guardar con el nombre que usted considere pertinente pero es fundamental que  el formato sea excel 97-2003 (.xls), igual como se genera desde el aplicativo.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="AIU (Administración, Imprevistos y Utilidad)">
-                           El sistema permite que el AIU de #{var.textoobra}s sea calculado de dos formas: 1) Cuando se esta diligenciando el cronograma incluir los valores del AIU dentro de los valores unitarios de las actividades. En este caso una vez se carga el cronograma en el sistema se debe responder a la pregunta “Las actividades del cronograma incluyen el AIU?”: SI; 2) Cuandoel valor del AIU no se ha incluido en el valor unitario de las actividades, una vez cargado el formato en el sistema se deben diligenciar los porcentajes correspondientes y responder a la pregunta: “Las actividades del cronograma incluyen el AIU?” NO. Sea cual sea la opción que haya elegido deberá cerciorarse que el valor que muestra el sistema en el campo ¨costo total¨ corresponda al valor #{var.textoobra3}.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se consultan o se suben documentos adicionales #{var.textoobra4}?">
-                           En el menú administrar #{var.solicitudproyecto} hay un botón llamado ¨documentos¨ al ingresar a este tenemos la opción de visualizar un listado de los documentos que posee actualmente cargado #{var.textoobra2} o la de adicionar cualquier documento adicional que se requiera cargar, simplemente debe ingresarse una breve descripción del mismo, seleccionar uno de los tipos de documentos disponibles, seleccionar la fecha del documento y cargar el archivo.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se elimina un reporte de avance?">
-                           En el menú administrar #{var.solicitudproyecto} hay un botón llamado eliminar último avance, allí se puede hacer esta acción.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cúal es la diferencia entre contrato y #{var.solicitudproyecto} en Siente?">
-                           En siente existe una diferenciación entre el contrato de obra y #{var.textoobra2} como tal, esto se hace para permitir que un solo contrato pueda incluir multiples #{var.solicitudproyecto}s. El contrato se crea diligenciando la información contractual, #{var.textoobra2} incluye además otro tipo de información como fotografías, georeferenciación y cronograma #{var.texto3} entre otros. Los contratos y #{var.textoobra}s se diligencian de forma separada y posteriormente se asocian. Una vez asociados, el seguimiento de avance se realizará sobre el ¨#{var.solicitudproyecto}¨.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se consultan o se suben imágenes adicionales #{var.textoobra4}?">
-                           En el menú administrar #{var.solicitudproyecto} hay un botón llamado ¨imagenes¨ al ingresar a este tenemos la opción de visualizar un listado de las imagenes que posee actualmente cargadas #{var.textoobra2}o o la de adicionar cualquier imagen adicional que se requiera cargar, simplemente debe ingresarse una breve descripción de la misma, seleccionar uno de los tipos de imagen disponible, seleccionar la fecha de la imagen y cargar el archivo.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se reportan avances #{var.textoobra4}?">
-                           Para reportar los diferentes avances #{var.textoobra3} se debe ingresar por el botón llamado “reportar avance”, allí se debe escoger el periodo que desea alimentar, inmediatamente despues se activa el boton ¨diligenciar actividades¨ se debe ingresar y diligenciar la cantidad de actividad ejecutada para cada una de ellas (las actividades corresponden a las subidas en el cronograma), posteriormente se diligencian los logros y/o dificultades, se da click en el boton aceptar y luego se añade una imagenrepresentativa para el momento #{var.textoobra3}, se sube un documento que soporte las cantidades reportadas y si se desea subir un vídeo se puede hacer de forma opcional.
-                        </rich:accordionItem>
-                        <rich:accordionItem
-                            label="Cómo se pide una validación de información?">
-                           En el menú administrar #{var.solicitudproyecto} hay un botón llamado “Solicitar validar información” allí hay dos botones uno es “Solicitar revisión de reporte de avance de Obra” al darle a esta opción se le enviara un correo al interventor y al Funcionario de Colombia Humanitaria encargado de validar dicha información. Al hacer uso de esta opción se debe estar seguro de cumplir con todos los requisitos que exige Colombia Humanitaria a traves de sus diferentes circulares.
-                        </rich:accordionItem>
-                    </rich:accordion>
+                <rich:accordionItem 
+                    header="Cómo funciona SIENTE?">
+                    Para funcionar SIENTE se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear los #{var.solicitudproyecto}s que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los distintos #{var.solicitudproyecto}s que se ejecutan.
+                </rich:accordionItem>
 
-                    <rich:accordion  width="98%" rendered="#{var.varpreguntacobra}"  >
-                         <rich:accordionItem
-                            label="Qué es COBRA?" >
-                           Es una solución WEB 2.0 Interactiva y Visual, cuyo objetivo es facilitar y potenciar la preparación, programación, contratación, seguimiento y control en línea y tiempo real de todos #{var.textoobra}s de obra civil que se ejecutan en un territorio.
-                        </rich:accordionItem>
-                         <rich:accordionItem
-                             label="Cómo funciona COBRA?" >
-                             Para funcionar COBRA se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear #{var.textoobra} que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los #{var.textoobra5}s que se ejecutan.
-                         </rich:accordionItem>
-                         <rich:accordionItem
-                             label="Cualquier persona puede participar en COBRA?" >
-                             SI. COBRA además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a #{var.textoobra} en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de #{var.textoobra}, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre #{var.textoobra}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
-                         </rich:accordionItem>
-                             
-                    </rich:accordion>
+                <rich:accordionItem
+                    header="Cualquier persona puede participar en SIENTE?">
+                    SÍ. SIENTE además de ser una herramienta de planeación y control, está pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a los #{var.solicitudproyecto}s en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de los #{var.solicitudproyecto}s, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre los #{var.solicitudproyecto}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
+                </rich:accordionItem>
 
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </f:view>
-</html>
+                <rich:accordionItem
+                    header="Cómo se cambia un #{var.solicitudproyecto} en ejecución al estado en ejecución incompleto?">
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado cambiar estado del #{var.solicitudproyecto}, allí aparecerá una advertencia indicando si se pasa el #{var.solicitudproyecto} a “EN EJECUCIÓN INCOMPLETA” se borrará todos los avances ingresados a este.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se crea y asocia un contrato de interventoria?">
+                    El contrato de interventoría se crea ingresando por el menú: GESTIONAR—CONTRATO CONSULTORIA –NUEVO. Se deben diligenciar todos los campos obligatorios (marcados con *) y se finaliza haciendo click en el botón guardar, ante lo cual el sistema validará si la información está diligenciada completamente y de ser así informará que el contrato ha sido guardado. Para la asociación de este contrato al #{var.solicitudproyecto}, este debe estar en el estado en ejecución y se debe seleccionar el botón ¨asociar contratos¨ buscar el contrato correspondiente e ingresar el valor de dicho contrato que se va a asociar al #{var.solicitudproyecto}.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se crea un contrato de obra?">
+                    El contrato se crea ingresando por el menú: gestionar—contrato—nuevo, allí se deben diligenciar todos los campos obligatorios (dichos campos están precedidos por un *) y se finaliza haciendo click en el botón guardar, ante lo cual el sistema validará si la información está diligenciada completamente y de ser así informará que el contrato ha sido guardado.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se asocia un contrato de obra al #{var.solicitudproyecto}?">
+                    El contrato creado se asocia teniendo muy en cuenta primero la entidad a la que pertenece el #{var.solicitudproyecto} y crearlo en la misma entidad, después ingresa al #{var.solicitudproyecto} y en el menú proyecto hay un botón llamado contrato allí, ahí otro botón llamado asociar contrato y asocia el valor del #{var.solicitudproyecto}.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se crea un contrato asociado a un convenio?">
+                    Ingresamos a GESTIONAR—CONTRATO—NUEVO en la opción “El Contrato pertenece a un Contrato o convenio superio?” respondemos “SÍ”,  ante lo cual el sistema solicitará “Seleccione el Convenio superior al que pertenece el Convenio:”, y se debe seleccionar el convenio correspondiente.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se diligencia el cronograma o programación del #{var.solicitudproyecto}?">
+                    Una vez se descarga el formato de cronograma generado por Siente, se deben diligenciar las actividades a desarrollar en el #{var.textoobra2} con su correspondiente unidad de medida, cantidad y valor unitario, el valor final se calcula automáticamente mediante una formula y esta no debe ser modificada. Posterior a esto se deben diligenciar en los periodos generados a la derecha de la hoja de calculo, las cantidades de actividad programadas para ejecutar en cada uno de los periodos (siempre la sumatoria de la cantidad programada en los periodos debe ser igual a la cantidad total estipulada para la actividad). Recomendaciones generales:
+                    <br/>- Nunca adicionar columnas o filas al formato.
+                    <br/>- Nunca incorporar informacion adicional a la que el formato solicita.
+                    <br/>- Nunca hacer uso de las celdas que se encuentran alrededor o por fuera de la información solicitada.
+                    <br/>- No se debe modificar ninguna de las fórmulas que se generan por defecto al generar el archivo.
+                    <br/>- En el diligenciamiento de cantidades o valores no se deben usar formulas, solo se deben incluir valores numéricos.
+                    <br/>- El archivo se puede guardar con el nombre que usted considere pertinente pero es fundamental que el formato sea excel 97-2003 (.xls), igual como se genera desde el aplicativo.
+                    <br/>- Nunca adicionar columnas o filas al formato.
+                    <br/>- Nunca incorporar información adicional a la que el formato solicita.
+                    <br/>- Nunca hacer uso de las celdas que se encuentran alrededor o por fuera de la información solicitada.
+                    <br/>- No se debe modificar ninguna de las fórmulas que se generan por defecto al generar el archivo.
+                    <br/>- En el diligenciamiento de cantidades o valores no se deben usar fórmulas, solo se deben incluir valores numéricos.
+                    <br/>- El archivo se puede guardar con el nombre que usted considere pertinente pero es fundamental que el formato sea excel 97-2003 (.xls), igual como se genera desde el aplicativo.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="AIU (Administración, Imprevistos y Utilidad)">
+                    El sistema permite que el AIU de #{var.textoobra}s sea calculado de dos formas: 1) Cuando se esta diligenciando el cronograma incluir los valores del AIU dentro de los valores unitarios de las actividades. En este caso una vez se carga el cronograma en el sistema se debe responder a la pregunta “¿Las actividades del cronograma incluyen el AIU?”: SÍ; 2) Cuando el valor del AIU no se ha incluido en el valor unitario de las actividades, una vez cargado el formato en el sistema se deben diligenciar los porcentajes correspondientes y responder a la pregunta: “¿Las actividades del cronograma incluyen el AIU?” NO. Sea cual sea la opción que haya elegido deberá cerciorarse que el valor que muestra el sistema en el campo ¨costo total¨ corresponda al valor #{var.textoobra3}.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se consultan o se suben documentos adicionales #{var.textoobra4}?">
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado ¨documentos¨ al ingresar a este tenemos la opción de visualizar un listado de los documentos que posee actualmente cargado #{var.textoobra2} o la de adicionar cualquier documento adicional que se requiera cargar, simplemente debe ingresarse una breve descripción del mismo, seleccionar uno de los tipos de documentos disponibles, seleccionar la fecha del documento y cargar el archivo.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se elimina un reporte de avance?">
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado eliminar último avance, allí se puede hacer esta acción.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cuál es la diferencia entre contrato y #{var.solicitudproyecto} en Siente?">
+                    En siente existe una diferenciación entre el contrato de obra y #{var.textoobra2} como tal, esto se hace para permitir que un solo contrato pueda incluir multiples #{var.solicitudproyecto}s. El contrato se crea diligenciando la información contractual, #{var.textoobra2} incluye además otro tipo de información como fotografías, georeferenciación y cronograma #{var.texto3} entre otros. Los contratos y #{var.textoobra}s se diligencian de forma separada y posteriormente se asocian. Una vez asociados, el seguimiento de avance se realizará sobre el ¨#{var.solicitudproyecto}¨.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se consultan o se suben imágenes adicionales #{var.textoobra4}?">
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado ¨imágenes¨ al ingresar a este tenemos la opción de visualizar un listado de las imágenes que posee actualmente cargadas #{var.textoobra2}o o la de adicionar cualquier imagen adicional que se requiera cargar, simplemente debe ingresarse una breve descripción de la misma, seleccionar uno de los tipos de imagen disponible, seleccionar la fecha de la imagen y cargar el archivo.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se reportan avances #{var.textoobra4}?">
+                    Para reportar los diferentes avances #{var.textoobra3} se debe ingresar por el botón llamado “reportar avance”, allí se debe escoger el periodo que desea alimentar, inmediatamente después se activa el botón ¨diligenciar actividades¨ se debe ingresar y diligenciar la cantidad de actividad ejecutada para cada una de ellas (las actividades corresponden a las subidas en el cronograma), posteriormente se diligencian los logros y/o dificultades, se da click en el botón aceptar y luego se añade una imagenrepresentativa para el momento #{var.textoobra3}, se sube un documento que soporte las cantidades reportadas y si se desea subir un video se puede hacer de forma opcional.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo se pide una validación de información?">
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado “Solicitar validar información” allí hay dos botones uno es “Solicitar revisión de reporte de avance de Obra” al darle a esta opción se le enviará un correo al interventor y al Funcionario de Colombia Humanitaria encargado de validar dicha información. Al hacer uso de esta opción se debe estar seguro de cumplir con todos los requisitos que exige Colombia Humanitaria a través de sus diferentes circulares.
+                </rich:accordionItem>
+            </rich:accordion>
+
+            <rich:accordion  width="98%" rendered="#{var.varpreguntacobra}"  >
+                <rich:accordionItem
+                    header="Qué es COBRA?" >
+                    Es una solución WEB 2.0 Interactiva y Visual, cuyo objetivo es facilitar y potenciar la preparación, programación, contratación, seguimiento y control en línea y tiempo real de todos #{var.textoobra}s de obra civil que se ejecutan en un territorio.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cómo funciona COBRA?" >
+                    Para funcionar COBRA se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear #{var.textoobra} que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los #{var.textoobra5}s que se ejecutan.
+                </rich:accordionItem>
+
+                <rich:accordionItem
+                    header="Cualquier persona puede participar en COBRA?" >
+                    SÍ. COBRA además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a #{var.textoobra} en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de #{var.textoobra}, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre #{var.textoobra}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
+                </rich:accordionItem>
+            </rich:accordion>
+        </h:form>
+    </ui:define>
+</ui:composition>
