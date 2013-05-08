@@ -137,7 +137,8 @@
                         <rich:column>
                             <a4j:commandLink  title="#{var.ver} Proyecto" style="font-size:11px;"
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProyectosxSolicitud(filaSeleccionada)}"
-                                              oncomplete="#{rich:component('modaltablaproyectoah')}.show();" execute="@this">
+                                              oncomplete="#{rich:component('modaltablaproyectoah')}.show();" execute="@this"
+                                              render="crear, tablaproyectosah">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
