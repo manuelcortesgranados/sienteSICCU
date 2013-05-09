@@ -27,7 +27,7 @@
         <h:form id="form_datos_basico" target="_blank">
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosBasicos" header="1. #{var.datossol}" style="width:100%;" >
+            <rich:panel id="DatosBasicos" header="1. #{var.datossol}" style="width:100%;" >
                 <center>
                     <h:panelGroup>
 
@@ -85,11 +85,11 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
 
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosGenerales" header="2. #{var.datosgenerales}" style="width:100%;">
+            <rich:panel id="DatosGenerales" header="2. #{var.datosgenerales}" style="width:100%;">
                 <center>
                     <h:outputText value="#{var.textdatosgeneralesAtencion}"/>
                 </center>
@@ -162,10 +162,10 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" style="width:100%;" header="3. #{var.distribucionayuda}">
+            <rich:panel style="width:100%;" header="3. #{var.distribucionayuda}">
                 <center>
                     <h:panelGroup id="gpDatosProducto">
                         <h:panelGrid  id="panelproductos" columns="2" cellspacing="15">
@@ -301,7 +301,7 @@
 
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <center>
                 <h:panelGrid columns="2" cellspacing="10">
 
