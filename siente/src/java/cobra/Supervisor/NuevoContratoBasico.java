@@ -3676,16 +3676,14 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String detalleContrato() {
-
-        //boolconthijo = false;
+    public String detalleContrato(int filaSeleccionada) {
+         NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+         Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
+          //boolconthijo = false;
         ///Revisar este método se totea pero no siempre
-        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
-        cargarContrato(contratotabla);
+         cargarContrato(contratotabla);
 //        setContrato(contratotabla);
 //        finentrega = contratotabla.getDatefechafin().toString();
-
-
 
         return "consultarContrato";
     }
@@ -3741,9 +3739,10 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String detalleContratoPadre() {
+    public String detalleContratoPadre(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
         //limpiarContrato();
-        Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         //contratotabla.getContrato().setFormapago(new Formapago());
         if (contratotabla.getContrato() != null) {
             //setContrato(contratotabla.getContrato());
@@ -4351,7 +4350,7 @@ public class NuevoContratoBasico   {
      * @return
      */
     public String buscarContrato() {
-
+        
         try {
             // aplicafiltrocontrato = false;
             listacontratos.clear();
