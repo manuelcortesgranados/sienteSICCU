@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.verplanificacion}" styleClass="txt_header" />
+                <interkont:spacer width="30"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true"/>
+                    <rich:componentControl attachTo="esconder-mp-listado-planificacion-pagos" event="onclick"  for="mp-listado-planificacion-pagos" operation="hide"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel id="gpListadoPlanificacion">
+
+            <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+
+                <h:outputLabel value="#{var.formadepago}:"/>
+                <interkont:spacer width="20"/>
+                <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+
+                <h:outputLabel value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                <h:outputLabel styleClass="txt_outtext" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+
+                <h:outputLabel value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                    <f:convertNumber pattern="$###,###"/>
+                </h:outputText>
+
+                <h:outputLabel value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                    <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                </h:outputText>
+
+            </h:panelGrid>
+
+            <h:form>
+                <h:panelGrid style="width:100%;" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                    <interkont:spacer height="5" style="width:100%;"/>
+                    <rich:dataTable id="tablaPlanificacion"
+                                    rows="5"
+                                    var ="planificacion"
+                                    binding="#{Supervisor$Contrato.tablaplanificacionpagos}"
+                                    onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                    sortMode="single"
+                                    value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
+                                    render="panelfooterplan"
+                                    width="600px"
+                                    style="text-align:center;">
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column width="150px" breakBefore="true" colspan="3">
+                                    <h:outputText value="#{var.numero} de Actas Parciales"/>
+                                </rich:column>
+                                <rich:column width="150px" breakBefore="true">
+                                    <h:outputText value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                </rich:column>
+                                <rich:column width="150px">
+                                    <h:outputText value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                </rich:column>
+                                <rich:column width="150px">
+                                    <h:outputText value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:columnGroup>
+                            <rich:column  width="150px" breakBefore="true">
+                                <h:outputText value="% #{planificacion.numvlrporcentage}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="#{planificacion.numvlrpago}">
+                                    <f:convertNumber pattern="$###,###"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column >
+                                <h:outputText value="#{planificacion.datefechapago}">
+                                    <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                </h:outputText>
+                            </rich:column>
+                        </rich:columnGroup>
+
+                    </rich:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </rich:panel>
+    </rich:popupPanel>
+
+</f:view>

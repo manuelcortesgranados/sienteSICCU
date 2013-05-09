@@ -1,37 +1,41 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../facelets/template_proyecto.xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_proyecto.xhtml">    
+                >
 
     <ui:define name="head">
         <title>Nuevo #{var.proyecto} - Supervisor</title>
-        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
-        <h:outputScript library="js" name="/resources/js/validarletra.js"/>
+        <h:outputScript  name="script_supervisor.js"/>
+        <h:outputScript  name="validarletra.js" library="js"/>
+   </ui:define>
+    
+     <ui:define name="title">
+     <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.datosbasicos}"/>
+    </ui:define>
 
-    </ui:define>
-    <ui:define name="title">
-        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.datosbasicos}"/>
-    </ui:define>
     <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    <ui:include src="./../facelets/menu_gestion.xhtml"/>
     </ui:define>
+   
 
     <ui:define name="body">
-
+     
         <h:form id="form_datos_basicos"  >
             <a4j:jsFunction oncomplete="#{rich:component(modalAvisoSupervisor)}.hide();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
                             id="editdatosbasicos" name="showModal" action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction> 
             <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
                     <td rowspan="6" valign="top" style="height: 400px; width: 20%">
-                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
+                        <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
+                        <ui:include src="./../facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
                     <td valign="top" height="35" style="width: 80%">
                         <rich:panel id="mp-proyectosPadres">
@@ -59,14 +63,14 @@
                                     </h:outputLabel>
 
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
-                                        <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="changed" render="layoutPeriodo" />
+                                        <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
                                     </rich:calendar>
 
                                     <h:outputLabel id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
                                     <h:panelGroup id="layoutFechaFin" >
                                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
-                                            <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="changed" render="layoutPeriodo"/>
+                                            <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
                                         </rich:calendar>
                                     </h:panelGroup>
                                     <h:outputLabel  value="#{var.periodomedida}"/>
@@ -89,14 +93,13 @@
 
                                     <h:outputLabel id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
                                     <h:panelGroup id="layoutenco">
-                                        <rich:select  style="width: 400px;" id="cmbEntidadContratantec" 
-                                                       defaultLabel="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
-                                                       disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
+                                        <h:selectOneMenu  style="width: 400px;" id="cmbEntidadContratantec" 
+                                                          label="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
+                                                          disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.terceroOption}" />
-                                            <a4j:ajax event="eventChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" >
-                                                <a4j:ajax event="complete" render="gpentidadministerios" />
-                                            </a4j:ajax>
-                                        </rich:select>
+                                            <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" render="gpentidadministerios">
+                                             </a4j:ajax>
+                                        </h:selectOneMenu>
                                     </h:panelGroup>
 
                                     <h:outputLabel id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
@@ -120,10 +123,10 @@
                                         <h:inputText  id="txtruta" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.ruta.strcodigotramo} #{Supervisor$IngresarNuevaObra.obranueva.ruta.strnombretramo}" >
                                         </h:inputText>
                                         <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  
-                                                           render="mp-listado-rutas,tabla-listado-ruta" immediate="true"
-                                                           oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')">
-                                            <a4j:ajax event="complete" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')" render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"/>
-                                        </a4j:commandButton>
+                                                           render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"
+                                                           oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')"                                                           
+                                                           >
+                                         </a4j:commandButton>
                                         <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
                                         </a4j:commandButton>
                                     </h:panelGroup>
@@ -189,7 +192,7 @@
                                     </h:outputLabel>
                                     <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
                                                  size="20"  maxlength="20"
-                                                 onkeypress="return validar(event)">
+                                                 onkeypress="return validar(event);">
                                         <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
 
                                     </h:inputText>
@@ -211,7 +214,7 @@
                                     </h:outputLabel>
                                     <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
                                                  size="20"  maxlength="20"
-                                                 onkeypress="return validar(event)" >
+                                                 onkeypress="return validar(event);" >
                                         <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
                                     </h:inputText>
 
@@ -219,7 +222,7 @@
                                     </h:outputLabel>
                                     <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalprogramejec}"
                                                  size="20"  maxlength="20"
-                                                 onkeypress="return validar(event)" >
+                                                 onkeypress="return validar(event);" >
                                         <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
                                     </h:inputText>
                                 </h:panelGrid>
@@ -271,8 +274,6 @@
                 </tr>
             </table>
         </h:form>
-        <ui:include src="/modal/modallistadosedes.xhtml"/>
-        <ui:include src="/modal/listadoRuta.xhtml"/>
     </ui:define>
-</ui:composition>
 
+</ui:composition>

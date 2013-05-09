@@ -71,7 +71,7 @@
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarActadePrecios}"
-                                                   value="#{var.aceptar}" onclick="#{rich:component('modalActaPrecios')}.hide());"
+                                                   value="#{var.aceptar}" onclick="javascript:Richfaces.hideModalPanel('modalActaPrecios');"
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}"
                                                    render="layoutActasDetalle,validarguardar"
                                                    style="font-size: 12px;"/>

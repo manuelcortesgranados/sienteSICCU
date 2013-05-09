@@ -44,13 +44,13 @@
                                 <div>
                                     <a4j:commandLink     action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"
                                                          render="gpDetaObraModal">
-                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show()"  immediate="true"/>
+                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show(); return true;"  immediate="true"/>
                                         <h:graphicImage url="#{var.ipserver}#{var.versioncobra}#{imagen.strubicacion}" />
                                     </a4j:commandLink>
 
                                     <a4j:commandLink    value="#{imagen.obra.strnombrecrot}" action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"                                               
                                                         render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal">
-                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show()"  immediate="true"/>
+                                        <a4j:ajax event="complete" render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal" oncomplete="#{rich:component('modalDetalleObra')}.show(); return true;"  immediate="true"/>
                                     </a4j:commandLink>
 
                                 </div>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition   
+<ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -10,50 +10,46 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-    <rich:popupPanel id="modalDocumento"  autosized="true" headerClass="rich-panel-header">
-        <f:facet name="header" >
-            <h:panelGroup >
-                <h:outputText value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
-            </h:panelGroup>
-        </f:facet>
-        <f:facet name="controls">
-            <h:form>
-                <h:panelGroup>
-                    <a4j:commandLink id="esconder-modalDocumento" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDocumento')}.hide(); return false;"/>
-                    
-                </h:panelGroup>
-            </h:form>
-        </f:facet>
-        <center>
-            <h:form target="_blank">
-                <rich:panel style="overflow-y:scroll;height:350px">
-                    <rich:dataTable id="tablaDocsAlim" sortMode="single" style="text-align:left; width: 80%" value="#{Supervisor$DetalleObra.listaDocsAlimentacion}"
-                                    var="currentRow"   binding="#{Supervisor$DetalleObra.tablaDocsAlimentacion}">
-                        <rich:column id="tc_strnombre" style="width: 120px;" >
-                            <f:facet name="header">
-                                <h:outputText value="#{var.houtnomdocu} "/>
-                            </f:facet>
-                            <h:outputText id="st_strnombre" value="#{currentRow.strnombre}"/>
-                        </rich:column>
-                        <rich:column id="tc_fktipodoc" style="width: 120px;" >
-                            <f:facet name="header">
-                                <h:outputText value="#{var.tipo}"/>
-                            </f:facet>
-                            <h:outputText id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
-                        </rich:column>
 
-                        <rich:column id="tc_verAli" style="text-align:center; width: 50px;" >
-                            <f:facet name="header">
-                                <h:outputText value="#{var.Ver}"/>
-                            </f:facet>
-                            <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action}" id="bt_downloadAli">
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                            </h:commandLink>
-                        </rich:column>
-                    </rich:dataTable>
-                </rich:panel>
-            </h:form>
-        </center>
+    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700px" style="padding:0px; "
+                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
+        <f:facet name="header" >           
+            <h:panelGroup >
+                <h:outputText  value="Ciudadano"/>
+            </h:panelGroup>
+            <h:panelGroup style="width:100%">
+                <h:panelGrid columns="2">
+                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
+                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
+                </h:panelGrid>
+            </h:panelGroup>
+        </f:facet>        
+        <h:form>
+            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+                <center>                    
+                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
+
+                        <h:panelGroup>
+                            <center>
+                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
+                            </center>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <interkont:spacer width="120"/>
+
+
+                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
+                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
+                            </a4j:commandButton>
+
+                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
+                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
+
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </center>
+            </rich:panel>
+        </h:form>
     </rich:popupPanel>
 </ui:composition>

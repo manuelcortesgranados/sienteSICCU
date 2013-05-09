@@ -33,12 +33,12 @@
 
 
             <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
-                <h:commandLink  styleClass="ubiproyecto anchorLink"   action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
-                    <a4j:ajax event="oncomplete" execute="@this" render="pgubicolo"/>
-                </h:commandLink>
-                <h:commandLink styleClass="text" value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
-                    <a4j:ajax event="oncomplete" execute="@this" render="pgubicolo"/>
-                </h:commandLink>
+                <a4j:commandLink  styleClass="ubiproyecto anchorLink"   action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                    <a4j:ajax event="complete" execute="@this" render="pgubicolo"/>
+                </a4j:commandLink>
+                <a4j:commandLink styleClass="text" value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                    <a4j:ajax event="complete" execute="@this" render="pgubicolo"/>
+                </a4j:commandLink>
             </h:panelGrid>
             <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
                 <a4j:commandLink styleClass="gencrono anchorLink"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>

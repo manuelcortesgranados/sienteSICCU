@@ -48,6 +48,7 @@
                 </script>
             </ui:define>
             <ui:define name="title">
+                <!--<h:outputText value="Mapa" rendered="#{SessionBeanCobra.cobraService.ciu}"/>-->
                 <h:panelGroup id="gpPaginacion" >
                     <h:outputText value="#{var.obrasvigentes} " rendered="#{HomeGestion.filtro.intestadoobra==1}"/>
                     <h:outputText value="#{var.obraspropuestas} " rendered="#{HomeGestion.filtro.intestadoobra==0}"/>
@@ -96,10 +97,10 @@
                                         </label>
                                     </div></div></td>
                             <td><a4j:commandLink styleClass="busquedavanzada anchorLink" render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                             oncomplete="#{rich:component('panelFiltroAvanzado')}.show()"/>
+                                             oncomplete="javascript:Richfaces.showModalPanel('panelFiltroAvanzado');"/>
 
                                 <a4j:commandLink styleClass="filtrar anchorLink" render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                                 oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show()"/>
+                                                 oncomplete="javascript:Richfaces.showModalPanel('panelFiltroAvanzadoCiud');"/>
 
 
                             </td>

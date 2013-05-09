@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition  
+<ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -11,101 +11,45 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <h:panelGroup id="panelContrato" style="padding: 0px;">
-        <center>
+    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"   style="padding:0px;width:700px; "
+                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
+        <f:facet name="header" >           
+            <h:panelGroup >
+                <h:outputText  value="Ciudadano"/>
+            </h:panelGroup>
+            <h:panelGroup style="width:100%">
+                <h:panelGrid columns="2">
+                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
+                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
+                </h:panelGrid>
+            </h:panelGroup>
+        </f:facet>        
+        <h:form>
+            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+                <center>                    
+                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
 
-            <h:panelGrid  style="width:100%;" >
-                <f:facet name="header"><h:outputLabel value="#{var.contrato}"></h:outputLabel></f:facet>
+                        <h:panelGroup>
+                            <center>
+                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
+                            </center>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <interkont:spacer width="120"/>
 
-                <rich:dataTable id="tablacontrato" sortMode="single" style="text-align:left; width:100%;" value="#{Supervisor$AdministrarObraNew.listaContrato}"
-                                var="_row" binding="#{Supervisor$AdministrarObraNew.tablaContrato}">
 
+                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
+                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
+                            </a4j:commandButton>
 
-                    <rich:column id="tc_strnrocontrato" style="width: 120px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.houtnrocontrato} "/>
-                        </f:facet>
-                        <h:outputText id="st_strnrocontrato" value="#{_row.contrato.strnumcontrato}"/>
-                    </rich:column>
+                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
+                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano');"/>
 
-                    <rich:column  style="width: 120px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.objetocontrato} "/>
-                        </f:facet>
-                        <h:inputTextarea  value="#{_row.contrato.textobjeto}" readonly="true" cols="35" rows="3" />
-                    </rich:column>
-
-                    <rich:column id="tc_strnomcontratista" style="width: 120px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.houtcontratis}"/>
-                        </f:facet>
-                        <h:outputText id="st_strnomcontratista" value="#{_row.contrato.contratista.strnombre} #{_row.contrato.contratista.strapellido1}"/>
-                    </rich:column>
-
-                    <rich:column id="tc_fechainic" style="width: 80px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.fechadeinicio}"/>
-                        </f:facet>
-                        <h:outputText  value="#{_row.contrato.datefechaini}"/>
-                    </rich:column>
-
-                    <rich:column id="tc_fechafina" style="width: 80px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.fechadefinalizacion}"/>
-                        </f:facet>
-                        <h:outputText value="#{_row.contrato.datefechafin}"/>
-                    </rich:column>
-
-                    <rich:column id="tc_duracion" style="width: 80px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.intduracion}"/>
-                        </f:facet>
-                        <h:outputText value="#{_row.contrato.intduraciondias} Días"/>
-                    </rich:column>
-
-                    <rich:column id="tc_valor" style="width: 120px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.vlrcontra}"/>
-                        </f:facet>
-                        <h:outputText value="#{_row.contrato.numvlrcontrato}">
-                            <f:convertNumber pattern="$###,###"/>
-                        </h:outputText>
-                    </rich:column>
-
-                    <rich:column id="tc_valor_asociado" style="width: 80px;">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.valorasociadoaproyecto}"/>
-                        </f:facet>
-                        <h:outputText value="#{_row.numvalorrelacion}">
-                            <f:convertNumber pattern="$###,###"/>
-                        </h:outputText>
-                    </rich:column>
-                    <rich:column id="tc_polizas" style="text-align:center; width: 120px;" rendered="#{Supervisor$AdministrarObraNew.polizacontrato}">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.verpolizas}"/>
-                        </f:facet>
-                        <a4j:commandLink id="verpoliza" style="font-size: 10px;" 
-                                         action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
-                                         onclick="javascript:Richfaces.showModalPanel('panelVerPolizaModal')">
-                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                            <a4j:ajax event="complete"  render="layoutCron"/>
-                        </a4j:commandLink>
-
-                    </rich:column>
-
-                    <rich:column id="tc_costos" width="120px" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto !=null and false}" style="text-align:center;" >
-                        <f:facet name="header">
-                            <h:outputText value="#{var.vercosto}"/>
-                        </f:facet>
-                        <a4j:commandLink id="vercosto" style="font-size: 10px;" 
-                                         render="panelContrato"
-                                         onclick="javascript:Richfaces.showModalPanel('panelCostoContrato')">
-                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                            <a4j:ajax event="complete"  render="layoutCron"/>
-                        </a4j:commandLink>
-                    </rich:column>
-                </rich:dataTable>
-            </h:panelGrid>
-        </center>
-    </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                </center>
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
 </ui:composition>

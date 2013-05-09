@@ -250,61 +250,6 @@
                                     </rich:columnGroup>
                                 </f:facet>
 
-                                <rich:columnGroup binding="#{Supervisor$Alimentar.cuerpo}" id="Cuerpo">
-                                    <rich:column id="Descripcion" width="250px">
-                                        <rich:panel style="width:250px"> 
-
-                                            <h:outputText value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
-                                            <h:outputText value="#{registros.actividadobra.strdescactividad}"  style="font-weight: bold; color:red;" rendered="#{registros.actividadobra.boolimprevisto}"/>
-
-                                        </rich:panel> 
-                                    </rich:column>
-                                    <rich:column id="Unidad" style="text-align: center;" >
-                                        <h:outputText value="#{registros.actividadobra.strtipounidadmed}" styleClass="matrixvalor "/>
-                                    </rich:column>
-                                    <rich:column id="Precio" style="text-align: right;">
-                                        <h:outputText value="#{registros.actividadobra.numvalorplanifao}" styleClass="matrixvalor ">
-                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="Cantidad2" style="text-align: right;">
-                                        <h:outputText value="#{registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor "/>
-                                    </rich:column>
-                                    <rich:column id="TotalActividad" style="text-align: right;">
-                                        <h:outputText value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
-                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="CantFaltAct" style="text-align: right;">
-                                        <h:outputText id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" styleClass="matrixvalor "/>
-                                    </rich:column>
-
-                                    <rich:column id="ValorEjec" style="text-align: right;">
-                                        <h:outputText id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" styleClass="matrixvalor ">
-                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="ValorFaltanAct" style="text-align: right;">                                          
-
-
-                                        <h:outputText id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
-                                            <f:convertNumber type="percent"/>
-                                        </h:outputText>
-
-                                    </rich:column>
-                                    <rich:column id="CantidadEjec" style="text-align: right;">
-                                        <h:panelGrid styleClass="tablamenuact" cellpadding="0" cellspacing="0" columns="2" > 
-                                            <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
-
-                                                <f:validateDoubleRange minimum="0" />
-                                            </h:inputText>
-                                            <a4j:commandLink styleClass="actualizaralim anchorLink"  action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
-                                                             render="layoutTablaMatrix, layoutComentafactor"/>
-
-                                        </h:panelGrid>
-                                        <rich:message  for="txtCantEjec" styleClass="error_texto"/>
-                                    </rich:column>
-                                </rich:columnGroup>
 
                                 <f:facet name="footer">
                                     <rich:columnGroup id="pie">
@@ -599,14 +544,14 @@
                 </h:panelGrid>
             </h:panelGroup>
         </h:form>
-        <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
+       <!-- <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
         <ui:include src="/modal/panelGuardadoModal.xhtml"/>
         <ui:include src="/modal/panelImagenModal.xhtml"/>
         <ui:include src="/modal/panelVideoModal.xhtml"/>
         <ui:include src="/modal/panelActaAlimentacionModal.xhtml"/>
         <ui:include src="/modal/confirmarGuardadoCualitativa.xhtml"/>                
         <ui:include src="/modal/alimentacion/modalAdicionarActividaes.xhtml"/>
-        <ui:include src="/modal/alimentacion/panelActaPrecios.xhtml"/>
+        <ui:include src="/modal/alimentacion/panelActaPrecios.xhtml"/>-->
     </ui:define>
 
 </ui:composition>
