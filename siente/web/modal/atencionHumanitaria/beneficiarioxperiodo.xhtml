@@ -1,25 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:a4j="http://richfaces.org/a4j" 
-                xmlns:interkont="http://www.interkont.com/jsf"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:rich="http://richfaces.org/rich"
-                xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:a4j="http://richfaces.org/a4j" 
+                 xmlns:interkont="http://www.interkont.com/jsf"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="beneficiarioxperiodo" autosized="true" headerClass="rich-panel-header"
-                     style="-webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px;border: #C1D1E7 thin solid;width: 450px;">
+    <rich:popupPanel id="beneficiarioxperiodo" autosized="true" width="450"  headerClass="rich-panel-header"
+                     style="-webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px;border: #C1D1E7 thin solid;">
 
         <f:facet name="header" >
             <h:panelGroup>
-                <h:outputText value="#{var.registrobeneficiarios}"  styleClass="txt_header" style="align: justify;" />
+                <h:outputText value="#{var.registrobeneficiarios}"  styleClass="txt_header" style="text-align: justify;" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandButton id="esconder_beneficiarioxperiodo" oncomplete="#{rich:component('beneficiarioxperiodo')}.hide();" title="#{var.cerrar}" immediate="true"
-                                   styleClass="btn_cerrar"  />
+                <a4j:commandLink id="esconder_beneficiarioxperiodo" styleClass="btn_cerrar" 
+                                 title="#{var.cerrar}" immediate="true" onclick="#{rich:component('beneficiarioxperiodo')}.hide();
+                                         return false;"/>
             </h:panelGroup>
         </f:facet>
         <center>
@@ -28,16 +29,15 @@
                     <rich:dataTable id="tablabeneficiarioxperiodo"
                                     value="#{Supervisor$DetalleObra.lstbeneficiario}"
                                     rowClasses="background_azul,background_blanco"
-                                    rows="10"
-                                    width="80%"
+                                    rows="10"                                    
                                     var="rowbeneficiario"
-                                    style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;">
+                                    style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;width:80%;">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column  colspan="11" breakBefore="true">
+                                <rich:column  colspan="11" breakRowBefore="true">
                                     <h:outputText value="#{var.listabeneficiario} por avance"/>
                                 </rich:column>
-                                <rich:column  breakBefore="true">
+                                <rich:column  breakRowBefore="true">
                                     <h:outputText id="tipodocumento" value="#{var.tipoDocumento}"/>
                                 </rich:column>
                                 <rich:column >
@@ -73,10 +73,7 @@
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
-                            <!--<rich:column  breakBefore="true">
-                                <h:outputText id="consecutivo2" value="#{rowbeneficiario.intcodigo}" />
-                            </rich:column>-->
-                            <rich:column breakBefore="true">
+                            <rich:column breakRowBefore="true">
                                 <h:outputText id="documento2" value="#{rowbeneficiario.strtipoidentificacion}" />
                             </rich:column>
                             <rich:column >
@@ -113,7 +110,7 @@
                         </rich:columnGroup>
                         <f:facet name="footer">
                             <rich:columnGroup id="grouptablabeneficiarioxperiodo">
-                                <rich:column colspan="12" breakBefore="true" style="text-align: center;">
+                                <rich:column colspan="12" breakRowBefore="true" style="text-align: center;">
                                     <rich:dataScroller id="scrolltablabeneficiarioxperiodo" for="tablabeneficiarioxperiodo" render="tablabeneficiarioxperiodo"/>
                                 </rich:column>
                             </rich:columnGroup>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition   
+<ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -35,9 +35,9 @@
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="btn_sec_gra"
-                                           oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;" value="#{var.aceptar}"
+                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion');" value="#{var.aceptar}"
                                            render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
+                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion')"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

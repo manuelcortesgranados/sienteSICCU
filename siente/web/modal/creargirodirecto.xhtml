@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition   
+<ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -11,110 +11,45 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel id="mp-crear-girodirecto" moveable="true" autosized="true"  headerClass="rich-panel-header">
-        <f:facet name="header" >
+    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700px" style="padding:0px; "
+                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
+        <f:facet name="header" >           
             <h:panelGroup >
-                <h:outputText value="#{var.creargirodirecto}"/>
+                <h:outputText  value="Ciudadano"/>
             </h:panelGroup>
-        </f:facet>
-        <f:facet name="controls">
-            <h:form>
-                <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-girodirecto" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-crear-girodirecto')}.hide(); return false;"/>
-                </h:panelGroup>
-            </h:form>
-        </f:facet>
+            <h:panelGroup style="width:100%">
+                <h:panelGrid columns="2">
+                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png"  style="width:45px;"/>
+                    <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
+                </h:panelGrid>
+            </h:panelGroup>
+        </f:facet>        
         <h:form>
-            <rich:panel id="rpgirodirecto">
-                <center>
-                    <h:panelGrid columns="2"  style="width:100%;" >
+            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+                <center>                    
+                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
 
-                        <h:outputText id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
-                        <h:panelGrid columns="2">
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirofidu" inputSize="10" required="true"
-                                           disabled="#{Supervisor$Contrato.boolcreargiro}" value="#{Supervisor$Contrato.movimientocontrato.datefechagirofiduprevisora}"/>
-                            <rich:message for="calendarfechagirofidu" styleClass="error_texto"/>
-                        </h:panelGrid>
-                        <h:outputText id="lblnumvlrgiro"  value="(*)#{var.vlrgiro}"/>
-                        <h:panelGrid columns="2">
-                            <rich:inputNumberSpinner id="numvlrgiro"  value="#{Supervisor$Contrato.movimientocontrato.numvlrgiro}"
-                                                     minValue="0" maxValue="9000000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}">
-                            </rich:inputNumberSpinner>
-                            <rich:message for="numvlrgiro" styleClass="error_texto"/>
-                        </h:panelGrid>
+                        <h:panelGroup>
+                            <center>
+                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
+                            </center>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <interkont:spacer width="120"/>
 
-                        <h:outputText id="lblordenpago"  value="(*)#{var.ordenpago}"  />
-                        <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
-                            <h:selectOneMenu id="cmbordenpago"  value="#{Supervisor$Contrato.movimientocontrato.ordendepago.oidcodigoordenpago}" disabled="#{Supervisor$Contrato.boolcreargiro}" >
-                                <f:selectItems value="#{Supervisor$Contrato.ordenPagoitem}" />
-                            </h:selectOneMenu>
-                        </h:panelGrid>
 
-                        <h:outputText id="lbltipomovimiento"  value="(*)#{var.tipomovimiento}" />
-                        <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
-                            <h:selectOneMenu id="cmbtipomovimiento" value="#{Supervisor$Contrato.movimientocontrato.tipomovimiento.oidtipomovimiento}" disabled="#{Supervisor$Contrato.boolcreargiro}">
-                                <f:selectItems value="#{Supervisor$Contrato.tipoMovimientoitem}" />
-                            </h:selectOneMenu>
-                        </h:panelGrid>
+                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
+                                <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.hideModalPanel('confirmarCiudadano');" render="gpLogPrinci"/>
+                            </a4j:commandButton>
 
-                        <h:outputText id="lblentidadcontratista"  value="(*)#{var.contratista}"/>
-                        <h:panelGrid columns="2">
-                            <h:inputText  size="25" maxlength="250" id="txtentidadcontratante" value="#{Supervisor$Contrato.movimientocontrato.strentidadcontratante}" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
-                            <rich:message for="txtentidadcontratante" styleClass="error_texto"/>
-                        </h:panelGrid>
+                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
+                                               onclick="javascript:Richfaces.hideModalPanel('confirmarCiudadano')"/>
 
-                        <h:outputText id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
-                        <h:panelGrid columns="2">
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirocontratista" inputSize="10" required="true"
-                                           value="#{Supervisor$Contrato.movimientocontrato.datefechagirocontratista}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
-                            <rich:message for="calendarfechagirocontratista" styleClass="error_texto"/>
-                        </h:panelGrid>
-
-                        <h:outputText id="lblObservacion"  value="#{var.observaciones}" />
-                        <h:inputTextarea  id="textobservacion" style="width: 100%" rows="4"  value="#{Supervisor$Contrato.movimientocontrato.textobservacion}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
+                        </h:panelGroup>
                     </h:panelGrid>
-
-                    <a4j:commandButton value="#{var.registrar}" action="#{Supervisor$Contrato.guardarGirodirecto}"
-                                       render="rpgirodirecto"
-                                       rendered="#{!Supervisor$Contrato.boolcreargiro}"
-                                       >
-                    </a4j:commandButton>
-                    <interkont:spacer width="10"/>
-                    <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcreargiro}"
-                                       render="pngirodirecto" rendered="#{Supervisor$Contrato.boolcreargiro}"
-                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.hide(); return false;">
-                    </a4j:commandButton>
-                    <interkont:spacer width="10"/>
-                    <a4j:commandButton value="#{var.cancelar}"  action="#{Supervisor$Contrato.limpiarGirodirecto}"
-                                       render="pngirodirecto" immediate="true"
-                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.hide(); return false;" rendered="#{!Supervisor$Contrato.boolcreargiro}" >
-                    </a4j:commandButton>
-
                 </center>
-                <a4j:outputPanel id="panelErrorNuevocontratista">
-                    <rich:messages id="messagesNuevocontratista" globalOnly="true"
-                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                   infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                   errorLabelClass="error_texto">
-                        <f:facet name="infoMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
-
-                </a4j:outputPanel>
-
             </rich:panel>
-
         </h:form>
-    </rich:popupPanel>  
+    </rich:popupPanel>
 </ui:composition>

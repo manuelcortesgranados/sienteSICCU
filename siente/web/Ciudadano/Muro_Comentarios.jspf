@@ -1,16 +1,7 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:a4j="http://richfaces.org/a4j" 
-    xmlns:interkont="http://www.interkont.com/jsf"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:rich="http://richfaces.org/rich"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
-    >
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jsp:root version="2.1" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf" xmlns:rich="http://richfaces.org/rich">
 
     <f:subview id="Comentarios" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}" >
         <a4j:region>
@@ -39,7 +30,7 @@
                 }
                 function borrar_campo1()
                 { if (document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value == "Escriba Su Comentario")
-                        document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value ="";
+                       document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value ="";
                 }
 
             </script>
@@ -52,12 +43,12 @@
                 <interkont:spacer height="10"/>
                 <h:panelGrid columns="1" style="width:100%;">
                     <a4j:region id="idregion">
-                        <h:panelGrid  id="txtcomentario1" columns="1" style="width:70%;" >
+                        <h:panelGrid  id="txtcomentario1" columns="1" width="70%" >
                             <a4j:status id="idstatuscomentario"/>
                             <h:outputText id="idcontarmensaje" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" styleClass="vtitle12" style="float:right;" />
                             <h:inputTextarea id="iacomentario" styleClass="commentframe" rows="5" cols="120" onkeydown="return maximaLongitud(this,400)"     
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo1(this);" >
-                                <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje" status="idstatuscomentario" />
+                                <a4j:ajax action="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="onkeyup" render="idcontarmensaje" status="idstatuscomentario" />
                             </h:inputTextarea>
                             <h:outputText value="Utilice este espacio para opinar e intercambiar opiniones con los demás ciudadanos" styleClass="vtitle09"/>                      
                         </h:panelGrid>
@@ -70,23 +61,23 @@
 
                                 <h:panelGrid styleClass="commentframe">
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuario}" type="submit" >
-                                        <h:graphicImage url="#{var.ipserver}siente#{rowcomentario.jsfUsuario.tercero.strfoto}" style="width:85px; height: 65px;" />
+                                        <h:graphicImage url="#{var.ipserver}siente#{rowcomentario.jsfUsuario.tercero.strfoto}"  width="85" height="65"/>
                                     </a4j:commandLink>
                                     <interkont:spacer width="30"/>
                                 </h:panelGrid>
 
                                 <h:panelGrid columns="3">
-                                    <h:graphicImage url="/resources/imgs/com_arrow.png"  style="width:20px; height: 26px;"/>
+                                    <h:graphicImage url="/resources/imgs/com_arrow.png" width="20" height="26"/>
 
                                     <h:panelGrid styleClass="commentuser" style="width:100%;">
                                         <h:panelGroup>
                                             <h:outputText id="idstrnombre" value="#{rowcomentario.jsfUsuario.tercero.strnombrecompleto}" styleClass="vtitle03"/>
-                                            <interkont:spacer style="width:20px;" />
+                                            <interkont:spacer width="20"/>
                                             <h:outputText id="iddate" value="#{rowcomentario.datefechaopinion}" styleClass="vtitle09">
                                                 <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
                                             </h:outputText>
                                         </h:panelGroup>
-                                        <h:panelGrid style="width:800px;">
+                                        <h:panelGrid width="800px">
                                             <h:outputLabel  id="idcomentario" value="#{rowcomentario.stropinion}"
                                                             style="align:justify; padding:10px;" />
                                         </h:panelGrid>
@@ -95,10 +86,10 @@
                             </h:panelGrid>
                         </a4j:repeat>
                     </h:panelGrid>
-                    <rich:dataScroller for="rpcomentario"  render="pgcomentario"  />
+                    <rich:dataScroller for="rpcomentario" align="center" render="pgcomentario"  />
                 </h:panelGrid>
             </rich:panel>
         </h:form>
     </f:subview>
-</ui:composition>
 
+</jsp:root>

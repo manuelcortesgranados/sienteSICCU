@@ -192,7 +192,7 @@
 
                     <h:panelGrid id="layoutActasDetalle" columns="1" style="text-align:center;" width="98%">
                         <a4j:commandButton value="Añadir Acta de Convenio de Precios" render="faltarender"
-                                           onclick="#{rich:component('modalActaPrecios')}.show();"
+                                           onclick="javascript:Richfaces.showModalPanel('modalActaPrecios');"
                                            style="font-size:12px;"/>
                         <h:inputText id="pathacta" disabled="true" size="50" value="#{Supervisor$Alimentar.pathActaPrecios}" />
                     </h:panelGrid>
@@ -200,7 +200,7 @@
                     <h:panelGrid id="validarguardar">
                         <a4j:commandButton rendered="#{Supervisor$Alimentar.validarGuardarItemNoPrevis}"
                                            value="#{var.guardar}" action="#{Supervisor$Alimentar.guardarActividades}" >
-                            <a4j:ajax event="oncomplete"  render="layoutTablaMatrix,scroll" oncomplete="#{rich:component('modalAdicioarActividades')}.hide() "/>
+                            <a4j:ajax event="oncomplete"  render="layoutTablaMatrix,scroll" oncomplete="javascript:Richfaces.hideModalPanel('modalAdicioarActividades')"/>
                         </a4j:commandButton>
                     </h:panelGrid>
                 </h:form>

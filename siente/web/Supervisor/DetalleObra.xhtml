@@ -1,1052 +1,1035 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition    xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:ui="http://java.sun.com/jsf/facelets"
+                   template="./../facelets/template_main.xhtml"
+                   xmlns:a4j="http://richfaces.org/a4j"
+                   xmlns:interkont="http://www.interkont.com/jsf"
+                   xmlns:f="http://java.sun.com/jsf/core"
+                   xmlns:h="http://java.sun.com/jsf/html"
+                   xmlns:rich="http://richfaces.org/rich">
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      template="/facelets/template_main.xhtml">
+    <ui:define name="head">
+        <style type="text/css">
 
-   
-            <ui:define name="head">
+            #sideline {
+                text-align: center;
+                position:relative;
+                font-family: Verdana, Geneva, sans-serif;
+                background-image: url("/cobrafonade/resources/imgs/lineCiudadano.png");
+                background-position-y: -8px;
+            }
 
-                <style type="text/css">
+            label.textlittle2 {
+                background-color: white;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
 
-                    #sideline {
-                        text-align: center;
-                        position:relative;
-                        font-family: Verdana, Geneva, sans-serif;
-                        background-image: url("/cobrafonade/resources/imgs/lineCiudadano.png");
-                        background-position-y: -8px;
-                    }
-                    
-                    label.textlittle2 {
-                        background-color: white;
-                        padding-left: 10px;
-                        padding-right: 10px;
-                    }
+            #sideline.span {
+                display: inline-block;    
+            }
+            line:before,
+            line:after {
+                border-top: 1px solid #E3E3E3;
+                display: block;
+                height: 1px;
+                content: " ";
+                width: 23%;
+                position: absolute;
+                left: 0;
+                top: 0.5em;
+            }
+            line:after {
+                right: 0;  
+                left: auto; 
+            }                    
+        </style>
+        <title>Cobra - Supervisor</title>
 
-                    #sideline.span {
-                        display: inline-block;    
-                    }
-                    line:before,
-                    line:after {
-                        border-top: 1px solid #E3E3E3;
-                        display: block;
-                        height: 1px;
-                        content: " ";
-                        width: 23%;
-                        position: absolute;
-                        left: 0;
-                        top: 0.5em;
-                    }
-                    line:after {
-                        right: 0;  
-                        left: auto; 
-                    }                    
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </style>
-                <title>Cobra - Supervisor</title>
+        <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <h:outputScript name="script_supervisor.js"/>
+        <h:outputScript name="coda-slider.1.1.1.pack.js" library="js"/>
+        <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js"/>
+        <h:outputScript name="jquery-easing-compatibility.1.2.pack.js" library="js"/>
+        <h:outputScript name="ycodaslider-2.0.pack.js" library="js"/>
+        <h:outputScript name="RGraph.common.core.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.common.effects.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.common.context.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.common.annotate.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.common.tooltips.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph"/>                                                                                              
+        <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
+        <h:outputScript name="RGraph.meter.js" library="js/RGraph"/>
+        <h:outputScript name="slider.min_imagnes.js" library="js"/>
+        <h:outputScript name="sliderman.1.3.6.js" library="js"/>
+        <h:outputScript name="amcharts.js" library="../amcharts"/>
 
-                <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <script type="text/javascript" src="/#{var.versioncobra}/resources/js/reloj.js"></script>
+        <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css"/>
+        <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css"/>
+        <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css"/>
 
-                <h:outputScript name="csspopup.js" library="js"/>
-                <h:outputScript name="jquery.timers-1.0.0.js" library="js"/>
-                <h:outputScript name="script_supervisor.js"/>
-                <h:outputScript name="coda-slider.1.1.1.pack.js" library="js"/>
-                <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js"/>
-                <h:outputScript name="jquery-easing-compatibility.1.2.pack.js" library="js"/>
-                <h:outputScript name="ycodaslider-2.0.pack.js" library="js"/>
-                <h:outputScript name="RGraph.common.core.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.common.effects.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.common.context.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.common.annotate.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.common.tooltips.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.common.zoom.js" library="js/RGraph"/>                                                                                              
-                <h:outputScript name="RGraph.common.resizing.js" library="js/RGraph"/>
-                <h:outputScript name="RGraph.meter.js" library="js/RGraph"/>
-                <h:outputScript name="slider.min_imagnes.js" library="js"/>
-                <h:outputScript name="sliderman.1.3.6.js" library="js"/>
-                <h:outputScript name="amcharts.js" library="amcharts"/>
+    </ui:define>
 
-                <script type="text/javascript" src="/#{var.versioncobra}/resources/js/reloj.js"></script>
-                <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
-                <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css"/>
-                <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css"/>
-                <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css"/>
-                <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css"/>
-            </ui:define>
-            <ui:define name="title">
-                <h:outputText value="#{var.houtdetalle}"/>
+    <ui:define name="title">
+        <h:outputText value="#{var.houtdetalle}"/>
                 <h:outputText style="font-size:8px;float:right;" value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"/>
                 <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
-            </ui:define>
-            <ui:define name="menu">
-                <ui:include src="/facelets/menu_gestion.xhtml"/>
-            </ui:define>
-            <ui:define name="menu_lateral">
-                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>                
-            </ui:define>
-            <ui:define name="menusuperior">
+    </ui:define>
+
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+                <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
+                 <ui:include src="./../facelets/menu_lateral_administrar.xhtml"/>               
+    </ui:define>
+
+
+    <ui:define name="menusuperior">
                 <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
                     <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
                 </h:panelGroup>
-            </ui:define>
-            <ui:define name="body">
+    </ui:define>
 
-                <body onload="cargarDetalle();
-                    mostrarReloj();">
-                    <h:form prependId="false">
+    <ui:define name="body">
+        <body onload="cargarDetalle();
+                mostrarReloj();">
+            <h:form prependId="false">
+                <a4j:jsFunction id="iniDetalle" name="cargarDetalle"    >
+                    <a4j:ajax event="complete"  oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}"/>
+                </a4j:jsFunction>
+                <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
 
-                        <a4j:jsFunction id="iniDetalle" name="cargarDetalle"    >
-                            <a4j:ajax event="complete"    oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}"/>
-                        </a4j:jsFunction>
-                        <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
-                
-                    </h:form>
-                    <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu}">
-                        <h:form prependId="false" >
+            </h:form>
+            <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu}">
+                <h:form prependId="false" >
+                    <h:inputHidden id="estaen" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
+                </h:form>
+                <interkont:spacer height="10"/>
+                <h:form>
+                    <a4j:jsFunction oncomplete="#{rich:component('modalAvisoSupervisor')}.show(); "
+                                    rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}"
+                                    id="edit" name="showModal"  action="#{SessionBeanCobra.visualizoModal}" >
+                    </a4j:jsFunction>
 
-                            <h:inputHidden id="estaen" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
-                        </h:form>
-                        <interkont:spacer height="10"/>
-                        <h:form >
-                            <a4j:jsFunction oncomplete="#{rich:component('modalAvisoSupervisor')}.show(); "
-                                            rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}"
-                                            id="edit" name="showModal"  action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction>
-                            <h:panelGrid id="layoutGral"  width="75%" style="text-align:center;">
-                                <center>
-                                    <h:panelGrid id="detalleproyecto" styleClass="detalleproyecto" columns="5"
-                                                 columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
-                                        <rich:panel  id="semaforoactual" header="#{var.houtsemaforoactual}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <h:panelGrid columnClasses="panelcenter" style="width:100%;">
+                    <h:panelGrid id="layoutGral"  width="75%" style="text-align:center;">
+                        <center>
+                            <h:panelGrid id="detalleproyecto" styleClass="detalleproyecto" columns="5"
+                                         columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
+                                <rich:panel  id="semaforoactual" header="#{var.houtsemaforoactual}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <h:panelGrid columnClasses="panelcenter" style="width:100%;">
 
-                                                <h:graphicImage id="imgSemaObra"
-                                                                value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
-                                                                rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
+                                        <h:graphicImage id="imgSemaObra"
+                                                        value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
+                                                        rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
 
-                                                <h:outputText value="#{Supervisor$DetalleObra.semaforo}"  style="font-size:12px; color:#666666;"/>
+                                        <h:outputText value="#{Supervisor$DetalleObra.semaforo}"  style="font-size:12px; color:#666666;"/>
 
-                                            </h:panelGrid>
-                                        </rich:panel>
+                                    </h:panelGrid>
+                                </rich:panel>
 
-                                        <rich:panel id="presupuestoactual" header="#{var.costo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                <rich:panel id="presupuestoactual" header="#{var.costo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
 
-                                            <h:panelGrid columns="1" style="width:100%;" columnClasses="column-grid-detail">
-                                                <h:panelGroup>
-                                                    <rich:panel  style="overflow-y: scroll;height:100px;">
-                                                        <h:panelGrid columns="1" styleClass="panelcenter">
-                                                            <center>
-                                                                <h:outputText value="#{var.valoraprobado}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null || Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"/>
-                                                                <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
-                                                                    <f:convertNumber pattern="$###,###"/>
-                                                                </h:outputText>
-                                                                <h:outputText styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.numvlraprobado}">
-                                                                    <f:convertNumber pattern="$###,###"/>
-                                                                </h:outputText>
-                                                                <h:outputText value="#{var.valor} #{var.textoobra3}" style="font-size:10px; color:#666666;" />
-                                                                <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                                    <f:convertNumber pattern="$###,###"/>
-                                                                </h:outputText>
-                                                                <h:outputText value="#{var.valor} #{var.interventorObra}ia" style="font-size:10px; color:#666666;"/>
-                                                                <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$DetalleObra.valorinterventoria}">
-                                                                    <f:convertNumber pattern="$###,###"/>
-                                                                </h:outputText>
-                                                                <h:outputText value="#{var.totalobra}" style="font-size:10px; color:#666666;"/>
-                                                                <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$DetalleObra.valorinterventoria + Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                                    <f:convertNumber pattern="$###,###"/>
-                                                                </h:outputText>
-
-
-                                                            </center>
-                                                        </h:panelGrid>
-                                                    </rich:panel>
-                                                </h:panelGroup>
-                                            </h:panelGrid>
-                                        </rich:panel>
-
-                                        <rich:panel id="duracion" header="#{var.intduracion}" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" style="width:100%;">
-                                                <h:outputText value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" style="font-size:30px; color:#336699; font-weight: bold;"/>
-                                                <h:outputText value="#{var.diasdesde}" style="font-size:10px; color:#666666;"/>
-                                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" style="font-size:10px; color:#666666;">
-                                                    <f:convertDateTime pattern="yyyy-MMM-dd" />
-                                                </h:outputText>
-                                                <h:outputText value="#{var.diashasta}" style="font-size:10px; color:#666666;"/>
-                                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" style="font-size:10px; color:#666666;">
-                                                    <f:convertDateTime pattern="yyyy-MMM-dd"/>
-                                                </h:outputText>
-                                            </h:panelGrid>
-                                        </rich:panel>
-
-                                        <rich:panel id="tiempoentrega" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-
-                                            <script type="text/javascript" language="JavaScript">
-
-                                                jQuery(document).ready(function() {
-                                                    var j = jQuery.noConflict();
-                                                    var timefalta = document.getElementById("finfecha").value;
-                                                    var futuro = new Date(timefalta);
-                                                    setInterval(function() {
-                                                        var ahora = new Date();
-                                                        var faltan = futuro - ahora;
-                                                        if (faltan > 0) {
-                                                            var segundos = Math.round(faltan / 1000);
-                                                            var minutos = Math.floor(segundos / 60);
-                                                            var segundos_s = segundos % 60;
-                                                            var horas = Math.floor(minutos / 60);
-                                                            var minutos_s = minutos % 60;
-                                                            var dias = Math.floor(horas / 24);
-                                                            var horas_s = horas % 24;
-                                                            horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
-                                                            dias = (!(dias > 9)) ? '0' + dias : dias;
-                                                            minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
-                                                            segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
-
-                                                            var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
-
-                                                            j('#refreshMe').html(cuentaRegresiva);
-
-                                                        }
-                                                        else {
-                                                            var dias = 0;
-                                                            var horas_s = 0;
-                                                            var minutos_s = 00;
-                                                            var segundos_s = 00;
-                                                            var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
-
-                                                            j('#refreshMe').html(cuentaRegresiva);
-                                                            return true;
-                                                        }
-                                                    }, 100);
-
-                                                });
-                                            </script>
-
-                                            <div id="refreshMe" style="font-size: 12pt">
-                                                <center><table width="149" border="0"><tr><td width="45"></td><td width="49">
-                                                                <h1 align="center" style="color:#336699">0</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center></div>
-
-                                        </rich:panel>
-
-                                        <rich:panel id="contratista" header="#{var.contratista}" bodyClass="rich-panel-grid-body"
-                                                    styleClass="rich-panel-grid" headerClass="font-header-panel" >
-                                            <rich:panel  style="overflow-y: scroll;height:100px;" >
-                                                <h:outputLabel id="st_strnomcontratista"
-                                                               style="font-size:13px; color:#666666;"
-                                                               value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
-                                            </rich:panel>
-                                        </rich:panel>
-
-                                        <interkont:spacer height="20"/>
-                                        <interkont:spacer height="20"/>
-                                        <interkont:spacer height="20"/>
-                                        <interkont:spacer height="20"/>
-                                        <interkont:spacer height="20"/>
-
-
-                                        <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <center>
-
-
-                                                <h:panelGroup>
-                                                    <rich:panel  style="overflow-y: scroll;height:100px;">
-
-                                                        <h:panelGrid id="tipo" columns="1" style="font-size:8pt; color:#666666;width:100%;"  columnClasses="panelcenter">
-                                                            <h:outputLabel id="stclaseProyecto"  value="#{var.claseProyecto}" style="font-size:12px; color:#336699; font-weight: bold;"/>
-                                                            <h:outputLabel id="stclaseProyectoout" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}"/>
-                                                        </h:panelGrid>
-                                                        <!--
-                                                        <h:panelGrid columns="2" style="width:100%;">-->
-                                                            <h:panelGrid columns="1" style="font-size:8pt; color:#666666;width:100%;" columnClasses="panelcenter">
-                                                                <h:outputLabel id="sttipoProyecto"  value="#{var.tipoProyecto}" style="font-size:12px; color:#336699; font-weight: bold;">
-                                                                    <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
-                                                                    </rich:tooltip>
-                                                                </h:outputLabel>
-                                                                <h:outputLabel id="sttipoProyectoout" styleClass="txt_outtext"  value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}">
-                                                                    <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
-                                                                    </rich:tooltip>
-                                                                </h:outputLabel>
-                                                            </h:panelGrid>
-                                                        
-                                                            <h:panelGrid columns="1" style="font-size:8pt; color:#666666;" columnClasses="panelcenter">
-
-                                                                <h:outputLabel id="stsubtipoProyecto"  value="#{var.subtipoProyecto}: " style="font-size:12px; color:#336699; font-weight: bold;">
-                                                                    <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
-                                                                    </rich:tooltip>
-                                                                </h:outputLabel>
-                                                                <h:outputLabel id="stsubtipoProyectoout" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}">
-                                                                    <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
-                                                                        <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
-                                                                    </rich:tooltip>
-                                                                </h:outputLabel>
-
-                                                            </h:panelGrid>
-                                                   
-                                                    </rich:panel>
-                                                </h:panelGroup>
-
-                                            </center>
-                                        </rich:panel>
-
-                                        <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <interkont:spacer height="5"/>
-                                            <h:panelGrid id="empleos" columns="1"  style="vertical-align:middle;text-align:center;width:100%;">
-                                                <center>
-                                                    <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
-                                                                   value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
-
-                                                    <h:outputText value="#{var.otrosactores}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                                    <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                    <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null and Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                </center>
-                                                <h:panelGroup id="layoutEmpleoGenerados">
+                                    <h:panelGrid columns="1" style="width:100%;" columnClasses="column-grid-detail">
+                                        <h:panelGroup>
+                                            <rich:panel  style="overflow-y: scroll;height:100px;">
+                                                <h:panelGrid columns="1" styleClass="panelcenter">
                                                     <center>
-                                                        <h:panelGrid columns="2">
-                                                            <h:panelGroup>
-                                                                <center>
-                                                                    <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
-                                                                                   value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}" />
-                                                                </center>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup>
-                                                                <center>
-                                                                    <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
-                                                                                   value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" />
-                                                                </center>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup>
-                                                                <center>
-                                                                    <h:outputText value="#{var.imp_direc}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                                    <h:outputText value="#{var.imp_inst}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                                                </center>
-                                                            </h:panelGroup>
-                                                            <h:panelGroup>
-                                                                <center>
-                                                                    <h:outputText value="#{var.imp_indirec}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                                                    <h:outputText value="#{var.organizacionesfortalecidas}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                                                                </center>
-                                                            </h:panelGroup>
-                                                        </h:panelGrid>
+                                                        <h:outputText value="#{var.valoraprobado}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null || Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"/>
+                                                        <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
+                                                            <f:convertNumber pattern="$###,###"/>
+                                                        </h:outputText>
+                                                        <h:outputText styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.numvlraprobado}">
+                                                            <f:convertNumber pattern="$###,###"/>
+                                                        </h:outputText>
+                                                        <h:outputText value="#{var.valor} #{var.textoobra3}" style="font-size:10px; color:#666666;" />
+                                                        <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                            <f:convertNumber pattern="$###,###"/>
+                                                        </h:outputText>
+                                                        <h:outputText value="#{var.valor} #{var.interventorObra}ia" style="font-size:10px; color:#666666;"/>
+                                                        <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$DetalleObra.valorinterventoria}">
+                                                            <f:convertNumber pattern="$###,###"/>
+                                                        </h:outputText>
+                                                        <h:outputText value="#{var.totalobra}" style="font-size:10px; color:#666666;"/>
+                                                        <h:outputText styleClass="txt_outtext" style="font-size:14px; color:#336699; font-weight: bold;" value="#{Supervisor$DetalleObra.valorinterventoria + Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                            <f:convertNumber pattern="$###,###"/>
+                                                        </h:outputText>
+
+
                                                     </center>
-                                                </h:panelGroup>
-                                            </h:panelGrid>
-                                        </rich:panel>
-
-                                        <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <interkont:spacer height="40"/>
-                                            <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" style="font-size:8pt; color:#666666;">
-                                                <h:outputText value="#{var.houtobraestaen}" style="font-weight: bold;"/>
-                                                <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                    <f:convertNumber pattern="###.## %"/>
-                                                </h:outputText>
-
-                                                <h:outputText value="#{var.deberiaestaren}" style="font-weight: bold;"/>
-                                                <h:outputText value="#{Supervisor$DetalleObra.obraMapa.deberiaestar/100}">
-                                                    <f:convertNumber pattern="###.## %"/>
-                                                </h:outputText>
-                                            </h:panelGrid>
-
-                                        </rich:panel>
-
-                                        <rich:panel id="avancefisico" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <f:facet name="header">
-                                                <h:outputLabel value="#{var.numvalavanfisicodeclarado}" />
-                                            </f:facet>
-                                            <interkont:spacer height="30"/>
-                                            <script>
-
-
-                                                function init() {
-                                                    var estaen = document.getElementById("estaen").value;
-                                                    var min = 0;
-                                                    var max = 100;
-
-                                                    var meter1 = new RGraph.Meter('meter1', min, max, estaen);
-
-                                                    var grad1 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                                    grad1.addColorStop(0, 'green');
-                                                    grad1.addColorStop(1, 'white');
-
-                                                    var grad2 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                                    grad2.addColorStop(0, 'yellow');
-                                                    grad2.addColorStop(1, 'white');
-
-                                                    var grad3 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                                    grad3.addColorStop(0, 'red');
-                                                    grad3.addColorStop(1, 'white');
-
-                                                    meter1.Set('chart.labels.position', 'inside');
-                                                    meter1.Set('chart.title', 'Avance Fisico');
-                                                    meter1.Set('chart.title.vpos', 0.5);
-                                                    meter1.Set('chart.title.color', 'black');
-                                                    meter1.Set('chart.green.color', grad1);
-                                                    meter1.Set('chart.yellow.color', grad2);
-                                                    meter1.Set('chart.red.color', grad3);
-                                                    meter1.Set('chart.border', false);
-                                                    meter1.Set('chart.needle.linewidth', 5);
-                                                    meter1.Set('chart.needle.tail', true);
-                                                    meter1.Set('chart.tickmarks.big.num', 0);
-                                                    meter1.Set('chart.tickmarks.small.num', 0);
-                                                    meter1.Set('chart.segment.radius.start', 100);
-                                                    meter1.Set('chart.needle.radius', 80);
-                                                    meter1.Set('chart.needle.linewidth', 2);
-                                                    meter1.Set('chart.linewidth.segments', 15);
-                                                    meter1.Set('chart.strokestyle', 'white');
-                                                    meter1.Set('chart.text.size', 14);
-                                                    RGraph.Effects.Meter.Grow(meter1);
-                                                }
-
-
-
-                                            </script>
-                                            <div id="capaPopUp"></div>
-                                            <div id="popUpDiv">
-                                                <div id="capaContent">
-                                                    <div>
-                                                        <canvas id="meter1" width="400" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
-                                                    </div>
-                                                    <a href="javascript:void(0);" title="Cerrar" id="cerrar">Cerrar</a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <h3>
-
-                                                    <a href="javascript:void(0);" onclick="init();
-                                                        return false;" title="Abrir PopUp" id="abrirPop">
-
-                                                        <h:outputText id="stEstado" styleClass="txt_outtext"
-                                                                      style="font-size:30px; color:#336699; font-weight: bold;"
-                                                                      value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
-                                                            <f:convertNumber  pattern="##.## %"/>
-                                                        </h:outputText><br/>
-                                                        <h:graphicImage value="#{var.vertacometro}" width="150px"/><br/>
-                                                        <h:outputText value="#{var.veravance}" style="font-size:13px; color:#666666;"/>
-                                                    </a>
-                                                </h3>
-                                            </div>
-                                        </rich:panel>
-                                        <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                            <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();return true;">
-                                                <h:graphicImage value="#{var.verobjeto}" />
-                                            </a4j:commandLink>
-                                        </rich:panel>
+                                                </h:panelGrid>
+                                            </rich:panel>
+                                        </h:panelGroup>
                                     </h:panelGrid>
-                                </center>
-                            </h:panelGrid>
+                                </rich:panel>
 
-                            <interkont:spacer height="20px" style="width:100%;"/>
-
-                            <rich:collapsiblePanel id="simpleToggleImagenes" switchType="server" header="#{var.imagenes}" expanded="false" toggleListener="#{Supervisor$DetalleObra.imagenEvolucion}" >
-                                <ui:include src="/modal/imagenDetaModal.xhtml"/>
-                            </rich:collapsiblePanel>
-                            <rich:collapsiblePanel id="simpleToggleUbicacion" switchType="server" header="#{var.ubicaciondelproyecto}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.mostrarGoogle}">
-                                <!--<ui:include src="/modal/ubicacionProyModal.xhtml"/>-->
-                            </rich:collapsiblePanel>
-
-
-
-
-                            <rich:collapsiblePanel id="simpleToggleContratos" switchType="server" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
-                                <!-- <ui:include src="/modal/contratoModal.xhtml"/>-->
-                            </rich:collapsiblePanel>
-
-
-                            <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="server" header="#{var.logro}s y #{var.dificultad}es" expanded="false" >
-                                <center>
-                                    <h:panelGrid columns="2">
-
-                                        <a4j:commandLink id="btlogros" styleClass="evo01 anchorLink"
-                                                         action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
-                                                         oncomplete="#{rich:component('modalLogrosDetalle')}.show();"
-                                                         style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                                         render="modalLogrosDetalle"/>
-
-                                        <a4j:commandLink id="btlogrosx" styleClass="evo02 anchorLink"
-                                                         action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
-                                                         style="border-radius: 10px; box-shadow: 2px 2px 5px #999;" render="modalDificultadDetalle"/>
-
+                                <rich:panel id="duracion" header="#{var.intduracion}" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" style="width:100%;">
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" style="font-size:30px; color:#336699; font-weight: bold;"/>
+                                        <h:outputText value="#{var.diasdesde}" style="font-size:10px; color:#666666;"/>
+                                        <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}" style="font-size:10px; color:#666666;">
+                                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                        </h:outputText>
+                                        <h:outputText value="#{var.diashasta}" style="font-size:10px; color:#666666;"/>
+                                        <h:outputText styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}" style="font-size:10px; color:#666666;">
+                                            <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                        </h:outputText>
                                     </h:panelGrid>
-                                </center>
-                            </rich:collapsiblePanel>
+                                </rich:panel>
 
-                            <rich:collapsiblePanel id="MovimientosFinancieros" switchType="server" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlmovientosfinancieros}" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
-                               <f:facet name="header">
-                                    <h:outputText value="#{var.movimientosfinancieros}"/>
-                                </f:facet>
-                                <interkont:spacer height="3"/>
-                                <h:panelGroup id="gpMovFinan">
+                                <rich:panel id="tiempoentrega" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+
+                                    <script type="text/javascript" language="JavaScript">
+
+            jQuery(document).ready(function() {
+                var j = jQuery.noConflict();
+                var timefalta = document.getElementById("finfecha").value;
+                var futuro = new Date(timefalta);
+                setInterval(function() {
+                    var ahora = new Date();
+                    var faltan = futuro - ahora;
+                    if (faltan > 0) {
+                        var segundos = Math.round(faltan / 1000);
+                        var minutos = Math.floor(segundos / 60);
+                        var segundos_s = segundos % 60;
+                        var horas = Math.floor(minutos / 60);
+                        var minutos_s = minutos % 60;
+                        var dias = Math.floor(horas / 24);
+                        var horas_s = horas % 24;
+                        horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
+                        dias = (!(dias > 9)) ? '0' + dias : dias;
+                        minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
+                        segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
+
+                        var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
+
+                        j('#refreshMe').html(cuentaRegresiva);
+
+                    }
+                    else {
+                        var dias = 0;
+                        var horas_s = 0;
+                        var minutos_s = 00;
+                        var segundos_s = 00;
+                        var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
+
+                        j('#refreshMe').html(cuentaRegresiva);
+                        return true;
+                    }
+                }, 100);
+
+            });
+                              </script>
+
+                                    <div id="refreshMe" style="font-size: 12pt">
+                                        <center><table width="149" border="0"><tr><td width="45"></td><td width="49">
+                                                        <h1 align="center" style="color:#336699">0</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td><td><h2 align="center" style="color:#336699">0</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center></div>
+
+                                </rich:panel>
+
+                                <rich:panel id="contratista" header="#{var.contratista}" bodyClass="rich-panel-grid-body"
+                                            styleClass="rich-panel-grid" headerClass="font-header-panel" >
+                                    <rich:panel  style="overflow-y: scroll;height:100px;" >
+                                        <h:outputLabel id="st_strnomcontratista"
+                                                       style="font-size:13px; color:#666666;"
+                                                       value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+                                    </rich:panel>
+                                </rich:panel>
+
+                            
+                                <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
+                                            styleClass="rich-panel-grid" headerClass="font-header-panel">
                                     <center>
+                                          <rich:panel  style="overflow-y: scroll;height:100px;">
 
-                                        <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
-                                                    bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
-                                                    rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}">
-                                            <center>
-                                                <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                                    <h:outputText value="#{var.numeroencargo}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
+                                                <h:panelGrid id="tipo" columns="1" style="font-size:8pt; color:#666666;width:100%;"  columnClasses="panelcenter">
+                                                    <h:outputLabel id="stclaseProyecto"  value="#{var.claseProyecto}" style="font-size:12px; color:#336699; font-weight: bold;"/>
+                                                    <h:outputLabel id="stclaseProyectoout" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}"/>
+                                                </h:panelGrid>
+                                                
+                                                <h:panelGrid columns="1" style="font-size:8pt; color:#666666;width:100%;" columnClasses="panelcenter">
+                                                    <h:outputLabel id="sttipoProyecto"  value="#{var.tipoProyecto}" style="font-size:12px; color:#336699; font-weight: bold;">
+                                                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
+                                                        </rich:tooltip>
+                                                    </h:outputLabel>
+                                                    <h:outputLabel id="sttipoProyectoout" styleClass="txt_outtext"  value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}">
+                                                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
+                                                        </rich:tooltip>
+                                                    </h:outputLabel>
+                                                </h:panelGrid>
 
-                                                    <h:outputText value="#{var.fechaapertura}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
-                                                    </h:outputText>
+                                                <h:panelGrid columns="1" style="font-size:8pt; color:#666666;" columnClasses="panelcenter">
 
-                                                    <h:outputText value="#{var.saldoinicial}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoinicial}">
-                                                        <f:convertNumber pattern="$###,###"/>
-                                                    </h:outputText>
-
-                                                    <h:outputText value="#{var.saldoactual}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoactual}">
-                                                        <f:convertNumber pattern="$###,###"/>
-                                                    </h:outputText>
+                                                    <h:outputLabel id="stsubtipoProyecto"  value="#{var.subtipoProyecto}: " style="font-size:12px; color:#336699; font-weight: bold;">
+                                                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                                        </rich:tooltip>
+                                                    </h:outputLabel>
+                                                    <h:outputLabel id="stsubtipoProyectoout" styleClass="txt_outtext" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}">
+                                                        <rich:tooltip followMouse="true" direction="topRight" showDelay="500" styleClass="tooltip">
+                                                            <h:outputLabel value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                                        </rich:tooltip>
+                                                    </h:outputLabel>
 
                                                 </h:panelGrid>
-                                            </center>
-                                        </rich:panel>
-                                        <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
-                                                    bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
-                                                    rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro != null}">
+
+                                            </rich:panel>
+                                        </center>
+                                </rich:panel>
+
+                                <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <interkont:spacer height="5"/>
+                                    <h:panelGrid id="empleos" columns="1"  style="vertical-align:middle;text-align:center;width:100%;">
+                                        <center>
+                                            <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
+                                                           value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
+
+                                            <h:outputText value="#{var.imp_bene}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                                            <h:outputText value="#{var.poblacionestudiantil}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                        </center>
+                                        <h:panelGroup id="layoutEmpleoGenerados">
                                             <center>
-                                                <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                                    <h:outputText value="#{var.numeroencargo}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
-
-                                                    <h:outputText value="#{var.fechaapertura}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
-                                                    </h:outputText>
-
-                                                    <h:outputText value="#{var.saldoinicial}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoinicial}">
-                                                        <f:convertNumber pattern="$###,###"/>
-                                                    </h:outputText>
-
-                                                    <h:outputText value="#{var.saldoactual}: "/>
-                                                    <interkont:spacer width="20"/>
-                                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoactual}">
-                                                        <f:convertNumber pattern="$###,###"/>
-                                                    </h:outputText>
-
+                                                <h:panelGrid columns="2">
+                                                    <h:panelGroup>
+                                                        <center>
+                                                            <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
+                                                                           value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}" />
+                                                        </center>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup>
+                                                        <center>
+                                                            <h:outputLabel styleClass="txt_outtext" style="font-size:12px; color:#336699; font-weight: bold;"
+                                                                           value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" />
+                                                        </center>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup>
+                                                        <center>
+                                                            <h:outputText value="#{var.imp_direc}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                                            <h:outputText value="#{var.imp_inst}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                                        </center>
+                                                    </h:panelGroup>
+                                                    <h:panelGroup>
+                                                        <center>
+                                                            <h:outputText value="#{var.imp_indirec}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                                            <h:outputText value="#{var.imp_acto}" style="font-size:10px; color:#666666;" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                                        </center>
+                                                    </h:panelGroup>
                                                 </h:panelGrid>
                                             </center>
-                                        </rich:panel>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </rich:panel>
+
+                                <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <interkont:spacer height="40"/>
+                                    <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" style="font-size:8pt; color:#666666;">
+                                        <h:outputText value="#{var.houtobraestaen}" style="font-weight: bold;"/>
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                            <f:convertNumber pattern="###.## %"/>
+                                        </h:outputText>
+
+                                        <h:outputText value="#{var.deberiaestaren}" style="font-weight: bold;"/>
+                                        <h:outputText value="#{Supervisor$DetalleObra.obraMapa.deberiaestar/100}">
+                                            <f:convertNumber pattern="###.## %"/>
+                                        </h:outputText>
+                                    </h:panelGrid>
+
+                                </rich:panel>
+
+                                <rich:panel id="avancefisico" bodyClass="rich-panel-grid-body"  styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <f:facet name="header">
+                                        <h:outputLabel value="#{var.numvalavanfisicodeclarado}" />
+                                    </f:facet>
+                                    <interkont:spacer height="30"/>
+                                    <script>
+
+
+                                        function init() {
+                                            var estaen = document.getElementById("estaen").value;
+                                            var min = 0;
+                                            var max = 100;
+
+                                            var meter1 = new RGraph.Meter('meter1', min, max, estaen);
+
+                                            var grad1 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                                            grad1.addColorStop(0, 'green');
+                                            grad1.addColorStop(1, 'white');
+
+                                            var grad2 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                                            grad2.addColorStop(0, 'yellow');
+                                            grad2.addColorStop(1, 'white');
+
+                                            var grad3 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                                            grad3.addColorStop(0, 'red');
+                                            grad3.addColorStop(1, 'white');
+
+                                            meter1.Set('chart.labels.position', 'inside');
+                                            meter1.Set('chart.title', 'Avance Fisico');
+                                            meter1.Set('chart.title.vpos', 0.5);
+                                            meter1.Set('chart.title.color', 'black');
+                                            meter1.Set('chart.green.color', grad1);
+                                            meter1.Set('chart.yellow.color', grad2);
+                                            meter1.Set('chart.red.color', grad3);
+                                            meter1.Set('chart.border', false);
+                                            meter1.Set('chart.needle.linewidth', 5);
+                                            meter1.Set('chart.needle.tail', true);
+                                            meter1.Set('chart.tickmarks.big.num', 0);
+                                            meter1.Set('chart.tickmarks.small.num', 0);
+                                            meter1.Set('chart.segment.radius.start', 100);
+                                            meter1.Set('chart.needle.radius', 80);
+                                            meter1.Set('chart.needle.linewidth', 2);
+                                            meter1.Set('chart.linewidth.segments', 15);
+                                            meter1.Set('chart.strokestyle', 'white');
+                                            meter1.Set('chart.text.size', 14);
+                                            RGraph.Effects.Meter.Grow(meter1);
+                                        }
+
+
+
+                                    </script>
+                                    <div id="capaPopUp"></div>
+                                    <div id="popUpDiv">
+                                        <div id="capaContent">
+                                            <div>
+                                                <canvas id="meter1" width="400" height="250"><div class="canvasfallback">[No canvas support]</div></canvas>
+                                            </div>
+                                            <a href="javascript:void(0);" title="Cerrar" id="cerrar">Cerrar</a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3>
+
+                                            <a href="javascript:void(0);" onclick="init();
+                                            return false;" title="Abrir PopUp" id="abrirPop">
+
+                                                <h:outputText id="stEstado" styleClass="txt_outtext"
+                                                              style="font-size:30px; color:#336699; font-weight: bold;"
+                                                              value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                    <f:convertNumber  pattern="##.## %"/>
+                                                </h:outputText><br/>
+                                                <h:graphicImage value="#{var.vertacometro}" width="150px"/><br/>
+                                                <h:outputText value="#{var.veravance}" style="font-size:13px; color:#666666;"/>
+                                            </a>
+                                        </h3>
+                                    </div>
+                                </rich:panel>
+                                <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                                    <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
+                                            return true;">
+                                        <h:graphicImage value="#{var.verobjeto}" />
+                                    </a4j:commandLink>
+                                </rich:panel>
+                            </h:panelGrid>
+                        </center>
+                    </h:panelGrid>
+
+
+
+                    <interkont:spacer height="20px" style="width:100%;"/>
+
+                    <rich:collapsiblePanel id="simpleToggleImagenes" switchType="server" header="#{var.imagenes}" expanded="false" toggleListener="#{Supervisor$DetalleObra.imagenEvolucion}" >
+                        <ui:include src="/modal/imagenDetaModal.xhtml"/>
+                    </rich:collapsiblePanel>
+                    <rich:collapsiblePanel id="simpleToggleUbicacion" switchType="server" header="#{var.ubicaciondelproyecto}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.mostrarGoogle}">
+                        <ui:include src="/modal/ubicacionProyModal.xhtml"/>
+                    </rich:collapsiblePanel>
+                    <rich:collapsiblePanel id="simpleToggleContratos" switchType="server" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                      <ui:include src="/modal/contratoModal.xhtml"/>
+                    </rich:collapsiblePanel>
+                    <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="server" header="#{var.logro}s y #{var.dificultad}es" expanded="false" >
+                        <center>
+                            <h:panelGrid columns="2">
+                                <a4j:commandLink id="btlogros" styleClass="evo01 anchorLink"
+                                                 action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
+                                                 oncomplete="#{rich:component('modalLogrosDetalle')}.show();"
+                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                 render="modalLogrosDetalle"/>
+                                <a4j:commandLink id="btlogrosx" styleClass="evo02 anchorLink"
+                                                 action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
+                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;" render="modalDificultadDetalle"/>
+                            </h:panelGrid>
+                        </center>
+                    </rich:collapsiblePanel>
+
+                    <rich:collapsiblePanel id="MovimientosFinancieros" switchType="server" expanded="false" header="#{var.movimientosfinancieros}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlmovientosfinancieros}" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                        <f:facet name="header">
+                            <h:outputText value="#{var.movimientosfinancieros}"/>
+                        </f:facet>
+                        <interkont:spacer height="3"/>
+                        <h:panelGroup id="gpMovFinan">
+                            <center>
+
+                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
+                                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
+                                            rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}">
+                                    <center>
+                                        <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                                            <h:outputText value="#{var.numeroencargo}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
+
+                                            <h:outputText value="#{var.fechaapertura}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                                <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputText value="#{var.saldoinicial}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoinicial}">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+
+                                            <h:outputText value="#{var.saldoactual}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoactual}">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+
+                                        </h:panelGrid>
                                     </center>
+                                </rich:panel>
+                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
+                                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
+                                            rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro != null}">
+                                    <center>
+                                        <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                                            <h:outputText value="#{var.numeroencargo}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
 
-                                    <interkont:spacer height="3"/>
-                                    <rich:dataTable id="tablaMovimientos"
+                                            <h:outputText value="#{var.fechaapertura}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                                <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                            </h:outputText>
 
-                                                    value="#{Supervisor$DetalleObra.listadomovimientos}"
+                                            <h:outputText value="#{var.saldoinicial}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoinicial}">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+
+                                            <h:outputText value="#{var.saldoactual}: "/>
+                                            <interkont:spacer width="20"/>
+                                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoactual}">
+                                                <f:convertNumber pattern="$###,###"/>
+                                            </h:outputText>
+
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:panel>
+                            </center>
+
+                            <interkont:spacer height="3"/>
+                            <rich:dataTable id="tablaMovimientos"
+
+                                            value="#{Supervisor$DetalleObra.listadomovimientos}"
+                                            onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                            onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                            var="currentRow"  style="width:100%;">
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column breakRowBefore="true" colspan="12">
+                                            <h:outputText value="Movimientos Financieros" />
+                                        </rich:column>
+                                        <rich:column breakRowBefore="true">
+                                            <h:outputText value="#{var.comprobantefidu}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.valor} Movimiento"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.valor} Ejecutado"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.porcentajejecutado}"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="% Legalizado"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.fecha} legalizaciÃ³n"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.tipom} Movimiento"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="Estado movimiento"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="Orden de pago"/>
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.nombre} Contratista"/>
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <rich:columnGroup>
+                                    <rich:column breakRowBefore="true">
+                                        <h:outputText value="#{currentRow.strcomprobantefidu}"/>
+                                    </rich:column>
+                                    <rich:column styleClass="panelderecha">
+                                        <h:outputText value="#{currentRow.numvlrmovimiento}">
+                                            <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column styleClass="panelderecha">
+                                        <h:outputText value="#{currentRow.numvlrejecutado}">
+                                            <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.floatporejecucion}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.floatporcentajelegalizacion}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.datefechalegalizacion}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.ordendepago.strordenpago}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{currentRow.strnombrecontratista}"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+                                <f:facet name="footer">
+                                    <rich:columnGroup>
+                                        <rich:column breakRowBefore="true" colspan="1">
+                                            <center>
+                                                TOTALES
+                                            </center>
+                                        </rich:column>
+                                        <rich:column styleClass="panelderecha">
+                                            <h:outputText value="#{Supervisor$DetalleObra.totales[1]}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.00"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column styleClass="panelderecha">
+                                            <h:outputText value="#{Supervisor$DetalleObra.totales[2]}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.00"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column colspan="7">
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                            </rich:dataTable>
+                        </h:panelGroup>
+                    </rich:collapsiblePanel>
+
+                    <rich:collapsiblePanel id="simpleToggleHistoria" switchType="server" rendered="#{Supervisor$AdministrarObraNew.historico}" header="#{var.historialmodificacion}" expanded="false" >
+                        <!--  <ui:include src="/modal/historialModiModal.xhtml"/>-->
+                    </rich:collapsiblePanel>
+
+                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="server" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos}"
+                                           header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
+
+                        <!--<ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>-->
+                    </rich:collapsiblePanel>
+
+
+                    <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="server" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
+                        <rich:panel id="panelInterventoriaContra" style="padding: 0px;" >
+                            <rich:dataTable id="tablaInterventoria"
+                                            rows="10"
+                                            var="contraInterven"
+                                            binding="#{Supervisor$DetalleObra.tablaContatoInter}"
+                                            onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                            onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                            sortMode="single"
+                                            value="#{SessionBeanCobra.cobraService.listaContratoInterventoria}"
+                                            style="text-align:center;width:100%;">
+                                <f:facet name="header">
+                                    <rich:columnGroup>
+                                        <rich:column colspan="8">
+                                            <h:outputText value="#{var.contrato} #{var.interventorObra}ia" />
+                                        </rich:column>
+                                        <rich:column breakRowBefore="true">
+                                            <h:outputText value="#{var.houtnrocontrato}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.objetocontrato}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.houtcontratis}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.fechadeinicio}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.fechadefinalizacion}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.intduracion}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.vlrcontra}" />
+                                        </rich:column>
+                                        <rich:column>
+                                            <h:outputText value="#{var.valorasociadoaproyecto}" />
+                                        </rich:column>
+                                    </rich:columnGroup>
+                                </f:facet>
+                                <rich:columnGroup>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.strnumcontrato}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.textobjeto}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.contratista.strnombre} #{contraInterven.contrato.contratista.strapellido1}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.datefechaini}">
+
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.datefechafin}">
+
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.intduraciondias}"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="#{contraInterven.contrato.numvlrcontrato}">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column >
+                                        <h:outputText value="#{contraInterven.numvalorrelacion}">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                </rich:columnGroup>
+                                <f:facet name="footer">
+                                    <rich:dataScroller for="tablaInterventoria" render="tablaInterventoria"></rich:dataScroller>
+                                </f:facet>
+                            </rich:dataTable>
+                        </rich:panel>
+                    </rich:collapsiblePanel>
+
+                    <rich:collapsiblePanel id="simpleToggleReportes" switchType="server" header="#{var.reportedeobra}" expanded="false">
+
+                        <rich:panel id="panelReporteObra" style="padding: 0px;" >
+                            <h:form target="_blank">
+
+                                <center>
+                                    Generar reporte en:
+                                    <h:panelGrid columns="3">
+                                        <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="pdf"  />
+                                        <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="excel"  />
+                                        <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="word"  />
+                                    </h:panelGrid>
+                                </center>
+                            </h:form>
+                        </rich:panel>
+                    </rich:collapsiblePanel>
+
+                    <rich:collapsiblePanel id="simpleToggleBeneficiariosxproyecto" switchType="server" expanded="false" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null
+                                                                                                                                    and SessionBeanCobra.usuarioObra.renderrecurso.verbeneficiariosah}"
+                                           header="#{var.listabeneficiario}"
+                                           toggleListener="#{Supervisor$DetalleObra.llenarBeneficiariosxproyecto}">
+                        <center>
+                            <rich:panel id="rpListaBeneficiariosxproyecto" >
+                                <rich:dataTable id="tablabeneficiarioxproyecto"
+                                                value="#{Supervisor$DetalleObra.lstbeneficiario}"
+                                                rows="10"
+
+                                                var="rowbeneficiariopr"
+                                                style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;width:90%">
+                                    <f:facet name="header">
+                                        <rich:columnGroup>
+                                            <rich:column  colspan="11" breakRowBefore="true">
+                                                <h:outputText value="#{var.listabeneficiario} por #{var.solicitudproyecto} (#{Supervisor$DetalleObra.totalben})"/>
+                                            </rich:column>
+                                            <!--<rich:column  breakBefore="true">
+                                                <h:outputText id="consecutivo" value="#{var.consecutivo}"/>
+                                            </rich:column>-->
+                                            <rich:column breakRowBefore="true">
+                                                <h:outputText id="tipodocumento" value="#{var.tipoDocumento}"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="identificacion" value="#{var.numero} de IdentificaciÃ³n"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="nombrecompleto" value="Nombre completo"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="departamento" value="#{var.departamento} de residencia"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="municipio" value="#{var.municipio} de residencia"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="direccion" value="#{var.direccion} / Nombre de la finca"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="telefono" value="#{var.telefono}"/>
+                                            </rich:column>
+                                            <rich:column >
+                                                <h:outputText id="email" value="#{var.correo} Electronico"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                    <rich:columnGroup id="cuerpo">
+                                        <rich:column  breakRowBefore="true" >
+                                            <h:outputText id="documento2" value="#{rowbeneficiariopr.strtipoidentificacion}" />
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="identificacion2" value="#{rowbeneficiariopr.intcedula}"/>
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="verstrnombrecompleto" value="#{rowbeneficiariopr.strnombrecompleto}" />
+                                        </rich:column>
+
+                                        <rich:column >
+                                            <h:outputText id="departamento2" value="#{rowbeneficiariopr.strdepartamento}" />
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="municipio2" value="#{rowbeneficiariopr.strmunicipio}" />
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="direccion2" value="#{rowbeneficiariopr.strdireccionprincipal}" />
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="telefono2" value="#{rowbeneficiariopr.strtelefono1}" />
+                                        </rich:column>
+                                        <rich:column >
+                                            <h:outputText id="email2" value="#{rowbeneficiariopr.stremail}" />
+                                        </rich:column>
+
+                                    </rich:columnGroup>
+                                    <f:facet name="footer">
+                                        <rich:columnGroup id="grouptablabeneficiarioxpr">
+                                            <rich:column colspan="11" breakRowBefore="true" style="text-align: center;">
+                                                <rich:dataScroller id="scrolltablabeneficiarioxpr" for="tablabeneficiarioxproyecto" render="tablabeneficiarioxproyecto"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                </rich:dataTable>
+                            </rich:panel>
+                        </center>
+                    </rich:collapsiblePanel>
+                    <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+
+                        <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="server" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
+                            <rich:panel id="rpListaActividadesProyecto" >
+                                <rich:dataTable id="listaActividadesAlimentar2"
+                                                onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                                onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
+                                                value="#{Supervisor$DetalleObra.listactividades}" var="registros" style="width:100%;">
+
+                                    <f:facet name="header">
+                                        <rich:columnGroup>
+                                            <rich:column id= "actividades" colspan="1" width="300px">
+
+                                                <h:outputText value="#{var.actividades}"/>
+                                            </rich:column>
+                                            <rich:column id= "total" colspan="4" >
+                                                <h:outputText value="#{var.totalactividad}"/>
+                                            </rich:column>
+                                            <rich:column id= "totalEjecutado" colspan="3" >
+                                                <h:outputText value="#{var.totalejecutado}"/>
+                                            </rich:column>
+
+                                            <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="250px">
+                                                <h:outputText value="#{var.descripcion}" style="width:250px;"/>
+                                            </rich:column>
+                                            <rich:column id= "unidad" rowspan="2" width="25px">
+                                                <h:outputText value="#{var.unidad}"/>
+                                            </rich:column>
+                                            <rich:column id= "valorUnitario" rowspan="2" width="25px">
+                                                <h:outputText value="#{var.valorunitaio}"/>
+                                            </rich:column>
+                                            <rich:column id= "cantidad" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.cantidad}"/>
+                                            </rich:column>
+                                            <rich:column id= "precio" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.valorprogramado}"/>
+                                            </rich:column>
+                                            <rich:column id= "cantidad2" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.cantidadejecutada}"/>
+                                            </rich:column>
+                                            <rich:column id= "precio2" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.valorejecutado}"/>
+                                            </rich:column>
+                                            <rich:column id= "cantidad3" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.porcentajeavance}"/>
+                                            </rich:column>
+                                            <!--<rich:column id= "precio3" rowspan="2" width="30px">
+                                                <h:outputText value="#{var.ingresarcantidadde}"/>
+                                            </rich:column>-->
+                                        </rich:columnGroup>
+                                    </f:facet>
+
+                                    <rich:columnGroup >
+                                        <rich:column id="Descripcion" width="250px">
+                                            <h:panelGroup >
+                                                <h:outputText value="#{registros.strdescactividad}"
+                                                              style="width:150px" rendered="#{!registros.boolimprevisto}"/>
+                                                <h:outputText value="#{registros.strdescactividad}"
+                                                              style="width:150px; font-weight: bold; color:red;" rendered="#{registros.boolimprevisto}"/>
+                                            </h:panelGroup>
+                                        </rich:column>
+                                        <rich:column id="Unidad" style="text-align: center;" >
+                                            <h:outputText value="#{registros.strtipounidadmed}" styleClass="matrixvalor "/>
+                                        </rich:column>
+                                        <rich:column id="Precio" style="text-align: right;">
+                                            <h:outputText value="#{registros.numvalorplanifao}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.00"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column id="Cantidad2" style="text-align: right;">
+                                            <h:outputText value="#{registros.floatcantplanifao}" styleClass="matrixvalor "/>
+                                        </rich:column>
+                                        <rich:column id="TotalActividad" style="text-align: right;">
+                                            <h:outputText value="#{registros.numvalorplanifao*registros.floatcantplanifao}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.00"/>
+                                            </h:outputText>
+                                        </rich:column>
+
+                                        <rich:column id="ValorEjec" style="text-align: right;">
+                                            <h:outputText id="ValorEjecObra" value="#{registros.floatcantidadejecutao}" styleClass="matrixvalor ">
+
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column id="ValorFaltanAct" style="text-align: right;">
+                                            <h:outputText id="valorFaltante"  value="#{registros.numvalorejecutao}" styleClass="matrixvalor ">
+                                                <f:convertNumber pattern="$#,###.00"/>
+                                            </h:outputText>
+                                        </rich:column>
+                                        <rich:column id="CantidadEjec" style="text-align: right;">
+                                            <h:outputText  id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
+                                                <f:convertNumber type="percent"/>
+
+                                            </h:outputText>
+                                        </rich:column>
+                                    </rich:columnGroup>
+
+                                    <f:facet name="footer">
+                                        <rich:columnGroup id="pie">
+                                            <rich:column colspan="3">TOTALES
+                                            </rich:column>
+                                            <rich:column>
+                                                <interkont:spacer width="2"/>
+                                            </rich:column>
+                                            <rich:column style="text-align: right;">
+                                                <h:outputText id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" styleClass="matrixvalor ">
+                                                    <f:convertNumber pattern="$#,###.00"/>
+                                                </h:outputText>
+                                            </rich:column>
+
+                                            <rich:column>
+                                                <interkont:spacer width="2"/>
+                                            </rich:column>
+
+                                            <rich:column style="text-align: right;">
+                                                <h:outputText id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}" styleClass="matrixvalor ">
+                                                    <f:convertNumber pattern="$#,###.00"/>
+                                                </h:outputText>
+                                            </rich:column>
+
+
+                                            <rich:column>
+                                                <interkont:spacer width="2"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                    </f:facet>
+                                </rich:dataTable>
+                            </rich:panel>
+                        </rich:collapsiblePanel>
+                    </h:form>
+
+                    <h:form id="formSubProyectos" rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                        <rich:collapsiblePanel  id="simpleTogglepadres" switchType="server" header="#{var.detsubproyectos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
+                            <center>
+                                <h:panelGroup id="panelSubProyectos">
+                                    <rich:dataTable id="tablaSubProyectos"
+                                                    value="#{Supervisor$DetalleObra.listaSubProyectos}"
+                                                    rendered="#{!empty Supervisor$DetalleObra.listaSubProyectos}"
                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                                    var="currentRow"  style="width:100%;">
+                                                    sortMode="single"  var="row" style="width:80%" rows="6"
+                                                    rowClasses="cabezo_tabla01, cabezo_tabla02">
                                         <f:facet name="header">
                                             <rich:columnGroup>
-                                                <rich:column breakRowBefore="true" colspan="12">
-                                                    <h:outputText value="Movimientos Financieros" />
+                                                <rich:column colspan="2">
+                                                    <h:outputText value="#{var.detnumsubproyectos}: "/>
+                                                    <h:outputText value="#{Supervisor$DetalleObra.numSubproyectos}"/>
                                                 </rich:column>
-                                                <rich:column breakRowBefore="true">
-                                                    <h:outputText value="#{var.comprobantefidu}"/>
+                                                <rich:column width="90%" breakRowBefore="true">
+                                                    <h:outputText id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
                                                 </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.valor} Movimiento"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.valor} Ejecutado"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.porcentajejecutado}"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="% Legalizado"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.fecha} legalización"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.tipom} Movimiento"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="Estado movimiento"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="Orden de pago"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.nombre} Contratista"/>
+                                                <rich:column width="10%">
+                                                    <h:outputText id="outputTexConsultarSubProyecto" value="#{var.consultar}" styleClass="centrado"/>
                                                 </rich:column>
                                             </rich:columnGroup>
                                         </f:facet>
-                                        <rich:columnGroup>
-                                            <rich:column breakRowBefore="true">
-                                                <h:outputText value="#{currentRow.strcomprobantefidu}"/>
-                                            </rich:column>
-                                            <rich:column styleClass="panelderecha">
-                                                <h:outputText value="#{currentRow.numvlrmovimiento}">
-                                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column styleClass="panelderecha">
-                                                <h:outputText value="#{currentRow.numvlrejecutado}">
-                                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
-                                                </h:outputText>
+                                        <rich:columnGroup id="cuerpoTablaSubproyectos">
+                                            <rich:column width="150px" breakRowBefore="true">
+                                                <h:outputText value="#{row.strnombreobra}"/>
                                             </rich:column>
                                             <rich:column>
-                                                <h:outputText value="#{currentRow.floatporejecucion}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.floatporcentajelegalizacion}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.datefechalegalizacion}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.ordendepago.strordenpago}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{currentRow.strnombrecontratista}"/>
+                                                <h:panelGroup styleClass="centrado">
+                                                    <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
+                                                                     id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.jspx?id=#{row.intcodigoobra}';">
+                                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                                    </a4j:commandLink>
+
+                                                    <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
+                                                                     onclick="document.location.href = '../faces/Supervisor/DetalleObra.jspx?id=#{row.intcodigoobra}';">
+                                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                                    </a4j:commandLink>
+                                                </h:panelGroup>
                                             </rich:column>
                                         </rich:columnGroup>
                                         <f:facet name="footer">
                                             <rich:columnGroup>
-                                                <rich:column breakRowBefore="true" colspan="1">
-                                                    <center>
-                                                        TOTALES
-                                                    </center>
-                                                </rich:column>
-                                                <rich:column styleClass="panelderecha">
-                                                    <h:outputText value="#{Supervisor$DetalleObra.totales[1]}" styleClass="matrixvalor ">
-                                                        <f:convertNumber pattern="$#,###.00"/>
-                                                    </h:outputText>
-                                                </rich:column>
-                                                <rich:column styleClass="panelderecha">
-                                                    <h:outputText value="#{Supervisor$DetalleObra.totales[2]}" styleClass="matrixvalor ">
-                                                        <f:convertNumber pattern="$#,###.00"/>
-                                                    </h:outputText>
-                                                </rich:column>
-                                                <rich:column colspan="7">
+                                                <rich:column colspan="2" breakRowBefore="true" style="text-align: center;">
+                                                    <rich:dataScroller id="datascrollerTablaSubProyectos" for="tablaSubProyectos" render="panelSubProyectos"/>
                                                 </rich:column>
                                             </rich:columnGroup>
                                         </f:facet>
                                     </rich:dataTable>
                                 </h:panelGroup>
-                            </rich:collapsiblePanel>
 
-                            <rich:collapsiblePanel id="simpleToggleHistoria" switchType="server" rendered="#{Supervisor$AdministrarObraNew.historico}" header="#{var.historialmodificacion}" expanded="false" >
-                              <!--  <ui:include src="/modal/historialModiModal.xhtml"/>-->
-                            </rich:collapsiblePanel>
 
-                        </h:form>
+                            </center>
 
-                        <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="server" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos}"
-                                               header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
-
-                             
-                            <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>
                         </rich:collapsiblePanel>
+                    </h:form>
 
-                        <h:form>
-                            <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="server" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
-                                <rich:panel id="panelInterventoriaContra" style="padding: 0px;" >
-                                    <rich:dataTable id="tablaInterventoria"
-                                                    rows="10"
-                                                    var="contraInterven"
-                                                    binding="#{Supervisor$DetalleObra.tablaContatoInter}"
-                                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                                    onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                                    sortMode="single"
-                                                    value="#{SessionBeanCobra.cobraService.listaContratoInterventoria}"
-                                                    style="text-align:center;width:100%;">
-                                        <f:facet name="header">
-                                            <rich:columnGroup>
-                                                <rich:column colspan="8">
-                                                    <h:outputText value="#{var.contrato} #{var.interventorObra}ia" />
-                                                </rich:column>
-                                                <rich:column breakRowBefore="true">
-                                                    <h:outputText value="#{var.houtnrocontrato}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.objetocontrato}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.houtcontratis}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.fechadeinicio}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.fechadefinalizacion}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.intduracion}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.vlrcontra}" />
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:outputText value="#{var.valorasociadoaproyecto}" />
-                                                </rich:column>
-                                            </rich:columnGroup>
-                                        </f:facet>
-                                        <rich:columnGroup>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.strnumcontrato}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.textobjeto}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.contratista.strnombre} #{contraInterven.contrato.contratista.strapellido1}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.datefechaini}">
-
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.datefechafin}">
-
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.intduraciondias}"/>
-                                            </rich:column>
-                                            <rich:column>
-                                                <h:outputText value="#{contraInterven.contrato.numvlrcontrato}">
-                                                    <f:convertNumber pattern="$###,###"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column >
-                                                <h:outputText value="#{contraInterven.numvalorrelacion}">
-                                                    <f:convertNumber pattern="$###,###"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                        <f:facet name="footer">
-                                            <rich:dataScroller for="tablaInterventoria" render="tablaInterventoria"></rich:dataScroller>
-                                        </f:facet>
-                                    </rich:dataTable>
-                                </rich:panel>
-                            </rich:collapsiblePanel>
-                        </h:form>
-
-                        <rich:collapsiblePanel id="simpleToggleReportes" switchType="server" header="#{var.reportedeobra}" expanded="false">
-                            
-                            <rich:panel id="panelReporteObra" style="padding: 0px;" >
-                                <h:form target="_blank">
-
-                                    <center>
-                                        Generar reporte en:
-                                        <h:panelGrid columns="3">
-                                            <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="pdf"  />
-                                            <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="excel"  />
-                                            <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="word"  />
-                                        </h:panelGrid>
-                                    </center>
-                                </h:form>
-                            </rich:panel>
-                        </rich:collapsiblePanel>
-                        <h:form>
-                            <rich:collapsiblePanel id="simpleToggleBeneficiariosxproyecto" switchType="server" expanded="false" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null
-                                                                                                                                           and SessionBeanCobra.usuarioObra.renderrecurso.verbeneficiariosah}"
-                                                    header="#{var.listabeneficiario}"
-                                                    toggleListener="#{Supervisor$DetalleObra.llenarBeneficiariosxproyecto}">
-                                <center>
-                                    <rich:panel id="rpListaBeneficiariosxproyecto" >
-                                        <rich:dataTable id="tablabeneficiarioxproyecto"
-                                                        value="#{Supervisor$DetalleObra.lstbeneficiario}"
-                                                        rows="10"
-                                                        
-                                                        var="rowbeneficiariopr"
-                                                        style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;border: #C1D1E7 thin solid;width:90%">
-                                            <f:facet name="header">
-                                                <rich:columnGroup>
-                                                    <rich:column  colspan="11" breakRowBefore="true">
-                                                        <h:outputText value="#{var.listabeneficiario} por #{var.solicitudproyecto} (#{Supervisor$DetalleObra.totalben})"/>
-                                                    </rich:column>
-                                                    <!--<rich:column  breakBefore="true">
-                                                        <h:outputText id="consecutivo" value="#{var.consecutivo}"/>
-                                                    </rich:column>-->
-                                                    <rich:column breakRowBefore="true">
-                                                        <h:outputText id="tipodocumento" value="#{var.tipoDocumento}"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="identificacion" value="#{var.numero} de Identificación"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="nombrecompleto" value="Nombre completo"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="departamento" value="#{var.departamento} de residencia"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="municipio" value="#{var.municipio} de residencia"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="direccion" value="#{var.direccion} / Nombre de la finca"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="telefono" value="#{var.telefono}"/>
-                                                    </rich:column>
-                                                    <rich:column >
-                                                        <h:outputText id="email" value="#{var.correo} Electronico"/>
-                                                    </rich:column>
-                                                </rich:columnGroup>
-                                            </f:facet>
-                                            <rich:columnGroup id="cuerpo">
-                                                <rich:column  breakRowBefore="true" >
-                                                    <h:outputText id="documento2" value="#{rowbeneficiariopr.strtipoidentificacion}" />
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="identificacion2" value="#{rowbeneficiariopr.intcedula}"/>
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="verstrnombrecompleto" value="#{rowbeneficiariopr.strnombrecompleto}" />
-                                                </rich:column>
-
-                                                <rich:column >
-                                                    <h:outputText id="departamento2" value="#{rowbeneficiariopr.strdepartamento}" />
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="municipio2" value="#{rowbeneficiariopr.strmunicipio}" />
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="direccion2" value="#{rowbeneficiariopr.strdireccionprincipal}" />
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="telefono2" value="#{rowbeneficiariopr.strtelefono1}" />
-                                                </rich:column>
-                                                <rich:column >
-                                                    <h:outputText id="email2" value="#{rowbeneficiariopr.stremail}" />
-                                                </rich:column>
-
-                                            </rich:columnGroup>
-                                            <f:facet name="footer">
-                                                <rich:columnGroup id="grouptablabeneficiarioxpr">
-                                                    <rich:column colspan="11" breakRowBefore="true" style="text-align: center;">
-                                                        <rich:dataScroller id="scrolltablabeneficiarioxpr" for="tablabeneficiarioxproyecto" render="tablabeneficiarioxproyecto"/>
-                                                    </rich:column>
-                                                </rich:columnGroup>
-                                            </f:facet>
-                                        </rich:dataTable>
-                                    </rich:panel>
-                                </center>
-                            </rich:collapsiblePanel>
-                        </h:form>
-                        <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                            <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="server" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
-                                <rich:panel id="rpListaActividadesProyecto" >
-                                    <rich:dataTable id="listaActividadesAlimentar2"
-                                                    onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
-                                                    value="#{Supervisor$DetalleObra.listactividades}" var="registros" style="width:100%;">
-
-                                        <f:facet name="header">
-                                            <rich:columnGroup>
-                                                <rich:column id= "actividades" colspan="1" width="300px">
-
-                                                    <h:outputText value="#{var.actividades}"/>
-                                                </rich:column>
-                                                <rich:column id= "total" colspan="4" >
-                                                    <h:outputText value="#{var.totalactividad}"/>
-                                                </rich:column>
-                                                <rich:column id= "totalEjecutado" colspan="3" >
-                                                    <h:outputText value="#{var.totalejecutado}"/>
-                                                </rich:column>
-
-                                                <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="250px">
-                                                    <h:outputText value="#{var.descripcion}" style="width:250px;"/>
-                                                </rich:column>
-                                                <rich:column id= "unidad" rowspan="2" width="25px">
-                                                    <h:outputText value="#{var.unidad}"/>
-                                                </rich:column>
-                                                <rich:column id= "valorUnitario" rowspan="2" width="25px">
-                                                    <h:outputText value="#{var.valorunitaio}"/>
-                                                </rich:column>
-                                                <rich:column id= "cantidad" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.cantidad}"/>
-                                                </rich:column>
-                                                <rich:column id= "precio" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.valorprogramado}"/>
-                                                </rich:column>
-                                                <rich:column id= "cantidad2" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.cantidadejecutada}"/>
-                                                </rich:column>
-                                                <rich:column id= "precio2" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.valorejecutado}"/>
-                                                </rich:column>
-                                                <rich:column id= "cantidad3" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.porcentajeavance}"/>
-                                                </rich:column>
-                                                <!--<rich:column id= "precio3" rowspan="2" width="30px">
-                                                    <h:outputText value="#{var.ingresarcantidadde}"/>
-                                                </rich:column>-->
-                                            </rich:columnGroup>
-                                        </f:facet>
-
-                                        <rich:columnGroup >
-                                            <rich:column id="Descripcion" width="250px">
-                                                <h:panelGroup >
-                                                    <h:outputText value="#{registros.strdescactividad}"
-                                                                  style="width:150px" rendered="#{!registros.boolimprevisto}"/>
-                                                    <h:outputText value="#{registros.strdescactividad}"
-                                                                  style="width:150px; font-weight: bold; color:red;" rendered="#{registros.boolimprevisto}"/>
-                                                </h:panelGroup>
-                                            </rich:column>
-                                            <rich:column id="Unidad" style="text-align: center;" >
-                                                <h:outputText value="#{registros.strtipounidadmed}" styleClass="matrixvalor "/>
-                                            </rich:column>
-                                            <rich:column id="Precio" style="text-align: right;">
-                                                <h:outputText value="#{registros.numvalorplanifao}" styleClass="matrixvalor ">
-                                                    <f:convertNumber pattern="$#,###.00"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="Cantidad2" style="text-align: right;">
-                                                <h:outputText value="#{registros.floatcantplanifao}" styleClass="matrixvalor "/>
-                                            </rich:column>
-                                            <rich:column id="TotalActividad" style="text-align: right;">
-                                                <h:outputText value="#{registros.numvalorplanifao*registros.floatcantplanifao}" styleClass="matrixvalor ">
-                                                    <f:convertNumber pattern="$#,###.00"/>
-                                                </h:outputText>
-                                            </rich:column>
-
-                                            <rich:column id="ValorEjec" style="text-align: right;">
-                                                <h:outputText id="ValorEjecObra" value="#{registros.floatcantidadejecutao}" styleClass="matrixvalor ">
-
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="ValorFaltanAct" style="text-align: right;">
-                                                <h:outputText id="valorFaltante"  value="#{registros.numvalorejecutao}" styleClass="matrixvalor ">
-                                                    <f:convertNumber pattern="$#,###.00"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="CantidadEjec" style="text-align: right;">
-                                                <h:outputText  id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
-                                                    <f:convertNumber type="percent"/>
-
-                                                </h:outputText>
-                                            </rich:column>
-                                        </rich:columnGroup>
-
-                                        <f:facet name="footer">
-                                            <rich:columnGroup id="pie">
-                                                <rich:column colspan="3">TOTALES
-                                                </rich:column>
-                                                <rich:column>
-                                                    <interkont:spacer width="2"/>
-                                                </rich:column>
-                                                <rich:column style="text-align: right;">
-                                                    <h:outputText id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" styleClass="matrixvalor ">
-                                                        <f:convertNumber pattern="$#,###.00"/>
-                                                    </h:outputText>
-                                                </rich:column>
-
-                                                <rich:column>
-                                                    <interkont:spacer width="2"/>
-                                                </rich:column>
-
-                                                <rich:column style="text-align: right;">
-                                                    <h:outputText id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}" styleClass="matrixvalor ">
-                                                        <f:convertNumber pattern="$#,###.00"/>
-                                                    </h:outputText>
-                                                </rich:column>
+                </h:form>
 
 
-                                                <rich:column>
-                                                    <interkont:spacer width="2"/>
-                                                </rich:column>
-                                            </rich:columnGroup>
-                                        </f:facet>
-                                    </rich:dataTable>
-                                </rich:panel>
-                            </rich:collapsiblePanel>
-                        </h:form>
-                        <h:form id="formSubProyectos" rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                            <rich:collapsiblePanel  id="simpleTogglepadres" switchType="server" header="#{var.detsubproyectos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.cargarSubProyectos}">
-                                 <center>
-                                    <h:panelGroup id="panelSubProyectos">
-                                        <rich:dataTable id="tablaSubProyectos"
-                                                        value="#{Supervisor$DetalleObra.listaSubProyectos}"
-                                                        rendered="#{!empty Supervisor$DetalleObra.listaSubProyectos}"
-                                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                                        onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                                        sortMode="single"  var="row" style="width:80%" rows="6"
-                                                        rowClasses="cabezo_tabla01, cabezo_tabla02">
-                                            <f:facet name="header">
-                                                <rich:columnGroup>
-                                                    <rich:column colspan="2">
-                                                        <h:outputText value="#{var.detnumsubproyectos}: "/>
-                                                        <h:outputText value="#{Supervisor$DetalleObra.numSubproyectos}"/>
-                                                    </rich:column>
-                                                    <rich:column width="90%" breakRowBefore="true">
-                                                        <h:outputText id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
-                                                    </rich:column>
-                                                    <rich:column width="10%">
-                                                        <h:outputText id="outputTexConsultarSubProyecto" value="#{var.consultar}" styleClass="centrado"/>
-                                                    </rich:column>
-                                                </rich:columnGroup>
-                                            </f:facet>
-                                            <rich:columnGroup id="cuerpoTablaSubproyectos">
-                                                <rich:column width="150px" breakRowBefore="true">
-                                                    <h:outputText value="#{row.strnombreobra}"/>
-                                                </rich:column>
-                                                <rich:column>
-                                                    <h:panelGroup styleClass="centrado">
-                                                        <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
-                                                                         id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{row.intcodigoobra}';">
-                                                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                                                        </a4j:commandLink>
-
-                                                        <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
-                                                                         onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{row.intcodigoobra}';">
-                                                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                                                        </a4j:commandLink>
-                                                    </h:panelGroup>
-                                                </rich:column>
-                                            </rich:columnGroup>
-                                            <f:facet name="footer">
-                                                <rich:columnGroup>
-                                                    <rich:column colspan="2" breakRowBefore="true" style="text-align: center;">
-                                                        <rich:dataScroller id="datascrollerTablaSubProyectos" for="tablaSubProyectos" render="panelSubProyectos"/>
-                                                    </rich:column>
-                                                </rich:columnGroup>
-                                            </f:facet>
-                                        </rich:dataTable>
-                                    </h:panelGroup>
-
-
-                                </center>
-
-                            </rich:collapsiblePanel>
-                        </h:form>
-
-                    </h:panelGroup>  
-
-                    <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+            </h:panelGroup>
+            
+             <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
 
                         <h:panelGrid style="width:100%;" id="gpPrincipalInfCiudad" >
                             <h:form prependId="false">
 
-                                <div id="sideline"><label class="textlittle2">INFORMACIÓN GENERAL #{vat.textobra8}</label></div>
+                                <div id="sideline"><label class="textlittle2">INFORMACIÃ“N GENERAL #{vat.textobra8}</label></div>
                                 <h:outputText value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})" styleClass="textlittle" />
                                 <h:panelGrid columns="2" style="width:100%;" columnClasses="panelizquierda, panelderecha">
                                     <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombrecrot}" styleClass="titledegrad" />
@@ -1067,7 +1050,7 @@
 
                                                 <h:outputText styleClass="textlittle3" value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
                                                 <h:outputText id="otContratistas" styleClass="textlittle3" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
-                                                    <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
+                                                    <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 200px;">
                                                         <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
                                                             <h:outputText value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
@@ -1081,7 +1064,7 @@
                                                 <h:outputText value="#{var.ncontratociu}:" styleClass="textlittle2" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" ></h:outputText>
                                                 <h:outputText styleClass="textlittle3" value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
                                                 <h:outputText id="otNumContratos" styleClass="textlittle3" value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratos" rendered="#{Supervisor$AdministrarObraNew.numContratosObra >1}">
-                                                    <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
+                                                    <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 200px;">
                                                         <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
                                                             <h:outputText value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
@@ -1093,14 +1076,14 @@
                                                 <h:outputText value="#{var.objeto} #{vat.textoobra3}" styleClass="textlittle2" ></h:outputText>
                                                 <h:outputText value=". . . . . . . . ." styleClass="textlittle2"></h:outputText>
                                                 <h:commandButton id="ver_objeto" value="#{var.verinfciu}" styleClass="buttonblue6 anchorLink" style="width:40px!important; height: 20px!important;" >
-                                                    <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottom-right" horizontalOffset="5"
+                                                    <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 200px;">
                                                     </rich:tooltip>
                                                 </h:commandButton>
                                                 <h:outputText rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value="#{var.contrato} de interventoria" styleClass="textlittle2" ></h:outputText>
                                                 <h:outputText rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value=". . . . . . . . ." styleClass="textlittle2"></h:outputText>
                                                 <h:commandButton rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" id="btncontratoInterventoria" value="#{var.verinfciu}" styleClass="buttonblue6 anchorLink" style="width:40px!important;height: 20px!important;">
-                                                    <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
+                                                    <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 400px;">
                                                         <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
                                                             <h:outputText value="#{var.objetocontrato}: " /><br/>
@@ -1126,7 +1109,7 @@
                                     </h:panelGrid>
                                     <h:panelGrid style="height: 186px;width:100%;" rowClasses="alignverticaldetalle, alignverticaldetallebottom">
 
-                                        <div id="sideline"><label class="textlittle2">SEMÁFORO</label></div>
+                                        <div id="sideline"><label class="textlittle2">SEMÃ�FORO</label></div>
                                         <h:panelGrid style="width:100%;" columnClasses="panelcenter">
                                             <h:graphicImage id="imgSemaObra"
                                                             value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
@@ -1164,7 +1147,7 @@
                                 <h:panelGrid id="pg_valores_financieros" style="width:100%;" columns="4"  rowClasses="alignverticaldetalle"
                                              columnClasses="pg_valores_financieros_col1,pg_valores_financieros_col2,pg_valores_financieros_col3,pg_valores_financieros_col4">
                                     <h:panelGrid style="height: 186px;width:100%;" rowClasses="alignverticaldetalle, alignverticaldetallebottom">
-                                        <div id="sideline"><label class="textlittle2">¿CUANTO CUESTA #{vat.textobra9}?</label></div>
+                                        <div id="sideline"><label class="textlittle2">Â¿CUANTO CUESTA #{vat.textobra9}?</label></div>
                                         <h:panelGrid style="width:100%;" styleClass="centrarImagenes_infociu" >
                                             <h:outputText styleClass="numberblue" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                                                 <f:convertNumber pattern="$###,###" />
@@ -1200,7 +1183,7 @@
                                     </h:panelGrid>
                                     <h:panelGrid style="height: 186px;width:100%;" rowClasses="alignverticaldetalle, alignverticaldetallebottom"  styleClass="centrarImagenes_infociu" >
                                         <h:panelGrid style="width:100%;">
-                                            <div id="sideline"><label class="textlittle2">DURACIÓN</label></div>
+                                            <div id="sideline"><label class="textlittle2">DURACIÃ“N</label></div>
                                         </h:panelGrid>
                                         <interkont:spacer height="15" />
                                         <h:outputText styleClass="numberbluebig"  value="#{Supervisor$AdministrarObraNew.obra.intplazoobra}" ></h:outputText>
@@ -1221,7 +1204,7 @@
                                     </h:panelGrid>
 
                                     <h:panelGrid  style="width:100%;"  styleClass="centrarImagenes_infociu" >
-                                        <div id="sideline"><label class="textlittle2">AVANCE FÍSICO</label></div>
+                                        <div id="sideline"><label class="textlittle2">AVANCE FÃ�SICO</label></div>
                                         <h:panelGrid columns="2" style="margin-left: auto;margin-right: auto;width: 100px;">
                                             <h:outputText value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
@@ -1257,7 +1240,7 @@
                                 <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2" style="width:100%;" columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2" >
                                     <h:panelGrid style="width:100%;" >
 
-                                        <div id="sideline"><label class="textlittle2">¿DÓNDE ESTÁ UBICADO #{var.textobra8}?</label></div>
+                                        <div id="sideline"><label class="textlittle2">Â¿DÃ“NDE ESTÃ� UBICADO #{var.textobra8}?</label></div>
                                         <interkont:spacer height="5" />
                                         <h:panelGrid columns="2" style="text-align:left;width:100%;">
                                             <h:panelGrid width="30%" style="align:right;margin-left: auto;margin-right: auto;width: 6px;">
@@ -1316,7 +1299,7 @@
 
                                     <h:panelGrid style="width:100%;" >
 
-                                        <div id="sideline"><label class="textlittle2">CONÓZCA LA EVOLUCIÓN</label></div>
+                                        <div id="sideline"><label class="textlittle2">CONÃ“ZCA LA EVOLUCIÃ“N</label></div>
                                         <h:panelGrid columnClasses="panelderecha" style="width: 100px; margin-left: auto;margin-right: auto;">
                                             <h:outputText value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
 
@@ -1403,26 +1386,17 @@
                     </h:panelGroup>
                     <h:panelGroup id="modalesDetalle"  >
 
-                      <!--  <ui:include src="/modal/verPolizasModal.jspx"/>
-                        <ui:include src="/modal/objetoObra.jspx"/>
-                        <ui:include src="/modal/costoContratomodal.jspx"/>
-                        <ui:include src="/modal/modalImagenvermas.jspx"/>
-                        <ui:include src="/modal/modalImagenes_info.jspx"/>
-    
-                        <ui:include src="/modal/dificultadModalDetalle.jspx"/>-->
-                    </h:panelGroup>
+                     <!--  <ui:include src="/modal/verPolizasModal.xhtml"/>
+                        <ui:include src="/modal/objetoObra.xhtml"/>
+                        <ui:include src="/modal/costoContratomodal.xhtml"/>
+                        <ui:include src="/modal/modalImagenvermas.xhtml"/>
+                        <ui:include src="/modal/modalImagenes_info.xhtml"/>
+                        <ui:include src="/modal/dificultadModalDetalle.xhtml"/>
+                   -->
+                     </h:panelGroup>
 
-                </body>
-            </ui:define>
+        </body>
 
-        </ui:composition>
+    </ui:define>
 
-
-
-
-
-
-
-
-
-
+</ui:composition>

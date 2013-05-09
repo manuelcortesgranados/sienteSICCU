@@ -25,11 +25,11 @@
                     <h:panelGrid columns="2" style="text-align:center;width:100%;">
 
                         <h:commandButton  action="#{Financiera$FiduFinanciera.confirma}" value="#{var.aceptar}" rendered="#{Financiera$FiduFinanciera.financieraService.guardado}"
-                                          onclick="#{rich:component('panelConfirmaguardado')}.hide();" />
+                                          onclick="javascript:Richfaces.hideModalPanel('panelConfirmaguardado');" />
 
                         <h:form >
                             <a4j:commandButton id="aceptar"
-                                               value="#{var.aceptar}" oncomplete="#{rich:component('panelConfirmaguardado')}.hide());" rendered="#{!Financiera$FiduFinanciera.financieraService.guardado}"
+                                               value="#{var.aceptar}" oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaguardado');" rendered="#{!Financiera$FiduFinanciera.financieraService.guardado}"
                                                title="#{var.aceptar}" execute="@this"
                                                style="font-size:12px;"/>
                         </h:form>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition   
+<ui:composition 
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -56,10 +56,10 @@
                         </h:selectOneMenu>
 
                         <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.modificarPoliza}">
-                            <a4j:ajax event="complete" render="pgprincipal" immediate="true" oncomplete="#{rich:component('mp-editar-polizas')}.hide(); return false;"/>
+                            <a4j:ajax event="complete" render="pgprincipal" immediate="true" oncomplete="javascript:Richfaces.hideModalPanel('mp-editar-polizas')"/>
                         </a4j:commandButton>
                         <a4j:commandButton value="#{var.cancelar}" id="cancelar_poliza"  
-                                           onclick="#{rich:component('mp-editar-polizas')}.hide(); return false;"/>
+                                           onclick="javascript:Richfaces.hideModalPanel('mp-editar-polizas')"/>
 
                     </h:panelGrid>
                 </center>
