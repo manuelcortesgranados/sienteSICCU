@@ -1,78 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:a4j="http://richfaces.org/a4j" 
+        xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" style="width:500px;">
+    <rich:popupPanel id="modalLogrosDetalle" autosized="true"  headerClass="rich-panel-header" styleClass="detalleproyecto" style="width:500px;">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalLogros" styleClass="cerrar"
                                      title="#{var.cerrar}" immediate="true"
-                                     onclick="#{rich:component('modalDificultadDetalle')}.hide();return  false;">>
+                                     onclick="#{rich:component('modalLogrosDetalle')}.hide();return  false;">
                     </a4j:commandLink>
-                </h:panelGroup>
+                   </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <h:form>
+        <h:form prependId="false" >
             <rich:panel>
-                <rich:dataTable id="tablaDificultadDet"                                
+                <rich:dataTable id="tablaLogrosDet"                                
                                 value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rows="5"
-                                var="currentRow" 
-                                style="width:80%">
+                                var="currentRow"  style="width:100%;">
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText value="#{var.dificultad}es"/>
+                                <h:outputText value="#{var.logro}s"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText id="tipodifdet" value="#{var.tipo}"/>
+                                <h:outputText id="tipodet" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText id="dificultadodet" value="#{var.dificultad}"/>
-                            </rich:column>
-                            <rich:column >
-                                <h:outputText id="fechadet" value="#{var.fecha}"/>
+                                <h:outputText id="logrodet" value="#{var.logro}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText id="usuariodifdet" value="#{var.usuario}"/>
+                                <h:outputText id="usuariodet" value="#{var.username}"/>
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText id="fechadet" value="#{var.fecha}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
-                        <rich:column  breakRowBefore="true">
-                            <h:outputText id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                        <rich:column breakRowBefore="true">
+                            <h:outputText id="tipologrodet" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
-                            <h:inputTextarea cols="60" rows="2" id="strdificultaddet" value="#{currentRow.strdificultad}" readonly="true" />
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:inputTextarea cols="60" rows="2" value="#{currentRow.strlogro}" readonly="true"  />
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText id="strusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText id="datefechadet" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                     </rich:columnGroup>
                     <f:facet name="footer">
-                        <rich:columnGroup id="groupdificultades">
+                        <rich:columnGroup>
                             <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
-                                <rich:dataScroller id="scrolltablaDificultadDet" for="tablaDificultadDet" render="tablaDificultadDet"/>
+                                <rich:dataScroller id="scrolltablalogrosdet" for="tablaLogrosDet" render="tablaLogrosDet"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
