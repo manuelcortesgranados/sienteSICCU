@@ -147,11 +147,6 @@ public class AdminSolicitudAtencion  {
     private UIDataTable tablaProductos = new UIDataTable();
     /**
      * Variable para hacer binding con la tabla que muestra los datos de
-     * productos en el jspx de consulta
-     */
-    private UIDataTable tablaProductosconsulta = new UIDataTable();
-    /**
-     * Variable para hacer binding con la tabla que muestra los datos de
      * los documentos
      */
     private UIDataTable tablaDocumentos = new UIDataTable();
@@ -410,14 +405,6 @@ public class AdminSolicitudAtencion  {
 
     public void setSolicitudaborrar(Solicitudmaestro solicitudaborrar) {
         this.solicitudaborrar = solicitudaborrar;
-    }
-
-    public UIDataTable getTablaProductosconsulta() {
-        return tablaProductosconsulta;
-    }
-
-    public void setTablaProductosconsulta(UIDataTable tablaProductosconsulta) {
-        this.tablaProductosconsulta = tablaProductosconsulta;
     }
 
     public SelectItem[] getMunicipiofiltro() {
@@ -1733,17 +1720,22 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se elimina de la lista el producto de la fila que el usuario selecciono.
+     * En este método se elimina de la lista el producto de la fila que el
+     * usuario selecciono.
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No devuelve ningún valor
      */
-    public String eliminarItem() {
+    public String eliminarItem(int filaSeleccionada) {
 
-        Solicituddetalle solicituddetalle = (Solicituddetalle) tablaProductos.getRowData();
+        Solicituddetalle solicituddetalle = getAtencionHumanitaria().getListadosolicitudDetalle().get(filaSeleccionada);
 
         getAtencionHumanitaria().getListadosolicitudDetalle().remove(solicituddetalle);
         getAtencionHumanitaria().borrarItem(solicituddetalle);
         calcularValorSolicitudDetalle();
-        if (getAtencionHumanitaria().getListadosolicitudDetalle().size() == 0) {
+        if (!getAtencionHumanitaria().getListadosolicitudDetalle().isEmpty()) {
+        } else {
             deshcategoria = false;
         }
         return null;

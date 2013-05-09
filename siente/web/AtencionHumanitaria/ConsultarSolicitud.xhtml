@@ -25,10 +25,7 @@
         <h:form id="form_datos_basico" target="_blank">
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosBasicos" style="width:100%;" >
-                <f:facet name="header">
-                    <h:outputText value="#{var.datossol}"/>
-                </f:facet>
+            <rich:panel header="#{var.datossol}" id="DatosBasicos" style="width:100%;" >
                 <center>
                     <h:panelGroup>
 
@@ -62,13 +59,10 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosGenerales" style="width:100%;" expanded="true">
-                <f:facet name="header">
-                    <h:outputText value="#{var.datosgenerales}"/>
-                </f:facet>
+            <rich:panel id="DatosGenerales" header="#{var.datosgenerales}" style="width:100%;">
                 <center>
                     <h:panelGroup>
 
@@ -112,17 +106,13 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax"  style="width:100%;">
-                <f:facet name="header">
-                    <h:outputText value="#{var.distribucionayuda}"/>
-                </f:facet>
+            <rich:panel header="#{var.distribucionayuda}" style="width:100%;">
                 <center>
-                    <rich:dataTable id="tablaProductosSeleccionadosconsultar"  sortMode="single" var="_Producto" style="width:100%; text-align:left;"
-                                    value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}"
-                                    binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaProductosconsulta}">
+                <rich:dataTable id="tablaProductosSeleccionadosconsultar"  sortMode="single" var="_Producto" style="width:100%; text-align:left;"
+                                    value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="6">
@@ -202,18 +192,22 @@
                         </h:panelGrid>
                     </h:panelGroup>
                 </center>
-            </rich:collapsiblePanel>
+            </rich:panel>
 
             <interkont:spacer height="3"/>
 
-            <ui:include src="/modal/modalsolicitudatencion/validarGuardadoAtencion.xhtml"/>
-            <ui:include src="/modal/modalsolicitudatencion/informacionentidad.xhtml"/>
-            <ui:include src="/modal/modalsolicitudatencion/informacioncontacto.xhtml"/>
+            <!--
+                <ui:include src="/modal/modalsolicitudatencion/validarGuardadoAtencion.xhtml"/>
+                <ui:include src="/modal/modalsolicitudatencion/informacionentidad.xhtml"/>
+        -->
+        <ui:include src="/modal/modalsolicitudatencion/informacioncontacto.xhtml"/>
         </h:form>
         <ui:include src="/modal/modalsolicitudatencion/confirmarCancelarSolicitud.xhtml"/>
+        <!--
         <ui:include src="/modal/modalsolicitudatencion/subirCartaFinanciera.xhtml"/>
         <ui:include src="/modal/modalsolicitudatencion/subirActaJunta.xhtml"/>
         <ui:include src="/modal/modalsolicitudatencion/subirVideoAtencion.xhtml"/>
+        -->
         <ui:include src="/modal/atencionHumanitaria/enviarsolicitudah.xhtml"/>
     </ui:define>
 </ui:composition>

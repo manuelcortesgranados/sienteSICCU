@@ -27,10 +27,7 @@
         <h:form id="form_datos_basico" target="_blank">
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosBasicos" style="width:100%;" >
-                <f:facet name="header">
-                    <h:outputText value="1. #{var.datossol}"/>
-                </f:facet>
+            <rich:panel id="DatosBasicos" header="1. #{var.datossol}" style="width:100%;" >
                 <center>
                     <h:panelGroup>
 
@@ -88,15 +85,11 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
 
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax" id="DatosGenerales" style="width:100%;" expanded="true">
-                <f:facet name="header">
-                    <h:outputText value="2. #{var.datosgenerales}"/>
-                </f:facet>
-
+            <rich:panel id="DatosGenerales" header="2. #{var.datosgenerales}" style="width:100%;">
                 <center>
                     <h:outputText value="#{var.textdatosgeneralesAtencion}"/>
                 </center>
@@ -169,13 +162,10 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <interkont:spacer height="3"/>
 
-            <rich:collapsiblePanel switchType="ajax"  style="width:100%;">
-                <f:facet name="header">
-                    <h:outputText value="3. #{var.distribucionayuda}"/>
-                </f:facet>
+            <rich:panel style="width:100%;" header="3. #{var.distribucionayuda}">
                 <center>
                     <h:panelGroup id="gpDatosProducto">
                         <h:panelGrid  id="panelproductos" columns="2" cellspacing="15">
@@ -207,10 +197,9 @@
                             </h:inputText>
 
                             <interkont:spacer height="3"/>
-                            <a4j:commandButton type="submit"
-                                               id="btAgregarPdoAt" value="#{var.agregar}" action="#{AtencionHumanitaria$AdminSolicitudAtencion.anadirItem}"
-                                               style="font-size:12px;">
-                                <a4j:ajax event="complete" render="tablaProductosSeleccionados,gpvalortotalmaestroAten,panelproductos,gpCombos" />
+                            <a4j:commandButton id="btAgregarPdoAt" value="#{var.agregar}"
+                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.anadirItem}"
+                                               style="font-size:12px;" render="tablaProductosSeleccionados,gpvalortotalmaestroAten,panelproductos,gpCombos">
                             </a4j:commandButton>
 
                         </h:panelGrid>
@@ -218,9 +207,8 @@
 
                     <h:panelGroup>
 
-                        <rich:dataTable id="tablaProductosSeleccionados"  sortMode="single" var="_Detalle" style="width:100%; text-align:left;"
-                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}"
-                                        binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaProductos}">
+                        <rich:dataTable id="tablaProductosSeleccionados"  sortMode="single" var="_Detalle" rowKeyVar="filaSeleccionada" style="width:100%; text-align:left;"
+                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}">
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
@@ -275,7 +263,7 @@
                             <rich:column >
                                 <a4j:commandButton  title="#{var.eliminar}" style="font-size:11px;" styleClass="eliminaravanzada"
                                                     render="tablaProductosSeleccionados, gpvalortotalmaestroAten, gpCombos"
-                                                    action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem}"/>
+                                                    action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem(filaSeleccionada)}"/>
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:columnGroup>
@@ -313,16 +301,14 @@
 
                 </center>
 
-            </rich:collapsiblePanel>
+            </rich:panel>
             <center>
                 <h:panelGrid columns="2" cellspacing="10">
 
                     <a4j:commandButton id="eviarsolsubirarchivos2" value="#{var.eviarsol}"
-                                       render="layoutConfirmarGuardadoAtencion"
-                                       action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}">
-                        <a4j:ajax event="complete" render="layoutConfirmarGuardadoAtencion" oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"/>
-                    </a4j:commandButton>
-
+                                       render="layoutConfirmarGuardadoAtencion, layoutConfirmarGuardadoAtencion"
+                                       action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"
+                                       oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"/>
 
                     <a4j:commandButton id="cancelarsubirarchivos2" value="#{var.cancelar}" styleClass="btn_pri_inm"   style="font-size:12px;"
                                        oncomplete="#{rich:component('panelCancelarSolicitud')}.show(); return false;"/>
