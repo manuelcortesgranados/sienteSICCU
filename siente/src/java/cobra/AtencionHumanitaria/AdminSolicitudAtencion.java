@@ -1719,17 +1719,22 @@ public class AdminSolicitudAtencion  {
     }
 
     /**
-     * En este método se elimina de la lista el producto de la fila que el usuario selecciono.
+     * En este método se elimina de la lista el producto de la fila que el
+     * usuario selecciono.
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No devuelve ningún valor
      */
-    public String eliminarItem() {
+    public String eliminarItem(int filaSeleccionada) {
 
-        Solicituddetalle solicituddetalle = (Solicituddetalle) tablaProductos.getRowData();
+        Solicituddetalle solicituddetalle = getAtencionHumanitaria().getListadosolicitudDetalle().get(filaSeleccionada);
 
         getAtencionHumanitaria().getListadosolicitudDetalle().remove(solicituddetalle);
         getAtencionHumanitaria().borrarItem(solicituddetalle);
         calcularValorSolicitudDetalle();
-        if (getAtencionHumanitaria().getListadosolicitudDetalle().size() == 0) {
+        if (!getAtencionHumanitaria().getListadosolicitudDetalle().isEmpty()) {
+        } else {
             deshcategoria = false;
         }
         return null;
