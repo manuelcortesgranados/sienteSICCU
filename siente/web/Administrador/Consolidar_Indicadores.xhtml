@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -20,12 +20,12 @@
 
             <ui:define name="head">
                 <title>Consolidado Indicadores</title>
-                <h:outputScript src="/resources/script_supervisor.js"/>
+                <h:outputScript  name="/resources/script_supervisor.js"/>
             </ui:define>
 
             <ui:define name="body">
                 <h:form>
-                    <h:panelGrid id="consolidarIndicadores" style="width:100%" >
+                    <h:panelGrid id="consolidarIndicadores" style="width:100%;" >
                         <h:panelGroup id="layoutConsolidarIndicadores">
                             <center>
                                 <h:outputText  value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" styleClass="mensaje_error"/>
@@ -49,4 +49,4 @@
             </ui:define>
         </ui:composition>
     </f:view>
-</html>
+</ui:composition>

@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<f:view xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
         xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
         xmlns:f="http://java.sun.com/jsf/core"
         xmlns:h="http://java.sun.com/jsf/html"
@@ -32,11 +33,11 @@
 
                                 <h:panelGrid columns="2">
                                     <h:outputLabel id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
-                                    <rich:comboBox selectFirstOnUpdate="false" width="400"
-                                                   defaultLabel="Ingrese Entidad" value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}" >                                                                                
+                                    <rich:list title="Ingrese Entidad" style="width: 400px;" 
+                                               value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
                                         <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
-                                        <a4j:ajax event="onchange" action="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
-                                    </rich:comboBox>  
+                                        <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
+                                    </rich:list>
                                 </h:panelGrid>
 
                                 <h:panelGrid id="prueba" columns="3">
@@ -59,4 +60,4 @@
             </h:form>
         </ui:define>
     </ui:composition>
-</f:view>   
+</ui:composition>   

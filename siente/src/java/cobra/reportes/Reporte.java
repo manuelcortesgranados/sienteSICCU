@@ -2297,7 +2297,6 @@ public class Reporte  implements ILifeCycleAware {
 
 
         if (getReporteSelectConveniosEntidadesNacionales() == -1) {
-            System.out.println("Debug - cadenaPeticionReporte = " + cadenaPeticionReporte);
             if (getReporteFormato() == PDF_FORMATO) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
             }
@@ -2311,7 +2310,6 @@ public class Reporte  implements ILifeCycleAware {
 
         if (getReporteSelectConveniosEntidadesNacionales() == REPORTE_CONVENIO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&convenio=" + _idConvenio;
-            System.out.println("Debug - cadenaPeticionReporte = " + cadenaPeticionReporte);
             if (getReporteFormato() == PDF_FORMATO) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + cadenaPeticionReporte);
             }
@@ -2325,7 +2323,6 @@ public class Reporte  implements ILifeCycleAware {
 
         if (getReporteSelectConveniosEntidadesNacionales() == REPORTE_PROYECTO_X_CONVENIO) {
             cadenaPeticionReporte = cadenaPeticionReporte + "&convenio=" + _idConvenio;
-            System.out.println("Debug - cadenaPeticionReporte = " + cadenaPeticionReporte);
             if (getReporteFormato() == PDF_FORMATO) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfproyectosconvenio") + cadenaPeticionReporte);
             }
