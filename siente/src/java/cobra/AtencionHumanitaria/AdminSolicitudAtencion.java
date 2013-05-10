@@ -2102,20 +2102,28 @@ public class AdminSolicitudAtencion  {
 
     /**
      * Elimina La imagen seleccionada de la lista.
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No devuelve ningun valor
      */
-    public String eliminarImagenLista() {
-        getAtencionHumanitaria().setImagen((Imagensolicitud) tablaImagenesatencion.getRowData());
+    public String eliminarImagenLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Imagensolicitud imagensolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadoimagensolicitud().get(filaSeleccionada);
+        getAtencionHumanitaria().setImagen(imagensolicitud);
         getAtencionHumanitaria().getListadoimagensolicitud().remove(getSessionBeanCobra().getAtencionhumanitariaService().getImagen());
         return null;
     }
 
     /**
      * Elimina el documento seleccionado de la lista
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return No retorna ningun valor
      */
-    public String eliminarDocumentoLista() {
-        getAtencionHumanitaria().setDocumento((Documentosolicitud) tablaDocumentos.getRowData());
+    public String eliminarDocumentoLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Documentosolicitud documentosolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadocumentosolicitud().get(filaSeleccionada);
+        getAtencionHumanitaria().setDocumento(documentosolicitud);
         getAtencionHumanitaria().getListadocumentosolicitud().remove(getSessionBeanCobra().getAtencionhumanitariaService().getDocumento());
         return null;
     }
@@ -2724,7 +2732,6 @@ public class AdminSolicitudAtencion  {
     /**
      * Asigna el valor a el objeto de Solicitud que han seleccionado en el home
      * para cosnultar
-     *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
      * @return la regla de navegacion que direcciona a la pagina de consultar atencion
