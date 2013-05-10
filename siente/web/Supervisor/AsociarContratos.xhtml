@@ -40,17 +40,17 @@
                             <a4j:commandLink value="Asociar contrato" rendered="#{SessionBeanCobra.usuarioService.usuarioObra.usuId !=17}"
                                              styleClass="asociarcontrato anchorLink"
                                              action="#{Supervisor$AsociarContratos.llenarContratos}" 
-                                             oncomplete="">
-                                <a4j:ajax event="complete" render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();"/>
-                            </a4j:commandLink>
+                                             oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();"
+                                             render="gpTotalContAso">
+                                  </a4j:commandLink>
 
 
 
                             <a4j:commandLink value="Interventoria" 
                                              styleClass="interventoria anchorLink"
-                                             action="#{Supervisor$AsociarContratos.llenarContratosIntervento}" >
-                                <a4j:ajax event="complete" render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show()"/>
-                            </a4j:commandLink>
+                                             action="#{Supervisor$AsociarContratos.llenarContratosIntervento}" 
+                                             render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();">
+                             </a4j:commandLink>
 
                         </h:panelGrid>
 
@@ -145,8 +145,8 @@
                 </rich:panel>
 
             </h:form>
-            <ui:include src="/modal/listadoContratoAsociar.jspx"/>
-            <ui:include src="../modal/modalRelacionContratointerventoria.jspx"/>
+            <ui:include src="/modal/listadoContratoAsociar.xhtml"/>
+            <ui:include src="../modal/modalRelacionContratointerventoria.xhtml"/>
         </ui:define>
     </ui:composition>
 </ui:composition>

@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fiji="http://exadel.com/fiji"
+                xmlns:m="http://code.google.com/p/gmaps4jsf/"
+                template="/facelets/template_main.xhtml">
+    <ui:define name="head">
+        <h:outputScript name="jscharts.js" library="js"/>
+        <h:outputScript name="amcharts.js" library="amcharts"/>
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{var.evolucioncontrato}"/>
+
+
+
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+    </ui:define>
+    <ui:define name="body" >
+
+
+        <h:form prependId="false" >
+            <interkont:spacer height="35" style="width:100%;"/>
+            <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
+                <center>
+                    <h:outputText value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
+                    <div id="graficoEvolucionContrato" style="
+                         width:100%;
+                         height: 400px;
+                         text-align: left;">
+                    </div>
+                </center>
+            </rich:collapsiblePanel>
+        </h:form>
+
+
+        <h:panelGrid id="planificacion_movimientos" columns="2" >
+
+
+            <rich:panel id="gpListadoPlanificacion">
+
+                <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+
+                    <h:outputLabel value="#{var.formadepago}:"/>
+                    <interkont:spacer width="20"/>
+                    <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+
+                    <h:outputLabel value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                    <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                    <h:outputLabel styleClass="txt_outtext" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+
+                    <h:outputLabel value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                        <f:convertNumber pattern="$###,###"/>
+                    </h:outputText>
+
+                    <h:outputLabel value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                    </h:outputText>
+
+                </h:panelGrid>
+
+                <h:form>
+                    <h:panelGrid style="width:100%;" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                        <interkont:spacer height="5" style="width:100%;"/>
+                        <rich:dataTable id="tablaPlanificacion"
+                                        rows="5"
+                                        var ="planificacion"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        sortMode="single"
+                                        value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
+                                        style="text-align:center; width:400px;">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column width="100px" breakRowBefore="true" colspan="3">
+                                        <h:outputText value="#{var.numero} de Actas Parciales"/>
+                                    </rich:column>
+                                    <rich:column width="100px" breakRowBefore="true">
+                                        <h:outputText value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup>
+                                <rich:column  width="100px" breakRowBefore="true">
+                                    <h:outputText value="#{planificacion.numvlrporcentage} %"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{planificacion.numvlrpago}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{planificacion.datefechapago}">
+                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                    </h:outputText>
+                                </rich:column>
+                            </rich:columnGroup>
+
+                        </rich:dataTable>
+                    </h:panelGrid>
+                </h:form>
+            </rich:panel>
+
+            <rich:panel id="gpListadoMovimientos">
+
+                <h:form>
+                    <h:panelGrid style="width:100%;" >
+                        <interkont:spacer height="5" style="width:100%;"/>
+                        <rich:dataTable id="tablaMovimientos"
+                                        var ="movimiento"
+                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                        sortMode="single"
+                                        value="#{Supervisor$GraficosEvolucion.movimientos}"
+                                        style="text-align:center;width:600px;">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column width="100px" breakRowBefore="true" colspan="4">
+                                        <h:outputText value="#{var.movimientosfinancieros}"/>
+                                    </rich:column>
+                                    <rich:column width="100px" breakRowBefore="true" >
+                                        <h:outputText value="#{var.ordenpago}"/>
+                                    </rich:column>
+                                    <rich:column width="100px" >
+                                        <h:outputText value="#{var.fecha}"/>
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText value="#{var.valormovimiento}" />
+                                    </rich:column>
+                                    <rich:column width="100px">
+                                        <h:outputText value="#{var.TIPO}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:columnGroup>
+                                <rich:column  width="100px" breakRowBefore="true">
+                                    <h:outputText value="#{movimiento.ordendepago.strordenpago}"/>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{movimiento.fechamovimiento}">
+                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{movimiento.numvlrejecutado}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
+                                </rich:column>
+                                <rich:column >
+                                    <h:outputText value="#{movimiento.tipomovimiento.strnombretipomovimiento}">
+
+                                    </h:outputText>
+                                </rich:column>
+                            </rich:columnGroup>
+
+                        </rich:dataTable>
+                    </h:panelGrid>
+                </h:form>
+
+            </rich:panel>
+
+        </h:panelGrid>
+
+    </ui:define>
+</ui:composition>

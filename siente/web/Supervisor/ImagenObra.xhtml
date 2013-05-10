@@ -14,7 +14,7 @@
 
     <ui:define name="head">
         <title>Cobra - Supervisor</title>
-        <h:outputScript library="/resources/script_supervisor.js" name="script_supervisor"/>
+        <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText  value="#{var.imagenesproyecto}"/>            
@@ -156,8 +156,8 @@
                             <interkont:spacer height="20px"/>
 
 
-                            <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true" execute="@this"  >
-                                <a4j:ajax event="expand" render="panelImagenes"  />
+                            <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true"  >
+                                <a4j:ajax event="click" render="panelImagenes"  />
                                 <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
                                     <ui:include src="SliderImagenes.xhtml"/>
                                 </h:panelGroup>

@@ -14,10 +14,10 @@
     <ui:define name="head">
         <title>Modificar Contrato</title>
         <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
-        <h:outputScript library="/resources/script_supervisor.js" name=""/>
-        <h:outputScript library="/resources/js/csspopup.js" name=""/>
-        <h:outputScript library="/resources/js/jquery.timers-1.0.0.js" name=""/>
-        <h:outputScript library="/resources/js/validarletra.js" name=""/>
+        <h:outputScript  name="script_supervisor.js"/>
+        <h:outputScript library="js" name="csspopup.js"/>
+        <h:outputScript library="js" name="jquery.timers-1.0.0.js"/>
+        <h:outputScript library="js" name="validarletra.js"/>
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css"/>
     </ui:define>
 
@@ -213,7 +213,7 @@
                                         <h:inputText id="innumrecursospropios"
                                                      value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursospropios}"
                                                      size="20"  maxlength="20"
-                                                     onkeypress="return validar(event)">
+                                                     onkeypress="return validar(event);">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
                                             <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                         </h:inputText>
@@ -221,7 +221,7 @@
                                         <h:inputText id="innumrecursosch" rendered="#{var.varrecurosoch}"
                                                      value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursosch}"
                                                      size="20"  maxlength="20"
-                                                     onkeypress="return validar(event)">
+                                                     onkeypress="return validar(event);">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
                                             <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
                                         </h:inputText>
@@ -445,7 +445,6 @@
                                                         binding="#{Supervisor$Contrato.tablaplanificacionpagos}"
                                                         sortMode="single"
                                                         value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
-                                                        render="panelfooterplan"
                                                         style="text-align:center; width: 600px;">
                                             <f:facet name="header">
                                                 <rich:columnGroup>
@@ -500,8 +499,7 @@
                         <a4j:outputPanel id="panelErrorModpolizas">
                             <rich:messages id="messagesModPolizas" globalOnly="true"
                                            styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                           infoLabelClass="info_texto" warnLabelClass="warn_texto"
-                                           errorLabelClass="error_texto">
+                                          >
                                 <f:facet name="infoMarker">
                                     <h:graphicImage style="width : 20px; height: 20px;" url="/resources/imgs/msginfo.png" />
                                 </f:facet>

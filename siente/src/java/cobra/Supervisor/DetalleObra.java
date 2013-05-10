@@ -255,6 +255,7 @@ public class DetalleObra  {
     }
 
     public boolean isVeralimenta() {
+        System.out.println("this = " + veralimenta);
         return veralimenta;
     }
 

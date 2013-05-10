@@ -16,8 +16,9 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-contratos-asociar" onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); return false;" immediate="true"
-                                       styleClass="btn_cerrar" />
+                    <a4j:commandLink id="esconder-mp-listado-contratos-asociar"
+                                     onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); return false;" immediate="true"
+                                     styleClass="cerrar" />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -100,7 +101,8 @@
                                     </rich:column>
                                     <rich:column width="120px" >
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$AsociarContratos.agregarContratoInterventoria}"
-                                                           oncomplete="javascript:Richfaces.showModalPanel('panelRelacionContratoInterventoria')" render="layoutpanelRelacionContratoInterventoria">
+                                                           oncomplete="#{rich:component('panelRelacionContratoInterventoria')}.show();" render="layoutpanelRelacionContratoInterventoria">
+                                                          
                                         </a4j:commandButton>
                                     </rich:column>
                                 </rich:columnGroup>

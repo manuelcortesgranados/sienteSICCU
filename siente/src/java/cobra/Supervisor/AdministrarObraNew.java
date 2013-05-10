@@ -1294,10 +1294,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
 
     }
 
-    public String bt_download_documento_action() {
+    public String bt_download_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tablaDocumentos.getRowData();
+        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        Documentoobra doc=ad.getListaDocumentosobra().get(filaSeleccionada);
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
@@ -1310,10 +1311,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         return null;
     }
 
-    public String bt_editar_documento_action() {
+    public String bt_editar_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        this.documentoobraEd = (Documentoobra) tablaDocumentos.getRowData();
+        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.documentoobraEd =ad.getListaDocumentosobra().get(filaSeleccionada);
         return null;
     }
 
@@ -1334,10 +1336,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         return null;
     }
 
-    public String bt_eliminar_documento_action() {
+    public String bt_eliminar_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        this.documentoobraEl = (Documentoobra) tablaDocumentos.getRowData();
+        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.documentoobraEl=ad.getListaDocumentosobra().get(filaSeleccionada);
         bt_aceptar_eliminar_documento_action();
         return null;
     }
@@ -1689,7 +1692,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             return "evolucion";
         } else {
             FacesUtils.addErrorMessage(bundle.getString("esteproyectonosehaalimentado"));
-            return null;
+            return "null";
         }
     }
 
