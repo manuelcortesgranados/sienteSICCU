@@ -36,11 +36,13 @@
                                 <div id="buscador_space">
                                     <label>
                                         <h:inputText id="txtPalabraClave" styleClass="buscador_field"
-                                                     onfocus="clearText(this);" onblur="clearText(this);" onclick="this.value = '';"
+                                                     onclick="this.value = '';"
                                                      value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" />
 
-                                        <h:commandButton type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar" value="#{var.buscar}">
-                                            <a4j:ajax event="click" render="tabla-listado-contratoconvenio" execute="@this" />
+                                        <h:commandButton id="filtrar" value="#{var.buscar}">
+                                            <a4j:ajax event="click" execute="@this"
+                                                      listener="#{Supervisor$Contrato.buscarContrato}"
+                                                      render="tabla-listado-contratoconvenio" />
                                         </h:commandButton>
                                     </label>
                                 </div>
@@ -61,15 +63,15 @@
                         <h:panelGroup id="panel-filtro-novedades">
                             <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="consulconvenio">
                                 <h:outputLabel id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
-                                <h:selectOneMenu style="width: 400px;"
-                                             value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
 
-                                             label="Ingrese una entidad" immediate="true">
+                                <h:selectOneMenu style="width: 400px;"
+                                                 value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
+                                                 label="Ingrese una entidad">
                                     <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                     <a4j:ajax event="valueChange"
                                               listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                               render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
-                                              execute="@this, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"  />
+                                              execute="@this" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
                         </h:panelGroup>

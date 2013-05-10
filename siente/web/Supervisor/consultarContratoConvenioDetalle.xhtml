@@ -529,8 +529,10 @@
                 </h:form>
 
                 <h:form>
-                    <rich:collapsiblePanel id="simpleTogglePolizas" switchType="client" header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.llenarPolizas}" render="polizasContrato,notienepoliza" />    
+                    
+                    <rich:collapsiblePanel  id="simpleTogglePolizas" switchType="client"
+                                            header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}">
+                        <f:ajax event="click" listener="#{Supervisor$Contrato.llenarPolizas}" render="polizasContrato,notienepoliza" />    
 
                         <center>
                             <h:panelGroup id="notienepoliza">
@@ -611,8 +613,11 @@
                 </h:form>
 
                 <h:form>
-                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" header="#{var.proyectosasociados} encontrados #{Supervisor$Contrato.contrato.intcantproyectos}" expanded="#{Supervisor$Contrato.boolproyectos}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.llenarObraAsociada}" render="tablaProyectosContrato">
+                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" 
+                                            header="#{var.proyectosasociados} encontrados #{Supervisor$Contrato.contrato.intcantproyectos}"
+                                            expanded="#{Supervisor$Contrato.boolproyectos}"
+                                            onclick="#{Supervisor$Contrato.llenarObraAsociada()}">
+                        <a4j:ajax event="click" render="tablaProyectosContrato" execute="simpleTogglepadres">
                             <!-- <a4j:ajax oncomplete="true"  /> -->
                         </a4j:ajax>
 
