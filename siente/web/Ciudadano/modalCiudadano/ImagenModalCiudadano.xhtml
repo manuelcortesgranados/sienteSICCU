@@ -36,14 +36,12 @@
                         acceptedTypes="jpg, jpeg, gif, png, bmp"
                         immediateUpload="true"
                         maxFilesQuantity="1" 
-                        listWidth="250" 
-                        listHeight="150"
-                        autoclear="true"
-                        addControlLabel="#{var.adicionar}"
+                        style="height: 150px; width: 250px;"
+                        addLabel="#{var.adicionar}"
                         doneLabel="#{var.hecho}"
-                        uploadControlLabel="#{var.subir}"
-                        clearAllControlLabel="#{var.borrartodo}"
-                        clearControlLabel="#{var.eliminar}">
+                        uploadLabel="#{var.subir}"
+                        clearAllLabel="#{var.borrartodo}"
+                        clearLabel="#{var.eliminar}">
                         <a4j:ajax event="uploadcomplete" render="info"/>
                     </rich:fileUpload>
                     <h:panelGroup id="info">
