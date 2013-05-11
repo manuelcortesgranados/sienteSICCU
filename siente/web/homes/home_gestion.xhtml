@@ -97,14 +97,14 @@
                                         </label>
                                     </div></div></td>
                             <td><a4j:commandLink styleClass="busquedavanzada anchorLink" render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                             oncomplete="javascript:Richfaces.showModalPanel('panelFiltroAvanzado');"/>
+                                             oncomplete="#{rich:component('panelFiltroAvanzado')}.show();return true;"/>
 
                                 <a4j:commandLink styleClass="filtrar anchorLink" render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                                 oncomplete="javascript:Richfaces.showModalPanel('panelFiltroAvanzadoCiud');"/>
+                                                 oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show();return true;"/>
 
 
                             </td>
-                            <td width="16%"><table width="150" border="0" cellspacing="5" cellpadding="0">
+                            <td style="width: 16%"><table  style="width: 150px" border="0" cellspacing="5" cellpadding="0">
                                     <tr>
                                         <td class="text01">Vistas</td>
                                         <td><div class="buttonsmall">
