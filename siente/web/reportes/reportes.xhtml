@@ -1,0 +1,492 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/facelets/template_main.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="head">
+        <title>Siente - Reportes</title>
+    </ui:define>
+    <ui:define name="title">
+        <h:panelGrid id="headerre" columns="2">
+            <interkont:spacer width="20" />
+            <h:outputText value="#{Reportes.headerReportes}"/>
+        </h:panelGrid>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_reportes.xhtml"/>
+    </ui:define>
+    <ui:define name="body">              
+        <rich:panel id="richpanelReportes">
+            <h:form>
+                <center>
+                    <!--Panel de regiones, localizacion.  -->
+                    <rich:panel id="panelRegionalizacion" header="#{var.control12}" styleClass="rich-panel-grid-report"
+                                bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">
+
+                        <h:panelGrid columns="1">
+                            <h:selectOneMenu value="#{Reportes.reporteselectregionali}" 
+                                             style="width: 100px;"
+                                             onclick="this.style.width = auto;" 
+                                             onblur="this.style.width = '100px;';">
+                                <f:selectItem itemValue="1" itemLabel="#{var.departamento}" />
+                                <f:selectItem itemValue="2" itemLabel="#{var.zona}" />
+                                <f:selectItem itemValue="3" itemLabel="#{var.region}" />
+                                <a4j:ajax execute="@this" event="change" render="richpanelReportes" listener="#{Reportes.reporteSelectRegionalizacion}"/>
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 1}" >
+                            <h:outputText value="Departamento: "/>
+                            <h:selectOneMenu value="#{Reportes.deptosah}" style="width: 100px;"
+                                             onclick="this.style.width = auto;" onblur="this.style.width = '100px;';">
+                                <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                <f:selectItems value="#{Reportes.sedeptosah}"/>
+                                <a4j:ajax execute="@this" event="change" render="panelMuni" listener="#{Reportes.llenarMuniciAh}"/>
+                            </h:selectOneMenu>
+                            <h:outputText value="Municipio: "/>
+                            <h:panelGroup id="panelMuni">
+                                <h:selectOneMenu value="#{Reportes.muniah}" style="width: 100px;" 
+                                                 onclick="this.style.width = auto;" onblur="this.style.width = '100px;';">
+                                    <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                    <f:selectItems value="#{Reportes.semuniah}"/>
+                                    <a4j:ajax execute="@this" event="change" render="richpanelReportes" />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 2}" >
+                            <h:outputText value="Zona Especifica: "/>
+                            <h:selectOneMenu value="#{Reportes.intzona}" style="width: 100px;"
+                                             onclick="this.style.width = auto;" onblur="this.style.width = '100px;';">
+                                <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                <f:selectItems value="#{Reportes.zonaespecifica}"/>
+                                <a4j:ajax execute="@this" event="change" render="richpanelReportes" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2" rendered="#{Reportes.reporteselectregionali == 3}">
+                            <h:outputText value="#{var.region}: "/>
+                            <h:selectOneMenu value="#{Reportes.regionint}">
+                                <f:selectItems value="#{Reportes.regionselect}" />
+                            </h:selectOneMenu>
+                        </h:panelGrid>  
+
+                    </rich:panel>
+
+
+                    <h:panelGroup id="reportesDinac">
+                        <!-- Panel para configurar los parametros requeridos. -->                                
+
+                        <rich:panel header="#{var.control13}" rendered="#{Reportes.consolida == 5}" styleClass="rich-panel-grid-report"
+                                    bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">
+
+                            <h:panelGrid columns="1">
+                                <h:outputLabel value="Seleccione Parametros: "/>
+
+                                <!-- Las opciones de seleccion  son 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales -->
+                                <h:selectOneMenu value="#{Reportes.reporteselectlinea}" 
+                                                 style="width: 150px;"
+                                                 onclick="this.style.width = auto;" 
+                                                 onblur="this.style.width = '150px;';">
+                                    <f:selectItem itemValue="1" itemLabel="#{var.control15}" />
+                                    <f:selectItem itemValue="2" itemLabel="#{var.control16}" />
+                                    <f:selectItem itemValue="3" itemLabel="#{var.control17}" />
+                                    <a4j:ajax execute="@this" event="change" render="reportesDinac, richpanelReportes" listener="#{Reportes.reporteSelectLinea}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>    
+
+                            <!--Seleccion de entidades nacionales, dependen de la opcion 3 del combo anterior -->
+                            <h:panelGrid columns="2" rendered="#{Reportes.reporteselectlinea == 3}">
+                                <h:outputLabel value="Entidades Nacionales:"/>
+                                <h:selectOneMenu value="#{Reportes.inttercer}" style="width: 100px;"
+                                                 onclick="this.style.width = auto;" 
+                                                 onblur="this.style.width = '100px;';" >                                            
+                                    <f:selectItems value="#{Reportes.tercerointselect}"/>
+                                    <a4j:ajax execute="@this" event="change" render="reportesDinac,richpanelReportes" listener="#{Reportes.llenarConveniosXEntidad}"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+                            <!--Seleccion convenio a partir de entidad nacional -->
+                            <h:panelGrid columns="2"  rendered="#{Reportes.reporteselectlinea == 3 and Reportes.idConvenio!=-1}">
+                                <h:outputLabel value="Convenios Nacionales:"/>
+                                <h:selectOneMenu value="#{Reportes.idConvenio}" 
+                                                 style="width: 100px;"
+                                                 onclick="this.style.width = auto;" 
+                                                 onblur="this.style.width = '100px;';" >                                            
+                                    <f:selectItems value="#{Reportes.contratoConvenios}"/>
+                                    <a4j:ajax execute="@this" event="change" render="reportesDinac,richpanelReportes"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>    
+
+                            <h:panelGrid columns="2"  rendered="#{Reportes.reporteselectlinea == 3 and Reportes.idConvenio==-1}">
+                                <h:outputLabel value="La entidad seleccionada no tiene convenios asociados." style="width: 100px;color:red;"/>                                        
+                            </h:panelGrid> 
+
+                            <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 3}">
+                                <h:outputText value="Seleccione Reporte :"/>
+                                <h:selectOneMenu value="#{Reportes.reporteSelectConveniosEntidadesNacionales}" 
+                                                 style="width: 100px;"
+                                                 onclick="this.style.width = auto;" 
+                                                 onblur="this.style.width = '100px;';">
+                                    <f:selectItem itemValue="1" itemLabel="#{var.control18}" />
+                                    <f:selectItem itemValue="2" itemLabel="#{var.control19}" />
+                                    <a4j:ajax execute="@this" event="change" render="richpanelReportes" listener="#{Reportes.inicializarConvenio}" />
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+
+                            <!--Se trabaja la opcion 2 ( 2. Obras entidades territoriales,) de las opciones especificadas en la lista anterior -->
+                            <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 2}">
+
+                                <h:panelGrid columns="1">
+                                    <h:outputLabel value="#{var.categoria}: "/>
+                                    <h:selectOneMenu value="#{Reportes.tipoobint}" 
+                                                     style="width: 150px;"
+                                                     onclick="this.style.width = auto;" 
+                                                     onblur="this.style.width = '150px;';">
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.tiposolicitudintselect}" />
+                                        <a4j:ajax event="change" render="reportestodossoli" execute="@this"/>
+                                    </h:selectOneMenu>
+
+                                    <h:outputLabel value="#{var.tipo} #{var.obra}: "/>
+                                    <h:selectOneMenu value="#{Reportes.inttipoproyecto}" 
+                                                     style="width: 150px;"
+                                                     onclick="this.style.width = auto;" 
+                                                     onblur="this.style.width = '150px;';">
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.tipoproyectointselect}" />
+                                        <a4j:ajax event="change" render="combotipoobra" execute="@this" listener="#{Reportes.llenarTipoObraxTipoProyecto}"/>
+                                    </h:selectOneMenu>
+
+
+                                    <h:outputLabel value="#{var.tipo} Obra: " />
+                                    <h:panelGroup id="combotipoobra" >
+                                        <h:selectOneMenu value="#{Reportes.inttipoobra}" 
+                                                         style="width: 150px;"
+                                                         onclick="this.style.width = auto;" 
+                                                         onblur="this.style.width = '150px;';">
+                                            <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                            <f:selectItems value="#{Reportes.tipoobraintselect}" />
+                                            <a4j:ajax event="change" render="combotipoobra, reportestodossoli" execute="@this"/>
+                                        </h:selectOneMenu>
+                                    </h:panelGroup>
+
+                                </h:panelGrid>
+                            </h:panelGrid>           
+
+
+
+                            <h:panelGrid columns="2" rendered="#{Reportes.consolida == 5 and Reportes.reporteselectlinea == 1}">
+                                <h:outputLabel value="Seleccione Reporte :"/>
+                                <h:selectOneMenu value="#{Reportes.reporteselectaten}" 
+                                                 style="width: 100px;"
+                                                 onclick="this.style.width = auto;" 
+                                                 onblur="this.style.width = '100px;';">
+                                    <f:selectItem itemValue="1" itemLabel="#{var.control20}" />
+                                    <f:selectItem itemValue="2" itemLabel="#{var.control21}" />
+                                    <f:selectItem itemValue="3" itemLabel="#{var.control22}" />
+                                    <f:selectItem itemValue="4" itemLabel="#{var.control23}" />
+                                    <f:selectItem itemValue="5" itemLabel="#{var.control24}" />
+                                    <f:selectItem itemValue="6" itemLabel="#{var.control25}" />
+                                    <f:selectItem itemValue="7" itemLabel="#{var.control26}" />
+                                    <f:selectItem itemValue="8" itemLabel="#{var.control27}" />
+                                    <f:selectItem itemValue="9" itemLabel="#{var.control28}" />
+                                    <f:selectItem itemValue="10" itemLabel="#{var.control29}" />
+                                    <a4j:ajax event="change" render="richpanelReportes" execute="@this" listener="#{Reportes.inicializarAh}" />
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+                        </rich:panel>
+
+                        <rich:panel header="#{var.control14}" rendered="false" styleClass="rich-panel-grid-report"
+                                    bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel">
+
+                            <h:panelGrid columns="1">
+                                <h:selectOneMenu value="#{Reportes.intobra}">
+                                    <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                    <f:selectItems value="#{Reportes.tipoobraintselect}" />
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+                        </rich:panel>                           
+
+                    </h:panelGroup>
+                </center>
+            </h:form>
+
+            <center>
+
+                <rich:panel id="reportatentodos" header="" styleClass="rich-panel-grid-report"
+                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
+                            rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten >= 5 }">
+                    <center>
+                        <h:form>
+                            <rich:panel id="reporttiposoliah" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten == 5 or 
+                                                                          Reportes.reporteselectaten == 7 or Reportes.reporteselectaten == 8 }">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="#{var.tipoAyudaHum}: "/>
+                                    <h:selectOneMenu value="#{Reportes.tipoahint}">
+                                        <f:selectItem itemValue="-1" itemLabel="Todos" />
+                                        <f:selectItems value="#{Reportes.tipoahintselect}" />
+                                    </h:selectOneMenu>
+                                </h:panelGrid>
+                            </rich:panel>
+
+
+                            <!-- ************************************************************-->
+                            <rich:panel id="reportregilocali" rendered="#{Reportes.reporteselectaten == 11 or Reportes.reporteselectaten == 11}">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="#{var.tipo} Origen: "/>
+                                    <h:selectOneMenu value="#{Reportes.tipoorigenint}">
+                                        <f:selectItem itemValue="4" itemLabel="Nacional" />
+                                        <f:selectItem itemValue="3" itemLabel="Region" />
+                                        <a4j:ajax execute="@this" event="change" render="reportregilocali"
+                                                  listener="#{Reportes.llenarxTipoOrien}"/>
+                                    </h:selectOneMenu>
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="2" rendered="#{Reportes.tipoorigenint == 3}"
+                                             columnClasses="panelizquierda, panelizquierda">
+                                    <h:outputText value="#{var.region}: "/>
+                                    <h:selectOneMenu value="#{Reportes.regionint}">
+                                        <f:selectItems value="#{Reportes.regionselect}" />
+                                    </h:selectOneMenu>
+                                </h:panelGrid>          
+
+                            </rich:panel>
+
+                            <!--**************************************************************************************-->
+                            <h:panelGrid columns="2" id="fechasAh" rendered="#{Reportes.reporteselectaten == 1 or Reportes.reporteselectaten >= 5 }">
+                                <h:outputText value="#{var.fecha} Inicio: "/>
+                                <rich:calendar  datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.feciniah}" >
+                                    <a4j:ajax event="change" render="fechasAh"/>
+                                </rich:calendar>
+                                <h:outputText value="#{var.fecha} Fin: "/>
+                                <rich:calendar  datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fecfinah}" >
+                                    <a4j:ajax event="change" render="fechasAh"/>
+                                </rich:calendar>
+                            </h:panelGrid>
+                        </h:form>                          
+                    </center>
+                </rich:panel>
+
+
+                <!--Inicio Botones reportes dinamicos -->
+                <rich:panel id="reportestodossoli" header="" rendered="#{(Reportes.consolida == 5 and Reportes.reporteselectlinea == 3 and Reportes.idConvenio!=-1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 1) or (Reportes.consolida == 5 and Reportes.reporteselectlinea == 2)}" styleClass="rich-panel-grid-report"
+                            bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">                            
+                    <h:form  target="_blank">
+                        Generar reporte en:
+                        <h:panelGrid columns="3"  >
+                            <h:panelGrid>
+                                <h:commandLink id="pdfDinamico" action="#{Reportes.reportePdfDinamico}" styleClass="pdf" />
+                            </h:panelGrid>
+                            <h:panelGrid>
+                                <h:commandLink id="excelDinamico" action="#{Reportes.reporteExcelDinamico}" styleClass="excel"/>
+                            </h:panelGrid>
+                            <h:panelGrid>
+                                <h:commandLink id="wordDinamico" action="#{Reportes.reporteWordDinamico}" styleClass="word"/>
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+                    </h:form>
+                </rich:panel>
+                <!--Fin Botones reportes dinamicos -->
+
+                <rich:panel id="panelReporteConvenio" header="Reportes Convenio"  styleClass="rich-panel-grid-report"
+                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel" rendered="#{Reportes.reporteselectcontrol >= 4}">
+                    <center>
+                        <h:form>
+                            <h:panelGrid id="selectcorte" columns="2">
+                                <h:outputText value="Fecha de Corte: "/>
+                                <h:selectOneMenu value="#{Reportes.idconsolidadoselec}">
+                                    <f:selectItems value="#{Reportes.itemsCortes}" />
+                                    <a4j:ajax event="change" render="selectcorte"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                        </h:form>
+                        <h:form target="_blank">
+                            <h:panelGrid columns="1">
+                                <h:commandLink action="#{Reportes.reportepdfconvenio}" styleClass="pdf" />
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+                <rich:panel id="panelReporteControl" header="Reportes Control"  styleClass="rich-panel-grid-report"
+                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel" rendered="#{Reportes.reporteselec >= 4}">
+                    <center>
+                        <h:form>
+                            <h:panelGrid id="selectcortecontrol" columns="2">
+                                <h:outputText value="Fecha de Corte: "/>
+                                <h:selectOneMenu value="#{Reportes.idconsolidadoselec}">
+                                    <f:selectItems value="#{Reportes.itemsCortes}" />
+                                    <a4j:ajax event="change" render="selectcortecontrol"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                        </h:form>
+                        <h:form target="_blank">
+                            <h:panelGrid columns="1">
+                                <h:commandLink action="#{Reportes.reportepdfcontrol}" styleClass="pdf" />
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+
+                <!--Aplica para reportes "cifras consolidadas" -->
+
+                <rich:panel id="panelReporteFicha" header="#{Reportes.headercifras}"  styleClass="rich-panel-grid-report"
+                            bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel"
+                            style="padding: 0px;" rendered="#{Reportes.consolida == 1}" >
+                    <center>
+
+                        <h:form>
+                            <h:panelGrid columns="2" rendered="#{Reportes.consolida == 1}">
+                                <h:outputText value="#{var.reporte}: "/>
+                                <h:selectOneMenu value="#{Reportes.reporteselec}">
+                                    <f:selectItem itemValue="1" itemLabel="#{var.cifras1}" />
+                                    <f:selectItem itemValue="2" itemLabel="#{var.cifras2}" />
+                                    <f:selectItem itemValue="3" itemLabel="#{var.cifras3}" />
+                                    <a4j:ajax event="change" render="richpanelReportes" execute="@this"/>
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+                        </h:form>
+
+                        <h:form target="_blank">
+                            Generar reporte en:
+                            <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 1}">
+                                <h:commandLink styleClass="pdf" id="pdfFichaCorto" action="#{Reportes.reportePdfFichaCorto}"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 2}">
+                                <h:commandLink styleClass="pdf" id="pdfFichaObras" action="#{Reportes.reportePdfFichaObras}"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 3}">
+                                <h:commandLink styleClass="pdf" id="pdfFichaConvenio" action="#{Reportes.reportePdfFichaConvenio}"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+                <!--False no esta en uso-->
+                <rich:panel id="panelReporteConsolidado" style="padding: 0px;"
+                            rendered="false">
+                    <center>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="#{var.estadoproyecto}"/>
+                                <h:selectOneMenu value="#{Reportes.intestadoobra}">
+                                    <f:selectItem itemValue="-1" itemLabel="Todos"/>
+                                    <f:selectItems value="#{Reportes.tipoestadoobra}" />
+                                </h:selectOneMenu>
+                                <h:outputText value="#{var.entidad}"/>
+                                <h:selectOneMenu value="#{Reportes.intentidad}">
+                                    <f:selectItem itemValue="-1" itemLabel="Todos"/>
+                                    <f:selectItems value="#{Reportes.entidades}" />
+                                </h:selectOneMenu>
+                                <h:outputLabel value="#{var.fecha} Inicio: "/>
+                                <rich:calendar datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fechainiconpro}"/>
+                                <h:outputLabel value="#{var.fecha} Fin: "/>
+                                <rich:calendar datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fechafinconpro}"/>
+                            </h:panelGrid>
+
+                            Generar reporte en:
+                            <h:panelGrid columns="3">
+                                <h:commandLink id="pdf1" action="#{Reportes.reportePdf}"
+                                               styleClass="pdf" target="_blank" />
+
+                                <h:commandLink id="excel" action="#{Reportes.reporteExcel}"
+                                               styleClass="excel" target="_blank"/>
+
+                                <h:commandLink id="word" action="#{Reportes.reporteWord}"
+                                               styleClass="word" target="_blank"/>
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+
+                <!--False no esta en uso-->
+                <rich:panel id="panelReporteConsolidadoSoli" style="padding: 0px;"
+                            rendered="false">
+                    <center>
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="#{var.fecha} Inicio: "/>
+                                <rich:calendar datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fechainiconso}"/>
+                                <h:outputLabel value="#{var.fecha} Fin: "/>
+                                <rich:calendar datePattern="yyyy-MM-dd" inputSize="10" value="#{Reportes.fechafinconso}"/>
+                            </h:panelGrid>
+
+                            Generar reporte en:
+                            <h:panelGrid columns="3">
+                                <h:commandLink id="pdfSolicitud" action="#{Reportes.reportePdfConsoSoli}"
+                                               styleClass="pdf" target="_blank" />
+                                <h:commandLink id="excelSolicitud" action="#{Reportes.reporteExcelConsoSoli}"
+                                               styleClass="excel" target="_blank" />
+                                <h:commandLink id="wordSolicitud" action="#{Reportes.reporteWordConsoSoli}"
+                                               styleClass="word" target="_blank" />
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+                <!--False no esta en uso-->
+                <rich:panel id="panelReporteFaltante" style="padding: 0px;"
+                            rendered="false">
+                    <center>
+                        <h:form target="_blank">
+                            <h:selectOneRadio value="#{Reportes.vistaicom}" >
+                                <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
+                                <f:selectItem itemLabel="#{var.departamento}" itemValue="0"/>
+                                <a4j:ajax event="change" render="panelReporteFaltante" />
+                            </h:selectOneRadio>
+
+                            <h:panelGrid columns="2" rendered="#{Reportes.vistaicom != 1}">
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" rendered="#{Reportes.vistaicom == 1}" >
+                                <h:outputText value="#{var.zona}:"/>
+                                <h:selectOneMenu value="#{Reportes.intzonainco}">
+                                    <f:selectItems value="#{Reportes.zonaespecificaincompl}" />
+                                </h:selectOneMenu>
+                            </h:panelGrid>
+
+                            Generar reporte en:
+                            <h:panelGrid columns="3">
+                                <h:commandLink id="pdfFaltante" action="#{Reportes.reportePdfImcompletos}"
+                                               styleClass="pdf">
+                                    <a4j:ajax oncomplete="true" render="panelReporteFaltante"/>
+                                </h:commandLink>
+
+                                <h:commandLink id="excelFaltante" action="#{Reportes.reporteExcelImcompletos}"
+                                               styleClass="excel">
+                                    <a4j:ajax oncomplete="true"  render="panelReporteFaltante"/>
+                                </h:commandLink>
+
+                                <h:commandLink id="wordFaltante" action="#{Reportes.reporteWordImcompletos}"
+                                               styleClass="word">
+                                    <a4j:ajax oncomplete="true"  render="panelReporteFaltante"/>
+                                </h:commandLink>
+                            </h:panelGrid>
+                        </h:form>
+                    </center>
+                </rich:panel>
+
+            </center>
+        </rich:panel>
+    </ui:define>
+</ui:composition>

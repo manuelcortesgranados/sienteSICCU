@@ -294,7 +294,7 @@
 
                         <h:panelGroup>
                             <rich:dataTable id="tablaImagenes" value="#{SessionBeanCobra.solicitudService.imagensolicituds}"
-                                            var="currentRow" style="width:100%;" binding="#{SolicitudObra$GestionarSolicitudObra.tablaImagenessolicitud}" rows="3" >
+                                            rowKeyVar="filaSeleccionada" var="currentRow" style="width:100%;" rows="3" >
                                 <f:facet name="header">
                                     <h:outputText value="#{var.imgseleccionadas}"/>
                                 </f:facet>
@@ -323,7 +323,7 @@
                                         <h:outputText value="#{var.eliminar}"/>
                                     </f:facet>
                                     <a4j:commandButton id="eliminar" value="#{var.eliminar}" render="tablaImagenes"
-                                                       action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista}"/>
+                                                       action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista(filaSeleccionada)}"/>
                                 </rich:column>
                                 <f:facet name="footer">
                                     <rich:dataScroller renderIfSinglePage="false" />
@@ -367,7 +367,7 @@
                         </h:panelGrid>
 
                         <rich:dataTable id="tablaDocumentos"  sortMode="single" style="text-align:left;width:100%;"  var="currentRow" 
-                                        binding="#{SolicitudObra$GestionarSolicitudObra.tablaDocumentos}" rows="7"
+                                        rowKeyVar="filaSeleccionada" rows="7"
                                         value="#{SessionBeanCobra.solicitudService.documentosolicituds}">
                             <f:facet name="header" >
                                 <rich:columnGroup >
@@ -393,7 +393,7 @@
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentos"
-                                                   action="#{SolicitudObra$GestionarSolicitudObra.eliminarDocumentoLista}">
+                                                   action="#{SolicitudObra$GestionarSolicitudObra.eliminarDocumentoLista(filaSeleccionada)}">
                                 </a4j:commandButton>
                             </rich:column>
                             <f:facet name="footer">

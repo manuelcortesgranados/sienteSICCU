@@ -189,7 +189,6 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
     private UIDataTable tablaMarkereli = new UIDataTable();
     private UIDataTable tablacontratos = new UIDataTable();
-    private UIDataTable tablaObrasPadres = new UIDataTable();
     private UIDataTable tablaregiones = new UIDataTable();
     private UIDataTable tablatipoproyecto = new UIDataTable();
     private UIDataTable tablatiposolicitudobra = new UIDataTable();
@@ -1032,14 +1031,6 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     
     public void setTablacontratos(UIDataTable tablacontratos) {
         this.tablacontratos = tablacontratos;
-    }
-    
-    public UIDataTable getTablaObrasPadres() {
-        return tablaObrasPadres;
-    }
-    
-    public void setTablaObrasPadres(UIDataTable tablaObrasPadres) {
-        this.tablaObrasPadres = tablaObrasPadres;
     }
     
     public int getIdConvenio() {
@@ -3565,10 +3556,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * Se utiliza para indicar que el proyecto en creación pertenece a un
      * proyecto Padre o Mayor
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return null
      */
-    public String seleccionarProyectoPadre() {
-        obrapadre = (Obra) tablaObrasPadres.getRowData();
+    public String seleccionarProyectoPadre(int filaSeleccionada) {
+        obrapadre = listaProyectosPadre.get(filaSeleccionada);
         obranueva.setObra(obrapadre);
         verObrasPadres = true;
         return null;

@@ -12,7 +12,7 @@
 
     <ui:define name="head">
         <title>Inicio Solicitudes de Obra</title>
-        <h:outputScript namme="script_supervisor.js"/>
+        <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText value="#{var.encontrarsolobra}"/>
@@ -29,7 +29,7 @@
                 <tr>
                     <td><div class="buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this)" onblur="clearText(this)"
+                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this);" onblur="clearText(this);"
                                                  value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"/>
                                     <h:commandButton type="button" action="#{SolicitudObra$GestionarSolicitudObra.buscar}"
                                                      id="filtrar"  value="#{var.buscar}" styleClass="buscador_button"/>
@@ -57,12 +57,11 @@
                                     id="tablaSolicitudObraTemp"
                                     rows="5"
                                     var ="currentRowTemp"
-                                    onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                                    onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                     binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudes}"
-                                    onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{SessionBeanCobra.solicitudService.solicitudObrachTemps}"
-                                    render="scrolltablaSolicitudObraTemp"
                                     style="text-align:center;width:100%;">
                         <f:facet name="header">
                             <rich:columnGroup>
@@ -70,7 +69,7 @@
                                     <h:outputText value="#{var.totalsolicitues} #{SolicitudObra$GestionarSolicitudObra.totalfilas} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.pagina} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginas}" />
                                 </rich:column>
 
-                                <rich:column breakBefore="true">
+                                <rich:column breakRowBefore="true">
                                     <h:outputText value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
@@ -161,7 +160,7 @@
                                               render="modaltablaproyectos, tablaproyectos"
                                               rendered="#{currentRowTemp.boolaprobado}">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
-                                <a4j:ajax event="oncomplete" oncomplete="#{rich:component('modaltablaproyectos')}.show();" />
+                                <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.show();" />
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -183,19 +182,18 @@
                         id="tablaSolicitudObra"
                         rows="5"
                         var ="currentRowObra"
-                        onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                        onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                         binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudesObra}"
-                        onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
+                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                         sortMode="single"
                         value="#{SessionBeanCobra.solicitudService.solicitudObrachs}"
-                        render="scrolltablaSolicitudObra"
                         style="text-align:center;width:100%;">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
                                     <h:outputText value="#{var.solicitudesapro} #{SolicitudObra$GestionarSolicitudObra.totalfilasobra} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.paginaobra} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginasobra}" />
                                 </rich:column>
-                                <rich:column breakBefore="true">
+                                <rich:column breakRowBefore="true">
                                     <h:outputText value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
@@ -271,7 +269,7 @@
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud}"
                                               render="modaltablaproyectos, tablaproyectos" >
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
-                                <a4j:ajax event="oncomplete" oncomplete="#{rich:component('modaltablaproyectos')}.show()" />
+                                <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.show()" />
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">

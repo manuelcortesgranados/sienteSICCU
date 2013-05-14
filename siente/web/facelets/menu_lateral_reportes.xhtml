@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
-   >
+    >
     <interkont:spacer height="20" style="width:100%;"/>
     <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
         <td>
@@ -23,11 +23,14 @@
 
                     <ul>
                         <li><a4j:commandLink value="#{var.header1}" styleClass="consoclaro anchorLink"
-                                           style="font-size: 9px;" immediate="true"
-                                           action="#{Reportes.reporteSelect}" render="richpanelReportes, headerre"/></li>
-                         <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
-                                           style="font-size: 9px;" immediate="true"
-                                           action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
+                                             style="font-size: 9px;" immediate="true"
+                                             action="#{Reportes.reporteSelect}" render="richpanelReportes, headerre"/></li>
+                        <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
+                                             style="font-size: 9px;" immediate="true"
+                                             action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
+                        <li><a4j:commandLink value="#{var.header6}" styleClass="conso anchorLink"
+                                             style="font-size: 9px;" immediate="true"
+                                             action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
                     </ul>
                 </div>
             </tr>
