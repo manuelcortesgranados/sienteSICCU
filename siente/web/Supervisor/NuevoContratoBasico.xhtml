@@ -457,8 +457,10 @@
                             </h:panelGrid>
                             <interkont:spacer height="14"/>
                             <h:panelGrid id="pgpolis">
-                                <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" rows="4" style="text-align:left; width:100%;" value="#{Supervisor$Contrato.listapolizas}"
-                                                var="registro" binding="#{Supervisor$Contrato.tablaPolizasbin}" >
+                                <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" 
+                                                rows="4" style="text-align:left; width:100%;"
+                                                value="#{Supervisor$Contrato.listapolizas}"
+                                                var="registro" rowKeyVar="filaSeleccionada">
                                     <rich:column id="tc-strTipoPoliza" width="100px">
                                         <f:facet name="header">
                                             <h:outputText value="#{var.tipoPolizaContrato}:" />
@@ -494,7 +496,7 @@
                                             <h:outputText value="#{var.eliminar}" />
                                         </f:facet>
                                         <a4j:commandButton id="eliminarpol" value="#{var.eliminar}" render="pgpolis" immediate="true"
-                                                           action="#{Supervisor$Contrato.borrarPoliza}">
+                                                           action="#{Supervisor$Contrato.eliminarPoliza(filaSeleccionada)}">
                                         </a4j:commandButton>
                                     </rich:column>
                                     <f:facet name="footer">
@@ -529,8 +531,9 @@
                         <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" style="width: 300px;">
                             <h:outputText id="txt_nombrearchivocc" value=" #{file.nombre}"/>
                         </rich:dataGrid>
-                        <rich:dataTable id="tablaDocumentoscont"  sortMode="single" style="text-align:left; width:100%;"  var="currentRow"
-                                        binding="#{Supervisor$Contrato.tablaDocumentos}" rows="7"
+                        <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
+                                        style="text-align:left; width:100%;"  var="currentRow"
+                                        rows="7" rowKeyVar="filaSeleccionada"
                                         value="#{Supervisor$Contrato.listadocumentos}">
                             <f:facet name="header" >
                                 <rich:columnGroup >
@@ -556,7 +559,7 @@
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont"
-                                                   action="#{Supervisor$Contrato.eliminardocu}">
+                                                   action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
                                 </a4j:commandButton>
                             </rich:column>
                             <f:facet name="footer">

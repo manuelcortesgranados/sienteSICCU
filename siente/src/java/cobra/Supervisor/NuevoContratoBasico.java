@@ -129,10 +129,6 @@ public class NuevoContratoBasico   {
      */
     private int mostrarAgregarPol = 0;
     /**
-     * Binding creado para acceder a los datos de las filas de la tabla creada
-     */
-    private UIDataTable tablaPolizasbin = new UIDataTable();
-    /**
      * Lista para llenar todas las pólizas de contrato
      */
     private List<Polizacontrato> listapolizas = new ArrayList<Polizacontrato>();
@@ -247,10 +243,6 @@ public class NuevoContratoBasico   {
      * Lista para llenar los tipos de docuemntos que se desean guardar
      */
     private List<Tipodocumento> listatipodocumentos = new ArrayList<Tipodocumento>();
-    /**
-     * Binding creado para acceder a los datos de las filas de la tabla creada
-     */
-    private UIDataTable tablaDocumentos = new UIDataTable();
     /**
      * Binding creado para acceder a los datos de las filas de la tabla creada
      */
@@ -1756,14 +1748,6 @@ public class NuevoContratoBasico   {
         this.tipodocumento = tipodocumento;
     }
 
-    public UIDataTable getTablaDocumentos() {
-        return tablaDocumentos;
-    }
-
-    public void setTablaDocumentos(UIDataTable tablaDocumentos) {
-        this.tablaDocumentos = tablaDocumentos;
-    }
-
     public List<Documentoobra> getListadocumentos() {
         return listadocumentos;
     }
@@ -1970,14 +1954,6 @@ public class NuevoContratoBasico   {
 
     public void setTipoContrato(SelectItem[] TipoContrato) {
         this.TipoContrato = TipoContrato;
-    }
-
-    public UIDataTable getTablaPolizasbin() {
-        return tablaPolizasbin;
-    }
-
-    public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
-        this.tablaPolizasbin = tablaPolizasbin;
     }
 
     public Polizacontrato getPolizacontrato() {
@@ -2985,11 +2961,13 @@ public class NuevoContratoBasico   {
     /**
      * Elimina la poliza seleccionada de la lista.
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarPoliza() {
+    public String eliminarPoliza(int filaSeleccionada) {
 
-        Polizacontrato poleli = (Polizacontrato) tablaPolizasbin.getRowData();
+        Polizacontrato poleli = listapolizas.get(filaSeleccionada);
         listapolizas.remove(poleli);
         //getSessionBeanCobra().getCobraService().borrarPolizaContrato(poleli);
         return null;
@@ -2998,10 +2976,12 @@ public class NuevoContratoBasico   {
     /**
      * Elimina la poliza seleccionada de la lista en el detalle del contrato.
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarPolizaNueva() {
-        Polizacontrato polizaEli = (Polizacontrato) tablaPolizasbin.getRowData();
+    public String eliminarPolizaNueva(int filaSeleccionada) {
+        Polizacontrato polizaEli = listapolizas.get(filaSeleccionada);
         listapolizas.remove(polizaEli);
         getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizaEli);
         llenarPolizas();
@@ -3528,10 +3508,12 @@ public class NuevoContratoBasico   {
     /**
      * Eliminar el documento seleccionado
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminardocu() {
-        Documentoobra documento = (Documentoobra) tablaDocumentos.getRowData();
+    public String eliminardocu(int filaSeleccionada) {
+        Documentoobra documento = listadocumentos.get(filaSeleccionada);
         listadocumentos.remove(documento);
         return null;
 
@@ -4028,21 +4010,14 @@ public class NuevoContratoBasico   {
     }
 
     /**
-     * Habilita la información de la poliza a modificar
-     *
-     * @return
-    /**
      * Habilita la información de la poliza a modificar y la lista
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
-
      */
-    public String editarPoliza() {
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();
-        boolcrearpoliza = true;
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();  
-        boolcrearpoliza=true;
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();
+    public String editarPoliza(int filaSeleccionada) {
+        polizacontrato = listapolizas.get(filaSeleccionada);
         boolcrearpoliza = true;
         return null;
     }
