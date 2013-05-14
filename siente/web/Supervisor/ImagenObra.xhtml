@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
@@ -14,7 +15,7 @@
 
     <ui:define name="head">
         <title>Cobra - Supervisor</title>
-        <h:outputScript library="/resources/script_supervisor.js" name="script_supervisor"/>
+        <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText  value="#{var.imagenesproyecto}"/>            
@@ -34,20 +35,17 @@
     </ui:define>
     <ui:define name="body">
         <body >
-
-            <h:panelGrid id="panel_imagenesevolucion" style="width:100%;">
-                <h:panelGroup style="width:100%">
-                    <center>
-                        <h:form target="_blank">
-
+            <h:form target="_blank">
+                <h:panelGrid id="panel_imagenesevolucion" style="width:100%;">
+                    <h:panelGroup style="width:100%">
+                        <center>
                             <h:panelGroup>
                                 <h:outputText  value="#{var.houtbusquedarapida} "/>
-
                                 <h:inputText id="idpalabraclave" value="#{Supervisor$AdministrarObraNew.palabraclave}" size="52"/>
-
                                 <a4j:commandButton render="tablaImagenesevolucion" action="#{Supervisor$AdministrarObraNew.buscarimg}" value="Buscar" execute="idpalabraclave, @this"/>
-
                             </h:panelGroup>
+
+
                             <interkont:spacer height="20px" style="width:100%;"/>
                             <h:panelGroup id="panelTablaImagenesevolucion">
                                 <rich:dataTable id="tablaImagenesevolucion" 
@@ -55,8 +53,8 @@
                                                 style="text-align:left; width:100%;"
                                                 value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}"
                                                 var="currentRow" 
-                                                binding="#{Supervisor$AdministrarObraNew.tablaImagenesevolucion}"
-                                                rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                                rowKeyVar="filaSeleccionada"
+                                                rowClasses="cabezo_tabla01, cabezo_tabla02">
                                     <rich:column sortBy="#{currentRow.strubicacion}" width="470px" id="Imagen" >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.imagenes}"/>
@@ -69,8 +67,8 @@
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                                 <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
                                                 <rich:jQuery selector="#Imagen img" query="mouseout(function(){normalPic(this)})"/>
-                                                <rich:jQuery name="enlargePic" timing="onJScall" query="stop().animate({width:'100px' })" />
-                                                <rich:jQuery name="normalPic" timing="onJScall" query="stop().animate({width:'70px'})" />
+                                                <rich:jQuery name="enlargePic" query="stop().animate({width:'100px' })" />
+                                                <rich:jQuery name="normalPic"  query="stop().animate({width:'70px'})" />
                                             </h:commandLink>
                                         </center>
                                     </rich:column>
@@ -155,17 +153,13 @@
 
                             <interkont:spacer height="20px"/>
 
-
-                            <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true" >
-                                <a4j:ajax event="expand" render="panelImagenes"  />
+                            <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true"  >
+                                <a4j:ajax event="click" render="panelImagenes"  />
                                 <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
-                                    <ui:include src="SliderImagenes.xhtml"/>
+                                    <!--  <ui:include src="SliderImagenes.xhtml"/>-->
                                 </h:panelGroup>
                             </rich:collapsiblePanel>
 
-                            <interkont:spacer height="20px"/>
-                        </h:form>
-                        <h:form>
                             <rich:dataTable  style="width:100%;" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                 <f:facet name="header">
                                     <rich:columnGroup>
@@ -222,18 +216,18 @@
                                 </f:facet>
                             </rich:dataTable>                               
                             <interkont:spacer height="20px" style="width:100%;"/>
-                        </h:form>
-                    </center>
-                </h:panelGroup>
-            </h:panelGrid>
 
+                        </center>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </h:form>
 
             <ui:include src="/modal/panelUploadImagenevolucion.xhtml"/>
             <ui:include src="/modal/confirmarEstablecerVallaModal.xhtml"/>
             <ui:include src="/modal/confirmarEstablecerImagenActualModal.xhtml"/>
             <ui:include src="/modal/eliminarImageneolucionModal.xhtml"/>
-            <ui:include src="/modal/editarImagenEvolucionModal.xhtml"/>
-            <ui:include src="/modal/modalImagen.xhtml"/>
+           <ui:include src="/modal/editarImagenEvolucionModal.xhtml"/>
+           <ui:include src="/modal/modalImagen.xhtml"/>
 
         </body>
     </ui:define>

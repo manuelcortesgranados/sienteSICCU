@@ -195,14 +195,13 @@
                                      * cambiar el valor de la adición
                                      */
                                     function numvalorhistOnchange() {
-                                        if (jQuery('.numvalorhist').attr('value') != '') {
-                                            if (jQuery('.numvalorhist').attr('value') != '0') {
-                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                            } else {
-                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                            }
-                                        }
+                                    if (jQuery('.numvalorhist').attr('value') != ''){
+                                    if (jQuery('.numvalorhist').attr('value') != '0'){
+                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                    } else {
+                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
                                     }
+                                            }
                             </script>
                         </f:verbatim>
                     </h:panelGroup>

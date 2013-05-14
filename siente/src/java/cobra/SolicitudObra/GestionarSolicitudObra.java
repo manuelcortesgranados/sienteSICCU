@@ -112,7 +112,6 @@ public class GestionarSolicitudObra  {
     private UIDataTable tablaSolicitudes = new UIDataTable();
     private UIDataTable tablaSolicitudesObra = new UIDataTable();
     private UIDataTable tablaImagenessolicitud = new UIDataTable();
-    private UIDataTable tablaDocumentos = new UIDataTable();
     private UIDataTable tablaProyectosAso = new UIDataTable();
     private UIDataTable tablaMovimientos = new UIDataTable();
     private String pathImagen = "";
@@ -215,14 +214,6 @@ public class GestionarSolicitudObra  {
 
     public void setTipodoc(int tipodoc) {
         this.tipodoc = tipodoc;
-    }
-
-    public UIDataTable getTablaDocumentos() {
-        return tablaDocumentos;
-    }
-
-    public void setTablaDocumentos(UIDataTable tablaDocumentos) {
-        this.tablaDocumentos = tablaDocumentos;
     }
 
     public SubirArchivoBean getSubirDocumentoSolicitud() {
@@ -1519,14 +1510,31 @@ public class GestionarSolicitudObra  {
         return null;
     }
 
-    public String eliminarImagenLista() {
-        getSessionBeanCobra().getSolicitudService().setImagensolicitud((Imagensolicitud) tablaImagenessolicitud.getRowData());
+    /**
+     * Elimina la imágen de la lista
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String eliminarImagenLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Imagensolicitud imagensolicitud = sessionBeanCobra.getSolicitudService().getImagensolicituds().get(filaSeleccionada);
+        sessionBeanCobra.getSolicitudService().setImagensolicitud(imagensolicitud);
         getSessionBeanCobra().getSolicitudService().getImagensolicituds().remove(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
         return null;
     }
 
-    public String eliminarDocumentoLista() {
-        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud((Documentosolicitud) tablaDocumentos.getRowData());
+    /**
+     * Elimina el documento de la lista
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String eliminarDocumentoLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Documentosolicitud documentosolicitud = sessionBeanCobra.getSolicitudService().getDocumentosolicituds().get(filaSeleccionada);
+        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud(documentosolicitud);
         getSessionBeanCobra().getSolicitudService().getDocumentosolicituds().remove(getSessionBeanCobra().getSolicitudService().getDocumentosolicitud());
         return null;
     }
