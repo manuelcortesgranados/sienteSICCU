@@ -111,9 +111,7 @@ public class GestionarSolicitudObra  {
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private UIDataTable tablaSolicitudes = new UIDataTable();
     private UIDataTable tablaSolicitudesObra = new UIDataTable();
-    private UIDataTable tablaImagenessolicitud = new UIDataTable();
     private UIDataTable tablaProyectosAso = new UIDataTable();
-    private UIDataTable tablaMovimientos = new UIDataTable();
     private String pathImagen = "";
     private String mensaje;
     private int tipodoc;
@@ -142,14 +140,6 @@ public class GestionarSolicitudObra  {
 
     public void setMunicipiofiltro(SelectItem[] municipiofiltro) {
         this.municipiofiltro = municipiofiltro;
-    }
-
-    public UIDataTable getTablaMovimientos() {
-        return tablaMovimientos;
-    }
-
-    public void setTablaMovimientos(UIDataTable tablaMovimientos) {
-        this.tablaMovimientos = tablaMovimientos;
     }
 
     public boolean isMostrarmov() {
@@ -238,14 +228,6 @@ public class GestionarSolicitudObra  {
 
     public void setPathImagen(String pathImagen) {
         this.pathImagen = pathImagen;
-    }
-
-    public UIDataTable getTablaImagenessolicitud() {
-        return tablaImagenessolicitud;
-    }
-
-    public void setTablaImagenessolicitud(UIDataTable tablaImagenessolicitud) {
-        this.tablaImagenessolicitud = tablaImagenessolicitud;
     }
 
     public ResourceBundle getBundle() {
@@ -1526,7 +1508,6 @@ public class GestionarSolicitudObra  {
 
     /**
      * Elimina el documento de la lista
-     *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
      * @return null
