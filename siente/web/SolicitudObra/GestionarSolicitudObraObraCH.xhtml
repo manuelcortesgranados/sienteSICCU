@@ -132,7 +132,7 @@
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="date_sol"
+                                               direction="topRight" id="date_sol"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrachD.datefecharecibido}"
                                                inputSize="10">
                                 </rich:calendar>
@@ -499,7 +499,7 @@
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="fecjunta" inputSize="10" immediate="true"
+                                               direction="topRight" id="fecjunta" inputSize="10" immediate="true"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrachD.datefechajunta}">
                                 </rich:calendar>
 
@@ -621,7 +621,7 @@
 
                             <h:outputText  value="#{var.fechadecarta}"/>                                    
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
-                                           direction="top-right" id="fecorden" inputSize="10"
+                                           direction="topRight" id="fecorden" inputSize="10"
                                            value="#{SessionBeanCobra.solicitudService.ordendepago.datefechaordenpago}"
                                            immediate="true">
                             </rich:calendar>
@@ -658,7 +658,7 @@
                             <rich:calendar locale="#{var.rcalendarlocale}"
                                            disabled="true"
                                            value="#{SessionBeanCobra.solicitudService.encargofiduciario.datefechaaperturaencargofiduciario}"
-                                           datePattern="yyyy-MM-dd" direction="top-right" id="fecInfo" inputSize="10" immediate="true"/>
+                                           datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true"/>
 
                             <h:outputLabel id="lblEncargo"  value="#{var.encargofiduciario}" for="txtEncargo"/>
                             <h:panelGroup>

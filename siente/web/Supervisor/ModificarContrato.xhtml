@@ -153,7 +153,7 @@
                             <h:panelGrid id="modificar1" columnClasses="aiu" columns="2" >
                                 <h:outputLabel id="lblFecmodi"  value="#{var.fechamodificacion}:" for="fecmodifi"/>
                                 <h:panelGrid columns="5">
-                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecmodifi" inputSize="10"
+                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecmodifi" inputSize="10"
                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.datefechamodificacionseleccionada}" required="true">
                                     </rich:calendar>
                                     <rich:message for="fecmodifi" style="color: red"/>
@@ -170,7 +170,7 @@
                                     <h:outputLabel id="lblFectermi"  value="#{var.nuevafechatermincacion}:" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"/>
                                 </h:panelGroup>
                                 <h:panelGroup id="pgprorroga">
-                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fectermi" inputSize="10" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"
+                                    <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fectermi" inputSize="10" rendered="#{Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}"
                                                     value="#{Supervisor$ModificarContrato.modificarcontrato.datefechafinalizacion}">
                                     </rich:calendar>
 

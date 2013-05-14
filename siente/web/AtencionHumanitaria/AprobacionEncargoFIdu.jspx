@@ -36,7 +36,7 @@
                             <h:panelGrid id="panelAprobacionFinanciera" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
                                 <h:outputText  value="#{var.fechaapertura}:" styleClass="titulo3_filtro_busqueda"/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecAprobFinanciera2"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecAprobFinanciera2"
                                                inputSize="10" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                                value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
                                 </rich:calendar>

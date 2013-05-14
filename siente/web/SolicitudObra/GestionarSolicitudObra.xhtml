@@ -148,7 +148,7 @@
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="date_sol"
+                                               direction="topRight" id="date_sol"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrach.datefecharecibido}"
                                                inputSize="10">
                                 </rich:calendar>
@@ -545,7 +545,7 @@
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="fecjunta" inputSize="10" immediate="true"
+                                               direction="topRight" id="fecjunta" inputSize="10" immediate="true"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrach.datefechajunta}">
                                 </rich:calendar>
 
@@ -673,7 +673,7 @@
                             <h:outputText  value="#{var.fechadecarta}"/>
                             <interkont:spacer width="95"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" 
-                                           direction="top-right" id="fecorden" inputSize="10"
+                                           direction="topRight" id="fecorden" inputSize="10"
                                            value="#{SessionBeanCobra.solicitudService.ordendepago.datefechaordenpago}"
                                            immediate="true">
                             </rich:calendar>
@@ -707,7 +707,7 @@
                         <h:panelGrid id="panelAprobacionFinanciera" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
                             <h:outputText  value="#{var.fechaapertura}"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecInfo" inputSize="10" immediate="true">
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true">
                                 <a4j:ajax  event="onchanged" onbeforesubmit="#{rich:component('panelCargando')}.show();">
                                     <a4j:ajax event="oncomplete" onbeforesubmit="#{rich:component('panelCargando')}.hide();"/>
                                 </a4j:ajax>

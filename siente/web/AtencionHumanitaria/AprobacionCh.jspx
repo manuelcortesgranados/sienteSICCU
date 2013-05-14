@@ -131,7 +131,7 @@
 
 
                                 <h:outputText  value="#{var.fechajuntadirectiva}" styleClass="titulo3_filtro_busqueda"/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                                value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}" inputSize="10" immediate="true">
 
                                 </rich:calendar>
