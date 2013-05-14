@@ -291,11 +291,6 @@ public class NuevoContratoBasico   {
      */
     private UIDataTable tablacontratoconvenio = new UIDataTable();
     /**
-     * Binding creado para acceder al registro seleccionado en la tabla de
-     * contratos según el contratista
-     */
-    private UIDataTable tablacontratoconveniocontratista = new UIDataTable();
-    /**
      * Fecha del fin del contrato para mostrar el tiempo de terminación del
      * contrato
      */
@@ -1658,14 +1653,6 @@ public class NuevoContratoBasico   {
 
     public void setTablacontratoconvenio(UIDataTable tablacontratoconvenio) {
         this.tablacontratoconvenio = tablacontratoconvenio;
-    }
-
-    public UIDataTable getTablacontratoconveniocontratista() {
-        return tablacontratoconveniocontratista;
-    }
-
-    public void setTablacontratoconveniocontratista(UIDataTable tablacontratoconveniocontratista) {
-        this.tablacontratoconveniocontratista = tablacontratoconveniocontratista;
     }
 
     public String getRealArchivoPath() {
@@ -3660,11 +3647,13 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato según contratista, desde la tabla detalle
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String detalleContratoContratista() {
-
-        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
+    public String detalleContratoContratista(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
         cargarContrato(contratotabla);
         return "consultarContrato";
     }
@@ -3728,11 +3717,13 @@ public class NuevoContratoBasico   {
      * Seleccionar el contrato desde la tabla detalle contratopadre según el
      * contratista
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String detalleContratoPadreContratista() {
-        //limpiarContrato();
-        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
+    public String detalleContratoPadreContratista(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
         //contratotabla.getContrato().setFormapago(new Formapago());
         if (contratotabla.getContrato() != null) {
             //setContrato(contratotabla.getContrato());
