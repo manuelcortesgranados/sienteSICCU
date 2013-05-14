@@ -62,7 +62,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -621,10 +620,6 @@ public class NuevoContratoBasico   {
      */
     private int indicepolizamodificar = 0;
     /**
-     * Binding para acceder a los datos de la tabla planificacion de pagos
-     */
-    private UIDataTable tablaplanificacionpagos = new UIDataTable();
-    /**
      * Variable para almacenar el porcentaje de anticipo
      */
     private BigDecimal porcenanticipo = BigDecimal.ZERO;
@@ -1095,14 +1090,6 @@ public class NuevoContratoBasico   {
 
     public void setPorcenanticipo(BigDecimal porcenanticipo) {
         this.porcenanticipo = porcenanticipo;
-    }
-
-    public UIDataTable getTablaplanificacionpagos() {
-        return tablaplanificacionpagos;
-    }
-
-    public void setTablaplanificacionpagos(UIDataTable tablaplanificacionpagos) {
-        this.tablaplanificacionpagos = tablaplanificacionpagos;
     }
 
     public BigDecimal getVloranticipo() {
@@ -5583,22 +5570,30 @@ public class NuevoContratoBasico   {
 
     /**
      * Se elige el giro directo que se quiere editar
+
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return null
      */
-    public String editarGirodirecto() {
+    public String editarGirodirecto(int filaSeleccionada) {
         booleditargirodirecto = true;
-        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        planificacionpago = sessionBeanCobra.getCobraService().getListaPlanificacionpagos().get(filaSeleccionada);
         return null;
     }
 
     /**
      * Eliminar el giro directo previamente seleccionado
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarGirodirecto() {
-        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
+    public String eliminarGirodirecto(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+
+        movimientocontrato = nuevoContraBasicoSeleccionado.getListaGirodirecto().get(filaSeleccionada);
         listaGirodirecto.remove(movimientocontrato);
         if (movimientocontrato.getIntidnumero() != 0) {
             getSessionBeanCobra().getCobraService().borrarMovimientocontrato(movimientocontrato);
