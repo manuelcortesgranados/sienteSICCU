@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="modalFichahome" headerClass="rich-panel-header" styleClass="detalleproyecto" style="width: 300px; height: 300px;">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.generarArchivo}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+
+                    <a4j:commandLink id="esconder_modalFichahome" styleClass="cerrar" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFichahome')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form target="_blank">
+            <center>
+                <h:panelGrid columns="1" columnClasses="panelcenter">
+                    <h:commandButton value="Reporte Ficha Corto" action="#{HomeGestion.reportePdfFichaCorto}" />
+                    <h:commandButton value="Reporte Ficha de #{var.textoobra}" action="#{HomeGestion.reportePdfFichaObras}" />
+                    <h:commandButton value="Reporte Ficha de los Convenios" action="#{HomeGestion.reportePdfFichaConvenio}" />
+                </h:panelGrid>
+            </center>
+        </h:form>
+    </rich:popupPanel>
+</ui:composition>

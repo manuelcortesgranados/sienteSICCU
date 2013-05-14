@@ -3,11 +3,11 @@
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
 <faces-config version="2.1"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
-  <lifecycle>
+    <lifecycle>
         <phase-listener>cobra.Supervisor.AppPhaseListener</phase-listener>
     </lifecycle>
 
@@ -159,7 +159,8 @@
         <managed-bean-name>Supervisor$GraficoEvolucionContrato</managed-bean-name>
         <managed-bean-class>cobra.Supervisor.GraficoEvolucionContrato</managed-bean-class>
 
-    <managed-bean-scope>request</managed-bean-scope></managed-bean>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>Supervisor$AdministrarObraNew</managed-bean-name>
@@ -262,7 +263,7 @@
     </managed-bean>
     <!-- Fin de Managed Beans de Supervisor -->
 
-        <!-- Inicio de Managed Beans generales para Cobra -->
+    <!-- Inicio de Managed Beans generales para Cobra -->
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
         <managed-bean-class>cobra.Login</managed-bean-class>
@@ -873,10 +874,6 @@
             <from-outcome>financiera</from-outcome>
             <to-view-id>/homes/home_financiera.xhtml</to-view-id>
         </navigation-case>
-        <navigation-case>
-            <from-outcome>reportes</from-outcome>
-            <to-view-id>/reportes/reportes.xhtml</to-view-id>
-        </navigation-case>
     </navigation-rule>
 
     <navigation-rule>
@@ -983,6 +980,10 @@
         <navigation-case>
             <from-outcome>modificarperfil</from-outcome>
             <to-view-id>/Ciudadano/ModificarUsuario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>reportes</from-outcome>
+            <to-view-id>/reportes/reportes.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
