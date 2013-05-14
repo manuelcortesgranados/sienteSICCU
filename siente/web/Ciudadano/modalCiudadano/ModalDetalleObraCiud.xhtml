@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
@@ -10,7 +10,7 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-
+ 
     <rich:popupPanel  id="modalDetalleObra" autosized="true" resizeable="false" width="700" style="padding:0px;"
                       headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
         <f:facet name="header" >            
@@ -25,7 +25,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalDetalleObra" styleClass="style-modal-dialog-button-close" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDetalleObra')}.hide(); return false"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDetalleObra')}.hide(); return false; "/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -138,7 +138,7 @@
                             <h:panelGroup layout="block">
                                 <h:outputText styleClass="stile-text-contrato" value="#{Ciudadano$PerfilCiudadano.unoContratista}" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas==1}"/>
                                 <h:outputText styleClass="stile-text-contrato" value="#{var.modalciudadanover}" id="verContratistas" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas>1}">
-                                    <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                    <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
                                                   verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 200px;">
                                         <a4j:repeat value="#{Ciudadano$PerfilCiudadano.list_contratistas_slider}"  var="contratistas">
                                             <h:outputText value="#{contratistas}"></h:outputText>
@@ -161,28 +161,28 @@
                     <h:panelGrid styleClass="slider-proyecto-img">
                         <h:graphicImage styleClass="table-img-content" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strimagenobra}"/>
                         <h:panelGrid styleClass="table-img-actions" columns="5">
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.jspx?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_info_modal">
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_info_modal">
                                 <h:graphicImage value="/resources/imgs/valla/btn_info.png"/>
-                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 100px;">
                                     <h:outputText value="Informacion" style="font-size:12px;"></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
                             <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Ciudadano/ParticipacionCiudadano.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_coment_modal">
                                 <h:graphicImage value="/resources/imgs/valla/btn_comentarios.png"/>
-                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 100px;">
                                     <h:outputText value="Comentarios" style="font-size:12px;"></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
-                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.jspx?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
+                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
                                 <h:graphicImage value="/resources/imgs/valla/btn_fotos.png"/>
-                                <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                <rich:tooltip followMouse="true" direction="bottom-right" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="tooltipinf_ciudadano" style="width: 100px;">
                                     <h:outputText value="Fotos" style="font-size:12px;"></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>                             
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.jspx?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" styleClass="button-silider">
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" styleClass="button-silider">
                                 <h:outputText value="#{var.modalciudadanoverproyecto}"></h:outputText> 
                             </a4j:commandLink>  
                         </h:panelGrid>

@@ -252,10 +252,10 @@
 
                 <interkont:spacer height="15px"/> 
 
-                <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.jspx"/>
-                <ui:include src="/Ciudadano/modalCiudadano/ConfirmarCiudadano.jspx"/>
-                <ui:include src="/modal/modalRecordarContra.jspx"/>
-                <!--<ui:include src="/Ciudadano/modalCiudadano/GuardarCiudadano.jspx"/>
+                <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
+                <ui:include src="/Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
+                <ui:include src="/modal/modalRecordarContra.xhtml"/>
+                <!--<ui:include src="/Ciudadano/modalCiudadano/GuardarCiudadano.xhtml"/>
                 -->
             </ui:define>
         </ui:composition>
