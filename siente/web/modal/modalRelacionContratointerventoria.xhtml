@@ -66,7 +66,7 @@
                         <a4j:commandButton id="BTaceptarRelacioninter"  value="Asociar"
                                            rendered="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible>0 and Supervisor$AdministrarObraNew.obra.numvaltotobra>0 and Supervisor$AsociarContratos.relacioncontratointer.numvalormaximo>0}"
                                            action="#{Supervisor$AsociarContratos.asociarContrato}"
-                                           oncomplete="#{rich:component('panelRecordarContra')}.hide();"
+                                           oncomplete="#{rich:component('mp-listado-contratos-asociar')}.hide();#{rich:component('panelRelacionContratoInterventoria')}.hide();"
                                            render="pgdatacontratos,pgcontrat1aso">
                         </a4j:commandButton>
                         <a4j:commandButton id="BTcancelarRelacion"  value="#{var.cancelar}"
