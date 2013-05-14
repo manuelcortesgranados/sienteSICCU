@@ -40,7 +40,7 @@
                             <interkont:spacer height="15px" style="width:100%;"/>
                             <h:outputText  value="#{var.ingreselafechadeesta}" styleClass="TextoTipificacionModificacion"/>
                             <interkont:spacer height="20px" style="width:100%;"/>
-                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right"
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"
                                            id="date_fechaModificacion" inputSize="10"
                                            value="#{Supervisor$ModificarProyecto.historicoobra.datefecobrahist}"/>
                             <interkont:spacer height="20" style="width:100%;"/>
@@ -195,14 +195,13 @@
                                      * cambiar el valor de la adición
                                      */
                                     function numvalorhistOnchange() {
-                                        if (jQuery('.numvalorhist').attr('value') != '') {
-                                            if (jQuery('.numvalorhist').attr('value') != '0') {
-                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                            } else {
-                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                            }
-                                        }
+                                    if (jQuery('.numvalorhist').attr('value') != ''){
+                                    if (jQuery('.numvalorhist').attr('value') != '0'){
+                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                    } else {
+                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
                                     }
+                                            }
                             </script>
                         </f:verbatim>
                     </h:panelGroup>

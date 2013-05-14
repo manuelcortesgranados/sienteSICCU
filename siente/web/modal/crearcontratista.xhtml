@@ -42,11 +42,6 @@
                             <rich:message for="txtelefonoMovilCrea" style="color: red"/>
                         </h:panelGrid>
 
-                        <h:outputText id="lblareaContratistaCrea"  value="#{var.areaContratista}"/>
-                        <h:selectOneMenu id="cmbareaContratistaCrea" value="#{Supervisor$Contrato.contratista.areacontratista.intcodigoareacon}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
-                            <f:selectItems value="#{Supervisor$Contrato.areaContratistaOption}" />
-                        </h:selectOneMenu>
-
                         <h:outputText id="lblemailContratistaCrea"  value="#{var.correo}"/>
                         <h:inputText  size="25" maxlength="250" id="txtemailContratistaCrea" value="#{Supervisor$Contrato.contratista.stremail}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
@@ -56,29 +51,10 @@
                             <f:selectItems value="#{Supervisor$Contrato.departamentoContratista}" />
                             <a4j:ajax execute="@this,combodepartamentoContratista" event="change" listener="#{Supervisor$Contrato.llenarMunicipioContratista}"
                                          render="gpMuniContratista" />
-                        </h:selectOneMenu>
-
-                        <h:outputText id="lblcargoContratistaCrea"  value="(*)#{var.cargo}"/>
-                        <h:panelGrid columns="2">
-                            <h:selectOneMenu id="cmbcargoContratistaCrea" value="#{Supervisor$Contrato.contratista.cargo.intcargo}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" >
-                                <f:selectItems value="#{Supervisor$Contrato.cargoOption}" />
-                            </h:selectOneMenu>                            
-                        </h:panelGrid>
+                        </h:selectOneMenu>                 
 
                         <h:outputLabel id="lblmunicipioContratista"  value="#{var.municipio}" for="combomunicipiocontratista">
-                        </h:outputLabel>
-                        <h:panelGroup id="gpMuniContratista">
-                            <h:selectOneMenu id="combomunicipiocontratista" value="#{Supervisor$Contrato.contratista.localidadByContratista.strcodigolocalidad}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
-                                <f:selectItems value="#{Supervisor$Contrato.municipioContratista}"/>
-                            </h:selectOneMenu>
-                        </h:panelGroup>
-
-                        <h:outputText id="lblgeneroContratistaCrea"  value="(*)#{var.generoContratista}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
-                        <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.habidescontratista}">
-                            <h:selectOneMenu id="cmbgeneroContratistaCrea" value="#{Supervisor$Contrato.contratista.genero.intgenero}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" >
-                                <f:selectItems value="#{Supervisor$Contrato.generoOption}" />
-                            </h:selectOneMenu>                            
-                        </h:panelGrid>
+                        </h:outputLabel>                     
 
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
@@ -86,14 +62,7 @@
                         <h:outputLabel id="lbltipoidContratista"  value="#{var.tipodeIdentificacion}" for="combotipoidcontratista" />
                         <h:selectOneMenu id="combotipoidcontratista" value="#{Supervisor$Contrato.contratista.tipoidentificacion.intcodigotipoiden}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.tipoIdentificacionOption}"/>
-                        </h:selectOneMenu>
-
-                        <h:outputText id="lblestadoCivilContratistaCrea"  value="(*)#{var.estadoCivil}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
-                        <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.habidescontratista}">
-                            <h:selectOneMenu id="cmbestadoCivilContratistaCrea" value="#{Supervisor$Contrato.contratista.estadoCivil.intestadoCivil}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" >
-                                <f:selectItems value="#{Supervisor$Contrato.estadoCivilOption}" />
-                            </h:selectOneMenu>
-                        </h:panelGrid>
+                        </h:selectOneMenu>                    
 
                         <h:outputLabel id="lblcedulaContratistaCrea"  value="(*)#{var.cedulaContratista}" />
                         <h:panelGrid columns="2" >
@@ -119,14 +88,7 @@
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechVencim" inputSize="10"
                                        value="#{Supervisor$Contrato.contratista.datefechanacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
-                        <h:outputLabel id="lblmunicipioExpdocumento"  value="#{var.municipio} de Expedición" for="combomunicipioExpdocumento" rendered="#{Supervisor$Contrato.habidescontratista}">
-                        </h:outputLabel>
-                        <h:panelGroup id="gpMuniExpdocumento" rendered="#{Supervisor$Contrato.habidescontratista}">
-                            <h:selectOneMenu id="combomunicipioExpdocumento" value="#{Supervisor$Contrato.contratista.localidadByStrlocalidadexpdocumento.strcodigolocalidad}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
-                                <f:selectItems value="#{Supervisor$Contrato.mpioExpdocumento}"/>
-                            </h:selectOneMenu>
-                        </h:panelGroup>
-
+                       
                         <h:outputLabel id="lbldepartamentoNacimiento" value="#{var.departamento} de Nacimiento:" for="combodepartamentoNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}">
                         </h:outputLabel>
                         <h:selectOneMenu id="combodepartamentoNacimiento" value="#{Supervisor$Contrato.codDeptoNacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
@@ -137,14 +99,6 @@
 
                         <h:outputText id="lbldigitoVerificacionCrea"  value="#{var.digitoVerificacion}"/>
                         <rich:inputNumberSpinner id="txtdigitoVerificacionCrea" value="#{Supervisor$Contrato.contratista.intdigitoverificacion}" minValue="0" maxValue="9" inputSize="20" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
-
-                        <h:outputLabel id="lblmunicipioNacimiento"  value="#{var.municipio} de Nacimiento:" for="combomunicipioNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}" >
-                        </h:outputLabel>
-                        <h:panelGroup id="gpMuniNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}" >
-                            <h:selectOneMenu id="combomunicipioNacimiento" value="#{Supervisor$Contrato.contratista.localidadByStrlocalidadnacimiento.strcodigolocalidad}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
-                                <f:selectItems value="#{Supervisor$Contrato.mpioNacimiento}"/>
-                            </h:selectOneMenu>
-                        </h:panelGroup>
 
                         <h:outputText id="lblnombreComtratistaCrea"  value="(*)#{var.nombre}" />
                         <h:panelGrid columns="2">

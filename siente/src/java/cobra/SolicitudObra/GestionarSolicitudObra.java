@@ -109,12 +109,7 @@ public class GestionarSolicitudObra  {
     private SubirArchivoBean subirDocumentoSolicitud = new SubirArchivoBean(1, true, false);
     private SubirArchivoBean subirActa = new SubirArchivoBean(1, true, false);
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
-    private UIDataTable tablaSolicitudes = new UIDataTable();
-    private UIDataTable tablaSolicitudesObra = new UIDataTable();
-    private UIDataTable tablaImagenessolicitud = new UIDataTable();
-    private UIDataTable tablaDocumentos = new UIDataTable();
     private UIDataTable tablaProyectosAso = new UIDataTable();
-    private UIDataTable tablaMovimientos = new UIDataTable();
     private String pathImagen = "";
     private String mensaje;
     private int tipodoc;
@@ -143,14 +138,6 @@ public class GestionarSolicitudObra  {
 
     public void setMunicipiofiltro(SelectItem[] municipiofiltro) {
         this.municipiofiltro = municipiofiltro;
-    }
-
-    public UIDataTable getTablaMovimientos() {
-        return tablaMovimientos;
-    }
-
-    public void setTablaMovimientos(UIDataTable tablaMovimientos) {
-        this.tablaMovimientos = tablaMovimientos;
     }
 
     public boolean isMostrarmov() {
@@ -217,14 +204,6 @@ public class GestionarSolicitudObra  {
         this.tipodoc = tipodoc;
     }
 
-    public UIDataTable getTablaDocumentos() {
-        return tablaDocumentos;
-    }
-
-    public void setTablaDocumentos(UIDataTable tablaDocumentos) {
-        this.tablaDocumentos = tablaDocumentos;
-    }
-
     public SubirArchivoBean getSubirDocumentoSolicitud() {
         return subirDocumentoSolicitud;
     }
@@ -247,14 +226,6 @@ public class GestionarSolicitudObra  {
 
     public void setPathImagen(String pathImagen) {
         this.pathImagen = pathImagen;
-    }
-
-    public UIDataTable getTablaImagenessolicitud() {
-        return tablaImagenessolicitud;
-    }
-
-    public void setTablaImagenessolicitud(UIDataTable tablaImagenessolicitud) {
-        this.tablaImagenessolicitud = tablaImagenessolicitud;
     }
 
     public ResourceBundle getBundle() {
@@ -449,28 +420,12 @@ public class GestionarSolicitudObra  {
         this.guarda = guarda;
     }
 
-    public UIDataTable getTablaSolicitudesObra() {
-        return tablaSolicitudesObra;
-    }
-
-    public void setTablaSolicitudesObra(UIDataTable tablaSolicitudesObra) {
-        this.tablaSolicitudesObra = tablaSolicitudesObra;
-    }
-
     public int getValuegrupo() {
         return valuegrupo;
     }
 
     public void setValuegrupo(int valuegrupo) {
         this.valuegrupo = valuegrupo;
-    }
-
-    public UIDataTable getTablaSolicitudes() {
-        return tablaSolicitudes;
-    }
-
-    public void setTablaSolicitudes(UIDataTable tablaSolicitudes) {
-        this.tablaSolicitudes = tablaSolicitudes;
     }
 
     public String getCodMunicipio() {
@@ -1081,9 +1036,17 @@ public class GestionarSolicitudObra  {
         }
     }
 
-    public String consultarSolicitud() {
+    /**
+     * Consulta la información detallada de una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String consultarSolicitud(int filaSeleccionada) {
         consul = true;
-        SolicitudObrachTemp solicitud_obratemp = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(new ArrayList<Documentosolicitud>());
         getSessionBeanCobra().getSolicitudService().setImagensolicituds(new ArrayList<Imagensolicitud>());
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(getSessionBeanCobra().getSolicitudService().encontrarDocumentxSoliTemp(solicitud_obratemp));
@@ -1097,9 +1060,17 @@ public class GestionarSolicitudObra  {
         return "crearSolicitud";
     }
 
-    public String editarSolicitud() {
+    /**
+     * Permite editar una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String editarSolicitud(int filaSeleccionada) {
         consul = false;
-        SolicitudObrachTemp solicitud_obratemp = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(new ArrayList<Documentosolicitud>());
         getSessionBeanCobra().getSolicitudService().setImagensolicituds(new ArrayList<Imagensolicitud>());
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(getSessionBeanCobra().getSolicitudService().encontrarDocumentxSoliTemp(solicitud_obratemp));
@@ -1111,8 +1082,14 @@ public class GestionarSolicitudObra  {
         return "crearSolicitud";
     }
 
-    public String consultarSolicitudDirector() {
-        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+    /**
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String consultarSolicitudDirector(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setSolicitudObrachD(solicitud_obra);
 
         if (solicitud_obra.getSubestadosolicitudch().getEstadosolicitudch().getOidestadosolicitud() == 1) {
@@ -1128,8 +1105,16 @@ public class GestionarSolicitudObra  {
         return listapagos(solicitud_obra);
     }
 
-    public String asociarProyectoaSolicitud() {
-        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+    /**
+     * Permite asociar un proyecto a una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String asociarProyectoaSolicitud(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
 
         if (solicitud_obra.getObras().size() == 0) {
             getSessionBeanCobra().getCobraService().getProyectoSoli().setStrnombreobra(solicitud_obra.getStrnombresolicitud());
@@ -1519,14 +1504,30 @@ public class GestionarSolicitudObra  {
         return null;
     }
 
-    public String eliminarImagenLista() {
-        getSessionBeanCobra().getSolicitudService().setImagensolicitud((Imagensolicitud) tablaImagenessolicitud.getRowData());
+    /**
+     * Elimina la imágen de la lista
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String eliminarImagenLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Imagensolicitud imagensolicitud = sessionBeanCobra.getSolicitudService().getImagensolicituds().get(filaSeleccionada);
+        sessionBeanCobra.getSolicitudService().setImagensolicitud(imagensolicitud);
         getSessionBeanCobra().getSolicitudService().getImagensolicituds().remove(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
         return null;
     }
 
-    public String eliminarDocumentoLista() {
-        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud((Documentosolicitud) tablaDocumentos.getRowData());
+    /**
+     * Elimina el documento de la lista
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String eliminarDocumentoLista(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Documentosolicitud documentosolicitud = sessionBeanCobra.getSolicitudService().getDocumentosolicituds().get(filaSeleccionada);
+        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud(documentosolicitud);
         getSessionBeanCobra().getSolicitudService().getDocumentosolicituds().remove(getSessionBeanCobra().getSolicitudService().getDocumentosolicitud());
         return null;
     }
@@ -1651,8 +1652,16 @@ public class GestionarSolicitudObra  {
         return null;
     }
 
-    public String eliminarsolicitud() {
-        SolicitudObrachTemp solicitud_obra = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+    /**
+     * Permite eliminar una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String eliminarsolicitud(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setSolicitudObrach(solicitud_obra);
         return null;
     }
@@ -1779,14 +1788,30 @@ public class GestionarSolicitudObra  {
         return null;
     }
 
-    public String llenarProyectosxSolicitud() {
-        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+    /**
+     * Establece los proyectos asociados a la solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String llenarProyectosxSolicitud(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getSolicitudService().encontrarProyectosxSolicitud(solicitud_obra.getIntserial()));
         return null;
     }
 
-    public String llenarProyectosxSolicitudTemp() {
-        SolicitudObrachTemp solicitud_obra = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+    /**
+     * Actualiza los proyectos asociados para una solicitud
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String llenarProyectosxSolicitudTemp(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getSolicitudService().encontrarProyectosxSolicitud(solicitud_obra.getIntserial()));
         return null;
     }

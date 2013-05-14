@@ -75,7 +75,7 @@
                                 <h:selectOneMenu id="combodepto" value="#{SolicitudObra$GestionarSolicitudObra.codDepartamento}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.deshabilitardepartamentos}" rendered="#{SolicitudObra$GestionarSolicitudObra.verdepartamento}">
                                     <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.departamento}" />
-                                    <a4j:ajax event="onchange" render="gpmunicipio" action="#{SolicitudObra$GestionarSolicitudObra.llenarMunicipios}" execute="@this"/>
+                                    <a4j:ajax event="change" render="gpmunicipio" listener="#{SolicitudObra$GestionarSolicitudObra.llenarMunicipios}" execute="@this"/>
                                 </h:selectOneMenu>
 
                                 <h:outputText value="#{var.municipio}"/>
@@ -110,7 +110,7 @@
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
                                     <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.evento}"/>
-                                    <a4j:ajax event="onchange" render="pgperiodoevento" action="#{SolicitudObra$GestionarSolicitudObra.llenarPeriodoEvento}"
+                                    <a4j:ajax event="change" render="pgperiodoevento" listener="#{SolicitudObra$GestionarSolicitudObra.llenarPeriodoEvento}"
                                               execute="@this"/>
                                 </h:selectOneMenu>
 
@@ -132,7 +132,7 @@
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="date_sol"
+                                               direction="topRight" id="date_sol"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrachD.datefecharecibido}"
                                                inputSize="10">
                                 </rich:calendar>
@@ -218,7 +218,7 @@
                                         <a4j:commandButton value="#{var.guardar}"
                                                            rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}"
                                                            action="#{SolicitudObra$GestionarSolicitudObra.validargurdado}">
-                                            <a4j:ajax event="oncomplete"  render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show()"/>
+                                            <a4j:ajax event="complete"  render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show()"/>
                                         </a4j:commandButton>
                                         <a4j:commandButton value="#{var.cancelar}"
                                                            rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}"
@@ -250,18 +250,18 @@
                             <a4j:commandLink id="bt_agregarImagen" styleClass="anadir anchorLink" title="#{var.agregar}"
                                              action="#{SolicitudObra$GestionarSolicitudObra.subirImagenaLista}"
                                              render="tablaImagenes,gpDatosBasicos,panelUploadImagenSolicitud"/>
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.files}" var="file" width="30px">
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.files}" var="file" style="width: 30px;">
                                 <h:outputText id="otxt_nombreImagen" value=" #{file.onlyName}"/>
                             </rich:dataGrid>
                         </h:panelGrid>
 
                         <h:panelGroup>
                             <rich:dataTable id="tablaImagenes" value="#{SessionBeanCobra.solicitudService.imagensolicituds}"
-                                            var="currentRow" style="width:100%;" binding="#{SolicitudObra$GestionarSolicitudObra.tablaImagenessolicitud}" rows="3" >
+                                            rowKeyVar="filaSeleccionada" var="currentRow" style="width:100%;" rows="3" >
                                 <f:facet name="header">
                                     <h:outputText value="#{var.imgseleccionadas}"/>
                                 </f:facet>
-                                <rich:column breakBefore="true" style="text-align:center;" width="100px">
+                                <rich:column breakRowBefore="true" style="text-align:center;" width="100px">
                                     <f:facet name="header" >
                                         <h:outputText value="#{var.descripcionImagen}"/>
                                     </f:facet>
@@ -288,7 +288,7 @@
                                         <h:outputText value="#{var.eliminar}"/>
                                     </f:facet>
                                     <a4j:commandButton id="eliminar" value="#{var.eliminar}" render="tablaImagenes"
-                                                       action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista}"/>
+                                                       action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista(filaSeleccionada)}"/>
                                 </rich:column>
                                 <f:facet name="footer">
                                     <rich:dataScroller renderIfSinglePage="false" />
@@ -321,25 +321,25 @@
                             <a4j:commandLink id="bt_agregar" styleClass="anadir anchorLink" title="#{var.agregar}"
                                              action="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoaLista}"
                                              render="tablaDocumentos,gpDatosBasicos1,panelUploadDocumento">
-                                <a4j:ajax event="oncomplete" action="#{SolicitudObra$GestionarSolicitudObra.validardocumentacion}">
-                                    <a4j:ajax event="oncomplete" render="resuDocu, docucomple"/>
+                                <a4j:ajax event="complete" listener="#{SolicitudObra$GestionarSolicitudObra.validardocumentacion}">
+                                    <a4j:ajax event="complete" render="resuDocu, docucomple"/>
                                 </a4j:ajax>
                             </a4j:commandLink>
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.files}" var="file" width="30px">
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.files}" var="file" style="width:30px;">
                                 <h:outputText id="otxt_nombrearchivo" value=" #{file.onlyName}"/>
                             </rich:dataGrid>
 
                         </h:panelGrid>
 
                         <rich:dataTable id="tablaDocumentos"  sortMode="single" style="text-align:left;width:100%;"  var="currentRow" 
-                                        binding="#{SolicitudObra$GestionarSolicitudObra.tablaDocumentos}" rows="7"
+                                        rowKeyVar="filaSeleccionada" rows="7"
                                         value="#{SessionBeanCobra.solicitudService.documentosolicituds}">
                             <f:facet name="header" >
                                 <rich:columnGroup >
                                     <rich:column colspan="5">
                                         <h:outputText value="#{var.docseleccionados}"/>
                                     </rich:column>
-                                    <rich:column breakBefore="true">
+                                    <rich:column breakRowBefore="true">
                                         <h:outputText value="#{var.tipoDocumento}"/>
                                     </rich:column>
                                     <rich:column>
@@ -358,12 +358,12 @@
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentos"
-                                                   action="#{SolicitudObra$GestionarSolicitudObra.eliminarDocumentoLista}">
+                                                   action="#{SolicitudObra$GestionarSolicitudObra.eliminarDocumentoLista(filaSeleccionada)}">
                                 </a4j:commandButton>
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:columnGroup>
-                                    <rich:column colspan="4" breakBefore="true" style="text-align: center;">
+                                    <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
                                         <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentos" render="tablaDocumentos"/>
                                     </rich:column>
                                 </rich:columnGroup>
@@ -453,8 +453,7 @@
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
                                     <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.estadosolicitudch}" />
-                                    <a4j:ajax event="onchange" render="gpsubestadosoli" action="#{SolicitudObra$GestionarSolicitudObra.llenarSubestadosolicitud}" execute="@this"/>
-                                </h:selectOneMenu>
+                                    <a4j:ajax event="change" render="gpsubestadosoli" listener="#{SolicitudObra$GestionarSolicitudObra.llenarSubestadosolicitud}" execute="@this"/>                                </h:selectOneMenu>
 
                                 <h:outputText value="#{var.subestadosolici}"/>
                                 <h:panelGroup id="gpsubestadosoli">
@@ -499,7 +498,7 @@
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                               direction="top-right" id="fecjunta" inputSize="10" immediate="true"
+                                               direction="topRight" id="fecjunta" inputSize="10" immediate="true"
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrachD.datefechajunta}">
                                 </rich:calendar>
 
@@ -523,7 +522,7 @@
                                                action="#{SolicitudObra$GestionarSolicitudObra.validaraprobacion}"
                                                rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"
                                                value="#{var.guardar}" >
-                                <a4j:ajax event="oncomplete"  render="layoutGuardar" oncomplete=" #{rich:component('panelValidarSolicitud')}.show()"/>
+                                <a4j:ajax event="complete"  render="layoutGuardar" oncomplete=" #{rich:component('panelValidarSolicitud')}.show()"/>
                             </a4j:commandButton>
                             <a4j:commandButton id="Cancelaraprobacioninfra" value="#{var.cancelar}"
                                                rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"
@@ -564,7 +563,7 @@
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago1}" inputSize="3">
-                                <a4j:ajax event="onchange" render="pagos" />
+                                <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
                             <h:outputText value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
@@ -575,7 +574,7 @@
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago2}" inputSize="3">
-                                <a4j:ajax event="onchange" render="pagos" />
+                                <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
                             <h:outputText value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
@@ -586,7 +585,7 @@
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago3}" inputSize="3">
-                                <a4j:ajax event="onchange" render="pagos" />
+                                <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
                             <h:outputText value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
@@ -621,7 +620,7 @@
 
                             <h:outputText  value="#{var.fechadecarta}"/>                                    
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
-                                           direction="top-right" id="fecorden" inputSize="10"
+                                           direction="topRight" id="fecorden" inputSize="10"
                                            value="#{SessionBeanCobra.solicitudService.ordendepago.datefechaordenpago}"
                                            immediate="true">
                             </rich:calendar>
@@ -637,7 +636,7 @@
                             <a4j:commandButton id="guardaorden"
                                                action="#{SolicitudObra$GestionarSolicitudObra.guardarOrdenPago}"
                                                value="#{var.guardar}">
-                                <a4j:ajax event="oncomplete" render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show();"/>
+                                <a4j:ajax event="complete" render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show();"/>
                             </a4j:commandButton>
                             <a4j:commandButton id="CancelarOrden" styleClass="btn_pri_inm" value="#{var.cancelar}"/>
                         </h:panelGrid>
@@ -658,7 +657,7 @@
                             <rich:calendar locale="#{var.rcalendarlocale}"
                                            disabled="true"
                                            value="#{SessionBeanCobra.solicitudService.encargofiduciario.datefechaaperturaencargofiduciario}"
-                                           datePattern="yyyy-MM-dd" direction="top-right" id="fecInfo" inputSize="10" immediate="true"/>
+                                           datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true"/>
 
                             <h:outputLabel id="lblEncargo"  value="#{var.encargofiduciario}" for="txtEncargo"/>
                             <h:panelGroup>
@@ -679,7 +678,7 @@
                                                action="#{SolicitudObra$GestionarSolicitudObra.guardarEncargoFiduciario}"
                                                value="#{var.guardar}"
                                                render="layoutGuardar">
-                                <a4j:ajax event="oncomplete" render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show();"/>
+                                <a4j:ajax event="complete" render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show();"/>
                             </a4j:commandButton>
                             <a4j:commandButton id="CancelaraprobacionAH" styleClass="btn_pri_inm" value="#{var.cancelar}"/>
 
@@ -687,21 +686,20 @@
                     </center>
                 </rich:collapsiblePanel>
 
-                <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax" opened="false" rendered="#{SolicitudObra$GestionarSolicitudObra.mostrarmov}">
+                <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax" expanded="false" rendered="#{SolicitudObra$GestionarSolicitudObra.mostrarmov}">
                     <f:facet name="header">
                         <h:outputText value="#{var.movimientosfinancieros}"/>
                     </f:facet>
                     <interkont:spacer height="3"/>
                     <rich:dataTable id="tablaMovimientos"
-                                    binding="#{SolicitudObra$GestionarSolicitudObra.tablaMovimientos}"
                                     value="#{SessionBeanCobra.solicitudService.listamovimientosolobra}"
-                                    var="currentRow"  style="width:100%;">
+                                    rowKeyVar="filaSeleccionada" var="currentRow"  style="width:100%;">
                         <f:facet name="header">
                             <rich:columnGroup>
-                                <rich:column breakBefore="true" colspan="12">
+                                <rich:column breakRowBefore="true" colspan="12">
                                     <h:outputText value="Movimientos Financieros" />
                                 </rich:column>
-                                <rich:column breakBefore="true">
+                                <rich:column breakRowBefore="true">
                                     <h:outputText value="#{var.comprobantefidu}"/>
                                 </rich:column>
                                 <rich:column>
@@ -739,7 +737,7 @@
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
-                        <rich:column breakBefore="true">
+                        <rich:column breakRowBefore="true">
                             <h:outputText value="#{currentRow.strcomprobantefidu}"/>
                         </rich:column>
                         <rich:column >

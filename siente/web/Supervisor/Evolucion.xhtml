@@ -54,7 +54,7 @@
                 <center>
                     <interkont:spacer style="width:100%;" height="20"/>
                     <rich:dataTable id="tablaavancesporperiodo"  rows="4" style="text-align:left;width:100%;"  var="avance"
-                                    value="#{Supervisor$DetalleObra.listaAlimenta}" binding="#{Supervisor$DetalleObra.tablalistaavances}"
+                                    rowKeyVar="filaSeleccionada" value="#{Supervisor$DetalleObra.listaAlimenta}"
                                     rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}"
                                     >
                         <rich:column id="avnfecalim" width="100px">
@@ -89,7 +89,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{var.veravance}" />
                             </f:facet>
-                            <a4j:commandButton value="#{var.veravance}" action="#{Supervisor$DetalleObra.encontraralimentacion}" render="imgspanel,layoutGral,simpleToggleSelechv"/> 
+                            <a4j:commandButton value="#{var.veravance}" action="#{Supervisor$DetalleObra.encontraralimentacion(filaSeleccionada)}" render="imgspanel,layoutGral,simpleToggleSelechv"/>
 
                         </rich:column>
                         <rich:dataScroller for="tablaavancesporperiodo" render="tablaavancesporperiodo"/>

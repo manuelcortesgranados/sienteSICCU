@@ -234,14 +234,14 @@
                                         </h:panelGrid>
                                         <h:outputLabel id="lblFecsusc"  value="#{var.fechasus}:" for="fecIniContrato"/>
                                         <h:panelGrid columns="2">
-                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
+                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="topRight" id="fecIniContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechaini}">
                                                 <a4j:ajax listener="#{Supervisor$Contrato.feciniCambio}" event="changed" render="gpDuracion" execute="@this, gpDuracion"/>
                                             </rich:calendar>
                                             <rich:message for="fecIniContrato" styleClass="error_texto"/>
                                         </h:panelGrid>
                                         <h:outputLabel id="lblFecFinal"  value="(*)#{var.fechadefinalizacion}:" for="fecfinContrato"/>
                                         <h:panelGrid columns="2">
-                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="top-right" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
+                                            <rich:calendar required="true" datePattern="yyyy-MM-dd" direction="topRight" id="fecfinContrato" inputSize="10" value="#{Supervisor$Contrato.contrato.datefechafin}">
                                                 <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="changed" render="gpDuracion" execute="@this" />
                                             </rich:calendar>
                                             <rich:message for="fecfinContrato" styleClass="error_texto"/>
@@ -370,7 +370,7 @@
                                             <f:convertNumber pattern="$ ###,###,###"/>
                                         </h:outputText>                                   
                                         <h:outputText value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
-                                        <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
+                                        <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
                                                         inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"  />
 
                                         <h:outputText id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
@@ -401,7 +401,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.fechagiro}:" />
                                                 </f:facet>
-                                                <rich:calendar  datePattern="yyyy-MM-dd" direction="top-right" id="fecpagoactapargir"
+                                                <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoactapargir"
                                                                 inputSize="10" value="#{arr.datefechapago}" >
                                                 </rich:calendar>
                                             </rich:column>

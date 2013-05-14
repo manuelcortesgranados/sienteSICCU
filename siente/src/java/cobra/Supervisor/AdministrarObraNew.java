@@ -1422,10 +1422,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         }
     }
 
-    public String bt_download_imagenevolucion_action() {
+    public String bt_download_imagenevolucion_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Imagenevolucionobra doc = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+         AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+         Imagenevolucionobra doc =  adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         // this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + doc.getStrubicacion());
@@ -1435,8 +1436,9 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         return "Download";
     }
 
-    public String bt_editar_imagenevolucion_action() {
-        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+    public String bt_editar_imagenevolucion_action(int filaSeleccionada) {
+         AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+         this.imagenevolucionobraEd =adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         return null;
     }
 
@@ -1494,11 +1496,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         return null;
     }
 
-    public String bt_eliminar_imagenevolucion_action() {
+    public String bt_eliminar_imagenevolucion_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-
-        this.imagenevolucionobraEl = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+        AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.imagenevolucionobraEl = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         listaImagenesevolucionobra.remove(this.imagenevolucionobraEl);
         getSessionBeanCobra().getCobraService().borrarImagen(this.imagenevolucionobraEl);
         return null;
