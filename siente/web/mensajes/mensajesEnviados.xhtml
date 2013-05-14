@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
+    template="/facelets/template_main.xhtml">
+
+    <ui:define name="head">
+
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="Mensajes enviados"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form1">
+            <h:panelGroup style="width:98%">
+                <center>
+                    <h:panelGroup id="panel_filtro_enviados">
+                        <h:outputText styleClass="txt_label_bold" value="#{var.houtbusquedarapida} "/>
+                        <h:inputText value="#{Mensajes.valorFiltroMensajeEnviado}" id="filtroEnviados" size="52">
+                            <a4j:ajax event="keyup" render="tablaMensajesEnviados" />
+                        </h:inputText>
+                    </h:panelGroup>
+                    <interkont:spacer height="10px" style="width:100%;"/>
+                    <h:panelGroup id="pl_tabla_enviados">
+                        <rich:dataTable id="tablaMensajesEnviados" sortMode="single" style="text-align:left;width:100%;" value="#{Mensajes.listaMensajesEnviados}" var="currentRow"  rows="10" binding="#{Mensajes.tablaMensajesEnviados}">
+                            <rich:column filterExpression="#{Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
+                                        >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.houtasunto}"/>
+                                </f:facet>
+                                <h:outputText value="#{currentRow.strasuntomensaje}"/>
+                            </rich:column>
+                            <rich:column sortBy="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}" width="300px"
+                                        >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.houtdestinatario}"/>
+                                </f:facet>
+                                <h:outputText value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombrecompleto}"/>
+                            </rich:column>
+                            <rich:column sortBy="#{currentRow.datefecmensaje}" width="140px"
+                                        >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.Fecha}"/>
+                                </f:facet>
+                                <h:outputText value="#{currentRow.datefecmensaje}">
+                                    <f:convertDateTime pattern="dd-MMM-yy hh:mm:ss"/>
+                                </h:outputText>
+                            </rich:column>
+                            <rich:column  style="text-align:center;" width="60px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.Ver}"/>
+                                </f:facet>
+                                <a4j:commandLink action="#{Mensajes.bt_verenviados_action}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
+                                                 immediate="true" render="pg_camposVerEnviados,mp_ver_enviados">
+                                    <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                </a4j:commandLink>
+                            </rich:column>
+                            <f:facet name="footer">
+                                <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                            </f:facet>
+                        </rich:dataTable>
+                    </h:panelGroup>
+                </center>
+            </h:panelGroup>
+        </h:form>
+        <ui:include src="/modal/verEnviadosModal.xhtml"/>
+    </ui:define>
+</ui:composition>
