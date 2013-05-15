@@ -218,8 +218,7 @@
                                                                                              SessionBeanCobra.cobraService.proyectoContrato.solicitudmaestro == null and var.varrecurosoch and !var.aplicaContralorias}">
                                             <a4j:commandButton id="btnBuscarnumencargo" value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarEncargoFiduciario}" disabled="#{Supervisor$Contrato.boolnumencargosoli}"
                                                                render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true" execute="@this, mp-listado-numencargo,tabla-listado-numencargo"
-                                                               oncomplete="javascript:Richfaces.showModalPanel('mp-listado-numencargo')" >
-                                                <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-numencargo')" render="mp-listado-numencargo,tabla-listado-numencargo" immediate="true"/>
+                                                               oncomplete="#{rich:component('mp-listado-numencargo')}.show();" >
                                             </a4j:commandButton>
                                             <interkont:spacer width="15"/>
                                             <h:inputText  id="txtNumencar" size="15" maxlength="250" disabled="true" value="#{Supervisor$Contrato.encargofiduciario.intnumencargofiduciario}" >
