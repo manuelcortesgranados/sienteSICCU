@@ -43,7 +43,7 @@
                     <rich:dataTable id="tablaContratistas"
                                     rows="5"
                                     var ="Contratista"
-                                    binding="#{Supervisor$Contrato.tablacontratistas}"                                    
+                                    rowKeyVar="filaSeleccinada"                                  
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
@@ -90,15 +90,14 @@
                                 <h:outputText value="#{Contratista.strapellido2}"/>
                             </rich:column>-->
                             <rich:column >
-                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas}"
+                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas(filaSeleccinada)}"
                                                    render="gpcontratistaseleccionado"
-                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratistas');" >
-                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratistas')" render="gpcontratistaseleccionado"/>
+                                                   oncomplete="#{rich:component('mp-listado-contratistas')}.hide();" >
                                 </a4j:commandButton>
                             </rich:column>
                             <rich:column>
-                                <a4j:commandButton value="Editar" action="#{Supervisor$Contrato.editarContratistas}" render="mp-crear-contratista">
-                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.showModalPanel('mp-crear-contratista')" />
+                                <a4j:commandButton value="Editar" action="#{Supervisor$Contrato.editarContratistas}" render="mp-crear-contratista"
+                                                  oncomplete="#{rich:component('mp-crear-contratista')}.show();"                                                  >                                    
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:columnGroup>
