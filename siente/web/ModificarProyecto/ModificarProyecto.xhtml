@@ -13,7 +13,7 @@
 
     <ui:define name="head">
         <title>Cobra - Supervisor</title>
-        <h:outputScript library="/resources/script_supervisor.js" name="scrip_supervisor"/>
+        <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText value="#{var.modificarobra}"/>
@@ -195,13 +195,14 @@
                                      * cambiar el valor de la adición
                                      */
                                     function numvalorhistOnchange() {
-                                    if (jQuery('.numvalorhist').attr('value') != ''){
-                                    if (jQuery('.numvalorhist').attr('value') != '0'){
-                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                    } else {
-                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                    }
+                                        if (jQuery('.numvalorhist').attr('value') != '') {
+                                            if (jQuery('.numvalorhist').attr('value') != '0') {
+                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                            } else {
+                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
                                             }
+                                        }
+                                    }
                             </script>
                         </f:verbatim>
                     </h:panelGroup>
