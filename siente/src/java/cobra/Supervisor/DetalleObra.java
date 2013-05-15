@@ -131,7 +131,6 @@ public class DetalleObra  {
     public BigDecimal valorinterventoria = BigDecimal.ZERO;
     private List<Listaverificacion> listaverificacion = new ArrayList<Listaverificacion>();
     private boolean veralimenta = false;
-    private UIDataTable tablalistaavances = new UIDataTable();
     private int listasegudires;
     private List<Beneficiario> lstbeneficiario;
     private int totalben=0;
@@ -244,14 +243,6 @@ public class DetalleObra  {
 
     public void setListasegudires(int listasegudires) {
         this.listasegudires = listasegudires;
-    }
-
-    public UIDataTable getTablalistaavances() {
-        return tablalistaavances;
-    }
-
-    public void setTablalistaavances(UIDataTable tablalistaavances) {
-        this.tablalistaavances = tablalistaavances;
     }
 
     public boolean isVeralimenta() {
@@ -819,7 +810,14 @@ public class DetalleObra  {
         return null;
     }
 
-    public String encontraralimentacion() {
+    /**
+     * Consulta las alimentaciones
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String encontraralimentacion(int filaSeleccionada) {
 
         if (periodoevo.getIntidperiodo() == -1) {
             alimentacionmostrar = new Alimentacion();
@@ -827,7 +825,7 @@ public class DetalleObra  {
 
             // alimentacionmostrar = getSessionBeanCobra().getCobraService().encontrarAlimentacionxPeriodo(periodoevo.getIntidperiodo(), getAdministrarObraNew().getObra().getIntcodigoobra());
 
-            alimentacionmostrar = (Alimentacion) tablalistaavances.getRowData();
+            alimentacionmostrar = listaAlimenta.get(filaSeleccionada);
             if (getAlimentacionmostrar() != null && getAlimentacionmostrar().getSemaforo().getStrimagen().equals(bundle.getString("semafo_verde"))) {
                 semaforo = "VERDE";
             }

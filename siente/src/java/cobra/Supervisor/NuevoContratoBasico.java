@@ -62,7 +62,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -129,10 +128,6 @@ public class NuevoContratoBasico   {
      * Mostrar pólizas cuando ingrese al método {@link agregarPolizasContra()}
      */
     private int mostrarAgregarPol = 0;
-    /**
-     * Binding creado para acceder a los datos de las filas de la tabla creada
-     */
-    private UIDataTable tablaPolizasbin = new UIDataTable();
     /**
      * Lista para llenar todas las pólizas de contrato
      */
@@ -251,10 +246,6 @@ public class NuevoContratoBasico   {
     /**
      * Binding creado para acceder a los datos de las filas de la tabla creada
      */
-    private UIDataTable tablaDocumentos = new UIDataTable();
-    /**
-     * Binding creado para acceder a los datos de las filas de la tabla creada
-     */
     private UIDataTable tablaDocumentosContrato = new UIDataTable();
     /**
      * Variable para mostrar periodo de un evento
@@ -299,11 +290,6 @@ public class NuevoContratoBasico   {
      * Binding creado para acceder a los datos de las filas de la tabla creada
      */
     private UIDataTable tablacontratoconvenio = new UIDataTable();
-    /**
-     * Binding creado para acceder al registro seleccionado en la tabla de
-     * contratos según el contratista
-     */
-    private UIDataTable tablacontratoconveniocontratista = new UIDataTable();
     /**
      * Fecha del fin del contrato para mostrar el tiempo de terminación del
      * contrato
@@ -620,10 +606,6 @@ public class NuevoContratoBasico   {
      * Variable utilizada para obtener la posicion de la poliza a modificar
      */
     private int indicepolizamodificar = 0;
-    /**
-     * Binding para acceder a los datos de la tabla planificacion de pagos
-     */
-    private UIDataTable tablaplanificacionpagos = new UIDataTable();
     /**
      * Variable para almacenar el porcentaje de anticipo
      */
@@ -1095,14 +1077,6 @@ public class NuevoContratoBasico   {
 
     public void setPorcenanticipo(BigDecimal porcenanticipo) {
         this.porcenanticipo = porcenanticipo;
-    }
-
-    public UIDataTable getTablaplanificacionpagos() {
-        return tablaplanificacionpagos;
-    }
-
-    public void setTablaplanificacionpagos(UIDataTable tablaplanificacionpagos) {
-        this.tablaplanificacionpagos = tablaplanificacionpagos;
     }
 
     public BigDecimal getVloranticipo() {
@@ -1681,14 +1655,6 @@ public class NuevoContratoBasico   {
         this.tablacontratoconvenio = tablacontratoconvenio;
     }
 
-    public UIDataTable getTablacontratoconveniocontratista() {
-        return tablacontratoconveniocontratista;
-    }
-
-    public void setTablacontratoconveniocontratista(UIDataTable tablacontratoconveniocontratista) {
-        this.tablacontratoconveniocontratista = tablacontratoconveniocontratista;
-    }
-
     public String getRealArchivoPath() {
         return realArchivoPath;
     }
@@ -1767,14 +1733,6 @@ public class NuevoContratoBasico   {
 
     public void setTipodocumento(SelectItem[] tipodocumento) {
         this.tipodocumento = tipodocumento;
-    }
-
-    public UIDataTable getTablaDocumentos() {
-        return tablaDocumentos;
-    }
-
-    public void setTablaDocumentos(UIDataTable tablaDocumentos) {
-        this.tablaDocumentos = tablaDocumentos;
     }
 
     public List<Documentoobra> getListadocumentos() {
@@ -1983,14 +1941,6 @@ public class NuevoContratoBasico   {
 
     public void setTipoContrato(SelectItem[] TipoContrato) {
         this.TipoContrato = TipoContrato;
-    }
-
-    public UIDataTable getTablaPolizasbin() {
-        return tablaPolizasbin;
-    }
-
-    public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
-        this.tablaPolizasbin = tablaPolizasbin;
     }
 
     public Polizacontrato getPolizacontrato() {
@@ -2998,11 +2948,13 @@ public class NuevoContratoBasico   {
     /**
      * Elimina la poliza seleccionada de la lista.
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarPoliza() {
+    public String eliminarPoliza(int filaSeleccionada) {
 
-        Polizacontrato poleli = (Polizacontrato) tablaPolizasbin.getRowData();
+        Polizacontrato poleli = listapolizas.get(filaSeleccionada);
         listapolizas.remove(poleli);
         //getSessionBeanCobra().getCobraService().borrarPolizaContrato(poleli);
         return null;
@@ -3011,10 +2963,12 @@ public class NuevoContratoBasico   {
     /**
      * Elimina la poliza seleccionada de la lista en el detalle del contrato.
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarPolizaNueva() {
-        Polizacontrato polizaEli = (Polizacontrato) tablaPolizasbin.getRowData();
+    public String eliminarPolizaNueva(int filaSeleccionada) {
+        Polizacontrato polizaEli = listapolizas.get(filaSeleccionada);
         listapolizas.remove(polizaEli);
         getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizaEli);
         llenarPolizas();
@@ -3541,10 +3495,12 @@ public class NuevoContratoBasico   {
     /**
      * Eliminar el documento seleccionado
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminardocu() {
-        Documentoobra documento = (Documentoobra) tablaDocumentos.getRowData();
+    public String eliminardocu(int filaSeleccionada) {
+        Documentoobra documento = listadocumentos.get(filaSeleccionada);
         listadocumentos.remove(documento);
         return null;
 
@@ -3691,11 +3647,13 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato según contratista, desde la tabla detalle
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String detalleContratoContratista() {
-
-        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
+    public String detalleContratoContratista(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
         cargarContrato(contratotabla);
         return "consultarContrato";
     }
@@ -3759,11 +3717,13 @@ public class NuevoContratoBasico   {
      * Seleccionar el contrato desde la tabla detalle contratopadre según el
      * contratista
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String detalleContratoPadreContratista() {
-        //limpiarContrato();
-        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
+    public String detalleContratoPadreContratista(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
         //contratotabla.getContrato().setFormapago(new Formapago());
         if (contratotabla.getContrato() != null) {
             //setContrato(contratotabla.getContrato());
@@ -4020,9 +3980,9 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String seleccionarContratistas() {
-
-        contrato.setContratista((Contratista) tablacontratistas.getRowData());
+    public String seleccionarContratistas(int filaSeleccinada) {
+        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");      
+        contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
         return null;
     }
 
@@ -4041,21 +4001,14 @@ public class NuevoContratoBasico   {
     }
 
     /**
-     * Habilita la información de la poliza a modificar
-     *
-     * @return
-    /**
      * Habilita la información de la poliza a modificar y la lista
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
-
      */
-    public String editarPoliza() {
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();
-        boolcrearpoliza = true;
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();  
-        boolcrearpoliza=true;
-        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();
+    public String editarPoliza(int filaSeleccionada) {
+        polizacontrato = listapolizas.get(filaSeleccionada);
         boolcrearpoliza = true;
         return null;
     }
@@ -5583,22 +5536,30 @@ public class NuevoContratoBasico   {
 
     /**
      * Se elige el giro directo que se quiere editar
+
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return null
      */
-    public String editarGirodirecto() {
+    public String editarGirodirecto(int filaSeleccionada) {
         booleditargirodirecto = true;
-        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        planificacionpago = sessionBeanCobra.getCobraService().getListaPlanificacionpagos().get(filaSeleccionada);
         return null;
     }
 
     /**
      * Eliminar el giro directo previamente seleccionado
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return
      */
-    public String eliminarGirodirecto() {
-        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
+    public String eliminarGirodirecto(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+
+        movimientocontrato = nuevoContraBasicoSeleccionado.getListaGirodirecto().get(filaSeleccionada);
         listaGirodirecto.remove(movimientocontrato);
         if (movimientocontrato.getIntidnumero() != 0) {
             getSessionBeanCobra().getCobraService().borrarMovimientocontrato(movimientocontrato);

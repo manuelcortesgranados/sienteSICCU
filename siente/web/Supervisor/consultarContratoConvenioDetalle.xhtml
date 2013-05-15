@@ -187,7 +187,8 @@
 
                 <interkont:spacer height="20px" style="width:100%;" />
 
-                <rich:collapsiblePanel id="simpleToggleContrato" switchType="client" header="#{var.datoscontrato} #{Supervisor$Contrato.tipoContCon}" expanded="true">
+                <rich:collapsiblePanel id="simpleToggleContrato" switchType="client" expanded="true"
+                                       header="#{var.datoscontrato} #{Supervisor$Contrato.tipoContCon}">
                     <center>
                         <h:panelGrid columns="1" style="width:100%;">
                             <h:form>
@@ -527,12 +528,12 @@
                         </center>
                     </rich:collapsiblePanel>
                 </h:form>
-
+                
                 <h:form>
-                    
                     <rich:collapsiblePanel  id="simpleTogglePolizas" switchType="client"
-                                            header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}">
-                        <f:ajax event="click" listener="#{Supervisor$Contrato.llenarPolizas}" render="polizasContrato,notienepoliza" />    
+                                            header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}"
+                                            onclick="#{Supervisor$Contrato.llenarPolizas()}">
+                        <f:ajax event="click" render="polizasContrato,notienepoliza" execute="@this" />    
 
                         <center>
                             <h:panelGroup id="notienepoliza">
@@ -541,7 +542,7 @@
 
                             <h:panelGroup id="polizasContrato">
                                 <rich:dataTable id="tablaPolizasContrato" sortMode="single" style="text-align:left; width: 550px;" var="localRow"
-                                                binding="#{Supervisor$Contrato.tablaPolizasbin}"
+                                                rowKeyVar="filaSeleccionada"
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">
@@ -580,12 +581,13 @@
                                             <h:outputText value="#{var.editar}" />
                                         </f:facet>
 
-                                        <a4j:commandLink id="bt_editarpolizas" action="#{Supervisor$Contrato.editarPoliza}" render="gpPolizaSelec,notienepoliza"
-                                                         oncomplete="#{rich:component('mp_nueva_poliza')}.show();" title="#{var.editar}">
+                                        <h:commandLink id="bt_editarpolizas" action="#{Supervisor$Contrato.editarPoliza(filaSeleccionada)}"
+                                                         onclick="#{rich:component('mp_nueva_poliza')}.show();" title="#{var.editar}">
+                                            <a4j:ajax event="click" render="gpPolizaSelec,notienepoliza" execute="@this" />
                                             <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png" />
 
                                             <a4j:param value="true" assignTo="#{Supervisor$Contrato.boolcrearpoliza}" />
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </rich:column>
 
                                     <rich:column id="tc-streliminarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_eliminarpoliza}">
@@ -593,20 +595,20 @@
                                             <h:outputText value="#{var.eliminar}" />
                                         </f:facet>
 
-                                        <a4j:commandLink action="#{Supervisor$Contrato.eliminarPolizaNueva}" render="polizasContrato,notienepoliza"
-                                                         execute="@this"
-                                                         title="#{var.eliminar}"  immediate="true">
+                                        <h:commandLink action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
+                                                         title="#{var.eliminar}" immediate="true" >
+                                            <a4j:ajax event="click" render="polizasContrato, notienepoliza" execute="@this" />
                                             <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
 
-                                <a4j:commandButton id="btnNuevaPoliza" value="Nueva Póliza" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}" 
-                                                   action="#{Supervisor$Contrato.instanciarPolizar}"
-                                                   oncomplete="#{rich:component('mp_nueva_poliza')}.show();"
-                                                   render="gpPolizaSelec" execute="@this, gpPolizaSelec">
+                                <h:commandButton id="btnNuevaPoliza" value="Nueva Póliza" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}" 
+                                                
+                                                   onclick="#{Supervisor$Contrato.instanciarPolizar()}; #{rich:component('mp_nueva_poliza')}.show();">
+                                    <a4j:ajax event="click" render="gpPolizaSelec" execute="@this, gpPolizaSelec" />
                                     <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
-                                </a4j:commandButton>
+                                </h:commandButton>
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
@@ -701,8 +703,10 @@
                     </rich:collapsiblePanel>
 
                     <rich:collapsiblePanel id="simpleToggleSubConvenios" switchType="client" header="Subconvenios" 
-                                           expanded="#{Supervisor$Contrato.boolsubconvenios}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.llenarSubconvenios}" render="pgtablaSubconvenios,notienesubconvenio">
+                                           expanded="#{Supervisor$Contrato.boolsubconvenios}"
+                                           rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}"
+                                           onclick="#{Supervisor$Contrato.llenarSubconvenios()}">
+                        <a4j:ajax event="click" render="pgtablaSubconvenios,notienesubconvenio">
                             <!-- <a4j:ajax oncomplete="true"  /> -->
                         </a4j:ajax>
 
@@ -785,8 +789,9 @@
 
                     <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="client" header="Contratos asociados directamente"
                                            expanded="#{Supervisor$Contrato.boolconthijo}" 
-                                           rendered="#{Supervisor$Contrato.contrato.booleantienehijos}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.llenarContrConvHijo}" render="pgtablaContratoHijo,notienehijo">
+                                           rendered="#{Supervisor$Contrato.contrato.booleantienehijos}"
+                                           onclick="#{Supervisor$Contrato.llenarContrConvHijo()}">
+                        <a4j:ajax event="click" render="pgtablaContratoHijo,notienehijo">
                             <!-- <a4j:ajax oncomplete="true"  /> -->
                         </a4j:ajax>
 
@@ -871,8 +876,10 @@
                     <interkont:spacer width="20" />
 
                     <rich:collapsiblePanel id="simpleTogglegirodirecto" switchType="client" header="#{var.girodirecto}"  
-                                           expanded="#{Supervisor$Contrato.boolgiros}" rendered="#{Supervisor$Contrato.booltipocontratoconvenio}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.limpiarGirodirecto}" render="pngirodirecto,notieneop">
+                                           expanded="#{Supervisor$Contrato.boolgiros}"
+                                           rendered="#{Supervisor$Contrato.booltipocontratoconvenio}"
+                                           onclick="#{Supervisor$Contrato.limpiarGirodirecto()}">
+                        <a4j:ajax event="click" render="pngirodirecto,notieneop">
                             <!-- <a4j:ajax oncomplete="true"  /> -->
                         </a4j:ajax>
 
@@ -986,9 +993,11 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleTogglemodificarcontrato" switchType="client" header="#{var.modificacionescontrato}#{Supervisor$Contrato.tipoContCon}" 
-                                           expanded="#{Supervisor$Contrato.boolmodifca}">
-                        <a4j:ajax event="click" listener="#{Supervisor$Contrato.llenarModifacionesContrato}" render="pnmodificar">
+                    <rich:collapsiblePanel id="simpleTogglemodificarcontrato" switchType="client"
+                                           header="#{var.modificacionescontrato} #{Supervisor$Contrato.tipoContCon}" 
+                                           expanded="#{Supervisor$Contrato.boolmodifca}"
+                                           onclick="#{Supervisor$Contrato.llenarModifacionesContrato()}">
+                        <a4j:ajax event="click" render="pnmodificar">
                             <!-- <a4j:ajax oncomplete="true" /> -->
                         </a4j:ajax>
 

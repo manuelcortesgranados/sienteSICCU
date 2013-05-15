@@ -41,7 +41,6 @@ public class ModificarContrato   {
     private Modificacioncontrato modificarcontrato = new Modificacioncontrato();
     private int cual = 1;
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
-    private UIDataTable tablaPolizasbin = new UIDataTable();
     private boolean valido = false;
     private CargadorArchivosWeb cargadorPoliza = new CargadorArchivosWeb();
     private String mensaje = "";
@@ -156,14 +155,6 @@ public class ModificarContrato   {
 
     public void setValido(boolean valido) {
         this.valido = valido;
-    }
-
-    public UIDataTable getTablaPolizasbin() {
-        return tablaPolizasbin;
-    }
-
-    public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
-        this.tablaPolizasbin = tablaPolizasbin;
     }
 
     public ResourceBundle getBundle() {
@@ -497,29 +488,31 @@ public class ModificarContrato   {
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
-//    public String cambioProrroga()
-//    {
-//
-    ////////////////////***********************************Esta validación debe ir al guardar
-    // switch(prorrogacontrato)
-//        {
-//            case 0:
-//                modificacion.setDatefechafinalizacion(null);
-//                break;
-//        }
-//        return null;
-//    }
 
-    public String seleccionareditarPoliza() {
-        getNuevoContratoBasico().setPolizacontrato((Polizacontrato) tablaPolizasbin.getRowData());
+    /**
+     * Selecciona la poliza a modificar
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String seleccionareditarPoliza(int filaSeleccionada) {
+        Polizacontrato polizacontrato = getNuevoContratoBasico().getListaPolizacontratos().get(filaSeleccionada);
+        getNuevoContratoBasico().setPolizacontrato(polizacontrato);
         getNuevoContratoBasico().setTipointpoli(getNuevoContratoBasico().getPolizacontrato().getTipopoliza().getInttipopoliza());
-        getNuevoContratoBasico().setIndicepolizamodificar(tablaPolizasbin.getRowIndex());
+        getNuevoContratoBasico().setIndicepolizamodificar(getNuevoContratoBasico().getListaPolizacontratos().indexOf(polizacontrato));
         return null;
     }
 
-    public String eliminarPoliza() {
-
-        Polizacontrato poleli = (Polizacontrato) tablaPolizasbin.getRowData();
+    /**
+     * Elimina la póliza seleccionada
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String eliminarPoliza(int filaSeleccionada) {
+        Polizacontrato poleli = getNuevoContratoBasico().getListaPolizacontratos().get(filaSeleccionada);
         getNuevoContratoBasico().getListaPolizacontratos().remove(poleli);
         return null;
     }

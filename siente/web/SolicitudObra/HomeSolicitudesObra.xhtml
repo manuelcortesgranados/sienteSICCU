@@ -57,8 +57,8 @@
                                     id="tablaSolicitudObraTemp"
                                     rows="5"
                                     var ="currentRowTemp"
+                                    rowKeyVar="filaSeleccionada"
                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                    binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudes}"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{SessionBeanCobra.solicitudService.solicitudObrachTemps}"
@@ -131,18 +131,18 @@
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  title="#{var.buscarProyecto}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
                                                 styleClass="busquedavanzada" value="#{var.consultar}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6||
                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
-                            <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud}"
+                            <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud != 1}"
                                                 styleClass="editaravanzada" />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.aprobar}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud == 1 and
                                                             currentRowTemp.boolaprobado != false}"
                                                 styleClass="editaravanzada" />
@@ -150,13 +150,13 @@
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.modificarobra}"
                                                 rendered="#{currentRowTemp.boolnuevo}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud(filaSeleccionada)}"
                                                 oncomplete="#{rich:component('panelEliminarSolicitud')}.show();"
                                                 styleClass="eliminaravanzada"/>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp}"
+                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp(filaSeleccionada)}"
                                               render="modaltablaproyectos, tablaproyectos"
                                               rendered="#{currentRowTemp.boolaprobado}">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
@@ -182,8 +182,8 @@
                         id="tablaSolicitudObra"
                         rows="5"
                         var ="currentRowObra"
+                        rowKeyVar="filaSeleccionada"
                         onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                        binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudesObra}"
                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                         sortMode="single"
                         value="#{SessionBeanCobra.solicitudService.solicitudObrachs}"
@@ -253,20 +253,20 @@
                         <!--
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" style="font-size:11px;"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector}" >
+                                              action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector(filaSeleccionada)}" >
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         -->
                         <rich:column>
                             <a4j:commandLink  title="#{var.asociarproyecto}" style="font-size:11px;"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud}">
+                                              action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud}"
+                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               render="modaltablaproyectos, tablaproyectos" >
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
                                 <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.show()" />
