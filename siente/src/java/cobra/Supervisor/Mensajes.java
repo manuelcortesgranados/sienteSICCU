@@ -8,7 +8,6 @@ package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.JsfUsuario;
-import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 
 import java.io.IOException;
@@ -19,10 +18,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import org.richfaces.component.UIDataTable;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -53,8 +50,6 @@ public class Mensajes  {
     private Mensaje mensajeEnviadoVer = new Mensaje();
     private Mensaje mensajeRecibidoVer = new Mensaje();
     private Mensaje mensajeRecibidoResponder = new Mensaje();
-    private UIDataTable tablaMensajesEnviados = new UIDataTable();
-    private UIDataTable tablaMensajesRecibidos = new UIDataTable();
     private String valorFiltroMensajeEnviado = "";
     private String valorFiltroMensajeRecibido = "";
     private JsfUsuario usuarioObra;    
@@ -133,22 +128,6 @@ public class Mensajes  {
 
     public void setMensajeRecibidoVer(Mensaje mensajeRecibidoVer) {
         this.mensajeRecibidoVer = mensajeRecibidoVer;
-    }
-
-    public UIDataTable getTablaMensajesEnviados() {
-        return tablaMensajesEnviados;
-    }
-
-    public void setTablaMensajesEnviados(UIDataTable tablaMensajesEnviados) {
-        this.tablaMensajesEnviados = tablaMensajesEnviados;
-    }
-
-    public UIDataTable getTablaMensajesRecibidos() {
-        return tablaMensajesRecibidos;
-    }
-
-    public void setTablaMensajesRecibidos(UIDataTable tablaMensajesRecibidos) {
-        this.tablaMensajesRecibidos = tablaMensajesRecibidos;
     }
 
     public String getValorFiltroMensajeEnviado() {
@@ -257,17 +236,27 @@ public class Mensajes  {
         }
     }
 
-    public String bt_verrecibidos_action() {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
-        this.mensajeRecibidoVer = (Mensaje) tablaMensajesRecibidos.getRowData();
+    /**
+     * Me permite ver un mensaje recibido
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String bt_verrecibidos_action(int filaSeleccionada) {
+        this.mensajeRecibidoVer = listaMensajesRecibidos.get(filaSeleccionada);
         return null;
     }
 
-    public String bt_verenviados_action() {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
-        this.mensajeEnviadoVer = (Mensaje) tablaMensajesEnviados.getRowData();
+    /**
+     * Me permite ver un mensaje enviado
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String bt_verenviados_action(int filaSeleccionada) {
+        this.mensajeEnviadoVer = listaMensajesEnviados.get(filaSeleccionada);
         return null;
     }
     

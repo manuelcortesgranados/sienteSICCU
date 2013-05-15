@@ -42,7 +42,6 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 //import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -57,7 +56,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
-import org.richfaces.component.UIDataTable;
 
 /**
  * <p>Fragment bean that corresponds to a similarly named JSP page
@@ -109,7 +107,6 @@ public class ModificarObra  {
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private List<Polizacontrato> listapolizas = new ArrayList<Polizacontrato>();
     private Polizacontrato polizaeditar = new Polizacontrato();
-    private UIDataTable tablapolizas = new UIDataTable();
 
     public boolean isCmbconvenio() {
         return cmbconvenio;
@@ -125,14 +122,6 @@ public class ModificarObra  {
 
     public void setVerotrosi(boolean verotrosi) {
         this.verotrosi = verotrosi;
-    }
-
-    public UIDataTable getTablapolizas() {
-        return tablapolizas;
-    }
-
-    public void setTablapolizas(UIDataTable tablapolizas) {
-        this.tablapolizas = tablapolizas;
     }
 
     public Polizacontrato getPolizaeditar() {
@@ -2355,9 +2344,15 @@ public class ModificarObra  {
         getSessionBeanCobra().getCobraService().guardarDocumento(doc);
     }
 
-    public String elegirPolizaEditar() {
-        polizaeditar = (Polizacontrato) tablapolizas.getRowData();
-
+    /**
+     * Selecciona la póliza a editar
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return
+     */
+    public String elegirPolizaEditar(int filaSeleccionada) {
+        polizaeditar = listapolizas.get(filaSeleccionada);
         return null;
     }
 

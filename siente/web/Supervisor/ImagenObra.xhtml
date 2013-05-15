@@ -97,7 +97,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{var.Ver}"/>
                                         </f:facet>
-                                        <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}"
+                                        <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}"
                                                        immediate="true">
                                             <h:graphicImage style="border:0px;border-style:none; height: 25px; width: 25px;" value="/resources/imgs/bt_ver.png"/>
                                         </h:commandLink>
@@ -106,7 +106,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{var.editar}"/>
                                         </f:facet>
-                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}"
+                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action(filaSeleccionada)}"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" execute="@this"
                                                          oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show(); return true;"
                                                          title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true">
@@ -139,7 +139,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{var.eliminar}"/>
                                         </f:facet>
-                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" execute="@this"
+                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action(filaSeleccionada)}" execute="@this"
                                                          render="tablaImagenesevolucion"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" title="#{var.eliminar}"  immediate="true">
                                             <h:graphicImage style="border:0px;border-style:none; height: 25px; width: 25px;" value="/resources/imgs/bt_eliminar.png"/>
@@ -156,7 +156,7 @@
                             <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true"  >
                                 <a4j:ajax event="click" render="panelImagenes"  />
                                 <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
-                                    <!--  <ui:include src="SliderImagenes.xhtml"/>-->
+                                     <ui:include src="SliderImagenes.xhtml"/>
                                 </h:panelGroup>
                             </rich:collapsiblePanel>
 

@@ -40,7 +40,7 @@
                                 <h:outputText styleClass="txt_label_bold" value="#{var.amigosupervisorantesdereemplazar}" style="font-size: 13px;"/>
                                 <interkont:spacer height="15px" style="width:100%;"/>
                                 <h:outputText  value="#{var.ingreselafechadeesta} "/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
                                                disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                 <interkont:spacer height="10px" style="width:100%;"/>
                                 <h:panelGrid style="width:100%;">
@@ -52,7 +52,7 @@
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid columns="2">
                                                     <h:outputText styleClass="txt_outtext" value="#{var.ingreselanueva} "/>
-                                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
+                                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
                                                                    disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" event="changed" render="panel_botonsoporte" />
                                                     </rich:calendar>
@@ -128,8 +128,8 @@
                                             </rich:dataGrid>
                                         </h:panelGrid>
                                         <h:panelGroup id="tablaPolizas" >
-                                            <rich:dataTable id="dtPolizas"  rows="6" style="text-align:left; width:100%;"  binding="#{Supervisor$ModificarObra.tablapolizas}"
-                                                            var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
+                                            <rich:dataTable id="dtPolizas"  rows="6" style="text-align:left; width:100%;"
+                                                            rowKeyVar="filaSeleccionada" var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
                                                 <rich:column id="tc-strTipoPoliza" width="100px">
                                                     <f:facet name="header">
                                                         <h:outputText value="#{var.tipoPolizaContrato}" />
@@ -158,7 +158,7 @@
                                                 </rich:column>
                                                 <rich:column id="tc-streliminarPoliza" width="250px">
                                                     <f:facet name="header"/>
-                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar(filaSeleccionada)}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
                                                                        oncomplete="#{rich:component('panelPolizaContrato')}.show(); return true;"   render="gpPolizaContratoModal"/>
                                                 </rich:column>
                                                 <f:facet name="footer">

@@ -16,7 +16,7 @@
                 <h:panelGrid  columns="2">
                     <h:panelGrid  columns="2">
                         <h:outputLabel id="lbfe"  value="#{var.fechaencargo}" />
-                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right"  inputSize="10" value="" >
+                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
                         </rich:calendar>
                         <h:outputLabel id="lblnumen"  value="#{var.numeroordenp}" />
                         <h:inputText value=""/>

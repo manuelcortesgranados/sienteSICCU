@@ -60,7 +60,7 @@
                                 </h:panelGroup>
 
                                 <h:outputText value="#{var.fechadecarta}:" styleClass="titulo3_filtro_busqueda"/>
-                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="top-right" id="fecAprobFinanciera"
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecAprobFinanciera"
                                                inputSize="10" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                                value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}">
                                 </rich:calendar>

@@ -39,7 +39,8 @@
                         <h:panelGrid columnClasses="panelcenter" style="width:100%;" >
                             <h:form  id="form_validarcambio">
                                 <a4j:commandLink value="Cambiar estado #{var.textoobra3}"
-                                                 styleClass="buttonform" onclick="javascript:Richfaces.showModalPanel('confirmarCambioEstado')">
+                                                 styleClass="buttonform" 
+                                                 onclick="#{rich:component('confirmarCambioEstado')}.show();return true;">
                                 </a4j:commandLink>  
                             </h:form>
                         </h:panelGrid>

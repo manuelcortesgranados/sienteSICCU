@@ -238,7 +238,6 @@
                         <!-- Listado de convenios según la entidad del contratista -->
                         <rich:panel id="pl-tabla-listado-contratoconvenio-contratista">
                             <rich:dataTable id="tabla-listado-contratoconvenio-contratista"
-                                            binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
                                             rowKeyVar="filaSeleccionada"
                                             value="#{Supervisor$Contrato.listacontratoscontratista}"
                                             rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
@@ -344,13 +343,13 @@
                                 </rich:column>
 
                                 <rich:column width="120px">
-                                    <h:commandLink style="font-size: 10px;"  action="#{Supervisor$Contrato.detalleContratoContratista}">
+                                    <h:commandLink style="font-size: 10px;"  action="#{Supervisor$Contrato.detalleContratoContratista(filaSeleccionada)}">
                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
                                 <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContratoPadreContratista}" rendered="#{currentRow.contrato!=null}">
+                                    <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContratoPadreContratista(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
