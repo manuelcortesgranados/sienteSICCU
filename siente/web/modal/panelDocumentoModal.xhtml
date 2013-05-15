@@ -26,7 +26,7 @@
             <h:form id="formDocs">
                 <h:panelGroup id="layoutDocumento">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" 
+                        <rich:fileUpload  addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}" style="width: 250px;"
                                          fileUploadListener="#{Supervisor$IngresarNuevaObra.subirContrato.listener}" id="uploadDoc" immediateUpload="#{Supervisor$IngresarNuevaObra.subirContrato.autoSubida}"
                                          listHeight="150"  maxFilesQuantity="#{Supervisor$IngresarNuevaObra.subirContrato.cantidadSubidas}" uploadLabel="#{var.subir}">

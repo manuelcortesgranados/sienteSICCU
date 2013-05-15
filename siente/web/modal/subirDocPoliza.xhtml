@@ -22,7 +22,7 @@
 
                 <h:panelGroup id="gpDoc">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" style="width: 250px;"
+                        <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}" id="uploadDoc" immediateUpload="#{Supervisor$Contrato.subirDocPol.autoSubida}"
                                          listHeight="150" maxFilesQuantity="#{Supervisor$Contrato.subirDocPol.cantidadSubidas}" uploadLabel="#{var.subir}">

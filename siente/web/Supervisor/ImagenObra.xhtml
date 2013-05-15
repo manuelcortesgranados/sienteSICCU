@@ -60,7 +60,7 @@
                                             <h:outputText value="#{var.imagenes}"/>
                                         </f:facet>
                                         <center>
-                                            <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}" immediate="true">
+                                            <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}" immediate="true">
                                                 <h:graphicImage value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
                                                                 style="border:0px;border-style:none;"/>
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>

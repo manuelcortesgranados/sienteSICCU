@@ -22,7 +22,7 @@
 
                 <h:panelGroup id="gpCartaAprobacion">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" style="width: 250px;"
+                        <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.listener}" id="uploadCartaAprobacion" immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.autoSubida}"
                                          listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.cantidadSubidas}" uploadLabel="#{var.subir}">

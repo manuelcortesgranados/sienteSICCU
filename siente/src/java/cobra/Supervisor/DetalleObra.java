@@ -1073,7 +1073,7 @@ public class DetalleObra  {
 //        }
         contratistanombrecomple = "";
         setContrat(getSessionBeanCobra().getCobraService().obtenerContratista(getAdministrarObraNew().getObra()));
-        getAdministrarObraNew().llenarContrato();
+       // getAdministrarObraNew().llenarContrato();
         getAdministrarObraNew().llenarContratoInterventoria();
         getAdministrarObraNew().llenarContratoObra();
         if (getAdministrarObraNew().getListaContrato() != null) {

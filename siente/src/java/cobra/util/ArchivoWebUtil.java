@@ -5,6 +5,7 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -15,7 +16,12 @@ import javax.servlet.ServletContext;
  * @author Jhon Eduard Ortiz S
  */
 public class ArchivoWebUtil {
-
+    
+    
+    public static File obtenerFile(String name, InputStream entrada){
+     return ArchivoUtil.crearArchivo(name, entrada);
+    }
+    
     /**
      * Obtiene el contexto correspondiente a la petición web incolucrada
      * @return Contexto Web
