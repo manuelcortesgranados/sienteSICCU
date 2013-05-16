@@ -29,7 +29,6 @@
 
                 </script>
                 <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
-                <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
                 <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
                 <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
 
@@ -137,7 +136,7 @@
                         </tr>
                     </table>
 
-                    <h:panelGrid id="vistaMapa" style="width:100%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+                    <h:panelGrid id="vistaMapa" style="width:95%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
 
                         <m:map  latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map"
                                 renderOnWindowLoad="false"  jsVariable="mapa" zoom="#{var.zoommapa}" type="G_NORMAL_MAP" style="width:100%;" height="#{SessionBeanCobra.cobraService.altomapa}">
@@ -310,12 +309,12 @@
                         </rich:dataTable>
                     </h:panelGrid>
                 </h:form>
-           <!--Se deben arregla y habilitar NOOOOOO BORRARRRRR     
+           
                 <ui:include src="/Ciudadano/Sliderimagenes.xhtml"/>
                 <f:subview id="murocomentarios"  >
                     <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
                 </f:subview>
--->
+
                <a4j:region>
                     <h:form>
                         <a4j:poll id = "refreshId"  action="#{HomeGestion.llenarTablaNovedades}"  render = "Novedades" interval = "50000" >
@@ -323,18 +322,17 @@
                         </a4j:poll>
                     </h:form>
                 </a4j:region>
-<!--Se deben arregla y habilitar NOOOOOO BORRARRRRR 
+
                 <ui:include src="/modal/modalFiltroAvanzado.xhtml"/>
                 <ui:include src="/modal/modalFiltroAvanzadoCiud.xhtml"/>
--->
 
-                <!--
                 <ui:include src="/modal/modalperfilcontrol/modalPresupuestoEjecucion.xhtml"/>
                 <ui:include src="/modal/modalperfilcontrol/modalEjecuciontotal.xhtml"/>
                 <ui:include src="/modal/modalperfilcontrol/modalAlojamientos.xhtml"/>
                 <ui:include src="/modal/modalperfilcontrol/modalConsolidadoObras.xhtml"/>
                 <ui:include src="/modal/modalperfilcontrol/modalconsolidadoconvenios.xhtml"/>
-                <ui:include src="/reportes/modalreporte/modalreportehome.xhtml"/>-->
+                <ui:include src="/reportes/modalreporte/modalreportehome.xhtml"/>
+                <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
             </ui:define>
 
 </ui:composition>
