@@ -33,26 +33,21 @@
 
                                 <h:panelGrid columns="2">
                                     <h:outputLabel id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
-                                    <rich:list title="Ingrese Entidad" style="width: 400px;" 
-                                               value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
+                                    <h:selectOneMenu value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
                                         <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                         <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
-                                    </rich:list>
+                                    </h:selectOneMenu>
                                 </h:panelGrid>
-
                                 <h:panelGrid id="prueba" columns="3">
                                     <h:outputText value="#{var.Usuario}"/>
                                     <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
                                     <rich:message for="txtusu_login" styleClass="error_texto"/>
                                 </h:panelGrid>                                    
                                <br/>
-                               <br/>
-                                
-                                 <a4j:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true">
-                                     <a4j:commandButton id="guardar_contrato" action="#{Administrador$AdministrarEntidad.asociarEntidadUsuario}" value="#{var.asociar}" render="consulconvenio,prueba,pgasociarEntidadUsuario" > 
-                                 </a4j:commandButton>
-                                 </a4j:commandButton>
-                            </h:panelGrid>
+                               <br/>                                
+                                 <a4j:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true" />
+                                 <a4j:commandButton id="guardar_contrato" action="#{Administrador$AdministrarEntidad.asociarEntidadUsuario}" value="#{var.asociar}" render="consulconvenio,prueba,pgasociarEntidadUsuario" /> 
+                                </h:panelGrid>
                         </h:panelGrid>
 
                     </center>                       
