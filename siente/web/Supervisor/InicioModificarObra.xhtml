@@ -27,42 +27,41 @@
         <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
     </ui:define>
     <ui:define name="body">
-        <h:form id="arModificar">
+        <a4j:region id="arModificar">
             <h:panelGrid id="layoutModificar" style="width:100%">
-
+                <h:form id="form_modificar">
                 <h:panelGrid id="panel_ModiInicial" style="width:100%;" columns="4">
                     <interkont:spacer height="50"/>
                     <center>
                         <h:panelGrid columns="3" styleClass="centrado" style="margin-top:5em;">
                             <h:panelGrid id="panelProrroga" width="20" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}">
-                                <h:commandLink id="bt_Modif" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"
+                                <a4j:commandLink id="bt_Modif" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"
                                                  styleClass="prorroga anchorLink"   style="font-size: 10px;"
-                                                 onclick="#{Supervisor$AdministrarObraNew.mostrarModificar()}">
-                                    <a4j:ajax event="click" render="layoutModificar, layoutDocActaConvenio, layoutDocCronog"/>
-                                </h:commandLink>
+                                                     action="#{Supervisor$AdministrarObraNew.mostrarModificar}" render="layoutModificar, layoutDocActaConvenio, layoutDocCronog">
+                                </a4j:commandLink>
                                 <h:outputText value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
                             </h:panelGrid>
 
                             <interkont:spacer width="50px" rendered="false" />
                             <h:panelGrid id="panelSuspencion" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}">
-                                <h:commandLink id="bt_suspension"  styleClass="suspension anchorLink"   style="font-size: 10px;">
-                                    <a4j:ajax event="click" listener="#{Supervisor$AdministrarObraNew.mostrarSuspender}" render="layoutModificar, layoutSuspenderObra, layoutDocActaSuspension"/>
-                                </h:commandLink>
+                                    <a4j:commandLink id="bt_suspension" styleClass="suspension anchorLink"   style="font-size: 10px;"
+                                                     action="#{Supervisor$AdministrarObraNew.mostrarSuspender}"
+                                                     render="layoutModificar, layoutSuspenderObra, layoutDocActaSuspension">
+                                    </a4j:commandLink>
                                 <h:outputText value="#{var.suspenderobra}"/>
                             </h:panelGrid>
                             <h:panelGrid rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}" columns="1">
-                                <h:commandLink id="bt_reinicio" styleClass="reiniciar anchorLink"   style="font-size: 10px;"
+                                    <a4j:commandLink id="bt_reinicio" styleClass="reiniciar anchorLink"   style="font-size: 10px;"
                                                  action="#{Supervisor$SuspenderObra.cargarReinicio}"
-                                                 >
-                                    <a4j:ajax event="click" render="layoutModificar,layoutDocActaSuspension"/>
-                                </h:commandLink>
+                                                     render="layoutModificar,layoutDocActaSuspension">
+                                    </a4j:commandLink>
                                 <h:outputText value="#{var.reiniciarlaobra}"/>
                             </h:panelGrid>
                         </h:panelGrid>
                     </center>
                 </h:panelGrid>
 
-
+                </h:form>
             </h:panelGrid>
 
 
@@ -71,7 +70,7 @@
                         onstart="#{rich:component('panelCargando')}.show(); return true;"
                         onstop="#{rich:component('panelCargando')}.hide(); return false;" />
 
-        </h:form>
+        </a4j:region>
     </ui:define>
 
 </ui:composition>
