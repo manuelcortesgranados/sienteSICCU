@@ -195,13 +195,14 @@
                                      * cambiar el valor de la adición
                                      */
                                     function numvalorhistOnchange() {
-                                    if (jQuery('.numvalorhist').attr('value') != ''){
-                                    if (jQuery('.numvalorhist').attr('value') != '0'){
-                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                    } else {
-                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                    }
+                                        if (jQuery('.numvalorhist').attr('value') != '') {
+                                            if (jQuery('.numvalorhist').attr('value') != '0') {
+                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                            } else {
+                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
                                             }
+                                        }
+                                    }
                             </script>
                         </f:verbatim>
                     </h:panelGroup>
@@ -305,7 +306,7 @@
                                                     rowClasses="stable"
                                                     binding="#{Supervisor$ModificarProyecto.tablaDocumentosModificacion}">
                                         <f:facet name="header">
-                                            <rich:columnGroup class="sliderich">
+                                            <rich:columnGroup>
 
                                                 <rich:column colspan="6">
 
@@ -385,11 +386,7 @@
                     </h:panelGroup>
 
 
-
-
-
-                    <!--a4j:include id="paso5View" viewId="/ModificarProyecto/fragmentos/paso5.xhtml"/-->
-                    <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
+                     <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
                         <h:outputText value="Paso 5" styleClass="TituloModificarProyecto centrado" />
                         <h:outputText value="#{var.tituloseleccontratovalormodi}" styleClass="TituloModificarProyecto centrado"/>
                         <interkont:spacer height="50"/>
