@@ -69,7 +69,7 @@
                                                     <h:outputLabel value="#{var.importeelcronograma}" styleClass="txt_label_bold"/>
                                                     <interkont:spacer width="40"/>
                                                     <a4j:commandButton styleClass="btn_sec_gig"  value="#{var.examinar}" style="font-size: 10px;" id="subircronograma"
-                                                                       onclick="javascript:Richfaces.showModalPanel('mp_subircronograma')" render="uploadCrono"/>
+                                                                       onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
                                                 </h:panelGrid>
 
                                                 <h:panelGroup id="layoutDoc" style="width: 80%">

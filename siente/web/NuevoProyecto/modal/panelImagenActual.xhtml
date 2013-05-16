@@ -32,7 +32,7 @@
                             clearLabel="#{var.eliminar}"
                             disabled="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos>0}"
                             >
-                            <a4j:ajax event="onuploadcomplete" render="info_imagen,spimagen"/>
+                            <a4j:ajax event="uploadcomplete" render="info_imagen,spimagen"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_imagen">
                             <center>
