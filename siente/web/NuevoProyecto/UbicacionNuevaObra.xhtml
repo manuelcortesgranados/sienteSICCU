@@ -78,7 +78,7 @@
                                     <h:outputLabel id="lbllugarproyecto"  value="#{var.zonaubi}" for="combolugarproyecto" />
                                     <h:selectOneMenu id="combolugarproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.lugarObra}" />
-                                        <a4j:ajax event="onchange" render="gpLblComuna, gpCmbComuna, gpLblBarrio" />
+                                        <a4j:ajax event="valueChange" render="gpLblComuna, gpCmbComuna, gpLblBarrio" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <hr style="background-image:none; height:5px; width: 25px;"/>
@@ -115,7 +115,7 @@
                                         <h:inputHidden id="txtzoomhiden" value="#{Supervisor$IngresarNuevaObra.jsZoon}" />
                                         <a4j:jsFunction name="renderDireccion" render="gpDirMapa,layoutLugar,panelMapa,pgubicolo" execute="false" />
                                         <a4j:jsFunction name="funmapCapturaLatLon" onbeforedomupdate="fun()" >
-                                            <a4j:ajax event="oncomplete" listener="#{Supervisor$IngresarNuevaObra.capturaZoom}" />
+                                            <a4j:ajax event="complete" listener="#{Supervisor$IngresarNuevaObra.capturaZoom}" />
                                         </a4j:jsFunction>
                                         <interkont:spacer width="10"/>
                                         <h:panelGrid id="gpOpMapa">
@@ -132,7 +132,7 @@
                                                             <f:selectItem itemLabel="Arrastrando y soltando" itemValue="0" />
                                                             <f:selectItem itemLabel="Ubicar por dirección" itemValue="1"/>
                                                             <f:selectItem itemLabel="Ubicar por latitud y longitud" itemValue="2"/>
-                                                            <a4j:ajax event="onchange" render="gpFormaSel"/>
+                                                            <a4j:ajax event="valueChange" render="gpFormaSel"/>
                                                         </h:selectOneMenu>
                                                         <h:outputText id="otSelTipo" styleClass="txt_header_outtext" value="Tipo de punto:"/>
                                                         <h:selectOneMenu value="#{Supervisor$IngresarNuevaObra.tiposelec}">
@@ -241,7 +241,7 @@
 
                                             <h:selectOneMenu id="comboclasificacionproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen}" disabled="#{Supervisor$IngresarNuevaObra.tipoOrigenSoloLectura}">
                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoOrigenes}" />
-                                                <a4j:ajax event="onchange" execute="@this"  render="panelLocalidadProyecto" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
+                                                <a4j:ajax event="valueChange" execute="@this"  render="panelLocalidadProyecto" listener="#{Supervisor$IngresarNuevaObra.ingresaraModalLocalidad}" />
                                             </h:selectOneMenu>
                                         </h:panelGrid>
                                     </rich:panel>
@@ -258,7 +258,7 @@
 
                                                     <h:selectOneMenu id="combodepartamentoproyecto" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Supervisor$IngresarNuevaObra.codDepartamento}" >
                                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.departamento}" />
-                                                        <a4j:ajax execute="@this, combodepartamentoproyecto" event="onchange" listener="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
+                                                        <a4j:ajax execute="@this, combodepartamentoproyecto" event="valueChange" listener="#{Supervisor$IngresarNuevaObra.llenarMunicipio}"
                                                                      render="panelmunipioproyecto" />
                                                     </h:selectOneMenu>
                                                 </h:panelGrid>

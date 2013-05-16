@@ -42,7 +42,7 @@
                             clearAllLabel="#{var.borrartodo}"
                             disabled="#{!empty Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}"
                             >
-                            <a4j:ajax event="onuploadcomplete" render="infoCrono" listener="#{Supervisor$IngresarNuevaObra.uploadCronoAction}"/>
+                            <a4j:ajax event="uploadcomplete" render="infoCrono" listener="#{Supervisor$IngresarNuevaObra.uploadCronoAction}"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoCrono">
                             <center>

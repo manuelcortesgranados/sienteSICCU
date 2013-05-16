@@ -17,7 +17,7 @@
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addControlLabel="#{var.adicionar}" allowFlash="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.useFlash}"
+                        <rich:fileUpload addControlLabel="#{var.adicionar}" allowFlash="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.useFlash}"
                                          clearAllControlLabel="#{var.borrartodo}" clearControlLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.listener}" id="uploadDocumento"
                                          immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.autoSubida}"

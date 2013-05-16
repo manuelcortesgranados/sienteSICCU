@@ -15,12 +15,13 @@
             <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" 
                          rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
                                      and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}">
-                <a4j:commandLink  styleClass="nproyecto anchorLink" action="#{Supervisor$Contrato.crearProyecto}" render="panelBody" immediate="true"  />
-                <a4j:commandLink  styleClass="text" value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" render="panelBody" immediate="true" />
+                <h:commandLink  styleClass="nproyecto anchorLink" action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
+                <h:commandLink  styleClass="text" value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
+                                immediate="true" />
             </h:panelGrid>
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="false" >
                 <h:commandLink styleClass="datos anchorLink" immediate="true" action="consultarContrato"/>
-                <a4j:commandLink styleClass="text" value="Datos Básicos" action="consultarContrato"/>
+                <h:commandLink styleClass="text" value="Datos Básicos" action="consultarContrato"/>
             </h:panelGrid>
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="false">
                 <h:commandLink styleClass="poliza anchorLink" immediate="true" action="consultarContrato" id="x1" >
@@ -33,15 +34,15 @@
             </h:panelGrid>
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="mproyectos anchorLink" immediate="true" action="detalleContrato"/>
-                <a4j:commandLink styleClass="text" value="Detalle Contrato" action="detalleContrato"/>
+                <h:commandLink styleClass="text" value="Detalle Contrato" action="detalleContrato"/>
             </h:panelGrid>
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="mproyectos anchorLink" immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
-                <a4j:commandLink styleClass="text" value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
+                <h:commandLink styleClass="text" value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
             </h:panelGrid>
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
                 <h:commandLink styleClass="mproyectos anchorLink" action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
-                <a4j:commandLink styleClass="text" value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
+                <h:commandLink styleClass="text" value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
             </h:panelGrid>
 
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >

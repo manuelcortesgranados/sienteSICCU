@@ -245,6 +245,13 @@
                     <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
                     <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
                 </rich:menuItem>
+                <rich:menuItem label="#{var.propuestas}" icon="/resources/imgs/bt_proceso.png" style="width: 150px;" 
+                               action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody" rendered="#{var.varproyectosestructuracion}">
+                        <a4j:param value="0" assignTo="#{HomeGestion.filtro.intestadoobra}" />
+                        <a4j:param value="2" assignTo="#{HomeGestion.filtro.tipointervencion}" />
+                        <a4j:param value="2" assignTo="#{HomeGestion.filtro.intcodfase}" />
+                        <a4j:param value="false" assignTo="#{HomeGestion.filtro.boolobraterminada}" />
+                    </rich:menuItem>
 
                 <rich:menuItem label="#{var.terminado}" icon="/resources/imgs/bt_finalizados.png" style="width: 150px;"
                                action="#{HomeGestion.activarvistamapa}" immediate="true" render="panelBody">

@@ -9,16 +9,24 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Production</param-value>
     </context-param>
+    <context-param>
+        <param-name>createTempFiles</param-name> 
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>maxRequestSize</param-name>
+        <param-value>1000000</param-value>
+    </context-param>
     <listener>
-     <listener-class>
-         org.springframework.web.context.ContextLoaderListener
-     </listener-class>
-   </listener>
-   <listener>
-     <listener-class>
-         org.springframework.web.context.request.RequestContextListener
-     </listener-class>
-   </listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
     <servlet>
         <servlet-name>dispatcher</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

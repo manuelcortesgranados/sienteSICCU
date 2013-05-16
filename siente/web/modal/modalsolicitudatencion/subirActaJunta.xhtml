@@ -22,7 +22,7 @@
 
                 <h:panelGroup id="gpActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" style="width: 250px;"
+                        <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.autoSubida}"
                                          listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.cantidadSubidas}" uploadLabel="#{var.subir}">

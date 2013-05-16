@@ -19,18 +19,14 @@
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             </ui:define>
 
-            <!-- <ui:define name="head">
-                 <title><h:outputText value="#{var.ingresarentidad}"></h:outputText></title>
-            <h:outputScript src="/resources/script_supervisor.js"/>
-        </ui:define>
-            -->
-
+            <ui:define name="title">
+                <h:outputText value="#{var.ingresarentidad}"></h:outputText>
+                </ui:define>
             <div id="header_content" >
-                <div class="star">
+                    <div class="star">
                     <h:outputText value="#{var.ingresarentidad}" />
                 </div>
             </div>
-
             <ui:define name="body">
                 <h:form>
                     <h:panelGroup>
@@ -75,32 +71,40 @@
                                                     <rich:message for="inptemailenti"  styleClass="tab-login-label-error"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
+                                            
+                                                                             
+                                            
                                             <h:outputLabel id="lbtipoorigenentidad"  value="#{var.tipoorigen} : *"  for="combotipoorigenentidad" />
-                                            <h:panelGrid columns="2" >
-                                                <h:panelGroup id="gptipoorigenentidad">
-                                                    <h:selectOneMenu id="combotipoorigenentidad" styleClass="fill"
-                                                                     value="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen}">
-                                                        <f:selectItems value="#{Administrador$AdministrarEntidad.tipoOrigenEntidad}"/>
+                                            <h:panelGrid columns="2"  >
+                                                <h:panelGroup id="gptipoorigenentidad" >
+                                                    <h:selectOneMenu id="combotipoorigenentidad" styleClass="fill"  immediate="true"
+                                                                     value="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen}" >
+                                                        <f:selectItems value="#{Administrador$AdministrarEntidad.tipoOrigenEntidad}" />
+                                                        <a4j:ajax   event="change"   render="lbldepartamento,combodepartamento,lblmunicipio,combomunicipio" />
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>                                                
+                                            </h:panelGrid>
+                                            <h:panelGrid id="lbldepartamento" >
+                                                <h:outputLabel id="lblubicacionenti"  value="#{var.departamento} : "  for="combodepartamentoEntidad" rendered="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen !=4 }"/>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="combodepartamento" >
+                                                <h:selectOneMenu id="combodepartamentoEntidad" value="#{Administrador$AdministrarEntidad.codDepartamentoEntidad}" styleClass="fill" rendered="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen !=4}">
+                                                    <f:selectItems value="#{Administrador$AdministrarEntidad.departamentoEntidad}" />
+                                                          <a4j:ajax execute="combodepartamentoEntidad" event="change" listener="#{Administrador$AdministrarEntidad.llenarMunicipioEntidadModi}"
+                                                             render="gpMuniEntidad" />
+                                                </h:selectOneMenu>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="lblmunicipio" >
+                                                <h:outputLabel id="lblubicacionmunienti"  value="#{var.municipio} : "  for="combomunicipioentidad" rendered="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen !=4 and Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen ==1 }"/>
+                                            </h:panelGrid>
+                                            <h:panelGrid id="combomunicipio" >
+                                                <h:panelGroup id="gpMuniEntidad">
+                                                    <h:selectOneMenu id="combomunicipioentidad" styleClass="fill" rendered="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen !=4 and Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen ==1 }"
+                                                                     value="#{Administrador$AdministrarEntidad.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}">
+                                                        <f:selectItems value="#{Administrador$AdministrarEntidad.municipioEntidad}"/>
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>
-                                                <h:panelGrid columnClasses="panelcenter">
-                                                    <rich:message for="inptemailenti"  styleClass="tab-login-label-error"/>
-                                                </h:panelGrid>
                                             </h:panelGrid>
-                                            <h:outputLabel id="lblubicacionenti"  value="#{var.departamento} : "  for="combodepartamentoEntidad"/>
-                                            <h:selectOneMenu id="combodepartamentoEntidad" value="#{Administrador$AdministrarEntidad.codDepartamentoEntidad}" styleClass="fill">
-                                                <f:selectItems value="#{Administrador$AdministrarEntidad.departamentoEntidad}" />
-                                                <a4j:ajax execute="combodepartamentoEntidad" event="onchange" listener="#{Administrador$AdministrarEntidad.llenarMunicipioEntidadModi}"
-                                                             render="gpMuniEntidad" />
-                                            </h:selectOneMenu>
-                                            <h:outputLabel id="lblubicacionmunienti"  value="#{var.municipio} : "  for="combomunicipioentidad" />
-                                            <h:panelGroup id="gpMuniEntidad">
-                                                <h:selectOneMenu id="combomunicipioentidad" styleClass="fill"
-                                                                 value="#{Administrador$AdministrarEntidad.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}">
-                                                    <f:selectItems value="#{Administrador$AdministrarEntidad.municipioEntidad}"/>
-                                                </h:selectOneMenu>
-                                            </h:panelGroup>
-
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </center>

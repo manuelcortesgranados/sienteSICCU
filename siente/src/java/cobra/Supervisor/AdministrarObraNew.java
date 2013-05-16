@@ -861,11 +861,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
 
             llenarSelectTipoDocumento();
             contratistanombre = "";
-            llenarContrato();
+            //llenarContrato();
             EncontrarSolicitante();
             iniciarImagenes();
             llenarSelectTipoImagenes();
-            mostrarGoogle();
+           // mostrarGoogle();
             //obtenerTacometro();
 
 
@@ -903,7 +903,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
                 if (String.valueOf(getObra().getIntcodigoobra()).compareTo(id) != 0) {
                     getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
                     setObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(Integer.parseInt(id)));
-                    llenarContrato();
+                    //llenarContrato();
                     obtenerTacometro();
                 }
 

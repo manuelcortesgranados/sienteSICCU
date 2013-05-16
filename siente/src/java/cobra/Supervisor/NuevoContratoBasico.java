@@ -3980,9 +3980,9 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String seleccionarContratistas() {
-
-        contrato.setContratista((Contratista) tablacontratistas.getRowData());
+    public String seleccionarContratistas(int filaSeleccinada) {
+        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");      
+        contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
         return null;
     }
 

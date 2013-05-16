@@ -30,7 +30,7 @@
             <h:form id="formActaConvenio">
                 <h:panelGroup id="layoutDocActaConvenio">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" addLabel="#{var.adicionar}" clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                        <rich:fileUpload  addLabel="#{var.adicionar}" clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{Supervisor$ModificarObra.subirActaConvenio.listener}" id="uploadActaConvenio" immediateUpload="#{Supervisor$ModificarObra.subirActaConvenio.autoSubida}"
                                          style="height: 150px; width: 250px" maxFilesQuantity="#{Supervisor$ModificarObra.subirActaConvenio.cantidadSubidas}" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="infoActaConvenio, layoutDocActaConvenio"/>

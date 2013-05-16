@@ -103,7 +103,7 @@
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"
                                                    oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadresPadre');" >
-                                    <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadresPadre')" render="gpproyectoSeleccionado"/>
+                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadresPadre')" render="gpproyectoSeleccionado"/>
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:columnGroup>

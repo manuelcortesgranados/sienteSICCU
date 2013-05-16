@@ -94,6 +94,7 @@ import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
+import org.richfaces.component.UIDataGrid;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
@@ -1832,7 +1833,23 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String llenarClaseObra() {
+    private UIDataGrid fasegrid= new UIDataGrid();
+
+    public UIDataGrid getFasegrid() {
+        return fasegrid;
+    }
+
+    public void setFasegrid(UIDataGrid fasegrid) {
+        this.fasegrid = fasegrid;
+    }
+    
+    
+    public void llenarClaseObra() {
+        
+       
+        
+        System.out.println("tablatipoah = " + tiahselect);
+        
         List<Claseobra> lista = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(tiahselect);
         ClaseObra = new SelectItem[lista.size()];
         int i = 0;
@@ -1842,8 +1859,18 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         }
         faseelegida.setIntidfase(tiahselect);
         tiproyectoselec = 0;
-        return null;
+        
+        System.out.println("tablatipoah = " + tiahselect);
+        
+        
     }
+    
+    public void obtenerFilaClase()
+    {
+         Fase clas=(Fase) fasegrid.getRowData();
+        
+        System.out.println("clas = " + clas.getStrnombre());
+    }        
 
     /**
      * Llenado de selectitem LugarObra.

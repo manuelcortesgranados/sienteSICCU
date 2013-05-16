@@ -55,9 +55,9 @@
                     <rich:dataTable id="tablaPlanificacion"
                                     rows="5"
                                     var ="planificacion"
-                                    binding="#{Supervisor$Contrato.tablaplanificacionpagos}"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
+                                    rowKeyVar="filaSeleccionada"
                                     value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
                                     style="text-align:center; width: 600px;">
                         <f:facet name="header">
