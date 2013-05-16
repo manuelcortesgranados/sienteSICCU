@@ -150,8 +150,9 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="1. #{var.escojafase}" />
                                                     </f:facet>
+                                                    <h:panelGroup id="tablatipoah">
 
-                                                    <rich:dataGrid id="tablatipoah" value="#{SessionBeanCobra.cobraService.fase}" var="fase" 
+                                                    <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" 
                                                                    columns="#{var.column}" style=" width: 50%" >
                                                         <center>
                                                             <h:panelGrid columns="1" styleClass="panelcenter" id="prue" >
@@ -162,7 +163,7 @@
                                                                         
                                                                         <h:selectOneRadio id="bt11"  value="#{Supervisor$IngresarNuevaObra.tiahselect}">
                                                                             <f:selectItem itemValue="#{fase.intidfase}" />
-                                                                           <f:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.llenarClaseObra}"
+                                                                           <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.llenarClaseObra}"
                                                                                          render="tablatipoah, tiposoli, panelTipo,panelSubTipo" />
                                                                         </h:selectOneRadio>
                                                                     </center>
@@ -170,6 +171,7 @@
                                                             </h:panelGrid>
                                                         </center>
                                                     </rich:dataGrid>
+                                                        </h:panelGroup>
                                                     <h:panelGrid columns="2" id="tiposoli">
                                                         <h:outputLabel  value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                         <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
