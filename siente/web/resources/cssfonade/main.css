@@ -4607,3 +4607,7 @@ a.buttonpdfgray:hover {
 .colorSoporte{
     color: #FF6600;
 }
+
+div#map{
+    width: 100% !important;
+}
