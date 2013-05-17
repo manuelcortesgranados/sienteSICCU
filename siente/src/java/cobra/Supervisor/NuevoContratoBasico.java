@@ -5533,8 +5533,10 @@ public class NuevoContratoBasico   {
      */
     public String editarGirodirecto(int filaSeleccionada) {
         booleditargirodirecto = true;
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        planificacionpago = sessionBeanCobra.getCobraService().getListaPlanificacionpagos().get(filaSeleccionada);
+        
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        movimientocontrato = nuevoContratoBasico.getListaGirodirecto().get(filaSeleccionada);
+
         return null;
     }
 
