@@ -150,7 +150,7 @@
                         </h:selectOneRadio>
                         <h:panelGrid  style="width:100%;" columnClasses="panelderecha">
                             <h:panelGroup>
-                                <a4j:commandLink styleClass="p_cancelar anchorLink" action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
+                                <a4j:commandLink styleClass="p_cancelar anchorLink" action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
                                 <a4j:commandLink styleClass="publicar anchorLink" action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
                                 </a4j:commandLink>
                             </h:panelGroup>

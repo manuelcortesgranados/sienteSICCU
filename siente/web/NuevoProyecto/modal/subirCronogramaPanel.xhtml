@@ -72,7 +72,7 @@
                                 <h:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
                                                     value="#{var.validar}"  
                                                    >
-                                    <a4j:ajax event="oncomplete" render="infoCrono" execute="infoCrono"  />
+                                    <a4j:ajax event="click" render="infoCrono" execute="infoCrono"  />
                                 </h:commandButton>
 
                             </center>
