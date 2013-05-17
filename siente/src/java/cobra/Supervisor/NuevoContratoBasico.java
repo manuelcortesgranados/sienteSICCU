@@ -2967,10 +2967,15 @@ public class NuevoContratoBasico   {
      * @return
      */
     public String eliminarPolizaNueva(int filaSeleccionada) {
-        Polizacontrato polizaEli = listapolizas.get(filaSeleccionada);
-        listapolizas.remove(polizaEli);
-        getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizaEli);
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Polizacontrato polizacontratoEliminada = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+        
+        listapolizas.remove(polizacontratoEliminada);
+        
+        getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizacontratoEliminada);
+        
         llenarPolizas();
+        
         return null;
     }
 
@@ -3650,15 +3655,15 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato desde la tabla detalle contratohijo
      *
-     * @return
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return consultarContrato Refresca la página para mostrar el detalle del contrato hijo.
      */
-    public String detalleContrHijo() {
-        //limpiarContrato();
-//        boolconthijo = false;
-        Contrato contrtablahijo = (Contrato) tablacontconvhijo.getRowData();
-//        setContrato(contrtablahijo);
-//        finentrega = contrtablahijo.getDatefechafin().toString();
-        cargarContrato(contrtablahijo);
+    public String detalleContrHijo(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratoHijo = nuevoContratoBasico.getListaContrConvHijo().get(filaSeleccionada);
+
+        cargarContrato(contratoHijo);
 
         return "consultarContrato";
     }
@@ -3666,17 +3671,13 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato desde la tabla detalle conveniohijo
      *
-     * @return
+     * @return consultarContrato Refresca la página para mostrar los detalles de subconvenio.
      */
-    public String detalleConvenioHijo() {
-        //boolsubconvenios = false;
-        Contrato contrtablahijo = (Contrato) tablaSubconvenios.getRowData();
-//        setContrato(contrtablahijo);
-//        finentrega = contrtablahijo.getDatefechafin().toString();
-//        
-        cargarContrato(contrtablahijo);
-
-
+    public String detalleConvenioHijo(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratoConvenioHijo = nuevoContratoBasico.getListaSubconvenios().get(filaSeleccionada);
+      
+        cargarContrato(contratoConvenioHijo);
 
         return "consultarContrato";
     }
@@ -3997,8 +3998,11 @@ public class NuevoContratoBasico   {
      * @return
      */
     public String editarPoliza(int filaSeleccionada) {
-        polizacontrato = listapolizas.get(filaSeleccionada);
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        polizacontrato = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+        
         boolcrearpoliza = true;
+        
         return null;
     }
 
@@ -4029,7 +4033,6 @@ public class NuevoContratoBasico   {
             SelectItem itemTipot = new SelectItem(tipoter.getIntcodigotipotercero(), tipoter.getStrnombretipotercero());
             TipoTerceroOPtion[i++] = itemTipot;
         }
-
     }
 
     /**
