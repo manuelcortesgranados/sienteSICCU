@@ -28,7 +28,7 @@ import cobra.CargadorArchivosWeb;
 import cobra.Marcador;
 import cobra.RedimensionarImagen;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
+import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
@@ -81,10 +81,10 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     ///Finalizar
     private boolean verFin = false;
     private String urlactafin = "";
-    private SubirArchivoBean subirActaFin = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirActaFin = new CargadorArchivosWeb();
     private String mensajefinaliza = "";
     private String urlactarecfin = "";
-    private SubirArchivoBean subirActaRecFin = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirActaRecFin = new CargadorArchivosWeb();
     //Docs & imágenes
     private List<Documentoobra> listaDocumentosobra;
     private Documentoobra documentoobra = new Documentoobra();
@@ -658,19 +658,19 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         this.mensajefinaliza = mensajefinaliza;
     }
 
-    public SubirArchivoBean getSubirActaFin() {
+    public CargadorArchivosWeb getSubirActaFin() {
         return subirActaFin;
     }
 
-    public void setSubirActaFin(SubirArchivoBean subirActaFin) {
+    public void setSubirActaFin(CargadorArchivosWeb subirActaFin) {
         this.subirActaFin = subirActaFin;
     }
 
-    public SubirArchivoBean getSubirActaRecFin() {
+    public CargadorArchivosWeb getSubirActaRecFin() {
         return subirActaRecFin;
     }
 
-    public void setSubirActaRecFin(SubirArchivoBean subirActaRecFin) {
+    public void setSubirActaRecFin(CargadorArchivosWeb subirActaRecFin) {
         this.subirActaRecFin = subirActaRecFin;
     }
 
@@ -1146,8 +1146,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
                 } catch (Exception ex) {
                     FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
                 }
-
-                subirActaRecFin.guardarArchivosTemporales(realArchivoPath, false);
+                try {
+                    subirActaRecFin.guardarArchivosTemporales(realArchivoPath, false);
+                } catch (ArchivoExistenteException ex) {
+                    Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 Tipodocumento tipdoc = new Tipodocumento(10, bundle.getString("actaparcial"), false);
                 Documentoobra doc = new Documentoobra(getObra(), tipdoc, "/resources/Documentos/ObrasVigentes/" + getObra().getIntcodigoobra() + "/Documentos/" + urlactarecfin, bundle.getString("actarecibofinal"), getObra().getDatefecrecfin());
@@ -1159,7 +1162,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
                 getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
 
                 urlactarecfin = "";
-                subirActaRecFin = new SubirArchivoBean(1, true, false);
+                subirActaRecFin = new CargadorArchivosWeb();
                 urlactarecfin = "";
 
             } else {
@@ -1216,8 +1219,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         } catch (Exception ex) {
             FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
         }
-
-        subirActaFin.guardarArchivosTemporales(realArchivoPath, false);
+        try {
+            subirActaFin.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Tipodocumento tipdoc = new Tipodocumento(10, bundle.getString("actaparcial"), false);
         Documentoobra doc = new Documentoobra(getObra(), tipdoc, "/resources/Documentos/ObrasVigentes/" + getObra().getIntcodigoobra() + "/Documentos/" + urlactafin, bundle.getString("actadeliquida"), getObra().getDatefecliqui());
@@ -1230,15 +1236,15 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         getObra().setTipoestadobra(new Tipoestadobra(2));
         getSessionBeanCobra().getCobraService().guardarObra(getObra(), getSessionBeanCobra().getUsuarioObra(), 7);
         urlactafin = "";
-        subirActaFin = new SubirArchivoBean(1, true, false);
+        subirActaFin = new CargadorArchivosWeb();
 
 
         return null;
     }
 
     public String pathDocumentoRecFin() {
-        if (subirActaRecFin.getSize() > 0) {
-            Iterator arch = subirActaRecFin.getFiles().iterator();
+        if (subirActaRecFin.getArchivos().size()> 0) {
+            Iterator arch = subirActaRecFin.getArchivos().iterator();
             while (arch.hasNext()) {
                 Archivo nombreoriginal = (Archivo) arch.next();
                 urlactarecfin =
@@ -1254,8 +1260,8 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     }
 
     public String pathDocumentoFin() {
-        if (subirActaFin.getSize() > 0) {
-            Iterator arch = subirActaFin.getFiles().iterator();
+        if (subirActaFin.getArchivos().size() > 0) {
+            Iterator arch = subirActaFin.getArchivos().iterator();
             while (arch.hasNext()) {
                 Archivo nombreoriginal = (Archivo) arch.next();
                 urlactafin =

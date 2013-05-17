@@ -130,7 +130,7 @@
                                     <h:panelGrid id="panelsubido" columns="3">
                                         <a4j:commandButton styleClass="btn_sec_gra" value="#{var.examinar}" immediate="true"
                                                            oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
-                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.files}" var="file" style="width:30px;">
+                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.numArchivos}" var="file" style="width:30px;">
                                             <h:outputText value=" #{file.onlyName}"/>
                                         </rich:dataGrid>
                                         <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"

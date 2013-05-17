@@ -12,9 +12,10 @@ import co.com.interkont.cobra.to.Solicitudmaestro;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipoordendepago;
 import cobra.Archivo;
+import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
 import cobra.Supervisor.FacesUtils;
+import com.interkont.cobra.exception.ArchivoExistenteException;
 
 import financiera.service.FinancieraServiceAble;
 import java.io.File;
@@ -23,6 +24,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
@@ -35,7 +38,7 @@ import org.richfaces.component.UIDataTable;
 public class FiduFinanciera  {
 
     private List<Encargofiduciario> listaencargofiducario = new ArrayList<Encargofiduciario>();
-    private SubirArchivoBean subirDocumento = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocumento = new CargadorArchivosWeb();
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private UIDataTable tablaTerceroListado = new UIDataTable();
     private UIDataTable tablaEncargoListado = new UIDataTable();
@@ -211,11 +214,11 @@ public class FiduFinanciera  {
         this.bundle = bundle;
     }
 
-    public SubirArchivoBean getSubirDocumento() {
+    public CargadorArchivosWeb getSubirDocumento() {
         return subirDocumento;
     }
 
-    public void setSubirDocumento(SubirArchivoBean subirDocumento) {
+    public void setSubirDocumento(CargadorArchivosWeb subirDocumento) {
         this.subirDocumento = subirDocumento;
     }
 
@@ -226,7 +229,7 @@ public class FiduFinanciera  {
 
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirDocumento.getSize() > 0) {
+        if (subirDocumento.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -239,9 +242,13 @@ public class FiduFinanciera  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirDocumento.guardarArchivosTemporales(realArchivoPath, false);
+        try {
+            subirDocumento.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(FiduFinanciera.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        Iterator arch = subirDocumento.getFiles().iterator();
+        Iterator arch = subirDocumento.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             //  getCoralService().getDocumentoobra().setStrubicaciondocumento(URL + "/" + nombreoriginal.getOnlyName());

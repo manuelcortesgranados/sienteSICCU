@@ -24,8 +24,8 @@
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_acta, panel_subirActa" />
                         </rich:fileUpload>
 

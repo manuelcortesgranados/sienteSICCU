@@ -24,8 +24,8 @@
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}" id="uploadDoc" immediateUpload="#{Supervisor$Contrato.subirDocPol.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{Supervisor$Contrato.subirDocPol.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}" id="uploadDoc" immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_doc,panel_subirDoc" />
                         </rich:fileUpload>
 
@@ -36,16 +36,16 @@
                                         <h:outputText value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{Supervisor$Contrato.subirDocPol.size==0}" value="#{var.nosuarc}" />
+                                    <h:outputText rendered="#{Supervisor$Contrato.subirDocPol.numArchivos==0}" value="#{var.nosuarc}" />
 
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocPol.files}" var="file">
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocPol.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.onlyName}" />
+                                                    <h:outputText value="#{file.nombre}" />
                                                     <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.length/1024} Kb" />
+                                                    <h:outputText value="#{file.numBytes /1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -54,11 +54,11 @@
 
                                 <interkont:spacer height="3" />
                                 <br/>
-                                <a4j:commandButton action="#{Supervisor$Contrato.borrarDocPol}" render="info_doc, uploadDoc, gpDoc, panel_subirDoc"
-                                                   rendered="#{Supervisor$Contrato.subirDocPol.size>0}" value="#{var.boarcsub}"
+                                <a4j:commandButton action="#{Supervisor$Contrato.subirDocPol.borrarDatosSubidos}" render="info_doc, uploadDoc, gpDoc, panel_subirDoc"
+                                                   rendered="#{Supervisor$Contrato.subirDocPol.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm" style="font-size:12px;" />
 
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$Contrato.subirDocPol.size>0}"
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$Contrato.subirDocPol.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadDoc')}.hide();
                                                return false;"
                                                    render="panel_subirDoc" style="font-size:12px;" />

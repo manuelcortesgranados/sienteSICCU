@@ -4490,6 +4490,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return Regla de Navegación "datosgenerarCrono"
      */
     public String pasoGenerarCronograma() {
+        System.out.println("cronograma");
         validarFinalizar();
         if (obranueva.isBooleantienehijos()) {
             validarCostos();
@@ -4633,6 +4634,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return
      */
     public String volverTipificacion() {
+        System.out.println("entre volver");
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
@@ -5027,21 +5029,27 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         switch (navegacion) {
             case 0:
                 regla = volverTipificacion();
+                System.out.println("regla = " + regla);
                 break;
             case 1:
                 regla = pasarDatosBasicos();
+                 System.out.println("regla = " + regla);
                 break;
             case 2:
                 regla = "datosubicaciondelaObra";
+                 System.out.println("regla = " + regla);
                 break;
             case 3:
                 regla = pasoGenerarCronograma();
+                 System.out.println("regla = " + regla);
                 break;
             case 4:
                 regla = "datosGenerarImagenes";
+                 System.out.println("regla = " + regla);
                 break;
             case 5:
                 regla = "datosAsociarContrato";
+                 System.out.println("regla = " + regla);
                 break;
             
             

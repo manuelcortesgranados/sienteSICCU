@@ -28,7 +28,7 @@
                     <rich:fileUpload acceptedTypes="jpg, bmp, gif, png, jpeg" addLabel="#{var.adicionar}"                                     
                                      clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}"
                                      doneLabel="#{var.hecho}" fileUploadListener="#{Supervisor$IngresarNuevaObra.subirImagen.listener}" id="upload"
-                                     immediateUpload="#{Supervisor$IngresarNuevaObra.subirImagen.autoSubida}" listHeight="150"  style="width:250px;"  
+                                     immediateUpload="true" listHeight="150"  style="width:250px;"  
                                      maxFilesQuantity="#{Supervisor$IngresarNuevaObra.subirImagen.cantidadSubidas}"  uploadLabel="#{var.subir}">
                        <a4j:ajax event="uploadcomplete" render="info"/>
                     </rich:fileUpload>

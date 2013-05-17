@@ -35,8 +35,8 @@
                                          doneLabel="#{var.hecho}"
                                          fileUploadListener="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.listener}"
                                          id="uploadImagenevolucion"
-                                         immediateUpload="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.autoSubida}"
-                                         maxFilesQuantity="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.cantidadSubidas}" 
+                                         immediateUpload="true"
+                                         maxFilesQuantity="1" 
                                          uploadLabel="#{var.subir}"
                                          style="height:150px; width: 250px;">
                             <a4j:ajax event="uploadcomplete" render="info_imagenevolucion, panel_subir_imagenevolucion"/>

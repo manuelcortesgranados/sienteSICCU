@@ -68,7 +68,7 @@
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarVideoTemporal}" id="BTaceptarVideo" render="layoutVideoMemoria"
                                                    value="#{var.aceptar}" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}"
-                                                   onclick="#{rich:component('modalVideo')}.hide()"
+                                                   onclick="#{rich:component('modalVideo')}.hide();return false;"
                                                    style="font-size: 12px;"/>
                             </center>
                         </h:panelGroup>

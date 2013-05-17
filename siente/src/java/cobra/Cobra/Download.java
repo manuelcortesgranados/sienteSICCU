@@ -7,13 +7,12 @@ package cobra.Cobra;
 
 import cobra.SessionBeanCobra;
 
-import cobra.SubirArchivoBean;
+
 import cobra.Supervisor.FacesUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;

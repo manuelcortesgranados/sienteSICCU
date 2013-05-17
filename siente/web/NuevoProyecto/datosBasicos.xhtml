@@ -141,7 +141,7 @@
                                                                render="mp-listado-sedeseducativas,tablasedeseducativas" immediate="true"
                                                                oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')">
                                                 <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')" render="tablasedeseducativas"/>
-                                            </a4j:commandButton>
+                                                   </a4j:commandButton>
                                             <a4j:commandButton id="btndesasociarrSede" value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarSede}" render="gpEducacion,layoutPrincipalTab,mp-proyectosPadres"
                                                                rendered="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa!=null}" >
                                             </a4j:commandButton>
@@ -241,8 +241,10 @@
                             </rich:collapsiblePanel>
                             <interkont:spacer height="10px" style="width:100%;"/>
                             <h:panelGroup >
-                                <a4j:commandButton id="btVolverTipif"  value="#{var.volver}"
-                                                   action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" render="rpTipificacion" />
+                                <h:commandButton id="btVolverTipif"  value="#{var.volver}"
+                                                   action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" >
+                                    
+                                </h:commandButton>    
 
                                 <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.validabasicos}" />
                                 <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"

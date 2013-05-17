@@ -12,12 +12,8 @@ import co.com.interkont.cobra.to.Registrovalidador;
 import co.com.interkont.cobra.to.Tipomovimiento;
 import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
 import cobra.Supervisor.FacesUtils;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;

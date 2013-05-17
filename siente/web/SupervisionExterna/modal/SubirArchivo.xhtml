@@ -24,8 +24,8 @@
                         <rich:fileUpload acceptedTypes="xls" addLabel="#{var.adicionar}"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}"
                                          doneLabel="#{var.hecho}" fileUploadListener="#{Supervision$Externa.subirListado.listener}"  id="uploadDocAt"
-                                         immediateUpload="#{Supervision$Externa.subirListado.autoSubida}" listHeight="150" style="width: 250px;"
-                                         maxFilesQuantity="#{Supervision$Externa.subirListado.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         immediateUpload="true" listHeight="150" style="width: 250px;"
+                                         maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_documentoSuper" />
                         </rich:fileUpload>
 

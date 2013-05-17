@@ -13,7 +13,7 @@
         <rich:panel header="Seleccionar Documento" styleClass="rich-panel-body" style="padding:0px;">
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
-                    <a4j:commandButton id="esconder_panelUploadDocumentocc" onclick=" #{rich:component('panelUploadDocumentocc')}.hide()"
+                    <a4j:commandButton id="esconder_panelUploadDocumentocc" onclick=" #{rich:component('panelUploadDocumentocc')}.hide();return false;"
                                        styleClass="btn_cerrar"  />
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">

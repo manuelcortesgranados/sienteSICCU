@@ -20,8 +20,10 @@ import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.to.Tipomodificacion;
 import co.com.interkont.cobra.to.Tiponovedad;
 import cobra.Archivo;
+import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
 import cobra.SubirArchivoBean;
+import com.interkont.cobra.exception.ArchivoExistenteException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,14 +82,14 @@ public class ModificarObra  {
     private String mensajeModificacion = "";
     private boolean cambioPrecios = false;
     private boolean adicionActividades = false;
-    private SubirArchivoBean subirOtroSi = new SubirArchivoBean(1, true, false);
-    private SubirArchivoBean subirActaConvenio = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirOtroSi = new CargadorArchivosWeb();
+    private CargadorArchivosWeb subirActaConvenio = new CargadorArchivosWeb();
     private Documentoobra otroSi = new Documentoobra();
     private Documentoobra actaConvenio = new Documentoobra();
     private String nombreConvenio = "";
     private Date fechaPolizaCumplimiento = null;
     boolean tipificacionValida = false;
-    private SubirArchivoBean subirCronograma = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirCronograma = new CargadorArchivosWeb();
     private String mensajeXLSInvalido = null;
     private boolean hayvideo = false;
     private int contadorguardar = 0;
@@ -300,27 +302,27 @@ public class ModificarObra  {
         this.otroSi = otroSi;
     }
 
-    public SubirArchivoBean getSubirActaConvenio() {
+    public CargadorArchivosWeb getSubirActaConvenio() {
         return subirActaConvenio;
     }
 
-    public void setSubirActaConvenio(SubirArchivoBean subirActaConvenio) {
+    public void setSubirActaConvenio(CargadorArchivosWeb subirActaConvenio) {
         this.subirActaConvenio = subirActaConvenio;
     }
 
-    public SubirArchivoBean getSubirCronograma() {
+    public CargadorArchivosWeb getSubirCronograma() {
         return subirCronograma;
     }
 
-    public void setSubirCronograma(SubirArchivoBean subirCronograma) {
+    public void setSubirCronograma(CargadorArchivosWeb subirCronograma) {
         this.subirCronograma = subirCronograma;
     }
 
-    public SubirArchivoBean getSubirOtroSi() {
+    public CargadorArchivosWeb getSubirOtroSi() {
         return subirOtroSi;
     }
 
-    public void setSubirOtroSi(SubirArchivoBean subirOtroSi) {
+    public void setSubirOtroSi(CargadorArchivosWeb subirOtroSi) {
         this.subirOtroSi = subirOtroSi;
     }
 
@@ -796,7 +798,7 @@ public class ModificarObra  {
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-        if (subirCronograma.getSize() > 0) {
+        if (subirCronograma.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -813,10 +815,13 @@ public class ModificarObra  {
             }
 
         }
+        try {
+            subirCronograma.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(this.getAdministrarObraNew().getObra().getIntcodigoobra()), false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(ModificarObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        subirCronograma.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(this.getAdministrarObraNew().getObra().getIntcodigoobra()), false);
-
-        Iterator arch = subirCronograma.getFiles().iterator();
+        Iterator arch = subirCronograma.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             historicoobra.setStrurlcronogramahist(URL + String.valueOf(this.getAdministrarObraNew().getObra().getIntcodigoobra()) + "/" + nombreoriginal.getName());
@@ -1697,8 +1702,8 @@ public class ModificarObra  {
 
     public String validarCrono() {
         cronovalido = false;
-        if (getSubirCronograma().getArchivosSubidos().size() > 0) {
-            Iterator arch = getSubirCronograma().getArchivosSubidos().iterator();
+        if (getSubirCronograma().getArchivos().size() > 0) {
+            Iterator arch = getSubirCronograma().getArchivos().iterator();
             mensajeXLSInvalido =
                     null;
             File fileCronograma = null;
@@ -1897,7 +1902,7 @@ public class ModificarObra  {
 
         if (historicoobra.isCambioprecios() || historicoobra.isAdicionactivi()) {
             //if (actaConvenio == null || actaConvenio.getStrubicacion() == null || actaConvenio.getStrubicacion().equals("")) {
-            if (subirActaConvenio.getArchivosSubidos().size() == 0) {
+            if (subirActaConvenio.getArchivos().isEmpty()) {
                 mensajeModificacion = bundle.getString("debeingresarelactadeconve");//"Debe ingresar el acta de convenio";
                 return false;
             }
@@ -1905,7 +1910,7 @@ public class ModificarObra  {
         }
         if (historicoobra.isAdiciontiempo() || historicoobra.isAdicionpresu()) {
             //if (otroSi == null || otroSi.getStrubicacion() == null || otroSi.getStrubicacion().equals("")) {
-            if (subirOtroSi.getArchivosSubidos().size() == 0) {
+            if (subirOtroSi.getArchivos().isEmpty()) {
                 mensajeModificacion = bundle.getString("debeingresarelotrosi");//"Debe ingresar el Otro Si";
                 return false;
             }
@@ -1932,7 +1937,7 @@ public class ModificarObra  {
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-        if (subirOtroSi.getSize() > 0) {
+        if (subirOtroSi.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -1947,10 +1952,13 @@ public class ModificarObra  {
             }
 
         }
-
-        subirOtroSi.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()), false);
-
-        Iterator arch = subirOtroSi.getFiles().iterator();
+        try {
+            subirOtroSi.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()), false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(ModificarObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Iterator arch = subirOtroSi.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             this.otroSi.setStrubicacion(URL + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()) + "/" + nombreoriginal.getOnlyName());
@@ -1965,7 +1973,7 @@ public class ModificarObra  {
         nombreConvenio = "";
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-        if (subirActaConvenio.getSize() > 0) {
+        if (subirActaConvenio.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -1980,10 +1988,13 @@ public class ModificarObra  {
             }
 
         }
+        try {
+            subirActaConvenio.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()), false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(ModificarObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        subirActaConvenio.guardarArchivosTemporales(realArchivoPath + "/" + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()), false);
-
-        Iterator arch = subirActaConvenio.getFiles().iterator();
+        Iterator arch = subirActaConvenio.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             this.actaConvenio.setStrubicacion(URL + String.valueOf(getAdministrarObraNew().getObra().getIntcodigoobra()) + "/" + nombreoriginal.getOnlyName());
@@ -2032,15 +2043,15 @@ public class ModificarObra  {
         mensajeModificacion = "";
         tipificacionValida = false;
         subirCronograma = null;
-        subirCronograma = new SubirArchivoBean(1, true, false);
+        subirCronograma = new CargadorArchivosWeb();
         subirCronograma.borrarDatosSubidos();
 
         subirActaConvenio = null;
-        subirActaConvenio = new SubirArchivoBean(1, true, false);
+        subirActaConvenio = new CargadorArchivosWeb();
         subirActaConvenio.borrarDatosSubidos();
 
         subirOtroSi = null;
-        subirOtroSi = new SubirArchivoBean(1, true, false);
+        subirOtroSi = new CargadorArchivosWeb();
         subirOtroSi.borrarDatosSubidos();
 
         this.cambioPrecios = false;
@@ -2098,8 +2109,7 @@ public class ModificarObra  {
                             File imagen = new File(nombre);
                             if (imagen.getTotalSpace() == 0) {
                             } else {
-                                subirOtroSi.adicionarArchivo(imagen);
-
+                                subirOtroSi.cargarArchivo(nombre);
                             }
                         } catch (Exception ex) {
                             Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
@@ -2141,7 +2151,7 @@ public class ModificarObra  {
                                 nombreConvenio = "";
 
                             } else {
-                                subirActaConvenio.adicionarArchivo(imagen);
+                                subirActaConvenio.cargarArchivo(nombre);
                                 nombreConvenio = imagen.getName();
 
                             }
@@ -2242,7 +2252,7 @@ public class ModificarObra  {
 
             if (verSoportes) {
                 //if (otroSi == null) {
-                if (subirOtroSi.getArchivosSubidos().size() > 0) {
+                if (subirOtroSi.getArchivos().size() > 0) {
                     bt_agregar_otroSi_action();
                 }
 
@@ -2275,7 +2285,7 @@ public class ModificarObra  {
                         File imagen = new File(nombre);
                         if (imagen.getTotalSpace() == 0) {
                         } else {
-                            subirOtroSi.adicionarArchivo(imagen);
+                            subirOtroSi.cargarArchivo(nombre);
 
                         }
                     } catch (Exception ex) {
@@ -2288,7 +2298,7 @@ public class ModificarObra  {
             //Guardando fisicamente el Acta de Convenio
             if ((adicionActividades || cambioPrecios)) {
                 //if (actaConvenio == null) {
-                if (subirActaConvenio.getArchivosSubidos().size() > 0) {
+                if (subirActaConvenio.getArchivos().size() > 0) {
                     bt_agregar_actaConvenio_action();
                 }
 
@@ -2321,7 +2331,7 @@ public class ModificarObra  {
                         File imagen = new File(nombre);
                         if (imagen.getTotalSpace() == 0) {
                         } else {
-                            subirActaConvenio.adicionarArchivo(imagen);
+                            subirActaConvenio.cargarArchivo(nombre);
 
                         }
                     } catch (Exception ex) {

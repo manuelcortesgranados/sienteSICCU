@@ -38,10 +38,9 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipotercero;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
-import cobra.CargadorArchivosWeb;
 import cobra.FiltroAvanzadoContrato;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
+import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
@@ -259,7 +258,7 @@ public class NuevoContratoBasico   {
     /**
      * Subir archivos a la carpeta donde se almacenan
      */
-    private SubirArchivoBean subirDocPol = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocPol = new CargadorArchivosWeb();
     /**
      * ruta donde se almacenarán los documentos
      */
@@ -685,15 +684,15 @@ public class NuevoContratoBasico   {
      */
     private boolean boolnumencargosoli;
     /**
-     * Instancia de la clase SubirArchivoBean utilizada para subir los
+     * Instancia de la clase CargadorArchivosWeb utilizada para subir los
      * documentos
      */
     private CargadorArchivosWeb cargadorDocumento = new CargadorArchivosWeb();
     /**
-     * Instancia de la clase SubirArchivoBean utilizada para subir los
+     * Instancia de la clase CargadorArchivosWeb utilizada para subir los
      * documentos de contrato
      */
-    private SubirArchivoBean subirDocumentoContrato = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocumentoContrato = new CargadorArchivosWeb();
     /**
      * Variable utilizada para saber si un contrato tiene hijos
      */
@@ -919,11 +918,11 @@ public class NuevoContratoBasico   {
         this.palabraclave = palabraclave;
     }
 
-    public SubirArchivoBean getSubirDocumentoContrato() {
+    public CargadorArchivosWeb getSubirDocumentoContrato() {
         return subirDocumentoContrato;
     }
 
-    public void setSubirDocumentoContrato(SubirArchivoBean subirDocumentoContrato) {
+    public void setSubirDocumentoContrato(CargadorArchivosWeb subirDocumentoContrato) {
         this.subirDocumentoContrato = subirDocumentoContrato;
     }
 
@@ -1703,11 +1702,11 @@ public class NuevoContratoBasico   {
         this.pathActa = pathActa;
     }
 
-    public SubirArchivoBean getSubirDocPol() {
+    public CargadorArchivosWeb getSubirDocPol() {
         return subirDocPol;
     }
 
-    public void setSubirDocPol(SubirArchivoBean subirDocPol) {
+    public void setSubirDocPol(CargadorArchivosWeb subirDocPol) {
         this.subirDocPol = subirDocPol;
     }
 
@@ -3172,10 +3171,8 @@ public class NuevoContratoBasico   {
         porcentapagoanticipo = new BigDecimal(BigInteger.ZERO);
         valorpagoanticipo = new BigDecimal(BigInteger.ZERO);
         setFechapagoanticipo(null);
-        //mostrarpregcontrcon = 0;
         varmostrarcontrpa = 0;
         contrpadre = null;
-        //tipoContCon = "";
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
 
@@ -3183,20 +3180,12 @@ public class NuevoContratoBasico   {
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-        subirDocPol = new SubirArchivoBean(1, true, false);
+        subirDocPol = new CargadorArchivosWeb();
 
         llenarEntidadesContratantes();
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
-//        inicializarformapago();
-//        validacionFormadePago();
-
-//        listaContrConvHijo.clear();
-//        listaSubconvenios.clear();
-
-        //return null;
-
 
     }
 

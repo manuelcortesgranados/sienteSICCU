@@ -23,8 +23,8 @@
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.listener}" id="uploadDocumento"
-                                         immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.cantidadSubidas}"
+                                         immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1"
                                          uploadLabel="#{var.subir}"
                                          style="width: 250px">
                             <a4j:ajax event="uploadcomplete" render="info_documento, panel_subir"/>
