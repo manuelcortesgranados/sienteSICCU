@@ -104,104 +104,104 @@
                         <f:verbatim>
                             <script type="text/javascript">
 
-                                    /**
-                                     * Activa y desactiva el checkbox prorroga al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function prorrogaOnClick() {
-                                        if (jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                            jQuery('.datefecfinhist').attr('value', '');
-                                        } else {
-                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
-                                     */
-                                    function checkRealizarProrrogaOnChangue() {
-                                        if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                            jQuery('.datefecfinhist').attr('value', '');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox adición de presupuesto al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function adicionPresupuestoOnClick() {
-                                        if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                            jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                            jQuery('.numvalorhist').attr('value', '');
-                                        } else {
-                                            jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Reestablece el valor de la adición cuando se desactiva el checkbox de
-                                     * adicionar presupuesto
-                                     */
-                                    function checkAdicionarPresupuestoOnChangue() {
-                                        if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                            jQuery('.numvalorhist').attr('value', '');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox adición de actividades al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function adicionActividadesOnClick() {
-                                        if (jQuery('.CheckAdicionarActividades').is(':checked')) {
-                                            jQuery('.CheckAdicionarActividades').removeAttr('checked');
-                                        } else {
-                                            jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox cambio de precios al dar click en
-                                     * la imagen correspondiente
-                                     */
-                                    function cambioPreciosOnClick() {
-                                        if (jQuery('.CheckCambiarPrecios').is(':checked')) {
-                                            jQuery('.CheckCambiarPrecios').removeAttr('checked');
-                                        } else {
-                                            jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
-                                        }
-                                        return false;
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox prorroga al ingresar una fecha
-                                     */
-                                    function datefecfinhistOnChange() {
-                                        if (jQuery('.datefecfinhist').attr('value') != '') {
-                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                        } else {
-                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                        }
-                                    }
-
-                                    /**
-                                     * Activa y desactiva el checkbox de adición de presupuesto al
-                                     * cambiar el valor de la adición
-                                     */
-                                    function numvalorhistOnchange() {
-                                    if (jQuery('.numvalorhist').attr('value') != ''){
-                                    if (jQuery('.numvalorhist').attr('value') != '0'){
-                                    jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                /**
+                                 * Activa y desactiva el checkbox prorroga al dar click en
+                                 * la imagen correspondiente
+                                 */
+                                function prorrogaOnClick() {
+                                    if (jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                        jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                        jQuery('.datefecfinhist').attr('value', '');
                                     } else {
-                                    jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                        jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
                                     }
-                                            }
+                                    return false;
+                                }
+
+                                /**
+                                 * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
+                                 */
+                                function checkRealizarProrrogaOnChangue() {
+                                    if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                        jQuery('.datefecfinhist').attr('value', '');
+                                    }
+                                    return false;
+                                }
+
+                                /**
+                                 * Activa y desactiva el checkbox adición de presupuesto al dar click en
+                                 * la imagen correspondiente
+                                 */
+                                function adicionPresupuestoOnClick() {
+                                    if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                        jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                        jQuery('.numvalorhist').attr('value', '');
+                                    } else {
+                                        jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                    }
+                                    return false;
+                                }
+
+                                /**
+                                 * Reestablece el valor de la adición cuando se desactiva el checkbox de
+                                 * adicionar presupuesto
+                                 */
+                                function checkAdicionarPresupuestoOnChangue() {
+                                    if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                        jQuery('.numvalorhist').attr('value', '');
+                                    }
+                                    return false;
+                                }
+
+                                /**
+                                 * Activa y desactiva el checkbox adición de actividades al dar click en
+                                 * la imagen correspondiente
+                                 */
+                                function adicionActividadesOnClick() {
+                                    if (jQuery('.CheckAdicionarActividades').is(':checked')) {
+                                        jQuery('.CheckAdicionarActividades').removeAttr('checked');
+                                    } else {
+                                        jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
+                                    }
+                                    return false;
+                                }
+
+                                /**
+                                 * Activa y desactiva el checkbox cambio de precios al dar click en
+                                 * la imagen correspondiente
+                                 */
+                                function cambioPreciosOnClick() {
+                                    if (jQuery('.CheckCambiarPrecios').is(':checked')) {
+                                        jQuery('.CheckCambiarPrecios').removeAttr('checked');
+                                    } else {
+                                        jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
+                                    }
+                                    return false;
+                                }
+
+                                /**
+                                 * Activa y desactiva el checkbox prorroga al ingresar una fecha
+                                 */
+                                function datefecfinhistOnChange() {
+                                    if (jQuery('.datefecfinhist').attr('value') != '') {
+                                        jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
+                                    } else {
+                                        jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                    }
+                                }
+
+                                /**
+                                 * Activa y desactiva el checkbox de adición de presupuesto al
+                                 * cambiar el valor de la adición
+                                 */
+                                function numvalorhistOnchange() {
+                                    if (jQuery('.numvalorhist').attr('value') != '') {
+                                        if (jQuery('.numvalorhist').attr('value') != '0') {
+                                            jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                        } else {
+                                            jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                        }
+                                }}
                             </script>
                         </f:verbatim>
                     </h:panelGroup>
