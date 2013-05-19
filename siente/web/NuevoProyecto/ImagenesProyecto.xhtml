@@ -24,8 +24,8 @@
             <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
                     <td rowspan="6" valign="top" style="height:400px;width: auto">
-                      <!--  <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>-->
+                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
                     <td valign="top" height="35" style="width: 80%">
                         <rich:panel>
@@ -41,7 +41,7 @@
                                             <h:panelGrid id="layoutImagen"  columnClasses="aiu">
                                                 <center>
                                                     <a4j:commandLink id="btAdjuntarImagen" styleClass="anadirimagen anchorlink" >
-                                                        <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenActual')"/>
+                                                        <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenActual')}.show();"/>
                                                     </a4j:commandLink>
                                                 </center>
                                                 <h:outputText id="ImagenAtencionppal" value="#{var.nombre}"/>
@@ -65,7 +65,7 @@
                                         <center>
                                             <h:panelGrid id="panel_subirImagen"  columns="1" >
                                                 <a4j:commandLink id="adjuntarImagen" styleClass="anadirimagenes anchorlink">
-                                                    <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenProyecto')"/>
+                                                    <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                                 </a4j:commandLink>
 
 
@@ -167,7 +167,7 @@
             </table>
         </h:form>
 
-        <ui:include src="../NuevoProyecto/modal/panelImagenActual.jspx"/>
-        <ui:include src="../NuevoProyecto/modal/panelImagenProyecto.jspx"/>
+        <ui:include src="../NuevoProyecto/modal/panelImagenActual.xhtml"/>
+        <ui:include src="../NuevoProyecto/modal/panelImagenProyecto.xhtml"/>
     </ui:define>   
 </ui:composition>

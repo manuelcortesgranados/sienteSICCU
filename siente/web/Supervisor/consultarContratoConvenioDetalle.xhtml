@@ -13,10 +13,6 @@
 
     <ui:define name="head">
         <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
-
-        <h:outputScript name="csspopup.js" library="js" />
-        <h:outputScript name="jquery.timers-1.0.0.js" library="js" />
-
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
     </ui:define>
 
@@ -44,146 +40,103 @@
 
         <rich:panel id="pgcontratoconvenio">
             <center>
-                <h:form>
-                    <h:panelGrid id="layoutdetalle"  style="text-align:center; width:100%;" rendered="true">
-                        <h:panelGrid id="detallecontrato" styleClass="tipo" columns="4"
-                                     columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
-                            <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel" 
-                                        rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                                <h:panelGrid columns="1" style="width:100%;">
-                                    <interkont:spacer height="30" />
+                <h:panelGrid id="layoutdetalle"  style="text-align:center; width:100%;" rendered="true">
+                    <h:panelGrid id="detallecontrato" styleClass="tipo" columns="4"
+                                 columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
+                        <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel" 
+                                    rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
+                            <h:panelGrid columns="1" style="width:100%;">
+                                <interkont:spacer height="30" />
 
-                                    <h:panelGroup>
-                                        <center>
-                                            <h:outputText id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}" style="font-size:30px; color:#336699; font-weight: bold;" />
-                                        </center>
-                                    </h:panelGroup>
-
-                                    <interkont:spacer height="20" />
-                                </h:panelGrid>
-                            </rich:panel>
-
-                            <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                <interkont:spacer height="50" />
-
-                                <h:panelGrid columns="1" style="width:100%;" columnClasses="column-grid-detail">
-                                    <h:panelGroup>
-                                        <h:panelGrid columns="1">
-                                            <h:outputText id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="txt_outtext" style="font-size:16px; color:#336699; font-weight: bold;">
-                                                <f:convertNumber pattern="$ ###,###" />
-                                            </h:outputText>
-                                        </h:panelGrid>
-                                    </h:panelGroup>
-                                </h:panelGrid>
-                            </rich:panel>
-
-                            <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" style="width:100%;">
-                                    <h:outputText value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" style="font-size:30px; color:#336699; font-weight: bold;" />
-
-                                    <h:outputText value="desde" style="font-size:10px; color:#666666;" />
-
-                                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechaini}" style="font-size:10px; color:#666666;">
-                                        <f:convertDateTime pattern="yyyy-MMM-dd" />
-                                    </h:outputText>
-
-                                    <h:outputText value="#{var.diashasta}" style="font-size:10px; color:#666666;" />
-
-                                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechafin}" style="font-size:10px; color:#666666;">
-                                        <f:convertDateTime pattern="yyyy-MMM-dd" />
-                                    </h:outputText>
-                                </h:panelGrid>
-                            </rich:panel>
-
-                            <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
-                                <script type="text/javascript" language="JavaScript">
-                                    jQuery(document).ready(function() {
-                                        var j = jQuery.noConflict();
-                                        var timefalta = document.getElementById("finfecha").value;
-                                        var futuro = new Date(timefalta);
-
-                                        setInterval(function() {
-                                            var ahora = new Date();
-                                            var faltan = futuro - ahora;
-
-                                            if (faltan > 0) {
-                                                var segundos = Math.round(faltan / 1000);
-                                                var minutos = Math.floor(segundos / 60);
-                                                var segundos_s = segundos % 60;
-                                                var horas = Math.floor(minutos / 60);
-                                                var minutos_s = minutos % 60;
-                                                var dias = Math.floor(horas / 24);
-                                                var horas_s = horas % 24;
-                                                horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
-                                                dias = (!(dias > 9)) ? '0' + dias : dias;
-                                                minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
-                                                segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
-                                                var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
-
-                                                j('#refreshMe').html(cuentaRegresiva);
-                                            }
-
-                                            else {
-                                                var dias = 0;
-                                                var horas_s = 0;
-                                                var minutos_s = 00;
-                                                var segundos_s = 00;
-                                                var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
-
-                                                j('#refreshMe').html(cuentaRegresiva);
-                                                return true;
-                                            }
-                                        }, 100);
-                                    });
-                                </script>
-
-                                <div id="refreshMe" style="font-size: 12pt">
+                                <h:panelGroup>
                                     <center>
-                                        <table width="149" border="0">
-                                            <tr>
-                                                <td width="45"></td>
-                                                <td width="49">
-                                                    <h1 align="center" style="color:#336699">0</h1>
-                                                </td>
-                                                <td width="41">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td height="20"></td>
-                                                <td>
-                                                    <p align="center" style="color:#666666; font-size: 10pt">Dias</p>
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h2 align="center" style="color:#336699">0</h2>
-                                                </td>
-                                                <td>
-                                                    <h2 align="center" style="color:#336699">0</h2>
-                                                </td>
-                                                <td>
-                                                    <h2 align="center" style="color:#336699">0</h2>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <p align="center" style="color:#666666; font-size: 7pt">Horas</p>
-                                                </td>
-                                                <td>
-                                                    <p align="center" style="color:#666666; font-size: 7pt">Minutos</p>
-                                                </td>
-                                                <td>
-                                                    <p align="center" style="color:#666666; font-size: 7pt">seg</p>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <h:outputText id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}" style="font-size:30px; color:#336699; font-weight: bold;" />
                                     </center>
-                                </div>
-                            </rich:panel>
-                        </h:panelGrid>
+                                </h:panelGroup>
+
+                                <interkont:spacer height="20" />
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <interkont:spacer height="50" />
+
+                            <h:panelGrid columns="1" style="width:100%;" columnClasses="column-grid-detail">
+                                <h:panelGroup>
+                                    <h:panelGrid columns="1">
+                                        <h:outputText id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="txt_outtext" style="font-size:16px; color:#336699; font-weight: bold;">
+                                            <f:convertNumber pattern="$ ###,###" />
+                                        </h:outputText>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" style="width:100%;">
+                                <h:outputText value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" style="font-size:30px; color:#336699; font-weight: bold;" />
+
+                                <h:outputText value="desde" style="font-size:10px; color:#666666;" />
+
+                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechaini}" style="font-size:10px; color:#666666;">
+                                    <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                </h:outputText>
+
+                                <h:outputText value="#{var.diashasta}" style="font-size:10px; color:#666666;" />
+
+                                <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.datefechafin}" style="font-size:10px; color:#666666;">
+                                    <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                </h:outputText>
+                            </h:panelGrid>
+                        </rich:panel>
+
+                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <div id="refreshMe" style="font-size: 12pt">
+                                <center>
+                                    <table width="149" border="0">
+                                        <tr>
+                                            <td width="45"></td>
+                                            <td width="49">
+                                                <h1 align="center" style="color:#336699" id="refreshMeDias">0</h1>
+                                            </td>
+                                            <td width="41">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20"></td>
+                                            <td>
+                                                <p align="center" style="color:#666666; font-size: 10pt">Dias</p>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h2 align="center" style="color:#336699" id="refreshMeHoras">00</h2>
+                                            </td>
+                                            <td>
+                                                <h2 align="center" style="color:#336699" id="refreshMeMinutos">00</h2>
+                                            </td>
+                                            <td>
+                                                <h2 align="center" style="color:#336699" id="refreshMeSeg">00</h2>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p align="center" style="color:#666666; font-size: 7pt">Horas</p>
+                                            </td>
+                                            <td>
+                                                <p align="center" style="color:#666666; font-size: 7pt">Minutos</p>
+                                            </td>
+                                            <td>
+                                                <p align="center" style="color:#666666; font-size: 7pt">seg</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </center>
+                            </div>
+                        </rich:panel>
                     </h:panelGrid>
-                </h:form>
+                </h:panelGrid>
 
                 <interkont:spacer height="20px" style="width:100%;" />
 
@@ -193,7 +146,7 @@
                         <h:panelGrid columns="1" style="width:100%;">
                             <h:form>
                                 <h:panelGrid id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                    <h:outputLabel id="pertenece"  value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                    <h:outputLabel id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
 
                                     <interkont:spacer width="20" />
 
@@ -236,11 +189,12 @@
 
                                     <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}">
                                         <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
-                                            <a4j:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
-                                                             action="#{Supervisor$Contrato.habilitarBotonModificar}" render="form_editar"
-                                                             execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
+                                            <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
+                                                           title="#{var.editar}">
+                                                <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
+
                                                 <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png" />
-                                            </a4j:commandLink>
+                                            </h:commandLink>
 
                                             <h:outputText id="txtObjeto" styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                         </h:panelGroup>
@@ -266,26 +220,25 @@
                                     <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
                                     <h:outputText value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
-                                    <interkont:spacer width="20" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
+                                    <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
                                     <h:outputLabel value="#{Supervisor$Contrato.contrato.periodoevento.strdescripcion}" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
-                                    <h:outputText  value="#{var.modalidadcontratista} " rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
+                                    <h:outputText  value="#{var.modalidadcontratista} " rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
-                                    <interkont:spacer width="20" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
+                                    <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
-                                    <h:outputLabel value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
-
+                                    <h:outputLabel value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
                                     <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
 
-                                    <h:outputLabel id="contratista" value="#{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
+                                    <interkont:spacer width="20" />
 
+                                    <h:outputLabel id="contratista" value="#{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
                                     <h:outputLabel id="enti" value="#{var.entidad}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
 
                                     <interkont:spacer width="20" />
 
                                     <h:outputLabel id="strcontrcontrato" styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
-
-                                    <h:outputLabel id="fecsus" value="#{var.fechasus}" />
+                                    <h:outputLabel id="fecsus" value="#{var.fechasus}:" />
 
                                     <interkont:spacer width="20" />
 
@@ -528,12 +481,12 @@
                         </center>
                     </rich:collapsiblePanel>
                 </h:form>
-                
+
                 <h:form>
-                    <rich:collapsiblePanel  id="simpleTogglePolizas" switchType="client"
-                                            header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}"
-                                            onclick="#{Supervisor$Contrato.llenarPolizas()}">
-                        <f:ajax event="click" render="polizasContrato,notienepoliza" execute="@this" />    
+                    <rich:collapsiblePanel id="simpleTogglePolizas" switchType="ajax"
+                                           header="#{var.polizas}" expanded="#{Supervisor$Contrato.boolpolizas}"
+                                           toggleListener="#{Supervisor$Contrato.llenarPolizas}">
+                        <a4j:ajax event="switch" render="polizasContrato, notienepoliza"  />
 
                         <center>
                             <h:panelGroup id="notienepoliza">
@@ -541,8 +494,8 @@
                             </h:panelGroup>
 
                             <h:panelGroup id="polizasContrato">
-                                <rich:dataTable id="tablaPolizasContrato" sortMode="single" style="text-align:left; width: 550px;" var="localRow"
-                                                rowKeyVar="filaSeleccionada"
+                                <rich:dataTable id="tablaPolizasContrato" sortMode="single" style="text-align:left; width: 550px;"
+                                                rowKeyVar="filaSeleccionada" var="localRow"
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">
@@ -581,13 +534,14 @@
                                             <h:outputText value="#{var.editar}" />
                                         </f:facet>
 
-                                        <h:commandLink id="bt_editarpolizas" action="#{Supervisor$Contrato.editarPoliza(filaSeleccionada)}"
-                                                         onclick="#{rich:component('mp_nueva_poliza')}.show();" title="#{var.editar}">
-                                            <a4j:ajax event="click" render="gpPolizaSelec,notienepoliza" execute="@this" />
-                                            <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                        <a4j:commandLink id="commandLinkEditarPoliza" title="#{var.editar}"
+                                                         action="#{Supervisor$Contrato.editarPoliza(filaSeleccionada)}"
+                                                         render="gpPolizaSelec, notienepoliza"
+                                                         oncomplete="#{rich:component('mp_nueva_poliza')}.show();">
 
+                                            <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             <a4j:param value="true" assignTo="#{Supervisor$Contrato.boolcrearpoliza}" />
-                                        </h:commandLink>
+                                        </a4j:commandLink>
                                     </rich:column>
 
                                     <rich:column id="tc-streliminarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_eliminarpoliza}">
@@ -595,33 +549,34 @@
                                             <h:outputText value="#{var.eliminar}" />
                                         </f:facet>
 
-                                        <h:commandLink action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
-                                                         title="#{var.eliminar}" immediate="true" >
-                                            <a4j:ajax event="click" render="polizasContrato, notienepoliza" execute="@this" />
-                                            <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
-                                        </h:commandLink>
+                                        <a4j:commandLink id="commandLinkEliminarPoliza" title="#{var.eliminar}"
+                                                         action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
+                                                         immediate="true" render="polizasContrato, notienepoliza">
+
+                                            <h:graphicImage style="border: 0px; border-style: none;" width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
+                                        </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
-
-                                <h:commandButton id="btnNuevaPoliza" value="Nueva Póliza" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}" 
-                                                
-                                                   onclick="#{Supervisor$Contrato.instanciarPolizar()}; #{rich:component('mp_nueva_poliza')}.show();">
-                                    <a4j:ajax event="click" render="gpPolizaSelec" execute="@this, gpPolizaSelec" />
-                                    <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
-                                </h:commandButton>
+                                
+                                <a4j:commandButton id="commandButtonNuevaPoliza" value="Nueva póliza"
+                                                   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}"
+                                                   action="#{Supervisor$Contrato.instanciarPolizar}"
+                                                   oncomplete="#{rich:component('mp_nueva_poliza')}.show();"
+                                                   render="gpPolizaSelec">
+                                    
+                                     <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
+                                </a4j:commandButton>
                             </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
                 </h:form>
 
                 <h:form>
-                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="client" 
+                    <rich:collapsiblePanel  id="simpleTogglepadres" switchType="ajax" 
                                             header="#{var.proyectosasociados} encontrados #{Supervisor$Contrato.contrato.intcantproyectos}"
                                             expanded="#{Supervisor$Contrato.boolproyectos}"
-                                            onclick="#{Supervisor$Contrato.llenarObraAsociada()}">
-                        <a4j:ajax event="click" render="tablaProyectosContrato" execute="simpleTogglepadres">
-                            <!-- <a4j:ajax oncomplete="true"  /> -->
-                        </a4j:ajax>
+                                            toggleListener="#{Supervisor$Contrato.llenarObraAsociada}">
+                        <a4j:ajax event="switch" render="tablaProyectosContrato" />
 
                         <center>
                             <h:panelGroup id="tablaProyectosContrato">
@@ -661,12 +616,12 @@
 
                                         <rich:column>
                                             <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btn_consultaproyecenconvenio}"
-                                                             id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.jspx?id=#{row.intcodigoobra}';">
+                                                             id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
                                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
-                                                             onclick="document.location.href = '../faces/Supervisor/DetalleObra.jspx?id=#{row.intcodigoobra}';">
+                                                             onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
                                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
                                         </rich:column>
@@ -702,13 +657,11 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleSubConvenios" switchType="client" header="Subconvenios" 
+                    <rich:collapsiblePanel id="simpleToggleSubConvenios" switchType="ajax" header="Subconvenios" 
                                            expanded="#{Supervisor$Contrato.boolsubconvenios}"
                                            rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}"
-                                           onclick="#{Supervisor$Contrato.llenarSubconvenios()}">
-                        <a4j:ajax event="click" render="pgtablaSubconvenios,notienesubconvenio">
-                            <!-- <a4j:ajax oncomplete="true"  /> -->
-                        </a4j:ajax>
+                                           toggleListener="#{Supervisor$Contrato.llenarSubconvenios}">
+                        <a4j:ajax event="switch" render="pgtablaSubconvenios, notienesubconvenio" />
 
                         <center>
                             <h:panelGroup id="notienesubconvenio">
@@ -719,9 +672,8 @@
                             <h:panelGroup id="pgtablaSubconvenios">
                                 <rich:dataTable id="tablaSubconvenios" sortMode="single" style="text-align:left; width: 95%;"
                                                 value="#{Supervisor$Contrato.listaSubconvenios}" rows="5"
-                                                binding="#{Supervisor$Contrato.tablaSubconvenios}" 
                                                 rendered="#{Supervisor$Contrato.listaSubconvenios.size()>0}"
-                                                var="row">
+                                                var="row" rowKeyVar="filaSeleccionada">
                                     <rich:column id="id_num">
                                         <f:facet name="header">
                                             <h:outputText value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
@@ -767,11 +719,10 @@
                                             <h:outputText value="#{var.consultar}" />
                                         </f:facet>
 
-                                        <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleConvenioHijo}" immediate="true">
-                                            <a4j:ajax event="click" render="pgcontratoconvenio" />
+                                        <a4j:commandLink id="commandLinkVerSubconvenio" action="#{Supervisor$Contrato.detalleConvenioHijo(filaSeleccionada)}"
+                                                         render="pgcontratoconvenio" immediate="true" style="font-size: 10px;">
                                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
-                                        </h:commandLink>
-
+                                        </a4j:commandLink>
                                     </rich:column>
                                     <f:facet name="footer">
                                         <rich:columnGroup>
@@ -787,13 +738,11 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="client" header="Contratos asociados directamente"
+                    <rich:collapsiblePanel id="simpleTogglecontrhijo" switchType="ajax" header="Contratos asociados directamente"
                                            expanded="#{Supervisor$Contrato.boolconthijo}" 
                                            rendered="#{Supervisor$Contrato.contrato.booleantienehijos}"
-                                           onclick="#{Supervisor$Contrato.llenarContrConvHijo()}">
-                        <a4j:ajax event="click" render="pgtablaContratoHijo,notienehijo">
-                            <!-- <a4j:ajax oncomplete="true"  /> -->
-                        </a4j:ajax>
+                                           toggleListener="#{Supervisor$Contrato.llenarContrConvHijo}">
+                        <a4j:ajax event="switch" render="pgtablaContratoHijo, notienehijo" />
 
                         <center>
                             <h:panelGroup id="notienehijo">
@@ -803,7 +752,7 @@
                             <h:panelGroup id="pgtablaContratoHijo">
                                 <rich:dataTable id="tablacontratohijo" sortMode="single" style="text-align:left; width: 95%;"
                                                 value="#{Supervisor$Contrato.listaContrConvHijo}" rows="8"
-                                                binding="#{Supervisor$Contrato.tablacontconvhijo}"
+                                                rowKeyVar="filaSeleccionada"
                                                 rendered="#{Supervisor$Contrato.listaContrConvHijo.size()>0}"
                                                 var="row">
                                     <rich:column id="id_num">
@@ -853,10 +802,11 @@
                                             <h:outputText value="#{var.consultar}" />
                                         </f:facet>
 
-                                        <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContrHijo}">
-                                            <a4j:ajax event="click" render="pgcontratoconvenio,pgtablaContratoHijo" />
+                                        <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo(filaSeleccionada)}"
+                                                         render="pgcontratoconvenio, pgtablaContratoHijo"
+                                                         immediate="true" style="font-size: 10px;">
                                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
-                                        </h:commandLink>
+                                        </a4j:commandLink>
                                     </rich:column>
 
                                     <f:facet name="footer">
@@ -875,13 +825,11 @@
 
                     <interkont:spacer width="20" />
 
-                    <rich:collapsiblePanel id="simpleTogglegirodirecto" switchType="client" header="#{var.girodirecto}"  
+                    <rich:collapsiblePanel id="simpleTogglegirodirecto" switchType="ajax" header="#{var.girodirecto}"  
                                            expanded="#{Supervisor$Contrato.boolgiros}"
                                            rendered="#{Supervisor$Contrato.booltipocontratoconvenio}"
-                                           onclick="#{Supervisor$Contrato.limpiarGirodirecto()}">
-                        <a4j:ajax event="click" render="pngirodirecto,notieneop">
-                            <!-- <a4j:ajax oncomplete="true"  /> -->
-                        </a4j:ajax>
+                                           toggleListener="#{Supervisor$Contrato.limpiarGirodirecto}">
+                        <a4j:ajax event="switch" render="pngirodirecto, notieneop" />
 
                         <center>
                             <h:panelGroup id="pngirodirecto">
@@ -905,7 +853,7 @@
                                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                                     rendered="#{Supervisor$Contrato.listaGirodirecto.size()>=1}"
-                                                    var="girodirecto" binding="#{Supervisor$Contrato.tablaGirodirecto}">
+                                                    var="girodirecto" rowKeyVar="filaSeleccionada">
                                         <f:facet name="header">
                                             <rich:columnGroup>
                                                 <rich:column colspan="7">
@@ -965,14 +913,16 @@
                                         </rich:column>
 
                                         <rich:column>
-                                            <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto}" render="mp-crear-girodirecto">
-                                                <a4j:ajax oncomplete="#{rich:component('mp-crear-girodirecto')}.show();" />
-                                            </a4j:commandButton>
+                                            <a4j:commandButton value="#{var.editar}" 
+                                                               action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}"
+                                                               render="rpgirodirecto" immediate="true"
+                                                               oncomplete="#{rich:component('mp-crear-girodirecto')}.show();" />
                                         </rich:column>
 
                                         <rich:column>
-                                            <a4j:commandButton value="#{var.eliminar}" immediate="true" action="#{Supervisor$Contrato.eliminarGirodirecto}" render="pngirodirecto">
-                                            </a4j:commandButton>
+                                            <a4j:commandButton value="#{var.eliminar}" immediate="true" 
+                                                               action="#{Supervisor$Contrato.eliminarGirodirecto(filaSeleccionada)}"
+                                                               render="pngirodirecto" />
                                         </rich:column>
 
                                         <f:facet name="footer">
@@ -993,13 +943,11 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleTogglemodificarcontrato" switchType="client"
+                    <rich:collapsiblePanel id="simpleTogglemodificarcontrato" switchType="ajax"
                                            header="#{var.modificacionescontrato} #{Supervisor$Contrato.tipoContCon}" 
                                            expanded="#{Supervisor$Contrato.boolmodifca}"
-                                           onclick="#{Supervisor$Contrato.llenarModifacionesContrato()}">
-                        <a4j:ajax event="click" render="pnmodificar">
-                            <!-- <a4j:ajax oncomplete="true" /> -->
-                        </a4j:ajax>
+                                           toggleListener="#{Supervisor$Contrato.llenarModifacionesContrato}">
+                        <a4j:ajax event="switch" render="pnmodificar" />
 
                         <h:panelGroup id="pnmodificar">
                             <h:panelGroup id="nomodificar">
@@ -1014,7 +962,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.fechamodificacion} " />
                                     </f:facet>
-                                    
+
                                     <h:outputText  id="datemodificacion" value="#{modificarcontr.datefechamodificacionseleccionada}" />
                                 </rich:column>
 
@@ -1022,7 +970,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.fechatermianter} " />
                                     </f:facet>
-                                    
+
                                     <h:outputText id="datemodificacionanter" value="#{modificarcontr.datefechafin}" />
                                 </rich:column>
 
@@ -1030,15 +978,15 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.fechterminacion}" />
                                     </f:facet>
-                                    
+
                                     <h:outputText id="dateterminacion" value="#{modificarcontr.datefechafinalizacion}" />
                                 </rich:column>
-                                
+
                                 <rich:column width="120px">
                                     <f:facet name="header">
                                         <h:outputText value="#{var.valorcontranter}" />
                                     </f:facet>
-                                    
+
                                     <h:outputText  value="#{modificarcontr.numvlrcontrato}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
@@ -1048,7 +996,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.valorcontractua}" />
                                     </f:facet>
-                                    
+
                                     <h:outputText  value="#{modificarcontr.numvlrnuevo}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
@@ -1058,20 +1006,22 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.modificaciones}" />
                                     </f:facet>
-                                    
+
                                     <rich:list var="tipo" value="#{modificarcontr.listatiposmodificacion}" rows="5">
                                         <h:outputText value="#{tipo.strdesctipomodif}" />
                                     </rich:list>
                                 </rich:column>
-                                
+
                                 <rich:column width="120px">
                                     <f:facet name="header">
                                         <h:outputText id="documento" value="#{var.documento}" />
                                     </f:facet>
-                                    
-                                    <a4j:commandLink id="btAdjuntarImagenmodi" style="font-size: 10px;">
-                                        <a4j:ajax  event="click" onbeforesubmit="#{rich:component('panelModiContratoDoc')}.show();"
-                                                   listener="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}" render="tabladocumentomodi" />
+
+                                    <a4j:commandLink id="btAdjuntarImagenmodi" style="font-size: 10px;"
+                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}"
+                                                     oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
+                                                     render="tabladocumentomodi">
+
                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
                                 </rich:column>
@@ -1080,15 +1030,15 @@
                     </rich:collapsiblePanel>
 
                     <h:panelGrid>
-                        <a4j:commandButton id="btCanContrato" value="#{var.volver}" immediate="true" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}"
-                                           action="#{Supervisor$Contrato.iniciarDetaContrato}">
+                        <h:commandButton id="btCanContrato" value="#{var.volver}" immediate="true" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}"
+                                         action="#{Supervisor$Contrato.iniciarDetaContrato}">
                             <a4j:param assignTo="#{Supervisor$ModificarContrato.permitirGuardar}" value="false" />
-                        </a4j:commandButton>
-                        
+                        </h:commandButton>
+
                         <h:commandButton id="btCanConvenio" value="#{var.volver}" immediate="true" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}"
                                          action="#{Supervisor$Contrato.iniciarDetaConvenio}">
                         </h:commandButton>
-                        
+
                         <h:commandButton id="btCanConsultoria" value="#{var.volver}" immediate="true" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}"
                                          action="#{Supervisor$Contrato.contrConsultoria}">
                         </h:commandButton>
@@ -1096,15 +1046,44 @@
                 </h:form>
             </center>
         </rich:panel>
-        
+
         <ui:include src="/modal/gestionpolizas/nuevapoliza.xhtml" />
-        
         <ui:include src="/modal/contratoDetaDoc.xhtml" />
-        
         <ui:include src="/modal/modicontratoDetaDoc.xhtml" />
-        
         <ui:include src="/modal/listadoplanificacionpagos.xhtml" />
-        
         <ui:include src="/modal/creargirodirecto.xhtml" />
+        <h:outputScript name="csspopup.js" library="js" />
+        <h:outputScript name="jquery.timers-1.0.0.js" library="js" />
+        <script type="text/javascript" language="JavaScript">
+                                                                 window.onload = iniciarFunciones();
+
+                                                                 function iniciarFunciones() {
+                                                                     var timefalta = document.getElementById("finfecha").value;
+                                                                     var futuro = new Date(timefalta);
+
+                                                                     setInterval(function() {
+                                                                         var ahora = new Date();
+                                                                         var faltan = futuro - ahora;
+
+                                                                         if (faltan > 0) {
+                                                                             var segundos = Math.round(faltan / 1000);
+                                                                             var minutos = Math.floor(segundos / 60);
+                                                                             var segundos_s = segundos % 60;
+                                                                             var horas = Math.floor(minutos / 60);
+                                                                             var minutos_s = minutos % 60;
+                                                                             var dias = Math.floor(horas / 24);
+                                                                             var horas_s = horas % 24;
+                                                                             horas_s = (!(horas_s > 9)) ? '0' + horas_s : horas_s;
+                                                                             dias = (!(dias > 9)) ? '0' + dias : dias;
+                                                                             minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
+                                                                             segundos_s = (!(segundos_s > 9)) ? '0' + segundos_s : segundos_s;
+                                                                             document.getElementById('refreshMeDias').innerHTML = dias;
+                                                                             document.getElementById('refreshMeHoras').innerHTML = horas_s;
+                                                                             document.getElementById('refreshMeMinutos').innerHTML = minutos_s;
+                                                                             document.getElementById('refreshMeSeg').innerHTML = segundos_s;
+                                                                         }
+                                                                     }, 100);
+                                                                 }
+        </script>
     </ui:define>
 </ui:composition>

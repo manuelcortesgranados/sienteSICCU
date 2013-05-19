@@ -29,8 +29,8 @@
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$IngresarNuevaObra.subirCDP.listener}" id="uploadCDP" immediateUpload="#{Supervisor$IngresarNuevaObra.subirCDP.autoSubida}"
-                                         listHeight="150" style="width: 250px;"  maxFilesQuantity="#{Supervisor$IngresarNuevaObra.subirCDP.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         fileUploadListener="#{Supervisor$IngresarNuevaObra.subirCDP.listener}" id="uploadCDP" immediateUpload="true"
+                                         listHeight="150" style="width: 250px;"  maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="infoCDP, layoutCDP"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoCDP">

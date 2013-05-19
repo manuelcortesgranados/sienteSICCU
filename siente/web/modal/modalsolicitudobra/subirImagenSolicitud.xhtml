@@ -27,8 +27,8 @@
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload acceptedTypes="jpg, jpeg, gif, png, bmp"
                                          doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.listener}" id="uploadImagenAtencion" immediateUpload="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.cantidadSubidas}">
+                                         fileUploadListener="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.listener}" id="uploadImagenAtencion" immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1">
                             <a4j:ajax event="uploadcomplete" render="info_imagenAtencion,panel_subirImagen"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_imagenAtencion">

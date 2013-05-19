@@ -13,7 +13,7 @@
 
     <ui:define name="head">
         <title>Cobra - Supervisor</title>
-        <h:outputScript library="/resources/script_supervisor.js" name="scrip_supervisor"/>
+        <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText value="#{var.modificarobra}"/>
@@ -305,7 +305,7 @@
                                                     rowClasses="stable"
                                                     binding="#{Supervisor$ModificarProyecto.tablaDocumentosModificacion}">
                                         <f:facet name="header">
-                                            <rich:columnGroup class="sliderich">
+                                            <rich:columnGroup>
 
                                                 <rich:column colspan="6">
 
@@ -385,11 +385,7 @@
                     </h:panelGroup>
 
 
-
-
-
-                    <!--a4j:include id="paso5View" viewId="/ModificarProyecto/fragmentos/paso5.xhtml"/-->
-                    <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
+                     <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
                         <h:outputText value="Paso 5" styleClass="TituloModificarProyecto centrado" />
                         <h:outputText value="#{var.tituloseleccontratovalormodi}" styleClass="TituloModificarProyecto centrado"/>
                         <interkont:spacer height="50"/>

@@ -77,15 +77,12 @@
                     </h:panelGrid>
 
                     <a4j:commandButton value="#{var.registrar}" action="#{Supervisor$Contrato.guardarGirodirecto}"
-                                       render="rpgirodirecto"
-                                       rendered="#{!Supervisor$Contrato.boolcreargiro}"
-                                       >
+                                       render="rpgirodirecto" rendered="#{!Supervisor$Contrato.boolcreargiro}">
                     </a4j:commandButton>
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcreargiro}"
                                        render="pngirodirecto" rendered="#{Supervisor$Contrato.boolcreargiro}"
                                        oncomplete= "#{rich:component('mp-crear-girodirecto')}.hide();">
-                        >
                     </a4j:commandButton>
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.cancelar}"  action="#{Supervisor$Contrato.limpiarGirodirecto}"

@@ -14,8 +14,9 @@ import cobra.Archivo;
 
 import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
-import cobra.SubirArchivoBean;
+import cobra.CargadorArchivosWeb;
 import cobra.Supervisor.FacesUtils;
+import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
@@ -67,7 +70,7 @@ public class AdminSupervisionExterna  {
     private String obradearte = "";
     private String mensaje;
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
-    private SubirArchivoBean subirListado = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirListado = new CargadorArchivosWeb();
     private String urlCronograma = "";
     private UIDataTable tablaItemSeguimientoSeleccionado = new UIDataTable();
     public Seguimiento seguimientoSelec = new Seguimiento();
@@ -177,11 +180,11 @@ public class AdminSupervisionExterna  {
         this.mensaje = mensaje;
     }
 
-    public SubirArchivoBean getSubirListado() {
+    public CargadorArchivosWeb getSubirListado() {
         return subirListado;
     }
 
-    public void setSubirListado(SubirArchivoBean subirListado) {
+    public void setSubirListado(CargadorArchivosWeb subirListado) {
         this.subirListado = subirListado;
     }
 
@@ -543,7 +546,7 @@ public class AdminSupervisionExterna  {
         String realArchivoPath = "";
         String URL = "/resources/Documentos/ValidadorE/" + getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/";
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirListado.getSize() > 0) {
+        if (subirListado.getArchivos().size()> 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -553,8 +556,12 @@ public class AdminSupervisionExterna  {
             } catch (Exception ex) {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
-            subirListado.guardarArchivosTemporales(realArchivoPath, false);
-            Iterator arch = subirListado.getFiles().iterator();
+            try {
+                subirListado.guardarArchivosTemporales(realArchivoPath, false);
+            } catch (ArchivoExistenteException ex) {
+                Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Iterator arch = subirListado.getArchivos().iterator();
             while (arch.hasNext()) {
                 Archivo nombreoriginal = (Archivo) arch.next();
                 pathDoc = nombreoriginal.getOnlyName();

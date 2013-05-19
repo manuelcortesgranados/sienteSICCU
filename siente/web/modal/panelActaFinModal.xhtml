@@ -26,15 +26,15 @@
             <h:form id="formActaFin">
                 <h:panelGroup id="layoutDocActaFin">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="*" 
+                        <rich:fileUpload 
                                          addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" 
                                          clearLabel="#{var.eliminar}" 
                                          doneLabel="#{var.hecho}"
                                          fileUploadListener="#{Supervisor$AdministrarObraNew.subirActaFin.listener}"
-                                         id="uploadActaFin" immediateUpload="#{Supervisor$AdministrarObraNew.subirActaFin.autoSubida}"
+                                         id="uploadActaFin" immediateUpload="true"
                                          listHeight="150" 
-                                         maxFilesQuantity="#{Supervisor$AdministrarObraNew.subirActaFin.cantidadSubidas}"
+                                         maxFilesQuantity="1"
                                          uploadLabel="#{var.subir}"
                                          style="width: 250px;">                                  
                            
@@ -47,16 +47,16 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$AdministrarObraNew.subirActaFin.size==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirActaFin.files}" var="file">
+                                    <h:outputText rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirActaFin.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
                                                     <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -65,12 +65,12 @@
                                 <interkont:spacer height="3"/>
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$AdministrarObraNew.borrarActaFinal}" render="infoActaFin, uploadActaFin, layoutActaFin"
-                                                   rendered="#{Supervisor$AdministrarObraNew.subirActaFin.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
 
                                 <a4j:commandButton id="BTaceptarActaFin" value="#{var.aceptar}"
                                                    onclick="#{rich:component('panelActaFin')}.hide();"
-                                                    rendered="#{Supervisor$AdministrarObraNew.subirActaFin.size>0}"
+                                                   rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos>0}"
                                                    render="layoutActaFin" action="#{Supervisor$AdministrarObraNew.pathDocumentoFin}"
                                                    style="font-size:12px;"/>
                             </center>

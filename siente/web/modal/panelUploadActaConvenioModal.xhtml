@@ -31,8 +31,8 @@
                 <h:panelGroup id="layoutDocActaConvenio">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$ModificarObra.subirActaConvenio.listener}" id="uploadActaConvenio" immediateUpload="#{Supervisor$ModificarObra.subirActaConvenio.autoSubida}"
-                                         style="height: 150px; width: 250px" maxFilesQuantity="#{Supervisor$ModificarObra.subirActaConvenio.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         fileUploadListener="#{Supervisor$ModificarObra.subirActaConvenio.listener}" id="uploadActaConvenio" immediateUpload="true"
+                                         style="height: 150px; width: 250px" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="infoActaConvenio, layoutDocActaConvenio"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoActaConvenio">
@@ -41,16 +41,16 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirActaConvenio.files}" var="file">
+                                    <h:outputText rendered="#{Supervisor$ModificarObra.subirActaConvenio.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirActaConvenio.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
                                                     <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -59,9 +59,9 @@
                                 <interkont:spacer height="3"/>
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarObra.subirActaConvenio.borrarDatosSubidos}" render="infoActaConvenio, uploadActaConvenio"
-                                                   rendered="#{Supervisor$ModificarObra.subirActaConvenio.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{Supervisor$ModificarObra.subirActaConvenio.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
-                                <a4j:commandButton id="BTaceptarActaConvenio" value="#{var.aceptar}" rendered="#{Supervisor$ModificarObra.subirActaConvenio.size>0}"
+                                <a4j:commandButton id="BTaceptarActaConvenio" value="#{var.aceptar}" rendered="#{Supervisor$ModificarObra.subirActaConvenio.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActaConvenio')}.hide();"
                                                    render="panel_subirActaConvenio"
                                                    style="font-size: 12px;"/>

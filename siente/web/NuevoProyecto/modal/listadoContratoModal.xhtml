@@ -102,7 +102,7 @@
                                     </rich:column>
                                     <rich:column style="width: 120px" >
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato}"                                                           
-                                                           oncomplete="javascript:Richfaces.showModalPanel('panelRelacionContrato')" render="layoutpanelRelacionContrato">
+                                                           oncomplete="#{rich:component('panelRelacionContrato')}.show();"  render="layoutpanelRelacionContrato">
                                     </a4j:commandButton>
                                     </rich:column>
                                 </rich:columnGroup>

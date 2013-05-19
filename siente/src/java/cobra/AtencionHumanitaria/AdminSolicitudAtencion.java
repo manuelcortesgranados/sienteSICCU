@@ -30,13 +30,14 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Urgencia;
 import co.com.interkont.cobra.to.Zonaespecifica;
 import cobra.Archivo;
+import cobra.CargadorArchivosWeb;
 import cobra.FiltroObra;
 import cobra.Financiera.FiduFinanciera;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
 import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
-import cobra.Supervisor.IngresarNuevaObra;import java.io.File;
+import cobra.Supervisor.IngresarNuevaObra;import com.interkont.cobra.exception.ArchivoExistenteException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -341,23 +342,23 @@ public class AdminSolicitudAtencion  {
     /**
      * Inicializacion de el bean de subir archivos para las imagenes
      */
-    private SubirArchivoBean subirImagenAtencion = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirImagenAtencion = new CargadorArchivosWeb();
     /**
      * Inicializacion de el bean de subir archivos para los videos
      */
-    private SubirArchivoBean subirVideoAtencion = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirVideoAtencion = new CargadorArchivosWeb();
     /**
      * Inicializacion de el bean de subir archivos para los documentos
      */
-    private SubirArchivoBean subirDocumento = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocumento = new CargadorArchivosWeb();
     /**
      * Inicializacion de el bean de subir archivos para el acta
      */
-    private SubirArchivoBean subirActa = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirActa = new CargadorArchivosWeb();
     /**
      * Inicializacion de el bean de subir archivos para la carta financiera
      */
-    private SubirArchivoBean subirCartaFinanciera = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirCartaFinanciera = new CargadorArchivosWeb();
     /**
      * Inicializacion de el bean bundle
      */
@@ -799,27 +800,27 @@ public class AdminSolicitudAtencion  {
         this.hayvideo = hayvideo;
     }
 
-    public SubirArchivoBean getSubirActa() {
+    public CargadorArchivosWeb getSubirActa() {
         return subirActa;
     }
 
-    public void setSubirActa(SubirArchivoBean subirActa) {
+    public void setSubirActa(CargadorArchivosWeb subirActa) {
         this.subirActa = subirActa;
     }
 
-    public SubirArchivoBean getSubirCartaFinanciera() {
+    public CargadorArchivosWeb getSubirCartaFinanciera() {
         return subirCartaFinanciera;
     }
 
-    public void setSubirCartaFinanciera(SubirArchivoBean subirCartaFinanciera) {
+    public void setSubirCartaFinanciera(CargadorArchivosWeb subirCartaFinanciera) {
         this.subirCartaFinanciera = subirCartaFinanciera;
     }
 
-    public SubirArchivoBean getSubirVideoAtencion() {
+    public CargadorArchivosWeb getSubirVideoAtencion() {
         return subirVideoAtencion;
     }
 
-    public void setSubirVideoAtencion(SubirArchivoBean subirVideoAtencion) {
+    public void setSubirVideoAtencion(CargadorArchivosWeb subirVideoAtencion) {
         this.subirVideoAtencion = subirVideoAtencion;
     }
 
@@ -831,11 +832,11 @@ public class AdminSolicitudAtencion  {
         this.tablaImagenesatencion = tablaImagenesatencion;
     }
 
-    public SubirArchivoBean getSubirImagenAtencion() {
+    public CargadorArchivosWeb getSubirImagenAtencion() {
         return subirImagenAtencion;
     }
 
-    public void setSubirImagenAtencion(SubirArchivoBean subirImagenAtencion) {
+    public void setSubirImagenAtencion(CargadorArchivosWeb subirImagenAtencion) {
         this.subirImagenAtencion = subirImagenAtencion;
     }
 
@@ -855,11 +856,11 @@ public class AdminSolicitudAtencion  {
         this.bundle = bundle;
     }
 
-    public SubirArchivoBean getSubirDocumento() {
+    public CargadorArchivosWeb getSubirDocumento() {
         return subirDocumento;
     }
 
-    public void setSubirDocumento(SubirArchivoBean subirDocumento) {
+    public void setSubirDocumento(CargadorArchivosWeb subirDocumento) {
         this.subirDocumento = subirDocumento;
     }
 
@@ -1789,7 +1790,7 @@ public class AdminSolicitudAtencion  {
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 
-        if (subirImagenAtencion.getSize() > 0) {
+        if (subirImagenAtencion.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -1802,9 +1803,13 @@ public class AdminSolicitudAtencion  {
             } catch (Exception ex) {
                 FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
             }
-            subirImagenAtencion.guardarArchivosTemporales(realArchivoPath, false);
+            try {
+                subirImagenAtencion.guardarArchivosTemporales(realArchivoPath, false);
+            } catch (ArchivoExistenteException ex) {
+                Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-            Iterator arch = subirImagenAtencion.getFiles().iterator();
+            Iterator arch = subirImagenAtencion.getArchivos().iterator();
             while (arch.hasNext()) {
 
                 Archivo nombreoriginal = (Archivo) arch.next();
@@ -1848,7 +1853,7 @@ public class AdminSolicitudAtencion  {
         String URL = "/resources/Documentos/Solicitud/Temporal/";
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirDocumento.getSize() > 0) {
+        if (subirDocumento.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -1859,8 +1864,12 @@ public class AdminSolicitudAtencion  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirDocumento.guardarArchivosTemporales(realArchivoPath, false);
-        Iterator arch = subirDocumento.getFiles().iterator();
+        try {
+            subirDocumento.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator arch = subirDocumento.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getAtencionHumanitaria().getDocumento().setStrurldocumento(URL + nombreoriginal.getOnlyName());
@@ -1875,7 +1884,7 @@ public class AdminSolicitudAtencion  {
         String URL = "/resources/Documentos/Solicitud/Temporal/";
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirActa.getSize() > 0) {
+        if (subirActa.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -1886,8 +1895,12 @@ public class AdminSolicitudAtencion  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirActa.guardarArchivosTemporales(realArchivoPath, false);
-        Iterator arch = subirActa.getFiles().iterator();
+        try {
+            subirActa.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator arch = subirActa.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getAtencionHumanitaria().getSolicitudmaestro().setStrurlactajunta(URL + "/" + nombreoriginal.getOnlyName());
@@ -1902,7 +1915,7 @@ public class AdminSolicitudAtencion  {
         String URL = "/resources/Documentos/Solicitud/Temporal/";
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirCartaFinanciera.getSize() > 0) {
+        if (subirCartaFinanciera.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -1913,8 +1926,12 @@ public class AdminSolicitudAtencion  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirCartaFinanciera.guardarArchivosTemporales(realArchivoPath, false);
-        Iterator arch = subirCartaFinanciera.getFiles().iterator();
+        try {
+            subirCartaFinanciera.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator arch = subirCartaFinanciera.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getAtencionHumanitaria().getSolicitudmaestro().setStrurlcartaaprobacion(URL + "/" + nombreoriginal.getOnlyName());
@@ -1966,7 +1983,7 @@ public class AdminSolicitudAtencion  {
         getAtencionHumanitaria().getDocumento().setTipodocumentosolicitud(getAtencionHumanitaria().getObjTipoDocumento());
         getAtencionHumanitaria().getListadocumentosolicitud().add(getAtencionHumanitaria().getDocumento());
         getAtencionHumanitaria().setDocumento(new Documentosolicitud());
-        setSubirDocumento(new SubirArchivoBean(1, true, false));
+        setSubirDocumento(new CargadorArchivosWeb());
         return null;
     }
 
@@ -1994,7 +2011,7 @@ public class AdminSolicitudAtencion  {
      */
     public String subirImagenaLista() {
 
-        if (subirImagenAtencion.getSize() > 0) {
+        if (subirImagenAtencion.getArchivos().size() > 0) {
 
             if (getAtencionHumanitaria().getImagen().getStrdescripcion().compareTo("") != 0) {
                 getAtencionHumanitaria().getImagen().setOidcodigosolicitudmaestro(getAtencionHumanitaria().getSolicitudmaestro());
@@ -2004,7 +2021,7 @@ public class AdminSolicitudAtencion  {
 
                 getAtencionHumanitaria().getListadoimagensolicitud().add(getAtencionHumanitaria().getImagen());
                 getAtencionHumanitaria().setImagen(new Imagensolicitud());
-                setSubirImagenAtencion(new SubirArchivoBean(1, true, false));
+                setSubirImagenAtencion(new CargadorArchivosWeb());
 
             } else {
                 FacesUtils.addErrorMessage(bundle.getString("debedarunnombre"));
@@ -2299,7 +2316,7 @@ public class AdminSolicitudAtencion  {
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String URLFINAL = theApplicationsServletContext.getRealPath("");
 
-        if (subirVideoAtencion.getSize() > 0) {
+        if (subirVideoAtencion.getArchivos().size() > 0) {
             hayvideo = true;
 
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
@@ -2313,9 +2330,12 @@ public class AdminSolicitudAtencion  {
                 FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
                 return null;
             }
-
-            subirVideoAtencion.guardarArchivosTemporales(realArchivoPath, false);
-            Iterator arch = subirVideoAtencion.getFiles().iterator();
+            try {
+                subirVideoAtencion.guardarArchivosTemporales(realArchivoPath, false);
+            } catch (ArchivoExistenteException ex) {
+                Logger.getLogger(AdminSolicitudAtencion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Iterator arch = subirVideoAtencion.getArchivos().iterator();
             String nombre2 = "";
 
             while (arch.hasNext()) {
@@ -2498,8 +2518,8 @@ public class AdminSolicitudAtencion  {
      */
     public String limpiarSolicitud() {
 
-        subirImagenAtencion = new SubirArchivoBean(1, true, false);
-        subirDocumento = new SubirArchivoBean(1, true, false);
+        subirImagenAtencion = new CargadorArchivosWeb();
+        subirDocumento = new CargadorArchivosWeb();
         getAtencionHumanitaria().getSolicitudmaestro().setTipoah(new Tipoah(2, "", ""));
         getAtencionHumanitaria().setListadocumentosolicitud(new ArrayList<Documentosolicitud>());
         getAtencionHumanitaria().setListadoimagensolicitud(new ArrayList<Imagensolicitud>());
