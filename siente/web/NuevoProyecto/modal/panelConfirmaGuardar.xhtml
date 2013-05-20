@@ -29,7 +29,7 @@
                     
                     <interkont:spacer height="30"/>
                     <a4j:commandButton id="BTaceptarDocFin"  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"  value="#{var.aceptar}"
-                                        oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaGuardar')" 
+                                        oncomplete="#{rich:component('panelConfirmaGuardar')}.hide();" 
                                        />
 
                     <h:commandButton id="BTaceptarDocFin2" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"

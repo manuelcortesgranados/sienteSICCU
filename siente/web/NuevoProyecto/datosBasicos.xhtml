@@ -15,19 +15,19 @@
         <title>#{var.nuevoproyectosupervisor}</title>
         <h:outputScript  name="script_supervisor.js"/>
         <h:outputScript  name="validarletra.js" library="js"/>
-   </ui:define>
-    
-     <ui:define name="title">
-     <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.datosbasicos}"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.datosbasicos}"/>
     </ui:define>
 
     <ui:define name="menu">
-    <ui:include src="./../facelets/menu_gestion.xhtml"/>
+        <ui:include src="./../facelets/menu_gestion.xhtml"/>
     </ui:define>
-   
+
 
     <ui:define name="body">
-     
+
         <h:form id="form_datos_basicos"  >
             <a4j:jsFunction oncomplete="#{rich:component(modalAvisoSupervisor)}.hide();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
                             id="editdatosbasicos" name="showModal" action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction> 
@@ -44,8 +44,8 @@
                                     <h:outputText value="#{var.pasosIniciales}" styleClass="txt_header" />
                                 </h:panelGroup>
                             </f:facet>
-                           
-                            <rich:collapsiblePanel switchType="ajax" header="3. #{var.datosbasicos}"  >
+
+                            <rich:collapsiblePanel switchType="client" header="3. #{var.datosbasicos}"  >
                                 <h:outputText style="font-size:8px;float:right;" value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
                                 <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
@@ -58,13 +58,13 @@
                                     </h:inputTextarea>
 
 
-                                    <h:outputLabel id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni">
-                                        <rich:message for="fecIni" style="color: #ed0606;"/>
-                                    </h:outputLabel>
+                                        <h:outputLabel id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni">
+                                            <rich:message for="fecIni" style="color: #ed0606;"/>
+                                        </h:outputLabel>
 
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
                                         <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
-                                    </rich:calendar>
+                                        </rich:calendar>
 
                                     <h:outputLabel id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
@@ -98,7 +98,7 @@
                                                           disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.terceroOption}" />
                                             <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" render="gpentidadministerios">
-                                             </a4j:ajax>
+                                            </a4j:ajax>
                                         </h:selectOneMenu>
                                     </h:panelGroup>
 
@@ -124,9 +124,9 @@
                                         </h:inputText>
                                         <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  
                                                            render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"
-                                                           oncomplete="javascript:Richfaces.showModalPanel('mp-listado-rutas')"                                                           
+                                                           oncomplete="#{rich:component('mp-listado-rutas')}.show();"                                                           
                                                            >
-                                         </a4j:commandButton>
+                                        </a4j:commandButton>
                                         <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
                                         </a4j:commandButton>
                                     </h:panelGroup>
@@ -139,8 +139,8 @@
                                         <h:panelGroup>
                                             <a4j:commandButton id="btnBus" value="#{var.buscar} Sede Educativa" action="#{Supervisor$EntidadConvenio.llenarlistaSedes}"
                                                                render="mp-listado-sedeseducativas,tablasedeseducativas" immediate="true"
-                                                               oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')">
-                                                <a4j:ajax event="complete"   oncomplete="javascript:Richfaces.showModalPanel('mp-listado-sedeseducativas')" render="tablasedeseducativas"/>
+                                                               oncomplete="#{rich:component('mp-listado-sedeseducativas')}.show();">
+                                                <a4j:ajax event="complete"   oncomplete="#{rich:component(mp-listado-sedeseducativa)}.show();" render="tablasedeseducativas"/>
                                             </a4j:commandButton>
                                             <a4j:commandButton id="btndesasociarrSede" value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarSede}" render="gpEducacion,layoutPrincipalTab,mp-proyectosPadres"
                                                                rendered="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa!=null}" >

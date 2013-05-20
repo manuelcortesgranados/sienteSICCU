@@ -24,8 +24,8 @@
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.listener}" id="uploadCartaAprobacion" immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.listener}" id="uploadCartaAprobacion" immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_CartaAprobacion,panel_subirCartaAprobacion" />
                         </rich:fileUpload>
 
@@ -36,15 +36,15 @@
                                         <h:outputText value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.size==0}" value="#{var.nosuarc}" />
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.files}" var="file">
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.onlyName}" />
+                                                    <h:outputText value="#{file.nombre}" />
                                                     <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.length/1024} Kb" />
+                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -55,10 +55,10 @@
 
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarCartaAprobacion}" render="info_CartaAprobacion, uploadCartaAprobacion, gpCartaAprobacion, panel_subirCartaAprobacion"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm" style="font-size:12px;" />
                                 
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.size>0}"
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadCartaAprobacion')}.hide();
                                                return false;"
                                                    render="panel_subirCartaAprobacion" style="font-size:12px;" />

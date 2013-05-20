@@ -25,8 +25,8 @@
                         <rich:fileUpload acceptedTypes="jpg, jpeg, gif, png, bmp" addLabel="#{var.adicionar}" style="width: 250px;"
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.listener}" id="uploadImagenAtencion"
-                                         immediateUpload="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.cantidadSubidas}" uploadLabel="#{var.subir}">
+                                         immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_imagenAtencion,panel_subirImagen" />
                         </rich:fileUpload>
 
@@ -37,16 +37,16 @@
                                         <h:outputText value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.size==0}" value="#{var.nosuarc}" />
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
 
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.files}" var="file">
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.onlyName}" />
+                                                    <h:outputText value="#{file.nombre}" />
                                                     <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.length/1024} Kb" />
+                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -56,10 +56,10 @@
                                 <interkont:spacer height="3" />
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarImagenAtencion}" render="info_imagenAtencion, uploadImagenAtencion, gpImagenModalAtencion, panel_subirImagen"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm" style="font-size:12px;" />
 
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.size>0}"
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
                                                return false;"
                                                    render="tablaImagenes, panel_subirImagen" style="font-size:12px;" />

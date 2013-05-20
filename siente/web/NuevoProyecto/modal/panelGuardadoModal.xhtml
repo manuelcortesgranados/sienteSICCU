@@ -32,7 +32,7 @@
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}"
-                                       onclick="javascript:Richfaces.hideModalPanel('panelGuardado')"
+                                       onclick="#{rich:component('panelGuardado')}.hide();"
                                           style="font-size: 12px;"
                                        render="gpPrincipalAlimentar"/>
                 </center>

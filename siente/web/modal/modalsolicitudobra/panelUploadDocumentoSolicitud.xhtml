@@ -28,8 +28,8 @@
                         <rich:fileUpload   
                                          doneLabel="#{var.hecho}"
                                          fileUploadListener="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.listener}" id="uploadDocumento"
-                                         immediateUpload="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.autoSubida}"
-                                         listHeight="150" maxFilesQuantity="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.cantidadSubidas}">
+                                         immediateUpload="true"
+                                         listHeight="150" maxFilesQuantity="1">
                             <a4j:ajax event="uploadcomplete" render="info_documento, panel_subir"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_documento">

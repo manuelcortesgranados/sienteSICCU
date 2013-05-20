@@ -2625,7 +2625,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.presu:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 #navIndicadores ul li a.conso {
@@ -2637,7 +2637,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.conso:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 #navIndicadores ul li a.consoclaro {
@@ -2650,7 +2650,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.consoclaro:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 
@@ -2663,7 +2663,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.humani:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 #navIndicadores ul li a.aloja {
@@ -2675,7 +2675,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.aloja:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 
 }
@@ -2688,7 +2688,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.terri:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 #navIndicadores ul li a.nacio {
@@ -2700,7 +2700,7 @@ a.busquedavanzada2:hover {
 #navIndicadores ul li a.nacio:hover {
     background-color:#949494;
     -moz-opacity: 0.9;
-    filter:alpha opacity=90;
+    filter:alpha opacity 90;
     width:195px;
 }
 

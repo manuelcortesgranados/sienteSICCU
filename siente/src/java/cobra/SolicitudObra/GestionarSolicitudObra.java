@@ -35,10 +35,11 @@ import cobra.Archivo;
 import cobra.FiltroObra;
 
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
+import cobra.CargadorArchivosWeb;
 import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.IngresarNuevaObra;
+import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
@@ -105,9 +108,9 @@ public class GestionarSolicitudObra  {
     private boolean aplicafiltroobra;
     private int totalSolApro;
     private int totalSolUsu;
-    private SubirArchivoBean subirImagenSolicitud = new SubirArchivoBean(1, true, false);
-    private SubirArchivoBean subirDocumentoSolicitud = new SubirArchivoBean(1, true, false);
-    private SubirArchivoBean subirActa = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirImagenSolicitud = new CargadorArchivosWeb();
+    private CargadorArchivosWeb subirDocumentoSolicitud = new CargadorArchivosWeb();
+    private CargadorArchivosWeb subirActa = new CargadorArchivosWeb();
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private UIDataTable tablaProyectosAso = new UIDataTable();
     private String pathImagen = "";
@@ -172,11 +175,11 @@ public class GestionarSolicitudObra  {
         this.consul = consul;
     }
 
-    public SubirArchivoBean getSubirActa() {
+    public CargadorArchivosWeb getSubirActa() {
         return subirActa;
     }
 
-    public void setSubirActa(SubirArchivoBean subirActa) {
+    public void setSubirActa(CargadorArchivosWeb subirActa) {
         this.subirActa = subirActa;
     }
 
@@ -204,11 +207,11 @@ public class GestionarSolicitudObra  {
         this.tipodoc = tipodoc;
     }
 
-    public SubirArchivoBean getSubirDocumentoSolicitud() {
+    public CargadorArchivosWeb getSubirDocumentoSolicitud() {
         return subirDocumentoSolicitud;
     }
 
-    public void setSubirDocumentoSolicitud(SubirArchivoBean subirDocumentoSolicitud) {
+    public void setSubirDocumentoSolicitud(CargadorArchivosWeb subirDocumentoSolicitud) {
         this.subirDocumentoSolicitud = subirDocumentoSolicitud;
     }
 
@@ -236,11 +239,11 @@ public class GestionarSolicitudObra  {
         this.bundle = bundle;
     }
 
-    public SubirArchivoBean getSubirImagenSolicitud() {
+    public CargadorArchivosWeb getSubirImagenSolicitud() {
         return subirImagenSolicitud;
     }
 
-    public void setSubirImagenSolicitud(SubirArchivoBean subirImagenSolicitud) {
+    public void setSubirImagenSolicitud(CargadorArchivosWeb subirImagenSolicitud) {
         this.subirImagenSolicitud = subirImagenSolicitud;
     }
 
@@ -1467,7 +1470,7 @@ public class GestionarSolicitudObra  {
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String URLFINAL = theApplicationsServletContext.getRealPath("");
 
-        if (subirImagenSolicitud.getSize() > 0) {
+        if (subirImagenSolicitud.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
 
@@ -1479,10 +1482,13 @@ public class GestionarSolicitudObra  {
                 FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
             }
         }
+        try {
+            subirImagenSolicitud.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(GestionarSolicitudObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-        subirImagenSolicitud.guardarArchivosTemporales(realArchivoPath, false);
-
-        Iterator arch = subirImagenSolicitud.getFiles().iterator();
+        Iterator arch = subirImagenSolicitud.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getSessionBeanCobra().getSolicitudService().getImagensolicitud().setStrurlimagen(URL + "/" + nombreoriginal.getOnlyName());
@@ -1538,7 +1544,7 @@ public class GestionarSolicitudObra  {
             subirImagenAtencion();
             getSessionBeanCobra().getSolicitudService().getImagensolicituds().add(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
             getSessionBeanCobra().getSolicitudService().setImagensolicitud(new Imagensolicitud());
-            setSubirImagenSolicitud(new SubirArchivoBean(1, true, false));
+            setSubirImagenSolicitud(new CargadorArchivosWeb());
         } else {
             FacesUtils.addErrorMessage(bundle.getString("debeproporcionaadescrip"));
         }
@@ -1560,7 +1566,7 @@ public class GestionarSolicitudObra  {
                 getSessionBeanCobra().getSolicitudService().getDocumentosolicitud().setTipodocumentosolicitud(getSessionBeanCobra().getSolicitudService().getTipodocumentosolicitud());
                 getSessionBeanCobra().getSolicitudService().getDocumentosolicituds().add(getSessionBeanCobra().getSolicitudService().getDocumentosolicitud());
                 getSessionBeanCobra().getSolicitudService().setDocumentosolicitud(new Documentosolicitud());
-                setSubirDocumentoSolicitud(new SubirArchivoBean(1, true, false));
+                setSubirDocumentoSolicitud(new CargadorArchivosWeb());
 
                 //} else {
                 //     FacesUtils.addErrorMessage(bundle.getString("debeproporcinarelnombredeldocu"));
@@ -1585,7 +1591,7 @@ public class GestionarSolicitudObra  {
         getSessionBeanCobra().getSolicitudService().getDocumentosolicitud().setTipodocumentosolicitud(getSessionBeanCobra().getSolicitudService().getTipodocumentosolicitud());
         getSessionBeanCobra().getSolicitudService().getDocumentosolicituds().add(getSessionBeanCobra().getSolicitudService().getDocumentosolicitud());
         getSessionBeanCobra().getSolicitudService().setDocumentosolicitud(new Documentosolicitud());
-        setSubirActa(new SubirArchivoBean(1, true, false));
+        setSubirActa(new CargadorArchivosWeb());
         return null;
     }
 
@@ -1594,7 +1600,7 @@ public class GestionarSolicitudObra  {
         String URL = "/resources/Documentos/Solicitud/Temporal";
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirDocumentoSolicitud.getSize() > 0) {
+        if (subirDocumentoSolicitud.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -1605,8 +1611,12 @@ public class GestionarSolicitudObra  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirDocumentoSolicitud.guardarArchivosTemporales(realArchivoPath, false);
-        Iterator arch = subirDocumentoSolicitud.getFiles().iterator();
+        try {
+            subirDocumentoSolicitud.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(GestionarSolicitudObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator arch = subirDocumentoSolicitud.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getSessionBeanCobra().getSolicitudService().getDocumentosolicitud().setStrurldocumento(URL + "/" + nombreoriginal.getOnlyName());
@@ -1618,7 +1628,7 @@ public class GestionarSolicitudObra  {
         String URL = "/resources/Documentos/Solicitud/Temporal";
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirActa.getSize() > 0) {
+        if (subirActa.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -1629,8 +1639,12 @@ public class GestionarSolicitudObra  {
                 mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
             }
         }
-        subirActa.guardarArchivosTemporales(realArchivoPath, false);
-        Iterator arch = subirActa.getFiles().iterator();
+        try {
+            subirActa.guardarArchivosTemporales(realArchivoPath, false);
+        } catch (ArchivoExistenteException ex) {
+            Logger.getLogger(GestionarSolicitudObra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Iterator arch = subirActa.getArchivos().iterator();
         while (arch.hasNext()) {
             Archivo nombreoriginal = (Archivo) arch.next();
             getSessionBeanCobra().getSolicitudService().getDocumentosolicitud().setStrurldocumento(URL + "/" + nombreoriginal.getOnlyName());

@@ -38,10 +38,9 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tipotercero;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
-import cobra.CargadorArchivosWeb;
 import cobra.FiltroAvanzadoContrato;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
+import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
@@ -259,7 +258,7 @@ public class NuevoContratoBasico   {
     /**
      * Subir archivos a la carpeta donde se almacenan
      */
-    private SubirArchivoBean subirDocPol = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocPol = new CargadorArchivosWeb();
     /**
      * ruta donde se almacenarán los documentos
      */
@@ -685,15 +684,15 @@ public class NuevoContratoBasico   {
      */
     private boolean boolnumencargosoli;
     /**
-     * Instancia de la clase SubirArchivoBean utilizada para subir los
+     * Instancia de la clase CargadorArchivosWeb utilizada para subir los
      * documentos
      */
     private CargadorArchivosWeb cargadorDocumento = new CargadorArchivosWeb();
     /**
-     * Instancia de la clase SubirArchivoBean utilizada para subir los
+     * Instancia de la clase CargadorArchivosWeb utilizada para subir los
      * documentos de contrato
      */
-    private SubirArchivoBean subirDocumentoContrato = new SubirArchivoBean(1, true, false);
+    private CargadorArchivosWeb subirDocumentoContrato = new CargadorArchivosWeb();
     /**
      * Variable utilizada para saber si un contrato tiene hijos
      */
@@ -919,11 +918,11 @@ public class NuevoContratoBasico   {
         this.palabraclave = palabraclave;
     }
 
-    public SubirArchivoBean getSubirDocumentoContrato() {
+    public CargadorArchivosWeb getSubirDocumentoContrato() {
         return subirDocumentoContrato;
     }
 
-    public void setSubirDocumentoContrato(SubirArchivoBean subirDocumentoContrato) {
+    public void setSubirDocumentoContrato(CargadorArchivosWeb subirDocumentoContrato) {
         this.subirDocumentoContrato = subirDocumentoContrato;
     }
 
@@ -1703,11 +1702,11 @@ public class NuevoContratoBasico   {
         this.pathActa = pathActa;
     }
 
-    public SubirArchivoBean getSubirDocPol() {
+    public CargadorArchivosWeb getSubirDocPol() {
         return subirDocPol;
     }
 
-    public void setSubirDocPol(SubirArchivoBean subirDocPol) {
+    public void setSubirDocPol(CargadorArchivosWeb subirDocPol) {
         this.subirDocPol = subirDocPol;
     }
 
@@ -2968,10 +2967,15 @@ public class NuevoContratoBasico   {
      * @return
      */
     public String eliminarPolizaNueva(int filaSeleccionada) {
-        Polizacontrato polizaEli = listapolizas.get(filaSeleccionada);
-        listapolizas.remove(polizaEli);
-        getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizaEli);
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Polizacontrato polizacontratoEliminada = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+        
+        listapolizas.remove(polizacontratoEliminada);
+        
+        getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizacontratoEliminada);
+        
         llenarPolizas();
+        
         return null;
     }
 
@@ -3172,10 +3176,8 @@ public class NuevoContratoBasico   {
         porcentapagoanticipo = new BigDecimal(BigInteger.ZERO);
         valorpagoanticipo = new BigDecimal(BigInteger.ZERO);
         setFechapagoanticipo(null);
-        //mostrarpregcontrcon = 0;
         varmostrarcontrpa = 0;
         contrpadre = null;
-        //tipoContCon = "";
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
 
@@ -3183,20 +3185,12 @@ public class NuevoContratoBasico   {
 
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-        subirDocPol = new SubirArchivoBean(1, true, false);
+        subirDocPol = new CargadorArchivosWeb();
 
         llenarEntidadesContratantes();
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
-//        inicializarformapago();
-//        validacionFormadePago();
-
-//        listaContrConvHijo.clear();
-//        listaSubconvenios.clear();
-
-        //return null;
-
 
     }
 
@@ -3661,15 +3655,15 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato desde la tabla detalle contratohijo
      *
-     * @return
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return consultarContrato Refresca la página para mostrar el detalle del contrato hijo.
      */
-    public String detalleContrHijo() {
-        //limpiarContrato();
-//        boolconthijo = false;
-        Contrato contrtablahijo = (Contrato) tablacontconvhijo.getRowData();
-//        setContrato(contrtablahijo);
-//        finentrega = contrtablahijo.getDatefechafin().toString();
-        cargarContrato(contrtablahijo);
+    public String detalleContrHijo(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratoHijo = nuevoContratoBasico.getListaContrConvHijo().get(filaSeleccionada);
+
+        cargarContrato(contratoHijo);
 
         return "consultarContrato";
     }
@@ -3677,17 +3671,13 @@ public class NuevoContratoBasico   {
     /**
      * Seleccionar el contrato desde la tabla detalle conveniohijo
      *
-     * @return
+     * @return consultarContrato Refresca la página para mostrar los detalles de subconvenio.
      */
-    public String detalleConvenioHijo() {
-        //boolsubconvenios = false;
-        Contrato contrtablahijo = (Contrato) tablaSubconvenios.getRowData();
-//        setContrato(contrtablahijo);
-//        finentrega = contrtablahijo.getDatefechafin().toString();
-//        
-        cargarContrato(contrtablahijo);
-
-
+    public String detalleConvenioHijo(int filaSeleccionada) {
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratoConvenioHijo = nuevoContratoBasico.getListaSubconvenios().get(filaSeleccionada);
+      
+        cargarContrato(contratoConvenioHijo);
 
         return "consultarContrato";
     }
@@ -4008,8 +3998,11 @@ public class NuevoContratoBasico   {
      * @return
      */
     public String editarPoliza(int filaSeleccionada) {
-        polizacontrato = listapolizas.get(filaSeleccionada);
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        polizacontrato = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+        
         boolcrearpoliza = true;
+        
         return null;
     }
 
@@ -4040,7 +4033,6 @@ public class NuevoContratoBasico   {
             SelectItem itemTipot = new SelectItem(tipoter.getIntcodigotipotercero(), tipoter.getStrnombretipotercero());
             TipoTerceroOPtion[i++] = itemTipot;
         }
-
     }
 
     /**
@@ -5544,8 +5536,10 @@ public class NuevoContratoBasico   {
      */
     public String editarGirodirecto(int filaSeleccionada) {
         booleditargirodirecto = true;
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        planificacionpago = sessionBeanCobra.getCobraService().getListaPlanificacionpagos().get(filaSeleccionada);
+        
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        movimientocontrato = nuevoContratoBasico.getListaGirodirecto().get(filaSeleccionada);
+
         return null;
     }
 

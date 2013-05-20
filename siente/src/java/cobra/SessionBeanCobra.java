@@ -491,7 +491,6 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public void cargarpermisosmodulo(int modulo) {
-        System.out.println("validando permisos = " + modulo);
         Modulorecurso modulorecurso = new Modulorecurso();
         getUsuarioService().getUsuarioObra().setRenderrecurso(modulorecurso.validarrecurso(modulo));
 

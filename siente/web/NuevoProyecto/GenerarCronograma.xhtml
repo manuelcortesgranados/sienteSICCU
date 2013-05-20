@@ -51,14 +51,9 @@
                                                         <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                                     </h:panelGroup>
                                                     <a4j:commandLink id="generarcronograma" styleClass="excel anchorlink" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
-                                                                     action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}"                          
+                                                                     action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" oncomplete="#{rich:component('mp_cronograma')}.show();" render="layoutCron"                       
                                                                      >
-
-                                                        <a4j:ajax event="complete" onbeforesubmit="javascript:Richfaces.showModalPanel('mp_cronograma')" render="layoutCron"/>
                                                     </a4j:commandLink>
-
-
-
                                                 </h:panelGrid>
                                                 <h:outputLabel value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                             </center>
@@ -69,7 +64,7 @@
                                                     <h:outputLabel value="#{var.importeelcronograma}" styleClass="txt_label_bold"/>
                                                     <interkont:spacer width="40"/>
                                                     <a4j:commandButton styleClass="btn_sec_gig"  value="#{var.examinar}" style="font-size: 10px;" id="subircronograma"
-                                                                       onclick="javascript:Richfaces.showModalPanel('mp_subircronograma')" render="uploadCrono"/>
+                                                                       onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
                                                 </h:panelGrid>
 
                                                 <h:panelGroup id="layoutDoc" style="width: 80%">

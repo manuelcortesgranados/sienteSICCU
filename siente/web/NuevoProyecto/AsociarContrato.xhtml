@@ -100,8 +100,7 @@
                                 <h:panelGrid id="pgconveniocontrato" columns="2">
                                     <a4j:commandLink value="Asociar contrato"
                                                      styleClass="asociarcontrato anchorLink"
-                                                     action="#{Supervisor$IngresarNuevaObra.llenarContratos}" >
-                                        <a4j:ajax event="complete" render="gpTotalCont" oncomplete="javascript:Richfaces.showModalPanel('mp-listado-contratos')"/>
+                                                     action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();">
                                     </a4j:commandLink>
                                     <a4j:commandLink value="Crear contrato" rendered="false"
                                                      styleClass="crearcontrato anchorLink"
@@ -207,8 +206,8 @@
                 </tr>
             </table>
         </h:form>
-        <ui:include src="../NuevoProyecto/modal/listadoContratoModal.jspx"/>
-        <ui:include src="../NuevoProyecto/modal/modalRelacionContrato.jspx"/>
+        <ui:include src="../NuevoProyecto/modal/listadoContratoModal.xhtml"/>
+        <ui:include src="../NuevoProyecto/modal/modalRelacionContrato.xhtml"/>
 
     </ui:define>
 </ui:composition>

@@ -1644,9 +1644,7 @@ public class HomeGestion implements Serializable {
         return bol;
     }
 
-    public String primeroListProyectos() {
-
-        System.out.println("Debug - primeroListProyectos");
+    public String primeroListProyectos() {       
         obrasEncontradas = 0;
 
         //listaobrasusu = new ArrayList<Obra>();
@@ -1864,8 +1862,6 @@ public class HomeGestion implements Serializable {
     }
 
     public String llenarTablaNovedades() {
-
-        System.out.println("Debug - llenarTablaNovedades");
         llenarComentarios();
         opcionov = 1;
         listarecientes = new ArrayList<ActividadReciente>();

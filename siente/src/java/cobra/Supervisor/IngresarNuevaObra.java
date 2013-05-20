@@ -197,7 +197,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     private UIDataTable tablalocalidades = new UIDataTable();
     private UIDataTable tablatipoobra = new UIDataTable();
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
-    private UIDataTable tablalistacontratos = new UIDataTable();
+    private UIDataTable tablalistacontratos = new UIDataTable();   
     // </editor-fold>
     /**
      * Variables Int.
@@ -285,7 +285,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     private Imagenevolucionobra imagenevolucionobraEd = new Imagenevolucionobra();
     private Imagenevolucionobra imagenevolucionobraEl = new Imagenevolucionobra();
     private Imagenevolucionobra imagenevolucionobra = new Imagenevolucionobra();
-    private Relacioncontratoobra relacioncontrato = new Relacioncontratoobra();
+    private Relacioncontratoobra relacioncontrato = new Relacioncontratoobra();    
     private Fase faseelegida = new Fase();
     private BigDecimal sumValorContrato;
     private FiltroAvanzadoObra filtro = new FiltroAvanzadoObra();
@@ -566,7 +566,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     public void setSumValorContrato(BigDecimal sumValorContrato) {
         this.sumValorContrato = sumValorContrato;
     }
-    
+        
     public Fase getFaseelegida() {
         return faseelegida;
     }
@@ -1659,6 +1659,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return null
      */
     public String fechaCambio() {
+        
         Calendar hoy = Calendar.getInstance();
         if (obranueva.getDatefeciniobra() != null && obranueva.getDatefecfinobra() != null) {
             if (obranueva.getDatefecfinobra().compareTo(obranueva.getDatefeciniobra()) >= 0) {
@@ -1823,6 +1824,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         navegacion = 0;
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
+        chequiarFase(0);
         return "nuevoProyecto";
         
     }
@@ -1833,24 +1835,13 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    private UIDataGrid fasegrid= new UIDataGrid();
-
-    public UIDataGrid getFasegrid() {
-        return fasegrid;
-    }
-
-    public void setFasegrid(UIDataGrid fasegrid) {
-        this.fasegrid = fasegrid;
-    }
+   
     
     
-    public void llenarClaseObra() {
+    public void llenarClaseObra(int codfase) {
         
-       
         
-        System.out.println("tablatipoah = " + tiahselect);
-        
-        List<Claseobra> lista = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(tiahselect);
+        List<Claseobra> lista = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(codfase);
         ClaseObra = new SelectItem[lista.size()];
         int i = 0;
         for (Claseobra clase : lista) {
@@ -1860,18 +1851,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         faseelegida.setIntidfase(tiahselect);
         tiproyectoselec = 0;
         
-        System.out.println("tablatipoah = " + tiahselect);
-        
-        
     }
     
-    public void obtenerFilaClase()
-    {
-         Fase clas=(Fase) fasegrid.getRowData();
-        
-        System.out.println("clas = " + clas.getStrnombre());
+    public void obtenerFaseSeleccionada(int fila)
+    {        
+        chequiarFase(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
+        setTiahselect(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
+        llenarClaseObra(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
     }        
-
     /**
      * Llenado de selectitem LugarObra.
      */
@@ -2611,12 +2598,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      */
     public void cargarObra(Obra obra) throws Exception {
         
-        obranueva = obra;
-        obranueva.setNumvaldeclarado(BigDecimal.ZERO);
-        obranueva.setNumvalavanfinanciaerodeclarado(BigDecimal.ZERO);
-        obranueva.setNumvalavanfisicodeclarado(BigDecimal.ZERO);
-        obranueva.setNumvalprogramejec(BigDecimal.ZERO);
-        if (obranueva.getSolicitud_obra() != null || obranueva.getSolicitudmaestro() != null) {
+        setObranueva(obra);
+        getObranueva().setNumvaldeclarado(BigDecimal.ZERO);
+        getObranueva().setNumvalavanfinanciaerodeclarado(BigDecimal.ZERO);
+        getObranueva().setNumvalavanfisicodeclarado(BigDecimal.ZERO);
+        getObranueva().setNumvalprogramejec(BigDecimal.ZERO);
+        if (getObranueva().getSolicitud_obra() != null || getObranueva().getSolicitudmaestro() != null) {
             objeto = true;
         }
         preguntaProyectoPadre = 0;
@@ -2630,38 +2617,39 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         listamarcadores = new ArrayList<Marcador>();
         verConfirmar = false;
         estadoguardado = 0;
-        obranueva.setEnalimentacion(false);
-        obranueva.setBoolincluyeaiu(false);
+        getObranueva().setEnalimentacion(false);
+        getObranueva().setBoolincluyeaiu(false);
         
-        tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
-        tiahselect = obranueva.getClaseobra().getFase().getIntidfase();
+        tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
+        tiahselect = getObranueva().getClaseobra().getFase().getIntidfase();
+        getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto()-1);
         seleccionarsubtipo();
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();
+        subtiposelec = getObranueva().getTipoobra().getInttipoobra();    
         sumValorContrato = BigDecimal.ZERO;
         navegacion = 1;
-        llenarClaseObra();
+        llenarClaseObra(getObranueva().getClaseobra().getFase().getIntidfase());
         EncontrarSolicitante();
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         this.realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-        switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
+        switch (getObranueva().getTipoorigen().getIntidtipoorigen()) {
             case 1:
             case 2:
-                getListaLocalidades().addAll(getSessionBeanCobra().getCobraService().encontrarLocalidadPorObra(obranueva));
+                getListaLocalidades().addAll(getSessionBeanCobra().getCobraService().encontrarLocalidadPorObra(getObranueva()));
                 listaRegiones = new ArrayList<Region>();
                 break;
             case 3:
-                getListaRegiones().addAll(getSessionBeanCobra().getCobraService().encontrarRegionesPorObra(obranueva));
+                getListaRegiones().addAll(getSessionBeanCobra().getCobraService().encontrarRegionesPorObra(getObranueva()));
                 listaLocalidades = new ArrayList<Localidad>();
                 break;
         }
-        List<Puntoobra> lispuntoobrapropues = getSessionBeanCobra().getCobraService().encontrarPuntosObraxObra(obranueva.getIntcodigoobra());
-        obranueva.setPuntoobras(new LinkedHashSet(lispuntoobrapropues));
-        if (obranueva != null && obranueva.getFloatlatitud() != null && obranueva.getFloatlongitud() != null && obranueva.getFloatlatitud().compareTo(BigDecimal.valueOf(0.000000)) != 0 && obranueva.getFloatlongitud().compareTo(BigDecimal.valueOf(0.000000)) != 0) {
-            if (obranueva.getTipoestadobra().getIntestadoobra() == 0) {//si es obra propuesta
+        List<Puntoobra> lispuntoobrapropues = getSessionBeanCobra().getCobraService().encontrarPuntosObraxObra(getObranueva().getIntcodigoobra());
+        getObranueva().setPuntoobras(new LinkedHashSet(lispuntoobrapropues));
+        if (getObranueva() != null && getObranueva().getFloatlatitud() != null && getObranueva().getFloatlongitud() != null && getObranueva().getFloatlatitud().compareTo(BigDecimal.valueOf(0.000000)) != 0 && getObranueva().getFloatlongitud().compareTo(BigDecimal.valueOf(0.000000)) != 0) {
+            if (getObranueva().getTipoestadobra().getIntestadoobra() == 0) {//si es obra propuesta
                 PlaceMark placeMarkNewcargar = new PlaceMark();
                 
                 try {
-                    placeMarkNewcargar = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(obranueva.getFloatlatitud().toString(), obranueva.getFloatlongitud().toString());
+                    placeMarkNewcargar = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(getObranueva().getFloatlatitud().toString(), getObranueva().getFloatlongitud().toString());
                     address = placeMarkNewcargar.getAddress();
                 } catch (Exception e) {
                     address = "Faltante";
@@ -2769,16 +2757,19 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
             }
         }
         llenarEntidadesContratantes();
-        if (obranueva.getContrato() != null) {
+        if (getObranueva().getContrato() != null) {
             setDesdeconvenio(true);
-            if (obranueva.getTercero().getIntcodigo() == 5212) {
+            if (getObranueva().getTercero().getIntcodigo() == 5212) {
                 getEntidadConvenio().setIntentidadconvenio(1);
             }
-            if (obranueva.getTercero().getIntcodigo() == 5229) {
+            if (getObranueva().getTercero().getIntcodigo() == 5229) {
                 getEntidadConvenio().setIntentidadconvenio(2);
             }
         }
-        fechaCambio();
+        fechaCambio();        
+        chequiarFase(getTiahselect());
+        chequiarTipoProyecto(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto());
+        chequiarTipoObra(getObranueva().getTipoobra().getInttipoobra());
     }
 
     /**
@@ -2789,7 +2780,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return null
      */
     public String validarCronograma() {
-        
+       
         disableAiu = 1;
         valido = 2;
         actividadesobra = new LinkedHashSet<Actividadobra>();
@@ -3456,7 +3447,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return null
      */
     public String guardadoIntermedio() {
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         if (comboEntidadesObraguardar()) {
@@ -4034,10 +4025,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      */
     public String llenarFase() {
         getSessionBeanCobra().getCobraService().setFase(getSessionBeanCobra().getCobraService().encontrarFase());
-        llenarClaseObra();
+        
         return null;
     }
-
+     
+          
     /**
      * Llenado de Listatipoproyecto.
      *
@@ -4045,20 +4037,32 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      */
     public String llenarTipoProyecto() {
         getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
-        tiproyectoselec = 0;
+        setTiproyectoselec(0);
+        
         return null;
     }
-
+    
+    /**
+     * Obtener el tipo de proyecto seleccionado y cargar los subtipos
+     * @param fila
+     */
+    public void obtenerFilaTipoProyecto( int fila)
+    {
+        setTiproyectoselec(getSessionBeanCobra().getCobraService().getListatipoproyecto().get(fila).getIntidtipoproyecto());
+        chequiarTipoProyecto(getSessionBeanCobra().getCobraService().getListatipoproyecto().get(fila).getIntidtipoproyecto());
+        seleccionarsubtipo();
+    }
     /**
      * LLenar la listatipodeobra dependiendo el tipoproyecto
-     *
-     * @return
+     *    
      */
-    public String seleccionarsubtipo() {
-        getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(tiproyectoselec));
-        return null;
+    public void seleccionarsubtipo() {
+        
+        getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(getTiproyectoselec()));
+        
     }
 
+    
     /**
      * Encontrar la imagen evolucion por nombre
      *
@@ -4116,12 +4120,13 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String cambioSubtipo() {
+    public void cambioSubtipo(int subtipo) {
         obranueva.setTipoobra(new Tipoobra());
-        obranueva.getTipoobra().setInttipoobra(subtiposelec);
+        obranueva.getTipoobra().setInttipoobra(subtipo);
         obranueva.getTipoobra().setTipoproyecto(new Tipoproyecto());
         obranueva.getTipoobra().getTipoproyecto().setIntidtipoproyecto(tiproyectoselec);
-        return null;
+        chequiarTipoObra(subtipo);
+        
     }
 
     /**
@@ -4495,7 +4500,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
             validarCostos();
         }
         navegacion = 3;
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         return "datosgenerarCrono";
@@ -4603,7 +4608,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     }
     
     public boolean validarTipificacion() {
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
         tiahselect = faseelegida.getIntidfase();
         if (tiahselect == 0 || subtiposelec == 0 || tiproyectoselec == 0) {
             return false;
@@ -5021,7 +5026,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     public String navegarNuevaObra() {
         String regla = null;
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
-        tiahselect = faseelegida.getIntidfase();
+        
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         
         switch (navegacion) {
@@ -5136,4 +5141,65 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
         obranueva.setObra(getAdministrarObraNew().getObra());
         return ret;
     }
+    /*
+     * Método para chuliar la fase seleccionada
+     * 
+     */    
+    
+    public void chequiarFase(int idfase)
+    {
+        for(Fase fas:getSessionBeanCobra().getCobraService().getFase())
+        {
+            if(fas.getIntidfase()==idfase)
+            {
+                fas.setCheck(true);
+            } 
+            else
+            {
+                fas.setCheck(false);
+            }    
+        }    
+    }    
+    
+    /*
+     * Método para chuliar el tipo de proyecto seleccionado
+     * 
+     */    
+    
+    public void chequiarTipoProyecto(int idtipo)
+    {
+        for(Tipoproyecto tip:getSessionBeanCobra().getCobraService().getListatipoproyecto())
+        {
+            if(tip.getIntidtipoproyecto()==idtipo)
+            {
+                tip.setCheck(true);
+            } 
+            else
+            {
+                tip.setCheck(false);
+            }    
+        }    
+    } 
+    /*
+     * Método para chuliar el tipo de obra seleccionado
+     * 
+     */    
+    
+    public void chequiarTipoObra(int idtipo)
+    {
+        
+        for(Tipoobra tip:getSessionBeanCobra().getCobraService().getListatipoobra())
+        {
+            
+            if(tip.getInttipoobra()==idtipo)
+            {
+                tip.setCheck(true);
+                
+            } 
+            else
+            {
+                tip.setCheck(false);
+            }    
+        }    
+    } 
 }
