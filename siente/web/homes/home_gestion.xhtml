@@ -130,7 +130,7 @@
 
             <h:panelGrid id="vistaMapa" style="width:95%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
 
-                <m:map  latitude="#{var.latitudmapa}" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map"
+                <m:map  latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map"
                         renderOnWindowLoad="false"  jsVariable="mapa" zoom="#{var.zoommapa}" type="G_NORMAL_MAP" style="width:100%;" height="#{SessionBeanCobra.cobraService.altomapa}">
 
                     <a4j:repeat var="marker" value="#{HomeGestion.markers}">
