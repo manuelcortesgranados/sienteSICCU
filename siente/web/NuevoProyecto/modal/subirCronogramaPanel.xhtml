@@ -7,6 +7,13 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <script>
+        function contieneError() {
+             return document.getElementById("hayError").value >0;
+       };
+</script>
+    </h:head>
     
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -65,14 +72,15 @@
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
-                                <a4j:commandButton id="bt_borrarCronogramaSubido" action="#{Supervisor$IngresarNuevaObra.borrarCronograma}" render="infoCrono, uploadCrono, layoutDoc, pasoGenCron"
+                                <h:inputHidden id="hayError" value="#{Supervisor$IngresarNuevaObra.datosValidos}"/>
+                                <a4j:commandButton id="bt_borrarCronogramaSubido" action="#{Supervisor$IngresarNuevaObra.borrarCronograma}" render="infoCrono, uploadCrono, layoutDoc, pasoGenCron,hayError"
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                   >
+                                                    >
                                 </a4j:commandButton>
                                 <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
-                                                   value="#{var.validar}"  
+                                                   value="#{var.validar}"
                                                    render="infoCrono" execute="infoCrono"
-                                                    >
+                                                   >
                                       </a4j:commandButton>
 
                             </center>

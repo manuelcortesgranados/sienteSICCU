@@ -44,9 +44,9 @@
                             doneLabel="#{var.hecho}"
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}">
-                            <a4j:ajax event="uploadcomplete" render="infoCrono"/>
+                            <a4j:ajax event="uploadcomplete" render="infoCrono1"/>
                         </rich:fileUpload>
-                        <h:panelGroup id="infoCrono">
+                        <h:panelGroup id="infoCrono1">
                             <center>
                                 <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
                                     <f:facet name="header">
@@ -69,7 +69,7 @@
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
                                 <br/>
-                                <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorCronograma.borrarDatosSubidos}" render="infoCrono, uploadCrono, panelInfoCronoSubido"
+                                <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorCronograma.borrarDatosSubidos}" render="infoCrono1, uploadCrono, panelInfoCronoSubido"
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton oncomplete="btValidarCronogramaOnComplete();" value="#{var.validar}" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}"

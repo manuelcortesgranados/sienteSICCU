@@ -71,7 +71,7 @@
                                                            style="height: 20px; background-color: #FFFFFF; -rave-layout: grid">
                                                 <h:outputText value=" #{file.nombre}" />
                                                 <interkont:spacer height="8" width="15"/>
-                                                <h:graphicImage url="/resources/botones/chulo.png" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:graphicImage url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
                                                 <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
                                                 <h:graphicImage url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
                                                 <h:outputText value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
