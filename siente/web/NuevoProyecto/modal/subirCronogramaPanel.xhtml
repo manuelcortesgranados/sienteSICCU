@@ -17,9 +17,9 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder_mp_subircronograma" 
+                    <a4j:commandLink id="esconder_mp_subircronograma" 
                                        title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                       styleClass="btn_cerrar" onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                       styleClass="cerrar" onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -69,11 +69,11 @@
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
                                                    >
                                 </a4j:commandButton>
-                                <h:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
-                                                    value="#{var.validar}"  
-                                                   >
-                                    <a4j:ajax event="click" render="infoCrono" execute="infoCrono"  />
-                                </h:commandButton>
+                                <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
+                                                   value="#{var.validar}"  
+                                                   render="infoCrono" execute="infoCrono"
+                                                    >
+                                      </a4j:commandButton>
 
                             </center>
                                 <a4j:outputPanel id="panelErrorGC">

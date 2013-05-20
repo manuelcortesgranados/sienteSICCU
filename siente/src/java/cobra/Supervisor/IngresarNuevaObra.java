@@ -2780,7 +2780,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * @return null
      */
     public String validarCronograma() {
-        
+       
         disableAiu = 1;
         valido = 2;
         actividadesobra = new LinkedHashSet<Actividadobra>();
