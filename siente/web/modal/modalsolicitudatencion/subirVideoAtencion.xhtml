@@ -37,16 +37,16 @@
                                         <h:outputText value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size==0}" value="#{var.nosuarc}" />
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.numArchivos==0}" value="#{var.nosuarc}" />
 
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.files}" var="file">
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.onlyName}" />
+                                                    <h:outputText value="#{file.nombre}" />
                                                     <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.length/1024} Kb" />
+                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -56,11 +56,11 @@
                                 <interkont:spacer height="3" />
 
                                 <a4j:commandButton id="borrarDatos_VideoAtencion" action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarVideoAtencion}"
-                                                   render="infovideoAtencion, uploadvideoAtencion, layoutVideoAtencion" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size>0}" value="#{var.boarcsub}"
+                                                   render="infovideoAtencion, uploadvideoAtencion, layoutVideoAtencion" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;" />
 
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarVideoTemporal}" id="BTaceptarVideoAtencion"
-                                                   value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.size>0}"
+                                                   value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoAtencion.numArchivos>0}"
                                                    onclick="#{rich:component('modalVideoAtencion')}.hide();
                                            return false;"
                                                    render="layoutVideoAtencion" style="font-size: 12px;" />
