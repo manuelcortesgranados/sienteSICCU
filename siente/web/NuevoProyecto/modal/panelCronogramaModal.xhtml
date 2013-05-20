@@ -17,8 +17,8 @@
         <f:facet name="controls">
             
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder_mp_cronograma" oncomplete="javascript:Richfaces.hideModalPanel('mp_cronograma');" title="#{var.cerrar}" immediate="true"
-                                       styleClass="btn_cerrar"  onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
+                    <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
+                                       styleClass="cerrar"  onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             
         </f:facet>
