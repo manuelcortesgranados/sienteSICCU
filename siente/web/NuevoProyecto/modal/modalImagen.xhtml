@@ -13,7 +13,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-imagen" onclick="javascript:Richfaces.hideModalPanel('modalImagen')" immediate="true"
+                    <a4j:commandLink id="esconder-mp-imagen" onclick="#{rich:component('modalImagen')}.hide();" immediate="true"
                                        styleClass="btn_cerrar"  />
                 </h:panelGroup>
             </h:form>

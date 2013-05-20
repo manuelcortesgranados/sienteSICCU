@@ -28,7 +28,7 @@
                                         <h:panelGrid id="layoutImagen" styleClass="fondo_foto" columnClasses="aiu">
 
                                             <a4j:commandLink id="btAdjuntarImagen" styleClass="anadirimagen anchorlink" >
-                                                <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenProyecto')"/>
+                                                <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
                                             <h:outputText id="ImagenAtencionppal" value="#{var.nombre}"/>
@@ -51,7 +51,7 @@
                                     <center>
                                         <h:panelGrid id="panel_subirImagen"  columns="1" >
                                             <a4j:commandLink id="adjuntarImagen" styleClass="anadirimagen anchorlink" >
-                                                <a4j:ajax event="click" onbeforesubmit="javascript:Richfaces.showModalPanel('panelImagenProyecto')"/>
+                                                <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
 
@@ -130,11 +130,11 @@
                     </rich:panel>
 
                 </h:form>
-                <ui:include src="/modal/paneImagenModal.jspx"/>
-                <ui:include src="/modal/panelUploadImagenevolucionNuevaObra.jspx"/>
-                <ui:include src="/modal/eliminarImageneolucionModalNuevaObra.jspx"/>
-                <ui:include src="/modal/editarImagenEvolucionModalNuevaObra.jspx"/>
-                <ui:include src="../NuevoProyecto/modal/panelImagenProyecto.jspx"/>
-                <ui:include src="../NuevoProyecto/modal/modalImagen.jspx"/>
+                <ui:include src="/modal/paneImagenModal.xhtml"/>
+                <ui:include src="/modal/panelUploadImagenevolucionNuevaObra.xhtml"/>
+                <ui:include src="/modal/eliminarImageneolucionModalNuevaObra.xhtml"/>
+                <ui:include src="/modal/editarImagenEvolucionModalNuevaObra.xhtml"/>
+                <ui:include src="../NuevoProyecto/modal/panelImagenProyecto.xhtml"/>
+                <ui:include src="../NuevoProyecto/modal/modalImagen.xhtml"/>
             </ui:define>   
 </ui:composition>

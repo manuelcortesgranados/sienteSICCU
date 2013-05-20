@@ -352,7 +352,7 @@
                             <h:panelGroup >
                                 <a4j:commandButton id="btVolverDatosBas"  value="#{var.volver}" immediate="true"
                                                    action="datosbasicosnuevoproyecto" />
-                                <a4j:commandButton value="#{var.continuar}"  action="datosgenerarCrono" />
+                                <a4j:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" />
                                 <h:commandButton id="btCancelarUbica"  value="#{var.cancelar}" immediate="true"
                                                  action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                                 </h:commandButton>

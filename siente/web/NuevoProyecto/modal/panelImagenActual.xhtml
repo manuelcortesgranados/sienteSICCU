@@ -12,7 +12,7 @@
         <rich:panel header="#{var.seleccionarimagen}" styleClass="rich-panel-body" style="padding:0px;">
             <h:form >
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
-                    <a4j:commandButton id="esconder_panelImagenActual" onclick="javascript:Richfaces.hideModalPanel('panelImagenActual')" immediate="true"
+                    <a4j:commandLink id="esconder_panelImagenActual" onclick="#{rich:component('panelImagenActual')}.hide();" immediate="true"
                                        styleClass="btn_cerrar"  />
                 </h:panelGroup>
                 <h:panelGroup id="gpImagen">
@@ -61,7 +61,7 @@
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos>0}" value="#{var.boarcsub}"
                                                      style="font-size:12px;"/>
                                 <h:commandButton value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos>0}"
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelImagenActual')" 
+                                                   onclick="#{rich:component('panelImagenActual')}.hide();" 
                                                      style="font-size:12px;"/>
                             </center>
                         </h:panelGroup>

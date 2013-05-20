@@ -152,21 +152,18 @@
                                                     </f:facet>
                                                     <h:panelGroup id="tablatipoah">
 
-                                                        <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" rowKeyVar="faseele"
-                                                                        columns="#{var.column}"   >
-                                                            <center>
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
-                                                                    <h:graphicImage url="/resources/imgs/#{fase.intidfase}fase.png"  />
-                                                                </a4j:commandLink>
+                                                        <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" 
+                                                                        columns="#{var.column}" style=" width: 50%"  binding="#{Supervisor$IngresarNuevaObra.fasegrid}">
 
-                                                                <a4j:commandLink styleClass="text" value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
-                                                                
-                                                                </a4j:commandLink>
-                                                                <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
+                                                            <h:panelGrid columns="1">
+                                                                <h:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFilaClase}"                                                                   >
+                                                                    <h:graphicImage url="/resources/imgs/#{fase.intidfase}fase.png"  />
+                                                                </h:commandLink>
+
+                                                                <a4j:commandLink styleClass="text" value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaClase}" execute="@form" />
                                                                                
                                                             </h:panelGrid>
-                                                            </center>
+                                                           
 
                                                         </rich:dataGrid>
                                                     </h:panelGroup>
@@ -174,7 +171,8 @@
                                                         <h:outputLabel  value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                         <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                             <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
-                                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
+                                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />
+                                                                <a4j:ajax event="change" execute="@this, tiposoli" render="tiposoli, panelTipo" />
                                                             </h:selectOneMenu>
                                                         </h:panelGroup>
                                                     </h:panelGrid>
@@ -185,18 +183,21 @@
                                                             <h:outputText value="2. #{var.escojatipo}"/>
                                                         </f:facet>
                                                         <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
-                                                                       columns="4" style="width:100%;" rowKeyVar="fila">
-                                                            <center>                                                        
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
-                                                                    <h:graphicImage url="#{tipoproyecto.strurlimagen}" height="60px"/>
-                                                                </a4j:commandLink>
-
-                                                                <a4j:commandLink styleClass="text" value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
-                                                                </a4j:commandLink>
-                                                                <h:selectBooleanCheckbox value="#{tipoproyecto.check}" disabled="true"  />
-                                                                               
-                                                            </h:panelGrid>
+                                                                       columns="3" style="width:100%;" >
+                                                            <center>
+                                                                <h:panelGrid columns="1" styleClass="panelcenter" >
+                                                                    <h:graphicImage url="#{tipoproyecto.strurlimagen}" />
+                                                                    <h:outputText value="#{tipoproyecto.strnombre}" />
+                                                                    <h:panelGroup>
+                                                                        <center>
+                                                                            <h:selectOneRadio id="bt12" valueChangeListener="#{Supervisor$IngresarNuevaObra.tiproyectoselec}">
+                                                                                <f:selectItem itemValue="#{tipoproyecto.intidtipoproyecto}" />
+                                                                                <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.seleccionarsubtipo}" 
+                                                                                          render="panelSubTipo, tablasubtipoah" />
+                                                                            </h:selectOneRadio>
+                                                                        </center>
+                                                                    </h:panelGroup>
+                                                                </h:panelGrid>
                                                             </center>
                                                         </rich:dataGrid>
 
@@ -210,25 +211,22 @@
 
 
                                                             <rich:dataGrid id="tablatipoobra" value="#{SessionBeanCobra.cobraService.listatipoobra}" var="tipoobra" 
-                                                                           columns="4" style="width:100%;" rowKeyVar="fila" >
-                                                                
-                                                                    <center>                                                        
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink  execute="@this"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
-                                                                                              render="tablatipoobra" >
-                                                                    <h:graphicImage url="#{tipoobra.strurlimagen}"/>
-                                                                </a4j:commandLink>
-
-                                                                <a4j:commandLink styleClass="text" value="#{tipoobra.strnombremedio}"  execute="@this"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
+                                                                           columns="2" style="width:100%;" >
+                                                                <center>
+                                                                    <h:panelGrid columns="1" styleClass="panelcenter" >
+                                                                        <h:graphicImage url="#{tipoobra.strurlimagen}" />
+                                                                        <h:outputText value="#{tipoobra.strnombremedio}" />
+                                                                        <h:panelGroup>
+                                                                            <center>
+                                                                                <h:selectOneRadio valueChangeListener="#{Supervisor$IngresarNuevaObra.subtiposelec}" >
+                                                                                    <f:selectItem itemValue="#{tipoobra.inttipoobra}" />
+                                                                                    <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.cambioSubtipo}" 
                                                                                               render="tablatipoobra"  />
-                                                                
-                                                                <h:selectBooleanCheckbox value="#{tipoobra.check}" disabled="true"  />
-                                                                               
-                                                            </h:panelGrid>
-                                                            </center>
-                                                               
+                                                                                </h:selectOneRadio>
+                                                                            </center>
+                                                                        </h:panelGroup>
+                                                                    </h:panelGrid>
+                                                                </center>
                                                             </rich:dataGrid>
                                                         </rich:panel>
                                                     </h:panelGroup>
