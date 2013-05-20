@@ -43,7 +43,7 @@ import javax.faces.model.SelectItem;
  *
  * @author David Andrés Betancourth Botero
  */
-public class Reporte  implements ILifeCycleAware {
+public class Reporte implements ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String tiposolitxregion;
@@ -153,6 +153,26 @@ public class Reporte  implements ILifeCycleAware {
     private int reporteSelectConveniosEntidadesNacionales;
     private SelectItem[] _contratoConvenios;
     private int _idConvenio;
+    private int _reporteSelectAdministrativos;
+    private int _reporteSelectFaseAdministrativos;
+
+    public int getReporteSelectFaseAdministrativos() {
+        return _reporteSelectFaseAdministrativos;
+    }
+
+    public void setReporteSelectFaseAdministrativos(int _reporteSelectFaseAdministrativos) {
+        this._reporteSelectFaseAdministrativos = _reporteSelectFaseAdministrativos;
+    }
+
+    public int getReporteSelectAdministrativos() {
+        System.out.println("Debug - getReporteSelectAdministrativos");
+        return _reporteSelectAdministrativos;
+    }
+
+    public void setReporteSelectAdministrativos(int _reporteSelectAdministrativos) {
+        System.out.println("Debug - setReporteSelectAdministrativos _reporteSelectAdministrativos = " + _reporteSelectAdministrativos);
+        this._reporteSelectAdministrativos = _reporteSelectAdministrativos;
+    }
 
     public int getIdConvenio() {
         return _idConvenio;
@@ -845,13 +865,6 @@ public class Reporte  implements ILifeCycleAware {
         }
     }
 
-//    public void llenarxTipoOrienOb() {
-//        switch (getTipoorigenintob()) {
-//            case 3:
-//                llenarRegiones();
-//                break;
-//        }
-//    }
     public String reporteatencion() {
         String nombrereport = "";
         switch (getReporteselectaten()) {
@@ -1369,6 +1382,8 @@ public class Reporte  implements ILifeCycleAware {
     }
 
     public String getHeaderReportes() {
+
+        System.out.println("Debug - getHeaderReportes");
         String tempo = "";
         switch (consolida) {
             case 0:
@@ -1389,6 +1404,9 @@ public class Reporte  implements ILifeCycleAware {
             case 5:
                 tempo = bundle.getString("header5");
                 break;
+            case 6:
+                tempo = bundle.getString("header6");
+                break;
         }
         return tempo;
     }
@@ -1407,7 +1425,9 @@ public class Reporte  implements ILifeCycleAware {
         reporteselectcontrol = 0;
         reporteselectregionali = 1;
         reporteselectlinea = 1;
-        reporteSelectConveniosEntidadesNacionales = 1;
+        setReporteSelectConveniosEntidadesNacionales(1);
+        setReporteSelectAdministrativos(1);
+        setReporteSelectFaseAdministrativos(0);
     }
 
     public String reporteSelectAh() {
@@ -1471,16 +1491,6 @@ public class Reporte  implements ILifeCycleAware {
         return null;
     }
 
-//    public String llenarEntidades() {
-//        getSessionBeanCobra().getCobraService().setEntidades(getSessionBeanCobra().getCobraService().encontrarEntidades());
-//        entidades = new SelectItem[getSessionBeanCobra().getCobraService().getEntidades().size()];
-//        int i = 0;
-//        for (Tercero entidad : getSessionBeanCobra().getCobraService().getEntidades()) {
-//            SelectItem entid = new SelectItem(entidad.getIntcodigo(), entidad.getStrnombre().toUpperCase());
-//            entidades[i++] = entid;
-//        }
-//        return null;
-//    }
     public String reporteSelectDi() {
 
         inicializarVariables();
@@ -1493,6 +1503,11 @@ public class Reporte  implements ILifeCycleAware {
         inicializarVariables();
         consolida = 1;
         return null;
+    }
+
+    public void reporteSelectAdministrativo() {
+        inicializarVariables();
+        consolida = 6;
     }
 
     public void reporteSelectLinea() {
@@ -2097,8 +2112,7 @@ public class Reporte  implements ILifeCycleAware {
     public void reporteWordDinamico() {
         /**
          * Proceso de los reportes dinamicos en formato Word, identificando a
-         * cual pertenece y por consiguiente que reporte debe cargar
-         *
+         * cual pertenece y por consiguiente que reporte debe cargar.
          */
         try {
             setReporteFormato(DOC_FORMATO);
@@ -2550,5 +2564,182 @@ public class Reporte  implements ILifeCycleAware {
 
         }
 
+    }
+
+    public void reporteSelectLineaAdministrativa() {
+        System.out.println("Debug - reporteSelectLineaAdministrativa");
+        switch (getReporteSelectAdministrativos()) {
+            case 1:
+                // Reporte proyectos de infraestructura.
+                break;
+            case 2:
+                llenarEntidades(2);
+                break;
+            case 3:
+                // Reporte proyectos asociados a convenios
+                break;
+            case 4:
+                //Reporte proyectos asociados a convenios con localidad.                
+                break;
+
+        }
+
+    }
+
+    public void reportePdfAdministrativo() {
+        /**
+         * Proceso de los reportes Administrativos en formato PDF, identificando
+         * a cual pertenece y por consiguiente que reporte debe cargar
+         *
+         */
+        try {
+            setReporteFormato(PDF_FORMATO);
+
+            switch (getReporteSelectAdministrativos()) {
+                case 1:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamento();
+                            //cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
+
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica)
+                            configuracionRegionalXZona();
+                            break;
+                    }
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                    break;
+                case 4:
+                    break;
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //****************************************************************************
+
+//    public void reporteWordDinamico() {
+//        /**
+//         * Proceso de los reportes dinamicos en formato Word, identificando a
+//         * cual pertenece y por consiguiente que reporte debe cargar.
+//         */
+//        try {
+//            setReporteFormato(DOC_FORMATO);
+//
+//            switch (getReporteselectregionali()) {
+//                case 1:
+//                    //Regionalizacion 1. Departamentos
+//                    switch (getReporteselectlinea()) {
+//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
+//                        case 1:
+//                            //1. Ayuda humanitaria
+//                            configuracionRegionalXDepartamento();
+//                            reporteDinamicoAyudaHumanitaria();
+//                            break;
+//                        case 2:
+//                            //2. Obras entidades territoriales
+//                            configuracionRegionalXDepartamento();
+//                            reporteDinamicoObrasEntidadesTerritoriales();
+//                            break;
+//
+//                        case 3:
+//                            //3. Convenios entidades nacionales
+//                            configuracionRegionalXDepartamento();
+//                            reporteDinamicoConveniosEntidadesNacionales();
+//                            break;
+//                    }
+//                    break;
+//                case 2:
+//                    //Regionalizacion 2. Region (Zona especifica)
+//                    switch (getReporteselectlinea()) {
+//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
+//                        case 1:
+//                            //1. Ayuda humanitaria
+//                            configuracionRegionalXZona();
+//                            reporteDinamicoAyudaHumanitaria();
+//                            break;
+//                        case 2:
+//                            //2. Obras entidades territoriales
+//                            configuracionRegionalXZona();
+//                            reporteDinamicoObrasEntidadesTerritoriales();
+//                            break;
+//                        case 3:
+//                            //3. Convenios entidades nacionales
+//                            configuracionRegionalXZona();
+//                            reporteDinamicoConveniosEntidadesNacionales();
+//                            break;
+//                    }
+//                    break;
+//
+//                case 3:
+//                    switch (getReporteselectlinea()) {
+//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
+//                        case 1:
+//                            //1. Ayuda humanitaria
+//                            configuracionRegionalXRegion();
+//                            reporteDinamicoAyudaHumanitaria();
+//                            break;
+//                        case 2:
+//                            //2. Obras entidades territoriales
+//                            configuracionRegionalXRegion();
+//                            reporteDinamicoObrasEntidadesTerritoriales();
+//                            break;
+//                        case 3:
+//                            //3. Convenios entidades nacionales
+//                            configuracionRegionalXRegion();
+//                            reporteDinamicoConveniosEntidadesNacionales();
+//                            break;
+//                    }
+//            }
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//
+//    }
+    //****************************************************************************
+    public void reporteExcelAdministrativo() {
+        /**
+         * Proceso de los reportes Administrativos en formato Excel,
+         * identificando a cual pertenece y por consiguiente que reporte debe
+         * cargar
+         *
+         */
+//        try {
+        setReporteFormato(XLS_FORMATO);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+    }
+
+    public void reporteWordAdministrativo() {
+        /**
+         * Proceso de los reportes Administrativos en formato Word,
+         * identificando a cual pertenece y por consiguiente que reporte debe
+         * cargar
+         *
+         */
+//        try {
+        setReporteFormato(DOC_FORMATO);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
+    public void configuracionAdministraticaXFase() {
+        /*
+         * Metodo encargado de dar el formato a la cadena del reporte de acuerdo a la fase seleccionada
+         *
+         */
     }
 }

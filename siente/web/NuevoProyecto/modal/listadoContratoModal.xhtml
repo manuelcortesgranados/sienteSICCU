@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-contratos" immediate="true"
+                    <a4j:commandLink id="esconder-mp-listado-contratos" immediate="true"
                                        styleClass="btn_cerrar"  onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -44,11 +44,11 @@
                             <rich:dataTable id="tablacontratos" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tercero.intcodigo!=0}"
                                             rows="5"
                                             var="currentRow"
-                                            binding="#{Supervisor$IngresarNuevaObra.tablacontratos}"
+                                            rowKeyVar="filaSeleccionada"
                                             onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                             sortMode="single"
                                             value="#{Supervisor$IngresarNuevaObra.listacontratos}"
-                                            style="text-align:left; width: 800px;">
+                                            style="text-align:left; width: 800px; border:1px">
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="7">
@@ -101,8 +101,8 @@
                                         <h:outputText  value="#{currentRow.datefechafin}"/>
                                     </rich:column>
                                     <rich:column style="width: 120px" >
-                                        <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato}"                                                           
-                                                           oncomplete="#{rich:component('panelRelacionContrato')}.show();"  render="layoutpanelRelacionContrato">
+                                        <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato(filaSeleccionada)}"                                                           
+                                                           oncomplete="#{rich:component('panelRelacionContrato')}.show();" render="layoutpanelRelacionContrato">
                                     </a4j:commandButton>
                                     </rich:column>
                                 </rich:columnGroup>
@@ -111,17 +111,13 @@
                                         <rich:column colspan="8" breakRowBefore="true" style="text-align: center;">
                                             <center>
                                                 <h:panelGrid columns="4">
-                                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.primeroContratos}">
-                                                        <a4j:ajax event="oncomplete" render="tablacontratos,gpTotalCont"/>
+                                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.primeroContratos}" render="tablacontratos,gpTotalCont">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.anterioresContratos}">
-                                                        <a4j:ajax event="oncomplete" render="tablacontratos,gpTotalCont"/>
+                                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.anterioresContratos}" render="tablacontratos,gpTotalCont">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.siguienteContratos}">
-                                                        <a4j:ajax event="oncomplete" render="tablacontratos,gpTotalCont"/>
+                                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.siguienteContratos}" render="tablacontratos,gpTotalCont">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.ultimoContratos}">
-                                                        <a4j:ajax event="oncomplete" render="tablacontratos,gpTotalCont"/>
+                                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.ultimoContratos}" render="tablacontratos,gpTotalCont">
                                                     </a4j:commandButton>
                                                 </h:panelGrid>
                                             </center>

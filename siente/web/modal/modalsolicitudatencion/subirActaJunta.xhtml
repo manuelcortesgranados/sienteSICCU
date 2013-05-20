@@ -36,16 +36,16 @@
                                         <h:outputText value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.size==0}" value="#{var.nosuarc}" />
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos==0}" value="#{var.nosuarc}" />
 
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.files}" var="file">
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.onlyName}" />
+                                                    <h:outputText value="#{file.nombre}" />
                                                     <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.length/1024} Kb" />
+                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -55,9 +55,9 @@
                                 <interkont:spacer height="3" />
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarActaAtencion}" render="info_acta, uploadActa, gpActa, panel_subirActa"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;" />
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.size>0}"
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActa')}.hide();
                                                return false;"
                                                    render="panel_subirActa" style="font-size:12px;" />

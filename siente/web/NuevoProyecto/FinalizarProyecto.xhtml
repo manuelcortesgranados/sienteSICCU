@@ -90,7 +90,7 @@
                                                                rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0 and Supervisor$IngresarNuevaObra.validacion.total}"
                                                                action="#{Supervisor$IngresarNuevaObra.finalizar_action}"     >
                                                 <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                                <a4j:ajax event="complete" render="layoutGuardar" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.show();" />
+                                                <a4j:ajax event="complete" render="layoutGuardar" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.show();"/>
                                             </a4j:commandButton>
 
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}">

@@ -66,11 +66,9 @@
 
                         <a4j:commandButton id="BTaceptarRelacion"  value="Asociar"   rendered="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible>0 and Supervisor$IngresarNuevaObra.valortotalobra>0 and Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo>0}"                                        
                                            render="pgdatacontratos" action="#{Supervisor$IngresarNuevaObra.asociarContrato}"
-                                           oncomplete="#{rich:component('mp-listado-contratos')}.hide();
-                                           #{rich:component('panelRelacionContrato')}.hide();" />
+                                           oncomplete="#{rich:component('mp-listado-contratos')}.hide(); #{rich:component('panelRelacionContrato')}.hide();" />
                         <a4j:commandButton id="BTcancelarRelacion"  value="#{var.cancelar}"
-                                           oncomplete="#{rich:component('mp-listado-contratos')}.hide();
-                                           #{rich:component('panelRelacionContrato')}.hide();" />
+                                           oncomplete="#{rich:component('mp-listado-contratos')}.hide(); #{rich:component('panelRelacionContrato')}.hide();" />
                     </h:panelGrid>
                 </h:panelGroup>
 

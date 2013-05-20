@@ -59,8 +59,8 @@
                 </a4j:commandButton>
 
                 <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.insertarPoliza}" style="left:120%"
-                                   render="polizasContrato, mp_nueva_poliza" rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
-                                   oncomplete="#{rich:component('mp_nueva_poliza')}.hide();">
+                                   rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
+                                   oncomplete="#{rich:component('mp_nueva_poliza')}.hide()" render="polizasContrato">
                 </a4j:commandButton>
             </h:panelGrid>
         </h:form>
