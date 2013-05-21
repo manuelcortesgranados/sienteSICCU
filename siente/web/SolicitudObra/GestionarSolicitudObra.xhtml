@@ -277,8 +277,8 @@
                             <a4j:commandLink id="bt_agregarImagen" styleClass="anadir anchorLink" title="#{var.agregar}"
                                              action="#{SolicitudObra$GestionarSolicitudObra.subirImagenaLista}"
                                              render="tablaImagenes,gpDatosBasicos,panelUploadImagenSolicitud"/>
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.files}" var="file" style="width: 30px">
-                                <h:outputText id="otxt_nombreImagen" value=" #{file.onlyName}"/>
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.archivos}" var="file" style="width: 30px">
+                                <h:outputText id="otxt_nombreImagen" value=" #{file.nombre}"/>
                             </rich:dataGrid>
                         </h:panelGrid>
 
@@ -299,7 +299,7 @@
                                         <h:outputText value="#{var.imagen}"/>
                                     </f:facet>
                                     <center>
-                                        <h:graphicImage value="#{currentRow.strurlimagen}"  />
+                                        <h:graphicImage value="#{currentRow.strurldocumento}"  />
                                         <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                         <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                         <rich:jQuery selector="#Imagen img" event="mouseover" query="jQuery(this).stop().animate({width:'150px', height:'150px'})"/>
@@ -343,10 +343,9 @@
                                              render="tablaDocumentos,gpDatosBasicos1,panelUploadDocumento">
 
                             </a4j:commandLink>
-<!--                            <a4j:ajax event="complete" render="resuDocu, docucomple, panelEstado, gpsubestadosoli" listener="#{SolicitudObra$GestionarSolicitudObra.validardocumentacion}">
-</a4j:ajax>-->
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.files}" var="file" style="width: 30px">
-                                <h:outputText id="otxt_nombrearchivo" value="#{file.onlyName}"/>
+
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.archivos}" var="file" style="width: 30px">
+                                <h:outputText id="otxt_nombrearchivo" value="#{file.nombre}"/>
                             </rich:dataGrid>
 
                         </h:panelGrid>
