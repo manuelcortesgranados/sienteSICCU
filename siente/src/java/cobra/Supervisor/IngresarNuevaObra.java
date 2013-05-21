@@ -118,6 +118,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
     /**
      * Variables Boolean.
      */
+    private int datosValidos;
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
     private boolean decision;
     private boolean verContrato = false;
@@ -3176,6 +3177,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
                                             llenarTiposCosto();
                                             valortotalobra = obranueva.getNumvaltotobra();
                                             FacesUtils.addInfoMessage(bundle.getString("archivovalido"));
+                                            setDatosValidos(1);
                                             validarCostos();
                                         }
                                     }
@@ -3214,6 +3216,8 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
                 Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        setDatosValidos(1);
+        System.out.println(getDatosValidos());
         return null;
     }
 
@@ -5202,4 +5206,20 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
             }    
         }    
     } 
+
+   
+
+    /**
+     * @param datosValidos the datosValidos to set
+     */
+    public void setDatosValidos(int datosValidos) {
+        this.datosValidos = datosValidos;
+    }
+
+    /**
+     * @return the datosValidos
+     */
+    public int getDatosValidos() {
+        return datosValidos;
+    }
 }
