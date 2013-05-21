@@ -330,7 +330,7 @@
                         <h:panelGrid id="panel_subir"  columns="6" columnClasses=",,,,,buttonsmall">
 
                             <a4j:commandButton id="adjuntarDocumento" styleClass="btn_sec_gra" value="#{var.examinar}" immediate="true" style="font-size: 10px;"
-                                               onclick="#{rich:component('panelUploadDocumento')}.hide();">
+                                               onclick="#{rich:component('panelUploadDocumento')}.show();">
                             </a4j:commandButton>
                             <h:outputText id="Documento" value="#{var.descipcionDocumento}"/>
                             <h:inputText id="inputDescDocument" value="#{SessionBeanCobra.solicitudService.documentosolicitud.strdescripcion}"/>
