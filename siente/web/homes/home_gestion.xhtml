@@ -79,8 +79,8 @@
                 <tr>
                     <td><div class="buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this)" onblur="clearText(this)" value="#{HomeGestion.filtro.palabraclave}" onclick="this.value = ''"/><!--obrafiltrar.strnombreobra-->
-                                    <h:commandButton type="button" styleClass="buscador_button" action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
+                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field"  value="#{HomeGestion.filtro.palabraclave}" /><!--obrafiltrar.strnombreobra-->
+                                    <a4j:commandButton type="button" styleClass="buscador_button" action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" render="vistaMapa" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
 
                                     <h:commandLink action="#{HomeGestion.primeroListProyectos}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
                                         <h:graphicImage  url="/resources/imgs/bt_ver.png" styleClass="buscadorciudadano_button"/>
