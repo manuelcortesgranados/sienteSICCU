@@ -73,8 +73,8 @@
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <interkont:spacer width="10"/>
-                                <a4j:commandButton id="BTaceptarModificarDocs" value="#{var.aceptar}" rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}"
-                                                   onclick="#{rich:component('panelUploadDocumentoModificacion')}.hide();return false;" render="panelListadoArchivosCargados"
+                                <a4j:commandButton id="BTaceptarModificarDocs"  value="#{var.aceptar}" rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}"
+                                                   oncomplete="#{rich:component('panelUploadDocumentoModificacion')}.hide();return false;" render="panelListadoArchivosCargados"
                                                    style="font-size: 12px;"/>
                             </center>
                         </h:panelGroup>
