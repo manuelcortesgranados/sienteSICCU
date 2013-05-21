@@ -38,16 +38,16 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.size==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirActa.files}" var="file">
+                                    <h:outputText rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirActa.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
                                                     <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -57,8 +57,8 @@
                                 <br/>
                                 <a4j:commandButton action="#{SolicitudObra$GestionarSolicitudObra.borrarActaAtencion}"
                                                    render="info_acta, uploadActa, gpActa, panel_subirActa"
-                                                   rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.size>0}" value="#{var.boarcsub}"/>
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.size>0}"
+                                                   rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos>0}" value="#{var.boarcsub}"/>
+                                <a4j:commandButton value="#{var.aceptar}" rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActa')}.hide(); return false;" render="panel_subirActa"/>
                             </center>
                         </h:panelGroup>

@@ -276,10 +276,8 @@
                                             <h:graphicImage value="#{currentRow.strurlimagen}" />
                                             <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                             <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
-                                            <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
-                                            <rich:jQuery selector="#Imagen img" query="mouseout(function(){normalPic(this)})"/>
-                                            <rich:jQuery name="enlargePic" timing="onJScall" query="stop().animate({width:'150px', height:'150px' })" />
-                                            <rich:jQuery name="normalPic" timing="onJScall" query="stop().animate({width:'120px', height:'120px'})" />
+                                            <rich:jQuery selector="#Imagen img" event="mouseover" query="jQuery(this).stop().animate({width:'150px', height:'150px'})"/>
+                                            <rich:jQuery selector="#Imagen img" event="mouseout" query="jQuery(this).stop().animate({width:'120px', height:'120px'})"/>
                                         </a4j:commandLink>
                                     </center>
                                 </rich:column>
@@ -390,7 +388,7 @@
 
                 </rich:collapsiblePanel>
                 <interkont:spacer height="3"/>
-                <rich:collapsiblePanel id="AprobacionInfraestructura" style="width:100%;" switchType="true"
+                <rich:collapsiblePanel id="AprobacionInfraestructura" style="width:100%;" switchType="client"
                                        rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
                                                    SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                    SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -531,7 +529,7 @@
                     </center>
                 </rich:collapsiblePanel>
                 <interkont:spacer height="3"/>
-                <rich:collapsiblePanel id="AprobacionDirector" style="width:100%;" switchType="true" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
+                <rich:collapsiblePanel id="AprobacionDirector" style="width:100%;" switchType="client" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
                     <f:facet name="header">
@@ -604,8 +602,7 @@
                     </center>
                 </rich:collapsiblePanel>
                 <interkont:spacer height="3"/>
-                <rich:collapsiblePanel id="GestionarOrdenPago" style="width:100%;" switchType="true" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
-                                                                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
+                <rich:collapsiblePanel id="GestionarOrdenPago" style="width:100%;" switchType="client" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
                     <f:facet name="header">
                         <h:outputText value="8. #{var.gestionarordenpago}"/>
                     </f:facet>
@@ -643,7 +640,7 @@
                     </center>
                 </rich:collapsiblePanel>
                 <interkont:spacer height="3"/>
-                <rich:collapsiblePanel id="AprobacionFinanciera" style="width:100%;" switchType="true" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
+                <rich:collapsiblePanel id="AprobacionFinanciera" style="width:100%;" switchType="client" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
 
                     <f:facet name="header">
                         <h:outputText value="9. #{var.aprobacionfinanciera}"/>

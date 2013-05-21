@@ -2614,9 +2614,11 @@ public class Reporte implements ILifeCycleAware {
                     break;
                 case 3:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_solicitudes_presentadas_vs_aprobadas") + cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios")+cadenaPeticionReporte);
                     break;
                 case 4:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios_con_Localidad")+cadenaPeticionReporte);
                     break;
             }
 

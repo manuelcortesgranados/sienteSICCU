@@ -1644,7 +1644,7 @@ public class HomeGestion implements Serializable {
         return bol;
     }
 
-    public String primeroListProyectos() {       
+    public String primeroListProyectos() {
         obrasEncontradas = 0;
 
         //listaobrasusu = new ArrayList<Obra>();
@@ -1704,7 +1704,6 @@ public class HomeGestion implements Serializable {
 
     public String siguienteProyectos() {
 
-        System.out.println("Debug - siguienteProyectos");
         obrasEncontradas = 0;
         int num = (pagina) * filtro.getFactorpagina();
         filtro.setIntpagini(num);
@@ -1755,7 +1754,6 @@ public class HomeGestion implements Serializable {
     }
 
     public String anterioresProyectos() {
-        System.out.println("Debug - anterioresProyectos");
         obrasEncontradas = 0;
         pagina = pagina - 1;
         int num = (pagina - 1) * filtro.getFactorpagina();
@@ -1804,7 +1802,6 @@ public class HomeGestion implements Serializable {
     }
 
     public String ultimoProyectos() {
-        System.out.println("Debug- ultimoProyectos");
         obrasEncontradas = 0;
         int num = totalfilas - filtro.getFactorpagina();
 
@@ -1998,8 +1995,6 @@ public class HomeGestion implements Serializable {
     }
 
     public void cargarMapaCiudadano() {
-
-        System.out.println("Debug - cargarMapaCiudadano");
 
         if (listaobrasusu != null) {
             //mapa.getChildren().clear();
@@ -2540,8 +2535,6 @@ public class HomeGestion implements Serializable {
             }
 
         }
-
-        System.out.println("Debug - cargarMapaCiudadano - FIN");
     }
 
     /**
