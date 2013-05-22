@@ -4932,13 +4932,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String seleccionruta() {
+    public String seleccionruta(int filaSeleccionada) {
         try {
             marli = new ArrayList<Marcador>();
-            
-            Ruta rutaseleccion = (Ruta) getEntidadConvenio().getTablarutas().getRowData();
-            getObranueva().setRuta(rutaseleccion);
-            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(rutaseleccion.getStrcodigotramo()));
+            EntidadConvenio rutaseleccion = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
+            Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);              
+            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(ruta.getStrcodigotramo()));
             
             Marcador marc = new Marcador();
             int i = 0;

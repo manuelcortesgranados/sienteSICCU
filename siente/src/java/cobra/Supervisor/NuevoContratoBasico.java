@@ -1814,7 +1814,7 @@ public class NuevoContratoBasico   {
         this.planificacionpago = planificacionpago;
     }
 
-    public List<Contrato> getListacontratos() {
+    public List<Contrato> getListacontratos() {       
         return listacontratos;
     }
 
@@ -3019,12 +3019,12 @@ public class NuevoContratoBasico   {
      * Inicializa las variables que determinan si es un convenio o un contrato
      * padre. Hace un llamado al método donde se carga la lista.
      */
-    public void llenarContratosPadres() {
+    public void llenarContratosPadres() {          
         listacontratos.clear();
         listacontratoscontratista.clear();
 
         if (preguntacontrato == 1) {//Contrato=false,convenio=true
-
+            
             filtrocontrato.setBooltipocontconv(false);
             filtrocontrato.setBooltienehijo(true);
             aplicafiltrocontrato = false;
@@ -3080,9 +3080,10 @@ public class NuevoContratoBasico   {
      *
      * @return No retorna ningun valor
      */
-    public String contratoPadreSelec() {
-        varmostrarcontrpa = 1;
-        contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
+    public String contratoPadreSelec(int filaSeleccionada) {        
+        NuevoContratoBasico contratoSelec = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        contrpadre.setContrato(contratoSelec.getListaContratosPadre().get(filaSeleccionada));             
+       
         return null;
 
     }
@@ -3598,13 +3599,10 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String encargoFiduSelec() {
-
-        encargofiduciario = (Encargofiduciario) tablaEncargofiduciario.getRowData();
-        contrato.setEncargofiduciario(encargofiduciario);
-
+    public String encargoFiduSelec(int filaSeleccionada) {            
+        NuevoContratoBasico encargoFudiSeleccion = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");        
+        contrato.setEncargofiduciario(encargoFudiSeleccion.getListaEncargofiduciario().get(filaSeleccionada)); 
         return null;
-
     }
 
     /**
@@ -3970,7 +3968,7 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String seleccionarContratistas(int filaSeleccinada) {
+    public String seleccionarContratistas(int filaSeleccinada) {       
         NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");      
         contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
         return null;
@@ -3981,10 +3979,10 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String editarContratistas() {
+    public String editarContratistas(int filaSeleccinada) {
         boolcrearcontratista = false;
         booleditando = true;
-        contratista = (Contratista) tablacontratistas.getRowData();
+        contratista = listaContratista.get(filaSeleccinada);
         cambiarPersona();
 
         return null;
@@ -4319,7 +4317,7 @@ public class NuevoContratoBasico   {
      */
     public String primeroDetcontrato() {
 //        if (aplicafiltrocontrato) {
-
+        
         if (comboEntidadesContratoguardar()) {
             listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
             totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);

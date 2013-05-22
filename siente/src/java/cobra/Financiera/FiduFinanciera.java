@@ -369,10 +369,10 @@ public class FiduFinanciera  {
         return null;
     }
 
-    public String seleccionarEncargo() {
-
-        Encargofiduciario encargo = (Encargofiduciario) tablaEncargoListado.getRowData();
-        getFinancieraService().getOrdendepago().setEncargofiduciario(encargo);
+    public String seleccionarEncargo( int filaSeleccionada ) {
+        
+        Encargofiduciario encargo = (Encargofiduciario) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
+        listaencargofiducario.get(filaSeleccionada);
         Tercero ter = new Tercero();
         ter.setIntcodigo(encargo.getTercero().getIntcodigo());
         getFinancieraService().getOrdendepago().setTercero(ter);

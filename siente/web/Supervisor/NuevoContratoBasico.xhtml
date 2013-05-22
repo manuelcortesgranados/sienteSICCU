@@ -78,8 +78,8 @@
                                 <h:outputText  value="Seleccione el #{Supervisor$Contrato.tipoContCon} superior al que pertenece el #{Supervisor$Contrato.tipoContCon}:  " />
                                 <a4j:commandButton value="Seleccionar #{Supervisor$Contrato.tipoContCon}" execute="@this, gpTotalCont, cmbEntContra"
                                                    styleClass="btn_pri_gra" style="font-size:12px;"                                                   
-                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont" >
-                                    <a4j:ajax event="complete" execute="@this, gpTotalCont, cmbEntContra" oncomplete="#{rich:component('mp-listado-contratos')}.show();" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
+                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
+                                                   oncomplete="#{rich:component('mp-listado-contratos')}.show();">
                                 </a4j:commandButton>
                             </h:panelGrid>
 
@@ -87,8 +87,8 @@
                                 <h:outputText  value="Seleccione el Convenio superior al que pertenece el Convenio:  " />
                                 <a4j:commandButton value="Seleccionar convenio" execute="@this, gpTotalCont, cmbEntContra"
                                                    styleClass="btn_pri_gra" style="font-size:12px;"                                                   
-                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont">
-                                    <a4j:ajax execute="@this, gpTotalCont, cmbEntContra" event="complete" oncomplete="#{rich:component('mp-listado-contratos')}.show();" render="gpTotalCont, gpHeadercontratos" immediate="true"/>
+                                                   action="#{Supervisor$Contrato.llenarContratosPadres}" render="gpTotalCont, gpHeadercontratos"
+                                                   oncomplete="#{rich:component('mp-listado-contratos')}.show();">
                                 </a4j:commandButton>
                             </h:panelGrid>
                         </h:panelGroup>

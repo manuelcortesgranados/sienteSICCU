@@ -16,8 +16,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-numencargo" onclick="#{rich:component('mp-listado-numencargo')}.hide(); return false;" immediate="true"
-                                       styleClass="btn_cerrar"  />
+                    <a4j:commandLink id="esconder-mp-listado-numencargo" onclick="#{rich:component('mp-listado-numencargo')}.hide(); return false;" immediate="true"
+                                       styleClass="cerrar"  />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -38,7 +38,7 @@
                     <rich:dataTable id="tabla-listado-numencargo"
                                     rows="5"
                                     var ="currentRow"
-                                    binding="#{Supervisor$Contrato.tablaEncargofiduciario}"
+                                    rowKeyVar="filaSeleccionada"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
@@ -87,10 +87,9 @@
                                 </h:outputText>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$Contrato.encargoFiduSelec}"
+                                <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$Contrato.encargoFiduSelec(filaSeleccionada)}"
                                                    render="gpencargoseleecionado"
-                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-numencargo');" >
-                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-numencargo')" render="gpencargoseleecionado"/>
+                                                   oncomplete="#{rich:component('mp-listado-numencargo')}.hide();" >
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:columnGroup>
