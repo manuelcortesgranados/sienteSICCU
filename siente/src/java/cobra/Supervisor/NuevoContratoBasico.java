@@ -3092,11 +3092,13 @@ public class NuevoContratoBasico   {
      *
      * @return No retorna ningun valor
      */
-    public String contratoPadreSelecContratista() {
+    public String contratoPadreSelecContratista(int filaSeleccionada) {
         varmostrarcontrpa = 1;
-        contrpadre = (Contrato) tablacontrapadrebindinContratista.getRowData();
-        return null;
+        
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        contrpadre = nuevoContratoBasico.getListacontratoscontratista().get(filaSeleccionada);
 
+        return null;
     }
     /*
      * Inicializa variables, objetos y listas
