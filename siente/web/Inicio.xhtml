@@ -70,11 +70,12 @@
                                                         <f:validateLength maximum="20" minimum="8"/>
                                                     </h:inputSecret>
 
-                                                    <a4j:commandButton id="enviardos"  onclick="Richfaces.showModalPanel('ajaxLoadingModalBox', {width: 155, height: 155});"
-                                                                       value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
-                                                                       >
-                                                        <a4j:ajax event="click"   oncomplete="Richfaces.hideModalPanel('ajaxLoadingModalBox')"/>
-                                                    </a4j:commandButton>
+                                                    <h:commandButton id="enviardos"   value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                                     type="submit" 
+                                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();return true;"
+                                                                     > 
+                                                                                                              
+                                                    </h:commandButton>
                                                 </h:panelGrid>                                                      
                                             </center>
                                         </h:panelGroup>
@@ -226,7 +227,7 @@
                                                                          styleClass="tab-login-input-button-register" action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano" 
                                                                          oncomplete="#{rich:component('confirmarCiudadano')}.show();">
                                                         </a4j:commandLink>
-                                                        
+
                                                         <a4j:commandLink id="btnCancelarRegistro" value="#{var.cancelar}"  styleClass="tab-login-input-button-register" action="#{SessionBeanCobra.deshabilitarRegistrate}" immediate="true" render="gpLoginCiudadanoPrincipal" execute="@this">
 
                                                         </a4j:commandLink>
@@ -247,9 +248,11 @@
                     <h:graphicImage url="/resources/imgs/login/separador.png" width="10" height="60"/>
                     <h:graphicImage url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
                 </h:panelGroup>
-
+               
             </h:panelGroup>
         </h:form>
+        
+
     </ui:define>
 
 </ui:composition>
