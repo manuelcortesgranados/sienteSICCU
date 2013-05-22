@@ -8,7 +8,7 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalDificultad" moveable="true" headerClass="rich-panel-header" autosized="true" style="width:500px;">
+    <rich:popupPanel id="modalDificultad" moveable="true" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
@@ -28,7 +28,7 @@
         <h:form>
             <rich:panel>
                 <rich:dataTable id="tablaDificultad"
-                                binding="#{Supervisor$DetalleObra.tabladificultadalimentacion}"
+                                rowKeyVar="filaSeleccionada"
                                 value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rows="5"

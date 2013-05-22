@@ -3766,14 +3766,16 @@ public class NuevoContratoBasico   {
         return null;
     }
 
-    public String bt_download_documento_action() {
+    public String bt_download_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
-        getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
+        
+        NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        doc.getListadocuContrato().get(filaSeleccionada);
+        getSessionBeanCobra().setUrlAbri(doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }

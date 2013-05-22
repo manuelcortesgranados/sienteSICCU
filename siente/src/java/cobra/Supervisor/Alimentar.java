@@ -1681,9 +1681,9 @@ public class Alimentar {
     /**
      * Obtener la lista de seguidores, con el parametro obra y limitante
      */
-    public void eliminaractividad() {
-        Actividadobra activi = (Actividadobra) tablaitemnoprevistos.getRowData();
-        listactividadobra.remove(activi);
+    public void eliminaractividad(int filaSeleccionada) {
+       // Supervisor$Alimentar.listactividadobra
+        listactividadobra.remove(filaSeleccionada);
     }
 
     /**

@@ -111,8 +111,9 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
      * seguimiento seleccionado
      * @return
      */
-    public String seguimientoconsul() {
-        Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
+    public String seguimientoconsul(int filaSeleccionada) {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
         getAdminSupervisionExterna().setObjetoSeguimiento(segui);
         return "consuldetaseguimi";
     }
@@ -121,9 +122,11 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
      * Procesa la petición para descargar el reporte del seguimiento
      * @return
      */
-    public String seguimientoreport() {
-        Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
-        try {
+    public String seguimientoreport(int filaSeleccionada ) {
+//       SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//       Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
+//        
+       try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfseguimiento") + getObra().getIntcodigoobra());
         } catch (IOException ex) {
             Logger.getLogger(Obra.class.getName()).log(Level.SEVERE, null, ex);

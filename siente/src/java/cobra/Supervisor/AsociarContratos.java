@@ -443,9 +443,9 @@ public class AsociarContratos  {
         return "asociarcontratos";
     }
 
-    public String agregarContratoInterventoria() {
-
-        Contrato contselec = (Contrato) tablacontratosasoc.getRowData();
+    public String agregarContratoInterventoria(int filaSeleccionada) {
+        AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
+        Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
 
         relacioncontratointer = new Relacioncontratoobra();
         relacioncontratointer.setContrato(contselec);

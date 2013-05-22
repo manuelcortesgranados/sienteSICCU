@@ -44,7 +44,7 @@
                     <interkont:spacer height="10px" style="width:100%;"/>
                     <rich:panel id="pl-tabla-listado-proyectosPadres"  >
                         <rich:dataTable id="tabla-listado-proyectosPadres" sortMode="single" style="text-align:left; width: 800px;" value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}" var="currentRow" 
-                                        binding="#{Supervisor$IngresarNuevaObra.tablaObrasPadres}" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                        rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  style="width:110px;">
                                 <f:facet name="header">
                                     <h:outputText value="#{var.numero}"/>
@@ -61,10 +61,9 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{var.seleccionar}"/>
                                 </f:facet>
-                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre}"
+                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"
-                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadres');" >
-                                    <a4j:ajax event="oncomplete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-proyectosPadres')" render="gpproyectoSeleccionado"/>
+                                                   oncomplete="#{rich:component('mp-listado-proyectosPadres')}.hide();" >
                                 </a4j:commandButton>
                             </rich:column>
 

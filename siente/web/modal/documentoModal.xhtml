@@ -26,8 +26,12 @@
         <center>
             <h:form target="_blank">
                 <rich:panel style="overflow-y:scroll;height:350px">
-                    <rich:dataTable id="tablaDocsAlim"  sortMode="single" style="text-align:left;width:80%" value="#{Supervisor$DetalleObra.listaDocsAlimentacion}"
-                                    var="currentRow"   binding="#{Supervisor$DetalleObra.tablaDocsAlimentacion}">
+                    <rich:dataTable id="tablaDocsAlim"  
+                                    sortMode="single" 
+                                    style="text-align:left;width:80%" 
+                                    value="#{Supervisor$DetalleObra.listaDocsAlimentacion}"
+                                    var="currentRow"
+                                    rowKeyVar="filaSeleccioanda">
                         <rich:column id="tc_strnombre"  width="120px">
                             <f:facet name="header">
                                 <h:outputText value="#{var.houtnomdocu} "/>
