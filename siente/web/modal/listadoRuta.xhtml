@@ -16,8 +16,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-mp-listado-rutas" onclick="#{rich:component('mp-listado-rutas')}.hide(); return false;" immediate="true"
-                                       styleClass="btn_cerrar"  />
+                    <a4j:commandLink id="esconder-mp-listado-rutas" onclick="#{rich:component('mp-listado-rutas')}.hide(); return false;" immediate="true"
+                                       styleClass="cerrar"  />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -37,7 +37,7 @@
                     <rich:dataTable id="tabla-listado-ruta"
                                     rows="5"
                                     var ="rutarow"
-                                    binding="#{Supervisor$EntidadConvenio.tablarutas}"
+                                    rowKeyVar="filaSeleccionada"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
@@ -70,10 +70,9 @@
                                 <h:outputText value="#{rutarow.strnombretramo}"/>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$IngresarNuevaObra.seleccionruta}"
-                                                   render="pginvias"
-                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-rutas');" >
-                                    <a4j:ajax event="complete"  oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-rutas')" render="pginvias"/>
+                                <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$IngresarNuevaObra.seleccionruta(filaSeleccionada)}"
+                                                   render="pginvias, @form" immediate="true" execute="@form"
+                                                   oncomplete="#{rich:component('mp-listado-rutas')}.hide();">                                    
                                 </a4j:commandButton>
                             </rich:column>
                         </rich:columnGroup>
@@ -82,17 +81,13 @@
                                 <rich:column colspan="7" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
-                                            <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.primeroRuta}">
-                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                            <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.primeroRuta}" render="tabla-listado-ruta,gpTotalRuta">
                                             </a4j:commandButton>
-                                            <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.anteriorRuta}">
-                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                            <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" action="#{Supervisor$EntidadConvenio.anteriorRuta}" render="tabla-listado-ruta,gpTotalRuta">
                                             </a4j:commandButton>
-                                            <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.siguienteRuta}">
-                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                            <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.siguienteRuta}" render="tabla-listado-ruta,gpTotalRuta">
                                             </a4j:commandButton>
-                                            <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.ultimoRuta}">
-                                                <a4j:ajax event="complete" render="tabla-listado-ruta,gpTotalRuta"/>
+                                            <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" action="#{Supervisor$EntidadConvenio.ultimoRuta}" render="tabla-listado-ruta,gpTotalRuta">
                                             </a4j:commandButton>
                                         </h:panelGrid>
                                     </center>

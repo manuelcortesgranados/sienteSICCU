@@ -41,7 +41,7 @@
                         <rich:dataTable id="tablaEncargo"
                                         rows="5"
                                         var ="_Encargo"
-                                        binding="#{Financiera$FiduFinanciera.tablaEncargoListado}"
+                                        rowKeyVar="filaSeleccionada"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                         sortMode="single"
@@ -88,9 +88,9 @@
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
-                                    <a4j:commandButton id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo}"
+                                    <a4j:commandButton id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo(filaSeleccionada)}"
                                                        title="#{var.agregar}" render="encargoorden" value="Seleccionar"
-                                                       onclick="javascript:Richfaces.hideModalPanel('mp-listado-encargo')" >
+                                                       onclick="#{rich:component('mp-listado-encargo')}.hide();" >
                                     </a4j:commandButton>
                                 </rich:column>
                             </rich:columnGroup>
@@ -99,10 +99,10 @@
                                     <rich:column colspan="7" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.primerosrealesEncargo}"/>
-                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.anterioresRealesEncargo}"/>
-                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.siguientesRealesEncargo}"/>
-                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaEncargo" action="#{Financiera$FiduFinanciera.ultimoRealesEncargo}"/>
+                                                <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}"  action="#{Financiera$FiduFinanciera.primerosrealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" action="#{Financiera$FiduFinanciera.anterioresRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.siguientesRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.ultimoRealesEncargo}" render="tablaEncargo, mp-listado-encargo" />
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>
