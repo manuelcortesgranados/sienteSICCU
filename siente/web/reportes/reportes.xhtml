@@ -289,13 +289,13 @@
                         Generar reporte en:
                         <h:panelGrid columns="3"  >
                             <h:panelGrid>
-                                <h:commandLink id="pdfDinamico" action="#{Reportes.reportePdfDinamico}" styleClass="pdf" />
+                                <h:commandLink id="pdfDinamico" action="#{Reportes.reportePdfDinamico}" styleClass="pdf" type="submit"/>
                             </h:panelGrid>
                             <h:panelGrid>
-                                <h:commandLink id="excelDinamico" action="#{Reportes.reporteExcelDinamico}" styleClass="excel"/>
+                                <h:commandLink id="excelDinamico" action="#{Reportes.reporteExcelDinamico}" styleClass="excel" type="submit"/>
                             </h:panelGrid>
                             <h:panelGrid>
-                                <h:commandLink id="wordDinamico" action="#{Reportes.reporteWordDinamico}" styleClass="word"/>
+                                <h:commandLink id="wordDinamico" action="#{Reportes.reporteWordDinamico}" styleClass="word" type="submit"/>
                             </h:panelGrid>
 
                         </h:panelGrid>
@@ -317,7 +317,7 @@
                         </h:form>
                         <h:form target="_blank">
                             <h:panelGrid columns="1">
-                                <h:commandLink action="#{Reportes.reportepdfconvenio}" styleClass="pdf" />
+                                <h:commandLink action="#{Reportes.reportepdfconvenio}" styleClass="pdf" type="submit"/>
                             </h:panelGrid>
                         </h:form>
                     </center>
@@ -337,7 +337,7 @@
                         </h:form>
                         <h:form target="_blank">
                             <h:panelGrid columns="1">
-                                <h:commandLink action="#{Reportes.reportepdfcontrol}" styleClass="pdf" />
+                                <h:commandLink action="#{Reportes.reportepdfcontrol}" styleClass="pdf" type="submit"/>
                             </h:panelGrid>
                         </h:form>
                     </center>
@@ -366,15 +366,15 @@
                         <h:form target="_blank">
                             Generar reporte en:
                             <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 1}">
-                                <h:commandLink styleClass="pdf" id="pdfFichaCorto" action="#{Reportes.reportePdfFichaCorto}"/>
+                                <h:commandLink styleClass="pdf" id="pdfFichaCorto" action="#{Reportes.reportePdfFichaCorto}" type="submit"/>
                             </h:panelGrid>
 
                             <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 2}">
-                                <h:commandLink styleClass="pdf" id="pdfFichaObras" action="#{Reportes.reportePdfFichaObras}"/>
+                                <h:commandLink styleClass="pdf" id="pdfFichaObras" action="#{Reportes.reportePdfFichaObras}" type="submit"/>
                             </h:panelGrid>
 
                             <h:panelGrid columns="1" rendered="#{Reportes.reporteselec == 3}">
-                                <h:commandLink styleClass="pdf" id="pdfFichaConvenio" action="#{Reportes.reportePdfFichaConvenio}"/>
+                                <h:commandLink styleClass="pdf" id="pdfFichaConvenio" action="#{Reportes.reportePdfFichaConvenio}" type="submit"/>
                             </h:panelGrid>
                         </h:form>
                     </center>
@@ -421,7 +421,7 @@
                                 </h:selectOneMenu>
                             </h:panelGrid>   
 
-                            <!--Seleccion de entidades nacionales, dependen de la opcion 2 del combo anterior -->
+                            <!--Seleccion de entidades nacionales, dependen de la opcion 2 del combo  -->
                             <h:panelGrid columns="1" rendered="#{Reportes.reporteSelectAdministrativos == 2}">
                                 <h:outputLabel value="Entidades Nacionales:"/>
                                 <h:selectOneMenu value="#{Reportes.inttercer}" 
@@ -434,18 +434,6 @@
                             </h:panelGrid>
 
                         </rich:panel>
-
-                        <rich:panel header="#{var.control14}" rendered="false" styleClass="rich-panel-grid-report"
-                                    bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel">
-
-                            <h:panelGrid columns="1">
-                                <h:selectOneMenu value="#{Reportes.intobra}">
-                                    <f:selectItem itemValue="-1" itemLabel="Todos" />
-                                    <f:selectItems value="#{Reportes.tipoobraintselect}" />
-                                </h:selectOneMenu>
-                            </h:panelGrid>
-
-                        </rich:panel>     
 
                         <!--Panel de regiones, localizacion.  -->
                         <rich:panel id="panelRegionalizacionAdministrativos" header="#{var.control12}" styleClass="rich-panel-grid-report"
@@ -509,17 +497,17 @@
                             bodyClass="rich-panel-grid-body-reportes" headerClass="font-header-panel">                            
                     <h:form  target="_blank">
                         Generar reporte en:
+
                         <h:panelGrid columns="3"  >
                             <h:panelGrid>
-                                <h:commandLink id="pdfAdministrativos" action="#{Reportes.reportePdfAdministrativo}" styleClass="pdf" />
+                                <h:commandLink id="pdfAdministrativos" action="#{Reportes.reportePdfAdministrativo}" styleClass="pdf" type="submit"/>
                             </h:panelGrid>
                             <h:panelGrid>
-                                <h:commandLink id="excelAdministrativos" action="#{Reportes.reporteExcelAdministrativo}" styleClass="excel"/>
+                                <h:commandLink id="excelAdministrativos" action="#{Reportes.reporteExcelAdministrativo}" styleClass="excel" type="submit"/>
                             </h:panelGrid>
                             <h:panelGrid>
-                                <h:commandLink id="wordAdministrativos" action="#{Reportes.reporteWordAdministrativo}" styleClass="word"/>
+                                <h:commandLink id="wordAdministrativos" action="#{Reportes.reporteWordAdministrativo}" styleClass="word" type="submit"/>
                             </h:panelGrid>
-
                         </h:panelGrid>
                     </h:form>
                 </rich:panel>

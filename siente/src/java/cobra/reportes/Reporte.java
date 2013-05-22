@@ -165,12 +165,10 @@ public class Reporte implements ILifeCycleAware {
     }
 
     public int getReporteSelectAdministrativos() {
-        System.out.println("Debug - getReporteSelectAdministrativos");
         return _reporteSelectAdministrativos;
     }
 
     public void setReporteSelectAdministrativos(int _reporteSelectAdministrativos) {
-        System.out.println("Debug - setReporteSelectAdministrativos _reporteSelectAdministrativos = " + _reporteSelectAdministrativos);
         this._reporteSelectAdministrativos = _reporteSelectAdministrativos;
     }
 
@@ -1383,7 +1381,6 @@ public class Reporte implements ILifeCycleAware {
 
     public String getHeaderReportes() {
 
-        System.out.println("Debug - getHeaderReportes");
         String tempo = "";
         switch (consolida) {
             case 0:
@@ -2528,6 +2525,20 @@ public class Reporte implements ILifeCycleAware {
         }
     }
 
+    public void configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura() {
+        /*
+         * Metodo encargado de dar el formato a la cadena del reporte de acuerdo al departamento y municipios 
+         * seleccionados, teniendo en cuenta cuando estos estan vacios. 
+         */
+        cadenaPeticionReporte = null;
+
+        if (deptosah.equals("-1")) {
+            cadenaPeticionReporte = "&departamento=169";
+        } else {
+            cadenaPeticionReporte = "&departamento=" + deptosah;
+        }
+    }
+
     public void configuracionRegionalXRegion() {
         /*
          * Metodo encargado de dar el formato a la cadena del reporte de acuerdo a una Región  
@@ -2567,7 +2578,6 @@ public class Reporte implements ILifeCycleAware {
     }
 
     public void reporteSelectLineaAdministrativa() {
-        System.out.println("Debug - reporteSelectLineaAdministrativa");
         switch (getReporteSelectAdministrativos()) {
             case 1:
                 // Reporte proyectos de infraestructura.
@@ -2600,25 +2610,41 @@ public class Reporte implements ILifeCycleAware {
                     switch (getReporteselectregionali()) {
                         case 1:
                             //Regionalizacion 1. Departamentos
-                            configuracionRegionalXDepartamento();
-                            //cadenaPeticionReporte = cadenaPeticionReporte + "&TipoAtencion=" + tipoahint + "&fechaini=" + _fechaFormateada.format(feciniah) + "&fechafin=" + _fechaFormateada.format(fecfinah);
-
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
                             break;
                         case 2:
-                            //Regionalizacion 2. Region (Zona especifica)
-                            configuracionRegionalXZona();
+                            //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
                             break;
                     }
                     break;
                 case 2:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamento();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica)
+                            configuracionRegionalXZona();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                    }
                     break;
                 case 3:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios")+cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
                     break;
                 case 4:
                     cadenaPeticionReporte = "";
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios_con_Localidad")+cadenaPeticionReporte);
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
                     break;
             }
 
@@ -2628,87 +2654,6 @@ public class Reporte implements ILifeCycleAware {
     }
     //****************************************************************************
 
-//    public void reporteWordDinamico() {
-//        /**
-//         * Proceso de los reportes dinamicos en formato Word, identificando a
-//         * cual pertenece y por consiguiente que reporte debe cargar.
-//         */
-//        try {
-//            setReporteFormato(DOC_FORMATO);
-//
-//            switch (getReporteselectregionali()) {
-//                case 1:
-//                    //Regionalizacion 1. Departamentos
-//                    switch (getReporteselectlinea()) {
-//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
-//                        case 1:
-//                            //1. Ayuda humanitaria
-//                            configuracionRegionalXDepartamento();
-//                            reporteDinamicoAyudaHumanitaria();
-//                            break;
-//                        case 2:
-//                            //2. Obras entidades territoriales
-//                            configuracionRegionalXDepartamento();
-//                            reporteDinamicoObrasEntidadesTerritoriales();
-//                            break;
-//
-//                        case 3:
-//                            //3. Convenios entidades nacionales
-//                            configuracionRegionalXDepartamento();
-//                            reporteDinamicoConveniosEntidadesNacionales();
-//                            break;
-//                    }
-//                    break;
-//                case 2:
-//                    //Regionalizacion 2. Region (Zona especifica)
-//                    switch (getReporteselectlinea()) {
-//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
-//                        case 1:
-//                            //1. Ayuda humanitaria
-//                            configuracionRegionalXZona();
-//                            reporteDinamicoAyudaHumanitaria();
-//                            break;
-//                        case 2:
-//                            //2. Obras entidades territoriales
-//                            configuracionRegionalXZona();
-//                            reporteDinamicoObrasEntidadesTerritoriales();
-//                            break;
-//                        case 3:
-//                            //3. Convenios entidades nacionales
-//                            configuracionRegionalXZona();
-//                            reporteDinamicoConveniosEntidadesNacionales();
-//                            break;
-//                    }
-//                    break;
-//
-//                case 3:
-//                    switch (getReporteselectlinea()) {
-//                        // Manejo de las tres opciones de reportes dinamicos 1.Ayuda humanitaria, 2. Obras entidades territoriales, 3. Convenios entidades nacionales
-//                        case 1:
-//                            //1. Ayuda humanitaria
-//                            configuracionRegionalXRegion();
-//                            reporteDinamicoAyudaHumanitaria();
-//                            break;
-//                        case 2:
-//                            //2. Obras entidades territoriales
-//                            configuracionRegionalXRegion();
-//                            reporteDinamicoObrasEntidadesTerritoriales();
-//                            break;
-//                        case 3:
-//                            //3. Convenios entidades nacionales
-//                            configuracionRegionalXRegion();
-//                            reporteDinamicoConveniosEntidadesNacionales();
-//                            break;
-//                    }
-//            }
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//
-//    }
-    //****************************************************************************
     public void reporteExcelAdministrativo() {
         /**
          * Proceso de los reportes Administrativos en formato Excel,
@@ -2716,11 +2661,54 @@ public class Reporte implements ILifeCycleAware {
          * cargar
          *
          */
-//        try {
-        setReporteFormato(XLS_FORMATO);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            setReporteFormato(XLS_FORMATO);
+
+            switch (getReporteSelectAdministrativos()) {
+                case 1:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamento();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica)
+                            configuracionRegionalXZona();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                    }
+                    break;
+                case 3:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    break;
+                case 4:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -2731,17 +2719,53 @@ public class Reporte implements ILifeCycleAware {
          * cargar
          *
          */
-//        try {
-        setReporteFormato(DOC_FORMATO);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-    }
+        try {
+            setReporteFormato(DOC_FORMATO);
 
-    public void configuracionAdministraticaXFase() {
-        /*
-         * Metodo encargado de dar el formato a la cadena del reporte de acuerdo a la fase seleccionada
-         *
-         */
+            switch (getReporteSelectAdministrativos()) {
+                case 1:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica) en este caso no se requiere la zona
+                            configuracionRegionalXDepartamentoAdministrativoProyectosInfraestructura();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Proyectos_Infraestructura_Validacion_de_Informacion") + cadenaPeticionReporte);
+                            break;
+                    }
+                    break;
+                case 2:
+                    switch (getReporteselectregionali()) {
+                        case 1:
+                            //Regionalizacion 1. Departamentos
+                            configuracionRegionalXDepartamento();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                        case 2:
+                            //Regionalizacion 2. Region (Zona especifica)
+                            configuracionRegionalXZona();
+                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
+                            break;
+                    }
+                    break;
+                case 3:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios") + cadenaPeticionReporte);
+                    break;
+                case 4:
+                    cadenaPeticionReporte = "";
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_proyectos_asociados_a_convenios_con_Localidad") + cadenaPeticionReporte);
+                    break;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Reporte.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

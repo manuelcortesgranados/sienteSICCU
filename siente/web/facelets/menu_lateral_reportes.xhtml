@@ -28,7 +28,7 @@
                         <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
                                              style="font-size: 9px;" immediate="true"
                                              action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
-                        <li><a4j:commandLink value="#{var.header6}" styleClass="conso anchorLink"
+                        <li><a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" styleClass="conso anchorLink"
                                              style="font-size: 9px;" immediate="true"
                                              action="#{Reportes.reporteSelectAdministrativo}" render="richpanelReportes, headerre"/></li>
                     </ul>
