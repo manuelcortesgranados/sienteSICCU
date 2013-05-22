@@ -224,7 +224,6 @@ public class Usuario  {
     }
 
     public String getUsuLogin() {
-        System.out.println("usulogin = "+ usuLogin);
         return usuLogin;
     }
 
@@ -428,12 +427,8 @@ public class Usuario  {
      * @return Retorna los usuario encontrados con estos criterios
      */
     public void buscarUsuarioporCriterios() {
-        System.out.println("usulogin del bena = " + usuLogin);
-        System.out.println("entro aqui ejej = ");
-        
         listausuarios = new ArrayList<JsfUsuario>();
-        listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
-        System.out.println("lista = " + listausuarios);
+        listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);        
     }
     /**
      * Este metodo es utilizado mostrar el Perfil del usuario con la informacion 
