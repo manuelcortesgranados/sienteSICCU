@@ -150,7 +150,7 @@
 
 
                         <rich:dataTable id="tabla-listado-contratospadContratista" rendered="#{!empty Supervisor$Contrato.listacontratoscontratista and Supervisor$Contrato.contrato.tercero.intcodigo!=0}"
-                                        binding="#{Supervisor$Contrato.tablacontrapadrebindinContratista}"
+                                        rowKeyVar="filaSeleccionada"
                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
                                         sortMode="single"  var="currentRow" style="width: 800px;" rows="6"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
@@ -215,7 +215,7 @@
                                 </rich:column>
 
                                 <rich:column>
-                                    <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelecContratista}"
+                                    <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelecContratista(filaSeleccionada)}"
                                                        render="rpconpasel,tpDatosBasicos"
                                                        oncomplete="#{rich:component('mp-listado-contratos')}.hide();" />
                                 </rich:column>
