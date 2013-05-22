@@ -90,8 +90,12 @@
                                     </rich:panel>
                                 </h:panelGrid>
                                 <h:panelGroup>
-                                    <rich:dataTable id="tablaImagenes" value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
-                                                    var="currentRow" style="width:100%;" binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}" rows="3" >
+                                    <rich:dataTable id="tablaImagenes"
+                                                    value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
+                                                    var="currentRow"
+                                                    style="width:100%;"
+                                                    rowKeyVar="filaSeleccionada"
+                                                    rows="3" >
                                         <f:facet name="header">
                                             <h:outputText value="#{var.imgseleccionadas}"/>
                                         </f:facet>
@@ -121,7 +125,7 @@
                                                 <h:outputText value="#{var.eliminar}"/>
                                             </f:facet>
                                             <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
-                                                               action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
+                                                               action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista(filaSeleccionada)}"/>
                                         </rich:column>
                                         <f:facet name="footer">
                                             <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>

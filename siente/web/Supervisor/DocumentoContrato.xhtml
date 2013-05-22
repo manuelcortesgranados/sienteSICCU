@@ -40,7 +40,6 @@
                                             value="#{SessionBeanCobra.cobraService.listaDocumentosContrato}"
                                             var="currentRow" 
                                             rowKeyVar="filaSeleccionada"
-                                            binding="#{Supervisor$Contrato.tablaDocumentosContrato}"
                                             rows="7"
                                             rowClasses="cabezo_tabla01, cabezo_tabla02" >
                                 <rich:column width="320px">
@@ -67,7 +66,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.Ver}"/>
                                     </f:facet>
-                                    <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo}"  immediate="true">
+                                    <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo(filaSeleccionada)}"  immediate="true">
                                         <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                                     </h:commandLink>
                                 </rich:column>
@@ -75,7 +74,7 @@
                                     <f:facet name="header">
                                         <h:outputText  value="#{var.eliminar}"/>
                                     </f:facet>
-                                    <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action}"
+                                    <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action(filaSeleccionada)}"
                                                      rendered="#{!currentRow.tipodocumento.obligatorio}" execute="@this"
                                                      title="#{var.eliminar}"  immediate="true" render="tablaDocumentosContrato">
                                         <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>

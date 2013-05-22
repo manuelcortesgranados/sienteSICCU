@@ -202,7 +202,7 @@
                             </center>
 
 
-                            <rich:dataTable binding="#{Supervisor$Alimentar.listaActividades}" id="listaActividadesAlimentar"
+                            <rich:dataTable rowKeyVar="filaSeleccionada" id="listaActividadesAlimentar"
                                             onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                             onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
                                             value="#{Supervisor$Alimentar.registrosmatrix}" var="registros" 
@@ -503,7 +503,7 @@
 
                             <h:inputText size="40" id="txtActa" readonly="true" value="#{Supervisor$Alimentar.urlacta}" />
                             <a4j:commandButton id="btActa" value="#{var.examinar}" immediate="true"
-                                               onclick="#{rich:component('panelActa')}.show();"
+                                               onclick="#{rich:component('panelActa')}.show();return true;"
                                                style="font-size:12px;"/>
                         </h:panelGrid>
                     </center>
@@ -544,14 +544,14 @@
                 </h:panelGrid>
             </h:panelGroup>
         </h:form>
-       <!-- <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
+       <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
         <ui:include src="/modal/panelGuardadoModal.xhtml"/>
         <ui:include src="/modal/panelImagenModal.xhtml"/>
         <ui:include src="/modal/panelVideoModal.xhtml"/>
         <ui:include src="/modal/panelActaAlimentacionModal.xhtml"/>
         <ui:include src="/modal/confirmarGuardadoCualitativa.xhtml"/>                
         <ui:include src="/modal/alimentacion/modalAdicionarActividaes.xhtml"/>
-        <ui:include src="/modal/alimentacion/panelActaPrecios.xhtml"/>-->
+        <ui:include src="/modal/alimentacion/panelActaPrecios.xhtml"/>
     </ui:define>
 
 </ui:composition>

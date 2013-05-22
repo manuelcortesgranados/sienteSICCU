@@ -13,14 +13,14 @@
     >
 
     <f:subview id="Comentarios" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}" >
-        <a4j:region>
+     
             <h:form>
                 <a4j:poll  id = "refreshId"  rendered="#{SessionBeanCobra.actualcomentario}"
                            action="#{SessionBeanCobra.LlenarComentarios}"  render = "panelcomentarios" interval = "1000" >
 
                 </a4j:poll>
             </h:form>
-        </a4j:region>
+        
         <h:form id="formComentarios">
             <script language="JavaScript">
                 
