@@ -29,8 +29,12 @@
 
                 <h:panelGrid  width="100%" >
                     
-                    <rich:dataTable id="tablacosto"  sortMode="single" style="text-align:left;width:100%" value="#{Supervisor$AdministrarObraNew.obra}"
-                                    var="currentRow"   binding="#{Supervisor$AdministrarObraNew.tablaCosto}">
+                    <rich:dataTable id="tablacosto"  
+                                    sortMode="single" 
+                                    style="text-align:left;width:100%" 
+                                    value="#{Supervisor$AdministrarObraNew.obra}"
+                                    var="currentRow"
+                                    rowKeyVar="filaSeleccionada">
 
                         <rich:column id="tc_tipocosto"  width="120px">
                             <f:facet name="header">

@@ -197,7 +197,7 @@
                 <rich:dataTable id="tablObrasVigentes"
                                 value="#{HomeGestion.listaobrasusu}"
                                 var="obra" style="width:100%;"
-                                binding="#{HomeGestion.tablaobras}"
+                                rowKeyVar="filaSeleccionada"
                                 rendered="#{HomeGestion.obrasEncontradas == null or HomeGestion.obrasEncontradas > 0 }"
                                 rows="#{HomeGestion.filtro.factorpagina}">
                     <f:facet name="header">

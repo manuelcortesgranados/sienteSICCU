@@ -29,8 +29,12 @@
             <center>
 
                 <h:panelGrid  width="100%" >
-                    <rich:dataTable id="tabladocumento"  sortMode="single" style="text-align:left;width:100%" value="#{Supervisor$Contrato.listadocuContrato}"
-                                    var="currentRow"   binding="#{Supervisor$Contrato.tabladocuContrato}">
+                    <rich:dataTable id="tabladocumento"  
+                                    sortMode="single" 
+                                    style="text-align:left;width:100%" 
+                                    value="#{Supervisor$Contrato.listadocuContrato}"
+                                    var="currentRow"
+                                    rowKeyVar="filaSeleccionada">
                         <rich:column id="strnombreimg"  width="120px">
                             <f:facet name="header">
 
@@ -51,7 +55,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{var.Ver}"/>
                             </f:facet>
-                            <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action}" immediate="true">
+                            <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action(filaSeleccionada)}" immediate="true">
                             </h:commandButton>
                         </rich:column>
 

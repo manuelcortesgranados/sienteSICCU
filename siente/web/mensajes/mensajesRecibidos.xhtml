@@ -35,7 +35,12 @@
                     </h:panelGroup>
                     <interkont:spacer height="10px" style="width:100%;"/>
                     <h:panelGroup id="pl_tabla">
-                        <rich:dataTable id="tablaMensajesRecibidos" sortMode="single" style="text-align:left;width:100%;" value="#{Mensajes.listaMensajesRecibidos}" var="currentRow" rows="10" binding="#{Mensajes.tablaMensajesRecibidos}">
+                        <rich:dataTable id="tablaMensajesRecibidos" 
+                                        sortMode="single" 
+                                        style="text-align:left;width:100%;" 
+                                        value="#{Mensajes.listaMensajesRecibidos}" 
+                                        var="currentRow" rows="10" 
+                                        binding="#{Mensajes.tablaMensajesRecibidos}">
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesRecibidos}" id="tc-strasuntomensaje" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                        >
                                 <f:facet name="header">
@@ -64,7 +69,7 @@
                                     <h:outputText value="#{var.Ver}"/>
                                 </f:facet>
                                 <a4j:commandLink action="#{Mensajes.bt_verrecibidos_action}" id="bt-ver-recibidos"
-                                                 oncomplete="#{rich:component( 'mp_ver')}.show()" title="#{var.Ver}"  immediate="true" render="pg_camposVer,mp_ver">
+                                                 oncomplete="#{rich:component( 'mp_ver')}.show()" title="#{var.Ver}" execute="@this,pg_camposVer,mp_ver"  immediate="true" render="pg_camposVer,mp_ver">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>

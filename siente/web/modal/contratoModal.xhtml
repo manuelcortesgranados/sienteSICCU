@@ -14,10 +14,12 @@
             <h:panelGrid  width="100%" >
                 <f:facet name="header"><h:outputLabel value="#{var.contrato}"></h:outputLabel></f:facet>
 
-                <rich:dataTable id="tablacontrato"  sortMode="single" style="text-align:left;width:100%;" value="#{Supervisor$AdministrarObraNew.listaContrato}"
-                                var="_row" binding="#{Supervisor$AdministrarObraNew.tablaContrato}">
-
-
+                <rich:dataTable id="tablacontrato"  
+                                sortMode="single" 
+                                style="text-align:left;width:100%;"
+                                value="#{Supervisor$AdministrarObraNew.listaContrato}"
+                                var="_row" 
+                                rowKeyVar="filaSeleccionada">
                     <rich:column id="tc_strnrocontrato"  width="120px">
                         <f:facet name="header">
 

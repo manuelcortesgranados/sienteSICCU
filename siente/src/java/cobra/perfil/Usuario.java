@@ -224,6 +224,7 @@ public class Usuario  {
     }
 
     public String getUsuLogin() {
+        System.out.println("usulogin = "+ usuLogin);
         return usuLogin;
     }
 
@@ -427,8 +428,12 @@ public class Usuario  {
      * @return Retorna los usuario encontrados con estos criterios
      */
     public void buscarUsuarioporCriterios() {
+        System.out.println("usulogin del bena = " + usuLogin);
+        System.out.println("entro aqui ejej = ");
+        
         listausuarios = new ArrayList<JsfUsuario>();
         listausuarios = getSessionBeanCobra().getUsuarioService().buscarUsuario(usuLogin);
+        System.out.println("lista = " + listausuarios);
     }
     /**
      * Este metodo es utilizado mostrar el Perfil del usuario con la informacion 
@@ -441,11 +446,13 @@ public class Usuario  {
      * Este metodo es utilizado para cargar toda la informacion del usuario.
      * @return Retorna La informacion del usuario.
      */
-    public String irperfilUsuario() {
+    public String irperfilUsuario(int filaSeleccionada) {
         modificarUsuario = true;
         deshabilitarBotonModificar = true;
         habilitarBotonGuardar = false;
-        usuariomod = (JsfUsuario) tablabuscarusuarios.getRowData();
+        Usuario usuario =(Usuario) FacesUtils.getManagedBean("Perfil$Usuario");
+        usuario.getListausuarios().get(filaSeleccionada);       
+        usuariomod = usuario.getListausuarios().get(filaSeleccionada);
         if (usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad().length() > 3) {
             coddeptoselec = usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad().substring(0, 5);
         } else {

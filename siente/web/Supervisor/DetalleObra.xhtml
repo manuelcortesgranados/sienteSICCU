@@ -443,8 +443,8 @@
                         <a4j:ajax event="click" render="panelUbicacion, pgtablapuntos"/>
                         <ui:include src="/modal/ubicacionProyModal.xhtml"/>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="simpleToggleContratos" switchType="client" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
-                        <a4j:ajax event="click"  render="panelContrato,layoutGral"/>
+                    <rich:collapsiblePanel id="simpleToggleContratos" switchType="ajax" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >
+                        <a4j:ajax event="switch"  render="panelContrato,layoutGral"/>
                         <ui:include src="/modal/contratoModal.xhtml"/>
                     </rich:collapsiblePanel>
                     <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="client" header="#{var.logro}s y #{var.dificultad}es" expanded="false" >
@@ -641,14 +641,14 @@
                         </h:panelGroup>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleHistoria" switchType="client" rendered="#{Supervisor$AdministrarObraNew.historico}" header="#{var.historialmodificacion}" expanded="false" >
-                        <a4j:ajax event="click"  render="panelprorroga" />
+                    <rich:collapsiblePanel id="simpleToggleHistoria" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.historico}" header="#{var.historialmodificacion}" expanded="false" >
+                        <a4j:ajax event="switch"  render="panelprorroga" />
                         <ui:include src="/modal/historialModiModal.xhtml"/>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="client" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos}"
+                    <rich:collapsiblePanel id="simpleToggleSeguimientos" switchType="ajax" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null and SessionBeanCobra.usuarioObra.renderrecurso.pnlseguimientos}"
                                            header="#{var.seguimientos}" expanded="false" toggleListener="#{Supervisor$DetalleObra.llenarSeguimientosxProyectos}" >
-                        <a4j:ajax event="click" render="gpListaSeguimientos"/>
+                        <a4j:ajax event="switch" render="gpListaSeguimientos"/>
                         <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml"/>
                     </rich:collapsiblePanel>
 
