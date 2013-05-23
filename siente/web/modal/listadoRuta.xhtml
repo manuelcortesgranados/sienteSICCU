@@ -31,7 +31,6 @@
             </h:form>
         </center>
         <rich:panel id="gpTotalRuta">
-            <h:form id="form-mp-listado-ruta">
                 <h:panelGrid style="width:100%;">
                     <interkont:spacer height="5" style="width:100%;"/>
                     <rich:dataTable id="tabla-listado-ruta"
@@ -71,7 +70,8 @@
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$IngresarNuevaObra.seleccionruta(filaSeleccionada)}"
-                                                   render="pginvias, @form" immediate="true" execute="@form"
+                                                   render="pginvias, @form" immediate="true" execute="@this"
+                                                  
                                                    oncomplete="#{rich:component('mp-listado-rutas')}.hide();">                                    
                                 </a4j:commandButton>
                             </rich:column>
@@ -96,7 +96,6 @@
                         </f:facet>
                     </rich:dataTable>
                 </h:panelGrid>
-            </h:form>
         </rich:panel>
     </rich:popupPanel>
 </ui:composition>

@@ -323,7 +323,7 @@
                                     <a4j:ajax event="complete" render="resuDocu, docucomple"/>
                                 </a4j:ajax>
                             </a4j:commandLink>
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.files}" var="file" style="width:30px;">
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.archivos}" var="file" style="width:30px;">
                                 <h:outputText id="otxt_nombrearchivo" value=" #{file.onlyName}"/>
                             </rich:dataGrid>
 

@@ -38,20 +38,17 @@
                             </h:inputText>
                         </h:panelGrid>
 
-
                         <interkont:spacer height="20" style="width:100%;"/>
                         <rich:dataTable id="tablaTercero"
                                         rows="10"
                                         var ="_Tercero"
-                                        binding="#{Financiera$FiduFinanciera.tablaTerceroListado}"
+                                        rowKeyVar="filaSeleccionada"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Financiera$FiduFinanciera.financieraService.listaTercero}"
                                         style="text-align:center; width: 100%;">
                             <f:facet name="header">
                                 <rich:columnGroup>
-
-
                                     <rich:column colspan="4">
                                         <h:outputText value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                     </rich:column>
@@ -94,12 +91,9 @@
                                     <h:outputText value="#{_Tercero.strapellido1}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <a4j:commandButton id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP}"
-                                                       render="soliOrden" title="#{var.agregar}" onclick="javascript:Richfaces.hideModalPanel('mp-listado-tercero')" >
-
-                                    </a4j:commandButton>
-
-
+                                    <a4j:commandButton id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP(filaSeleccionada)}"
+                                                       render="soliOrden" title="#{var.agregar}"
+                                                       onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;" />
                                 </rich:column>
                             </rich:columnGroup>
 
