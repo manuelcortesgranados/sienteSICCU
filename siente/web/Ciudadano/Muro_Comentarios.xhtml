@@ -13,33 +13,35 @@
     >
 
     <f:subview id="Comentarios" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}" >
-        <a4j:region>
+     
             <h:form>
                 <a4j:poll  id = "refreshId"  rendered="#{SessionBeanCobra.actualcomentario}"
                            action="#{SessionBeanCobra.LlenarComentarios}"  render = "panelcomentarios" interval = "1000" >
 
                 </a4j:poll>
             </h:form>
-        </a4j:region>
+        
         <h:form id="formComentarios">
             <script language="JavaScript">
-                
-                function maximaLongitud(texto,maxlong)
+
+                function maximaLongitud(texto, maxlong)
                 {
                     var out_value;
 
                     if (texto.value.length > maxlong)
                     {
                         in_value = texto.value;
-                        out_value = in_value.substring(0,maxlong);
+                        out_value = in_value.substring(0, maxlong);
                         texto.value = out_value;
                         return false;
                     }
                     return true;
                 }
-                function borrar_campo1()
-                { if (document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value == "Escriba Su Comentario")
-                        document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value ="";
+                function borrar_campo1(){
+                    if (document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value == "Escriba Su Comentario") {
+                        document.getElementById("murocomentarios:Comentarios:formComentarios:iacomentario").value = "";
+                    }
+
                 }
 
             </script>
@@ -55,8 +57,8 @@
                         <h:panelGrid  id="txtcomentario1" columns="1" style="width:70%;" >
                             <a4j:status id="idstatuscomentario"/>
                             <h:outputText id="idcontarmensaje" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" styleClass="vtitle12" style="float:right;" />
-                            <h:inputTextarea id="iacomentario" styleClass="commentframe" rows="5" cols="120" onkeydown="return maximaLongitud(this,400)"     
-                                             value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo1(this);" >
+                            <h:inputTextarea id="iacomentario" styleClass="commentframe" rows="5" cols="120" onkeydown="return maximaLongitud(this, 400)"     
+                                             value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onfocus="borrar_campo1(this);">
                                 <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje" status="idstatuscomentario" />
                             </h:inputTextarea>
                             <h:outputText value="Utilice este espacio para opinar e intercambiar opiniones con los demás ciudadanos" styleClass="vtitle09"/>                      

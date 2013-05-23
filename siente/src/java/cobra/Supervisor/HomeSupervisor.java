@@ -630,13 +630,19 @@ public class HomeSupervisor  {
         }
     }
 
-    public String bt_verObra_action() {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
-        this.novedad = (Novedad) tablaNovedades.getRowData();
-        //getSessionBeanCobra().setCodigoobraalimentar(this.novedad.getObra().getIntcodigoobra());
+    /**
+     * Carga una obra dada una libra de novedades.
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String bt_verObra_action(int filaSeleccionada) {
+        HomeSupervisor homeSupervisor = (HomeSupervisor) FacesUtils.getManagedBean("Supervisor$HomeSupervisor");
+        novedad = homeSupervisor.getListaTotalNovedades().get(filaSeleccionada);
+        
         getAdministrarObraNew().cargarObra(novedad.getObra());
-        //getAdministrarObra().limpiarAlimentar();
+        
         return "administrar";
     }
 

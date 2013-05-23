@@ -785,8 +785,10 @@ public class ModificarContrato   {
         return "consultarContrato";
     }
 
-    public String llenarDocumentosModifContrato() {
-        Modificacioncontrato modi = (Modificacioncontrato) binditablamodi.getRowData();
+    public String llenarDocumentosModifContrato(int filaSeleccionada) {    
+       NuevoContratoBasico contratobasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+       contratobasico.getListaModificarContrato().get(filaSeleccionada);
+       Modificacioncontrato modi = contratobasico.getListaModificarContrato().get(filaSeleccionada);
         listadocuModifContrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxModificacionContrato(modi);
         return null;
     }

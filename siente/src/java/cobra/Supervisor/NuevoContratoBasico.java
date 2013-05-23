@@ -3092,11 +3092,13 @@ public class NuevoContratoBasico   {
      *
      * @return No retorna ningun valor
      */
-    public String contratoPadreSelecContratista() {
+    public String contratoPadreSelecContratista(int filaSeleccionada) {
         varmostrarcontrpa = 1;
-        contrpadre = (Contrato) tablacontrapadrebindinContratista.getRowData();
-        return null;
+        
+        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        contrpadre = nuevoContratoBasico.getListacontratoscontratista().get(filaSeleccionada);
 
+        return null;
     }
     /*
      * Inicializa variables, objetos y listas
@@ -3766,14 +3768,16 @@ public class NuevoContratoBasico   {
         return null;
     }
 
-    public String bt_download_documento_action() {
+    public String bt_download_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
-        getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
+        
+        NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        doc.getListadocuContrato().get(filaSeleccionada);
+        getSessionBeanCobra().setUrlAbri(doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3781,10 +3785,10 @@ public class NuevoContratoBasico   {
 
     }
 
-    public String bt_download_documento_action_modulo() {
+    public String bt_download_documento_action_modulo(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
+        Documentoobra doc =  getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
@@ -5692,8 +5696,9 @@ public class NuevoContratoBasico   {
     /**
      * eliminar el documento seleccionado
      */
-    public void bt_eliminar_documento_action() {
-        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
+    public void bt_eliminar_documento_action(int filaSeleccionada) {
+        SessionBeanCobra sbc=(SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");        
+        Documentoobra doc = sbc.getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().getCobraService().borrarDocumento(doc);
         getSessionBeanCobra().getCobraService().getListaDocumentosContrato().remove(doc);
     }

@@ -45,10 +45,14 @@
                     </h:panelGroup>
                     <interkont:spacer height="10px" style="width:100%;"/>
                     <rich:panel id="pl-tabla-listado-contratista" style="overflow: auto;width: 100%; height: 300px;">   
-                        <rich:dataTable id="tabla-listado-contratista" binding="#{Supervisor$IngresarNuevaObra.tablacontratista}" onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                        <rich:dataTable id="tabla-listado-contratista"                                         
+                                        onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                        value="#{Supervisor$IngresarNuevaObra.listacontratistas}" sortMode="single" style="text-align:left; width:440px; "  var="currentRow" rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02">
-                            <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"  style="width: 110px;">
+                                        value="#{Supervisor$IngresarNuevaObra.listacontratistas}" 
+                                        sortMode="single" style="text-align:left; width:440px; "  var="currentRow" 
+                                        rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                            <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"  
+                                         style="width: 110px;">
                                 <f:facet name="header">
                                     <h:outputText value="#{var.numerocontratista}"/>
                                 </f:facet>
@@ -65,8 +69,8 @@
                                     <h:outputText value="#{var.seleccionar}"/>
                                 </f:facet>
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarContratista}"
-                                                   render="mostrarContratistaSeleccionado,gpContratoSelec"
-                                                   oncomplete="javascript:Richfaces.hideModalPanel('mp-listado-contratista');" />
+                                                   render="mostrarContratistaSeleccionado,gpContratoSelec"                                                   
+                                                   oncomplete="#{rich:component('mp-listado-contratista')}.hide();"/>
                             </rich:column>
 
                             <f:facet name="footer">

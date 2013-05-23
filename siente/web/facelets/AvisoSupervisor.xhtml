@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich">
+
+
+    <rich:popupPanel id="modalAvisoSupervisor" width="400" height="400" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Información importante"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_modalAvisoSupervisor" styleClass="cerrar"
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAvisoSupervisor')}.hide();
+                                                     return false;">
+                    </a4j:commandLink>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <rich:panel>
+                <h:panelGrid id="pgAviso"  columnClasses="panelcenter" width="360px"  cellpadding="0" cellspacing="0" >
+                    <h:graphicImage height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                    <h:panelGroup>
+                        <center>
+                            <h:outputText style="font-size:16px;color:#336699;"  value="Señor Interventor, le recomendamos para diligenciar correctamente su reporte de obras 
+                                          y solicitar su respectiva validación consultar la circular 65 en" />
+
+                            <a href="http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx" style="font-size:16px;" target="_blank" >http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx</a>
+                            <h:outputText value=" Link Circulares." style="font-size:16px;color:#336699;"/>
+                        </center>
+                    </h:panelGroup>
+
+                    <a4j:commandButton id="btncerraraviso" value="#{var.aceptar}"
+                       onclick="#{rich:component('modalAvisoSupervisor')}.hide();
+                                                     return false;">
+                    </a4j:commandButton>
+
+                </h:panelGrid>
+            </rich:panel>
+        </h:form>
+    </rich:popupPanel>
+
+</ui:composition>

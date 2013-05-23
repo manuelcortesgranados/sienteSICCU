@@ -889,12 +889,13 @@ public class DetalleObra  {
 //
 //        return null;
 //    }
-    public String bt_downloadAlimen_action() {
+    public String bt_downloadAlimen_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();
+        DetalleObra doc= (DetalleObra) FacesUtils.getManagedBean("Supervisor$DetalleObra");
+        doc.getListaDocsAlimentacion().get(filaSeleccionada);      
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getListaDocsAlimentacion().get(filaSeleccionada).getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -316,7 +316,6 @@
                                         <rich:inplaceSelect id="inplaceSelect" showControls="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
                                                             value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-
                                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.actualizarEntidadContrato}" />
                                         </rich:inplaceSelect>
 
@@ -588,7 +587,6 @@
                                 </h:panelGrid >
 
                                 <rich:dataTable id="tablacontratoconv" style="width: 800px;"
-                                                binding="#{Supervisor$Contrato.tablacontconvproyecto}"
                                                 value="#{Supervisor$Contrato.listaObraContrato}"
                                                 rendered="#{Supervisor$Contrato.listaObraContrato.size()>0}"
                                                 sortMode="single" var="row" rows="6"
@@ -956,7 +954,7 @@
                             <rich:dataTable id="tablamodificar" sortMode="single" style="text-align: left; width: 100%;"
                                             value="#{Supervisor$Contrato.listaModificarContrato}"
                                             rendered="#{Supervisor$Contrato.listaModificarContrato.size()>0}"
-                                            binding="#{Supervisor$ModificarContrato.binditablamodi}"
+                                            rowKeyVar="filaSeleccionada"
                                             var="modificarcontr">
                                 <rich:column width="120px">
                                     <f:facet name="header">
@@ -1018,7 +1016,7 @@
                                     </f:facet>
 
                                     <a4j:commandLink id="btAdjuntarImagenmodi" style="font-size: 10px;"
-                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}"
+                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato(filaSeleccionada)}"
                                                      oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
                                                      render="tabladocumentomodi">
 

@@ -28,8 +28,8 @@
                     <h:graphicImage id="imgPeriodo" url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}" style="width: 113px" styleClass="picborder" />
                     <h:panelGrid columns="2">
                         <interkont:spacer width="150"/>
-                        <a4j:commandLink id="btAdjuntarImagen"
-                                         onclick="#{rich:component('modalImagenCiu')}.show(); return false;"
+                        <a4j:commandLink id="btAdjuntarImagen" 
+                                         oncomplete="#{rich:component('modalImagenCiu')}.show(); return true;"
                                          styleClass="p_examinar anchorLink"/>
                     </h:panelGrid>
                 </h:panelGrid>
@@ -38,16 +38,6 @@
 
                     <h:outputText id="lblnombreciudadano"  value="#{var.nombre}:" styleClass="vtitle19"/>
                     <h:inputText styleClass="fill" size="25" maxlength="250" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombrecompleto}"/>
-
-
-                    <h:outputText id="lblcontraseña"  value="#{var.contrasena}" styleClass="vtitle19" />
-                    <h:panelGroup>
-
-                        <a4j:commandButton oncomplete="#{rich:component('mp-cambiar-contrasena')}.show(); return true;"
-                                           value="#{var.cambiar}" immediate="true" >
-
-                        </a4j:commandButton>
-                    </h:panelGroup>
 
                     <h:outputText id="lblcorreoelectronico"  value="#{var.correo}" styleClass="vtitle19"/>
                     <h:inputText  size="25" maxlength="250" styleClass="fill"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}"/>
@@ -91,7 +81,7 @@
 
 
         </h:form>
-        <ui:include src="../Ciudadano/modalCiudadano/cambiarContraseña.xhtml"/>
         <ui:include src="../Ciudadano/modalCiudadano/ImagenModalCiudadano.xhtml"/>
+        
     </ui:define>
 </ui:composition>

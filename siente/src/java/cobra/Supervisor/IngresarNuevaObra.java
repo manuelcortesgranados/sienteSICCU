@@ -3680,9 +3680,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String desasociarContrato() {
-        
-        Relacioncontratoobra contselec = (Relacioncontratoobra) tablalistacontratos.getRowData();
+    public String desasociarContrato(int filaSeleccionada) {
+        IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        Relacioncontratoobra contselec = ign.getListacontratosobra().get(filaSeleccionada);
         listacontratosobra.remove(contselec);
         if (listacontratosobra.size() == 0) {
             validacion.setContratos(false);
@@ -4233,8 +4233,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String eliminarImagenLista() {
-        Imagenevolucionobra imgborrar = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+    public String eliminarImagenLista(int filaSeleccionada) {
+       IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        Imagenevolucionobra imgborrar = ign.getListaImagenesevolucionobra().get(filaSeleccionada);
         if (imgborrar.getTipoimagen().getIntidtipoimagen() == 1) {
             img = false;
         } else if (imgborrar.getTipoimagen().getIntidtipoimagen() == 5) {
@@ -4448,8 +4449,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String eliminarMarker() {
-        Marcador marEli = (Marcador) tablaMarkereli.getRowData();
+    public String eliminarMarker(int filaSeleccionada) {
+        IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        Marcador marEli = ign.getMarli().get(filaSeleccionada);
         marli.remove(marEli);
         listamarcadores.remove(marEli);
         if (listamarcadores.isEmpty()) {
@@ -4932,13 +4934,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String seleccionruta() {
+    public String seleccionruta(int filaSeleccionada) {
         try {
             marli = new ArrayList<Marcador>();
-            
-            Ruta rutaseleccion = (Ruta) getEntidadConvenio().getTablarutas().getRowData();
-            getObranueva().setRuta(rutaseleccion);
-            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(rutaseleccion.getStrcodigotramo()));
+            EntidadConvenio rutaseleccion = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
+            Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);              
+            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(ruta.getStrcodigotramo()));
             
             Marcador marc = new Marcador();
             int i = 0;

@@ -99,7 +99,7 @@
                     <rich:dataTable id="tablaOrden"
                                     rows="10"
                                     var ="_Orden"
-                                    binding="#{Financiera$FiduFinanciera.tablaOrdenListado}"
+                                    rowKeyVar="filaSeleccionada"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
@@ -166,9 +166,9 @@
 
             </h:form>
         </center>
-        <ui:include src="/modal/confirmarordenpago.jspx"/>
-        <ui:include src="/modal/ingresandoModal.jspx"/>
-        <ui:include src="/modal/listadoencargofidu.jspx"/>
+        <ui:include src="/modal/confirmarordenpago.xhtml"/>
+        <ui:include src="/modal/ingresandoModal.xhtml"/>
+        <ui:include src="/modal/listadoencargofidu.xhtml"/>
 
     </ui:define>
 </ui:composition>

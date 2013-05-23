@@ -398,9 +398,10 @@ public class AsociarContratos  {
         return false;
     }
 
-    public String desasociarContratoInterventoria() {
+    public String desasociarContratoInterventoria(int filaSeleccionada) {
 
-        Relacioncontratoobra contselec = (Relacioncontratoobra) tablacontratos.getRowData();
+        AsociarContratos asoc=(AsociarContratos)FacesUtils.getManagedBean("Supervisor$AsociarContratos");
+        Relacioncontratoobra contselec = asoc.getListacontratosobra().get(filaSeleccionada);
         listacontratosobra.remove(contselec);
         sumValorContrato = sumValorContrato.subtract(contselec.getNumvalorrelacion());
         getSessionBeanCobra().getCobraService().borrarRelacionContrato(contselec);
@@ -442,9 +443,9 @@ public class AsociarContratos  {
         return "asociarcontratos";
     }
 
-    public String agregarContratoInterventoria() {
-
-        Contrato contselec = (Contrato) tablacontratosasoc.getRowData();
+    public String agregarContratoInterventoria(int filaSeleccionada) {
+        AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
+        Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
 
         relacioncontratointer = new Relacioncontratoobra();
         relacioncontratointer.setContrato(contselec);

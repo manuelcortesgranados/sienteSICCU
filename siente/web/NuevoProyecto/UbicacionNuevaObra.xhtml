@@ -177,13 +177,16 @@
                                                 <a4j:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
                                                                    render="layoutLugar,gpDirMapa">
                                                 </a4j:commandButton>
-                                                <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click()" selector="#txtAddress" />
+                                                <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click();" selector="#txtAddress" />
                                             </h:panelGroup>
                                         </h:panelGrid>
                                         <h:panelGroup id="layoutLugar" >
 
                                             
-                                                <rich:dataTable id="datamarkers"  rows="4" style="text-align:left; width:100%;" binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
+                                                <rich:dataTable id="datamarkers" 
+                                                                rows="4" 
+                                                                style="text-align:left; width:100%;"
+                                                                rowKeyVar="filaSeleccionada"
                                                                 var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
                                                     <rich:column id="co1" style="width: 100px;"
                                                                  >
@@ -219,7 +222,7 @@
                                                         <f:facet name="header">
                                                             <h:outputText value="#{var.eliminar}" />
                                                         </f:facet>
-                                                        <a4j:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker}" render="datamarkers,layoutLugar,gpDirMapa, gpOpMapa"/>
+                                                        <a4j:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}" render="datamarkers,layoutLugar,gpDirMapa, gpOpMapa"/>
                                                     </rich:column>
                                                     <f:facet name="footer">
                                                         <rich:dataScroller id="dsmar" for="datamarkers"/>

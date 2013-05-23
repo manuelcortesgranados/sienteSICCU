@@ -35,7 +35,11 @@
                     </h:panelGroup>
                     <interkont:spacer height="10px" style="width:100%;"/>
                     <h:panelGroup id="pl_tabla_enviados">
-                        <rich:dataTable id="tablaMensajesEnviados" sortMode="single" style="text-align:left;width:100%;" value="#{Mensajes.listaMensajesEnviados}" var="currentRow"  rows="10" binding="#{Mensajes.tablaMensajesEnviados}">
+                        <rich:dataTable id="tablaMensajesEnviados" sortMode="single" style="text-align:left;width:100%;"
+                                        value="#{Mensajes.listaMensajesEnviados}"
+                                        var="currentRow"  
+                                        rows="10"
+                                        rowKeyVar="filaSeleccionada">
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                         >
                                 <f:facet name="header">
@@ -63,8 +67,8 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{var.Ver}"/>
                                 </f:facet>
-                                <a4j:commandLink action="#{Mensajes.bt_verenviados_action}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
-                                                 immediate="true" render="pg_camposVerEnviados,mp_ver_enviados">
+                                <a4j:commandLink action="#{Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
+                                                 immediate="true" render="pg_camposVerEnviados,mp_ver_enviados" execute="@this,pg_camposVerEnviados,mp_ver_enviados">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>

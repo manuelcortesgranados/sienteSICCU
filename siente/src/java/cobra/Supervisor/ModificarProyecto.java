@@ -1330,8 +1330,9 @@ public class ModificarProyecto  {
      *
      * @return
      */
-    public String btDescargarDocumentoAction() {
-        Documentoobra docdowload = (Documentoobra) tablaDocumentosModificacion.getRowData();
+    public String btDescargarDocumentoAction(int filaSeleccionada) {
+        ModificarProyecto mp=(ModificarProyecto)FacesUtils.getManagedBean("Supervisor$ModificarProyecto");
+         Documentoobra docdowload = mp.getListadocumentosmodi().get(filaSeleccionada);
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/"+getSessionBeanCobra().getBundle().getString("versioncobra")+ docdowload.getStrubicacion());
         } catch (Exception e) {
@@ -1347,17 +1348,19 @@ public class ModificarProyecto  {
         listadocumentosmodi = getSessionBeanCobra().getCobraService().encontrarDocumentosModificacion(historicoobra.getOididhistoricoobra());
     }
 
-    public String btEliminarDocumentoAction() {
-        eliminarDocumento();
+    public String btEliminarDocumentoAction(int filaSeleccionada) {
+        eliminarDocumento(filaSeleccionada);
         return null;
     }
 
     /**
      * Permite eliminar el documento de una modificación
      */
-    public void eliminarDocumento() {
+    public void eliminarDocumento(int filaSeleccionada) {
         boolean archivoEliminado = false;
-        documentoobra = (Documentoobra) tablaDocumentosModificacion.getRowData();
+         ModificarProyecto mp=(ModificarProyecto)FacesUtils.getManagedBean("Supervisor$ModificarProyecto");
+        documentoobra = mp.getListadocumentosmodi().get(filaSeleccionada);
+       
         listadocumentosmodi.remove(documentoobra);
         getSessionBeanCobra().getCobraService().borrarDocumento(documentoobra);
         archivoEliminado = ArchivoWebUtil.eliminarArchivo(this.documentoobra.getStrubicacion());
