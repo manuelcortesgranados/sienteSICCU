@@ -3080,9 +3080,9 @@ public class NuevoContratoBasico   {
      *
      * @return No retorna ningun valor
      */
-    public String contratoPadreSelec() {
+    public String contratoPadreSelec(int filaSeleccionada) {
         varmostrarcontrpa = 1;
-        contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
+        contrpadre = listaContratosPadre.get(filaSeleccionada);
         return null;
 
     }
@@ -3600,11 +3600,9 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String encargoFiduSelec() {
-
-        encargofiduciario = (Encargofiduciario) tablaEncargofiduciario.getRowData();
+    public String encargoFiduSelec(int filaSeleccionada) {
+        encargofiduciario = listaEncargofiduciario.get(filaSeleccionada);
         contrato.setEncargofiduciario(encargofiduciario);
-
         return null;
 
     }
@@ -3985,10 +3983,10 @@ public class NuevoContratoBasico   {
      *
      * @return
      */
-    public String editarContratistas() {
+    public String editarContratistas(int filaSeleccionada) {
         boolcrearcontratista = false;
         booleditando = true;
-        contratista = (Contratista) tablacontratistas.getRowData();
+        contratista = listaContratista.get(filaSeleccionada);
         cambiarPersona();
 
         return null;

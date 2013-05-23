@@ -14,25 +14,20 @@
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
-            <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-numencargo" onclick="#{rich:component('mp-listado-numencargo')}.hide(); return false;" immediate="true"
                                        styleClass="cerrar"  />
                 </h:panelGroup>
-            </h:form>
         </f:facet>
         <center>
-            <h:form>
                 <h:panelGrid columns="3" >
                     <h:outputText value="#{var.consultar} #{var.numeroencargo} " style="font-size:12px"/>
                     <rich:inputNumberSpinner enableManualInput="true" minValue="0" value="#{Supervisor$Contrato.codigoencargo}"
                                              inputSize="10" maxValue="100000" onfocus="clearText(this)" onblur="clearText(this)" />
                     <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarEncargo}" render="tabla-listado-numencargo,gpTotalNumEncar"/>
                 </h:panelGrid>
-            </h:form>
         </center>
         <rich:panel id="gpTotalNumEncar">
-            <h:form id="form-mp-listado-numencargo">
                 <h:panelGrid style="width:100%;">
                     <interkont:spacer height="5" style="width:100%;"/>
                     <rich:dataTable id="tabla-listado-numencargo"
@@ -88,7 +83,7 @@
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$Contrato.encargoFiduSelec(filaSeleccionada)}"
-                                                   render="gpencargoseleecionado"
+                                                   render="gpencargoseleecionado" execute="@this"
                                                    oncomplete="#{rich:component('mp-listado-numencargo')}.hide();" >
                                 </a4j:commandButton>
                             </rich:column>
@@ -117,7 +112,6 @@
                         </f:facet>
                     </rich:dataTable>
                 </h:panelGrid>
-            </h:form>
         </rich:panel>
     </rich:popupPanel>
 </ui:composition>
