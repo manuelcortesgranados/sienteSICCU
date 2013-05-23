@@ -241,8 +241,8 @@
                             </rich:collapsiblePanel>
                             <interkont:spacer height="10px" style="width:100%;"/>
                             <h:panelGroup >
-                                <a4j:commandButton id="btVolverTipif"  value="#{var.volver}"
-                                                   action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" render="rpTipificacion" />
+                                <h:commandButton id="btVolverTipif"  value="#{var.volver}"
+                                                   action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" />
 
                                 <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.validabasicos}" />
                                 <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
