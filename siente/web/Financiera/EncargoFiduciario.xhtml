@@ -58,7 +58,7 @@
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
                                                    required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}" >
-                                        <a4j:ajax  event="changed" />
+                                        <a4j:ajax  event="change" />
                                     </rich:calendar>
                                 </h:panelGroup>
                                 <rich:message for="fechaapertura" style="color: red"/>
@@ -94,9 +94,9 @@
             </rich:tab>
         </rich:tabPanel>
 
-        <ui:include src="/modal/listadotercero.jspx"/>
-        <ui:include src="/modal/ingresandoModal.jspx"/>
-        <ui:include src="/modal/confirmarguardado.jspx"/>
+        <ui:include src="/modal/listadotercero.xhtml"/>
+        <ui:include src="/modal/ingresandoModal.xhtml"/>
+        <ui:include src="/modal/confirmarguardado.xhtml"/>
 
     </ui:define>
 </ui:composition>
