@@ -1830,9 +1830,9 @@ public class GestionarSolicitudObra  {
         return null;
     }
 
-    public String verProyectosSoli() throws Exception {
-        Obra obra = (Obra) tablaProyectosAso.getRowData();
-        // IngresarNuevaObra igre = new IngresarNuevaObra();
+    public String verProyectosSoli(int filaSeleccionada) throws Exception {
+        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Obra obra = sessionBeanCobra.getSolicitudService().getListaproyectoasoci().get(filaSeleccionada);
 
         if (obra.getTipoestadobra().getIntestadoobra() == 1) {
             getAdministrarObraNew().setObra(obra);
