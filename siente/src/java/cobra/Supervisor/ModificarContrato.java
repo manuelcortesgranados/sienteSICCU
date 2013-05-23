@@ -793,19 +793,25 @@ public class ModificarContrato   {
         return null;
     }
 
-    public String bt_download_documento_action() {
-        // TODO: Process the action. Return value is a navigation
-        // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tabladocuModiContrato.getRowData();
-        getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
-        //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
+    /**
+     * Seleccionar un registro de documentos de modificación en contrato.
+     *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
+     * @return null
+     */
+    public String bt_download_documento_action(int filaSeleccionada) {
+        ModificarContrato modificarContrato = (ModificarContrato) FacesUtils.getManagedBean("Supervisor$ModificarContrato");
+        Documentoobra documentoObra = modificarContrato.getListadocuModifContrato().get(filaSeleccionada);
+        
+        getSessionBeanCobra().setUrlAbri(documentoObra.getStrubicacion());
+
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + documentoObra.getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(Modificacioncontrato.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-
     }
 
     /**
