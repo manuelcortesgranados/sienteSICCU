@@ -70,11 +70,10 @@
                                                         <f:validateLength maximum="20" minimum="8"/>
                                                     </h:inputSecret>
 
-                                                    <a4j:commandButton id="enviardos"  onclick="Richfaces.showModalPanel('ajaxLoadingModalBox', {width: 155, height: 155});"
-                                                                       value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
-                                                                       >
-                                                        <a4j:ajax event="click"   oncomplete="Richfaces.hideModalPanel('ajaxLoadingModalBox')"/>
-                                                    </a4j:commandButton>
+                                                    <h:commandButton id="enviardos"   value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                                     type="submit" 
+                                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();return true;"
+                                                                    /> 
                                                 </h:panelGrid>                                                      
                                             </center>
                                         </h:panelGroup>

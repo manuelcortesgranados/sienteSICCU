@@ -366,6 +366,7 @@ public class Alimentar {
     }
 
     public List<Relacionalimentacionactividad> getRegistrosmatrix() {
+        System.out.println("this rm = " + registrosmatrix.size());
         return registrosmatrix;
     }
 
