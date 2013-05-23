@@ -28,7 +28,6 @@
         <h:form >
             <rich:panel>
                 <rich:dataTable id="tablaproyectosah" rendered="#{SessionBeanCobra.cobraService.verproy}"
-                                binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaproyectosah}"
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
                                 var="currentRow" style="width:100%;">
                     <f:facet name="header">
@@ -76,10 +75,10 @@
                                 <h:outputText value="#{currentRow.intplazoobra}"/>
                             </rich:column>
                             <rich:column>
-                                <a4j:commandLink type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{currentRow.intcodigoobra}';">
+                                <a4j:commandLink type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{currentRow.intcodigoobra}';">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
-                                <a4j:commandLink  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{currentRow.intcodigoobra}';">
+                                <a4j:commandLink  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{currentRow.intcodigoobra}';">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>

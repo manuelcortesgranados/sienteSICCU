@@ -119,7 +119,7 @@
                                 </h:panelGrid>
                                 <h:panelGrid columns="2" id="gpentidadministerios" >
                                     <h:outputLabel id="lblruta"  value="#{var.seleccionruta}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}" />
-                                    <h:panelGroup id="pginvias" >
+                                    <h:panelGroup id="pginvias" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}">
                                         <h:inputText  id="txtruta" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.ruta.strcodigotramo} #{Supervisor$IngresarNuevaObra.obranueva.ruta.strnombretramo}" >
                                         </h:inputText>
                                         <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  

@@ -66,8 +66,8 @@
                             <center>
                                 <h:panelGrid columns="2">
                                     <a4j:commandButton id="btn_reiniciar_obra" action="#{Supervisor$SuspenderObra.reiniciarObra}" value="#{var.reiniciarlaobra}"
-                                                       styleClass="btn_pri_inm"   style="font-size: 12px;">
-                                        <a4j:ajax event="complete" render="layoutConfReinicio" onbeforesubmit="#{rich:component('panelConfirmarReinicio')}.show();"/>
+                                                       styleClass="btn_pri_inm"   style="font-size: 12px;"
+                                                       oncomplete="#{rich:component('panelConfirmarReinicio')}.show();">
                                     </a4j:commandButton>
                                     <a4j:commandButton id="btn_cancelar_reinicio" value="#{var.cancelar}" style="font-size: 12px;" action="#{Supervisor$SuspenderObra.cancelarReinicio}"
                                                        >

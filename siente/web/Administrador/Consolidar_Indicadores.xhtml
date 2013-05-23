@@ -1,30 +1,30 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                template="./../facelets/template_indicadores.xhtml">
 
-    <f:view locale="#{var.rcalendarlocale}">
-
-        <ui:composition template="/facelets/template_indicadores.xhtml">
-
-            <ui:define name="menu">
-                <ui:include src="/facelets/menu_gestion.xhtml"/>
-            </ui:define>
-            <ui:define name="menu_lateral">
-                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            </ui:define>
-
-            <ui:define name="head">
-                <title>Consolidado Indicadores</title>
+    <ui:define name="head">
+        <title>Consolidado Indicadores</title>
                 <h:outputScript  name="/resources/script_supervisor.js"/>
-            </ui:define>
+    </ui:define>
 
-            <ui:define name="body">
-                <h:form>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <h:form>
+      <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+      </h:form>
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
                     <h:panelGrid id="consolidarIndicadores" style="width:100%;" >
                         <h:panelGroup id="layoutConsolidarIndicadores">
                             <center>
@@ -35,9 +35,7 @@
                                     <a4j:commandButton id="consolidar_si"  value="#{var.si}" action="#{GraficarIndicadores.consolidar}"
                                                        style="font-size: 12px;" render="PanelConsolidado">
                                     </a4j:commandButton>
-                                    <h:commandButton id="consolidar_no" value="#{var.no}" style="font-size: 12px;">
-                                        <a4j:ajax event="complete" render="consolidarIndicadores"/>
-                                    </h:commandButton>
+                                    <a4j:commandButton id="consolidar_no" value="#{var.no}" style="font-size: 12px;" oncomplete="true" render="consolidarIndicadores"/>
                                 </h:panelGrid>
                                 <h:panelGrid id="PanelConsolidado">
                                     <h:outputLabel value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
@@ -46,7 +44,6 @@
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:form>
-            </ui:define>
-        </ui:composition>
-    </f:view>
+    </ui:define>
+
 </ui:composition>

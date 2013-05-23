@@ -58,9 +58,10 @@
                         </center>
                     </rich:panel>
                     <a4j:commandButton value="#{var.adicionar} #{var.actividad}"
-                                       action="#{Supervisor$Alimentar.agregaractividad}" render="objetoactividad">
-                        <a4j:ajax event="complete" 
-                                  render="tablaitemprevistos, objetoactividad, validarguardar"/>
+                                       action="#{Supervisor$Alimentar.agregaractividad}"
+                                       oncomplete="true"
+                                       render="tablaitemprevistos, objetoactividad, validarguardar" >
+                    
                     </a4j:commandButton>
 
                     <rich:dataTable
@@ -71,7 +72,7 @@
                         rows="2"
                         value="#{Supervisor$Alimentar.listactividadobra}"
                         var="itemsprevis"
-                        binding="#{Supervisor$Alimentar.tablaitemnoprevistos}"
+                        rowKeyVar="filaSeleccionada"
                         style="width: 96%" >
 
                         <f:facet name="header">
@@ -114,7 +115,7 @@
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <a4j:commandButton value="#{var.eliminar}" action="#{Supervisor$Alimentar.eliminaractividad}"
+                                <a4j:commandButton value="#{var.eliminar}" action="#{Supervisor$Alimentar.eliminaractividad(filaSeleccionada)}"
                                                    render="tablaitemprevistos"/>
                             </rich:column>
                         </rich:columnGroup>

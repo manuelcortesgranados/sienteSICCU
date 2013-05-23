@@ -23,33 +23,36 @@
                     <h:outputText  value="Ciudadano" styleClass="style-modal-dialog-head-title"/>
                 </h:panelGrid>
             </h:panelGroup>
-        </f:facet>        
-        <h:form>
-            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
-                <center>                    
-                    <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
+        </f:facet>       
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
+                <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+                    <center>                    
+                        <h:panelGrid id="pgguardarCiudadano" style="width:100%;" columnClasses="panelcenter" >
 
-                        <h:panelGroup>
-                            <center>
-                                <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
-                            </center>
-                        </h:panelGroup>
-                        <h:panelGroup>
-                            <interkont:spacer width="120"/>
+                            <h:panelGroup>
+                                <center>
+                                    <h:outputText value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  styleClass="tab-login-label-title" />
+                                </center>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <interkont:spacer width="120"/>
 
 
-                            <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide(); return false;" render="gpLogPrinci"/>
-                            </a4j:commandButton>
+                                <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}">
+                                    <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide(); return false;" render="gpLogPrinci"/>
+                                </a4j:commandButton>
 
-                            <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
-                                               action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                               onclick="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
+                                <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                                   action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
+                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
 
-                        </h:panelGroup>
-                    </h:panelGrid>
-                </center>
-            </rich:panel>
-        </h:form>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                    </center>
+                </rich:panel>
+            </h:form>
+        </rich:panel>
+
     </rich:popupPanel>
 </ui:composition>

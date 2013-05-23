@@ -30,11 +30,10 @@
         <h:form >
             <rich:panel>
                 <rich:dataTable id="tablaproyectos"
-                                binding="#{SolicitudObra$GestionarSolicitudObra.tablaProyectosAso}"
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rowKeyVar="filaSeleccionada"
-                                 var="currentRow" style="width:100%;">
+                                var="currentRow" style="width:100%;">
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  breakRowBefore="true">
@@ -78,10 +77,9 @@
                             </rich:column>
                              <rich:column>
                                 <a4j:commandLink  title="#{var.ver} #{var.proyecto}" style="font-size:11px;"
-                                                   action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli}"
-                                                   oncomplete="">
+                                                  action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli(filaSeleccionada)}"
+                                                  oncomplete="#{rich:component('modaltablaproyectos')}.hide();">
                                     <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
-                                    <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.hide();"/>
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:columnGroup>
