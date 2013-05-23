@@ -212,8 +212,7 @@
                                                                     </h:panelGroup>
                                                                 </center>
                                                             </h:panelGroup>
-                                                            <a4j:commandLink styleClass="tab-login-input-button-photo" value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" immediate="true" execute="@this">   
-                                                                <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('modalImagenCorreo')}.show();" />
+                                                            <a4j:commandLink styleClass="tab-login-input-button-photo" value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
                                                             </a4j:commandLink>  
                                                         </h:panelGrid>
                                                     </h:panelGrid>
