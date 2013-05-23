@@ -99,10 +99,10 @@
                     </h:panelGrid>
                     <interkont:spacer height="20" />
                     <h:panelGrid  columns="2" style="text-align: left;margin-left: 40px;">
-                        <h:commandButton id="resumengeneral_rehabilitacion" value="#{var.resumengeneralboton}" action="#{ControlGerencial.reportePdfFichaBalanceAh}" styleClass="style-modal-button button-dash-board" style="width:50px;">
-                            <a4j:ajax event="oncomplete" onbeforesubmit="javascript:Richfaces.hideModalPanel('modalDashboard_ah');" />
-                        </h:commandButton>
-                    </h:panelGrid>
+                        <h:commandButton id="resumengeneral_rehabilitacion" value="#{var.resumengeneralboton}" action="#{ControlGerencial.reportePdfFichaBalanceAh}"
+                                         styleClass="style-modal-button button-dash-board" style="width:50px;"
+                                         onclick="#{rich:component('modalDashboard_ah')}.hide();return true;"/>
+                      </h:panelGrid>
                 </center>
             </rich:panel>
         </h:form>
