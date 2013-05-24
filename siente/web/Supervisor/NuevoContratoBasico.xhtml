@@ -173,7 +173,7 @@
                                                 <h:outputText value="#{var.eliminar}"/>
                                             </f:facet>
                                             <a4j:commandButton action="#{Supervisor$Contrato.eliminarItemPadreSele}"
-                                                               render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra"  styleClass="eliminaravanzada"/>
+                                                               render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar" styleClass="eliminaravanzada"/>
                                         </rich:column>
                                     </rich:dataTable>
                                 </center>
@@ -563,7 +563,7 @@
                     </rich:collapsiblePanel>
                     <h:panelGrid columns="2">
                         <a4j:commandButton id="guardar_contrato"  action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
-                                           render="pgcontrato,gpValContrato">
+                                           render="pgcontrato,gpValContrato" execute="@this">
 
                         </a4j:commandButton>
                         <h:commandButton id="btCancelar"  value="#{var.cancelar}" immediate="true"

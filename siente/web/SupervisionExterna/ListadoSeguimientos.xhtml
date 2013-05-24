@@ -13,7 +13,7 @@
 
     <ui:define name="head">
         <title>Seguimientos</title>
-        
+
         <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
 
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
@@ -29,21 +29,21 @@
             });
         </script>
     </ui:define>
-    
+
     <ui:define name="title">
         <h:outputText value="Seguimientos" />
         <h:outputText style="font-size:8px; float:right;" value="(#{SupervisionExterna$ListadoSeguimientos.id})" />
     </ui:define>
-    
+
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
-    
+
     <ui:define name="menu_lateral">
         <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
-        
+
         <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
-        
+
         <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard}">
             <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml" />
         </h:panelGroup>
@@ -52,10 +52,12 @@
             <ui:include src="/facelets/panel_conozca_inversion.xhtml" />
         </h:panelGroup>
     </ui:define>
-    
+
     <ui:define name="body">
-        <h:panelGroup styleClass="centrado">
-            <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml" />
-        </h:panelGroup>
+        <h:form>
+            <h:panelGroup styleClass="centrado">
+                <ui:include src="/facelets/Supervisor/listado_seguimientos.xhtml" />
+            </h:panelGroup>
+        </h:form>
     </ui:define>
 </ui:composition>

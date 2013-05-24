@@ -37,65 +37,55 @@
                     <a4j:commandLink id="btnInfoGralRegistro" styleClass="superv01 anchorLink" value="#{var.houinfo}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
                                      action="#{Supervision$Externa.mostrarDatosGenerales}"
-                                     onclick="#{rich:component('modaldatosobrasgenerales')}.show();
-                                             return true;" 
+                                     oncomplete="#{rich:component('modaldatosobrasgenerales')}.show();" 
                                      render="modaldatosobrasgenerales" />
 
                     <a4j:commandLink id="btnInformeVisita" styleClass="superv02 anchorLink" value="#{var.informeVisita}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalinformevisita')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalinformevisita')}.show();"
                                      render="modalinformevisita" />
 
                     <a4j:commandLink id="btnInfoGralFinanciera" styleClass="superv03 anchorLink" value="#{var.infofinanciera}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalinformacionfinanciera')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalinformacionfinanciera')}.show();"
                                      render="modalinformacionfinanciera" />
 
                     <a4j:commandLink id="btnInfoGralPolizaContrato" styleClass="superv04 anchorLink" value="#{var.polizacontrato}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
                                      action="#{Supervision$Externa.mostrarPolizaSeguimiento}"
-                                     onclick="#{rich:component('modalpolizacontratosuper')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalpolizacontratosuper')}.show();"
                                      render="modalpolizacontratosuper" />
                     
                     <a4j:commandLink id="btnInfoGralImpactoSocial" styleClass="superv05 anchorLink" value="#{var.impactoSocial}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalimpactosocial')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalimpactosocial')}.show();"
                                      render="modalimpactosocial" />
 
                     <a4j:commandLink id="btnInfoGeoreferenciada" styleClass="superv06 anchorLink" value="#{var.ubicaciongeoreferenciada}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalubicacionsupervision')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalubicacionsupervision')}.show();"
                                      render="modalubicacionsupervision" />
 
                     <a4j:commandLink id="btnActividadesContractuales" styleClass="superv07 anchorLink" value="#{var.actividadescontractuales}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
                                      action="#{Supervision$Externa.llenarlistadoActividadesSeguimientos}"
-                                     onclick="#{rich:component('modalactividadescontractuales')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalactividadescontractuales')}.show();"
                                      render="modalactividadescontractuales" />
 
                     <a4j:commandLink id="btnInfoInterventoria" styleClass="superv08 anchorLink" value="#{var.infointerventoria}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalinfogeneralint')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalinfogeneralint')}.show();"
                                      render="modalinfogeneralint" />
 
                     <a4j:commandLink id="btnInfoFinancieraInterventoria" styleClass="superv09 anchorLink" value="#{var.infofinancierainter}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                     onclick="#{rich:component('modalinformacionfinancieraInterv')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalinformacionfinancieraInterv')}.show();"
                                      render="modalinformacionfinancieraInterv" />
 
                     <a4j:commandLink id="btnPolizasInterventoria" styleClass="superv10 anchorLink" value="#{var.polizainterventoria}"
                                      style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
                                      action="#{Supervision$Externa.mostrarPolizaSeguimiento}"
-                                     onclick="#{rich:component('modalpolizainterventoriasuper')}.show();
-                                             return true;"
+                                     oncomplete="#{rich:component('modalpolizainterventoriasuper')}.show();"
                                      render="modalpolizainterventoriasuper" />
                 </h:panelGrid>
                 <h:commandButton action="#{Supervision$Externa.volverDetalle}" value="Volver" />
