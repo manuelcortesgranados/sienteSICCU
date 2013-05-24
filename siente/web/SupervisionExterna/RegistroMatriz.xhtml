@@ -54,8 +54,7 @@
 
                         <h:panelGrid columns="2">
                             <a4j:commandLink id="subirRegistoMat" styleClass="subir anchorlink" title="#{var.subirarchivos}"
-                                             onclick="#{rich:component('panelUploadArchivoSuper')}.show();
-                                               return true;"/>
+                                             oncomplete="#{rich:component('panelUploadArchivoSuper')}.show();" />
                         </h:panelGrid>
                     </rich:panel>
                 </rich:panel>
