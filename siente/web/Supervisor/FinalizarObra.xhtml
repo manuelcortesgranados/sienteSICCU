@@ -124,7 +124,7 @@
                                         <h:outputText  value="#{var.antesderegistrarlaliquidacion}"/>
                                         <h:panelGrid id="layoutActaFin" columns="2" width="500" columnClasses="labelsDetalle">
                                             <a4j:commandButton id="btActaFin" styleClass="btn_sec_gra" value="#{var.examinar}"  immediate="true"
-                                                               onclick="#{rich:component('panelActaFin')}.show(); return true;" />
+                                                               oncomplete="#{rich:component('panelActaFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactafin}" />
                                             <h:outputText  value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}"/>
@@ -134,8 +134,8 @@
                                             <h:outputText  value="#{var.aldarclickensi}"/>
                                         </h:panelGroup>
                                         <a4j:commandButton id="BTaceptarFinPaso3" styleClass="btn_sec_peq" value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
-                                                           render="gpErrorFin, layoutConfFin"  >
-                                            <a4j:ajax event="complete" oncomplete="#{rich:component('panelConfirmaFin')}.show(); return true;" />
+                                                           render="gpErrorFin, layoutConfFin" oncomplete="#{rich:component('panelConfirmaFin')}.show(); return true;"  execute="@this">
+                                            
                                         </a4j:commandButton>
 
                                         <interkont:spacer height="30" width="200"/>

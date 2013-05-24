@@ -33,7 +33,7 @@
                     </h:outputLabel>
 
                     <rich:calendar locale="#{var.fechadocumento}"  datePattern="d-MMM-yyyy" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
-                        <a4j:ajax event="changed" render="hpCargar"/>
+                        <a4j:ajax event="change" render="hpCargar"/>
                     </rich:calendar>
 
                     <h:outputLabel id="lblObseroObra"  value="#{var.observaciondocumento}" for="txtObserProyecto" >
@@ -51,6 +51,6 @@
 
             </h:form>
         </center>
-        <ui:include src="/modal/cargarExcelMovimientos.jspx"/>
+        <ui:include src="/modal/cargarExcelMovimientos.xhtml"/>
     </ui:define>
 </ui:composition>

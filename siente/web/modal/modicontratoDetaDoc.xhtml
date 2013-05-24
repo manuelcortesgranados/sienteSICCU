@@ -35,7 +35,6 @@
                                         style="text-align:left;width:100%;" 
                                         value="#{Supervisor$ModificarContrato.listadocuModifContrato}"
                                         var="currentRow"
-                                        binding="#{Supervisor$ModificarContrato.tabladocuModiContrato}"
                                         rowKeyVar="filaSeleccionada">
                             <rich:column id="strnombremodi"  width="120px">
                                 <f:facet name="header">
@@ -57,8 +56,8 @@
                                 <f:facet name="header">
                                     <h:outputText value="#{var.Ver}"/>
                                 </f:facet>
-                                <h:commandButton  value="Ver" id="boton" action="#{Supervisor$ModificarContrato.bt_download_documento_action}" immediate="true">
-                                </h:commandButton>
+                                <h:commandButton value="Ver" id="boton" immediate="true"
+                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action(filaSeleccionada)}" />
                             </rich:column>
 
 
@@ -68,7 +67,8 @@
                         <h:panelGrid columns="5">
                             <a4j:commandButton id="confirmarContratomodi"  value="#{var.aceptar}"
                                                style="font-size: 12px;"
-                                               onclick="#{rich:component('panelModiContratoDoc')}.hide();" />
+                                               onclick="#{rich:component('panelModiContratoDoc')}.hide();
+                                             return false;" />
                         </h:panelGrid>
                     </center>
 

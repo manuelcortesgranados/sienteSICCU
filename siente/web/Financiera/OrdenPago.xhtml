@@ -49,7 +49,7 @@
                                     <h:outputLabel value="#{Financiera$FiduFinanciera.financieraService.ordendepago.encargofiduciario.strdescripcion}"/>
 
                                     <a4j:commandButton  id="bt-ver-listado-encargo"
-                                                        oncomplete="#{rich:component('mp-listado-encargo')}.show()" style="font-size: 10px;" value="#{var.verencargo}" immediate="true"
+                                                        oncomplete="#{rich:component('mp-listado-encargo')}.show();" style="font-size: 10px;" value="#{var.verencargo}" immediate="true"
                                                         render="gpEncargo" action="#{Financiera$FiduFinanciera.verEncargo}"
                                                         />
                                 </h:panelGroup>

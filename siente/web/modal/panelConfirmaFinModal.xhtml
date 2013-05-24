@@ -34,8 +34,9 @@
                                           style="font-size:12px;"/>
                     <h:panelGroup>
                         <a4j:commandButton id="BTaceptarFinaliza" value="#{var.si}" action="#{Supervisor$AdministrarObraNew.registrarLiquidacion}"
-                                         onclick="#{rich:component('panelConfirmaFin')}.hide(); #{rich:component('panelFinalizado')}.show();"
+                                         onclick="#{rich:component('panelConfirmaFin')}.hide();  #{rich:component('panelFinalizado')}.show();"
                                            rendered="#{Supervisor$AdministrarObraNew.verFin}"
+                                           oncomplete=""
                                               style="font-size:12px;">
                             <a4j:ajax oncomplete="true"  onbeforesubmit="#{rich:component('panelCargando')}.hide;" />
                         </a4j:commandButton>

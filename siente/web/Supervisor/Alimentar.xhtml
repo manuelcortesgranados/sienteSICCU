@@ -32,11 +32,8 @@
     <ui:define name="body">
         <h:form id="alimentaravance">
             <h:panelGroup id="gpPrincipalAlimentar" rendered="#{Supervisor$Alimentar.vertodoalimentar}">
-                <rich:collapsiblePanel switchType="ajax" id="gpAlimentarObra" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
-                    <f:facet name="header">
-                        <h:outputText value="#{var.definirperiodoavance}"/>
-                    </f:facet>
-
+                <rich:collapsiblePanel header="#{var.definirperiodoavance}" switchType="ajax" id="gpAlimentarObra" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
+                  
                     <h:panelGrid id="gpBasicos" columns="2" style="width:100%;">
                         <h:panelGrid columns="2" style="width:100%;" columnClasses="panelizquierda,panelcenter">
                             <h:panelGroup style="width:100%;">
@@ -118,10 +115,8 @@
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <h:panelGroup id="pnActividades" rendered="#{Supervisor$Alimentar.editarActividades}">
-                    <rich:collapsiblePanel  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.actividadesproyecto}"/>
-                        </f:facet>
+                    <rich:collapsiblePanel header="#{var.actividadesproyecto}"  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
+                       
                         <rich:panel id="layoutTablaMatrix" >
                             <h:panelGrid columns="2" style="width:100%;">
                                 <rich:dataTable  id="datosgeneralesAlimentar" style="width:100%;">
@@ -248,6 +243,64 @@
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
+                                
+                                
+                                        <rich:columnGroup >
+                                            <rich:column id="Descripcion" width="250px">
+                                                <rich:panel style="width:250px"> 
+
+                                                    <h:outputText value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
+                                                    <h:outputText value="#{registros.actividadobra.strdescactividad}"  style="font-weight: bold; color:red;" rendered="#{registros.actividadobra.boolimprevisto}"/>
+
+                                                </rich:panel> 
+                                            </rich:column>
+                                            <rich:column id="Unidad" style="text-align: center;" >
+                                                <h:outputText value="#{registros.actividadobra.strtipounidadmed}" styleClass="matrixvalor "/>
+                                            </rich:column>
+                                            <rich:column id="Precio" style="text-align: right;">
+                                                <h:outputText value="#{registros.actividadobra.numvalorplanifao}" styleClass="matrixvalor ">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column id="Cantidad2" style="text-align: right;">
+                                                <h:outputText value="#{registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor "/>
+                                            </rich:column>
+                                            <rich:column id="TotalActividad" style="text-align: right;">
+                                                <h:outputText value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column id="CantFaltAct" style="text-align: right;">
+                                                <h:outputText id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" styleClass="matrixvalor "/>
+                                            </rich:column>
+
+                                            <rich:column id="ValorEjec" style="text-align: right;">
+                                                <h:outputText id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" styleClass="matrixvalor ">
+                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                                </h:outputText>
+                                            </rich:column>
+                                            <rich:column id="ValorFaltanAct" style="text-align: right;">                                          
+
+
+                                                <h:outputText id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" styleClass="matrixvalor ">
+                                                    <f:convertNumber type="percent"/>
+                                                </h:outputText>
+
+                                            </rich:column>
+                                            <rich:column id="CantidadEjec" style="text-align: right;">
+                                                <h:panelGrid styleClass="tablamenuact" cellpadding="0" cellspacing="0" columns="2" > 
+                                                    <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
+
+                                                        <f:validateDoubleRange minimum="0" />
+                                                    </h:inputText>
+                                                    <a4j:commandLink styleClass="actualizaralim anchorLink"  action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
+                                                                     render="layoutTablaMatrix, layoutComentafactor"/>
+
+                                                </h:panelGrid>
+                                                <rich:message styleClass="error_texto"  for="txtCantEjec"/>
+                                            </rich:column>
+                                        </rich:columnGroup>
+                                
 
 
                                 <f:facet name="footer">
@@ -284,11 +337,8 @@
 
 
 
-                            <rich:collapsiblePanel id="pncual" switchType="ajax"  style="text-align:center;">
-                                <f:facet name="header">
-                                    <h:outputText value="#{var.avancescualitativos}"/>
-                                </f:facet>
-
+                            <rich:collapsiblePanel header="#{var.avancescualitativos}" id="pncual" switchType="ajax"  style="text-align:center;">
+                              
                                 <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;" >
                                     <interkont:spacer width="17"/>
                                     <interkont:spacer height="14"/>
@@ -365,10 +415,8 @@
                                     </h:panelGroup>
                                 </center>
                             </rich:collapsiblePanel>
-                            <rich:collapsiblePanel  switchType="ajax">
-                                <f:facet name="header">
-                                    <h:outputText value="#{var.impactoSocial}"/>
-                                </f:facet>
+                            <rich:collapsiblePanel header="#{var.impactoSocial}"  switchType="ajax">
+                               
                                 <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" width="60%">
                                     <interkont:spacer width="17" height="14"/>
                                     <interkont:spacer height="14"/>
@@ -407,11 +455,8 @@
                 </h:panelGroup>
                 <h:panelGrid id="layoutComentafactor" columns="2" columnClasses="top_align" style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
 
-                    <rich:collapsiblePanel id="layoutFactores" style="width:100%;" rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
-                        <f:facet name="header">
-                            <h:outputText value="#{var.atencion}"/>
-                        </f:facet>
-
+                    <rich:collapsiblePanel header="#{var.atencion}" id="layoutFactores" style="width:100%;" rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
+                       
                         <h:outputText  value="#{var.factoresdeatraso}"/>
                         <h:panelGrid columns="3" columnClasses="labelsDatos,labelsDatos, labelsDatos ">
                             <h:outputText  value="#{var.tipodefactoratraso}"/>
@@ -452,7 +497,7 @@
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
-                                    <rich:columnGroup id="Cuerpo">
+                                    <rich:columnGroup>
                                         <rich:column id="descripcion" width="150px">
                                             <h:outputText value="#{registros.strdescfactor}"/>
                                         </rich:column>
@@ -478,10 +523,8 @@
                     </rich:collapsiblePanel>
                 </h:panelGrid>
 
-                <rich:collapsiblePanel switchType="ajax" id="gpSubirImagen" expanded="false"  style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
-                    <f:facet name="header">
-                        <h:outputText value="#{var.anadirimagen}"/>
-                    </f:facet>
+                <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"  style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+                   
                     <h:panelGrid id="layoutImagenDetalle" styleClass="fondo_foto" style="text-align:center;">
                         <h:graphicImage id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
@@ -489,10 +532,8 @@
                                            styleClass="btn_pri_gra"   style="font-size:12px;"/>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
-                <rich:collapsiblePanel switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}" style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
-                    <f:facet name="header">
-                        <h:outputText value="#{var.anadirotrosdoc}"/>
-                    </f:facet>
+                <rich:collapsiblePanel header="#{var.anadirotrosdoc}" switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}" style="text-align:center;" rendered="#{!Supervisor$Alimentar.editarActividades}">
+                  
                     <center>
                         <h:panelGrid id="layoutActa" columns="6">
                             <h:outputLabel id="lblActa"  value="#{var.acta}:" for="txtActa">
@@ -508,10 +549,8 @@
                     </center>
                 </rich:collapsiblePanel>
 
-                <rich:collapsiblePanel id="pnVideo" switchType="ajax" expanded="false" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
-                    <f:facet name="header">
-                        <h:outputText value="#{var.houtvideo}"/>
-                    </f:facet>
+                <rich:collapsiblePanel id="pnVideo" header="#{var.houtvideo}" switchType="ajax" expanded="false" style="text-align:center;width:100%;"  rendered="#{!Supervisor$Alimentar.editarActividades}">
+                    
                     <center>
                         <h:panelGrid id="layoutVideoMemoria" columns="3">
                             <h:panelGroup>

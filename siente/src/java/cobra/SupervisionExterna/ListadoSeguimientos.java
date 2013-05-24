@@ -112,6 +112,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware {
      * @return
      */
     public String seguimientoconsul(int filaSeleccionada) {
+        System.out.println("entre seguimiento");
         SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
         getAdminSupervisionExterna().setObjetoSeguimiento(segui);

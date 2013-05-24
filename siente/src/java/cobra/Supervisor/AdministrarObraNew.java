@@ -24,6 +24,7 @@ import co.com.interkont.cobra.to.Tiponovedad;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.Archivo;
+import cobra.ArchivoWeb;
 import cobra.CargadorArchivosWeb;
 import cobra.Marcador;
 import cobra.RedimensionarImagen;
@@ -1244,14 +1245,10 @@ public class AdministrarObraNew  implements ILifeCycleAware {
 
     public String pathDocumentoRecFin() {
         if (subirActaRecFin.getArchivos().size()> 0) {
-            Iterator arch = subirActaRecFin.getArchivos().iterator();
-            while (arch.hasNext()) {
-                Archivo nombreoriginal = (Archivo) arch.next();
+            for (ArchivoWeb nombreoriginal : subirActaRecFin.getArchivos()) {
                 urlactarecfin =
-                        nombreoriginal.getOnlyName();
-
+                        nombreoriginal.getNombre();
             }
-
         } else {
             urlactarecfin = "";
         }
@@ -1261,11 +1258,9 @@ public class AdministrarObraNew  implements ILifeCycleAware {
 
     public String pathDocumentoFin() {
         if (subirActaFin.getArchivos().size() > 0) {
-            Iterator arch = subirActaFin.getArchivos().iterator();
-            while (arch.hasNext()) {
-                Archivo nombreoriginal = (Archivo) arch.next();
+            for (ArchivoWeb nombreoriginal : subirActaFin.getArchivos()) {
                 urlactafin =
-                        nombreoriginal.getOnlyName();
+                        nombreoriginal.getNombre();
             }
 
         } else {

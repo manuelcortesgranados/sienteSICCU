@@ -69,7 +69,7 @@
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
 
                                 <a4j:commandButton id="BTaceptarActaFin" value="#{var.aceptar}"
-                                                   onclick="#{rich:component('panelActaFin')}.hide();"
+                                                   oncomplete="#{rich:component('panelActaFin')}.hide(); return false;"
                                                    rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos>0}"
                                                    render="layoutActaFin" action="#{Supervisor$AdministrarObraNew.pathDocumentoFin}"
                                                    style="font-size:12px;"/>

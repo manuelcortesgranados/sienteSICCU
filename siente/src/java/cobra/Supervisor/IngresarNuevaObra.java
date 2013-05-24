@@ -4984,14 +4984,15 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      * El metodo aplica siempre y cuando sea un proyecto para el ministerio de
      * educacion debido a que se selecciona la sede donde se va a ejecutar el
      * Proyecto.
-     *
+     * @param filaSeleccionada identificador de la fila seleccionada.
      * @return null
      */
-    public String seleccionarSede() {
-        
+    public String seleccionarSede(int filaSeleccionada) {
+        EntidadConvenio entidadConvenio = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
+        Sedeeducativa sede = entidadConvenio.getListasedeseducativas().get(filaSeleccionada);
+
         listamarcadores = new ArrayList<Marcador>();
         marli = new ArrayList<Marcador>();
-        Sedeeducativa sede = (Sedeeducativa) getEntidadConvenio().getTablasedes().getRowData();
         obranueva.setSedeeducativa(sede);
         Marcador marc = new Marcador();
         marc.setTipo(0);

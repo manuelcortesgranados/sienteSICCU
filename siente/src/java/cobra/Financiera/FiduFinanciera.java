@@ -395,9 +395,11 @@ public class FiduFinanciera  {
         return null;
     }
 
-    public String seleccionarTerceroOP() {
-        Tercero ter = (Tercero) tablaTerceroListado.getRowData();
-        getFinancieraService().getOrdendepago().setTercero(ter);
+    public String seleccionarTerceroOP(int filaSeleccionada) {
+        FiduFinanciera fiduFinanciera = (FiduFinanciera) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
+        Tercero tercero = fiduFinanciera.getFinancieraService().getListaTercero().get(filaSeleccionada);
+        
+        getFinancieraService().getOrdendepago().setTercero(tercero);
 
         return null;
     }

@@ -29,10 +29,10 @@
                 <tr>
                     <td><div class="buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this);" onblur="clearText(this);"
+                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" 
                                                  value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"/>
-                                    <h:commandButton type="button" action="#{SolicitudObra$GestionarSolicitudObra.buscar}"
-                                                     id="filtrar"  value="#{var.buscar}" styleClass="buscador_button"/>
+                                    <a4j:commandButton type="button" action="#{SolicitudObra$GestionarSolicitudObra.buscar}"
+                                                       id="filtrar"  value="#{var.buscar}" styleClass="buscador_button" render="pn-proyectosPadres"/>
                                 </label>
                             </div></div>
                     </td>
@@ -50,7 +50,7 @@
                 </tr>
             </table>
             <rich:panel id="mp-proyectosPadres">
-                <h:panelGrid columns="1" style="width:100%;">
+                <h:panelGrid id="pn-proyectosPadres" columns="1" style="width:100%;">
 
                     <interkont:spacer height="20"/>
                     <rich:dataTable rendered="#{!SessionBeanCobra.solicitudService.tablasver}"

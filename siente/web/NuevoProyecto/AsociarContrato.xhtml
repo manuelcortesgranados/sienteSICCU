@@ -170,11 +170,11 @@
                                     <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
                                                        action="datosGenerarImagenes" />
 
-                                    <a4j:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
+                                    <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
                                                        action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"
                                                        >
 
-                                    </a4j:commandButton>
+                                    </h:commandButton>
 
                                     <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
                                                      action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >

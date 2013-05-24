@@ -58,7 +58,6 @@
                                         rows="3"
                                         var ="sede"
                                         rowKeyVar="filaSeleccionada"
-                                        binding="#{Supervisor$EntidadConvenio.tablasedes}"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
@@ -99,10 +98,9 @@
                                     <h:outputText value="#{sede.strnombre}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede}"
+                                    <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"
                                                        title="#{var.agregar}" render="gpEducacion" value="Seleccionar"
-                                                       onclick="javascript:Richfaces.hideModalPanel('mp-listado-sedeseducativas')" >
-                                    </a4j:commandButton>
+                                                       onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;" />
                                 </rich:column>
                             </rich:columnGroup>
                             <f:facet name="footer">

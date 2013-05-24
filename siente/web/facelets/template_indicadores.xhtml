@@ -8,9 +8,8 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
    >
-    <html>
-
-        <head>
+    
+        <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
@@ -40,9 +39,9 @@
                 </script>
                 
             
-        </head>
+        </h:head>
 
-        <body >
+        <h:body >
             <h:form id="form_menu">
                 <ui:insert name="menu"/>
             </h:form>
@@ -100,6 +99,6 @@
                     </td>
                 </tr>
             </table>
-        </body>
-    </html>
+        </h:body>
+   
 </ui:composition>

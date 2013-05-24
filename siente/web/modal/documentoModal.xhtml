@@ -49,7 +49,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{var.Ver}"/>
                             </f:facet>
-                            <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action}" id="bt_downloadAli">
+                            <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action(filaSeleccionada)}" id="bt_downloadAli">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
