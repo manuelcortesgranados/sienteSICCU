@@ -30,7 +30,7 @@
         </f:facet>
         <h:form>
                 <h:panelGroup layout="block" styleClass="serch-advanced-body">
-                    <h:panelGroup layout="block" styleClass="serch-advanced-header">
+                    <h:panelGroup layout="block" >
                         <h:panelGrid style="width:100%;">
                             <h:panelGroup layout="block" style="width:100%;margin-top: 30px;margin-left: 50px; color:white;">
                                 <h:outputLabel  value="#{var.ingresarcorreo}"/><br/><br/>
@@ -39,11 +39,11 @@
                                 <h:panelGrid width="40%" >
                                     <rich:message for="txtolvidocontra" styleClass="tab-login-label-error" style="position: relative;top: -10px;"/>                                        
                                     <rich:messages id="messagerepass" globalOnly="true" style="position: relative;top: -10px;"
-                                                   styleClass="tab-login-label-error" ajaxRendered="true"                                                               >                                                    
+                                                   styleClass="tab-login-label-error" ajaxRendered="true" >                                                    
                                     </rich:messages> 
                                 </h:panelGrid>
 
-                                <a4j:commandButton value="#{var.enviar}" styleClass="tab-login-input-button" action="#{SessionBeanCobra.cambiarContraseñaUsuario}"/>
+                                <a4j:commandButton value="#{var.enviar}" styleClass="tab-login-input-button" action="#{SessionBeanCobra.cambiarContrasenaUsuario}" execute="@this txtolvidocontra" render="@this txtolvidocontra"/>
                                 <h:commandButton value="#{var.cancelar}" styleClass="tab-login-input-button" style="margin-left: 30px;" />
                             </h:panelGroup>
                         </h:panelGrid>                        

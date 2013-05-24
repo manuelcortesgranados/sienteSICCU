@@ -30,7 +30,7 @@
 
                                 <h:graphicImage id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
-                                                height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="javascript:Richfaces.showModalPanel('modalImagenvermas')" />
+                                                height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="#{rich:component('modalImagenvermas')}.show();return true;" />
 
 
 
