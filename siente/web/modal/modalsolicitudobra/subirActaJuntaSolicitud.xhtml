@@ -56,7 +56,7 @@
                                 <interkont:spacer height="3"/>
                                 <br/>
                                 <a4j:commandButton action="#{SolicitudObra$GestionarSolicitudObra.borrarActaAtencion}"
-                                                   render="info_acta, uploadActa, gpActa, panel_subirActa"
+                                                   render="info_acta, uploadActa, gpActa, panel_subirActa" execute="@this"
                                                    rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos>0}" value="#{var.boarcsub}"/>
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActa')}.hide(); return false;" render="panel_subirActa"/>

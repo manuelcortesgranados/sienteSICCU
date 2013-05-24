@@ -33,13 +33,12 @@
             <center>
                 <h:form>
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
-                        <h:commandButton value="#{var.aceptar}" action="#{Supervision$Externa.guardarVisita}"
-                                          onclick="javascript:Richfaces.hideModalPanel('panelConfirmaguardadoSuper');" />
+                        <a4j:commandButton value="#{var.aceptar}" action="#{Supervision$Externa.guardarVisita}"
+                                          oncomplete="#{rich:component('panelConfirmaguardadoSuper')}.hide();" />
                         <a4j:region>
                             <a4j:commandButton id="can"
-                                               value="#{var.cancelar}" oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaguardadoSuper');"
-                                               execute="@this"
-                                               style="font-size:12px;"/>
+                                               value="#{var.cancelar}" style="font-size:12px;" execute="@this"
+                                               oncomplete="#{rich:component('panelConfirmaguardadoSuper')}.hide();" />
                         </a4j:region>
                     </h:panelGrid>
                 </h:form>

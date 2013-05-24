@@ -11,6 +11,7 @@ import co.com.interkont.cobra.to.Tipodesarrollo;
 import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Visita;
 import cobra.Archivo;
+import cobra.ArchivoWeb;
 
 import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
@@ -561,10 +562,8 @@ public class AdminSupervisionExterna  {
             } catch (ArchivoExistenteException ex) {
                 Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
             }
-            Iterator arch = subirListado.getArchivos().iterator();
-            while (arch.hasNext()) {
-                Archivo nombreoriginal = (Archivo) arch.next();
-                pathDoc = nombreoriginal.getOnlyName();
+            for (ArchivoWeb nombreoriginal : subirListado.getArchivos()) {
+                pathDoc = nombreoriginal.getNombre();
             }
         } else {
             if (pathDoc.compareTo("") != 0) {
