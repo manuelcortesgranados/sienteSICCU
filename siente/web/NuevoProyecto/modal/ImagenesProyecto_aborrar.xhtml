@@ -34,16 +34,17 @@
                                             <h:outputText id="ImagenAtencionppal" value="#{var.nombre}"/>
                                             <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
-                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
+                                            <!--<rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
                                                 <h:inputText id="nombreImagen" value=" #{file.onlyName}" disabled="true" size="18"/>
-                                            </rich:dataGrid>
+                                            </rich:dataGrid>-->
                                         </h:panelGrid>
                                         <center>
+                                            <!--
                                             <h:panelGrid>
                                                 <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" styleClass="buttontxt" value="#{var.subir}"
                                                                  action="#{Supervisor$IngresarNuevaObra.subirImagenaPrincipal}"
                                                                  render="tablaImagenes,spimagen,panelImagenProyecto"/>
-                                            </h:panelGrid>
+                                            </h:panelGrid>-->
                                         </center>
                                     </center>
                                 </rich:panel>
@@ -58,17 +59,17 @@
                                             <h:outputText id="ImagenAtencion" value="#{var.descripcionImagen}"/>
                                             <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
-                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
+                                            <!--<rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" style="width:30px;">
                                                 <h:inputText id="otxt_nombreImagen" value=" #{file.onlyName}" disabled="true" size="18"/>
-                                            </rich:dataGrid>
+                                            </rich:dataGrid>-->
                                         </h:panelGrid>
                                     </center>
                                     <center>
-                                        <h:panelGrid>
+                                       <!-- <h:panelGrid>
                                             <a4j:commandLink id="bt_agregarImagen"  title="#{var.subir}" styleClass="buttontxt" value="#{var.subir}"
                                                              action="#{Supervisor$IngresarNuevaObra.subirImagenaLista}"
                                                              render="tablaImagenes,spimagen,panelImagenProyecto"/>
-                                        </h:panelGrid>
+                                        </h:panelGrid>-->
                                     </center>
                                 </rich:panel>
                             </h:panelGrid>
@@ -116,15 +117,15 @@
                             </h:panelGroup>
                             <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}" value="#{var.guardarbo}"
                                                />
-                            <h:commandButton   value="#{var.continuar}"
+                            <!--<h:commandButton   value="#{var.continuar}"
                                                action="#{Supervisor$IngresarNuevaObra.paso4}"   >
-                            </h:commandButton>
-
+                            </h:commandButton>-->
+                        
                             <a4j:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
                                                action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                             </a4j:commandButton>
                             <h:commandButton   value="Guardar"
-                                               action="#{Supervisor$IngresarNuevaObra.Finalizar_action}"   >
+                                               action="#{Supervisor$IngresarNuevaObra.finalizar_action}"   >
                             </h:commandButton>
                         </rich:collapsiblePanel>
                     </rich:panel>
