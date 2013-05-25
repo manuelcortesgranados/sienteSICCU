@@ -144,7 +144,7 @@
                             <a4j:commandButton  title="#{var.aprobar}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud == 1 and
-                                                            currentRowTemp.boolaprobado != false}"
+                                                currentRowTemp.boolaprobado != false}"
                                                 styleClass="editaravanzada" />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
@@ -158,10 +158,11 @@
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;"
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp(filaSeleccionada)}"
                                               render="modaltablaproyectos, tablaproyectos"
-                                              rendered="#{currentRowTemp.boolaprobado}">
+                                              rendered="#{currentRowTemp.boolaprobado}"
+                                              oncomplete="#{rich:component('modaltablaproyectos')}.show();" 
+                                              >
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
-                                <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.show();" />
-                            </a4j:commandLink>
+                                </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
                             <h:panelGroup>
