@@ -34,12 +34,12 @@
 
 
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmarSolicitud')"
+                                       oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
                                        style="font-size: 12px;"/>
 
                     <a4j:commandButton id="BTaceptarDoc" value="#{var.no}"   
                                        style="font-size: 12px;">
-                        <a4j:ajax event="click"   onbeforesubmit="javascript:Richfaces.hideModalPanel('panelConfirmarSolicitudAH')" />
+                        <a4j:ajax event="click"   onbeforesubmit="#{rich:component('panelConfirmarSolicitudAH')}.hide(); " />
                     </a4j:commandButton>
 
 

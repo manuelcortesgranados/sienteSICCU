@@ -528,7 +528,7 @@
                     <h:panelGrid id="layoutImagenDetalle" styleClass="fondo_foto" style="text-align:center;">
                         <h:graphicImage id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
-                                           onclick="#{rich:component('modalImagen')}.show();"
+                                           onclick="#{rich:component('modalImagen')}.show(); return true"
                                            styleClass="btn_pri_gra"   style="font-size:12px;"/>
                     </h:panelGrid>
                 </rich:collapsiblePanel>
