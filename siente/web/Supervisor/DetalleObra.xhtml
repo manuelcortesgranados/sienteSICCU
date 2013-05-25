@@ -439,8 +439,8 @@
                         <a4j:ajax event="click" render="ima1,ima2"/>
                         <ui:include src="/modal/imagenDetaModal.xhtml"/>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="simpleToggleUbicacion" switchType="client" header="#{var.ubicaciondelproyecto}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.mostrarGoogle}">
-                        <a4j:ajax event="click" render="panelUbicacion, pgtablapuntos"/>
+                    <rich:collapsiblePanel id="simpleToggleUbicacion" switchType="ajax" header="#{var.ubicaciondelproyecto}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.mostrarGoogle}">
+                        <a4j:ajax event="switch" render="panelUbicacion, pgtablapuntos"/>
                         <ui:include src="/modal/ubicacionProyModal.xhtml"/>
                     </rich:collapsiblePanel>
                     <rich:collapsiblePanel id="simpleToggleContratos" switchType="ajax" header="#{var.informacioncontrato}" expanded="false" toggleListener="#{Supervisor$AdministrarObraNew.llenarContrato}" >

@@ -75,12 +75,11 @@
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm" style="font-size: 12px;" />
 
-                                <a4j:commandButton id="BTaceptarDoc" value="#{var.aceptar}"
-                                                   onclick="#{rich:component('panelDocCiu')}.hide();
-                                             return false;"
+                                <a4j:commandButton id="BTaceptarDoc" value="#{var.aceptar}" style="font-size: 12px;"
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}"
-                                                   render="layoutDocCiu_par" action="#{Ciudadano$PerfilCiudadano.pathDocumento}"
-                                                   style="font-size: 12px;" />
+                                                   action="#{Ciudadano$PerfilCiudadano.pathDocumento}"
+                                                   oncomplete="#{rich:component('panelDocCiu')}.hide();"
+                                                   render="layoutDocCiu_par" />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
