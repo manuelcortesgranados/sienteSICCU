@@ -100,7 +100,8 @@
                                 <h:panelGrid id="pgconveniocontrato" columns="2">
                                     <a4j:commandLink value="Asociar contrato"
                                                      styleClass="asociarcontrato anchorLink"
-                                                     action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();">
+                                                     action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
+                                                     render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
                                     </a4j:commandLink>
                                     <a4j:commandLink value="Crear contrato" rendered="false"
                                                      styleClass="crearcontrato anchorLink"

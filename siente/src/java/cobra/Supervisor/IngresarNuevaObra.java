@@ -3631,8 +3631,8 @@ public class IngresarNuevaObra  implements ILifeCycleAware {
      *
      * @return null
      */
-    public String agregarContrato() {
-        Contrato contselec = (Contrato) tablacontratos.getRowData();
+    public String agregarContrato(int filaSeleccionada) {
+        Contrato contselec = listacontratos.get(filaSeleccionada);
         relacioncontrato = new Relacioncontratoobra();
         relacioncontrato.setContrato(contselec);
         relacioncontrato.setObra(obranueva);

@@ -54,7 +54,8 @@
                                <interkont:spacer height="20"/>
                                <h:commandButton value="#{var.generarcronograma}" style="font-size: 11px;"
                                                  styleClass="btn_sec_gig"
-                                                  action="#{Supervisor$IngresarNuevaObra.bt_download_action}">
+                                                  action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
+                                                  onclick="#{rich:component('mp_cronograma')}.hide();">
                                </h:commandButton>
                               </h:form>
                           </center>
