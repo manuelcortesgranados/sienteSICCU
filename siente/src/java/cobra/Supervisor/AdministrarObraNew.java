@@ -1448,10 +1448,12 @@ public class AdministrarObraNew  implements ILifeCycleAware {
      * valla de algún registro del listado de imágenes. Establece la imagen
      * seleccionada en el atributo imagenevolucionobraEd
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return null
      */
-    public String btEstablecerVallaAction() {
-        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+    public String btEstablecerVallaAction(int filaSeleccionada) {
+        this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
         return null;
     }
 
@@ -1472,10 +1474,12 @@ public class AdministrarObraNew  implements ILifeCycleAware {
      * imagen actual en algún registro del listado de imágenes. Establece la
      * imagen seleccionada en el atributo imagenevolucionobraEd
      *
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      * @return null
      */
-    public String btEstablecerImagenActualAction() {
-        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+    public String btEstablecerImagenActualAction(int filaSeleccionada) {
+        this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
         return null;
     }
 
