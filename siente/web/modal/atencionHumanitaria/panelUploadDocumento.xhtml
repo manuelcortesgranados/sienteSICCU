@@ -21,12 +21,12 @@
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.listener}" id="uploadDocumento"
-                                         immediateUpload="true"
-                                         listHeight="150" maxFilesQuantity="1"
-                                         uploadLabel="#{var.subir}"
-                                         style="width: 250px">
+                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.listener}" id="uploadDocumento"
+                                          immediateUpload="true"
+                                          listHeight="150" maxFilesQuantity="1"
+                                          uploadLabel="#{var.subir}"
+                                          style="width: 250px">
                             <a4j:ajax event="uploadcomplete" render="info_documento, panel_subir"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info_documento">

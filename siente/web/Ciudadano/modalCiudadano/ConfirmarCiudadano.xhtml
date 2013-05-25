@@ -45,7 +45,7 @@
 
                                 <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
                                                    action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
+                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide();"/>
 
                             </h:panelGroup>
                         </h:panelGrid>

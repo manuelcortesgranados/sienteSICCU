@@ -27,12 +27,12 @@
                     <h:panelGrid columns="2" style="text-align:center;width:100%;">
 
                         <a4j:commandButton  action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarSolicitud}" value="#{var.si}" 
-                                            oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaborrado');"
+                                            oncomplete="#{rich:component('panelConfirmaborrado')}.hide();"
                                             render="tablaAtencionHumanitaria" />
 
                         <h:form >
                             <a4j:commandButton id="aceptar"
-                                               value="#{var.no}" oncomplete="javascript:Richfaces.hideModalPanel('panelConfirmaborrado');"
+                                               value="#{var.no}" oncomplete="#{rich:component('panelConfirmaborrado')}.hide();"
                                                title="#{var.aceptar}" execute="@this"
                                                style="font-size:12px;"/>
                         </h:form>
