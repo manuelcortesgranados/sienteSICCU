@@ -85,8 +85,10 @@
                                     <h:panelGroup>
                                         <a4j:commandButton id="btn_registrar_suspension" action="#{Supervisor$SuspenderObra.registrarSuspension}"
                                                            value="#{var.registrarSuspension}" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
-                                                           styleClass="btn_pri_inm" style="font-size: 12px;" render="layoutConfSuspension">
-                                            <a4j:ajax oncomplete="true" render="layoutConfSuspension, panelSuspenderObra" onbeforesubmit="#{rich:component('panelConfirmarSuspension')}.show();" />
+                                                           styleClass="btn_pri_inm" style="font-size: 12px;"
+                                                           oncomplete="#{rich:component('panelConfirmarSuspension')}.show();"
+                                                           render="layoutConfSuspension, panelSuspenderObra">
+                                            
                                         </a4j:commandButton>
 
                                         <a4j:commandButton id="btn_registrar_suspension1" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
