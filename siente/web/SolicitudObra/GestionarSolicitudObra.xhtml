@@ -549,11 +549,10 @@
                     </center>
                     <center>
                         <h:panelGrid columns="2">
-                            <a4j:commandButton id="GuardaraprobacionL" 
+                            <a4j:commandButton id="GuardaraprobacionL"
+                                               oncomplete="#{rich:component('panelValidarSolicitud')}.show()" render="layoutGuardar"
                                                action="#{SolicitudObra$GestionarSolicitudObra.validaraprobacion}"
-                                               rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"                                                                          
                                                value="#{var.guardar}" >
-                                <a4j:ajax event="complete"  render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show()"/>
                             </a4j:commandButton>
                             <a4j:commandButton id="Cancelaraprobacioninfra" value="#{var.cancelar}"
                                                rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"
