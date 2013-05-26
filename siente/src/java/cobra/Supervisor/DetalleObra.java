@@ -53,6 +53,7 @@ import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.AtencionHumanitaria.AdminSolicitudAtencion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
+import java.io.Serializable;
 import javax.faces.context.FacesContext;
 
 /**
@@ -66,7 +67,7 @@ import javax.faces.context.FacesContext;
  * @version Created on 13-oct-2010, 13:53:10
  * @author carlosalbertoloaizaguerrero
  */
-public class DetalleObra  {
+public class DetalleObra implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String strimagenobraproyectada = "";

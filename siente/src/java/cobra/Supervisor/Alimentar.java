@@ -37,6 +37,7 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -71,7 +72,7 @@ import org.richfaces.component.UIDataTable;
  * @author carlosalbertoloaizaguerrero
  * @author David Andrés Betancourth Botero
  */
-public class Alimentar {
+public class Alimentar implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
@@ -1209,7 +1210,7 @@ public class Alimentar {
     /**
      * Si estadoalimentar es igual a 1 permite guardar alimentación
      */
-    public String finalizarModal_action() {
+    public void finalizarModal_action() {      
 
         if (estadoalimentar == 1) {
             try {
@@ -1223,7 +1224,7 @@ public class Alimentar {
             }
         }
 
-        return null;
+       
 
     }
 
