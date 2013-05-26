@@ -88,9 +88,9 @@
                                             <a4j:commandButton id="Finalizar" value="#{var.finalizar}"
                                                                render="layoutGuardar, panelFinproy"
                                                                rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0 and Supervisor$IngresarNuevaObra.validacion.total}"
-                                                               action="#{Supervisor$IngresarNuevaObra.finalizar_action}"     >
+                                                               action="#{Supervisor$IngresarNuevaObra.finalizar_action}" execute="@this"
+                                                               oncomplete="#{rich:component('panelConfirmaGuardar')}.show();">
                                                 <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                                <a4j:ajax event="complete" render="layoutGuardar" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.show();"/>
                                             </a4j:commandButton>
 
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}">
