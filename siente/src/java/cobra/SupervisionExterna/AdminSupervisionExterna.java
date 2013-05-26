@@ -39,7 +39,7 @@ import supervision.service.SupervisionExternaServiceAble;
  *
  * @author desarrollo1
  */
-public class AdminSupervisionExterna  {
+public class AdminSupervisionExterna {
 
     private SelectItem[] visitaSelec;
     private UIDataTable tablaSeguimientos = new UIDataTable();
@@ -361,7 +361,9 @@ public class AdminSupervisionExterna  {
         return getSessionBeanCobra().getSupervisionExternaService();
     }
 
-    /** Creates a new instance of AdminSupervisionExterna */
+    /**
+     * Creates a new instance of AdminSupervisionExterna
+     */
     public AdminSupervisionExterna() throws IOException {
         registrarMatriz();
 //        llenarVisitas();
@@ -402,7 +404,6 @@ public class AdminSupervisionExterna  {
 //        totalSolicituesApro = getSessionBeanCobra().getSolicitudService().totalaprobadas();
 //    }
 //
-
     public String mostrarInformacionGeneral() {
         setObjetoActividadSeguimiento(getSessionBeanCobra().getSupervisionExternaService().obtenerActividadSeguimientoPorId(getObjetoSeguimiento().getIntidseguimiento()));
         setObjetoTipoDesarrollo(getSessionBeanCobra().getSupervisionExternaService().obtenerTipoDesarrolloPorId(getObjetoSeguimiento().getIntidseguimiento()));
@@ -512,7 +513,6 @@ public class AdminSupervisionExterna  {
         return "proyectosSupervision";
     }
 
-
     public String cambioListado() {
         this.subirListado.borrarDatosSubidos();
         ServletContext contextoCobra = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
@@ -542,12 +542,12 @@ public class AdminSupervisionExterna  {
         return null;
     }
 
-    public String subirListado() throws FileNotFoundException, IOException, InvalidFormatException {
+    public String subirListadoSeg() throws FileNotFoundException, IOException, InvalidFormatException {
         String pathDoc = "";
         String realArchivoPath = "";
         String URL = "/resources/Documentos/ValidadorE/" + getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/";
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirListado.getArchivos().size()> 0) {
+        if (subirListado.getArchivos().size() > 0) {
             realArchivoPath = theApplicationsServletContext.getRealPath(URL);
             try {
                 File carpeta = new File(realArchivoPath);
@@ -562,7 +562,9 @@ public class AdminSupervisionExterna  {
             } catch (ArchivoExistenteException ex) {
                 Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
             }
-            for (ArchivoWeb nombreoriginal : subirListado.getArchivos()) {
+            Iterator arch = subirListado.getArchivos().iterator();
+            while (arch.hasNext()) {
+                ArchivoWeb nombreoriginal = (ArchivoWeb) arch.next();
                 pathDoc = nombreoriginal.getNombre();
             }
         } else {
