@@ -321,10 +321,7 @@
                         </center>
                     </rich:collapsiblePanel>
 
-                    <rich:collapsiblePanel id="stpformadepago"  switchType="ajax" expanded="false">
-                        <f:facet name="header">
-                            <h:outputText value="2. #{var.outformapago}"/>
-                        </f:facet>
+                    <rich:collapsiblePanel id="stpformadepago"  header="2. #{var.outformapago}" switchType="ajax" expanded="false">                        
                         <a4j:ajax event="click"  render="gpPrincipalFormaPago" />
                         <center>
                             <h:outputLabel rendered="#{Supervisor$Contrato.contrato.numvlrcontrato==0}" value="#{var.debediligenciarvalorcontrato}" />
@@ -404,10 +401,7 @@
                         </h:panelGroup>
 
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="rsgtpoliz" switchType="ajax" expanded="false" style="width:100%;" toggleListener="#{Supervisor$Contrato.instanciarPolizar}" immediate="true">
-                        <f:facet name="header">
-                            <h:outputText value="3. #{var.anadirpolizas}:"/>
-                        </f:facet>
+                    <rich:collapsiblePanel id="rsgtpoliz" switchType="ajax" header="3. #{var.anadirpolizas}:" expanded="false" style="width:100%;" toggleListener="#{Supervisor$Contrato.instanciarPolizar}" immediate="true">                      
                         <center>
 
                             <h:panelGrid id="gpPolizaSelec" columns="2"  style="width:100%;" rendered="#{Supervisor$Contrato.verEliminar==0}" >
@@ -496,10 +490,7 @@
                             </h:panelGrid>
                         </center>
                     </rich:collapsiblePanel>
-                    <rich:collapsiblePanel id="stpdocuemntos"  switchType="ajax" expanded="false" immediate="true">
-                        <f:facet name="header">
-                            <h:outputText value="4. #{var.documento}"/>
-                        </f:facet>
+                    <rich:collapsiblePanel id="stpdocuemntos" header="4. #{var.documento}"  switchType="ajax" expanded="false" immediate="true">
                         <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
 
                             <a4j:commandButton id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" style="font-size: 10px;"
