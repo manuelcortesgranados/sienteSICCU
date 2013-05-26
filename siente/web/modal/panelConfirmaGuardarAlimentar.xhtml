@@ -8,7 +8,7 @@
 
 
     <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="false" width="350" style="padding:0px;"
-                     headerClass="rich-panel-header">
+                     headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  value="#{var.confirmarguardadoali}"/>
@@ -23,13 +23,14 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+         <h:form >
+        <rich:panel styleClass="rich-panel-body" style="padding:0px;" >
             <center>
                 <h:panelGrid id="layoutGuardar">
                     <h:outputText rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
                     <h:outputText rendered="#{Supervisor$Alimentar.estadoalimentar==0}" styleClass="txt_outtext" value="#{Supervisor$Alimentar.mensajefin}"/>
                     <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
-                    <h:form>
+                   
                         <center>
                             <a4j:commandButton id="BTaceptarGuardar" value="#{var.aceptar}"
                                                rendered="#{Supervisor$Alimentar.estadoalimentar==0}"
@@ -37,22 +38,25 @@
                             </a4j:commandButton>
                         </center>
                         <h:panelGrid columns="2">
-                            <a4j:commandButton action="#{Supervisor$Alimentar.finalizarModal_action}" id="BTaceptar" value="#{var.si}"
-                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}" render="gpPrincipalAlimentar,panelImagen,ima1,ima2,layoutDocActa, panelVideo"
-                                               style="font-size:12px" onclick="#{rich:component('panelConfirmaGuardar')}.hide(); return false;">
-                                <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('panelGuardado')}.show();"
-                                             render="gpPrincipalAlimentar, panelImagen,ima1,ima2,layoutDocActa, panelVideo"/>
-                            </a4j:commandButton>
+                              
+                            <a4j:commandButton value="#{var.si}" id="BTaceptar" action="#{Supervisor$Alimentar.finalizarModal_action}" 
+                                               oncomplete="#{rich:component('panelGuardadoAlimentar')}.show();#{rich:component('panelConfirmaGuardar')}.hide()"
+                                               execute="@this" immediate="true" rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
+                                 
+                            </a4j:commandButton>                           
+                            
                             <a4j:commandButton id="BTcancelar" value="#{var.no}"
-                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
+                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}" >
                                 <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.hide();"/>
                             </a4j:commandButton>
                         </h:panelGrid>
 
-                    </h:form>
+                    
                 </h:panelGrid>
             </center>
         </rich:panel>
+        </h:form>
     </rich:popupPanel>
+   
 
 </ui:composition>
