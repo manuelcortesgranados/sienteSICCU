@@ -260,17 +260,16 @@
                         </rich:column>
                         -->
                         <rich:column>
-                            <a4j:commandLink  title="#{var.asociarproyecto}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.asociarproyecto}" style="font-size:11px;" execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;" execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
-                                              render="modaltablaproyectos, tablaproyectos" >
+                                              oncomplete="#{rich:component('modaltablaproyectos')}.show();" render="modaltablaproyectos, tablaproyectos" >
                                 <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
-                                <a4j:ajax event="complete" oncomplete="#{rich:component('modaltablaproyectos')}.show()" />
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
