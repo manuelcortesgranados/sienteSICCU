@@ -20,22 +20,23 @@
     </ui:define>
 
     <ui:define name="body" >
-        <h:form  id="formCronograma"  >
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
-                <tr>
+        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <tr>
+                <h:form>
                     <td rowspan="6" valign="top" style="height:400px;width: 20%">
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
-                    <td valign="top" height="35" style="width: 80%">
-
+                </h:form>
+                <td valign="top" height="35" style="width: 80%">
+                    <h:form id="formCronograma">
                         <rich:panel id="pasoGenCron" style="width:98%;" >
                             <f:facet name="header">
                                 <h:outputText value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
                                 <h:outputText value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
                             </f:facet>
                             <interkont:spacer width="20"/>
-                          <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}" header="#{var.pgenerarcronograma}">
+                            <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}" header="#{var.pgenerarcronograma}">
                                 <center>
                                     <h:panelGrid style="align:center;" columns="1" >
                                         <h:panelGroup>
@@ -204,10 +205,11 @@
                             </h:panelGroup>
 
                         </rich:panel>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
+                    </h:form>
+                </td>
+            </tr>
+        </table>
+
         <ui:include src="../NuevoProyecto/modal/panelCronogramaModal.xhtml"/>
         <ui:include src="../NuevoProyecto/modal/subirCronogramaPanel.xhtml"/>
     </ui:define>

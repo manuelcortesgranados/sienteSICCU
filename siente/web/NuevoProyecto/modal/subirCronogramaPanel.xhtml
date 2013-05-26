@@ -25,7 +25,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
-                                       title="#{var.cerrar}" immediate="true" render="pasoGenCron"
+                                     title="#{var.cerrar}" immediate="true" render="pasoGenCron"
                                        styleClass="cerrar" onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -73,13 +73,15 @@
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
                                 <h:inputHidden id="hayError" value="#{Supervisor$IngresarNuevaObra.datosValidos}"/>
-                                <a4j:commandButton id="bt_borrarCronogramaSubido" action="#{Supervisor$IngresarNuevaObra.borrarCronograma}" render="infoCrono, uploadCrono, layoutDoc, pasoGenCron,hayError"
+                                <a4j:commandButton id="bt_borrarCronogramaSubido" action="#{Supervisor$IngresarNuevaObra.borrarCronograma}" 
+                                                   render="infoCrono, uploadCrono, layoutDoc, pasoGenCron,hayError, formCronograma" execute="@form"
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
                                                     >
                                 </a4j:commandButton>
                                 <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.validarCronograma}" id="bt_aceptarCrono" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"
-                                                   value="#{var.validar}"
-                                                   render="infoCrono" execute="infoCrono"
+                                                   value="#{var.validar}" 
+                                                   render="infoCrono,pasoGenCron" execute="@this, infoCrono, layoutDoc"
+                                                   onclick="#{rich:component('mp_subircronograma')}.hide();"
                                                    >
                                       </a4j:commandButton>
 
