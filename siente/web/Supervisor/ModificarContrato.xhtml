@@ -340,11 +340,8 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.editar}" />
                                                 </f:facet>
-                                                <a4j:commandButton id="btnPolizas" value="#{var.editar}"
+                                                <a4j:commandButton id="btnPolizas" value="#{var.editar}" oncomplete="#{rich:component('mp-editar-polizas')}.show();" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.seleccionareditarPoliza(filaSeleccionada)}" render="rpPolizas">
-                                                    <a4j:ajax event="complete" 
-                                                              oncomplete="#{rich:component('mp-editar-polizas')}.show(); return true;"
-                                                              immediate="true"/>
                                                 </a4j:commandButton>
 
                                             </rich:column>
@@ -352,7 +349,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.eliminar}" />
                                                 </f:facet>
-                                                <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" immediate="true"
+                                                <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.eliminarPoliza(filaSeleccionada)}">
                                                 </a4j:commandButton>
                                             </rich:column>
@@ -480,8 +477,8 @@
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >
-                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}" render="mp-crear-girodirecto">
-                                                        <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-crear-girodirecto')}.show(); return true;" />
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}" render="mp-crear-girodirecto"
+                                                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.show();">
                                                     </a4j:commandButton>
                                                 </rich:column>
                                             </rich:columnGroup>
