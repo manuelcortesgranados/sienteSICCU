@@ -44,8 +44,8 @@
             </f:facet>
 
             <c:forEach items="#{SessionBeanCobra.modulos}" var="modulo">
-                <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" icon="#{modulo.striconoInicio}"
-                                onclick="document.location.href='..#{modulo.strurlMdloRuta}';" immediate="true" style="width: 250px;"/>
+                <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" icon="#{modulo.striconoInicio}" action="#{SessionBeanCobra.nombreModulo(modulo)}"
+                                immediate="true" style="width: 250px;"/>
             </c:forEach>
         </rich:dropDownMenu>
 

@@ -367,7 +367,6 @@ public class Alimentar implements Serializable{
     }
 
     public List<Relacionalimentacionactividad> getRegistrosmatrix() {
-        System.out.println("this rm = " + registrosmatrix.size());
         return registrosmatrix;
     }
 

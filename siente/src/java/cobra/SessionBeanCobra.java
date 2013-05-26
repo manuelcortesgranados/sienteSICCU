@@ -1087,4 +1087,8 @@ public class SessionBeanCobra implements Serializable {
         obraseguida = getCiudadanoservice().numeroobrasseguidas(getUsuarioService().getUsuarioObra().getUsuId());
 
     }
+    
+    public String nombreModulo(Modulo modulo){
+        return modulo.getStrmodNmbre();
+    }
 }
