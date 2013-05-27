@@ -102,7 +102,7 @@
                                     <h:outputText value="#{var.convenio} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                                 </f:facet>
                                 <center>
-                                    <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}"
+                                    <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}" rowKeyVar="filaSeleccionada"
                                                     sortMode="single"  var="currentRow" style="width:100%;" rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02">
                                         <rich:column style="width: 150px;" breakRowBefore="true">
                                             <f:facet name="header">
@@ -172,7 +172,7 @@
                                             <f:facet name="header">
                                                 <h:outputText value="#{var.eliminar}"/>
                                             </f:facet>
-                                            <a4j:commandButton action="#{Supervisor$Contrato.eliminarItemPadreSele}"
+                                            <a4j:commandButton action="#{Supervisor$Contrato.eliminarItemPadreSele(filaSeleccionada)}"
                                                                render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar" styleClass="eliminaravanzada"/>
                                         </rich:column>
                                     </rich:dataTable>
@@ -485,7 +485,7 @@
                                         <f:facet name="header">
                                             <h:outputText value="#{var.eliminar}" />
                                         </f:facet>
-                                        <a4j:commandButton id="eliminarpol" value="#{var.eliminar}" render="pgpolis" immediate="true"
+                                        <a4j:commandButton id="eliminarpol" value="#{var.eliminar}" render="pgpolis" execute="@this"
                                                            action="#{Supervisor$Contrato.eliminarPoliza(filaSeleccionada)}">
                                         </a4j:commandButton>
                                     </rich:column>
@@ -548,7 +548,7 @@
                                 <h:outputText value="#{currentRow.strnombre}" />
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont"
+                                <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
                                                    action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
                                 </a4j:commandButton>
                             </rich:column>
