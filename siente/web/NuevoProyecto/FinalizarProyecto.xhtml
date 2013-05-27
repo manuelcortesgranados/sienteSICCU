@@ -22,14 +22,17 @@
 
     <ui:define name="body">
 
-        <h:form id="formFinProy">
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
-                <tr>
+        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <tr>
+                <h:form>
                     <td rowspan="6" valign="top" style="height:400px;width: 20%">
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
-                    <td valign="top" height="35" style="width: 80%">
+                </h:form>
+                <td valign="top" height="35" style="width: 80%">
+                    <h:form id="formFinProy">
+
                         <rich:panel  id="panelFinproy" >
                             <f:facet name="header" >
                                 <h:panelGroup >
@@ -88,7 +91,7 @@
                                             <a4j:commandButton id="Finalizar" value="#{var.finalizar}"
                                                                render="layoutGuardar, panelFinproy"
                                                                rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0 and Supervisor$IngresarNuevaObra.validacion.total}"
-                                                               action="#{Supervisor$IngresarNuevaObra.finalizar_action}" execute="@this"
+                                                               action="#{Supervisor$IngresarNuevaObra.finalizar_action}" execute="@this" immediate="true"
                                                                oncomplete="#{rich:component('panelConfirmaGuardar')}.show();">
                                                 <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
                                             </a4j:commandButton>
@@ -130,10 +133,11 @@
                                 </rich:collapsiblePanel>
                             </center>
                         </rich:panel>
-                    </td>
-                </tr>
-            </table>               
-        </h:form>           
+                    </h:form>           
+                </td>
+            </tr>
+        </table>              
+
         <ui:include src="../NuevoProyecto/modal/panelConfirmaGuardar.xhtml"/>
     </ui:define>
 </ui:composition>
