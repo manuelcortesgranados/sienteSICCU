@@ -210,20 +210,20 @@
                                     <rich:column colspan="10" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
                                             </h:panelGrid>
                                         </center>
@@ -358,20 +358,20 @@
                                     <rich:column colspan="10" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
 
-                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}">
-                                                    <a4j:ajax oncomplete="true" render="tabla-listado-contratoconvenio,pgcontratoconvenio" />
+                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}"
+                                                                   render="tabla-listado-contratoconvenio,pgcontratoconvenio">
                                                 </a4j:commandButton>
                                             </h:panelGrid>
                                         </center>
