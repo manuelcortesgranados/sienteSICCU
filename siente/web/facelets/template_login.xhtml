@@ -23,7 +23,7 @@
         <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/login.js"></script>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/slider_queessiente.css?#{var.version}" rel="stylesheet" type="text/css"/>
-        <h:outputScript name="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js" library="js" />
+        
         <ui:insert name="head"/>
     </h:head>
 
@@ -51,7 +51,7 @@
         <ui:insert name="body"/>                                      
         <ui:include src="ajaxStatus.xhtml"/>
         <ui:include src="/modal/login/queessiente.xhtml"/>
-
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js"/>
     </h:body>
 
 </ui:composition>
