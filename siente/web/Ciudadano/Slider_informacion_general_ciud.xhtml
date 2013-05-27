@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
@@ -10,152 +11,89 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-    
-   <f:subview id="panelSliderDash" >
-        <div id="container2">
-          
-            <rich:panel id="inversiontotal" header="#{var.datosnacionales}" bodyClass="sliderichcontentblue" headerClass="sliderichdatosnacionales">
-                <div id="slider2">
+    <f:subview id="InfoGeneral" >
+        <rich:panel id="infogeneralCiudadano"   >
+            <div id="container3"  >
+                <center>
+                    <div id="slider3">
+                        <div>
+                            <rich:panel header="Semaforo" styleClass="sliderichcontentblue3">
+                                <h:panelGroup >
+                                    <center>
+                                        <h:graphicImage id="imgSemaObra"
+                                                        value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
+                                                        rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
+                                        <h:graphicImage value="#{var.noinfo}" height="100px"
+                                                        rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
+                                        <interkont:spacer width="80%" height="5" />
+                                        <center>
+                                            <h:outputText value="#{Supervisor$DetalleObra.semaforo}" styleClass="titletool3" />
+                                        </center>
 
-                    <div >
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter" >
-
-                            <h:panelGroup>
-                                <interkont:spacer width="20"/>
-                                <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.inversionTotalNal}" style="font-size:15px;" styleClass="vtitle10">
-                                        <f:convertNumber pattern="$###,###"/>
-                                    </h:outputText>
+                                    </center>
                                 </h:panelGroup>
-                            </h:panelGroup>
-
-                            <h:panelGroup styleClass="panelcenter">
-                                <h:outputText value="Recursos invertidos" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="20"/>
-                                <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.inversionObra}" style="font-size:15px;" styleClass="vtitle10">
-                                        <f:convertNumber pattern="$###,###"/>
-                                    </h:outputText>
+                            </rich:panel>
+                        </div>
+                        <div>
+                            <rich:panel header="Tipo #{var.proyecto}" styleClass="sliderichcontentblue3" >
+                                <h:panelGroup >
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup>
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" styleClass="titletool3" style="font-size:18px;"  >
+                                        </h:outputText>
+                                    </h:panelGroup>
                                 </h:panelGroup>
-                            </h:panelGroup>
-
-                            <h:panelGroup styleClass="panelcenter">
-                                <h:outputText value="Recursos aprobados rehabilitación" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="20"/>
+                            </rich:panel>
+                        </div>
+                        <div >
+                            <rich:panel header="Valor Actual" styleClass="sliderichcontentblue3" >
                                 <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.inversionAh}" style="font-size:15px;text-align:center;" styleClass="vtitle10">
-                                        <f:convertNumber pattern="$###,###"/>
-                                    </h:outputText>
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup >
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="titletool3" style="font-size:18px;">
+                                            <f:convertNumber pattern="$###,###"/>
+                                        </h:outputText>
+                                    </h:panelGroup>
                                 </h:panelGroup>
-                            </h:panelGroup>
+                            </rich:panel>
 
-                            <h:panelGroup styleClass="panelcenter">
-                                <interkont:spacer width="20"/>
-                                <h:outputText value="Atención Humanitaria" style="text-align:center;" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="20"/>
+                        </div>
+                        <div >
+                            <rich:panel header="Ente que lo ejecuta" styleClass="sliderichcontentblue3" >
+                                <h:panelGrid columns="1">
+                                    <interkont:spacer width="20" height="10" />
+                                    <h:outputText value="#{Supervisor$DetalleObra.contratistanombrecomple}" styleClass="titletool3" />
+                                </h:panelGrid>
+                            </rich:panel>
+                        </div>
+                        <div >
+                            <rich:panel header="Visitas #{var.textoobra4}" styleClass="sliderichcontentblue3" >
                                 <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.persdamnif}"  styleClass="vtitle10">
-                                        <f:convertNumber pattern="###,###"/>
-                                    </h:outputText>
+                                    <interkont:spacer width="20" height="50" />
+                                    <h:panelGroup  styleClass="panelcenter">
+                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" styleClass="titletool3" style="font-size:18px;" >
+                                        </h:outputText>
+                                    </h:panelGroup>
                                 </h:panelGroup>
-                            </h:panelGroup>
+                            </rich:panel>
 
-                            <h:panelGroup styleClass="panelcenter">
-                                <interkont:spacer width="20"/>
-                                <h:outputText value="Personas Damnificadas" style="font-size:13px;text-align:center;"  styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="30"/>
+                        </div>
+                        <div >
+                            <rich:panel header="Personas Inscritas" styleClass="sliderichcontentblue3"  >
                                 <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.persafect}" styleClass="vtitle10">
-                                        <f:convertNumber pattern="###,###.##"/>
-                                    </h:outputText>
+                                    <interkont:spacer width="4"  height="50"/>
+                                    <h:panelGroup styleClass="panelcenter" >
+                                        <h:outputText value="#{Supervisor$DetalleObra.listasegudires}" styleClass="titletool3" style="font-size:18px;">
+                                        </h:outputText>
+                                    </h:panelGroup>
                                 </h:panelGroup>
-                            </h:panelGroup>
+                            </rich:panel>
 
-                            <h:panelGroup styleClass="panelcenter">
-                                <interkont:spacer width="20"/>
-                                <h:outputText value="Personas Afectadas" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
+                        </div>
+                    </div>            
+                </center>
+            </div>
+        </rich:panel>
 
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter" >
-
-                            <h:panelGroup>
-                                <interkont:spacer width="30"/>
-                                <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.hogdamnif}" styleClass="vtitle10">
-                                        <f:convertNumber pattern="###,###"/>
-                                    </h:outputText>
-                                </h:panelGroup>
-                            </h:panelGroup>
-
-                            <h:panelGroup styleClass="panelcenter">
-                                <interkont:spacer width="20"/>
-                                <h:outputText value="Hogares Damnificados" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="30"/>
-                                <h:panelGroup>
-                                    <h:outputText value="#{ControlGerencial.informaciondash.hogafect}" styleClass="vtitle10">
-                                        <f:convertNumber pattern="###,###.##"/>
-                                    </h:outputText>
-                                </h:panelGroup>
-                            </h:panelGroup>
-
-                            <h:panelGroup styleClass="panelcenter">
-                                <interkont:spacer width="20"/>
-                                <h:outputText value="Hogares Afectados" styleClass="titletool2"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-                    </div>
-                </div>
-            </rich:panel>
-        </div>
     </f:subview>
 </ui:composition>
