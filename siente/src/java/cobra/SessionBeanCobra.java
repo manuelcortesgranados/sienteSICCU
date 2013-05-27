@@ -1026,16 +1026,18 @@ public class SessionBeanCobra implements Serializable {
                 restaurar.setJsfUsuario(getUsuarioObra());
                 boolean res = usuarioService.guardarRestaurarPassword(restaurar, getCobraService());
                 if (res == true) {
-
-                    FacesUtils.addErrorMessage (bundle.getString("errortresrecordarcontrasenia"));
+                    System.out.println(bundle.getString("errortresrecordarcontrasenia"));
+                    FacesUtils.addErrorMessage(bundle.getString("errortresrecordarcontrasenia"));
                     } else {
+                    System.out.println(bundle.getString("errorcuatrorecordarcontrasenia"));
                      FacesUtils.addErrorMessage(bundle.getString("errorcuatrorecordarcontrasenia"));
                 }
             } else {
+                System.out.println(bundle.getString("errordosrecordarcontrasenia"));
                 FacesUtils.addErrorMessage(bundle.getString("errordosrecordarcontrasenia"));
             }
         } else {
-          
+            System.out.println(bundle.getString("errorunorecordarcontrasenia"));
              FacesUtils.addErrorMessage(bundle.getString("errorunorecordarcontrasenia"));
         }
         
