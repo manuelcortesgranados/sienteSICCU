@@ -1422,9 +1422,9 @@ public class Reporte implements ILifeCycleAware {
         reporteselectcontrol = 0;
         reporteselectregionali = 1;
         reporteselectlinea = 1;
-        setReporteSelectConveniosEntidadesNacionales(1);
         setReporteSelectAdministrativos(1);
-        setReporteSelectFaseAdministrativos(0);
+        setReporteSelectConveniosEntidadesNacionales(1);
+        setReporteSelectFaseAdministrativos(-1);
     }
 
     public String reporteSelectAh() {
@@ -2584,6 +2584,7 @@ public class Reporte implements ILifeCycleAware {
                 break;
             case 2:
                 llenarEntidades(2);
+                setInttercer(-1);
                 break;
             case 3:
                 // Reporte proyectos asociados a convenios
@@ -2625,15 +2626,26 @@ public class Reporte implements ILifeCycleAware {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamento();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                                       if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
                             configuracionRegionalXZona();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+
+                            if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdf_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                     }
@@ -2684,15 +2696,26 @@ public class Reporte implements ILifeCycleAware {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamento();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
                             configuracionRegionalXZona();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+
+                            if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteexcel_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                     }
@@ -2742,15 +2765,26 @@ public class Reporte implements ILifeCycleAware {
                         case 1:
                             //Regionalizacion 1. Departamentos
                             configuracionRegionalXDepartamento();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+
+                            if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                         case 2:
                             //Regionalizacion 2. Region (Zona especifica)
                             configuracionRegionalXZona();
-                            cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
-                            cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            if (getReporteSelectFaseAdministrativos() != -1) {
+                                cadenaPeticionReporte += "&fase=" + getReporteSelectFaseAdministrativos();
+                            }
+
+                            if (getInttercer() != -1) {
+                                cadenaPeticionReporte += "&entidad=" + getInttercer();
+                            }
                             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteword_Reporte_Faltantes") + cadenaPeticionReporte);
                             break;
                     }

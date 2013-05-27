@@ -414,6 +414,7 @@
                                                  style="width: 150px;"
                                                  onclick="this.style.width = 'auto;';" 
                                                  onblur="this.style.width = '150px;';">
+                                    <f:selectItem itemValue="-1" itemLabel="Todos" />
                                     <f:selectItem itemValue="1" itemLabel="#{var.control34}" />
                                     <f:selectItem itemValue="2" itemLabel="#{var.control35}" />
                                     <f:selectItem itemValue="3" itemLabel="#{var.control36}" />
@@ -427,7 +428,8 @@
                                 <h:selectOneMenu value="#{Reportes.inttercer}" 
                                                  style="width: 150px;"
                                                  onclick="this.style.width = 'auto;';" 
-                                                 onblur="this.style.width = '150px;';" >                                            
+                                                 onblur="this.style.width = '150px;';" >
+                                    <f:selectItem itemValue="-1" itemLabel="Todos" />
                                     <f:selectItems value="#{Reportes.tercerointselect}"/>
                                     <a4j:ajax execute="@this" event="change" render="reportesAdministrativos,richpanelReportes" />
                                 </h:selectOneMenu>
