@@ -127,7 +127,9 @@
                                                                oncomplete="#{rich:component('panelActaFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactafin}" />
                                             <h:outputText  value="#{var.fechadelacta} "/>
-                                            <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}"/>
+                                            <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}" >
+                                                <a4j:ajax execute="@this" ></a4j:ajax>
+                                            </rich:calendar>
                                         </h:panelGrid>
                                         <h:outputText  value="#{var.estatotalmenteseguroliquidacion}"/>
                                         <h:panelGroup>

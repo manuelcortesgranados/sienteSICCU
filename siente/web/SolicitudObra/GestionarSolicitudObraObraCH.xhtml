@@ -177,14 +177,15 @@
                                 </h:selectOneMenu>
 
                                 <h:outputText value="#{var.objetosolicitud}"/>
-                                <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
-                                                 disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                                 value="#{SessionBeanCobra.solicitudService.solicitudObrachD.textobservaciones}">
+                                <h:panelGroup>
+                                    <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
+                                                     disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
+                                                     value="#{SessionBeanCobra.solicitudService.solicitudObrachD.textobservaciones}"/>
                                     <rich:message styleClass="mensaje_error" for="txtobjetosolicitud"/>
-                                </h:inputTextarea>
+                                </h:panelGroup>
 
                                 <h:outputText value="#{var.vlrsolicittud}"/>
                                 <rich:inputNumberSpinner minValue="0" maxValue="5000000000" inputSize="10"
@@ -530,8 +531,8 @@
                 </rich:collapsiblePanel>
                 <interkont:spacer height="3"/>
                 <rich:collapsiblePanel id="AprobacionDirector" style="width:100%;" switchType="client" rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
-                                                                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
-                                                                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
+                                                                                                                   SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
+                                                                                                                   SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}">
                     <f:facet name="header">
                         <h:outputText value="7. #{var.aprobaciondeldirector}"/>
                     </f:facet>

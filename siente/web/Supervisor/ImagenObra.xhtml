@@ -119,7 +119,7 @@
                                         </f:facet>
                                         <h:selectBooleanCheckbox styleClass="CheckEstablecerValla#{currentRow.intidimagen}"  value="#{currentRow.booleanvalla}" 
                                                                  disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
-                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction}" event="change" 
+                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerValla" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
@@ -130,7 +130,7 @@
                                         </f:facet>
                                         <h:selectBooleanCheckbox styleClass="CheckEstablecerImagenActual#{currentRow.intidimagen}"  value="#{currentRow.booleanactual}" 
                                                                  disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
-                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction}" event="change" 
+                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerImagenActual" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>

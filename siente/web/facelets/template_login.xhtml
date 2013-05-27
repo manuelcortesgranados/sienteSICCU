@@ -1,34 +1,35 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:composite="http://java.sun.com/jsf/composite"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j" 
-        xmlns:interkont="http://www.interkont.com/jsf"
-	xmlns:rich="http://richfaces.org/rich" 
-      >
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:rich="http://richfaces.org/rich" 
+                >
 
-    
-<h:head>
+
+    <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
-            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_login.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/login.js"></script>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/slider_queessiente.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js"></script>
-            <ui:insert name="head"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_login.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/login.js"></script>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/slider_queessiente.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <h:outputScript name="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js" library="js" />
+        <ui:insert name="head"/>
     </h:head>
 
-<h:body onload="style_background();">
-<h:panelGroup layout="block" styleClass="header-login">
+    <h:body onload="style_background();">
+        <h:form>
+            <h:panelGroup layout="block" styleClass="header-login">
                 <h:graphicImage url="/resources/imgs/login/icon_header.png" styleClass="header-login-img"/>
                 <h:outputText value="#{var.loginheader}"  styleClass="header-login-title" />
             </h:panelGroup>
@@ -37,19 +38,19 @@
                 <h:outputText value="#{var.loginfotercopy}"  styleClass="footer-login-title" />
                 <a4j:commandLink value="#{var.loginfoterterminos}"  styleClass="footer-login-titel-link"/>
                 <a4j:commandLink value="#{var.loginfoteracerca}"  styleClass="footer-login-titel-link"/>
-                <a4j:commandLink value="#{var.loginfoterquees}" styleClass="footer-login-titel-link">
+                <h:commandLink value="#{var.loginfoterquees}" styleClass="footer-login-titel-link">
                     <rich:componentControl target="queessiente" operation="show"/>
-                </a4j:commandLink>
+                </h:commandLink>
                 <h:graphicImage url="/resources/imgs/login/icon_yt.png" width="40" height="40" styleClass="footer-login-img-social"/>
                 <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
                 <h:graphicImage url="/resources/imgs/login/icon_tw.png" width="40" height="40" styleClass="footer-login-img-social"/>
             </h:panelGroup>
-    
-    
-   
-           <ui:insert name="body"/>                                      
-           <ui:include src="ajaxStatus.xhtml"/>
-           <ui:include src="/modal/login/queessiente.xhtml"/>
+        </h:form>
+
+
+        <ui:insert name="body"/>                                      
+        <ui:include src="ajaxStatus.xhtml"/>
+        <ui:include src="/modal/login/queessiente.xhtml"/>
 
     </h:body>
 

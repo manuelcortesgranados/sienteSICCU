@@ -29,15 +29,19 @@
     <ui:define name="body">
 
         <h:form id="form_datos_basicos"  >
-            <a4j:jsFunction oncomplete="#{rich:component(modalAvisoSupervisor)}.hide();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
+            <a4j:jsFunction oncomplete="#{rich:component('modalAvisoSupervisor')}.show();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
                             id="editdatosbasicos" name="showModal" action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction> 
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
-                <tr>
+        </h:form>        
+        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <tr>
+                <h:form>
                     <td rowspan="6" valign="top" style="height: 400px; width: 20%">
                         <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="./../facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
-                    <td valign="top" height="35" style="width: 80%">
+                </h:form>                
+                <td valign="top" height="35" style="width: 80%">
+                    <h:form>
                         <rich:panel id="mp-proyectosPadres">
                             <f:facet name="header" >
                                 <h:panelGroup >
@@ -49,22 +53,25 @@
                                 <h:outputText style="font-size:8px;float:right;" value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
                                 <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
-                                    <h:outputLabel id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev">
+                                    <h:panelGroup>
+                                        <h:outputLabel id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>
                                         <rich:message for="txtNombreAbrev" style="color: #ed0606;"/>
-                                    </h:outputLabel>
+                                    </h:panelGroup>
+
                                     <h:inputTextarea  id="txtNombreAbrev" value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}" 
                                                       cols="60" rows="2" >
 
                                     </h:inputTextarea>
 
 
-                                        <h:outputLabel id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni">
-                                            <rich:message for="fecIni" style="color: #ed0606;"/>
-                                        </h:outputLabel>
+                                    <h:panelGroup>
+                                        <h:outputLabel id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni"/>
+                                        <rich:message for="fecIni" style="color: #ed0606;"/>
+                                    </h:panelGroup>
 
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
                                         <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
-                                        </rich:calendar>
+                                    </rich:calendar>
 
                                     <h:outputLabel id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
@@ -80,9 +87,11 @@
                                         </h:selectOneMenu>
                                     </h:panelGroup>
 
-                                    <h:outputLabel id="lblPlazodias"  value="#{var.plazodias}" for="plazodias">
+                                    <h:panelGroup>
+                                        <h:outputLabel id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
                                         <rich:message for="plazodias" style="color: #ed0606;"/>
-                                    </h:outputLabel>
+                                    </h:panelGroup>
+
                                     <h:panelGroup id="layoutPeriodo">
                                         <h:inputText  size="15" id="plazodias" value="#{Supervisor$IngresarNuevaObra.obranueva.intplazoobra}" disabled="true">
                                             <f:validateLongRange minimum="0"/>
@@ -242,7 +251,7 @@
                             <interkont:spacer height="10px" style="width:100%;"/>
                             <h:panelGroup >
                                 <h:commandButton id="btVolverTipif"  value="#{var.volver}"
-                                                   action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" />
+                                                 action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" />
 
                                 <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.validabasicos}" />
                                 <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
@@ -270,10 +279,12 @@
                             </h:panelGroup>
 
                         </rich:panel>
-                    </td>
-                </tr>
-            </table>
-        </h:form>
+                    </h:form>
+                </td>
+
+            </tr>
+        </table>
+
         <ui:include src="/modal/listadoRuta.xhtml"/>
         <ui:include src="/modal/modallistadosedes.xhtml"/>
     </ui:define>

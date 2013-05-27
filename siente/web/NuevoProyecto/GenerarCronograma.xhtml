@@ -7,213 +7,211 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                >
-    <f:view >
+                template="/facelets/template_proyecto.xhtml">
+    <ui:define name="head">
+        <title>Nuevo #{var.proyect} - Supervisor </title>
 
-        <ui:composition template="/facelets/template_proyecto.xhtml">
-            <ui:define name="head">
-                <title>Nuevo #{var.proyect} - Supervisor </title>
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.cronogramavalidacion}"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
 
-            </ui:define>
-            <ui:define name="title">
-                <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.cronogramavalidacion}"/>
-            </ui:define>
-            <ui:define name="menu">
-                <ui:include src="/facelets/menu_gestion.xhtml"/>
-            </ui:define>
-
-            <ui:define name="body" >
-                <h:form  id="formCronograma"  >
-                    <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
-                        <tr>
-                            <td rowspan="6" valign="top" style="height:400px;width: 20%">
-                                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                                <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
-                            </td>
-                            <td valign="top" height="35" style="width: 80%">
-
-                                <rich:panel id="pasoGenCron" style="width:98%;" >
-                                    <f:facet name="header">
-                                        <h:outputText value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                        <h:outputText value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                    </f:facet>
-                                    <interkont:spacer width="20"/>
-
-                                    <h:panelGrid id="layoutPaso2" style="width:100%;">
-                                        <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
-                                            <center>
-                                                <f:facet name="header">
-                                                    <h:outputText value="#{var.pgenerarcronograma}"/>
-                                                </f:facet>
-                                                <h:panelGrid style="align:center;" columns="1" >
-                                                    <h:panelGroup>
-                                                        <h:outputText value="#{var.debediligenciartodoslosdatos}"/>
-                                                        <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                                    </h:panelGroup>
-                                                    <a4j:commandLink id="generarcronograma" styleClass="excel anchorlink" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
-                                                                     action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" oncomplete="#{rich:component('mp_cronograma')}.show();" render="layoutCron"                       
-                                                                     >
-                                                    </a4j:commandLink>
-                                                </h:panelGrid>
-                                                <h:outputLabel value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                            </center>
-                                        </rich:collapsiblePanel>
-                                        <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
-                                            <center>
-                                                <h:panelGrid columns="1" style="align:center;">
-                                                    <h:outputLabel value="#{var.importeelcronograma}" styleClass="txt_label_bold"/>
-                                                    <interkont:spacer width="40"/>
-                                                    <a4j:commandButton styleClass="btn_sec_gig"  value="#{var.examinar}" style="font-size: 10px;" id="subircronograma"
-                                                                       onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
-                                                </h:panelGrid>
-
-                                                <h:panelGroup id="layoutDoc" style="width: 80%">
-                                                    <rich:panel style="width: 80%">
-
-                                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos!=0}"
-                                                                       style="height: 20px; background-color: #FFFFFF; -rave-layout: grid">
-                                                            <h:outputText value=" #{file.nombre}" />
-                                                            <interkont:spacer height="8" width="15"/>
-                                                            <h:graphicImage url="/resources/botones/chulo.png" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
-                                                            <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
-                                                            <h:graphicImage url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
-                                                            <h:outputText value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
-                                                            <h:outputText value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}"/>
-                                                        </rich:dataGrid>
-                                                        <h:outputText rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}" value="#{var.nosuarc}"/>
-                                                        <h:panelGroup styleClass="panelInfoArchivoSubido"
-                                                                      rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and !empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}">
-                                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.nombreArchivoCronograma}"/>
-                                                            <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" style="padding-left:2em;"/>
-                                                            <h:outputText value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}" style="padding-left:2em;"/>
-                                                        </h:panelGroup>
-                                                    </rich:panel>
-                                                </h:panelGroup>
-                                            </center>
-                                        </rich:collapsiblePanel>
-                                        <rich:collapsiblePanel header="#{var.presupuesto}" switchType="client" expanded="true" id="stpPresupuesto" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" >
-                                            <f:facet name="header">
-                                                <h:outputText value="#{var.presupuesto}"/>
-                                            </f:facet>
-
-
-                                            <center>                                    
-                                                <h:panelGrid >
-
-                                                    <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle">
-                                                        <h:outputLabel value="#{var.definaelcostototal}" styleClass="txt_novedades"/>
-                                                    </h:panelGrid>
-
-                                                    <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle" style="width: 500px;" id="panelCostosComb" >
-
-                                                        <h:outputText value="Las actividades del cronograma incluyen el AIU?" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                                        <h:outputText value="El costo #{var.textoobra3} incluye el AIU?" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                                        <h:selectOneMenu id="cmbanalisisprecio" value="#{Supervisor$IngresarNuevaObra.obranueva.boolincluyeaiu}"  >
-                                                            <f:selectItem itemValue="false" itemLabel="No"/>
-                                                            <f:selectItem itemValue="true" itemLabel="Si"/> 
-                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="layoutCostoTotal" >
-
-                                                            </a4j:ajax>    
-                                                        </h:selectOneMenu>
-
-                                                        <h:outputLabel id="lbltipocosto"  value="#{var.tipocosto}"/>
-
-                                                        <h:selectOneMenu id="combotipocosto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto}"  >
-                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoCostoOption}" />
-                                                            <a4j:ajax event="change"  listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" >
-
-                                                            </a4j:ajax>     
-                                                        </h:selectOneMenu>
-                                                    </h:panelGrid>
-
-
-                                                    <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 500px;" id="panelCostos" >
-
-                                                        <h:outputLabel id="lblcostodirecto"  value="#{var.costodirecto}"/>
-                                                        <h:panelGroup id="layoutCostoDirecto">
-                                                            <h:outputText id="stcostodirecto" styleClass="txt_informacion_encabezado" value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
-                                                                <f:convertNumber pattern="$#,###.00"/>
-                                                            </h:outputText>
-                                                            <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
-                                                                <f:convertNumber pattern="###,###"/>
-                                                                <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
-                                                            </h:inputText>
-                                                        </h:panelGroup>
-
-                                                        <h:outputLabel id="lbladministracion"  value="#{var.administracion} (%):" />
-                                                        <rich:inputNumberSpinner id="admini"  value="#{Supervisor$IngresarNuevaObra.obranueva.floatporadmon}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
-                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
-                                                        </rich:inputNumberSpinner>                                                    
-                                                        <h:outputLabel id="lblImprevistos"  value="#{var.imprevistos} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
-                                                        <rich:inputNumberSpinner id="imprevistos" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporimprevi}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"  >
-                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
-                                                        </rich:inputNumberSpinner>
-                                                        <h:outputLabel id="lblUtilidad"  value="Utilidad (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
-                                                        <rich:inputNumberSpinner id="utilidad" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporutilidad}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}" >
-                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
-                                                        </rich:inputNumberSpinner>                                                    
-                                                        <h:outputLabel id="lblIva"  value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
-
-                                                        <h:outputLabel id="lblIvaAdmon"  value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto!=1}"/>
-                                                        <rich:inputNumberSlider id="ivautilidad" maxValue="16" step="1"
-                                                                                value="#{Supervisor$IngresarNuevaObra.obranueva.floatporivasobreutil}" style="width: 90px;">
-                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
-                                                        </rich:inputNumberSlider>                                                    
-                                                        <h:outputLabel id="lblotros"  value="#{var.otros} (%):" />
-                                                        <rich:inputNumberSpinner id="otros" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporotros}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
-                                                            <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
-                                                        </rich:inputNumberSpinner>
-
-                                                        <h:outputLabel id="lblCostoTotal"  value="#{var.costototal}:"/>
-                                                        <h:panelGroup id="layoutCostoTotal">                                                            
-                                                            <h:outputText id="stCosto" styleClass="txt_informacion_encabezado" 
-                                                                          value="#{Supervisor$IngresarNuevaObra.valortotalobra}">
-                                                                <f:convertNumber pattern="$ ###,###,###"/>
-                                                            </h:outputText>
-                                                        </h:panelGroup>
-                                                    </h:panelGrid>
-
-                                                    <interkont:spacer height="14" width="150"/>
-                                                </h:panelGrid>
-                                            </center>
-                                        </rich:collapsiblePanel>
-                                        <h:panelGroup >
-                                            <h:commandButton id="btVolverGenCron"  value="#{var.volver}" immediate="true"
-                                                             action="datosubicaciondelaObra" />
-                                            <h:commandButton  value="#{var.continuar}" immediate="true" 
-                                                               action="datosGenerarImagenes" >
-                                            </h:commandButton>
-                                            <h:commandButton id="btCancelarGenerar"  value="#{var.cancelar}" immediate="true"
-                                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                            </h:commandButton>
-                                            <a4j:outputPanel id="panelErrorGen">
-                                                <rich:messages id="messagesGen" globalOnly="true"
-                                                               styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                                               >
-                                                    <f:facet name="infoMarker">
-                                                        <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                    </f:facet>
-                                                    <f:facet name="warnMarker">
-                                                        <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                    </f:facet>
-                                                    <f:facet name="errorMarker">
-                                                        <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                    </f:facet>
-                                                    <f:facet name="fatalMarker">
-                                                        <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                    </f:facet>
-                                                </rich:messages>
-                                            </a4j:outputPanel>
-                                        </h:panelGroup>
-                                    </h:panelGrid>
-                                </rich:panel>
-                            </td>
-                        </tr>
-                    </table>
+    <ui:define name="body" >
+        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <tr>
+                <h:form>
+                    <td rowspan="6" valign="top" style="height:400px;width: 20%">
+                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
+                    </td>
                 </h:form>
-                <ui:include src="../NuevoProyecto/modal/panelCronogramaModal.xhtml"/>
-                <ui:include src="../NuevoProyecto/modal/subirCronogramaPanel.xhtml"/>
-            </ui:define>
-        </ui:composition>
-    </f:view>
+                <td valign="top" height="35" style="width: 80%">
+                    <h:form id="formCronograma">
+                        <rich:panel id="pasoGenCron" style="width:98%;" >
+                            <f:facet name="header">
+                                <h:outputText value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                <h:outputText value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                            </f:facet>
+                            <interkont:spacer width="20"/>
+                            <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}" header="#{var.pgenerarcronograma}">
+                                <center>
+                                    <h:panelGrid style="align:center;" columns="1" >
+                                        <h:panelGroup>
+                                            <h:outputText value="#{var.debediligenciartodoslosdatos}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                        </h:panelGroup>
+                                        <a4j:commandLink rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
+                                                         action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" 
+                                                         execute="@this"
+                                                         oncomplete="#{rich:component('mp_cronograma')}.show();"
+                                                         styleClass="excel anchorlink"
+                                                         >
+                                        </a4j:commandLink>
+
+
+                                    </h:panelGrid>
+                                    <h:outputLabel value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                </center>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
+                                <center>
+                                    <h:panelGrid columns="1" style="align:center;">
+                                        <h:outputLabel value="#{var.importeelcronograma}" styleClass="txt_label_bold"/>
+                                        <interkont:spacer width="40"/>
+                                        <a4j:commandButton styleClass="btn_sec_gig"  value="#{var.examinar}" style="font-size: 10px;" id="subircronograma"
+                                                           onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
+                                    </h:panelGrid>
+
+                                    <h:panelGroup id="layoutDoc" style="width: 80%">
+                                        <rich:panel style="width: 80%">
+
+                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos!=0}"
+                                                           style="height: 20px; background-color: #FFFFFF; -rave-layout: grid">
+                                                <h:outputText value=" #{file.nombre}" />
+                                                <interkont:spacer height="8" width="15"/>
+                                                <h:graphicImage url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:graphicImage url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
+                                                <h:outputText value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
+                                                <h:outputText value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}"/>
+                                            </rich:dataGrid>
+                                            <h:outputText rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}" value="#{var.nosuarc}"/>
+                                            <h:panelGroup styleClass="panelInfoArchivoSubido"
+                                                          rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and !empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}">
+                                                <h:outputText value="#{Supervisor$IngresarNuevaObra.nombreArchivoCronograma}"/>
+                                                <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" style="padding-left:2em;"/>
+                                                <h:outputText value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}" style="padding-left:2em;"/>
+                                            </h:panelGroup>
+                                        </rich:panel>
+                                    </h:panelGroup>
+                                </center>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel header="#{var.presupuesto}" switchType="client" expanded="true" id="stpPresupuesto" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.presupuesto}"/>
+                                </f:facet>
+
+
+                                <center>                                    
+                                    <h:panelGrid >
+
+                                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle">
+                                            <h:outputLabel value="#{var.definaelcostototal}" styleClass="txt_novedades"/>
+                                        </h:panelGrid>
+
+                                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle" style="width: 500px;" id="panelCostosComb" >
+
+                                            <h:outputText value="Las actividades del cronograma incluyen el AIU?" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                            <h:outputText value="El costo #{var.textoobra3} incluye el AIU?" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                            <h:selectOneMenu id="cmbanalisisprecio" value="#{Supervisor$IngresarNuevaObra.obranueva.boolincluyeaiu}"  >
+                                                <f:selectItem itemValue="false" itemLabel="No"/>
+                                                <f:selectItem itemValue="true" itemLabel="Si"/> 
+                                                <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="layoutCostoTotal" >
+
+                                                </a4j:ajax>    
+                                            </h:selectOneMenu>
+
+                                            <h:outputLabel id="lbltipocosto"  value="#{var.tipocosto}"/>
+
+                                            <h:selectOneMenu id="combotipocosto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto}"  >
+                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoCostoOption}" />
+                                                <a4j:ajax event="change"  listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" >
+
+                                                </a4j:ajax>     
+                                            </h:selectOneMenu>
+                                        </h:panelGrid>
+
+
+                                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 500px;" id="panelCostos" >
+
+                                            <h:outputLabel id="lblcostodirecto"  value="#{var.costodirecto}"/>
+                                            <h:panelGroup id="layoutCostoDirecto">
+                                                <h:outputText id="stcostodirecto" styleClass="txt_informacion_encabezado" value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
+                                                    <f:convertNumber pattern="$#,###.00"/>
+                                                </h:outputText>
+                                                <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
+                                                    <f:convertNumber pattern="###,###"/>
+                                                    <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.validarCostos}"  render="panelCostos" oncomplete="this.form.submit()" />
+                                                </h:inputText>
+                                            </h:panelGroup>
+
+                                            <h:outputLabel id="lbladministracion"  value="#{var.administracion} (%):" />
+                                            <rich:inputNumberSpinner id="admini"  value="#{Supervisor$IngresarNuevaObra.obranueva.floatporadmon}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
+                                                <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                            </rich:inputNumberSpinner>                                                    
+                                            <h:outputLabel id="lblImprevistos"  value="#{var.imprevistos} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+                                            <rich:inputNumberSpinner id="imprevistos" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporimprevi}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"  >
+                                                <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                            </rich:inputNumberSpinner>
+                                            <h:outputLabel id="lblUtilidad"  value="Utilidad (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+                                            <rich:inputNumberSpinner id="utilidad" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporutilidad}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}" >
+                                                <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                            </rich:inputNumberSpinner>                                                    
+                                            <h:outputLabel id="lblIva"  value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+
+                                            <h:outputLabel id="lblIvaAdmon"  value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto!=1}"/>
+                                            <rich:inputNumberSlider id="ivautilidad" maxValue="16" step="1"
+                                                                    value="#{Supervisor$IngresarNuevaObra.obranueva.floatporivasobreutil}" style="width: 90px;">
+                                                <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                            </rich:inputNumberSlider>                                                    
+                                            <h:outputLabel id="lblotros"  value="#{var.otros} (%):" />
+                                            <rich:inputNumberSpinner id="otros" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporotros}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
+                                                <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
+                                            </rich:inputNumberSpinner>
+
+                                            <h:outputLabel id="lblCostoTotal"  value="#{var.costototal}:"/>
+                                            <h:panelGroup id="layoutCostoTotal">                                                            
+                                                <h:outputText id="stCosto" styleClass="txt_informacion_encabezado" 
+                                                              value="#{Supervisor$IngresarNuevaObra.valortotalobra}">
+                                                    <f:convertNumber pattern="$ ###,###,###"/>
+                                                </h:outputText>
+                                            </h:panelGroup>
+                                        </h:panelGrid>
+
+                                        <interkont:spacer height="14" width="150"/>
+                                    </h:panelGrid>
+                                </center>
+                            </rich:collapsiblePanel>
+                            <h:panelGroup >
+                                <h:commandButton id="btVolverGenCron"  value="#{var.volver}" immediate="true"
+                                                 action="datosubicaciondelaObra" />
+                                <a4j:commandButton execute="@this" value="#{var.continuar}" immediate="true" 
+                                                   action="datosGenerarImagenes" >
+                                </a4j:commandButton>
+                                <h:commandButton id="btCancelarGenerar"  value="#{var.cancelar}" immediate="true"
+                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                </h:commandButton>
+                                <a4j:outputPanel id="panelErrorGen">
+                                    <rich:messages id="messagesGen" globalOnly="true"
+                                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                   >
+                                        <f:facet name="infoMarker">
+                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                        </f:facet>
+                                        <f:facet name="warnMarker">
+                                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                        </f:facet>
+                                        <f:facet name="errorMarker">
+                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                        </f:facet>
+                                        <f:facet name="fatalMarker">
+                                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                        </f:facet>
+                                    </rich:messages>
+                                </a4j:outputPanel>
+                            </h:panelGroup>
+
+                        </rich:panel>
+                    </h:form>
+                </td>
+            </tr>
+        </table>
+
+        <ui:include src="../NuevoProyecto/modal/panelCronogramaModal.xhtml"/>
+        <ui:include src="../NuevoProyecto/modal/subirCronogramaPanel.xhtml"/>
+    </ui:define>
+
 </ui:composition>

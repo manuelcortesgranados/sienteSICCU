@@ -2119,7 +2119,9 @@ public class NuevoContratoBasico   {
         llenarFormaPago();
         llenarComboContratista();
         iniciarFiltroAvanzado();
+         if(getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")){
         llenarModalidadContratista();
+        }        
         //limpiarGirodirecto();
 
 //     llenarContratosPadres();
@@ -2485,7 +2487,7 @@ public class NuevoContratoBasico   {
      */
 
     public String guardarContrato() {
-//        if (validarContrato()) {
+//        if (validarContrato()) {        
         if (comboEntidadesContratoguardar()) {
             if (contrato.getIntduraciondias() > 0) {
                 if (contrato.getContratista() == null) {
@@ -2535,6 +2537,9 @@ public class NuevoContratoBasico   {
                     contrato.setIntcantproyectos(0);
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
+                    }
+                    if(getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")){
+                        contrato.setModalidadcontratista(null);
                     }
                     //contrato.setContrato(null);
 //                        if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
@@ -3081,8 +3086,8 @@ public class NuevoContratoBasico   {
      * @return No retorna ningun valor
      */
     public String contratoPadreSelec(int filaSeleccionada) {
-        varmostrarcontrpa = 1;
-        contrpadre = listaContratosPadre.get(filaSeleccionada);
+        varmostrarcontrpa = 1;       
+        contrpadre = listacontratos.get(filaSeleccionada);
         return null;
 
     }
@@ -3093,11 +3098,8 @@ public class NuevoContratoBasico   {
      * @return No retorna ningun valor
      */
     public String contratoPadreSelecContratista(int filaSeleccionada) {
-        varmostrarcontrpa = 1;
-        
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        contrpadre = nuevoContratoBasico.getListacontratoscontratista().get(filaSeleccionada);
-
+        varmostrarcontrpa = 1;  
+        contrpadre = listacontratoscontratista.get(filaSeleccionada);
         return null;
     }
     /*
@@ -3198,8 +3200,10 @@ public class NuevoContratoBasico   {
 
     /**
      * Elimina el contrato padre seleccionado.
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      */
-    public void eliminarItemPadreSele() {
+    public void eliminarItemPadreSele(int filaSeleccionada) {
         //contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
         contrpadre = null;
         varmostrarcontrpa = 0;

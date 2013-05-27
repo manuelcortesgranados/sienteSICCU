@@ -203,16 +203,17 @@
                                 </h:selectOneMenu>
 
                                 <h:outputText value="#{var.objetosolicitud}:"/>
-                                <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
-                                                 disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                                 value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}"
-                                                 rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}">
+                                <h:panelGroup>
+                                    <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
+                                                     disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
+                                                     value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}"
+                                                     rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"/>
                                     <rich:message styleClass="mensaje_error" for="txtobjetosolicitud"/>
-                                </h:inputTextarea>
+                                </h:panelGroup>
                                 <h:outputText rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}">
                                 </h:outputText>
@@ -275,7 +276,7 @@
                             <h:outputText id="ImagenAtencion" value="#{var.descripcionImagen}:"/>
                             <h:inputText id="inputNombre" value="#{SessionBeanCobra.solicitudService.imagensolicitud.strdescripcion}"/>
                             <a4j:commandLink id="bt_agregarImagen" styleClass="anadir anchorLink" title="#{var.agregar}"
-                                             action="#{SolicitudObra$GestionarSolicitudObra.subirImagenaLista}"
+                                             action="#{SolicitudObra$GestionarSolicitudObra.subirImagenaLista}" execute="adjuntarImagen"
                                              render="tablaImagenes,gpDatosBasicos,panelUploadImagenSolicitud"/>
                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.archivos}" var="file" style="width: 30px">
                                 <h:outputText id="otxt_nombreImagen" value=" #{file.nombre}"/>
@@ -310,7 +311,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.eliminar}"/>
                                     </f:facet>
-                                    <a4j:commandButton id="eliminar" value="#{var.eliminar}" render="tablaImagenes"
+                                    <a4j:commandButton id="eliminar" value="#{var.eliminar}" render="tablaImagenes" execute="@this"
                                                        action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista(filaSeleccionada)}"/>
                                 </rich:column>
                                 <f:facet name="footer">
@@ -338,7 +339,7 @@
                             <h:selectOneMenu id="selecttipodocumento" value="#{SolicitudObra$GestionarSolicitudObra.tipodoc}">
                                 <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tipodocumento}"/>
                             </h:selectOneMenu>                                   
-                            <a4j:commandLink id="bt_agregar" styleClass="anadir anchorLink" title="#{var.agregar}"
+                            <a4j:commandLink id="bt_agregar" styleClass="anadir anchorLink" title="#{var.agregar}" execute="panel_subir"
                                              action="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoaLista}"
                                              render="tablaDocumentos,gpDatosBasicos1,panelUploadDocumento">
 
@@ -376,7 +377,7 @@
                                 <h:outputText value="#{currentRow.strdescripcion}"/>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentos"
+                                <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentos" execute="@this"
                                                    action="#{SolicitudObra$GestionarSolicitudObra.eliminarDocumentoLista(filaSeleccionada)}">
                                 </a4j:commandButton>
                             </rich:column>
@@ -490,7 +491,7 @@
                                 </h:panelGroup>
 
                                 <h:outputText value="#{var.valoraprobado}"/>
-                                <rich:inputNumberSpinner
+                                <rich:inputNumberSpinner 
                                     minValue="0" disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
@@ -549,11 +550,10 @@
                     </center>
                     <center>
                         <h:panelGrid columns="2">
-                            <a4j:commandButton id="GuardaraprobacionL" 
+                            <a4j:commandButton id="GuardaraprobacionL"
+                                               oncomplete="#{rich:component('panelValidarSolicitud')}.show()" render="layoutGuardar"
                                                action="#{SolicitudObra$GestionarSolicitudObra.validaraprobacion}"
-                                               rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"                                                                          
                                                value="#{var.guardar}" >
-                                <a4j:ajax event="complete"  render="layoutGuardar" oncomplete="#{rich:component('panelValidarSolicitud')}.show()"/>
                             </a4j:commandButton>
                             <a4j:commandButton id="Cancelaraprobacioninfra" value="#{var.cancelar}"
                                                rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6}"

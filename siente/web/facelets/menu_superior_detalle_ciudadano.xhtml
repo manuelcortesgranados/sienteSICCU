@@ -13,13 +13,13 @@
             <h:panelGrid columns="4"  rowClasses="alignverticaldetalle" >
                 <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px" >
                     <h:panelGroup layout="block" style="height:30px" >
-                        <a4j:commandLink styleClass="buttonblue1 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
-                                         immediate="true" render="panelBody" value="#{var.informacionciu}" style="text-align: center; width:180px!important;
+                        <h:commandLink styleClass="buttonblue1 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
+                                         immediate="true"  value="#{var.informacionciu}" style="text-align: center; width:180px!important;
                                          height:25px!important;color:#FFF!important;"
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
-                        <a4j:commandLink styleClass="buttonblue1_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
-                                         immediate="true" render="panelBody" value="#{var.informacionciu}" 
+                        <h:commandLink styleClass="buttonblue1_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
+                                         immediate="true"  value="#{var.informacionciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
                     </h:panelGroup>
@@ -27,38 +27,38 @@
                 <h:panelGrid  cellpadding="0" cellspacing="0" style="height:30px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnparticipacion_ciudadano}" >
                     <h:panelGroup layout="block" style="height:30px" >
                         <a4j:commandLink styleClass="buttonblue2 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
-                                         immediate="true" render="panelBody" value="#{var.comentariosciu}" style="text-align: center; width:180px!important;
+                                         immediate="true"  value="#{var.comentariosciu}" style="text-align: center; width:180px!important;
                                          height:25px!important;color:#FFF!important;"
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
                         <a4j:commandLink styleClass="buttonblue2_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
-                                         immediate="true" render="panelBody" value="#{var.comentariosciu}" 
+                                         immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
                     </h:panelGroup>
                 </h:panelGrid>
                 <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px"  >
                     <h:panelGroup layout="block" style="height:30px" >
-                        <a4j:commandLink styleClass="buttonblue3 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=4}"
-                                         immediate="true" render="panelBody" value="#{var.fotosciu}" style="text-align: center; width:180px!important;
+                        <h:commandLink styleClass="buttonblue3 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=4}"
+                                         immediate="true"  value="#{var.fotosciu}" style="text-align: center; width:180px!important;
                                          height:25px!important;color:#FFF!important;"
                                          action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
                                          />
-                        <a4j:commandLink styleClass="buttonblue3_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==4}"
-                                         immediate="true" render="panelBody" value="#{var.fotosciu}" 
+                        <h:commandLink styleClass="buttonblue3_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==4}"
+                                         immediate="true"  value="#{var.fotosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
                                          />
                     </h:panelGroup>
                 </h:panelGrid>
                 <h:panelGrid cellpadding="0" cellspacing="0" style="height:30px"  >
                     <h:panelGroup layout="block" style="height:30px" >
-                        <a4j:commandLink styleClass="buttonblue4 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=3}"
-                                         immediate="true" render="panelBody" value="#{var.documentosciu}" style="text-align: center; width:180px!important;
+                        <h:commandLink styleClass="buttonblue4 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=3}"
+                                         immediate="true"  value="#{var.documentosciu}" style="text-align: center; width:180px!important;
                                          height:25px!important;color:#FFF!important;"
                                          action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
                                          />
-                        <a4j:commandLink styleClass="buttonblue4_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==3}"
-                                         immediate="true" render="panelBody" value="#{var.documentosciu}" 
+                        <h:commandLink styleClass="buttonblue4_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==3}"
+                                         immediate="true"  value="#{var.documentosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
                                          />
                     </h:panelGroup>

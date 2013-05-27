@@ -94,36 +94,36 @@
 
 
                                     var j = jQuery.noConflict();
-                                    var timefalta=document.getElementById("finfecha").value;
-                                    var futuro = new Date (timefalta);
+                                    var timefalta = document.getElementById("finfecha").value;
+                                    var futuro = new Date(timefalta);
                                     var actualiza = 1000;
 
-                                    j("#refreshMe").everyTime(actualiza,function(i){
+                                    j("#refreshMe").everyTime(actualiza, function(i) {
                                         var ahora = new Date();
                                         var faltan = futuro - ahora;
 
-                                        if (faltan > 0){
-                                            var segundos = Math.round(faltan/1000);
-                                            var minutos = Math.floor(segundos/60);
-                                            var segundos_s = segundos%60;
-                                            var horas = Math.floor(minutos/60);
-                                            var minutos_s = minutos%60;
-                                            var dias = Math.floor(horas/24);
-                                            var horas_s = horas%24;
+                                        if (faltan > 0) {
+                                            var segundos = Math.round(faltan / 1000);
+                                            var minutos = Math.floor(segundos / 60);
+                                            var segundos_s = segundos % 60;
+                                            var horas = Math.floor(minutos / 60);
+                                            var minutos_s = minutos % 60;
+                                            var dias = Math.floor(horas / 24);
+                                            var horas_s = horas % 24;
 
-                                            var cuentaRegresiva='<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">'+dias+'</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">'+horas_s+'</h2></td><td><h2 align="center" style="color:#336699">'+minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">'+segundos_s+'</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
+                                            var cuentaRegresiva = '<table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="26"></td><td><p align="center" style="color:#666666">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666">Horas</p></td> <td><p align="center" style="color:#666666">Minutos</p></td> <td><p align="center" style="color:#666666">seg</p></td>  </tr></table>';
 
                                             j('#refreshMe').html(cuentaRegresiva);
 
                                         }
                                         else {
-                                            var dias=0;
-                                            var horas_s=0;
-                                            var minutos_s=00;
-                                            var segundos_s=00;
-                                            var cuentaRegresiva='<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">'+dias+'</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">'+horas_s+'</h2></td><td><h2 align="center" style="color:#336699">'+minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">'+segundos_s+'</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
+                                            var dias = 0;
+                                            var horas_s = 0;
+                                            var minutos_s = 00;
+                                            var segundos_s = 00;
+                                            var cuentaRegresiva = '<center><table width="149" border="0"><tr><td width="45"></td><td width="49"><h1 align="center" style="color:#336699">' + dias + '</h1></td><td width="41"></td></tr><tr><td height="20"></td><td><p align="center" style="color:#666666; font-size: 10pt">Dias</p></td><td></td></tr><tr><td><h2 align="center" style="color:#336699">' + horas_s + '</h2></td><td><h2 align="center" style="color:#336699">' + minutos_s + '</h2></td><td><h2 align="center" style="color:#336699">' + segundos_s + '</h2></td></tr><tr> <td><p align="center" style="color:#666666; font-size: 7pt">Horas</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">Minutos</p></td> <td><p align="center" style="color:#666666; font-size: 7pt">seg</p></td>  </tr></table></center>';
 
-                                            j('#refreshMe').html(cuentaRegresiva) ;
+                                            j('#refreshMe').html(cuentaRegresiva);
                                             return true;
                                         }
 
@@ -340,11 +340,8 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.editar}" />
                                                 </f:facet>
-                                                <a4j:commandButton id="btnPolizas" value="#{var.editar}"
+                                                <a4j:commandButton id="btnPolizas" value="#{var.editar}" oncomplete="#{rich:component('mp-editar-polizas')}.show();" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.seleccionareditarPoliza(filaSeleccionada)}" render="rpPolizas">
-                                                    <a4j:ajax event="complete" 
-                                                              oncomplete="#{rich:component('mp-editar-polizas')}.show(); return true;"
-                                                              immediate="true"/>
                                                 </a4j:commandButton>
 
                                             </rich:column>
@@ -352,7 +349,7 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="#{var.eliminar}" />
                                                 </f:facet>
-                                                <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" immediate="true"
+                                                <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.eliminarPoliza(filaSeleccionada)}">
                                                 </a4j:commandButton>
                                             </rich:column>
@@ -362,27 +359,31 @@
                                     </h:panelGroup>
 
                                     <h:panelGrid id="pgdocumentosModi" columns="6">
-                                        <h:outputLabel id="lblPoliza"  value="#{var.anadirpolizas}:" for="txtPoliza">
+                                        <h:panelGroup>
+                                            <h:outputLabel id="lblPoliza"  value="#{var.anadirpolizas}:" for="txtPoliza"/>
                                             <rich:message for="txtPoliza"/>
-                                        </h:outputLabel>
+                                        </h:panelGroup>
                                         <interkont:spacer width="42"/>
 
                                         <h:inputText size="40" id="txtPoliza" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoPoliza}" />
                                         <a4j:commandButton id="bt_agregarModi" value="#{var.examinar}"
-                                                           onclick="#{rich:component('panelUploadDocumentopoliza')}.show(); return true;"
+                                                           onclick="#{rich:component('panelUploadDocumentopoliza')}.show();
+                                    return true;"
                                                            style="font-size:12px;"/>
                                     </h:panelGrid>
 
                                 </rich:panel> 
                                 <h:panelGrid id="pgdocumentosOtrosi" columns="6" rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto>=1 or Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}" >
-                                    <h:outputLabel id="lblOtrosi"  value="#{var.adjuntarotrosi}:" for="txtOtrosi">
+                                    <h:panelGroup>
+                                        <h:outputLabel id="lblOtrosi"  value="#{var.adjuntarotrosi}:" for="txtOtrosi"/>
                                         <rich:message for="txtOtrosi"/>
-                                    </h:outputLabel>
+                                    </h:panelGroup>
                                     <interkont:spacer width="42"/>
 
                                     <h:inputText size="40" id="txtOtrosi" readonly="true" value="#{Supervisor$ModificarContrato.nombreArchivoOtroSi}" />
                                     <a4j:commandButton id="bt_agregarOtrosi" value="#{var.examinar}"  render="gpUploadDocAt"
-                                                       onclick="#{rich:component('panelUploadDocumentoOtrosi')}.show(); return true;"
+                                                       onclick="#{rich:component('panelUploadDocumentoOtrosi')}.show();
+                                    return true;"
                                                        style="font-size:12px;"/>
                                 </h:panelGrid>
                             </h:panelGroup>
@@ -480,8 +481,8 @@
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >
-                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}" render="mp-crear-girodirecto">
-                                                        <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-crear-girodirecto')}.show(); return true;" />
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}" render="mp-crear-girodirecto"
+                                                                       oncomplete="#{rich:component('mp-crear-girodirecto')}.show();">
                                                     </a4j:commandButton>
                                                 </rich:column>
                                             </rich:columnGroup>

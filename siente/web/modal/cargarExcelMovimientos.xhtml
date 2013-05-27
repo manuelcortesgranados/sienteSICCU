@@ -9,29 +9,24 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_subirexcelgiros" resizeable="false" autosized="true" headerClass="rich-panel-header">
-        <f:facet name="header" >
-            <h:panelGroup >
-                <h:outputText value="Subir Archivo Giros"/>
-            </h:panelGroup>
-        </f:facet>
+    <rich:popupPanel id="mp_subirexcelgiros" autosized="true">
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subirexcelgiros" styleClass="cerrar"
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_subirexcelgiros')}.hide(); return false;"/>
+                                     title="#{var.cerrar}" onclick="#{rich:component('mp_subirexcelgiros')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:form>
+        <rich:panel header="Subir Archivo Giros" styleClass="rich-panel-body" style="padding:0px;">
+            <h:form>
             <h:panelGroup id="gpUploadDocAt">
                 <h:panelGrid columnClasses="top,top" columns="2">
                     <rich:fileUpload acceptedTypes="csv" 
                                      doneLabel="#{var.hecho}"
-                                     fileUploadListener="#{Financiera$CargarExcel.cargadorArchivoMovimientos.listener}" id="uploadDocumentoMovs"
-                                     immediateUpload="true"
+                                     fileUploadListener="#{Financiera$CargarExcel.cargadorArchivoMovimientos.listener}" id="uploadDocumentoMovs" immediateUpload="true"
                                      listHeight="150" maxFilesQuantity="1">
-                        <a4j:ajax event="uploadcomplete" render="info_documento"/>
+                        <a4j:ajax event="uploadcomplete" render="gpUploadDocAt"/>
                     </rich:fileUpload>
                     <h:panelGroup id="info_documento">
                         <center>
@@ -41,7 +36,7 @@
                                 </f:facet>
                                 <h:outputText rendered="#{Financiera$CargarExcel.cargadorArchivoMovimientos.numArchivos==0}" value="#{var.nosuarc}"/>
                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Financiera$CargarExcel.cargadorArchivoMovimientos.archivos}" var="file">
-                                    <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                    <rich:panel>
                                         <h:panelGrid columns="1">
 
                                             <h:panelGrid columns="2">
@@ -64,8 +59,10 @@
                         </center>
                     </h:panelGroup>
                 </h:panelGrid>
+
             </h:panelGroup>
         </h:form>
+        </rich:panel>
     </rich:popupPanel>
 
 </ui:composition>

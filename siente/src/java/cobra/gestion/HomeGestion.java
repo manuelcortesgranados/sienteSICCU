@@ -508,15 +508,17 @@ public class HomeGestion implements Serializable {
     public void setObrasEncontradas(Integer obrasEncontradas) {
         this.obrasEncontradas = obrasEncontradas;
     }
-    private List markers;
+    private List<Marcador> markers;
 
-    public List getMarkers() {
+    public List<Marcador> getMarkers() {
         return markers;
     }
 
-    public void setMarkers(List markers) {
+    public void setMarkers(List<Marcador> markers) {
         this.markers = markers;
     }
+
+   
 
     public Marcador getMarcador() {
         return marcador;
@@ -1846,7 +1848,7 @@ public class HomeGestion implements Serializable {
         return null;
     }
 
-    public Boolean getresulbusqueda() {
+    public boolean getResulbusqueda() {
         if (listaobrasusu.size() <= 0) {
             if (totalfilas > 0) {
                 setMensaje(bundle.getString("nogeorefernciado"));
@@ -2151,25 +2153,25 @@ public class HomeGestion implements Serializable {
                 descripcion.append("<label>Asi va</label>");
                 descripcion.append("<br/>");
                 descripcion.append("<label class=\"asi-va-value\">");
-                descripcion.append(asi_va_text + "%");
+                descripcion.append(asi_va_text).append("%");
                 descripcion.append("</label>");
                 descripcion.append("</center>");
                 descripcion.append("</div>");
-                descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/avance_fisico.png\" class=\"line-avance\"/>");
-                descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/circulo.png\" class=\"circle-avance\" style=\"margin-left:\"" + (asi_va * 85) / 100 + "px;\"/>");
+                descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/avance_fisico.png\" class=\"line-avance\"/>");
+                descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/circulo.png\" class=\"circle-avance\" style=\"margin-left:\"").append((asi_va * 85) / 100).append("px;\"/>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"position-value-text\" style=\"position: relative; top: -13px\">");
                 descripcion.append("<center >");
                 descripcion.append("<label>Deberia ir</label>");
                 descripcion.append("<br/>");
                 descripcion.append("<label class=\"asi-va-value\">");
-                descripcion.append(deberia_ir_text + "%");
+                descripcion.append(deberia_ir_text).append("%");
                 descripcion.append("</label>");
                 descripcion.append("</center>");
                 descripcion.append("</div>");
                 descripcion.append("<div style=\"position: relative; top: -13px\">");
-                descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/avance_fisico.png\" class=\"line-avance\"/>");
-                descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/circulo.png\" class=\"circle-avance\" style=\"margin-left:\"" + (deberia_ir * 85) / 100 + "px;\"/>");
+                descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/avance_fisico.png\" class=\"line-avance\"/>");
+                descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/circulo.png\" class=\"circle-avance\" style=\"margin-left:\"").append((deberia_ir * 85) / 100).append("px;\"/>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
                 descripcion.append("</td>");
@@ -2263,11 +2265,11 @@ public class HomeGestion implements Serializable {
                 descripcion.append("<tr>");
                 descripcion.append("<td>");
                 if (obra.getStrimagenobra() != null && !obra.getStrimagenobra().equalsIgnoreCase("") && obra.getStrimagenobra().indexOf(".") != -1) {
-                    descripcion.append("<img class=\"table-img-content\" src=\"" + host + version);
+                    descripcion.append("<img class=\"table-img-content\" src=\"").append(host).append(version);
                     descripcion.append(obra.getStrimagenobra());
                     descripcion.append("\">");
                 } else {
-                    descripcion.append("<img class=\"table-img-content\" src=\"" + host + version + "/resources/imgs/noimagen_mapa.png\">");
+                    descripcion.append("<img class=\"table-img-content\" src=\"").append(host).append(version).append("/resources/imgs/noimagen_mapa.png\">");
                 }
                 descripcion.append("</td>");
                 descripcion.append("</tr>");
@@ -2277,24 +2279,24 @@ public class HomeGestion implements Serializable {
                 descripcion.append("<tr >");
                 if (obra.getTipoestadobra().getIntestadoobra() != 0) {
                     descripcion.append("<td class=\"title-tool\">");
-                    descripcion.append("<a href=\"" + url + "?id=" + obra.getIntcodigoobra() + "\" value=\"Información\" >");
-                    descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/btn_info.png\" />");
+                    descripcion.append("<a href=\"").append(url).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");
+                    descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/btn_info.png\" />");
                     descripcion.append("</a>");
                     descripcion.append("</td>");
                     if (!getSessionBeanCobra().getUsuarioObra().getUsuLogin().equals(bundle.getString("ciudadanosinregistro"))) {
                         descripcion.append("<td class=\"title-tool\">");
-                        descripcion.append("<a href=\"" + urlComentario + "?id=" + obra.getIntcodigoobra() + "\" value=\"Comentarios\" >");
-                        descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/btn_comentarios.png\" />");
+                        descripcion.append("<a href=\"").append(urlComentario).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Comentarios\" >");
+                        descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/btn_comentarios.png\" />");
                         descripcion.append("</a>");
                         descripcion.append("</td>");
                     }
                     descripcion.append("<td class=\"title-tool\">");
-                    descripcion.append("<a href=\"" + urlImages + "?id=" + obra.getIntcodigoobra() + "\" value=\"Fotos\" >");
-                    descripcion.append("<img src=\"/" + version + "/resources/imgs/valla/btn_fotos.png\" />");
+                    descripcion.append("<a href=\"").append(urlImages).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Fotos\" >");
+                    descripcion.append("<img src=\"/").append(version).append("/resources/imgs/valla/btn_fotos.png\" />");
                     descripcion.append("</a>");
                     descripcion.append("</td>");
                     descripcion.append("<td>");
-                    descripcion.append("<a href=\"" + url + "?id=" + obra.getIntcodigoobra() + "\" class=\"button-valla\" >");
+                    descripcion.append("<a href=\"").append(url).append("?id=").append(obra.getIntcodigoobra()).append("\" class=\"button-valla\" >");
                     descripcion.append("Ver proyecto");
                     descripcion.append("</a>");
                     descripcion.append("</td>");
@@ -2314,217 +2316,10 @@ public class HomeGestion implements Serializable {
                 descripcion.append("</div>");
                 descripcion.append("</body>");
                 descripcion.append("</html>");
-
-                /*
                 
-                
-                 if (obra.getTipoestadobra().getIntestadoobra() != 0) {
-                 descripcion.append("<a href=\"#\" class=\"datoup anchorLink\"></a>");
-                 descripcion.append("<a href=\"#\" class=\"datoup anchorLink\"></a>");
-                 descripcion.append("<a href=\"#\" class=\"datoup anchorLink\">" + obra.getNumcomentarios() + "</a>");
-                 descripcion.append("<a href=\"#\" class=\"datoup anchorLink\" style=\"margin-left:1em\">" + obra.getNumdocs() + "</a>");
-                 descripcion.append("<a href=\"#\" class=\"datoup anchorLink\">" + obra.getNumimagenes() + "</a>");
-                 descripcion.append("<a href=\"" + url + "?id=" + obra.getIntcodigoobra() + "\" class=\"info anchorLink\"></a>");
-                 descripcion.append("<a href=\"#\" class=\"gust anchorLink\"></a>");
-                 if (!usuarioSinRegistro) {
-                 descripcion.append("<a href=\"" + urlComentario + "?id=" + obra.getIntcodigoobra() + "\" class=\"come anchorLink\"></a>");
-                 } else {
-                 descripcion.append("<a href=\"#\" class=\"come anchorLink\"></a>");
-                 }
-                 descripcion.append("<a href=\"" + urlDocumento + "?id=" + obra.getIntcodigoobra() + "\" class=\"docu anchorLink\" style=\"margin-left:2em\"></a>");
-                 descripcion.append("<a href=\"" + urlImages + "?id=" + obra.getIntcodigoobra() + "\" class=\"foto anchorLink\"></a>");
-                 } else {
-                 }
-                 descripcion.append("<a href=\"");
-                 if (obra.getTipoestadobra().getIntestadoobra() != 0) {
-                 descripcion.append(url);
-                 descripcion.append("?id=");
-                 descripcion.append(obra.getIntcodigoobra());
-                 descripcion.append("\" class=\"dato anchorLink\">" + bundle.getString("informacion") + "</a>");
-                
-                 descripcion.append("<a href=\"#\" class=\"dato anchorLink\">" + bundle.getString("megusta") + "</a>");
-                 if (!usuarioSinRegistro) {
-                 descripcion.append("<a href=\"");
-                 descripcion.append(urlComentario);
-                 descripcion.append("?id=");
-                 descripcion.append(obra.getIntcodigoobra());
-                 descripcion.append("\" class=\"dato anchorLink\">" + bundle.getString("comentarios") + "</a>");
-                 } else {
-                 descripcion.append("<a href=\"#\" class=\"dato anchorLink\">" + bundle.getString("comentarios") + "</a>");
-                 }
-                
-                 descripcion.append("<a href=\"");
-                 descripcion.append(urlDocumento);
-                 descripcion.append("?id=");
-                 descripcion.append(obra.getIntcodigoobra());
-                 descripcion.append("\" class=\"dato anchorLink\" style=\"margin-left:1em\">" + bundle.getString("houtdocumentos") + "</a>");
-                
-                 descripcion.append("<a href=\"");
-                 descripcion.append(urlImages);
-                 descripcion.append("?id=");
-                 descripcion.append(obra.getIntcodigoobra());
-                 descripcion.append("\" class=\"dato anchorLink\">" + bundle.getString("fotos") + "</a>");
-                
-                 } else {
-                
-                 }
-                
-                
-                
-                 descripcion.append("</div>");
-                 descripcion.append("</td></tr>");
-                
-                 descripcion.append("<tr><td>");
-                
-                 descripcion.append("<div class=\"vdatos02\">");
-                 descripcion.append("<span class=\"vtitle04\">Avance f&iacute;sico </span>");
-                 descripcion.append("<span class=\"vtitle05\">");
-                 descripcion.append(porcentaje.toString());
-                 descripcion.append("%</span><br/>");
-                 //meter alimentacion
-                 if (obra.getDeberiaestar() != null) {
-                 descripcion.append("<span class=\"vtitle04\">Deber&iacute;a estar </span>");
-                 descripcion.append("<span class=\"vtitle05\">");
-                 descripcion.append(obra.getDeberiaestar().divide(BigDecimal.ONE, 2, RoundingMode.HALF_UP));
-                 descripcion.append("%</span></div>");
-                
-                 }
-                 /*
-                 if (getAlimentacionultima() != null) {
-                 descripcion.append("<span class=\"vtitle04\">Deber&iacute;a estar </span>");
-                 descripcion.append("<span class=\"vtitle05\">");
-                 descripcion.append("10");
-                 descripcion.append("%</span></div>");
-                 }
-                
-                
-                 descripcion.append("</td><td>");
-                
-                 descripcion.append("<table border=\"0\">");
-                 descripcion.append("<tr><td>");
-                 //Semaforo
-                 //if (getAlimentacionultima() != null) {
-                 //  descripcion.append("<div class=\"vavance\"><img width=\"166\" height=\"103\" src=\"" + host + version + getAlimentacionultima().getSemaforo().getStrimagen() + "\" </div>");
-                 //}
-                
-                
-                 //Semaforo
-                 descripcion.append("</td><td>");
-                
-                 descripcion.append("<div class=\"vdatos01\">");
-                 descripcion.append("<span class=\"vtitle01\">Valor: </span>");
-                 descripcion.append("<span class=\"vtitle02\">");
-                 descripcion.append(money.format(obra.getNumvaltotobra()));
-                 descripcion.append("</span><br/>");
-                
-                 descripcion.append("<span class=\"vtitle01\">Ubicaci&oacute;n: </span>");
-                 descripcion.append("<span class=\"vtitle03\">");
-                 descripcion.append(obra.getStrdireccion());
-                 descripcion.append("</span></div>");
-                
-                 descripcion.append("</td></tr>");
-                 descripcion.append("</table>");
-                
-                 descripcion.append("</td></tr>");
-                 descripcion.append("<tr><td align=\"center\">");
-                
-                 //Seguidores
-                
-                 int x = 0;
-                 int y = 0;
-                 int img = 0;
-                 /*
-                 List<VistaSeguidoresObra> vissegui = getSessionBeanCobra().getCobraService().encontrarSeguidoresxObraxLimit(obra.getIntcodigoobra(), 8);
-                
-                 if (vissegui.size() != 0) {
-                 descripcion.append("<span class=\"vtitle04\">Seguidores:‌</span>");
-                 descripcion.append("<span class=\"vtitle05\">" + vissegui.size() + "</span></br>");
-                
-                 descripcion.append("<table border=\"0\" cellpadding=\"5\">");
-                 while (x < 2) {
-                 descripcion.append("<tr>");
-                 y = 0;
-                 while (y < 4) {
-                 if (!vissegui.get(y).getStrfoto().equals("/resources/imgs/bt_user.png")) {
-                 if (img != vissegui.size()) {
-                 descripcion.append("<td>");
-                 descripcion.append("<img src=\"" + host + version + vissegui.get(img).getStrfoto() + "\" height=\"40px\" width=\"40px\">");
-                 descripcion.append("</td>");
-                 img++;
-                 }
-                 } else {
-                 descripcion.append("<td>");
-                 descripcion.append("</td>");
-                 }
-                 y++;
-                 }
-                 descripcion.append("</tr>");
-                 x++;
-                 }
-                 descripcion.append("</table>");
-                 }
-                
-                
-                 //Seguidores
-                
-                 descripcion.append("</td><td>");
-                
-                 //                descripcion.append("<div class=\"vdatos03\">");
-                 //                descripcion.append("<span class=\"vtitle06\">Contratista: </span>");
-                 //                descripcion.append("<span class=\"vtitle07\">");
-                 //                descripcion.append(" ");
-                 //                descripcion.append("</span><br/>");
-                
-                
-                
-                 descripcion.append("<span class=\"vtitle06\">Contratante: </span>");
-                 descripcion.append("<span class=\"vtitle07\">");
-                 descripcion.append(obra.getTercero().getStrnombrecompleto());
-                 descripcion.append("</span>");
-                
-                 descripcion.append("<div class=\"panelobjetoglobociu\">");
-                 descripcion.append("<span class=\"vtitle06\">Objeto: </span>");
-                 descripcion.append("<span class=\"vtitle07\">");
-                 descripcion.append(obra.getStrobjetoobra().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
-                 descripcion.append("</span>");
-                 descripcion.append("</div>");
-                
-                 contratistas = (getSessionBeanCobra().getCobraService().obtenerContratistaporobra(obra.getIntcodigoobra()));
-                 if (contratistas != null) {
-                 if (!contratistas.isEmpty()) {
-                 if (contratistas.size() == 1) {
-                 descripcion.append("<div>");
-                 descripcion.append("<span class=\"vtitle01\">Contratista: </span>");
-                 descripcion.append("<span class=\"vtitle03\">");
-                 descripcion.append(contratistas.get(0).getStrnombre());
-                 descripcion.append("</span></div>");
-                 } else {
-                 for (Contratista cont : contratistas) {
-                 if (cont.getStrnombre() != null) {
-                 descripcion.append("<div>");
-                 descripcion.append( cont.getStrnombre());
-                 descripcion.append("<span class=\"vtitle03\">");
-                 descripcion.append(contratistas.size());
-                 descripcion.append("</span></div>");
-                 }
-                 }
-                 }
-                 }
-                 }
-                
-                 //                descripcion.append("<p align=\"right\"><img src=\"/siente/resources/imgs/social_tw_tweet.png\" width=\"85\" height=\"28\"> <img src=\"/siente/resources/imgs/social_fb_like.png\" width=\"85\" height=\"28\"></p>");
-                 descripcion.append("</div>");
-                
-                 descripcion.append("</td></tr>");
-                
-                 descripcion.append("</table>");
-                
-                 descripcion.append("</td>");
-                 descripcion.append("</tr>");
-                 descripcion.append("</table></body></html>");
-                 * 
-                 */
-                marker.setInformationWindow(descripcion.toString().replaceAll("\"", ""));
+                //marker.setInformationWindow(descripcion.toString().replaceAll("\"", ""));
+                marker.setInformationWindow(descripcion.toString());
+               System.out.println(descripcion.toString());
                 if (obra.getRuta() != null) {
 
                     marker.setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(obra.getRuta().getStrcodigotramo()));

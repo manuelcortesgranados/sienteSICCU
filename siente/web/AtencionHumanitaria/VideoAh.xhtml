@@ -47,9 +47,10 @@
                                          action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoaSolicitud}"
                                          render="tablaVideos,gpDatosBasicos2" />
                         <interkont:spacer height="40"/>
-                        <h:outputLabel id="lblVideoAtencion"  value="Video: " for="txtVideoAtencion">
+                        <h:panelGroup>
+                            <h:outputLabel id="lblVideoAtencion"  value="Video: " for="txtVideoAtencion" />
                             <rich:message for="txtVideoAtencion"/>
-                        </h:outputLabel>
+                        </h:panelGroup>
 
                     </h:panelGrid>
 

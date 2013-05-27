@@ -33,7 +33,7 @@
                                        />
 
                     <h:commandButton id="BTaceptarDocFin2" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
-                                     action="#{Supervisor$IngresarNuevaObra.finalizarModal_action}" onclick="#{rich:component('panelConfirmaGuardar')}.hide(); return false;"  >
+                                     action="#{Supervisor$IngresarNuevaObra.finalizarModal_action}" onclick="#{rich:component('panelConfirmaGuardar')}.hide();"  >
                     </h:commandButton>
                 </h:panelGrid>
            

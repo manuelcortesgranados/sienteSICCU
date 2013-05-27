@@ -137,7 +137,7 @@
                                                 <h:outputText value="#{var.logintabentrarcontenidoingresarsinuno}"  styleClass="tab-login-label-contenido" />
                                                 <h:outputText value="#{var.logintabentrarcontenidoingresarsindos}"  styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />
                                             </h:panelGrid>
-                                            <a4j:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" styleClass="tab-login-input-button-sin-login" execute="@this" render="@none"/>
+                                            <h:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" styleClass="tab-login-input-button-sin-login" onclick="#{rich:component('ajaxLoadingModalBox')}.show();return true;" />
 
 
                                             <interkont:spacer style="width: 100%;" height="30"/>

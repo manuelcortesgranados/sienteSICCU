@@ -129,11 +129,12 @@
             </table>
 
             <h:panelGrid id="vistaMapa" style="width:95%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+                
+                
+ <m:map  latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
+                        jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
-                <m:map  latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map"
-                        renderOnWindowLoad="false"  jsVariable="mapa" zoom="#{var.zoommapa}" type="G_NORMAL_MAP" style="width:100%;" height="#{SessionBeanCobra.cobraService.altomapa}">
-
-                    <a4j:repeat var="marker" value="#{HomeGestion.markers}">
+                    <ui:repeat var="marker" value="#{HomeGestion.markers}">
                         <m:polyline lineWidth="10" hexaColor="#747474" geodesic="true" rendered="#{marker.verlinea}">
                             <a4j:repeat   var="point" value="#{marker.listapuntosruta}"  >
                                 <m:point latitude="#{point.floatlatitud}" longitude="#{point.floatlongitud}"  />
@@ -147,18 +148,17 @@
                         <m:marker latitude="#{marker.latitude}"
                                   longitude="#{marker.longitude}"
                                   jsVariable="#{marker.jsVariable}"
-                                  draggable="false">
+                                  draggable="false" >
 
                             <m:icon imageURL="#{marker.icon}" width="20" height="34" shadowHeight="25"  shadowWidth="40" />
-                            <m:htmlInformationWindow htmlText="#{marker.informationWindow}"/>
+                            <m:htmlInformationWindow htmlText="#{marker.informationWindow}" />
 
                         </m:marker>
 
-                    </a4j:repeat>
-                    <m:mapControl name="GLargeMapControl" position="G_ANCHOR_BOTTOM_RIGHT"/>
-                    <m:mapControl name="GMapTypeControl" position="G_ANCHOR_TOP_RIGHT"/>
+                    </ui:repeat>
+                    
+                    
                 </m:map>
-
             </h:panelGrid>
 
             <h:panelGrid id="vistaThumb" style="width:100%; height:450px;" rendered="#{HomeGestion.filtro.intvista == 2}">
