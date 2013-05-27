@@ -545,7 +545,7 @@ public class AdminSupervisionExterna {
     }
 
     public String subirListadoSeg() throws ArchivoExistenteException, FileNotFoundException, IOException, InvalidFormatException {
-       String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOC_MATRIZ, "" + +getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/");
+        String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOC_MATRIZ, "" + +getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/");
         subirListado.getArchivoWeb().cambiarNombre(null, true);
         subirListado.guardarArchivosTemporales(carpetaDoc, false);
         getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(subirListado.getArchivos().get(0).getRutaWeb());

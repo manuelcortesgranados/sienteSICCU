@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package cobra.Supervisor;
+
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -68,7 +69,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on 28-oct-2010, 1:04:30
  * @author carlosalbertoloaizaguerrero
  */
-public class AdministrarObraNew  implements ILifeCycleAware {
+public class AdministrarObraNew implements ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     //private Obra obra = new Obra();
@@ -153,18 +154,17 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     private ArrayList<Relacioncontratoobra> listaContratoInterventoria;
     private List<Marcador> listamarcadores = new ArrayList<Marcador>();
     private String nombreImpactoSocial;
-    private int cantidadColumnas=3;
+    private int cantidadColumnas = 3;
     public boolean btn_habilitarModificarObjeto = true;
-    public boolean modificarObjetoObra=false;
+    public boolean modificarObjetoObra = false;
 
     public int getCantidadColumnas() {
-        
-        if(listaVideoObra.size() < 3) {
+
+        if (listaVideoObra.size() < 3) {
             return listaVideoObra.size();
-        }
-        else {
-            
-            return cantidadColumnas ;
+        } else {
+
+            return cantidadColumnas;
         }
     }
 
@@ -305,7 +305,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     }
 
     public Boolean getMostrarvideo() {
-        System.out.println("mostrarvideo"+mostrarvideo);
+        System.out.println("mostrarvideo" + mostrarvideo);
         return mostrarvideo;
     }
 
@@ -794,21 +794,23 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public void setModificarObjetoObra(boolean modificarObjetoObra) {
         this.modificarObjetoObra = modificarObjetoObra;
     }
-    
-        public void habilitarBotonModificarObjeto() {
+
+    public void habilitarBotonModificarObjeto() {
         btn_habilitarModificarObjeto = false;
         modificarObjetoObra = true;
 
     }
-      public void habilitarBtnCancelar(){
+
+    public void habilitarBtnCancelar() {
         btn_habilitarModificarObjeto = true;
         modificarObjetoObra = false;
-      }
-      public void guardarModificacionObjeto(){
+    }
+
+    public void guardarModificacionObjeto() {
         btn_habilitarModificarObjeto = true;
-        modificarObjetoObra = false; 
-         getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
-      }
+        modificarObjetoObra = false;
+        getSessionBeanCobra().getCobraService().guardarObra(getObra(), null, opcion);
+    }
 
     public String getNombrePanelSuspension() {
         if (getObra() != null) {
@@ -866,7 +868,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             EncontrarSolicitante();
             iniciarImagenes();
             llenarSelectTipoImagenes();
-           // mostrarGoogle();
+            // mostrarGoogle();
             //obtenerTacometro();
 
 
@@ -1127,35 +1129,19 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     }
 
     //finalizar
-    public String registrarReciboFinal() {
+    public String registrarReciboFinal() throws ArchivoExistenteException {
         mensajefinaliza = "";
         if (urlactarecfin.compareTo("") != 0) {
             if (getObra().getDatefecrecfin() != null) {
-                //guardar ActaRecFinal
-                String realArchivoPath = "";
-                String URL = "/resources/Documentos/ObrasVigentes/" + getObra().getIntcodigoobra() + "/Documentos/";
-
-                ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-
-                realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-                try {
-                    File carpeta = new File(realArchivoPath);
-                    if (!carpeta.exists()) {
-                        carpeta.mkdirs();
-
-                    }
-                } catch (Exception ex) {
-                    FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
-                }
-                try {
-                    subirActaRecFin.guardarArchivosTemporales(realArchivoPath, false);
-                } catch (ArchivoExistenteException ex) {
-                    Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+                String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOCS_OBRA, "" + this.getObra().getIntcodigoobra()) + "/Documentos/";
+                subirActaRecFin.getArchivoWeb().cambiarNombre(null, true);
+                subirActaRecFin.guardarArchivosTemporales(carpetaDoc, false);
+                System.out.println(subirActaRecFin.getArchivos().size());
+                String rutaWebDoc = subirActaRecFin.getArchivos().get(0).getRutaWeb();
                 Tipodocumento tipdoc = new Tipodocumento(10, bundle.getString("actaparcial"), false);
-                Documentoobra doc = new Documentoobra(getObra(), tipdoc, "/resources/Documentos/ObrasVigentes/" + getObra().getIntcodigoobra() + "/Documentos/" + urlactarecfin, bundle.getString("actarecibofinal"), getObra().getDatefecrecfin());
+                Documentoobra doc = new Documentoobra(getObra(), tipdoc, rutaWebDoc, bundle.getString("actarecibofinal"), getObra().getDatefecrecfin());
                 getSessionBeanCobra().getCobraService().guardarDocumento(doc);
+
                 Novedad nov = new Novedad(0, new Tiponovedad(10, ""), getObra(), new Date());
                 getObra().setNovedads(new LinkedHashSet());
                 getObra().getNovedads().add(nov);
@@ -1222,8 +1208,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         }
         try {
             subirActaFin.guardarArchivosTemporales(realArchivoPath, false);
+
+
         } catch (ArchivoExistenteException ex) {
-            Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdministrarObraNew.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
         Tipodocumento tipdoc = new Tipodocumento(10, bundle.getString("actaparcial"), false);
@@ -1244,7 +1233,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     }
 
     public String pathDocumentoRecFin() {
-        if (subirActaRecFin.getArchivos().size()> 0) {
+        if (subirActaRecFin.getArchivos().size() > 0) {
             for (ArchivoWeb nombreoriginal : subirActaRecFin.getArchivos()) {
                 urlactarecfin =
                         nombreoriginal.getNombre();
@@ -1298,13 +1287,16 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public String bt_download_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        Documentoobra doc=ad.getListaDocumentosobra().get(filaSeleccionada);
+        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        Documentoobra doc = ad.getListaDocumentosobra().get(filaSeleccionada);
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
+
+
         } catch (IOException ex) {
-            Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdministrarObraNew.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -1315,8 +1307,8 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public String bt_editar_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.documentoobraEd =ad.getListaDocumentosobra().get(filaSeleccionada);
+        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.documentoobraEd = ad.getListaDocumentosobra().get(filaSeleccionada);
         return null;
     }
 
@@ -1340,8 +1332,8 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public String bt_eliminar_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad=( AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.documentoobraEl=ad.getListaDocumentosobra().get(filaSeleccionada);
+        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.documentoobraEl = ad.getListaDocumentosobra().get(filaSeleccionada);
         bt_aceptar_eliminar_documento_action();
         return null;
     }
@@ -1376,9 +1368,13 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             this.documentoobra.setTipodocumento(new Tipodocumento(1, "", true));
             this.documentoobra.setDatefecha(new Date());
             this.cargadorDocumentos = new CargadorArchivosWeb();
+
+
         } catch (ArchivoExistenteException ex) {
-            Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage(
+            Logger.getLogger(ModificarProyecto.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance()
+                    .addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     Propiedad.getValor("docexistenteerror"), ""));
@@ -1426,20 +1422,23 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public String bt_download_imagenevolucion_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-         AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-         Imagenevolucionobra doc =  adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        Imagenevolucionobra doc = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         // this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + doc.getStrubicacion());
+
+
         } catch (IOException ex) {
-            Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevoContratoBasico.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return "Download";
     }
 
     public String bt_editar_imagenevolucion_action(int filaSeleccionada) {
-         AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-         this.imagenevolucionobraEd =adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        this.imagenevolucionobraEd = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         return null;
     }
 
@@ -1504,7 +1503,7 @@ public class AdministrarObraNew  implements ILifeCycleAware {
     public String bt_eliminar_imagenevolucion_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew adminObra=(AdministrarObraNew)FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
         this.imagenevolucionobraEl = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         listaImagenesevolucionobra.remove(this.imagenevolucionobraEl);
         getSessionBeanCobra().getCobraService().borrarImagen(this.imagenevolucionobraEl);
@@ -1536,9 +1535,13 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             this.imagenevolucionobra.setTipoimagen(new Tipoimagen());
             this.imagenevolucionobra.setDatefecha(new Date());
             this.cargadorImagenes = new CargadorArchivosWeb();
+
+
         } catch (ArchivoExistenteException ex) {
-            Logger.getLogger(ModificarProyecto.class.getName()).log(Level.SEVERE, null, ex);
-            FacesContext.getCurrentInstance().addMessage(
+            Logger.getLogger(ModificarProyecto.class
+                    .getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance()
+                    .addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     Propiedad.getValor("docexistenteerror"), ""));
@@ -1592,8 +1595,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             this.imagenevolucionobra.setStrubicacion(rutaWebImg);
             this.imagenevolucionobra.setStrnombrearchivo(nombreImg);
             RedimensionarImagen.scale(ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg), 640, 5, ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg));
+
+
         } catch (IOException ex) {
-            Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdministrarObraNew.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -1647,26 +1653,23 @@ public class AdministrarObraNew  implements ILifeCycleAware {
         listaVideoObra = getSessionBeanCobra().getCobraService().obtenerVideoxObra(getObra().getIntcodigoobra());
         if (listaVideoObra.size() <= 0) {
             mostrarvideo = true;
-        }
-        else
-        {
+        } else {
             mostrarvideo = false;
         }
         return "adminvideoobra";
     }
-    public String cantidadColumnasVideos()
-    {
-        cantidadColumnas=3;
-        String columnas="3";
-        if(listaVideoObra.size() < 3) {
-            columnas=listaVideoObra.size()+"";
+
+    public String cantidadColumnasVideos() {
+        cantidadColumnas = 3;
+        String columnas = "3";
+        if (listaVideoObra.size() < 3) {
+            columnas = listaVideoObra.size() + "";
+            return columnas;
+        } else {
+
             return columnas;
         }
-        else {
-            
-            return columnas ;
-        }
-        
+
     }
 
     public String iniciardeta() {
@@ -1990,8 +1993,11 @@ public class AdministrarObraNew  implements ILifeCycleAware {
             getSessionBeanCobra().getCobraService().funcion_CambiarEstado(getObra(), getSessionBeanCobra().getUsuarioObra());
             getIngresarNuevaObra().cargarObra(getSessionBeanCobra().getCobraService().encontrarObraPorId(getObra().getIntcodigoobra()));
             //return "datosbasicosnuevoproyecto";
+
+
         } catch (Exception ex) {
-            Logger.getLogger(AdministrarObraNew.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AdministrarObraNew.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
         return "datosbasicosnuevoproyecto";
     }
