@@ -26,12 +26,12 @@
                 </h:panelGrid>
                 <h:panelGrid  cellpadding="0" cellspacing="0" style="height:30px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnparticipacion_ciudadano}" >
                     <h:panelGroup layout="block" style="height:30px" >
-                        <h:commandLink styleClass="buttonblue2 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
+                        <a4j:commandLink styleClass="buttonblue2 anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
                                          immediate="true"  value="#{var.comentariosciu}" style="text-align: center; width:180px!important;
                                          height:25px!important;color:#FFF!important;"
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
-                        <h:commandLink styleClass="buttonblue2_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
+                        <a4j:commandLink styleClass="buttonblue2_active anchorLink" rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
                                          immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
