@@ -69,6 +69,8 @@ public class RutasWebArchivos {
      */
     public static String IMGS_OBRA ="/resources/Documentos/ObrasVigentes/{0}/ImagenesEvolucion/";
     
+    public static String DOC_MATRIZ="/resources/Documentos/ValidadorE/";
+    
     /**
      * Constante que corresponde a la ubicación web en la que se almacenan los
      * videos de alimentación de una obra. El parámetro {0} debe reemplazarse por el

@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder_panelUploadArchivoSuper" immediate="true" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelUploadArchivoSuper" immediate="true" styleClass="cerrar"
                                        onclick="#{rich:component('panelUploadArchivoSuper')}.hide();
                                                return false;" />
                 </h:panelGroup>
@@ -31,9 +31,13 @@
             <h:form id="formSubirSubirArchivoMatriz">
                 <h:panelGroup id="panelGroupSubirArchivoMatriz">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload id="uploadDocAt" acceptedTypes="xls" addLabel="#{var.adicionar}"
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}"
-                                         doneLabel="#{var.hecho}" fileUploadListener="#{Supervision$Externa.subirListado.listener}"
+                        <rich:fileUpload id="uploadDocAt"
+                                         acceptedTypes="xls"
+                                         addLabel="#{var.adicionar}"
+                                         clearAllLabel="#{var.borrartodo}"
+                                         clearLabel="#{var.eliminar}"
+                                         doneLabel="#{var.hecho}" 
+                                         fileUploadListener="#{Supervision$Externa.subirListado.listener}"
                                          immediateUpload="true" listHeight="150" style="width: 250px;"
                                          maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_documentoSuper" />

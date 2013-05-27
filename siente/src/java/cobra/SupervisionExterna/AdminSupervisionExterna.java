@@ -17,11 +17,13 @@ import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
 import cobra.CargadorArchivosWeb;
 import cobra.Supervisor.FacesUtils;
+import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -542,50 +544,12 @@ public class AdminSupervisionExterna {
         return null;
     }
 
-    public String subirListadoSeg() throws FileNotFoundException, IOException, InvalidFormatException {
-        String pathDoc = "";
-        String realArchivoPath = "";
-        String URL = "/resources/Documentos/ValidadorE/" + getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/";
-        ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        if (subirListado.getArchivos().size() > 0) {
-            realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-            try {
-                File carpeta = new File(realArchivoPath);
-                if (!carpeta.exists()) {
-                    carpeta.mkdirs();
-                }
-            } catch (Exception ex) {
-                mensaje = (bundle.getString("nosepuedesubir"));//"Cannot upload file ");
-            }
-            try {
-                subirListado.guardarArchivosTemporales(realArchivoPath, false);
-            } catch (ArchivoExistenteException ex) {
-                Logger.getLogger(AdminSupervisionExterna.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            Iterator arch = subirListado.getArchivos().iterator();
-            while (arch.hasNext()) {
-                ArchivoWeb nombreoriginal = (ArchivoWeb) arch.next();
-                pathDoc = nombreoriginal.getNombre();
-            }
-        } else {
-            if (pathDoc.compareTo("") != 0) {
-                realArchivoPath = theApplicationsServletContext.getRealPath(pathDoc);
-                File archi = new File(realArchivoPath);
-
-                if (archi.exists()) {
-                    archi.delete();
-
-                }
-                pathDoc = "";
-            }
-
-        }
-        urlCronograma = pathDoc;
-        // String url = getSessionBeanCobra().getSupervisionExternaService().getVisita().getStrurlinforme();
-        getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(URL + urlCronograma);
-        //   guardarVisita();
+    public String subirListadoSeg() throws ArchivoExistenteException, FileNotFoundException, IOException, InvalidFormatException {
+       String carpetaDoc = MessageFormat.format(RutasWebArchivos.DOC_MATRIZ, "" + +getSessionBeanCobra().getSupervisionExternaService().getVisita().getOidvisita() + "/");
+        subirListado.getArchivoWeb().cambiarNombre(null, true);
+        subirListado.guardarArchivosTemporales(carpetaDoc, false);
+        getSessionBeanCobra().getSupervisionExternaService().getVisita().setStrurlinforme(subirListado.getArchivos().get(0).getRutaWeb());
         getValidadorSeguimiento().validarCronogramaSeguimiento(getSessionBeanCobra().getSupervisionExternaService().getVisita().getStrurlinforme());
-
         return null;
     }
 }
