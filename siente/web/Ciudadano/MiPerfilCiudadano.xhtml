@@ -108,7 +108,7 @@
                     </h:panelGrid>
                     <interkont:spacer height="5"/>
                     <h:panelGrid bgcolor="#F2F7FA" style="width:100%; height:30px;"  rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
-                        <a4j:commandLink styleClass="perfil01 anchorLink"  action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" render="modif_ciudadano"/>
+                        <h:commandLink styleClass="perfil01 anchorLink"  action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" immediate="true"/>
                     </h:panelGrid>
                 </h:panelGrid>
 

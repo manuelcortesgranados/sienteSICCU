@@ -41,6 +41,7 @@ import com.interkont.cobra.util.DatoPie;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -67,7 +68,7 @@ import org.richfaces.component.UIRepeat;
  * @author Leonardo Montes
  * @author Diana Taborda
  */
-public class PerfilCiudadano  implements ILifeCycleAware {
+public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
 
     private String contrasena = "";
     private String codDepartamentoCiudadano = "";

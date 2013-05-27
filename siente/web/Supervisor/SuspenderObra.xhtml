@@ -56,9 +56,10 @@
                                 </rich:calendar>
 
                                 <h:outputText value="#{var.ingreselajustificacion}" />
-                                <h:inputTextarea id="txtrazonSusp" value="#{Supervisor$SuspenderObra.suspension.strrazonmodif}" cols="60" rows="6" >
+                                <h:panelGroup>
+                                    <h:inputTextarea id="txtrazonSusp" value="#{Supervisor$SuspenderObra.suspension.strrazonmodif}" cols="60" rows="6" />
                                     <rich:message styleClass="mensaje_error" for="txtrazonSusp" />
-                                </h:inputTextarea>
+                                </h:panelGroup>
 
                                 <a4j:commandButton id="adjuntarActaSuspension" value="#{var.adjuntaractadesuspen}" render="layoutDocActaSuspension"
                                                    styleClass="btn_pri_inm" style="font-size: 10px;"
@@ -88,7 +89,7 @@
                                                            styleClass="btn_pri_inm" style="font-size: 12px;"
                                                            oncomplete="#{rich:component('panelConfirmarSuspension')}.show();"
                                                            render="layoutConfSuspension, panelSuspenderObra">
-                                            
+
                                         </a4j:commandButton>
 
                                         <a4j:commandButton id="btn_registrar_suspension1" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"

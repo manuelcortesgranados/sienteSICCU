@@ -138,12 +138,14 @@
 
                             </h:selectOneMenu>
 
-                            <h:outputText value="#{var.objetosolicitud}:" styleClass="titulo3_filtro_busqueda"/>
-                            <h:inputTextarea id="txtobjetosolicitudAt" cols="35" rows="6"
-                                             value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}" disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14}">
-                                <rich:message styleClass="mensaje_error" for="txtobjetosolicitud"/>
-                            </h:inputTextarea>
 
+                            <h:outputText value="#{var.objetosolicitud}:" styleClass="titulo3_filtro_busqueda"/>
+                            <h:panelGroup>
+                                <h:inputTextarea id="txtobjetosolicitudAt" cols="35" rows="6"
+                                                 value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}" disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14}">
+                                </h:inputTextarea>
+                                <rich:message styleClass="mensaje_error" for="txtobjetosolicitud"/>
+                            </h:panelGroup>
                             <h:outputText value="#{var.incluyeint}" styleClass="titulo3_filtro_busqueda"/>
                             <h:selectOneMenu  id="incluyeIntAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}">
                                 <f:selectItem itemValue="true" itemLabel="Si"/>

@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
-  >
+    >
 
     <rich:panel id="cambiocontrasena">
 
@@ -17,34 +17,38 @@
             1. la longitud de el campo contraseña es de 11 caracteres.
             <h:panelGrid id="cambiocontra" columnClasses="aiu" columns="2" >
 
-                <h:outputLabel id="usuario"  value="#{var.username}:" for="txtusuario">
+                <h:panelGroup>
+                    <h:outputLabel id="usuario"  value="#{var.username}:" for="txtusuario"/>
                     <rich:message for="txtusuario" style="color: #ed0606;"/>
-                </h:outputLabel>
+                </h:panelGroup>
 
                 <h:inputText  size="20" id="txtusuario" value="#{Perfil$Usuario.username}" disabled="true">
                     <f:validateLength maximum="15" minimum="1"/>
                 </h:inputText>
 
 
-                <h:outputLabel id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact">
+                <h:panelGroup>
+                    <h:outputLabel id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
                     <rich:message for="txtcontrasenaact" style="color: #ed0606;"/>
-                </h:outputLabel>
+                </h:panelGroup>
 
                 <h:inputSecret id="txtcontrasenaact" styleClass="signup_field" required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
-                <h:outputLabel id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev">
+                <h:panelGroup>
+                    <h:outputLabel id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
                     <rich:message for="txtcontrasenanuev" style="color: #ed0606;"/>
-                </h:outputLabel>
+                </h:panelGroup>
 
                 <h:inputSecret id="txtcontrasenanuev" styleClass="signup_field" required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
-                <h:outputLabel id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom">
+                <h:panelGroup>
+                    <h:outputLabel id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
                     <rich:message for="txtcontrasenanuevcom" style="color: #ed0606;"/>
-                </h:outputLabel>
+                </h:panelGroup>
 
                 <h:inputSecret id="txtcontrasenanuevcom" styleClass="signup_field" required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
@@ -52,10 +56,11 @@
 
             </h:panelGrid>
 
-            <h:commandButton id="enviar" onclick="#{rich:component('ajaxLoadingModalBox')}.show();return true;"
+            <h:commandButton id="enviar" onclick="#{rich:component('ajaxLoadingModalBox')}.show();
+                        return true;"
                              value="Enviar" action="#{Perfil$Usuario.enviodatos}" styleClass="signup_button" 
                              type="submit">
-               
+
             </h:commandButton>
 
         </h:form>

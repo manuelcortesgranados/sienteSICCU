@@ -1,15 +1,8 @@
 package cobra;
 
-import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Puntoreferencia;
-import co.com.interkont.cobra.vista.VistaObraMapa;
-import javax.faces.event.AbortProcessingException;
-import javax.faces.event.ValueChangeEvent;
 
 import com.googlecode.gmaps4jsf.component.marker.Marker;
-import com.googlecode.gmaps4jsf.component.marker.MarkerValue;
-import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
-import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

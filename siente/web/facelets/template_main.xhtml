@@ -1,110 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf">
-    
-    <h:head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
-            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
-            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
-            <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
-            <ui:insert name="head"/>
-            <style type="text/css">
-                body,td,th {
-                    margin: 0px;
-                    font-family: Verdana, Geneva, sans-serif;
-                }
-            </style>
-           
-        </h:head>
 
-        <h:body>
-            <h:form id="form_menu">
-                <ui:insert name="menu"/>
-            </h:form>
-            <table style="width:100%;" align="center" border="0" cellpadding="0" >
-                <tr style="vertical-align: top">
-                    <td width="15%" valign="top" style="border-right: #F4F4F4 thin solid">
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="centrado" >
-                            <tr>
-                                <td  style="height:auto;">
-                                    <h:form id="form_menu_lateral" >
-                                        <ui:insert name="menu_lateral"/>
-                                    </h:form>                                    
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td width="85%" valign="top">
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" style="width:100%;">
-                            <tr>
-                                <td>
-                                    
-                                    <div id="header_content">
-                                        <div class="ubicacion">
-                                            <ui:insert name="title"/>
-                                        </div>
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
+        <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
+        <ui:insert name="head"/>
+        <style type="text/css">
+            body,td,th {
+                margin: 0px;
+                font-family: Verdana, Geneva, sans-serif;
+            }
+        </style>
+
+    </h:head>
+
+    <h:body>
+        <h:form id="form_menu">
+            <ui:insert name="menu"/>
+        </h:form>
+        <table style="width:100%;" align="center" border="0" cellpadding="0" >
+            <tr style="vertical-align: top">
+                <td width="15%" valign="top" style="border-right: #F4F4F4 thin solid">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="centrado" >
+                        <tr>
+                            <td  style="height:auto;">
+                                <h:form id="form_menu_lateral" >
+                                    <ui:insert name="menu_lateral"/>
+                                </h:form>                                    
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td width="85%" valign="top">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" style="width:100%;">
+                        <tr>
+                            <td>
+
+                                <div id="header_content">
+                                    <div class="ubicacion">
+                                        <ui:insert name="title"/>
                                     </div>
-                                        
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" height="35">
-                                    <h:panelGrid styleClass="centrado" style="width:100%;">
-                                        <table border="0" cellspacing="0" cellpadding="0" class="centrado" style="width:100%;">
-                                            <tr>
-                                                <td>
-                                                    <a4j:outputPanel id="panelBody">
-                                                        <rich:messages id="messages" globalOnly="true"
-                                                                       styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
-                                                                       >
-                                                            <f:facet name="infoMarker">
-                                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                            </f:facet>
-                                                            <f:facet name="warnMarker">
-                                                                <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                            </f:facet>
-                                                            <f:facet name="errorMarker">
-                                                                <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                            </f:facet>
-                                                            <f:facet name="fatalMarker">
-                                                                <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                            </f:facet>
-                                                        </rich:messages>
-                                                        <ui:insert name="menusuperior"/>
-                                                        <ui:insert name="body"/>
-                                                      <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" height="35">
+                                <h:panelGrid styleClass="centrado" style="width:100%;">
+                                    <table border="0" cellspacing="0" cellpadding="0" class="centrado" style="width:100%;">
+                                        <tr>
+                                            <td>
+                                                <a4j:outputPanel id="panelBody">
+                                                    <rich:messages id="messages" globalOnly="true"
+                                                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                                   >
+                                                        <f:facet name="infoMarker">
+                                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                                        </f:facet>
+                                                        <f:facet name="warnMarker">
+                                                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                                        </f:facet>
+                                                        <f:facet name="errorMarker">
+                                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                        </f:facet>
+                                                        <f:facet name="fatalMarker">
+                                                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                        </f:facet>
+                                                    </rich:messages>
+                                                    <ui:insert name="menusuperior"/>
+                                                    <ui:insert name="body"/>
+                                                    <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     
                                                     <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
-                                                    </a4j:outputPanel>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </h:panelGrid>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="tablafooter">
-                <tr style="height:15px;"/>
-                <tr>
-                    <td>
-                        <h:form id="form_footer">
-                            <ui:include src="/facelets/footer.xhtml"/>
-                        </h:form>
-                    </td>
-                </tr>
-            </table>                  
-        </h:body>
-    </ui:composition>
+                                                </a4j:outputPanel>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </h:panelGrid>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="tablafooter">
+            <tr style="height:15px;"/>
+            <tr>
+                <td>
+                    <h:form id="form_footer">
+                        <ui:include src="/facelets/footer.xhtml"/>
+                    </h:form>
+                </td>
+            </tr>
+        </table>                  
+    </h:body>
+</ui:composition>

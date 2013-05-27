@@ -22,7 +22,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="cerrar" 
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelPolizaContrato')}.hide(); return false;"/>
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelPolizaContrato')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -51,9 +52,12 @@
 
 
                         <h:panelGrid styleClass="vineta"/>
-                        <h:outputLabel id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza">
+
+                        <h:panelGroup>
+                            <h:outputLabel id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza"/>
                             <rich:message for="calendarVenciPoliza" style="color: #ed0606;"/>
-                        </h:outputLabel>      
+                        </h:panelGroup>
+
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$IngresarNuevaObra.polizacontrato.datefechavecimiento}" required="true"/>
 
@@ -65,7 +69,7 @@
 
                     </h:panelGrid>
                 </h:panelGrid>
-                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 60%;" >
+                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 60%;" >
                     <h:panelGrid style="width: 10px;"/>
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="tablaPolizas, gpPolizaContrato"
                                        execute="@this" style="font-size: 10px;" styleClass="btn_sec_gig"  />

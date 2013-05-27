@@ -28,17 +28,19 @@
 
                 <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
-                    <h:outputLabel id="lblFecdoc"  value="#{var.fechadocumento}" for="fecIni">
+                    <h:panelGroup>
+                        <h:outputLabel id="lblFecdoc"  value="#{var.fechadocumento}" for="fecIni"/>
                         <rich:message for="fecIni" style="color: #ed0606;"/>
-                    </h:outputLabel>
+                    </h:panelGroup>
 
                     <rich:calendar locale="#{var.fechadocumento}"  datePattern="d-MMM-yyyy" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
                         <a4j:ajax event="change" render="hpCargar"/>
                     </rich:calendar>
 
-                    <h:outputLabel id="lblObseroObra"  value="#{var.observaciondocumento}" for="txtObserProyecto" >
+                    <h:panelGroup>
+                        <h:outputLabel id="lblObseroObra"  value="#{var.observaciondocumento}" for="txtObserProyecto" />
                         <rich:message for="txtObserProyecto" style="color: #ed0606;"/>
-                    </h:outputLabel>
+                    </h:panelGroup>
 
                     <h:inputTextarea cols="80" id="txtObserProyecto" rows="4" value="#{Financiera$CargarExcel.registro.observacion}"/>
 

@@ -23,6 +23,7 @@ import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import com.interkont.cobra.util.DatoPie;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import javax.faces.model.SelectItem;
  * @version Created on 16/11/2008, 04:41:01 PM
  * @author Carlos Alberto Loaiza Guerrerro
  */
-public class ControlGerencial {
+public class ControlGerencial  implements Serializable{
 
     private String deptos;
     private String muni;
@@ -482,7 +483,7 @@ public class ControlGerencial {
         filtrogeren.setLocalidad("169");
         filtrogeren.setZona(0);
         informaciondash = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboard(filtrogeren);
-       
+
     }
 
     public String iniciargerencial() {
@@ -860,7 +861,7 @@ public class ControlGerencial {
      *
      * @return null
      */
-    public String obtenerConsolidadoRehabilitacion() {
+    public void obtenerConsolidadoRehabilitacion() {
         Iterator<DatoPie> itLista = getSessionBeanCobra().getIndicadorService().obtenerConsolidadoRehabilitacion(filtrogeren).iterator();
         while (itLista.hasNext()) {
             DatoPie datoPie = itLista.next();
@@ -880,7 +881,7 @@ public class ControlGerencial {
                 numProyCriticos = new BigDecimal(datoPie.getValor()).setScale(0, RoundingMode.HALF_UP);
             }
         }
-        return null;
+
     }
 
     /**
@@ -1064,10 +1065,14 @@ public class ControlGerencial {
      *
      * @return null
      */
-    public String obtenerConsolidadoConvenios() {
+    public void obtenerConsolidadoConvenios() {
         System.out.println("obtenerConsolidadoConvenios ");
         informaciondashconvenios = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardConvenios(filtrogeren);
-        return null;
+
+    }
+    
+    public void prueba(){
+        System.out.println("entre prueba contro gerencial");
     }
 
     /**
@@ -1076,9 +1081,11 @@ public class ControlGerencial {
      *
      * @return null
      */
-    public String obtenerConsolidadoAh() {
+    public void obtenerConsolidadoAh() {
         System.out.println("obtenerConsolidadoAh");
         informaciondashah = getSessionBeanCobra().getIndicadorService().obtenerInformacionDashboardAh(filtrogeren);
-        return null;
+
     }
+
+    
 }
