@@ -23,6 +23,7 @@ import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import com.interkont.cobra.util.DatoPie;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ import javax.faces.model.SelectItem;
  * @version Created on 16/11/2008, 04:41:01 PM
  * @author Carlos Alberto Loaiza Guerrerro
  */
-public class ControlGerencial {
+public class ControlGerencial  implements Serializable{
 
     private String deptos;
     private String muni;

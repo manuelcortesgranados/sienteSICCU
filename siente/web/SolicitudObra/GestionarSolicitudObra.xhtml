@@ -203,16 +203,17 @@
                                 </h:selectOneMenu>
 
                                 <h:outputText value="#{var.objetosolicitud}:"/>
-                                <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
-                                                 disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
-                                                             SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
-                                                 value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}"
-                                                 rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}">
+                                <h:panelGroup>
+                                    <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
+                                                     disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
+                                                                 SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
+                                                     value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}"
+                                                     rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"/>
                                     <rich:message styleClass="mensaje_error" for="txtobjetosolicitud"/>
-                                </h:inputTextarea>
+                                </h:panelGroup>
                                 <h:outputText rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}">
                                 </h:outputText>

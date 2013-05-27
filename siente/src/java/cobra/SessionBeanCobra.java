@@ -128,7 +128,6 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public String getUsuarioCorreo() {
-        System.out.println("usuario:"+usuarioCorreo);
         return usuarioCorreo;
     }
 

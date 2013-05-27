@@ -23,28 +23,29 @@
         <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/login/login.js"></script>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/slider_queessiente.css?#{var.version}" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js"></script>
+        <h:outputScript name="#{facesContext.externalContext.requestContextPath}/resources/js/slider_queessiente.js" library="js" />
         <ui:insert name="head"/>
     </h:head>
 
     <h:body onload="style_background();">
-        <h:panelGroup layout="block" styleClass="header-login">
-            <h:graphicImage url="/resources/imgs/login/icon_header.png" styleClass="header-login-img"/>
-            <h:outputText value="#{var.loginheader}"  styleClass="header-login-title" />
-        </h:panelGroup>
-        <h:panelGroup layout="block" styleClass="footer-login">
-            <h:graphicImage url="/resources/imgs/login/icon_footer.png"  styleClass="footer-login-img"/>
-            <h:outputText value="#{var.loginfotercopy}"  styleClass="footer-login-title" />
-            <a4j:commandLink value="#{var.loginfoterterminos}"  styleClass="footer-login-titel-link"/>
-            <a4j:commandLink value="#{var.loginfoteracerca}"  styleClass="footer-login-titel-link"/>
-            <a4j:commandLink value="#{var.loginfoterquees}" styleClass="footer-login-titel-link">
-                <rich:componentControl target="queessiente" operation="show"/>
-            </a4j:commandLink>
-            <h:graphicImage url="/resources/imgs/login/icon_yt.png" width="40" height="40" styleClass="footer-login-img-social"/>
-            <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
-            <h:graphicImage url="/resources/imgs/login/icon_tw.png" width="40" height="40" styleClass="footer-login-img-social"/>
-        </h:panelGroup>
-
+        <h:form>
+            <h:panelGroup layout="block" styleClass="header-login">
+                <h:graphicImage url="/resources/imgs/login/icon_header.png" styleClass="header-login-img"/>
+                <h:outputText value="#{var.loginheader}"  styleClass="header-login-title" />
+            </h:panelGroup>
+            <h:panelGroup layout="block" styleClass="footer-login">
+                <h:graphicImage url="/resources/imgs/login/icon_footer.png"  styleClass="footer-login-img"/>
+                <h:outputText value="#{var.loginfotercopy}"  styleClass="footer-login-title" />
+                <a4j:commandLink value="#{var.loginfoterterminos}"  styleClass="footer-login-titel-link"/>
+                <a4j:commandLink value="#{var.loginfoteracerca}"  styleClass="footer-login-titel-link"/>
+                <h:commandLink value="#{var.loginfoterquees}" styleClass="footer-login-titel-link">
+                    <rich:componentControl target="queessiente" operation="show"/>
+                </h:commandLink>
+                <h:graphicImage url="/resources/imgs/login/icon_yt.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                <h:graphicImage url="/resources/imgs/login/icon_tw.png" width="40" height="40" styleClass="footer-login-img-social"/>
+            </h:panelGroup>
+        </h:form>
 
 
         <ui:insert name="body"/>                                      
