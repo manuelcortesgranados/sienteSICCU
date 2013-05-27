@@ -84,6 +84,7 @@
                                     <h:panelGroup id="layoutPeriodoMedi2">
                                         <h:selectOneMenu id="comboperiodomedida" value="#{Supervisor$IngresarNuevaObra.obranueva.periodomedida.intidperiomedida}"  >
                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoMedida}" />
+                                            <a4j:ajax event="change" render="layoutPeriodo, layoutPeriodoMedi2 " />
                                         </h:selectOneMenu>
                                     </h:panelGroup>
 

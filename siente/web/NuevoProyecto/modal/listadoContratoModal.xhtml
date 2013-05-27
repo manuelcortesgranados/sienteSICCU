@@ -24,7 +24,6 @@
             </h:form>
         </f:facet>
         <center>
-            <h:form>
                 <h:panelGroup id="gpTotalCont">
                     <h:panelGrid columns="2" >
                         <h:outputText value="#{var.buscar} " style="font-size:12px"/>
@@ -102,7 +101,8 @@
                                     </rich:column>
                                     <rich:column style="width: 120px" >
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato(filaSeleccionada)}"                                                           
-                                                           oncomplete="#{rich:component('panelRelacionContrato')}.show();" render="layoutpanelRelacionContrato">
+                                                           oncomplete="#{rich:component('panelRelacionContrato')}.show();" render="layoutpanelRelacionContrato"
+                                                           execute="@this" immediate="true">
                                     </a4j:commandButton>
                                     </rich:column>
                                 </rich:columnGroup>
@@ -128,7 +128,6 @@
                         </h:panelGrid>
                     </rich:panel>
                 </h:panelGroup>
-            </h:form>
         </center>
     </rich:popupPanel>
 </ui:composition>
