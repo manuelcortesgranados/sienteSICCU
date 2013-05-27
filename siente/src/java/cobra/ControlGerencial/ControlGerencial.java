@@ -937,6 +937,7 @@ public class ControlGerencial  implements Serializable{
      * @return
      */
     public String reportePdfFichaConvenio() {
+        System.out.println("ingrese reporte");
         try {
             if (vistaicom == 0) {
                 if (deptos.equals("0")) {

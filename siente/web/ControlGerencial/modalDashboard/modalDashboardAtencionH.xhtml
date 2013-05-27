@@ -2,12 +2,12 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
     <rich:popupPanel  id="modalDashboard_ah" resizeable="false" width="700" height="600"  style="padding:0px; background-color: black"
@@ -24,11 +24,12 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_modalDashboard_ah" styleClass="style-modal-dialog-button-close"
-                                     title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modalDashboard_ah')}.hide(); return false;"/>
-                      </h:panelGroup>
+                                     title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modalDashboard_ah')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:form target="_blank">
+        
             <rich:panel  style="padding:0px;background-color: black " id="modalDashboardAhInfo">
                 <interkont:spacer height="20" />
                 <h:panelGrid style="width:100%;">
@@ -99,13 +100,20 @@
                     </h:panelGrid>
                     <interkont:spacer height="20" />
                     <h:panelGrid  columns="2" style="text-align: left;margin-left: 40px;">
-                        <h:commandButton id="resumengeneral_rehabilitacion" value="#{var.resumengeneralboton}" action="#{ControlGerencial.reportePdfFichaBalanceAh}"
-                                         styleClass="style-modal-button button-dash-board" style="width:50px;"
-                                         onclick="#{rich:component('modalDashboard_ah')}.hide();return true;"/>
-                      </h:panelGrid>
+                        <a4j:commandButton 
+                            value="#{var.resumengeneralboton}"
+                            action="#{ControlGerencial.reportePdfFichaBalanceAh}"
+                            execute="@this"
+                            immediate="true"
+                            render="@this"
+                            styleClass="style-modal-button button-dash-board"
+                            style="width:50px;"
+                            />
+
+                    </h:panelGrid>
                 </center>
             </rich:panel>
-        </h:form>
+
     </rich:popupPanel>
 
 </ui:composition>
