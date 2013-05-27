@@ -3200,8 +3200,10 @@ public class NuevoContratoBasico   {
 
     /**
      * Elimina el contrato padre seleccionado.
+     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * acción en la tabla
      */
-    public void eliminarItemPadreSele() {
+    public void eliminarItemPadreSele(int filaSeleccionada) {
         //contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
         contrpadre = null;
         varmostrarcontrpa = 0;

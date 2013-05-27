@@ -42,9 +42,9 @@
                             </rich:calendar>
                             
                             <h:outputText id="txtoutnombreinforme" value="#{var.nombreinforme}" />
-                            <h:inputText id="txtinnombreinforme" value="#{Supervision$Externa.supervisionExterna.visita.strnombreinforme}" required="true" requiredMessage="Nombre Necesario">
-                                <rich:message for="txtinnombreinforme" style="color: #ed0606;" />
-                            </h:inputText>
+                            <h:inputText id="txtinnombreinforme" value="#{Supervision$Externa.supervisionExterna.visita.strnombreinforme}" required="true" requiredMessage="Nombre Necesario" />
+                            <interkont:spacer />
+                            <rich:message for="txtinnombreinforme" style="color: #ed0606;" />    
                             
                             <h:outputText id="txtoutcomentarioinforme" value="#{var.comentario}" />
                             <h:inputTextarea id="txtincomentarioinforme" rows="3" cols="25" value="#{Supervision$Externa.supervisionExterna.visita.strcomentinforme}" />
@@ -54,7 +54,7 @@
 
                         <h:panelGrid columns="2">
                             <a4j:commandLink id="subirRegistoMat" styleClass="subir anchorlink" title="#{var.subirarchivos}"
-                                             oncomplete="#{rich:component('panelUploadArchivoSuper')}.show();" />
+                                             onclick="#{rich:component('panelUploadArchivoSuper')}.show(); return true;" />
                         </h:panelGrid>
                     </rich:panel>
                 </rich:panel>
