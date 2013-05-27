@@ -1,17 +1,17 @@
 @font-face {
-    font-family: "bebas"!important;
-    src: url("font/BEBAS___.TTF")!important;
+    font-family: "bebas";
+    src: url("font/BEBAS___.TTF");
 
 }
 
 @font-face {
-    font-family: "century"!important;
-    src: url("font/Century-Gothic.ttf")!important;
+    font-family: "century";
+    src: url("font/Century-Gothic.ttf");
 }
 
 @font-face {
-    font-family: "futura"!important;
-    src: url("font/futura-light-bt.ttf")!important;
+    font-family: "futura";
+    src: url("font/futura-light-bt.ttf");
 }
 
 .rf-pp-shade {
@@ -19,66 +19,9 @@
 }
 
 .rf-pp-cnt-scrlr{
-    background: transparent!important;
-    border: solid 1px transparent !important;
-}
-
-.rf-pp-cntr{
-    background: transparent!important;
-    border: solid 1px transparent !important;
-}
-
-.rf-pp-shdw{
-    background: transparent!important;
-    border: solid 1px transparent !important;
-}
-
-.modal-font{
-    width: 100%!important;
-    height: 100%!important;
-    position: fixed!important;
-    top: 0!important;
-    left: 0!important;
-    background-color: rgba(0,0,0,0.5)!important;
-    z-index: 19999!important;
-}
-
-.modal-content{
-    position: fixed!important;
-    top: 20%!important;
-    left: 30%!important;
-    width: 700px!important;
-    height: 500px!important;
-    position: fixed!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    z-index: 20000!important;
-}
-
-.modal-header{
-    width: 100%!important;
-    clear: both!important;
-    height: 50px!important;
-    border-color: transparent!important;
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(29,98,159,0.8)), to(rgba(28,43,56,0.8))) !important;
-    background: -moz-linear-gradient(top, rgba(29,98,159,0.8), rgba(28,43,56,0.8)) !important;
-    background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
-    background: -o-linear-gradient(top,rgba(29,98,159,0.8), rgba(28,43,56,0.8))!important;
-    -moz-border-top-left-radius: 20px!important; 
-    -moz-border-top-right-radius: 20px!important; 
-    -ms-border-top-left-radius: 20px!important; 
-    -ms-border-top-right-radius: 20px!important; 
-    -webkit-border-top-left-radius: 20px!important; 
-    -webkit-border-top-right-radius: 20px!important; 
-    border-top-left-radius: 20px!important; 
-    border-top-right-radius: 20px!important; 
-    margin-left: 1px !important;
-}
-
-.modal-body{
-    width: 100%!important;
-    height: 450px!important;    
-    border-width: 0px!important;
+    width: 100%;
+    overflow: hidden; 
+    border-width: 0px;
     border: transparent !important;
     -moz-border-top-right-radius: 0px!important;
     -ms-border-top-right-radius: 0px!important;
@@ -99,218 +42,296 @@
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(29,98,159,0.7)), to(rgba(28,43,56,0.7))) !important;
     background: -moz-linear-gradient(top, rgba(29,98,159,0.7), rgba(28,43,56,0.7)) !important;
     background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
-    background: -o-linear-gradient(top,rgba(29,98,159,0.7), rgba(28,43,56,0.7))!important;
+    background: -o-linear-gradient(top,rgba(29,98,159,0.7), rgba(28,43,56,0.7))!important ;
+}
+
+.rf-pp-cntr{
+    background: transparent!important;
+    border: solid 1px transparent !important;
+}
+
+.rf-pp-shdw{
+    background: transparent!important;
+    border: solid 1px transparent !important;
+}
+
+.modal-font{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 19999;
+}
+
+.modal-content{
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    width: 700px;
+    height: 500px;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 20000;
+}
+
+.modal-header{
+    width: 100%;
+    clear: both;
+    height: 50px;
+    border-color: transparent;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(29,98,159,1)), to(rgba(28,43,56,1))) !important;
+    background: -moz-linear-gradient(top, rgba(29,98,159,1), rgba(28,43,56,1)) !important;
+    background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
+    background: -o-linear-gradient(top,rgba(29,98,159,1), rgba(28,43,56,1))!important ;
+    -moz-border-top-left-radius: 20px; 
+    -moz-border-top-right-radius: 20px; 
+    -ms-border-top-left-radius: 20px; 
+    -ms-border-top-right-radius: 20px; 
+    -webkit-border-top-left-radius: 20px; 
+    -webkit-border-top-right-radius: 20px; 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+}
+
+.modal-body{
+    width: 100%;
+    height: 450px;    
+    border-width: 0px;
+    border: transparent !important;
+    -moz-border-top-right-radius: 0px!important;
+    -ms-border-top-right-radius: 0px!important;
+    -webkit-border-top-right-radius: 0px!important;
+    border-top-right-radius: 0px!important;
+    -moz-border-bottom-right-radius: 20px ; 
+    -ms-border-bottom-right-radius: 20px ; 
+    -webkit-bottom-right-radius: 20px ; 
+    border-bottom-right-radius: 20px ; 
+    -moz-border-bottom-left-radius: 20px ; 
+    -ms-border-bottom-left-radius: 20px ; 
+    -webkit-bottom-left-radius: 20px ; 
+    border-bottom-left-radius: 20px ;    
+    -moz-box-shadow: transparent !important;
+    -webkit-box-shadow: transparent !important;
+    -ms-box-shadow: transparent !important;
+    box-shadow: transparent !important;
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(29,98,159,0.7)), to(rgba(28,43,56,0.7))) !important;
+    background: -moz-linear-gradient(top, rgba(29,98,159,0.7), rgba(28,43,56,0.7)) !important;
+    background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
+    background: -o-linear-gradient(top,rgba(29,98,159,0.7), rgba(28,43,56,0.7))!important ;
 }
 
 
 .modal-body table{
-    border-collapse: inherit!important;
-    border-spacing: 0!important;
-    border-color: inherit!important;
+    border-collapse: inherit;
+    border-spacing: 0;
+    border-color: inherit;
 }
 .modal-imagotipo{
-    margin-left: 15px!important;
+    margin-left: 15px;
 
 }
 
 .modal-title{
-    width: 600px!important;
+    width: 600px;
     color: white !important;
-    font-family: "century"!important;
+    font-family: "century";
 
 }
 
 .modal-title label.lable-title{
     width: 450px!important;
-    font-size: larger!important;
-    text-transform: uppercase!important;
+    font-size: larger;
+    text-transform: uppercase;
 }
 
 
 #after{
     background-image: url("../imgs/scroll-left.png")!important;
-    background-position: center center!important;
-    background-repeat: no-repeat!important;
-    float: left!important;
-    width: 35px!important;
-    height: 50px!important;
-    background-color: rgba(255,255,255,0.4)!important;
-    position: relative!important;
-    top: 185px!important;
-    cursor: pointer!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: left;
+    width: 35px;
+    height: 50px;
+    background-color: rgba(255,255,255,0.4);
+    position: relative;
+    top: 185px;
+    cursor: pointer;
 }
 
 
 #before{    
     background-image: url("../imgs/scroll-right.png")!important;
-    background-position: center center!important;
-    background-repeat: no-repeat!important;
-    float: right!important;
-    width: 35px!important;
-    height: 50px!important;
-    background-color: rgba(255,255,255,0.4)!important;
-    position: relative!important;
-    top: 185px!important;
-    cursor: pointer!important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    float: right;
+    width: 35px;
+    height: 50px;
+    background-color: rgba(255,255,255,0.4);
+    position: relative;
+    top: 185px;
+    cursor: pointer;
 }
 
 #after:hover, #before:hover{
-    background-color: rgba(255,255,255,0.7)!important;
+    background-color: rgba(255,255,255,0.7);
 }
 
 #after input[type=button], #before input[type=button]{
-    width: 35px!important;
-    height: 50px!important;
-    background: transparent!important;
-    border: none!important;
+    width: 35px;
+    height: 50px;
+    background: transparent;
+    border: none;
 }
 
 
 #content{
-    width: 560px!important;
-    height: 350px!important;
-    position: relative!important;
-    left: 70px!important;
+    width: 560px;
+    height: 350px;
+    position: relative;
+    left: 70px;
 }
 
 ul#slider{
-    height: 350px!important;
-    overflow: hidden!important; 
-    position: relative!important; 
-    width: 520px!important;
+    height: 350px;
+    overflow: hidden; 
+    position: relative; 
+    width: 520px;
 }
 
 ul#slider li > div{
-    width: 560px!important;
-    height: 350px!important;
-    color: white!important;
-    text-align: justify!important;
+    width: 560px;
+    height: 350px;
+    color: white;
+    text-align: justify;
 }
 
 ul#slider li{
-    list-style-type: none!important;
-    position: absolute!important;
-    left: 0!important;
-    top: 0!important;
-    visibility: hidden!important;  
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;  
 }
 
 #what-siente-title{
-    width: 400px!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    font-family: "century"!important;
-    font-weight: bold!important;
-    font-size: 35px!important;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "century";
+    font-weight: bold;
+    font-size: 35px;
 }
 
 #what-siente{
-    width: 400px!important;
-    margin-left: auto!important;
-    margin-right: auto!important;
-    font-family: "century"!important;
-    font-size: 15px!important;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: "century";
+    font-size: 15px;
 }
 
 #what-siente label{
-    text-align: center!important;
+    text-align: center;
 }
 
 #vidio{
-    position: relative!important;
-    left: 50px!important;
-    background: white!important;
-    height: 330px!important;
-    width: 490px!important;
-    -webkit-border-radius: 10px!important;
-    -moz-border-radius: 10px!important;
-    -o-border-radius: 10px!important;
-    -ms-border-radius: 10px!important;
-    border-radius: 10px!important;
-    background-color: rgba(255, 255, 255, 0.72)!important;
+    position: relative;
+    left: 50px;
+    background: white;
+    height: 330px;
+    width: 490px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.72);
 }
 
 #vidio video{
-    width: 460px!important;
-    height: 300px!important;
-    margin-left: 10px!important;
-    margin-top: 10px!important;
-    border: solid 5px #1D629F!important;
-    -webkit-border-radius: 10px!important;
-    -moz-border-radius: 10px!important;
-    -o-border-radius: 10px!important;
-    -ms-border-radius: 10px!important;
-    border-radius: 10px!important;
+    width: 460px;
+    height: 300px;
+    margin-left: 10px;
+    margin-top: 10px;
+    border: solid 5px #1D629F;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    border-radius: 10px;
 }
 
 
 .div-option{
-    position: relative!important;
-    top: 400px!important;
-    text-align: center!important;
+    position: relative;
+    top: 400px;
+    text-align: center;
 }
 
 .div-option label{
-    -webkit-border-radius: 5px!important;
-    -moz-border-radius: 5px!important;
-    -o-border-radius: 5px!important;
-    -ms-border-radius: 5px!important;
-    border-radius: 5px!important;
-    display: inline-block!important;
-    width: 10px!important;
-    height: 10px!important;
-    background:  #1D629F!important;
-    margin: 7px!important;
-    cursor: pointer!important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background:  #1D629F;
+    margin: 7px;
+    cursor: pointer;
 }
 
 .div-option label.active{
-    background: white!important;
+    background: white;
 }
 
 .div-option label.inactive{
-    background: #1D629F!important;
+    background: #1D629F;
 }
 
 .what-siente-img{
-    margin-left: 170px!important;
-    margin-top: 30px!important;
+    margin-left: 170px;
+    margin-top: 30px;
 }
 
 #slider-li-one{
     left: 0%!important;
-    visibility: visible !important;
-    transition:left 1s linear!important;
-    transition-property:left 1s linear!important;
-    -moz-transition:left 1s linear!important;
-    -webkit-transition:left 1s linear!important;
-    -o-transition:left 1s linear!important;
-    -ms-transition:left 1s linear!important;
+    transition:left 1s linear, visibility 1s linear;
+    transition-property:left 1s linear, visibility 1s linear;
+    -moz-transition:left 1s linear, visibility 0s linear;
+    -webkit-transition:left 1s linear, visibility 1s linear;
+    -o-transition:left 1s linear, visibility 1s linear;
+    -ms-transition:left 1s linear, visibility 1s linear;
 }
 
 #slider-li-two{
     left: 100%!important;
-    visibility: visible !important;
-    transition:left 1s linear!important;
-    transition-property:left 1s linear!important;
-    -moz-transition:left 1s linear!important;
-    -webkit-transition:left 1s linear!important;
-    -o-transition:left 1s linear!important;
-    -ms-transition:left 1s linear!important;
+    visibility: visible!important;
+    transition:left 1s linear;
+    transition-property:left 1s linear;
+    -moz-transition:left 1s linear;
+    -webkit-transition:left 1s linear;
+    -o-transition:left 1s linear;
+    -ms-transition:left 1s linear;
 }
 
 #slider-li-tree{
     left: 200%!important;
-    visibility: visible !important;
-    transition:left 1s linear!important;
-    transition-property:left 1s linear!important;
-    -moz-transition:left 1s linear!important;
-    -webkit-transition:left 1s linear!important;
-    -o-transition:left 1s linear!important;
-    -ms-transition:left 1s linear!important;
+    visibility: visible!important;
+    transition:left 1s linear;
+    transition-property:left 1s linear;
+    -moz-transition:left 1s linear;
+    -webkit-transition:left 1s linear;
+    -o-transition:left 1s linear;
+    -ms-transition:left 1s linear;
 }
 
 #slider-li-one.animation-one-right{
+    visibility: visible!important;
     left:-100%!important;    
 }
 #slider-li-two.animation-one-right{
@@ -322,6 +343,7 @@ ul#slider li{
 
 #slider-li-one.animation-one-left{
     left:0%!important;
+    visibility: visible!important;
 }
 #slider-li-two.animation-one-left{
     left:100%!important;
@@ -331,6 +353,7 @@ ul#slider li{
 }
 
 #slider-li-one.animation-one-right-two{
+    visibility: visible!important;
     left:-200%!important;    
 }
 #slider-li-two.animation-one-right-two{
@@ -345,6 +368,7 @@ ul#slider li{
 }
 #slider-li-two.animation-one-left-two{
     left:0%!important;
+    visibility: visible!important;
 }
 #slider-li-tree.animation-one-left-two{
     left:100%!important;
