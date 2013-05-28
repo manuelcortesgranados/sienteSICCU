@@ -21,35 +21,7 @@
 
             }
         </script>
-        -->
-        <script>
-            var geocoder = null;
-            function nuevoPuntoOnclick() {
-                    if(jQuery('.selectForma').val() === '1') {
-                    jQuery('.txtlatitudAdress').val('');
-                    jQuery('.txtlongitudAdress').val('');
-                    address = jQuery('.txtAddress').val();
-                        if(address !== '') {
-                        geocoder = new GClientGeocoder();
-                        if (geocoder) {
-                            geocoder.getLatLng(
-                                    address,
-                                    function(point) {
-                                        if (!point) {
-                                            alert(address + " no fue encontrada");
-                                        } else {
-                                            jQuery('.txtlatitudAdress').val(point.y);
-                                            jQuery('.txtlongitudAdress').val(point.x);
-                                            nuevoPunto();
-                                        }
-                                    }
-                            );
-                        }
-                    }
-                }
-                return true;
-            }
-        </script>
+        -->       
     </ui:define>
     <ui:define name="title">
         <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre}"/>
@@ -100,16 +72,11 @@
 
                                                 <m:marker longitude="#{marker.longitude}" latitude="#{marker.latitude}"
                                                           draggable="#{marker.draggable}" id="mkObra"  submitOnValueChange="false"
-                                                          valueChangeListener="#{Supervisor$IngresarNuevaObra.cambio}">
-                                                    <m:eventListener id="even" eventName="dragend" jsFunction="renderDireccion" />
+                                                          valueChangeListener="#{Supervisor$IngresarNuevaObra.cambio}">                                                   
                                                     <m:icon imageURL="/#{var.versioncobra}/resources/images/pin.png"/>
 
                                                 </m:marker>
-                                            </a4j:repeat>
-                                            <m:mapControl name="GLargeMapControl" position="G_ANCHOR_BOTTOM_RIGHT"/>
-                                            <m:mapControl name="GMenuMapTypeControl" position="G_ANCHOR_TOP_RIGHT"/>
-
-
+                                            </a4j:repeat>                                        
                                         </m:map>
                                         <h:inputHidden id="txthiden" value="#{Supervisor$IngresarNuevaObra.jsVariable}" />
                                         <h:inputHidden id="txtzoomhiden" value="#{Supervisor$IngresarNuevaObra.jsZoon}" />
@@ -164,19 +131,17 @@
 
                                                         </h:panelGrid>
                                                         <h:panelGrid >
-                                                            <a4j:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}" render="gpDirMapa,layoutLugar" onclick="nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
-                                                            <a4j:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" onclick="return nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
+                                                            <h:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}"  onclick="nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
+                                                            <h:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" onclick="return nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
                                                         </h:panelGrid>
                                                     </h:panelGroup>
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.verConfirmar}">
-                                                <a4j:commandButton value="#{var.confirmarpunto}" id="confpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.confirmarPunto}"
-                                                                   render="layoutLugar,gpDirMapa">
-                                                </a4j:commandButton>
-                                                <a4j:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
-                                                                   render="layoutLugar,gpDirMapa">
-                                                </a4j:commandButton>
+                                                <h:commandButton value="#{var.confirmarpunto}" id="confpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.confirmarPunto}"
+                                                                   />
+                                                <h:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
+                                                                   />
                                                 <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click();" selector="#txtAddress" />
                                             </h:panelGroup>
                                         </h:panelGrid>
@@ -185,7 +150,7 @@
 
                                             <rich:dataTable id="datamarkers" 
                                                             rows="4" 
-                                                            style="text-align:left; width:100%;"
+                                                            style="text-align:left; width:100%;"    
                                                             rowKeyVar="filaSeleccionada"
                                                             var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
                                                 <rich:column id="co1" style="width: 100px;"
@@ -203,7 +168,7 @@
                                                     <h:outputText id="otxt-lo" value="#{lalo.latitude}"/>
                                                 </rich:column>
                                                 <rich:column id="co3" style="width: 100px;"
-                                                             >s
+                                                             >
                                                     <f:facet name="header">
                                                         <h:outputText value="Direccion" />
                                                     </f:facet>
@@ -222,7 +187,7 @@
                                                     <f:facet name="header">
                                                         <h:outputText value="#{var.eliminar}" />
                                                     </f:facet>
-                                                    <a4j:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}" render="datamarkers,layoutLugar,gpDirMapa, gpOpMapa"/>
+                                                    <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}"/>
                                                 </rich:column>
                                                 <f:facet name="footer">
                                                     <rich:dataScroller id="dsmar" for="datamarkers"/>
@@ -388,5 +353,35 @@
                 </td>
             </tr>
         </table>
+         <script>
+            var geocoder = null;
+            function nuevoPuntoOnclick() {
+                    if(jQuery('.selectForma').val() === '1') {
+                    jQuery('.txtlatitudAdress').val('');
+                    jQuery('.txtlongitudAdress').val('');
+                    address = jQuery('.txtAddress').val();
+                        if(address !== '') {
+
+                        geocoder = new GClientGeocoder();
+                        if (geocoder) {
+                            alert('ingreso aqui geocoder');
+                            geocoder.getLatLng(
+                                    address,
+                                    function(point) {
+                                        if (!point) {
+                                            alert(address + " no fue encontrada");                                            
+                                        } else {
+                                            jQuery('.txtlatitudAdress').val(point.y);
+                                            jQuery('.txtlongitudAdress').val(point.x);
+                                            nuevoPsunto();
+                                        }
+                                    }
+                            );
+                        }
+                    }
+                }
+                return true;
+            }
+        </script>
     </ui:define> 
 </ui:composition>

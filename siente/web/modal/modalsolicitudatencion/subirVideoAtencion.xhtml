@@ -13,10 +13,10 @@
     <rich:popupPanel id="modalVideoAtencion" autosized="true">
         <rich:panel header="#{var.seleccionarvideo}" styleClass="rich-panel-body" style="padding:0px;">
             <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
-                <a4j:commandButton id="esconder_panelVideoAtencion"
+                <a4j:commandLink id="esconder_panelVideoAtencion"
                                    onclick="#{rich:component('modalVideoAtencion')}.hide();
                                            return false;"
-                                   immediate="true" styleClass="btn_cerrar" />
+                                   immediate="true" styleClass="cerrar" />
             </h:panelGroup>
 
             <h:form id="formVideoAtencion">

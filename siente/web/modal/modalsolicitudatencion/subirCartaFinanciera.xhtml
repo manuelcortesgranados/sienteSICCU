@@ -14,10 +14,10 @@
         <rich:panel header="#{var.seleccartaaprobacion}" styleClass="rich-panel-body" style="padding:0px;">
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%;">
-                    <a4j:commandButton id="esconder_panelUploadCartaAprobacion"
+                    <a4j:commandLink id="esconder_panelUploadCartaAprobacion"
                                        onclick="#{rich:component('panelUploadCartaAprobacion')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="btn_cerrar" />
+                                       immediate="true" styleClass="cerrar" />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpCartaAprobacion">
