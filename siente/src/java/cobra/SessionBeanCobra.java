@@ -914,12 +914,12 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public String habilitarRegistrate() {
-        verregistrarse = true;
+        verregistrarse = false;
         return null;
     }
 
     public String deshabilitarRegistrate() {
-        verregistrarse = false;
+        verregistrarse = true;
         return null;
     }
 
