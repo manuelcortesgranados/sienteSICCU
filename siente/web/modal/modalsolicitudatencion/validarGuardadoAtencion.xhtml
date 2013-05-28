@@ -16,10 +16,10 @@
                 <h:panelGroup>
                     <h:outputText value= "#{var.atencion}" />
                     <interkont:spacer width="265" />
-                    <a4j:commandButton id="esconder_panelConfirmarGuardadoAtencion"
+                    <a4j:commandLink id="esconder_panelConfirmarGuardadoAtencion"
                                        onclick="#{rich:component('panelConfirmarGuardadoAtencion')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="btn_cerrar" />
+                                       immediate="true" styleClass="cerrar" />
                 </h:panelGroup>
             </f:facet>
 

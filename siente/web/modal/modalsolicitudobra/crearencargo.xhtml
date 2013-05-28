@@ -19,10 +19,10 @@
 
         <rich:panel id="panelCrearEncargoFidu">
             <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
-                <a4j:commandButton id="esconder_panelCrearEncargo"
+                <a4j:commandLink id="esconder_panelCrearEncargo"
                                    onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
-                                   immediate="true" styleClass="btn_cerrar" />
+                                   immediate="true" styleClass="cerrar" />
             </h:panelGroup>
             <h:form>
                 <h:panelGrid id="mos" columns="2" style="width: 100%;" columnClasses="panelizquierda, panelizquierda">
