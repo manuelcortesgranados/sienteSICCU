@@ -10,33 +10,32 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
     <interkont:spacer height="20" style="width:100%;"/>
-    <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
-        <td>
-            <tr>
-                <h:outputText value="Reportes" style="font-size:14px;" styleClass="headerIndicadores"/>
-            </tr>
-            <tr>
-                <div id="navIndicadores" >
-                    <!--<div id="elipse">
+        <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
+            <td>
+                <tr>
+                    <h:outputText value="Reportes" style="font-size:14px;" styleClass="headerIndicadores"/>
+                </tr>
+                <tr>
+                    <div id="navIndicadores" >
+                        <!--<div id="elipse">
+    
+                        </div>-->
 
-                    </div>-->
-
-                    <ul>
-                        <li><a4j:commandLink value="#{var.header1}" styleClass="consoclaro anchorLink"
-                                             style="font-size: 9px;" immediate="true"
-                                             action="#{Reportes.reporteSelect}" render="richpanelReportes, headerre"/></li>
-                        <li><a4j:commandLink value="#{var.header5}" styleClass="conso anchorLink"
-                                             style="font-size: 9px;" immediate="true"
-                                             action="#{Reportes.reporteSelectDi}" render="richpanelReportes, headerre"/></li>
-                        <li><a4j:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" styleClass="conso anchorLink"
-                                             style="font-size: 9px;" immediate="true"
-                                             action="#{Reportes.reporteSelectAdministrativo}" render="richpanelReportes, headerre"/></li>
-                    </ul>
-                </div>
-            </tr>
-        </td>
-    </table>
-
+                        <ul>
+                            <li><h:commandLink value="#{var.header1}" styleClass="consoclaro anchorLink"
+                                           style="font-size: 9px;" 
+                                             action="#{Reportes.reporteSelect}" /></li>
+                            <li><h:commandLink value="#{var.header5}" styleClass="conso anchorLink"
+                                             style="font-size: 9px;"  
+                                             action="#{Reportes.reporteSelectDi}" /></li>
+                            <li><h:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" styleClass="conso anchorLink"
+                                             style="font-size: 9px;" 
+                                             action="#{Reportes.reporteSelectAdministrativo}" /></li>
+                        </ul>
+                    </div>
+                </tr>
+            </td>
+        </table>
 
 
 </ui:composition>
