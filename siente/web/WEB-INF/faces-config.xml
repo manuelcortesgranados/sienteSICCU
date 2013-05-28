@@ -1024,11 +1024,11 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>Gestión Financiera</from-outcome>
-            <to-view-id>Gestión Financiera</to-view-id>
+            <to-view-id>/homes/home_financiera.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Indicadores</from-outcome>
-            <to-view-id>/homes/home_indicadores.jspx</to-view-id>
+            <to-view-id>/homes/home_indicadores.xhtml</to-view-id>
         </navigation-case>
 </navigation-rule>
 
