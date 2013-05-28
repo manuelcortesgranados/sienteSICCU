@@ -35,16 +35,16 @@
                                     <f:facet name="header">
                                         <h:outputText value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size==0}" value="#{var.nosuarc}"/>
-                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.files}" var="file">
+                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
                                                     <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.onlyName}"/>
+                                                    <h:outputText value="#{file.nombre}"/>
                                                     <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.length/1024} Kb"/>
+                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -53,12 +53,12 @@
                                 <interkont:spacer height="3"/>
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.borrarDatosSubidos}" render="info_documento, uploadDocumento, panel_subir"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" value="#{var.boarcsub}"
+                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
                                 <a4j:commandButton value="#{var.aceptar}" 
-                                                   onclick="javascript:Richfaces.hideModalPanel('panelUploadDocumento')" render="panel_subir,tablaDocumentos"
+                                                   onclick="#{rich:component('panelUploadDocumento')}.hide();" render="panel_subir,tablaDocumentos"
                                                    style="font-size:12px;"
-                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.size>0}" />
+                                                   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos>0}" />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

@@ -5,13 +5,14 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoPie {
+public class GraficoPie implements Serializable{
 
 
     private String tituloCampo;

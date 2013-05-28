@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author Jhon Eduard Ortiz S
  */
-public abstract class GraficoEvolucionProyecto  {
+public abstract class GraficoEvolucionProyecto {
 
     protected GraficoSeries grafico = new GraficoSeriesAmCharts("graficoEvolucionProyecto");
 

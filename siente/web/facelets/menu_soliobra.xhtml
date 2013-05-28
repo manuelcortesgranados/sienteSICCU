@@ -122,7 +122,7 @@
 
         <rich:toolbarGroup>
             <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
-                           onclick="javascript:Richfaces.showModalPanel('panelCargando')" styleClass="cerrar anchorLink"/>
+                           onclick="#{rich:component('panelCargando')}show();" styleClass="cerrar anchorLink"/>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>

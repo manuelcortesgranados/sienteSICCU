@@ -19,6 +19,7 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 
 import financiera.service.FinancieraServiceAble;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -35,7 +36,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo10
  */
-public class FiduFinanciera  {
+public class FiduFinanciera implements Serializable{
 
     private List<Encargofiduciario> listaencargofiducario = new ArrayList<Encargofiduciario>();
     private CargadorArchivosWeb subirDocumento = new CargadorArchivosWeb();

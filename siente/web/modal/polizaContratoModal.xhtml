@@ -63,7 +63,7 @@
                     <h:panelGrid style="width: 10px;" />
                     
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="panel_botonsoporte"
-                                       oncomplete="javascript:Richfaces.hideModalPanel('panelPolizaContrato');"
+                                       oncomplete="#{rich:component('panelPolizaContrato')}.hide();"
                                        action="#{Supervisor$ModificarObra.modificarPoliza}" style="font-size: 10px;" styleClass="btn_sec_gig" />
                 </h:panelGrid>
             </h:form>

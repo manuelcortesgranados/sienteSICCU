@@ -18,13 +18,10 @@ import co.com.interkont.cobra.to.Movimiento;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Periodo;
 import co.com.interkont.cobra.to.Periodohisto;
-
 import cobra.GestionarXML;
 import cobra.SessionBeanCobra;
-
 import java.io.IOException;
 import java.math.BigDecimal;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,11 +44,9 @@ import co.com.interkont.cobra.to.Relacionalimentacionactividad;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
 import co.com.interkont.cobra.to.Relacionobraseguidor;
 import co.com.interkont.cobra.to.Seguimiento;
-import co.com.interkont.cobra.to.Semaforo;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.vista.VistaObraMapa;
-import cobra.AtencionHumanitaria.AdminSolicitudAtencion;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
 import javax.faces.context.FacesContext;

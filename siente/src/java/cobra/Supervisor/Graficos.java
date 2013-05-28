@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.google.gson.Gson;
+import java.io.Serializable;
 import java.math.RoundingMode;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -27,7 +28,7 @@ import javax.servlet.ServletContext;
  *
  * @author felipe
  */
-public class Graficos  {
+public class Graficos implements Serializable{
 
     public String rutaGrafico="";
 

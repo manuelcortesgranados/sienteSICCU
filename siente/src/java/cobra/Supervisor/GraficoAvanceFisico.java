@@ -1,6 +1,5 @@
 package cobra.Supervisor;
 
-import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SessionBeanCobra;
@@ -9,7 +8,7 @@ import cobra.graficos.DatoGrafico;
 import cobra.graficos.EstiloGrafico;
 import cobra.graficos.GraficoSeries;
 import cobra.graficos.GraficoSeriesAmCharts;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
@@ -18,7 +17,7 @@ import java.util.Date;
  * MBean encargado de gestionar la presentación del gráfico de avance físico
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoAvanceFisico  {
+public class GraficoAvanceFisico implements Serializable{
 
     private GraficoSeries grafico = new GraficoSeriesAmCharts("graficoAvanceFisico");
 

@@ -2,8 +2,6 @@ package Seguridad;
 
 import cobra.SessionBeanCobra;
 import java.io.IOException;
-
-import java.util.ResourceBundle;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -20,7 +18,6 @@ public class DisableUrlSessionFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         SessionBeanCobra beanone = (SessionBeanCobra) httpRequest.getSession().getAttribute("SessionBeanCobra");
 
-      //  ResourceBundle bundle = ResourceBundle.getBundle("cobra.properties.Bundle");
         try {
             if (!(request instanceof HttpServletRequest)) {
                 chain.doFilter(request, response);

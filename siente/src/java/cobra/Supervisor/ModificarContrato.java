@@ -13,11 +13,11 @@ import co.com.interkont.cobra.to.Polizacontrato;
 import co.com.interkont.cobra.to.Tipodocumento;
 import co.com.interkont.cobra.to.Tipomodificacion;
 import cobra.CargadorArchivosWeb;
-
 import cobra.SessionBeanCobra;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.text.NumberFormat;
@@ -36,7 +36,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo5
  */
-public class ModificarContrato   {
+public class ModificarContrato implements Serializable{
 
     private Modificacioncontrato modificarcontrato = new Modificacioncontrato();
     private int cual = 1;

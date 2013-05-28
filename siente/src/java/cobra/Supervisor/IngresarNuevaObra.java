@@ -47,7 +47,6 @@ import co.com.interkont.cobra.to.Vereda;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
 import java.io.FileOutputStream;
 import javax.faces.model.SelectItem;
 import java.math.BigDecimal;
@@ -57,7 +56,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import cobra.ArchivoWeb;
 import cobra.CargadorArchivosWeb;
 import cobra.Cobra.Download;
 import cobra.FiltroAvanzadoContrato;
@@ -67,7 +65,6 @@ import cobra.SessionBeanCobra;
 import cobra.gestion.HomeGestion;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
-//import com.googlecode.gmaps4jsf.component.marker.MarkerValue;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
 import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
@@ -76,13 +73,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.faces.event.ValueChangeEvent;
@@ -94,8 +91,6 @@ import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
-import org.richfaces.component.UIDataGrid;
-
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
  * contains component definitions (and initialization code) for all components
@@ -107,7 +102,7 @@ import org.richfaces.component.UIDataGrid;
  * @author Carlos Alberto Loaiza Guerrerro
  * @author David Andres Betancourth Botero
  */
-public class IngresarNuevaObra  implements ILifeCycleAware {
+public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 
     /**
      * Variables BigDecimal.

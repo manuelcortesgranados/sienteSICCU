@@ -40,6 +40,7 @@ import cobra.Supervisor.IngresarNuevaObra;import com.interkont.cobra.exception.A
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -59,7 +60,7 @@ import org.richfaces.component.UIDataTable;
  * Clase que permite toda la interacción con el modulo de antecion humanitaria, persistir, consultar, entre otros.
  * @author Diana Taborda
  */
-public class AdminSolicitudAtencion  {
+public class AdminSolicitudAtencion  implements Serializable{
 
     /**
      * Variable para mostrar un selectitem con los departamentos
@@ -1078,9 +1079,6 @@ public class AdminSolicitudAtencion  {
         limpiarSolicitud();
         llenadodecombos();
         txtPalabraClave = "";
-
-
-
         getSessionBeanCobra().getSolicitudService().setJsfusuariogrupo(getSessionBeanCobra().getUsuarioService().
                 encontrarGrupoxUsuarioxModulo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 1));
         switch (getSessionBeanCobra().getSolicitudService().getJsfusuariogrupo().getGrupo().getGruGid()) {

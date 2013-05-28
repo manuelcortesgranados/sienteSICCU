@@ -10,12 +10,11 @@ import co.com.interkont.cobra.to.Seguimiento;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.ILifeCycleAware;
-
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 
@@ -24,7 +23,7 @@ import org.richfaces.component.UIDataTable;
  * Clase encargada de procesar las peticiones de la página de listado de seguimientos
  * @author Jhon Eduard Ortiz S.
  */
-public class ListadoSeguimientos  implements ILifeCycleAware {
+public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
     private String id = "";
     private UIDataTable tablaSeguimientos = new UIDataTable();

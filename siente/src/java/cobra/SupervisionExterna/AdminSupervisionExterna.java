@@ -10,9 +10,6 @@ import co.com.interkont.cobra.to.Seguimiento;
 import co.com.interkont.cobra.to.Tipodesarrollo;
 import co.com.interkont.cobra.to.Tipoobra;
 import co.com.interkont.cobra.to.Visita;
-import cobra.Archivo;
-import cobra.ArchivoWeb;
-
 import cobra.SessionBeanCobra;
 import cobra.SolicitudObra.ValidadorSeguimiento;
 import cobra.CargadorArchivosWeb;
@@ -22,14 +19,13 @@ import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
@@ -41,7 +37,7 @@ import supervision.service.SupervisionExternaServiceAble;
  *
  * @author desarrollo1
  */
-public class AdminSupervisionExterna {
+public class AdminSupervisionExterna implements Serializable{
 
     private SelectItem[] visitaSelec;
     private UIDataTable tablaSeguimientos = new UIDataTable();

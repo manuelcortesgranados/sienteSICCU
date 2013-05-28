@@ -35,9 +35,9 @@
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" style="text-align:center; width:100%;">
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="btn_sec_gra"
-                                           oncomplete="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion');" value="#{var.aceptar}"
+                                           oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.hide();" value="#{var.aceptar}"
                                            render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="javascript:Richfaces.hideModalPanel('mp_eliminar_imagenevolucion')"/>
+                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide();"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

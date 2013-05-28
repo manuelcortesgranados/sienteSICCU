@@ -56,13 +56,13 @@
                                         <center>
                                             <h:panelGrid columns="4">
                                                 <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.primerosreales}"
-                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                                   onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
                                                 <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.anterioresReales}"
-                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                                   onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
                                                 <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.siguientesReales}"
-                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                                   onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
                                                 <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.ultimoReales}"
-                                                                   onclick="javascript:Richfaces.showModalPanel('panelIngre')" oncomplete="javascript:Richfaces.hideModalPanel('panelIngre')"/>
+                                                                   onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>

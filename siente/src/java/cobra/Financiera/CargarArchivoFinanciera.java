@@ -38,15 +38,15 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import cobra.util.RutasWebArchivos;
+import java.io.Serializable;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import org.postgresql.util.PSQLException;
 
 /**
  *
  * @author desarrollo5
  */
-public class CargarArchivoFinanciera  {
+public class CargarArchivoFinanciera  implements Serializable{
 
     private final static int TOTAL_COL = 20;
     private List<Movimiento> movimientos = new ArrayList<Movimiento>();

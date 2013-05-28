@@ -44,10 +44,10 @@ import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
 import coral.dao.DataAccessLayerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -81,7 +81,7 @@ import javax.servlet.ServletContext;
  * @author carlosalbertoloaizaguerrero
  * @author Leonardo Montes
  */
-public class NuevoContratoBasico   {
+public class NuevoContratoBasico implements Serializable  {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**

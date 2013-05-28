@@ -1,7 +1,6 @@
 package cobra;
 
 import co.com.interkont.cobra.to.Puntoreferencia;
-
 import com.googlecode.gmaps4jsf.component.marker.Marker;
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -3,19 +3,17 @@
  */
 package cobra.Supervisor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-
-
 import org.richfaces.component.SortOrder;
 
 /**
  * @author Ilya Shaikovsky
  *
  */
-public class SortingBean {
+public class SortingBean implements Serializable{
 	
 	//Settings panel data bindings
 	ArrayList<SelectItem> firstSortItems = new ArrayList<SelectItem>();

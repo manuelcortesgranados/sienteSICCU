@@ -13,14 +13,12 @@ import co.com.interkont.cobra.to.Zonaespecifica;
 import cobra.FiltroLocalidades;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
-import cobra.Supervisor.ILifeCycleAware;
 import com.interkont.cobra.util.DatoBarrasComparativo;
 import com.interkont.cobra.util.DatoPie;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javax.faces.FacesException;
 import javax.faces.model.SelectItem;
 
 /**
@@ -34,7 +32,7 @@ import javax.faces.model.SelectItem;
  * @version Created on 13-oct-2010, 22:27:32
  * @author carlosalbertoloaizaguerrero
  */
-public class GraficarIndicadores   {
+public class GraficarIndicadores  implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private GraficoPie piepresupuesto;

@@ -12,12 +12,12 @@ import cobra.graficos.Datasets;
 import cobra.graficos.Estructuragraphic;
 import cobra.graficos.JSChart;
 import cobra.graficos.Optionset;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.google.gson.Gson;
+import java.io.Serializable;
 import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -31,7 +31,7 @@ import javax.servlet.ServletContext;
  *
  * @author felipe
  */
-public class GraficosEvolucion  {
+public class GraficosEvolucion implements Serializable{
 
     public String rutaGrafico = "";
     public List<Movimiento> movimientos;

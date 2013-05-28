@@ -10,7 +10,7 @@ import cobra.graficos.EstiloGrafico;
 import cobra.graficos.Grafico;
 import cobra.graficos.GraficoSeries;
 import cobra.graficos.GraficoSeriesAmCharts;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
@@ -23,7 +23,7 @@ import java.util.List;
  * contrato
  * @author Jhon Eduard Ortiz S
  */
-public class GraficoEvolucionContrato  {
+public class GraficoEvolucionContrato implements Serializable{
 
     private GraficoSeries grafico = new GraficoSeriesAmCharts("graficoEvolucionContrato");
 

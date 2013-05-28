@@ -11,15 +11,14 @@ import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.Novedad;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Relacioneventoscorreousuario;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import cobra.SessionBeanCobra;
+import java.io.Serializable;
 import java.util.LinkedHashSet;
 import javax.faces.context.FacesContext;
 import org.richfaces.component.UIDataTable;
@@ -35,7 +34,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on 13/11/2008, 09:42:21 PM
  * @author carlos
  */
-public class HomeSupervisor  {
+public class HomeSupervisor  implements Serializable{
 
     private UIDataTable listaPropuestas = new UIDataTable();
     private UIDataTable listaSuspendidas = new UIDataTable();

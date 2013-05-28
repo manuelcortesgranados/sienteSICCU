@@ -7,7 +7,7 @@ package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import cobra.SessionBeanCobra;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author felipe
  */
-public class Video  {
+public class Video implements Serializable{
 
     private List<Videoevolucionobra> listadoVideos = new ArrayList<Videoevolucionobra>();
 

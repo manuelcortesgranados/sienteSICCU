@@ -5,13 +5,14 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoBarrasComparativo;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author carlosloaiza
  */
-public class GraficoBarrasComparativo {
+public class GraficoBarrasComparativo implements Serializable {
 
     private String tituloCampo;
     private String valorCampo;

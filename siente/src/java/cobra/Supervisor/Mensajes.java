@@ -11,6 +11,7 @@ import co.com.interkont.cobra.to.JsfUsuario;
 import cobra.SessionBeanCobra;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,7 +34,7 @@ import javax.faces.model.SelectItem;
  * @author jhon
  */
 
-public class Mensajes  {
+public class Mensajes  implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**

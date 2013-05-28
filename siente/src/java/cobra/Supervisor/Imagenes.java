@@ -6,16 +6,16 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.to.Imagenevolucionobra;
-
 import java.util.List;
 import cobra.SessionBeanCobra;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author felipe
  */
-public class Imagenes  {
+public class Imagenes implements Serializable{
 
     public List<Imagenevolucionobra> imagevo =new ArrayList<Imagenevolucionobra>();
     

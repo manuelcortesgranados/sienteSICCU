@@ -8,7 +8,7 @@ import co.com.interkont.cobra.to.Puntoreferencia;
 import co.com.interkont.cobra.to.Ruta;
 import co.com.interkont.cobra.to.Sedeeducativa;
 import cobra.SessionBeanCobra;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import org.richfaces.component.UIDataTable;
@@ -17,7 +17,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author carlosloaiza
  */
-public class EntidadConvenio  {
+public class EntidadConvenio implements Serializable{
 
     private List<Ruta> listaruta = new ArrayList<Ruta>();
     int intentidadconvenio = 0;

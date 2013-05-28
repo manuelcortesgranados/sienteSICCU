@@ -7,11 +7,9 @@ package cobra.Supervisor;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Relacioncontratoobra;
 import cobra.FiltroAvanzadoContrato;
-
 import cobra.SessionBeanCobra;
-
+import java.io.Serializable;
 import java.math.BigDecimal;
-
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,7 +26,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on 13-oct-2010, 13:53:10
  * @author carlosalbertoloaizaguerrero
  */
-public class AsociarContratos  {
+public class AsociarContratos implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private List<Relacioncontratoobra> listacontratosobra = new ArrayList<Relacioncontratoobra>();

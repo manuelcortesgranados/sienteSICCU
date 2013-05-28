@@ -16,14 +16,13 @@ import co.com.interkont.cobra.to.Relacionactividadobraperiodo;
 import co.com.interkont.cobra.to.Relacionactividadobraperiodohisto;
 import co.com.interkont.cobra.to.Tipodocumento;
 import co.com.interkont.cobra.to.Tipoestadobra;
-
 import co.com.interkont.cobra.to.Tipomodificacion;
 import co.com.interkont.cobra.to.Tiponovedad;
 import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +33,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
@@ -49,7 +47,7 @@ import javax.servlet.ServletContext;
  * @version Created on 4/02/2010, 11:40:48 PM
  * @author carlos
  */
-public class SuspenderObra  {
+public class SuspenderObra implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private String mensajeSuspension = "";

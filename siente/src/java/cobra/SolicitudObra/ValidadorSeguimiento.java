@@ -30,7 +30,6 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import cobra.SessionBeanCobra;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import cobra.Supervisor.FacesUtils;
-import cobra.Supervisor.ILifeCycleAware;
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -42,7 +41,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 
 import javax.servlet.ServletContext;

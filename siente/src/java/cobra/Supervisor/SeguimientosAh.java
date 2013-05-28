@@ -9,11 +9,9 @@ import co.com.interkont.cobra.to.seguimientosah.AlberguesMunicipal;
 import co.com.interkont.cobra.to.seguimientosah.ArriendoMuni;
 import co.com.interkont.cobra.to.seguimientosah.AsishumaMunicipal;
 import cobra.SessionBeanCobra;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-import javax.faces.FacesException;
 
 /**
  * <p>Fragment bean that corresponds to a similarly named JSP page
@@ -26,7 +24,7 @@ import javax.faces.FacesException;
  * @version Created on 4-sep-2010, 10:21:32
  * @author carlosalbertoloaizaguerrero 
  */
-public class SeguimientosAh  {
+public class SeguimientosAh implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
     private List<AhGlobal> listaglobalah= new ArrayList<AhGlobal>();
     private List<AsishumaMunicipal> listaasishummuni = new ArrayList<AsishumaMunicipal>();

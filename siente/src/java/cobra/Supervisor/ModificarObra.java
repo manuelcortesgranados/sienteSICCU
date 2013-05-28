@@ -22,15 +22,14 @@ import co.com.interkont.cobra.to.Tiponovedad;
 import cobra.Archivo;
 import cobra.CargadorArchivosWeb;
 import cobra.SessionBeanCobra;
-import cobra.SubirArchivoBean;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -46,8 +45,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-//import org.apache.poi.hssf.usermodel.HSSFCell;
-//import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -70,7 +67,7 @@ import org.apache.poi.ss.util.CellReference;
  * @version Created on 3/11/2010, 12:11:49 AM
  * @author carlos
  */
-public class ModificarObra  {
+public class ModificarObra implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private Historicoobra historicoobra = new Historicoobra();

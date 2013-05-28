@@ -7,7 +7,7 @@ package cobra.restaurarpassword;
 import Seguridad.Encrypter;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
-
+import java.io.Serializable;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  *
  * @author desarrollo3
  */
-public class RestaurarPassword  {
+public class RestaurarPassword implements Serializable {
 
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private String contrasenanuev;

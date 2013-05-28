@@ -24,9 +24,7 @@ import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Tiponovedad;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
-import cobra.Archivo;
 import cobra.ArchivoWeb;
-import cobra.CargadorArchivosWeb;
 import cobra.Marcador;
 import cobra.RedimensionarImagen;
 import cobra.SessionBeanCobra;
@@ -36,9 +34,9 @@ import cobra.util.RutasWebArchivos;
 import com.googlecode.gmaps4jsf.services.GMaps4JSFServiceFactory;
 import com.googlecode.gmaps4jsf.services.data.PlaceMark;
 import com.interkont.cobra.exception.ArchivoExistenteException;
-
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -50,13 +48,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
-import org.omg.PortableInterceptor.NON_EXISTENT;
 import org.richfaces.component.UIDataTable;
 
 /**
@@ -69,7 +64,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on 28-oct-2010, 1:04:30
  * @author carlosalbertoloaizaguerrero
  */
-public class AdministrarObraNew implements ILifeCycleAware {
+public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     //private Obra obra = new Obra();
@@ -1234,6 +1229,7 @@ public class AdministrarObraNew implements ILifeCycleAware {
 
     public String pathDocumentoRecFin() {
         if (subirActaRecFin.getArchivos().size() > 0) {
+
             for (ArchivoWeb nombreoriginal : subirActaRecFin.getArchivos()) {
                 urlactarecfin =
                         nombreoriginal.getNombre();

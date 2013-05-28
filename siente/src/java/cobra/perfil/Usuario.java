@@ -16,7 +16,7 @@ import co.com.interkont.cobra.to.Tipotercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Utilidades;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +30,7 @@ import org.richfaces.component.UIDataTable;
  * @author David Andres Betancourth Botero
  * @author Cristian Daniel Gutierrez S.
  */
-public class Usuario  {
+public class Usuario implements Serializable {
 
     public String username = "";
     public String contrasenaact = "";

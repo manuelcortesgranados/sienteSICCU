@@ -10,7 +10,6 @@ import co.com.interkont.cobra.to.JsfUsuario;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import cobra.Supervisor.FacesUtils;
 import java.io.Serializable;
 import java.util.Date;

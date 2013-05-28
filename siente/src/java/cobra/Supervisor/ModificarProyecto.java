@@ -23,13 +23,13 @@ import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import com.interkont.cobra.exception.ArchivoNoExistenteException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
@@ -57,7 +57,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author Jhon Eduard Ortiz S
  */
-public class ModificarProyecto  {
+public class ModificarProyecto  implements Serializable{
 
     //<editor-fold defaultstate="collapsed" desc="Constantes">
     //</editor-fold>

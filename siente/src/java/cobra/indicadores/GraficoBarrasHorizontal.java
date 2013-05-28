@@ -2,6 +2,7 @@
 package cobra.indicadores;
 
 import com.interkont.cobra.util.DatoPie;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  *
  * @author 
  */
-public class GraficoBarrasHorizontal {
+public class GraficoBarrasHorizontal implements Serializable{
 
 
     private String scriptGrafico;

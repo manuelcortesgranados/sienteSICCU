@@ -56,10 +56,10 @@
                         </h:selectOneMenu>
 
                         <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.modificarPoliza}">
-                            <a4j:ajax event="complete" render="pgprincipal" immediate="true" oncomplete="javascript:Richfaces.hideModalPanel('mp-editar-polizas')"/>
+                            <a4j:ajax event="complete" render="pgprincipal" immediate="true" oncomplete="#{rich:component('mp-editar-polizas')}.hide();"/>
                         </a4j:commandButton>
                         <a4j:commandButton value="#{var.cancelar}" id="cancelar_poliza"  
-                                           onclick="javascript:Richfaces.hideModalPanel('mp-editar-polizas')"/>
+                                           onclick="#{rich:component('mp-editar-polizas')}.hide();"/>
 
                     </h:panelGrid>
                 </center>

@@ -4,7 +4,6 @@
  */
 package cobra.Administrador;
 
-import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Tercero;
@@ -17,6 +16,7 @@ import co.com.interkont.cobra.to.Tipotercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.TerceroEntidadLista;
 import cobra.Supervisor.FacesUtils;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +38,7 @@ import javax.faces.model.SelectItem;
  *
  * @author desarrollo3
  */
-public class AdiministrarEntidad  {
+public class AdiministrarEntidad implements Serializable {
 
     private ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private Tercero tercero;

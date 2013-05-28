@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;  
 import java.io.FileOutputStream;
 import java.io.IOException;  
+import java.io.Serializable;
 import java.util.List;     
  import org.jdom.Document;  
  import org.jdom.Element;  
@@ -23,7 +24,7 @@ import java.util.List;
 
 
  
-public class GestionarXML implements java.io.Serializable{
+public class GestionarXML implements Serializable{
     private Document doc;
     private Element raiz;
     

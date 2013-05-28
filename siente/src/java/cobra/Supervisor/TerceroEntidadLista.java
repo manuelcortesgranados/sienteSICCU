@@ -9,7 +9,7 @@ package cobra.Supervisor;
  *
  * @author desarrollo3
  */
-public class TerceroEntidadLista {
+public class TerceroEntidadLista  {
      int codigo;
         String strnombre;
 

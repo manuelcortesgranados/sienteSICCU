@@ -9,8 +9,8 @@ import co.com.interkont.cobra.to.Mensaje;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
-
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -36,7 +35,7 @@ import org.richfaces.component.UIDataTable;
  * @version Created on Feb 11, 2009, 1:49:53 PM
  * @author jhon
  */
-public class Mensajes {
+public class Mensajes implements Serializable{
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**

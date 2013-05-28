@@ -6,6 +6,7 @@ package cobra;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ import org.richfaces.model.UploadedFile;
  * @author Carlos Loaiza
  *
  */
-public class SubirArchivoBean {
+public class SubirArchivoBean implements Serializable{
 
     private ArrayList<Archivo> files = new ArrayList<Archivo>();
     private ArrayList<File> archivosSubidos = new ArrayList<File>();

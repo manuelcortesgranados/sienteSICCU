@@ -37,7 +37,6 @@ import cobra.Supervisor.EntidadConvenio;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.IngresarNuevaObra;
 import cobra.Supervisor.TerceroEntidadLista;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -51,7 +50,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.FacesException;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
