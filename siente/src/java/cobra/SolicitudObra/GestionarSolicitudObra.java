@@ -36,13 +36,18 @@ import cobra.FiltroObra;
 
 import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
+import cobra.RedimensionarImagen;
 import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.IngresarNuevaObra;
+import cobra.util.ArchivoWebUtil;
+import cobra.util.RutasWebArchivos;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -1464,36 +1469,14 @@ public class GestionarSolicitudObra  implements Serializable{
         return null;
     }
 
-    public void subirImagenAtencion() {
-        String realArchivoPath = "";
-        String URL = "/resources/Documentos/Solicitud/Temporal/";
-
-        ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String URLFINAL = theApplicationsServletContext.getRealPath("");
-
-        if (subirImagenSolicitud.getArchivos().size() > 0) {
-            realArchivoPath = theApplicationsServletContext.getRealPath(URL);
-            try {
-
-                File carpeta = new File(realArchivoPath);
-                if (!carpeta.exists()) {
-                    carpeta.mkdirs();
-                }
-            } catch (Exception ex) {
-                FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
-            }
-        }
-        try {
-            subirImagenSolicitud.guardarArchivosTemporales(realArchivoPath, false);
-        } catch (ArchivoExistenteException ex) {
-            Logger.getLogger(GestionarSolicitudObra.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        Iterator arch = subirImagenSolicitud.getArchivos().iterator();
-        while (arch.hasNext()) {
-            Archivo nombreoriginal = (Archivo) arch.next();
-            getSessionBeanCobra().getSolicitudService().getImagensolicitud().setStrurlimagen(URL + "/" + nombreoriginal.getOnlyName());
-        }
+    public void subirImagenAtencion() throws ArchivoExistenteException, IOException {
+        String carpetaDoc = MessageFormat.format(RutasWebArchivos.SOLICITUD,"");
+        subirImagenSolicitud.getArchivoWeb().cambiarNombre(null, true);
+        subirImagenSolicitud.guardarArchivosTemporales(carpetaDoc, false);
+        String rutaWebImg=subirImagenSolicitud.getArchivos().get(0).getRutaWeb();
+        RedimensionarImagen.scale(ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg), 640, 5, ArchivoWebUtil.obtenerRutaAbsoluta(rutaWebImg));
+        getSessionBeanCobra().getSolicitudService().getImagensolicitud().setStrurlimagen(rutaWebImg);
+        
     }
 
     public String borrarImagenAtencion() {
@@ -1539,10 +1522,12 @@ public class GestionarSolicitudObra  implements Serializable{
         return null;
     }
 
-    public String subirImagenaLista() {
+    public String subirImagenaLista() throws ArchivoExistenteException, IOException {
+      
         if (!getSessionBeanCobra().getSolicitudService().getImagensolicitud().getStrdescripcion().equals("")) {
             getSessionBeanCobra().getSolicitudService().getImagensolicitud().setSolicitudObrachTemp(getSessionBeanCobra().getSolicitudService().getSolicitudObrach());
             subirImagenAtencion();
+            System.out.println("sali" );
             getSessionBeanCobra().getSolicitudService().getImagensolicituds().add(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
             getSessionBeanCobra().getSolicitudService().setImagensolicitud(new Imagensolicitud());
             setSubirImagenSolicitud(new CargadorArchivosWeb());

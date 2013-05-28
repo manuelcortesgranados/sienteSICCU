@@ -23,6 +23,7 @@
                 <h:panelGroup id="gpImagenModalAtencion">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload acceptedTypes="jpg, jpeg, gif, png, bmp"
+                                         addLabel="#{var.adicionar}"
                                          doneLabel="#{var.hecho}"
                                          fileUploadListener="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.listener}" id="uploadImagenAtencion" immediateUpload="true"
                                          listHeight="150" maxFilesQuantity="1">
