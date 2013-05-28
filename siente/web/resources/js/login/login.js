@@ -10,11 +10,11 @@ function style_background(){
         var nom = navigator.appName;
         if (nom == "Microsoft Internet Explorer"){
             if(parseInt(document.body.offsetHeight) < 780){
-                _heigth = 800;
+                _heigth = 900;
             }
         }else if (nom == "Netscape"){
             if(parseInt(window.innerHeight) < 780){
-                _heigth = 800;
+                _heigth = 900;
             }
         }
         session();
