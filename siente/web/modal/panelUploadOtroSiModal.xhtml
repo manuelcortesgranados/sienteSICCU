@@ -69,7 +69,7 @@
                                                    rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size: 12px;"/>
                                 <a4j:commandButton id="BTaceptarOtroSi" value="#{var.aceptar}"  rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}"
-                                                   onclick="#{rich:component('panelUploadOtroSi')}.hide()); )"
+                                                   onclick="#{rich:component('panelUploadOtroSi')}.hide(); return false;"
                                                    render="panel_subirOtroSi"
                                                    style="font-size: 12px;"/>
                             </center>
