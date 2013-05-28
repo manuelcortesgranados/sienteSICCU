@@ -118,7 +118,7 @@
                         <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActiveClass="tab-pestania-active" headerInactiveClass="tab-pestania-inactive" contentClass="tab-div">
                             <h:panelGroup layout="block" id="gpLoginCiudadanoPrincipal">
 
-                                <h:panelGroup layout="block" rendered="#{!SessionBeanCobra.verregistrarse}" >
+                                <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >
                                     <a4j:region >
                                         <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
                                             <br/>
@@ -159,7 +159,7 @@
                                 </h:panelGroup>
 
 
-                                <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >
+                                <h:panelGroup layout="block" rendered="#{!SessionBeanCobra.verregistrarse}" >
                                     <a4j:region>
                                         <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
                                             <br/>
