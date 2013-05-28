@@ -1060,7 +1060,7 @@ public class DetalleObra implements Serializable{
             obtenerSeguidorporObra();
         }
         semaforo = "";
-        llenarContratosInterventoria();
+        //llenarContratosInterventoria();
         idcontratos = "";
 //        if (getSessionBeanCobra().getCobraService().isVerproy()) {
 //
@@ -1068,9 +1068,9 @@ public class DetalleObra implements Serializable{
 //        }
         contratistanombrecomple = "";
         setContrat(getSessionBeanCobra().getCobraService().obtenerContratista(getAdministrarObraNew().getObra()));
-       // getAdministrarObraNew().llenarContrato();
-        getAdministrarObraNew().llenarContratoInterventoria();
-        getAdministrarObraNew().llenarContratoObra();
+      
+       // getAdministrarObraNew().llenarContratoInterventoria();
+        //getAdministrarObraNew().llenarContratoObra();
         if (getAdministrarObraNew().getListaContrato() != null) {
             int i = 0;
             while (i < getAdministrarObraNew().getListaContrato().size()) {
@@ -1118,47 +1118,6 @@ public class DetalleObra implements Serializable{
             semaforo = "ROJO";
         }
 
-        /*
-         if (getAlimentacionultima() != null && getAlimentacionultima().getSemaforo().getStrimagen().equals(bundle.getString("semafo_verde"))) {
-         semaforo = "VERDE";
-         }
-         if (getAlimentacionultima() != null && getAlimentacionultima().getSemaforo().getStrimagen().equals(bundle.getString("semafo_amarillo"))) {
-         semaforo = "AMARILLO";
-         }
-         if (getAlimentacionultima() != null && getAlimentacionultima().getSemaforo().getStrimagen().equals(bundle.getString("semafo_rojo"))) {
-         semaforo = "ROJO";
-         }
-         if(new Date().after(getAdministrarObraNew().getObra().getDatefecfinobra()))
-         {
-         if(getAlimentacionultima() != null)
-         {
-         if(getAdministrarObraNew().getObra().getNumvalejecobra()
-         .add(getAdministrarObraNew().getObra().getNumvaltotobra()
-         .multiply(BigDecimal.valueOf(0.01))
-         )
-         .compareTo(getAdministrarObraNew().getObra().getNumvaltotobra())
-         < 0
-         )
-         {
-
-
-         alimentacionultima.setNumtotalproyacu(getAdministrarObraNew().getObra().getNumvaltotobra());
-         alimentacionultima.setSemaforo(new Semaforo());
-         alimentacionultima.getSemaforo().setStrimagen(bundle.getString("semafo_rojo"));
-         semaforo = "ROJO";
-
-         }
-         }
-         else
-         {
-         setAlimentacionultima(new Alimentacion());
-         alimentacionultima.setNumtotalproyacu(getAdministrarObraNew().getObra().getNumvaltotobra());
-         alimentacionultima.setSemaforo(new Semaforo());
-         alimentacionultima.getSemaforo().setStrimagen(bundle.getString("semafo_rojo"));
-         semaforo = "ROJO";
-         }
-         }*/
-        imagenEvolucion();
         totalalim = 0;
         primerhisto = getSessionBeanCobra().getCobraService().obtenerPrimerHistorico(getAdministrarObraNew().getObra().getIntcodigoobra());
 

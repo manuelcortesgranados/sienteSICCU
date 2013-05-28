@@ -6,7 +6,6 @@ package cobra;
 
 import co.com.interkont.cobra.to.ControlPanel;
 import cobra.Supervisor.FacesUtils;
-import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 
 /**
