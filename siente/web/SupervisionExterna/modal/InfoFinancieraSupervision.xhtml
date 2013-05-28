@@ -20,10 +20,10 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder-modalinformacionfinanciera"
+                    <a4j:commandLink id="esconder-modalinformacionfinanciera"
                                        onclick="#{rich:component('modalinformacionfinanciera')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="btn_cerrar" />
+                                       title="#{var.cerrar}" immediate="true" styleClass="cerrar" />
                 </h:panelGroup>
             </h:form>
         </f:facet>    

@@ -56,14 +56,14 @@
                         </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:commandLink target="_blank" action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
+                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
                                        immediate="true">
                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>
 
                     </rich:column>
                     <rich:column> 
-                        <h:commandLink  action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
+                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
                             <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>                              
                     </rich:column>
