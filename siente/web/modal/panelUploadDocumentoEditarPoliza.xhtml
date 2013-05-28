@@ -14,7 +14,7 @@
             <h:form>
                 <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
 
-                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide());"
+                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide(); return false;"
                                        styleClass="btn_cerrar"  />
 
                 </h:panelGroup>
@@ -60,9 +60,9 @@
                                                    rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="btn_pri_inm"   style="font-size:12px;"/>
                                 <a4j:commandButton value="#{var.aceptar}"
-                                                   onclick="#{rich:component('panelUploadDocumentopoliza')}.hide();" render="pgdocumentosModi"
+                                                   onclick="#{rich:component('panelUploadDocumentopoliza')}.hide(); return false;" render="pgdocumentosModi"
                                                    style="font-size:12px;"
-                                                   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}"/>
+                                                   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos>0}" />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
