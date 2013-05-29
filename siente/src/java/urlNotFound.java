@@ -34,7 +34,7 @@ public class urlNotFound extends HttpServlet {
            
             session.errorCapturado();
             request.getSession(false).invalidate();
-           response.sendRedirect("../Errores.jspx");
+           response.sendRedirect("../Errores.xhtml");
         }
         catch(Exception ex){
             

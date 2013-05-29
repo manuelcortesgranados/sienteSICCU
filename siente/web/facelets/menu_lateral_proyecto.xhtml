@@ -88,16 +88,16 @@
             </h:panelGrid>  
             <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$IngresarNuevaObra.obranueva.obra}">
                 <a4j:commandLink execute="@this" styleClass="verdocs anchorLink" rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"
-                                 immediate="true" id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
+                                 immediate="true" id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
                 <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
-                                 onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
+                                 onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"/>
                 <a4j:commandLink execute="@this" styleClass="verdocs anchorLink" rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"
-                            immediate="true" onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
+                            immediate="true" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
                 <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
-                                 onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
+                                 onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"/>
             </h:panelGrid>
 

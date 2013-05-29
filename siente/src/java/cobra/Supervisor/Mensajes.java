@@ -171,7 +171,7 @@ public class Mensajes  implements Serializable{
         {
 
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.jspx");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.xhtml");
 
                 //this.getSessionMap().clear();
             } catch (IOException ex) {
