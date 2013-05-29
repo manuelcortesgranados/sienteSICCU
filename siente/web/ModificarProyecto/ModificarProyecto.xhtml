@@ -1,8 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition 
+
+<ui:composition  
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:rich="http://richfaces.org/rich"
@@ -13,7 +15,7 @@
 
     <ui:define name="head">
         <title>Cobra - Supervisor</title>
-        <h:outputScript name="script_supervisor.js"/>
+        <h:outputScript  name="script_supervisor"/>
     </ui:define>
     <ui:define name="title">
         <h:outputText value="#{var.modificarobra}"/>
@@ -27,12 +29,12 @@
         <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
     </ui:define>
     <ui:define name="body">
+        <h:form id="form_modificar">
 
-        <h:panelGrid id="panel_modificarobra" style="width:100%;">
-            <h:panelGroup style="width:100%">
-                <h:panelGroup id="pgPasos">
-                    <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso1}">
-                        <h:form>
+            <h:panelGrid id="panel_modificarobra" style="width:100%;">
+                <h:panelGroup style="width:100%">
+                    <h:panelGroup id="pgPasos">
+                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso1}">
                             <h:outputText value="#{var.textopaso1modificacion}" styleClass="TextoTipificacionModificacion"/>
                             <interkont:spacer height="15px" style="width:100%;"/>
                             <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso1Modificacion1}" />
@@ -49,14 +51,13 @@
                             <h:inputTextarea rows="8" value="#{Supervisor$ModificarProyecto.historicoobra.strrazonmodif}" styleClass="Justificacion"/>
                             <interkont:spacer height="20" style="width:100%;"/>
                             <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="BotonesPasosModificar" value="#{var.siguiente}"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
-                        </h:form>
-                    </h:panelGroup>
+                        </h:panelGroup>
 
-                    <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
-                        <h:form>
+
+                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
                             <interkont:spacer height="10px" style="width:100%;"/>
                             <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso2Modificacion1}"/>
                             <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso2Modificacion2}"/>
@@ -95,119 +96,122 @@
                             <interkont:spacer height="15px" style="width:100%;"/>
                             <h:outputText value="#{var.notapaso2modificacion}" styleClass="TextoTipificacionModificacion"/>
                             <interkont:spacer height="10" style="width:100%;"/>
+
                             <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
-                        </h:form>
-                        <f:verbatim>
-                            <script type="text/javascript">
 
-                                /**
-                                 * Activa y desactiva el checkbox prorroga al dar click en
-                                 * la imagen correspondiente
-                                 */
-                                function prorrogaOnClick() {
-                                    if (jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                        jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                        jQuery('.datefecfinhist').attr('value', '');
-                                    } else {
-                                        jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                    }
-                                    return false;
-                                }
+                            <f:verbatim>
+                                <script type="text/javascript">
 
-                                /**
-                                 * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
-                                 */
-                                function checkRealizarProrrogaOnChangue() {
-                                    if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
-                                        jQuery('.datefecfinhist').attr('value', '');
-                                    }
-                                    return false;
-                                }
-
-                                /**
-                                 * Activa y desactiva el checkbox adición de presupuesto al dar click en
-                                 * la imagen correspondiente
-                                 */
-                                function adicionPresupuestoOnClick() {
-                                    if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                        jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
-                                        jQuery('.numvalorhist').attr('value', '');
-                                    } else {
-                                        jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
-                                    }
-                                    return false;
-                                }
-
-                                /**
-                                 * Reestablece el valor de la adición cuando se desactiva el checkbox de
-                                 * adicionar presupuesto
-                                 */
-                                function checkAdicionarPresupuestoOnChangue() {
-                                    if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
-                                        jQuery('.numvalorhist').attr('value', '');
-                                    }
-                                    return false;
-                                }
-
-                                /**
-                                 * Activa y desactiva el checkbox adición de actividades al dar click en
-                                 * la imagen correspondiente
-                                 */
-                                function adicionActividadesOnClick() {
-                                    if (jQuery('.CheckAdicionarActividades').is(':checked')) {
-                                        jQuery('.CheckAdicionarActividades').removeAttr('checked');
-                                    } else {
-                                        jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
-                                    }
-                                    return false;
-                                }
-
-                                /**
-                                 * Activa y desactiva el checkbox cambio de precios al dar click en
-                                 * la imagen correspondiente
-                                 */
-                                function cambioPreciosOnClick() {
-                                    if (jQuery('.CheckCambiarPrecios').is(':checked')) {
-                                        jQuery('.CheckCambiarPrecios').removeAttr('checked');
-                                    } else {
-                                        jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
-                                    }
-                                    return false;
-                                }
-
-                                /**
-                                 * Activa y desactiva el checkbox prorroga al ingresar una fecha
-                                 */
-                                function datefecfinhistOnChange() {
-                                    if (jQuery('.datefecfinhist').attr('value') != '') {
-                                        jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
-                                    } else {
-                                        jQuery('.CheckRealizarProrroga').removeAttr('checked');
-                                    }
-                                }
-
-                                /**
-                                 * Activa y desactiva el checkbox de adición de presupuesto al
-                                 * cambiar el valor de la adición
-                                 */
-                                function numvalorhistOnchange() {
-                                    if (jQuery('.numvalorhist').attr('value') != '') {
-                                        if (jQuery('.numvalorhist').attr('value') != '0') {
-                                            jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                    /**
+                                     * Activa y desactiva el checkbox prorroga al dar click en
+                                     * la imagen correspondiente
+                                     */
+                                    function prorrogaOnClick() {
+                                        if (jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                            jQuery('.datefecfinhist').attr('value', '');
                                         } else {
-                                            jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
                                         }
-                                }}
-                            </script>
-                        </f:verbatim>
-                    </h:panelGroup>
+                                        return false;
+                                    }
 
-                    <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
-                        <h:form>
+                                    /**
+                                     * Reestablece la fecha cuando se desactiva el checkbox de realizar prórroga
+                                     */
+                                    function checkRealizarProrrogaOnChangue() {
+                                        if (!jQuery('.CheckRealizarProrroga').is(':checked')) {
+                                            jQuery('.datefecfinhist').attr('value', '');
+                                        }
+                                        return false;
+                                    }
+
+                                    /**
+                                     * Activa y desactiva el checkbox adición de presupuesto al dar click en
+                                     * la imagen correspondiente
+                                     */
+                                    function adicionPresupuestoOnClick() {
+                                        if (jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                            jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                            jQuery('.numvalorhist').attr('value', '');
+                                        } else {
+                                            jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                        }
+                                        return false;
+                                    }
+
+                                    /**
+                                     * Reestablece el valor de la adición cuando se desactiva el checkbox de
+                                     * adicionar presupuesto
+                                     */
+                                    function checkAdicionarPresupuestoOnChangue() {
+                                        if (!jQuery('.CheckAdicionarPresupuesto').is(':checked')) {
+                                            jQuery('.numvalorhist').attr('value', '');
+                                        }
+                                        return false;
+                                    }
+
+                                    /**
+                                     * Activa y desactiva el checkbox adición de actividades al dar click en
+                                     * la imagen correspondiente
+                                     */
+                                    function adicionActividadesOnClick() {
+                                        if (jQuery('.CheckAdicionarActividades').is(':checked')) {
+                                            jQuery('.CheckAdicionarActividades').removeAttr('checked');
+                                        } else {
+                                            jQuery('.CheckAdicionarActividades').attr('checked', 'checked');
+                                        }
+                                        return false;
+                                    }
+
+                                    /**
+                                     * Activa y desactiva el checkbox cambio de precios al dar click en
+                                     * la imagen correspondiente
+                                     */
+                                    function cambioPreciosOnClick() {
+                                        if (jQuery('.CheckCambiarPrecios').is(':checked')) {
+                                            jQuery('.CheckCambiarPrecios').removeAttr('checked');
+                                        } else {
+                                            jQuery('.CheckCambiarPrecios').attr('checked', 'checked');
+                                        }
+                                        return false;
+                                    }
+
+                                    /**
+                                     * Activa y desactiva el checkbox prorroga al ingresar una fecha
+                                     */
+                                    function datefecfinhistOnChange() {
+                                        if (jQuery('.datefecfinhist').attr('value') != '') {
+                                            jQuery('.CheckRealizarProrroga').attr('checked', 'checked');
+                                        } else {
+                                            jQuery('.CheckRealizarProrroga').removeAttr('checked');
+                                        }
+                                    }
+
+                                    /**
+                                     * Activa y desactiva el checkbox de adición de presupuesto al
+                                     * cambiar el valor de la adición
+                                     */
+                                    function numvalorhistOnchange() {
+                                        if (jQuery('.numvalorhist').attr('value') != '') {
+                                            if (jQuery('.numvalorhist').attr('value') != '0') {
+                                                jQuery('.CheckAdicionarPresupuesto').attr('checked', 'checked');
+                                            } else {
+                                                jQuery('.CheckAdicionarPresupuesto').removeAttr('checked');
+                                            }
+                                        }
+                                    }
+                                </script>
+                            </f:verbatim>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
+
                             <interkont:spacer height="10px" style="width:100%;"/>
                             <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso3Modificacion1}"/>
                             <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso3Modificacion2}"/>
@@ -226,12 +230,13 @@
                                     <h:outputText value="#{var.debediligenciartodoslosdatos}"/>
                                     <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
+
                                 <h:panelGrid columns="2" columnClasses="PanelGenerarCronogramaPaso3">
-                                    <a4j:commandLink id="generarcronograma" styleClass="excelModificar anchorlink"
-                                                     action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}"
-                                                     oncomplete="#{rich:component('mp_cronograma_mod')}.show(); return true;">
-                                        <h:outputLabel value="#{var.pgenerarcronograma}"/>
-                                    </a4j:commandLink>
+                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" 
+                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
+                                                     oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
+                                                     styleClass="excelModificar anchorlink" immediate="true" />
+                                    <h:outputLabel value="#{var.pgenerarcronograma}"/>
                                     <h:panelGroup>
                                         <h:outputText styleClass="Notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
                                         <h:outputText value="#{var.textonotapaso3modificacion}" styleClass="TextoTipificacionModificacion"/>
@@ -262,23 +267,23 @@
                                     </h:panelGrid>
                                 </a4j:repeat>
                             </h:panelGrid>
+
                             <interkont:spacer height="10" style="width:100%;"/>
                             <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
-                        </h:form>
-                    </h:panelGroup>
 
-                    <!--a4j:include id="paso4View" viewId="/ModificarProyecto/fragmentos/paso4.xhtml"/-->
-                    <h:panelGroup styleClass="PanelPaso4Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
-                        <h:outputText value="Paso 4" styleClass="TituloModificarProyecto centrado" />
-                        <h:outputText value="Anexe los documentos relacionados" styleClass="TituloModificarProyecto centrado"/>
-                        <interkont:spacer height="50"/>
+                        </h:panelGroup>
 
-                        <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
-                            <h:form>
+                        <h:panelGroup styleClass="PanelPaso4Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
+                            <h:outputText value="Paso 4" styleClass="TituloModificarProyecto centrado" />
+                            <h:outputText value="Anexe los documentos relacionados" styleClass="TituloModificarProyecto centrado"/>
+                            <interkont:spacer height="50"/>
+
+                            <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
+
                                 <h:panelGroup  styleClass="centrado panelSubirDocModificacion" id="panelSubirDocModificacion">
                                     <h:inputText id="txt_strnombre_documento_Modificacion" maxlength="255" value="#{Supervisor$ModificarProyecto.documentomodificacion.strnombre}"
                                                  styleClass="buscador_field_2" />
@@ -288,7 +293,7 @@
                                                      value="#{Supervisor$ModificarProyecto.tipodoc}" >
                                         <f:selectItems value="#{Supervisor$ModificarProyecto.selectItemTipoDocumentoModi}" />
                                     </h:selectOneMenu>
-                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btAgregarDocumentoAction}" render="panelTablaDocumentosModificacion,panelSubirDocModificacion,layoutDocModificacion,messages" >
+                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btAgregarDocumentoAction}" render="panelTablaDocumentosModificacion,panelSubirDocModificacion,layoutDocModificacion,messages" execute="@form">
                                         <h:graphicImage url="/resources/imgs/add.png"/>
                                     </a4j:commandLink>
                                     <h:panelGroup id="panelListadoArchivosCargados">
@@ -297,8 +302,8 @@
                                         </rich:dataGrid>
                                     </h:panelGroup>
                                 </h:panelGroup>
-                            </h:form>
-                            <h:form  target="_blank">
+
+
                                 <h:panelGroup id="panelTablaDocumentosModificacion">
                                     <rich:dataTable id="tablaDocumentosModificacion" var="currentRow" styleClass="centrado" style="width:100%; background-color: #F2F7FA"
                                                     value="#{Supervisor$ModificarProyecto.listadocumentosmodi}" rows="5" 
@@ -357,7 +362,7 @@
 
                                             </rich:column>
                                             <rich:column >
-                                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction(filaSeleccionada)}" render="panelTablaDocumentosModificacion">
+                                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction(filaSeleccionada)}" render="panelTablaDocumentosModificacion" execute="@this">
                                                     <h:graphicImage style="border:0px;border-style:none; height: 25px; width: 25px;" value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>
                                             </rich:column>
@@ -374,32 +379,30 @@
                                 </h:panelGroup>
                                 <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
                                 <interkont:spacer height="10" style="width:100%;"/>
-                            </h:form>
-                            <h:form>
+
                                 <h:panelGroup styleClass="centrado">
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
                                 </h:panelGroup>
-                            </h:form>
-                        </h:panelGrid>
-                    </h:panelGroup>
 
+                            </h:panelGrid>
+                        </h:panelGroup>
 
-                     <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
-                        <h:outputText value="Paso 5" styleClass="TituloModificarProyecto centrado" />
-                        <h:outputText value="#{var.tituloseleccontratovalormodi}" styleClass="TituloModificarProyecto centrado"/>
-                        <interkont:spacer height="50"/>
+                        <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
+                            <h:outputText value="Paso 5" styleClass="TituloModificarProyecto centrado" />
+                            <h:outputText value="#{var.tituloseleccontratovalormodi}" styleClass="TituloModificarProyecto centrado"/>
+                            <interkont:spacer height="50"/>
 
-                        <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
-                            <h:form>
+                            <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
+
                                 <h:panelGroup  styleClass="centrado panelSubirDocModificacion">
                                     <h:outputText  value="#{var.selcontratopresumodi}" styleClass="TextoTipificacionModificacion" rendered="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}"/>
                                     <h:outputText  value="#{var.selcontratopresumodidismi}" styleClass="TextoTipificacionModificacion" rendered="#{Supervisor$ModificarProyecto.historicoobra.disminucionpresu}"/>
                                 </h:panelGroup>
-                            </h:form>
-                            <h:panelGroup>
-                                <h:form>
+
+                                <h:panelGroup>
+
                                     <rich:dataTable id="tablaContratosModiProyecto" rows="10" style="text-align:left; width:100%;"  var="contrarow"
                                                     value="#{Supervisor$ModificarProyecto.obra.relacionesContratoObraConsultoria}"
                                                     binding="#{Supervisor$ModificarProyecto.tablacontratos}">
@@ -466,24 +469,32 @@
                                             </rich:columnGroup>
                                         </f:facet>
                                     </rich:dataTable>
-                                </h:form>
-                            </h:panelGroup>
-                            <h:form>
-                                <h:panelGroup styleClass="centrado">
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.guardar}"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}"/>
+
                                 </h:panelGroup>
-                            </h:form>
-                        </h:panelGrid>
+
+                                <h:panelGroup styleClass="centrado">
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.guardar}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                                </h:panelGroup>
+
+                            </h:panelGrid>
+                        </h:panelGroup>
+
                     </h:panelGroup>
                 </h:panelGroup>
-            </h:panelGroup>
-        </h:panelGrid>
+            </h:panelGrid>
+
+
+
+
+
+        </h:form>
         <ui:include id="generarCronogramaView" src="/ModificarProyecto/modal/panelCronogramaModalModif.xhtml"/>
         <ui:include id="subirCronogramaView" src="/ModificarProyecto/modal/panelSubirCronogramaModal.xhtml"/>
         <ui:include id="mensajesCronogramaView" src="/ModificarProyecto/modal/panelCronogramaMensajeError.xhtml"/>
         <ui:include id="subirDocumentoView" src="/ModificarProyecto/modal/panelUploadDocumentoModificacion.xhtml"/>
-    </ui:define>
-</ui:composition>
 
+    </ui:define>
+
+</ui:composition>

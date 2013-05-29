@@ -54,6 +54,7 @@ public class Download  implements Serializable{
         // want to read the documentName location from a context parameter
         // in web.xml
         String URL_ARCHIVO = this.getSessionBeanCobra().getUrlAbri();
+        System.out.println("URL_ARCHIVO = " + URL_ARCHIVO);
         
 
         FacesContext fctx = FacesContext.getCurrentInstance();

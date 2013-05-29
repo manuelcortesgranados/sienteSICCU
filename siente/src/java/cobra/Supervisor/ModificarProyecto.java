@@ -656,7 +656,7 @@ public class ModificarProyecto  implements Serializable{
      */
     public String btGenerarCronogramaAction() {
         generarCronograma();
-        return null;
+        return "null";
     }
 
     /**
@@ -1193,6 +1193,7 @@ public class ModificarProyecto  implements Serializable{
      * Genera el cronograma para la modificación
      */
     private void generarCronograma() {
+        System.out.println("Ingreso ");
         cargarObra();
         String ubicacionRelativaCarpetaBase = Propiedad.getValor("ubicacioncarpetabasemodificacion");
         String nombreSubCarpeta = String.valueOf(obra.getIntcodigoobra());
@@ -1202,6 +1203,7 @@ public class ModificarProyecto  implements Serializable{
         Workbook workbook = cargarInfoProyectoEnPlantilla(plantilla);
         almacenarArchivo(workbook, ubicacionRelativaCarpetaBase, nombreSubCarpeta, nombreArchivo);
         this.getSessionBeanCobra().setUrlAbri(ubicacionRelativaCarpetaBase + nombreSubCarpeta + "/" + nombreArchivo);
+        System.out.println("sali"+getSessionBeanCobra().getUrlAbri());
     }
 
     /**
