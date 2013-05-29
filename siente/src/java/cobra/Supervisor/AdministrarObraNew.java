@@ -871,7 +871,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
             try {
                 //System.out.println(FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.jspx");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.xhtml");
 
                 //this.getSessionMap().clear();
             } catch (IOException ex) {

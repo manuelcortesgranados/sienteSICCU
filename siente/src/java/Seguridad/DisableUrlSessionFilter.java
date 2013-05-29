@@ -60,7 +60,7 @@ public class DisableUrlSessionFilter implements Filter {
             chain.doFilter(request, wrappedResponse);
         } catch (ServletException e) {
             httpRequest.getSession(false).invalidate();
-            httpResponse.sendRedirect("/"+beanone.getBundle().getString("versioncobra") +"/inicio.jspx");
+            httpResponse.sendRedirect("/"+beanone.getBundle().getString("versioncobra") +"/inicio.xhtml");
             
         } catch (javax.faces.FacesException e) {
         }

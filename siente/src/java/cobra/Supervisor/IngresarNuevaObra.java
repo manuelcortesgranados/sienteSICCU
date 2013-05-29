@@ -1504,7 +1504,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             }
         } else {
             try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.jspx");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("../Inicio.xhtml");
             } catch (IOException ex) {
                 Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
             }

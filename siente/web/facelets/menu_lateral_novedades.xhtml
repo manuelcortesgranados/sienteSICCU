@@ -24,9 +24,9 @@
                 <rich:panel style="color: #333333; width: 100%;" styleClass="richPanelNovedades">
                     <h:outputText value="#{item.textoinicial}"/>
                     <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="enlaceobra"
-                                      onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.jspx?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                                      onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
                     <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="enlaceobra"
-                                      onclick="document.location.href='../faces/Supervisor/DetalleObra.jspx?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
+                                      onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
                     <h:outputText value=" #{item.textofinal}"/>
                     <h:graphicImage value="/resources/imgs/line.png" style="width:100%;"  />
                 </rich:panel>

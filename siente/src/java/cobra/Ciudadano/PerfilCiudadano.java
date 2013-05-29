@@ -919,7 +919,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     /**
      * Inicializar el formulario de Mi perfil Ciudadano
      *
-     * @return MiperfilCiudadano.jspx
+     * @return MiperfilCiudadano.xhtml
      */
     public String iniperfiUsu() {
         boolotrousuario = false;
@@ -945,7 +945,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     /**
      * Iniciar la modificación del usuario ciudadano
      *
-     * @return MofificarUsuario.jspx
+     * @return MofificarUsuario.xhtml
      */
     public String modificarUsuario() {
         getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero().setCargo(new Cargo(1, ""));
@@ -968,7 +968,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     }
 
     /*
-     * En la vista de ParticipacionCiudadano.jspx selecciona el tipo de opinion, imagen y titulo de la imagen para la opinion 
+     * En la vista de ParticipacionCiudadano.xhtml selecciona el tipo de opinion, imagen y titulo de la imagen para la opinion 
      */
     public void seleccionDenuncie() {
         //getSessionBeanCobra().getCiudadanoservice().getOpinionciudadano().getTipoopinion().setIntidtipoopinion(4);
@@ -1043,7 +1043,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     /**
      * Mostrar el usuario el cual fué elegido
      *
-     * @return MiperfilCiudadano.jspx
+     * @return MiperfilCiudadano.xhtml
      */
     public String cargarUsuario() {
 
@@ -1066,7 +1066,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     /**
      * Mostrar el usuario el cual fué elegido
      *
-     * @return MiperfilCiudadano.jspx
+     * @return MiperfilCiudadano.xhtml
      */
     public String cargarUsuarioPerfil() {
 
@@ -1258,7 +1258,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
 
     /**
      * 
-     * @return Volver al Inicio.jspx
+     * @return Volver al Inicio.xhtml
      */
     public String volverinicio() {
         return "volver";

@@ -999,12 +999,12 @@
                                             <rich:column>
                                                 <h:panelGroup styleClass="centrado">
                                                     <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
-                                                                     id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.jspx?id=#{row.intcodigoobra}';">
+                                                                     id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
                                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
 
                                                     <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
-                                                                     onclick="document.location.href = '../faces/Supervisor/DetalleObra.jspx?id=#{row.intcodigoobra}';">
+                                                                     onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
                                                         <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
                                                 </h:panelGroup>
