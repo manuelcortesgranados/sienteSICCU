@@ -4,8 +4,6 @@
  */
 package cobra;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author carlos
@@ -20,7 +18,7 @@ public class Coordenada {
         this.grados=grados;
         this.minutos=minutos;
         this.segundos=segundos;
-        this.convertirCoordenadaDecimal();
+        convertirCoordenadaDecimal();
     }
 
     public Coordenada(double coorddecima) {

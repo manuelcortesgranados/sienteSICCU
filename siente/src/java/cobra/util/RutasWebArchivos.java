@@ -113,5 +113,7 @@ public class RutasWebArchivos {
      * Constante que corresponde a la ruta web del archivo de fiduprevisora
      */
     public static String FINANCIERA ="/resources/Documentos/financiera/";
+    
+    public static String SOLICITUD="/resources/Documentos/Solicitud/Temporal/";
 
 }

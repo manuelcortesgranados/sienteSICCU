@@ -2122,12 +2122,7 @@ public class NuevoContratoBasico implements Serializable  {
          if(getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")){
         llenarModalidadContratista();
         }        
-        //limpiarGirodirecto();
-
-//     llenarContratosPadres();
-//        contratoConvenio();
-        //  tipocontratoconvenio=false;
-        //  contratoConvenio();
+      
     }
 
     public String instanciarPolizar() {
