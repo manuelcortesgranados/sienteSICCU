@@ -887,7 +887,7 @@ input.buscador_button {
     border-style: none;
 }
 
- .rf-p-hdr{
+.rf-p-hdr{
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     background-position: left top;
@@ -936,21 +936,25 @@ input.buscador_button {
 
 
 .rf-tb {
-    margin: 0;
-    padding:0;
-    background-image:url(../imgs/Cobra_menubar_bg.png);
+    margin: 0!important;
+    padding:0!important;
+    background-image:url(../imgs/Cobra_menubar_bg.png)!important;
     background-repeat: repeat-x;
-    height: 60px;
-    width:100%;
-    font-family:Arial, Helvetica, sans-serif;
-    text-align:left;
-    clear: both;
+    height: 60px!important;
+    width:100%!important;
+    font-family:Arial, Helvetica, sans-serif!important;
+    text-align:left!important;
+    clear: both!important;
     float: left;
-    border:none;
-    -moz-box-shadow: 3px 3px 3px #777;
-    -webkit-box-shadow: 3px 3px 3px #777;
-    border-spacing: 0;
-
+    border:none!important;
+    -moz-box-shadow: 3px 3px 3px #777!important;
+    -webkit-box-shadow: 3px 3px 3px #777!important;
+    border-spacing: 0!important;
+    border: 0px solid;
+    border-color: transparent!important;
+    font-size: 1em!important;
+    font-weight: bold!important;
+    background-color: transparent!important;
 }
 
 
@@ -1185,7 +1189,7 @@ input.buscador_button {
     -moz-box-shadow: 1px 1px 1px #003;
     -webkit-box-shadow: 1px 1px 1px #003;
 }
- 
+
 .rf-tb  .rf-tb-itm a.cerrar {
     background-image: url(../imgs/bt_cerrar_over.png);
     background-position: 3% 50%;
@@ -1206,7 +1210,7 @@ input.buscador_button {
 }
 .rf-tb .rf-tb-itm .rf-ddm-lbl
 .rf-ddm-lst .rf-ddm-lst-bg{
-visibility:visible;
+    visibility:visible;
 }
 
 .rf-tb .rf-tb-itm .rf-ddm-lbl
@@ -1288,7 +1292,7 @@ visibility:visible;
     float: left;
     width:25px;
     height:25px;
-       
+
 }
 
 .rich-stglpanel{
@@ -3995,9 +3999,9 @@ table.centrado {
 .titledegrad {   
 
     /*background: -webkit-gradient(linear, left top, left bottom, from(#27225F), to(#3AA7E5));
-	-webkit-background-clip: text;
-	-moz-background-clip: text;
-	-webkit-text-fill-color: transparent;*/
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent;*/
     color:#1D71B8;
     font-family:"Century Gothic";
     font-size:22px;
@@ -4038,9 +4042,9 @@ table.centrado {
 
 .tab-uno{
     background-image: url("../imgs/bt_05.png");
-   /* background-position: center center fixed;
-    background-repeat: no-repeat;
-    background-color:#28245B;*/
+    /* background-position: center center fixed;
+     background-repeat: no-repeat;
+     background-color:#28245B;*/
 }
 
 .buttonblue1{
@@ -4165,33 +4169,33 @@ table.centrado {
     color:#27225F!important;
 }
 .buttonblue6{
-	color:#FFF!important;
-	padding: 2px 10px 2px 10px!important;
-	font-size:10px!important;
-	font-family:"Century Gothic"!important;
-	line-height:0px!important;
-	-webkit-border-radius: 28px!important;
-	-moz-border-radius: 28px!important;
-	border-radius: 28px!important;
-	background: #3AA7E5!important;
-	background: -moz-linear-gradient(top,  #3AA7E5 0%,  #27225F 100%)!important;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3AA7E5), color-stop(64%,#27225F), color-stop(100%,#27225F))!important;
-	background: -webkit-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
-	background: -o-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
-	background: -ms-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
-	background: linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA7E5', endColorstr='#27225F',GradientType=0 )!important;
+    color:#FFF!important;
+    padding: 2px 10px 2px 10px!important;
+    font-size:10px!important;
+    font-family:"Century Gothic"!important;
+    line-height:0px!important;
+    -webkit-border-radius: 28px!important;
+    -moz-border-radius: 28px!important;
+    border-radius: 28px!important;
+    background: #3AA7E5!important;
+    background: -moz-linear-gradient(top,  #3AA7E5 0%,  #27225F 100%)!important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3AA7E5), color-stop(64%,#27225F), color-stop(100%,#27225F))!important;
+    background: -webkit-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: -o-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: -ms-linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    background: linear-gradient(top,  #3AA7E5 0%,#27225F 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3AA7E5', endColorstr='#27225F',GradientType=0 )!important;
 }
 .buttonblue6:hover {
-	background: #F5F5F5!important;
-	background: -moz-linear-gradient(top,  #F5F5F5 0%,  #B1B1B1 100%)!important;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F5F5), color-stop(64%,#B1B1B1), color-stop(100%,#B1B1B1))!important;
-	background: -webkit-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
-	background: -o-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
-	background: -ms-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
-	background: linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#B1B1B1',GradientType=0 )!important;
-	color:#27225F!important;
+    background: #F5F5F5!important;
+    background: -moz-linear-gradient(top,  #F5F5F5 0%,  #B1B1B1 100%)!important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F5F5F5), color-stop(64%,#B1B1B1), color-stop(100%,#B1B1B1))!important;
+    background: -webkit-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: -o-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: -ms-linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    background: linear-gradient(top,  #F5F5F5 0%,#B1B1B1 100%)!important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F5F5', endColorstr='#B1B1B1',GradientType=0 )!important;
+    color:#27225F!important;
 }
 .buttonphoto {
     width: 25px; /* for validator */
@@ -4220,30 +4224,30 @@ table.centrado {
     background-position: 0px -28px;
 }
 .numberblue {
-	font-family:"knockout", Arial, Helvetica, sans-serif;
-	font-size:80px;
-	color:#1D71B8;
+    font-family:"knockout", Arial, Helvetica, sans-serif;
+    font-size:80px;
+    color:#1D71B8;
 }
 .numbergray {
-	font-family:"knockout", Arial, Helvetica, sans-serif;
-	font-size:80px;
-	color:#DADADA;
+    font-family:"knockout", Arial, Helvetica, sans-serif;
+    font-size:80px;
+    color:#DADADA;
 }
 .numberbluebig {
-	font-family:"knockout", Arial, Helvetica, sans-serif;
-	font-size:130px;
-	line-height:80px;
-	color:#1D71B8;
+    font-family:"knockout", Arial, Helvetica, sans-serif;
+    font-size:130px;
+    line-height:80px;
+    color:#1D71B8;
 }
 .numbersmall{
-	font-family:"knockout", Arial, Helvetica, sans-serif;
-	font-size:24px;
-	color: #575757;
+    font-family:"knockout", Arial, Helvetica, sans-serif;
+    font-size:24px;
+    color: #575757;
 }
 .numbersmallgray{
-	font-family:"knockout", Arial, Helvetica, sans-serif;
-	font-size:24px;
-	color: #B1B1B1;
+    font-family:"knockout", Arial, Helvetica, sans-serif;
+    font-size:24px;
+    color: #B1B1B1;
 }
 .alignverticaldetalle
 {
@@ -4316,97 +4320,97 @@ p.Century Gothic {
 }
 
 a.buttonexcelgray {
-	width: 40px; /* for validator */
-	height: 40px;
-	background-image:url(../imgs/Cobra_bt67.png);
-	background-position: 0px -46px;
-	margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 0px;
-	margin-left: 5px;
-	position:relative;
-	display:block;
-	float: left;
-	}
+    width: 40px; /* for validator */
+    height: 40px;
+    background-image:url(../imgs/Cobra_bt67.png);
+    background-position: 0px -46px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    position:relative;
+    display:block;
+    float: left;
+}
 a.buttonexcelgray:hover {
-	background-position: 0px 0px;
-	}
+    background-position: 0px 0px;
+}
 a.buttonwordgray {
-	width: 40px; /* for validator */
-	height: 40px;
-	background-image:url(../imgs/Cobra_bt65.png);
-	background-position: 0px -46px;
-	margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 0px;
-	margin-left: 5px;
-	position:relative;
-	display:block;
-	float: left;
-	}
+    width: 40px; /* for validator */
+    height: 40px;
+    background-image:url(../imgs/Cobra_bt65.png);
+    background-position: 0px -46px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    position:relative;
+    display:block;
+    float: left;
+}
 a.buttonwordgray:hover {
-	background-position: 0px 0px;
-	}
+    background-position: 0px 0px;
+}
 a.buttonpdfgray {
-	width: 40px; /* for validator */
-	height: 40px;
-	background-image:url(../imgs/Cobra_bt66.png);
-	background-position: 0px -46px;
-	margin-top: 5px;
-	margin-right: 5px;
-	margin-bottom: 0px;
-	margin-left: 5px;
-	position:relative;
-	display:block;
-	float: left;
-	}
+    width: 40px; /* for validator */
+    height: 40px;
+    background-image:url(../imgs/Cobra_bt66.png);
+    background-position: 0px -46px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    position:relative;
+    display:block;
+    float: left;
+}
 a.buttonpdfgray:hover {
-	background-position: 0px 0px;
-	}
+    background-position: 0px 0px;
+}
 
 .pestanablue1{
-	width:180px;
-	height:20px;
-	color:#FFF;
-	background-image:url(../imgs/pestana01.png);
-	background-repeat:no-repeat;
-        background-position:center top;
-	float:left;
-	position:relative;
-	margin-right:5px;
+    width:180px;
+    height:20px;
+    color:#FFF;
+    background-image:url(../imgs/pestana01.png);
+    background-repeat:no-repeat;
+    background-position:center top;
+    float:left;
+    position:relative;
+    margin-right:5px;
 }
 .pestanablue2{
-	width:180px;
-	height:20px;
-	color:#FFF;
-	background-image:url(../imgs/pestana02.png);
-	background-repeat:no-repeat;
-	background-position:center top;
-	float:left;
-	position:relative;
-	margin-right:5px;
+    width:180px;
+    height:20px;
+    color:#FFF;
+    background-image:url(../imgs/pestana02.png);
+    background-repeat:no-repeat;
+    background-position:center top;
+    float:left;
+    position:relative;
+    margin-right:5px;
 }
 .pestanablue3{
-	width:180px;
-	height:20px;
-	color:#FFF;
-	background-image:url(../imgs/pestana03.png);
-	background-repeat:no-repeat;
-	background-position:center top;
-	float:left;
-	position:relative;
-	margin-right:5px;
+    width:180px;
+    height:20px;
+    color:#FFF;
+    background-image:url(../imgs/pestana03.png);
+    background-repeat:no-repeat;
+    background-position:center top;
+    float:left;
+    position:relative;
+    margin-right:5px;
 }
 .pestanablue4{
-	width:180px;
-	height:20px;
-	color:#FFF;
-	background-image:url(../imgs/pestana04.png);
-	background-repeat:no-repeat;
-	background-position:center top;
-	float:left;
-	position:relative;
-	margin-right:5px;
+    width:180px;
+    height:20px;
+    color:#FFF;
+    background-image:url(../imgs/pestana04.png);
+    background-repeat:no-repeat;
+    background-position:center top;
+    float:left;
+    position:relative;
+    margin-right:5px;
 }
 .centrarImagenes_infociu {
     text-align: center;
@@ -4418,13 +4422,13 @@ a.buttonpdfgray:hover {
 .pg_detalle_col1{
     width: 34%;
     border-left:#F4F4F4 thin solid; 
-    
+
 }
 .pg_detalle_col2{
     width: 15%;
     border-left:#F4F4F4 thin solid; 
     text-align:center; 
-    
+
 }
 .pg_detalle_col3{
     width: 15%;
@@ -4434,7 +4438,7 @@ a.buttonpdfgray:hover {
 .pg_detalle_col4{
     width: 36%;
     border-left:#F4F4F4 thin solid; 
-    
+
 }
 
 .pg_valores_financieros_col1{
@@ -4448,7 +4452,7 @@ a.buttonpdfgray:hover {
 .pg_valores_financieros_col3{
     width: 20%;
     border-left:#F4F4F4 thin solid;
-   
+
 }
 .pg_valores_financieros_col4{
     width:18% ;
