@@ -13,30 +13,30 @@
     <rich:popupPanel id="panelCrearEncargo" autosized="true" width="400"  headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText value="#{var.crear}" styleClass="txt_header" />
+                <h:outputText  class="id-jsf- "   value="#{var.crear}" class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
         <rich:panel id="panelCrearEncargoFidu">
-            <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+            <h:panelGroup >
                 <a4j:commandLink id="esconder_panelCrearEncargo"
                                    onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
-                                   immediate="true" styleClass="cerrar" />
+                                   immediate="true" class="id-jsf-"   />
             </h:panelGroup>
             <h:form>
-                <h:panelGrid id="mos" columns="2" style="width: 100%;" columnClasses="panelizquierda, panelizquierda">
-                    <h:outputLabel id="lblnumeroencargo" value="#{var.numeroencargo}" for="txtNumeroencargo" />
+                <h:panelGrid id="mos" columns="2"  columnClasses="panelizquierda, panelizquierda">
+                    <h:outputLabel  class="id-jsf- "   id="lblnumeroencargo" value="#{var.numeroencargo}" for="txtNumeroencargo" />
                     <h:inputText id="txtNumeroencargo" required="true" value="#{SessionBeanCobra.solicitudService.encargofiduciario.intnumencargofiduciario}" />
 
-                    <h:outputText id="lblfecha" value="#{var.fecha}" />
+                    <h:outputText  class="id-jsf- "   id="lblfecha" value="#{var.fecha}" />
                     <h:panelGroup id="layoutFechaEncargo">
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                        required="true"
                                        value="#{SessionBeanCobra.solicitudService.encargofiduciario.datefechaaperturaencargofiduciario}" />
                     </h:panelGroup>
 
-                    <h:outputLabel id="lblvalorencargo" value="#{var.valorencargo}" />
+                    <h:outputLabel  class="id-jsf- "   id="lblvalorencargo" value="#{var.valorencargo}" />
                     <h:inputText id="txtValor" required="true" disabled="true"
                                  value="#{SessionBeanCobra.solicitudService.solicitudObrachD.doublevaloraprobado}">
                         <f:convertNumber pattern="#,###.00" />
@@ -45,12 +45,12 @@
 
                 <center>
                     <h:panelGrid id="botones" columns="2">
-                        <a4j:commandButton id="crearencargo" styleClass="btn_pri_inm" value="#{var.crear}"
+                        <a4j:commandButton id="crearencargo" class="id-jsf-"   value="#{var.crear}"
                                            onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
                                            render="panelAprobacionFinanciera" />
 
-                        <a4j:commandButton id="Cancelarencargo" styleClass="btn_pri_inm" value="#{var.cancelar}"
+                        <a4j:commandButton id="Cancelarencargo" class="id-jsf-"   value="#{var.cancelar}"
                                            onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;" />
                     </h:panelGrid>

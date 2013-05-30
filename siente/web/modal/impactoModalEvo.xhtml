@@ -11,13 +11,13 @@
     <rich:popupPanel id="modalImpacto"  width="380" height="200" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="id-jsf- "   value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImpacto" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalImpacto" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImpacto')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -25,15 +25,15 @@
         <center>
             <rich:dataGrid id="tablaaliperim" value="#{Supervisor$DetalleObra.alimentacionmostrar}" var="currentRow">
                 <h:panelGrid columns="2" >
-                        <h:outputLabel value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  value="#{currentRow.numempdirectos}"/>
-                        <h:outputLabel value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  value="#{currentRow.numempindirectos}"/>
-                        <h:outputLabel value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                        <h:outputLabel value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
-                        <h:outputLabel  value="#{currentRow.numhabafectados}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{currentRow.numempdirectos}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{currentRow.numempindirectos}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                        <h:outputLabel  class="id-jsf- "   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{currentRow.numhabafectados}"/>
                 </h:panelGrid>
             </rich:dataGrid>
         </center>

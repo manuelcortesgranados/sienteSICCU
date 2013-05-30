@@ -22,131 +22,131 @@
                 <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
             </ui:define>
             <ui:define name="title">
-                <h:outputText value="#{var.seguimientosah}"/>
-                <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.seguimientosah}"/>
+                <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
             </ui:define>
             <ui:define name="body">
                 <h:form>
-                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single" style="text-align:left; width:100%;"  var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
+                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single"   var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="16" breakRowBefore="true">
-                                    <h:outputText value="#{var.seguimientoglobal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.seguimientoglobal}"/>
                                 </rich:column>
                                 <rich:column  colspan="8" breakRowBefore="true">
-                                    <h:outputText value="#{var.familiasaatenderseg}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.familiasaatenderseg}"/>
                                 </rich:column>
                                 <rich:column  colspan="4">
-                                    <h:outputText value="#{var.familiasaatendidasseg}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.familiasaatendidasseg}"/>
                                 </rich:column>
                                 <rich:column  colspan="4">
-                                    <h:outputText value="#{var.avancedeclaradoseg}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.avancedeclaradoseg}"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText value="#{var.numsolicitudch}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.numsolicitudch}"/>                                                
                                 </rich:column>
                                 <rich:column  >
-                                    <h:outputText value="#{var.mercyaseoiniporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.mercyaseoiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.mercyaseoajusporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.mercyaseoajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.arriendosiniporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.arriendosiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.arriendosajusporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.arriendosajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.alberguesiniporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.alberguesiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.alberguesajusporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.alberguesajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.repviviendaporate}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.repviviendaporate}"/>                                                
                                 </rich:column>
                                 <rich:column  >
-                                    <h:outputText value="#{var.mecryaseoatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.mecryaseoatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.arriendosatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.arriendosatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.alberguesatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.alberguesatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.repviviendaatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.repviviendaatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.mecryaseoatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.mecryaseoatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.arriendosatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.arriendosatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.alberguesatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.alberguesatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.repviviendaatendidas}"/>                                                
+                                    <h:outputText  class="id-jsf- "   value="#{var.repviviendaatendidas}"/>                                                
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
-                            <rich:column  breakRowBefore="true" styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.numSolicitud}" />
+                            <rich:column  breakRowBefore="true" class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numSolicitud}" />
                             </rich:column>
-                            <rich:column   styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.mercAseoini}" />
+                            <rich:column   class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.mercAseoini}" />
                             </rich:column>
-                            <rich:column   styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.mercAseoajuste}" />
+                            <rich:column   class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.mercAseoajuste}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.arriendoIni}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.arriendoIni}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.arriendoAjust}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.arriendoAjust}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.albergueIni}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.albergueIni}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.albergueAjuste}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.albergueAjuste}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.repVivienda}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.repVivienda}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.mercAseo}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.mercAseo}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.arriendo}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.arriendo}" />
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.albergue}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.albergue}" />
                             </rich:column>    
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.reparacionVivienda}" />
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.reparacionVivienda}" />
                             </rich:column>    
 
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.numvaldeclaradomeryaseo/100}" >
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numvaldeclaradomeryaseo/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.numvaldeclaradoarriendo/100}" >
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numvaldeclaradoarriendo/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.numvaldeclaradoalbergues/100}" >
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numvaldeclaradoalbergues/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>    
-                            <rich:column styleClass="panelderecha">
-                                <h:outputText  value="#{currentRow.numvaldeclaradorepvivienda/100}" >
+                            <rich:column class="id-jsf-"  >
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numvaldeclaradorepvivienda/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>    
@@ -157,32 +157,32 @@
                         </f:facet>
                     </rich:dataTable>
 
-                    <interkont:spacer height="20" style="width:100%;"/>
-                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                    <interkont:spacer height="20" />
+                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single"   
                                     var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaasishummuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText value="#{var.seguimientoahmunicipal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.seguimientoahmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
-                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                <rich:column  breakRowBefore="true" class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="panelcenter">
-                                    <h:outputText value="#{var.departamento}" />                                                
+                                <rich:column  class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelcenter">
-                                    <h:outputText value="#{var.municipio}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelcenter">
-                                    <h:outputText value="#{var.codigodaneah}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.codigodaneah}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.numtotalfambenmeryaseo}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numtotalfambenmeryaseo}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.valrepayudentreg}" >
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.valrepayudentreg}" >
                                         
                                     </h:outputText>
                                                                                                  
@@ -191,23 +191,23 @@
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
-                            <h:outputText value="#{currentRow.numSolicitud}"/>                                                
+                        <rich:column  breakRowBefore="true" class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numSolicitud}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="panelcenter">                                    
-                            <h:outputText value="#{currentRow.nomDep}"/>                                                
+                        <rich:column  class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.nomDep}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelcenter">
-                            <h:outputText value="#{currentRow.nomMunicipio}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.nomMunicipio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelcenter">
-                            <h:outputText value="#{currentRow.codMupio}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.codMupio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
@@ -217,60 +217,60 @@
                         </f:facet>
                     </rich:dataTable>
 
-                     <interkont:spacer height="20" style="width:100%;"/>
-                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single" style="text-align:left; width:100%;"  
+                     <interkont:spacer height="20" />
+                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single"   
                                     var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaarriendomuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="7" breakRowBefore="true">
-                                    <h:outputText value="#{var.seguimientoarriendosmunicipal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.seguimientoarriendosmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
-                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                <rich:column  breakRowBefore="true" class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="panelcenter">
-                                    <h:outputText value="#{var.departamento}" />                                                
+                                <rich:column  class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelcenter">
-                                    <h:outputText value="#{var.municipio}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelcenter">
-                                    <h:outputText value="#{var.codigodaneah}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.codigodaneah}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.numfambenarriendos}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numfambenarriendos}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.numfambeneficiadasarriendos}" />             
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numfambeneficiadasarriendos}" />             
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.valrepayudentregarrien}" />             
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.valrepayudentregarrien}" />             
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
-                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        <rich:column  breakRowBefore="true" class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="panelcenter">                                    
-                            <h:outputText value="#{currentRow.nomDep}"/>                                                
+                        <rich:column  class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.nomDep}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelcenter">
-                            <h:outputText value="#{currentRow.nomMuni}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.nomMuni}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelcenter">
-                            <h:outputText value="#{currentRow.codMpio}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.codMpio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.numFamiliabeneficiar}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numFamiliabeneficiar}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.numFamiliabeneficiada}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numFamiliabeneficiada}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.valAyudaentregada}"> 
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.valAyudaentregada}"> 
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
@@ -281,55 +281,55 @@
                     </rich:dataTable>
 
                     
-                     <interkont:spacer height="20" style="width:100%;"/>
-                    <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single" style="text-align:left;"  
+                     <interkont:spacer height="20" />
+                    <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single"   
                                     var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
                                     rendered="#{fn:length(Supervisor$SeguimientosAh.listaalberguesmuni)>0}">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText value="#{var.seguimientoalberguesmunicipal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.seguimientoalberguesmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="panelcenter">
-                                    <h:outputText value="#{var.numsolicitudch}" />                                                
+                                <rich:column  breakRowBefore="true" class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="panelcenter">
-                                    <h:outputText value="#{var.departamento}" />                                                
+                                <rich:column  class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelcenter">
-                                    <h:outputText value="#{var.municipio}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}" />                                                
                                 </rich:column>                                
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.unidhabaconstruir}" />                                                
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.unidhabaconstruir}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.unidhabaconstruidos}" />             
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.unidhabaconstruidos}" />             
                                 </rich:column>
-                                <rich:column styleClass="panelderecha">
-                                    <h:outputText value="#{var.unidhabenconstr}" />             
+                                <rich:column class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "   value="#{var.unidhabenconstr}" />             
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="panelcenter">                                    
-                            <h:outputText value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        <rich:column  breakRowBefore="true" class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="panelcenter">                                    
-                            <h:outputText value="#{currentRow.strdepartamento}"/>                                                
+                        <rich:column  class="id-jsf-"  >                                    
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strdepartamento}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelcenter">
-                            <h:outputText value="#{currentRow.strmunicipio}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strmunicipio}"/>                                                
                         </rich:column>
                        
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.intuniConstruir}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.intuniConstruir}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.intuniConstruidas}"/>                                                
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.intuniConstruidas}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.intuniProConstruccion}"/>
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.intuniProConstruccion}"/>
                         </rich:column>
 
                         <f:facet name="footer">

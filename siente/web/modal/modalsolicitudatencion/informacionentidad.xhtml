@@ -14,7 +14,7 @@
         <f:facet name="header">
             <h:panelGroup>
                 <center>
-                    <h:outputText value="#{var.infoentidad}" styleClass="txt_header" />
+                    <h:outputText  class="id-jsf- "   value="#{var.infoentidad}" class="id-jsf-"   />
                 </center>
             </h:panelGroup>
         </f:facet>
@@ -23,32 +23,32 @@
             <h:form>
                 <center>
                     <h:panelGrid columns="2">
-                        <h:outputText value="#{var.nombreah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.nombreah}" />
                         <h:inputText id="nombreinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strnombrecompleto}" disabled="true" />
 
-                        <h:outputText value="#{var.nit}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.nit}" />
                         <h:inputText id="nitinfoentidad"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.intcedula}" disabled="true" />
 
-                        <h:outputText value="#{var.departamento}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.departamento}" />
                         <h:inputText id="departamento" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
 
-                        <h:outputText value="#{var.municipio}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.municipio}" />
                         <h:inputText id="municipio" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
 
-                        <h:outputText value="#{var.mail}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.mail}" />
                         <h:inputText  id="mail" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.stremail}" disabled="true" />
 
-                        <h:outputText value="#{var.website}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.website}" />
                         <h:inputText id="websiteinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strpaginaweb}" disabled="true" />
 
-                        <h:outputText value="#{var.telefonoah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.telefonoah}" />
                         <h:inputText id="telefonoinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono1}  #{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono2}" disabled="true" />
                     </h:panelGrid>
 
                     <a4j:commandButton id="btn_aceptar"  value="#{var.aceptar}"
                                        onclick="#{rich:component('panelInformacionEntidad')}.hide();
                                                return false;"
-                                       style="font-size: 12px;" />
+                                        />
                 </center>
             </h:form>
         </rich:panel>

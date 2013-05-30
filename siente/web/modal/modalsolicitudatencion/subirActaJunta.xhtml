@@ -10,19 +10,19 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadActa" autosized="true" style="padding:0px;">
-        <rich:panel header="#{var.seleccionaracta}" styleClass="rich-panel-body" style="padding:0px;">
+    <rich:popupPanel id="panelUploadActa" autosized="true" >
+        <rich:panel header="#{var.seleccionaracta}" class="id-jsf-"   >
             <h:form>
-                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                <h:panelGroup >
                     <a4j:commandLink id="esconder_panelUploadActa"
                                        onclick="#{rich:component('panelUploadActa')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="cerrar" />
+                                       immediate="true" class="id-jsf-"   />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload  addLabel="#{var.adicionar}" style="width: 250px;"
+                        <rich:fileUpload  addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="true"
                                          listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
@@ -31,21 +31,21 @@
 
                         <h:panelGroup id="info_acta">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  class="id-jsf- "   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.nombre}" />
-                                                    <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -56,11 +56,11 @@
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarActaAtencion}" render="info_acta, uploadActa, gpActa, panel_subirActa"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size:12px;" />
+                                                   class="id-jsf-"      />
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActa')}.hide();
                                                return false;"
-                                                   render="panel_subirActa" style="font-size:12px;" />
+                                                   render="panel_subirActa"  />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

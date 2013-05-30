@@ -9,11 +9,11 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
     >
-    <interkont:spacer height="20" style="width:100%;"/>
-        <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
+    <interkont:spacer height="20" />
+        <table  align="center" border="0" cellspacing="0" cellpadding="0">
             <td>
                 <tr>
-                    <h:outputText value="Reportes" style="font-size:14px;" styleClass="headerIndicadores"/>
+                    <h:outputText  class="id-jsf- "   value="Reportes"  class="id-jsf-"  />
                 </tr>
                 <tr>
                     <div id="navIndicadores" >
@@ -22,14 +22,14 @@
                         </div>-->
 
                         <ul>
-                            <li><h:commandLink value="#{var.header1}" styleClass="consoclaro anchorLink"
-                                           style="font-size: 9px;" 
+                            <li><h:commandLink value="#{var.header1}" class="id-jsf-"  
+                                            
                                              action="#{Reportes.reporteSelect}" /></li>
-                            <li><h:commandLink value="#{var.header5}" styleClass="conso anchorLink"
-                                             style="font-size: 9px;"  
+                            <li><h:commandLink value="#{var.header5}" class="id-jsf-"  
+                                               
                                              action="#{Reportes.reporteSelectDi}" /></li>
-                            <li><h:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" styleClass="conso anchorLink"
-                                             style="font-size: 9px;" 
+                            <li><h:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" class="id-jsf-"  
+                                              
                                              action="#{Reportes.reporteSelectAdministrativo}" /></li>
                         </ul>
                     </div>

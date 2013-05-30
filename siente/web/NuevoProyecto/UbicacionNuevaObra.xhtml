@@ -24,40 +24,40 @@
         -->       
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
 
     <ui:define name="body" >
-        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+        <table   align="center" border="0" cellspacing="8" cellpadding="0">
             <tr>
                 <h:form>
-                    <td rowspan="6" valign="top" style="height:400px;width: 20%">                       
+                    <td rowspan="6" valign="top" >                       
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>               
                     </td>
                 </h:form>
-                <td valign="top" height="35" style="width: 80%">
+                <td valign="top" height="35" >
                     <rich:panel id="pgubicolo" header="#{var.ubicacionproyectocolo}" >
-                        <a4j:outputPanel id="panelMapa"  style="width: 100%" >
+                        <a4j:outputPanel id="panelMapa"   >
                             <h:form id="fr">
 
-                                <hr style="background-image:none; height:5px; width: 25px;"/>
+                                <hr />
                                 <h:panelGrid columns="3" >
                                     <interkont:spacer width="385" height="5"/>
-                                    <h:outputLabel id="lbllugarproyecto"  value="#{var.zonaubi}" for="combolugarproyecto" />
+                                    <h:outputLabel  class="id-jsf- "   id="lbllugarproyecto"  value="#{var.zonaubi}" for="combolugarproyecto" />
                                     <h:selectOneMenu id="combolugarproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
                                         <f:selectItems value="#{Supervisor$IngresarNuevaObra.lugarObra}" />
                                         <a4j:ajax event="valueChange" render="gpLblComuna, gpCmbComuna, gpLblBarrio" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
-                                <hr style="background-image:none; height:5px; width: 25px;"/>
+                                <hr />
                                 <rich:collapsiblePanel id="simpleToggleSelecMapa" header="#{var.ubicacionproyectogeogra}"  >
 
-                                    <rich:panel id="gpDirMapa" style="width: 100% !important;">
-                                        <h:outputText value="#{var.selevisu} "/>
+                                    <rich:panel id="gpDirMapa" >
+                                        <h:outputText  class="id-jsf- "   value="#{var.selevisu} "/>
 
                                         <m:map id="panelMapa"  width="100%"  height="450px" partiallyTriggered="false" autoReshape="#{Supervisor$IngresarNuevaObra.redibujarmapa}" enableScrollWheelZoom="true"
                                                latitude="#{Supervisor$IngresarNuevaObra.latitudmapa}" longitude="#{Supervisor$IngresarNuevaObra.longitudmapa}" zoom="#{Supervisor$IngresarNuevaObra.zoom}"
@@ -87,21 +87,21 @@
                                         <interkont:spacer width="10"/>
                                         <h:panelGrid id="gpOpMapa">
 
-                                            <a4j:commandButton value="#{var.nuevopunto}" styleClass="txt_header_outtext" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=2 and Supervisor$EntidadConvenio.intentidadconvenio!=1 and !Supervisor$IngresarNuevaObra.verNuevo}"
+                                            <a4j:commandButton value="#{var.nuevopunto}" class="id-jsf-"   rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=2 and Supervisor$EntidadConvenio.intentidadconvenio!=1 and !Supervisor$IngresarNuevaObra.verNuevo}"
                                                                render="gpOpMapa"  action="#{Supervisor$IngresarNuevaObra.habilitarNuevo}"  >
 
                                             </a4j:commandButton>
                                             <h:panelGroup id="gpOpcionesMapa" rendered="#{Supervisor$IngresarNuevaObra.verNuevo}">
                                                 <h:panelGroup rendered="#{!Supervisor$IngresarNuevaObra.verConfirmar}">
                                                     <h:panelGrid  columns="2">
-                                                        <h:outputText id="otSelforma" styleClass="txt_header_outtext" value="Forma de ubicación:"/>
-                                                        <h:selectOneMenu id="selectForma" styleClass="selectForma" value="#{Supervisor$IngresarNuevaObra.formaseleccionada}">
+                                                        <h:outputText  class="id-jsf- "   id="otSelforma" class="id-jsf-"   value="Forma de ubicación:"/>
+                                                        <h:selectOneMenu id="selectForma" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.formaseleccionada}">
                                                             <f:selectItem itemLabel="Arrastrando y soltando" itemValue="0" />
                                                             <f:selectItem itemLabel="Ubicar por dirección" itemValue="1"/>
                                                             <f:selectItem itemLabel="Ubicar por latitud y longitud" itemValue="2"/>
                                                             <a4j:ajax event="valueChange" render="gpFormaSel"/>
                                                         </h:selectOneMenu>
-                                                        <h:outputText id="otSelTipo" styleClass="txt_header_outtext" value="Tipo de punto:"/>
+                                                        <h:outputText  class="id-jsf- "   id="otSelTipo" class="id-jsf-"   value="Tipo de punto:"/>
                                                         <h:selectOneMenu value="#{Supervisor$IngresarNuevaObra.tiposelec}">
                                                             <f:selectItem itemLabel="Primario" itemValue="0" itemDisabled="#{!Supervisor$IngresarNuevaObra.verPrimario}"/>
                                                             <f:selectItem itemLabel="Secundario" itemValue="1"/>
@@ -110,37 +110,37 @@
                                                     <h:panelGroup id="gpFormaSel">
 
                                                         <h:panelGrid columns="2" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}">
-                                                            <h:outputText id="txtbus" styleClass="txt_header_outtext" value="#{var.ingresedir}"/>
-                                                            <h:inputText id="txtAddress" styleClass="txtAddress" value="#{Supervisor$IngresarNuevaObra.address}"/>
-                                                            <h:panelGroup style="display:none;" layout="block" >
-                                                                <h:outputLabel value="#{var.latitud}:" styleClass="txt_header_outtext"  />
-                                                                <h:inputText id="txtlatitudAdress" styleClass="txtlatitudAdress" value="#{Supervisor$IngresarNuevaObra.latNewmanu}"/>
-                                                                <h:outputLabel value="#{var.longitud}:" styleClass="txt_header_outtext" />
-                                                                <h:inputText id="txtlongitudAdress" styleClass="txtlongitudAdress" value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
+                                                            <h:outputText  class="id-jsf- "   id="txtbus" class="id-jsf-"   value="#{var.ingresedir}"/>
+                                                            <h:inputText id="txtAddress" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.address}"/>
+                                                            <h:panelGroup  layout="block" >
+                                                                <h:outputLabel  class="id-jsf- "   value="#{var.latitud}:" class="id-jsf-"    />
+                                                                <h:inputText id="txtlatitudAdress" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.latNewmanu}"/>
+                                                                <h:outputLabel  class="id-jsf- "   value="#{var.longitud}:" class="id-jsf-"   />
+                                                                <h:inputText id="txtlongitudAdress" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.longNewmanu}"/>
                                                             </h:panelGroup>
                                                             <rich:hotKey id="myKey" key="return" onkeyup="#{rich:element('newpunto')}.click()" selector="#txtAddress" />
                                                         </h:panelGrid>
                                                         <h:panelGrid columns="2" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==2}">
 
 
-                                                            <h:outputLabel value="#{var.latitud}" styleClass="txt_header_outtext"  />
+                                                            <h:outputLabel  class="id-jsf- "   value="#{var.latitud}" class="id-jsf-"    />
                                                             <h:inputText id="txtlatmanu"   value="#{Supervisor$IngresarNuevaObra.latNewmanu}"  >
                                                             </h:inputText>
-                                                            <h:outputLabel value="#{var.longitud}" styleClass="txt_header_outtext" />
+                                                            <h:outputLabel  class="id-jsf- "   value="#{var.longitud}" class="id-jsf-"   />
                                                             <h:inputText id="txtlonmanu" value="#{Supervisor$IngresarNuevaObra.longNewmanu}"   />
 
                                                         </h:panelGrid>
                                                         <h:panelGrid >
-                                                            <h:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}"  onclick="nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
-                                                            <h:commandButton styleClass="newpunto" value="#{var.agregarmarcador}" onclick="return nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
+                                                            <h:commandButton class="id-jsf-"   value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}"  onclick="nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
+                                                            <h:commandButton class="id-jsf-"   value="#{var.agregarmarcador}" onclick="return nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
                                                         </h:panelGrid>
                                                     </h:panelGroup>
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.verConfirmar}">
-                                                <h:commandButton value="#{var.confirmarpunto}" id="confpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.confirmarPunto}"
+                                                <h:commandButton value="#{var.confirmarpunto}" id="confpunto" class="id-jsf-"   action="#{Supervisor$IngresarNuevaObra.confirmarPunto}"
                                                                    />
-                                                <h:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="txt_header_outtext" action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
+                                                <h:commandButton value="#{var.cancelarpunto}" id="cancpunto" class="id-jsf-"   action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
                                                                    />
                                                 <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click();" selector="#txtAddress" />
                                             </h:panelGroup>
@@ -150,42 +150,42 @@
 
                                             <rich:dataTable id="datamarkers" 
                                                             rows="4" 
-                                                            style="text-align:left; width:100%;"    
+                                                                
                                                             rowKeyVar="filaSeleccionada"
                                                             var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
-                                                <rich:column id="co1" style="width: 100px;"
+                                                <rich:column id="co1" 
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.longitud}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.longitud}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-la" value="#{lalo.longitude}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-la" value="#{lalo.longitude}"/>
                                                 </rich:column>
-                                                <rich:column id="co2" style="width: 100px;"
+                                                <rich:column id="co2" 
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.latitud}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.latitud}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-lo" value="#{lalo.latitude}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-lo" value="#{lalo.latitude}"/>
                                                 </rich:column>
-                                                <rich:column id="co3" style="width: 100px;"
+                                                <rich:column id="co3" 
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText value="Direccion" />
+                                                        <h:outputText  class="id-jsf- "   value="Direccion" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-di" value="#{lalo.address}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-di" value="#{lalo.address}"/>
                                                 </rich:column>
-                                                <rich:column id="co5" style="width: 300px;"
+                                                <rich:column id="co5" 
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText value="Tipo" />
+                                                        <h:outputText  class="id-jsf- "   value="Tipo" />
                                                     </f:facet>
-                                                    <h:outputText  value="Primario" rendered="#{lalo.tipo==0}"/>
-                                                    <h:outputText  value="Secundario" rendered="#{lalo.tipo==1}"/>
+                                                    <h:outputText  class="id-jsf- "    value="Primario" rendered="#{lalo.tipo==0}"/>
+                                                    <h:outputText  class="id-jsf- "    value="Secundario" rendered="#{lalo.tipo==1}"/>
                                                 </rich:column>
-                                                <rich:column id="co4" style="width: 300px;"
+                                                <rich:column id="co4" 
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.eliminar}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.eliminar}" />
                                                     </f:facet>
                                                     <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}"/>
                                                 </rich:column>
@@ -203,8 +203,8 @@
                                     <rich:panel id="gpDirLocalidades3" rendered="#{var.habilitarLocalidadesEjecutaraPoryecto}">
                                         <h:panelGrid columns="4">
                                             <interkont:spacer width="385" height="5"/>
-                                            <h:panelGrid styleClass="vineta"/>
-                                            <h:outputLabel id="lblclasificacionProyecto"  value="#{var.clasificacionProyecto}" for="comboclasificacionproyecto">
+                                            <h:panelGrid class="id-jsf-"  />
+                                            <h:outputLabel  class="id-jsf- "   id="lblclasificacionProyecto"  value="#{var.clasificacionProyecto}" for="comboclasificacionproyecto">
                                             </h:outputLabel>
 
                                             <h:selectOneMenu id="comboclasificacionproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen}" disabled="#{Supervisor$IngresarNuevaObra.tipoOrigenSoloLectura}">
@@ -220,8 +220,8 @@
                                                 <h:panelGroup id="gpdeptomuniproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
                                                     <h:panelGrid columns="4">
                                                         <interkont:spacer width="385" height="5"/>
-                                                        <h:panelGrid styleClass="vineta"/>
-                                                        <h:outputLabel id="lbldepartamentoProyecto"  value="#{var.departamentoProyecto}" for="combodepartamentoproyecto">
+                                                        <h:panelGrid class="id-jsf-"  />
+                                                        <h:outputLabel  class="id-jsf- "   id="lbldepartamentoProyecto"  value="#{var.departamentoProyecto}" for="combodepartamentoproyecto">
                                                         </h:outputLabel>
 
                                                         <h:selectOneMenu id="combodepartamentoproyecto" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}" value="#{Supervisor$IngresarNuevaObra.codDepartamento}" >
@@ -233,9 +233,9 @@
                                                 </h:panelGroup>
                                                 <a4j:outputPanel id="panelmunipioproyecto" ajaxRendered="true" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
                                                     <h:panelGrid columns="4">
-                                                        <h:panelGrid styleClass="vineta"/>
+                                                        <h:panelGrid class="id-jsf-"  />
                                                         <interkont:spacer width="385" height="15"/>
-                                                        <h:outputLabel id="lblmunicipioProyecto"  value="#{var.municipioProyecto}" for="combomunicipioproyecto">
+                                                        <h:outputLabel  class="id-jsf- "   id="lblmunicipioProyecto"  value="#{var.municipioProyecto}" for="combomunicipioproyecto">
                                                         </h:outputLabel>
                                                         <h:selectOneMenu id="combomunicipioproyecto" value="#{Supervisor$IngresarNuevaObra.codMunicipio}">
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.municipio}"/>
@@ -245,8 +245,8 @@
                                                 <h:panelGroup id="gpregionproyecto" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==3}">
                                                     <h:panelGrid columns="4">
                                                         <interkont:spacer width="385" height="5"/>
-                                                        <h:panelGrid styleClass="vineta"/>
-                                                        <h:outputLabel id="lblregionProyecto"  value="#{var.regionProyecto}" for="comboregion">
+                                                        <h:panelGrid class="id-jsf-"  />
+                                                        <h:outputLabel  class="id-jsf- "   id="lblregionProyecto"  value="#{var.regionProyecto}" for="comboregion">
 
                                                         </h:outputLabel>
                                                         <h:panelGroup id="gpregion">
@@ -260,42 +260,42 @@
                                                     <interkont:spacer width="485" height="5"/>
                                                     <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarLocalidad}" render="layoutLocalidades" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
                                                                         value="#{var.agregar}" execute=" @this, combodepartamentoproyecto,combomunicipioproyecto,comboregion"
-                                                                        style="font-size:12px;" disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                                                         disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                                 </h:panelGrid>
                                             </h:panelGroup>  
                                         </rich:panel>  
                                         <center>
-                                            <rich:panel id="layoutLocalidades" header="#{var.localidades}" styleClass="rich-panel-body" style="padding:0px;" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
-                                                <h:panelGroup style="overflow:auto; height: 180px; width: 520px">
+                                            <rich:panel id="layoutLocalidades" header="#{var.localidades}" class="id-jsf-"    rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
+                                                <h:panelGroup >
                                                     <rich:dataTable id="tablaLocalidades" rows="4" var ="_localidad" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==2 || Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}"
                                                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"   binding="#{Supervisor$IngresarNuevaObra.tablalocalidades}"
-                                                                    value="#{Supervisor$IngresarNuevaObra.listaLocalidades}" style="text-align:center; width:100%;;">
+                                                                    value="#{Supervisor$IngresarNuevaObra.listaLocalidades}" >
                                                         <f:facet name="header">
                                                             <rich:columnGroup>
                                                                 <rich:column width="150px">
-                                                                    <h:outputText value="#{var.codigoLocalidad}"/>
+                                                                    <h:outputText  class="id-jsf- "   value="#{var.codigoLocalidad}"/>
                                                                 </rich:column>
                                                                 <rich:column width="150px">
-                                                                    <h:outputText value="#{var.departamento}" />
+                                                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}" />
                                                                 </rich:column>
                                                                 <rich:column width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                                                    <h:outputText value="#{var.municipio}"/>
+                                                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
                                                                 </rich:column>
                                                                 <rich:column width="100px">
-                                                                    <h:outputText value="#{var.eliminar}"/>
+                                                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                                                 </rich:column>
                                                             </rich:columnGroup>
                                                         </f:facet>
                                                         <rich:columnGroup id="Cuerpo">
                                                             <rich:column  width="150px" >
-                                                                <h:outputText value="#{_localidad.strcodigolocalidad}"/>
+                                                                <h:outputText  class="id-jsf- "   value="#{_localidad.strcodigolocalidad}"/>
                                                             </rich:column>
                                                             <rich:column  width="150px" >
-                                                                <h:outputText value="#{_localidad.strdepartamento}"/>
+                                                                <h:outputText  class="id-jsf- "   value="#{_localidad.strdepartamento}"/>
                                                             </rich:column>
                                                             <rich:column  width="150px" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen==1}">
-                                                                <h:outputText value="#{_localidad.strmunicipio}"/>
+                                                                <h:outputText  class="id-jsf- "   value="#{_localidad.strmunicipio}"/>
                                                             </rich:column>
 
                                                             <rich:column id="Eliminar" width="100">
@@ -327,7 +327,7 @@
 
                                     <a4j:outputPanel id="panelErrorUb">
                                         <rich:messages id="messagesUb" globalOnly="true"
-                                                       styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                       class="id-jsf-"   ajaxRendered="true"
                                                        >
                                             <f:facet name="infoMarker">
                                                 <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />

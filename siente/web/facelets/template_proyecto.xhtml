@@ -10,7 +10,7 @@
     >
    <h:head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+            <title><h:outputText  class="id-jsf- "   value="#{var.titulogeneral}"></h:outputText></title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>            
@@ -33,7 +33,7 @@
                 <ui:insert name="menu"/>
             </h:form>
 
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <table   align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
                     <td width="15%"></td>
                     <td width="85%">
@@ -53,10 +53,10 @@
 
                 </tr>
             </table>
-            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
-                <tr style="height:15px;"/>
+            <table  border="0" cellspacing="0" cellpadding="0">
+                <tr />
                 <tr>
-                    <td style="width:100%;">
+                    <td >
                         <h:form id="form_footer">
                             <ui:include src="/facelets/footer.xhtml"/>
 

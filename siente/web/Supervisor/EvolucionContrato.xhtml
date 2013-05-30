@@ -16,7 +16,7 @@
         <h:outputScript name="amcharts.js" library="amcharts"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.evolucioncontrato}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.evolucioncontrato}"/>
 
 
 
@@ -32,14 +32,11 @@
 
 
         <h:form prependId="false" >
-            <interkont:spacer height="35" style="width:100%;"/>
+            <interkont:spacer height="35" />
             <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
                 <center>
-                    <h:outputText value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
-                    <div id="graficoEvolucionContrato" style="
-                         width:100%;
-                         height: 400px;
-                         text-align: left;">
+                    <h:outputText  class="id-jsf- "   value="#{Supervisor$GraficoEvolucionContrato.graficoEvolucionContrato.scriptGrafico}" escape="false"/>
+                    <div id="graficoEvolucionContrato" >
                     </div>
                 </center>
             </rich:collapsiblePanel>
@@ -53,65 +50,65 @@
 
                 <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
-                    <h:outputLabel value="#{var.formadepago}:"/>
+                    <h:outputLabel  class="id-jsf- "   value="#{var.formadepago}:"/>
                     <interkont:spacer width="20"/>
-                    <h:outputLabel styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+                    <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                    <h:outputLabel value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                    <h:outputLabel  class="id-jsf- "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
-                    <h:outputLabel styleClass="txt_outtext" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                    <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
-                    <h:outputLabel value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <h:outputLabel  class="id-jsf- "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                         <f:convertNumber pattern="$###,###"/>
                     </h:outputText>
 
-                    <h:outputLabel value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                    <h:outputLabel  class="id-jsf- "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                     <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                    <h:outputText styleClass="txt_outtext" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                         <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                     </h:outputText>
 
                 </h:panelGrid>
 
                 <h:form>
-                    <h:panelGrid style="width:100%;" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
-                        <interkont:spacer height="5" style="width:100%;"/>
+                    <h:panelGrid  rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 2}">
+                        <interkont:spacer height="5" />
                         <rich:dataTable id="tablaPlanificacion"
                                         rows="5"
                                         var ="planificacion"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
-                                        style="text-align:center; width:400px;">
+                                        >
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column width="100px" breakRowBefore="true" colspan="3">
-                                        <h:outputText value="#{var.numero} de Actas Parciales"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.numero} de Actas Parciales"/>
                                     </rich:column>
                                     <rich:column width="100px" breakRowBefore="true">
-                                        <h:outputText value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
                                     </rich:column>
                                     <rich:column width="100px">
-                                        <h:outputText value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
                                     </rich:column>
                                     <rich:column width="100px">
-                                        <h:outputText value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup>
                                 <rich:column  width="100px" breakRowBefore="true">
-                                    <h:outputText value="#{planificacion.numvlrporcentage} %"/>
+                                    <h:outputText  class="id-jsf- "   value="#{planificacion.numvlrporcentage} %"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{planificacion.numvlrpago}">
+                                    <h:outputText  class="id-jsf- "   value="#{planificacion.numvlrpago}">
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{planificacion.datefechapago}">
+                                    <h:outputText  class="id-jsf- "   value="#{planificacion.datefechapago}">
                                         <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                     </h:outputText>
                                 </rich:column>
@@ -125,49 +122,49 @@
             <rich:panel id="gpListadoMovimientos">
 
                 <h:form>
-                    <h:panelGrid style="width:100%;" >
-                        <interkont:spacer height="5" style="width:100%;"/>
+                    <h:panelGrid  >
+                        <interkont:spacer height="5" />
                         <rich:dataTable id="tablaMovimientos"
                                         var ="movimiento"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Supervisor$GraficosEvolucion.movimientos}"
-                                        style="text-align:center;width:600px;">
+                                        >
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column width="100px" breakRowBefore="true" colspan="4">
-                                        <h:outputText value="#{var.movimientosfinancieros}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.movimientosfinancieros}"/>
                                     </rich:column>
                                     <rich:column width="100px" breakRowBefore="true" >
-                                        <h:outputText value="#{var.ordenpago}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.ordenpago}"/>
                                     </rich:column>
                                     <rich:column width="100px" >
-                                        <h:outputText value="#{var.fecha}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.fecha}"/>
                                     </rich:column>
                                     <rich:column width="100px">
-                                        <h:outputText value="#{var.valormovimiento}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.valormovimiento}" />
                                     </rich:column>
                                     <rich:column width="100px">
-                                        <h:outputText value="#{var.TIPO}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.TIPO}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup>
                                 <rich:column  width="100px" breakRowBefore="true">
-                                    <h:outputText value="#{movimiento.ordendepago.strordenpago}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{movimiento.ordendepago.strordenpago}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{movimiento.fechamovimiento}">
+                                    <h:outputText  class="id-jsf- "   value="#{movimiento.fechamovimiento}">
                                         <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{movimiento.numvlrejecutado}">
+                                    <h:outputText  class="id-jsf- "   value="#{movimiento.numvlrejecutado}">
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{movimiento.tipomovimiento.strnombretipomovimiento}">
+                                    <h:outputText  class="id-jsf- "   value="#{movimiento.tipomovimiento.strnombretipomovimiento}">
 
                                     </h:outputText>
                                 </rich:column>

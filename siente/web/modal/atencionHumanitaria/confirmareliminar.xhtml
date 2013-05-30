@@ -8,23 +8,23 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelConfirmaborrado" autosized="true" style="width: 250px"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmaborrado" autosized="true"   headerClass="rich-panel-header">
 
         <f:facet name="header" >
 
             <h:panelGroup >
-                <h:outputText value="#{var.atencion}"  styleClass="txt_header" />
+                <h:outputText  class="id-jsf- "   value="#{var.atencion}"  class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
         <rich:panel id="panelConfGuardar">
 
-            <h:panelGroup style="width: 100%">
-                <h:outputText  value="#{var.validacionconfirmareliminar}"   />
+            <h:panelGroup >
+                <h:outputText  class="id-jsf- "    value="#{var.validacionconfirmareliminar}"   />
             </h:panelGroup>
 
             <center>
                 <h:form>
-                    <h:panelGrid columns="2" style="text-align:center;width:100%;">
+                    <h:panelGrid columns="2" >
 
                         <a4j:commandButton  action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarSolicitud}" value="#{var.si}" 
                                             oncomplete="#{rich:component('panelConfirmaborrado')}.hide();"
@@ -34,7 +34,7 @@
                             <a4j:commandButton id="aceptar"
                                                value="#{var.no}" oncomplete="#{rich:component('panelConfirmaborrado')}.hide();"
                                                title="#{var.aceptar}" execute="@this"
-                                               style="font-size:12px;"/>
+                                               />
                         </h:form>
                     </h:panelGrid>
 

@@ -16,8 +16,8 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.finalizarproyecto}"/>                              
-        <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.finalizarproyecto}"/>                              
+        <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -31,15 +31,15 @@
             <h:panelGroup id="layoutFinalizar">
                 <center>
                     <h:panelGroup id="gpErrorFin">
-                        <h:outputText styleClass="mensaje_error" value="#{Supervisor$AdministrarObraNew.mensajefinaliza}"/>
+                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.mensajefinaliza}"/>
                     </h:panelGroup>
-                    <h:panelGrid id="panel_FinalizarPaso1"  style="width:100%;" columnClasses="aiu">
+                    <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu">
                         <rich:panel header="#{var.finalizarobra}">
-                            <h:outputText rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
-                                          value="#{var.solopuedefinalizaobrasactivas}" styleClass="mensaje_error"/>
+                            <h:outputText  class="id-jsf- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
+                                          value="#{var.solopuedefinalizaobrasactivas}" class="id-jsf-"  />
                             <h:panelGroup>
                                 <center>
-                                    <h:outputText value="#{var.pasosparafinalizarobra}" styleClass="txt_outtext_bold"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.pasosparafinalizarobra}" class="id-jsf-"  />
                                     <br/>
                                     <interkont:spacer height="15px;"/>
                                 </center>
@@ -47,95 +47,95 @@
                             <center>
                                 <h:panelGrid id="gridPasosFin" columns="1">
                                     <h:panelGroup >
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.registrarelrecibofinal}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registrarelrecibofinal}"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText styleClass="txt_fechaazul" value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 }"/>
-                                        <h:outputText  value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 }"/>
+                                        <h:outputText  class="id-jsf- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
                                     </h:panelGroup>
                                     <h:panelGroup>
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.registrarlaultimaacta}"/> <interkont:spacer width="15px;"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registrarlaultimaacta}"/> <interkont:spacer width="15px;"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText styleClass="txt_fechaazul" value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}"/>
-                                        <h:outputText  value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}"/>
+                                        <h:outputText  class="id-jsf- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
                                     </h:panelGroup>
                                     <h:panelGroup>
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.registraliquidacionfinal}"/><interkont:spacer width="15px;"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registraliquidacionfinal}"/><interkont:spacer width="15px;"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText styleClass="txt_fechaazul" value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
-                                        <h:outputText  value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
+                                        <h:outputText  class="id-jsf- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
                                     </h:panelGroup>
                                 </h:panelGrid>
                             </center>
                             <h:panelGroup>
                                 <center><interkont:spacer height="25px;"/>
-                                    <h:panelGrid id="finPaso1"  style="width:100%;" columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1}">
+                                    <h:panelGrid id="finPaso1"   columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1}">
                                         <h:panelGroup>
-                                            <h:outputText styleClass="txt_outtext_bold" value="#{var.registrar} "/>
-                                            <h:outputText styleClass="txt_outtext_bold" value="#{var.elrecibofinaldeobra}"/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registrar} "/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.elrecibofinaldeobra}"/>
                                         </h:panelGroup>
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.antesderegistrarelrecibofinal}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.antesderegistrarelrecibofinal}"/>
                                         <interkont:spacer height="10px;"/>
                                         <h:panelGrid id="layoutActaRecFin" columns="2" width="500" columnClasses="labelsDetalle">
-                                            <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true" style="font-size: 10px;"  styleClass="btn_sec_gra"
+                                            <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true"   class="id-jsf-"  
                                                                onclick="#{rich:component('panelActaRecFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaRecFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactarecfin}" />
-                                            <h:outputText  value="#{var.fechadelacta} "/>
+                                            <h:outputText  class="id-jsf- "    value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActaRecfin" value="#{Supervisor$AdministrarObraNew.obra.datefecrecfin}"/>
                                         </h:panelGrid>
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.estatotalmenteseguroregistrar}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.estatotalmenteseguroregistrar}"/>
                                         <h:panelGroup>
-                                            <a4j:commandButton id="BTaceptarFinPaso1" style="font-size: 10px;" value="#{var.si}" styleClass="btn_sec_peq" render="gpErrorFin, layoutFinalizar"
+                                            <a4j:commandButton id="BTaceptarFinPaso1"  value="#{var.si}" class="id-jsf-"   render="gpErrorFin, layoutFinalizar"
                                                                action="#{Supervisor$AdministrarObraNew.registrarReciboFinal}" >
                                             </a4j:commandButton>
                                             <interkont:spacer width="10"/>
-                                            <a4j:commandButton id="BTnoFinPaso1" style="font-size: 10px;" value="#{var.no}" styleClass="btn_sec_peq" action="admindetalleObra"/>
+                                            <a4j:commandButton id="BTnoFinPaso1"  value="#{var.no}" class="id-jsf-"   action="admindetalleObra"/>
 
                                         </h:panelGroup>
                                         <interkont:spacer height="30" width="200"/>
-                                        <h:outputText styleClass="txt_outtext_bold" value="#{var.notaunavez}"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.notaunavez}"/>
 
                                     </h:panelGrid>
-                                    <h:panelGrid id="finPaso2" style="width:100%;" columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}">
+                                    <h:panelGrid id="finPaso2"  columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}">
 
                                         <h:panelGroup>
-                                            <h:outputText styleClass="txt_ALIMENTAR01" value="#{var.registrar2}"/>
-                                            <h:outputText styleClass="txt_fechaazul]" value="#{var.laultimaacta}"/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registrar2}"/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-" value="#{var.laultimaacta}"/>
                                         </h:panelGroup>
-                                        <h:outputText  value="#{var.estatotalmenteseguroregistrar}"/>
+                                        <h:outputText  class="id-jsf- "    value="#{var.estatotalmenteseguroregistrar}"/>
                                         <h:panelGroup>
-                                            <h:outputText  value="#{var.antesdedarclick}"/>
+                                            <h:outputText  class="id-jsf- "    value="#{var.antesdedarclick}"/>
                                         </h:panelGroup>
 
                                         <h:panelGroup>
-                                            <a4j:commandButton id="BTaceptarFinPaso2" style="font-size: 10px;" value="#{var.si}" styleClass="btn_sec_peq"
+                                            <a4j:commandButton id="BTaceptarFinPaso2"  value="#{var.si}" class="id-jsf-"  
                                                                render="gpErrorFin, layoutFinalizar" action="#{Supervisor$AdministrarObraNew.registrarUltimaActaParcial}"
                                                                />
                                             <interkont:spacer width="10"/>
-                                            <a4j:commandButton id="BTno1" style="font-size: 10px;" value="#{var.no}" styleClass="btn_sec_peq" action="admindetalleObra"/>
+                                            <a4j:commandButton id="BTno1"  value="#{var.no}" class="id-jsf-"   action="admindetalleObra"/>
                                         </h:panelGroup>
                                         <interkont:spacer height="30" width="200"/>
 
                                     </h:panelGrid>
-                                    <h:panelGrid id="finPaso3" style="width:100%;" columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}">
+                                    <h:panelGrid id="finPaso3"  columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}">
                                         <h:panelGroup>
-                                            <h:outputText styleClass="txt_ALIMENTAR01" value="#{var.registrar3} "/>
-                                            <h:outputText styleClass="txt_ALIMENTAR01" value="#{var.laliquidaciondestaobra}"/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.registrar3} "/>
+                                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.laliquidaciondestaobra}"/>
                                         </h:panelGroup>
-                                        <h:outputText  value="#{var.antesderegistrarlaliquidacion}"/>
+                                        <h:outputText  class="id-jsf- "    value="#{var.antesderegistrarlaliquidacion}"/>
                                         <h:panelGrid id="layoutActaFin" columns="2" width="500" columnClasses="labelsDetalle">
-                                            <a4j:commandButton id="btActaFin" styleClass="btn_sec_gra" value="#{var.examinar}"  immediate="true"
+                                            <a4j:commandButton id="btActaFin" class="id-jsf-"   value="#{var.examinar}"  immediate="true"
                                                                oncomplete="#{rich:component('panelActaFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactafin}" />
-                                            <h:outputText  value="#{var.fechadelacta} "/>
+                                            <h:outputText  class="id-jsf- "    value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}" >
                                                 <a4j:ajax execute="@this" ></a4j:ajax>
                                             </rich:calendar>
                                         </h:panelGrid>
-                                        <h:outputText  value="#{var.estatotalmenteseguroliquidacion}"/>
+                                        <h:outputText  class="id-jsf- "    value="#{var.estatotalmenteseguroliquidacion}"/>
                                         <h:panelGroup>
-                                            <h:outputText  value="#{var.aldarclickensi}"/>
+                                            <h:outputText  class="id-jsf- "    value="#{var.aldarclickensi}"/>
                                         </h:panelGroup>
-                                        <a4j:commandButton id="BTaceptarFinPaso3" styleClass="btn_sec_peq" value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
+                                        <a4j:commandButton id="BTaceptarFinPaso3" class="id-jsf-"   value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
                                                            render="gpErrorFin, layoutConfFin" oncomplete="#{rich:component('panelConfirmaFin')}.show(); return true;"  execute="@this">
                                             
                                         </a4j:commandButton>

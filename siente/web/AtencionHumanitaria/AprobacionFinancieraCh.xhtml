@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.generarsolicitudah}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -27,60 +27,60 @@
 
             <rich:collapsiblePanel id="OrdendePagoCh" switchType="ajax">
                 <f:facet name="header">
-                    <h:outputText value="#{var.ordendepagocolombiahumanitaria}"/>
+                    <h:outputText  class="id-jsf- "   value="#{var.ordendepagocolombiahumanitaria}"/>
                 </f:facet>
                 <interkont:spacer height="3"/>
 
                 <center>
                     <h:panelGrid id="panelOrdenCh" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
-                        <h:outputLabel id="lblcartaaprobacion"  value="#{var.cartaaprobacion}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputLabel  class="id-jsf- "   id="lblcartaaprobacion"  value="#{var.cartaaprobacion}:" class="id-jsf-"  />
 
                         <h:panelGrid id="panel_subirCartaAprobacion"  columns="6" columnClasses=",,,buttonsmall"
                                      rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                            <a4j:commandButton id="adjuntarCartaAprobacion" styleClass="btn_sec_gra" value="#{var.examinar}" style="font-size: 10px;"
+                            <a4j:commandButton id="adjuntarCartaAprobacion" class="id-jsf-"   value="#{var.examinar}" 
                                                onclick="#{rich:component('panelUploadCartaAprobacion')}.show(); return false;">
                             </a4j:commandButton>
-                            <h:outputText id="txtRutaCartaAprobacion" value="#{var.rutadocumento}"/>
+                            <h:outputText  class="id-jsf- "   id="txtRutaCartaAprobacion" value="#{var.rutadocumento}"/>
                             <h:inputText id="inputDescCartaAprobacion" value=" #{file.onlyName}" disabled="true"/>
-                            <a4j:commandLink id="bt_agregarCartaAprobacion" styleClass="anadir anchorLink" title="#{var.agregar}"
+                            <a4j:commandLink id="bt_agregarCartaAprobacion" class="id-jsf-"   title="#{var.agregar}"
                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirAprobacionaDetalle}"
                                              render="panelOrdenCh,panelUploadCartaAprobacion"/>
-                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.files}" var="file" style="width: 30px">
-                                <h:outputText id="otxt_nombreCartaAprobacion" value=" #{file.onlyName}"/>
+                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.files}" var="file" >
+                                <h:outputText  class="id-jsf- "   id="otxt_nombreCartaAprobacion" value=" #{file.onlyName}"/>
                             </rich:dataGrid>
 
                         </h:panelGrid>
 
                         <h:panelGroup rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <a4j:commandButton id="btCartaAprobacionver" value="#{var.ver}" immediate="true"
-                                               style="font-size:12px;" />
+                                                />
 
                         </h:panelGroup>
 
-                        <h:outputText value="#{var.fechadecarta}:" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText  class="id-jsf- "   value="#{var.fechadecarta}:" class="id-jsf-"  />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecAprobFinanciera"
                                        inputSize="10" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}">
                         </rich:calendar>
 
-                        <h:outputLabel value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}"
+                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechacartaaprobacion}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputLabel>
 
-                        <h:outputText value="#{var.observaciones}" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText  class="id-jsf- "   value="#{var.observaciones}" class="id-jsf-"  />
                         <h:inputTextarea id="observacionesorden" rows="3" cols="30"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservacionfinanciera}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11}"/>
 
-                        <h:outputLabel id="observacioneslabel" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservacionfinanciera}"
+                        <h:outputLabel  class="id-jsf- "   id="observacioneslabel" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservacionfinanciera}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11}"/>
 
-                        <h:outputText value="#{var.numeroorden}" styleClass="titulo3_filtro_busqueda"/>
+                        <h:outputText  class="id-jsf- "   value="#{var.numeroorden}" class="id-jsf-"  />
                         <h:inputText id="numerordenpago" size="10"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.ordendepago.strordenpago}"
                                      rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11 and !AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
-                        <h:outputLabel id="numordenlabel" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservacionfinanciera}"
+                        <h:outputLabel  class="id-jsf- "   id="numordenlabel" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservacionfinanciera}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.grupousu>11}"/>
 
                     </h:panelGrid>
@@ -88,8 +88,8 @@
                 <center>
                     <h:panelGrid columns="2" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.grupousu==12
                                                          ||!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.grupousu==13}">
-                        <a4j:commandButton id="registraraprobacion" styleClass="btn_pri_inm" value="#{var.registraraprobacion}"   action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"/>
-                        <a4j:commandButton id="Cancelaraprobacion" styleClass="btn_pri_inm" value="#{var.cancelar}"   oncomplete="#{rich:component('panelCancelarSolicitud')}.show();"/>
+                        <a4j:commandButton id="registraraprobacion" class="id-jsf-"   value="#{var.registraraprobacion}"   action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"/>
+                        <a4j:commandButton id="Cancelaraprobacion" class="id-jsf-"   value="#{var.cancelar}"   oncomplete="#{rich:component('panelCancelarSolicitud')}.show();"/>
 
                     </h:panelGrid>
                 </center>

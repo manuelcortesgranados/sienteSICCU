@@ -10,43 +10,43 @@
           xmlns:m="http://code.google.com/p/gmaps4jsf/"
           xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <rich:popupPanel id="mp_nuevo" moveable="false" autosized="true" style="padding: 0px;">
-        <rich:panel header="#{var.rpanhea_enviarmensaje}" id="pl_tabla_listado_resumen_semanal" styleClass="rich-panel-body" style="padding:0px;">
-            <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+    <rich:popupPanel id="mp_nuevo" moveable="false" autosized="true" >
+        <rich:panel header="#{var.rpanhea_enviarmensaje}" id="pl_tabla_listado_resumen_semanal" class="id-jsf-"   >
+            <h:panelGroup >
                 <a4j:commandButton id="esconder_mp_nuevo" onclick="#{rich:component('mp_nuevo')}.hide(); return false;" 
-                                   styleClass="btn_cerrar" />
+                                   class="id-jsf-"   />
             </h:panelGroup>
             <h:form id="form_nuevo">
-                <h:panelGrid style="width:100%;">
-                    <interkont:spacer height="20" style="width:100%;"/>
-                    <h:panelGrid id="pg_camposNuevo" columns="3" style="text-align:left;width:100%;">
+                <h:panelGrid >
+                    <interkont:spacer height="20" />
+                    <h:panelGrid id="pg_camposNuevo" columns="3" >
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  value="#{var.houtfechayhora}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{var.houtfechayhora}"/>
                         <h:inputText id="txt-datefecmensaje-nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  value="#{var.houtdestinatario}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{var.houtdestinatario}"/>
                         <h:selectOneMenu id="select_usuarios-nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.jsfUsuarioByIntusurecibe.tercero.strnombre}">
                             <f:selectItems value="#{Supervisor$Mensajes.selectItemUsuarios}" />
                         </h:selectOneMenu>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  value="#{var.houtasunto}"/>
+                        <h:outputLabel  class="id-jsf- "    value="#{var.houtasunto}"/>
                         <h:inputText id="txt_asunto_nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.strasuntomensaje}" size="65" required="true" maxlength="250">
                             <h:message for="txt_asunto_nuevo"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  value="#{var.houtmensaje}" />
+                        <h:outputLabel  class="id-jsf- "    value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.strtextomensaje}" cols="74" rows="14" required="true">
                             <h:message for="txt_strtextomensaje_nuevo"/>
                         </h:inputTextarea>
                     </h:panelGrid>
                 </h:panelGrid>
-                <interkont:spacer height="10" style="width:100%;"/>
+                <interkont:spacer height="10" />
                 <center>
                     <a4j:commandButton id="bt_aceptarNuevo" action="#{Supervisor$Mensajes.aceptar_nuevo_action}" oncomplete= "#{rich:component('mp_nuevo')}.hide();"
                                               value="#{var.enviar}"
-                                       styleClass="btn_pri_med"   render="pl_tabla_enviados"/>
+                                       class="id-jsf-"     render="pl_tabla_enviados"/>
                 </center>
             </h:form>
         </rich:panel>

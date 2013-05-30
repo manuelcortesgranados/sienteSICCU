@@ -18,42 +18,42 @@
     </ui:define>
     <ui:define name="body">
         <rich:tabPanel >
-            <rich:tab  id="paso1" style="width:250px;">
+            <rich:tab  id="paso1" >
                 <h:form>
 
                     <rich:panel header="#{var.ingresardatosencago}" id="PanelEncargo">
-                        <h:panelGrid columns="4" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;">
-                            <h:panelGrid id="mos" columns="4" style="width: 100%;" >
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputLabel id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
+                        <h:panelGrid columns="4" columnClasses="inputsDetalle,inputsDetalle" >
+                            <h:panelGrid id="mos" columns="4"  >
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputLabel  class="id-jsf- "   id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
 
                                 </h:outputLabel>
                                 <h:inputText  id="txtNumeroencargo" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.intnumencargofiduciario}"
                                               required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
-                                <rich:message for="txtNumeroencargo" style="color: red"/>
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputText id="lbldescripcion"  value="#{var.descripcion}"/>
+                                <rich:message for="txtNumeroencargo" />
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputText  class="id-jsf- "   id="lbldescripcion"  value="#{var.descripcion}"/>
                                 <h:inputTextarea id="txtdes" cols="23" rows="4" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.strdescripcion}"
                                                  required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}"/>
-                                <rich:message for="txtdes" style="color: red"/>
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputLabel id="lblsaldoincial"  value="#{var.saldoinicial}"/>
+                                <rich:message for="txtdes" />
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputLabel  class="id-jsf- "   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
                                 <h:inputText id="txtsaldoinicial" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoinicial}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
-                                <rich:message for="txtsaldoinicial" style="color: red"/>
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputLabel id="lblsaldoactual"  value="#{var.saldoactual}"/>
+                                <rich:message for="txtsaldoinicial" />
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputLabel  class="id-jsf- "   id="lblsaldoactual"  value="#{var.saldoactual}"/>
                                 <h:inputText id="txtsaldoactual" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoactual}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
-                                <rich:message for="txtsaldoactual" style="color: red"/>
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputText id="lblfecha"  value="#{var.fecha}"/>
+                                <rich:message for="txtsaldoactual" />
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputText  class="id-jsf- "   id="lblfecha"  value="#{var.fecha}"/>
                                 <h:panelGroup id="layoutFechaEncargo" >
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
@@ -61,22 +61,22 @@
                                         <a4j:ajax  event="change" />
                                     </rich:calendar>
                                 </h:panelGroup>
-                                <rich:message for="fechaapertura" style="color: red"/>
+                                <rich:message for="fechaapertura" />
 
-                                <h:panelGrid styleClass="vineta"/>
-                                <h:outputLabel id="lblsolicitante"  value="#{var.solicitante}"/>
-                                <h:panelGrid columns="4" style="width: 100%;" >
+                                <h:panelGrid class="id-jsf-"  />
+                                <h:outputLabel  class="id-jsf- "   id="lblsolicitante"  value="#{var.solicitante}"/>
+                                <h:panelGrid columns="4"  >
 
 
-                                    <h:panelGroup id="solicitante" style="text-align: center;">
+                                    <h:panelGroup id="solicitante" >
 
-                                        <h:outputLabel id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
+                                        <h:outputLabel  class="id-jsf- "   id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
                                                        #{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strapellido1}"/>
 
 
                                         <a4j:commandButton  id="bt-ver-listado-tercero" immediate="true"  disabled="#{!Financiera$FiduFinanciera.editarorden}"
-                                                            oncomplete="#{rich:component('mp-listado-tercero')}.show();" style="font-size: 10px;" title="#{var.vertercero}"
-                                                            styleClass="btn_lupa" render="gpTercero" action="#{Financiera$FiduFinanciera.verTercero}"
+                                                            oncomplete="#{rich:component('mp-listado-tercero')}.show();"  title="#{var.vertercero}"
+                                                            class="id-jsf-"   render="gpTercero" action="#{Financiera$FiduFinanciera.verTercero}"
                                                             />
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -85,7 +85,7 @@
 
                         <interkont:spacer width="30"/>
 
-                        <a4j:commandButton id="guardar" action="#{Financiera$FiduFinanciera.guardarFinanciera}" value="#{var.guardar}" styleClass="btn_pri_inm"
+                        <a4j:commandButton id="guardar" action="#{Financiera$FiduFinanciera.guardarFinanciera}" value="#{var.guardar}" class="id-jsf-"  
                                            render="panelConfGuardar"   onclick="#{rich:component('panelConfirmaguardado')}.show();">
 
                         </a4j:commandButton>

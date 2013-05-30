@@ -14,7 +14,7 @@
         <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.cuentaprincipal}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.cuentaprincipal}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_soliobra.xhtml"/>
@@ -28,63 +28,63 @@
 
                 <interkont:spacer height="20"/>
 
-                <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" style="width:100%;">
+                <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" >
                     <f:facet name="header">
-                        <h:outputText value="1. #{var.cuentaprincipal}"/>
+                        <h:outputText  class="id-jsf- "   value="1. #{var.cuentaprincipal}"/>
                     </f:facet>
                     <center>
                         <h:panelGroup>
 
                             <h:panelGrid columns="2" cellspacing="15" >
-                                <h:outputText value="#{var.nombredecuenta}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.nombredecuenta}"/>
                                 <h:inputText size="8" id="nombrecuenta"/>
-                                <h:outputText value="#{var.tipodecuenta}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.tipodecuenta}"/>
                                 <h:selectOneMenu id="tipocuenta"/>
-                                <h:outputText value="#{var.montocuenta}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.montocuenta}"/>
                                 <h:inputText size="8" id="montocuenta"/>
-                                <h:outputText value="#{var.saldoactual}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.saldoactual}"/>
                                 <h:inputText size="8" id="saldoactual"/>
                             </h:panelGrid>
                             <h:panelGrid columns="1" cellspacing="15">
-                                <a4j:commandButton id="agregar" value="#{var.agregar}" styleClass="btn_pri_inm"   style="font-size:12px;">
+                                <a4j:commandButton id="agregar" value="#{var.agregar}" class="id-jsf-"     >
                                 </a4j:commandButton>
                             </h:panelGrid>
-                            <rich:dataTable id="tablacuentas"  var="currentRow" rows="7" style="width:100%;">
+                            <rich:dataTable id="tablacuentas"  var="currentRow" rows="7" >
                                 <f:facet name="header" >
                                     <rich:columnGroup >
                                         <rich:column colspan="4">
-                                            <h:outputText value="#{var.listacuentas}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.listacuentas}"/>
                                         </rich:column>
                                         <rich:column breakRowBefore="true" >
-                                            <h:outputText value="#{var.nombrecuenta}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.nombrecuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText value="#{var.tipocuenta}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.tipocuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText value="#{var.monto}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.monto}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText value="#{var.eliminarcuenta}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.eliminarcuenta}"/>
                                         </rich:column>
                                     </rich:columnGroup>
 
                                 </f:facet>
                                 <rich:column  >
-                                    <h:outputText value="#{var.nombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.nombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{var.nombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
                                     <a4j:commandLink value="Ir"/>
                                 </rich:column>
                                 <f:facet name="footer">
                                     <rich:columnGroup>
-                                        <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
+                                        <rich:column colspan="4" breakRowBefore="true" >
                                             <rich:dataScroller id="scrollTablacuenta" for="tablacuentas" render="tablacuentas"/>
                                         </rich:column>
                                     </rich:columnGroup>

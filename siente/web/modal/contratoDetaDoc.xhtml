@@ -11,49 +11,49 @@
     <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.documento}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelContratoDoc" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelContratoDoc')}.hide();return false;">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel style="overflow-y:scroll;height:350px" >
+        <rich:panel  >
             <h:form id="fcontrato" target="_blank">
             <center>
 
                 <h:panelGrid  width="100%" >
                     <rich:dataTable id="tabladocumento"  
                                     sortMode="single" 
-                                    style="text-align:left;width:100%" 
+                                     
                                     value="#{Supervisor$Contrato.listadocuContrato}"
                                     var="currentRow"
                                     rowKeyVar="filaSeleccionada">
                         <rich:column id="strnombreimg"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText value="#{var.nombreah}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.nombreah}"/>
                             </f:facet>
-                            <h:outputText id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                            <h:outputText  class="id-jsf- "   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
                         </rich:column>
 
                         <rich:column id="strfecha"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText value="#{var.fecha}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.fecha}"/>
                             </f:facet>
-                            <h:outputText id="st_strfecha" value="#{currentRow.datefecha}"/>
+                            <h:outputText  class="id-jsf- "   id="st_strfecha" value="#{currentRow.datefecha}"/>
                         </rich:column>
 
-                        <rich:column style="text-align:center;" width="60px">
+                        <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.Ver}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action(filaSeleccionada)}" immediate="true">
                             </h:commandButton>
@@ -65,7 +65,7 @@
                 <center>
                     <h:panelGrid columns="5">
                         <a4j:commandButton id="confirmarContrato"  value="#{var.aceptar}"
-                                            style="font-size: 12px;"
+                                            
                                             onclick="#{rich:component('panelContratoDoc')}.hide();return false;">
                         </a4j:commandButton>
                     </h:panelGrid>

@@ -7,16 +7,16 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalLogros" autosized="true" width="500"  headerClass="rich-panel-header" styleClass="detalleproyecto" >
+    <rich:popupPanel id="modalLogros" autosized="true" width="500"  headerClass="rich-panel-header" class="id-jsf-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="id-jsf- "   value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalLogros" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalLogros" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalLogros')}.hide();return  false;"
                                      />
@@ -30,44 +30,44 @@
                                 value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rows="5"
-                                var="currentRow"  style="width:100%;">
+                                var="currentRow"  >
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText value="#{var.logro}s"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.logro}s"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText id="tipo" value="#{var.tipo}"/>
+                                <h:outputText  class="id-jsf- "   id="tipo" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText id="logro" value="#{var.logro}"/>
+                                <h:outputText  class="id-jsf- "   id="logro" value="#{var.logro}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText id="usuario" value="#{var.username}"/>
+                                <h:outputText  class="id-jsf- "   id="usuario" value="#{var.username}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText id="fecha" value="#{var.fecha}"/>
+                                <h:outputText  class="id-jsf- "   id="fecha" value="#{var.fecha}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column breakRowBefore="true">
-                            <h:outputText id="tipologro" value="#{currentRow.tipocualitativa.strnombre}"/>
+                            <h:outputText  class="id-jsf- "   id="tipologro" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
                             <h:inputTextarea cols="60" rows="2" value="#{currentRow.strlogro}" readonly="true" />
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText id="strusuario" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText  class="id-jsf- "   id="strusuario" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText id="datefecha" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:outputText  class="id-jsf- "   id="datefecha" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                     </rich:columnGroup>
                     <f:facet name="footer">
                         <rich:columnGroup id="grouptablalogros">
-                            <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
+                            <rich:column colspan="4" breakRowBefore="true" >
                                 <rich:dataScroller id="scrolltablalogros" for="tablaLogrosProyecto" render="tablaLogrosProyecto"/>
                             </rich:column>
                         </rich:columnGroup>

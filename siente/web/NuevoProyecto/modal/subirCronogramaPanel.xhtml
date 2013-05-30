@@ -18,7 +18,7 @@
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.subircronogramadilingeciado}" styleClass="txt_header"/>
+                <h:outputText  class="id-jsf- "   value="#{var.subircronogramadilingeciado}" class="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -26,7 +26,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
                                      title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                       styleClass="cerrar" onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                       class="id-jsf-"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -40,7 +40,7 @@
                             acceptedTypes="xls"
                             immediateUpload="true"
                             maxFilesQuantity="1"
-                            style="width: 250px;"
+                            
                             listHeight="150"                            
                             addLabel="#{var.adicionar}"
                             uploadLabel="#{var.subir}"
@@ -53,19 +53,19 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoCrono">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file">
                                         <h:panelGroup>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </h:panelGroup>
@@ -88,19 +88,19 @@
                             </center>
                                 <a4j:outputPanel id="panelErrorGC">
                                 <rich:messages id="messagesGC" globalOnly="true"
-                                               styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                               class="id-jsf-"   ajaxRendered="true"
                                                >
                                     <f:facet name="infoMarker">
-                                        <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msginfo.png" />
+                                        <h:graphicImage  url="/resources/imgs/msginfo.png" />
                                     </f:facet>
                                     <f:facet name="warnMarker">
-                                        <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgwarn.png" />
+                                        <h:graphicImage  url="/resources/imgs/msgwarn.png" />
                                     </f:facet>
                                     <f:facet name="errorMarker">
-                                        <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                     <f:facet name="fatalMarker">
-                                        <h:graphicImage  style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage   url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                 </rich:messages>
 

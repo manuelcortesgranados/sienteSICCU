@@ -18,8 +18,8 @@
         <h:outputScript  name="script_supervisor"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.modificarobra}"/>
-        <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.modificarobra}"/>
+        <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -31,76 +31,76 @@
     <ui:define name="body">
         <h:form id="form_modificar">
 
-            <h:panelGrid id="panel_modificarobra" style="width:100%;">
-                <h:panelGroup style="width:100%">
+            <h:panelGrid id="panel_modificarobra" >
+                <h:panelGroup >
                     <h:panelGroup id="pgPasos">
-                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso1}">
-                            <h:outputText value="#{var.textopaso1modificacion}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso1Modificacion1}" />
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso1Modificacion2}" />
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:outputText  value="#{var.ingreselafechadeesta}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="20px" style="width:100%;"/>
+                        <h:panelGroup class="id-jsf-"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso1}">
+                            <h:outputText  class="id-jsf- "   value="#{var.textopaso1modificacion}" class="id-jsf-"  />
+                            <interkont:spacer height="15px" />
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso1Modificacion1}" />
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso1Modificacion2}" />
+                            <interkont:spacer height="15px" />
+                            <h:outputText  class="id-jsf- "    value="#{var.ingreselafechadeesta}" class="id-jsf-"  />
+                            <interkont:spacer height="20px" />
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"
                                            id="date_fechaModificacion" inputSize="10"
                                            value="#{Supervisor$ModificarProyecto.historicoobra.datefecobrahist}"/>
-                            <interkont:spacer height="20" style="width:100%;"/>
-                            <h:outputText value="#{var.porfavorjustifique}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="20" style="width:100%;"/>
-                            <h:inputTextarea rows="8" value="#{Supervisor$ModificarProyecto.historicoobra.strrazonmodif}" styleClass="Justificacion"/>
-                            <interkont:spacer height="20" style="width:100%;"/>
-                            <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                            <interkont:spacer height="20" />
+                            <h:outputText  class="id-jsf- "   value="#{var.porfavorjustifique}" class="id-jsf-"  />
+                            <interkont:spacer height="20" />
+                            <h:inputTextarea rows="8" value="#{Supervisor$ModificarProyecto.historicoobra.strrazonmodif}" class="id-jsf-"  />
+                            <interkont:spacer height="20" />
+                            <h:panelGroup class="id-jsf-"  >
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" class="id-jsf-"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  class="id-jsf-"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
                         </h:panelGroup>
 
 
-                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
-                            <interkont:spacer height="10px" style="width:100%;"/>
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso2Modificacion1}"/>
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso2Modificacion2}"/>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:outputText value="#{var.textopaso2modificacion}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:panelGrid columns="2" styleClass="PanelTipificacionModificacion centrado" columnClasses="CeldaPanelTipificacionModificacion">
-                                <a4j:commandLink styleClass="prorroga2 anchorLink" onclick="if (!prorrogaOnClick())
+                        <h:panelGroup class="id-jsf-"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
+                            <interkont:spacer height="10px" />
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso2Modificacion1}"/>
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso2Modificacion2}"/>
+                            <interkont:spacer height="15px" />
+                            <h:outputText  class="id-jsf- "   value="#{var.textopaso2modificacion}" class="id-jsf-"  />
+                            <interkont:spacer height="15px" />
+                            <h:panelGrid columns="2" class="id-jsf-"   columnClasses="CeldaPanelTipificacionModificacion">
+                                <a4j:commandLink class="id-jsf-"   onclick="if (!prorrogaOnClick())
                                             return false;"/>
-                                <a4j:commandLink styleClass="adicionPresupuesto anchorLink" onclick="if (!adicionPresupuestoOnClick())
+                                <a4j:commandLink class="id-jsf-"   onclick="if (!adicionPresupuestoOnClick())
                                             return false;"/>
                                 <h:panelGroup>
-                                    <h:selectBooleanCheckbox  value="#{Supervisor$ModificarProyecto.historicoobra.adiciontiempo}" styleClass="CheckRealizarProrroga" onchange="checkRealizarProrrogaOnChangue();"/>
-                                    <h:outputLabel value="#{var.nuevafechaterminacionmodificacion}" styleClass="TextoTipificacionModificacion"/>
+                                    <h:selectBooleanCheckbox  value="#{Supervisor$ModificarProyecto.historicoobra.adiciontiempo}" class="id-jsf-"   onchange="checkRealizarProrrogaOnChangue();"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.nuevafechaterminacionmodificacion}" class="id-jsf-"  />
                                 </h:panelGroup>
                                 <h:panelGroup>
-                                    <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="CheckAdicionarPresupuesto" onchange="checkAdicionarPresupuestoOnChangue();"/>
-                                    <h:outputLabel value="#{var.nuevovaloradicionmodificacion}" styleClass="TextoTipificacionModificacion"/>
+                                    <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" class="id-jsf-"   onchange="checkAdicionarPresupuestoOnChangue();"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.nuevovaloradicionmodificacion}" class="id-jsf-"  />
                                 </h:panelGroup>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="12"
                                                value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" inputClass="datefecfinhist"  >
                                     <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                 </rich:calendar>
-                                <h:inputText styleClass="numvalorhist" value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
+                                <h:inputText class="id-jsf-"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
                                     <f:convertNumber pattern="###,###" maxFractionDigits="6"/>
                                 </h:inputText>
-                                <interkont:spacer height="15px" style="width:100%;"/>
-                                <interkont:spacer height="15px" style="width:100%;"/>
-                                <a4j:commandLink styleClass="cambioPrecios anchorLink" onclick="if (!cambioPreciosOnClick())
+                                <interkont:spacer height="15px" />
+                                <interkont:spacer height="15px" />
+                                <a4j:commandLink class="id-jsf-"   onclick="if (!cambioPreciosOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <a4j:commandLink styleClass="adicionActividades anchorLink" onclick="if (!adicionActividadesOnClick())
+                                <a4j:commandLink class="id-jsf-"   onclick="if (!adicionActividadesOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.cambioprecios}" styleClass="CheckCambiarPrecios" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionactivi}" styleClass="CheckAdicionarActividades" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.cambioprecios}" class="id-jsf-"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
+                                <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionactivi}" class="id-jsf-"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
                             </h:panelGrid>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:outputText value="#{var.notapaso2modificacion}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="10" style="width:100%;"/>
+                            <interkont:spacer height="15px" />
+                            <h:outputText  class="id-jsf- "   value="#{var.notapaso2modificacion}" class="id-jsf-"  />
+                            <interkont:spacer height="10" />
 
-                            <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                            <h:panelGroup class="id-jsf-"  >
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" class="id-jsf-"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  class="id-jsf-"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
 
                             <f:verbatim>
@@ -210,84 +210,84 @@
 
                         </h:panelGroup>
 
-                        <h:panelGroup styleClass="PanelPaso1Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
+                        <h:panelGroup class="id-jsf-"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
 
-                            <interkont:spacer height="10px" style="width:100%;"/>
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso3Modificacion1}"/>
-                            <h:outputText styleClass="TituloModificarProyecto centrado" value="#{var.tituloPaso3Modificacion2}"/>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:outputText value="#{var.textopaso3modificacion}" styleClass="TextoTipificacionModificacion"/>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:panelGrid headerClass="sliderich" styleClass="centrado" width="70%">
+                            <interkont:spacer height="10px" />
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso3Modificacion1}"/>
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.tituloPaso3Modificacion2}"/>
+                            <interkont:spacer height="15px" />
+                            <h:outputText  class="id-jsf- "   value="#{var.textopaso3modificacion}" class="id-jsf-"  />
+                            <interkont:spacer height="15px" />
+                            <h:panelGrid headerClass="sliderich" class="id-jsf-"   width="70%">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.pgenerarcronograma}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.pgenerarcronograma}"/>
                                 </f:facet>
                                 <h:panelGroup rendered ="false">
-                                    <h:outputText value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.debediligenciartodoslosdatos}"/>
+                                    <h:graphicImage  url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
                                 <h:panelGroup rendered ="false">
-                                    <h:outputText value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.debediligenciartodoslosdatos}"/>
+                                    <h:graphicImage  url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
 
                                 <h:panelGrid columns="2" columnClasses="PanelGenerarCronogramaPaso3">
                                     <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" 
                                                      onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
                                                      oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
-                                                     styleClass="excelModificar anchorlink" immediate="true" />
-                                    <h:outputLabel value="#{var.pgenerarcronograma}"/>
+                                                     class="id-jsf-"   immediate="true" />
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.pgenerarcronograma}"/>
                                     <h:panelGroup>
-                                        <h:outputText styleClass="Notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
-                                        <h:outputText value="#{var.textonotapaso3modificacion}" styleClass="TextoTipificacionModificacion"/>
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.notapaso3modificacion} "/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.textonotapaso3modificacion}" class="id-jsf-"  />
                                     </h:panelGroup>
                                 </h:panelGrid>
                             </h:panelGrid>
-                            <interkont:spacer height="15px" style="width:100%;"/>
-                            <h:panelGrid id="panelInfoCronoSubido" headerClass="sliderich" styleClass="centrado" columnClasses="PanelSubirCronogramaPaso3">
+                            <interkont:spacer height="15px" />
+                            <h:panelGrid id="panelInfoCronoSubido" headerClass="sliderich" class="id-jsf-"   columnClasses="PanelSubirCronogramaPaso3">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.subircronograma}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.subircronograma}"/>
                                 </f:facet>
-                                <h:outputLabel value="#{var.importeelcronograma}" styleClass="TextoTipificacionModificacion"/>
-                                <interkont:spacer height="15px" style="width:100%;"/>
-                                <a4j:commandButton styleClass="btn_sec_gig"  value="#{var.examinar}" style="font-size: 10px;" id="subircronograma"
+                                <h:outputLabel  class="id-jsf- "   value="#{var.importeelcronograma}" class="id-jsf-"  />
+                                <interkont:spacer height="15px" />
+                                <a4j:commandButton class="id-jsf-"    value="#{var.examinar}"  id="subircronograma"
                                                    oncomplete="#{rich:component('panelUploadCronograma')}.show(); return true;" />
-                                <interkont:spacer height="15px" style="width:100%;"/>
-                                <h:outputText rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" styleClass="NoFileModificar"/>
+                                <interkont:spacer height="15px" />
+                                <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" class="id-jsf-"  />
 
                                 <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                                    <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" styleClass="centrado">
+                                    <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="id-jsf-"  >
                                         <h:panelGroup>
-                                            <h:graphicImage url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" style="vertical-align: middle"/>
-                                            <h:outputText value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" styleClass="NoFileModificar" style="margin-left: 0.5em;"/>
-                                            <h:graphicImage url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" style="vertical-align: middle"/>
-                                            <h:outputText value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" styleClass="NoFileModificar" style="margin-left: 0.5em;"/>
+                                            <h:graphicImage url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" class="id-jsf-"   />
+                                            <h:graphicImage url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" class="id-jsf-"   />
                                         </h:panelGroup>
-                                        <h:outputText value=" #{file.nombre}" styleClass="TextoTipificacionModificacion"/>
+                                        <h:outputText  class="id-jsf- "   value=" #{file.nombre}" class="id-jsf-"  />
                                     </h:panelGrid>
                                 </a4j:repeat>
                             </h:panelGrid>
 
-                            <interkont:spacer height="10" style="width:100%;"/>
-                            <h:panelGroup styleClass="centrado">
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                            <interkont:spacer height="10" />
+                            <h:panelGroup class="id-jsf-"  >
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  class="id-jsf-"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
 
                         </h:panelGroup>
 
-                        <h:panelGroup styleClass="PanelPaso4Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
-                            <h:outputText value="Paso 4" styleClass="TituloModificarProyecto centrado" />
-                            <h:outputText value="Anexe los documentos relacionados" styleClass="TituloModificarProyecto centrado"/>
+                        <h:panelGroup class="id-jsf-"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
+                            <h:outputText  class="id-jsf- "   value="Paso 4" class="id-jsf-"   />
+                            <h:outputText  class="id-jsf- "   value="Anexe los documentos relacionados" class="id-jsf-"  />
                             <interkont:spacer height="50"/>
 
-                            <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
+                            <h:panelGrid class="id-jsf-"  >
 
-                                <h:panelGroup  styleClass="centrado panelSubirDocModificacion" id="panelSubirDocModificacion">
+                                <h:panelGroup  class="id-jsf-"   id="panelSubirDocModificacion">
                                     <h:inputText id="txt_strnombre_documento_Modificacion" maxlength="255" value="#{Supervisor$ModificarProyecto.documentomodificacion.strnombre}"
-                                                 styleClass="buscador_field_2" />
-                                    <a4j:commandButton id="adjuntarDocumento" styleClass="buttonsmall2" value="#{var.examinar}" immediate="true"
+                                                 class="id-jsf-"   />
+                                    <a4j:commandButton id="adjuntarDocumento" class="id-jsf-"   value="#{var.examinar}" immediate="true"
                                                        oncomplete="#{rich:component('panelUploadDocumentoModificacion')}.show(); return true;"/>
                                     <h:selectOneMenu id="select_tipodocumentoModificacion"
                                                      value="#{Supervisor$ModificarProyecto.tipodoc}" >
@@ -297,15 +297,15 @@
                                         <h:graphicImage url="/resources/imgs/add.png"/>
                                     </a4j:commandLink>
                                     <h:panelGroup id="panelListadoArchivosCargados">
-                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorDocumentos.archivos}" var="file"  style="clear: left">
-                                            <h:outputText value=" #{file.nombre}"/>
+                                        <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorDocumentos.archivos}" var="file"  >
+                                            <h:outputText  class="id-jsf- "   value=" #{file.nombre}"/>
                                         </rich:dataGrid>
                                     </h:panelGroup>
                                 </h:panelGroup>
 
 
                                 <h:panelGroup id="panelTablaDocumentosModificacion">
-                                    <rich:dataTable id="tablaDocumentosModificacion" var="currentRow" styleClass="centrado" style="width:100%; background-color: #F2F7FA"
+                                    <rich:dataTable id="tablaDocumentosModificacion" var="currentRow" class="id-jsf-"   
                                                     value="#{Supervisor$ModificarProyecto.listadocumentosmodi}" rows="5" 
                                                     rowClasses="stable"
                                                     rowKeyVar="filaSeleccionada" 
@@ -318,23 +318,23 @@
                                                 </rich:column>
 
                                                 <rich:column breakRowBefore="true">
-                                                    <h:outputText value="#{var.nombre} del Documento"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nombre} del Documento"/>
                                                 </rich:column>
 
                                                 <rich:column >
-                                                    <h:outputText value="#{var.tipo}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText value="#{var.fecha}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.fecha}"/>
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText value="#{var.ver}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.ver}"/>
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText value="#{var.eliminar}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                                 </rich:column>
 
                                             </rich:columnGroup>
@@ -342,35 +342,35 @@
                                         </f:facet>
                                         <rich:columnGroup>
                                             <rich:column>
-                                                <h:outputText value="#{currentRow.strnombre}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}"/>
                                             </rich:column>
 
                                             <rich:column >
-                                                <h:outputText value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                                             </rich:column>
 
                                             <rich:column>
-                                                <h:outputText value="#{currentRow.datefecha}">
+                                                <h:outputText  class="id-jsf- "   value="#{currentRow.datefecha}">
                                                     <f:convertDateTime pattern="yyyy-MMM-dd"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column>
 
                                                 <h:commandLink id="boton_ver_doc_modi" action="#{Supervisor$ModificarProyecto.btDescargarDocumentoAction(filaSeleccionada)}" immediate="true"  >
-                                                    <h:graphicImage style="border:0px;border-style:none; height: 25px; width: 25px;" value="/resources/imgs/bt_ver.png"/>
+                                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                                                 </h:commandLink>
 
                                             </rich:column>
                                             <rich:column >
                                                 <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction(filaSeleccionada)}" render="panelTablaDocumentosModificacion" execute="@this">
-                                                    <h:graphicImage style="border:0px;border-style:none; height: 25px; width: 25px;" value="/resources/imgs/bt_eliminar.png"/>
+                                                    <h:graphicImage  value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>
                                             </rich:column>
                                         </rich:columnGroup>
 
                                         <f:facet name="footer">
                                             <rich:columnGroup>
-                                                <rich:column colspan="6" breakRowBefore="true" style="text-align: center;">
+                                                <rich:column colspan="6" breakRowBefore="true" >
                                                     <rich:dataScroller id="scrolltablaDocumentosModificacion" for="tablaDocumentosModificacion" render="tablaDocumentosModificacion"/>
                                                 </rich:column>
                                             </rich:columnGroup>
@@ -378,92 +378,92 @@
                                     </rich:dataTable>
                                 </h:panelGroup>
                                 <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
-                                <interkont:spacer height="10" style="width:100%;"/>
+                                <interkont:spacer height="10" />
 
-                                <h:panelGroup styleClass="centrado">
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.siguiente}" execute="@form"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                                <h:panelGroup class="id-jsf-"  >
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.siguiente}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  class="id-jsf-"   value="#{var.cancelar}" execute="@this"/>
                                 </h:panelGroup>
 
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <h:panelGroup styleClass="PanelPaso5Modificar PanelModificar" layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
-                            <h:outputText value="Paso 5" styleClass="TituloModificarProyecto centrado" />
-                            <h:outputText value="#{var.tituloseleccontratovalormodi}" styleClass="TituloModificarProyecto centrado"/>
+                        <h:panelGroup class="id-jsf-"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
+                            <h:outputText  class="id-jsf- "   value="Paso 5" class="id-jsf-"   />
+                            <h:outputText  class="id-jsf- "   value="#{var.tituloseleccontratovalormodi}" class="id-jsf-"  />
                             <interkont:spacer height="50"/>
 
-                            <h:panelGrid styleClass="centrado panelLayoutPaso4Modifcar">
+                            <h:panelGrid class="id-jsf-"  >
 
-                                <h:panelGroup  styleClass="centrado panelSubirDocModificacion">
-                                    <h:outputText  value="#{var.selcontratopresumodi}" styleClass="TextoTipificacionModificacion" rendered="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}"/>
-                                    <h:outputText  value="#{var.selcontratopresumodidismi}" styleClass="TextoTipificacionModificacion" rendered="#{Supervisor$ModificarProyecto.historicoobra.disminucionpresu}"/>
+                                <h:panelGroup  class="id-jsf-"  >
+                                    <h:outputText  class="id-jsf- "    value="#{var.selcontratopresumodi}" class="id-jsf-"   rendered="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}"/>
+                                    <h:outputText  class="id-jsf- "    value="#{var.selcontratopresumodidismi}" class="id-jsf-"   rendered="#{Supervisor$ModificarProyecto.historicoobra.disminucionpresu}"/>
                                 </h:panelGroup>
 
                                 <h:panelGroup>
 
-                                    <rich:dataTable id="tablaContratosModiProyecto" rows="10" style="text-align:left; width:100%;"  var="contrarow"
+                                    <rich:dataTable id="tablaContratosModiProyecto" rows="10"   var="contrarow"
                                                     value="#{Supervisor$ModificarProyecto.obra.relacionesContratoObraConsultoria}"
                                                     binding="#{Supervisor$ModificarProyecto.tablacontratos}">
                                         <rich:column width="100px">
                                             <f:facet name="header">
-                                                <h:outputText value="Número contrato" />
+                                                <h:outputText  class="id-jsf- "   value="Número contrato" />
                                             </f:facet>
-                                            <h:outputText value="#{contrarow.contrato.strnumcontrato}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{contrarow.contrato.strnumcontrato}"/>
                                         </rich:column>
-                                        <rich:column width="100px" style="text-align: right;">
+                                        <rich:column width="100px" >
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.valor}" />
+                                                <h:outputText  class="id-jsf- "   value="#{var.valor}" />
                                             </f:facet>
-                                            <h:outputText value="#{contrarow.contrato.numvlrcontrato}">
+                                            <h:outputText  class="id-jsf- "   value="#{contrarow.contrato.numvlrcontrato}">
                                                 <f:convertNumber pattern="$###,###,###"/>
 
                                             </h:outputText>
                                         </rich:column>
 
-                                        <rich:column width="150px" style="text-align: right;" >
+                                        <rich:column width="150px"  >
                                             <f:facet name="header">
-                                                <h:outputText value="Valor Disponible"/>
+                                                <h:outputText  class="id-jsf- "   value="Valor Disponible"/>
                                             </f:facet>
-                                            <h:outputText value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
+                                            <h:outputText  class="id-jsf- "   value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
                                                 <f:convertNumber pattern="$###,###,###"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column width="150px">
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.datefechaini}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.datefechaini}"/>
                                             </f:facet>
-                                            <h:outputText  value="#{contrarow.contrato.datefechaini}"/>
+                                            <h:outputText  class="id-jsf- "    value="#{contrarow.contrato.datefechaini}"/>
                                         </rich:column>
                                         <rich:column width="150px">
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.datefechafin}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.datefechafin}"/>
                                             </f:facet>
-                                            <h:outputText  value="#{contrarow.contrato.datefechafin}"/>
+                                            <h:outputText  class="id-jsf- "    value="#{contrarow.contrato.datefechafin}"/>
                                         </rich:column>
                                         <rich:column width="150px">
                                             <f:facet name="header">
-                                                <h:outputText value="Tipo Contrato"/>
+                                                <h:outputText  class="id-jsf- "   value="Tipo Contrato"/>
                                             </f:facet>
-                                            <h:outputText  value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
-                                            <h:outputText  value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                                            <h:outputText  class="id-jsf- "    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
+                                            <h:outputText  class="id-jsf- "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
                                         </rich:column>
                                         <rich:column width="150px">
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.seleccionar}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.seleccionar}"/>
                                             </f:facet>
                                             <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$ModificarProyecto.btSeleccionarContratoAction}" disabled="#{!Supervisor$ModificarProyecto.verSeleccionarContrato}" render="tablaContratosModiProyecto"/>
                                         </rich:column>
                                         <rich:column width="150px">
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.modificarcontrato}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.modificarcontrato}"/>
                                             </f:facet>
                                             <h:commandButton value="#{var.modificarcontrato}" action="#{Supervisor$ModificarProyecto.btModificarContratoAction}" immediate="true"/>
                                         </rich:column>
                                         <f:facet name="footer">
                                             <rich:columnGroup>
-                                                <rich:column colspan="8" breakRowBefore="true" style="text-align: center;">
+                                                <rich:column colspan="8" breakRowBefore="true" >
                                                     <rich:dataScroller id="scrollTablaContratosModiProyecto" for="tablaContratosModiProyecto" render="tablaContratosModiProyecto" />
                                                 </rich:column>
                                             </rich:columnGroup>
@@ -472,10 +472,10 @@
 
                                 </h:panelGroup>
 
-                                <h:panelGroup styleClass="centrado">
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="BotonesPasosModificar" value="#{var.guardar}" execute="@form"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="BotonesPasosModificar" value="#{var.cancelar}" execute="@this"/>
+                                <h:panelGroup class="id-jsf-"  >
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  class="id-jsf-"   value="#{var.guardar}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  class="id-jsf-"   value="#{var.cancelar}" execute="@this"/>
                                 </h:panelGroup>
 
                             </h:panelGrid>

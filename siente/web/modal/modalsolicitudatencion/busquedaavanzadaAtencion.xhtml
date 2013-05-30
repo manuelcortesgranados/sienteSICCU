@@ -10,19 +10,18 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelBusquedaAvanzadaAtencion" autosized="true"  style="background-color: #FFFFFF; border: 7px solid #004670;
-                     box-shadow: 1px 1px 10px #FFFFFF; text-align: center;"   headerClass="header_filtro" >
+    <rich:popupPanel id="panelBusquedaAvanzadaAtencion" autosized="true"     headerClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText value="#{var.filtbusqueda} " styleClass="titulo_filtro_busqueda" />
-                <h:outputText value="#{var.filtavanzada}" styleClass="titulo2_filtro_busqueda" />
+                <h:outputText  class="id-jsf- "   value="#{var.filtbusqueda} " class="id-jsf-"   />
+                <h:outputText  class="id-jsf- "   value="#{var.filtavanzada}" class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
         
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelBusquedaAvanzadaAtencion" styleClass="cerrarbusqueda"
+                    <a4j:commandLink id="esconder_panelBusquedaAvanzadaAtencion" class="id-jsf-"  
                                      onclick="#{rich:component('panelBusquedaAvanzadaAtencion')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -32,51 +31,51 @@
         
         <h:form id="form_filtro">
             <center>
-                <h:panelGrid id="gppanelBusquedaAvanzadaAtencion" style="background-color: #FFFFFF; height:250px;" columnClasses="panelcenter">
-                    <h:inputText size="35" style="width: 520px" id="txtPalabraClave" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"
-                                 onclick="this.value = '';" styleClass="buscador_field_filtro" />
+                <h:panelGrid id="gppanelBusquedaAvanzadaAtencion"  columnClasses="panelcenter">
+                    <h:inputText size="35"  id="txtPalabraClave" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"
+                                 onclick="this.value = '';" class="id-jsf-"   />
 
-                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda" style="background-color: #FFFFFF; width: 100%;">
-                        <h:outputLabel  id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" styleClass="titulo3_filtro_busqueda" />
+                    <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda" >
+                        <h:outputLabel  class="id-jsf- "    id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" class="id-jsf-"   />
                         <h:selectOneMenu id="estadosolicitudAH" 
                                          value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intestadoSolicitud}"
-                                         style="width: 200px;">
+                                         >
                             <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadosolicitud}" />
                             <a4j:ajax event="change" execute="@this, estadosolicitudAH" />
                         </h:selectOneMenu>
                         
-                        <h:outputLabel id="label_fase" value="#{var.tipoAyudaHum}" styleClass="titulo3_filtro_busqueda" />
+                        <h:outputLabel  class="id-jsf- "   id="label_fase" value="#{var.tipoAyudaHum}" class="id-jsf-"   />
                         <h:panelGroup>
                             <h:panelGrid>
                                 <h:selectOneMenu id="combotipoah1"
                                                  value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.inttipoayuda}"
-                                                 style="width: 200px;">
+                                                 >
                                     <f:selectItem itemValue="0" itemLabel="Todos" />
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipoah}" />
                                     <a4j:ajax  event="change" render="selcategoria1"
                                                listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProductos1}" execute="@this" />
                                 </h:selectOneMenu>
                                 
-                                <h:selectOneMenu id="selcategoria1" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.longproductoat}" style="width: 200px;">
+                                <h:selectOneMenu id="selcategoria1" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.longproductoat}" >
                                     <f:selectItem itemValue="0" itemLabel="Todos"  />
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.producto}" />
                                 </h:selectOneMenu>
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <h:outputLabel id="label_regionalizacion" value="#{var.region}alización" styleClass="titulo3_filtro_busqueda" />
+                        <h:outputLabel  class="id-jsf- "   id="label_regionalizacion" value="#{var.region}alización" class="id-jsf-"   />
                         <h:panelGroup>
-                            <h:selectOneMenu value="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas}" style="width: 200px;">
+                            <h:selectOneMenu value="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas}" >
                                 <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1" />
                                 <f:selectItem itemLabel="#{var.localidad}" itemValue="0" />
                                 <a4j:ajax event="change" execute="@this" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarZonaEspecifica}" render="pgorigen" />
                             </h:selectOneMenu>
                         </h:panelGroup>
                         
-                        <h:outputLabel id="label_donde" value="#{var.ubicacionsolicitud}" styleClass="titulo3_filtro_busqueda" />
+                        <h:outputLabel  class="id-jsf- "   id="label_donde" value="#{var.ubicacionsolicitud}" class="id-jsf-"   />
                         <h:panelGrid id="pgorigen">
                             <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas == 1}" 
-                                         style="width: 200px;">
+                                         >
                                 <h:selectOneMenu id="zona" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intregionespecifica}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.todos}" />
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.zonaespe}" />
@@ -85,19 +84,19 @@
                             </h:panelGrid>
 
                             <h:panelGroup id="pgdeptos" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas == 0}">
-                                <h:selectOneMenu  style="width: 200px;" id="depto" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.strcoddepto}">
+                                <h:selectOneMenu   id="depto" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.strcoddepto}">
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.departamentofiltro}" />
                                     <a4j:ajax event="change" render="municipios" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarMunicipiosFiltro}" execute="@this" />
                                 </h:selectOneMenu>
                                 
-                                <h:selectOneMenu id="municipios" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.strmunicipio}" style="width: 200px;">
+                                <h:selectOneMenu id="municipios" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.strmunicipio}" >
                                     <f:selectItem itemValue="0" itemLabel="Todos" />
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.municipiofiltro}" />
                                 </h:selectOneMenu>
                             </h:panelGroup>
                         </h:panelGrid>
 
-                        <h:outputText id="outpago" value="N° de Giro" styleClass="titulo3_filtro_busqueda" />
+                        <h:outputText  class="id-jsf- "   id="outpago" value="N° de Giro" class="id-jsf-"   />
                         <rich:inputNumberSpinner id="spago" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intordensolicitud}"
                                                  minValue="0" maxValue="5" inputSize="5" />
 
@@ -111,8 +110,8 @@
 
                         <interkont:spacer height="5" />
 
-                        <h:panelGroup style="float:right;">
-                            <h:commandLink type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" styleClass="busquedavanzada2 anchorLink" />
+                        <h:panelGroup >
+                            <h:commandLink type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" class="id-jsf-"   />
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:panelGrid>

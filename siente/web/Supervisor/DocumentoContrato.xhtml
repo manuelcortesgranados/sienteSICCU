@@ -22,21 +22,21 @@
         <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
     </ui:define>
     <ui:define name="body">
         <h:form target="_blank" > 
-            <h:panelGroup style="width:100%">
-                <div style="height: 40px; width: 100%">
-                    <marquee scrolldelay="200" behavior="alternate" style="width: 100%;">
-                        <rich:message for="txt_strnombre_documento" styleClass="txt_label_bold"/>
+            <h:panelGroup >
+                <div >
+                    <marquee scrolldelay="200" behavior="alternate" >
+                        <rich:message for="txt_strnombre_documento" class="id-jsf-"  />
                     </marquee>
                 </div>
-                <interkont:spacer height="20px" style="width:100%;"/>
+                <interkont:spacer height="20px" />
                 <h:panelGroup id="panel_docu_contrato">
                     <rich:dataTable id="tablaDocumentosContrato"
                                     sortMode="single"
-                                    style="text-align:left;width:100%;"
+                                    
                                     value="#{SessionBeanCobra.cobraService.listaDocumentosContrato}"
                                     var="currentRow" 
                                     rowKeyVar="filaSeleccionada"
@@ -44,40 +44,40 @@
                                     rowClasses="cabezo_tabla01, cabezo_tabla02" >
                         <rich:column width="320px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.houtnomdocu} "/>
+                                <h:outputText  class="id-jsf- "   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText value="#{currentRow.strnombre}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.tipo}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText  value="#{var.fechadeldocumento}"/>
+                                <h:outputText  class="id-jsf- "    value="#{var.fechadeldocumento}"/>
                             </f:facet>
-                            <h:outputText value="#{currentRow.datefecha}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.datefecha}">
                                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
                             </h:outputText>
                         </rich:column>
-                        <rich:column style="text-align:center;" width="60px">
+                        <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.Ver}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo(filaSeleccionada)}"  immediate="true">
-                                <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
-                        <rich:column style="text-align:center;" width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
+                        <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
                             <f:facet name="header">
-                                <h:outputText  value="#{var.eliminar}"/>
+                                <h:outputText  class="id-jsf- "    value="#{var.eliminar}"/>
                             </f:facet>
                             <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action(filaSeleccionada)}"
                                              rendered="#{!currentRow.tipodocumento.obligatorio}" execute="@this"
                                              title="#{var.eliminar}"  immediate="true" render="tablaDocumentosContrato">
-                                <h:graphicImage style="border:0px;border-style:none;" width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -90,45 +90,45 @@
             <interkont:spacer height="20px"/>
         </h:form>
         <h:form>
-            <rich:dataTable id="docsubir" style="width:100%;" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
+            <rich:dataTable id="docsubir"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
                 <f:facet name="header">
                     <rich:columnGroup>
-                        <rich:column colspan="4" style="text-align:center;">
-                            <h:outputText value="#{var.subidarapidadedocumentos}"/>
+                        <rich:column colspan="4" >
+                            <h:outputText  class="id-jsf- "   value="#{var.subidarapidadedocumentos}"/>
                         </rich:column>
-                        <rich:column breakRowBefore="true" style="text-align:center;">
-                            <h:outputText  value="#{var.nombre}"/>
+                        <rich:column breakRowBefore="true" >
+                            <h:outputText  class="id-jsf- "    value="#{var.nombre}"/>
                         </rich:column>
-                        <rich:column style="text-align:center;">
-                            <h:outputText value="#{var.tipo}"/>
+                        <rich:column >
+                            <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
                         </rich:column>
-                        <rich:column style="text-align:center;">
-                            <h:outputText value="#{var.fechadeldocumento}"/>
+                        <rich:column >
+                            <h:outputText  class="id-jsf- "   value="#{var.fechadeldocumento}"/>
                         </rich:column>
-                        <rich:column style="text-align:center;">
-                            <h:outputText value="#{var.subir}"/>
+                        <rich:column >
+                            <h:outputText  class="id-jsf- "   value="#{var.subir}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
                 <f:facet name="footer">
                     <rich:columnGroup id="contrasubido">
-                        <rich:column style="text-align:center;">
+                        <rich:column >
                             <h:inputText maxlength="255" value="#{Supervisor$Contrato.documentoobra.strnombre}" required="true" requiredMessage="#{var.debeproporcinarelnombredeldocu}"/>
                         </rich:column>
-                        <rich:column style="text-align:center;">
+                        <rich:column >
                             <h:selectOneMenu value="#{Supervisor$Contrato.documentoobra.tipodocumento.inttipodoc}">
                                 <f:selectItems value="#{Supervisor$Contrato.tipodocumento}" />
                             </h:selectOneMenu>
                         </rich:column>
-                        <rich:column style="text-align:center;">
+                        <rich:column >
                             <rich:calendar locale="#{var.rcalendarlocale}" value="#{Supervisor$Contrato.documentoobra.datefecha}" required="true" inputSize="10"/>
                         </rich:column>
-                        <rich:column style="text-align:center;">
+                        <rich:column >
                             <h:panelGrid id="panelsubido" columns="3">
-                               <a4j:commandButton styleClass="btn_sec_gra" value="#{var.examinar}" immediate="true"
+                               <a4j:commandButton class="id-jsf-"   value="#{var.examinar}" immediate="true"
                                                            oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
-                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" style="width:30px;">
-                                            <h:outputText value=" #{file.nombre}"/>
+                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" >
+                                            <h:outputText  class="id-jsf- "   value=" #{file.nombre}"/>
                                         </rich:dataGrid>
                                <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"
                                                            title="#{var.agregar}" value="#{var.agregar}"

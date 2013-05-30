@@ -8,45 +8,45 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <h:panelGroup id="panelprorroga" style="padding: 0px;">
+    <h:panelGroup id="panelprorroga" >
 
-        <h:panelGrid  style="width:100%;" >
+        <h:panelGrid   >
             <center>
                 <f:facet name="header">
-                    <h:outputLabel value="#{var.prorroga}">
+                    <h:outputLabel  class="id-jsf- "   value="#{var.prorroga}">
 
                     </h:outputLabel>
                 </f:facet>
 
-                <rich:dataTable id="tablahistoria" sortMode="single" style="text-align:left; width:100%;"
+                <rich:dataTable id="tablahistoria" sortMode="single" 
                                 value="#{Supervisor$AdministrarObraNew.listahistorico}"
                                 var="_row" >
                     <rich:column id="tc_strfecha"  width="120px">
                         <f:facet name="header">
-                            <h:outputText value="#{var.fecha} "/>
+                            <h:outputText  class="id-jsf- "   value="#{var.fecha} "/>
                         </f:facet>
-                        <h:outputText id="st_strfechahis" value="#{_row.datefechist}"/>
+                        <h:outputText  class="id-jsf- "   id="st_strfechahis" value="#{_row.datefechist}"/>
                     </rich:column>
 
                     <rich:column id="tc_strdias"  width="120px">
                         <f:facet name="header">
-                            <h:outputText value="#{var.diasadicionales} "/>
+                            <h:outputText  class="id-jsf- "   value="#{var.diasadicionales} "/>
                         </f:facet>
-                        <h:outputText id="st_strdias" value="#{_row.intplazoobra}"/>
+                        <h:outputText  class="id-jsf- "   id="st_strdias" value="#{_row.intplazoobra}"/>
                     </rich:column>
 
                     <rich:column id="tc_strfechater" width="120px">
                         <f:facet name="header">
-                            <h:outputText value="#{var.fechaterminacion}"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.fechaterminacion}"/>
                         </f:facet>
-                        <h:outputText id="st_strfecha" value="#{_row.datefecfinhist}"/>
+                        <h:outputText  class="id-jsf- "   id="st_strfecha" value="#{_row.datefecfinhist}"/>
                     </rich:column>
 
                     <rich:column id="tc_estado" width="120px">
                         <f:facet name="header">
-                            <h:outputText value="#{var.estado}"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.estado}"/>
                         </f:facet>
-                        <h:outputText  value="#{_row.booltieneespe}"/>
+                        <h:outputText  class="id-jsf- "    value="#{_row.booltieneespe}"/>
                     </rich:column>
 
 

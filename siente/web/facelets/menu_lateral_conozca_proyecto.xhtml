@@ -8,34 +8,34 @@
         xmlns:a4j="http://richfaces.org/a4j"
         xmlns:interkont="http://www.interkont.com/jsf">
 
-    <rich:panel headerClass="sliderich" header="Conozca el Proyecto" style="width:100%;">
+    <rich:panel headerClass="sliderich" header="Conozca el Proyecto" >
         <center>
-            <h:panelGrid columns="3" border="0" style="width:100%;" columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
+            <h:panelGrid columns="3" border="0"  columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
                 <interkont:spacer width="1" />
                 <h:panelGroup>
-                    <a4j:commandLink styleClass="Cobra_bt59 anchorLink"  
+                    <a4j:commandLink class="id-jsf-"    
                         action="#{Supervisor$AdministrarObraNew.iniciardeta}">
                     </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink styleClass="vtitle21" value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
+                <h:commandLink class="id-jsf-"   value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
 
-                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.comen}" />
+                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.comen}" />
                 <h:panelGroup>
-                    <a4j:commandLink  styleClass="Cobra_bt60 anchorLink" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
+                    <a4j:commandLink  class="id-jsf-"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
                      </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink styleClass="vtitle21" value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
+                <h:commandLink class="id-jsf-"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
 
-                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.imag}" />
+                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.imag}" />
                 <h:panelGroup>                   
-                        <a4j:commandLink styleClass="Cobra_bt61 anchorLink" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
+                        <a4j:commandLink class="id-jsf-"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
                 </h:panelGroup>
-                <h:commandLink styleClass="vtitle21" value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
-                <h:outputText styleClass="vtitle16" value="#{SessionBeanCobra.cobraService.docu}"  />
+                <h:commandLink class="id-jsf-"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
+                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.docu}"  />
                 <h:panelGroup>                    
-                        <a4j:commandLink styleClass="Cobra_bt63 anchorLink"  action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
+                        <a4j:commandLink class="id-jsf-"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
                </h:panelGroup>
-                <h:commandLink styleClass="vtitle21" value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
+                <h:commandLink class="id-jsf-"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
                 
             </h:panelGrid>
         </center>

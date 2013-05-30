@@ -9,94 +9,94 @@
         xmlns:interkont="http://www.interkont.com/jsf"
         >
 
-    <rich:panel header="Proyecto" id="menuProyecto" bodyClass="adminproyecto" style="border-style: none; width: 100%">
+    <rich:panel header="Proyecto" id="menuProyecto" bodyClass="adminproyecto" >
 
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0">
-                <h:commandLink styleClass="tipiobra anchorLink"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0">
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
                                  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
-                <h:commandLink styleClass="text" value="Tipificación"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit"
+                <h:commandLink class="id-jsf-"   value="Tipificación"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit"
                                  >
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0">
-                <h:commandLink  styleClass="datos anchorLink"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0">
+                <h:commandLink  class="id-jsf-"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
-                <h:commandLink styleClass="text" value="Datos Basicos" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink class="id-jsf-"   value="Datos Basicos" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
             </h:panelGrid>
 
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
-                <h:commandLink  styleClass="ubiproyecto anchorLink"   action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink  class="id-jsf-"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
-                <h:commandLink styleClass="text" value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                <h:commandLink class="id-jsf-"   value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="gencrono anchorLink"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
-                <h:commandLink styleClass="text" value="Cronograma"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+                <h:commandLink class="id-jsf-"   value="Cronograma"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0">
-                <h:commandLink styleClass="verfotos anchorLink"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0">
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>
-                <h:commandLink styleClass="text" value="Subir Fotos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink class="id-jsf-"   value="Subir Fotos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0">
-                <h:commandLink styleClass="contratos anchorLink"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0">
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
-                <h:commandLink styleClass="text" value="Contrato"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink class="id-jsf-"   value="Contrato"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink styleClass="impsocial anchorLink" immediate="true"/>
-                <h:commandLink styleClass="text" value="Impacto Social"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink class="id-jsf-"   immediate="true"/>
+                <h:commandLink class="id-jsf-"   value="Impacto Social"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink styleClass="mproyectos anchorLink" immediate="true"/>
-                <h:commandLink styleClass="text" value="Subir Documentos"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink class="id-jsf-"   immediate="true"/>
+                <h:commandLink class="id-jsf-"   value="Subir Documentos"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="guardar anchorLink"  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
-                <h:commandLink styleClass="text" value="Guardar Proyecto"  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+                <h:commandLink class="id-jsf-"   value="Guardar Proyecto"  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="guardarborrador anchorLink"  action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
-                <h:commandLink styleClass="text" value="Guardar Borrador" action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+                <h:commandLink class="id-jsf-"   value="Guardar Borrador" action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra !=null}">
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra !=null}">
 
-                <a4j:commandLink  styleClass="historialvalidacion" execute="@this" immediate="true" id="rp"
+                <a4j:commandLink  class="id-jsf-"   execute="@this" immediate="true" id="rp"
                                   onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}';" />                                    
 
-                <a4j:commandLink  styleClass="text" execute="@this" immediate="true" id="rtT"
+                <a4j:commandLink  class="id-jsf-"   execute="@this" immediate="true" id="rtT"
                                  value="Historial revisiones de información"  onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}';"  />
 
 
             </h:panelGrid>  
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$IngresarNuevaObra.obranueva.obra}">
-                <a4j:commandLink execute="@this" styleClass="verdocs anchorLink" rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$IngresarNuevaObra.obranueva.obra}">
+                <a4j:commandLink execute="@this" class="id-jsf-"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"
                                  immediate="true" id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
-                <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
+                <a4j:commandLink execute="@this" class="id-jsf-"   value="#{var.proysuperior}" immediate="true"
                                  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"/>
-                <a4j:commandLink execute="@this" styleClass="verdocs anchorLink" rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"
+                <a4j:commandLink execute="@this" class="id-jsf-"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"
                             immediate="true" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
-                <a4j:commandLink execute="@this" styleClass="text" value="#{var.proysuperior}" immediate="true"
+                <a4j:commandLink execute="@this" class="id-jsf-"   value="#{var.proysuperior}" immediate="true"
                                  onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"/>
             </h:panelGrid>

@@ -36,13 +36,13 @@
                 <h:graphicImage url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
 
                 <h:panelGrid columns="2" >
-                    <h:outputText value="Fecha de consolidación:"/>
+                    <h:outputText  class="id-jsf- "   value="Fecha de consolidación:"/>
 
                     <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.idconsolidadoselec}"  >
                         <f:selectItems value="#{GraficarIndicadores.itemsCortes}"/>
 
                     </h:selectOneMenu>
-                    <h:outputText value="Indicador: "/>                           
+                    <h:outputText  class="id-jsf- "   value="Indicador: "/>                           
 
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==0}">
                         <f:selectItem itemValue="0" itemLabel="Presupuesto en ejecución" />
@@ -67,7 +67,7 @@
 
                     <h:panelGroup id="cmbLoc" >
 
-                        <h:selectOneMenu id="cmbselec" value="#{GraficarIndicadores.filtrolocalidad.filtroselec}"  rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}" onchange="submit()" style="width:200px;">
+                        <h:selectOneMenu id="cmbselec" value="#{GraficarIndicadores.filtrolocalidad.filtroselec}"  rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}" onchange="submit()" >
                             <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
                             <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
 
@@ -79,7 +79,7 @@
 
                             <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec !=1}">
                                 <h:panelGroup >
-                                    <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"   style="width:200px;" >
+                                    <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"    >
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.sedeptos}" />
                                         <a4j:ajax event="change" listener="#{GraficarIndicadores.llenarMunicipios}" render="municipioincomindica"/>
@@ -87,7 +87,7 @@
                                 </h:panelGroup>
                                 <interkont:spacer width="10"/>
                                 <h:panelGroup id="municipioincomindica" >
-                                    <h:selectOneMenu id="cmbmuni" value="#{GraficarIndicadores.filtrolocalidad.muniselec}"  style="width:200px;">
+                                    <h:selectOneMenu id="cmbmuni" value="#{GraficarIndicadores.filtrolocalidad.muniselec}"  >
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.semuni}" />
                                     </h:selectOneMenu>
@@ -96,7 +96,7 @@
 
                             <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec == 1}" >
                                 <h:panelGroup >
-                                    <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.intzona}"  style="width:200px;">
+                                    <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.intzona}"  >
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.zonaespecifica}"/>
                                     </h:selectOneMenu>
@@ -112,50 +112,50 @@
 
             <h:panelGroup id="gpIndicadores">
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==0}">
-                    <h:outputText value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
-                    <div id="presupuestoejec" style="width: 100%; height: 600px;"></div>
+                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
+                    <div id="presupuestoejec" ></div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==1}">
 
-                    <rich:dataTable id="tablaConsolGen"  style="text-align:left; width:100%;" var="fila" 
+                    <rich:dataTable id="tablaConsolGen"   var="fila" 
                                     value="#{GraficarIndicadores.listaconsolidadosgen}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">                                            
-                                    <h:outputText value="Estado de avance y resultados"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Estado de avance y resultados"/>                                           
                                 </rich:column>
                                 <rich:column colspan="6">                                            
-                                    <h:outputText value="Nacional"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Nacional"/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText value=" "/>                                           
+                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" >                                            
-                                    <h:outputText value="Aprobado miles de pesos"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Aprobado miles de pesos"/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Tipo"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Tipo"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Número"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Número"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Terminados"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Terminados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Giro %"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Giro %"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="% Avance físico"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="% Avance físico"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Resultados familias atendidas"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Resultados familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Empleos directos"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Empleos directos"/>                                            
                                 </rich:column>
 
                             </rich:columnGroup>
@@ -163,45 +163,45 @@
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
 
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText value="#{fila.valorAprobado}"  >
+                                    <h:outputText  class="id-jsf- "   value="#{fila.valorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.id.tipoEtiqueta}"/>
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.id.tipoEtiqueta}"/>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetas}"/>
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numEtiquetas}"/>
 
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetasTer}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numEtiquetasTer}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.numGiro}" > 
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numGiro}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.numAvanFisico}" > 
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numAvanFisico}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.famAtendi}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.famAtendi}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.empleDirec}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.empleDirec}" >
 
                                 </h:outputText>
                             </rich:column>
@@ -216,64 +216,64 @@
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==2}">
 
-                    <rich:dataTable id="tablaAvanceHUm"  style="text-align:left; width:100%;" var="fila" 
+                    <rich:dataTable id="tablaAvanceHUm"   var="fila" 
                                     value="#{GraficarIndicadores.listaavanceshum}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="2">                                            
-                                    <h:outputText value=" "/>                                           
+                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText value="Primer giro"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Primer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText value="Segundo giro"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Segundo giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText value="Tercer giro"/>                                           
+                                    <h:outputText  class="id-jsf- "   value="Tercer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText value=" "/>                                           
+                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Aprobado en  millones de pesos"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Aprobado en  millones de pesos"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atender"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atendidas"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="% avance"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atender"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atendidas"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="% avance"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atender"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="Familias atendidas"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText value="% avance"/>                                            
+                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
                                 </rich:column>
 
                             </rich:columnGroup>
@@ -281,67 +281,67 @@
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
 
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText value="#{fila.pgValorAprobado}"  >
+                                    <h:outputText  class="id-jsf- "   value="#{fila.pgValorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgRecursosAprobados}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtender}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgPorcentajeAvance}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgRecursosAprobados}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtender}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgPorcentajeAvance}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgRecursosAprobados}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtender}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgPorcentajeAvance}" >
+                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
@@ -352,20 +352,20 @@
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==3}">
-                    <h:outputText value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==4}">
-                    <h:outputText value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==5}">
-                    <h:outputText value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==6}">
-                    <h:outputText value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
+                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
 
 
                 </h:panelGroup>

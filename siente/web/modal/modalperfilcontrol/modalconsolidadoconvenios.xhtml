@@ -10,17 +10,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-ConsolidadoConvenios" width="1100" height="400" headerClass="rich-panel-header" style="overflow: auto;">
+    <rich:popupPanel id="mp-ConsolidadoConvenios" width="1100" height="400" headerClass="rich-panel-header" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText value="#{var.convenio}s" styleClass="txt_header" />
+                <h:outputText  class="id-jsf- "   value="#{var.convenio}s" class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
         
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoConvenios" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp_ConsolidadoConvenios" class="id-jsf-"  
                                      onclick="#{rich:component('mp-ConsolidadoConvenios')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -31,24 +31,24 @@
         <h:form target="_blank">
             <rich:panel>                
                 <h:panelGrid columns="1">
-                    <h:outputText value="1. Convenios en ejecución con entidades nacionales"
-                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:outputText  class="id-jsf- "   value="1. Convenios en ejecución con entidades nacionales"
+                                   />
                     <h:graphicImage id="imgconsconvenio4" width="1000" value="#{var.imgconvenio4}" />
 
-                    <h:outputText value="2. Convenios con otras entidades"
-                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:outputText  class="id-jsf- "   value="2. Convenios con otras entidades"
+                                   />
                     <h:graphicImage id="imgconsconvenio5" width="1000" value="#{var.imgconvenio5}" />
 
-                    <h:outputText value="3. #{var.proyecto}s  vs. #{var.solicitudproyecto}s terminados"
-                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:outputText  class="id-jsf- "   value="3. #{var.proyecto}s  vs. #{var.solicitudproyecto}s terminados"
+                                   />
                     <h:graphicImage id="imgconsconvenio2" value="#{var.imgconvenio2}" />
 
-                    <h:outputText value="4. Recursos Programados vs. Recursos Ejecutados declarados"
-                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:outputText  class="id-jsf- "   value="4. Recursos Programados vs. Recursos Ejecutados declarados"
+                                   />
                     <h:graphicImage id="imgconsconvenio1" value="#{var.imgconvenio1}" />
 
-                    <h:outputText value="5. Otras actividades"
-                                  style="font-size:14px; font-color:black; font-weight: bold;" />
+                    <h:outputText  class="id-jsf- "   value="5. Otras actividades"
+                                   />
                     <h:graphicImage id="imgconsconvenio6" width="1000" value="#{var.imgconvenio6}" />
                    
                     <h:graphicImage id="imgconsconvenio3" width="1000" value="#{var.imgconvenio3}" />

@@ -12,39 +12,39 @@
     <rich:popupPanel id="modalAdicioarActividades" width="500" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Adición de actividades/ítems no previstos"/>
+                <h:outputText  class="id-jsf- "   value="Adición de actividades/ítems no previstos"/>
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalAdicioarActividades" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_modalAdicioarActividades" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAdicioarActividades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel id="panelAdicionarActividades" style="width:100%; overflow-y: scroll; height:500px;">
+        <rich:panel id="panelAdicionarActividades" >
             <center>
                 <h:form>
-                    <rich:panel styleClass="rich-panel-grid-activimodal"
+                    <rich:panel class="id-jsf-"  
                                 bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid id="objetoactividad" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                <h:outputText value="Actividad / ítem no previsto:"/>
+                                <h:outputText  class="id-jsf- "   value="Actividad / ítem no previsto:"/>
                                 <interkont:spacer width="20" />
                                 <h:inputTextarea cols="30" rows="2" value="#{Supervisor$Alimentar.actividadobra.strdescactividad}"/>
 
-                                <h:outputText value="#{var.unidaddemedida}:"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.unidaddemedida}:"/>
                                 <interkont:spacer width="20" />
                                 <h:inputText alt="Metros / M"
                                              size="20"
                                              maxlength="10"
                                              value="#{Supervisor$Alimentar.actividadobra.strtipounidadmed}"/>
 
-                                <h:outputText value="#{var.valorunitaio}:"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}:"/>
                                 <interkont:spacer width="20" />
                                 <h:panelGrid columns="1">
                                     <h:inputText onfocus="clearText(this);" required="true"
@@ -52,7 +52,7 @@
                                         <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                         <f:validateDoubleRange minimum="0"/>
                                     </h:inputText>
-                                    <rich:message for="numHabitantes" styleClass="error_texto"/>
+                                    <rich:message for="numHabitantes" class="id-jsf-"  />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </center>
@@ -73,44 +73,44 @@
                         value="#{Supervisor$Alimentar.listactividadobra}"
                         var="itemsprevis"
                         rowKeyVar="filaSeleccionada"
-                        style="width: 96%" >
+                         >
 
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="5">
-                                    <h:outputText value="#{var.actividades} Adicionadas"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.actividades} Adicionadas"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText value="Actividad / ítem no previsto"/>
+                                    <h:outputText  class="id-jsf- "   value="Actividad / ítem no previsto"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.unidaddemedida}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valorunitaio}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
-                                    <h:outputText value="#{var.valortotal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.eliminar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column>
-                                <h:outputText value="#{itemsprevis.strdescactividad}"/>
+                                <h:outputText  class="id-jsf- "   value="#{itemsprevis.strdescactividad}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{itemsprevis.strtipounidadmed}"/>
+                                <h:outputText  class="id-jsf- "   value="#{itemsprevis.strtipounidadmed}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{itemsprevis.calcularValorUnitario}">
+                                <h:outputText  class="id-jsf- "   value="#{itemsprevis.calcularValorUnitario}">
                                     <f:convertNumber pattern="$#,###.00"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
-                                <h:outputText value="#{itemsprevis.numvalorplanifao}">
+                                <h:outputText  class="id-jsf- "   value="#{itemsprevis.numvalorplanifao}">
                                     <f:convertNumber pattern="$#,###.00"/>
                                 </h:outputText>
                             </rich:column>
@@ -121,7 +121,7 @@
                         </rich:columnGroup>
                         <f:facet name="footer">
                             <rich:columnGroup>
-                                <rich:column colspan="5" breakRowBefore="true" style="text-align: center;">
+                                <rich:column colspan="5" breakRowBefore="true" >
                                     <rich:dataScroller for="tablaitemprevistos" render="tablaitemprevistos"/>
                                 </rich:column>
                             </rich:columnGroup>
@@ -130,18 +130,18 @@
 
                     <interkont:spacer height="20" />
 
-                    <rich:panel id="reportatentodos" header="#{var.definaelcostototal}" styleClass="rich-panel-grid-activimodal"
+                    <rich:panel id="reportatentodos" header="#{var.definaelcostototal}" class="id-jsf-"  
                                 bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle">
-                                <h:outputText value="El valor unitario de las actividades incluye el AIU?"/>
+                                <h:outputText  class="id-jsf- "   value="El valor unitario de las actividades incluye el AIU?"/>
                                 <h:selectOneMenu value="#{Supervisor$AdministrarObraNew.obra.aplicaaiu}" >
                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                     <f:selectItem itemValue="true" itemLabel="Si"/>
                                     <a4j:ajax event="valueChange" render="gpPanelTipoCostos"/>
                                 </h:selectOneMenu>
 
-                                <h:outputLabel value="#{var.tipocosto}"/>
+                                <h:outputLabel  class="id-jsf- "   value="#{var.tipocosto}"/>
                                 <h:selectOneMenu value="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto}" disabled="true">
                                     <f:selectItems value="#{Supervisor$Alimentar.tipoCostoOption}" />
                                 </h:selectOneMenu>
@@ -150,38 +150,38 @@
                             <h:panelGroup id="gpPanelTipoCostos">
                                 <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda" rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
 
-                                    <h:outputLabel value="#{var.costodirecto}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.costodirecto}"/>
                                     <interkont:spacer width="20" />
                                     <h:panelGroup>
-                                        <h:outputText styleClass="txt_informacion_encabezado" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </h:panelGroup>
 
-                                    <h:outputLabel value="#{var.administracion} (%):" />
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.administracion} (%):" />
                                     <interkont:spacer width="20" />
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.floatporadmon}%"/>
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.floatporadmon}%"/>
 
-                                    <h:outputLabel value="#{var.imprevistos} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.imprevistos} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.floatporimprevi}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.floatporimprevi}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
 
-                                    <h:outputLabel value="Utilidad (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="Utilidad (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.floatporutilidad}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.floatporutilidad}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
 
-                                    <h:outputLabel value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
-                                    <h:outputLabel value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto!=1}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto!=1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.floatporivasobreutil}%"/>
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.floatporivasobreutil}%"/>
 
-                                    <h:outputLabel value="#{var.otros} (%):" />
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.otros} (%):" />
                                     <interkont:spacer width="20" />
-                                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.floatporotros}%"/>
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.floatporotros}%"/>
 
-                                    <h:outputLabel value="#{var.costototal}:"/>
+                                    <h:outputLabel  class="id-jsf- "   value="#{var.costototal}:"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText styleClass="txt_informacion_encabezado"
+                                    <h:outputText  class="id-jsf- "   class="id-jsf-"  
                                                   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                         <f:convertNumber pattern="$ ###,###,###"/>
                                     </h:outputText>
@@ -191,11 +191,11 @@
                     </rich:panel>
                     <interkont:spacer height="20" />                    
 
-                    <h:panelGrid id="layoutActasDetalle" columns="1" style="text-align:center;" width="98%">
+                    <h:panelGrid id="layoutActasDetalle" columns="1"  width="98%">
                         <a4j:commandButton value="Añadir Acta de Convenio de Precios" render="faltarender"
                                            onclick="#{rich:component('modalActaPrecios')}.show();
                                              return true;"
-                                           style="font-size:12px;"/>
+                                           />
                         <h:inputText id="pathacta" disabled="true" size="50" value="#{Supervisor$Alimentar.pathActaPrecios}" />
                     </h:panelGrid>
 

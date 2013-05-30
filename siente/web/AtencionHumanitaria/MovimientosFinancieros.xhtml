@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.generarsolicitudah}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -26,96 +26,96 @@
         <h:form id="form_imagenes" target="_blank">
             <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax">
                 <f:facet name="header">
-                    <h:outputText value="#{var.movimientosfinancieros}"/>
+                    <h:outputText  class="id-jsf- "   value="#{var.movimientosfinancieros}"/>
                 </f:facet>
                 <interkont:spacer height="3"/>
                 <rich:dataTable id="tablaMovimientos"
                                 value="#{SessionBeanCobra.atencionhumanitariaService.listadoMovimientos}"
-                                var="currentRow"  style="width:100%;">
+                                var="currentRow"  >
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true" colspan="12">
-                                <h:outputText value="Movimientos Financieros" />
+                                <h:outputText  class="id-jsf- "   value="Movimientos Financieros" />
                             </rich:column>
                             <rich:column breakRowBefore="true">
-                                <h:outputText value="#{var.comprobantefidu}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.comprobantefidu}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.descripcion}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.descripcion}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.valor} Movimiento"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.valor} Movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.valor} Ejecutado"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.valor} Ejecutado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.valor} Legalizado"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.valor} Legalizado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.porcentajejecutado}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.porcentajejecutado}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="% Legalizado"/>
+                                <h:outputText  class="id-jsf- "   value="% Legalizado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.fecha} legalización"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.fecha} legalización"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.tipom} Movimiento"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.tipom} Movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="Estado movimiento"/>
+                                <h:outputText  class="id-jsf- "   value="Estado movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="Orden de pago"/>
+                                <h:outputText  class="id-jsf- "   value="Orden de pago"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.nombre} Contratista"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.nombre} Contratista"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:column breakRowBefore="true">
-                        <h:outputText value="#{currentRow.strcomprobantefidu}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.strcomprobantefidu}"/>
                     </rich:column>
                     <rich:column >
-                        <h:outputText value="#{currentRow.strdescripcionmovimiento}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.strdescripcionmovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.numvlrmovimiento}">
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrmovimiento}">
                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                         </h:outputText>
                     </rich:column>
-                    <rich:column styleClass="panelderecha">
-                        <h:outputText value="#{currentRow.numvlrejecutado}">
-                            <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
-                        </h:outputText>
-                    </rich:column>
-                    <rich:column>
-                        <h:outputText value="#{currentRow.numvlrlegalizado}">
+                    <rich:column class="id-jsf-"  >
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrejecutado}">
                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.floatporejecucion}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrlegalizado}">
+                            <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
+                        </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.floatporcentajelegalizacion}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.floatporejecucion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.datefechalegalizacion}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.floatporcentajelegalizacion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.datefechalegalizacion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.ordendepago.strordenpago}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{currentRow.strnombrecontratista}"/>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.ordendepago.strordenpago}"/>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  class="id-jsf- "   value="#{currentRow.strnombrecontratista}"/>
                     </rich:column>
                 </rich:dataTable>
             </rich:collapsiblePanel>

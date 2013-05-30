@@ -10,19 +10,19 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadImagenAtencion" autosized="true" style="padding:0px;">
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="rich-panel-body" style="padding:0px;">
+    <rich:popupPanel id="panelUploadImagenAtencion" autosized="true" >
+        <rich:panel header="#{var.seleccionarimagen}" class="id-jsf-"   >
             <h:form>
-                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                <h:panelGroup >
                     <a4j:commandLink id="esconder_panelUploadImagenAtencion"
                                        onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="cerrar" />
+                                       immediate="true" class="id-jsf-"   />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpImagenModalAtencion">
                     <h:panelGrid columnClasses="top,top" columns="2">
-                        <rich:fileUpload acceptedTypes="jpg, jpeg, gif, png, bmp" addLabel="#{var.adicionar}" style="width: 250px;"
+                        <rich:fileUpload acceptedTypes="jpg, jpeg, gif, png, bmp" addLabel="#{var.adicionar}" 
                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.listener}" id="uploadImagenAtencion"
                                          immediateUpload="true"
@@ -32,21 +32,21 @@
 
                         <h:panelGroup id="info_imagenAtencion">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  class="id-jsf- "   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.nombre}" />
-                                                    <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -57,12 +57,12 @@
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarImagenAtencion}" render="info_imagenAtencion, uploadImagenAtencion, gpImagenModalAtencion, panel_subirImagen"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm" style="font-size:12px;" />
+                                                   class="id-jsf-"    />
 
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
                                                return false;"
-                                                   render="tablaImagenes, panel_subirImagen" style="font-size:12px;" />
+                                                   render="tablaImagenes, panel_subirImagen"  />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

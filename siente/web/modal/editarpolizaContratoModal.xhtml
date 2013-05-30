@@ -15,13 +15,13 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.agregarPoliza}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.agregarPoliza}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelPolizaContrato" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelPolizaContrato')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -29,50 +29,50 @@
         </f:facet>
         <h:panelGroup id="gpPolizaContrato">
             <h:form >
-                <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" style="width:100%;">
+                <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" >
                     <interkont:spacer width="17"/>
                     <interkont:spacer height="14"/>
                     <interkont:spacer height="14"/>
                     <interkont:spacer height="20"/>
-                    <h:panelGrid columns="3" style="width: 100%;">
-                        <h:panelGrid styleClass="vineta"/>
-                        <h:outputLabel id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" for="comboTipoPoliza">
+                    <h:panelGrid columns="3" >
+                        <h:panelGrid class="id-jsf-"  />
+                        <h:outputLabel  class="id-jsf- "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" for="comboTipoPoliza">
 
                         </h:outputLabel>
-                        <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.strdescripcion}"/>
+                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.strdescripcion}"/>
 
 
-                        <h:panelGrid styleClass="vineta"/>
+                        <h:panelGrid class="id-jsf-"  />
 
-                        <h:outputLabel  id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" for="numPolizaContrato">
+                        <h:outputLabel  class="id-jsf- "    id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" for="numPolizaContrato">
 
                         </h:outputLabel>
 
-                        <h:outputText  value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}"/>
+                        <h:outputText  class="id-jsf- "    value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}"/>
 
 
-                        <h:panelGrid styleClass="vineta"/>
+                        <h:panelGrid class="id-jsf-"  />
 
                         <h:panelGroup>
-                            <h:outputLabel id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza"/>
-                            <rich:message for="calendarVenciPoliza" style="color: #ed0606;"/>
+                            <h:outputLabel  class="id-jsf- "   id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza"/>
+                            <rich:message for="calendarVenciPoliza" />
                         </h:panelGroup>
 
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$IngresarNuevaObra.polizacontrato.datefechavecimiento}" required="true"/>
 
-                        <h:panelGrid styleClass="vineta"/>
-                        <h:outputLabel id="lblEntidadPoliza"  value="#{var.entidadPoliza}" for="comboentidadPoliza">
+                        <h:panelGrid class="id-jsf-"  />
+                        <h:outputLabel  class="id-jsf- "   id="lblEntidadPoliza"  value="#{var.entidadPoliza}" for="comboentidadPoliza">
                         </h:outputLabel>
-                        <h:outputText value="#{Supervisor$ModificarObra.polizaeditar.entidad.strnombreentidad}"/>
+                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.entidad.strnombreentidad}"/>
 
 
                     </h:panelGrid>
                 </h:panelGrid>
-                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" style="width: 60%;" >
-                    <h:panelGrid style="width: 10px;"/>
+                <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle"  >
+                    <h:panelGrid />
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="tablaPolizas, gpPolizaContrato"
-                                       execute="@this" style="font-size: 10px;" styleClass="btn_sec_gig"  />
+                                       execute="@this"  class="id-jsf-"    />
                 </h:panelGrid>
 
 

@@ -8,16 +8,16 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-listado-novedades" moveable="true"  style="width:500px; height: 420px" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-listado-novedades" moveable="true"   headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.rpanhea_listadocompletonpvedades}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.rpanhea_listadocompletonpvedades}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-novedades" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_mp-listado-novedades" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-novedades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -25,18 +25,18 @@
         </f:facet>
         <rich:panel id="gpTotalNov">
             <h:form id="form-mp-listado-novedades">
-                <h:panelGrid style="width:100%;">
-                    <interkont:spacer height="20" style="width:100%;"/>
+                <h:panelGrid >
+                    <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
-                        <h:outputText  value="#{var.houtbusquedarapida} "/>
+                        <h:outputText  class="id-jsf- "    value="#{var.houtbusquedarapida} "/>
                         <h:inputText value="#{Supervisor$HomeSupervisor.valorFiltroNovedad}" id="filtro-novedades">
                             <a4j:ajax event="keyup" render="tabla-listado-novedades" />
                         </h:inputText>
                     </h:panelGroup>
-                    <interkont:spacer height="10px" style="width:100%;"/>
-                    <rich:panel id="pl-tabla-listado-novedades" style="overflow: auto;width: 100%; height: 300px;">
+                    <interkont:spacer height="10px" />
+                    <rich:panel id="pl-tabla-listado-novedades" >
                         <rich:dataTable id="tabla-listado-novedades"
-                                        style="text-align:left; background-color: #000000; width: 440px"
+                                        
                                         value="#{Supervisor$HomeSupervisor.listaTotalNovedades}" 
                                         var="currentRow" rows="7" sortMode="single"
                                         rowKeyVar="filaSeleccionada"
@@ -45,28 +45,28 @@
                                          filterExpression="#{Supervisor$HomeSupervisor.filtrarNovedades}"
                                          sortBy="#{currentRow.datefechanovedad}" width="110px">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.houtfechayhora}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.houtfechayhora}"/>
                                 </f:facet>
-                                <h:outputText id="otxt_datefechanovedad-listado" value="#{currentRow.datefechanovedad}"/>
+                                <h:outputText  class="id-jsf- "   id="otxt_datefechanovedad-listado" value="#{currentRow.datefechanovedad}"/>
                             </rich:column>
-                            <rich:column id="tc-strnombreobra-listado" sortBy="#{currentRow.obra.strnombreobra}"   style="width: 150px">
+                            <rich:column id="tc-strnombreobra-listado" sortBy="#{currentRow.obra.strnombreobra}"   >
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.houtnombreobra}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.houtnombreobra}"/>
                                 </f:facet>
-                                <h:outputText id="otxt_strnombreobra-listado" value="#{currentRow.obra.strnombreobra}"/>
+                                <h:outputText  class="id-jsf- "   id="otxt_strnombreobra-listado" value="#{currentRow.obra.strnombreobra}"/>
                             </rich:column>
-                            <rich:column id="tc-strtiponovedad-listado" sortBy="#{currentRow.tiponovedad.strtiponovedad}" style="width: 120px">
+                            <rich:column id="tc-strtiponovedad-listado" sortBy="#{currentRow.tiponovedad.strtiponovedad}" >
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.tipo}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
                                 </f:facet>
-                                <h:outputText id="otxt_fktiponovedad-listado" value="#{currentRow.tiponovedad.strtiponovedad}"/>
+                                <h:outputText  class="id-jsf- "   id="otxt_fktiponovedad-listado" value="#{currentRow.tiponovedad.strtiponovedad}"/>
                             </rich:column>
-                            <rich:column    id="tc-ver-obra-listado" style="text-align:center;" width="60px">
+                            <rich:column    id="tc-ver-obra-listado"  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.Ver}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
                                 </f:facet>
                                 <a4j:commandButton action="#{Supervisor$HomeSupervisor.bt_verObra_action(filaSeleccionada)}" id="bt-ver-obra-listado" title="#{var.verobra}"
-                                                   styleClass="btn_lupa"  />
+                                                   class="id-jsf-"    />
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>

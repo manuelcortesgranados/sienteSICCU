@@ -9,32 +9,32 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_confirmarEstablecerImagenActualModal" moveable="false" height="150" width="350" style="padding:0px;"
+    <rich:popupPanel id="mp_confirmarEstablecerImagenActualModal" moveable="false" height="150" width="350" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.establecerimagenactual}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.establecerimagenactual}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_confirmarEstablecerImagenActualModal" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp_confirmarEstablecerImagenActualModal" class="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel  class="id-jsf-"   >
             <h:form>
-                <h:panelGrid style="width:100%;" id="panelGridConfEstablecerImagenActual">
+                <h:panelGrid  id="panelGridConfEstablecerImagenActual">
                     <interkont:spacer height="10"/>
-                    <h:outputText value="#{var.confestablecerimagenactual}" />
+                    <h:outputText  class="id-jsf- "   value="#{var.confestablecerimagenactual}" />
                     <interkont:spacer height="20"/>
-                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerImagenActualAction}" styleClass="btn_sec_gra"
+                    <h:panelGrid columns="2" >
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerImagenActualAction}" class="id-jsf-"  
                                            oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();" value="#{var.aceptar}"
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="btn_sec_gra"
+                        <a4j:commandButton class="id-jsf-"  
                                            onclick="jQuery('.CheckEstablecerImagenActual#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
                                                    #{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
                                                    return false;" value="#{var.cancelar}"

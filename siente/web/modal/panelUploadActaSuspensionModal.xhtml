@@ -8,22 +8,22 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadActaSuspension" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelUploadActaSuspension" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.cargaractasus}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.cargaractasus}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadActaSuspension" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelUploadActaSuspension" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadActaSuspension')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formActaSuspension">
                 <h:panelGroup id="layoutDocActaSuspension">
                     <interkont:spacer height="50"/>
@@ -39,24 +39,24 @@
                             uploadLabel="#{var.subir}"
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}" 
-                            style="width:250px;height:150px">
+                            >
                             <a4j:ajax event="uploadcomplete" render="infoActaSuspension"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoActaSuspension">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaSuspension.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -66,12 +66,12 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$SuspenderObra.cargadorActaSuspension.borrarDatosSubidos}" render="infoActaSuspension, uploadActaSuspension"
                                                    rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <interkont:spacer width="10"/>
                                 <a4j:commandButton id="BTaceptarActaSuspension" value="#{var.aceptar}" rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActaSuspension')}.hide();"
                                                    render="panel_subirActaSuspension"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

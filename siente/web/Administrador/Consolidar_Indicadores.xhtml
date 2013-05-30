@@ -25,20 +25,20 @@
 
     <ui:define name="body">
         <h:form>
-                    <h:panelGrid id="consolidarIndicadores" style="width:100%;" >
+                    <h:panelGrid id="consolidarIndicadores"  >
                         <h:panelGroup id="layoutConsolidarIndicadores">
                             <center>
-                                <h:outputText  value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" styleClass="mensaje_error"/>
+                                <h:outputText  class="id-jsf- "    value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" class="id-jsf-"  />
 
                                 <h:panelGrid columns="2">
 
                                     <a4j:commandButton id="consolidar_si"  value="#{var.si}" action="#{GraficarIndicadores.consolidar}"
-                                                       style="font-size: 12px;" render="PanelConsolidado">
+                                                        render="PanelConsolidado">
                                     </a4j:commandButton>
-                                    <a4j:commandButton id="consolidar_no" value="#{var.no}" style="font-size: 12px;" oncomplete="true" render="consolidarIndicadores"/>
+                                    <a4j:commandButton id="consolidar_no" value="#{var.no}"  oncomplete="true" render="consolidarIndicadores"/>
                                 </h:panelGrid>
                                 <h:panelGrid id="PanelConsolidado">
-                                    <h:outputLabel value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
+                                    <h:outputLabel  class="id-jsf- "   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
                                 </h:panelGrid>
                             </center>
                         </h:panelGroup>

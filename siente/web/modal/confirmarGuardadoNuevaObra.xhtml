@@ -12,20 +12,20 @@
     <rich:popupPanel id="panelConfGuardadoTemporal" moveable="true" resizeable="false"  height="300" width="400" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.confirmarguardadot}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.confirmarguardadot}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfGuardadoTemporal" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelConfGuardadoTemporal" class="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelConfGuardadoTemporal')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
 
-        <interkont:spacer style="width:100%;" height="50"/>
+        <interkont:spacer  height="50"/>
         <center>
             <h:form>
                 <h:panelGrid id="layoutMensajepaso1" columnClasses="columna_derecha">

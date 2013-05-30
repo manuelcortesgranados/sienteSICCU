@@ -10,24 +10,24 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadArchivoSuper" autosized="true" style="padding:0px;">
+    <rich:popupPanel id="panelUploadArchivoSuper" autosized="true" >
         <f:facet name="header">
             <h:panelGrid>
-                <h:outputText value="Seleccionar documento" />
+                <h:outputText  class="id-jsf- "   value="Seleccionar documento" />
             </h:panelGrid>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadArchivoSuper" immediate="true" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelUploadArchivoSuper" immediate="true" class="id-jsf-"  
                                        onclick="#{rich:component('panelUploadArchivoSuper')}.hide();
                                                return false;" />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formSubirSubirArchivoMatriz">
                 <h:panelGroup id="panelGroupSubirArchivoMatriz">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -38,28 +38,28 @@
                                          clearLabel="#{var.eliminar}"
                                          doneLabel="#{var.hecho}" 
                                          fileUploadListener="#{Supervision$Externa.subirListado.listener}"
-                                         immediateUpload="true" listHeight="150" style="width: 250px;"
+                                         immediateUpload="true" listHeight="150" 
                                          maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_documentoSuper" />
                         </rich:fileUpload>
 
                         <h:panelGroup id="info_documentoSuper">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px; overflow-x: auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
                                     
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervision$Externa.subirListado.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}" />
-                                                    <h:outputText value="#{file.nombre}" />
-                                                    <h:outputText value="#{var.taarc}" />
-                                                    <h:outputText value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -72,12 +72,12 @@
                                 <a4j:commandButton id="bt_borrarListadoSubido" action="#{Supervision$Externa.cambioListado}"
                                                    render="info_documentoSuper, uploadDocAt, panelInformacionArchivo"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm" style="font-size:12px;" />
+                                                   class="id-jsf-"    />
                                 <a4j:commandButton value="#{var.aceptar}" id="bt_aceptarListadoSubido"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0}"
                                                    render="panelInformacionArchivo"
                                                    oncomplete="#{rich:component('panelUploadArchivoSuper')}.hide();"
-                                                   style="font-size:12px;" action="#{Supervision$Externa.subirListadoSeg()}" />
+                                                    action="#{Supervision$Externa.subirListadoSeg()}" />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

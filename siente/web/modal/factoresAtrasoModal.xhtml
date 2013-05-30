@@ -12,13 +12,13 @@
     <rich:popupPanel id="modalFactoresAtraso"  headerClass="rich-panel-header" width="300" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="id-jsf- "   value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalFactoresAtraso" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFactoresAtraso')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -32,23 +32,23 @@
                                 sortMode="single"
                                 rowKeyVar="filaSeleccionada"
                                 value="#{SessionBeanCobra.cobraService.factoratrasos}"
-                                var="regist" style="width:100%;">
+                                var="regist" >
                     <f:facet name="header">
                         <rich:columnGroup >
                             <rich:column width="150px" >
-                                <h:outputText value="#{var.houtfactor}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.houtfactor}"/>
                             </rich:column>
                             <rich:column width="140px">
-                                <h:outputText value="#{var.houttipofactor}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.houttipofactor}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup id="Cuerpo">
                         <rich:column id="descripcion" width="150px">
-                            <h:outputText value="#{regist.strdescfactor}"/>
+                            <h:outputText  class="id-jsf- "   value="#{regist.strdescfactor}"/>
                         </rich:column>
                         <rich:column id="tipfactor" width="140px">
-                            <h:outputText value="#{regist.tipofactoratraso.strdesctipoatraso}"/>
+                            <h:outputText  class="id-jsf- "   value="#{regist.tipofactoratraso.strdesctipoatraso}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </rich:dataTable>

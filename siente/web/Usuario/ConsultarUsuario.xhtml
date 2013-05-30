@@ -15,7 +15,7 @@
     <ui:define name="head" ></ui:define>
 
     <ui:define name="title">
-        <h:outputText value="Consultar usuario" />
+        <h:outputText  class="id-jsf- "   value="Consultar usuario" />
     </ui:define>
 
     <ui:define name="menu">
@@ -30,13 +30,13 @@
     <ui:define name="body">
         <h:form>
             <rich:panel id="pgcontratoconvenio">
-                <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                <table  border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td>
                             <div class="buscador">
                                 <div id="buscador_space">
                                     <label>
-                                        <h:inputText id="txtPalabraClave" styleClass="buscador_field"  onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
+                                        <h:inputText id="txtPalabraClave" class="id-jsf-"    onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
                                         <a4j:commandButton type="button" action="#{Perfil$Usuario.buscarUsuarioporCriterios}" id="filtrar"  value="#{var.buscar}" render="pnconsultarUsuario"  />
 
                                     </label>
@@ -46,55 +46,55 @@
                     </tr>
                 </table>
                 <center>
-                    <h:panelGrid id="pnconsultarUsuario" style="width:100%;" >
-                        <interkont:spacer height="30" style="width:100%;" />
+                    <h:panelGrid id="pnconsultarUsuario"  >
+                        <interkont:spacer height="30"  />
                         <rich:dataTable id="tabla-listado-buscarusuario"
                                         rowKeyVar="filaSeleccionada"
                                         value="#{Perfil$Usuario.listausuarios}"
-                                        sortMode="single" var="currentRow" style="width:100%;" rows="10"
+                                        sortMode="single" var="currentRow"  rows="10"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText value="Usuarios encontrados" />
+                                        <h:outputText  class="id-jsf- "   value="Usuarios encontrados" />
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText value="Nombre completo" />
+                                        <h:outputText  class="id-jsf- "   value="Nombre completo" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText value="Login" />
+                                        <h:outputText  class="id-jsf- "   value="Login" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText value="Cédula" />
+                                        <h:outputText  class="id-jsf- "   value="Cédula" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText value="Perfil usuario" />
+                                        <h:outputText  class="id-jsf- "   value="Perfil usuario" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText value="Ver" />
+                                        <h:outputText  class="id-jsf- "   value="Ver" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
 
                             <rich:column breakRowBefore="true">
-                                <h:outputText value="#{currentRow.tercero.strnombrecompleto}" />
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.strnombrecompleto}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText value="#{currentRow.usuLogin}" />
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.usuLogin}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText value="#{currentRow.tercero.intcedula}" />
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.intcedula}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
-                                <a4j:commandLink style="font-size: 10px;" action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
-                                    <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                <a4j:commandLink  action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
+                                    <h:graphicImage  value="/resources/imgs/bt_ver.png" />
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:dataTable>
-                        <interkont:spacer height="10px" style="width:100%;" /> 
+                        <interkont:spacer height="10px"  /> 
                        
                             <rich:column colspan="7" breakRowBefore="true">
                                 <center>

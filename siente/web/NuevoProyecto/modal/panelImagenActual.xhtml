@@ -8,12 +8,12 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelImagenActual" autosized="true" style="padding:0px;">
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="rich-panel-body" style="padding:0px;">
+    <rich:popupPanel id="panelImagenActual" autosized="true" >
+        <rich:panel header="#{var.seleccionarimagen}" class="id-jsf-"   >
             <h:form >
-                <h:panelGroup style="position: absolute; top: 5px; right: 10px; text-align: right; width: 100%; ">
+                <h:panelGroup >
                     <a4j:commandLink id="esconder_panelImagenActual" onclick="#{rich:component('panelImagenActual')}.hide();" immediate="true"
-                                       styleClass="cerrar"  />
+                                       class="id-jsf-"    />
                 </h:panelGroup>
                 <h:panelGroup id="gpImagen">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -23,7 +23,7 @@
                             acceptedTypes="jpg, jpeg, gif, png, bmp"
                             immediateUpload="true"
                             maxFilesQuantity="1" 
-                            style="width: 250px;" 
+                             
                             listHeight="150"                             
                             addLabel="#{var.adicionar}"
                             doneLabel="#{var.hecho}"
@@ -36,20 +36,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info_imagen">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -59,10 +59,10 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.borrarImagenEvolucion}" render="info_imagen, uploadImagen, spimagen"
                                                    rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos>0}" value="#{var.boarcsub}"
-                                                     style="font-size:12px;"/>
+                                                     />
                                 <h:commandButton value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos>0}"
                                                    onclick="#{rich:component('panelImagenActual')}.hide();" 
-                                                     style="font-size:12px;"/>
+                                                     />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

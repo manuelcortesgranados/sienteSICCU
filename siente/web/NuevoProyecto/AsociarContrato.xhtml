@@ -15,7 +15,7 @@
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -24,72 +24,72 @@
 
     <ui:define name="body" >
         <h:form>
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <table   align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
-                    <td rowspan="6" valign="top" style="height:400px;width: 20%">
+                    <td rowspan="6" valign="top" >
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
-                    <td valign="top" height="35" style="width: 80%">
+                    <td valign="top" height="35" >
                         <rich:panel id="pgcontrat1" header="#{var.asociacioncontrato}" >
                             <center>
-                                <interkont:spacer height="35" style="width:100%;"/>
+                                <interkont:spacer height="35" />
 
-                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
+                                <rich:panel header="Informacion #{var.encargofiduciario}" class="id-jsf-"  
                                             bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                                             rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
                                     <center>
                                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                            <h:outputText value="#{var.numeroencargo}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.numeroencargo}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
 
-                                            <h:outputText value="#{var.fechaapertura}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
                                                 <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                             </h:outputText>
 
-                                            <h:outputText value="#{var.saldoinicial}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.saldoinicial}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoinicial}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoinicial}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
-                                            <h:outputText value="#{var.saldoactual}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.saldoactual}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoactual}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoactual}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
                                         </h:panelGrid>
                                     </center>
                                 </rich:panel>
-                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="rich-panel-grid-report"
+                                <rich:panel header="Informacion #{var.encargofiduciario}" class="id-jsf-"  
                                             bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                                             rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
 
                                     <center>
                                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                            <h:outputText value="#{var.numeroencargo}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.numeroencargo}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
 
-                                            <h:outputText value="#{var.fechaapertura}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
                                                 <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                             </h:outputText>
 
-                                            <h:outputText value="#{var.saldoinicial}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.saldoinicial}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
-                                            <h:outputText value="#{var.saldoactual}: "/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.saldoactual}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
@@ -99,64 +99,64 @@
 
                                 <h:panelGrid id="pgconveniocontrato" columns="2">
                                     <a4j:commandLink value="Asociar contrato"
-                                                     styleClass="asociarcontrato anchorLink"
+                                                     class="id-jsf-"  
                                                      action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
                                                      render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
                                     </a4j:commandLink>
                                     <a4j:commandLink value="Crear contrato" rendered="false"
-                                                     styleClass="crearcontrato anchorLink"
+                                                     class="id-jsf-"  
                                                      action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
                                     </a4j:commandLink>
                                 </h:panelGrid>
 
                                 <h:panelGrid id="pgdatacontratos">
                                     <center>
-                                        <rich:dataTable id="datacontratos"  rows="4" style="text-align:left; width:100%;"
+                                        <rich:dataTable id="datacontratos"  rows="4" 
                                                         var="contrarow" rowKeyVar="filaSeleccionada"
                                                         value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
                                             <rich:column id="cocontr1" width="100px">
                                                 <f:facet name="header">
-                                                    <h:outputText value="Número contrato" />
+                                                    <h:outputText  class="id-jsf- "   value="Número contrato" />
                                                 </f:facet>
-                                                <h:outputText id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                                <h:outputText  class="id-jsf- "   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
                                             </rich:column>
-                                            <rich:column id="co2" width="100px" style="text-align: right;">
+                                            <rich:column id="co2" width="100px" >
                                                 <f:facet name="header">
-                                                    <h:outputText value="Valor del contrato" />
+                                                    <h:outputText  class="id-jsf- "   value="Valor del contrato" />
                                                 </f:facet>
-                                                <h:outputText id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                                <h:outputText  class="id-jsf- "   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
                                                     <f:convertNumber pattern="$ ###,###,###"/>
 
                                                 </h:outputText>
                                             </rich:column>
 
                                             <rich:column id="vlcongtrhijosse"
-                                                         style="text-align: right; width: 150px;" >
+                                                          >
                                                 <f:facet name="header">
-                                                    <h:outputText value="Valor Asociado"/>
+                                                    <h:outputText  class="id-jsf- "   value="Valor Asociado"/>
                                                 </f:facet>
-                                                <h:outputText id="vlcondisse" value="#{contrarow.numvalorrelacion}">
+                                                <h:outputText  class="id-jsf- "   id="vlcondisse" value="#{contrarow.numvalorrelacion}">
                                                     <f:convertNumber pattern="$###,###,###"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="fechaincontse"
-                                                         style="width: 150px;">
+                                                         >
                                                 <f:facet name="header">
-                                                    <h:outputText value="#{var.datefechaini}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.datefechaini}"/>
                                                 </f:facet>
-                                                <h:outputText  value="#{contrarow.contrato.datefechaini}"/>
+                                                <h:outputText  class="id-jsf- "    value="#{contrarow.contrato.datefechaini}"/>
                                             </rich:column>
                                             <rich:column id="fechaficontse"  width="150px"
-                                                         style="width: 150px;">
+                                                         >
                                                 <f:facet name="header">
-                                                    <h:outputText value="#{var.datefechafin}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.datefechafin}"/>
                                                 </f:facet>
-                                                <h:outputText  value="#{contrarow.contrato.datefechafin}"/>
+                                                <h:outputText  class="id-jsf- "    value="#{contrarow.contrato.datefechafin}"/>
                                             </rich:column>
                                             <rich:column id="desasociar"  width="150px"
-                                                         style="width: 150px;">
+                                                         >
                                                 <f:facet name="header">
-                                                    <h:outputText value="Desasociar"/>
+                                                    <h:outputText  class="id-jsf- "   value="Desasociar"/>
                                                 </f:facet>
                                                 <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato(filaSeleccionada)}"
                                                                    render="datacontratos,pgcontrat1">
@@ -183,7 +183,7 @@
                                 </h:panelGroup>
                                 <a4j:outputPanel id="panelErrorAsoCont">
                                     <rich:messages id="messagesAsoCon" globalOnly="true"
-                                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                   class="id-jsf-"   ajaxRendered="true"
                                                    >
                                         <f:facet name="infoMarker">
                                             <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />

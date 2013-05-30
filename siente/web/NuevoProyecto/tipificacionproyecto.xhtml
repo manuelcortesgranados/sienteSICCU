@@ -17,7 +17,7 @@
                 <h:outputScript library="js" name="/resources/script_supervisor.js"/>
             </ui:define>
             <ui:define name="title">
-                <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
             </ui:define>
             <ui:define name="menu">
                 <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -25,18 +25,18 @@
 
             <ui:define name="body">
                 <h:form id="form_datos_tipificacion" >
-                    <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+                    <table   align="center" border="0" cellspacing="8" cellpadding="0">
                         <tr>
-                            <td rowspan="6" valign="top" style="height:400px;width: 20%">
+                            <td rowspan="6" valign="top" >
                                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                                 <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                             </td>
-                            <td valign="top" height="35" style="width: 80%">
+                            <td valign="top" height="35" >
 
                                 <rich:panel id="rpTipificacion">
                                     <f:facet name="header" >
                                         <h:panelGroup >
-                                            <h:outputText value="#{var.pasosIniciales}" styleClass="txt_header" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.pasosIniciales}" class="id-jsf-"   />
                                         </h:panelGroup>
                                     </f:facet>
 
@@ -44,18 +44,18 @@
 
 
                                         <rich:panel  id="gpTotalProyectosPadres" >                            
-                                            <h:panelGrid style="width:100%;">                                    
+                                            <h:panelGrid >                                    
                                                 <h:panelGroup id="panel-periodo-evento">
                                                     <h:panelGrid columns="2" >
-                                                        <h:outputText  value="#{var.escogerEvento} "/>
+                                                        <h:outputText  class="id-jsf- "    value="#{var.escogerEvento} "/>
                                                         <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" >
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
                                                         </h:selectOneMenu>
-                                                        <h:outputText  value="#{var.escogerPeriodo} "/>
+                                                        <h:outputText  class="id-jsf- "    value="#{var.escogerPeriodo} "/>
                                                         <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" >
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoEventoItem}" />
                                                         </h:selectOneMenu>
-                                                        <h:outputText  value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
+                                                        <h:outputText  class="id-jsf- "    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
                                                         <h:selectOneMenu id="cmbIncluyeSubproyectos" value="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" rendered="#{var.permitirSubproyectos}">
                                                             <f:selectItem itemValue="false" itemLabel="No"/>
                                                             <f:selectItem itemValue="true" itemLabel="Si"/>
@@ -69,66 +69,66 @@
                                                 <rich:panel id="panel-buscarPadreProy">
 
                                                 </rich:panel>
-                                                <interkont:spacer height="10px" style="width:100%;"/>
+                                                <interkont:spacer height="10px" />
                                                 <center>
-                                                    <h:panelGrid columns="1" id="gp_datos" style="text-align: left" rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}">
+                                                    <h:panelGrid columns="1" id="gp_datos"  rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}">
                                                         <rich:panel id="mp-datos-proySeleccionado">
                                                             <f:facet name="header" >
                                                                 <h:panelGroup >
-                                                                    <h:outputText value="#{var.datosproyectoseleccionado}" styleClass="txt_header" />
+                                                                    <h:outputText  class="id-jsf- "   value="#{var.datosproyectoseleccionado}" class="id-jsf-"   />
                                                                 </h:panelGroup>
                                                             </f:facet>
-                                                            <h:panelGrid columns="3" style="width:100%;"  >
+                                                            <h:panelGrid columns="3"   >
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
-                                                                    <h:outputLabel id="st_strnroobraPadre" styleClass="txt_outtext" value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strnroobraPadre" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
-                                                                    <h:outputLabel id="st_strnomobraPadre" styleClass="txt_outtext" value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strnomobraPadre" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
-                                                                    <h:outputLabel id="st_numvaltotobraPadre" styleClass="txt_outtext" value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_numvaltotobraPadre" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
-                                                                    <h:outputLabel id="st_strestobraPadre" styleClass="txt_outtext" value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strestobraPadre" class="id-jsf-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
-                                                                    <h:outputLabel id="st_strplzobraPadre" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strplzobraPadre" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
-                                                                    <h:outputLabel id="st_strIntervobraPadre" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strIntervobraPadre" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
-                                                                    <h:outputLabel id="st_strfechIobraPadre" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strfechIobraPadre" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
-                                                                    <h:outputLabel id="st_strfechFobraPadre" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_strfechFobraPadre" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
-                                                                    <h:outputLabel id="st_ValorObraPadre" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
+                                                                    <h:outputLabel  class="id-jsf- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_ValorObraPadre" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
                                                                         <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ #,###,###.00"/>
                                                                     </h:outputLabel>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel id="lblvlrsumahijos"  value="Valor Disponible:"/>
-                                                                    <h:outputLabel id="st_Valosumhi" styleClass="txt_outtext" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
+                                                                    <h:outputLabel  class="id-jsf- "   id="lblvlrsumahijos"  value="Valor Disponible:"/>
+                                                                    <h:outputLabel  class="id-jsf- "   id="st_Valosumhi" class="id-jsf-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
                                                                         <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###"/>
                                                                     </h:outputLabel>
                                                                 </h:panelGroup>
@@ -145,10 +145,10 @@
                                     <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
 
                                         <center>
-                                            <h:panelGrid id="pgtipi" columns="1" style="width:100%;">
+                                            <h:panelGrid id="pgtipi" columns="1" >
                                                 <rich:panel>
                                                     <f:facet name="header">
-                                                        <h:outputText value="1. #{var.escojafase}" />
+                                                        <h:outputText  class="id-jsf- "   value="1. #{var.escojafase}" />
                                                     </f:facet>
                                                     <h:panelGroup id="tablatipoah">
 
@@ -160,7 +160,7 @@
                                                                     <h:graphicImage url="/resources/imgs/#{fase.intidfase}fase.png"  />
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink styleClass="text" value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
+                                                                <a4j:commandLink class="id-jsf-"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
                                                                 
                                                                 </a4j:commandLink>
                                                                 <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
@@ -171,7 +171,7 @@
                                                         </rich:dataGrid>
                                                     </h:panelGroup>
                                                     <h:panelGrid columns="2" id="tiposoli">
-                                                        <h:outputLabel  value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
+                                                        <h:outputLabel  class="id-jsf- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                         <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                             <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
                                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
@@ -182,17 +182,17 @@
                                                 <h:panelGroup id="panelTipo">
                                                     <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                         <f:facet name="header">
-                                                            <h:outputText value="2. #{var.escojatipo}"/>
+                                                            <h:outputText  class="id-jsf- "   value="2. #{var.escojatipo}"/>
                                                         </f:facet>
                                                         <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
-                                                                       columns="4" style="width:100%;" rowKeyVar="fila">
+                                                                       columns="4"  rowKeyVar="fila">
                                                             <center>                                                        
                                                             <h:panelGrid columns="1" columnClasses="panelcenter">
                                                                 <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
                                                                     <h:graphicImage url="#{tipoproyecto.strurlimagen}" height="60px"/>
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink styleClass="text" value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
+                                                                <a4j:commandLink class="id-jsf-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
                                                                 </a4j:commandLink>
                                                                 <h:selectBooleanCheckbox value="#{tipoproyecto.check}" disabled="true"  />
                                                                                
@@ -205,12 +205,12 @@
                                                     <h:panelGroup id="panelSubTipo">
                                                         <rich:panel id="rpTipoObra" rendered="#{Supervisor$IngresarNuevaObra.tiproyectoselec!=0}">
                                                             <f:facet name="header">
-                                                                <h:outputText value="3. #{var.subtipoProyecto}"/>
+                                                                <h:outputText  class="id-jsf- "   value="3. #{var.subtipoProyecto}"/>
                                                             </f:facet>
 
 
                                                             <rich:dataGrid id="tablatipoobra" value="#{SessionBeanCobra.cobraService.listatipoobra}" var="tipoobra" 
-                                                                           columns="4" style="width:100%;" rowKeyVar="fila" >
+                                                                           columns="4"  rowKeyVar="fila" >
                                                                 
                                                                     <center>                                                        
                                                             <h:panelGrid columns="1" columnClasses="panelcenter">
@@ -220,7 +220,7 @@
                                                                     <h:graphicImage url="#{tipoobra.strurlimagen}"/>
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink styleClass="text" value="#{tipoobra.strnombremedio}"  execute="@this"  
+                                                                <a4j:commandLink class="id-jsf-"   value="#{tipoobra.strnombremedio}"  execute="@this"  
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                               render="tablatipoobra"  />
                                                                 
@@ -249,7 +249,7 @@
 
                                         <a4j:outputPanel id="panelErrorTip">
                                             <rich:messages id="messagesTip" globalOnly="true"
-                                                           styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                           class="id-jsf-"   ajaxRendered="true"
                                                            >
                                                 <f:facet name="infoMarker">
                                                     <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />

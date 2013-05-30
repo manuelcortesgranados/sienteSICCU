@@ -18,11 +18,11 @@
 
             <div id="header_content">
                 <div class="imagenes">
-                    <h:outputText value="Imágenes"/>
+                    <h:outputText  class="id-jsf- "   value="Imágenes"/>
                 </div>
             </div>
             <center>
-                <rich:panel id="sliderimages" style="width:100%"  bodyClass="middleinfosliderciuda" >
+                <rich:panel id="sliderimages"   bodyClass="middleinfosliderciuda" >
                     <div id="container">
                         <div id="slider">
                             <a4j:repeat value="#{SessionBeanCobra.ciudadanoservice.listaSliderGeneral}" var="imagen" binding="#{Ciudadano$PerfilCiudadano.repeatslider}">

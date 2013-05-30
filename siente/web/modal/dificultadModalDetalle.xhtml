@@ -10,16 +10,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" style="width:500px;">
+    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="id-jsf- "   value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalDificultadd" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalDificultadDetalle')}.hide();return  false;">>
                     </a4j:commandLink>
@@ -34,44 +34,44 @@
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rows="5"
                                 var="currentRow" 
-                                style="width:80%">
+                                >
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText value="#{var.dificultad}es"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.dificultad}es"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText id="tipodifdet" value="#{var.tipo}"/>
+                                <h:outputText  class="id-jsf- "   id="tipodifdet" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText id="dificultadodet" value="#{var.dificultad}"/>
+                                <h:outputText  class="id-jsf- "   id="dificultadodet" value="#{var.dificultad}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText id="fechadet" value="#{var.fecha}"/>
+                                <h:outputText  class="id-jsf- "   id="fechadet" value="#{var.fecha}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText id="usuariodifdet" value="#{var.usuario}"/>
+                                <h:outputText  class="id-jsf- "   id="usuariodifdet" value="#{var.usuario}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column  breakRowBefore="true">
-                            <h:outputText id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                            <h:outputText  class="id-jsf- "   id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
                             <h:inputTextarea cols="60" rows="2" id="strdificultaddet" value="#{currentRow.strdificultad}" readonly="true" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:outputText  class="id-jsf- "   id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText  class="id-jsf- "   id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                     </rich:columnGroup>
                     <f:facet name="footer">
                         <rich:columnGroup id="groupdificultades">
-                            <rich:column colspan="4" breakRowBefore="true" style="text-align: center;">
+                            <rich:column colspan="4" breakRowBefore="true" >
                                 <rich:dataScroller id="scrolltablaDificultadDet" for="tablaDificultadDet" render="tablaDificultadDet"/>
                             </rich:column>
                         </rich:columnGroup>

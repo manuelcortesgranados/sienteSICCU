@@ -8,24 +8,24 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel autosized="true" id="panelGuardadoAlimentar" resizeable="false" style="padding:0px; width:350px; "
+    <rich:popupPanel autosized="true" id="panelGuardadoAlimentar" resizeable="false" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="#{var.guardado}"/>
+                <h:outputText  class="id-jsf- "    value="#{var.guardado}"/>
             </h:panelGroup>
         </f:facet>
-         <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+         <rich:panel class="id-jsf-"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
-                    <h:outputText value="#{var.laobra}" />
-                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_outtext"/>
-                    <h:outputText value="#{var.hasidoalimentadaexitosa}" />
+                    <h:outputText  class="id-jsf- "   value="#{var.laobra}" />
+                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" class="id-jsf-"  />
+                    <h:outputText  class="id-jsf- "   value="#{var.hasidoalimentadaexitosa}" />
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"
                                        oncomplete="#{rich:component('panelGuardadoAlimentar')}.hide(); return true;"
-                                       style="font-size: 12px;" />
+                                        />
                 </center>
             </h:form>
         </rich:panel>

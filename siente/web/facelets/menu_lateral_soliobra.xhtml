@@ -9,50 +9,50 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodyClass="tool" style="border-style: none;" rendered="false">
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodyClass="tool"  rendered="false">
 
-        <a4j:commandLink styleClass="ghost anchorlink"/>
+        <a4j:commandLink class="id-jsf-"  />
 
         
 
-        <a4j:commandLink styleClass="ghost anchorlink"/>
-        <a4j:commandLink styleClass="text" value="Consultar Solicitudes Aprobadas"  action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}" 
+        <a4j:commandLink class="id-jsf-"  />
+        <a4j:commandLink class="id-jsf-"   value="Consultar Solicitudes Aprobadas"  action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}" 
 
                          render="panelBody"/>
 
-        <!--<a4j:commandLink styleClass="text" value="Reporte" />-->
-        <div style="clear: both" />
+        <!--<a4j:commandLink class="id-jsf-"   value="Reporte" />-->
+        <div  />
     </rich:panel>
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="tool" style="border-style: none;">
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="consatencion anchorLink" immediate="true"
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="tool" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"   immediate="true"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
-                <h:commandLink styleClass="text" value="Registrar Solicitud"
+                <h:commandLink class="id-jsf-"   value="Registrar Solicitud"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="consobra anchorLink" immediate="true" action="cancelarSolicitud"/>
-                <a4j:commandLink styleClass="text" value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"   immediate="true" action="cancelarSolicitud"/>
+                <a4j:commandLink class="id-jsf-"   value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
                                  render="panelBody"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="reportes anchorLink" immediate="true" action="irreportesdetalle"/>
-                <a4j:commandLink styleClass="text" value="Reporte"  action="irreportesdetalle"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"   immediate="true" action="irreportesdetalle"/>
+                <a4j:commandLink class="id-jsf-"   value="Reporte"  action="irreportesdetalle"/>
             </h:panelGrid>
 
 
         </h:panelGrid>
     </rich:panel>
 
-    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="tool" style="border-style: none;">
+    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="tool" >
         <h:panelGrid columns="2" columnClasses="labelsDatos,labelsDatos" cellpadding="1px"  >
-            <h:outputText id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
-            <h:outputText id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
+            <h:outputText  class="id-jsf- "   id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
+            <h:outputText  class="id-jsf- "   id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
 
-            <h:outputText id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
-            <h:outputText id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
+            <h:outputText  class="id-jsf- "   id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
+            <h:outputText  class="id-jsf- "   id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
 
          
         </h:panelGrid>

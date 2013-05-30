@@ -8,18 +8,18 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalImagen" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+    <rich:popupPanel id="modalImagen" autosized="true"  headerClass="rich-panel-header">
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_modalImagen" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="#{var.imagen}" styleClass="rich-panel-body" style="padding:0px;">           
+        <rich:panel header="#{var.imagen}" class="id-jsf-"   >           
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -35,24 +35,24 @@
                             uploadLabel="#{var.subir}"
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}"
-                            style="width: 250px;height: 150px">
+                            >
                             <a4j:ajax event="uploadcomplete" render="info"/>
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorImagen.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -61,11 +61,11 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Supervisor$Alimentar.borrarImagenAlimenta}"
                                                    render="layoutImagenDetalle, info, upload" rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" onclick="#{rich:component('modalImagen')}.hide();" rendered="#{Supervisor$Alimentar.cargadorImagen.numArchivos>0}"
                                                    render="layoutImagenDetalle"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

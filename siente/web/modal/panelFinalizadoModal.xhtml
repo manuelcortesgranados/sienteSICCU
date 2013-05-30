@@ -7,31 +7,31 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <rich:popupPanel height="200" id="panelFinalizado" resizeable="false" width="350" style="padding:0px;"
+    <rich:popupPanel height="200" id="panelFinalizado" resizeable="false" width="350" 
                      headerClass="rich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.FINALIZAR}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.FINALIZAR}"/>
             </h:panelGroup>
         </f:facet>
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFinalizado" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelFinalizado" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFinalizado')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form>
                 <h:panelGrid id="layoutFinalizado">
-                    <h:outputText value="#{var.laobra}" />
-                    <h:outputText value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="txt_label_bold"/>
-                    <h:outputText value="#{var.hasidoconexito}" />
+                    <h:outputText  class="id-jsf- "   value="#{var.laobra}" />
+                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" class="id-jsf-"  />
+                    <h:outputText  class="id-jsf- "   value="#{var.hasidoconexito}" />
                     <a4j:commandButton id="BTaceptarFinalizado" value="#{var.aceptar}"
                                        onclick="#{rich:component('panelFinalizado')}.hide();" render="layoutPrincipal"
-                                       styleClass="btn_pri_col"   style="font-size: 11px;">
+                                       class="id-jsf-"     >
                     </a4j:commandButton>
                 </h:panelGrid>
             </h:form>

@@ -12,20 +12,20 @@
     >
 
 
-    <rich:popupPanel height="200" id="guardarCiudadano" resizeable="false" width="350" style="padding:0px;"
+    <rich:popupPanel height="200" id="guardarCiudadano" resizeable="false" width="350" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="Ciudadano"/>
+                <h:outputText  class="id-jsf- "    value="Ciudadano"/>
             </h:panelGroup>
         </f:facet>
         <h:form>
-            <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+            <rich:panel class="id-jsf-"   >
                 <center>
-                    <h:panelGrid id="pgguardar" style="width:100%;" >
+                    <h:panelGrid id="pgguardar"  >
                         <h:panelGroup>
                             <center>
-                                <h:outputText value="#{var.mensajecorreo}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.mensajecorreo}" />
                             </center>
                         </h:panelGroup>
                         <h:panelGroup>

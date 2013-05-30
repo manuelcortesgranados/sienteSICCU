@@ -14,7 +14,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="Cargar Giros"/>
+        <h:outputText  class="id-jsf- "   value="Cargar Giros"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,8 +29,8 @@
                 <h:panelGrid id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
                     <h:panelGroup>
-                        <h:outputLabel id="lblFecdoc"  value="#{var.fechadocumento}" for="fecIni"/>
-                        <rich:message for="fecIni" style="color: #ed0606;"/>
+                        <h:outputLabel  class="id-jsf- "   id="lblFecdoc"  value="#{var.fechadocumento}" for="fecIni"/>
+                        <rich:message for="fecIni" />
                     </h:panelGroup>
 
                     <rich:calendar locale="#{var.fechadocumento}"  datePattern="d-MMM-yyyy" direction="bottomRight" id="fecIni" inputSize="10" value="#{Financiera$CargarExcel.registro.fechaarchivo}" >
@@ -38,8 +38,8 @@
                     </rich:calendar>
 
                     <h:panelGroup>
-                        <h:outputLabel id="lblObseroObra"  value="#{var.observaciondocumento}" for="txtObserProyecto" />
-                        <rich:message for="txtObserProyecto" style="color: #ed0606;"/>
+                        <h:outputLabel  class="id-jsf- "   id="lblObseroObra"  value="#{var.observaciondocumento}" for="txtObserProyecto" />
+                        <rich:message for="txtObserProyecto" />
                     </h:panelGroup>
 
                     <h:inputTextarea cols="80" id="txtObserProyecto" rows="4" value="#{Financiera$CargarExcel.registro.observacion}"/>
@@ -47,7 +47,7 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="1" id="hpCargar">
-                    <a4j:commandLink execute="@this" styleClass="subir anchorLink" rendered="#{Financiera$CargarExcel.registro.fechaarchivo!=null}"
+                    <a4j:commandLink execute="@this" class="id-jsf-"   rendered="#{Financiera$CargarExcel.registro.fechaarchivo!=null}"
                                      oncomplete="#{rich:component('mp_subirexcelgiros')}.show();" render="mp_subirexcelgiros"/>
                 </h:panelGrid>
 

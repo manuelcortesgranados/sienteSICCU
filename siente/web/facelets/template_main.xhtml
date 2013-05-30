@@ -11,7 +11,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><h:outputText value="#{var.titulogeneral}"></h:outputText></title>
+        <title><h:outputText  class="id-jsf- "   value="#{var.titulogeneral}"></h:outputText></title>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
@@ -33,12 +33,12 @@
         <h:form id="form_menu">
             <ui:insert name="menu"/>
         </h:form>
-        <table style="width:100%;" align="center" border="0" cellpadding="0" >
-            <tr style="vertical-align: top">
-                <td width="15%" valign="top" style="border-right: #F4F4F4 thin solid">
+        <table  align="center" border="0" cellpadding="0" >
+            <tr >
+                <td width="15%" valign="top" >
                     <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" class="centrado" >
                         <tr>
-                            <td  style="height:auto;">
+                            <td  >
                                 <h:form id="form_menu_lateral" >
                                     <ui:insert name="menu_lateral"/>
                                 </h:form>                                    
@@ -47,7 +47,7 @@
                     </table>
                 </td>
                 <td width="85%" valign="top">
-                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" style="width:100%;">
+                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" >
                         <tr>
                             <td>
 
@@ -61,13 +61,13 @@
                         </tr>
                         <tr>
                             <td valign="top" height="35">
-                                <h:panelGrid styleClass="centrado" style="width:100%;">
-                                    <table border="0" cellspacing="0" cellpadding="0" class="centrado" style="width:100%;">
+                                <h:panelGrid class="id-jsf-"   >
+                                    <table border="0" cellspacing="0" cellpadding="0" class="centrado" >
                                         <tr>
                                             <td>
                                                 <a4j:outputPanel id="panelBody">
                                                     <rich:messages id="messages" globalOnly="true"
-                                                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                                   class="id-jsf-"   ajaxRendered="true"
                                                                    >
                                                         <f:facet name="infoMarker">
                                                             <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
@@ -97,8 +97,8 @@
                 </td>
             </tr>
         </table>
-        <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="tablafooter">
-            <tr style="height:15px;"/>
+        <table  border="0" cellspacing="0" cellpadding="0" id="tablafooter">
+            <tr />
             <tr>
                 <td>
                     <h:form id="form_footer">

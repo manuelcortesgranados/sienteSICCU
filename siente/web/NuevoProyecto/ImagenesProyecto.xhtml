@@ -14,75 +14,75 @@
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>            
     <ui:define name="body">
         <h:form id="formImagenesProy" >
-            <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+            <table   align="center" border="0" cellspacing="8" cellpadding="0">
                 <tr>
-                    <td rowspan="6" valign="top" style="height:400px;width: auto">
+                    <td rowspan="6" valign="top" >
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
-                    <td valign="top" height="35" style="width: 80%">
+                    <td valign="top" height="35" >
                         <rich:panel>
                             <f:facet name="header">
-                                <h:outputText value="#{var.subirimagenes}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.subirimagenes}"/>
                             </f:facet>
                             <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
-                                <h:outputText value="#{var.subalasimagenesantes}"/>
-                                <h:panelGrid columns="2" style="width:100%;">
+                                <h:outputText  class="id-jsf- "   value="#{var.subalasimagenesantes}"/>
+                                <h:panelGrid columns="2" >
 
-                                    <rich:panel id="imagenanterior" header="#{var.imagenanterior}" bodyClass="rich-panel-grid-body" style="overflow: auto; height: 390px; width: 100%" >
+                                    <rich:panel id="imagenanterior" header="#{var.imagenanterior}" bodyClass="rich-panel-grid-body"  >
                                         <center>
                                             <h:panelGrid id="layoutImagen"  columnClasses="aiu">
                                                 <center>
-                                                    <a4j:commandLink id="btAdjuntarImagen" styleClass="anadirimagen anchorlink" >
+                                                    <a4j:commandLink id="btAdjuntarImagen" class="id-jsf-"   >
                                                         <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenActual')}.show();"/>
                                                     </a4j:commandLink>
                                                 </center>
-                                                <h:outputText id="ImagenAtencionppal" value="#{var.nombre}"/>
+                                                <h:outputText  class="id-jsf- "   id="ImagenAtencionppal" value="#{var.nombre}"/>
                                                 <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.nombreimg}" size="40"/>                                                  
 
-                                                <rich:dataGrid columns="1" rowKeyVar="row"  value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file" style="width: 30px;">
+                                                <rich:dataGrid columns="1" rowKeyVar="row"  value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file" >
                                                     <h:inputText id="nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
                                                 </rich:dataGrid>
                                             </h:panelGrid>
                                             <center>
                                                 <h:panelGrid>
                                                     <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenInicial}" value="#{var.subir}"
-                                                                   rendered="#{!Supervisor$IngresarNuevaObra.img}" styleClass="buttontxt">
+                                                                   rendered="#{!Supervisor$IngresarNuevaObra.img}" class="id-jsf-"  >
                                                         <!--<a4j:ajax event="clompete" render="tablaImagenes,panelImagenProyecto,imagenanterior"/>-->
                                                     </h:commandLink>
                                                 </h:panelGrid>
                                             </center>
                                         </center>
                                     </rich:panel>
-                                    <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="rich-panel-grid-body" style="overflow: auto; height: 390px; width: 100%" >
+                                    <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="rich-panel-grid-body"  >
                                         <center>
                                             <h:panelGrid id="panel_subirImagen"  columns="1" >
-                                                <a4j:commandLink id="adjuntarImagen" styleClass="anadirimagenes anchorlink">
+                                                <a4j:commandLink id="adjuntarImagen" class="id-jsf-"  >
                                                     <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                                 </a4j:commandLink>
 
 
-                                                <h:outputText id="ImagenAtencion" value="#{var.descripcionImagen}"/>
+                                                <h:outputText  class="id-jsf- "   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
                                                 <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.nomImagen}" size="40"/>
 
-                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.archivos}" var="file" style="width: 30px;">
+                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.archivos}" var="file" >
                                                     <h:inputText id="otxt_nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
                                                 </rich:dataGrid>
                                             </h:panelGrid>
-                                            <h:outputLabel value="(Foto de Valla Obligatoria - Circular 33)"/>
+                                            <h:outputLabel  class="id-jsf- "   value="(Foto de Valla Obligatoria - Circular 33)"/>
                                         </center>
 
                                         <center>
                                             <h:panelGrid>
                                                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenPrincipal}" value="#{var.subir}"
-                                                               rendered="#{!Supervisor$IngresarNuevaObra.imgppal}" styleClass="buttontxt">
+                                                               rendered="#{!Supervisor$IngresarNuevaObra.imgppal}" class="id-jsf-"  >
                                                     <!--<a4j:ajax event="complete" render="tablaImagenes,panelImagenProyecto,imagenprincipal"/>-->
                                                 </h:commandLink>
                                             </h:panelGrid>
@@ -93,36 +93,36 @@
                                     <rich:dataTable id="tablaImagenes"
                                                     value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
                                                     var="currentRow"
-                                                    style="width:100%;"
+                                                    
                                                     rowKeyVar="filaSeleccionada"
                                                     rows="3" >
                                         <f:facet name="header">
-                                            <h:outputText value="#{var.imgseleccionadas}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.imgseleccionadas}"/>
                                         </f:facet>
-                                        <rich:column breakRowBefore="true" style="text-align:center;" width="100px">
+                                        <rich:column breakRowBefore="true"  width="100px">
                                             <f:facet name="header" >
-                                                <h:outputText value="#{var.tipo}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
                                             </f:facet>
-                                            <h:outputText value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
                                         </rich:column>
 
-                                        <rich:column  style="text-align:center; width: 100px;">
+                                        <rich:column  >
                                             <f:facet name="header" >
-                                                <h:outputText value="#{var.nombreah}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.nombreah}"/>
                                             </f:facet>
-                                            <h:outputText value="#{currentRow.strnombre}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}"/>
                                         </rich:column>
-                                        <rich:column style="text-align:center; width: 100px;" id="Imagen">
+                                        <rich:column  id="Imagen">
                                             <f:facet name="header" >
-                                                <h:outputText value="#{var.imagen}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.imagen}"/>
                                             </f:facet>
 
-                                            <h:graphicImage value="#{currentRow.strubicacion}" style="height: 70px; width: 70px;"  />
+                                            <h:graphicImage value="#{currentRow.strubicacion}"   />
                                         </rich:column>
 
-                                        <rich:column style="text-align:center;" width="60px">
+                                        <rich:column  width="60px">
                                             <f:facet name="header">
-                                                <h:outputText value="#{var.eliminar}"/>
+                                                <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                             </f:facet>
                                             <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
                                                                action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista(filaSeleccionada)}"/>
@@ -146,19 +146,19 @@
                                 </h:commandButton>
                                 <a4j:outputPanel id="panelErrorImag">
                                     <rich:messages id="messagesImag" globalOnly="true"
-                                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                   class="id-jsf-"   ajaxRendered="true"
                                                   >
                                         <f:facet name="infoMarker">
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msginfo.png" />
+                                            <h:graphicImage  url="/resources/imgs/msginfo.png" />
                                         </f:facet>
                                         <f:facet name="warnMarker">
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgwarn.png" />
+                                            <h:graphicImage  url="/resources/imgs/msgwarn.png" />
                                         </f:facet>
                                         <f:facet name="errorMarker">
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                         <f:facet name="fatalMarker">
-                                            <h:graphicImage  style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage   url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                     </rich:messages>
 

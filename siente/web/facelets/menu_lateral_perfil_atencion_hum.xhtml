@@ -12,27 +12,27 @@
 
 
     <rich:panel id="perfilSolicitante" header="Mi Perfil - #{SessionBeanCobra.usuarioObra.tercero.strnombre}  #{SessionBeanCobra.usuarioObra.tercero.strapellido1}  #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
-                bodyClass="tool" style="border-style: none;">
+                bodyClass="tool" >
         <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
             <interkont:spacer width="5"/>
-            <h:outputText id="stSolicitudesTotales"  value="#{var.misolicitues}"/>
+            <h:outputText  class="id-jsf- "   id="stSolicitudesTotales"  value="#{var.misolicitues}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stSolTotales" styleClass="txt_outtext" value="#{AtencionHumanitaria$AdminSolicitudAtencion.cantidadSolicitides}"/>
+            <h:outputText  class="id-jsf- "   id="stSolTotales" class="id-jsf-"   value="#{AtencionHumanitaria$AdminSolicitudAtencion.cantidadSolicitides}"/>
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stSolicituesAprobadas"  value="#{var.solaprobadas}"/>
+            <h:outputText  class="id-jsf- "   id="stSolicituesAprobadas"  value="#{var.solaprobadas}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stSolAprobadas" styleClass="txt_outtext" value="#{AtencionHumanitaria$AdminSolicitudAtencion.solicitudesAprobadas}"/>
+            <h:outputText  class="id-jsf- "   id="stSolAprobadas" class="id-jsf-"   value="#{AtencionHumanitaria$AdminSolicitudAtencion.solicitudesAprobadas}"/>
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stMensajesPendientes"  value="#{var.mensajependiente}"/>
+            <h:outputText  class="id-jsf- "   id="stMensajesPendientes"  value="#{var.mensajependiente}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stMenPendientes" styleClass="txt_outtext" value=""/>
+            <h:outputText  class="id-jsf- "   id="stMenPendientes" class="id-jsf-"   value=""/>
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stAlarmas"  value="#{var.alarmas}"/>
+            <h:outputText  class="id-jsf- "   id="stAlarmas"  value="#{var.alarmas}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stAl" styleClass="txt_outtext" value=""/>
+            <h:outputText  class="id-jsf- "   id="stAl" class="id-jsf-"   value=""/>
         </h:panelGrid>
     </rich:panel>
 </ui:composition>

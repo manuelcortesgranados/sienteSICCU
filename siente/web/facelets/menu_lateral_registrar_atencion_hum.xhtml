@@ -9,57 +9,57 @@
     xmlns:interkont="http://www.interkont.com/jsf"
   >
 
-    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodyClass="tool" style="border-style: none;">
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
+    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodyClass="tool" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="datos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="datosb_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Datos Basicos"
+                <a4j:commandLink class="id-jsf-"   value="Datos Basicos"
                                  action="datosb_atencion" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="datos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Datos Basicos"
+                <a4j:commandLink class="id-jsf-"   value="Datos Basicos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="verfotos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="img_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Imagenes"
+                <a4j:commandLink class="id-jsf-"   value="Imagenes"
                                  action="img_atencion"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablaadminproyecto" cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="verfotos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Imagenes"
+                <a4j:commandLink class="id-jsf-"   value="Imagenes"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="mproyectos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="doc_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Documentos"
+                <a4j:commandLink class="id-jsf-"   value="Documentos"
                                  action="doc_atencion"  execute="@this"/>
             </h:panelGrid>
 
-             <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="mproyectos anchorLink" immediate="true"
+             <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Documentos"
+                <a4j:commandLink class="id-jsf-"   value="Documentos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
-                <a4j:commandLink styleClass="vervideos anchorLink" immediate="true"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <a4j:commandLink class="id-jsf-"   immediate="true"
                                  action="video_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="text" value="Video"
+                <a4j:commandLink class="id-jsf-"   value="Video"
                                  action="video_atencion"  execute="@this"/>
             </h:panelGrid>
         </h:panelGrid>

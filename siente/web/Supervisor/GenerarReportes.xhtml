@@ -18,15 +18,15 @@
     <ui:define name="body">
 
         <h:form >
-            <rich:panel style="width:100%;" id="layoutAlimentar" header="#{var.reporte}">
+            <rich:panel  id="layoutAlimentar" header="#{var.reporte}">
 
                 <interkont:spacer height="30"/>
                 <center>
                     <h:panelGrid id="panelReporte" columns="3">
 
-                        <h:commandLink styleClass="pdf anchorLink" action="#{Supervisor$DetalleObra.reportePdf}" />
-                        <a4j:commandLink styleClass="excel anchorLink" action="#{Supervisor$DetalleObra.reporteExcel}"/>
-                        <a4j:commandLink styleClass="word anchorLink" action="#{Supervisor$DetalleObra.reporteWord}"/>
+                        <h:commandLink class="id-jsf-"   action="#{Supervisor$DetalleObra.reportePdf}" />
+                        <a4j:commandLink class="id-jsf-"   action="#{Supervisor$DetalleObra.reporteExcel}"/>
+                        <a4j:commandLink class="id-jsf-"   action="#{Supervisor$DetalleObra.reporteWord}"/>
 
                     </h:panelGrid>
                 </center>

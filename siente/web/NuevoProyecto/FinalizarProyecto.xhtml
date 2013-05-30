@@ -14,7 +14,7 @@
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.ingresarnuevoproyecto} - #{var.veravanceyfinalizar}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.ingresarnuevoproyecto} - #{var.veravanceyfinalizar}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -22,67 +22,67 @@
 
     <ui:define name="body">
 
-        <table  style="width:100%;" align="center" border="0" cellspacing="8" cellpadding="0">
+        <table   align="center" border="0" cellspacing="8" cellpadding="0">
             <tr>
                 <h:form>
-                    <td rowspan="6" valign="top" style="height:400px;width: 20%">
+                    <td rowspan="6" valign="top" >
                         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
                         <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
                     </td>
                 </h:form>
-                <td valign="top" height="35" style="width: 80%">
+                <td valign="top" height="35" >
                     <h:form id="formFinProy">
 
                         <rich:panel  id="panelFinproy" >
                             <f:facet name="header" >
                                 <h:panelGroup >
-                                    <h:outputText value="#{var.veravanceyfinalizar}" styleClass="txt_header" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.veravanceyfinalizar}" class="id-jsf-"   />
                                 </h:panelGroup>
                             </f:facet>
                             <center>
                                 <rich:collapsiblePanel  header="#{var.titulofinalizarproyecto}" switchType="client" >
 
                                     <h:panelGrid id="panelFinalizar" >
-                                        <h:outputText value="#{var.titulofinalizarproyecto}"/>
-                                        <h:panelGrid columns="2" style="width:100%;">
-                                            <h:outputText value="#{var.tipificaciondelproyecto}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.titulofinalizarproyecto}"/>
+                                        <h:panelGrid columns="2" >
+                                            <h:outputText  class="id-jsf- "   value="#{var.tipificaciondelproyecto}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
 
-                                            <h:outputText value="#{var.datosbasicos}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.datosbasicos}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
 
-                                            <h:outputText value="#{var.ubicaciondelproyecto}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.ubicaciondelproyecto}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
 
-                                            <h:outputText value="#{var.cronogramavalidacion}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.cronogramavalidacion}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
 
-                                            <h:outputText value="#{var.totalobra}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.totalobra}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
 
-                                            <h:outputText value="#{var.imagenesproyecto}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.imagenesproyecto}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
 
-                                            <h:outputText value="#{var.informacioncontractual}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.contratos}"/>
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.contratos}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.informacioncontractual}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.contratos}"/>
+                                            <h:graphicImage  url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.contratos}"/>
 
                                         </h:panelGrid>
                                     </h:panelGrid>
-                                    <h:panelGrid style="width:100%;">
+                                    <h:panelGrid >
                                         <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
-                                            <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
-                                            <h:outputText value="#{var.completarinformacionproyecto}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
+                                            <h:graphicImage  url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.completarinformacionproyecto}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
 
 
                                         </h:panelGroup>
-                                        <h:panelGroup styleClass="centrado">
+                                        <h:panelGroup class="id-jsf-"  >
                                             <a4j:commandButton id="btVolveragenerarFin"  value="#{var.volver}" immediate="true"
                                                                action="datosAsociarContrato" />
                                             <h:commandButton id="btCancelarNuevaObraFin"  value="#{var.cancelar}"
@@ -98,9 +98,9 @@
 
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}">
 
-                                                <!-- <h:outputText value="#{var.laobra}"  />-->
-                                                <!-- <h:outputText value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}"  />-->
-                                                <!-- <h:outputText value="#{var.hasidoanadidaconexito}"  />-->
+                                                <!-- <h:outputText  class="id-jsf- "   value="#{var.laobra}"  />-->
+                                                <!-- <h:outputText  class="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}"  />-->
+                                                <!-- <h:outputText  class="id-jsf- "   value="#{var.hasidoanadidaconexito}"  />-->
                                                 <h:commandButton id="BTaceptarDoc" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
                                                                  action="#{Supervisor$IngresarNuevaObra.cancelar_action}"   >
 
@@ -113,19 +113,19 @@
                                     </h:panelGrid>
                                     <a4j:outputPanel id="panelErrorFin">
                                         <rich:messages id="messagesFin" globalOnly="true"
-                                                       styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                                       class="id-jsf-"   ajaxRendered="true"
                                                        >
                                             <f:facet name="infoMarker">
-                                                <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msginfo.png" />
+                                                <h:graphicImage  url="/resources/imgs/msginfo.png" />
                                             </f:facet>
                                             <f:facet name="warnMarker">
                                                 <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                             </f:facet>
                                             <f:facet name="errorMarker">
-                                                <h:graphicImage style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                                <h:graphicImage  url="/resources/imgs/msgerror.png" />
                                             </f:facet>
                                             <f:facet name="fatalMarker">
-                                                <h:graphicImage  style="height: 20px; width: 20px;" url="/resources/imgs/msgerror.png" />
+                                                <h:graphicImage   url="/resources/imgs/msgerror.png" />
                                             </f:facet>
                                         </rich:messages>
 

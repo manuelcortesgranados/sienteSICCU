@@ -13,13 +13,13 @@
     <rich:popupPanel id="mp-editar-polizas" moveable="true" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.editar}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.editar}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-editar-polizas" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_mp-editar-polizas" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-editar-polizas')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -27,9 +27,9 @@
         <h:form>
             <rich:panel id="rpPolizas">
                 <center>
-                    <h:panelGrid id="gpModiPoliza" columns="2"  style="width:100%;">
+                    <h:panelGrid id="gpModiPoliza" columns="2"  >
 
-                        <h:outputLabel id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
+                        <h:outputLabel  class="id-jsf- "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
                         </h:outputLabel>
                         <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
@@ -37,19 +37,19 @@
                             <a4j:ajax event="change"  />
                         </h:selectOneMenu>
 
-                        <h:outputLabel  id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
+                        <h:outputLabel  class="id-jsf- "    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
 
                         </h:outputLabel>
                         <h:inputText id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}"/>
 
-                        <h:outputLabel id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
+                        <h:outputLabel  class="id-jsf- "   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                         </h:outputLabel>
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
-                        <h:outputLabel id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
+                        <h:outputLabel  class="id-jsf- "   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
                         </h:outputLabel>
                         <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
                             <f:selectItems value="#{Supervisor$Contrato.companias}"/>

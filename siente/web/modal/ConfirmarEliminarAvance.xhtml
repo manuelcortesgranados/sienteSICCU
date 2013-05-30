@@ -11,34 +11,34 @@
 
 
     <rich:popupPanel  id="confirmarEliminarAvance" autosized="true"
-                      headerClass="sliderich" styleClass="sliderichcontentblue" >
+                      headerClass="sliderich" class="id-jsf-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="ELIMINAR ULTIMO REPORTE DE AVANCE"/>
+                <h:outputText  class="id-jsf- "    value="ELIMINAR ULTIMO REPORTE DE AVANCE"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_confirmarEliminarAvance" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_confirmarEliminarAvance" class="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <center>
-                <h:panelGrid id="pgconfirmarEliminarAvance"  columnClasses="panelcenter" width="400px" styleClass="sliderichcontentblue" cellpadding="0" cellspacing="0" >
+                <h:panelGrid id="pgconfirmarEliminarAvance"  columnClasses="panelcenter" width="400px" class="id-jsf-"   cellpadding="0" cellspacing="0" >
                     <h:graphicImage height="60px" width="60px" url="/resources/imgs/alerta.png" />
                     <h:panelGroup>
                         <center>
-                            <h:outputText styleClass="vtitle23" value="Está completamente seguro de solicitar borrar el último reporte de avance?" />
+                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="Está completamente seguro de solicitar borrar el último reporte de avance?" />
                         </center>
                     </h:panelGroup>
                     <h:panelGroup>
                         <interkont:spacer width="120" height="10"/>
                         <center>
-                            <a4j:commandButton id="BTaceptarEliAvance1" value="Si" styleClass="buttonform" style="color:#FFF;"  action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}" oncomplete="#{rich:component('confirmarEliminarAvance')}.hide();"/>
-                            <a4j:commandButton id="BTaceptarEliAvance2" value="NO" styleClass="buttonform"  style="color:#FFF;" onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
+                            <a4j:commandButton id="BTaceptarEliAvance1" value="Si" class="id-jsf-"     action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}" oncomplete="#{rich:component('confirmarEliminarAvance')}.hide();"/>
+                            <a4j:commandButton id="BTaceptarEliAvance2" value="NO" class="id-jsf-"     onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
                         </center>
                     </h:panelGroup>
                 </h:panelGrid>

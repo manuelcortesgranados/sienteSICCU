@@ -14,7 +14,7 @@
     <ui:define name="head" />
 
     <ui:define name="title">
-        <h:outputText value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Entidades Nacionales" />
+        <h:outputText  class="id-jsf- "   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Entidades Nacionales" />
     </ui:define>
 
     <ui:define name="menu">
@@ -29,13 +29,13 @@
     <ui:define name="body">
         <h:form>
             <rich:panel id="pgcontratoconvenio">
-                <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                <table  border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td>
                             <div class="buscador">
                                 <div id="buscador_space">
                                     <label>
-                                        <h:inputText id="txtPalabraClave" styleClass="buscador_field"
+                                        <h:inputText id="txtPalabraClave" class="id-jsf-"  
                                                      onclick="this.value = '';"
                                                      value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" />
 
@@ -47,7 +47,7 @@
                             </div>
                         </td>
                         <td>
-                            <a4j:commandLink styleClass="busquedavanzada anchorLink" render="panelFiltroContrato" value="#{var.houtbusquedaavanza}" execute="@this"
+                            <a4j:commandLink class="id-jsf-"   render="panelFiltroContrato" value="#{var.houtbusquedaavanza}" execute="@this"
                                              action="#{Supervisor$Contrato.iniciarFiltroAvanzado}"
                                              oncomplete="#{rich:component('panelFiltroContrato')}.show();" />
                         </td>
@@ -55,14 +55,14 @@
                 </table>
 
                 <center>
-                    <h:panelGrid style="width:100%;">
-                        <interkont:spacer height="20" style="width:100%;" />
+                    <h:panelGrid >
+                        <interkont:spacer height="20"  />
 
                         <h:panelGroup id="panel-filtro-novedades">
-                            <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="consulconvenio">
-                                <h:outputLabel id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
+                            <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" class="id-jsf-"  >
+                                <h:outputLabel  class="id-jsf- "   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
 
-                                <h:selectOneMenu style="width: 400px;"
+                                <h:selectOneMenu 
                                                  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
                                                  label="Ingrese una entidad" >
                                     <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
@@ -75,13 +75,13 @@
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <interkont:spacer height="10px" style="width:100%;" />
+                        <interkont:spacer height="10px"  />
 
                         <!-- Listado de convenios según la entidad del contratante -->
                         <rich:panel id="pl-tabla-listado-contratoconvenio">
                             <h:panelGrid rendered="#{empty Supervisor$Contrato.listacontratos and empty Supervisor$Contrato.listacontratoscontratista}">
                                 <f:facet name="header">
-                                    <h:outputText value="No se encontró #{Supervisor$Contrato.tipoContCon} para esta entidad" />
+                                    <h:outputText  class="id-jsf- "   value="No se encontró #{Supervisor$Contrato.tipoContCon} para esta entidad" />
                                 </f:facet>
                             </h:panelGrid>
 
@@ -89,71 +89,71 @@
                                             rowKeyVar="filaSeleccionada"
                                             value="#{Supervisor$Contrato.listacontratos}"
                                             rendered="#{Supervisor$Contrato.listacontratos.size()>0}"
-                                            sortMode="single" var="currentRow" style="width:100%;" rows="6"
+                                            sortMode="single" var="currentRow"  rows="6"
                                             rowClasses="cabezo_tabla01, cabezo_tabla02">
                                 <f:facet name="header">
 
                                     <rich:column colspan="10">
-                                        <h:outputText value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
                                     </rich:column>
 
                                     <rich:columnGroup>
                                         <rich:column colspan="10">
-                                            <h:outputText value="#{var.conveniosporcontratante}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.conveniosporcontratante}" />
                                         </rich:column>
                                     </rich:columnGroup>
 
                                     <rich:columnGroup>
                                         <rich:column width="150px" breakRowBefore="true">
-                                            <h:outputText id="txtnumerocc" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                            <h:outputText  class="id-jsf- "   id="txtnumerocc" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText id="outxtnombrecc" value="#{var.nombre}" />
+                                            <h:outputText  class="id-jsf- "   id="outxtnombrecc" value="#{var.nombre}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText id="outxttipocc" value="#{var.tipocontr}" />
+                                            <h:outputText  class="id-jsf- "   id="outxttipocc" value="#{var.tipocontr}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText id="outxtvlrcc" value="#{var.valor}" />
+                                            <h:outputText  class="id-jsf- "   id="outxtvlrcc" value="#{var.valor}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                            <h:outputText id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                            <h:outputText id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                            <h:outputText  class="id-jsf- "   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                            <h:outputText  class="id-jsf- "   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                            <h:outputText  class="id-jsf- "   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
                                         </rich:column>
 
                                         <rich:column width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText id="outxtpadrecc" value="#{var.proyectosasociados}?" />
+                                            <h:outputText  class="id-jsf- "   id="outxtpadrecc" value="#{var.proyectosasociados}?" />
                                         </rich:column>
 
                                         <rich:column width="150px"  rendered="false">
-                                            <h:outputText id="outxtconthijo" value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
+                                            <h:outputText  class="id-jsf- "   id="outxtconthijo" value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
                                         </rich:column>
 
                                         <rich:column width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText value="#{var.contratosdeconsultoria}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.contratosdeconsultoria}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.consultar}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.consultar}" />
                                         </rich:column>
 
                                         <rich:column width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
                                         </rich:column>
 
                                         <!--<rich:column width="150px">
-                                            <h:outputText value="#{var.editar}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.editar}" />
                                         </rich:column>-->
                                     </rich:columnGroup>
                                 </f:facet>
 
                                 <rich:column width="150px" breakRowBefore="true">
-                                    <h:outputText value="#{currentRow.strnumcontrato}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.strnumcontrato}" />
                                 </rich:column>
 
                                 <rich:column >
@@ -161,45 +161,45 @@
                                 </rich:column>
 
                                 <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText id="intxttipocc" value="#{currentRow.tipocontrato.strdesctipocontrato}" />
+                                    <h:outputText  class="id-jsf- "   id="intxttipocc" value="#{currentRow.tipocontrato.strdesctipocontrato}" />
                                 </rich:column>
 
                                 <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText id="intxttipocc2" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
+                                    <h:outputText  class="id-jsf- "   id="intxttipocc2" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
                                 </rich:column>
 
                                 <rich:column>
-                                    <h:outputText id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
+                                    <h:outputText  class="id-jsf- "   id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
                                 </rich:column>
 
                                 <rich:column>
-                                    <h:outputText id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                                    <h:outputText  class="id-jsf- "   id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
                                 </rich:column>
 
                                 <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText id="numproyecto" value="#{currentRow.intcantproyectos}" />
+                                    <h:outputText  class="id-jsf- "   id="numproyecto" value="#{currentRow.intcantproyectos}" />
                                 </rich:column>
 
                                 <rich:column  rendered="false">
-                                    <h:outputText id="numtxtpadrecc" value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
-                                    <h:outputText id="numtxtpadrehijocc" value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
+                                    <h:outputText  class="id-jsf- "   id="numtxtpadrecc" value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
+                                    <h:outputText  class="id-jsf- "   id="numtxtpadrehijocc" value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
                                 </rich:column>
 
                                 <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText id="descontrconsul" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
+                                    <h:outputText  class="id-jsf- "   id="descontrconsul" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
                                 </rich:column>
 
                                 <rich:column width="120px">
-                                    <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContrato(filaSeleccionada)}">
-                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                    <h:commandLink  action="#{Supervisor$Contrato.detalleContrato(filaSeleccionada)}">
+                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
                                 <rich:column width="120px" id="contconvpadre" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContratoPadre(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
-                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                    <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
+                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
@@ -232,7 +232,7 @@
                             </rich:dataTable>
                         </rich:panel>
 
-                        <interkont:spacer height="10px" style="width:100%;" />
+                        <interkont:spacer height="10px"  />
 
                         <!-- Listado de convenios según la entidad del contratista -->
                         <rich:panel id="pl-tabla-listado-contratoconvenio-contratista">
@@ -240,70 +240,70 @@
                                             rowKeyVar="filaSeleccionada"
                                             value="#{Supervisor$Contrato.listacontratoscontratista}"
                                             rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
-                                            sortMode="single" var="currentRow" style="width:100%;" rows="6"
+                                            sortMode="single" var="currentRow"  rows="6"
                                             rowClasses="cabezo_tabla01, cabezo_tabla02">
                                 <f:facet name="header">
 
                                     <rich:column colspan="10">
-                                        <h:outputText value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilasContratista} #{var.paginaCiu} #{Supervisor$Contrato.paginaContratista} #{var.deCiu} #{Supervisor$Contrato.totalpaginasContratista}" />
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilasContratista} #{var.paginaCiu} #{Supervisor$Contrato.paginaContratista} #{var.deCiu} #{Supervisor$Contrato.totalpaginasContratista}" />
                                     </rich:column>
 
                                     <rich:columnGroup>
                                         <rich:column colspan="10">
-                                            <h:outputText value="#{var.conveniosporcontratista}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.conveniosporcontratista}" />
                                         </rich:column>
                                     </rich:columnGroup>
 
                                     <rich:columnGroup>
                                         <rich:column width="150px" breakRowBefore="true">
-                                            <h:outputText value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.nombre}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.nombre}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.tipocontr}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.tipocontr}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.valor}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.valor}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                            <h:outputText value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                            <h:outputText value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
                                         </rich:column>
 
                                         <rich:column width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText value="#{var.proyectosasociados}?" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.proyectosasociados}?" />
                                         </rich:column>
 
                                         <rich:column width="150px" rendered="false">
-                                            <h:outputText value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
                                         </rich:column>
 
                                         <rich:column width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText value="#{var.contratosdeconsultoria}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.contratosdeconsultoria}" />
                                         </rich:column>
 
                                         <rich:column width="150px">
-                                            <h:outputText value="#{var.consultar}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.consultar}" />
                                         </rich:column>
 
                                         <rich:column width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                            <h:outputText value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
                                         </rich:column>
 
                                         <!--<rich:column width="150px">
-                                            <h:outputText value="#{var.editar}" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.editar}" />
                                         </rich:column>-->
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:column width="150px" breakRowBefore="true">
-                                    <h:outputText value="#{currentRow.strnumcontrato}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.strnumcontrato}" />
                                 </rich:column>
 
                                 <rich:column >
@@ -311,45 +311,45 @@
                                 </rich:column>
 
                                 <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText value="#{currentRow.tipocontrato.strdesctipocontrato}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.tipocontrato.strdesctipocontrato}" />
                                 </rich:column>
 
                                 <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
                                 </rich:column>
 
                                 <rich:column>
-                                    <h:outputText value="#{currentRow.numvlrcontrato}">
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrcontrato}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
                                 </rich:column>
 
                                 <rich:column>
-                                    <h:outputText value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
                                 </rich:column>
 
                                 <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText value="#{currentRow.intcantproyectos}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.intcantproyectos}" />
                                 </rich:column>
 
                                 <rich:column rendered="false">
-                                    <h:outputText value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
-                                    <h:outputText value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
                                 </rich:column>
 
                                 <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
+                                    <h:outputText  class="id-jsf- "   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
                                 </rich:column>
 
                                 <rich:column width="120px">
-                                    <h:commandLink style="font-size: 10px;"  action="#{Supervisor$Contrato.detalleContratoContratista(filaSeleccionada)}">
-                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                    <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista(filaSeleccionada)}">
+                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
                                 <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:commandLink style="font-size: 10px;" action="#{Supervisor$Contrato.detalleContratoPadreContratista(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
-                                        <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png" />
+                                    <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
+                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
                                 <f:facet name="footer">

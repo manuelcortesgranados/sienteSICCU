@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich" 
                 >
    
-    <h:panelGroup id="gpListaSeguimientos" styleClass="centrado">
+    <h:panelGroup id="gpListaSeguimientos" class="id-jsf-"  >
             <rich:dataTable id="tablaSeguimientos"
                             rows="10"
                             var="segumiento"
@@ -19,52 +19,52 @@
                             onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                             sortMode="single"
                             value="#{SessionBeanCobra.cobraService.listaseguimientos}"
-                            style="text-align:center;width:100%;"
-                            styleClass="centrado">
+                            
+                            class="id-jsf-"  >
                 <f:facet name="header">
                     <rich:columnGroup>
                         <rich:column colspan="5">
-                            <h:outputText value="#{var.seguimientos}" />
+                            <h:outputText  class="id-jsf- "   value="#{var.seguimientos}" />
                         </rich:column>
                         <rich:column breakRowBefore="true">
-                            <h:outputText value="#{var.firmainter}"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.firmainter}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{var.visitadopor}" />
+                            <h:outputText  class="id-jsf- "   value="#{var.visitadopor}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{var.fechavisita}" />
+                            <h:outputText  class="id-jsf- "   value="#{var.fechavisita}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{var.consultar}" />
+                            <h:outputText  class="id-jsf- "   value="#{var.consultar}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{var.reporte}" />
+                            <h:outputText  class="id-jsf- "   value="#{var.reporte}" />
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
                 <rich:columnGroup >
                     <rich:column>
-                        <h:outputText value="#{segumiento.strnombrecompleto}"/>
+                        <h:outputText  class="id-jsf- "   value="#{segumiento.strnombrecompleto}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{segumiento.strvisitador}"/>
+                        <h:outputText  class="id-jsf- "   value="#{segumiento.strvisitador}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{segumiento.datefechavisita}">
+                        <h:outputText  class="id-jsf- "   value="#{segumiento.datefechavisita}">
                             <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
                                        immediate="true">
-                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>
 
                     </rich:column>
                     <rich:column> 
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
-                            <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>                              
                     </rich:column>
                 </rich:columnGroup>
@@ -76,10 +76,10 @@
 
           
                 <h:panelGrid columnClasses="panelcenter" >
-                    <h:commandLink target="_blank"  styleClass="pdf" action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
+                    <h:commandLink target="_blank"  class="id-jsf-"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
                 </h:panelGrid>
             
-            <h:outputText id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
+            <h:outputText  class="id-jsf- "   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
         </center>
     </h:panelGroup>
 

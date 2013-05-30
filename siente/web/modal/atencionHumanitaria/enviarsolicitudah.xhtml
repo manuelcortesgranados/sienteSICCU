@@ -9,17 +9,17 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="panelConfirmarSolicitudAH" autosized="true" style="width: 200px"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmarSolicitudAH" autosized="true"   headerClass="rich-panel-header">
 
         <rich:panel >
             <f:facet name="header">
 
                 <h:panelGroup>
 
-                    <h:outputText value= "#{var.atencion}"/>
-                    <interkont:spacer style="width: 105px"/>
+                    <h:outputText  class="id-jsf- "   value= "#{var.atencion}"/>
+                    <interkont:spacer />
 
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="btn_cerrar" 
+                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
                                              return false;"/>
 
@@ -28,17 +28,17 @@
             </f:facet>
 
             <center>
-                <h:outputText value="#{var.estasegurodeenviar}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.estasegurodeenviar}"/>
 
                 <h:panelGrid columns="2" id="layoutGuardar">
 
 
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
                                        oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
-                                       style="font-size: 12px;"/>
+                                       />
 
                     <a4j:commandButton id="BTaceptarDoc" value="#{var.no}"   
-                                       style="font-size: 12px;">
+                                       >
                         <a4j:ajax event="click"   onbeforesubmit="#{rich:component('panelConfirmarSolicitudAH')}.hide(); " />
                     </a4j:commandButton>
 

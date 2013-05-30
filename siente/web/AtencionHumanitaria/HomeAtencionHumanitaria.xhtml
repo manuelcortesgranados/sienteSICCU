@@ -14,7 +14,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  value="#{var.encontrarsolah}"/>
+        <h:outputText  class="id-jsf- "    value="#{var.encontrarsolah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -25,16 +25,16 @@
     </ui:define>
     <ui:define name="body">
         <h:form>
-            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+            <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td><div class="buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" onfocus="clearText(this);" onblur="clearText(this);" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
-                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="buscador_button"/>
+                                    <h:inputText id="txtPalabraClave" class="id-jsf-"   onfocus="clearText(this);" onblur="clearText(this);" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
+                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" class="id-jsf-"  />
                                 </label>
                             </div></div></td>
                     <td>
-                        <a4j:commandLink styleClass="busquedavanzada anchorLink"
+                        <a4j:commandLink class="id-jsf-"  
                                          render="tablaAtencionHumanitaria" value="#{var.houtbusquedaavanza}">
                             <rich:componentControl event="click" target="panelBusquedaAvanzadaAtencion" operation="show" />
                         </a4j:commandLink>
@@ -46,99 +46,99 @@
                 <rich:panel header="#{var.solicitudatenciohum}">
                     <rich:dataTable id="tablaAtencionHumanitaria"
                                     value="#{SessionBeanCobra.atencionhumanitariaService.solicitudMaestro}"
-                                    var="currentRow" rows="10" style="width:100%;" rowKeyVar="filaSeleccionada">
+                                    var="currentRow" rows="10"  rowKeyVar="filaSeleccionada">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="12">
-                                    <h:outputText value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText value="#{var.codigo}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.codigo}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.nombreah}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombreah}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valorSolicitado}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.departamento}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.municipio}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.tipo} solicitud"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.tipo} solicitud"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.consultar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.consultar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.editar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.editar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.eliminar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.ver} Proyecto"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.ver} Proyecto"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText value="#{currentRow.oidcodigosolicitudmaestro}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.oidcodigosolicitudmaestro}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.strnombresolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strnombresolicitud}"/>
                         </rich:column>
-                        <rich:column styleClass="panelderecha">
-                            <h:outputText value="#{currentRow.numvlrsolicitado}">
+                        <rich:column class="id-jsf-"  >
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.localidad.strdepartamento}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.localidad.strmunicipio}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.tipoah.strdnombretipoah}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.tipoah.strdnombretipoah}"/>
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.buscarProyecto}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.buscarProyecto}" 
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.consultarSolicitud(filaSeleccionada)}" >
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.editar}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.editar}" 
                                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneditar_solicitud_ah}"
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.identificados_Modif(filaSeleccionada)}"
                                               render="DatosBasicosSolicitud">
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_editar.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_editar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud==4}" >
-                            <a4j:commandButton  title="#{var.eliminar}" style="font-size:11px;"
+                            <a4j:commandButton  title="#{var.eliminar}" 
                                                 action="#{AtencionHumanitaria$AdminSolicitudAtencion.SolicitudAeliminar(filaSeleccionada)}"
                                                 oncomplete="#{rich:component('panelConfirmaborrado')}.show();"
-                                                styleClass="eliminaravanzada" execute="@this"
+                                                class="id-jsf-"   execute="@this"
                                                 />
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud!=4}">
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.ver} Proyecto" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.ver} Proyecto" 
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               oncomplete="#{rich:component('modaltablaproyectoah')}.show();" execute="@this">
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">

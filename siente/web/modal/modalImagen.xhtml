@@ -11,20 +11,20 @@
     <rich:popupPanel id="modalImagen" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="#{var.imagen}"/>
+                <h:outputText  class="id-jsf- "    value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalImagen" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <rich:panel id="panelImagen" header="#{var.imagenproyectada}">
-                <h:panelGroup style="width: 100%">
+                <h:panelGroup >
                     <h:graphicImage value="http://74.207.234.207/CobraManizales#{Supervisor$AdministrarObraNew.imagenevolucionobra.strubicacion}" width="200"/>
                 </h:panelGroup>
             </rich:panel>

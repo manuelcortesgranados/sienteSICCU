@@ -9,28 +9,28 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:panel id="panelAsociarFiduprevisora">
-        <rich:collapsiblePanel switchType="ajax" style="width:98%" >
+        <rich:collapsiblePanel switchType="ajax"  >
             <f:facet name="header">
-                <h:outputText value="#{var.datosfidu}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.datosfidu}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
-                    <h:outputLabel id="lbfnenca"  value="#{var.numeroencargo}" />
+                    <h:outputLabel  class="id-jsf- "   id="lbfnenca"  value="#{var.numeroencargo}" />
                     <h:inputText value=""/>
-                    <a4j:commandButton styleClass="btn_pri_gig" value="#{var.aceptar}"/>
-                    <a4j:commandButton styleClass="btn_pri_gig" value="#{var.cancelar}"/>
+                    <a4j:commandButton class="id-jsf-"   value="#{var.aceptar}"/>
+                    <a4j:commandButton class="id-jsf-"   value="#{var.cancelar}"/>
                 </h:panelGrid>
             </center>
         </rich:collapsiblePanel>
-        <rich:collapsiblePanel switchType="ajax" style="width:98%">
+        <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText value="#{var.verdatosfidu}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.verdatosfidu}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
-                    <h:outputLabel id="lbfecnuenca"  value="#{var.numeroencargo}" />
+                    <h:outputLabel  class="id-jsf- "   id="lbfecnuenca"  value="#{var.numeroencargo}" />
                     <h:inputText value="" disabled="true"/>
-                    <h:outputLabel id="lbfecmosencar"  value="#{var.fechaencargo}" />
+                    <h:outputLabel  class="id-jsf- "   id="lbfecmosencar"  value="#{var.fechaencargo}" />
                     <h:inputText value="" disabled="true"/>
 
                 </h:panelGrid>

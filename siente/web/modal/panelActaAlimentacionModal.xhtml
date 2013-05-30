@@ -10,19 +10,19 @@
     <rich:popupPanel id="panelActa" autosized="true" headerClass="rich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.seleccionaracta}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.seleccionaracta}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelActa" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelActa" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelActa')}.hide();
                                              return false;"/>                   
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formActa">
                 <h:panelGroup id="layoutDocActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -31,7 +31,7 @@
                                 fileUploadListener="#{Supervisor$Alimentar.cargadorActa.listener}"
                                 immediateUpload="true"
                                 maxFilesQuantity="1"
-                                style="width: 250px;"
+                                
                                 listHeight="150"
                                 addLabel="#{var.adicionar}"
                                 doneLabel="#{var.hecho}"
@@ -42,20 +42,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoActa">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActa.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -65,12 +65,12 @@
                                 <br/>
                                 <a4j:commandButton id="borrar_Acta" action="#{Supervisor$Alimentar.borrarActa}" render="infoActa, uploadActa, layoutActa"
                                                    rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <a4j:commandButton id="BTaceptarActa" value="#{var.aceptar}"
                                                    onclick="#{rich:component('panelActa')}.hide();"
                                                    rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos>0}"
                                                    render="layoutActa" action="#{Supervisor$Alimentar.pathDocumento}"
-                                                      style="font-size: 12px;"/>
+                                                      />
                             </center>
 
                         </h:panelGroup>

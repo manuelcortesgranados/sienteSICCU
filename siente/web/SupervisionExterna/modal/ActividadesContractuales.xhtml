@@ -9,10 +9,10 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <rich:popupPanel id="modalactividadescontractuales" headerClass="rich-panel-header" autosized="true" style="overflow: auto;">
+    <rich:popupPanel id="modalactividadescontractuales" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText value="ACTIVIDADES CONTRACTUALES" styleClass="txt_header" />
+                <h:outputText  class="id-jsf- "   value="ACTIVIDADES CONTRACTUALES" class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -21,89 +21,89 @@
                     <a4j:commandLink id="esconder-modalactividadescontractuales" 
                                        onclick="#{rich:component('modalactividadescontractuales')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="cerrar" />
+                                       title="#{var.cerrar}" immediate="true" class="id-jsf-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel style="width:100%;">
+            <rich:panel >
                 <center>
                     <rich:dataTable id="tablaactividadescontractuales"
                                     rows="4"
                                     value="#{Supervision$Externa.listadoActividadesSeguimientos}"
-                                    var="currentRow" style="width: 80%;">
+                                    var="currentRow" >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText value="#{var.actividades}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.actividades}"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText value="#{var.numero}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.numero}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.actividad}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.actividad}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.unidaddemedida}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valorunitaio}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.cantidadcontratada}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.cantidadcontratada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valortotal}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.cantidadejecutada}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.cantidadejecutada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.totalejecutado}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.totalejecutado}" />
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.porcentajejecutado}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.porcentajejecutado}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText value="#{currentRow.intidactividadseg}" />
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.intidactividadseg}" />
                         </rich:column>
                         <rich:column >
-                            <h:outputText value="#{currentRow.strdescripcion}" style="line-height:15px;" />
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strdescripcion}"  />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.strunidadmedida}" style="line-height:15px;" />
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.strunidadmedida}"  />
                         </rich:column>
                         <rich:column >
-                            <h:outputText value="#{currentRow.numvlrunit}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrunit}">
                                 <f:convertNumber pattern="$###,###" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.floatcantcontra}" />
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.floatcantcontra}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.valortotalactividad}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.valortotalactividad}">
                                 <f:convertNumber pattern="$###,###" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.floatcantejec}" />
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.floatcantejec}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.numvlrtotalejec}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.numvlrtotalejec}">
                                 <f:convertNumber pattern="$###,###.##" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRow.porcentajeEjecutado}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRow.porcentajeEjecutado}">
                                 <f:convertNumber type="percent" integerOnly="true" maxIntegerDigits="3" maxFractionDigits="0" />
                             </h:outputText>
                         </rich:column>
                         <f:facet name="footer">
                             <rich:columnGroup>
-                                <rich:column colspan="9" breakRowBefore="true" style="text-align: center;">
+                                <rich:column colspan="9" breakRowBefore="true" >
                                     <rich:dataScroller for="tablaactividadescontractuales" render="tablaactividadescontractuales" />
                                 </rich:column>
                             </rich:columnGroup>

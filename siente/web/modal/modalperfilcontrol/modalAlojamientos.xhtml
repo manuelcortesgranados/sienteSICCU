@@ -9,37 +9,37 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-Alojamientos" headerClass="rich-panel-header" style="overflow: auto; width: 800px; height: 400px">
+    <rich:popupPanel id="mp-Alojamientos" headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.viviendasreparadas}" 
-                              style="font-size:14px; font-weight: bold;"
-                              styleClass="txt_header"/>
+                <h:outputText  class="id-jsf- "   value="#{var.viviendasreparadas}" 
+                              
+                              class="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_Alojamientos" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_mp_Alojamientos" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-Alojamientos')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form target="_blank">
-            <rich:panel style="width:98%;">
+            <rich:panel >
                 <h:panelGrid columns="1" id="alojamiento">
-                    <h:outputText value="1. ARRIENDOS" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="1. ARRIENDOS" />
                     <h:graphicImage id="imgalojamiento" value="#{var.imgalojamiento1}"/>
                     <h:graphicImage id="imgalojamiento1" value="#{var.imgalojamiento2}"/>
-                    <h:outputText value="2. REPARACION DE VIVIENDAS - PANORAMA GENERAL" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="2. REPARACION DE VIVIENDAS - PANORAMA GENERAL" />
                     <h:graphicImage id="imgalojamiento2" value="#{var.imgalojamiento3}"/>
-                    <h:outputText value="2. REPARACION DE VIVIENDAS - PANORAMA NACIONAL" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="2. REPARACION DE VIVIENDAS - PANORAMA NACIONAL" />
                     <h:graphicImage id="imgalojamiento3" value="#{var.imgalojamiento4}"/>
-                    <h:outputText value="3- ALBERGUES - PANORAMA GENERAL" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="3- ALBERGUES - PANORAMA GENERAL" />
                     <h:graphicImage id="imgalojamiento4" value="#{var.imgalojamiento5}"/>
-                    <h:outputText value="3. ALBERGUES - PANORAMA REGIONAL" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="3. ALBERGUES - PANORAMA REGIONAL" />
                     <h:graphicImage id="imgalojamiento5" value="#{var.imgalojamiento6}"/>
                 </h:panelGrid>
             </rich:panel>

@@ -8,34 +8,34 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets"> 
 
-    <h:panelGroup id="panelImagenes" style="padding: 0px;">
+    <h:panelGroup id="panelImagenes" >
         <center>            
-            <h:panelGrid width="60%" style="text-align:center;">
-                <h:panelGrid styleClass="detalleproyecto" columns="2"
+            <h:panelGrid width="60%" >
+                <h:panelGrid class="id-jsf-"   columns="2"
                              columnClasses="column-grid-panel,column-grid-panel,column-grid-panel">
-                    <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" styleClass="rich-panel-grid-imgs"  headerClass="font-header-panel">
-                        <h:panelGrid columns="1" style="width:100%;">
+                    <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" class="id-jsf-"    headerClass="font-header-panel">
+                        <h:panelGrid columns="1" >
                             <h:panelGroup id="ima2">
                                 <h:graphicImage value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
-                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                
                                                 height="140" width="190"/>
                             </h:panelGroup>
                         </h:panelGrid>
                      <!--   <rich:effect event="onclick"  type="Highlight" params="duration:0.8" />
                         <rich:effect event="onclick"  for="highlightbox"  type="Appear" params="delay:3.0,duration:0.5" />-->
                     </rich:panel>
-                    <rich:panel header="#{var.asiahora}" bodyClass="rich-panel-grid-body-imgs" styleClass="rich-panel-grid-imgs" headerClass="font-header-panel">
-                        <h:panelGrid columns="1" style="width:100%;">
+                    <rich:panel header="#{var.asiahora}" bodyClass="rich-panel-grid-body-imgs" class="id-jsf-"   headerClass="font-header-panel">
+                        <h:panelGrid columns="1" >
                             <h:panelGroup id="ima1">
 
                                 <h:graphicImage id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
-                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                
                                                 height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="#{rich:component('modalImagenvermas')}.show();return true;" />
 
 
 
                                 <h:graphicImage id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
-                                                style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                
                                                 height="140" width="190" rendered="#{!Supervisor$DetalleObra.boolimg}"/>
 
                             </h:panelGroup>

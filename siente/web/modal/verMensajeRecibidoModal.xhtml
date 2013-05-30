@@ -13,14 +13,14 @@
     <rich:popupPanel id="mp_ver" moveable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText value="#{var.rpanhea_vermensajerecibido}" />
+                <h:outputText  class="id-jsf- "   value="#{var.rpanhea_vermensajerecibido}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ver" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp_ver" class="id-jsf-"  
                                      onclick="#{rich:component('mp_ver')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -30,30 +30,30 @@
 
         <rich:panel>
             <h:form id="form_ver">
-                <h:panelGrid style="width:100%;">
-                    <interkont:spacer height="20" style="width:100%;" />
+                <h:panelGrid >
+                    <interkont:spacer height="20"  />
 
-                    <h:panelGrid id="pg_camposVer" columns="3" style="text-align: left; width: 100%;">
+                    <h:panelGrid id="pg_camposVer" columns="3" >
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel styleClass="txt_ventanas" value="#{var.houtfechayhora}" />
+                        <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{var.houtfechayhora}" />
                         <h:inputText id="txt-datefecmensaje-ver" value="#{Supervisor$HomeSupervisor.mensajeRecibidoVer.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
                         </h:inputText>
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel styleClass="txt_ventanas" value="#{var.houtremitente}" />
+                        <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{var.houtremitente}" />
                         <h:inputText id="txt_fkusuariorecibe_ver" value="#{Supervisor$HomeSupervisor.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strnombre} #{Supervisor$HomeSupervisor.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strapellido1}" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel styleClass="txt_ventanas" value="#{var.houtasunto}" />
+                        <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{var.houtasunto}" />
                         <h:inputText id="txt_asunto_ver" value="#{Supervisor$HomeSupervisor.mensajeRecibidoVer.strasuntomensaje}" size="65" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel styleClass="txt_ventanas" value="#{var.houtmensaje}" />
+                        <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_ver" value="#{Supervisor$HomeSupervisor.mensajeRecibidoVer.strtextomensaje}" cols="50" rows="14" readonly="true" />
                     </h:panelGrid>
                 </h:panelGrid>

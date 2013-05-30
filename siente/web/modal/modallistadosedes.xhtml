@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp-listado-sedeseducativas" width="800" height="450" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.sedeseducativas}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.sedeseducativas}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-sedeseducativas" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-listado-sedeseducativas" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;"/>
                       </h:panelGroup>
@@ -28,12 +28,12 @@
         
 
             <h:form id="form-mp-listado-sedeseducativas">
-                <h:panelGrid style="width:100%;">
-                    <rich:panel id="pl-tabla-listado-sedeseducativas" style="width: 100%; height: auto;">
+                <h:panelGrid >
+                    <rich:panel id="pl-tabla-listado-sedeseducativas" >
 
                         <h:panelGrid columns="2">
 
-                            <h:outputText value="Cual es el campo por el que desea buscar" style="font-size:12px"/>
+                            <h:outputText  class="id-jsf- "   value="Cual es el campo por el que desea buscar" />
                             <h:selectOneMenu id="cmbbusqueda" value="#{Supervisor$EntidadConvenio.busqueseleccion}">
                                 <f:selectItem itemValue="0" itemLabel="Seleccione"/>
                                 <f:selectItem itemValue="1" itemLabel="Codigo DANE"/>
@@ -43,9 +43,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGroup id="parametro">
-                                <h:outputText value="#{var.escribapalabra} Codigo DANE de la institución" style="font-size:12px" rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
-                                <h:outputText value="#{var.escribapalabra} Nombre de la institución" style="font-size:12px" rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
-                                <h:outputText value="#{var.escribapalabra} Nombre de la sede" style="font-size:12px" rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.escribapalabra} Codigo DANE de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.escribapalabra} Nombre de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.escribapalabra} Nombre de la sede"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
                             </h:panelGroup>
                             <h:panelGroup id="palabrabus">
                                 <h:inputText  size="30" value="#{Supervisor$EntidadConvenio.parametrobus}" rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
@@ -53,7 +53,7 @@
                                                    rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
                             </h:panelGroup>
                         </h:panelGrid>
-                        <interkont:spacer height="10" style="width:100%;"/>
+                        <interkont:spacer height="10" />
                         <rich:dataTable id="tablasedeseducativas"
                                         rows="3"
                                         var ="sede"
@@ -61,41 +61,41 @@
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         sortMode="single"
                                         value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
-                                        style="text-align:center;width:100%;">
+                                        >
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
                                     </rich:column>
                                     <rich:column width="200px" breakRowBefore="true">
-                                        <h:outputText value="#{var.codigodane}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.codigodane}"/>
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText value="#{var.institucion}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.institucion}" />
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText value="#{var.codsede}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.codsede}"/>
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText value="#{var.nombre} Sede" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.nombre} Sede" />
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText value="#{var.SELECCION}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="200px" breakRowBefore="true">
-                                    <h:outputText value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText value="#{sede.institucioneducativa.strnombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{sede.institucioneducativa.strnombre}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText value="#{sede.strcodigosedeeducativa}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{sede.strcodigosedeeducativa}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText value="#{sede.strnombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{sede.strnombre}"/>
                                 </rich:column>
                                 <rich:column width="200px">
                                     <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"

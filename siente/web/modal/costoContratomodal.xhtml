@@ -11,13 +11,13 @@
     <rich:popupPanel id="panelCostoContrato" autosized="true" headerClass="rich-panel-header">       
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.costo}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.costo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelCostoContrato" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelCostoContrato" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                       onclick="#{rich:component('panelCostoContrato')}.hide();return false;">
                     </a4j:commandLink>
@@ -31,7 +31,7 @@
                     
                     <rich:dataTable id="tablacosto"  
                                     sortMode="single" 
-                                    style="text-align:left;width:100%" 
+                                     
                                     value="#{Supervisor$AdministrarObraNew.obra}"
                                     var="currentRow"
                                     rowKeyVar="filaSeleccionada">
@@ -39,9 +39,9 @@
                         <rich:column id="tc_tipocosto"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText value="#{var.tipocosto}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.tipocosto}"/>
                             </f:facet>
-                            <h:outputText id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
+                            <h:outputText  class="id-jsf- "   id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
                         </rich:column>
 
                         
@@ -49,53 +49,53 @@
                         <rich:column id="tc_numvaltotobra"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText value="#{var.costodirecto}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.costodirecto}"/>
                             </f:facet>
-                            <h:outputText id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
+                            <h:outputText  class="id-jsf- "   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
 
                         <!-- <rich:column id="tc_stContratistaObra"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.houtcontratis}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.houtcontratis}"/>
                             </f:facet>
-                            <h:outputText id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
+                            <h:outputText  class="id-jsf- "   id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
                         </rich:column>-->
 
                         <rich:column id="tc_floatporadmon"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.administracion} (%)"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.administracion} (%)"/>
                             </f:facet>
-                            <h:outputText id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
+                            <h:outputText  class="id-jsf- "   id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporimprevi"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.imprevistos}(%)"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.imprevistos}(%)"/>
                             </f:facet>
-                            <h:outputText id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
+                            <h:outputText  class="id-jsf- "   id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporutilidad"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.utilidad}(%)"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.utilidad}(%)"/>
                             </f:facet>
-                            <h:outputText id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
+                            <h:outputText  class="id-jsf- "   id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporivasobreutil"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.ivasobreutilidad}(%)"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.ivasobreutilidad}(%)"/>
                             </f:facet>
-                            <h:outputText id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
+                            <h:outputText  class="id-jsf- "   id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
                         </rich:column>
 
                         <rich:column id="tc_CostoTotal"  width="120px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.costototal}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.costototal}"/>
                             </f:facet>
-                            <h:outputText id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
+                            <h:outputText  class="id-jsf- "   id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporimprevi/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporadmon/100
@@ -110,7 +110,7 @@
                 <center>
                     <h:panelGrid columns="5">
                         <a4j:commandButton id="confirmarCosto" render="layoutLugar" value="#{var.aceptar}"
-                                            style="font-size: 12px;"
+                                            
                                             onclick="#{rich:component('panelCostoContrato')}.hide();return false;">
                         </a4j:commandButton>
                     </h:panelGrid>

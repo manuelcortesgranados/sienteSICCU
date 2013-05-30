@@ -8,12 +8,12 @@
     xmlns:a4j="http://richfaces.org/a4j"
     xmlns:interkont="http://www.interkont.com/jsf">
     
-    <interkont:spacer height="20" style="width:100%;"/>
+    <interkont:spacer height="20" />
   
-    <table style="width:100%;" align="center" border="0" cellspacing="0" cellpadding="0">
+    <table  align="center" border="0" cellspacing="0" cellpadding="0">
         <td>
             <tr>
-                <h:outputText value="Indicadores" styleClass="headerIndicadores"/>
+                <h:outputText  class="id-jsf- "   value="Indicadores" class="id-jsf-"  />
             </tr>
             <tr>
                 <div id="navIndicadores" >
@@ -22,23 +22,23 @@
                     </div>
 
                     <ul>
-                        <li><h:commandLink value="#{var.header1}" styleClass="conso anchorLink"
-                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuConsolidados}">
+                        <li><h:commandLink value="#{var.header1}" class="id-jsf-"  
+                                             action="#{GraficarIndicadores.menuConsolidados}">
                                 
                             </h:commandLink>
                         </li>
-                        <li><h:commandLink value="#{var.header2}" styleClass="presu anchorLink"
-                                           style="font-size: 9px;"   action="#{GraficarIndicadores.menuAvanceAh}"
+                        <li><h:commandLink value="#{var.header2}" class="id-jsf-"  
+                                              action="#{GraficarIndicadores.menuAvanceAh}"
                                             >
                                 
                             </h:commandLink></li>
-                        <li><h:commandLink value="#{var.header3}" styleClass="humani anchorLink"
-                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuAvanceObras}"
+                        <li><h:commandLink value="#{var.header3}" class="id-jsf-"  
+                                             action="#{GraficarIndicadores.menuAvanceObras}"
                                           >
                                 
                             </h:commandLink></li>
-                        <li><h:commandLink value="#{var.header4}" styleClass="terri anchorLink"
-                                           style="font-size: 9px;"  action="#{GraficarIndicadores.menuAvanceConvenios}"
+                        <li><h:commandLink value="#{var.header4}" class="id-jsf-"  
+                                             action="#{GraficarIndicadores.menuAvanceConvenios}"
                                             >
                                 
                             </h:commandLink></li>

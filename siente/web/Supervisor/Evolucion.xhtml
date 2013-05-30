@@ -17,8 +17,8 @@
         <h:outputScript name="amcharts.js" library="amcharts"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.evoluciónproyecto}"/>
-        <h:outputText style="font-size:10px; float:right;" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.evoluciónproyecto}"/>
+        <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>  
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,19 +29,19 @@
     </ui:define>
     <ui:define name="body" >
         <h:form prependId="false" >
-            <interkont:spacer height="35" style="width:100%;"/>
+            <interkont:spacer height="35" />
             <rich:collapsiblePanel id="simpleToggleEvolucionFisi" header="#{var.evolucion}">
                 <center>
                     <f:param name="paginaOrigen" value="1"/>
-                    <h:outputText value="#{Supervisor$GraficoEvolucionProyectoSupervisor.grafico.scriptGrafico}" escape="false"/>
-                    <div id="graficoEvolucionProyecto" style="width:100%;height: 350px;text-align: left;"> </div>
+                    <h:outputText  class="id-jsf- "   value="#{Supervisor$GraficoEvolucionProyectoSupervisor.grafico.scriptGrafico}" escape="false"/>
+                    <div id="graficoEvolucionProyecto" > </div>
                 </center>
             </rich:collapsiblePanel>
         </h:form>
 
         <h:form>     
             <rich:collapsiblePanel id="simpleToggleSelechv" header="#{var.houthojavida}" >
-                <h:outputLabel id="lbperi"  value="#{var.periododecorte} "  style="font-size: 17px;"/>
+                <h:outputLabel  class="id-jsf- "   id="lbperi"  value="#{var.periododecorte} "  />
                 <h:selectOneMenu id="cmbencargo" value="#{Supervisor$DetalleObra.periodoevo.intidperiodo}" >
                     <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
                     <f:selectItems value="#{Supervisor$DetalleObra.periodoaliment}"/>
@@ -49,97 +49,97 @@
                     </a4j:ajax>
                 </h:selectOneMenu>
 
-                <h:outputText style="font-size:8px; float:right;" value="(#{Supervisor$DetalleObra.alimentacionmostrar.intidalimenta})" 
+                <h:outputText  class="id-jsf- "    value="(#{Supervisor$DetalleObra.alimentacionmostrar.intidalimenta})" 
                               rendered="#{Supervisor$DetalleObra.veralimenta}"/>
                 <center>
-                    <interkont:spacer style="width:100%;" height="20"/>
-                    <rich:dataTable id="tablaavancesporperiodo"  rows="4" style="text-align:left;width:100%;"  var="avance"
+                    <interkont:spacer  height="20"/>
+                    <rich:dataTable id="tablaavancesporperiodo"  rows="4"   var="avance"
                                     rowKeyVar="filaSeleccionada" value="#{Supervisor$DetalleObra.listaAlimenta}"
                                     rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}"
                                     >
                         <rich:column id="avnfecalim" width="100px">
                             <f:facet name="header">
-                                <h:outputText value="#{var.houtfechaalimentacion}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.houtfechaalimentacion}" />
                             </f:facet>
-                            <h:outputText id="otfecalim" value="#{avance.datefechaalimen}" >
+                            <h:outputText  class="id-jsf- "   id="otfecalim" value="#{avance.datefechaalimen}" >
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
                         </rich:column>
 
-                        <rich:column id="avntotalejec" width="100px" style="text-align: right;">
+                        <rich:column id="avntotalejec" width="100px" >
                             <f:facet name="header">
-                                <h:outputText value="#{var.totalejecutado}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.totalejecutado}" />
                             </f:facet>
-                            <h:outputText id="ottotejec" value="#{avance.numtotalejec}">
+                            <h:outputText  class="id-jsf- "   id="ottotejec" value="#{avance.numtotalejec}">
                                 <f:convertNumber pattern="$ ###,###,###"/>
 
                             </h:outputText>
                         </rich:column>
 
-                        <rich:column id="avntotalproyacu" width="100px" style="text-align: right;">
+                        <rich:column id="avntotalproyacu" width="100px" >
                             <f:facet name="header">
-                                <h:outputText value="#{var.valorejecutadoacumulado}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.valorejecutadoacumulado}" />
                             </f:facet>
-                            <h:outputText id="ottotproyacu" value="#{avance.numtotalejecacu}">
+                            <h:outputText  class="id-jsf- "   id="ottotproyacu" value="#{avance.numtotalejecacu}">
                                 <f:convertNumber pattern="$ ###,###,###"/>
 
                             </h:outputText>
                         </rich:column>
-                        <rich:column id="avnver" width="100px" style="text-align: right;">
+                        <rich:column id="avnver" width="100px" >
                             <f:facet name="header">
-                                <h:outputText value="#{var.veravance}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.veravance}" />
                             </f:facet>
                             <a4j:commandButton value="#{var.veravance}" action="#{Supervisor$DetalleObra.encontraralimentacion(filaSeleccionada)}" render="imgspanel,layoutGral,simpleToggleSelechv"/>
 
                         </rich:column>
                         <rich:dataScroller for="tablaavancesporperiodo" render="tablaavancesporperiodo"/>
                     </rich:dataTable>
-                    <interkont:spacer style="width:100%;" height="20"/>
+                    <interkont:spacer  height="20"/>
                 </center>
 
 
-                <rich:collapsiblePanel  rendered="#{Supervisor$DetalleObra.veralimenta}" style="height:auto;width:auto;" header="#{var.periododecorte}">
-                    <h:panelGrid id="layoutGral"  width="40%" styleClass="tabla-center">
-                        <h:panelGrid styleClass="detalleproyecto" style="text-align: center;"
+                <rich:collapsiblePanel  rendered="#{Supervisor$DetalleObra.veralimenta}"  header="#{var.periododecorte}">
+                    <h:panelGrid id="layoutGral"  width="40%" class="id-jsf-"  >
+                        <h:panelGrid class="id-jsf-"   
                                      columns="4" columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel"
                                      rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}">
-                            <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid"  headerClass="font-header-panel">
+                            <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" class="id-jsf-"    headerClass="font-header-panel">
                                 <h:panelGroup>
-                                    <h:graphicImage value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                    <h:graphicImage value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
                                                     height="120" width="160"
                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
                                     <h:graphicImage value="#{var.noimagen}" height="120" width="160"
                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <rich:panel header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" class="id-jsf-"   headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <interkont:spacer height="40"/>
-                                    <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" style="font-size:8pt; color:#666666;">
-                                        <h:outputText value="#{var.houtobraestaen}" style="font-size:10px; color:#336699; font-weight: bold;"/>
-                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                    <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
+                                        <h:outputText  class="id-jsf- "   value="#{var.houtobraestaen}" />
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                             <f:convertNumber pattern="###.## %"/>
                                         </h:outputText>
-                                        <h:outputText value="#{var.deberiaestaren}" style="font-size:10px; color:#336699; font-weight: bold;"/>
-                                        <h:outputText value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalproyacu/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                        <h:outputText  class="id-jsf- "   value="#{var.deberiaestaren}" />
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalproyacu/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                             <f:convertNumber pattern="###.## %"/>
                                         </h:outputText>
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.valoravancefisico}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <rich:panel header="#{var.valoravancefisico}" bodyClass="rich-panel-grid-body" class="id-jsf-"   headerClass="font-header-panel">
                                 <interkont:spacer height="35"/>
                                 <h:panelGroup>
                                     <h:panelGrid columns="1" columnClasses="tabla-center">
-                                        <h:outputText id="stcantidadejecutada" styleClass="txt_outtext" style="font-size:18px; color:#336699; font-weight: bold;"
+                                        <h:outputText  class="id-jsf- "   id="stcantidadejecutada" class="id-jsf-"   
                                                       value="#{Supervisor$DetalleObra.alimentacionmostrar.numtotalejec}">
                                             <f:convertNumber pattern="$ ###,###"/>
                                         </h:outputText>
-                                        <h:outputText value="#{var.valorejecutado}" style="font-size:16px; color:#666666;"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.valorejecutado}" />
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" styleClass="rich-panel-grid" headerClass="font-header-panel">
+                            <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" class="id-jsf-"   headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <center>
                                         <h:graphicImage id="imgSemaObra"
@@ -147,22 +147,22 @@
                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
                                         <h:graphicImage value="#{var.noinfo}" height="100px"
                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
-                                        <h:outputText value="#{Supervisor$DetalleObra.semaforo}"
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.semaforo}"
                                                       rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"
-                                                      style="font-size:12px; color:#666666;"/>
+                                                      />
                                     </center>
                                 </h:panelGroup>
                             </rich:panel>
                         </h:panelGrid>
                     </h:panelGrid>
                     <interkont:spacer height="30"/>
-                    <h:panelGrid id="imgspanel" width="10%" styleClass="tabla-center">
-                        <h:panelGrid columns="1" rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}" styleClass="detalleproyecto"
+                    <h:panelGrid id="imgspanel" width="10%" class="id-jsf-"  >
+                        <h:panelGrid columns="1" rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}" class="id-jsf-"  
                                      columnClasses="column-grid-panel">
-                            <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" styleClass="rich-panel-grid-obser" headerClass="font-header-panel">
+                            <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" class="id-jsf-"   headerClass="font-header-panel">
 
                                 <h:inputTextarea value="#{Supervisor$DetalleObra.alimentacionmostrar.textcomentario}" 
-                                                 style="line-height:15px;width: 100%" rows="5" disabled="true"/>
+                                                  rows="5" disabled="true"/>
 
                             </rich:panel>
                         </h:panelGrid>
@@ -171,44 +171,44 @@
 
                     <interkont:spacer height="30" />
                     <center>
-                        <h:panelGrid columns="7" styleClass="tabla-center">
-                            <a4j:commandLink id="btlogros" styleClass="evo01 anchorLink"
+                        <h:panelGrid columns="7" class="id-jsf-"  >
+                            <a4j:commandLink id="btlogros" class="id-jsf-"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
                                              oncomplete="#{rich:component('modalLogros')}.show();"
-                                             style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                             
                                              render="tablaLogrosProyecto"/>
                             <interkont:spacer width="5"/>
-                            <a4j:commandLink id="btlogrosx" styleClass="evo02 anchorLink"
+                            <a4j:commandLink id="btlogrosx" class="id-jsf-"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
-                                             style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                             
                                              oncomplete="#{rich:component('modalDificultad')}.show();" render="modalDificultad"/>
                             <interkont:spacer width="5"/>
-                            <a4j:commandLink id="btlogrosxx" styleClass="evo03 anchorLink"
+                            <a4j:commandLink id="btlogrosxx" class="id-jsf-"  
                                              action="#{Supervisor$DetalleObra.llenarFactoratraso}"
-                                             style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                             
                                              oncomplete="#{rich:component('modalFactoresAtraso')}.show();" render="tablaFactores"/>
 
                             <interkont:spacer width="5"/>
-                            <a4j:commandLink id="btlogrosxxx" styleClass="evo04 anchorLink"
+                            <a4j:commandLink id="btlogrosxxx" class="id-jsf-"  
                                              action="#{Supervisor$DetalleObra.llenaractividadesAlimentacion}"
-                                             style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                             
                                              oncomplete="#{rich:component('modalactividades')}.show();" render="listaractividades" />
                         </h:panelGrid>
-                        <h:panelGrid columns="1" id="panelVali" styleClass="tabla-center"  >
+                        <h:panelGrid columns="1" id="panelVali" class="id-jsf-"    >
                             <h:panelGrid columns="7" >
-                                <a4j:commandLink id="btlogros1" styleClass="evo05 anchorLink"
-                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                <a4j:commandLink id="btlogros1" class="id-jsf-"  
+                                                 
                                                  oncomplete="#{rich:component('modalImpacto')}.show();" render="tablaaliperim" />
                                 <interkont:spacer width="5"/>
-                                <a4j:commandLink id="btlogrosx2" styleClass="evo06 anchorLink"
+                                <a4j:commandLink id="btlogrosx2" class="id-jsf-"  
                                                  action="#{Supervisor$DetalleObra.LlenarDocumentos}"
-                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                 
                                                  oncomplete="#{rich:component('modalDocumento')}.show();" render="tablaDocsAlim"/>
                                 <interkont:spacer width="5"/>
-                                <a4j:commandLink id="btlogrosx3" styleClass="evo08 anchorLink" rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
+                                <a4j:commandLink id="btlogrosx3" class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
                                                  supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
                                                  action="#{Supervisor$DetalleObra.llenarmodalvalidacion}"
-                                                 style="border-radius: 10px; box-shadow: 2px 2px 5px #999;"
+                                                 
                                                  oncomplete="#{rich:component('modalValidarAlimentacion')}.show();" render="frmValidarAlimentacion"/>
                                 <interkont:spacer width="5"/>
                                 <a4j:commandLink id="pruebamodal" value="prueba" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"
@@ -217,7 +217,7 @@
                                 </a4j:commandLink>
 
                             </h:panelGrid>
-                            <h:outputText value="La última alimentación no ha sido validada aún por el funcionario de Colombia Humanitaria"
+                            <h:outputText  class="id-jsf- "   value="La última alimentación no ha sido validada aún por el funcionario de Colombia Humanitaria"
                                           rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
                         </h:panelGrid>
                     </center>

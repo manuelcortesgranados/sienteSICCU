@@ -8,24 +8,24 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadOtroSi" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelUploadOtroSi" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  value="#{var.cargarotrosi}"/>
+                <h:outputText  class="id-jsf- "    value="#{var.cargarotrosi}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_panelUploadOtroSi" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelUploadOtroSi" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadOtroSi')}.hide();
                                              return false;"/>
 
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formOtroSi">
                 <h:panelGroup id="layoutDocOtroSi">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -39,25 +39,25 @@
                                          immediateUpload="true"
                                          maxFilesQuantity="1" 
                                          uploadLabel="#{var.subir}"
-                                         style="height: 150px; width: 250px">
+                                         >
                             <a4j:ajax event="uploadcomplete" render="infoOtroSi, panel_subirOtroSi"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoOtroSi">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -67,11 +67,11 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarObra.subirOtroSi.borrarDatosSubidos}" render="infoOtroSi, uploadOtroSi"
                                                    rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <a4j:commandButton id="BTaceptarOtroSi" value="#{var.aceptar}"  rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadOtroSi')}.hide(); return false;"
                                                    render="panel_subirOtroSi"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

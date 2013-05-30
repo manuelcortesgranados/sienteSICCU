@@ -14,23 +14,23 @@
         <rich:panel>
             <f:facet name="header">
                 <h:panelGroup>
-                    <h:outputText value= "#{var.atencion}" />
+                    <h:outputText  class="id-jsf- "   value= "#{var.atencion}" />
                     <interkont:spacer width="105" />
                     <a4j:commandLink id="esconder_panelConfirmarSolicit"
                                        onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="cerrar" />
+                                       immediate="true" class="id-jsf-"   />
                 </h:panelGroup>
             </f:facet>
 
             <center> 
-                <h:outputText value="#{var.estasegurodeenviar}" />
+                <h:outputText  class="id-jsf- "   value="#{var.estasegurodeenviar}" />
                 <h:panelGrid columns="2" id="layoutGuardar">
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
                                        oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
-                                       style="font-size: 12px;" />
+                                        />
 
-                    <a4j:commandButton id="BTaceptarDoc" value="#{var.no}" style="font-size: 12px;"
+                    <a4j:commandButton id="BTaceptarDoc" value="#{var.no}" 
                                        onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
                                                return false;" />
                 </h:panelGrid>

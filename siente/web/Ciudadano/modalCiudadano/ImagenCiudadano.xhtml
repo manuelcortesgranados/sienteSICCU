@@ -11,23 +11,23 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel id="modalImagenCorreo" autosized="true" style="padding:0px;"
+    <rich:popupPanel id="modalImagenCorreo" autosized="true" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.imagen}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_modalImagen" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen" >
                 <h:panelGrid columnClasses="top,top" columns="2" rendered="#{SessionBeanCobra.ciudadanoservice.vermodalimagen}">
@@ -38,7 +38,7 @@
                             acceptedTypes="jpg, jpeg, gif, png, bmp"
                             immediateUpload="true"
                             maxFilesQuantity="1" 
-                            style="height: 150px; width: 250px "
+                            
                             addLabel="#{var.adicionar}"
                             doneLabel="#{var.hecho}"
                             uploadLabel="#{var.subir}"
@@ -48,19 +48,19 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorFoto.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -69,12 +69,12 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
                                                    render="pgfotografia"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

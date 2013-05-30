@@ -9,37 +9,37 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:panel id="panelAsociarFinanciera">
-        <rich:collapsiblePanel switchType="ajax" style="width: 98%">
+        <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText value="#{var.datosfina}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.datosfina}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
                     <h:panelGrid  columns="2">
-                        <h:outputLabel id="lbfe"  value="#{var.fechaencargo}" />
+                        <h:outputLabel  class="id-jsf- "   id="lbfe"  value="#{var.fechaencargo}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
                         </rich:calendar>
-                        <h:outputLabel id="lblnumen"  value="#{var.numeroordenp}" />
+                        <h:outputLabel  class="id-jsf- "   id="lblnumen"  value="#{var.numeroordenp}" />
                         <h:inputText value=""/>
-                        <h:outputLabel id="lblvlen"  value="#{var.valorencargof}" />
+                        <h:outputLabel  class="id-jsf- "   id="lblvlen"  value="#{var.valorencargof}" />
                         <h:inputText value=""/>
-                        <a4j:commandButton styleClass="btn_pri_gig" value="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="btn_pri_gig" value="#{var.cancelar}"/>
+                        <a4j:commandButton class="id-jsf-"   value="#{var.aceptar}"/>
+                        <a4j:commandButton class="id-jsf-"   value="#{var.cancelar}"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </center>
         </rich:collapsiblePanel>
-        <rich:collapsiblePanel switchType="ajax" style="width: 98%">
+        <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText value="#{var.verdatosfina}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.verdatosfina}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
-                    <h:outputLabel id="lbfecmos"  value="#{var.fechaencargo}" />
+                    <h:outputLabel  class="id-jsf- "   id="lbfecmos"  value="#{var.fechaencargo}" />
                     <h:inputText value="" disabled="true"/>
-                    <h:outputLabel id="lblnumenmos"  value="#{var.numeroordenp}" />
+                    <h:outputLabel  class="id-jsf- "   id="lblnumenmos"  value="#{var.numeroordenp}" />
                     <h:inputText value="" disabled="true"/>
-                    <h:outputLabel id="lblvlenmos"  value="#{var.valorencargof}" />
+                    <h:outputLabel  class="id-jsf- "   id="lblvlenmos"  value="#{var.valorencargof}" />
                     <h:inputText value="" disabled="true"/>
                 </h:panelGrid>
             </center>

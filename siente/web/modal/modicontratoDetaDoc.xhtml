@@ -12,13 +12,13 @@
     <rich:popupPanel id="panelModiContratoDoc" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.documento}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelModiContratoDoc" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelModiContratoDoc" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" 
                                      onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;"/>
@@ -29,32 +29,32 @@
             <h:form id="fmodicontrato" target="_blank">
                 <center>
 
-                    <h:panelGrid  style="width:100%;" >
+                    <h:panelGrid   >
                         <rich:dataTable id="tabladocumentomodi" 
                                         sortMode="single" 
-                                        style="text-align:left;width:100%;" 
+                                         
                                         value="#{Supervisor$ModificarContrato.listadocuModifContrato}"
                                         var="currentRow"
                                         rowKeyVar="filaSeleccionada">
                             <rich:column id="strnombremodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText value="#{var.nombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText id="st_strnombremodi" value="#{currentRow.strnombre}"/>
+                                <h:outputText  class="id-jsf- "   id="st_strnombremodi" value="#{currentRow.strnombre}"/>
                             </rich:column>
 
                             <rich:column id="strfechamodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText value="#{var.fecha}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.fecha}"/>
                                 </f:facet>
-                                <h:outputText id="st_strfechamodi" value="#{currentRow.datefecha}"/>
+                                <h:outputText  class="id-jsf- "   id="st_strfechamodi" value="#{currentRow.datefecha}"/>
                             </rich:column>
 
-                            <rich:column style="text-align:center;" width="60px">
+                            <rich:column  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.Ver}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
                                 </f:facet>
                                 <h:commandButton value="Ver" id="boton" immediate="true"
                                                  action="#{Supervisor$ModificarContrato.bt_download_documento_action(filaSeleccionada)}" />
@@ -66,7 +66,7 @@
                     <center>
                         <h:panelGrid columns="5">
                             <a4j:commandButton id="confirmarContratomodi"  value="#{var.aceptar}"
-                                               style="font-size: 12px;"
+                                               
                                                onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;" />
                         </h:panelGrid>

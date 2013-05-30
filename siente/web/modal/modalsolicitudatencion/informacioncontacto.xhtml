@@ -14,7 +14,7 @@
         <f:facet name="header">
             <h:panelGroup >
                 <center>
-                    <h:outputText value="#{var.infocontacto}" styleClass="txt_header" />
+                    <h:outputText  class="id-jsf- "   value="#{var.infocontacto}" class="id-jsf-"   />
                 </center>
             </h:panelGroup>
         </f:facet>
@@ -23,41 +23,41 @@
             <h:form>
                 <center>
                     <h:panelGrid columns="2" id="infocontacto">
-                        <h:outputText value="#{var.nombreah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.nombreah}" />
                         <h:inputText id="nombreahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}" disabled="true" />
 
-                        <h:outputText value="#{var.apellidoah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.apellidoah}" />
                         <h:inputText id="apellidoahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}" disabled="true" />
 
-                        <h:outputText value="#{var.cedulaah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.cedulaah}" />
                         <h:inputText id="cedulaahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.intcedula}" disabled="true" />
 
-                        <h:outputText value="#{var.departamento}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.departamento}" />
                         <h:inputText id="departamentosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
 
-                        <h:outputText value="#{var.municipio}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.municipio}" />
                         <h:inputText id="municipiosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
 
-                        <h:outputText value="#{var.entidadah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.entidadah}" />
                         <h:inputText id="entidad" disabled="true" />
 
-                        <h:outputText value="#{var.CARGO}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.CARGO}" />
                         <h:inputText id="cargosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.cargo.strdescripcion}" disabled="true" />
 
-                        <h:outputText value="#{var.mail}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.mail}" />
                         <h:inputText id="mailsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.stremail}" disabled="true" />
 
-                        <h:outputText value="#{var.telefonoah}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.telefonoah}" />
                         <h:inputText id="telefonosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strtelefono1}" disabled="true" />
 
-                        <h:outputText value="#{var.celular}" />
+                        <h:outputText  class="id-jsf- "   value="#{var.celular}" />
                         <h:inputText id="celularsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strmovil}" disabled="true" />
                     </h:panelGrid>
 
                     <a4j:commandButton id="btn_aceptar" value="#{var.aceptar}"
                                        onclick="#{rich:component('panelinformacioncontacto')}.hide();
                                                return false;"
-                                       style="font-size: 12px;" />
+                                        />
                 </center>
             </h:form>
         </rich:panel>

@@ -24,34 +24,34 @@
     </ui:define>
     <ui:define name="body">
         <h:form>
-            <h:panelGrid id="panel_modificarobra" style="width:100%;" rendered="#{Supervisor$AdministrarObraNew.verModificar or Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==3}">
-                <h:panelGroup style="width:100%" rendered="#{!Supervisor$AdministrarObraNew.verSuspender and !Supervisor$AdministrarObraNew.verReiniciar}">
-                    <h:outputText rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" value="#{var.solosepuedemodificar}" styleClass="txt_label_bold" style="font-size: 13px;"/>
+            <h:panelGrid id="panel_modificarobra"  rendered="#{Supervisor$AdministrarObraNew.verModificar or Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==3}">
+                <h:panelGroup  rendered="#{!Supervisor$AdministrarObraNew.verSuspender and !Supervisor$AdministrarObraNew.verReiniciar}">
+                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" value="#{var.solosepuedemodificar}" class="id-jsf-"   />
                     <interkont:spacer width="20"/>
                     <a4j:commandButton id="bt_VolverModif" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
                                        rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" render="layoutModificar" value="#{var.volver}"
-                                       styleClass="btn_sec_peq"   style="font-size: 12px;" execute="@this">
+                                       class="id-jsf-"      execute="@this">
                     </a4j:commandButton>
-                    <interkont:spacer style="width:100%;" height="12"/>
+                    <interkont:spacer  height="12"/>
                     <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==3}">
                         <h:panelGroup>
                             <center>
-                                <interkont:spacer height="10px" style="width:100%;"/>
-                                <h:outputText styleClass="txt_label_bold" value="#{var.amigosupervisorantesdereemplazar}" style="font-size: 13px;"/>
-                                <interkont:spacer height="15px" style="width:100%;"/>
-                                <h:outputText  value="#{var.ingreselafechadeesta} "/>
+                                <interkont:spacer height="10px" />
+                                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.amigosupervisorantesdereemplazar}" />
+                                <interkont:spacer height="15px" />
+                                <h:outputText  class="id-jsf- "    value="#{var.ingreselafechadeesta} "/>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
                                                disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
-                                <interkont:spacer height="10px" style="width:100%;"/>
-                                <h:panelGrid style="width:100%;">
+                                <interkont:spacer height="10px" />
+                                <h:panelGrid >
                                     <rich:panel header="#{var.ingresartiposdemodifica}">
-                                        <h:panelGrid style="width:100%;"  columns="2">
+                                        <h:panelGrid   columns="2">
                                             <interkont:spacer height="22"/><interkont:spacer height="22"/>
                                             <h:panelGrid>
-                                                <h:outputText styleClass="puntotitulo" value="1. #{var.sivaahaceruna}"/>
+                                                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="1. #{var.sivaahaceruna}"/>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText styleClass="txt_outtext" value="#{var.ingreselanueva} "/>
+                                                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.ingreselanueva} "/>
                                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
                                                                    disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" event="changed" render="panel_botonsoporte" />
@@ -59,10 +59,10 @@
                                                 </h:panelGrid>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid>
-                                                    <h:outputText styleClass="puntotitulo" value="2. #{var.sihayunaadicion}"/>
+                                                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="2. #{var.sihayunaadicion}"/>
                                                     <interkont:spacer height="10"/>
                                                     <h:panelGrid columns="2">
-                                                        <h:outputText styleClass="txt_outtext" value="#{var.ingresevaloradicion} " />
+                                                        <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.ingresevaloradicion} " />
                                                         <rich:inputNumberSpinner id="txt_adicionPresupuesto" value="#{Supervisor$ModificarObra.valorhistorico}" minValue="0" maxValue="400000000" inputSize="20" disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                             <a4j:ajax event="change" render="panel_botonsoporte" listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" />
                                                         </rich:inputNumberSpinner>
@@ -72,31 +72,31 @@
 
                                             </h:panelGrid>
                                             <h:panelGrid>
-                                                <h:outputText styleClass="puntotitulo" value="3. #{var.siexisteunconvenio}"/>
+                                                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="3. #{var.siexisteunconvenio}"/>
                                                 <interkont:spacer height="10"/>
 
-                                                <h:outputText styleClass="txt_outtext" value="#{var.decidasisetrata}"/>
+                                                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.decidasisetrata}"/>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGroup>
-                                                    <h:outputText styleClass="txt_outtext" value="#{var.cambiosdeprecios}"/>
+                                                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.cambiosdeprecios}"/>
                                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarObra.cambioPrecios}" disabled="#{Supervisor$ModificarObra.tipificacionValida}" >
                                                         <a4j:ajax event="change" render="panel_subirActaConvenio, layoutDocActaConvenio"/>
                                                     </h:selectBooleanCheckbox>
-                                                    <h:outputText styleClass="txt_outtext" value="#{var.modificaciondeactividades}"/>
+                                                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.modificaciondeactividades}"/>
                                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarObra.adicionActividades}" disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax event="change" render="panel_subirActaConvenio, layoutDocActaConvenio"/>
                                                     </h:selectBooleanCheckbox>
                                                 </h:panelGroup>
                                                 <h:panelGrid id="panel_subirActaConvenio"  columns="2">
-                                                    <a4j:commandButton id="adjuntarActaConvenio" styleClass="btn_pri_inm" value="#{var.adjuntaractadeconvenio}" style="font-size: 10px;" rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}"
+                                                    <a4j:commandButton id="adjuntarActaConvenio" class="id-jsf-"   value="#{var.adjuntaractadeconvenio}"  rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}"
                                                                        onclick="#{rich:component('panelUploadActaConvenio')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
 
                                                     <rich:panel rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}">
-                                                        <h:outputText rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nohasubidoningun}"/>
+                                                        <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nohasubidoningun}"/>
                                                         <center>
                                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirActaConvenio.files}" var="file" rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"
-                                                                           style="height: 20px; width: 300px; background-color: #FFFFFF; -rave-layout: grid">
-                                                                <h:outputText value=" #{file.onlyName}" />
+                                                                           >
+                                                                <h:outputText  class="id-jsf- "   value=" #{file.onlyName}" />
                                                                 <interkont:spacer height="8" width="15"/>
                                                                 <h:graphicImage  rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"/>
 
@@ -117,44 +117,44 @@
                                 <h:panelGroup id="gpPolizaContrato" rendered="#{Supervisor$ModificarObra.verSoportes}">
                                     <rich:panel>
                                         <f:facet name="header">
-                                            <h:outputText value="#{var.ingresardocumento}"/>
+                                            <h:outputText  class="id-jsf- "   value="#{var.ingresardocumento}"/>
                                         </f:facet>
                                         <h:panelGrid id="panel_subirOtroSi"  columns="2" width="80%">
-                                            <a4j:commandButton id="adjuntarOtroSi" value="#{var.adjuntarotrosi}" styleClass="btn_pri_inm"   style="font-size:12px;"
+                                            <a4j:commandButton id="adjuntarOtroSi" value="#{var.adjuntarotrosi}" class="id-jsf-"     
                                                                immediate="true"
                                                                onclick="#{rich:component('panelUploadOtroSi')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
-                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.files}" var="file" style="width:100%;">
-                                                <h:outputText id="txt_nombreArchivoOtroSi" value=" #{file.onlyName}"/>
+                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.files}" var="file" >
+                                                <h:outputText  class="id-jsf- "   id="txt_nombreArchivoOtroSi" value=" #{file.onlyName}"/>
                                             </rich:dataGrid>
                                         </h:panelGrid>
                                         <h:panelGroup id="tablaPolizas" >
-                                            <rich:dataTable id="dtPolizas"  rows="6" style="text-align:left; width:100%;"
+                                            <rich:dataTable id="dtPolizas"  rows="6" 
                                                             rowKeyVar="filaSeleccionada" var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
                                                 <rich:column id="tc-strTipoPoliza" width="100px">
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.tipoPolizaContrato}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.tipoPolizaContrato}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
                                                 </rich:column>
                                                 <rich:column id="tc-strnumPolizaContrato" width="100px">
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.numPolizaContrato}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.numPolizaContrato}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
                                                 </rich:column>
                                                 <rich:column id="tc-strVencimientoPoliza" width="100px">
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.vencimientoPoliza}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.vencimientoPoliza}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
+                                                    <h:outputText  class="id-jsf- "   id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
                                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column id="tc-strEntidadPoliza" width="100px">
                                                     <f:facet name="header">
-                                                        <h:outputText value="#{var.entidadPoliza}" />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.entidadPoliza}" />
                                                     </f:facet>
-                                                    <h:outputText id="otxt-strEntidadPoliza" value="#{registro.entidad.strnombreentidad}"/>
+                                                    <h:outputText  class="id-jsf- "   id="otxt-strEntidadPoliza" value="#{registro.entidad.strnombreentidad}"/>
                                                 </rich:column>
                                                 <rich:column id="tc-streliminarPoliza" width="250px">
                                                     <f:facet name="header"/>
@@ -173,62 +173,62 @@
 
                             </h:panelGroup>
                         </center>
-                        <interkont:spacer height="10" style="width:100%;"/>
+                        <interkont:spacer height="10" />
                         <h:panelGroup id="panel_justifiqueModificacion">
-                            <h:panelGrid  style="width:100%;" >
+                            <h:panelGrid   >
                                 <rich:panel header="#{var.porfavorjustifique}" >
-                                    <h:panelGroup style="width:100%">
+                                    <h:panelGroup >
                                         <center>
 
-                                            <interkont:spacer height="20" style="width:100%;"/>
+                                            <interkont:spacer height="20" />
                                             <h:inputTextarea cols="80" rows="4" value="#{Supervisor$ModificarObra.historicoobra.strrazonmodif}" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                         </center>
                                     </h:panelGroup>
                                 </rich:panel>
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGroup style="width:100%" id="panel_subirCronograma">
+                        <h:panelGroup  id="panel_subirCronograma">
                             <center>
                                 <h:panelGrid columns="3">
                                     <h:panelGrid>
                                         <a4j:commandButton id="generarcronograma"  render="layoutCronMod"
                                                            value="#{var.generarcronograma}" action="#{Supervisor$ModificarObra.generarCronograma}"
-                                                           styleClass="btn_pri_inm"   style="font-size: 12px;"
+                                                           class="id-jsf-"     
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}">
                                             <a4j:ajax event="complete"  onbeforesubmit="#{rich:component('mp_cronogramaMod')}.show(); return true;" render="layoutCronMod"/>
                                         </a4j:commandButton>
                                         <a4j:commandButton id="boton_tipificar_modificacion" action="#{Supervisor$ModificarObra.registrarTipificacion}" value="#{var.tipificarmodificacion}"
                                                            rendered="#{!Supervisor$ModificarObra.tipificacionValida}" render="layoutAdministrar"
-                                                           styleClass="btn_pri_gig"   style="font-size: 12px;">
+                                                           class="id-jsf-"     >
                                             <a4j:ajax event="oncomplete"  onbeforesubmit="#{rich:component('panelConfirmarTipificacion')}.show(); return true;" render="layoutAdministrar"/>
                                         </a4j:commandButton>
 
-                                        <a4j:commandButton id="btn_subir_diligenciado" value="#{var.subirarchivodiligenciado}" styleClass="btn_pri_col"   style="font-size:12px;"
+                                        <a4j:commandButton id="btn_subir_diligenciado" value="#{var.subirarchivodiligenciado}" class="id-jsf-"     
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}" onclick="#{rich:component('panelUploadCronograma')}.show(); return false;" render="layoutDocCronog"/>
                                     </h:panelGrid>
                                     <rich:panel rendered="#{Supervisor$ModificarObra.tipificacionValida}">
 
-                                        <h:outputText rendered="#{Supervisor$ModificarObra.subirCronograma.size==0}" value="#{var.nohasubidoningun}"/>
+                                        <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarObra.subirCronograma.size==0}" value="#{var.nohasubidoningun}"/>
                                         <center>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirCronograma.files}" var="file" rendered="#{Supervisor$ModificarObra.subirCronograma.size!=0}"
-                                                           style="height: 20px; width: 300px; background-color: #FFFFFF; -rave-layout: grid">
-                                                <h:outputText value=" #{file.onlyName}" />
+                                                           >
+                                                <h:outputText  class="id-jsf- "   value=" #{file.onlyName}" />
                                                 <interkont:spacer height="8" width="15"/>
                                                 <h:graphicImage rendered="#{Supervisor$ModificarObra.cronovalido}"/>
                                                 <h:graphicImage rendered="#{!Supervisor$ModificarObra.cronovalido}"/>
-                                                <h:outputText value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="txt_label_bold"/>
+                                                <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" class="id-jsf-"  />
                                             </rich:dataGrid>
                                         </center>
                                     </rich:panel>
 
                                     <h:panelGroup id="layoutRegTip">
-                                        <a4j:commandButton id="btn_cancelar_tipificacion" value="#{var.cancelar}"    style="font-size:12px;"
+                                        <a4j:commandButton id="btn_cancelar_tipificacion" value="#{var.cancelar}"    
                                                            action="#{Supervisor$ModificarObra.borrarUltimaTipificacion}" render="layoutModificar, layoutDocOtroSi"
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}" >
                                             <a4j:ajax event="complete" render="layoutModificar, layoutDocOtroSi"  />
                                         </a4j:commandButton>
 
-                                        <a4j:commandButton id="btn_registrar_modificacion" value="#{var.registrarmodificacion}" styleClass="btn_pri_inm"   style="font-size:12px;"
+                                        <a4j:commandButton id="btn_registrar_modificacion" value="#{var.registrarmodificacion}" class="id-jsf-"     
                                                            action="#{Supervisor$ModificarObra.registrarModificacion}" render="layoutConfMod"
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida and Supervisor$ModificarObra.cronovalido}" >
                                             <a4j:ajax event="complete" render="layoutPrincipal, layoutModificar, layoutMatrix, layoutConfMod" onbeforesubmit="#{rich:component('panelConfirmarModificacion')}.show();return true;"/>

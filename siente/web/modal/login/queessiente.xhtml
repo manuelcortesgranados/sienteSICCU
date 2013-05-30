@@ -9,26 +9,26 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel  id="queessiente" autosized="true" resizeable="false" width="700" style="padding:0px;"
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog" onshow="completModal()" >
+    <rich:popupPanel  id="queessiente" autosized="true" resizeable="false" width="700" 
+                      headerClass="style-modal-dialog-head" class="id-jsf-"   onshow="completModal()" >
         <f:facet name="header" >            
-            <h:panelGroup style="width:100%">
+            <h:panelGroup >
                 <h:panelGrid columns="2">
                     <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  value="#{var.loginfoterquees}" styleClass="style-modal-dialog-head-title"/>
+                    <h:outputText  class="id-jsf- "    value="#{var.loginfoterquees}" class="id-jsf-"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_queessiente" styleClass="style-modal-dialog-button-close" 
+                    <a4j:commandLink id="esconder_queessiente" class="id-jsf-"   
                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('queessiente')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGroup  layout="block" style="height: 450px;">
+            <h:panelGroup  layout="block" >
 
                 <h:panelGroup   layout="block" >
                     <div id="after">
@@ -46,8 +46,8 @@
                             <li id="slider-li-one" >
                                 <div >                                        
                                     <p id="what-siente">                                            
-                                        <label id="what-siente-title"><h:outputText value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
-                                        <h:outputText value="#{var.leyendamodalquees}"></h:outputText>
+                                        <label id="what-siente-title"><h:outputText  class="id-jsf- "   value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.leyendamodalquees}"></h:outputText>
 
                                     </p>
                                     <div class="what-siente-img">
@@ -68,13 +68,13 @@
                                         </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{var.vartextoquees}">
-                                        <rich:panel style="overflow-y: scroll;height:100%;" >
+                                        <rich:panel  >
                                             <p id="what-siente">
-                                                <label id="what-siente-title"><h:outputText value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
-                                                <h:outputText  value="#{var.leyendamodalqueesfunciona}"  > </h:outputText>
-                                                <h:outputText  value="#{var.leyendamodalqueesfunciona2}"  > </h:outputText>
-                                                <h:outputText  value="#{var.leyendamodalqueesfunciona3}"  > </h:outputText>
-                                                <h:outputText  value="#{var.leyendamodalqueesfunciona4}"  > </h:outputText>
+                                                <label id="what-siente-title"><h:outputText  class="id-jsf- "   value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
+                                                <h:outputText  class="id-jsf- "    value="#{var.leyendamodalqueesfunciona}"  > </h:outputText>
+                                                <h:outputText  class="id-jsf- "    value="#{var.leyendamodalqueesfunciona2}"  > </h:outputText>
+                                                <h:outputText  class="id-jsf- "    value="#{var.leyendamodalqueesfunciona3}"  > </h:outputText>
+                                                <h:outputText  class="id-jsf- "    value="#{var.leyendamodalqueesfunciona4}"  > </h:outputText>
                                             </p>
                                         </rich:panel>
                                     </h:panelGroup>
@@ -83,7 +83,7 @@
 
                             <li id="slider-li-tree">
                                 <div >
-                                    <img src="/#{var.versioncobra}/resources/imgs/pwr_interkont.png" style="margin-left: 20px; margin-top: 50px;"/>
+                                    <img src="/#{var.versioncobra}/resources/imgs/pwr_interkont.png" />
                                 </div>
                             </li>
                         </ul>

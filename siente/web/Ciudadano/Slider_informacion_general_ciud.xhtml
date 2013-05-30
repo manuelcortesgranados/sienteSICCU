@@ -17,7 +17,7 @@
                 <center>
                     <div id="slider3">
                         <div>
-                            <rich:panel header="Semaforo" styleClass="sliderichcontentblue3">
+                            <rich:panel header="Semaforo" class="id-jsf-"  >
                                 <h:panelGroup >
                                     <center>
                                         <h:graphicImage id="imgSemaObra"
@@ -27,7 +27,7 @@
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
                                         <interkont:spacer width="80%" height="5" />
                                         <center>
-                                            <h:outputText value="#{Supervisor$DetalleObra.semaforo}" styleClass="titletool3" />
+                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.semaforo}" class="id-jsf-"   />
                                         </center>
 
                                     </center>
@@ -35,22 +35,22 @@
                             </rich:panel>
                         </div>
                         <div>
-                            <rich:panel header="Tipo #{var.proyecto}" styleClass="sliderichcontentblue3" >
+                            <rich:panel header="Tipo #{var.proyecto}" class="id-jsf-"   >
                                 <h:panelGroup >
                                     <interkont:spacer width="20" height="50" />
                                     <h:panelGroup>
-                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" styleClass="titletool3" style="font-size:18px;"  >
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" class="id-jsf-"     >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Valor Actual" styleClass="sliderichcontentblue3" >
+                            <rich:panel header="Valor Actual" class="id-jsf-"   >
                                 <h:panelGroup>
                                     <interkont:spacer width="20" height="50" />
                                     <h:panelGroup >
-                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="titletool3" style="font-size:18px;">
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" class="id-jsf-"   >
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGroup>
@@ -59,19 +59,19 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Ente que lo ejecuta" styleClass="sliderichcontentblue3" >
+                            <rich:panel header="Ente que lo ejecuta" class="id-jsf-"   >
                                 <h:panelGrid columns="1">
                                     <interkont:spacer width="20" height="10" />
-                                    <h:outputText value="#{Supervisor$DetalleObra.contratistanombrecomple}" styleClass="titletool3" />
+                                    <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.contratistanombrecomple}" class="id-jsf-"   />
                                 </h:panelGrid>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Visitas #{var.textoobra4}" styleClass="sliderichcontentblue3" >
+                            <rich:panel header="Visitas #{var.textoobra4}" class="id-jsf-"   >
                                 <h:panelGroup>
                                     <interkont:spacer width="20" height="50" />
-                                    <h:panelGroup  styleClass="panelcenter">
-                                        <h:outputText value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" styleClass="titletool3" style="font-size:18px;" >
+                                    <h:panelGroup  class="id-jsf-"  >
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" class="id-jsf-"    >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
@@ -79,11 +79,11 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Personas Inscritas" styleClass="sliderichcontentblue3"  >
+                            <rich:panel header="Personas Inscritas" class="id-jsf-"    >
                                 <h:panelGroup>
                                     <interkont:spacer width="4"  height="50"/>
-                                    <h:panelGroup styleClass="panelcenter" >
-                                        <h:outputText value="#{Supervisor$DetalleObra.listasegudires}" styleClass="titletool3" style="font-size:18px;">
+                                    <h:panelGroup class="id-jsf-"   >
+                                        <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.listasegudires}" class="id-jsf-"   >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>

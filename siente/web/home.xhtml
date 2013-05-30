@@ -13,20 +13,20 @@
     <ui:define name="body">
         <h:form prependId="false">
 
-            <h:panelGroup layout="block" styleClass="sliderpanel_element" id="product_gallery">
+            <h:panelGroup layout="block" class="id-jsf-"   id="product_gallery">
                 <h:panelGroup layout="block"  id="sliderpanel_outer">
                     <h:panelGroup layout="block"  id="sliderpanel_inner">
                         <h:panelGroup layout="block" id="sliderpanel_items">
                             <a4j:region id="form_home">
                                 <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                                    <h:panelGroup layout="block" styleClass="sliderpanel_element" >
+                                    <h:panelGroup layout="block" class="id-jsf-"   >
 
-                                        <h:panelGroup layout="block" styleClass="textomodulo">
+                                        <h:panelGroup layout="block" class="id-jsf-"  >
 
-                                            <h:outputText value="#{modulo.strmodNmbre}" />
+                                            <h:outputText  class="id-jsf- "   value="#{modulo.strmodNmbre}" />
 
                                         </h:panelGroup>
-                                        <h:outputLink styleClass="#{modulo.strestilo} anchorLink"
+                                        <h:outputLink  class="id-jsf-"
                                                       value="#{facesContext.externalContext.requestContextPath}/faces#{modulo.strurlMdloRuta}">
 
                                         </h:outputLink>

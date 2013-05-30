@@ -9,17 +9,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalFichahome" headerClass="rich-panel-header" styleClass="detalleproyecto" style="width: 300px; height: 300px;">
+    <rich:popupPanel id="modalFichahome" headerClass="rich-panel-header" class="id-jsf-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.generarArchivo}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.generarArchivo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalFichahome" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_modalFichahome" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFichahome')}.hide();
                                              return false;"/>
                 </h:panelGroup>

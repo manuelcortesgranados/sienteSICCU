@@ -12,7 +12,7 @@
     <rich:popupPanel id="panelConfirmaguardadoSuper" autosized="true" width="250" headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText value="Confirmar Guardado" />
+                <h:outputText  class="id-jsf- "   value="Confirmar Guardado" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -22,22 +22,22 @@
                                      onclick="#{rich:component('panelConfirmaguardadoSuper')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true"
-                                     styleClass="style-modal-dialog-button-close" />
+                                     class="id-jsf-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <rich:panel id="panelConfGuardarSuper">
-            <h:panelGroup style="width: 100%;">
-                <h:outputText />
+            <h:panelGroup >
+                <h:outputText  class="id-jsf- "   />
             </h:panelGroup>
             <center>
                 <h:form>
-                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
+                    <h:panelGrid columns="2" >
                         <a4j:commandButton value="#{var.aceptar}" action="#{Supervision$Externa.guardarVisita}"
                                           oncomplete="#{rich:component('panelConfirmaguardadoSuper')}.hide();" />
                         <a4j:region>
                             <a4j:commandButton id="can"
-                                               value="#{var.cancelar}" style="font-size:12px;" execute="@this"
+                                               value="#{var.cancelar}"  execute="@this"
                                                oncomplete="#{rich:component('panelConfirmaguardadoSuper')}.hide();" />
                         </a4j:region>
                     </h:panelGrid>

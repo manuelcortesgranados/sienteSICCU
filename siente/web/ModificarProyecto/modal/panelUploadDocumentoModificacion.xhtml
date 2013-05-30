@@ -10,16 +10,16 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-    <rich:popupPanel id="panelUploadDocumentoModificacion" autosized="true" style="padding:0px;" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelUploadDocumentoModificacion" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.adjuntardoc}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.adjuntardoc}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadDocumentoModificacion" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelUploadDocumentoModificacion" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelUploadDocumentoModificacion')}.hide();
                                              return false;">
@@ -27,7 +27,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form id="formDocumentoModificacion">
                 <h:panelGroup id="layoutDocModificacion">
 
@@ -38,7 +38,7 @@
                             fileUploadListener="#{Supervisor$ModificarProyecto.cargadorDocumentos.listener}" 
                             immediateUpload="true"
                             maxFilesQuantity="1" 
-                            style="width: 250px; height: 150px;"
+                            
                             addLabel="#{var.adicionar}"
                             uploadLabel="#{var.subir}"
                             doneLabel="#{var.hecho}"
@@ -48,19 +48,19 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoDocModificacio">
                             <center>
-                                <rich:panel bodyClass="info" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorDocumentos.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -71,11 +71,11 @@
                                 <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorDocumentos.borrarDatosSubidos}"
                                                    render="infoDocModificacio, uploadDocModi"
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <interkont:spacer width="10"/>
                                 <a4j:commandButton id="BTaceptarModificarDocs"  value="#{var.aceptar}" rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}"
                                                    oncomplete="#{rich:component('panelUploadDocumentoModificacion')}.hide();return false;" render="panelListadoArchivosCargados"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

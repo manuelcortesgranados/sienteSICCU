@@ -10,13 +10,13 @@
     <rich:popupPanel id="mp-listado-encargo" moveable="true" width="600" height="500" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.listadoencargo}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.listadoencargo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-encargo" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-listado-encargo" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-encargo')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -24,7 +24,7 @@
         <center>
             <h:form>
                 <h:panelGrid columns="3">
-                    <h:outputText value="#{var.consultar} #{var.numeroencargo} " style="font-size:12px"/>
+                    <h:outputText  class="id-jsf- "   value="#{var.consultar} #{var.numeroencargo} " />
                     <rich:inputNumberSpinner enableManualInput="true" minValue="0" value="#{Financiera$FiduFinanciera.intencargofidu}"
                                              inputSize="10" maxValue="1000000" onfocus="clearText(this)" onblur="clearText(this)" />
 
@@ -36,8 +36,8 @@
 
         <rich:panel id="gpEncargo">
             <h:form id="form-mp-listado-encargo">
-                <h:panelGrid style="width:100%;">
-                     <interkont:spacer height="5" style="width:100%;"/>
+                <h:panelGrid >
+                     <interkont:spacer height="5" />
                         <rich:dataTable id="tablaEncargo"
                                         rows="5"
                                         var ="_Encargo"
@@ -46,44 +46,44 @@
                                         onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                         sortMode="single"
                                         value="#{Financiera$FiduFinanciera.financieraService.listaencargo}"
-                                        style="text-align:center; width:100%;;">
+                                        >
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
-                                        <h:outputText value="#{var.listadoencargo} #{Financiera$FiduFinanciera.totalfilasencargo} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina} #{var.deCiu} #{Financiera$FiduFinanciera.totalpaginasencargo}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.listadoencargo} #{Financiera$FiduFinanciera.totalfilasencargo} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina} #{var.deCiu} #{Financiera$FiduFinanciera.totalpaginasencargo}" />
                                     </rich:column>
                                     <rich:column width="250px" breakRowBefore="true">
-                                        <h:outputText value="#{var.numeroencargo}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.numeroencargo}"/>
                                     </rich:column>
 
                                     <rich:column width="250px">
-                                        <h:outputText value="#{var.fechaapertura}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.fechaapertura}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText value="#{var.saldoinicial}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.saldoinicial}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText value="#{var.saldoactual}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.saldoactual}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText value="#{var.SELECCION}" />
+                                        <h:outputText  class="id-jsf- "   value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="250px" breakRowBefore="true">
-                                    <h:outputText value="#{_Encargo.intnumencargofiduciario}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{_Encargo.intnumencargofiduciario}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText value="#{_Encargo.datefechaaperturaencargofiduciario}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{_Encargo.datefechaaperturaencargofiduciario}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{_Encargo.numsaldoinicial}">
+                                    <h:outputText  class="id-jsf- "   value="#{_Encargo.numsaldoinicial}">
                                         <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  value="#{_Encargo.numsaldoactual}">
+                                    <h:outputText  class="id-jsf- "    value="#{_Encargo.numsaldoactual}">
                                         <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputText>
                                 </rich:column>

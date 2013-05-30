@@ -10,16 +10,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modaltablaproyectos" autosized="true" headerClass="rich-panel-header" styleClass="detalleproyecto" width="700" >
+    <rich:popupPanel id="modaltablaproyectos" autosized="true" headerClass="rich-panel-header" class="id-jsf-"   width="700" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.verobra}s"/>
+                <h:outputText  class="id-jsf- "   value="#{var.verobra}s"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modaltablaproyectos" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modaltablaproyectos" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modaltablaproyectos')}.hide(); return false;"
                                      />
@@ -33,60 +33,60 @@
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rowKeyVar="filaSeleccionada"
-                                var="currentRow" style="width:100%;">
+                                var="currentRow" >
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText value="#{var.nombreobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.nombreobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.tab_tipoobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.tab_tipoobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.estadoproyecto}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.estadoproyecto}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.valor}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.valor}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.duracionobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.duracionobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{var.ver}"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.ver}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     
                         <rich:columnGroup>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText value="#{currentRow.strnombreobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.strnombreobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{currentRow.tipoobra.strdesctipoobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.tipoobra.strdesctipoobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{currentRow.tipoestadobra.strdesctipoestado}"/>
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.tipoestadobra.strdesctipoestado}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  value="#{currentRow.numvaltotobra}">
+                                <h:outputText  class="id-jsf- "    value="#{currentRow.numvaltotobra}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText value="#{currentRow.intplazoobra}"/>
+                                <h:outputText  class="id-jsf- "   value="#{currentRow.intplazoobra}"/>
                             </rich:column>
                              <rich:column>
-                                <a4j:commandLink  title="#{var.ver} #{var.proyecto}" style="font-size:11px;"
+                                <a4j:commandLink  title="#{var.ver} #{var.proyecto}" 
                                                   action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli(filaSeleccionada)}"
                                                   oncomplete="#{rich:component('modaltablaproyectos')}.show();">
-                                    <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:columnGroup>
                
                     <f:facet name="footer">
                         <rich:columnGroup>
-                            <rich:column colspan="7" breakRowBefore="true" style="text-align: center;">
+                            <rich:column colspan="7" breakRowBefore="true" >
                                 <rich:dataScroller id="scrolltablaproyectos" for="tablaproyectos" render="tablaproyectos"/>
                             </rich:column>
                         </rich:columnGroup>

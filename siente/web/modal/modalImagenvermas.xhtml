@@ -10,14 +10,14 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalImagenvermas" autosized="true" style="padding:0px;"
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
+    <rich:popupPanel id="modalImagenvermas" autosized="true" 
+                      headerClass="style-modal-dialog-head" class="id-jsf-"  >
         
              <f:facet name="header" >
-            <h:panelGroup style="width:100%">
+            <h:panelGroup >
                 <h:panelGrid columns="3">
                     <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText value="#{var.imagen}" styleClass="style-modal-dialog-head-title"/>
+                    <h:outputText  class="id-jsf- "   value="#{var.imagen}" class="id-jsf-"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
@@ -25,7 +25,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagenvermas" styleClass="style-modal-dialog-button-close"
+                    <a4j:commandLink id="esconder_modalImagenvermas" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenvermas')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -37,7 +37,7 @@
                     <div id="SliderName_2" class="SliderName_2">
                         <a4j:repeat value="#{Supervisor$DetalleObra.listaImagenesevolucionobra}" var="item" >
                             <h:graphicImage width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
-                            <div class="SliderName_2Description"><h:outputText value="#{item.strnombre} - #{item.datefecha}"/></div>
+                            <div class="SliderName_2Description"><h:outputText  class="id-jsf- "   value="#{item.strnombre} - #{item.datefecha}"/></div>
 
                         </a4j:repeat>
 

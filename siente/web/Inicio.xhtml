@@ -39,38 +39,38 @@
 
     <ui:define name="body">
         <h:form> 
-            <h:panelGroup layout="block" styleClass="content-tab-login" id="gpLogPrinci">
+            <h:panelGroup layout="block" class="id-jsf-"   id="gpLogPrinci">
                 <h:graphicImage url="/resources/imgs/login/logo_login.png" width="350"/>
                 <rich:panel>
                     <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
                         <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  oncomplete="placehoder()">
                             <a4j:region>
                                 <h:panelGroup layout="block">
-                                    <h:panelGrid  style="width:100%;" >
+                                    <h:panelGrid   >
                                         <br/>
-                                        <h:outputText value="#{var.logintabentrarbienvenido}"  styleClass="tab-login-label-title"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.logintabentrarbienvenido}"  class="id-jsf-"  />
                                         <br/>
-                                        <h:outputText value="#{var.loginmensajeprincipal}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>
-                                        <h:outputText value="#{var.loginmensajeprincipal2}"  styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>
-                                        <h:outputText value="#{var.loginmensajeprincipal3}"  styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal}" class="id-jsf-"  />
+                                        <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal2}"  class="id-jsf-"  />
+                                        <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal3}"  class="id-jsf-"  />
                                         <br/>
-                                        <h:outputText value="#{var.logintabentraringresarcon}" styleClass="tab-login-label-title"/>
-                                        <h:panelGrid  style="width:100%;" rendered="false">
-                                            <h:outputText value="#{var.logintabentrarcontenidoingresarconuno}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>    
-                                            <h:outputText value="#{var.logintabentrarcontenidoingresarcondos}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-two"/>    
+                                        <h:outputText  class="id-jsf- "   value="#{var.logintabentraringresarcon}" class="id-jsf-"  />
+                                        <h:panelGrid   rendered="false">
+                                            <h:outputText  class="id-jsf- "   value="#{var.logintabentrarcontenidoingresarconuno}" class="id-jsf-"  />    
+                                            <h:outputText  class="id-jsf- "   value="#{var.logintabentrarcontenidoingresarcondos}" class="id-jsf-"  />    
                                         </h:panelGrid>
-                                        <h:inputText id="usuariodos" title="Usuario" styleClass="tab-login-input-text" required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
-                                        <h:panelGrid style="width:100%;" >
+                                        <h:inputText id="usuariodos" title="Usuario" class="id-jsf-"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
+                                        <h:panelGrid  >
                                             <rich:message for="usuariodos" />
                                         </h:panelGrid>
-                                        <h:panelGroup style="width:100%">
+                                        <h:panelGroup >
                                             <center>
                                                 <h:panelGrid columns="2">
-                                                    <h:inputSecret id="contrasenados"  styleClass="tab-login-input-password" title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
+                                                    <h:inputSecret id="contrasenados"  class="id-jsf-"   title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
                                                         <f:validateLength maximum="20" minimum="8"/>
                                                     </h:inputSecret>
 
-                                                    <h:commandButton id="enviardos" styleClass="tab-login-input-button"  value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                    <h:commandButton id="enviardos" class="id-jsf-"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
                                                                      type="submit" 
                                                                      onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                 return true;"
@@ -78,36 +78,36 @@
                                                 </h:panelGrid>                                                      
                                             </center>
                                         </h:panelGroup>
-                                        <h:panelGrid style="width:100%;">
+                                        <h:panelGrid >
                                             <rich:message for="contrasenados"/>
                                         </h:panelGrid>
-                                        <h:panelGrid  style="width:100%">
+                                        <h:panelGrid  >
                                             <center>
 
-                                                <a4j:commandLink value="#{var.logintabentrarolvidocontrasenia}"  styleClass="tab-login-label-title "
+                                                <a4j:commandLink value="#{var.logintabentrarolvidocontrasenia}"  class="id-jsf-"  
                                                                  oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
                                             </center>
                                         </h:panelGrid>
-                                        <h:panelGroup style="width:100%" rendered="false">
+                                        <h:panelGroup  rendered="false">
                                             <center>
 
                                                 <h:panelGrid columns="3">
                                                     <h:selectBooleanCheckbox id="checkdos" />
-                                                    <h:outputText value="#{var.logintabentrarcontentcheck}"   />
-                                                    <h:outputText value="#{var.logintabentrarolvidocontrasenia}" />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logintabentrarcontentcheck}"   />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logintabentrarolvidocontrasenia}" />
                                                 </h:panelGrid>
                                             </center>
                                         </h:panelGroup> 
 
                                         <br/>
-                                        <h:panelGroup style="width:100%">
+                                        <h:panelGroup >
                                             <center>
                                                 <h:panelGrid rendered="#{var.varcomentariologin}">
-                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />    
-                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado2}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>    
-                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado3}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>                                                            
-                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado4}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" style="font-weight: bolder; font-family: 'medium'"/>
-                                                    <h:outputText value="#{var.logingmensajeusuarioregistrado5}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one"/>                                                            
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado}" class="id-jsf-"   />    
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado2}" class="id-jsf-"  />    
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado3}" class="id-jsf-"  />                                                            
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado4}" class="id-jsf-"   />
+                                                    <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado5}" class="id-jsf-"  />                                                            
                                                 </h:panelGrid>
                                             </center>
                                         </h:panelGroup>
@@ -120,38 +120,38 @@
 
                                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >
                                     <a4j:region >
-                                        <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
+                                        <h:panelGrid columnClasses="panelcenter"  >
                                             <br/>
-                                            <h:outputText value="#{var.logintabentrarbienvenido}" styleClass="tab-login-label-title" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.logintabentrarbienvenido}" class="id-jsf-"   />
                                             <br/>
-                                            <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
-                                                <h:outputText value="#{var.loginmensajeprincipal}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />
-                                                <h:outputText value="#{var.loginmensajeprincipal2}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />
-                                                <h:outputText value="#{var.loginmensajeprincipal3}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />
+                                            <h:panelGrid columnClasses="panelcenter"  >
+                                                <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal}" class="id-jsf-"   />
+                                                <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal2}" class="id-jsf-"   />
+                                                <h:outputText  class="id-jsf- "   value="#{var.loginmensajeprincipal3}" class="id-jsf-"   />
 
                                             </h:panelGrid>
 
                                             <br/>
-                                            <h:outputText value="#{var.logintabentraringresarsin}" styleClass="tab-login-label-title" />
-                                            <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
-                                                <h:outputText value="#{var.logintabentrarcontenidoingresarsinuno}"  styleClass="tab-login-label-contenido" />
-                                                <h:outputText value="#{var.logintabentrarcontenidoingresarsindos}"  styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />
+                                            <h:outputText  class="id-jsf- "   value="#{var.logintabentraringresarsin}" class="id-jsf-"   />
+                                            <h:panelGrid columnClasses="panelcenter"  >
+                                                <h:outputText  class="id-jsf- "   value="#{var.logintabentrarcontenidoingresarsinuno}"  class="id-jsf-"   />
+                                                <h:outputText  class="id-jsf- "   value="#{var.logintabentrarcontenidoingresarsindos}"  class="id-jsf-"   />
                                             </h:panelGrid>
-                                            <h:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" styleClass="tab-login-input-button-sin-login" onclick="#{rich:component('ajaxLoadingModalBox')}.show();
+                                            <h:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" class="id-jsf-"   onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                 return true;" />
 
 
                                             <br/>
-                                            <h:panelGroup style="width:100%">
+                                            <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columnClasses="panelcenter">
-                                                        <h:outputText value="#{var.logingmensajeusuarioregistrado6}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />    
-                                                        <h:outputText value="#{var.logingmensajeusuarioregistrado7}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />    
+                                                        <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado6}" class="id-jsf-"   />    
+                                                        <h:outputText  class="id-jsf- "   value="#{var.logingmensajeusuarioregistrado7}" class="id-jsf-"   />    
 
                                                     </h:panelGrid>
                                                 </center>
                                             </h:panelGroup>
-                                            <a4j:commandLink type="ajax" action="#{SessionBeanCobra.habilitarRegistrate}" value="#{var.loguintabregistrarte} >" styleClass="tab-login-input-button-sin-login" 
+                                            <a4j:commandLink type="ajax" action="#{SessionBeanCobra.habilitarRegistrate}" value="#{var.loguintabregistrarte} >" class="id-jsf-"   
                                                              execute="@this" render="gpLoginCiudadanoPrincipal" oncomplete="placehoder()">                                                    
                                             </a4j:commandLink>
                                         </h:panelGrid>
@@ -161,74 +161,74 @@
 
                                 <h:panelGroup layout="block" rendered="#{!SessionBeanCobra.verregistrarse}" >
                                     <a4j:region>
-                                        <h:panelGrid columnClasses="panelcenter" style="width: 100%;" >
+                                        <h:panelGrid columnClasses="panelcenter"  >
                                             <br/>
-                                            <h:panelGroup style="width:100%">
+                                            <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columns="2">
-                                                        <h:outputText value="#{var.logintabregistratetitle}" styleClass="tab-login-label-title"/>
-                                                        <h:outputText value="#{var.logintabregistratetitledos}" styleClass="tab-login-label-contenido" />    
+                                                        <h:outputText  class="id-jsf- "   value="#{var.logintabregistratetitle}" class="id-jsf-"  />
+                                                        <h:outputText  class="id-jsf- "   value="#{var.logintabregistratetitledos}" class="id-jsf-"   />    
                                                     </h:panelGrid>
                                                 </center>
                                             </h:panelGroup>
-                                            <h:panelGrid columnClasses="panelcenter" style="width: 100%;">
-                                                <h:outputText value="#{var.logintabregistratecontenidouno}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-one" />    
-                                                <h:outputText value="#{var.logintabregistratecontenidodos}" styleClass="tab-login-label-contenido tab-login-label-contenido-line-two"  rendered="#{var.varcomentariologin}" />
+                                            <h:panelGrid columnClasses="panelcenter" >
+                                                <h:outputText  class="id-jsf- "   value="#{var.logintabregistratecontenidouno}" class="id-jsf-"   />    
+                                                <h:outputText  class="id-jsf- "   value="#{var.logintabregistratecontenidodos}" class="id-jsf-"    rendered="#{var.varcomentariologin}" />
                                             </h:panelGrid>
                                             <br/>
-                                            <h:panelGroup style="width:100%">
+                                            <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columns="2">
-                                                        <h:panelGrid style="width: 70%;">
-                                                            <h:inputText required="true" maxlength="250" id="textnombre" title="Nombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="tab-login-input-text"/>
-                                                            <h:panelGrid columnClasses="panelcenter" style="width: 100%;">
-                                                                <rich:message for="textnombre"  styleClass="tab-login-label-error"/>
+                                                        <h:panelGrid >
+                                                            <h:inputText required="true" maxlength="250" id="textnombre" title="Nombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" class="id-jsf-"  />
+                                                            <h:panelGrid columnClasses="panelcenter" >
+                                                                <rich:message for="textnombre"  class="id-jsf-"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true"  id="textusuario" title="Usuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="tab-login-input-text"/>
-                                                            <h:panelGrid style="width: 100%;" columnClasses="panelcenter">
-                                                                <rich:message for="textusuario"  styleClass="tab-login-label-error"/>
+                                                            <h:inputText required="true"  id="textusuario" title="Usuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" class="id-jsf-"  />
+                                                            <h:panelGrid  columnClasses="panelcenter">
+                                                                <rich:message for="textusuario"  class="id-jsf-"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true" maxlength="80" title="Em@il" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="tab-login-input-text"/>
-                                                            <h:panelGrid style="width: 100%;" columnClasses="panelcenter">
-                                                                <rich:message for="textcorreo"  styleClass="tab-login-label-error"/>
+                                                            <h:inputText required="true" maxlength="80" title="Em@il" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" class="id-jsf-"  />
+                                                            <h:panelGrid  columnClasses="panelcenter">
+                                                                <rich:message for="textcorreo"  class="id-jsf-"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret required="true" id="textpassword" title="Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="tab-login-input-text"/>
-                                                            <h:panelGrid style="width: 100%;" columnClasses="panelcenter">
-                                                                <rich:message for="textpassword"  styleClass="tab-login-label-error"/>
+                                                            <h:inputSecret required="true" id="textpassword" title="Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" class="id-jsf-"  />
+                                                            <h:panelGrid  columnClasses="panelcenter">
+                                                                <rich:message for="textpassword"  class="id-jsf-"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret  required="true" id="textrepassword" title="Confirmar Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="tab-login-input-text"/>
-                                                            <h:panelGrid style="width: 100%;" columnClasses="panelcenter">
-                                                                <rich:message for="textrepassword"  styleClass="tab-login-label-error"/>
+                                                            <h:inputSecret  required="true" id="textrepassword" title="Confirmar Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" class="id-jsf-"  />
+                                                            <h:panelGrid  columnClasses="panelcenter">
+                                                                <rich:message for="textrepassword"  class="id-jsf-"  />
                                                             </h:panelGrid>
                                                             <interkont:spacer width="100%" height="5"/>
                                                         </h:panelGrid>
                                                         <h:panelGrid  width="30%">
-                                                            <h:panelGroup styleClass="div-login-photo-register-first" layout="block">
+                                                            <h:panelGroup class="id-jsf-"   layout="block">
                                                                 <center>
-                                                                    <h:panelGroup styleClass="div-login-photo-register-last" layout="block" id="pgfotografia">
-                                                                        <h:graphicImage url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  styleClass="panelmiddle" style="width: 100%;" height="100%"
+                                                                    <h:panelGroup class="id-jsf-"   layout="block" id="pgfotografia">
+                                                                        <h:graphicImage url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  class="id-jsf-"    height="100%"
 
                                                                                         />
                                                                     </h:panelGroup>
                                                                 </center>
                                                             </h:panelGroup>
-                                                            <a4j:commandLink styleClass="tab-login-input-button-photo" value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
+                                                            <a4j:commandLink class="id-jsf-"   value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
                                                             </a4j:commandLink>  
                                                         </h:panelGrid>
                                                     </h:panelGrid>
                                                 </center>
                                             </h:panelGroup>
                                             <br/>
-                                            <h:panelGroup style="width:100%">
+                                            <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columns="2">
                                                         <a4j:commandLink id="btnGuardarCiudadano"  
                                                                          value="#{var.registrarme}"  
-                                                                         styleClass="tab-login-input-button-register" action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano" 
+                                                                         class="id-jsf-"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano" 
                                                                          oncomplete="#{rich:component('confirmarCiudadano')}.show();">
                                                         </a4j:commandLink>
 
-                                                        <a4j:commandLink id="btnCancelarRegistro" value="#{var.cancelar}"  styleClass="tab-login-input-button-register" action="#{SessionBeanCobra.deshabilitarRegistrate}" immediate="true" render="gpLoginCiudadanoPrincipal" execute="@this">
+                                                        <a4j:commandLink id="btnCancelarRegistro" value="#{var.cancelar}"  class="id-jsf-"   action="#{SessionBeanCobra.deshabilitarRegistrate}" immediate="true" render="gpLoginCiudadanoPrincipal" execute="@this">
 
                                                         </a4j:commandLink>
                                                     </h:panelGrid>
@@ -243,7 +243,7 @@
                         </rich:tab>
                     </rich:tabPanel>
                 </rich:panel>
-                <h:panelGroup layout="block" styleClass="div-login-imgs" rendered="#{var.logologin}">
+                <h:panelGroup layout="block" class="id-jsf-"   rendered="#{var.logologin}">
                     <h:graphicImage url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
                     <h:graphicImage url="/resources/imgs/login/separador.png" width="10" height="60"/>
                     <h:graphicImage url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>

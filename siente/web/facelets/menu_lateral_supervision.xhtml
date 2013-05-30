@@ -10,21 +10,21 @@
   >
 
 
-    <rich:panel header="Supervision Externa" id="menuSupervisionExterna" bodyClass="tool" style="border-style: none;">
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" > 
-                <h:commandLink styleClass="registrarmatriz anchorLink" immediate="true" action="#{Supervision$Externa.registrarMatriz}"/>
-                <h:commandLink styleClass="text" value="Registrar Matriz"
+    <rich:panel header="Supervision Externa" id="menuSupervisionExterna" bodyClass="tool" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" > 
+                <h:commandLink class="id-jsf-"   immediate="true" action="#{Supervision$Externa.registrarMatriz}"/>
+                <h:commandLink class="id-jsf-"   value="Registrar Matriz"
                                action="#{Supervision$Externa.registrarMatriz}"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" > 
-                <h:commandLink styleClass="proyectosnew anchorLink" immediate="true" action="#{Supervision$Externa.verRegistros}" />
-                <h:commandLink styleClass="text" value="Mis proyectos"
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" > 
+                <h:commandLink class="id-jsf-"   immediate="true" action="#{Supervision$Externa.verRegistros}" />
+                <h:commandLink class="id-jsf-"   value="Mis proyectos"
                                action="#{Supervision$Externa.verRegistros}"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" rendered="false"> 
-                <h:commandLink styleClass="reportes anchorLink" immediate="true" disabled="false"/>
-                <a4j:commandLink styleClass="text" value="Reporte" disabled="false"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false"> 
+                <h:commandLink class="id-jsf-"   immediate="true" disabled="false"/>
+                <a4j:commandLink class="id-jsf-"   value="Reporte" disabled="false"/>
             </h:panelGrid>
         </h:panelGrid>
 
@@ -33,27 +33,27 @@
     <interkont:spacer height="5px"/>
 
     <rich:panel id="perfilSolicitante" header="Mi Perfil - #{SessionBeanCobra.usuarioObra.tercero.strnombre}  #{SessionBeanCobra.usuarioObra.tercero.strapellido1}  #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
-                bodyClass="tool" style="border-style: none;">
+                bodyClass="tool" >
         <h:panelGrid columns="4" columnClasses="labelsDatos,labelsDatos,labelsDatos, labelsDatos" cellpadding="1px"  >
             <interkont:spacer width="5"/>
-            <h:outputText id="stSolicitudesTotales"  value="#{var.proyectos}"/>
+            <h:outputText  class="id-jsf- "   id="stSolicitudesTotales"  value="#{var.proyectos}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stSolTotales" styleClass="txt_outtext" value="#{Supervision$Externa.cantidadRegistros}"/>
+            <h:outputText  class="id-jsf- "   id="stSolTotales" class="id-jsf-"   value="#{Supervision$Externa.cantidadRegistros}"/>
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stSolicituesAprobadas"  value="#{var.solaprobadas}"/>
+            <h:outputText  class="id-jsf- "   id="stSolicituesAprobadas"  value="#{var.solaprobadas}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stSolAprobadas" styleClass="txt_outtext"  value="#{Supervision$Externa.totalSolicituesApro}" />
+            <h:outputText  class="id-jsf- "   id="stSolAprobadas" class="id-jsf-"    value="#{Supervision$Externa.totalSolicituesApro}" />
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stMensajesPendientes"  value="#{var.mensajependiente}"/>
+            <h:outputText  class="id-jsf- "   id="stMensajesPendientes"  value="#{var.mensajependiente}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stMenPendientes" styleClass="txt_outtext" value=""/>
+            <h:outputText  class="id-jsf- "   id="stMenPendientes" class="id-jsf-"   value=""/>
 
             <interkont:spacer width="5"/>
-            <h:outputText id="stAlarmas"  value="#{var.alarmas}"/>
+            <h:outputText  class="id-jsf- "   id="stAlarmas"  value="#{var.alarmas}"/>
             <interkont:spacer width="10"/>
-            <h:outputText id="stAl" styleClass="txt_outtext" value=""/>
+            <h:outputText  class="id-jsf- "   id="stAl" class="id-jsf-"   value=""/>
         </h:panelGrid>
     </rich:panel>
 

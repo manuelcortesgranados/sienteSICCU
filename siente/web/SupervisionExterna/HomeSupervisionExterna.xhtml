@@ -17,7 +17,7 @@
     </ui:define>
     
     <ui:define name="title">
-        <h:outputText value="Mis Proyectos" />
+        <h:outputText  class="id-jsf- "   value="Mis Proyectos" />
     </ui:define>
     
     <ui:define name="menu">
@@ -30,20 +30,20 @@
     
     <ui:define name="body">
         <h:form>
-            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+            <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
                         <div class="buscador">
                             <div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClaveProyecto" styleClass="buscador_field" onfocus="clearText(this);" onblur="clearText(this);" />
-                                    <h:commandButton type="button" id="filtrarVlaveProyecto"  value="#{var.buscar}" styleClass="buscador_button" />
+                                    <h:inputText id="txtPalabraClaveProyecto" class="id-jsf-"   onfocus="clearText(this);" onblur="clearText(this);" />
+                                    <h:commandButton type="button" id="filtrarVlaveProyecto"  value="#{var.buscar}" class="id-jsf-"   />
                                 </label>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <a4j:commandLink styleClass="busquedavanzada anchorLink" type="submit" value="Búsqueda avanzada" />
+                        <a4j:commandLink class="id-jsf-"   type="submit" value="Búsqueda avanzada" />
                     </td>
                 </tr>
             </table>

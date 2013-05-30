@@ -15,7 +15,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText value="#{var.encontrarsolobra}"/>
+        <h:outputText  class="id-jsf- "   value="#{var.encontrarsolobra}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_soliobra.xhtml"/>
@@ -25,18 +25,18 @@
     </ui:define>
     <ui:define name="body">
         <h:form>
-            <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+            <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td><div class="buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="buscador_field" 
+                                    <h:inputText id="txtPalabraClave" class="id-jsf-"   
                                                  value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"/>
                                     <a4j:commandButton type="button" action="#{SolicitudObra$GestionarSolicitudObra.buscar}"
-                                                       id="filtrar"  value="#{var.buscar}" styleClass="buscador_button" render="pn-proyectosPadres"/>
+                                                       id="filtrar"  value="#{var.buscar}" class="id-jsf-"   render="pn-proyectosPadres"/>
                                 </label>
                             </div></div>
                     </td>
-                    <td><a4j:commandLink styleClass="busquedavanzada anchorLink" type="submit" render="panelFiltroObra" value="#{var.houtbusquedaavanza}"
+                    <td><a4j:commandLink class="id-jsf-"   type="submit" render="panelFiltroObra" value="#{var.houtbusquedaavanza}"
                                          oncomplete="#{rich:component('panelFiltroObra')}.show();" 
                                          action="#{SolicitudObra$GestionarSolicitudObra.iniciarfiltro}"/>
                     </td>
@@ -44,13 +44,13 @@
                 <tr>
                     <td>
                         <blink>
-                            <h:outputText rendered="#{SolicitudObra$GestionarSolicitudObra.resulbusqueda}" value="#{SessionBeanCobra.solicitudService.mensaje}" />
+                            <h:outputText  class="id-jsf- "   rendered="#{SolicitudObra$GestionarSolicitudObra.resulbusqueda}" value="#{SessionBeanCobra.solicitudService.mensaje}" />
                         </blink>
                     </td>
                 </tr>
             </table>
             <rich:panel id="mp-proyectosPadres">
-                <h:panelGrid id="pn-proyectosPadres" columns="1" style="width:100%;">
+                <h:panelGrid id="pn-proyectosPadres" columns="1" >
 
                     <interkont:spacer height="20"/>
                     <rich:dataTable rendered="#{!SessionBeanCobra.solicitudService.tablasver}"
@@ -62,106 +62,106 @@
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{SessionBeanCobra.solicitudService.solicitudObrachTemps}"
-                                    style="text-align:center;width:100%;">
+                                    >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText value="#{var.totalsolicitues} #{SolicitudObra$GestionarSolicitudObra.totalfilas} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.pagina} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginas}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.totalsolicitues} #{SolicitudObra$GestionarSolicitudObra.totalfilas} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.pagina} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText value="#{var.codigoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.NOMBRE}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.NOMBRE}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valorSolicitado}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.departamento}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.municipio}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.tipoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.tipoSolicitud}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
-                                    <h:outputText value="#{var.consultar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.consultar}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5 ||
                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
-                                    <h:outputText value="#{var.editar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.editar}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
-                                    <h:outputText value="#{var.eliminar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.consultar} #{var.proyectos}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.consultar} #{var.proyectos}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.strconsecutivo}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.strconsecutivo}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.strnombresolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.strnombresolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.doublevalorsolicitado}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.doublevalorsolicitado}">
                                 <f:convertNumber pattern="$ ###,###"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.localidad.strdepartamento}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.localidad.strmunicipio}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowTemp.tiposolicitudobra.strdescripcion}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowTemp.tiposolicitudobra.strdescripcion}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  title="#{var.buscarProyecto}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
-                                                styleClass="busquedavanzada" value="#{var.consultar}"/>
+                                                class="id-jsf-"   value="#{var.consultar}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6||
                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud != 1}"
-                                                styleClass="editaravanzada" />
+                                                class="id-jsf-"   />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.aprobar}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud == 1 and
                                                 currentRowTemp.boolaprobado != false}"
-                                                styleClass="editaravanzada" />
+                                                class="id-jsf-"   />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.modificarobra}"
                                                 rendered="#{currentRowTemp.boolnuevo}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud(filaSeleccionada)}"
                                                 oncomplete="#{rich:component('panelEliminarSolicitud')}.show();"
-                                                styleClass="eliminaravanzada"/>
+                                                class="id-jsf-"  />
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" 
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp(filaSeleccionada)}"
                                               render="modaltablaproyectos, tablaproyectos"
                                               rendered="#{currentRowTemp.boolaprobado}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" 
                                               >
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_consultar.png"/>
                                 </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -188,88 +188,88 @@
                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                         sortMode="single"
                         value="#{SessionBeanCobra.solicitudService.solicitudObrachs}"
-                        style="text-align:center;width:100%;">
+                        >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText value="#{var.solicitudesapro} #{SolicitudObra$GestionarSolicitudObra.totalfilasobra} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.paginaobra} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginasobra}" />
+                                    <h:outputText  class="id-jsf- "   value="#{var.solicitudesapro} #{SolicitudObra$GestionarSolicitudObra.totalfilasobra} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.paginaobra} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginasobra}" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText value="#{var.codigoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.NOMBRE}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.NOMBRE}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.valorSolicitado}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.departamento}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.municipio}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.tipoSolicitud}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.tipoSolicitud}"/>
                                 </rich:column>
                                 <!--
                                 <rich:column>
-                                    <h:outputText value="#{var.consultar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.consultar}"/>
                                 </rich:column>                                        
                                 -->
                                 <rich:column>
-                                    <h:outputText value="#{var.asociarproyecto}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.asociarproyecto}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText value="#{var.consultar} Proyecto"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.consultar} Proyecto"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.strconsecutivo}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.strconsecutivo}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.strnombresolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.strnombresolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.doublevalorsolicitado}">
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.doublevalorsolicitado}">
                                 <f:convertNumber pattern="$ ###,###"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.localidad.strdepartamento}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.localidad.strmunicipio}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText value="#{currentRowObra.tiposolicitudobra.strdescripcion}"/>
+                            <h:outputText  class="id-jsf- "   value="#{currentRowObra.tiposolicitudobra.strdescripcion}"/>
                         </rich:column>
                         <!--
                         <rich:column>
-                            <a4j:commandLink  title="#{var.buscarProyecto}" style="font-size:11px;"
+                            <a4j:commandLink  title="#{var.buscarProyecto}" 
                                               action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector(filaSeleccionada)}" >
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         -->
                         <rich:column>
-                            <a4j:commandLink  title="#{var.asociarproyecto}" style="font-size:11px;" execute="@this"
+                            <a4j:commandLink  title="#{var.asociarproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_contrato.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
-                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" style="font-size:11px;" execute="@this"
+                            <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" render="modaltablaproyectos, tablaproyectos" >
-                                <h:graphicImage style="border:0px;border-style:none" value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">

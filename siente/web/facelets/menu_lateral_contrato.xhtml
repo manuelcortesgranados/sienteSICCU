@@ -10,44 +10,44 @@
    >
 
 
-    <rich:panel header="#{Supervisor$Contrato.tipoContCon}" id="menuContrato" bodyClass="admin" style="border-style: none;">
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%;">
-            <h:panelGrid styleClass="tablamenugestion" cellpadding="0" cellspacing="0" 
+    <rich:panel header="#{Supervisor$Contrato.tipoContCon}" id="menuContrato" bodyClass="admin" >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" 
                          rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
                                      and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}">
-                <h:commandLink  styleClass="nproyecto anchorLink" action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
-                <h:commandLink  styleClass="text" value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
+                <h:commandLink  class="id-jsf-"   action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
+                <h:commandLink  class="id-jsf-"   value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
                                 immediate="true" />
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="false" >
-                <h:commandLink styleClass="datos anchorLink" immediate="true" action="consultarContrato"/>
-                <h:commandLink styleClass="text" value="Datos Básicos" action="consultarContrato"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false" >
+                <h:commandLink class="id-jsf-"   immediate="true" action="consultarContrato"/>
+                <h:commandLink class="id-jsf-"   value="Datos Básicos" action="consultarContrato"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink styleClass="poliza anchorLink" immediate="true" action="consultarContrato" id="x1" >
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink class="id-jsf-"   immediate="true" action="consultarContrato" id="x1" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>  
-                <h:commandLink styleClass="text" value="Poliza"
+                <h:commandLink class="id-jsf-"   value="Poliza"
                                action="consultarContrato" id="x2" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="mproyectos anchorLink" immediate="true" action="detalleContrato"/>
-                <h:commandLink styleClass="text" value="Detalle Contrato" action="detalleContrato"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"   immediate="true" action="detalleContrato"/>
+                <h:commandLink class="id-jsf-"   value="Detalle Contrato" action="detalleContrato"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
-                <h:commandLink styleClass="mproyectos anchorLink" immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
-                <h:commandLink styleClass="text" value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="id-jsf-"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
+                <h:commandLink class="id-jsf-"   value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
-                <h:commandLink styleClass="mproyectos anchorLink" action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
-                <h:commandLink styleClass="text" value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                <h:commandLink class="id-jsf-"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
+                <h:commandLink class="id-jsf-"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
             </h:panelGrid>
 
-            <h:panelGrid styleClass="tablamenuadmin" cellpadding="0" cellspacing="0" >
-             <h:commandLink styleClass="evolucion anchorLink" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
-             <h:commandLink styleClass="text" value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
+             <h:commandLink class="id-jsf-"   action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+             <h:commandLink class="id-jsf-"   value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
             </h:panelGrid>
         </h:panelGrid>
 

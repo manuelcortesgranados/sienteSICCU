@@ -8,24 +8,24 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalActaPrecios" autosized="true" style="padding:0px;"
+    <rich:popupPanel id="modalActaPrecios" autosized="true" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.acta} #{var.deCiu} Precios"/>
+                <h:outputText  class="id-jsf- "   value="#{var.acta} #{var.deCiu} Precios"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalActaPrecios" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_modalActaPrecios" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalActaPrecios')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="Acta de Precios" styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel header="Acta de Precios" class="id-jsf-"   >
             <h:form>
                 <h:panelGroup>
                     <h:panelGrid id="faltarender" columnClasses="top,top" columns="2">
@@ -41,24 +41,24 @@
                             uploadLabel="#{var.subir}"
                             clearAllLabel="#{var.borrartodo}"
                             clearLabel="#{var.eliminar}"
-                            style="width:250">
+                            >
                             <a4j:ajax event="uploadcomplete" render="infoActas"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoActas">
                             <center>
-                                <rich:panel bodyClass="informa" style="width: 300px;overflow-x:auto;">
+                                <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText value="#{var.arcsub}"/>
+                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActaPrecios.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText value="#{var.nomarc}"/>
-                                                    <h:outputText value="#{file.nombre}"/>
-                                                    <h:outputText value="#{var.taarc}"/>
-                                                    <h:outputText value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -68,12 +68,12 @@
                                 <a4j:commandButton id="borrarDatos_ActaPrecios" action="#{Supervisor$Alimentar.borrarActadePrecios}"
                                                    render="layoutActasDetalle, validarguardar, infoActas, informa, uploadActas"
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="btn_pri_inm"   style="font-size: 12px;"/>
+                                                   class="id-jsf-"     />
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarActadePrecios}"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalActaPrecios')}.hide(); "
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}"
                                                    render="layoutActasDetalle,validarguardar"
-                                                   style="font-size: 12px;"/>
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

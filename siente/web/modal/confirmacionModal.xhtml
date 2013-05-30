@@ -13,13 +13,13 @@
     <rich:popupPanel id="ConfirmarMovil" autosized="true" width="400" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.atencion}" styleClass="txt_header"/>
+                <h:outputText  class="id-jsf- "   value="#{var.atencion}" class="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_ConfirmarMovil" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_ConfirmarMovil" class="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('ConfirmarMovil')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -27,8 +27,8 @@
         <rich:panel>
             <h:form>
                 <h:panelGrid columns="1" id="layoutMovil">
-                    <h:panelGrid style="width: 100%">
-                        <h:outputText value="El último reporte de avance no ha sido validado por el funcionario de Colombia Humanitaria. "  />
+                    <h:panelGrid >
+                        <h:outputText  class="id-jsf- "   value="El último reporte de avance no ha sido validado por el funcionario de Colombia Humanitaria. "  />
 
                     </h:panelGrid>
                     <h:panelGrid columns="2">

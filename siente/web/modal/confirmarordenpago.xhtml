@@ -8,16 +8,16 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelConfirmaOrden" autosized="true" style="width:250px;"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmaOrden" autosized="true"   headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.confirmarorden}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.confirmarorden}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaOrden" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_panelConfirmaOrden" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelConfirmaOrden')}.hide();return false;">
                     </a4j:commandLink>
@@ -25,12 +25,12 @@
             </h:form>
         </f:facet>
         <rich:panel id="panelConfGuardar" >
-            <h:panelGroup style="width: 100%">
-                <h:outputText value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
+            <h:panelGroup >
+                <h:outputText  class="id-jsf- "   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
             </h:panelGroup>
             <center>
                 <h:form>
-                    <h:panelGrid columns="2" width="100%" style="text-align:center;">
+                    <h:panelGrid columns="2" width="100%" >
 
                         <h:commandButton  action="#{Financiera$FiduFinanciera.confirmaOrden}" value="#{var.aceptar}" rendered="#{Financiera$FiduFinanciera.financieraService.guardado}"
                                            onclick="#{rich:component('panelConfirmaOrden')}.hide();return false;" />
@@ -39,7 +39,7 @@
                             <a4j:commandButton id="aceptar"
                                                value="#{var.aceptar}" oncomplete="#{rich:component('panelConfirmaOrden')}.hide();" rendered="#{!Financiera$FiduFinanciera.financieraService.guardado}"
                                                title="#{var.aceptar}" execute="@this"
-                                               style="font-size:12px;"/>
+                                               />
                         </h:form>
                     </h:panelGrid>
                 </h:form>

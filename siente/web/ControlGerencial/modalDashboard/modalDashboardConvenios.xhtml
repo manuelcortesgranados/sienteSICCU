@@ -9,21 +9,21 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false" width="700" height="500" style="padding:0px;"
-                      headerClass="style-modal-dialog-head" styleClass="style-modal-dialog">
+    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false" width="700" height="500" 
+                      headerClass="style-modal-dialog-head" class="id-jsf-"  >
         <f:facet name="header" >
 
-            <h:panelGroup style="width:100%">
+            <h:panelGroup >
                 <h:panelGrid columns="3">
                     <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  value="#{var.entesnacionales}" styleClass="style-modal-dialog-head-title"/>
+                    <h:outputText  class="id-jsf- "    value="#{var.entesnacionales}" class="id-jsf-"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" styleClass="style-modal-dialog-button-close"
+                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDashboard_entesnacionales')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -31,53 +31,53 @@
         </f:facet>
 
 
-        <rich:panel  style="padding:0px;background-color: black" id="modalDashboardConveniosInfo">
+        <rich:panel   id="modalDashboardConveniosInfo">
 
             <interkont:spacer height="20" />
-            <h:panelGrid style="width:100%;">
-                <h:outputText value="#{var.resumengeneral} nacionales" styleClass="style-modal-dialog-head-title" ></h:outputText>
+            <h:panelGrid >
+                <h:outputText  class="id-jsf- "   value="#{var.resumengeneral} nacionales" class="id-jsf-"   ></h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
-            <h:panelGrid style="text-align: left;margin-left: 40px;" columns="2">
-                <h:outputText  value="#{var.totalobra}s:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.totalproy}" styleClass="style-modal-dialog-head-title">
+            <h:panelGrid  columns="2">
+                <h:outputText  class="id-jsf- "    value="#{var.totalobra}s:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalproy}" class="id-jsf-"  >
                     <f:convertNumber pattern="###,###"/>
                 </h:outputText>
-                <h:outputText  value="#{var.proyectosterminados}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.proyterm}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.proyectosterminados}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.proyterm}" class="id-jsf-"  >
                     <f:convertNumber pattern="###,###"/>
                 </h:outputText>
-                <h:outputText  value="#{var.totalrecursos}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.totalrecursos}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}" class="id-jsf-"  >
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  value="#{var.totalrecursosprogramados}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.totalrecursosprogramados}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}" class="id-jsf-"  >
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  value="#{var.totalrecursosejecutados}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.totalrecursosejecutados}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}" class="id-jsf-"  >
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  value="#{var.porcentajejecutado}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.porcEjec}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.porcentajejecutado}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" class="id-jsf-"  >
                     <f:convertNumber pattern="###.## %"/>
                 </h:outputText>
-                <h:outputText  value="#{var.numeroentidadesnacionalesejecutadas}:" styleClass="style-modal-dialog-head-title"></h:outputText>
-                <h:outputText value="#{ControlGerencial.informaciondashconvenios.numentiejec}" styleClass="style-modal-dialog-head-title">
+                <h:outputText  class="id-jsf- "    value="#{var.numeroentidadesnacionalesejecutadas}:" class="id-jsf-"  ></h:outputText>
+                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.numentiejec}" class="id-jsf-"  >
                     <f:convertNumber pattern=" ###,###"/>
                 </h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
             <center>
-                <h:panelGrid columns="3" style="text-align: left;margin-left: 40px;">
-                    <h:outputText value="Descargue Reportes" styleClass="style-modal-dialog-head-title"></h:outputText>
+                <h:panelGrid columns="3" >
+                    <h:outputText  class="id-jsf- "   value="Descargue Reportes" class="id-jsf-"  ></h:outputText>
                     <interkont:spacer width="10" />
 
                 </h:panelGrid>
                 <interkont:spacer height="20" />
 
-                <h:panelGrid  columns="2" style="text-align: left;margin-left: 40px;">
+                <h:panelGrid  columns="2" >
                     
                         <a4j:commandButton 
                             value="#{var.rpanhea_listado}" 

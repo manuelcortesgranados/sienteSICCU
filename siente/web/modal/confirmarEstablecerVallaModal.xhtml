@@ -9,33 +9,33 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_confirmarEstablecerVallaModal" moveable="false" height="150" width="350" style="padding:0px;"
+    <rich:popupPanel id="mp_confirmarEstablecerVallaModal" moveable="false" height="150" width="350" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.establecervalla}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.establecervalla}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" class="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel  class="id-jsf-"   >
             <h:form>
-                <h:panelGrid style="width:100%;" id="panelGridConfEstablecerValla">
+                <h:panelGrid  id="panelGridConfEstablecerValla">
                     <interkont:spacer height="10"/>
-                    <h:outputText value="#{var.confestablecervalla}" />
+                    <h:outputText  class="id-jsf- "   value="#{var.confestablecervalla}" />
                     <interkont:spacer height="20"/>
-                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" styleClass="btn_sec_gra"
+                    <h:panelGrid columns="2" >
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" class="id-jsf-"  
                                            oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();" value="#{var.aceptar}"
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="btn_sec_gra"
+                        <a4j:commandButton class="id-jsf-"  
                                            onclick="jQuery('.CheckEstablecerValla#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
                                              #{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;" value="#{var.cancelar}"

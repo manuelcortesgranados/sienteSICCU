@@ -7,31 +7,31 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <rich:popupPanel height="200" id="panelConfirmarModificacion" resizeable="false" width="350" style="padding:0px;"
+    <rich:popupPanel height="200" id="panelConfirmarModificacion" resizeable="false" width="350" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.confirmarmodi}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.confirmarmodi}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_panelConfirmarModificacion" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarModificacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <center>
                 <h:form>
                     <h:panelGrid id="layoutConfMod" columnClasses="aiu">
                         <interkont:spacer height="20"/>
-                        <h:outputText value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="txt_label_bold"/>
+                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" class="id-jsf-"  />
                         <a4j:commandButton id="btCerrarCofMod" value="#{var.aceptar}"
                                            render="layoutPrincipal, layoutModificar, layoutMatrix, layoutDocOtroSi, layoutDocActaConvenio, layoutDocCronog"
-                                              style="font-size: 12px;"
+                                              
                                               oncomplete="#{rich:component('panelConfirmarModificacion')}.hide();">
                         </a4j:commandButton>
                     </h:panelGrid>

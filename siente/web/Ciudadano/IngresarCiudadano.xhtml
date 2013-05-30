@@ -15,45 +15,45 @@
 
         <h:form>
             <center>
-                <h:panelGrid id="pgingresociudadano" columns="2"  style="vertical-align:top; width: 63%" columnClasses="panelcenter, panelderecha">
+                <h:panelGrid id="pgingresociudadano" columns="2"   columnClasses="panelcenter, panelderecha">
                     <interkont:spacer width="50"/>
-                    <h:outputText value="#{var.registrate}" style="font-style: italic; font-size: 24px; font-weight: bold; color: rgb(255, 153, 0)"/>
+                    <h:outputText  class="id-jsf- "   value="#{var.registrate}" />
                     <h:panelGroup >
-                        <h:panelGrid columns="1"  columnClasses="paneltop" style="text-align: center;">
-                            <h:panelGrid columns="1" style="text-align: center;">
-                                <h:outputText value="#{var.formulario1}" style="font-style: italic; text-align: center; font-size: 16px; color: rgb(0, 0, 51);"/>
-                                <h:outputText value="#{var.formulario2}" style="font-style: italic; text-align: center; font-size: 16px; color: rgb(0, 0, 51);"/>
-                                <h:outputText value="#{var.formulario3}" style="font-style: italic; text-align: center; font-size: 16px; color: rgb(0, 0, 51);"/>
+                        <h:panelGrid columns="1"  columnClasses="paneltop" >
+                            <h:panelGrid columns="1" >
+                                <h:outputText  class="id-jsf- "   value="#{var.formulario1}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.formulario2}" />
+                                <h:outputText  class="id-jsf- "   value="#{var.formulario3}" />
                             </h:panelGrid>
-                            <h:graphicImage value="/resources/imgs/Siente_dedo.png" style="width: 160px;"/>
+                            <h:graphicImage value="/resources/imgs/Siente_dedo.png" />
                         </h:panelGrid>
                     </h:panelGroup>
                     <h:panelGroup>
-                        <h:panelGrid columns="2" style="width:100%;" columnClasses="panelderecha, panelizquierda">
-                            <h:outputText value="#{var.nombre}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                        <h:panelGrid columns="2"  columnClasses="panelderecha, panelizquierda">
+                            <h:outputText  class="id-jsf- "   value="#{var.nombre}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText size="25" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}"/>
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText value="#{var.email}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.email}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText  size="25" maxlength="80"  id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" />
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText value="#{var.Celular}:" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.Celular}:" />
                             <h:inputText  size="25" maxlength="100" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtelefono1}" /> 
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputLabel id="lbldepto"  value="#{var.departamento}:" for="combodeptoCiudadano" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputLabel  class="id-jsf- "   id="lbldepto"  value="#{var.departamento}:" for="combodeptoCiudadano" />
                             <h:selectOneMenu id="combodeptoCiudadano" value="#{Ciudadano$PerfilCiudadano.codDepartamentoCiudadano}">
                                 <f:selectItems value="#{Ciudadano$PerfilCiudadano.departamentoCiudadano}" />
                                 <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarMunicipioCiudadano}" render="pgMuniCiudadano" execute="@this, combodeptoCiudadano" />
                             </h:selectOneMenu>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputLabel id="lblubicacionmuni"  value="#{var.municipio}:"  for="combomunicipiociudadano" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputLabel  class="id-jsf- "   id="lblubicacionmuni"  value="#{var.municipio}:"  for="combomunicipiociudadano" />
                             <h:panelGroup id="pgMuniCiudadano">
                                 <h:selectOneMenu id="combomunicipiociudadano"
                                                  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}">
@@ -62,14 +62,14 @@
                             </h:panelGroup>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText value="#{var.username}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.username}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText  id="textusuario" size="25" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" />
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
 
-                            <h:outputText value="#{var.contraseña}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.contraseña}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputSecret id="textpassword" size="25" value="#{Ciudadano$PerfilCiudadano.password}"/>
 
@@ -78,10 +78,10 @@
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
 
-                            <h:outputText value="#{var.repetircontraseña}: *" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);" />
+                            <h:outputText  class="id-jsf- "   value="#{var.repetircontraseña}: *"  />
                             <h:panelGrid columns="1">
                                 <h:inputSecret id="textrepassword"  size="25" value="#{Ciudadano$PerfilCiudadano.repassword}" />
-                                <rich:message for="textrepassword" style="color: red"/>
+                                <rich:message for="textrepassword" />
                             </h:panelGrid>
 
 
@@ -91,9 +91,9 @@
 
 
                             <h:panelGroup id="pgfotografia">
-                                <h:outputText value="#{var.ingresar} #{var.fotografia}" style="text-align: right; font-size: 18px; font-style: italic; width: 100%; color: rgb(0, 0, 51);"/>
+                                <h:outputText  class="id-jsf- "   value="#{var.ingresar} #{var.fotografia}" />
                                 <a4j:commandLink  >   
-                                    <h:graphicImage url="#{Ciudadano$PerfilCiudadano.pathImaCiu}"  styleClass="panelmiddle" style="width: 50px; height: 50px;" 
+                                    <h:graphicImage url="#{Ciudadano$PerfilCiudadano.pathImaCiu}"  class="id-jsf-"    
                                                     onclick="#{rich:component('mp-crear-modalImagenCorreo')}.show(); return true;"                    
                                                     />
                                 </a4j:commandLink>    
@@ -104,10 +104,10 @@
 
                             <interkont:spacer width="50"/>
                             <h:panelGroup>
-                                <h:panelGrid columns="2" style="width:100%;">
-                                    <h:commandLink  styleClass="buttonform" value="#{var.cancelar}" action="#{Ciudadano$PerfilCiudadano.regresar}" immediate="true">
+                                <h:panelGrid columns="2" >
+                                    <h:commandLink  class="id-jsf-"   value="#{var.cancelar}" action="#{Ciudadano$PerfilCiudadano.regresar}" immediate="true">
                                     </h:commandLink> 
-                                    <a4j:commandLink id="btnGuardarCiudadano" value="#{var.registrarme}"  styleClass="buttonform" action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano">
+                                    <a4j:commandLink id="btnGuardarCiudadano" value="#{var.registrarme}"  class="id-jsf-"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano">
                                         <a4j:ajax event="complete" oncomplete="#{rich:component('confirmarCiudadano')}.show(); return true;"   />
                                     </a4j:commandLink>
 

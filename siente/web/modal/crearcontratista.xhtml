@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp-crear-contratista" moveable="true" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.crearcontratista}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.crearcontratista}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-contratista" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp-crear-contratista" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp-crear-contratista')}.hide();return false;">
                     </a4j:commandLink>
@@ -30,22 +30,22 @@
                 <center>
                     <h:panelGrid columns="4"  width="100%" >
 
-                        <h:outputText id="lbltipoContratistaCrea"  value="#{var.tipoContratista}" />
+                        <h:outputText  class="id-jsf- "   id="lbltipoContratistaCrea"  value="#{var.tipoContratista}" />
                         <h:selectOneMenu id="cmbtipoContratistaCrea" value="#{Supervisor$Contrato.contratista.tipotercero.intcodigotipotercero}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.tipoTerceroOPtion}" />
                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.cambiarPersona}" execute="@this" render="rpContratista" />
                         </h:selectOneMenu>
 
-                        <h:outputText id="lbltelefonoMovilCrea"  value="(*)#{var.telefonoMovil}"/>
+                        <h:outputText  class="id-jsf- "   id="lbltelefonoMovilCrea"  value="(*)#{var.telefonoMovil}"/>
                         <h:panelGrid columns="2">
                             <h:inputText  size="25" maxlength="15" id="txtelefonoMovilCrea" value="#{Supervisor$Contrato.contratista.strmovil}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
-                            <rich:message for="txtelefonoMovilCrea" style="color: red"/>
+                            <rich:message for="txtelefonoMovilCrea" />
                         </h:panelGrid>
 
-                        <h:outputText id="lblemailContratistaCrea"  value="#{var.correo}"/>
+                        <h:outputText  class="id-jsf- "   id="lblemailContratistaCrea"  value="#{var.correo}"/>
                         <h:inputText  size="25" maxlength="250" id="txtemailContratistaCrea" value="#{Supervisor$Contrato.contratista.stremail}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
-                        <h:outputLabel id="lbldepartamentoContratista" value="#{var.departamento}" for="combodepartamentoContratista">
+                        <h:outputLabel  class="id-jsf- "   id="lbldepartamentoContratista" value="#{var.departamento}" for="combodepartamentoContratista">
                         </h:outputLabel>
                         <h:selectOneMenu id="combodepartamentoContratista" value="#{Supervisor$Contrato.codDepartamentoContratista}"  disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.departamentoContratista}" />
@@ -57,24 +57,24 @@
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
 
-                        <h:outputLabel id="lbltipoidContratista"  value="#{var.tipodeIdentificacion}" for="combotipoidcontratista" />
+                        <h:outputLabel  class="id-jsf- "   id="lbltipoidContratista"  value="#{var.tipodeIdentificacion}" for="combotipoidcontratista" />
                         <h:selectOneMenu id="combotipoidcontratista" value="#{Supervisor$Contrato.contratista.tipoidentificacion.intcodigotipoiden}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.tipoIdentificacionOption}"/>
                         </h:selectOneMenu>                    
 
-                        <h:outputLabel id="lblcedulaContratistaCrea"  value="(*)#{var.cedulaContratista}" />
+                        <h:outputLabel  class="id-jsf- "   id="lblcedulaContratistaCrea"  value="(*)#{var.cedulaContratista}" />
                         <h:panelGrid columns="2" >
                             <rich:inputNumberSpinner id="txtcedulaContratistaCrea" value="#{Supervisor$Contrato.contratista.intcedula}" minValue="0" maxValue="4000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
-                            <rich:message for="txtcedulaContratistaCrea" style="color: red"/>
+                            <rich:message for="txtcedulaContratistaCrea" />
                         </h:panelGrid>
 
-                        <h:outputText id="lbldirecionContratistaCrea"  value="(*)#{var.label_direccion}"/>
+                        <h:outputText  class="id-jsf- "   id="lbldirecionContratistaCrea"  value="(*)#{var.label_direccion}"/>
                         <h:panelGrid columns="2">
                             <h:inputText  size="25" maxlength="250" id="txtdirecionContratistaCrea" value="#{Supervisor$Contrato.contratista.strdireccionprincipal}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" required="true"/>
-                            <rich:message for="txtdirecionContratistaCrea" style="color: red"/>
+                            <rich:message for="txtdirecionContratistaCrea" />
                         </h:panelGrid>
 
-                        <h:outputLabel id="lbldepartamentoExpdocumento" value="#{var.departamento} de Expedición" for="combodepartamentoExpdocumento" rendered="#{Supervisor$Contrato.habidescontratista}">
+                        <h:outputLabel  class="id-jsf- "   id="lbldepartamentoExpdocumento" value="#{var.departamento} de Expedición" for="combodepartamentoExpdocumento" rendered="#{Supervisor$Contrato.habidescontratista}">
                         </h:outputLabel>
                         <h:selectOneMenu id="combodepartamentoExpdocumento" value="#{Supervisor$Contrato.codDeptoExpdocumento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.deptoExpdocumento}" />
@@ -82,12 +82,12 @@
                                          render="gpMuniExpdocumento" />
                         </h:selectOneMenu>
 
-                        <h:outputLabel id="lblfechaNacimientoCrea"  value="#{var.fechadeNacimiento}" for="calendarfechVencim" rendered="#{Supervisor$Contrato.habidescontratista}"/>
+                        <h:outputLabel  class="id-jsf- "   id="lblfechaNacimientoCrea"  value="#{var.fechadeNacimiento}" for="calendarfechVencim" rendered="#{Supervisor$Contrato.habidescontratista}"/>
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechVencim" inputSize="10"
                                        value="#{Supervisor$Contrato.contratista.datefechanacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
                        
-                        <h:outputLabel id="lbldepartamentoNacimiento" value="#{var.departamento} de Nacimiento:" for="combodepartamentoNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}">
+                        <h:outputLabel  class="id-jsf- "   id="lbldepartamentoNacimiento" value="#{var.departamento} de Nacimiento:" for="combodepartamentoNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}">
                         </h:outputLabel>
                         <h:selectOneMenu id="combodepartamentoNacimiento" value="#{Supervisor$Contrato.codDeptoNacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.deptoNacimiento}"/>
@@ -95,31 +95,31 @@
                                          render="gpMuniNacimiento"/>
                         </h:selectOneMenu>
 
-                        <h:outputText id="lbldigitoVerificacionCrea"  value="#{var.digitoVerificacion}"/>
+                        <h:outputText  class="id-jsf- "   id="lbldigitoVerificacionCrea"  value="#{var.digitoVerificacion}"/>
                         <rich:inputNumberSpinner id="txtdigitoVerificacionCrea" value="#{Supervisor$Contrato.contratista.intdigitoverificacion}" minValue="0" maxValue="9" inputSize="20" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
-                        <h:outputText id="lblnombreComtratistaCrea"  value="(*)#{var.nombre}" />
+                        <h:outputText  class="id-jsf- "   id="lblnombreComtratistaCrea"  value="(*)#{var.nombre}" />
                         <h:panelGrid columns="2">
                             <h:inputText  size="25" maxlength="250" id="txtnombreComtratistaCrea" value="#{Supervisor$Contrato.contratista.strnombre}"  required="true" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
-                            <rich:message for="txtnombreComtratistaCrea" style="color: red"/>
+                            <rich:message for="txtnombreComtratistaCrea" />
                         </h:panelGrid>
 
-                        <h:outputText id="lblwebContratistaCrea"  value="#{var.paginaWeb}:"/>
+                        <h:outputText  class="id-jsf- "   id="lblwebContratistaCrea"  value="#{var.paginaWeb}:"/>
                         <h:inputText  size="25" maxlength="250" id="txtwebContratistaCrea" value="#{Supervisor$Contrato.contratista.strpaginaweb}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"  />
 
-                        <h:outputText id="lblprimerApellidoCrea"  value="#{var.primerApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
+                        <h:outputText  class="id-jsf- "   id="lblprimerApellidoCrea"  value="#{var.primerApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
                         <h:inputText  size="25" maxlength="250" id="txtprimerApellidoCrea" value="#{Supervisor$Contrato.contratista.strapellido1}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
-                        <h:outputText id="lbltwitterContratistaCrea"  value="#{var.cuentaTwitter}:"/>
+                        <h:outputText  class="id-jsf- "   id="lbltwitterContratistaCrea"  value="#{var.cuentaTwitter}:"/>
                         <h:inputText  size="25" maxlength="250" id="txtwitterContratistaCrea" value="#{Supervisor$Contrato.contratista.strtwiter}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
-                        <h:outputText id="lblsegundoApellidoCrea"  value="#{var.segundoApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
+                        <h:outputText  class="id-jsf- "   id="lblsegundoApellidoCrea"  value="#{var.segundoApellido}" rendered="#{Supervisor$Contrato.habidescontratista}"/>
                         <h:inputText  size="25" maxlength="250" id="txtsegundoApellidoCrea" value="#{Supervisor$Contrato.contratista.strapellido2}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
-                        <h:outputText id="lblfacebookContratistaCrea"  value="#{var.cuentaFacebook}:"/>
+                        <h:outputText  class="id-jsf- "   id="lblfacebookContratistaCrea"  value="#{var.cuentaFacebook}:"/>
                         <h:inputText  size="25" maxlength="250" id="txtfacebookContratistaCrea" value="#{Supervisor$Contrato.contratista.strfacebook}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
-                        <h:outputText id="lbltelefonoFijoCrea"  value="#{var.telefonoFijo}"/>
+                        <h:outputText  class="id-jsf- "   id="lbltelefonoFijoCrea"  value="#{var.telefonoFijo}"/>
                         <h:inputText  size="25" maxlength="15" id="txtelefonoFijoCrea" value="#{Supervisor$Contrato.contratista.strtelefono1}" disabled="#{Supervisor$Contrato.boolcrearcontratista}" />
 
                     </h:panelGrid>
@@ -144,7 +144,7 @@
                 </center>
                 <a4j:outputPanel id="panelErrorNuevocontratista">
                     <rich:messages id="messagesNuevocontratista" globalOnly="true"
-                                   styleClass="mensajes_error_background mensajes_error" ajaxRendered="true"
+                                   class="id-jsf-"   ajaxRendered="true"
                                    >
                         <f:facet name="infoMarker">
                             <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />

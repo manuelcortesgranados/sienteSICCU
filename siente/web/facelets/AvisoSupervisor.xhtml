@@ -11,13 +11,13 @@
     <rich:popupPanel id="modalAvisoSupervisor" width="400" height="400" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="Información importante"/>
+                <h:outputText  class="id-jsf- "   value="Información importante"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalAvisoSupervisor" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_modalAvisoSupervisor" class="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAvisoSupervisor')}.hide();
                                                      return false;">
                     </a4j:commandLink>
@@ -30,11 +30,11 @@
                     <h:graphicImage height="60px" width="60px" url="/resources/imgs/alerta.png" />
                     <h:panelGroup>
                         <center>
-                            <h:outputText style="font-size:16px;color:#336699;"  value="Señor Interventor, le recomendamos para diligenciar correctamente su reporte de obras 
+                            <h:outputText  class="id-jsf- "     value="Señor Interventor, le recomendamos para diligenciar correctamente su reporte de obras 
                                           y solicitar su respectiva validación consultar la circular 65 en" />
 
-                            <a href="http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx" style="font-size:16px;" target="_blank" >http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx</a>
-                            <h:outputText value=" Link Circulares." style="font-size:16px;color:#336699;"/>
+                            <a href="http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx"  target="_blank" >http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx</a>
+                            <h:outputText  class="id-jsf- "   value=" Link Circulares." />
                         </center>
                     </h:panelGroup>
 

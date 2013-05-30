@@ -11,33 +11,33 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-  <rich:popupPanel id="mp_eliminar_imagenevolucion" moveable="false" height="150" width="350" style="padding:0px;"
+  <rich:popupPanel id="mp_eliminar_imagenevolucion" moveable="false" height="150" width="350" 
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.eliminarimagen}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.eliminarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
                     
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel  class="id-jsf-"   >
             <h:form>
-                <h:panelGrid style="width:100%;" id="gpImagenModalEliminar">
+                <h:panelGrid  id="gpImagenModalEliminar">
                     <interkont:spacer height="10"/>
-                    <h:outputText id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
+                    <h:outputText  class="id-jsf- "   id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
                     <interkont:spacer height="20"/>
-                    <h:panelGrid columns="2" style="text-align:center; width:100%;">
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="btn_sec_gra"
+                    <h:panelGrid columns="2" >
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_imagenevolucion_action}" class="id-jsf-"  
                                            oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.hide();" value="#{var.aceptar}"
                                            render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton value="#{var.cancelar}" styleClass="btn_sec_gra" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide();"/>
+                        <a4j:commandButton value="#{var.cancelar}" class="id-jsf-"   onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide();"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

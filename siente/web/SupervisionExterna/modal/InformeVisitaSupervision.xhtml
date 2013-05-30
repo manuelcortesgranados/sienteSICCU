@@ -10,10 +10,10 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalinformevisita" headerClass="rich-panel-header" height="400" width="1200" style="overflow: auto;">
+    <rich:popupPanel id="modalinformevisita" headerClass="rich-panel-header" height="400" width="1200" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText value="Informe de Visita" styleClass="txt_header" />
+                <h:outputText  class="id-jsf- "   value="Informe de Visita" class="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -23,179 +23,179 @@
                     <a4j:commandLink id="esconder-modalinformevisita"
                                        onclick="#{rich:component('modalinformevisita')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="cerrar" />
+                                       title="#{var.cerrar}" immediate="true" class="id-jsf-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titFechaVisita" value="#{var.fechavisita}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titFechaVisita" value="#{var.fechavisita}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inFechaVisita" value="#{Supervision$Externa.objetoSeguimiento.datefechavisita}" />
+                <h:outputText  class="id-jsf- "   id="inFechaVisita" value="#{Supervision$Externa.objetoSeguimiento.datefechavisita}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titNroVisita" value="#{var.visitanumero}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titNroVisita" value="#{var.visitanumero}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inNroVisita" value="#{Supervision$Externa.objetoSeguimiento.intnumvisita}" />
+                <h:outputText  class="id-jsf- "   id="inNroVisita" value="#{Supervision$Externa.objetoSeguimiento.intnumvisita}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titTipoVisita" value="#{var.tipovisita}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titTipoVisita" value="#{var.tipovisita}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inTipoVisita" value="#{Supervision$Externa.objetoSeguimiento.tipovisita.strdescripcion}" />
+                <h:outputText  class="id-jsf- "   id="inTipoVisita" value="#{Supervision$Externa.objetoSeguimiento.tipovisita.strdescripcion}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titVisitadoPor" value="#{var.visitadopor}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titVisitadoPor" value="#{var.visitadopor}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inVisitadoPor" value="#{Supervision$Externa.objetoSeguimiento.strvisitador}" />
+                <h:outputText  class="id-jsf- "   id="inVisitadoPor" value="#{Supervision$Externa.objetoSeguimiento.strvisitador}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titRepresentante" value="#{var.representantedelegadoentidad}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titRepresentante" value="#{var.representantedelegadoentidad}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inRepresentante" value="#{Supervision$Externa.objetoSeguimiento.strnombredelegado}" />
+                <h:outputText  class="id-jsf- "   id="inRepresentante" value="#{Supervision$Externa.objetoSeguimiento.strnombredelegado}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titTotalEjecutado" value="#{var.totalejecutado}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titTotalEjecutado" value="#{var.totalejecutado}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inTotalEjecutado" value="#{Supervision$Externa.objetoActividadSeguimiento.numvlrtotalejec}">
+                <h:outputText  class="id-jsf- "   id="inTotalEjecutado" value="#{Supervision$Externa.objetoActividadSeguimiento.numvlrtotalejec}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titPorcentajeEject" value="#{var.porcentajejecutado}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titPorcentajeEject" value="#{var.porcentajejecutado}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inPorcentajeEject" value="#{Supervision$Externa.objetoSeguimiento.numporcentaejecutado}">
+                <h:outputText  class="id-jsf- "   id="inPorcentajeEject" value="#{Supervision$Externa.objetoSeguimiento.numporcentaejecutado}">
                     <f:convertNumber pattern="% ####" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titVlrProgram" value="#{var.valorprogramado} #{var.alafecha}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titVlrProgram" value="#{var.valorprogramado} #{var.alafecha}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inVlrProgram" value="#{Supervision$Externa.objetoSeguimiento.numvlrprogramadofecha}">
+                <h:outputText  class="id-jsf- "   id="inVlrProgram" value="#{Supervision$Externa.objetoSeguimiento.numvlrprogramadofecha}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titPorcentajeProgram" value="#{var.porcentajealafecha}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titPorcentajeProgram" value="#{var.porcentajealafecha}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inPorcentajeProgram" value="% #{Supervision$Externa.objetoSeguimiento.numvlrprogramadofechaporcen}">
+                <h:outputText  class="id-jsf- "   id="inPorcentajeProgram" value="% #{Supervision$Externa.objetoSeguimiento.numvlrprogramadofechaporcen}">
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titPorcentajeFecha" value="#{var.porcentajejecutado} #{var.alafecha}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titPorcentajeFecha" value="#{var.porcentajejecutado} #{var.alafecha}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inPorcentajeFecha" value="% #{Supervision$Externa.objetoSeguimiento.numvlrejecutafechaporcen}">
+                <h:outputText  class="id-jsf- "   id="inPorcentajeFecha" value="% #{Supervision$Externa.objetoSeguimiento.numvlrejecutafechaporcen}">
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titResumenContrato" value="#{var.resumenestadoactualcontrato}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titResumenContrato" value="#{var.resumenestadoactualcontrato}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inResumenContrato" value="#{Supervision$Externa.objetoSeguimiento.strresumenactual}" />
+                <h:outputText  class="id-jsf- "   id="inResumenContrato" value="#{Supervision$Externa.objetoSeguimiento.strresumenactual}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titRecomendacionContinuidad" value="#{var.recomendacionescontinuidad}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titRecomendacionContinuidad" value="#{var.recomendacionescontinuidad}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inRecomendacionContinuidad" value="#{Supervision$Externa.objetoSeguimiento.strrecomendacontinui}" />
+                <h:outputText  class="id-jsf- "   id="inRecomendacionContinuidad" value="#{Supervision$Externa.objetoSeguimiento.strrecomendacontinui}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titPresentaDesarrollo" value="#{var.presentaDesarrolloNormal}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titPresentaDesarrollo" value="#{var.presentaDesarrolloNormal}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inPresentaDesarrollo" value="#{Supervision$Externa.objetoTipoDesarrollo.strdescripcion} " />
+                <h:outputText  class="id-jsf- "   id="inPresentaDesarrollo" value="#{Supervision$Externa.objetoTipoDesarrollo.strdescripcion} " />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titConceptoObra" value="#{var.conceptoobra}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titConceptoObra" value="#{var.conceptoobra}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inConceptoObra" value="#{Supervision$Externa.objetoSeguimiento.textconceptopresupuesto}"   />
+                <h:outputText  class="id-jsf- "   id="inConceptoObra" value="#{Supervision$Externa.objetoSeguimiento.textconceptopresupuesto}"   />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titAvancesRetrasos" value="#{var.avancesretrasos}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titAvancesRetrasos" value="#{var.avancesretrasos}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inAvancesRetrasos" value="#{Supervision$Externa.objetoSeguimiento.textavancesretrasos}" />
+                <h:outputText  class="id-jsf- "   id="inAvancesRetrasos" value="#{Supervision$Externa.objetoSeguimiento.textavancesretrasos}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titLogrosAdministrativos" value="#{var.logrosadministrativos}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titLogrosAdministrativos" value="#{var.logrosadministrativos}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inLogrosAdministrativos" value="#{Supervision$Externa.objetoSeguimiento.textlogrosdificultades}" />
+                <h:outputText  class="id-jsf- "   id="inLogrosAdministrativos" value="#{Supervision$Externa.objetoSeguimiento.textlogrosdificultades}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titreunionesSeguimientos" value="#{var.reunionesseguimiento}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titreunionesSeguimientos" value="#{var.reunionesseguimiento}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inreunionesSeguimientos" value="#{Supervision$Externa.tieneReuniones}" />
+                <h:outputText  class="id-jsf- "   id="inreunionesSeguimientos" value="#{Supervision$Externa.tieneReuniones}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titInterventoriaRemite" value="#{var.interventoriaremite}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titInterventoriaRemite" value="#{var.interventoriaremite}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inInterventoriaRemite" value="#{Supervision$Externa.remiteInformes}" />
+                <h:outputText  class="id-jsf- "   id="inInterventoriaRemite" value="#{Supervision$Externa.remiteInformes}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titCumplimientoRequerimiento" value="#{var.cumplimientorequerimientos}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titCumplimientoRequerimiento" value="#{var.cumplimientorequerimientos}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inCumplimientoRequerimiento" value="#{Supervision$Externa.cumpleAmbiental}" />
+                <h:outputText  class="id-jsf- "   id="inCumplimientoRequerimiento" value="#{Supervision$Externa.cumpleAmbiental}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titPermisosAmbiental" value="#{var.permisosinicioobra}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titPermisosAmbiental" value="#{var.permisosinicioobra}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inPermisosAmbiental" value="#{Supervision$Externa.permisosLicencias}" />
+                <h:outputText  class="id-jsf- "   id="inPermisosAmbiental" value="#{Supervision$Externa.permisosLicencias}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titNormasSalud" value="#{var.normasalud}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titNormasSalud" value="#{var.normasalud}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inNormasSalud" value="#{Supervision$Externa.permisoAmbiental}" />
+                <h:outputText  class="id-jsf- "   id="inNormasSalud" value="#{Supervision$Externa.permisoAmbiental}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titObservacionesComentarios" value="#{var.observacionescomentarios}" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titObservacionesComentarios" value="#{var.observacionescomentarios}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inObservacionesComentarios" value="#{Supervision$Externa.objetoSeguimiento.textobservacionespunto}" />
+                <h:outputText  class="id-jsf- "   id="inObservacionesComentarios" value="#{Supervision$Externa.objetoSeguimiento.textobservacionespunto}" />
             </rich:panel>
 
-            <rich:panel bodyClass="inpanelBody" style="background-color: #C1D1E7;">
-                <h:outputText id="titObservacionesNovedades" value="#{var.observacionesnovedades}:" />
+            <rich:panel bodyClass="inpanelBody" >
+                <h:outputText  class="id-jsf- "   id="titObservacionesNovedades" value="#{var.observacionesnovedades}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText id="inObservacionesNovedades" value="#{Supervision$Externa.objetoSeguimiento.textobservacionesmunicipio}" />
+                <h:outputText  class="id-jsf- "   id="inObservacionesNovedades" value="#{Supervision$Externa.objetoSeguimiento.textobservacionesmunicipio}" />
             </rich:panel>
         </h:panelGrid>
     </rich:popupPanel>

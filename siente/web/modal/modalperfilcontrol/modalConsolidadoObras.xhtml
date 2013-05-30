@@ -9,16 +9,16 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-ConsolidadoObras" headerClass="rich-panel-header" style=" overflow: auto; width: 800px; height: 400px ">
+    <rich:popupPanel id="mp-ConsolidadoObras" headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.consolidadoreport}" styleClass="txt_header"/>
+                <h:outputText  class="id-jsf- "   value="#{var.consolidadoreport}" class="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="cerrar" 
+                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" class="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-ConsolidadoObras')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,9 +27,9 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1" >
-                    <h:outputText value="1. AVANCE FISICO POR TIPO DE OBRA" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="1. AVANCE FISICO POR TIPO DE OBRA" />
                     <h:graphicImage value="#{var.imgobras1}"/>                    
-                    <h:outputText value="2 . AVANCE FISICO REGIONAL" style="font-size:14px; font-weight: bold;"/>
+                    <h:outputText  class="id-jsf- "   value="2 . AVANCE FISICO REGIONAL" />
                     <h:graphicImage value="#{var.imgobras2}"/>
                 </h:panelGrid>
             </rich:panel>

@@ -9,16 +9,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:interkont="http://www.interkont.com/jsf">
 
-    <rich:popupPanel id="mp_editar" moveable="false"  style="padding:0px;width:592px; height:430opx;" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp_editar" moveable="false"   headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText value="#{var.editardocuento}"/>
+                <h:outputText  class="id-jsf- "   value="#{var.editardocuento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_editar" styleClass="cerrar"
+                    <a4j:commandLink id="esconder_mp_editar" class="id-jsf-"  
                                        title="#{var.cerrar}" immediate="true"
                                        onclick="#{rich:component('mp_editar')}.hide();return  false;">
                      </a4j:commandLink>
@@ -26,33 +26,33 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="rich-panel-body" style="padding:0px;">
+        <rich:panel class="id-jsf-"   >
             <h:form>
                 <h:panelGrid width="100%">
                     <interkont:spacer height="70px"/>
-                    <h:panelGrid id="pg_campos_editar_documento" columns="3" width="100%" style="text-align:left;">
+                    <h:panelGrid id="pg_campos_editar_documento" columns="3" width="100%" >
                         <interkont:spacer width="60"/>
-                        <h:outputLabel value="#{var.nombre}" />
+                        <h:outputLabel  class="id-jsf- "   value="#{var.nombre}" />
                         <h:inputText id="txt_strnombre_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.strnombre}" required="true">
                             <h:message for="txt_strnombre_ed"/>
                         </h:inputText>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel value="Tipo:" />
+                        <h:outputLabel  class="id-jsf- "   value="Tipo:" />
                         <h:selectOneMenu id="select_tipodocumento2" value="#{Supervisor$AdministrarObraNew.documentoobraEd.tipodocumento.inttipodoc}">
                             <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoDocumento}" />
                         </h:selectOneMenu>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel value="#{var.fecha}" />
+                        <h:outputLabel  class="id-jsf- "   value="#{var.fecha}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.datefecha}" required="true">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="80px"/>
-                    <h:panelGrid columns="2" width="100%" style="text-align:center;">
+                    <h:panelGrid columns="2" width="100%" >
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_documento_action}" id="bt_aceptarEliminar"
-                                           styleClass="btn_sec_gra" value="#{var.aceptar}"
+                                           class="id-jsf-"   value="#{var.aceptar}"
                                            oncomplete="#{rich:component('mp_editar')}.hide();"
                                            render="panel_docu"  title="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="btn_sec_gra" value="#{var.cancelar}" 
+                        <a4j:commandButton class="id-jsf-"   value="#{var.cancelar}" 
                                            oncomplete="#{rich:component('mp_editar')}.hide();"/>
 
                     </h:panelGrid>

@@ -10,10 +10,10 @@
     <f:view locale="#{var.rcalendarlocale}">
         <h:form>
             <center>
-                <rich:panel style="margin-top:200px;">
+                <rich:panel >
                     <h:panelGroup>
                         <h:graphicImage value="/resources/imgs/msginfo.png"/>
-                        <h2><h:outputText value="#{var.moduloenconstruccion}"/></h2>
+                        <h2><h:outputText  class="id-jsf- "   value="#{var.moduloenconstruccion}"/></h2>
                     </h:panelGroup>
                     <h:commandLink value="Volver" type="submit" action="volver" id="volver"/>
                 </rich:panel>

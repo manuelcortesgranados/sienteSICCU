@@ -13,22 +13,22 @@
         <rich:popupPanel id="mp-listado-contratista" moveable="true" width="500" height="420" headerClass="rich-panel-header">
             <f:facet name="header" >
                 <h:panelGroup >
-                    <h:outputText value="#{var.listarcontratistas}" />
+                    <h:outputText  class="id-jsf- "   value="#{var.listarcontratistas}" />
                 </h:panelGroup>
             </f:facet>
             <f:facet name="controls">
                 <h:form>
                     <h:panelGroup>
-                        <a4j:commandLink id="esconder_mp-listado-contratista" styleClass="cerrar"
+                        <a4j:commandLink id="esconder_mp-listado-contratista" class="id-jsf-"  
                                          title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratista')}.hide(); return false;"/>
                     </h:panelGroup>
                 </h:form>
             </f:facet>
             <rich:panel  id="gpTotalContratista" >            
                 <h:panelGrid width=     "100%">
-                    <interkont:spacer height="20" style="width:100%;"/>
+                    <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
-                        <h:outputText  value="#{var.houtbusquedarapida} "/>
+                        <h:outputText  class="id-jsf- "    value="#{var.houtbusquedarapida} "/>
                         <h:inputText  id="filtro-contratista" value="#{Supervisor$IngresarNuevaObra.valorFiltroContratistas}" immediate="true">
                             <a4j:ajax  event="blur" render="tabla-listado-contratista"  execute="@this" >
                             <a4j:queue ignoreDupResponses="true"/>
@@ -36,37 +36,37 @@
                         </h:inputText>
 
                         <f:facet name="header">
-                            <h:outputText value="#{var.filtrar}"/>
+                            <h:outputText  class="id-jsf- "   value="#{var.filtrar}"/>
                         </f:facet>
                         <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
                         <a4j:ajax event="click" render="tabla-listado-contratista" execute="@this">
                         <a4j:queue ignoreDupResponses="true"/>
                         </a4j:ajax>
                     </h:panelGroup>
-                    <interkont:spacer height="10px" style="width:100%;"/>
-                    <rich:panel id="pl-tabla-listado-contratista" style="overflow: auto;width: 100%; height: 300px;">   
+                    <interkont:spacer height="10px" />
+                    <rich:panel id="pl-tabla-listado-contratista" >   
                         <rich:dataTable id="tabla-listado-contratista"                                         
                                         onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                         value="#{Supervisor$IngresarNuevaObra.listacontratistas}" 
-                                        sortMode="single" style="text-align:left; width:440px; "  var="currentRow" 
+                                        sortMode="single"   var="currentRow" 
                                         rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"  
-                                         style="width: 110px;">
+                                         >
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.numerocontratista}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.numerocontratista}"/>
                                 </f:facet>
-                                <h:outputText id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
+                                <h:outputText  class="id-jsf- "   id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
                             </rich:column>
-                            <rich:column id="nombrecontratista"  style="width:150px;">
+                            <rich:column id="nombrecontratista"  >
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.nombre}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
+                                <h:outputText  class="id-jsf- "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
                             </rich:column>
                             <rich:column id="seleccionar" width="120px">
                                 <f:facet name="header">
-                                    <h:outputText value="#{var.seleccionar}"/>
+                                    <h:outputText  class="id-jsf- "   value="#{var.seleccionar}"/>
                                 </f:facet>
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarContratista}"
                                                    render="mostrarContratistaSeleccionado,gpContratoSelec"                                                   
