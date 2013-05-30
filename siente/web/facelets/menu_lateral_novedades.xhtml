@@ -12,23 +12,23 @@
 
     <interkont:spacer  height="10"/>
 
-    <rich:panel headerClass="sliderich" bodyClass="sliderichcontentbluenovedades" header="Actividad Reciente" id="Novedades"  >
+    <rich:panel headerClass="id-jsf-rp-sliderich" bodyClass="id-jsf-rp-sliderichcontentbluenovedades" header="Actividad Reciente" id="Novedades"  >
 
 
         <a4j:repeat value="#{HomeGestion.listarecientes}" var="item" >
             <h:panelGrid  columns="2"   >
 
 
-                <h:graphicImage  class="id-jsf- "   value="#{item.strrutaimg}"/>
+                <h:graphicImage  class="id-jsf-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
-                <rich:panel  class="id-jsf-"  >
-                    <h:outputText  class="id-jsf- "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="id-jsf-"  
+                <rich:panel  class="id-jsf-rp-indicadores"  >
+                    <h:outputText  class="id-jsf-hot-textoinicial "   value="#{item.textoinicial}"/>
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="id-jsf-hcl-nombreobra"  
                                       onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="id-jsf-"  
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="id-jsf-hcl-nombreobra1"  
                                       onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
-                    <h:outputText  class="id-jsf- "   value=" #{item.textofinal}"/>
-                    <h:graphicImage  class="id-jsf- "   value="/resources/imgs/line.png"   />
+                    <h:outputText  class="id-jsf-hot-textofinal"   value=" #{item.textofinal}"/>
+                    <h:graphicImage  class="id-jsf-hgi-textofinal"   value="/resources/imgs/line.png"   />
                 </rich:panel>
             </h:panelGrid>
         </a4j:repeat>

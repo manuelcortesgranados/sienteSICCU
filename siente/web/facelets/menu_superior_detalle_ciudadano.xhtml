@@ -13,11 +13,11 @@
             <h:panelGrid columns="4"  rowClasses="alignverticaldetalle" >
                 <h:panelGrid cellpadding="0" cellspacing="0"  >
                     <h:panelGroup layout="block"  >
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
+                        <h:commandLink class="id-jsf-hcl-iniciardeta"   rendered="#{Supervisor$AdministrarObraNew.opcion!=0}"
                                          immediate="true"  value="#{var.informacionciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
+                        <h:commandLink class="id-jsf-hcl-iniciardeta1"   rendered="#{Supervisor$AdministrarObraNew.opcion==0}"
                                          immediate="true"  value="#{var.informacionciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciardeta}"
                                          />
@@ -25,11 +25,11 @@
                 </h:panelGrid>
                 <h:panelGrid  cellpadding="0" cellspacing="0"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnparticipacion_ciudadano}" >
                     <h:panelGroup layout="block"  >
-                        <a4j:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
+                        <a4j:commandLink class="id-jsf-hcl-iniciarOpiniones"   rendered="#{Supervisor$AdministrarObraNew.opcion!=7}"
                                          immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
-                        <a4j:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
+                        <a4j:commandLink class="id-jsf--hcl-iniciarOpiniones1"   rendered="#{Supervisor$AdministrarObraNew.opcion==7}"
                                          immediate="true"  value="#{var.comentariosciu}" 
                                          action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"
                                          />
@@ -37,11 +37,11 @@
                 </h:panelGrid>
                 <h:panelGrid cellpadding="0" cellspacing="0"   >
                     <h:panelGroup layout="block"  >
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion!=4}"
+                        <h:commandLink class="id-jsf-hcl-iniciarImagenes"   rendered="#{Supervisor$AdministrarObraNew.opcion!=4}"
                                          immediate="true"  value="#{var.fotosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
                                          />
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion==4}"
+                        <h:commandLink class="id-jsf-hcl-iniciarImagenes1"   rendered="#{Supervisor$AdministrarObraNew.opcion==4}"
                                          immediate="true"  value="#{var.fotosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarImagenes}"
                                          />
@@ -49,11 +49,11 @@
                 </h:panelGrid>
                 <h:panelGrid cellpadding="0" cellspacing="0"   >
                     <h:panelGroup layout="block"  >
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion!=3}"
+                        <h:commandLink class="id-jsf-hcl-iniciarDocumentos"   rendered="#{Supervisor$AdministrarObraNew.opcion!=3}"
                                          immediate="true"  value="#{var.documentosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
                                          />
-                        <h:commandLink class="id-jsf-"   rendered="#{Supervisor$AdministrarObraNew.opcion==3}"
+                        <h:commandLink class="id-jsf-hcl-iniciarDocumentos"   rendered="#{Supervisor$AdministrarObraNew.opcion==3}"
                                          immediate="true"  value="#{var.documentosciu}" 
                                          action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"
                                          />

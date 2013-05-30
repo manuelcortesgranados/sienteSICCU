@@ -15,10 +15,10 @@
         <h:form id="form_cambiocontra">
 
             1. la longitud de el campo contraseña es de 11 caracteres.
-            <h:panelGrid id="cambiocontra" columnClasses="aiu" columns="2" >
+            <h:panelGrid id="cambiocontra" columns="2" >
 
                 <h:panelGroup>
-                    <h:outputLabel  class="id-jsf- "   id="usuario"  value="#{var.username}:" for="txtusuario"/>
+                    <h:outputLabel  class="id-jsf-hot-usuario"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
                     <rich:message for="txtusuario" />
                 </h:panelGroup>
 
@@ -28,29 +28,29 @@
 
 
                 <h:panelGroup>
-                    <h:outputLabel  class="id-jsf- "   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
+                    <h:outputLabel  class="id-jsf-hot-contrasenaact"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
                     <rich:message for="txtcontrasenaact" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenaact" class="id-jsf-"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenaact" class="id-jsf-his-txtcontrasenaact"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  class="id-jsf- "   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
+                    <h:outputLabel  class="id-jsf-hol-contrasenanuev"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
                     <rich:message for="txtcontrasenanuev" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenanuev" class="id-jsf-"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenanuev" class="id-jsf-his-txtcontrasenanuev"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  class="id-jsf- "   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
+                    <h:outputLabel  class="id-jsf-hol-contrasenanuevcom"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
                     <rich:message for="txtcontrasenanuevcom" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenanuevcom" class="id-jsf-"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenanuevcom" class="id-jsf-his-txtcontrasenanuevcom"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
@@ -58,7 +58,7 @@
 
             <h:commandButton id="enviar" onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                         return true;"
-                             value="Enviar" action="#{Perfil$Usuario.enviodatos}" class="id-jsf-"   
+                             value="Enviar" action="#{Perfil$Usuario.enviodatos}" class="id-jsf-hcl-enviar"   
                              type="submit">
 
             </h:commandButton>

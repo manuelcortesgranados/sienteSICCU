@@ -8,7 +8,7 @@
     xmlns:a4j="http://richfaces.org/a4j"
     xmlns:interkont="http://www.interkont.com/jsf">
 
-    <rich:panel header="Twitter" bodyClass="tool" headerClass="headertool" >
+    <rich:panel header="Twitter" bodyClass="id-jsf-rp-twitter-body" headerClass="id-jsf-rp-twitter-header" >
 
         <script>
             function addEnter(textareaId)
@@ -27,8 +27,8 @@
 
         </script>
         <h:inputTextarea id="textarea" binding="#{textarea}" />
-        <input type="button" value="Enter" onclick="addEnter('#{textarea}')" />
-        <input type="button" value="Backspace" onclick="addBackspace('#{textarea}')" />
+        <input type="button" value="Enter" onclick="addEnter('#{textarea}');" />
+        <input type="button" value="Backspace" onclick="addBackspace('#{textarea}');" />
 
          </rich:panel>
 </ui:composition>

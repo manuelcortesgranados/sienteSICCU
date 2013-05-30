@@ -9,57 +9,57 @@
     xmlns:interkont="http://www.interkont.com/jsf"
   >
 
-    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodyClass="tool" >
+    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodyClass="id-jsf-rp-tool" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-deshformulario"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-datosb_atencion"   immediate="true"
                                  action="datosb_atencion"  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Datos Basicos"
+                <a4j:commandLink class="id-jsf-hcl-datosb_atencion2"   value="Datos Basicos"
                                  action="datosb_atencion" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-deshformulario1"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-consultardatosbasicos"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Datos Basicos"
+                <a4j:commandLink class="id-jsf-hcl-consultardatosbasicos1"   value="Datos Basicos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-img_atencion"   immediate="true"
                                  action="img_atencion"  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Imagenes"
+                <a4j:commandLink class="id-jsf-hcl-img_atencion1"   value="Imagenes"
                                  action="img_atencion"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-consultarimagenes"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Imagenes"
+                <a4j:commandLink class="id-jsf-hcl-consultarimagenes"   value="Imagenes"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-deshformulario3"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-doc_atencion"   immediate="true"
                                  action="doc_atencion"  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Documentos"
+                <a4j:commandLink class="id-jsf-hcl-doc_atencion1"   value="Documentos"
                                  action="doc_atencion"  execute="@this"/>
             </h:panelGrid>
 
-             <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+             <h:panelGrid class="id-jsf-hpg-deshformulario4"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink class="id-jsf-hcl-consultardocumentos"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Documentos"
+                <a4j:commandLink class="id-jsf-hcl-consultardocumentos1"   value="Documentos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                <a4j:commandLink class="id-jsf-"   immediate="true"
+            <h:panelGrid class="id-jsf-hpg-video_atencion"   cellpadding="0" cellspacing="0" >
+                <a4j:commandLink class="id-jsf-hcl-va"   immediate="true"
                                  action="video_atencion"  execute="@this"/>
-                <a4j:commandLink class="id-jsf-"   value="Video"
+                <a4j:commandLink class="id-jsf-hcl-va1"   value="Video"
                                  action="video_atencion"  execute="@this"/>
             </h:panelGrid>
         </h:panelGrid>

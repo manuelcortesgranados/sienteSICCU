@@ -10,33 +10,34 @@
     >
 
 
-    <div class="topbar"><div class="toptitle"><h:outputText  class="id-jsf- "   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
+    <div class="topbar"><div class="toptitle">
+            <h:outputText  class="id-jsf-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
         <div class="sienteicon">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   id="label_usuario" class="id-jsf-"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
-                <h:outputText  class="id-jsf- "   id="label_apellido" class="id-jsf-"   value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
-                <h:outputText  class="id-jsf- "   id="label_apellido2" class="id-jsf-"   value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
-                <h:outputText  class="id-jsf- "     value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
+                <h:outputText  class="id-jsf-hot-label_usuario"   id="label_usuario"    value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
+                <h:outputText  class="id-jsf-hot-label_apellido"   id="label_apellido"  value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
+                <h:outputText  class="id-jsf-hot-label_apellido2"   id="label_apellido2"   value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
+                <h:outputText  class="id-jsf-hot-intcodigo"     value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
             </h:panelGroup>
         </div>
     </div>
 
     <rich:toolbar>
         <rich:toolbarGroup>
-            <h:commandLink class="id-jsf-"  />
+            <h:commandLink class="id-jsf-hcl-sin5"  />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage  class="id-jsf- "   value="/resources/imgs/menu_middle.png"  class="id-jsf-"  />
+            <h:graphicImage  class="id-jsf-hgi-imagen"   value="/resources/imgs/menu_middle.png" />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
             <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
-                           class="id-jsf-"  />
+                           class="id-jsf-hcl-salir"  />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage  class="id-jsf- "   value="/resources/imgs/menu_middle.png"  class="id-jsf-"  />
+            <h:graphicImage  class="id-jsf-hgi-imagen1"  value="/resources/imgs/menu_middle.png" />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right" rendered="#{var.variconch}">
@@ -44,7 +45,7 @@
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right">
-            <a target="_blank" href="#{var.linkcliente}" class="ch anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente}" class="id-jsf-ch"></a>
         </rich:toolbarGroup>
 
     </rich:toolbar>
