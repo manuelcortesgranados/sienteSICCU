@@ -61,7 +61,7 @@
                                         </f:facet>
                                         <center>
                                             <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}" immediate="true">
-                                                <h:graphicImage value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
+                                                <h:graphicImage  class="id-jsf- "   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
                                                                 />
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
@@ -99,7 +99,7 @@
                                         </f:facet>
                                         <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}"
                                                        immediate="true">
-                                            <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                         </h:commandLink>
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
@@ -110,7 +110,7 @@
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" execute="@this"
                                                          oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show(); return true;"
                                                          title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true">
-                                            <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
@@ -142,7 +142,7 @@
                                         <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action(filaSeleccionada)}" execute="@this"
                                                          render="tablaImagenesevolucion"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" title="#{var.eliminar}"  immediate="true">
-                                            <h:graphicImage  value="/resources/imgs/bt_eliminar.png"/>
+                                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_eliminar.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
                                     <f:facet name="footer">

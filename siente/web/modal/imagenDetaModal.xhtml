@@ -16,7 +16,7 @@
                     <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" class="id-jsf-"    headerClass="font-header-panel">
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima2">
-                                <h:graphicImage value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
+                                <h:graphicImage  class="id-jsf- "   value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
                                                 
                                                 height="140" width="190"/>
                             </h:panelGroup>
@@ -28,13 +28,13 @@
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima1">
 
-                                <h:graphicImage id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  class="id-jsf- "   id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
                                                 
                                                 height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="#{rich:component('modalImagenvermas')}.show();return true;" />
 
 
 
-                                <h:graphicImage id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  class="id-jsf- "   id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
                                                 
                                                 height="140" width="190" rendered="#{!Supervisor$DetalleObra.boolimg}"/>
 

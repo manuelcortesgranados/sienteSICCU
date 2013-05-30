@@ -35,7 +35,7 @@
                             <br/>
                             <br/>
                         <a4j:commandLink id = "btn_editarObjetoObra"   action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
-                            <h:graphicImage  width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                            <h:graphicImage  class="id-jsf- "    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
                         </a4j:commandLink>
                     </h:panelGroup>
                     <h:panelGroup  id="txthabilitarModificar" rendered="#{Supervisor$AdministrarObraNew.modificarObjetoObra}" >
@@ -43,7 +43,7 @@
                         <a4j:commandLink   id="bt_editarpolizas1"  action="#{Supervisor$AdministrarObraNew.guardarModificacionObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
                             <br/>
                             <br/>
-                            <h:graphicImage  width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                            <h:graphicImage  class="id-jsf- "    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
                         </a4j:commandLink>  
                         <rich:message for="habilitarObjeto" />  
                     </h:panelGroup>

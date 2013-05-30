@@ -10,84 +10,84 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="modalDashboard_ah" resizeable="false" width="700" height="600"  
-                      headerClass="style-modal-dialog-head" class="id-jsf-"  >
+    <rich:popupPanel  id="modalDashboard_ah" resizeable="false"
+                      headerClass="id-jsf-modal-dialog-head" class="id-jsf-rpp-modalDashboard_ah"  >
         <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="3">
-                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  class="id-jsf- "    value="Atención Humanitaria" class="id-jsf-"  />
+                    <h:graphicImage  class="id-jsf-hgi-magotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" />
+                    <h:outputText  class="id-jsf-hot-atencionhumanitaria"    value="Atención Humanitaria"   />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_ah" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalDashboard_ah" class="id-jsf-esconder" value="X" 
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modalDashboard_ah')}.hide();
-                                             return false;"/>
+                                     return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         
-            <rich:panel   id="modalDashboardAhInfo">
+            <rich:panel  id="modalDashboardAhInfo">
                 <interkont:spacer height="20" />
                 <h:panelGrid >
-                    <h:outputText  class="id-jsf- "   value="#{var.resumenatencion}" class="id-jsf-"   ></h:outputText>
+                    <h:outputText  class="id-jsf-hot-resumenatencion"   value="#{var.resumenatencion}"></h:outputText>
                 </h:panelGrid>
                 <interkont:spacer height="20" />
                 <h:panelGrid  >
                     <h:panelGrid  columns="2" >
-                        <h:outputText  class="id-jsf- "   value="#{var.valortotalah}:" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.totalInvAh}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-valortotalah"   value="#{var.valortotalah}:"></h:outputText>
+                        <h:outputText  class="id-jsf-hot-totalInvAh"   value="#{ControlGerencial.informaciondashah.totalInvAh}" >
                             <f:convertNumber pattern="$ ###,###"/>
                         </h:outputText>
                     </h:panelGrid>
                     <interkont:spacer height="20" />
-                    <h:outputText  class="id-jsf- "   value="KITS DE MERCADO Y ASEO" class="id-jsf-"  ></h:outputText>
+                    <h:outputText  class="id-jsf-hot-kidsaseo"   value="KITS DE MERCADO Y ASEO"></h:outputText>
                     <h:panelGrid  columns="2" columnClasses="panelizquierda,panelderecha">
-                        <h:outputText  class="id-jsf- "   value="#{var.valorinvertidomercadoyaseo}:" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.valorInvMercAseo}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-valorinvertidomercadoyaseo"   value="#{var.valorinvertidomercadoyaseo}:"></h:outputText>
+                        <h:outputText  class="id-jsf-hot-valorInvMercAseo"   value="#{ControlGerencial.informaciondashah.valorInvMercAseo}">
                             <f:convertNumber pattern="$ ###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.toneladasentregadasmercadoyaseo}:" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.tonEntMercAseo}" class="id-jsf-"   >
+                        <h:outputText  class="id-jsf-hot-toneladasentregadasmercadoyaseo"   value="#{var.toneladasentregadasmercadoyaseo}:" ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-tonEntMercAseo"   value="#{ControlGerencial.informaciondashah.tonEntMercAseo}" >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.mercadosykits}:" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.mercAseoEnt}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-mercadosykits"   value="#{var.mercadosykits}:" ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-mercAseoEnt"   value="#{ControlGerencial.informaciondashah.mercAseoEnt}">
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.familiasbeneficiadas}" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.famBenMercAseo}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-familiasbeneficiadas"   value="#{var.familiasbeneficiadas}"  ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-famBenMercAseo"   value="#{ControlGerencial.informaciondashah.famBenMercAseo}">
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
                     </h:panelGrid>
                     <interkont:spacer height="20" />
-                    <h:outputText  class="id-jsf- "   value="ALOJAMIENTOS TEMPORALES" class="id-jsf-"  ></h:outputText>
-                    <h:panelGrid  columns="2" columnClasses="panelizquierda,panelderecha">
-                        <h:outputText  class="id-jsf- "   value="#{var.arriendosentregados}" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.arriendEnt}" class="id-jsf-"  >
+                    <h:outputText  class="id-jsf-hot-alojamientotemporal"   value="ALOJAMIENTOS TEMPORALES"  ></h:outputText>
+                    <h:panelGrid  columns="2">
+                        <h:outputText  class="id-jsf-hot-arriendosentregados"   value="#{var.arriendosentregados}" ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-arriendEnt"   value="#{ControlGerencial.informaciondashah.arriendEnt}" >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="Total #{var.familiasaatendidasseg} en arriendos" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.totFamAtendArriend}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-familiasaatendidasseg"   value="Total #{var.familiasaatendidasseg} en arriendos"  ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-totFamAtendArriend"   value="#{ControlGerencial.informaciondashah.totFamAtendArriend}"   >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.viviendasreparadas}" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.vivRep}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-viviendasreparadas"   value="#{var.viviendasreparadas}"  ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-vivRep"   value="#{ControlGerencial.informaciondashah.vivRep}"  >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.alberguesconstruidos}" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.alberguesConstruidos}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-alberguesconstruidos "   value="#{var.alberguesconstruidos}"  ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-alberguesConstruidos"   value="#{ControlGerencial.informaciondashah.alberguesConstruidos}"   >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.familiasbeneficiadas} con albergues" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.famBenAlbergues}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-familiasbeneficiadas2 "   value="#{var.familiasbeneficiadas} con albergues" ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-famBenAlbergues"   value="#{ControlGerencial.informaciondashah.famBenAlbergues}" >
                             <f:convertNumber pattern="###,###"/>
                         </h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{var.totalrecursosdesembolsados}" class="id-jsf-"  ></h:outputText>
-                        <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashah.totRecDesmAloj}" class="id-jsf-"  >
+                        <h:outputText  class="id-jsf-hot-totalrecursosdesembolsados"   value="#{var.totalrecursosdesembolsados}" ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-totRecDesmAloj"   value="#{ControlGerencial.informaciondashah.totRecDesmAloj}" >
                             <f:convertNumber pattern="$ ###,###"/>
                         </h:outputText>
                     </h:panelGrid>
@@ -95,7 +95,7 @@
                 <interkont:spacer height="20" />
                 <center>
                     <h:panelGrid columns="3" >
-                        <h:outputText  class="id-jsf- "   value="Descargue Reporte" class="id-jsf-"  ></h:outputText>
+                        <h:outputText  class="id-jsf-hot-descargareporte"   value="Descargue Reporte"  ></h:outputText>
                         <interkont:spacer width="10" />                        
                     </h:panelGrid>
                     <interkont:spacer height="20" />
@@ -106,8 +106,7 @@
                             execute="@this"
                             immediate="true"
                             render="@this"
-                            class="id-jsf-"  
-                            
+                            class="id-jsf-hcl-vermasdashboard"  
                             />
 
                     </h:panelGrid>

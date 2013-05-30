@@ -82,7 +82,7 @@
                                     </f:facet>                                    
 
                                     <h:commandLink id="boton_" action="#{Supervisor$AdministrarObraNew.bt_download_documento_action(filaSeleccionada)}"  immediate="true">
-                                        <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                                        <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                                     </h:commandLink>
                                 </rich:column>
                                 <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.ver_editardoc}">
@@ -92,7 +92,7 @@
                                     <a4j:commandLink id="bt_editardoc" action="#{Supervisor$AdministrarObraNew.bt_editar_documento_action(filaSeleccionada)}"
                                                      oncomplete="#{rich:component('mp_editar')}.show();" title="#{var.editar}"
                                                      immediate="true" execute="@this" >
-                                        <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                        <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
                                 <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.ver_eliminardoc}">
@@ -102,7 +102,7 @@
                                     <a4j:commandLink id="bt_eliminardoc" action="#{Supervisor$AdministrarObraNew.bt_eliminar_documento_action(filaSeleccionada)}"
                                                      rendered="#{!currentRow.tipodocumento.obligatorio and currentRow.contrato==null}"
                                                      title="#{var.eliminar}"  immediate="true" render="docsubir, tablaDocumentos" execute="@this">
-                                        <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                        <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
                                 <f:facet name="footer">

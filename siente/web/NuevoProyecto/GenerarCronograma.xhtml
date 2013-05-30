@@ -41,7 +41,7 @@
                                     <h:panelGrid  columns="1" >
                                         <h:panelGroup>
                                             <h:outputText  class="id-jsf- "   value="#{var.debediligenciartodoslosdatos}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:graphicImage  class="id-jsf- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                         </h:panelGroup>
                                         <a4j:commandLink rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
                                                          action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" 
@@ -72,9 +72,9 @@
                                                            >
                                                 <h:outputText  class="id-jsf- "   value=" #{file.nombre}" />
                                                 <interkont:spacer height="8" width="15"/>
-                                                <h:graphicImage url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
                                                 <h:outputText  class="id-jsf- "   value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
-                                                <h:graphicImage url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
+                                                <h:graphicImage  class="id-jsf- "   url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
                                                 <h:outputText  class="id-jsf- "   value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
                                                 <h:outputText  class="id-jsf- "   value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}"/>
                                             </rich:dataGrid>
@@ -189,16 +189,16 @@
                                                    class="id-jsf-"   ajaxRendered="true"
                                                    >
                                         <f:facet name="infoMarker">
-                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                            <h:graphicImage  class="id-jsf- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                         </f:facet>
                                         <f:facet name="warnMarker">
-                                            <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                            <h:graphicImage  class="id-jsf- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                         </f:facet>
                                         <f:facet name="errorMarker">
-                                            <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  class="id-jsf- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                         <f:facet name="fatalMarker">
-                                            <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  class="id-jsf- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                     </rich:messages>
                                 </a4j:outputPanel>

@@ -157,7 +157,7 @@
                                                             <center>
                                                             <h:panelGrid columns="1" columnClasses="panelcenter">
                                                                 <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
-                                                                    <h:graphicImage url="/resources/imgs/#{fase.intidfase}fase.png"  />
+                                                                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/#{fase.intidfase}fase.png"  />
                                                                 </a4j:commandLink>
 
                                                                 <a4j:commandLink class="id-jsf-"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
@@ -189,7 +189,7 @@
                                                             <center>                                                        
                                                             <h:panelGrid columns="1" columnClasses="panelcenter">
                                                                 <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
-                                                                    <h:graphicImage url="#{tipoproyecto.strurlimagen}" height="60px"/>
+                                                                    <h:graphicImage  class="id-jsf- "   url="#{tipoproyecto.strurlimagen}" height="60px"/>
                                                                 </a4j:commandLink>
 
                                                                 <a4j:commandLink class="id-jsf-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
@@ -217,7 +217,7 @@
                                                                 <a4j:commandLink  execute="@this"  
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                               render="tablatipoobra" >
-                                                                    <h:graphicImage url="#{tipoobra.strurlimagen}"/>
+                                                                    <h:graphicImage  class="id-jsf- "   url="#{tipoobra.strurlimagen}"/>
                                                                 </a4j:commandLink>
 
                                                                 <a4j:commandLink class="id-jsf-"   value="#{tipoobra.strnombremedio}"  execute="@this"  
@@ -252,16 +252,16 @@
                                                            class="id-jsf-"   ajaxRendered="true"
                                                            >
                                                 <f:facet name="infoMarker">
-                                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                                    <h:graphicImage  class="id-jsf- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                                 </f:facet>
                                                 <f:facet name="warnMarker">
-                                                    <h:graphicImage height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                                    <h:graphicImage  class="id-jsf- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                                 </f:facet>
                                                 <f:facet name="errorMarker">
-                                                    <h:graphicImage height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                    <h:graphicImage  class="id-jsf- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                                 </f:facet>
                                                 <f:facet name="fatalMarker">
-                                                    <h:graphicImage  height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                    <h:graphicImage  class="id-jsf- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                                 </f:facet>
                                             </rich:messages>
 

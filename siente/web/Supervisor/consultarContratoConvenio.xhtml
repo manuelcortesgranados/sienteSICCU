@@ -193,13 +193,13 @@
 
                                 <rich:column width="120px">
                                     <h:commandLink  action="#{Supervisor$Contrato.detalleContrato(filaSeleccionada)}">
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
                                 <rich:column width="120px" id="contconvpadre" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
                                     <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
@@ -343,13 +343,13 @@
 
                                 <rich:column width="120px">
                                     <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista(filaSeleccionada)}">
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
 
                                 <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
                                     <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </h:commandLink>
                                 </rich:column>
                                 <f:facet name="footer">

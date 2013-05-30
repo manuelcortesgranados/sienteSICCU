@@ -105,10 +105,10 @@
                                      rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}">
                             <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" class="id-jsf-"    headerClass="font-header-panel">
                                 <h:panelGroup>
-                                    <h:graphicImage value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
+                                    <h:graphicImage  class="id-jsf- "   value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
                                                     height="120" width="160"
                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
-                                    <h:graphicImage value="#{var.noimagen}" height="120" width="160"
+                                    <h:graphicImage  class="id-jsf- "   value="#{var.noimagen}" height="120" width="160"
                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
                                 </h:panelGroup>
                             </rich:panel>
@@ -142,10 +142,10 @@
                             <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" class="id-jsf-"   headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <center>
-                                        <h:graphicImage id="imgSemaObra"
+                                        <h:graphicImage  class="id-jsf- "   id="imgSemaObra"
                                                         value="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen}"
                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
-                                        <h:graphicImage value="#{var.noinfo}" height="100px"
+                                        <h:graphicImage  class="id-jsf- "   value="#{var.noinfo}" height="100px"
                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
                                         <h:outputText  class="id-jsf- "   value="#{Supervisor$DetalleObra.semaforo}"
                                                       rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"

@@ -69,7 +69,7 @@
                                 </f:facet>
                                 <a4j:commandLink action="#{Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
                                                  immediate="true" render="pg_camposVerEnviados,mp_ver_enviados" execute="@this,pg_camposVerEnviados,mp_ver_enviados">
-                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                             <f:facet name="footer">

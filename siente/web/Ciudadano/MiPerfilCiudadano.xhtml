@@ -51,7 +51,7 @@
         <h:form>
             <h:panelGrid columns="3"   id="pgmiperfil">
                 <h:panelGrid    columnClasses="panelcenter" >
-                    <h:graphicImage class="id-jsf-"   url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
+                    <h:graphicImage  class="id-jsf- "   class="id-jsf-"   url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
                     <h:outputLabel  class="id-jsf- "    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}" class="id-jsf-"  />
                     <h:outputLabel  class="id-jsf- "    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"  class="id-jsf-"  />
                     <interkont:spacer width="30"/>
@@ -126,7 +126,7 @@
                 <rich:panel class="id-jsf-"   >
                     <h:outputLabel  class="id-jsf- "   value="#{var.proyecto}" class="id-jsf-"   />
                     <h:panelGrid columns="3">
-                        <h:graphicImage  url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  width="70" />
+                        <h:graphicImage  class="id-jsf- "    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  width="70" />
                         <h:outputLabel  class="id-jsf- "   value="#{SessionBeanCobra.obraseguida}" class="id-jsf-"   />
                         <h:outputLabel  class="id-jsf- "   value="Ver #{var.solicitudproyecto}s" class="id-jsf-"   />
                     </h:panelGrid>
@@ -134,7 +134,7 @@
                 <rich:panel class="id-jsf-"   >
                     <h:outputLabel  class="id-jsf- "   value="Comentarios" class="id-jsf-"   />
                     <h:panelGrid columns="3">
-                        <h:graphicImage  url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_02.png"  width="70" height="70"/>
+                        <h:graphicImage  class="id-jsf- "    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_02.png"  width="70" height="70"/>
                         <h:outputLabel  class="id-jsf- "   value="#{SessionBeanCobra.ciudadanoservice.intcomentario}" class="id-jsf-"   />
                         <h:outputLabel  class="id-jsf- "   value="Ver mi muro" class="id-jsf-"   />
                     </h:panelGrid>
@@ -142,7 +142,7 @@
                 <rich:panel class="id-jsf-"   >
                     <h:outputLabel  class="id-jsf- "   value="Fotos" class="id-jsf-"   />
                     <h:panelGrid columns="3">
-                        <h:graphicImage  url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_03.png"  width="70" height="70"/>
+                        <h:graphicImage  class="id-jsf- "    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_03.png"  width="70" height="70"/>
                         <h:outputLabel  class="id-jsf- "   value="#{SessionBeanCobra.ciudadanoservice.intfotos}" class="id-jsf-"   />
                         <h:outputLabel  class="id-jsf- "   value="Ver imágenes" class="id-jsf-"   />
                     </h:panelGrid>
@@ -182,13 +182,13 @@
 
                                 <h:panelGrid class="id-jsf-"  >
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuarioPerfil}" type="submit" >
-                                        <h:graphicImage url="#{var.ipserver}siente#{rowcomentario.jsfUsuariocomento.tercero.strfoto}" />
+                                        <h:graphicImage  class="id-jsf- "   url="#{var.ipserver}siente#{rowcomentario.jsfUsuariocomento.tercero.strfoto}" />
                                     </a4j:commandLink>
                                     <interkont:spacer width="30"/>
                                 </h:panelGrid>
 
                                 <h:panelGrid columns="3">
-                                    <h:graphicImage url="/resources/imgs/com_arrow.png" />
+                                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/com_arrow.png" />
 
                                     <h:panelGrid class="id-jsf-"   >
                                         <h:panelGroup>

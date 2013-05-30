@@ -98,7 +98,7 @@
                                                                            >
                                                                 <h:outputText  class="id-jsf- "   value=" #{file.onlyName}" />
                                                                 <interkont:spacer height="8" width="15"/>
-                                                                <h:graphicImage  rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"/>
+                                                                <h:graphicImage  class="id-jsf- "    rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"/>
 
                                                             </rich:dataGrid>
                                                         </center>
@@ -214,8 +214,8 @@
                                                            >
                                                 <h:outputText  class="id-jsf- "   value=" #{file.onlyName}" />
                                                 <interkont:spacer height="8" width="15"/>
-                                                <h:graphicImage rendered="#{Supervisor$ModificarObra.cronovalido}"/>
-                                                <h:graphicImage rendered="#{!Supervisor$ModificarObra.cronovalido}"/>
+                                                <h:graphicImage  class="id-jsf- "   rendered="#{Supervisor$ModificarObra.cronovalido}"/>
+                                                <h:graphicImage  class="id-jsf- "   rendered="#{!Supervisor$ModificarObra.cronovalido}"/>
                                                 <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" class="id-jsf-"  />
                                             </rich:dataGrid>
                                         </center>

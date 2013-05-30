@@ -9,69 +9,69 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false" width="700" height="500" 
-                      headerClass="style-modal-dialog-head" class="id-jsf-"  >
+    <rich:popupPanel  id="modalDashboard_entesnacionales" resizeable="false"
+                     headerClass="id-jsf-modal-dialog-head" class="id-jsf-rpp-modalDashboard_entesnacionales"  >
         <f:facet name="header" >
 
             <h:panelGroup >
                 <h:panelGrid columns="3">
-                    <h:graphicImage url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  class="id-jsf- "    value="#{var.entesnacionales}" class="id-jsf-"  />
+                    <h:graphicImage  class="id-jsf-hgi-magotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" />
+                    <h:outputText  class="id-jsf-hot-entesnacionales"    value="#{var.entesnacionales}"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" class="id-jsf-hcl-esconder"  value="X" 
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDashboard_entesnacionales')}.hide();
-                                             return false;"/>
+                                     return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
 
-        <rich:panel   id="modalDashboardConveniosInfo">
+        <rich:panel id="modalDashboardConveniosInfo">
 
             <interkont:spacer height="20" />
             <h:panelGrid >
-                <h:outputText  class="id-jsf- "   value="#{var.resumengeneral} nacionales" class="id-jsf-"   ></h:outputText>
+                <h:outputText  class="id-jsf-hot-resumengeneralnacionales"   value="#{var.resumengeneral} nacionales"></h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
             <h:panelGrid  columns="2">
-                <h:outputText  class="id-jsf- "    value="#{var.totalobra}s:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalproy}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-totalobra"    value="#{var.totalobra}s:" ></h:outputText>
+                <h:outputText  class="id-jsf-hot-totalproy"   value="#{ControlGerencial.informaciondashconvenios.totalproy}" >
                     <f:convertNumber pattern="###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.proyectosterminados}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.proyterm}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-proyectosterminados"    value="#{var.proyectosterminados}:"  ></h:outputText>
+                <h:outputText  class="id-jsf-hot-proyterm"   value="#{ControlGerencial.informaciondashconvenios.proyterm}" >
                     <f:convertNumber pattern="###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.totalrecursos}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-totalrecursos"    value="#{var.totalrecursos}:"></h:outputText>
+                <h:outputText  class="id-jsf-houttotalRecValDec"   value="#{ControlGerencial.informaciondashconvenios.totalRecValDec}">
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.totalrecursosprogramados}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-totalrecursosprogramados"    value="#{var.totalrecursosprogramados}:"></h:outputText>
+                <h:outputText  class="id-jsf-houttotalRecProgEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecProgEjec}">
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.totalrecursosejecutados}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hout-totalrecursosejecutados"    value="#{var.totalrecursosejecutados}:"></h:outputText>
+                <h:outputText  class="id-jsf-houttotalRecEjec"   value="#{ControlGerencial.informaciondashconvenios.totalRecEjec}">
                     <f:convertNumber pattern="$ ###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.porcentajejecutado}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-porcentajejecutado"    value="#{var.porcentajejecutado}:" ></h:outputText>
+                <h:outputText  class="id-jsf-hot-porcEjec"   value="#{ControlGerencial.informaciondashconvenios.porcEjec}" >
                     <f:convertNumber pattern="###.## %"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf- "    value="#{var.numeroentidadesnacionalesejecutadas}:" class="id-jsf-"  ></h:outputText>
-                <h:outputText  class="id-jsf- "   value="#{ControlGerencial.informaciondashconvenios.numentiejec}" class="id-jsf-"  >
+                <h:outputText  class="id-jsf-hot-numeroentidadesnacionalesejecutadas "    value="#{var.numeroentidadesnacionalesejecutadas}:"  ></h:outputText>
+                <h:outputText  class="id-jsf-hot-numentiejec"   value="#{ControlGerencial.informaciondashconvenios.numentiejec}"   >
                     <f:convertNumber pattern=" ###,###"/>
                 </h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
             <center>
                 <h:panelGrid columns="3" >
-                    <h:outputText  class="id-jsf- "   value="Descargue Reportes" class="id-jsf-"  ></h:outputText>
+                    <h:outputText  class="id-jsf-hot-descarguereporte"   value="Descargue Reportes"  ></h:outputText>
                     <interkont:spacer width="10" />
 
                 </h:panelGrid>

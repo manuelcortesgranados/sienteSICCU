@@ -90,7 +90,7 @@
                                     <h:outputText  class="id-jsf- "   id="lblDesviacion"
                                                   class="id-jsf-"   value="#{Supervisor$Alimentar.desviacion} %"/>
                                     <interkont:spacer width="10" rendered="#{!Supervisor$Alimentar.fechavalida}"/>
-                                    <h:graphicImage id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
+                                    <h:graphicImage  class="id-jsf- "   id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
                                                     url="#{Supervisor$Alimentar.alimentacion.semaforo.strimagen}"/>
                                     <interkont:spacer width="15" rendered="#{Supervisor$Alimentar.fechavalida}"/>
 
@@ -526,7 +526,7 @@
                 <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
                    
                     <h:panelGrid id="layoutImagenDetalle" class="id-jsf-"   >
-                        <h:graphicImage id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
+                        <h:graphicImage  class="id-jsf- "   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
                                            onclick="#{rich:component('modalImagen')}.show(); return true;"
                                            class="id-jsf-"     />

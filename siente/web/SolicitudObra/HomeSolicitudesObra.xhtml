@@ -161,7 +161,7 @@
                                               rendered="#{currentRowTemp.boolaprobado}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" 
                                               >
-                                <h:graphicImage  value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_consultar.png"/>
                                 </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -255,21 +255,21 @@
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 
                                               action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector(filaSeleccionada)}" >
-                                <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         -->
                         <rich:column>
                             <a4j:commandLink  title="#{var.asociarproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
-                                <h:graphicImage  value="/resources/imgs/bt_contrato.png"/>
+                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" render="modaltablaproyectos, tablaproyectos" >
-                                <h:graphicImage  value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">

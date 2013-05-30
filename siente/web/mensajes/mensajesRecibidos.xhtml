@@ -70,7 +70,7 @@
                                 </f:facet>
                                 <a4j:commandLink action="#{Mensajes.bt_verrecibidos_action}" id="bt-ver-recibidos"
                                                  oncomplete="#{rich:component( 'mp_ver')}.show()" title="#{var.Ver}" execute="@this,pg_camposVer,mp_ver"  immediate="true" render="pg_camposVer,mp_ver">
-                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                             <f:facet name="footer">

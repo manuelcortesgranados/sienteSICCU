@@ -40,7 +40,7 @@
     <ui:define name="body">
         <h:form> 
             <h:panelGroup layout="block" class="id-jsf-"   id="gpLogPrinci">
-                <h:graphicImage url="/resources/imgs/login/logo_login.png" width="350"/>
+                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/login/logo_login.png" width="350"/>
                 <rich:panel>
                     <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
                         <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  oncomplete="placehoder()">
@@ -206,7 +206,7 @@
                                                             <h:panelGroup class="id-jsf-"   layout="block">
                                                                 <center>
                                                                     <h:panelGroup class="id-jsf-"   layout="block" id="pgfotografia">
-                                                                        <h:graphicImage url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  class="id-jsf-"    height="100%"
+                                                                        <h:graphicImage  class="id-jsf- "   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  class="id-jsf-"    height="100%"
 
                                                                                         />
                                                                     </h:panelGroup>
@@ -244,9 +244,9 @@
                     </rich:tabPanel>
                 </rich:panel>
                 <h:panelGroup layout="block" class="id-jsf-"   rendered="#{var.logologin}">
-                    <h:graphicImage url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
-                    <h:graphicImage url="/resources/imgs/login/separador.png" width="10" height="60"/>
-                    <h:graphicImage url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
+                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
+                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/login/separador.png" width="10" height="60"/>
+                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
                 </h:panelGroup>
 
             </h:panelGroup>

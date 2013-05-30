@@ -32,7 +32,7 @@
             <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
                 <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="id-jsf-"  >
                     <h:panelGroup>
-                        <h:graphicImage url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                        <h:graphicImage  class="id-jsf- "   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                         <h:outputText  class="id-jsf- "   value="#{var.cronogramamodificacioninvalido}" class="id-jsf-"   />
                     </h:panelGroup>
                     <h:outputText  class="id-jsf- "   value=" #{file.nombre}" class="id-jsf-"  />

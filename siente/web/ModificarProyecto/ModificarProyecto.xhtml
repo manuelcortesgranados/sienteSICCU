@@ -224,11 +224,11 @@
                                 </f:facet>
                                 <h:panelGroup rendered ="false">
                                     <h:outputText  class="id-jsf- "   value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage  url="/resources/imgs/msgerror.png"/>
+                                    <h:graphicImage  class="id-jsf- "    url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
                                 <h:panelGroup rendered ="false">
                                     <h:outputText  class="id-jsf- "   value="#{var.debediligenciartodoslosdatos}"/>
-                                    <h:graphicImage  url="/resources/imgs/msgerror.png"/>
+                                    <h:graphicImage  class="id-jsf- "    url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
 
                                 <h:panelGrid columns="2" columnClasses="PanelGenerarCronogramaPaso3">
@@ -258,9 +258,9 @@
                                 <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
                                     <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="id-jsf-"  >
                                         <h:panelGroup>
-                                            <h:graphicImage url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            <h:graphicImage  class="id-jsf- "   url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                                             <h:outputText  class="id-jsf- "   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" class="id-jsf-"   />
-                                            <h:graphicImage url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            <h:graphicImage  class="id-jsf- "   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                                             <h:outputText  class="id-jsf- "   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" class="id-jsf-"   />
                                         </h:panelGroup>
                                         <h:outputText  class="id-jsf- "   value=" #{file.nombre}" class="id-jsf-"  />
@@ -294,7 +294,7 @@
                                         <f:selectItems value="#{Supervisor$ModificarProyecto.selectItemTipoDocumentoModi}" />
                                     </h:selectOneMenu>
                                     <a4j:commandLink action="#{Supervisor$ModificarProyecto.btAgregarDocumentoAction}" render="panelTablaDocumentosModificacion,panelSubirDocModificacion,layoutDocModificacion,messages" execute="@form">
-                                        <h:graphicImage url="/resources/imgs/add.png"/>
+                                        <h:graphicImage  class="id-jsf- "   url="/resources/imgs/add.png"/>
                                     </a4j:commandLink>
                                     <h:panelGroup id="panelListadoArchivosCargados">
                                         <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorDocumentos.archivos}" var="file"  >
@@ -357,13 +357,13 @@
                                             <rich:column>
 
                                                 <h:commandLink id="boton_ver_doc_modi" action="#{Supervisor$ModificarProyecto.btDescargarDocumentoAction(filaSeleccionada)}" immediate="true"  >
-                                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                                 </h:commandLink>
 
                                             </rich:column>
                                             <rich:column >
                                                 <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction(filaSeleccionada)}" render="panelTablaDocumentosModificacion" execute="@this">
-                                                    <h:graphicImage  value="/resources/imgs/bt_eliminar.png"/>
+                                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>
                                             </rich:column>
                                         </rich:columnGroup>

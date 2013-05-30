@@ -156,7 +156,7 @@
                                                              action="#{Supervisor$Contrato.habilitarBotonModificarNumero}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
-                                                <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
                                             <h:outputText  class="id-jsf- "   id="txtNumero" class="id-jsf-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
@@ -169,13 +169,13 @@
                                                              action="#{Supervisor$Contrato.actualizarContato}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
-                                                <h:graphicImage  width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink immediate="true" id="bt_cancelarModificarNumero" render="form_editarNumeroContrato"
                                                              action="#{Supervisor$Contrato.cancelarModifcacionNumeroContrato}"
                                                              execute="@this, txthabilitarModificarNumero,txthabilitarNumero">
-                                                <h:graphicImage  width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
                                             </a4j:commandLink>   
 
                                             <rich:message for="habilitarNumero"  />  
@@ -193,7 +193,7 @@
                                                            title="#{var.editar}">
                                                 <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
 
-                                                <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </h:commandLink>
 
                                             <h:outputText  class="id-jsf- "   id="txtObjeto" class="id-jsf-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
@@ -204,13 +204,13 @@
                                             <a4j:commandLink id="btn_modificarObjeto" render="form_editar"
                                                              action="#{Supervisor$Contrato.guardarModficiacionObjetoContrato}"
                                                              execute="txthabilitarModificar,txthabilitarObjeto" title="#{var.editar}">
-                                                <h:graphicImage  width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink> 
 
                                             <a4j:commandLink id="bt_cancelar" immediate="true" render="form_editar"
                                                              action="#{Supervisor$Contrato.cancelarModificacionObjeto}"
                                                              execute="@this,txthabilitarModificar,txthabilitarObjeto">
-                                                <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
                                             </a4j:commandLink>   
 
                                             <rich:message for="habilitarObjeto"  />  
@@ -346,7 +346,7 @@
                                         <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelContratoDoc')}.show();"
                                                   listener="#{Supervisor$Contrato.llenarDocumentosContrato}" render="tabladocumento" />
 
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
 
                                     <h:outputText  class="id-jsf- "   id="verplanificacion"  value="#{var.verplanificacion}:" />
@@ -356,7 +356,7 @@
                                     <a4j:commandLink id="ververplanificacion" 
                                                      action="#{Supervisor$Contrato.llenarplanificacionpagos}" render="gpListadoPlanificacion"
                                                      oncomplete="#{rich:component('mp-listado-planificacion-pagos')}.show();">
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
                                 </h:panelGrid>
                             </h:form>
@@ -538,7 +538,7 @@
                                                          render="gpPolizaSelec, notienepoliza"
                                                          oncomplete="#{rich:component('mp_nueva_poliza')}.show();">
 
-                                            <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                            <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             <a4j:param value="true" assignTo="#{Supervisor$Contrato.boolcrearpoliza}" />
                                         </a4j:commandLink>
                                     </rich:column>
@@ -552,7 +552,7 @@
                                                          action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
                                                          immediate="true" render="polizasContrato, notienepoliza">
 
-                                            <h:graphicImage  width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
+                                            <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
@@ -615,12 +615,12 @@
                                         <rich:column>
                                             <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btn_consultaproyecenconvenio}"
                                                              id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
-                                                <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
                                                              onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
-                                                <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
                                         </rich:column>
                                     </rich:columnGroup>
@@ -719,7 +719,7 @@
 
                                         <a4j:commandLink id="commandLinkVerSubconvenio" action="#{Supervisor$Contrato.detalleConvenioHijo(filaSeleccionada)}"
                                                          render="pgcontratoconvenio" immediate="true" >
-                                            <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
                                     </rich:column>
                                     <f:facet name="footer">
@@ -803,7 +803,7 @@
                                         <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo(filaSeleccionada)}"
                                                          render="pgcontratoconvenio, pgtablaContratoHijo"
                                                          immediate="true" >
-                                            <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
                                     </rich:column>
 
@@ -1020,7 +1020,7 @@
                                                      oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
                                                      render="tabladocumentomodi">
 
-                                        <h:graphicImage  value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
                                 </rich:column>
                             </rich:dataTable>

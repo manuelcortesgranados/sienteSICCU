@@ -19,7 +19,7 @@
             <h:panelGrid  columns="2"   >
 
 
-                <h:graphicImage value="#{item.strrutaimg}"/>
+                <h:graphicImage  class="id-jsf- "   value="#{item.strrutaimg}"/>
 
                 <rich:panel  class="id-jsf-"  >
                     <h:outputText  class="id-jsf- "   value="#{item.textoinicial}"/>
@@ -28,7 +28,7 @@
                     <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="id-jsf-"  
                                       onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
                     <h:outputText  class="id-jsf- "   value=" #{item.textofinal}"/>
-                    <h:graphicImage value="/resources/imgs/line.png"   />
+                    <h:graphicImage  class="id-jsf- "   value="/resources/imgs/line.png"   />
                 </rich:panel>
             </h:panelGrid>
         </a4j:repeat>

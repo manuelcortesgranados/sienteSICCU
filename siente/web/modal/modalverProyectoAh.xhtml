@@ -76,10 +76,10 @@
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{currentRow.intcodigoobra}';">
-                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                                 <a4j:commandLink  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{currentRow.intcodigoobra}';">
-                                    <h:graphicImage  value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:columnGroup>

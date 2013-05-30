@@ -20,10 +20,10 @@
                             <rich:panel header="Semaforo" class="id-jsf-"  >
                                 <h:panelGroup >
                                     <center>
-                                        <h:graphicImage id="imgSemaObra"
+                                        <h:graphicImage  class="id-jsf- "   id="imgSemaObra"
                                                         value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
-                                        <h:graphicImage value="#{var.noinfo}" height="100px"
+                                        <h:graphicImage  class="id-jsf- "   value="#{var.noinfo}" height="100px"
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
                                         <interkont:spacer width="80%" height="5" />
                                         <center>

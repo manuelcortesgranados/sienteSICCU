@@ -274,7 +274,7 @@
                                     </f:facet>
                                     <center>
                                         <a4j:commandLink render="panelImagenAten">
-                                            <h:graphicImage value="#{currentRow.strurlimagen}" />
+                                            <h:graphicImage  class="id-jsf- "   value="#{currentRow.strurlimagen}" />
                                             <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                             <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                             <rich:jQuery selector="#Imagen img" event="mouseover" query="jQuery(this).stop().animate({width:'150px', height:'150px'})"/>
