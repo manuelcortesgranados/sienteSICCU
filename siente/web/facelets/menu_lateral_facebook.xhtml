@@ -10,8 +10,8 @@
     xmlns:fb='http://www.facebook.com/2008/fbml'
    >
 
-    <rich:panel header="Facebook" bodyClass="tool" headerClass="headertool"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfacebook}">
-        <div id="fb-root"></div>
+    <rich:panel header="Facebook"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfacebook}">
+        <div ></div>
         <script>
             var j = jQuery.noConflict();
           
@@ -45,7 +45,7 @@
         </script>
 
         <div
-            class="fb-login-button"
+           
             data-show-faces="false"  client_id="true"
             scope="
             user_about_me,user_activities,user_birthday,user_checkins,user_education_history,
@@ -55,7 +55,7 @@
             facebook login
         </div>
         
-        <div class="pru" id="pru" />
+        <div  id="pru" />
 
     </rich:panel>
 </ui:composition>
