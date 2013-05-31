@@ -12,42 +12,42 @@
 
     <rich:panel header="#{Supervisor$Contrato.tipoContCon}" id="menuContrato" bodyClass="admin" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" 
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" 
                          rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
                                      and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}">
-                <h:commandLink  class="id-jsf-"   action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
-                <h:commandLink  class="id-jsf-"   value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
+                <h:commandLink  class="ikont-"   action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
+                <h:commandLink  class="ikont-"   value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
                                 immediate="true" />
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false" >
-                <h:commandLink class="id-jsf-"   immediate="true" action="consultarContrato"/>
-                <h:commandLink class="id-jsf-"   value="Datos Básicos" action="consultarContrato"/>
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="false" >
+                <h:commandLink class="ikont-"   immediate="true" action="consultarContrato"/>
+                <h:commandLink class="ikont-"   value="Datos Básicos" action="consultarContrato"/>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink class="id-jsf-"   immediate="true" action="consultarContrato" id="x1" >
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink class="ikont-"   immediate="true" action="consultarContrato" id="x1" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>  
-                <h:commandLink class="id-jsf-"   value="Poliza"
+                <h:commandLink class="ikont-"   value="Poliza"
                                action="consultarContrato" id="x2" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                <h:commandLink class="id-jsf-"   immediate="true" action="detalleContrato"/>
-                <h:commandLink class="id-jsf-"   value="Detalle Contrato" action="detalleContrato"/>
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="ikont-"   immediate="true" action="detalleContrato"/>
+                <h:commandLink class="ikont-"   value="Detalle Contrato" action="detalleContrato"/>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                <h:commandLink class="id-jsf-"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
-                <h:commandLink class="id-jsf-"   value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink class="ikont-"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
+                <h:commandLink class="ikont-"   value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
-                <h:commandLink class="id-jsf-"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
-                <h:commandLink class="id-jsf-"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                <h:commandLink class="ikont-"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
+                <h:commandLink class="ikont-"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-             <h:commandLink class="id-jsf-"   action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
-             <h:commandLink class="id-jsf-"   value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" >
+             <h:commandLink class="ikont-"   action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+             <h:commandLink class="ikont-"   value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
             </h:panelGrid>
         </h:panelGrid>
 

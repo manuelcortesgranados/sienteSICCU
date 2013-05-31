@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.menu1_3_1}"/>
+        <h:outputText  class="ikont- "   value="#{var.menu1_3_1}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -31,17 +31,17 @@
 
                         <h:panelGrid columns="4" cellspacing="5">
 
-                            <h:outputText  class="id-jsf- "   value="#{var.departamento}: " class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   id="txtDepartamentoatsoli" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
+                            <h:outputText  class="ikont- "   value="#{var.departamento}: " class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   id="txtDepartamentoatsoli" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
 
                             <interkont:spacer rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
                             <interkont:spacer rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
-                            <h:outputText  class="id-jsf- "   value="#{var.municipio}:" class="id-jsf-"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
-                            <h:outputLabel  class="id-jsf- "   id="txtmunicipiosoli"
+                            <h:outputText  class="ikont- "   value="#{var.municipio}:" class="ikont-"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
+                            <h:outputLabel  class="ikont- "   id="txtmunicipiosoli"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.contacto}:" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   id="contactoSoli" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}  #{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}"/>
+                            <h:outputText  class="ikont- "   value="#{var.contacto}:" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   id="contactoSoli" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}  #{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}"/>
 
 
                             <a4j:commandButton id="btContacto1" value="#{var.ver}" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.mostrar}" action="#{AtencionHumanitaria$AdminSolicitudAtencion.cargarSolicitante}"
@@ -67,38 +67,38 @@
                     <h:panelGroup>
 
                         <h:panelGrid columns="2" cellspacing="5" id="gpCombos">
-                            <h:outputText  class="id-jsf- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
+                            <h:outputText  class="ikont- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}"/>
 
-                            <h:outputText  class="id-jsf- "    value="#{var.evento}:" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.evento.strnombre}"/>
+                            <h:outputText  class="ikont- "    value="#{var.evento}:" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.evento.strnombre}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.periodo}:" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.strdescripcion}"/>
+                            <h:outputText  class="ikont- "   value="#{var.periodo}:" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.strdescripcion}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.fecha} Solicitud:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechasolicitud}">
+                            <h:outputText  class="ikont- "   value="#{var.fecha} Solicitud:" class="ikont-"  />
+                            <h:outputText  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechasolicitud}">
                                 <f:convertDateTime pattern="dd,MMMM, yyyy"  />
                             </h:outputText>
 
 
-                            <h:outputText  class="id-jsf- "   value="#{var.nomsol}" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}"/>
+                            <h:outputText  class="ikont- "   value="#{var.nomsol}" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}"/>
 
-                            <h:outputLabel  class="id-jsf- "   id="lbltips"  value="#{var.tiposolicitud}:" class="id-jsf-"   />
-                            <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.strdnombretipoah}"/>
+                            <h:outputLabel  class="ikont- "   id="lbltips"  value="#{var.tiposolicitud}:" class="ikont-"   />
+                            <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.strdnombretipoah}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.objetosolicitud}:" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   id="txtobjet"
+                            <h:outputText  class="ikont- "   value="#{var.objetosolicitud}:" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   id="txtobjet"
                                            value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.incluyeint}" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   value="Si" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
-                            <h:outputLabel  class="id-jsf- "   value="No" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
+                            <h:outputText  class="ikont- "   value="#{var.incluyeint}" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   value="Si" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
+                            <h:outputLabel  class="ikont- "   value="No" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.porcentaje} Interventoria:" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}"
+                            <h:outputText  class="ikont- "   value="#{var.porcentaje} Interventoria:" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}">
                                 <f:convertNumber pattern="##,##%"/>
                             </h:outputLabel>
@@ -116,50 +116,50 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="6">
-                                    <h:outputText  class="id-jsf- "   value="#{var.categoriaseleccionada}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.categoriaseleccionada}"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.categoria}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.categoria}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.familiasAtender}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.familiasAtender}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.tamFamilia}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.tamFamilia}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.valortotal}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.municipio}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.productoah.strdescripcionproductoah}"/>
+                            <h:outputText  class="ikont- "   value="#{_Producto.productoah.strdescripcionproductoah}"/>
 
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.numcantidadsolicitadaitem}"/>
+                            <h:outputText  class="ikont- "   value="#{_Producto.numcantidadsolicitadaitem}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.productoah.tipodefamilia.strdescripcionfamilia}"/>
+                            <h:outputText  class="ikont- "   value="#{_Producto.productoah.tipodefamilia.strdescripcionfamilia}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.numvlrunitario}">
+                            <h:outputText  class="ikont- "   value="#{_Producto.numvlrunitario}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.numvlrtotalitem}">
+                            <h:outputText  class="ikont- "   value="#{_Producto.numvlrtotalitem}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{_Producto.localidad.strmunicipio}"/>
+                            <h:outputText  class="ikont- "   value="#{_Producto.localidad.strmunicipio}"/>
                         </rich:column>
                         <f:facet name="footer">
                             <rich:columnGroup>
@@ -173,20 +173,20 @@
 
                     <h:panelGroup id="gpvalortotalmaestroAtencons">
                         <h:panelGrid columns="2" cellspacing="5" >
-                            <h:outputText  class="id-jsf- "   value="#{var.totalfamilias}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "   id="totalFamiliAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
+                            <h:outputText  class="ikont- "   value="#{var.totalfamilias}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "   id="totalFamiliAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="###,###.##"/>
                             </h:outputText>
-                            <h:outputText  class="id-jsf- "   value="#{var.totalParcial}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "   id="totalParcialAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
+                            <h:outputText  class="ikont- "   value="#{var.totalParcial}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "   id="totalParcialAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
-                            <h:outputText  class="id-jsf- "   value="#{var.interventorObra}ia:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "    id="porcentajeAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje*AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial/100}">
+                            <h:outputText  class="ikont- "   value="#{var.interventorObra}ia:" class="ikont-"  />
+                            <h:outputText  class="ikont- "    id="porcentajeAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje*AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial/100}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
-                            <h:outputText  class="id-jsf- "   value="#{var.valorsolicitud}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "     id="valorTotalAtcon"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
+                            <h:outputText  class="ikont- "   value="#{var.valorsolicitud}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "     id="valorTotalAtcon"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </h:panelGrid>

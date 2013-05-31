@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalinformacionfinancieraInterv" headerClass="rich-panel-header" height="260" width="425" moveable="false">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="Información Financiera de Interventoría" class="id-jsf-"   />
+                <h:outputText  class="ikont- "   value="Información Financiera de Interventoría" class="ikont-"   />
             </h:panelGroup>
         </f:facet>
         
@@ -23,62 +23,62 @@
                     <a4j:commandLink id="esconder-modalinformacionfinancieraInterv" 
                                        onclick="#{rich:component('modalinformacionfinancieraInterv')}.hide();
                                                return false;" 
-                                       title="#{var.cerrar}" immediate="true" class="id-jsf-"   />
+                                       title="#{var.cerrar}" immediate="true" class="ikont-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titValorContratoInterv" value="#{var.valorcontratosupervisor}" />
+                <h:outputText  class="ikont- "   id="titValorContratoInterv" value="#{var.valorcontratosupervisor}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inValorContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}">
+                <h:outputText  class="ikont- "   id="inValorContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titValorPagadoActasInterv" value="#{var.valortotalpagadoactas}" />
+                <h:outputText  class="ikont- "   id="titValorPagadoActasInterv" value="#{var.valortotalpagadoactas}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inValorPagadoActasInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlrpagoactasinter}">
+                <h:outputText  class="ikont- "   id="inValorPagadoActasInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlrpagoactasinter}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titValorAnticipoInterv" value="#{var.valoranticipo}" />
+                <h:outputText  class="ikont- "   id="titValorAnticipoInterv" value="#{var.valoranticipo}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inValorAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
+                <h:outputText  class="ikont- "   id="inValorAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titSaldoPagarContratoInterv" value="#{var.saldopagarcontrato}" />
+                <h:outputText  class="ikont- "   id="titSaldoPagarContratoInterv" value="#{var.saldopagarcontrato}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inSaldoPagarContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numsaldoxpagarcontrinter}">
+                <h:outputText  class="ikont- "   id="inSaldoPagarContratoInterv"  value="#{Supervision$Externa.objetoSeguimiento.numsaldoxpagarcontrinter}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titTotalAmortizadoAnticipoInterv" value="#{var.totalamortizado}" />
+                <h:outputText  class="ikont- "   id="titTotalAmortizadoAnticipoInterv" value="#{var.totalamortizado}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inTotalAmortizadoAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
+                <h:outputText  class="ikont- "   id="inTotalAmortizadoAnticipoInterv" value="#{Supervision$Externa.objetoSeguimiento.numvlranticipointerv}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titSaldoPorAmortizarInterv" value="#{var.saldoamortizaranticipo}" />
+                <h:outputText  class="ikont- "   id="titSaldoPorAmortizarInterv" value="#{var.saldoamortizaranticipo}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="inSaldoPorAmortizarInterv" value="#{Supervision$Externa.objetoSeguimiento.numsaldoxamortizaranticipointer}">
+                <h:outputText  class="ikont- "   id="inSaldoPorAmortizarInterv" value="#{Supervision$Externa.objetoSeguimiento.numsaldoxamortizaranticipointer}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>

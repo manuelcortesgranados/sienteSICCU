@@ -33,16 +33,16 @@
     <ui:define name="body">
         <h:form id="form_indicadores">
             <h:panelGrid columns="1">
-                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
+                <h:graphicImage  class="ikont- "   url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
 
                 <h:panelGrid columns="2" >
-                    <h:outputText  class="id-jsf- "   value="Fecha de consolidación:"/>
+                    <h:outputText  class="ikont- "   value="Fecha de consolidación:"/>
 
                     <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.idconsolidadoselec}"  >
                         <f:selectItems value="#{GraficarIndicadores.itemsCortes}"/>
 
                     </h:selectOneMenu>
-                    <h:outputText  class="id-jsf- "   value="Indicador: "/>                           
+                    <h:outputText  class="ikont- "   value="Indicador: "/>                           
 
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==0}">
                         <f:selectItem itemValue="0" itemLabel="Presupuesto en ejecución" />
@@ -112,7 +112,7 @@
 
             <h:panelGroup id="gpIndicadores">
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==0}">
-                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
+                    <h:outputText  class="ikont- "   value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
                     <div id="presupuestoejec" ></div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==1}">
@@ -123,39 +123,39 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">                                            
-                                    <h:outputText  class="id-jsf- "   value="Estado de avance y resultados"/>                                           
+                                    <h:outputText  class="ikont- "   value="Estado de avance y resultados"/>                                           
                                 </rich:column>
                                 <rich:column colspan="6">                                            
-                                    <h:outputText  class="id-jsf- "   value="Nacional"/>                                           
+                                    <h:outputText  class="ikont- "   value="Nacional"/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
+                                    <h:outputText  class="ikont- "   value=" "/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" >                                            
-                                    <h:outputText  class="id-jsf- "   value="Aprobado miles de pesos"/>                                           
+                                    <h:outputText  class="ikont- "   value="Aprobado miles de pesos"/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Tipo"/>                                            
+                                    <h:outputText  class="ikont- "   value="Tipo"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Número"/>                                            
+                                    <h:outputText  class="ikont- "   value="Número"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Terminados"/>                                            
+                                    <h:outputText  class="ikont- "   value="Terminados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Giro %"/>                                            
+                                    <h:outputText  class="ikont- "   value="Giro %"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="% Avance físico"/>                                            
+                                    <h:outputText  class="ikont- "   value="% Avance físico"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Resultados familias atendidas"/>                                            
+                                    <h:outputText  class="ikont- "   value="Resultados familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Empleos directos"/>                                            
+                                    <h:outputText  class="ikont- "   value="Empleos directos"/>                                            
                                 </rich:column>
 
                             </rich:columnGroup>
@@ -163,45 +163,45 @@
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
 
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.etiqueta}" />
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText  class="id-jsf- "   value="#{fila.valorAprobado}"  >
+                                    <h:outputText  class="ikont- "   value="#{fila.valorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText  class="id-jsf- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
+                                    <h:outputText  class="ikont- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.id.tipoEtiqueta}"/>
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.id.tipoEtiqueta}"/>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numEtiquetas}"/>
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.numEtiquetas}"/>
 
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numEtiquetasTer}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.numEtiquetasTer}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numGiro}" > 
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.numGiro}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.numAvanFisico}" > 
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.numAvanFisico}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.famAtendi}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.famAtendi}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.empleDirec}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.empleDirec}" >
 
                                 </h:outputText>
                             </rich:column>
@@ -222,58 +222,58 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="2">                                            
-                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
+                                    <h:outputText  class="ikont- "   value=" "/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  class="id-jsf- "   value="Primer giro"/>                                           
+                                    <h:outputText  class="ikont- "   value="Primer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  class="id-jsf- "   value="Segundo giro"/>                                           
+                                    <h:outputText  class="ikont- "   value="Segundo giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  class="id-jsf- "   value="Tercer giro"/>                                           
+                                    <h:outputText  class="ikont- "   value="Tercer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText  class="id-jsf- "   value=" "/>                                           
+                                    <h:outputText  class="ikont- "   value=" "/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Aprobado en  millones de pesos"/>                                            
+                                    <h:outputText  class="ikont- "   value="Aprobado en  millones de pesos"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="ikont- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
+                                    <h:outputText  class="ikont- "   value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="ikont- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
+                                    <h:outputText  class="ikont- "   value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Recursos aprobados"/>                                            
+                                    <h:outputText  class="ikont- "   value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atender"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="Familias atendidas"/>                                            
+                                    <h:outputText  class="ikont- "   value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  class="id-jsf- "   value="% avance"/>                                            
+                                    <h:outputText  class="ikont- "   value="% avance"/>                                            
                                 </rich:column>
 
                             </rich:columnGroup>
@@ -281,67 +281,67 @@
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
 
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.etiqueta}" />
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText  class="id-jsf- "   value="#{fila.pgValorAprobado}"  >
+                                    <h:outputText  class="ikont- "   value="#{fila.pgValorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText  class="id-jsf- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
+                                    <h:outputText  class="ikont- "   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgRecursosAprobados}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.pgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgFamiliasAtender}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.pgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.pgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.pgPorcentajeAvance}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.pgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgRecursosAprobados}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.sgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgFamiliasAtender}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.sgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.sgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.sgPorcentajeAvance}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.sgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgRecursosAprobados}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.tgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgFamiliasAtender}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.tgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgFamiliasAtendidas}" >                                            
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.tgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  class="id-jsf- "    class="id-jsf-"   value="#{fila.tgPorcentajeAvance}" >
+                                <h:outputText  class="ikont- "    class="ikont-"   value="#{fila.tgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
@@ -352,20 +352,20 @@
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==3}">
-                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="ikont- "   value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==4}">
-                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="ikont- "   value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==5}">
-                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText  class="ikont- "   value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==6}">
-                    <h:outputText  class="id-jsf- "   value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
+                    <h:outputText  class="ikont- "   value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
 
 
                 </h:panelGroup>

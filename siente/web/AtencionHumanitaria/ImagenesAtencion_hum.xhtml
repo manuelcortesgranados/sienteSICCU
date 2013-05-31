@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.generarsolicitudah}"/>
+        <h:outputText  class="ikont- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -27,28 +27,28 @@
 
             <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" >
                 <f:facet name="header">
-                    <h:outputText  class="id-jsf- "   value="#{var.imagenes}"/>
+                    <h:outputText  class="ikont- "   value="#{var.imagenes}"/>
 
                 </f:facet>
                 <center>
 
-                    <h:outputText  class="id-jsf- "   value="#{var.textsubirimagen}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                    <h:outputText  class="ikont- "   value="#{var.textsubirimagen}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
                     <interkont:spacer height="3"/>
 
                     <h:panelGrid id="panel_subirImagen"  columns="6" columnClasses=",,,,buttonsmall" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario }">
 
-                        <a4j:commandButton id="adjuntarImagen" class="id-jsf-"   value="#{var.examinar}" immediate="true" 
+                        <a4j:commandButton id="adjuntarImagen" class="ikont-"   value="#{var.examinar}" immediate="true" 
                                            onclick="#{rich:component('panelUploadImagenAtencion')}.show();">
                         </a4j:commandButton>
                         <interkont:spacer height="3"/>
-                        <h:outputText  class="id-jsf- "   id="ImagenAtencion" value="#{var.descripcionImagen}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   id="ImagenAtencion" value="#{var.descripcionImagen}:" class="ikont-"  />
                         <h:inputText id="inputNombre" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.imagen.strdescripcion}"/>
-                        <a4j:commandLink id="bt_agregarImagen" class="id-jsf-"   title="#{var.agregar}"
+                        <a4j:commandLink id="bt_agregarImagen" class="ikont-"   title="#{var.agregar}"
                                          action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenaLista}"
                                          render="tablaImagenes,gpDatosBasicos,panelUploadImagenAtencion"/>
                         <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.files}" var="file" >
-                            <h:outputText  class="id-jsf- "   id="otxt_nombreImagen" value=" #{file.onlyName}"/>
+                            <h:outputText  class="ikont- "   id="otxt_nombreImagen" value=" #{file.onlyName}"/>
                         </rich:dataGrid>
                     </h:panelGrid>
 
@@ -57,20 +57,20 @@
                                         value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadoimagensolicitud}"
                                          rows="3" >
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.imgseleccionadas}"/>
+                                <h:outputText  class="ikont- "   value="#{var.imgseleccionadas}"/>
                             </f:facet>
                             <rich:column breakRowBefore="true"  width="100px">
                                 <f:facet name="header" >
-                                    <h:outputText  class="id-jsf- "   value="#{var.descripcionImagen}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.descripcionImagen}"/>
                                 </f:facet>
-                                <h:outputText  class="id-jsf- "   value="#{currentRow.strdescripcion}"/>
+                                <h:outputText  class="ikont- "   value="#{currentRow.strdescripcion}"/>
                             </rich:column>
                             <rich:column  width="100px">
                                 <f:facet name="header">
-                                    <h:outputText  class="id-jsf- "   value="#{var.imagen}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.imagen}"/>
                                 </f:facet>
                                 <h:panelGroup>
-                                    <h:graphicImage  class="id-jsf- "   value="#{currentRow.strurlimagen}" />
+                                    <h:graphicImage  class="ikont- "   value="#{currentRow.strurlimagen}" />
                                     <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                     <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                     <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
@@ -81,9 +81,9 @@
                             </rich:column>
                             <rich:column  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.eliminar}"/>
                                 </f:facet>
-                                <a4j:commandButton id="eliminar" value="#{var.eliminar}" class="id-jsf-"  
+                                <a4j:commandButton id="eliminar" value="#{var.eliminar}" class="ikont-"  
                                                     render="tablaImagenes"
                                                    action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarImagenLista(filaSeleccionada)}"/>
                             </rich:column>

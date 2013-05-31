@@ -23,7 +23,7 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.tablerodecontrol}"/>
+        <h:outputText  class="ikont- "   value="#{var.tablerodecontrol}"/>
     </ui:define>
     <ui:define name="menu_lateral">
         <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                
@@ -36,51 +36,51 @@
     <ui:define name="body">
         <h:form id="dashboard">
             <h:panelGrid columns="1" id="panelgerencial" cellpadding="0" cellspacing="0" width="90%">
-                <h:outputText  class="id-jsf-hot-texto1inversion "   value="#{var.texto1_inversion_tablerocontrol}" />
+                <h:outputText  class="ikont-hot-texto1inversion "   value="#{var.texto1_inversion_tablerocontrol}" />
                 <h:panelGrid id="panelcombos"  columns="5"  >
-                    <h:panelGroup class="id-jsf-hpg-panelcombos"  >
-                        <h:selectOneMenu value="#{ControlGerencial.vistaicom}" class="id-jsf-hsom-vistaicom"  >
+                    <h:panelGroup class="ikont-hpg-panelcombos"  >
+                        <h:selectOneMenu value="#{ControlGerencial.vistaicom}" class="ikont-hsom-vistaicom"  >
                             <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
                             <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
                             <a4j:ajax event="change" render="panelcombos" />
                         </h:selectOneMenu>
                     </h:panelGroup>
-                    <h:panelGroup class="id-jsf-hpg-deptos"   rendered="#{ControlGerencial.vistaicom != 1}">
-                        <h:selectOneMenu value="#{ControlGerencial.deptos}" class="id-jsf-hsom-deptos"  >
+                    <h:panelGroup class="ikont-hpg-deptos"   rendered="#{ControlGerencial.vistaicom != 1}">
+                        <h:selectOneMenu value="#{ControlGerencial.deptos}" class="ikont-hsom-deptos"  >
                             <f:selectItem itemValue="0" itemLabel="Todos"/>
                             <f:selectItems value="#{ControlGerencial.sedeptos}" />
                             <a4j:ajax event="change" listener="#{ControlGerencial.llenarMunici}" render="municipioincom"/>
                         </h:selectOneMenu>
                     </h:panelGroup>
-                    <h:panelGroup id="municipioincom" class="id-jsf-hpg-municipioincom"   rendered="#{ControlGerencial.vistaicom != 1}">
-                        <h:selectOneMenu value="#{ControlGerencial.muni}" class="id-jsf-hsom-muni"  >
+                    <h:panelGroup id="municipioincom" class="ikont-hpg-municipioincom"   rendered="#{ControlGerencial.vistaicom != 1}">
+                        <h:selectOneMenu value="#{ControlGerencial.muni}" class="ikont-hsom-muni"  >
                             <f:selectItem itemValue="0" itemLabel="Todos"/>
                             <f:selectItems value="#{ControlGerencial.semuni}" />
                         </h:selectOneMenu>
                     </h:panelGroup>
-                    <h:panelGroup class="id-jsf-hpg-intzona"   rendered="#{ControlGerencial.vistaicom == 1}">
-                        <h:selectOneMenu value="#{ControlGerencial.intzona}" class="id-jsf-hsom-intzona"  >
+                    <h:panelGroup class="ikont-hpg-intzona"   rendered="#{ControlGerencial.vistaicom == 1}">
+                        <h:selectOneMenu value="#{ControlGerencial.intzona}" class="ikont-hsom-intzona"  >
                             <f:selectItem itemValue="0" itemLabel="Todos"/>
                             <f:selectItems value="#{ControlGerencial.zonaespecifica}"/>
                         </h:selectOneMenu>
                     </h:panelGroup>
                     <h:panelGroup >
-                        <h:commandLink value="Graficar" action="#{ControlGerencial.generarGraficos}" class="id-jsf-hcl-graficar"   />
+                        <h:commandLink value="Graficar" action="#{ControlGerencial.generarGraficos}" class="ikont-hcl-graficar"   />
                     </h:panelGroup>
                 </h:panelGrid>
-                <rich:panel bodyClass="id-jsf-rp-sliderbody" headerClass="id-jsf-rp-sliderheader" >
+                <rich:panel bodyClass="ikont-rp-sliderbody" headerClass="ikont-rp-sliderheader" >
                     <f:facet name="header">
-                        <h:outputText  class="id-jsf-hot-header"   value="Los últimos 10 proyectos reportados"/>
+                        <h:outputText  class="ikont-hot-header"   value="Los últimos 10 proyectos reportados"/>
                     </f:facet>
 
                     <div id="container">
                         <div id="slider" class="divSlider">
                             <a4j:repeat value="#{ControlGerencial.listaimagenesslider}" var="imagen">
                                 <div>
-                                    <h:graphicImage  class="id-jsf-hgi-strnombrecrot"   alt="#{imagen.obra.strnombrecrot}" url="#{var.ipserver}siente#{imagen.strubicacion}" />
+                                    <h:graphicImage  class="ikont-hgi-strnombrecrot"   alt="#{imagen.obra.strnombrecrot}" url="#{var.ipserver}siente#{imagen.strubicacion}" />
                                     <h:outputLink
                                         value="#{facesContext.externalContext.requestContextPath}/faces/Supervisor/DetalleObra.xhtml?id=#{imagen.obra.intcodigoobra}" >
-                                        <h:outputText  class="id-jsf-hot-strnombrecrot"   value="#{imagen.obra.strnombrecrot}"/>
+                                        <h:outputText  class="ikont-hot-strnombrecrot"   value="#{imagen.obra.strnombrecrot}"/>
                                     </h:outputLink>
                                 </div>
                             </a4j:repeat>
@@ -89,24 +89,24 @@
                 </rich:panel>
                 <h:panelGrid columns="2" cellpadding="0" cellspacing="0" >
                     <h:panelGrid cellpadding="0" cellspacing="0">
-                        <rich:panel headerClass="id-jsf-topheader" bodyClass="id-jsf-panelTableroControl">
+                        <rich:panel headerClass="ikont-topheader" bodyClass="ikont-panelTableroControl">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf-hot-headerinvporregion"  value="#{(ControlGerencial.invporregion)?'Inversión Total por Región':'Inversión Total Nacional'}"/>
+                                <h:outputText  class="ikont-hot-headerinvporregion"  value="#{(ControlGerencial.invporregion)?'Inversión Total por Región':'Inversión Total Nacional'}"/>
                             </f:facet>
                             <center>
-                                <h:panelGrid  columns="2" class="id-jsf-hpg-invporregion"   rendered="#{!ControlGerencial.invporregion}">
-                                    <h:graphicImage  class="id-jsf-hgi-invporregion "   url="/resources/imgs/dash_01.png" width="50" height="50" />
+                                <h:panelGrid  columns="2" class="ikont-hpg-invporregion"   rendered="#{!ControlGerencial.invporregion}">
+                                    <h:graphicImage  class="ikont-hgi-invporregion "   url="/resources/imgs/dash_01.png" width="50" height="50" />
                                     <h:panelGroup >
-                                        <h:outputText  class="id-jsf-hot-inversionTotalNal"   value="#{ControlGerencial.informaciondash.inversionTotalNal}">
+                                        <h:outputText  class="ikont-hot-inversionTotalNal"   value="#{ControlGerencial.informaciondash.inversionTotalNal}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGrid>
 
-                                <h:panelGrid   columns="2" class="id-jsf-hpg-invporregion1"   rendered="#{ControlGerencial.invporregion}">
-                                    <h:graphicImage  class="id-jsf-hgi-invporregion1"   url="/resources/imgs/dash_01.png" width="50" height="50" />
+                                <h:panelGrid   columns="2" class="ikont-hpg-invporregion1"   rendered="#{ControlGerencial.invporregion}">
+                                    <h:graphicImage  class="ikont-hgi-invporregion1"   url="/resources/imgs/dash_01.png" width="50" height="50" />
                                     <h:panelGroup >
-                                        <h:outputText  class="id-jsf-hot-inversionTotalRegion"   value="#{ControlGerencial.informaciondash.inversionTotalRegion}">
+                                        <h:outputText  class="ikont-hot-inversionTotalRegion"   value="#{ControlGerencial.informaciondash.inversionTotalRegion}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGroup>
@@ -116,73 +116,73 @@
                             <h:panelGrid columns="3"  rendered="false">
                                 <interkont:spacer width="30"/>
                                 <h:panelGrid>
-                                    <h:outputLabel  class="id-jsf-hot-carteracolectiva"   value="#{var.carteracolectiva}" />
-                                    <h:outputText  class="id-jsf-hot-porcentajeCartera "   value="#{ControlGerencial.porcentajeCartera}%" />
-                                    <h:outputLabel  class="id-jsf-hol-totalCartera"   value="#{ControlGerencial.totalCartera}" >
+                                    <h:outputLabel  class="ikont-hot-carteracolectiva"   value="#{var.carteracolectiva}" />
+                                    <h:outputText  class="ikont-hot-porcentajeCartera "   value="#{ControlGerencial.porcentajeCartera}%" />
+                                    <h:outputLabel  class="ikont-hol-totalCartera"   value="#{ControlGerencial.totalCartera}" >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputLabel>
                                 </h:panelGrid>
 
-                                <h:outputText  class="id-jsf-hot-scriptcolumnaporcentual"   value="#{ControlGerencial.columnatotalgeneral.scriptcolumnaporcentual}" escape="false"/>
+                                <h:outputText  class="ikont-hot-scriptcolumnaporcentual"   value="#{ControlGerencial.columnatotalgeneral.scriptcolumnaporcentual}" escape="false"/>
                             </h:panelGrid>
                             <interkont:spacer height="30"/>
                             <h:panelGrid columns="3"  rendered="false">
                                 <interkont:spacer width="30"/>
                                 <h:panelGrid>
-                                    <h:outputLabel  class="id-jsf-hol-pago"   value="#{var.pago} a contratistas" />
-                                    <h:outputText  class="id-jsf-hot-porcentajePago"   value="#{ControlGerencial.porcentajePago}%" />
-                                    <h:outputLabel  class="id-jsf-hol-totalPago"   value="#{ControlGerencial.totalPago}" >
+                                    <h:outputLabel  class="ikont-hol-pago"   value="#{var.pago} a contratistas" />
+                                    <h:outputText  class="ikont-hot-porcentajePago"   value="#{ControlGerencial.porcentajePago}%" />
+                                    <h:outputLabel  class="ikont-hol-totalPago"   value="#{ControlGerencial.totalPago}" >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputLabel>
                                 </h:panelGrid>
-                                <h:outputText  class="id-jsf-hot-scriptcolumnaporcentual1"   value="#{ControlGerencial.columnapagocontratistas.scriptcolumnaporcentual}" escape="false"/>
+                                <h:outputText  class="ikont-hot-scriptcolumnaporcentual1"   value="#{ControlGerencial.columnapagocontratistas.scriptcolumnaporcentual}" escape="false"/>
                             </h:panelGrid>
                             <interkont:spacer height="30"/>
                             <h:panelGrid columns="3"  rendered="false">
                                 <interkont:spacer width="30"/>
                                 <h:panelGrid>
-                                    <h:outputLabel  class="id-jsf-hol-legalizacion"   value="#{var.legalizacion}" />
-                                    <h:outputText  class="id-jsf-hot-porcentajeLegalizado"   value="#{ControlGerencial.porcentajeLegalizado}%"  />
-                                    <h:outputText  class="id-jsf-hot-totalLegalizado"   value="#{ControlGerencial.totalLegalizado}" >
+                                    <h:outputLabel  class="ikont-hol-legalizacion"   value="#{var.legalizacion}" />
+                                    <h:outputText  class="ikont-hot-porcentajeLegalizado"   value="#{ControlGerencial.porcentajeLegalizado}%"  />
+                                    <h:outputText  class="ikont-hot-totalLegalizado"   value="#{ControlGerencial.totalLegalizado}" >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </h:panelGrid>
-                                <h:outputText  class="id-jsf-hot-scriptcolumnaporcentual2"   value="#{ControlGerencial.columnalegalizacion.scriptcolumnaporcentual}" escape="false"/>
+                                <h:outputText  class="ikont-hot-scriptcolumnaporcentual2"   value="#{ControlGerencial.columnalegalizacion.scriptcolumnaporcentual}" escape="false"/>
                             </h:panelGrid>
                             <interkont:spacer height="20"/>
                             <interkont:spacer height="40"/>
                         </rich:panel>
                     </h:panelGrid>
                     <h:panelGrid columns="2" cellpadding="0" cellspacing="0">
-                        <rich:panel headerClass="id-jsf-rp-headertablerocontrol1" bodyClass="id-jsf-rp-bodytablerocontrol1">
+                        <rich:panel headerClass="ikont-rp-headertablerocontrol1" bodyClass="ikont-rp-bodytablerocontrol1">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf-hot-personashogares"   value="Personas y hogares"/>
+                                <h:outputText  class="ikont-hot-personashogares"   value="Personas y hogares"/>
                             </f:facet>
                             <h:panelGrid>
                                 <h:panelGroup>
                                     <h:panelGrid columns="2" cellpadding="0" captionStyle="0"   >
-                                        <h:graphicImage  class="id-jsf-hgi-personas"   value="/resources/imgs/dash_07.png" />
-                                        <h:outputText    value="Personas" class="id-jsf-hot-personas"  />
+                                        <h:graphicImage  class="ikont-hgi-personas"   value="/resources/imgs/dash_07.png" />
+                                        <h:outputText    value="Personas" class="ikont-hot-personas"  />
                                     </h:panelGrid>
-                                    <h:outputText  class="id-jsf-hot-scriptGrafico2"   value="#{ControlGerencial.barraspersonas.scriptGrafico}" escape="false"/>
+                                    <h:outputText  class="ikont-hot-scriptGrafico2"   value="#{ControlGerencial.barraspersonas.scriptGrafico}" escape="false"/>
                                     <div id="chartpersonas" ></div>
                                 </h:panelGroup>
                                 <h:panelGroup >
-                                    <h:panelGrid columns="2" cellpadding="0" captionStyle="0" class="id-jsf-hpg-hogares"  >
-                                        <h:graphicImage  class="id-jsf-hgi-Hogares "   value="/resources/imgs/dash_06.png"   />
-                                        <h:outputText  class="id-jsf-hot-Hogares "   value="Hogares"  />
+                                    <h:panelGrid columns="2" cellpadding="0" captionStyle="0" class="ikont-hpg-hogares"  >
+                                        <h:graphicImage  class="ikont-hgi-Hogares "   value="/resources/imgs/dash_06.png"   />
+                                        <h:outputText  class="ikont-hot-Hogares "   value="Hogares"  />
                                     </h:panelGrid>
-                                    <h:outputText  class="id-jsf-hot-scriptGrafico"   value="#{ControlGerencial.barrashogares.scriptGrafico}" escape="false"/>
+                                    <h:outputText  class="ikont-hot-scriptGrafico"   value="#{ControlGerencial.barrashogares.scriptGrafico}" escape="false"/>
                                     <div id="charthogares" ></div>
                                 </h:panelGroup>
                             </h:panelGrid>
                         </rich:panel>
-                        <rich:panel headerClass="id-jsf-rp-headertablerocontrol" bodyClass="id-jsf-rp-bodytablerocontrol">
+                        <rich:panel headerClass="ikont-rp-headertablerocontrol" bodyClass="ikont-rp-bodytablerocontrol">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf-hot-entidadesnacionalesheader"   value="Entidades Nacionales"/>
+                                <h:outputText  class="ikont-hot-entidadesnacionalesheader"   value="Entidades Nacionales"/>
                             </f:facet>
                             <h:panelGroup>
-                                <h:outputText  class="id-jsf-hot-inversionConvenios"   value="#{ControlGerencial.informaciondash.inversionConvenios}" >
+                                <h:outputText  class="ikont-hot-inversionConvenios"   value="#{ControlGerencial.informaciondash.inversionConvenios}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                                 <h:inputHidden id="estaen" value="#{ControlGerencial.informaciondash.intPorcentageEje}" />
@@ -198,9 +198,9 @@
                                 </div>
 
                                 <div>
-                                    <h:outputText  class="id-jsf-hot-porcentajeinversion"                                                   
+                                    <h:outputText  class="ikont-hot-porcentajeinversion"                                                   
                                                   value="Porcentaje de Inversión: " />
-                                    <h:outputText  class="id-jsf-hot-stEstado"   id="stEstado"
+                                    <h:outputText  class="ikont-hot-stEstado"   id="stEstado"
                                                   value="#{ControlGerencial.informaciondash.porInversionConvenios}">
                                         <f:convertNumber type="percent"/>
                                     </h:outputText>
@@ -210,7 +210,7 @@
                             <h:panelGroup>
                                 <a4j:commandLink rendered="#{var.vermasdashboard}" 
                                                  value="#{var.ver}+"
-                                                 class="id-jsf-hcl-vermasdashboard"    
+                                                 class="ikont-hcl-vermasdashboard"    
                                                  action="#{ControlGerencial.obtenerConsolidadoConvenios}"
                                                  execute="@this"
                                                  render=":modalDashboard_entesnacionales"
@@ -220,31 +220,31 @@
                             </h:panelGroup>
                         </rich:panel>
 
-                        <rich:panel  headerClass="id-jsf-rp-headertablerocontrol2" bodyClass="id-jsf-rp-bodytablerocontrol2">
+                        <rich:panel  headerClass="ikont-rp-headertablerocontrol2" bodyClass="ikont-rp-bodytablerocontrol2">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf-hot-facerentesterritoriales"   value="Entes Territoriales"/>
+                                <h:outputText  class="ikont-hot-facerentesterritoriales"   value="Entes Territoriales"/>
                             </f:facet>
-                            <h:panelGrid  rowClasses="id-jsf-cell-top">
+                            <h:panelGrid  rowClasses="ikont-cell-top">
                                 <h:panelGroup>
                                     <center>
                                         <h:panelGrid>
-                                            <h:outputLabel  class="id-jsf-hol-dashinvtipoproyecto"   value="#{var.dashinvtipoproyecto}" />
-                                            <h:outputText  class="id-jsf-hot-scriptPieDashboard"   value="#{ControlGerencial.piecontrol.scriptPieDashboard}" escape="false"/>
+                                            <h:outputLabel  class="ikont-hol-dashinvtipoproyecto"   value="#{var.dashinvtipoproyecto}" />
+                                            <h:outputText  class="ikont-hot-scriptPieDashboard"   value="#{ControlGerencial.piecontrol.scriptPieDashboard}" escape="false"/>
                                             <div id="proyectospie" ></div>
                                         </h:panelGrid>
-                                        <h:outputText  class="id-jsf-hot-inversionObra"   value="#{ControlGerencial.informaciondash.inversionObra}">
+                                        <h:outputText  class="ikont-hot-inversionObra"   value="#{ControlGerencial.informaciondash.inversionObra}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                         <h:panelGrid  rendered="false">
-                                            <h:outputLabel  class="id-jsf-hol-ejecuciontotal"   value="#{var.ejecuciontotal}" />
-                                            <h:outputText  class="id-jsf-hot-scriptcolumnaporcentual2"   value="#{ControlGerencial.columnaproyectoconsolidado.scriptcolumnaporcentual}" escape="false"/>
+                                            <h:outputLabel  class="ikont-hol-ejecuciontotal"   value="#{var.ejecuciontotal}" />
+                                            <h:outputText  class="ikont-hot-scriptcolumnaporcentual2"   value="#{ControlGerencial.columnaproyectoconsolidado.scriptcolumnaporcentual}" escape="false"/>
                                         </h:panelGrid>
                                     </center>
                                 </h:panelGroup>
                                 <interkont:spacer height="10" />
                                 <a4j:commandLink rendered="#{var.vermasdashboard}" 
                                                  value="#{var.ver}+"
-                                                 class="id-jsf-hcl-vermasdashboard"    
+                                                 class="ikont-hcl-vermasdashboard"    
                                                  action="#{ControlGerencial.obtenerConsolidadoRehabilitacion}"
                                                  execute="@this"
                                                  render=":modalDashboard_rehabilitacion"
@@ -253,9 +253,9 @@
                                 </a4j:commandLink>
                             </h:panelGrid>
                         </rich:panel>
-                        <rich:panel headerClass="id-jsf-rp-headertablerocontrol3" bodyClass="id-jsf-rp-bodytablerocontrol3">
+                        <rich:panel headerClass="ikont-rp-headertablerocontrol3" bodyClass="ikont-rp-bodytablerocontrol3">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf-hot-faceatencionhumanitaria"   value="Atención humanitaria"/>
+                                <h:outputText  class="ikont-hot-faceatencionhumanitaria"   value="Atención humanitaria"/>
                             </f:facet>
 
                             <h:panelGroup>
@@ -264,9 +264,9 @@
                                     <a4j:repeat value="#{ControlGerencial.listaServiciosAHAtendidas}" var="item">
 
                                         <li class="liItemAtencion">
-                                            <h:outputText  class="id-jsf-hot-etiqueta"   value="#{item.etiqueta}:"/>
+                                            <h:outputText  class="ikont-hot-etiqueta"   value="#{item.etiqueta}:"/>
 
-                                            <h:outputText  class="id-jsf-hot-valormoney"   value="#{item.valormoney}">
+                                            <h:outputText  class="ikont-hot-valormoney"   value="#{item.valormoney}">
                                                 <f:convertNumber pattern="###,###"/>
                                             </h:outputText>
 
@@ -279,14 +279,14 @@
                             </h:panelGroup>
                             <h:panelGrid>
                                 <interkont:spacer height="20" />
-                                <h:outputText  class="id-jsf-hot-inversionAh"   value="#{ControlGerencial.informaciondash.inversionAh}" >
+                                <h:outputText  class="ikont-hot-inversionAh"   value="#{ControlGerencial.informaciondash.inversionAh}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                                 <interkont:spacer height="5" />                                        
                                 <h:panelGroup>
                                     <a4j:commandLink rendered="#{var.vermasdashboard}" 
                                                      value="#{var.ver}+"
-                                                     class="id-jsf-hcl-vermasdashboard"    
+                                                     class="ikont-hcl-vermasdashboard"    
                                                      action="#{ControlGerencial.obtenerConsolidadoAh}"
                                                      execute="@this"
                                                      render=":modalDashboard_ah"

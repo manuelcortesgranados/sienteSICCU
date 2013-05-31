@@ -13,13 +13,13 @@
     <rich:popupPanel id="modalactividades"  autosized="true" headerClass="rich-panel-header" moveable="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="ACTIVIDADES PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="ikont- "   value="ACTIVIDADES PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalactividades" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalactividades" class="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('modalactividades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -38,68 +38,68 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="8">
-                                    <h:outputText  class="id-jsf- "   value="Listado de Actividades #{Supervisor$DetalleObra.totalfilas} #{var.paginaCiu} #{Supervisor$DetalleObra.pagina}#{var.deCiu}#{Supervisor$DetalleObra.totalpaginas}" />
+                                    <h:outputText  class="ikont- "   value="Listado de Actividades #{Supervisor$DetalleObra.totalfilas} #{var.paginaCiu} #{Supervisor$DetalleObra.pagina}#{var.deCiu}#{Supervisor$DetalleObra.totalpaginas}" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.actividad}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.actividad}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.unidaddemedida}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.cantidadprogramada}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.cantidadprogramada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.cantidadejecutada}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.cantidadejecutada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.cantidadejecutadaacumulado}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.cantidadejecutadaacumulado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.porcentajealimentacion}%"/>
+                                    <h:outputText  class="ikont- "   value="#{var.porcentajealimentacion}%"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="#{var.porcentajetotalactividad}%"/>
+                                    <h:outputText  class="ikont- "   value="#{var.porcentajetotalactividad}%"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true">
-                                <h:outputLabel  class="id-jsf- "   id="layoutactividad" class="id-jsf-"   value="#{row.actividadobra.strdescactividad}" />
+                                <h:outputLabel  class="ikont- "   id="layoutactividad" class="ikont-"   value="#{row.actividadobra.strdescactividad}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutunidad" class="id-jsf-"   value="#{row.actividadobra.strtipounidadmed}" />
+                                <h:outputLabel  class="ikont- "   id="layoutunidad" class="ikont-"   value="#{row.actividadobra.strtipounidadmed}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutcantidad" class="id-jsf-"   value="#{row.actividadobra.numvalorplanifao}" >
+                                <h:outputLabel  class="ikont- "   id="layoutcantidad" class="ikont-"   value="#{row.actividadobra.numvalorplanifao}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutcostounitario" class="id-jsf-"   value="#{row.actividadobra.floatcantplanifao}" >
+                                <h:outputLabel  class="ikont- "   id="layoutcostounitario" class="ikont-"   value="#{row.actividadobra.floatcantplanifao}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutcantidadejecutada" class="id-jsf-"   value="#{row.floatcantejec}" >
+                                <h:outputLabel  class="ikont- "   id="layoutcantidadejecutada" class="ikont-"   value="#{row.floatcantejec}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutcantidadejecutadaacumulado" class="id-jsf-"   value="#{row.actividadobra.floatcantidadejecutao}" >
+                                <h:outputLabel  class="ikont- "   id="layoutcantidadejecutadaacumulado" class="ikont-"   value="#{row.actividadobra.floatcantidadejecutao}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutporcentajealimentacion" class="id-jsf-"   value="#{row.floatcantejec/row.actividadobra.floatcantplanifao*100}" >
+                                <h:outputLabel  class="ikont- "   id="layoutporcentajealimentacion" class="ikont-"   value="#{row.floatcantejec/row.actividadobra.floatcantplanifao*100}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="layoutporcentajetotalactividad" class="id-jsf-"   value="#{row.actividadobra.floatcantidadejecutao/row.actividadobra.floatcantplanifao*100}">
+                                <h:outputLabel  class="ikont- "   id="layoutporcentajetotalactividad" class="ikont-"   value="#{row.actividadobra.floatcantidadejecutao/row.actividadobra.floatcantplanifao*100}">
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>

@@ -13,8 +13,8 @@
         <h:outputScript library="js" name="validarletra.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.generarsolicitudah}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
-        <h:outputText  class="id-jsf- "   value="#{var.menu1_2}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
+        <h:outputText  class="ikont- "   value="#{var.generarsolicitudah}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
+        <h:outputText  class="ikont- "   value="#{var.menu1_2}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -33,7 +33,7 @@
 
                         <h:panelGrid columns="4" cellspacing="15" id="DatosBasicosSolicitud">
 
-                            <h:outputText  class="id-jsf- "   value="#{var.departamento}: " class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.departamento}: " class="ikont-"  />
                             <h:selectOneMenu rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
                                              id="cmbDepartamentoAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.codDepartamento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.departamento}"/>
@@ -42,10 +42,10 @@
                                            execute="@this,cmbMunicipioAt,cmbMunicipioCrear" render="CombomunicipoAt,panelContacto,cmbMunicipioCrear">
                                 </a4j:ajax>
                             </h:selectOneMenu>
-                            <h:outputLabel  class="id-jsf- "   id="txtDepartamentoatsoli"
+                            <h:outputLabel  class="ikont- "   id="txtDepartamentoatsoli"
                                            value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strdepartamento}"
                                            rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante}"/>
-                            <h:outputText  class="id-jsf- "   value="#{var.municipio}:" class="id-jsf-"   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
+                            <h:outputText  class="ikont- "   value="#{var.municipio}:" class="ikont-"   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
                             <h:panelGroup id="CombomunicipoAt">
                                 <h:selectOneMenu id="cmbMunicipioAt" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
                                                  value="#{AtencionHumanitaria$AdminSolicitudAtencion.strmunicipio}">
@@ -55,14 +55,14 @@
                                     </a4j:ajax>
                                 </h:selectOneMenu>
                             </h:panelGroup>
-                            <h:outputLabel  class="id-jsf- "   id="txtmunicipiosoli" value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strmunicipio}"
+                            <h:outputLabel  class="ikont- "   id="txtmunicipiosoli" value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strmunicipio}"
                                            rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
 
 
-                            <h:outputText  class="id-jsf- "   value="#{var.contacto}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.contacto}:" class="ikont-"  />
 
                             <h:panelGroup id="panelContacto">
-                                <h:outputLabel  class="id-jsf- "   id="contacto" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}"
+                                <h:outputLabel  class="ikont- "   id="contacto" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}"
                                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante}"/>
 
                                 <h:selectOneMenu  id="itemContacto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
@@ -70,7 +70,7 @@
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.solicitante}"/>
                                 </h:selectOneMenu>
                             </h:panelGroup>
-                            <h:outputLabel  class="id-jsf- "   id="contactolabel" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu==10}"/>
+                            <h:outputLabel  class="ikont- "   id="contactolabel" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu==10}"/>
 
                             <a4j:commandButton id="btContacto1" value="#{var.ver}" immediate="true"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.cargarSolicitante}"
@@ -91,35 +91,35 @@
 
             <rich:panel id="DatosGenerales" header="2. #{var.datosgenerales}" >
                 <center>
-                    <h:outputText  class="id-jsf- "   value="#{var.textdatosgeneralesAtencion}"/>
+                    <h:outputText  class="ikont- "   value="#{var.textdatosgeneralesAtencion}"/>
                 </center>
 
                 <center>
                     <h:panelGroup>
 
                         <h:panelGrid columns="2" cellspacing="15" id="gpCombos">
-                            <h:outputText  class="id-jsf- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" class="id-jsf-"  />
-                            <h:outputLabel  class="id-jsf- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
+                            <h:outputText  class="ikont- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" class="ikont-"  />
+                            <h:outputLabel  class="ikont- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}"/>
 
-                            <h:outputText  class="id-jsf- "    value="#{var.evento}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "    value="#{var.evento}:" class="ikont-"  />
                             <h:selectOneMenu  id="comboeventoAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.eventoSolicitud.intidevento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.evento}"/>
                                 <a4j:ajax  execute="comboeventoAt" event="change" render="DatosBasicos" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarPeriodoEvento}"  />
                             </h:selectOneMenu>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.periodo}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.periodo}:" class="ikont-"  />
                             <h:selectOneMenu  id="periodoAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.periodoEvento.intidperiodoevento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.periodoevento}"/>
                             </h:selectOneMenu>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.nomsol}" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.nomsol}" class="ikont-"  />
                             <h:inputTextarea  id="nomsolAt" cols="30" rows="3"
                                               value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}">
                                 <f:validateLength maximum="200"/>
                             </h:inputTextarea>
 
-                            <h:outputLabel  class="id-jsf- "   id="lbltips"  value="#{var.tiposolicitud}:" class="id-jsf-"   />
+                            <h:outputLabel  class="ikont- "   id="lbltips"  value="#{var.tiposolicitud}:" class="ikont-"   />
                             <h:selectOneMenu id="combotipoah" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.oidcodigotipoah}"
                                              disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.deshcategoria}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipoah}"/>
@@ -127,7 +127,7 @@
                                            listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProductos}" execute="@this" />
                             </h:selectOneMenu>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.selecategoria}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.selecategoria}:" class="ikont-"  />
                             <h:selectOneMenu  id="selcategoria" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.productoNuevo.oidcodigoproductoah}"
                                               disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14
                                                           ||AtencionHumanitaria$AdminSolicitudAtencion.deshcategoria}">
@@ -139,21 +139,21 @@
                             </h:selectOneMenu>
 
 
-                            <h:outputText  class="id-jsf- "   value="#{var.objetosolicitud}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.objetosolicitud}:" class="ikont-"  />
                             <h:panelGroup>
                                 <h:inputTextarea id="txtobjetosolicitudAt" cols="35" rows="6"
                                                  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}" disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14}">
                                 </h:inputTextarea>
-                                <rich:message class="id-jsf-"   for="txtobjetosolicitud"/>
+                                <rich:message class="ikont-"   for="txtobjetosolicitud"/>
                             </h:panelGroup>
-                            <h:outputText  class="id-jsf- "   value="#{var.incluyeint}" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.incluyeint}" class="ikont-"  />
                             <h:selectOneMenu  id="incluyeIntAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}">
                                 <f:selectItem itemValue="true" itemLabel="Si"/>
                                 <f:selectItem itemValue="false" itemLabel="No"/>
                                 <a4j:ajax event="change" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.calcularValorSolicitudDetalle}"
                                           render="gpvalortotalmaestroAten,porceninterventoria"/>
                             </h:selectOneMenu>
-                            <h:outputText  class="id-jsf- "   value="#{var.valor} interventoria" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.valor} interventoria" class="ikont-"  />
                             <rich:inputNumberSpinner minValue="0" maxValue="100" inputSize="3" id="porceninterventoria"
                                                      value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}">
 
@@ -172,19 +172,19 @@
                     <h:panelGroup id="gpDatosProducto">
                         <h:panelGrid  id="panelproductos" columns="2" cellspacing="15">
 
-                            <h:outputText  class="id-jsf- "   value="#{var.escojaMunicipio}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.escojaMunicipio}:" class="ikont-"  />
                             <h:selectOneMenu id="cmbMunicipioCrear"
                                              value="#{AtencionHumanitaria$AdminSolicitudAtencion.strmunicipio}" >
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.municipio}"/>
                             </h:selectOneMenu>
 
 
-                            <h:outputText  class="id-jsf- "   value="#{var.numFamilias}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.numFamilias}:" class="ikont-"  />
                             <rich:inputNumberSpinner minValue="1" maxValue="100000" inputSize="10" required="true"
                                                      value="#{SessionBeanCobra.atencionhumanitariaService.solicituddetalle.numcantidadsolicitadaitem}"/>
 
 
-                            <h:outputText  class="id-jsf- "   value="#{var.tamFamilia}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.tamFamilia}:" class="ikont-"  />
                             <h:selectOneMenu  id="tamFamiliaAt"
                                               value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipofamiliavalue}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipofamilia}"/>
@@ -192,7 +192,7 @@
                                           render="valoruni"/>
                             </h:selectOneMenu>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}:" class="id-jsf-"  />
+                            <h:outputText  class="ikont- "   value="#{var.valorunitaio}:" class="ikont-"  />
                             <h:inputText id="valoruni" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicituddetalle.numvlrunitario}"
                                          size="15" onkeypress="return validar(event);" >
                                 <f:convertNumber maxFractionDigits="6" minFractionDigits="2" type="number"  />
@@ -214,56 +214,56 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
-                                        <h:outputText  class="id-jsf- "   value="#{var.categoriaseleccionada}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.categoriaseleccionada}"/>
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  class="id-jsf- "   value="#{var.categoria}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.categoria}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.familiasAtender}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.familiasAtender}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.tamFamilia}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.tamFamilia}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.valorunitaio}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.valortotal}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.valortotal}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.municipio}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.municipio}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.eliminar}"/>
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:column breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.productoah.strdescripcionproductoah}"/>
+                                <h:outputText  class="ikont- "   value="#{_Detalle.productoah.strdescripcionproductoah}"/>
 
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.numcantidadsolicitadaitem}"/>
+                                <h:outputText  class="ikont- "   value="#{_Detalle.numcantidadsolicitadaitem}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.productoah.tipodefamilia.strdescripcionfamilia}"/>
+                                <h:outputText  class="ikont- "   value="#{_Detalle.productoah.tipodefamilia.strdescripcionfamilia}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.numvlrunitario}">
+                                <h:outputText  class="ikont- "   value="#{_Detalle.numvlrunitario}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.numvlrtotalitem}">
+                                <h:outputText  class="ikont- "   value="#{_Detalle.numvlrtotalitem}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Detalle.localidad.strmunicipio}"/>
+                                <h:outputText  class="ikont- "   value="#{_Detalle.localidad.strmunicipio}"/>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton  title="#{var.eliminar}"  class="id-jsf-"  
+                                <a4j:commandButton  title="#{var.eliminar}"  class="ikont-"  
                                                     value="#{var.eliminar}"
                                                     render="tablaProductosSeleccionados, gpvalortotalmaestroAten, gpCombos"
                                                     action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem(filaSeleccionada)}"/>
@@ -281,22 +281,22 @@
 
                     <h:panelGroup id="gpvalortotalmaestroAten">
                         <h:panelGrid columns="2" cellspacing="15" >
-                            <h:outputText  class="id-jsf- "   value="#{var.totalfamilias}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "   id="totalFamiliasAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
+                            <h:outputText  class="ikont- "   value="#{var.totalfamilias}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "   id="totalFamiliasAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
 
                             </h:outputText>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.totalParcial}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "   id="totalParcialAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
+                            <h:outputText  class="ikont- "   value="#{var.totalParcial}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "   id="totalParcialAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
 
-                            <h:outputText  class="id-jsf- "   value="#{var.interventorObra}ia:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "    id="porcentajeAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.valorporcentaje}">
+                            <h:outputText  class="ikont- "   value="#{var.interventorObra}ia:" class="ikont-"  />
+                            <h:outputText  class="ikont- "    id="porcentajeAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.valorporcentaje}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
-                            <h:outputText  class="id-jsf- "   value="#{var.valorsolicitud}:" class="id-jsf-"  />
-                            <h:outputText  class="id-jsf- "     id="valorTotalAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
+                            <h:outputText  class="ikont- "   value="#{var.valorsolicitud}:" class="ikont-"  />
+                            <h:outputText  class="ikont- "     id="valorTotalAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
                         </h:panelGrid>
@@ -313,7 +313,7 @@
                                        action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"
                                        oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"/>
 
-                    <a4j:commandButton id="cancelarsubirarchivos2" value="#{var.cancelar}" class="id-jsf-"     
+                    <a4j:commandButton id="cancelarsubirarchivos2" value="#{var.cancelar}" class="ikont-"     
                                        oncomplete="#{rich:component('panelCancelarSolicitud')}.show(); return false;"/>
                 </h:panelGrid>
             </center>

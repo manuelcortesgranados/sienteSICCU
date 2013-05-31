@@ -14,7 +14,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="Cargar Giros"/>
+        <h:outputText  class="ikont- "   value="Cargar Giros"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,7 +29,7 @@
                     <center>
                         <h:panelGrid columns="2" id="panelen">
 
-                            <h:outputLabel  class="id-jsf- "   id="lblnumeroorden"  value="#{var.numeroorden}" for="txtNumeroorden"/>
+                            <h:outputLabel  class="ikont- "   id="lblnumeroorden"  value="#{var.numeroorden}" for="txtNumeroorden"/>
                             <h:panelGroup>
                                 <h:inputText  id="txtNumeroorden"  value="#{Financiera$FiduFinanciera.financieraService.ordendepago.strordenpago}"
                                               required="true">
@@ -37,16 +37,16 @@
                                 <rich:message for="txtNumeroorden" />
                             </h:panelGroup>
 
-                            <h:outputText  class="id-jsf- "    value="#{var.fecha}"/>
+                            <h:outputText  class="ikont- "    value="#{var.fecha}"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fechaorden"
                                            value="#{Financiera$FiduFinanciera.financieraService.ordendepago.datefechaordenpago}" inputSize="10" immediate="true">
 
                             </rich:calendar>
 
-                            <h:outputLabel  class="id-jsf- "   id="lblencargo"  value="#{var.encargofiduciario}"/>
+                            <h:outputLabel  class="ikont- "   id="lblencargo"  value="#{var.encargofiduciario}"/>
                             <h:panelGrid columns="3"  >
                                 <h:panelGroup id="encargoorden" >
-                                    <h:outputLabel  class="id-jsf- "   value="#{Financiera$FiduFinanciera.financieraService.ordendepago.encargofiduciario.strdescripcion}"/>
+                                    <h:outputLabel  class="ikont- "   value="#{Financiera$FiduFinanciera.financieraService.ordendepago.encargofiduciario.strdescripcion}"/>
 
                                     <a4j:commandButton  id="bt-ver-listado-encargo"
                                                         oncomplete="#{rich:component('mp-listado-encargo')}.show();"  value="#{var.verencargo}" immediate="true"
@@ -55,14 +55,14 @@
                                 </h:panelGroup>
                             </h:panelGrid>
 
-                            <h:outputText  class="id-jsf- "   id="lbldescripcionorden"  value="#{var.descripcion}"/>
+                            <h:outputText  class="ikont- "   id="lbldescripcionorden"  value="#{var.descripcion}"/>
                             <h:panelGroup>
                                 <h:inputTextarea id="txtdescripcionorden" cols="23" rows="4" value="#{Financiera$FiduFinanciera.financieraService.ordendepago.strdescripcionordenpago}"
                                                  required="true"/>
                                 <rich:message for="txtdescripcionorden"  />
                             </h:panelGroup>
 
-                            <h:outputLabel  class="id-jsf- "   id="lblvalororden"  value="#{var.valororden}"/>
+                            <h:outputLabel  class="ikont- "   id="lblvalororden"  value="#{var.valororden}"/>
                             <h:panelGroup>
                                 <h:inputText id="txtvalororden" value="#{Financiera$FiduFinanciera.financieraService.ordendepago.numvlrordenpago}"
                                              required="true" >
@@ -90,7 +90,7 @@
             <h:form>
                 <rich:collapsiblePanel id="ordenpago" header="Listado Ordenes De Pago" switchType="ajax" expanded="false">
                     <h:panelGrid columns="3">
-                        <h:outputText  class="id-jsf- "   value="#{var.buscarpalabraclave} " />
+                        <h:outputText  class="ikont- "   value="#{var.buscarpalabraclave} " />
                         <h:inputText value="#{Financiera$FiduFinanciera.filtro}" size="100"/>
 
                         <a4j:commandButton render="tablaOrden" action="#{Financiera$FiduFinanciera.filtrarOrden}" value="Buscar"/>
@@ -108,43 +108,43 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="4">
-                                    <h:outputText  class="id-jsf- "   value="#{var.listadetercero} de Orden de pago  #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
+                                    <h:outputText  class="ikont- "   value="#{var.listadetercero} de Orden de pago  #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column width="150px" breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.numeroorden}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.numeroorden}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.fecha}" />
+                                    <h:outputText  class="ikont- "   value="#{var.fecha}" />
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.valor}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.valor}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.numeroencargo}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.numeroencargo}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.solicitante}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.solicitante}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoOrden">
                             <rich:column  width="150px" breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{_Orden.strordenpago}"/>
+                                <h:outputText  class="ikont- "   value="#{_Orden.strordenpago}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Orden.datefechaordenpago}"/>
+                                <h:outputText  class="ikont- "   value="#{_Orden.datefechaordenpago}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   id="otxt-valorObras" value="#{_Orden.numvlrordenpago}">
+                                <h:outputText  class="ikont- "   id="otxt-valorObras" value="#{_Orden.numvlrordenpago}">
                                     <f:convertNumber pattern="$ ###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Orden.encargofiduciario.intnumencargofiduciario}"/>
+                                <h:outputText  class="ikont- "   value="#{_Orden.encargofiduciario.intnumencargofiduciario}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{_Orden.tercero.strnombrecompleto}"/>
+                                <h:outputText  class="ikont- "   value="#{_Orden.tercero.strnombrecompleto}"/>
                             </rich:column>
                         </rich:columnGroup>
                         <f:facet name="footer">

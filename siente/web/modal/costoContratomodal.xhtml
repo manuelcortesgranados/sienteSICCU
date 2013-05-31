@@ -11,13 +11,13 @@
     <rich:popupPanel id="panelCostoContrato" autosized="true" headerClass="rich-panel-header">       
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.costo}"/>
+                <h:outputText  class="ikont- "   value="#{var.costo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelCostoContrato" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelCostoContrato" class="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                       onclick="#{rich:component('panelCostoContrato')}.hide();return false;">
                     </a4j:commandLink>
@@ -39,9 +39,9 @@
                         <rich:column id="tc_tipocosto"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  class="id-jsf- "   value="#{var.tipocosto}"/>
+                                <h:outputText  class="ikont- "   value="#{var.tipocosto}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
+                            <h:outputText  class="ikont- "   id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
                         </rich:column>
 
                         
@@ -49,53 +49,53 @@
                         <rich:column id="tc_numvaltotobra"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  class="id-jsf- "   value="#{var.costodirecto}"/>
+                                <h:outputText  class="ikont- "   value="#{var.costodirecto}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
+                            <h:outputText  class="ikont- "   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
 
                         <!-- <rich:column id="tc_stContratistaObra"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.houtcontratis}"/>
+                                <h:outputText  class="ikont- "   value="#{var.houtcontratis}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
+                            <h:outputText  class="ikont- "   id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
                         </rich:column>-->
 
                         <rich:column id="tc_floatporadmon"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.administracion} (%)"/>
+                                <h:outputText  class="ikont- "   value="#{var.administracion} (%)"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
+                            <h:outputText  class="ikont- "   id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporimprevi"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.imprevistos}(%)"/>
+                                <h:outputText  class="ikont- "   value="#{var.imprevistos}(%)"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
+                            <h:outputText  class="ikont- "   id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporutilidad"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.utilidad}(%)"/>
+                                <h:outputText  class="ikont- "   value="#{var.utilidad}(%)"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
+                            <h:outputText  class="ikont- "   id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
                         </rich:column>
 
                         <rich:column id="tc_floatporivasobreutil"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.ivasobreutilidad}(%)"/>
+                                <h:outputText  class="ikont- "   value="#{var.ivasobreutilidad}(%)"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
+                            <h:outputText  class="ikont- "   id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
                         </rich:column>
 
                         <rich:column id="tc_CostoTotal"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.costototal}"/>
+                                <h:outputText  class="ikont- "   value="#{var.costototal}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
+                            <h:outputText  class="ikont- "   id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporimprevi/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporadmon/100

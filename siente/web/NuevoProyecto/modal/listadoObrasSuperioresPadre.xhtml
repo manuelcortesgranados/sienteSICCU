@@ -11,13 +11,13 @@
     <rich:popupPanel id="mp-listado-proyectosPadresPadre" moveable="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.encontrarPadreProyecto}" class="id-jsf-"   />
+                <h:outputText  class="ikont- "   value="#{var.encontrarPadreProyecto}" class="ikont-"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-mp-listado-proyectosPadresPadre" class="id-jsf-"  
+                    <a4j:commandLink id="esconder-mp-listado-proyectosPadresPadre" class="ikont-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-proyectosPadresPadre')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -25,7 +25,7 @@
         <center>
             <h:panelGrid columns="2">
 
-                <h:outputText  class="id-jsf- "   value="#{var.buscarProyecto} " />
+                <h:outputText  class="ikont- "   value="#{var.buscarProyecto} " />
                 <h:panelGroup>
 
                     <h:inputText value="#{Supervisor$IngresarNuevaObra.nombreobra}" size="40">
@@ -55,7 +55,7 @@
                             <rich:columnGroup>
 
                                 <rich:column colspan="5">
-                                    <h:outputText  class="id-jsf- "   value="#{var.misolicitues} #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina}#{var.deCiu}#{Supervisor$IngresarNuevaObra.totalpaginas}" />
+                                    <h:outputText  class="ikont- "   value="#{var.misolicitues} #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina}#{var.deCiu}#{Supervisor$IngresarNuevaObra.totalpaginas}" />
                                 </rich:column>
                                 <rich:column colspan="5" breakRowBefore="true">
                                     <center>
@@ -68,36 +68,36 @@
                                     </center>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.numero}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.numero}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.fecha}s" />
+                                    <h:outputText  class="ikont- "   value="#{var.fecha}s" />
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.valortotal}" />
+                                    <h:outputText  class="ikont- "   value="#{var.valortotal}" />
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}" />
+                                    <h:outputText  class="ikont- "   value="#{var.nombre}" />
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.seleccionar}" />
+                                    <h:outputText  class="ikont- "   value="#{var.seleccionar}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoObraPadres">
                             <rich:column   breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{ObraPadre.intcodigoobra}"/>
+                                <h:outputText  class="ikont- "   value="#{ObraPadre.intcodigoobra}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="Inicio : #{ObraPadre.datefeciniobra} - Fin : #{ObraPadre.datefecfinobra}"/>
+                                <h:outputText  class="ikont- "   value="Inicio : #{ObraPadre.datefeciniobra} - Fin : #{ObraPadre.datefecfinobra}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="numvalorobra" value="#{ObraPadre.numvaltotobra}">
+                                <h:outputText  class="ikont- "   id="numvalorobra" value="#{ObraPadre.numvaltotobra}">
                                     <f:convertNumber pattern="$#,###.00"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{ObraPadre.strnombrecrot}"/>
+                                <h:outputText  class="ikont- "   value="#{ObraPadre.strnombrecrot}"/>
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"

@@ -18,7 +18,7 @@
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.subircronogramadilingeciado}" class="id-jsf-"  />
+                <h:outputText  class="ikont- "   value="#{var.subircronogramadilingeciado}" class="ikont-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -26,7 +26,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
                                      title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                       class="id-jsf-"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                       class="ikont-"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -55,17 +55,17 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="ikont- "   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file">
                                         <h:panelGroup>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </h:panelGroup>
@@ -88,19 +88,19 @@
                             </center>
                                 <a4j:outputPanel id="panelErrorGC">
                                 <rich:messages id="messagesGC" globalOnly="true"
-                                               class="id-jsf-"   ajaxRendered="true"
+                                               class="ikont-"   ajaxRendered="true"
                                                >
                                     <f:facet name="infoMarker">
-                                        <h:graphicImage  class="id-jsf- "    url="/resources/imgs/msginfo.png" />
+                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msginfo.png" />
                                     </f:facet>
                                     <f:facet name="warnMarker">
-                                        <h:graphicImage  class="id-jsf- "    url="/resources/imgs/msgwarn.png" />
+                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msgwarn.png" />
                                     </f:facet>
                                     <f:facet name="errorMarker">
-                                        <h:graphicImage  class="id-jsf- "    url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                     <f:facet name="fatalMarker">
-                                        <h:graphicImage  class="id-jsf- "     url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  class="ikont- "     url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                 </rich:messages>
 

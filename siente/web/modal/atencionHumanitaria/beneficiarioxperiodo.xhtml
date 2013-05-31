@@ -13,12 +13,12 @@
 
         <f:facet name="header" >
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.registrobeneficiarios}"  class="id-jsf-"    />
+                <h:outputText  class="ikont- "   value="#{var.registrobeneficiarios}"  class="ikont-"    />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandLink id="esconder_beneficiarioxperiodo" class="id-jsf-"   
+                <a4j:commandLink id="esconder_beneficiarioxperiodo" class="ikont-"   
                                  title="#{var.cerrar}" immediate="true" onclick="#{rich:component('beneficiarioxperiodo')}.hide();
                                          return false;"/>
             </h:panelGroup>
@@ -35,76 +35,76 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="11" breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.listabeneficiario} por avance"/>
+                                    <h:outputText  class="ikont- "   value="#{var.listabeneficiario} por avance"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   id="tipodocumento" value="#{var.tipoDocumento}"/>
+                                    <h:outputText  class="ikont- "   id="tipodocumento" value="#{var.tipoDocumento}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="identificacion" value="#{var.numero} de Identificación"/>
+                                    <h:outputText  class="ikont- "   id="identificacion" value="#{var.numero} de Identificación"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="apellido1" value="Primer #{var.apellido}"/>
+                                    <h:outputText  class="ikont- "   id="apellido1" value="Primer #{var.apellido}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="apellido2" value="Segundo #{var.apellido}"/>
+                                    <h:outputText  class="ikont- "   id="apellido2" value="Segundo #{var.apellido}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="nombre1" value="Primer #{var.nombre}"/>
+                                    <h:outputText  class="ikont- "   id="nombre1" value="Primer #{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="nombre2" value="Segundo #{var.nombre}"/>
+                                    <h:outputText  class="ikont- "   id="nombre2" value="Segundo #{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="departamento" value="#{var.departamento} de residencia"/>
+                                    <h:outputText  class="ikont- "   id="departamento" value="#{var.departamento} de residencia"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="municipio" value="#{var.municipio} de residencia"/>
+                                    <h:outputText  class="ikont- "   id="municipio" value="#{var.municipio} de residencia"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
+                                    <h:outputText  class="ikont- "   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="telefono" value="#{var.telefono}"/>
+                                    <h:outputText  class="ikont- "   id="telefono" value="#{var.telefono}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   id="email" value="#{var.correo} Electronico"/>
+                                    <h:outputText  class="ikont- "   id="email" value="#{var.correo} Electronico"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
                             <rich:column breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   id="documento2" value="#{rowbeneficiario.strtipoidentificacion}" />
+                                <h:outputText  class="ikont- "   id="documento2" value="#{rowbeneficiario.strtipoidentificacion}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="identificacion2" value="#{rowbeneficiario.intcedula}"/>
+                                <h:outputText  class="ikont- "   id="identificacion2" value="#{rowbeneficiario.intcedula}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="apellido1_2" value="#{rowbeneficiario.strapellido1}" />
+                                <h:outputText  class="ikont- "   id="apellido1_2" value="#{rowbeneficiario.strapellido1}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="apellido2_2" value="#{rowbeneficiario.strapellido2}" />
+                                <h:outputText  class="ikont- "   id="apellido2_2" value="#{rowbeneficiario.strapellido2}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="nombre1_2" value="#{rowbeneficiario.strnombre}" />
+                                <h:outputText  class="ikont- "   id="nombre1_2" value="#{rowbeneficiario.strnombre}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="nombre2_2" value="#{rowbeneficiario.strnombre2}" />
+                                <h:outputText  class="ikont- "   id="nombre2_2" value="#{rowbeneficiario.strnombre2}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="departamento2" value="#{rowbeneficiario.strdepartamento}" />
+                                <h:outputText  class="ikont- "   id="departamento2" value="#{rowbeneficiario.strdepartamento}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="municipio2" value="#{rowbeneficiario.strmunicipio}" />
+                                <h:outputText  class="ikont- "   id="municipio2" value="#{rowbeneficiario.strmunicipio}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="direccion2" value="#{rowbeneficiario.strdireccionprincipal}" />
+                                <h:outputText  class="ikont- "   id="direccion2" value="#{rowbeneficiario.strdireccionprincipal}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="telefono2" value="#{rowbeneficiario.strtelefono1}" />
+                                <h:outputText  class="ikont- "   id="telefono2" value="#{rowbeneficiario.strtelefono1}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   id="email2" value="#{rowbeneficiario.stremail}" />
+                                <h:outputText  class="ikont- "   id="email2" value="#{rowbeneficiario.stremail}" />
                             </rich:column>
 
                         </rich:columnGroup>

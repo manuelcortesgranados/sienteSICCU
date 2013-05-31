@@ -12,7 +12,7 @@
         <center>
 
             <h:panelGrid  width="100%" >
-                <f:facet name="header"><h:outputLabel  class="id-jsf- "   value="#{var.contrato}"></h:outputLabel></f:facet>
+                <f:facet name="header"><h:outputLabel  class="ikont- "   value="#{var.contrato}"></h:outputLabel></f:facet>
 
                 <rich:dataTable id="tablacontrato"  
                                 sortMode="single" 
@@ -23,71 +23,71 @@
                     <rich:column id="tc_strnrocontrato"  width="120px">
                         <f:facet name="header">
 
-                            <h:outputText  class="id-jsf- "   value="#{var.houtnrocontrato} "/>
+                            <h:outputText  class="ikont- "   value="#{var.houtnrocontrato} "/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   id="st_strnrocontrato" value="#{_row.contrato.strnumcontrato}"/>
+                        <h:outputText  class="ikont- "   id="st_strnrocontrato" value="#{_row.contrato.strnumcontrato}"/>
                     </rich:column>
 
                     <rich:column  width="120px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.objetocontrato} "/>
+                            <h:outputText  class="ikont- "   value="#{var.objetocontrato} "/>
                         </f:facet>
                         <h:inputTextarea  value="#{_row.contrato.textobjeto}" readonly="true" cols="35" rows="3" />
                     </rich:column>
 
                     <rich:column id="tc_strnomcontratista" width="120px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.houtcontratis}"/>
+                            <h:outputText  class="ikont- "   value="#{var.houtcontratis}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   id="st_strnomcontratista" value="#{_row.contrato.contratista.strnombre} #{_row.contrato.contratista.strapellido1}"/>
+                        <h:outputText  class="ikont- "   id="st_strnomcontratista" value="#{_row.contrato.contratista.strnombre} #{_row.contrato.contratista.strapellido1}"/>
                     </rich:column>
 
                     <rich:column id="tc_fechainic" width="80px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.fechadeinicio}"/>
+                            <h:outputText  class="ikont- "   value="#{var.fechadeinicio}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "    value="#{_row.contrato.datefechaini}"/>
+                        <h:outputText  class="ikont- "    value="#{_row.contrato.datefechaini}"/>
                     </rich:column>
 
                     <rich:column id="tc_fechafina" width="80px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.fechadefinalizacion}"/>
+                            <h:outputText  class="ikont- "   value="#{var.fechadefinalizacion}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   value="#{_row.contrato.datefechafin}"/>
+                        <h:outputText  class="ikont- "   value="#{_row.contrato.datefechafin}"/>
                     </rich:column>
 
                     <rich:column id="tc_duracion" width="80px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.intduracion}"/>
+                            <h:outputText  class="ikont- "   value="#{var.intduracion}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   value="#{_row.contrato.intduraciondias} Días"/>
+                        <h:outputText  class="ikont- "   value="#{_row.contrato.intduraciondias} Días"/>
                     </rich:column>
 
                     <rich:column id="tc_valor" width="120px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.vlrcontra}"/>
+                            <h:outputText  class="ikont- "   value="#{var.vlrcontra}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   value="#{_row.contrato.numvlrcontrato}">
+                        <h:outputText  class="ikont- "   value="#{_row.contrato.numvlrcontrato}">
                             <f:convertNumber pattern="$###,###"/>
                         </h:outputText>
                     </rich:column>
                     
                     <rich:column id="tc_valor_asociado" width="80px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.valorasociadoaproyecto}"/>
+                            <h:outputText  class="ikont- "   value="#{var.valorasociadoaproyecto}"/>
                         </f:facet>
-                        <h:outputText  class="id-jsf- "   value="#{_row.numvalorrelacion}">
+                        <h:outputText  class="ikont- "   value="#{_row.numvalorrelacion}">
                             <f:convertNumber pattern="$###,###"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column id="tc_polizas" width="120px"  rendered="#{Supervisor$AdministrarObraNew.polizacontrato}">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.verpolizas}"/>
+                            <h:outputText  class="ikont- "   value="#{var.verpolizas}"/>
                         </f:facet>
                         <a4j:commandLink id="verpoliza"  
                                          action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
                                          onclick="#{rich:component('panelVerPolizaModal')}.hide();return false;">
-                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
 
@@ -95,12 +95,12 @@
 
                     <rich:column id="tc_costos" width="120px" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto !=null}"  >
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.vercosto}"/>
+                            <h:outputText  class="ikont- "   value="#{var.vercosto}"/>
                         </f:facet>
                         <a4j:commandLink id="vercosto"  
                                           render="panelContrato"
                                          onclick="#{rich:component('panelCostoContrato')}.show();return true;">
-                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png"/>
                             <a4j:ajax event="complete"  render="layoutCron"/>
                         </a4j:commandLink>
                     </rich:column>

@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.generarsolicitudah}"/>
+        <h:outputText  class="ikont- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -29,127 +29,127 @@
             <rich:collapsiblePanel id="AprobacionAsesorch" switchType="ajax">
 
                 <f:facet name="header">
-                    <h:outputText  class="id-jsf- "   value="#{var.aprobacionfuncionarioasesor}"/>
+                    <h:outputText  class="ikont- "   value="#{var.aprobacionfuncionarioasesor}"/>
                 </f:facet>
                 <interkont:spacer height="3"/>
 
                 <center>
                     <h:panelGrid id="panelAprobacionFuncionario" columns="2" columnClasses="panelizquierda, panelizquierda" >
-                        <h:outputText  class="id-jsf- "   value="#{var.estadodocumentacion}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.estadodocumentacion}:" class="ikont-"  />
                         <h:selectOneMenu id="estadodocumentacion" value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadodoc}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadodocumentacion}"/>
                         </h:selectOneMenu>
-                        <h:outputLabel  class="id-jsf- "   value="Completo"
+                        <h:outputLabel  class="ikont- "   value="Completo"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolestadodocumentacion}"/>
 
 
-                        <h:outputLabel  class="id-jsf- "   value="Incompleto"
+                        <h:outputLabel  class="ikont- "   value="Incompleto"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolestadodocumentacion}" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.lasolicitudesviable}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.lasolicitudesviable}:" class="ikont-"  />
                         <h:selectOneMenu id="solicitudviable" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItem itemValue="0" itemLabel="Si"/>
                             <f:selectItem itemValue="1" itemLabel="No"/>
                         </h:selectOneMenu>
 
-                        <h:outputLabel  class="id-jsf- "   value="Si"
+                        <h:outputLabel  class="ikont- "   value="Si"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"/>
 
-                        <h:outputLabel  class="id-jsf- "   value="No"
+                        <h:outputLabel  class="ikont- "   value="No"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolviabilidad}"/>
 
 
-                        <h:outputText  class="id-jsf- "   value=" #{var.estadosolicitud}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value=" #{var.estadosolicitud}:" class="ikont-"  />
                         <h:selectOneMenu id="estadosolicitudAH"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.estadoSolicitudch.oidestadosolicitud}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.estadosolicitud}"/>
                             <a4j:ajax event="change" render="DatosBasicos,panelAprobacionFuncionario" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarSubestado}" execute="@this, estadosolicitudAH"/>
                         </h:selectOneMenu>
 
-                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"
+                        <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.definirestadodelproceso}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.definirestadodelproceso}:" class="ikont-"  />
                         <h:selectOneMenu id="estadodelprocesoAH"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.subestadoSolicitudch.intoidsubestadosolicitud}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.subestado}"/>
                         </h:selectOneMenu>
-                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.strdescripcion}"
+                        <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.subestadosolicitudch.strdescripcion}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.aprobartotalidadpresupuesto}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.aprobartotalidadpresupuesto}:" class="ikont-"  />
                         <h:selectOneMenu id="aprobarpresupuestoAH" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItem itemValue="0" itemLabel="Si"/>
                             <f:selectItem itemValue="1" itemLabel="No"/>
                         </h:selectOneMenu>
 
-                        <h:outputLabel  class="id-jsf- "   value="Si"
+                        <h:outputLabel  class="ikont- "   value="Si"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"/>
 
-                        <h:outputLabel  class="id-jsf- "   value="No"
+                        <h:outputLabel  class="ikont- "   value="No"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobapresupuesto}"/>
 
 
-                        <h:outputText  class="id-jsf- "   value="#{var.valoraprobado}:" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.valoraprobado}:" class="ikont-"  />
                         <rich:inputNumberSpinner minValue="0" maxValue="5000000000"
                                                  inputSize="10" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
                                                  rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
-                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
+                        <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlraprobado}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:convertNumber pattern="$ ###,###"/>
                         </h:outputLabel>
 
-                        <h:outputText  class="id-jsf- "   value="#{var.observaciones}" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.observaciones}" class="ikont-"  />
                         <h:inputTextarea id="valoraprobadoAH" rows="3" cols="20" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservaciones}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
-                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservaciones}"
+                        <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.textobservaciones}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
 
                         </h:outputLabel>
 
-                        <h:outputText  class="id-jsf- "   value="#{var.aprobadojuntadirectiva}?" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "   value="#{var.aprobadojuntadirectiva}?" class="ikont-"  />
                         <h:selectOneMenu id="aprobadojuntaAH" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItem itemValue="0" itemLabel="Si"/>
                             <f:selectItem itemValue="1" itemLabel="No"/>
                         </h:selectOneMenu>
-                        <h:outputLabel  class="id-jsf- "   value="Si"
+                        <h:outputLabel  class="ikont- "   value="Si"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"/>
 
-                        <h:outputLabel  class="id-jsf- "   value="No"
+                        <h:outputLabel  class="ikont- "   value="No"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaprobajunta}"/>
 
 
-                        <h:outputText  class="id-jsf- "    value="#{var.fechajuntadirectiva}" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "    value="#{var.fechajuntadirectiva}" class="ikont-"  />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecjuntaAH" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}" inputSize="10" immediate="true">
 
                         </rich:calendar>
-                        <h:outputLabel  class="id-jsf- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}"
+                        <h:outputLabel  class="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechajunta}"
                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputLabel>
 
 
-                        <h:outputText  class="id-jsf- "    value="#{var.actajuntadirectiva}:" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" class="id-jsf-"  />
+                        <h:outputText  class="ikont- "    value="#{var.actajuntadirectiva}:" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" class="ikont-"  />
 
                         <h:panelGrid id="panel_subirActa"  columns="6" columnClasses="buttonsmall" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==11 }">
 
-                            <a4j:commandButton id="adjuntarActa" class="id-jsf-"   value="#{var.examinar}" 
+                            <a4j:commandButton id="adjuntarActa" class="ikont-"   value="#{var.examinar}" 
                                                onclick="#{rich:component('panelUploadActa')}.show(); return false;" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}" >
                             </a4j:commandButton>
-                            <h:outputText  class="id-jsf- "   id="txtActaRuta" value="#{var.rutadocumento}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                            <h:outputText  class="ikont- "   id="txtActaRuta" value="#{var.rutadocumento}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
                             <h:inputText id="inputDescActa" value=" #{file.onlyName}" disabled="true" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
-                            <a4j:commandLink id="bt_agregarActa" class="id-jsf-"   title="#{var.agregar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                            <a4j:commandLink id="bt_agregarActa" class="ikont-"   title="#{var.agregar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActaaLista}"
                                              render="panelAprobacionFuncionario,panelUploadActa"/>
                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.files}" var="file" >
-                                <h:outputText  class="id-jsf- "   id="otxt_nombreActa" value=" #{file.onlyName}"  rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                                <h:outputText  class="ikont- "   id="otxt_nombreActa" value=" #{file.onlyName}"  rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
                             </rich:dataGrid>
 
                         </h:panelGrid>
@@ -163,12 +163,12 @@
 
                 <center>
                     <h:panelGrid columns="2">
-                        <a4j:commandButton id="guardarAH" class="id-jsf-"   value="#{var.guardar}"
+                        <a4j:commandButton id="guardarAH" class="ikont-"   value="#{var.guardar}"
                                            rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                            action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"
                                            oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"
                                            render="layoutConfirmarGuardadoAtencion"/>
-                        <a4j:commandButton id="CancelarAH" class="id-jsf-"   value="#{var.cancelar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                        <a4j:commandButton id="CancelarAH" class="ikont-"   value="#{var.cancelar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                            oncomplete="#{rich:component('panelCancelarSolicitud')}.show(); return false;"/>
                     </h:panelGrid>
                 </center>

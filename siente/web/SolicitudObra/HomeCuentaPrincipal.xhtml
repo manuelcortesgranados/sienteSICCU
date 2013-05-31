@@ -14,7 +14,7 @@
         <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.cuentaprincipal}"/>
+        <h:outputText  class="ikont- "   value="#{var.cuentaprincipal}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_soliobra.xhtml"/>
@@ -30,54 +30,54 @@
 
                 <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" >
                     <f:facet name="header">
-                        <h:outputText  class="id-jsf- "   value="1. #{var.cuentaprincipal}"/>
+                        <h:outputText  class="ikont- "   value="1. #{var.cuentaprincipal}"/>
                     </f:facet>
                     <center>
                         <h:panelGroup>
 
                             <h:panelGrid columns="2" cellspacing="15" >
-                                <h:outputText  class="id-jsf- "   value="#{var.nombredecuenta}"/>
+                                <h:outputText  class="ikont- "   value="#{var.nombredecuenta}"/>
                                 <h:inputText size="8" id="nombrecuenta"/>
-                                <h:outputText  class="id-jsf- "   value="#{var.tipodecuenta}"/>
+                                <h:outputText  class="ikont- "   value="#{var.tipodecuenta}"/>
                                 <h:selectOneMenu id="tipocuenta"/>
-                                <h:outputText  class="id-jsf- "   value="#{var.montocuenta}"/>
+                                <h:outputText  class="ikont- "   value="#{var.montocuenta}"/>
                                 <h:inputText size="8" id="montocuenta"/>
-                                <h:outputText  class="id-jsf- "   value="#{var.saldoactual}"/>
+                                <h:outputText  class="ikont- "   value="#{var.saldoactual}"/>
                                 <h:inputText size="8" id="saldoactual"/>
                             </h:panelGrid>
                             <h:panelGrid columns="1" cellspacing="15">
-                                <a4j:commandButton id="agregar" value="#{var.agregar}" class="id-jsf-"     >
+                                <a4j:commandButton id="agregar" value="#{var.agregar}" class="ikont-"     >
                                 </a4j:commandButton>
                             </h:panelGrid>
                             <rich:dataTable id="tablacuentas"  var="currentRow" rows="7" >
                                 <f:facet name="header" >
                                     <rich:columnGroup >
                                         <rich:column colspan="4">
-                                            <h:outputText  class="id-jsf- "   value="#{var.listacuentas}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.listacuentas}"/>
                                         </rich:column>
                                         <rich:column breakRowBefore="true" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.nombrecuenta}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.nombrecuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  class="id-jsf- "   value="#{var.tipocuenta}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.tipocuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  class="id-jsf- "   value="#{var.monto}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.monto}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  class="id-jsf- "   value="#{var.eliminarcuenta}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.eliminarcuenta}"/>
                                         </rich:column>
                                     </rich:columnGroup>
 
                                 </f:facet>
                                 <rich:column  >
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
                                     <a4j:commandLink value="Ir"/>

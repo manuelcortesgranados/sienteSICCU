@@ -22,14 +22,14 @@
         <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
+        <h:outputText  class="ikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
     </ui:define>
     <ui:define name="body">
         <h:form target="_blank" > 
             <h:panelGroup >
                 <div >
                     <marquee scrolldelay="200" behavior="alternate" >
-                        <rich:message for="txt_strnombre_documento" class="id-jsf-"  />
+                        <rich:message for="txt_strnombre_documento" class="ikont-"  />
                     </marquee>
                 </div>
                 <interkont:spacer height="20px" />
@@ -44,40 +44,40 @@
                                     rowClasses="cabezo_tabla01, cabezo_tabla02" >
                         <rich:column width="320px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.houtnomdocu} "/>
+                                <h:outputText  class="ikont- "   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}"/>
+                            <h:outputText  class="ikont- "   value="#{currentRow.strnombre}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
+                                <h:outputText  class="ikont- "   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  class="ikont- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "    value="#{var.fechadeldocumento}"/>
+                                <h:outputText  class="ikont- "    value="#{var.fechadeldocumento}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   value="#{currentRow.datefecha}">
+                            <h:outputText  class="ikont- "   value="#{currentRow.datefecha}">
                                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
+                                <h:outputText  class="ikont- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo(filaSeleccionada)}"  immediate="true">
-                                <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  class="ikont- "    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
                         <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "    value="#{var.eliminar}"/>
+                                <h:outputText  class="ikont- "    value="#{var.eliminar}"/>
                             </f:facet>
                             <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action(filaSeleccionada)}"
                                              rendered="#{!currentRow.tipodocumento.obligatorio}" execute="@this"
                                              title="#{var.eliminar}"  immediate="true" render="tablaDocumentosContrato">
-                                <h:graphicImage  class="id-jsf- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                <h:graphicImage  class="ikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -94,19 +94,19 @@
                 <f:facet name="header">
                     <rich:columnGroup>
                         <rich:column colspan="4" >
-                            <h:outputText  class="id-jsf- "   value="#{var.subidarapidadedocumentos}"/>
+                            <h:outputText  class="ikont- "   value="#{var.subidarapidadedocumentos}"/>
                         </rich:column>
                         <rich:column breakRowBefore="true" >
-                            <h:outputText  class="id-jsf- "    value="#{var.nombre}"/>
+                            <h:outputText  class="ikont- "    value="#{var.nombre}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
+                            <h:outputText  class="ikont- "   value="#{var.tipo}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  class="id-jsf- "   value="#{var.fechadeldocumento}"/>
+                            <h:outputText  class="ikont- "   value="#{var.fechadeldocumento}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  class="id-jsf- "   value="#{var.subir}"/>
+                            <h:outputText  class="ikont- "   value="#{var.subir}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
@@ -125,10 +125,10 @@
                         </rich:column>
                         <rich:column >
                             <h:panelGrid id="panelsubido" columns="3">
-                               <a4j:commandButton class="id-jsf-"   value="#{var.examinar}" immediate="true"
+                               <a4j:commandButton class="ikont-"   value="#{var.examinar}" immediate="true"
                                                            oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
                                  <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" >
-                                            <h:outputText  class="id-jsf- "   value=" #{file.nombre}"/>
+                                            <h:outputText  class="ikont- "   value=" #{file.nombre}"/>
                                         </rich:dataGrid>
                                <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"
                                                            title="#{var.agregar}" value="#{var.agregar}"

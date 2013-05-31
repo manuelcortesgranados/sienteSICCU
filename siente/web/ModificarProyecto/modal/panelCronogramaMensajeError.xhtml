@@ -14,13 +14,13 @@
     <rich:popupPanel id="mp_cronograma_msjerror" resizeable="false" trimOverlayedElements="false"  autosized="true"  headerClass="rich-panel-header" minWidth="400" minHeight="150">
         <f:facet name="header"  >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.titulomodalvalcronomod}" class="id-jsf-"  />
+                <h:outputText  class="ikont- "   value="#{var.titulomodalvalcronomod}" class="ikont-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" class="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp_cronograma_msjerror')}.hide();
                                              return false;">
@@ -28,56 +28,56 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGrid id="panelMensajes" class="id-jsf-"  >
+        <h:panelGrid id="panelMensajes" class="ikont-"  >
             <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="id-jsf-"  >
+                <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="ikont-"  >
                     <h:panelGroup>
-                        <h:graphicImage  class="id-jsf- "   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                        <h:outputText  class="id-jsf- "   value="#{var.cronogramamodificacioninvalido}" class="id-jsf-"   />
+                        <h:graphicImage  class="ikont- "   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                        <h:outputText  class="ikont- "   value="#{var.cronogramamodificacioninvalido}" class="ikont-"   />
                     </h:panelGroup>
-                    <h:outputText  class="id-jsf- "   value=" #{file.nombre}" class="id-jsf-"  />
+                    <h:outputText  class="ikont- "   value=" #{file.nombre}" class="ikont-"  />
                 </h:panelGrid>
             </a4j:repeat>
             <rich:panel rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}">
                 <rich:dataTable id="tablalistaerror" rows="5" 
-                                rowClasses="background_azul,background_blanco" class="id-jsf-"  
+                                rowClasses="background_azul,background_blanco" class="ikont-"  
                                 value="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.mensajesExcel}"
                                 var="actual">
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column colspan="3">
-                                <h:outputText  class="id-jsf- "   value="#{var.titulolistaerroresmodificar}"  />
+                                <h:outputText  class="ikont- "   value="#{var.titulolistaerroresmodificar}"  />
                             </rich:column>
                             <rich:column breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{var.columna}"  />
+                                <h:outputText  class="ikont- "   value="#{var.columna}"  />
                             </rich:column>
                             <rich:column  >
-                                <h:outputText  class="id-jsf- "   value="#{var.fila}" />
+                                <h:outputText  class="ikont- "   value="#{var.fila}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{var.descripcion}"  />
+                                <h:outputText  class="ikont- "   value="#{var.descripcion}"  />
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column  breakRowBefore="true">
-                            <h:outputText  class="id-jsf- "   value="#{actual.tituloColumna}"/>
+                            <h:outputText  class="ikont- "   value="#{actual.tituloColumna}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{actual.fila}"/>
+                            <h:outputText  class="ikont- "   value="#{actual.fila}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{actual.detalle}"/>
+                            <h:outputText  class="ikont- "   value="#{actual.detalle}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </rich:dataTable>
                 <h:form>
                     <rich:dataScroller for="tablalistaerror" maxPages="10">
                         <f:facet name="first">
-                            <h:outputText  class="id-jsf- "   value="#{var.primeroCiu}"/>
+                            <h:outputText  class="ikont- "   value="#{var.primeroCiu}"/>
                         </f:facet>
                         <f:facet name="last">
-                            <h:outputText  class="id-jsf- "   value="#{var.ultimoCiu}"/>
+                            <h:outputText  class="ikont- "   value="#{var.ultimoCiu}"/>
                         </f:facet>
                     </rich:dataScroller>
                 </h:form>

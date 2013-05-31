@@ -14,7 +14,7 @@
 
         </ui:define>
         <ui:define name="title">
-            <h:outputText  class="id-jsf- "   value="#{var.asociarentidadusuario}"/>
+            <h:outputText  class="ikont- "   value="#{var.asociarentidadusuario}"/>
         </ui:define>
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,19 +29,19 @@
                     <center>
                         <h:panelGrid >
                             <interkont:spacer height="20" />
-                            <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" class="id-jsf-"  >
+                            <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" class="ikont-"  >
 
                                 <h:panelGrid columns="2">
-                                    <h:outputLabel  class="id-jsf- "   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
+                                    <h:outputLabel  class="ikont- "   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
                                     <h:selectOneMenu value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
                                         <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                         <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <h:panelGrid id="prueba" columns="3">
-                                    <h:outputText  class="id-jsf- "   value="#{var.Usuario}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.Usuario}"/>
                                     <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
-                                    <rich:message for="txtusu_login" class="id-jsf-"  />
+                                    <rich:message for="txtusu_login" class="ikont-"  />
                                 </h:panelGrid>                                    
                                <br/>
                                <br/>                                

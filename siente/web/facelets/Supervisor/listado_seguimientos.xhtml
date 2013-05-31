@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich" 
                 >
    
-    <h:panelGroup id="gpListaSeguimientos" class="id-jsf-"  >
+    <h:panelGroup id="gpListaSeguimientos" class="ikont-"  >
             <rich:dataTable id="tablaSeguimientos"
                             rows="10"
                             var="segumiento"
@@ -20,51 +20,51 @@
                             sortMode="single"
                             value="#{SessionBeanCobra.cobraService.listaseguimientos}"
                             
-                            class="id-jsf-"  >
+                            class="ikont-"  >
                 <f:facet name="header">
                     <rich:columnGroup>
                         <rich:column colspan="5">
-                            <h:outputText  class="id-jsf- "   value="#{var.seguimientos}" />
+                            <h:outputText  class="ikont- "   value="#{var.seguimientos}" />
                         </rich:column>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  class="id-jsf- "   value="#{var.firmainter}"/>
+                            <h:outputText  class="ikont- "   value="#{var.firmainter}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{var.visitadopor}" />
+                            <h:outputText  class="ikont- "   value="#{var.visitadopor}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{var.fechavisita}" />
+                            <h:outputText  class="ikont- "   value="#{var.fechavisita}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{var.consultar}" />
+                            <h:outputText  class="ikont- "   value="#{var.consultar}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="id-jsf- "   value="#{var.reporte}" />
+                            <h:outputText  class="ikont- "   value="#{var.reporte}" />
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
                 <rich:columnGroup >
                     <rich:column>
-                        <h:outputText  class="id-jsf- "   value="#{segumiento.strnombrecompleto}"/>
+                        <h:outputText  class="ikont- "   value="#{segumiento.strnombrecompleto}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  class="id-jsf- "   value="#{segumiento.strvisitador}"/>
+                        <h:outputText  class="ikont- "   value="#{segumiento.strvisitador}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  class="id-jsf- "   value="#{segumiento.datefechavisita}">
+                        <h:outputText  class="ikont- "   value="#{segumiento.datefechavisita}">
                             <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
                                        immediate="true">
-                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>
 
                     </rich:column>
                     <rich:column> 
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
-                            <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>                              
                     </rich:column>
                 </rich:columnGroup>
@@ -76,10 +76,10 @@
 
           
                 <h:panelGrid columnClasses="panelcenter" >
-                    <h:commandLink target="_blank"  class="id-jsf-"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
+                    <h:commandLink target="_blank"  class="ikont-"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
                 </h:panelGrid>
             
-            <h:outputText  class="id-jsf- "   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
+            <h:outputText  class="ikont- "   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
         </center>
     </h:panelGroup>
 

@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp_editar_imagenevolucion" moveable="false" width="592" height="430"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.editarimagen}"/>
+                <h:outputText  class="ikont- "   value="#{var.editarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_editar_imagenevolucion" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp_editar_imagenevolucion" class="ikont-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar_imagenevolucion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -26,30 +26,30 @@
         </f:facet>
 
         <h:form> 
-            <rich:panel class="id-jsf-"   >
+            <rich:panel class="ikont-"   >
 
                 <h:panelGrid width="100%" id="gpImagenModalEditar">
                     <interkont:spacer height="70px"/>
                     <h:panelGrid id="pg_campos_editar_imagenevolucion" columns="3" width="100%" >
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  class="id-jsf- "   value="#{var.nombre}"/>
+                        <h:outputLabel  class="ikont- "   value="#{var.nombre}"/>
                         <h:inputText id="txt_strnombre_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.strnombre}" required="true">
                             <h:message for="txt_strnombre_imgev_ed"/>
                         </h:inputText>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  class="id-jsf- "   value="#{var.tipo}"/>
+                        <h:outputLabel  class="ikont- "   value="#{var.tipo}"/>
                         <h:selectOneMenu id="select_tipoimageneditar" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.tipoimagen.intidtipoimagen}">
                             <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoImagen}" />
                         </h:selectOneMenu>
 
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  class="id-jsf- "   value="#{var.fecha}" />
+                        <h:outputLabel  class="ikont- "   value="#{var.fecha}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.datefecha}" required="true">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="80px"/>
                     <h:panelGrid columns="2" width="100%" >
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" class="id-jsf-"  
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" class="ikont-"  
                                            value="#{var.aceptar}"
                                            oncomplete="#{rich:component('mp_editar_imagenevolucion')}.hide();"
                                            render="panel_imagenesevolucion" title="#{var.aceptar}"/>

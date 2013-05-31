@@ -11,34 +11,34 @@
 
 
     <rich:popupPanel  id="confirmarCambioEstado" autosized="true"
-                      headerClass="sliderich" class="id-jsf-"   >
+                      headerClass="sliderich" class="ikont-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="Solicitar cambio de estado de #{var.solicitudproyecto}"/>
+                <h:outputText  class="ikont- "    value="Solicitar cambio de estado de #{var.solicitudproyecto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_confirmarCambioEstado" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_confirmarCambioEstado" class="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('confirmarCambioEstado')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <center>
-                <h:panelGrid id="pgconfirmarCambioEstado"  columnClasses="panelcenter" width="300px" class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                    <h:graphicImage  class="id-jsf- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                <h:panelGrid id="pgconfirmarCambioEstado"  columnClasses="panelcenter" width="300px" class="ikont-"   cellpadding="0" cellspacing="0" >
+                    <h:graphicImage  class="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
                     <h:panelGroup>
                         <center>
-                            <h:outputText  class="id-jsf- "   class="id-jsf-"   value="Está completamente seguro de solicitar el cambio de estado de su #{var.solicitudproyecto}?" />
+                            <h:outputText  class="ikont- "   class="ikont-"   value="Está completamente seguro de solicitar el cambio de estado de su #{var.solicitudproyecto}?" />
                         </center>
                     </h:panelGroup>
                     <center>
                         <interkont:spacer height="15" />
                         <h:panelGroup>
-                            <a4j:commandButton id="BTaceptarCambio" value="Si" class="id-jsf-"   oncomplete="#{rich:component('confirmarCambioEstado')}.hide();" action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}"/>
-                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" class="id-jsf-"   onclick="#{rich:component('confirmarCambioEstado')}.hide(); return false;"/>
+                            <a4j:commandButton id="BTaceptarCambio" value="Si" class="ikont-"   oncomplete="#{rich:component('confirmarCambioEstado')}.hide();" action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}"/>
+                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" class="ikont-"   onclick="#{rich:component('confirmarCambioEstado')}.hide(); return false;"/>
                         </h:panelGroup>
                     </center>
                 </h:panelGrid>

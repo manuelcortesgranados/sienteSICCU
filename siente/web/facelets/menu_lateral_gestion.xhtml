@@ -9,45 +9,45 @@
     xmlns:interkont="http://www.interkont.com/jsf">
 
     <rich:panel header="#{SessionBeanCobra.cobraService.headerNombre}" id="menuInicio" bodyClass="tool" headerClass="#{SessionBeanCobra.cobraService.headerStyle}"  >
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  class="id-jsf-"  >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  class="ikont-"  >
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
-                <a4j:commandLink  class="id-jsf-"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true"  />
-                <a4j:commandLink  class="id-jsf-"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
+                <a4j:commandLink  class="ikont-"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true"  />
+                <a4j:commandLink  class="ikont-"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true" />
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                <h:commandLink  class="id-jsf-"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
-                <h:commandLink  class="id-jsf-"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" >
+                <h:commandLink  class="ikont-"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
+                <h:commandLink  class="ikont-"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false" />
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
-                <h:commandLink  class="id-jsf-"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />
-                <h:commandLink  class="id-jsf-"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
+                <h:commandLink  class="ikont-"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />
+                <h:commandLink  class="ikont-"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
             </h:panelGrid>
 
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"> 
-                <h:commandLink class="id-jsf-"   action="reportes" immediate="true" />
-                <h:commandLink class="id-jsf-"   value="Reportes" action="reportes" immediate="true" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"> 
+                <h:commandLink class="ikont-"   action="reportes" immediate="true" />
+                <h:commandLink class="ikont-"   value="Reportes" action="reportes" immediate="true" />
             </h:panelGrid>           
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"> 
-                <a4j:commandLink class="id-jsf-"    actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato" />
-                <a4j:commandLink class="id-jsf-"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato"/>
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"> 
+                <a4j:commandLink class="ikont-"    actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato" />
+                <a4j:commandLink class="ikont-"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato"/>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"> 
-                <a4j:commandLink class="id-jsf-"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"> 
+                <a4j:commandLink class="ikont-"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
                     <f:attribute name="isContrato" value="#{false}" />
                 </a4j:commandLink>
-                <a4j:commandLink class="id-jsf-"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.contratoConvenio}" action="nuevoContrato" >
+                <a4j:commandLink class="ikont-"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.contratoConvenio}" action="nuevoContrato" >
                 </a4j:commandLink>
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnindicadores}"> 
-                <a4j:commandLink class="id-jsf-"   action="indicadores" immediate="true" />
-                <a4j:commandLink class="id-jsf-"   value="Indicadores" action="indicadores" immediate="true" />
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnindicadores}"> 
+                <a4j:commandLink class="ikont-"   action="indicadores" immediate="true" />
+                <a4j:commandLink class="ikont-"   value="Indicadores" action="indicadores" immediate="true" />
             </h:panelGrid>
-            <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"> 
-                <h:outputLink class="id-jsf-"   target="_blank" value="#{var.linksoporte}" />
-                <a4j:commandLink id="btSoporte" class="id-jsf-"   value="Soporte" onclick="document.location.href='#{var.linksoporte}';"
+            <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"> 
+                <h:outputLink class="ikont-"   target="_blank" value="#{var.linksoporte}" />
+                <a4j:commandLink id="btSoporte" class="ikont-"   value="Soporte" onclick="document.location.href='#{var.linksoporte}';"
                                  />
             </h:panelGrid>
 

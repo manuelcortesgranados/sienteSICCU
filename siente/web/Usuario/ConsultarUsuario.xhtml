@@ -15,7 +15,7 @@
     <ui:define name="head" ></ui:define>
 
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="Consultar usuario" />
+        <h:outputText  class="ikont- "   value="Consultar usuario" />
     </ui:define>
 
     <ui:define name="menu">
@@ -36,7 +36,7 @@
                             <div class="buscador">
                                 <div id="buscador_space">
                                     <label>
-                                        <h:inputText id="txtPalabraClave" class="id-jsf-"    onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
+                                        <h:inputText id="txtPalabraClave" class="ikont-"    onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
                                         <a4j:commandButton type="button" action="#{Perfil$Usuario.buscarUsuarioporCriterios}" id="filtrar"  value="#{var.buscar}" render="pnconsultarUsuario"  />
 
                                     </label>
@@ -56,41 +56,41 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText  class="id-jsf- "   value="Usuarios encontrados" />
+                                        <h:outputText  class="ikont- "   value="Usuarios encontrados" />
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  class="id-jsf- "   value="Nombre completo" />
+                                        <h:outputText  class="ikont- "   value="Nombre completo" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  class="id-jsf- "   value="Login" />
+                                        <h:outputText  class="ikont- "   value="Login" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  class="id-jsf- "   value="Cédula" />
+                                        <h:outputText  class="ikont- "   value="Cédula" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  class="id-jsf- "   value="Perfil usuario" />
+                                        <h:outputText  class="ikont- "   value="Perfil usuario" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  class="id-jsf- "   value="Ver" />
+                                        <h:outputText  class="ikont- "   value="Ver" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
 
                             <rich:column breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.strnombrecompleto}" />
+                                <h:outputText  class="ikont- "   value="#{currentRow.tercero.strnombrecompleto}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{currentRow.usuLogin}" />
+                                <h:outputText  class="ikont- "   value="#{currentRow.usuLogin}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.intcedula}" />
+                                <h:outputText  class="ikont- "   value="#{currentRow.tercero.intcedula}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                <h:outputText  class="ikont- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink  action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
-                                    <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png" />
+                                    <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png" />
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:dataTable>

@@ -12,8 +12,8 @@
             <center>
                 <rich:panel >
                     <h:panelGroup>
-                        <h:graphicImage  class="id-jsf- "   value="/resources/imgs/msginfo.png"/>
-                        <h2><h:outputText  class="id-jsf- "   value="#{var.moduloenconstruccion}"/></h2>
+                        <h:graphicImage  class="ikont- "   value="/resources/imgs/msginfo.png"/>
+                        <h2><h:outputText  class="ikont- "   value="#{var.moduloenconstruccion}"/></h2>
                     </h:panelGroup>
                     <h:commandLink value="Volver" type="submit" action="volver" id="volver"/>
                 </rich:panel>

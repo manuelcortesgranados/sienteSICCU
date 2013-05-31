@@ -11,53 +11,53 @@
     <rich:panel id="panelConfirmarColombiaHum">
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText  class="id-jsf- "   value="#{var.datosch}"/>
+                <h:outputText  class="ikont- "   value="#{var.datosch}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="4">
-                    <h:outputLabel  class="id-jsf- "   id="lbestEdit"  value="#{var.estado}" />
+                    <h:outputLabel  class="ikont- "   id="lbestEdit"  value="#{var.estado}" />
                     <h:selectOneMenu>
                         <f:selectItem itemValue="Seleccione" />
                     </h:selectOneMenu>
-                    <h:outputLabel  class="id-jsf- "   id="lblvlraproEdit"  value="#{var.valorap}" />
+                    <h:outputLabel  class="ikont- "   id="lblvlraproEdit"  value="#{var.valorap}" />
                     <h:inputText value="" />
-                    <h:outputLabel  class="id-jsf- "   id="lblpriEdit"  value="#{var.prioridad}" />
+                    <h:outputLabel  class="ikont- "   id="lblpriEdit"  value="#{var.prioridad}" />
                     <rich:inputNumberSpinner id="numberSpinnerPrioridad" minValue="1" maxValue="100"/>
-                    <h:outputLabel  class="id-jsf- "   id="lblFecjuEdit"  value="#{var.fechajunta}" />
+                    <h:outputLabel  class="ikont- "   id="lblFecjuEdit"  value="#{var.fechajunta}" />
                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
                     </rich:calendar>
-                    <h:outputLabel  class="id-jsf- "    value="#{var.observaciones}"/>
+                    <h:outputLabel  class="ikont- "    value="#{var.observaciones}"/>
                 </h:panelGrid>
                 <h:panelGrid >
                     <h:inputTextarea cols="58"/>
                 </h:panelGrid>
                 <a4j:commandButton id="btAceptarSoliCH"  
                                    value="#{var.aceptar}"
-                                   class="id-jsf-"    />
+                                   class="ikont-"    />
                 <a4j:commandButton id="btCancelarSoliCH"  
                                    value="#{var.cancelar}"
-                                   class="id-jsf-"    />
+                                   class="ikont-"    />
             </center>
         </rich:collapsiblePanel>
 
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText  class="id-jsf- "   value="#{var.verdatosch}"/>
+                <h:outputText  class="ikont- "   value="#{var.verdatosch}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
                     <h:panelGrid  columns="2">
-                        <h:outputLabel  class="id-jsf- "   id="lbest"  value="#{var.estado}" />
+                        <h:outputLabel  class="ikont- "   id="lbest"  value="#{var.estado}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  class="id-jsf- "   id="lblvlrapro"  value="#{var.valorap}" />
+                        <h:outputLabel  class="ikont- "   id="lblvlrapro"  value="#{var.valorap}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  class="id-jsf- "   id="lblpri"  value="#{var.prioridad}" />
+                        <h:outputLabel  class="ikont- "   id="lblpri"  value="#{var.prioridad}" />
                         <h:inputText value="" disabled="true" />
                     </h:panelGrid>
                     <h:panelGrid  columns="2">
-                        <h:outputLabel  class="id-jsf- "   id="lblFecju"  value="#{var.fechajunta}" />
+                        <h:outputLabel  class="ikont- "   id="lblFecju"  value="#{var.fechajunta}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  class="id-jsf- "    value="#{var.observaciones}"/>
+                        <h:outputLabel  class="ikont- "    value="#{var.observaciones}"/>
                         <h:inputTextarea value="" cols="23" rows="3" disabled="true"/>
                     </h:panelGrid>
                 </h:panelGrid>

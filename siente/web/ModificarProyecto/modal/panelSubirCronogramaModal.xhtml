@@ -14,13 +14,13 @@
     <rich:popupPanel id="panelUploadCronograma" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="#{var.cargarcronograma}"/>
+                <h:outputText  class="ikont- "    value="#{var.cargarcronograma}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadCronograma" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelUploadCronograma" class="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelUploadCronograma')}.hide();
                                              return false;">
@@ -28,7 +28,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel class="ikont-"   >
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -50,18 +50,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="ikont- "   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
+                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
+                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -71,7 +71,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorCronograma.borrarDatosSubidos}" render="infoCrono1, uploadCrono, panelInfoCronoSubido"
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"     />
+                                                   class="ikont-"     />
                                 <a4j:commandButton oncomplete="btValidarCronogramaOnComplete();" value="#{var.validar}" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}"
                                                    render="panelMensajes,funcionBtValidarCronogramaOnComplete, panelInfoCronoSubido, messages" action="#{Supervisor$ModificarProyecto.btValidarCronogramaAction}"
                                                    />

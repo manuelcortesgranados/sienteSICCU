@@ -17,21 +17,21 @@
                 <h:form>
                     <rich:panel>
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.subirimagenes}"/>
+                            <h:outputText  class="ikont- "   value="#{var.subirimagenes}"/>
                         </f:facet>
                         <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
-                            <h:outputText  class="id-jsf- "   value="#{var.subalasimagenesantes}"/>
+                            <h:outputText  class="ikont- "   value="#{var.subalasimagenesantes}"/>
                             <h:panelGrid columns="2" >
 
                                 <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="rich-panel-grid-body">
                                     <center>
-                                        <h:panelGrid id="layoutImagen" class="id-jsf-"   columnClasses="aiu">
+                                        <h:panelGrid id="layoutImagen" class="ikont-"   columnClasses="aiu">
 
-                                            <a4j:commandLink id="btAdjuntarImagen" class="id-jsf-"   >
+                                            <a4j:commandLink id="btAdjuntarImagen" class="ikont-"   >
                                                 <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
-                                            <h:outputText  class="id-jsf- "   id="ImagenAtencionppal" value="#{var.nombre}"/>
+                                            <h:outputText  class="ikont- "   id="ImagenAtencionppal" value="#{var.nombre}"/>
                                             <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
                                             <!--<rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" >
@@ -41,7 +41,7 @@
                                         <center>
                                             <!--
                                             <h:panelGrid>
-                                                <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" class="id-jsf-"   value="#{var.subir}"
+                                                <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" class="ikont-"   value="#{var.subir}"
                                                                  action="#{Supervisor$IngresarNuevaObra.subirImagenaPrincipal}"
                                                                  render="tablaImagenes,spimagen,panelImagenProyecto"/>
                                             </h:panelGrid>-->
@@ -51,12 +51,12 @@
                                 <rich:panel id="imagensecundaria" header="#{var.imagensecundaria}" bodyClass="rich-panel-grid-body" >
                                     <center>
                                         <h:panelGrid id="panel_subirImagen"  columns="1" >
-                                            <a4j:commandLink id="adjuntarImagen" class="id-jsf-"   >
+                                            <a4j:commandLink id="adjuntarImagen" class="ikont-"   >
                                                 <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
 
-                                            <h:outputText  class="id-jsf- "   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
+                                            <h:outputText  class="ikont- "   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
                                             <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
                                             <!--<rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" >
@@ -66,7 +66,7 @@
                                     </center>
                                     <center>
                                        <!-- <h:panelGrid>
-                                            <a4j:commandLink id="bt_agregarImagen"  title="#{var.subir}" class="id-jsf-"   value="#{var.subir}"
+                                            <a4j:commandLink id="bt_agregarImagen"  title="#{var.subir}" class="ikont-"   value="#{var.subir}"
                                                              action="#{Supervisor$IngresarNuevaObra.subirImagenaLista}"
                                                              render="tablaImagenes,spimagen,panelImagenProyecto"/>
                                         </h:panelGrid>-->
@@ -77,34 +77,34 @@
                                 <rich:dataTable id="tablaImagenes" value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
                                                 var="currentRow"  binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}" rows="3" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.imgseleccionadas}"/>
+                                        <h:outputText  class="ikont- "   value="#{var.imgseleccionadas}"/>
                                     </f:facet>
                                     <rich:column breakRowBefore="true"  >
                                         <f:facet name="header" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.tipo}"/>
                                         </f:facet>
-                                        <h:outputText  class="id-jsf- "   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                        <h:outputText  class="ikont- "   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
                                     </rich:column>
 
                                     <rich:column  >
                                         <f:facet name="header" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.nombreah}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.nombreah}"/>
                                         </f:facet>
-                                        <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}"/>
+                                        <h:outputText  class="ikont- "   value="#{currentRow.strnombre}"/>
                                     </rich:column>
                                     <rich:column  id="Imagen">
                                         <f:facet name="header" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.imagen}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.imagen}"/>
                                         </f:facet>
 
-                                        <h:graphicImage  class="id-jsf- "   value="#{currentRow.strubicacion}"  />
+                                        <h:graphicImage  class="ikont- "   value="#{currentRow.strubicacion}"  />
                                     </rich:column>
 
                                     <rich:column >
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.eliminar}"/>
                                         </f:facet>
-                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}" class="id-jsf-"   
+                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}" class="ikont-"   
                                                              render="tablaImagenes"
                                                            action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
                                     </rich:column>

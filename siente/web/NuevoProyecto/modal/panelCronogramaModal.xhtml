@@ -11,14 +11,14 @@
        <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClass="rich-panel-header">
            <f:facet name="header" >
                <h:panelGroup >
-                   <h:outputText  class="id-jsf- "   value="#{var.atencion}" class="id-jsf-"  />
+                   <h:outputText  class="ikont- "   value="#{var.atencion}" class="ikont-"  />
                </h:panelGroup>
            </f:facet>
            <f:facet name="controls">
                
                    <h:panelGroup>
                        <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
-                                          class="id-jsf-"    onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
+                                          class="ikont-"    onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
                    </h:panelGroup>
                
            </f:facet>
@@ -31,20 +31,20 @@
    
                            <h:panelGroup>
                                 
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.aldarclickenelboto} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.cobra} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.vaagenerar} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.cronograma} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.en} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.excel} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.unavezdiligenciado}"/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.alsistemaeimporte} "/>
-                               <h:outputText  class="id-jsf- "   class="id-jsf-"   value="(#{var.recuerdequedebeguar})"/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.aldarclickenelboto} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.cobra} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.vaagenerar} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.cronograma} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.en} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.excel} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.unavezdiligenciado}"/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.alsistemaeimporte} "/>
+                               <h:outputText  class="ikont- "   class="ikont-"   value="(#{var.recuerdequedebeguar})"/>
                            </h:panelGroup>
                            
                           <h:panelGrid>
                            <interkont:spacer height="5"/>
-                           <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.silodeseapuedecerrar}"/>
+                           <h:outputText  class="ikont- "   class="ikont-"   value="#{var.silodeseapuedecerrar}"/>
                                
                          </h:panelGrid>
    
@@ -53,7 +53,7 @@
                               <h:form>
                                <interkont:spacer height="20"/>
                                <h:commandButton value="#{var.generarcronograma}"                                                
-                                                 class="id-jsf-"  
+                                                 class="ikont-"  
                                                   action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
                                                   onclick="#{rich:component('mp_cronograma')}.hide();">
                                </h:commandButton>

@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalimpactosocial" headerClass="rich-panel-header" height="148" width="354" moveable="false">
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="Impacto Social" class="id-jsf-"   />
+                <h:outputText  class="ikont- "   value="Impacto Social" class="ikont-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -23,37 +23,37 @@
                     <a4j:commandLink id="esconder-modalimpactosocial"
                                        onclick="#{rich:component('modalimpactosocial')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" class="id-jsf-"   />
+                                       title="#{var.cerrar}" immediate="true" class="ikont-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titHabitantesBeneficiados" value="#{var.habitantesbeneficiados}:" />
+                <h:outputText  class="ikont- "   id="titHabitantesBeneficiados" value="#{var.habitantesbeneficiados}:" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="verHabitantesBeneficiados" value="#{Supervision$Externa.objetoSeguimiento.inthabbeneficiados}">
+                <h:outputText  class="ikont- "   id="verHabitantesBeneficiados" value="#{Supervision$Externa.objetoSeguimiento.inthabbeneficiados}">
                     <f:convertNumber pattern="###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titEmpleosDirectos" value="#{var.empleosdirectos}:" />
+                <h:outputText  class="ikont- "   id="titEmpleosDirectos" value="#{var.empleosdirectos}:" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="verEmpleosDirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosdirectos}">
+                <h:outputText  class="ikont- "   id="verEmpleosDirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosdirectos}">
                     <f:convertNumber pattern="###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  class="id-jsf- "   id="titEmpleosIndirectos" value="#{var.empleosindirectos}:" />
+                <h:outputText  class="ikont- "   id="titEmpleosIndirectos" value="#{var.empleosindirectos}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  class="id-jsf- "   id="verEmpleosIndirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosindirectos}">
+                <h:outputText  class="ikont- "   id="verEmpleosIndirectos" value="#{Supervision$Externa.objetoSeguimiento.intempleadosindirectos}">
                     <f:convertNumber pattern="###,###.##" />
                 </h:outputText>
             </rich:panel>

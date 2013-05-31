@@ -13,29 +13,29 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.establecervalla}"/>
+                <h:outputText  class="ikont- "   value="#{var.establecervalla}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" class="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  class="id-jsf-"   >
+        <rich:panel  class="ikont-"   >
             <h:form>
                 <h:panelGrid  id="panelGridConfEstablecerValla">
                     <interkont:spacer height="10"/>
-                    <h:outputText  class="id-jsf- "   value="#{var.confestablecervalla}" />
+                    <h:outputText  class="ikont- "   value="#{var.confestablecervalla}" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" >
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" class="id-jsf-"  
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" class="ikont-"  
                                            oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();" value="#{var.aceptar}"
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton class="id-jsf-"  
+                        <a4j:commandButton class="ikont-"  
                                            onclick="jQuery('.CheckEstablecerValla#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
                                              #{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;" value="#{var.cancelar}"

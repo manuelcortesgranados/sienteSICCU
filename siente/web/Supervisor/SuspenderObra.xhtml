@@ -12,8 +12,8 @@
                 template="/facelets/template_main.xhtml">
 
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="#{var.reiniciarlaobra}" />                        
-        <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
+        <h:outputText  class="ikont- "   value="#{var.reiniciarlaobra}" />                        
+        <h:outputText  class="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
     </ui:define>
 
     <ui:define name="menu">
@@ -43,40 +43,40 @@
                         <center>
                             <h:panelGrid  columns="2">
 
-                                <h:outputText  class="id-jsf- "   value="#{var.ingreselafechadeini} " />
+                                <h:outputText  class="ikont- "   value="#{var.ingreselafechadeini} " />
                                 <h:panelGroup>
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_iniSuspe" 
                                                    inputSize="10"  value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}" >
                                     </rich:calendar>
                                 </h:panelGroup>
 
-                                <h:outputText  class="id-jsf- "   value="#{var.ingreselafechadefinali}" />
+                                <h:outputText  class="ikont- "   value="#{var.ingreselafechadefinali}" />
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_finSuspe"
                                                inputSize="10" value="#{Supervisor$SuspenderObra.suspension.datefecfinhist}" >
                                 </rich:calendar>
 
-                                <h:outputText  class="id-jsf- "   value="#{var.ingreselajustificacion}" />
+                                <h:outputText  class="ikont- "   value="#{var.ingreselajustificacion}" />
                                 <h:panelGroup>
                                     <h:inputTextarea id="txtrazonSusp" value="#{Supervisor$SuspenderObra.suspension.strrazonmodif}" cols="60" rows="6" />
-                                    <rich:message class="id-jsf-"   for="txtrazonSusp" />
+                                    <rich:message class="ikont-"   for="txtrazonSusp" />
                                 </h:panelGroup>
 
                                 <a4j:commandButton id="adjuntarActaSuspension" value="#{var.adjuntaractadesuspen}" render="layoutDocActaSuspension"
-                                                   class="id-jsf-"   
+                                                   class="ikont-"   
                                                    onclick="#{rich:component('panelUploadActaSuspension')}.show();
                                                            return true;" />
                                 <h:panelGroup id="panel_subirActaSuspension">
                                     <rich:panel>
-                                        <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nohasubidoningun}" />
+                                        <h:outputText  class="ikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nohasubidoningun}" />
 
                                         <center>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaSuspension.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}"
                                                            >
-                                                <h:outputText  class="id-jsf- "   value=" #{file.nombre}" />
+                                                <h:outputText  class="ikont- "   value=" #{file.nombre}" />
 
                                                 <interkont:spacer height="8" width="15" />
 
-                                                <h:graphicImage  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}" />
+                                                <h:graphicImage  class="ikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}" />
                                             </rich:dataGrid>
                                         </center>
                                     </rich:panel>
@@ -86,7 +86,7 @@
                                     <h:panelGroup>
                                         <a4j:commandButton id="btn_registrar_suspension" action="#{Supervisor$SuspenderObra.registrarSuspension}"
                                                            value="#{var.registrarSuspension}" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
-                                                           class="id-jsf-"   
+                                                           class="ikont-"   
                                                            oncomplete="#{rich:component('panelConfirmarSuspension')}.show();"
                                                            render="layoutConfSuspension, panelSuspenderObra">
 
@@ -94,7 +94,7 @@
 
                                         <a4j:commandButton id="btn_registrar_suspension1" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
                                                            action="#{Supervisor$SuspenderObra.registrarSuspension}" value="#{var.registrarSuspension}"
-                                                           class="id-jsf-"    render="layoutConfSuspension,panelSuspenderObra">
+                                                           class="ikont-"    render="layoutConfSuspension,panelSuspenderObra">
                                         </a4j:commandButton>
 
                                         <interkont:spacer width="10" />

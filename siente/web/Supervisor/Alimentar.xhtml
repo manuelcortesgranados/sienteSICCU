@@ -17,9 +17,9 @@
         <h:outputScript name="validarletra.js"  library="js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="id-jsf- "   value="Reportar avance"/>
+        <h:outputText  class="ikont- "   value="Reportar avance"/>
 
-        <h:outputText  class="id-jsf- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  class="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
 
     </ui:define>
     <ui:define name="menu">
@@ -38,7 +38,7 @@
                         <h:panelGrid columns="2"  columnClasses="panelizquierda,panelcenter">
                             <h:panelGroup >
                                 <h:panelGrid id="valores" columns="2">
-                                    <h:outputText  class="id-jsf- "   value="#{var.esteavanceposeeacta}"/>
+                                    <h:outputText  class="ikont- "   value="#{var.esteavanceposeeacta}"/>
                                     <h:selectOneMenu id="cmbcontrato" value="#{Supervisor$Alimentar.subiracta}" >
                                         <f:selectItem itemValue="true" itemLabel="Si"/>
                                         <f:selectItem itemValue="false" itemLabel="No"/>
@@ -47,7 +47,7 @@
                                     </h:selectOneMenu>
 
 
-                                    <h:outputLabel  class="id-jsf- "    value="#{var.fechadelacta}" for="fechaalimentacion" />
+                                    <h:outputLabel  class="ikont- "    value="#{var.fechadelacta}" for="fechaalimentacion" />
                                     <h:selectOneMenu id="fecInfo" value="#{Supervisor$Alimentar.fechaescogida}"  rendered="#{var.varalimentacionxperiodo}">
                                         <f:selectItem itemValue="-1" itemLabel="Seleccione"/>
                                         <f:selectItems value="#{Supervisor$Alimentar.periodos}"/>
@@ -59,18 +59,18 @@
                                         <rich:calendar  required="true" datePattern="yyyy-MM-dd"  id="fechaalimentacion" inputSize="10" value="#{Supervisor$Alimentar.fechaAlimentacion}"
                                                         onchange="#{Supervisor$Alimentar.fechaCambio}" direction="topRight" >
                                                   </rich:calendar>
-                                        <rich:message for="fechaalimentacion" class="id-jsf-"  />
+                                        <rich:message for="fechaalimentacion" class="ikont-"  />
                                     </h:panelGrid>
 
                                     <interkont:spacer width="10"/>
                                     <h:panelGroup id="gpErrorAlimentar">
                                         <blink>
-                                            <h:outputText  class="id-jsf- "   value="#{Supervisor$Alimentar.mensajefecha}" rendered="#{!Supervisor$Alimentar.fechavalida}" />
+                                            <h:outputText  class="ikont- "   value="#{Supervisor$Alimentar.mensajefecha}" rendered="#{!Supervisor$Alimentar.fechavalida}" />
                                         </blink>
                                     </h:panelGroup>
 
-                                    <h:outputText  class="id-jsf- "    value="#{var.valorproyectado}:"/>
-                                    <h:outputText  class="id-jsf- "   id="labelValorProyectado" class="id-jsf-"   value="#{Supervisor$Alimentar.alimentacion.numtotalproyacu}">
+                                    <h:outputText  class="ikont- "    value="#{var.valorproyectado}:"/>
+                                    <h:outputText  class="ikont- "   id="labelValorProyectado" class="ikont-"   value="#{Supervisor$Alimentar.alimentacion.numtotalproyacu}">
                                         <f:convertNumber pattern="$ ###,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                     </h:outputText>
 
@@ -78,19 +78,19 @@
 
 
                                 <h:panelGrid id="layoutEjecutado" columns="3">
-                                    <h:outputText  class="id-jsf- "    value="#{var.valortotalejecutado}:"/>
+                                    <h:outputText  class="ikont- "    value="#{var.valortotalejecutado}:"/>
                                     <h:panelGroup id="valorEjecutado">
-                                        <h:outputText  class="id-jsf- "   id="labelValorEjecutado" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
+                                        <h:outputText  class="ikont- "   id="labelValorEjecutado" class="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1]}">
                                             <f:convertNumber pattern="$ ###,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                         </h:outputText>
                                     </h:panelGroup>
                                     <interkont:spacer width="15"/>
-                                    <h:outputText  class="id-jsf- "   id="stDesviacion"
+                                    <h:outputText  class="ikont- "   id="stDesviacion"
                                                   value="#{var.desviacion}"/>
-                                    <h:outputText  class="id-jsf- "   id="lblDesviacion"
-                                                  class="id-jsf-"   value="#{Supervisor$Alimentar.desviacion} %"/>
+                                    <h:outputText  class="ikont- "   id="lblDesviacion"
+                                                  class="ikont-"   value="#{Supervisor$Alimentar.desviacion} %"/>
                                     <interkont:spacer width="10" rendered="#{!Supervisor$Alimentar.fechavalida}"/>
-                                    <h:graphicImage  class="id-jsf- "   id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
+                                    <h:graphicImage  class="ikont- "   id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
                                                     url="#{Supervisor$Alimentar.alimentacion.semaforo.strimagen}"/>
                                     <interkont:spacer width="15" rendered="#{Supervisor$Alimentar.fechavalida}"/>
 
@@ -104,7 +104,7 @@
                                 <center>
                                     <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" border="1"  >
 
-                                        <h:inputTextarea cols="60" id="comentSem"  rows="8" class="id-jsf-"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
+                                        <h:inputTextarea cols="60" id="comentSem"  rows="8" class="ikont-"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
                                         <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
 
                                     </h:panelGrid>
@@ -128,19 +128,19 @@
                                             </rich:column>
 
                                             <rich:column  breakRowBefore="true" width="160px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.valorproyecto}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.valorproyecto}"/>
                                             </rich:column>
                                             <rich:column  width="150px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.valorejecutadofecha}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.valorejecutadofecha}"/>
                                             </rich:column>
                                             <rich:column   width="150px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.valorejeesteeporte}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.valorejeesteeporte}"/>
                                             </rich:column>
                                             <rich:column   width="150px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.valorejecutadoacumulado}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.valorejecutadoacumulado}"/>
                                             </rich:column>
                                             <rich:column   width="150px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.porcentajeavanceacum}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.porcentajeavanceacum}"/>
                                             </rich:column>                                                
 
                                         </rich:columnGroup>
@@ -151,27 +151,27 @@
                                     <f:facet name="footer">
                                         <rich:columnGroup>
                                             <rich:column >
-                                                <h:outputText  class="id-jsf- "   id="stvaltotal2" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                <h:outputText  class="ikont- "   id="stvaltotal2" class="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  class="id-jsf- "   id="stvaleje2" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                <h:outputText  class="ikont- "   id="stvaleje2" class="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra}">
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  class="id-jsf- "   id="stvalejecreporte2" class="id-jsf-"   value="#{Supervisor$Alimentar.totales[1]}">
+                                                <h:outputText  class="ikont- "   id="stvalejecreporte2" class="ikont-"   value="#{Supervisor$Alimentar.totales[1]}">
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  class="id-jsf- "   id="stvalejecacum2" class="id-jsf-"   value="#{Supervisor$Alimentar.totales[1]+Supervisor$AdministrarObraNew.obra.numvalejecobra}">
+                                                <h:outputText  class="ikont- "   id="stvalejecacum2" class="ikont-"   value="#{Supervisor$Alimentar.totales[1]+Supervisor$AdministrarObraNew.obra.numvalejecobra}">
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  class="id-jsf- "   id="stporceporeje2" class="id-jsf-"   value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1])/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                <h:outputText  class="ikont- "   id="stporceporeje2" class="ikont-"   value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra+Supervisor$Alimentar.totales[1])/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                     <f:convertNumber pattern="###.## %"/>
                                                 </h:outputText>
                                             </rich:column>
@@ -179,8 +179,8 @@
                                     </f:facet>
 
                                 </rich:dataTable>
-                                <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" >
-                                    <a4j:commandLink class="id-jsf-"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
+                                <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" >
+                                    <a4j:commandLink class="ikont-"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
                                                      render="layoutTablaMatrix, layoutComentafactor"/>
                                 </h:panelGrid>
                             </h:panelGrid>
@@ -205,41 +205,41 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column id= "actividades" colspan="1" width="120px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.actividades}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.actividades}"/>
                                         </rich:column>
                                         <rich:column id= "total" colspan="4" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.totalactividad}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.totalactividad}"/>
                                         </rich:column>
                                         <rich:column id= "totalEjecutado" colspan="3" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.totalejecutado}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.totalejecutado}"/>
                                         </rich:column>
 
                                         <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="260px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.descripcion}" />
+                                            <h:outputText  class="ikont- "   value="#{var.descripcion}" />
                                         </rich:column>
                                         <rich:column id= "unidad" rowspan="2" width="25px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.unidad}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.unidad}"/>
                                         </rich:column>
                                         <rich:column id= "valorUnitario" rowspan="2" width="25px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.valorunitaio}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.valorunitaio}"/>
                                         </rich:column>
                                         <rich:column id= "cantidad" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.cantidad}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.cantidad}"/>
                                         </rich:column>
                                         <rich:column id= "precio" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.valorprogramado}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.valorprogramado}"/>
                                         </rich:column>
                                         <rich:column id= "cantidad2" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.cantidadejecutada}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.cantidadejecutada}"/>
                                         </rich:column>
                                         <rich:column id= "precio2" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.valorejecutadoreporte}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.valorejecutadoreporte}"/>
                                         </rich:column>                                           
                                         <rich:column id= "cantidad3" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.porcentajeavance}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.porcentajeavance}"/>
                                         </rich:column>
                                         <rich:column id= "precio3" rowspan="2" width="30px">
-                                            <h:outputText  class="id-jsf- "   value="#{var.ingresarcantidadde}"/>
+                                            <h:outputText  class="ikont- "   value="#{var.ingresarcantidadde}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
@@ -249,55 +249,55 @@
                                             <rich:column id="Descripcion" width="250px">
                                                 <rich:panel > 
 
-                                                    <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.strdescactividad}"   rendered="#{registros.actividadobra.boolimprevisto}"/>
+                                                    <h:outputText  class="ikont- "   value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
+                                                    <h:outputText  class="ikont- "   value="#{registros.actividadobra.strdescactividad}"   rendered="#{registros.actividadobra.boolimprevisto}"/>
 
                                                 </rich:panel> 
                                             </rich:column>
                                             <rich:column id="Unidad"  >
-                                                <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.strtipounidadmed}" class="id-jsf-"  />
+                                                <h:outputText  class="ikont- "   value="#{registros.actividadobra.strtipounidadmed}" class="ikont-"  />
                                             </rich:column>
                                             <rich:column id="Precio" >
-                                                <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.numvalorplanifao}" class="id-jsf-"  >
+                                                <h:outputText  class="ikont- "   value="#{registros.actividadobra.numvalorplanifao}" class="ikont-"  >
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="Cantidad2" >
-                                                <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.floatcantplanifao}" class="id-jsf-"  />
+                                                <h:outputText  class="ikont- "   value="#{registros.actividadobra.floatcantplanifao}" class="ikont-"  />
                                             </rich:column>
                                             <rich:column id="TotalActividad" >
-                                                <h:outputText  class="id-jsf- "   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" class="id-jsf-"  >
+                                                <h:outputText  class="ikont- "   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" class="ikont-"  >
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="CantFaltAct" >
-                                                <h:outputText  class="id-jsf- "   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" class="id-jsf-"  />
+                                                <h:outputText  class="ikont- "   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" class="ikont-"  />
                                             </rich:column>
 
                                             <rich:column id="ValorEjec" >
-                                                <h:outputText  class="id-jsf- "   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" class="id-jsf-"  >
+                                                <h:outputText  class="ikont- "   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" class="ikont-"  >
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="ValorFaltanAct" >                                          
 
 
-                                                <h:outputText  class="id-jsf- "   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" class="id-jsf-"  >
+                                                <h:outputText  class="ikont- "   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" class="ikont-"  >
                                                     <f:convertNumber type="percent"/>
                                                 </h:outputText>
 
                                             </rich:column>
                                             <rich:column id="CantidadEjec" >
-                                                <h:panelGrid class="id-jsf-"   cellpadding="0" cellspacing="0" columns="2" > 
+                                                <h:panelGrid class="ikont-"   cellpadding="0" cellspacing="0" columns="2" > 
                                                     <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
 
                                                         <f:validateDoubleRange minimum="0" />
                                                     </h:inputText>
-                                                    <a4j:commandLink class="id-jsf-"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
+                                                    <a4j:commandLink class="ikont-"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
                                                                      render="layoutTablaMatrix, layoutComentafactor"/>
 
                                                 </h:panelGrid>
-                                                <rich:message class="id-jsf-"    for="txtCantEjec"/>
+                                                <rich:message class="ikont-"    for="txtCantEjec"/>
                                             </rich:column>
                                         </rich:columnGroup>
                                 
@@ -311,7 +311,7 @@
                                             <interkont:spacer width="2"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  class="id-jsf- "   id="Pie0" value="#{Supervisor$Alimentar.totales[0]}" class="id-jsf-"  >
+                                            <h:outputText  class="ikont- "   id="Pie0" value="#{Supervisor$Alimentar.totales[0]}" class="ikont-"  >
                                                 <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                             </h:outputText>
                                         </rich:column>
@@ -321,7 +321,7 @@
                                         </rich:column>
 
                                         <rich:column >
-                                            <h:outputText  class="id-jsf- "   id="Pie1" value="#{Supervisor$Alimentar.totales[1]}" class="id-jsf-"  >
+                                            <h:outputText  class="ikont- "   id="Pie1" value="#{Supervisor$Alimentar.totales[1]}" class="ikont-"  >
                                                 <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                             </h:outputText>
                                         </rich:column>
@@ -345,20 +345,20 @@
                                     <interkont:spacer height="14"/>
                                     <interkont:spacer height="20"/>
                                     <h:panelGrid columns="3" id="Cualitativa"  >
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "   id="txtAspectoEvaluar"  value="#{var.aspectoEvaluar}" for="txtAspectoEvaluar">
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "   id="txtAspectoEvaluar"  value="#{var.aspectoEvaluar}" for="txtAspectoEvaluar">
                                             <rich:message for="txtAspectoEvaluar" />
                                         </h:outputLabel>
                                         <h:selectOneMenu id="comboAspectoEvaluar" value="#{Supervisor$Alimentar.ali.tipocualitativa.intidtipocualificacion}" >
                                             <f:selectItems value="#{Supervisor$Alimentar.itemstipoculitativa}"/>
                                         </h:selectOneMenu>
 
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "   id="lblLogroProyecto"  value="#{var.logroProyecto}" />
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "   id="lblLogroProyecto"  value="#{var.logroProyecto}" />
                                         <h:inputTextarea cols="55" id="txtLogroProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strlogro}"/>
 
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "   id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "   id="lblDificultadProyecto"  value="#{var.dificultadProyecto}" />
                                         <h:inputTextarea cols="55" id="txtDificultadProyecto" rows="4" value="#{Supervisor$Alimentar.ali.strdificultad}"/>
                                     </h:panelGrid>
                                 </h:panelGrid>
@@ -381,28 +381,28 @@
                                                 <rich:column id="tc-strAspectoEvualuar" width="600px"
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText  class="id-jsf- "   value="#{var.tipologro}" />
+                                                        <h:outputText  class="ikont- "   value="#{var.tipologro}" />
                                                     </f:facet>
-                                                    <h:outputText  class="id-jsf- "   id="otxt-strAspectoEvualuar" value="#{row.tipocualitativa.strnombre}"/>
+                                                    <h:outputText  class="ikont- "   id="otxt-strAspectoEvualuar" value="#{row.tipocualitativa.strnombre}"/>
                                                 </rich:column>
                                                 <rich:column id="tc-strAspectoEvualuar1" width="600px"
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText  class="id-jsf- "   value="#{var.logro}" />
+                                                        <h:outputText  class="ikont- "   value="#{var.logro}" />
                                                     </f:facet>
                                                     <h:inputTextarea id="otxt-strAspectoEvualuar1" value="#{row.strlogro}" readonly="true" cols="35" rows="3" />
                                                 </rich:column>
                                                 <rich:column id="tc-strAspectoEvualuar2" width="600px"
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText  class="id-jsf- "   value="#{var.dificultad}" />
+                                                        <h:outputText  class="ikont- "   value="#{var.dificultad}" />
                                                     </f:facet>
                                                     <h:inputTextarea id="otxt-strAspectoEvualuar2" value="#{row.strdificultad}" readonly="true" cols="35" rows="3" />
                                                 </rich:column>
                                                 <rich:column id="tc-streliminarAvance" width="200px"
                                                              >
                                                     <f:facet name="header">
-                                                        <h:outputText  class="id-jsf- "   value="#{var.eliminar}" />
+                                                        <h:outputText  class="ikont- "   value="#{var.eliminar}" />
                                                     </f:facet>
 
                                                     <a4j:commandLink execute="@this" value="#{var.eliminar}" action="#{Supervisor$Alimentar.removerAlimentacionCualitativa}"
@@ -423,19 +423,19 @@
                                     <interkont:spacer height="14"/>
                                     <interkont:spacer height="20"/>
                                     <h:panelGrid columns="3" >
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "   id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                                        <h:outputLabel  class="id-jsf- "   id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "   id="lblnumHabitantes"  value="#{var.numeroHabitantesben}" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                                        <h:outputLabel  class="ikont- "   id="lblpoblacionestudiantil"  value="#{var.poblacionestudiantil}:" for="numHabitantes" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
                                         <rich:inputNumberSpinner  id="numHabitantes" value="#{Supervisor$Alimentar.alimentacion.numhabafectados}" minValue="0" maxValue="50000000" />
 
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "     value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                        <h:outputLabel  class="id-jsf- "     value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "     value="#{var.numEmpleoDirectogen}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel  class="ikont- "     value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                         <rich:inputNumberSpinner  id="numEmpleoDirecto" value="#{Supervisor$Alimentar.alimentacion.numempdirectos}" minValue="0" maxValue="50000000" />
 
-                                        <h:panelGrid class="id-jsf-"  />
-                                        <h:outputLabel  class="id-jsf- "    value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                                        <h:outputLabel  class="id-jsf- "     value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                                        <h:panelGrid class="ikont-"  />
+                                        <h:outputLabel  class="ikont- "    value="#{var.numEmpleoInDirectogen}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                                        <h:outputLabel  class="ikont- "     value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
                                         <rich:inputNumberSpinner  id="numEmpleoInDirecto" value="#{Supervisor$Alimentar.alimentacion.numempindirectos}" minValue="0" maxValue="50000000" />
 
                                     </h:panelGrid>
@@ -444,7 +444,7 @@
                             <center>
                                 <h:panelGrid id="layoutError">
                                     <rich:messages />
-                                    <h:outputText  class="id-jsf- "    value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
+                                    <h:outputText  class="ikont- "    value="#{Supervisor$Alimentar.mensajeMatrix}" rendered="#{Supervisor$Alimentar.validezalimentacion}"/>
                                     <a4j:commandButton id="BTaceptarMatrix" rendered="#{!Supervisor$Alimentar.validezalimentacion}" render="gpPrincipalAlimentar"
                                                        action="#{Supervisor$Alimentar.cambioMatrix}" value="#{var.aceptar}"                      />
 
@@ -457,15 +457,15 @@
 
                     <rich:collapsiblePanel header="#{var.atencion}" id="layoutFactores"  rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
                        
-                        <h:outputText  class="id-jsf- "    value="#{var.factoresdeatraso}"/>
+                        <h:outputText  class="ikont- "    value="#{var.factoresdeatraso}"/>
                         <h:panelGrid columns="3" columnClasses="labelsDatos,labelsDatos, labelsDatos ">
-                            <h:outputText  class="id-jsf- "    value="#{var.tipodefactoratraso}"/>
+                            <h:outputText  class="ikont- "    value="#{var.tipodefactoratraso}"/>
                             <h:selectOneMenu id="select_tipofactor" value="#{Supervisor$Alimentar.tipofactorselec}"  >
                                 <f:selectItems value="#{Supervisor$Alimentar.tipoFactorOption}" />
                                 <a4j:ajax event="valueChange" render="layoutFactor" listener="#{Supervisor$Alimentar.combotipoCambio_action}" execute="@this"/>
                             </h:selectOneMenu>
                             <interkont:spacer width="45"/>
-                            <h:outputText  class="id-jsf- "    value="#{var.houtfactoresdeatraso}"/>
+                            <h:outputText  class="ikont- "    value="#{var.houtfactoresdeatraso}"/>
                             <h:panelGroup id="layoutFactor">
                                 <h:panelGrid>
                                     <h:selectOneMenu id="select_factor" value="#{Supervisor$Alimentar.factorselec}" >
@@ -487,22 +487,22 @@
                                     <f:facet name="header">
                                         <rich:columnGroup>
                                             <rich:column width="150px" >
-                                                <h:outputText  class="id-jsf- "   value="#{var.houtfactor}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.houtfactor}"/>
                                             </rich:column>
                                             <rich:column width="150px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.houttipofactor}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.houttipofactor}"/>
                                             </rich:column>
                                             <rich:column width="100px">
-                                                <h:outputText  class="id-jsf- "   value="#{var.eliminar}"/>
+                                                <h:outputText  class="ikont- "   value="#{var.eliminar}"/>
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
                                     <rich:columnGroup>
                                         <rich:column id="descripcion" width="150px">
-                                            <h:outputText  class="id-jsf- "   value="#{registros.strdescfactor}"/>
+                                            <h:outputText  class="ikont- "   value="#{registros.strdescfactor}"/>
                                         </rich:column>
                                         <rich:column id="tipfactor" width="150px">
-                                            <h:outputText  class="id-jsf- "   value="#{registros.tipofactoratraso.strdesctipoatraso}"/>
+                                            <h:outputText  class="ikont- "   value="#{registros.tipofactoratraso.strdesctipoatraso}"/>
                                         </rich:column>
                                         <rich:column id="Eliminar" width="100">
                                             <a4j:commandButton id="btEliminar" value="#{var.eliminar}" immediate="true"
@@ -525,18 +525,18 @@
 
                 <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
                    
-                    <h:panelGrid id="layoutImagenDetalle" class="id-jsf-"   >
-                        <h:graphicImage  class="id-jsf- "   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
+                    <h:panelGrid id="layoutImagenDetalle" class="ikont-"   >
+                        <h:graphicImage  class="ikont- "   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
                                            onclick="#{rich:component('modalImagen')}.show(); return true;"
-                                           class="id-jsf-"     />
+                                           class="ikont-"     />
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel header="#{var.anadirotrosdoc}" switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}"  rendered="#{!Supervisor$Alimentar.editarActividades}">
                   
                     <center>
                         <h:panelGrid id="layoutActa" columns="6">
-                            <h:outputLabel  class="id-jsf- "   id="lblActa"  value="#{var.acta}:" for="txtActa">
+                            <h:outputLabel  class="ikont- "   id="lblActa"  value="#{var.acta}:" for="txtActa">
                                 
                             </h:outputLabel>
                             <interkont:spacer width="42"/>
@@ -554,7 +554,7 @@
                     <center>
                         <h:panelGrid id="layoutVideoMemoria" columns="3">
                             <h:panelGroup>
-                                <h:outputLabel  class="id-jsf- "   id="lblVideo"  value="#{var.video}:">
+                                <h:outputLabel  class="ikont- "   id="lblVideo"  value="#{var.video}:">
                                     
                                 </h:outputLabel>
                             </h:panelGroup>

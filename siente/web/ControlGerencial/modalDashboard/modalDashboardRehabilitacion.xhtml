@@ -10,20 +10,20 @@
 
 
     <rich:popupPanel  id="modalDashboard_rehabilitacion" resizeable="false" width="700" height="500" 
-                      headerClass="id-jsf-style-modal-dialog-head" class="id-jsf-rpp-modalDashboard_rehabilitacion"  >
+                      headerClass="ikont-style-modal-dialog-head" class="ikont-rpp-modalDashboard_rehabilitacion"  >
         <f:facet name="header" >
 
             <h:panelGroup >
                 <h:panelGrid columns="3">
-                    <h:graphicImage  class="id-jsf-hgi-magotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  class="id-jsf-hot-rehabilitacion"    value="#{var.rehabilitacion}" />
+                    <h:graphicImage  class="ikont-hgi-magotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
+                    <h:outputText  class="ikont-hot-rehabilitacion"    value="#{var.rehabilitacion}" />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_rehabilitacion" class="id-jsf-hcl-esconder"  
+                    <a4j:commandLink id="esconder_modalDashboard_rehabilitacion" class="ikont-hcl-esconder"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDashboard_rehabilitacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -33,36 +33,36 @@
         <rich:panel  >
             <interkont:spacer height="20" />
             <h:panelGrid >
-                <h:outputText  class="id-jsf-hot-resumengeneralterritoriales"   value="#{var.resumengeneral} territoriales" ></h:outputText>
+                <h:outputText  class="ikont-hot-resumengeneralterritoriales"   value="#{var.resumengeneral} territoriales" ></h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
             <h:panelGrid  columns="2" id="pgInfoModalRehabilitacion">
-                <h:outputText  class="id-jsf-hot-totalobrasaprobados"    value="#{var.totalobra}s aprobados:"></h:outputText>
-                <h:outputText  class="id-jsf-hot-numAprobado"   value="#{ControlGerencial.numAprobado}" >
+                <h:outputText  class="ikont-hot-totalobrasaprobados"    value="#{var.totalobra}s aprobados:"></h:outputText>
+                <h:outputText  class="ikont-hot-numAprobado"   value="#{ControlGerencial.numAprobado}" >
                 </h:outputText>
-                <h:outputText  class="id-jsf-hot-proyectosterminados"    value="#{var.proyectosterminados}:" ></h:outputText>
-                <h:outputText  class="id-jsf-hot-numTerminado"   value="#{ControlGerencial.numTerminado}">
+                <h:outputText  class="ikont-hot-proyectosterminados"    value="#{var.proyectosterminados}:" ></h:outputText>
+                <h:outputText  class="ikont-hot-numTerminado"   value="#{ControlGerencial.numTerminado}">
                 </h:outputText>
-                <h:outputText  class="id-jsf-hot-recursosaprobados"    value="#{var.recursosaprobados}:" ></h:outputText>
-                <h:outputText  class="id-jsf-hot-valorAprobado "   value="#{ControlGerencial.valorAprobado}"   >
+                <h:outputText  class="ikont-hot-recursosaprobados"    value="#{var.recursosaprobados}:" ></h:outputText>
+                <h:outputText  class="ikont-hot-valorAprobado "   value="#{ControlGerencial.valorAprobado}"   >
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf-hot-recursosejecutados"    value="#{var.recursosejecutados}:" ></h:outputText>
-                <h:outputText  class="id-jsf-hot-valorEjecutado"   value="#{ControlGerencial.valorEjecutado}">
+                <h:outputText  class="ikont-hot-recursosejecutados"    value="#{var.recursosejecutados}:" ></h:outputText>
+                <h:outputText  class="ikont-hot-valorEjecutado"   value="#{ControlGerencial.valorEjecutado}">
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf-hot-porcentajetotalnacional"    value="#{var.porcentajetotalnacional}:" ></h:outputText>
-                <h:outputText  class="id-jsf-hottotalNacionalInvertido"   value="#{ControlGerencial.totalNacionalInvertido}" >
+                <h:outputText  class="ikont-hot-porcentajetotalnacional"    value="#{var.porcentajetotalnacional}:" ></h:outputText>
+                <h:outputText  class="ikont-hottotalNacionalInvertido"   value="#{ControlGerencial.totalNacionalInvertido}" >
                     <f:convertNumber pattern="###.## %"/>
                 </h:outputText>
-                <h:outputText  class="id-jsf-hot-proyectosestadocritico "    value="#{var.proyectosestadocritico}" ></h:outputText>
-                <h:outputText  class="id-jsf-hot-numProyCriticos "   value="#{ControlGerencial.numProyCriticos}"  >
+                <h:outputText  class="ikont-hot-proyectosestadocritico "    value="#{var.proyectosestadocritico}" ></h:outputText>
+                <h:outputText  class="ikont-hot-numProyCriticos "   value="#{ControlGerencial.numProyCriticos}"  >
                 </h:outputText>
             </h:panelGrid>
             <interkont:spacer height="20" />
             <center>
                 <h:panelGrid columns="3" >
-                    <h:outputText  class="id-jsf-hot-descarguereporte"  value="Descargue Reportes" ></h:outputText>
+                    <h:outputText  class="ikont-hot-descarguereporte"  value="Descargue Reportes" ></h:outputText>
                     <interkont:spacer width="10" />
 
                 </h:panelGrid>
@@ -70,14 +70,14 @@
                 <h:panelGrid  columns="2" >
                     <a4j:commandButton  
                         value="#{var.rpanhea_listado}" 
-                        class="id-jsf-"  
+                        class="ikont-"  
                         action="#{ControlGerencial.reportePdfFichaObras}"
                         execute="@this"
                         immediate="true"
                         render="@this"/>
                     <a4j:commandButton  
                         value="#{var.resumengeneralboton}" 
-                        class="id-jsf-"  
+                        class="ikont-"  
                         action="#{ControlGerencial.reportePdfFichaCorto}"
                         
                         execute="@this"

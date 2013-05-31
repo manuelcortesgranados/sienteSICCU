@@ -13,29 +13,29 @@
             <h:panelGrid columns="3" border="0"  columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
                 <interkont:spacer width="1" />
                 <h:panelGroup>
-                    <a4j:commandLink class="id-jsf-"    
+                    <a4j:commandLink class="ikont-"    
                         action="#{Supervisor$AdministrarObraNew.iniciardeta}">
                     </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink class="id-jsf-"   value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
+                <h:commandLink class="ikont-"   value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
 
-                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.comen}" />
+                <h:outputText  class="ikont- "   class="ikont-"   value="#{SessionBeanCobra.cobraService.comen}" />
                 <h:panelGroup>
-                    <a4j:commandLink  class="id-jsf-"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
+                    <a4j:commandLink  class="ikont-"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
                      </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink class="id-jsf-"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
+                <h:commandLink class="ikont-"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
 
-                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.imag}" />
+                <h:outputText  class="ikont- "   class="ikont-"   value="#{SessionBeanCobra.cobraService.imag}" />
                 <h:panelGroup>                   
-                        <a4j:commandLink class="id-jsf-"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
+                        <a4j:commandLink class="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
                 </h:panelGroup>
-                <h:commandLink class="id-jsf-"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
-                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{SessionBeanCobra.cobraService.docu}"  />
+                <h:commandLink class="ikont-"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
+                <h:outputText  class="ikont- "   class="ikont-"   value="#{SessionBeanCobra.cobraService.docu}"  />
                 <h:panelGroup>                    
-                        <a4j:commandLink class="id-jsf-"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
+                        <a4j:commandLink class="ikont-"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
                </h:panelGroup>
-                <h:commandLink class="id-jsf-"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
+                <h:commandLink class="ikont-"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
                 
             </h:panelGrid>
         </center>

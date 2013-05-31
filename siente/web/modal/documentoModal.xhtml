@@ -12,13 +12,13 @@
     <rich:popupPanel id="modalDocumento"  autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  class="ikont- "   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();return  false;"   class="id-jsf-"   immediate="true">
+                    <a4j:commandLink id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();return  false;"   class="ikont-"   immediate="true">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
@@ -34,23 +34,23 @@
                                     rowKeyVar="filaSeleccioanda">
                         <rich:column id="tc_strnombre"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.houtnomdocu} "/>
+                                <h:outputText  class="ikont- "   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_strnombre" value="#{currentRow.strnombre}"/>
+                            <h:outputText  class="ikont- "   id="st_strnombre" value="#{currentRow.strnombre}"/>
                         </rich:column>
                         <rich:column id="tc_fktipodoc" width="120px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.tipo}"/>
+                                <h:outputText  class="ikont- "   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText  class="id-jsf- "   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  class="ikont- "   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
 
                         <rich:column id="tc_verAli"  width="50px">
                             <f:facet name="header">
-                                <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
+                                <h:outputText  class="ikont- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action(filaSeleccionada)}" id="bt_downloadAli">
-                                <h:graphicImage  class="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  class="ikont- "    value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
                     </rich:dataTable>
