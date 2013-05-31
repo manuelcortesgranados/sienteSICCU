@@ -65,7 +65,6 @@ public class AppPhaseListener implements PhaseListener {
                             admin.setOpcion(0);
                         }
                         
-                        System.out.println("ManagedBeanNameManagedBeanName = " + ManagedBeanName);
                         
                        ManagedBeanName = "Supervisor$AdministrarObraNew";
                         
