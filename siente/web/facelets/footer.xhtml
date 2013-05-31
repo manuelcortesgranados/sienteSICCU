@@ -6,38 +6,38 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf"
     >
 
     <rich:toolbar>
-
         <rich:toolbarGroup>
-            <h:commandLink class="ikont-"  />
+            <h:commandLink class="ikont-hcl-footer-siente" >siente</h:commandLink>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage  class="ikont- "   value="/resources/imgs/menu_middle.png"  class="ikont-"  />
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  class="ikont-hgi-footer-menumiddle1"  />
         </rich:toolbarGroup>
 
         <rich:dropDownMenu>
             <f:facet name="label">
                 <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_down"
-                                class="ikont-"  />
+                                class="ikont-hcl-footer-cerrarsession"  />
             </f:facet>
         </rich:dropDownMenu>
 
         <rich:toolbarGroup location="right" rendered="#{var.variconch}">
-            <a target="_blank" href="#{var.linkcliente2}" class="republica anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente2}" class="ikont-a-footer-republica">rep</a>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right">
-            <a target="_blank" href="#{var.linkcliente}" class="ch anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente}" class="ikont-a-footer-ch">ch</a>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage  class="ikont- "   value="/resources/imgs/menu_middle.png"  class="ikont-"  />
+            <h:graphicImage value="/resources/imgs/menu_middle.png"  class="ikont-hgi-footer-menumiddle2"  />
         </rich:toolbarGroup>
 
     </rich:toolbar>  
-    <br class="clearFloat" />
+    <br />
 </ui:composition>

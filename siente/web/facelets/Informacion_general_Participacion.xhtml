@@ -9,12 +9,9 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    
     <interkont:spacer  height="10"/>
-
-    <rich:panel class="ikont-"   header="Información General" id="infogeneral">
-
-        <h:graphicImage  class="ikont- "   class="ikont-"   url="#{var.ipserver}#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.strimagenobra}" width="130" height="100"/>
+    <rich:panel class="ikont-rp-infogeneral"   header="Información General" id="infogeneral">
+        <h:graphicImage class="ikont-hgi-strimagneobra" url="#{var.ipserver}#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.strimagenobra}" />
         <h:panelGrid columns="6">
             <interkont:spacer width="35"/>
             <h:graphicImage  class="ikont- "    url="/resources/imgs/star_a.png"/>
@@ -23,34 +20,25 @@
             <h:graphicImage  class="ikont- "    url="/resources/imgs/star_a.png"/>
             <h:graphicImage  class="ikont- "    url="/resources/imgs/star_a.png"/>
         </h:panelGrid>
-        <h:panelGrid class="ikont-"   >
-            <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
+        <h:panelGrid class="ikont-hpg-strobjetoobra"   >
+            <h:outputText  class="ikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
         </h:panelGrid>
         <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda">
-            <h:outputText  class="ikont- "   value="#{var.valor}" class="ikont-"   />
-            <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" class="ikont-"  >
-                 <f:convertNumber pattern="$###,###"/>
+            <h:outputText  class="ikont-hot-valor "   value="#{var.valor}"/>
+            <h:outputText  class="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+                <f:convertNumber pattern="$###,###"/>
             </h:outputText>
-
-            <h:outputText  class="ikont- "   value="#{var.avancefisico}" class="ikont-"   />
-            <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}" class="ikont-"  >
-                 <f:convertNumber pattern="###.## %"/>
+            <h:outputText  class="ikont-hot-avancefisico"   value="#{var.avancefisico}" />
+            <h:outputText  class="ikont-hot-totalavancefisico"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+                <f:convertNumber pattern="###.## %"/>
             </h:outputText>
-
-            <h:outputText  class="ikont- "   value="#{var.intduracion}" class="ikont-"   />
-            <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" class="ikont-"  />
-
-            <h:outputText  class="ikont- "   value="#{var.contratista}(s)" class="ikont-"   />
+            <h:outputText  class="ikont-hot-intduration"   value="#{var.intduracion}" />
+            <h:outputText  class="ikont-hot-intplazoobra"   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
+            <h:outputText  class="ikont-hot-contratistas"   value="#{var.contratista}(s)" />
             <rich:panel   >
-                <h:outputLabel  class="ikont- "   id="st_strnomcontratista"
-                               class="ikont-"  
-                               value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+                <h:outputLabel  class="ikont-hol-contratistanombrecomple" id="st_strnomcontratista" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
             </rich:panel>
-           
         </h:panelGrid>
     </rich:panel>
-
-
     <interkont:spacer height="5px"/>
-
 </ui:composition>

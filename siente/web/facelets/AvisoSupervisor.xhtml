@@ -8,33 +8,33 @@
                 xmlns:rich="http://richfaces.org/rich">
 
 
-    <rich:popupPanel id="modalAvisoSupervisor" width="400" height="400" headerClass="rich-panel-header">
+    <rich:popupPanel id="modalAvisoSupervisor" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="Información importante"/>
+                <h:outputText  class="ikont-hot-informaicionimportante"   value="Información importante"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalAvisoSupervisor" class="ikont-"  
+                    <a4j:commandLink id="esconder_modalAvisoSupervisor" 
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAvisoSupervisor')}.hide();
-                                                     return false;">
+                                                     return false;">cerrar
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <rich:panel>
-                <h:panelGrid id="pgAviso"  columnClasses="panelcenter" width="360px"  cellpadding="0" cellspacing="0" >
-                    <h:graphicImage  class="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                <h:panelGrid id="pgAviso"  columnClasses="panelcenter"  class="ikont-hpg-aviso" cellpadding="0" cellspacing="0" >
+                    <h:graphicImage class="ikont-hgi-alertasupervisor" url="/resources/imgs/alerta.png" />
                     <h:panelGroup>
                         <center>
-                            <h:outputText  class="ikont- "     value="Señor Interventor, le recomendamos para diligenciar correctamente su reporte de obras 
+                            <h:outputText  class="ikont-hot-mensajesupervisor"     value="Señor Interventor, le recomendamos para diligenciar correctamente su reporte de obras 
                                           y solicitar su respectiva validación consultar la circular 65 en" />
 
                             <a href="http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx"  target="_blank" >http://www.colombiahumanitaria.gov.co/Apoyo/Paginas/Circulares.aspx</a>
-                            <h:outputText  class="ikont- "   value=" Link Circulares." />
+                            <h:outputText  class="ikont-hot-linkciruclares"   value=" Link Circulares." />
                         </center>
                     </h:panelGroup>
 
