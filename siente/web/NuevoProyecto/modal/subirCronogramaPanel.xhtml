@@ -18,7 +18,7 @@
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.subircronogramadilingeciado}" class="ikont-"  />
+                <h:outputText  class="ikont-hot-subircronogramadilingeciado"   value="#{var.subircronogramadilingeciado}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -26,7 +26,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
                                      title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                       class="ikont-"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                     class="ikont-hcl-subircronograma"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -39,8 +39,7 @@
                             fileUploadListener="#{Supervisor$IngresarNuevaObra.cargadorCronograma.listener}"
                             acceptedTypes="xls"
                             immediateUpload="true"
-                            maxFilesQuantity="1"
-                            
+                            maxFilesQuantity="1"                            
                             listHeight="150"                            
                             addLabel="#{var.adicionar}"
                             uploadLabel="#{var.subir}"
@@ -55,17 +54,17 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
+                                        <h:outputText  class="ikont-hot-arcsub1"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont- "   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="ikont-hot-numArchivos"   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file">
                                         <h:panelGroup>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  class="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  class="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </h:panelGroup>
@@ -88,19 +87,19 @@
                             </center>
                                 <a4j:outputPanel id="panelErrorGC">
                                 <rich:messages id="messagesGC" globalOnly="true"
-                                               class="ikont-"   ajaxRendered="true"
+                                               class="ikont-rm-messagesGC"   ajaxRendered="true"
                                                >
                                     <f:facet name="infoMarker">
-                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msginfo.png" />
+                                        <h:graphicImage  class="ikont-hgi-infoMarker"    url="/resources/imgs/msginfo.png" />
                                     </f:facet>
                                     <f:facet name="warnMarker">
-                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msgwarn.png" />
+                                        <h:graphicImage  class="ikont-hgi-warnMarker"    url="/resources/imgs/msgwarn.png" />
                                     </f:facet>
                                     <f:facet name="errorMarker">
-                                        <h:graphicImage  class="ikont- "    url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  class="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                     <f:facet name="fatalMarker">
-                                        <h:graphicImage  class="ikont- "     url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  class="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                 </rich:messages>
 

@@ -12,13 +12,13 @@
                      headerClass="rich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "    value="#{var.guardado}"/>
+                <h:outputText  class="ikont-hot-guardado"    value="#{var.guardado}"/>
             </h:panelGroup>
         </f:facet>
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelGuardado" class="ikont-"  
+                    <a4j:commandLink id="esconder_panelGuardado" class="ikont-hcl-esconder"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelGuardado')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -26,9 +26,9 @@
         <rich:panel class="ikont-"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
-                    <h:outputText  class="ikont- "   value="#{var.laobra}" />
-                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" class="ikont-"  />
-                    <h:outputText  class="ikont- "   value="#{var.hasidoalimentadaexitosa}" />
+                    <h:outputText  class="ikont-hot-laobra"   value="#{var.laobra}" />
+                    <h:outputText  class="ikont-hot-strnombreobra "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"  />
+                    <h:outputText  class="ikont-hot-aliexi"   value="#{var.hasidoalimentadaexitosa}" />
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}"

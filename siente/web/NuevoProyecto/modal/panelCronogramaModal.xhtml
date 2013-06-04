@@ -1,70 +1,71 @@
 <?xml version='1.0' encoding='UTF-8' ?> 
-    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-    
-    <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-           xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-           xmlns:f="http://java.sun.com/jsf/core"
-            xmlns:h="http://java.sun.com/jsf/html"
-            xmlns:rich="http://richfaces.org/rich"
-            xmlns:ui="http://java.sun.com/jsf/facelets">
-   
-       <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClass="rich-panel-header">
-           <f:facet name="header" >
-               <h:panelGroup >
-                   <h:outputText  class="ikont- "   value="#{var.atencion}" class="ikont-"  />
-               </h:panelGroup>
-           </f:facet>
-           <f:facet name="controls">
-               
-                   <h:panelGroup>
-                       <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
-                                          class="ikont-"    onclick="#{rich:component('mp_cronograma')}.hide(); return false;"/>
-                   </h:panelGroup>
-               
-           </f:facet>
-           <rich:panel >
-              
-                   <h:panelGroup id="layoutCron">
-                       
-            
-                       <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.datosbas}" >
-   
-                           <h:panelGroup>
-                                
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.aldarclickenelboto} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.cobra} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.vaagenerar} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.cronograma} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.en} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.excel} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.unavezdiligenciado}"/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="#{var.alsistemaeimporte} "/>
-                               <h:outputText  class="ikont- "   class="ikont-"   value="(#{var.recuerdequedebeguar})"/>
-                           </h:panelGroup>
-                           
-                          <h:panelGrid>
-                           <interkont:spacer height="5"/>
-                           <h:outputText  class="ikont- "   class="ikont-"   value="#{var.silodeseapuedecerrar}"/>
-                               
-                         </h:panelGrid>
-   
-                           <center>
-                               <interkont:spacer height="20" width="50"/>
-                              <h:form>
-                               <interkont:spacer height="20"/>
-                               <h:commandButton value="#{var.generarcronograma}"                                                
-                                                 class="ikont-"  
-                                                  action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
-                                                  onclick="#{rich:component('mp_cronograma')}.hide();">
-                               </h:commandButton>
-                              </h:form>
-                          </center>
-                       </h:panelGroup>
-                           
-                   </h:panelGroup>
-              
-          </rich:panel>
-          <rich:hotKey key="esc"  onkeyup="#{rich:component('mp_cronograma')}.hide();" />
-     </rich:popupPanel>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-  </ui:composition>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  class="ikont-hot-atencion"   value="#{var.atencion}"  />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
+                                 class="ikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
+                                                  return false;"/>
+            </h:panelGroup>
+
+        </f:facet>
+        <rich:panel >
+
+            <h:panelGroup id="layoutCron">
+
+
+                <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.datosbas}" >
+
+                    <h:panelGroup>
+
+                        <h:outputText  class="ikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
+                        <h:outputText  class="ikont-hot-cobra"     value="#{var.cobra} "/>
+                        <h:outputText  class="ikont-hot-vaagenerar"     value="#{var.vaagenerar} "/>
+                        <h:outputText  class="ikont-hot-cronograma"    value="#{var.cronograma} "/>
+                        <h:outputText  class="ikont-hot-en"      value="#{var.en} "/>
+                        <h:outputText  class="ikont-hot-excel"    value="#{var.excel} "/>
+                        <h:outputText  class="ikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}"/>
+                        <h:outputText  class="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
+                        <h:outputText  class="ikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
+                    </h:panelGroup>
+
+                    <h:panelGrid>
+                        <interkont:spacer height="5"/>
+                        <h:outputText  class="ikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
+
+                    </h:panelGrid>
+
+                    <center>
+                        <interkont:spacer height="20" width="50"/>
+                        <h:form>
+                            <interkont:spacer height="20"/>
+                            <h:commandButton value="#{var.generarcronograma}"                                                
+                                             class="ikont-"  
+                                             action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
+                                             onclick="#{rich:component('mp_cronograma')}.hide();">
+                            </h:commandButton>
+                        </h:form>
+                    </center>
+                </h:panelGroup>
+
+            </h:panelGroup>
+
+        </rich:panel>
+        <rich:hotKey key="esc"  onkeyup="#{rich:component('mp_cronograma')}.hide();" />
+    </rich:popupPanel>
+
+</ui:composition>

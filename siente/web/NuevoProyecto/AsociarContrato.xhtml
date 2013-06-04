@@ -66,30 +66,30 @@
                                     </center>
                                 </rich:panel>
                                 <rich:panel header="Informacion #{var.encargofiduciario}" class="ikont-rp-encargofiduciario"  
-                                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
+                                            bodyClass="ikont-rp-encargofiduciario-body" headerClass="ikont-rp-encargofiduciario-header"
                                             rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
 
                                     <center>
-                                        <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                            <h:outputText  class="ikont- "   value="#{var.numeroencargo}: "/>
+                                        <h:panelGrid columns="3">
+                                            <h:outputText  class="ikont-hot-numeroencargo1"   value="#{var.numeroencargo}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  class="ikont- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
+                                            <h:outputText  class="ikont-hot-intnumencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
 
-                                            <h:outputText  class="ikont- "   value="#{var.fechaapertura}: "/>
+                                            <h:outputText  class="ikont-hot-fechaapertura1"   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  class="ikont- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                            <h:outputText  class="ikont-hot-fechaaperturaencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
                                                 <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                             </h:outputText>
 
-                                            <h:outputText  class="ikont- "   value="#{var.saldoinicial}: "/>
+                                            <h:outputText  class="ikont-hot-saldoinicial1"   value="#{var.saldoinicial}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  class="ikont- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
+                                            <h:outputText  class="ikont-hot-numsaldoinicial"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
-                                            <h:outputText  class="ikont- "   value="#{var.saldoactual}: "/>
+                                            <h:outputText  class="ikont-hot-saldoactual1"   value="#{var.saldoactual}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  class="ikont- "   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
+                                            <h:outputText  class="ikont-hot-numsaldoactual1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
@@ -99,12 +99,12 @@
 
                                 <h:panelGrid id="pgconveniocontrato" columns="2">
                                     <a4j:commandLink value="Asociar contrato"
-                                                     class="ikont-"  
+                                                     class="ikont-hcl-asociarcontrato"  
                                                      action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
                                                      render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
                                     </a4j:commandLink>
                                     <a4j:commandLink value="Crear contrato" rendered="false"
-                                                     class="ikont-"  
+                                                     class="ikont-hcl-crearcontrato"  
                                                      action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
                                     </a4j:commandLink>
                                 </h:panelGrid>
@@ -116,51 +116,46 @@
                                                         value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
                                             <rich:column id="cocontr1" width="100px">
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="Número contrato" />
+                                                    <h:outputText  class="ikont-rc-cocontr1"   value="Número contrato" />
                                                 </f:facet>
-                                                <h:outputText  class="ikont- "   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                                <h:outputText  class="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
                                             </rich:column>
                                             <rich:column id="co2" width="100px" >
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="Valor del contrato" />
+                                                    <h:outputText  class="ikont-rc-co2"   value="Valor del contrato" />
                                                 </f:facet>
-                                                <h:outputText  class="ikont- "   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                                <h:outputText  class="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
                                                     <f:convertNumber pattern="$ ###,###,###"/>
 
                                                 </h:outputText>
                                             </rich:column>
 
-                                            <rich:column id="vlcongtrhijosse"
-                                                          >
+                                            <rich:column id="vlcongtrhijosse">
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="Valor Asociado"/>
+                                                    <h:outputText  class="ikont-rc-vlcongtrhijosse"   value="Valor Asociado"/>
                                                 </f:facet>
-                                                <h:outputText  class="ikont- "   id="vlcondisse" value="#{contrarow.numvalorrelacion}">
+                                                <h:outputText  class="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.numvalorrelacion}">
                                                     <f:convertNumber pattern="$###,###,###"/>
                                                 </h:outputText>
                                             </rich:column>
-                                            <rich:column id="fechaincontse"
-                                                         >
+                                            <rich:column id="fechaincontse">
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="#{var.datefechaini}"/>
+                                                    <h:outputText  class="ikont-rc-fechaincontse"   value="#{var.datefechaini}"/>
                                                 </f:facet>
-                                                <h:outputText  class="ikont- "    value="#{contrarow.contrato.datefechaini}"/>
+                                                <h:outputText  class="ikont-hot-datefechaini"    value="#{contrarow.contrato.datefechaini}"/>
                                             </rich:column>
-                                            <rich:column id="fechaficontse"  width="150px"
-                                                         >
+                                            <rich:column id="fechaficontse"  width="150px">
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="#{var.datefechafin}"/>
+                                                    <h:outputText  class="ikont-rc-fechaficontse"   value="#{var.datefechafin}"/>
                                                 </f:facet>
-                                                <h:outputText  class="ikont- "    value="#{contrarow.contrato.datefechafin}"/>
+                                                <h:outputText  class="ikont-hot-datefechafin"    value="#{contrarow.contrato.datefechafin}"/>
                                             </rich:column>
-                                            <rich:column id="desasociar"  width="150px"
-                                                         >
+                                            <rich:column id="desasociar"  width="150px">
                                                 <f:facet name="header">
-                                                    <h:outputText  class="ikont- "   value="Desasociar"/>
+                                                    <h:outputText  class="ikont-rc-desasociar"   value="Desasociar"/>
                                                 </f:facet>
                                                 <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato(filaSeleccionada)}"
                                                                    render="datacontratos,pgcontrat1">
-
                                                 </a4j:commandButton>
                                             </rich:column>
                                         </rich:dataTable>
@@ -183,19 +178,19 @@
                                 </h:panelGroup>
                                 <a4j:outputPanel id="panelErrorAsoCont">
                                     <rich:messages id="messagesAsoCon" globalOnly="true"
-                                                   class="ikont-"   ajaxRendered="true"
+                                                   class="ikont-rm-messagesAsoCon"   ajaxRendered="true"
                                                    >
                                         <f:facet name="infoMarker">
-                                            <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                            <h:graphicImage  class="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                         </f:facet>
                                         <f:facet name="warnMarker">
-                                            <h:graphicImage  class="ikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                            <h:graphicImage  class="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                         </f:facet>
                                         <f:facet name="errorMarker">
-                                            <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  class="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                         <f:facet name="fatalMarker">
-                                            <h:graphicImage  class="ikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  class="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                     </rich:messages>
 

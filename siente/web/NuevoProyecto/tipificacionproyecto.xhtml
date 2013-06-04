@@ -17,7 +17,7 @@
                 <h:outputScript library="js" name="/resources/script_supervisor.js"/>
             </ui:define>
             <ui:define name="title">
-                <h:outputText  class="ikont- "   value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
+                <h:outputText  class="ikont-hot-tipifipry"   value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
             </ui:define>
             <ui:define name="menu">
                 <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -36,7 +36,7 @@
                                 <rich:panel id="rpTipificacion">
                                     <f:facet name="header" >
                                         <h:panelGroup >
-                                            <h:outputText  class="ikont- "   value="#{var.pasosIniciales}" class="ikont-"   />
+                                            <h:outputText  class="ikont-hot-pasosIniciales"   value="#{var.pasosIniciales}"  />
                                         </h:panelGroup>
                                     </f:facet>
 
@@ -47,15 +47,15 @@
                                             <h:panelGrid >                                    
                                                 <h:panelGroup id="panel-periodo-evento">
                                                     <h:panelGrid columns="2" >
-                                                        <h:outputText  class="ikont- "    value="#{var.escogerEvento} "/>
+                                                        <h:outputText  class="ikont-hot-escogerEvento"    value="#{var.escogerEvento} "/>
                                                         <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" >
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
                                                         </h:selectOneMenu>
-                                                        <h:outputText  class="ikont- "    value="#{var.escogerPeriodo} "/>
+                                                        <h:outputText  class="ikont-hot-escogerPeriodo"    value="#{var.escogerPeriodo} "/>
                                                         <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" >
                                                             <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoEventoItem}" />
                                                         </h:selectOneMenu>
-                                                        <h:outputText  class="ikont- "    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
+                                                        <h:outputText  class="ikont-hot-incluyeSubproyectos"    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
                                                         <h:selectOneMenu id="cmbIncluyeSubproyectos" value="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" rendered="#{var.permitirSubproyectos}">
                                                             <f:selectItem itemValue="false" itemLabel="No"/>
                                                             <f:selectItem itemValue="true" itemLabel="Si"/>
@@ -75,60 +75,60 @@
                                                         <rich:panel id="mp-datos-proySeleccionado">
                                                             <f:facet name="header" >
                                                                 <h:panelGroup >
-                                                                    <h:outputText  class="ikont- "   value="#{var.datosproyectoseleccionado}" class="ikont-"   />
+                                                                    <h:outputText  class="ikont-hot-datospry"   value="#{var.datosproyectoseleccionado}" />
                                                                 </h:panelGroup>
                                                             </f:facet>
                                                             <h:panelGrid columns="3"   >
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strnroobraPadre" class="ikont-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strnroobraPadre"   id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strnroobraPadre"   id="st_strnroobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strnomobraPadre" class="ikont-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strnomobraPadre"   id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strnomobraPadre"   id="st_strnomobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_numvaltotobraPadre" class="ikont-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_numvaltotobraPadre"   id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_numvaltotobraPadre"   id="st_numvaltotobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strestobraPadre" class="ikont-"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strestobraPadre"   id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strestobraPadre"   id="st_strestobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strplzobraPadre" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strplzobraPadre"   id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
+                                                                    <h:outputLabel  class="ikont-ho-st_strplzobraPadre"   id="st_strplzobraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strIntervobraPadre" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strIntervobraPadre"   id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strIntervobraPadre"   id="st_strIntervobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strfechIobraPadre" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strfechIbraPadre"   id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strfechIobraPadre"   id="st_strfechIobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_strfechFobraPadre" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
+                                                                    <h:outputLabel  class="ikont-hol-tc_strfechFobraPadre"   id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_strfechFobraPadre"   id="st_strfechFobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
                                                                     <h:outputLabel  class="ikont- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_ValorObraPadre" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
+                                                                    <h:outputLabel  class="ikont- "   id="st_ValorObraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
                                                                         <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ #,###,###.00"/>
                                                                     </h:outputLabel>
                                                                 </h:panelGroup>
                                                                 <interkont:spacer width="50"/>
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  class="ikont- "   id="lblvlrsumahijos"  value="Valor Disponible:"/>
-                                                                    <h:outputLabel  class="ikont- "   id="st_Valosumhi" class="ikont-"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
+                                                                    <h:outputLabel  class="ikont-hol-lblvlrsumahijos"   id="lblvlrsumahijos"  value="Valor Disponible:"/>
+                                                                    <h:outputLabel  class="ikont-hol-st_Valosumhi"   id="st_Valosumhi" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
                                                                         <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###"/>
                                                                     </h:outputLabel>
                                                                 </h:panelGroup>
@@ -148,7 +148,7 @@
                                             <h:panelGrid id="pgtipi" columns="1" >
                                                 <rich:panel>
                                                     <f:facet name="header">
-                                                        <h:outputText  class="ikont- "   value="1. #{var.escojafase}" />
+                                                        <h:outputText  class="ikont-hot-escojafase"   value="1. #{var.escojafase}" />
                                                     </f:facet>
                                                     <h:panelGroup id="tablatipoah">
 
@@ -157,10 +157,10 @@
                                                             <center>
                                                             <h:panelGrid columns="1" columnClasses="panelcenter">
                                                                 <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
-                                                                    <h:graphicImage  class="ikont- "   url="/resources/imgs/#{fase.intidfase}fase.png"  />
+                                                                    <h:graphicImage  class="ikont-hgi-fase"   url="/resources/imgs/#{fase.intidfase}fase.png"  />
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink class="ikont-"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
+                                                                <a4j:commandLink class="ikont-hcl-fasestrnombre"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
                                                                 
                                                                 </a4j:commandLink>
                                                                 <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
@@ -182,7 +182,7 @@
                                                 <h:panelGroup id="panelTipo">
                                                     <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                         <f:facet name="header">
-                                                            <h:outputText  class="ikont- "   value="2. #{var.escojatipo}"/>
+                                                            <h:outputText  class="ikont-hot-escojatipo"   value="2.#{var.escojatipo}"/>
                                                         </f:facet>
                                                         <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
                                                                        columns="4"  rowKeyVar="fila">
@@ -205,7 +205,7 @@
                                                     <h:panelGroup id="panelSubTipo">
                                                         <rich:panel id="rpTipoObra" rendered="#{Supervisor$IngresarNuevaObra.tiproyectoselec!=0}">
                                                             <f:facet name="header">
-                                                                <h:outputText  class="ikont- "   value="3. #{var.subtipoProyecto}"/>
+                                                                <h:outputText  class="ikont-hot-tipoObra"   value="3. #{var.subtipoProyecto}"/>
                                                             </f:facet>
 
 
@@ -217,10 +217,10 @@
                                                                 <a4j:commandLink  execute="@this"  
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                               render="tablatipoobra" >
-                                                                    <h:graphicImage  class="ikont- "   url="#{tipoobra.strurlimagen}"/>
+                                                                    <h:graphicImage  class="ikont-hgi-strurlimagen"   url="#{tipoobra.strurlimagen}"/>
                                                                 </a4j:commandLink>
 
-                                                                <a4j:commandLink class="ikont-"   value="#{tipoobra.strnombremedio}"  execute="@this"  
+                                                                <a4j:commandLink class="ikont-hcl-strnombremedio"   value="#{tipoobra.strnombremedio}"  execute="@this"  
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                               render="tablatipoobra"  />
                                                                 
@@ -249,19 +249,19 @@
 
                                         <a4j:outputPanel id="panelErrorTip">
                                             <rich:messages id="messagesTip" globalOnly="true"
-                                                           class="ikont-"   ajaxRendered="true"
+                                                           class="ikont-rm-messagesTip"   ajaxRendered="true"
                                                            >
                                                 <f:facet name="infoMarker">
-                                                    <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                                    <h:graphicImage  class="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                                 </f:facet>
                                                 <f:facet name="warnMarker">
-                                                    <h:graphicImage  class="ikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                                    <h:graphicImage  class="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                                 </f:facet>
                                                 <f:facet name="errorMarker">
-                                                    <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                    <h:graphicImage  class="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                                 </f:facet>
                                                 <f:facet name="fatalMarker">
-                                                    <h:graphicImage  class="ikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                    <h:graphicImage  class="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                                 </f:facet>
                                             </rich:messages>
 
