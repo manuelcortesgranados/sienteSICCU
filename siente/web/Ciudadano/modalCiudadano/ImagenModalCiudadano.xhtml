@@ -12,22 +12,22 @@
     >
 
     <rich:popupPanel id="modalImagenCiu" autosized="true" 
-                     headerClass="rich-panel-header">
+                     >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.imagen}"/>
+                <h:outputText  class="ikont-hot-imagen"   value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" class="ikont-"   
+                    <a4j:commandLink id="esconder_modalImagen" class="ikont-acl-escondermodalimagen"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenCiu')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="ikont-"   >
+        <rich:panel class="ikont-rp-modalimagenciu"   >
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -38,7 +38,6 @@
                             acceptedTypes="jpg, jpeg, gif, png, bmp"
                             immediateUpload="true"
                             maxFilesQuantity="1" 
-                            
                             addLabel="#{var.adicionar}"
                             doneLabel="#{var.hecho}"
                             uploadLabel="#{var.subir}"
@@ -48,19 +47,19 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
+                                        <h:outputText  class="ikont-headermodalimagenciu"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont- "   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="ikont-numarchivosmodalimagenciu"   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorFoto.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="ikont-hot-nomarcmodalimagenciu"   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="ikont-hot-nombremodalimagenciu"   value="#{file.nombre}"/>
+                                                    <h:outputText  class="ikont-hot-taarcmodalimagenciu"   value="#{var.taarc}"/>
+                                                    <h:outputText  class="ikont-hot-numbytesmodalimagenciu"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -69,7 +68,7 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="layoutImagenDetalleCiu, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="ikont-"     />
+                                                   class="ikont-acl-borrardatosimagen"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalImagenCiu')}.hide(); return false;" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
                                                    render="layoutImagenDetalleCiu"

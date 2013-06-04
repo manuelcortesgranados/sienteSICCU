@@ -12,27 +12,27 @@
     >
 
     <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700" 
-                      headerClass="style-modal-dialog-head" class="ikont-"  >
+                       class="ikont-rpp-confirmarciudadano"  >
         <f:facet name="header" >           
             <h:panelGroup >
-                <h:outputText  class="ikont- "    value="Ciudadano"/>
+                <h:outputText  class="ikont-hot-confirmarciudadano"    value="Ciudadano"/>
             </h:panelGroup>
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  class="ikont- "   url="/resources/imgs/modal/imagotipo_siente.png"  />
-                    <h:outputText  class="ikont- "    value="Ciudadano" class="ikont-"  />
+                    <h:graphicImage  class="ikont-hgi-imagotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png"  />
+                    <h:outputText  class="ikont-hot-ciudadano"    value="Ciudadano" />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>       
-        <rich:panel class="ikont-"   >
+        <rich:panel class="ikont-rp-confirmarciudadano"   >
             <h:form>
-                <rich:panel class="ikont-"   >
+                <rich:panel class="ikont-rp-pgguardarciudadano"   >
                     <center>                    
                         <h:panelGrid id="pgguardarCiudadano"  columnClasses="panelcenter" >
 
                             <h:panelGroup>
                                 <center>
-                                    <h:outputText  class="ikont- "   value="#{SessionBeanCobra.ciudadanoservice.mensaje}"  class="ikont-"   />
+                                    <h:outputText  class="ikont-hot-mensaje "   value="#{SessionBeanCobra.ciudadanoservice.mensaje}" />
                                 </center>
                             </h:panelGroup>
                             <h:panelGroup>

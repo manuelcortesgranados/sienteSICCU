@@ -17,17 +17,17 @@
                 <center>
                     <div id="slider3">
                         <div>
-                            <rich:panel header="Semaforo" class="ikont-"  >
+                            <rich:panel header="Semaforo" class="ikont-hp-semaforo"  >
                                 <h:panelGroup >
                                     <center>
-                                        <h:graphicImage  class="ikont- "   id="imgSemaObra"
+                                        <h:graphicImage  class="ikont-hgi-imgsemaobra"   id="imgSemaObra"
                                                         value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
-                                        <h:graphicImage  class="ikont- "   value="#{var.noinfo}" height="100px"
+                                        <h:graphicImage  class="ikont-hgi-noinfo"   value="#{var.noinfo}" height="100px"
                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo == null}"/>
                                         <interkont:spacer width="80%" height="5" />
                                         <center>
-                                            <h:outputText  class="ikont- "   value="#{Supervisor$DetalleObra.semaforo}" class="ikont-"   />
+                                            <h:outputText  class="ikont-hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}" />
                                         </center>
 
                                     </center>
@@ -35,22 +35,22 @@
                             </rich:panel>
                         </div>
                         <div>
-                            <rich:panel header="Tipo #{var.proyecto}" class="ikont-"   >
+                            <rich:panel header="Tipo #{var.proyecto}" class="ikont-hp-tipoproyecto"   >
                                 <h:panelGroup >
                                     <interkont:spacer width="20" height="50" />
                                     <h:panelGroup>
-                                        <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" class="ikont-"     >
+                                        <h:outputText  class="ikont-hot-tipoproyecto"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Valor Actual" class="ikont-"   >
+                            <rich:panel header="Valor Actual" class="ikont-rp-valoractual"   >
                                 <h:panelGroup>
                                     <interkont:spacer width="20" height="50" />
                                     <h:panelGroup >
-                                        <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" class="ikont-"   >
+                                        <h:outputText  class="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" >
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGroup>
@@ -59,19 +59,19 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Ente que lo ejecuta" class="ikont-"   >
+                            <rich:panel header="Ente que lo ejecuta" class="ikont-rp-enqueloejecuta"   >
                                 <h:panelGrid columns="1">
                                     <interkont:spacer width="20" height="10" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$DetalleObra.contratistanombrecomple}" class="ikont-"   />
+                                    <h:outputText  class="ikont-hot-contratistanombrecomple"   value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
                                 </h:panelGrid>
                             </rich:panel>
                         </div>
                         <div >
-                            <rich:panel header="Visitas #{var.textoobra4}" class="ikont-"   >
+                            <rich:panel header="Visitas #{var.textoobra4}" class="ikont-rp-visitas"   >
                                 <h:panelGroup>
                                     <interkont:spacer width="20" height="50" />
-                                    <h:panelGroup  class="ikont-"  >
-                                        <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" class="ikont-"    >
+                                    <h:panelGroup  class="ikont-hpg-visitas"  >
+                                        <h:outputText  class="ikont-hot-numvisitas"   value="#{Supervisor$AdministrarObraNew.obra.numvisitas}" >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>
@@ -79,11 +79,11 @@
 
                         </div>
                         <div >
-                            <rich:panel header="Personas Inscritas" class="ikont-"    >
+                            <rich:panel header="Personas Inscritas" class="ikont-rp-personasinscritas">
                                 <h:panelGroup>
                                     <interkont:spacer width="4"  height="50"/>
-                                    <h:panelGroup class="ikont-"   >
-                                        <h:outputText  class="ikont- "   value="#{Supervisor$DetalleObra.listasegudires}" class="ikont-"   >
+                                    <h:panelGroup class="ikont-hpg-listasegudires">
+                                        <h:outputText  class="ikont-hot-listasegudires "   value="#{Supervisor$DetalleObra.listasegudires}" >
                                         </h:outputText>
                                     </h:panelGroup>
                                 </h:panelGroup>

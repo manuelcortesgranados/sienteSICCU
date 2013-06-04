@@ -17,43 +17,43 @@
             <center>
                 <h:panelGrid id="pgingresociudadano" columns="2"   columnClasses="panelcenter, panelderecha">
                     <interkont:spacer width="50"/>
-                    <h:outputText  class="ikont- "   value="#{var.registrate}" />
+                    <h:outputText  class="ikont-hot-registrate"   value="#{var.registrate}" />
                     <h:panelGroup >
                         <h:panelGrid columns="1"  columnClasses="paneltop" >
                             <h:panelGrid columns="1" >
-                                <h:outputText  class="ikont- "   value="#{var.formulario1}" />
-                                <h:outputText  class="ikont- "   value="#{var.formulario2}" />
-                                <h:outputText  class="ikont- "   value="#{var.formulario3}" />
+                                <h:outputText  class="ikont-hot-formulario1"   value="#{var.formulario1}" />
+                                <h:outputText  class="ikont-hot-formulario2 "   value="#{var.formulario2}" />
+                                <h:outputText  class="ikont-hot-formulario3"   value="#{var.formulario3}" />
                             </h:panelGrid>
-                            <h:graphicImage  class="ikont- "   value="/resources/imgs/Siente_dedo.png" />
+                            <h:graphicImage  class="ikont-hgi-siente"   value="/resources/imgs/Siente_dedo.png" />
                         </h:panelGrid>
                     </h:panelGroup>
                     <h:panelGroup>
                         <h:panelGrid columns="2"  columnClasses="panelderecha, panelizquierda">
-                            <h:outputText  class="ikont- "   value="#{var.nombre}: *" />
+                            <h:outputText  class="ikont-hot-nombre"   value="#{var.nombre}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText size="25" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}"/>
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText  class="ikont- "   value="#{var.email}: *" />
+                            <h:outputText  class="ikont-hot-email"   value="#{var.email}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText  size="25" maxlength="80"  id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" />
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText  class="ikont- "   value="#{var.Celular}:" />
+                            <h:outputText  class="ikont-hot-celular"   value="#{var.Celular}:" />
                             <h:inputText  size="25" maxlength="100" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtelefono1}" /> 
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputLabel  class="ikont- "   id="lbldepto"  value="#{var.departamento}:" for="combodeptoCiudadano" />
+                            <h:outputLabel  class="ikont-hot-departamento"   id="lbldepto"  value="#{var.departamento}:" for="combodeptoCiudadano" />
                             <h:selectOneMenu id="combodeptoCiudadano" value="#{Ciudadano$PerfilCiudadano.codDepartamentoCiudadano}">
                                 <f:selectItems value="#{Ciudadano$PerfilCiudadano.departamentoCiudadano}" />
                                 <a4j:ajax event="change" listener="#{Ciudadano$PerfilCiudadano.llenarMunicipioCiudadano}" render="pgMuniCiudadano" execute="@this, combodeptoCiudadano" />
                             </h:selectOneMenu>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputLabel  class="ikont- "   id="lblubicacionmuni"  value="#{var.municipio}:"  for="combomunicipiociudadano" />
+                            <h:outputLabel  class="ikont-hot-municipio"   id="lblubicacionmuni"  value="#{var.municipio}:"  for="combomunicipiociudadano" />
                             <h:panelGroup id="pgMuniCiudadano">
                                 <h:selectOneMenu id="combomunicipiociudadano"
                                                  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}">
@@ -62,14 +62,14 @@
                             </h:panelGroup>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
-                            <h:outputText  class="ikont- "   value="#{var.username}: *" />
+                            <h:outputText  class="ikont-hot-username" value="#{var.username}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputText  id="textusuario" size="25" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" />
                             </h:panelGrid>
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
 
-                            <h:outputText  class="ikont- "   value="#{var.contraseña}: *" />
+                            <h:outputText  class="ikont-hot-password"   value="#{var.contraseña}: *" />
                             <h:panelGrid columns="1">
                                 <h:inputSecret id="textpassword" size="25" value="#{Ciudadano$PerfilCiudadano.password}"/>
 
@@ -78,7 +78,7 @@
                             <interkont:spacer height="5"/>
                             <interkont:spacer height="5"/>
 
-                            <h:outputText  class="ikont- "   value="#{var.repetircontraseña}: *"  />
+                            <h:outputText  class="ikont-hot-confirmarpassword"   value="#{var.repetircontraseña}: *"  />
                             <h:panelGrid columns="1">
                                 <h:inputSecret id="textrepassword"  size="25" value="#{Ciudadano$PerfilCiudadano.repassword}" />
                                 <rich:message for="textrepassword" />
@@ -91,9 +91,9 @@
 
 
                             <h:panelGroup id="pgfotografia">
-                                <h:outputText  class="ikont- "   value="#{var.ingresar} #{var.fotografia}" />
+                                <h:outputText  class="ikont-hot-subirfotografia"   value="#{var.ingresar} #{var.fotografia}" />
                                 <a4j:commandLink  >   
-                                    <h:graphicImage  class="ikont- "   url="#{Ciudadano$PerfilCiudadano.pathImaCiu}"  class="ikont-"    
+                                    <h:graphicImage  class="ikont-hgi-pathimaciu"   url="#{Ciudadano$PerfilCiudadano.pathImaCiu}"
                                                     onclick="#{rich:component('mp-crear-modalImagenCorreo')}.show(); return true;"                    
                                                     />
                                 </a4j:commandLink>    
@@ -105,9 +105,9 @@
                             <interkont:spacer width="50"/>
                             <h:panelGroup>
                                 <h:panelGrid columns="2" >
-                                    <h:commandLink  class="ikont-"   value="#{var.cancelar}" action="#{Ciudadano$PerfilCiudadano.regresar}" immediate="true">
+                                    <h:commandLink  class="ikont-hcl-cancelar"   value="#{var.cancelar}" action="#{Ciudadano$PerfilCiudadano.regresar}" immediate="true">
                                     </h:commandLink> 
-                                    <a4j:commandLink id="btnGuardarCiudadano" value="#{var.registrarme}"  class="ikont-"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano">
+                                    <a4j:commandLink id="btnGuardarCiudadano" value="#{var.registrarme}"  class="ikont-acl-registrarme"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano">
                                         <a4j:ajax event="complete" oncomplete="#{rich:component('confirmarCiudadano')}.show(); return true;"   />
                                     </a4j:commandLink>
 
