@@ -22,131 +22,131 @@
                 <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
             </ui:define>
             <ui:define name="title">
-                <h:outputText  styleClass="ikont- "   value="#{var.seguimientosah}"/>
-                <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+                <h:outputText  styleClass="ikont-hot-seguimientoah"   value="#{var.seguimientosah}"/>
+                <h:outputText  styleClass="ikont-hot-strnomedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
             </ui:define>
             <ui:define name="body">
                 <h:form>
-                    <rich:dataTable id="tablaSeguimientosGlobal"  sortMode="single"   var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
+                    <rich:dataTable styleClass="ikont-rdt-listglobalah" id="tablaSeguimientosGlobal"  sortMode="single"   var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="16" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.seguimientoglobal}"/>
+                                    <h:outputText  styleClass="ikont-hot-seguimientoglobal" value="#{var.seguimientoglobal}"/>
                                 </rich:column>
                                 <rich:column  colspan="8" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.familiasaatenderseg}"/>
+                                    <h:outputText  styleClass="ikont-hot-fanatenderseg" value="#{var.familiasaatenderseg}"/>
                                 </rich:column>
                                 <rich:column  colspan="4">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.familiasaatendidasseg}"/>
+                                    <h:outputText  styleClass="ikont-hot-famatenseg" value="#{var.familiasaatendidasseg}"/>
                                 </rich:column>
                                 <rich:column  colspan="4">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.avancedeclaradoseg}"/>
+                                    <h:outputText  styleClass="ikont-hot-avancedeclarado" value="#{var.avancedeclaradoseg}"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numsolicitudch}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-numsolicitudch" value="#{var.numsolicitudch}"/>                                                
                                 </rich:column>
                                 <rich:column  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.mercyaseoiniporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoini" value="#{var.mercyaseoiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.mercyaseoajusporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-mercadoyaseo" value="#{var.mercyaseoajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.arriendosiniporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-arriendoini" value="#{var.arriendosiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.arriendosajusporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-arriendo" value="#{var.arriendosajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.alberguesiniporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-albergueini" value="#{var.alberguesiniporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.alberguesajusporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-albergue" value="#{var.alberguesajusporate}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.repviviendaporate}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-repvivienda" value="#{var.repviviendaporate}"/>                                                
                                 </rich:column>
                                 <rich:column  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.mecryaseoatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida" value="#{var.mecryaseoatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.arriendosatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-arriendoatendida" value="#{var.arriendosatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.alberguesatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-albergueatendida" value="#{var.alberguesatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.repviviendaatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.mecryaseoatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida"   value="#{var.mecryaseoatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.arriendosatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-arriendoatendido" value="#{var.arriendosatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.alberguesatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-albegueatendido" value="#{var.alberguesatendidas}"/>                                                
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.repviviendaatendidas}"/>                                                
+                                    <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
                             <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.numSolicitud}" />
+                                <h:outputText  styleClass="ikont-hot-numsolicituds" value="#{currentRow.numSolicitud}" />
                             </rich:column>
-                            <rich:column   styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.mercAseoini}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-mercyaseoini" value="#{currentRow.mercAseoini}" />
                             </rich:column>
-                            <rich:column   styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.mercAseoajuste}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-mercyaseoajuste" value="#{currentRow.mercAseoajuste}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.arriendoIni}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-arriendoini" value="#{currentRow.arriendoIni}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.arriendoAjust}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-arriendojust" value="#{currentRow.arriendoAjust}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.albergueIni}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-alberguesini" value="#{currentRow.albergueIni}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.albergueAjuste}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-alberguesajust" value="#{currentRow.albergueAjuste}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.repVivienda}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-repvivienda" value="#{currentRow.repVivienda}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.mercAseo}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-mercadoaseo" value="#{currentRow.mercAseo}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.arriendo}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-txtarriendo" value="#{currentRow.arriendo}" />
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.albergue}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-albergue" value="#{currentRow.albergue}" />
                             </rich:column>    
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.reparacionVivienda}" />
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-reparacionvivienda" value="#{currentRow.reparacionVivienda}" />
                             </rich:column>    
 
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.numvaldeclaradomeryaseo/100}" >
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numvaldeclarado" value="#{currentRow.numvaldeclaradomeryaseo/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.numvaldeclaradoarriendo/100}" >
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numvaldecarriendo" value="#{currentRow.numvaldeclaradoarriendo/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.numvaldeclaradoalbergues/100}" >
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numvaldecalbergue" value="#{currentRow.numvaldeclaradoalbergues/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>    
-                            <rich:column styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont- "    value="#{currentRow.numvaldeclaradorepvivienda/100}" >
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numvaldecrepvivienda" value="#{currentRow.numvaldeclaradorepvivienda/100}" >
                                     <f:convertNumber pattern="###.## %"/>
                                 </h:outputText>
                             </rich:column>    
@@ -164,25 +164,25 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.seguimientoahmunicipal}"/>
+                                    <h:outputText  styleClass="ikont-hot-seguimientoahmuni" value="#{var.seguimientoahmunicipal}"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numsolicitudch}" />                                                
+                                    <h:outputText  styleClass="ikont-hot-numsolicitdchs" value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.departamento}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-departamento" value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.municipio}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.codigodaneah}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numtotalfambenmeryaseo}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-numtotbenemercyaseo" value="#{var.numtotalfambenmeryaseo}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valrepayudentreg}" >
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-valrayudentreg" value="#{var.valrepayudentreg}" >
                                         
                                     </h:outputText>
                                                                                                  
@@ -191,23 +191,23 @@
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numSolicitud}"/>                                                
+                        <rich:column  breakRowBefore="true">                                    
+                            <h:outputText  styleClass="ikont-hot-numsolicitud" value="#{currentRow.numSolicitud}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.nomDep}"/>                                                
+                        <rich:column>                                    
+                            <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.nomMunicipio}"/>                                                
+                        <rich:column>                            
+                            <h:outputText  styleClass="ikont-hot-nommunicipio" value="#{currentRow.nomMunicipio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.codMupio}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-codmupio" value="#{currentRow.codMupio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-numtotfliabene" value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-valtotayudaentregamerc" value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
@@ -224,53 +224,53 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="7" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.seguimientoarriendosmunicipal}"/>
+                                    <h:outputText  styleClass="ikont-hot-seguimientoarriendomuni"   value="#{var.seguimientoarriendosmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numsolicitudch}" />                                                
+                                <rich:column  breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-txtnumsolicitud" value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.departamento}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-depto" value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.municipio}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-muni" value="#{var.municipio}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.codigodaneah}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numfambenarriendos}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-numfambenarriendo" value="#{var.numfambenarriendos}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numfambeneficiadasarriendos}" />             
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-numfambenearriendo" value="#{var.numfambeneficiadasarriendos}" />             
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valrepayudentregarrien}" />             
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-valrayudentregarrien" value="#{var.valrepayudentregarrien}" />             
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        <rich:column  breakRowBefore="true">                                    
+                            <h:outputText  styleClass="ikont-hot-solicitudmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.nomDep}"/>                                                
+                        <rich:column>                                    
+                            <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.nomMuni}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-nommuni" value="#{currentRow.nomMuni}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.codMpio}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-codmpio" value="#{currentRow.codMpio}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numFamiliabeneficiar}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-numfliabeneficiar" value="#{currentRow.numFamiliabeneficiar}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numFamiliabeneficiada}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-txtnumfliabeneficiada" value="#{currentRow.numFamiliabeneficiada}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.valAyudaentregada}"> 
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-valayudaentregada" value="#{currentRow.valAyudaentregada}"> 
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
@@ -288,48 +288,48 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.seguimientoalberguesmunicipal}"/>
+                                    <h:outputText  styleClass="ikont-hot-seguimientoalbermuni" value="#{var.seguimientoalberguesmunicipal}"/>
                                 </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numsolicitudch}" />                                                
+                                <rich:column  breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-numsolicitdch" value="#{var.numsolicitudch}" />                                                
                                 </rich:column>
-                                <rich:column  styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.departamento}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-txtdepto" value="#{var.departamento}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.municipio}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
                                 </rich:column>                                
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.unidhabaconstruir}" />                                                
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-unidhabaconstruir" value="#{var.unidhabaconstruir}" />                                                
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.unidhabaconstruidos}" />             
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-unidhabaconstruidos" value="#{var.unidhabaconstruidos}" />             
                                 </rich:column>
-                                <rich:column styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.unidhabenconstr}" />             
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-unidhabencontr" value="#{var.unidhabenconstr}" />             
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
 
 
-                        <rich:column  breakRowBefore="true" styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                        <rich:column  breakRowBefore="true">                                    
+                            <h:outputText  styleClass="ikont-hot-codigosolicmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
                         </rich:column>
-                        <rich:column  styleClass="ikont-"  >                                    
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strdepartamento}"/>                                                
+                        <rich:column>                                    
+                            <h:outputText  styleClass="ikont-hot-strdepartamento" value="#{currentRow.strdepartamento}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strmunicipio}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-txtstrmunicipio" value="#{currentRow.strmunicipio}"/>                                                
                         </rich:column>
                        
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.intuniConstruir}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-intunicontruir" value="#{currentRow.intuniConstruir}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.intuniConstruidas}"/>                                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-intuniconstruidas" value="#{currentRow.intuniConstruidas}"/>                                                
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.intuniProConstruccion}"/>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-intuniprocontruccion" value="#{currentRow.intuniProConstruccion}"/>
                         </rich:column>
 
                         <f:facet name="footer">
