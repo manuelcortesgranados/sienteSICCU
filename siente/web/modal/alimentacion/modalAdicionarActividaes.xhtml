@@ -9,7 +9,7 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalAdicioarActividades" width="500" autosized="true" headerClassrich-panel-header">
+    <rich:popupPanel id="modalAdicioarActividades" width="500" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- "   value="Adición de actividades/ítems no previstos"/>
@@ -30,7 +30,7 @@
             <center>
                 <h:form>
                     <rich:panel styleClass="ikont-"  
-                                bodystyleClassrich-panel-grid-body-activimodal" headerClassfont-header-panel">
+                                bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid id="objetoactividad" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
                                 <h:outputText  styleClass="ikont- "   value="Actividad / ítem no previsto:"/>
@@ -131,7 +131,7 @@
                     <interkont:spacer height="20" />
 
                     <rich:panel id="reportatentodos" header="#{var.definaelcostototal}" styleClass="ikont-"  
-                                bodystyleClassrich-panel-grid-body-activimodal" headerClassfont-header-panel">
+                                bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle">
                                 <h:outputText  styleClass="ikont- "   value="El valor unitario de las actividades incluye el AIU?"/>

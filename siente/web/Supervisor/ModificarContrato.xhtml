@@ -46,7 +46,7 @@
                 <h:panelGrid id="layoutdetalleModificar"   rendered="true">
                     <h:panelGrid id="detallecontrato" styleClass="ikont-"   columns="4"
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
-                        <rich:panel  id="tipo" header="#{var.tipo}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel"
+                        <rich:panel  id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel"
                                      rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                             <h:panelGrid columns="1" >
                                 <interkont:spacer height="30"/>
@@ -59,7 +59,7 @@
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="valor" header="#{var.valor}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                        <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                             <interkont:spacer height="50"/>
 
                             <h:panelGrid columns="1"  columnClasses="column-grid-detail">
@@ -73,7 +73,7 @@
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodystyleClassrich-panel-grid-body"  styleClass="ikont-"   headerClassfont-header-panel">
+                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body"  styleClass="ikont-"   headerClass="font-header-panel">
                             <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" >
                                 <h:outputText  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}" />
                                 <h:outputText  styleClass="ikont- "   value="desde" />
@@ -87,7 +87,7 @@
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
 
                             <div id="refreshMe" >
                                 <center>

@@ -45,13 +45,13 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info_imagenevolucion">
                             <center>
-                                <rich:panel bodystyleClass="info" >
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
                                     </f:facet>
                                     <h:outputText  styleClass="ikont "   rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file">
-                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">

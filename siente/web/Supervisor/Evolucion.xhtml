@@ -103,7 +103,7 @@
                         <h:panelGrid styleClass="ikont-"   
                                      columns="4" columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel"
                                      rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}">
-                            <rich:panel header="#{var.imagen}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"    headerClassfont-header-panel">
+                            <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" styleClass="ikont-"    headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <h:graphicImage  styleClass="ikont- "   value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
                                                     height="120" width="160"
@@ -112,7 +112,7 @@
                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.avancefisico}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                            <rich:panel header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <interkont:spacer height="40"/>
                                     <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
@@ -127,7 +127,7 @@
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.valoravancefisico}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                            <rich:panel header="#{var.valoravancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                 <interkont:spacer height="35"/>
                                 <h:panelGroup>
                                     <h:panelGrid columns="1" columnClasses="tabla-center">
@@ -139,7 +139,7 @@
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </rich:panel>
-                            <rich:panel header="#{var.houtsemaforo}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                            <rich:panel header="#{var.houtsemaforo}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <center>
                                         <h:graphicImage  styleClass="ikont- "   id="imgSemaObra"
@@ -159,7 +159,7 @@
                     <h:panelGrid id="imgspanel" width="10%" styleClass="ikont-"  >
                         <h:panelGrid columns="1" rendered="#{Supervisor$DetalleObra.periodoevo.intidperiodo != -1}" styleClass="ikont-"  
                                      columnClasses="column-grid-panel">
-                            <rich:panel header="#{var.observaciongeneral}" bodystyleClassrich-panel-grid-body-obser" styleClass="ikont-"   headerClassfont-header-panel">
+                            <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" styleClass="ikont-"   headerClass="font-header-panel">
 
                                 <h:inputTextarea value="#{Supervisor$DetalleObra.alimentacionmostrar.textcomentario}" 
                                                   rows="5" disabled="true"/>

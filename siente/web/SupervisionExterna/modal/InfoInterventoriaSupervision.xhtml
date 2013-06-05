@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalinformacioninterventoria" headerClassrich-panel-header" height="400" width="1200" >
+    <rich:popupPanel id="modalinformacioninterventoria" headerClass="rich-panel-header" height="400" width="1200" >
         <f:facet name="header">
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- "   value="INFORMACIÓN GENERAL DE INTERVENTORÍA" styleClass="ikont-"   />
@@ -28,51 +28,51 @@
             </h:form>
         </f:facet>
         
-        <rich:panel header="#{var.numerocontrato}" headerClasstooltip">
+        <rich:panel header="#{var.numerocontrato}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inNumEncargoS" value="#{Supervision$Externa.objetoSeguimiento.strnumcontrato}" />
         </rich:panel>
         
-        <rich:panel header="#{var.numeroencargo}" headerClasstooltip">
+        <rich:panel header="#{var.numeroencargo}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inEncargoFiduS" value="#{Supervision$Externa.objetoSeguimiento.intnumencargofidu}" />
         </rich:panel>
         
-        <rich:panel header="#{var.contratista}" headerClasstooltip">
+        <rich:panel header="#{var.contratista}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inContratistaS" value="#{Supervision$Externa.objetoSeguimiento.strcontratista}" />
         </rich:panel>
         
-        <rich:panel header="#{var.objetodelcontrato}" headerClasstooltip">
+        <rich:panel header="#{var.objetodelcontrato}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inObjetoS" value="#{Supervision$Externa.objetoSeguimiento.strobjcontratointerven}" />
         </rich:panel>
         
-        <rich:panel header="#{var.plazo} (Meses)" headerClasstooltip">
+        <rich:panel header="#{var.plazo} (Meses)" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inPlazoS" value="#{Supervision$Externa.objetoSeguimiento.intplazocontrato}" />
         </rich:panel>
         
-        <rich:panel header="#{var.fechainicioacta}" headerClasstooltip">
+        <rich:panel header="#{var.fechainicioacta}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inFechaInicioS" value="#{Supervision$Externa.objetoSeguimiento.datefecactainiinterv}" />
         </rich:panel>
         
-        <rich:panel header="#{var.fechafinalizacion}" headerClasstooltip">
+        <rich:panel header="#{var.fechafinalizacion}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inFechaFinalizacionS" value="#{Supervision$Externa.objetoSeguimiento.datefecactafininterv}" />
         </rich:panel>
         
-        <rich:panel header="#{var.prorroga} (Meses)" headerClasstooltip">
+        <rich:panel header="#{var.prorroga} (Meses)" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inProrrogaS" value="#{Supervision$Externa.objetoSeguimiento.intmesesprorroga}"  />
         </rich:panel>
         
-        <rich:panel header="#{var.fechafinalizacion} #{var.vigentes}" headerClasstooltip">
+        <rich:panel header="#{var.fechafinalizacion} #{var.vigentes}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inFechaFinalizacionVigS" value="#{Supervision$Externa.objetoSeguimiento.datefecfinalizavigeninter}" />
         </rich:panel>
         
-        <rich:panel header="#{var.valorcontrato}" headerClasstooltip">
+        <rich:panel header="#{var.valorcontrato}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inValorContratoS" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}" />
         </rich:panel>
         
-        <rich:panel header="#{var.preguntavalorinterventoria}" headerClasstooltip">
+        <rich:panel header="#{var.preguntavalorinterventoria}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inPreguntaValorS" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}" />
         </rich:panel>
         
-        <rich:panel header="#{var.condicioninterventoria}" headerClasstooltip">
+        <rich:panel header="#{var.condicioninterventoria}" headerClass="tooltip">
             <h:outputText  styleClass="ikont- "   id="inCondiccionS" value="#{Supervision$Externa.objetoSeguimiento.boolcumpleporcenvalrmenoroigual}"  />
         </rich:panel>
     </rich:popupPanel>

@@ -122,7 +122,7 @@
                         <center>
                             <h:panelGrid id="detalleproyecto" styleClass="ikont-"   columns="5"
                                          columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
-                                <rich:panel  id="semaforoactual" header="#{var.houtsemaforoactual}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel  id="semaforoactual" header="#{var.houtsemaforoactual}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                     <h:panelGrid columnClasses="panelcenter" >
 
                                         <h:graphicImage  styleClass="ikont- "   id="imgSemaObra"
@@ -134,7 +134,7 @@
                                     </h:panelGrid>
                                 </rich:panel>
 
-                                <rich:panel id="presupuestoactual" header="#{var.costo}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="presupuestoactual" header="#{var.costo}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
 
                                     <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                         <h:panelGroup>
@@ -169,7 +169,7 @@
                                     </h:panelGrid>
                                 </rich:panel>
 
-                                <rich:panel id="duracion" header="#{var.intduracion}" bodystyleClassrich-panel-grid-body"  styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="duracion" header="#{var.intduracion}" bodyClass="rich-panel-grid-body"  styleClass="ikont-"   headerClass="font-header-panel">
                                     <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" >
                                         <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
                                         <h:outputText  styleClass="ikont- "   value="#{var.diasdesde}" />
@@ -183,7 +183,7 @@
                                     </h:panelGrid>
                                 </rich:panel>
 
-                                <rich:panel id="tiempoentrega" header="#{var.tiempoentrega}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="tiempoentrega" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
 
                                     <script type="text/javascript" language="JavaScript">
 
@@ -233,8 +233,8 @@
 
                                 </rich:panel>
 
-                                <rich:panel id="contratista" header="#{var.contratista}" bodystyleClassrich-panel-grid-body"
-                                            styleClass="ikont-"   headerClassfont-header-panel" >
+                                <rich:panel id="contratista" header="#{var.contratista}" bodyClass="rich-panel-grid-body"
+                                            styleClass="ikont-"   headerClass="font-header-panel" >
                                     <rich:panel   >
                                         <h:outputLabel  styleClass="ikont- "   id="st_strnomcontratista"
                                                        
@@ -243,8 +243,8 @@
                                 </rich:panel>
 
 
-                                <rich:panel id="tipoproyecto" header="#{var.tipo}" bodystyleClassrich-panel-grid-body" 
-                                            styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
+                                            styleClass="ikont-"   headerClass="font-header-panel">
                                     <center>
                                         <rich:panel  >
 
@@ -285,7 +285,7 @@
                                     </center>
                                 </rich:panel>
 
-                                <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="empleosgenerados"  header="#{Supervisor$AdministrarObraNew.nombreImpactoSocial}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                     <interkont:spacer height="5"/>
                                     <h:panelGrid id="empleos" columns="1"  >
                                         <center>
@@ -328,7 +328,7 @@
                                     </h:panelGrid>
                                 </rich:panel>
 
-                                <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel  id="deberiaestar" header="#{var.ejevspro}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                     <interkont:spacer height="40"/>
                                     <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
                                         <h:outputText  styleClass="ikont- "   value="#{var.houtobraestaen}" />
@@ -344,7 +344,7 @@
 
                                 </rich:panel>
 
-                                <rich:panel id="avancefisico" bodystyleClassrich-panel-grid-body"  styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel id="avancefisico" bodyClass="rich-panel-grid-body"  styleClass="ikont-"   headerClass="font-header-panel">
                                     <f:facet name="header">
                                         <h:outputLabel  styleClass="ikont- "   value="#{var.numvalavanfisicodeclarado}" />
                                     </f:facet>
@@ -421,7 +421,7 @@
                                         </h3>
                                     </div>
                                 </rich:panel>
-                                <rich:panel header="#{var.objeto}" bodystyleClassrich-panel-grid-body" styleClass="ikont-"   headerClassfont-header-panel">
+                                <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                                     <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
                                             return true;">
                                         <h:graphicImage  styleClass="ikont- "   value="#{var.verobjeto}" />
@@ -475,7 +475,7 @@
                             <center>
 
                                 <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-"  
-                                            bodystyleClassrich-panel-grid-body-report" headerClassfont-header-panel"
+                                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                                             rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}">
                                     <center>
                                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
@@ -505,7 +505,7 @@
                                     </center>
                                 </rich:panel>
                                 <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-"  
-                                            bodystyleClassrich-panel-grid-body-report" headerClassfont-header-panel"
+                                            bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                                             rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro != null}">
                                     <center>
                                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">

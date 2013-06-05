@@ -48,7 +48,7 @@
 
                         <h:panelGroup id="infoDoc">
                             <center>
-                                <rich:panel bodystyleClass="info" >
+                                <rich:panel bodyClass="info" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont "   value="#{var.arcsub}" /> 
                                     </f:facet>
@@ -56,7 +56,7 @@
                                     <h:outputText  styleClass="ikont "   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorDocumento.archivos}" var="file">
-                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont "   value="#{var.nomarc}" />

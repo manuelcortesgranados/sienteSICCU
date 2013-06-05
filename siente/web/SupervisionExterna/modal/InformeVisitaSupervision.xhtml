@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalinformevisita" headerClassrich-panel-header" height="400" width="1200" >
+    <rich:popupPanel id="modalinformevisita" headerClass="rich-panel-header" height="400" width="1200" >
         <f:facet name="header">
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- "   value="Informe de Visita" styleClass="ikont-"   />
@@ -29,172 +29,172 @@
         </f:facet>
 
         <h:panelGrid columns="2">
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titFechaVisita" value="#{var.fechavisita}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inFechaVisita" value="#{Supervision$Externa.objetoSeguimiento.datefechavisita}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titNroVisita" value="#{var.visitanumero}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inNroVisita" value="#{Supervision$Externa.objetoSeguimiento.intnumvisita}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titTipoVisita" value="#{var.tipovisita}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inTipoVisita" value="#{Supervision$Externa.objetoSeguimiento.tipovisita.strdescripcion}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titVisitadoPor" value="#{var.visitadopor}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inVisitadoPor" value="#{Supervision$Externa.objetoSeguimiento.strvisitador}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titRepresentante" value="#{var.representantedelegadoentidad}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inRepresentante" value="#{Supervision$Externa.objetoSeguimiento.strnombredelegado}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titTotalEjecutado" value="#{var.totalejecutado}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inTotalEjecutado" value="#{Supervision$Externa.objetoActividadSeguimiento.numvlrtotalejec}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titPorcentajeEject" value="#{var.porcentajejecutado}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inPorcentajeEject" value="#{Supervision$Externa.objetoSeguimiento.numporcentaejecutado}">
                     <f:convertNumber pattern="% ####" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titVlrProgram" value="#{var.valorprogramado} #{var.alafecha}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inVlrProgram" value="#{Supervision$Externa.objetoSeguimiento.numvlrprogramadofecha}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titPorcentajeProgram" value="#{var.porcentajealafecha}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inPorcentajeProgram" value="% #{Supervision$Externa.objetoSeguimiento.numvlrprogramadofechaporcen}">
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titPorcentajeFecha" value="#{var.porcentajejecutado} #{var.alafecha}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inPorcentajeFecha" value="% #{Supervision$Externa.objetoSeguimiento.numvlrejecutafechaporcen}">
                 </h:outputText>
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titResumenContrato" value="#{var.resumenestadoactualcontrato}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inResumenContrato" value="#{Supervision$Externa.objetoSeguimiento.strresumenactual}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titRecomendacionContinuidad" value="#{var.recomendacionescontinuidad}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inRecomendacionContinuidad" value="#{Supervision$Externa.objetoSeguimiento.strrecomendacontinui}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titPresentaDesarrollo" value="#{var.presentaDesarrolloNormal}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inPresentaDesarrollo" value="#{Supervision$Externa.objetoTipoDesarrollo.strdescripcion} " />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titConceptoObra" value="#{var.conceptoobra}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inConceptoObra" value="#{Supervision$Externa.objetoSeguimiento.textconceptopresupuesto}"   />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titAvancesRetrasos" value="#{var.avancesretrasos}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inAvancesRetrasos" value="#{Supervision$Externa.objetoSeguimiento.textavancesretrasos}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titLogrosAdministrativos" value="#{var.logrosadministrativos}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inLogrosAdministrativos" value="#{Supervision$Externa.objetoSeguimiento.textlogrosdificultades}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titreunionesSeguimientos" value="#{var.reunionesseguimiento}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inreunionesSeguimientos" value="#{Supervision$Externa.tieneReuniones}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titInterventoriaRemite" value="#{var.interventoriaremite}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inInterventoriaRemite" value="#{Supervision$Externa.remiteInformes}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titCumplimientoRequerimiento" value="#{var.cumplimientorequerimientos}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inCumplimientoRequerimiento" value="#{Supervision$Externa.cumpleAmbiental}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titPermisosAmbiental" value="#{var.permisosinicioobra}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inPermisosAmbiental" value="#{Supervision$Externa.permisosLicencias}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titNormasSalud" value="#{var.normasalud}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inNormasSalud" value="#{Supervision$Externa.permisoAmbiental}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titObservacionesComentarios" value="#{var.observacionescomentarios}" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inObservacionesComentarios" value="#{Supervision$Externa.objetoSeguimiento.textobservacionespunto}" />
             </rich:panel>
 
-            <rich:panel bodystyleClassinpanelBody" >
+            <rich:panel bodyClass="inpanelBody" >
                 <h:outputText  styleClass="ikont- "   id="titObservacionesNovedades" value="#{var.observacionesnovedades}:" />
             </rich:panel>
-            <rich:panel bodystyleClassinpanelBody">
+            <rich:panel bodyClass="inpanelBody">
                 <h:outputText  styleClass="ikont- "   id="inObservacionesNovedades" value="#{Supervision$Externa.objetoSeguimiento.textobservacionesmunicipio}" />
             </rich:panel>
         </h:panelGrid>

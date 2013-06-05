@@ -9,7 +9,7 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodystyleClass="ikont-rp-tool"  rendered="false">
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodyClass="ikont-rp-tool"  rendered="false">
 
         <a4j:commandLink styleClass="ikont-hcl-sin1"  />
 
@@ -23,7 +23,7 @@
         <div  />
     </rich:panel>
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodystyleClass="ikont-rp-menusolicitudobra-body" >
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodyClass="ikont-rp-menusolicitudobra-body" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
             <h:panelGrid styleClass="ikont-hpg-crearSolicitud"   cellpadding="0" cellspacing="0" >
                 <h:commandLink styleClass="ikont-hcl"   immediate="true"
@@ -45,7 +45,7 @@
         </h:panelGrid>
     </rich:panel>
 
-    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodystyleClass="ikont-rp-menuNumSolicitudes-body" >
+    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodyClass="ikont-rp-menuNumSolicitudes-body" >
         <h:panelGrid columns="2"  cellpadding="1px"  >
             <h:outputText  styleClass="ikont-hot-textSolicitudes"   id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
             <h:outputText  styleClass="ikont-hot-numSolicitudes "   id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />

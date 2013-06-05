@@ -9,7 +9,7 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="modalActaPrecios" autosized="true" 
-                     headerClassrich-panel-header">
+                     headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- "   value="#{var.acta} #{var.deCiu} Precios"/>
@@ -46,13 +46,13 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoActas">
                             <center>
-                                <rich:panel bodystyleClassinforma" >
+                                <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont- "   value="#{var.arcsub}"/>
                                     </f:facet>
                                     <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActaPrecios.archivos}" var="file">
-                                        <rich:panel bodystyleClassrich-laguna-panel-no-header">
+                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont- "   value="#{var.nomarc}"/>
