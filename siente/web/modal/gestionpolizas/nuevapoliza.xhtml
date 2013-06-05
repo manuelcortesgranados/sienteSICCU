@@ -11,14 +11,14 @@
     <rich:popupPanel  id="mp_nueva_poliza" moveable="true" autosized="true"  headerClass="rich-panel-header" onresize="100" width="500">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="INGRESAR NUEVA PÓLIZA"/>
+                <h:outputText  class="ikont-hot-ingresarnuevapoliza "   value="INGRESAR NUEVA PÓLIZA"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_nueva_poliza" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_nueva_poliza" class="ikont-a4jcl-escondermpnuevapoliza"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_nueva_poliza')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,7 +27,7 @@
         <h:form>
             <h:panelGrid id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
-                <h:outputLabel  class="id-jsf- "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
+                <h:outputLabel  class="ikont-hol-lblTipoPoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
                 </h:outputLabel>
                 <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.polizacontrato.tipopoliza.inttipopoliza}"  >
@@ -35,19 +35,19 @@
 
                 </h:selectOneMenu>
 
-                <h:outputLabel  class="id-jsf- "    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato" >
+                <h:outputLabel  class="ikont-hol-lblnumPolizaContrato"    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato" >
 
                 </h:outputLabel>
                 <h:inputText id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}" />
 
-                <h:outputLabel  class="id-jsf- "   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
+                <h:outputLabel  class="ikont-hol-lblVencimientoPoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                 </h:outputLabel>
                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
-                <h:outputLabel  class="id-jsf- "   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
+                <h:outputLabel  class="ikont-hol-lblEntidadPoliza"   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
                 </h:outputLabel>
                 <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
                     <f:selectItems value="#{Supervisor$Contrato.companias}"/>
