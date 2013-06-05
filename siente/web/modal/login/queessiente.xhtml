@@ -10,19 +10,19 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel  id="queessiente" autosized="true" resizeable="false" width="700" 
-                      headerClass="style-modal-dialog-head" styleClass="ikont"   onshow="completModal()" >
+                      headerClass="style-modal-dialog-head" styleClass="ikont-rpp-queessiente"   onshow="completModal()" >
         <f:facet name="header" >            
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  styleClass="ikont "    value="#{var.loginfoterquees}"  />
+                    <h:graphicImage  styleClass="ikont-gi-imagotiposientepng "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
+                    <h:outputText  styleClass="ikont-hot-loginfoterquees "    value="#{var.loginfoterquees}"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_queessiente" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_queessiente" styleClass="ikont-a4jcl-esconderqueessiente"   
                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('queessiente')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -46,8 +46,8 @@
                             <li id="slider-li-one" >
                                 <div >                                        
                                     <p id="what-siente">                                            
-                                        <label id="what-siente-title"><h:outputText  styleClass="ikont "   value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
-                                        <h:outputText  styleClass="ikont "   value="#{var.leyendamodalquees}"></h:outputText>
+                                        <label id="what-siente-title"><h:outputText  styleClass="ikont-l-whatsientetitle "   value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
+                                        <h:outputText  styleClass="ikont-hot-leyendamodalquees "   value="#{var.leyendamodalquees}"></h:outputText>
 
                                     </p>
                                     <div styleClass="what-siente-img">
@@ -70,11 +70,11 @@
                                     <h:panelGroup rendered="#{var.vartextoquees}">
                                         <rich:panel  >
                                             <p id="what-siente">
-                                                <label id="what-siente-title"><h:outputText  styleClass="ikont "   value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona2}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona3}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona4}"  > </h:outputText>
+                                                <label id="what-siente-title"><h:outputText  styleClass="ikont-l-whatsientetitle"  value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
+                                                <h:outputText  styleClass="ikont-hot-leyendamodalqueesfunciona"    value="#{var.leyendamodalqueesfunciona}"  > </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyendamodalqueesfunciona2"    value="#{var.leyendamodalqueesfunciona2}"  > </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyendamodalqueesfunciona3"    value="#{var.leyendamodalqueesfunciona3}"  > </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyendamodalqueesfunciona4"    value="#{var.leyendamodalqueesfunciona4}"  > </h:outputText>
                                             </p>
                                         </rich:panel>
                                     </h:panelGroup>

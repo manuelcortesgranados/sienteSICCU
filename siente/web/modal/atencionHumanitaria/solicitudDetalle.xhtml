@@ -11,32 +11,28 @@
     <rich:panel id="panelsolicituddetalle" headerClass="rich-panel-header">
         <center>
             <h:panelGrid columns="6">
-                <h:panelGrid styleClass="ikont-"  />
-                <h:outputLabel  styleClass="ikont- "   id="lbldeptocrear"  value="#{var.departamento}:" />
+                <h:panelGrid styleClass="ikont-hpg-panelsolicituddetalledepartamento"  />
+                <h:outputLabel  styleClass="ikont-hol-lbldeptocrear"   id="lbldeptocrear"  value="#{var.departamento}:" />
                 <h:selectOneMenu id="combodeptocrear" value="#{CrearSolicitudAtencion$Solicitud.codDepartamentoCrear}">
                     <f:selectItems value="#{CrearSolicitudAtencion$Solicitud.departamentoCrear}" />
                     <a4j:ajax event="onchange" render="gpmunicipiocrear" listener="#{CrearSolicitudAtencion$Solicitud.llenarMunicipios}" execute="@this"/>
                 </h:selectOneMenu>
 
-                <h:panelGrid styleClass="ikont-"  />
-                <h:outputLabel  styleClass="ikont- "   id="lblmuni"  value="#{var.municipio}:" />
+                <h:panelGrid styleClass="ikont-panelsolicituddetallemunicipio"  />
+                <h:outputLabel  styleClass="ikont-hol-lblmuni"   id="lblmuni"  value="#{var.municipio}:" />
                 <h:panelGroup id="gpmunicipiocrear">
                     <h:selectOneMenu value="#{CrearSolicitudAtencion$Solicitud.codMunicipioCrear}">
                         <f:selectItems value="#{CrearSolicitudAtencion$Solicitud.municipioCrear}"/>
                     </h:selectOneMenu>
                 </h:panelGroup>        
 
-                <h:panelGrid styleClass="ikont-"  />
-                <h:outputLabel  styleClass="ikont- "   id="lbl"  value="#{var.numerofamiliasah}:" />
+                <h:panelGrid styleClass="ikont-hpg-panelsolicituddetallenumerofamilias"  />
+                <h:outputLabel  styleClass="ikont-hol-lbl"   id="lbl"  value="#{var.numerofamiliasah}:" />
                 <rich:inputNumberSpinner id="number" minValue="1" maxValue="100"
                                          value="#{SessionBeanCobra.atencionhumanitariaService.solicituddetalle.numcantidadsolicitadaitem}"/>
 
-                <h:outputLabel  styleClass="ikont- "   />
-                <h:outputLabel  styleClass="ikont- "   />
-                <h:outputLabel  styleClass="ikont- "   />
-
-                <h:panelGrid styleClass="ikont-"  />
-                <h:outputLabel  styleClass="ikont- "   id="lblDescripciondetalle"  value="#{var.descripcionah}:" />
+                <h:panelGrid styleClass="ikont-hpg-panelsolicituddetalledescripcionah"  />
+                <h:outputLabel  styleClass="ikont-hol-lblDescripciondetalle"   id="lblDescripciondetalle"  value="#{var.descripcionah}:" />
 
             </h:panelGrid>
             <center>
@@ -55,28 +51,28 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.productoah}"/>
+                                    <h:outputText  styleClass="ikont-hot-productoah"   value="#{var.productoah}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.descripcionproducto}"/>
+                                    <h:outputText  styleClass="ikont-hot-descripcionproducto"   value="#{var.descripcionproducto}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.tipodefamilia}"/>
+                                    <h:outputText  styleClass="ikont-hot-tipodefamilia"   value="#{var.tipodefamilia}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.seleccionar}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- "   value="#{listaProductos.strdescripcionproductoah}"/>
+                                <h:outputText  styleClass="ikont-hot-strdescripcionproductoah"   value="#{listaProductos.strdescripcionproductoah}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- "   value="#{listaProductos.numvlrproductoah}"/>
+                                <h:outputText  styleClass="ikont-hot-numvlrproductoah"   value="#{listaProductos.numvlrproductoah}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- "   value="#{listaProductos.tipodefamilia.strdescripcionfamilia}"/>
+                                <h:outputText  styleClass="ikont-hot-strdescripcionfamilia"   value="#{listaProductos.tipodefamilia.strdescripcionfamilia}"/>
                             </rich:column>
                             <rich:column>
                                 <a4j:commandButton  value="#{var.agregar}"                                          
@@ -84,7 +80,7 @@
                                                     onclick="#{rich:component('panelCargando')}.show();" 
                                                     oncomplete="#{rich:component('panelCargando')}.hide();"
                                                     render="ToggleAtencionHumanitaria, tablaSolicitudDetalle, gpvalortotalmaestro"
-                                                    styleClass="ikont-"    />
+                                                    styleClass="ikont-a4jcb-agregar"    />
                             </rich:column>  
                         </rich:columnGroup>
                         <f:facet name="footer">

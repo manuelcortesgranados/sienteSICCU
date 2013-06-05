@@ -13,12 +13,12 @@
 
         <f:facet name="header" >
             <h:panelGroup>
-                <h:outputText  styleClass="ikont- "   value="#{var.registrobeneficiarios}"  styleClass="ikont-"    />
+                <h:outputText  styleClass="ikont-hot-registrobeneficiarios"   value="#{var.registrobeneficiarios}" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandLink id="esconder_beneficiarioxperiodo" styleClass="ikont-"   
+                <a4j:commandLink id="esconder_beneficiarioxperiodo" styleClass="ikont-a4jcl-esconderbeneficiarioxperiodo"   
                                  title="#{var.cerrar}" immediate="true" onclick="#{rich:component('beneficiarioxperiodo')}.hide();
                                          return false;"/>
             </h:panelGroup>
@@ -35,76 +35,76 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  colspan="11" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.listabeneficiario} por avance"/>
+                                    <h:outputText  styleClass="ikont-hot-listabeneficiarioavance "   value="#{var.listabeneficiario} por avance"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   id="tipodocumento" value="#{var.tipoDocumento}"/>
+                                    <h:outputText  styleClass="ikont-hot-tipoDocumento"   id="tipodocumento" value="#{var.tipoDocumento}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="identificacion" value="#{var.numero} de Identificación"/>
+                                    <h:outputText  styleClass="ikont-hot-identificacion"   id="identificacion" value="#{var.numero} de Identificación"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="apellido1" value="Primer #{var.apellido}"/>
+                                    <h:outputText  styleClass="ikont-hot-apellido1"   id="apellido1" value="Primer #{var.apellido}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="apellido2" value="Segundo #{var.apellido}"/>
+                                    <h:outputText  styleClass="ikont-hot-apellido2"   id="apellido2" value="Segundo #{var.apellido}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="nombre1" value="Primer #{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre1"   id="nombre1" value="Primer #{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="nombre2" value="Segundo #{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre2"   id="nombre2" value="Segundo #{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="departamento" value="#{var.departamento} de residencia"/>
+                                    <h:outputText  styleClass="ikont-hot-departamento "   id="departamento" value="#{var.departamento} de residencia"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="municipio" value="#{var.municipio} de residencia"/>
+                                    <h:outputText  styleClass="ikont-hot-municipio"   id="municipio" value="#{var.municipio} de residencia"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
+                                    <h:outputText  styleClass="ikont-hot-direccion"   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="telefono" value="#{var.telefono}"/>
+                                    <h:outputText  styleClass="ikont-hot-telefono"   id="telefono" value="#{var.telefono}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   id="email" value="#{var.correo} Electronico"/>
+                                    <h:outputText  styleClass="ikont-hot-email"   id="email" value="#{var.correo} Electronico"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
                             <rich:column breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- "   id="documento2" value="#{rowbeneficiario.strtipoidentificacion}" />
+                                <h:outputText  styleClass="ikont-hot-documento2"   id="documento2" value="#{rowbeneficiario.strtipoidentificacion}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="identificacion2" value="#{rowbeneficiario.intcedula}"/>
+                                <h:outputText  styleClass="ikont-hot-identificacion2"   id="identificacion2" value="#{rowbeneficiario.intcedula}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="apellido1_2" value="#{rowbeneficiario.strapellido1}" />
+                                <h:outputText  styleClass="ikont-hot-apellido1_2"   id="apellido1_2" value="#{rowbeneficiario.strapellido1}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="apellido2_2" value="#{rowbeneficiario.strapellido2}" />
+                                <h:outputText  styleClass="ikont-hot-apellido2_2"   id="apellido2_2" value="#{rowbeneficiario.strapellido2}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="nombre1_2" value="#{rowbeneficiario.strnombre}" />
+                                <h:outputText  styleClass="ikont-hot-nombre1_2"   id="nombre1_2" value="#{rowbeneficiario.strnombre}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="nombre2_2" value="#{rowbeneficiario.strnombre2}" />
+                                <h:outputText  styleClass="ikont-hot-nombre2_2"   id="nombre2_2" value="#{rowbeneficiario.strnombre2}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="departamento2" value="#{rowbeneficiario.strdepartamento}" />
+                                <h:outputText  styleClass="ikont-hot-departamento2"   id="departamento2" value="#{rowbeneficiario.strdepartamento}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="municipio2" value="#{rowbeneficiario.strmunicipio}" />
+                                <h:outputText  styleClass="ikont-hot-municipio2"   id="municipio2" value="#{rowbeneficiario.strmunicipio}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="direccion2" value="#{rowbeneficiario.strdireccionprincipal}" />
+                                <h:outputText  styleClass="ikont-hot-direccion2"   id="direccion2" value="#{rowbeneficiario.strdireccionprincipal}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="telefono2" value="#{rowbeneficiario.strtelefono1}" />
+                                <h:outputText  styleClass="ikont-hot-telefono2"   id="telefono2" value="#{rowbeneficiario.strtelefono1}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   id="email2" value="#{rowbeneficiario.stremail}" />
+                                <h:outputText  styleClass="ikont-hot-email2"   id="email2" value="#{rowbeneficiario.stremail}" />
                             </rich:column>
 
                         </rich:columnGroup>

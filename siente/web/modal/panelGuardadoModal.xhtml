@@ -12,15 +12,15 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.guardado}"/>
+                <h:outputText  styleClass="ikont-hot-guardado"    value="#{var.guardado}"/>
             </h:panelGroup>
         </f:facet>
-         <rich:panel styleClass="ikont"   >
+         <rich:panel styleClass="ikont-rp-guardado"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
-                    <h:outputText  styleClass="ikont "   value="#{var.laobra}" />
-                    <h:outputText  styleClass="ikont "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="ikont"  />
-                    <h:outputText  styleClass="ikont "   value="#{var.hasidoalimentadaexitosa}" />
+                    <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" />
+                    <h:outputText  styleClass="ikont-hot-strnombreobra"   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"/>
+                    <h:outputText  styleClass="ikont-hot-hasidoalimentadaexitosa"   value="#{var.hasidoalimentadaexitosa}" />
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"

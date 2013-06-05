@@ -14,13 +14,13 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalImagenCiu" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_modalImagenCiu" styleClass="ikont-a4jcl-escondermodalImagenCiu"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenCiu')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="#{var.imagen}" styleClass="ikont"   >           
+        <rich:panel header="#{var.imagen}" styleClass="ikont-rp-imagen"   >           
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagenCiu">  
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -42,17 +42,17 @@
                             <center>
                                 <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Ciudadano$PerfilCiudadano.cargadorImagen.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Ciudadano$PerfilCiudadano.cargadorImagen.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorImagen.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numBytesKb "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -61,7 +61,7 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCiuCargado}"
                                                    render="layoutImaCiu_par, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorImagen.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
+                                                   styleClass="ikont-a4jcb-borrarDatosImagen"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.aceptarImagen}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" onclick="#{rich:component('modalImagenCiu')}.hide();" rendered="#{Ciudadano$PerfilCiudadano.cargadorImagen.numArchivos>0}"
                                                    render="layoutImaCiu_par"

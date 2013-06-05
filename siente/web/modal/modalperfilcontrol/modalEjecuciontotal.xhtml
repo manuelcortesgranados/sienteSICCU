@@ -12,14 +12,14 @@
     <rich:popupPanel id="mp-EjecucionTotal" headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.ejecuciontotal}" styleClass="ikont"  />
+                <h:outputText  styleClass="ikont-hot-ejecuciontotal"   value="#{var.ejecuciontotal}" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="ikont-a4jcl-escondermpEjecucionTotal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-EjecucionTotal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -29,15 +29,15 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1">
-                    <h:outputText  styleClass="ikont "   value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
+                    <h:outputText  styleClass="ikont-hot-inversiontotalfasesahyr "   value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
                                   />
                     <h:commandLink action="#{HomeGestion.reportePdfInversionFases}">
-                        <h:graphicImage  styleClass="ikont "   width="1000" value="#{var.imginversionfases}"/>
+                        <h:graphicImage  styleClass="ikont-hgi-imginversionfases"   width="1000" value="#{var.imginversionfases}"/>
                     </h:commandLink>
-                    <h:outputText  styleClass="ikont "   value="1. Consolidado Inversión"
+                    <h:outputText  styleClass="ikont-hot-consolidadoinversion"   value="1. Consolidado Inversión"
                                   />
                     <h:commandLink action="#{HomeGestion.reportePdfInversionFasesDeptos}">
-                        <h:graphicImage  styleClass="ikont "   width="1000" value="#{var.imginversionfasesdeptos}"/>
+                        <h:graphicImage  styleClass="ikont-hgi-imginversionfasesdeptos"   width="1000" value="#{var.imginversionfasesdeptos}"/>
                     </h:commandLink>
                 </h:panelGrid>
             </rich:panel>

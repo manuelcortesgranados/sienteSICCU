@@ -11,26 +11,26 @@
     <rich:panel id="panelAsociarFiduprevisora">
         <rich:collapsiblePanel switchType="ajax"  >
             <f:facet name="header">
-                <h:outputText  styleClass="ikont- "   value="#{var.datosfidu}"/>
+                <h:outputText  styleClass="ikont-hot-datosfidu"   value="#{var.datosfidu}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
-                    <h:outputLabel  styleClass="ikont- "   id="lbfnenca"  value="#{var.numeroencargo}" />
+                    <h:outputLabel  styleClass="ikont-hol-lbfnenca"   id="lbfnenca"  value="#{var.numeroencargo}" />
                     <h:inputText value=""/>
-                    <a4j:commandButton styleClass="ikont-"   value="#{var.aceptar}"/>
-                    <a4j:commandButton styleClass="ikont-"   value="#{var.cancelar}"/>
+                    <a4j:commandButton styleClass="ikont-a4jcb-aceptar"   value="#{var.aceptar}"/>
+                    <a4j:commandButton styleClass="ikont-a4jcb-cancelar"   value="#{var.cancelar}"/>
                 </h:panelGrid>
             </center>
         </rich:collapsiblePanel>
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText  styleClass="ikont- "   value="#{var.verdatosfidu}"/>
+                <h:outputText  styleClass="ikont-hot-verdatosfidu"   value="#{var.verdatosfidu}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
-                    <h:outputLabel  styleClass="ikont- "   id="lbfecnuenca"  value="#{var.numeroencargo}" />
+                    <h:outputLabel  styleClass="ikont-hol-lbfecnuenca"   id="lbfecnuenca"  value="#{var.numeroencargo}" />
                     <h:inputText value="" disabled="true"/>
-                    <h:outputLabel  styleClass="ikont- "   id="lbfecmosencar"  value="#{var.fechaencargo}" />
+                    <h:outputLabel  styleClass="ikont-hol-lbfecmosencar"   id="lbfecmosencar"  value="#{var.fechaencargo}" />
                     <h:inputText value="" disabled="true"/>
 
                 </h:panelGrid>
