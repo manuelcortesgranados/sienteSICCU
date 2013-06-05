@@ -10,10 +10,10 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelEliminarSolicitud" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelEliminarSolicitud" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.atencion}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.atencion}" styleClass="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -21,7 +21,7 @@
             <h:form>
                 <h:panelGrid columns="1" id="layoutEliminar">
                     <h:panelGroup >
-                        <h:outputText  class="id-jsf- "   value="#{var.soli_confirmacionEliminar}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.soli_confirmacionEliminar}" />
                     </h:panelGroup>
 
                     <h:panelGrid columns="2">

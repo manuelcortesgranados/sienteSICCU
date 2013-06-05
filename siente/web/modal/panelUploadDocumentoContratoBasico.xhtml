@@ -10,11 +10,11 @@
 
     <rich:popupPanel id="panelUploadDocumentocc" autosized="true" >
 
-        <rich:panel header="Seleccionar Documento" class="id-jsf-"   >
+        <rich:panel header="Seleccionar Documento" styleClass="id-jsf-"   >
             <h:form>
                 <h:panelGroup >
                     <a4j:commandButton id="esconder_panelUploadDocumentocc" onclick=" #{rich:component('panelUploadDocumentocc')}.hide();return false;"
-                                       class="id-jsf-"    />
+                                       styleClass="id-jsf-"    />
                 </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -33,20 +33,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info_documento">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -56,7 +56,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$Contrato.cargadorDocumento.borrarDatosSubidos}" render="info_documento, uploadDocumento"
                                                    rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"     />
+                                                   styleClass="id-jsf-"     />
                                 <a4j:commandButton value="#{var.aceptar}" 
                                                    onclick="#{rich:component('panelUploadDocumentocc')}.hide();" render="tablaDocumentoscont, rdDoccontrato"
                                                    

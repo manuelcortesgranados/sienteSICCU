@@ -7,24 +7,24 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-listado-rutas" moveable="true" headerClass="rich-panel-header" autosized="true">
+    <rich:popupPanel id="mp-listado-rutas" moveable="true" headerstyleClass="rich-panel-header" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   id="listarRutas" value="#{var.listar} #{var.rutas}"/>
+                <h:outputText  styleClass="id-jsf- "   id="listarRutas" value="#{var.listar} #{var.rutas}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-rutas" onclick="#{rich:component('mp-listado-rutas')}.hide(); return false;" immediate="true"
-                                       class="id-jsf-"    />
+                                       styleClass="id-jsf-"    />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
             <h:form>
                 <h:panelGrid columns="3" >
-                    <h:outputText  class="id-jsf- "   value="#{var.consultar} #{var.rutas} " />
+                    <h:outputText  styleClass="id-jsf- "   value="#{var.consultar} #{var.rutas} " />
                     <h:inputText id="idpalabraclave" value="#{Supervisor$EntidadConvenio.palabraclave}"/>
                     <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$EntidadConvenio.buscarRuta}" render="tabla-listado-ruta,gpTotalRuta"/>
                 </h:panelGrid>
@@ -47,26 +47,26 @@
                             <rich:columnGroup>
 
                                 <rich:column colspan="7">
-                                    <h:outputText  class="id-jsf- "   value="#{var.rutas} encontradas #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.rutas} encontradas #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column width="200px" breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.codigotramo}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.codigotramo}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.descripcion}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.descripcion}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoRutas">
                             <rich:column  width="200px" breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{rutarow.strcodigotramo}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{rutarow.strcodigotramo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{rutarow.strnombretramo}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{rutarow.strnombretramo}"/>
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton value="#{var.seleccionar}" action="#{Supervisor$IngresarNuevaObra.seleccionruta(filaSeleccionada)}"

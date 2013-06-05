@@ -12,178 +12,178 @@
     >
  
     <rich:popupPanel  id="modalDetalleObra" autosized="true" resizeable="false" width="700" 
-                      styleClass="ikont-rpp-modaldetalleobra"  >
+                      stylestyleClassikont-rpp-modaldetalleobra"  >
         <f:facet name="header" >            
             <h:panelGroup  id="gpHeaderMOdalDetaCiudadano">
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
-                    <h:outputText  styleClass="ikont-hot-strnombrecrot"    value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strnombrecrot}" />
+                    <h:graphicImage  stylestyleClassikont-hgi-imagotiposiente"   url="/resources/imgs/modal/imagotipo_siente.png" style = " width : 45px" />
+                    <h:outputText  stylestyleClassikont-hot-strnombrecrot"    value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strnombrecrot}" />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDetalleObra" styleClass="ikont-acl-escondermodaldetalleobra"   
+                    <a4j:commandLink id="esconder_modalDetalleObra" stylestyleClassikont-acl-escondermodaldetalleobra"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDetalleObra')}.hide(); return false; "/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel styleClass="ikont-rp-gpdetaobramodal"    id="gpDetaObraModal">
+            <rich:panel stylestyleClassikont-rp-gpdetaobramodal"    id="gpDetaObraModal">
                 <h:panelGrid  columns="2">
-                    <h:panelGrid  styleClass="ikont-hpg-gpdetaobramodal"  >
+                    <h:panelGrid  stylestyleClassikont-hpg-gpdetaobramodal"  >
                         <h:panelGrid  columns="3">
-                            <h:graphicImage  styleClass="ikont-hgi-semaforo" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.semaforo}"/>
+                            <h:graphicImage  stylestyleClassikont-hgi-semaforo" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.semaforo}"/>
                             <h:panelGrid  columns="2">
-                                <h:panelGrid  styleClass="ikont-hpg-modalciudadanoduracion"   columns="3"> 
+                                <h:panelGrid  stylestyleClassikont-hpg-modalciudadanoduracion"   columns="3"> 
                                     <br/>
-                                    <h:outputText  styleClass="ikont-hot-modalciudadanoduracion" value="#{var.modalciudadanoduracion}"></h:outputText> 
+                                    <h:outputText  stylestyleClassikont-hot-modalciudadanoduracion" value="#{var.modalciudadanoduracion}"></h:outputText> 
                                     <br/>
                                 </h:panelGrid>
-                                <h:panelGrid  styleClass="ikont-hpg-modalciudadanoavancefisico"   columns="3"> 
+                                <h:panelGrid  stylestyleClassikont-hpg-modalciudadanoavancefisico"   columns="3"> 
                                     <br/>
-                                    <h:outputText  styleClass="ikont-hot-modalciudadanoavancefisico" value="#{var.modalciudadanoavancefisico}"></h:outputText> 
+                                    <h:outputText  stylestyleClassikont-hot-modalciudadanoavancefisico" value="#{var.modalciudadanoavancefisico}"></h:outputText> 
                                     <br/>
                                 </h:panelGrid>
                                 <h:panelGrid columnClasses="panelcenter"  >
-                                    <h:outputText  styleClass="ikont-hot-intplazoobra"  value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intplazoobra}"></h:outputText>
-                                    <h:outputText  styleClass="ikont-hot-modalciudadanodias" value="#{var.modalciudadanodias}"></h:outputText>
+                                    <h:outputText  stylestyleClassikont-hot-intplazoobra"  value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intplazoobra}"></h:outputText>
+                                    <h:outputText  stylestyleClassikont-hot-modalciudadanodias" value="#{var.modalciudadanodias}"></h:outputText>
                                     <h:panelGrid columnClasses="panelcenter"  columns="2" >
-                                        <h:outputText  styleClass="ikont-hot-modalciudadanoinicioobra" value="#{var.modalciudadanoinicioobra}"></h:outputText>    
-                                        <h:outputText  styleClass="ikont-hot-datefeciniobra " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.datefeciniobra}"></h:outputText>    
+                                        <h:outputText  stylestyleClassikont-hot-modalciudadanoinicioobra" value="#{var.modalciudadanoinicioobra}"></h:outputText>    
+                                        <h:outputText  stylestyleClassikont-hot-datefeciniobra " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.datefeciniobra}"></h:outputText>    
                                     </h:panelGrid>
                                     <h:panelGrid columnClasses="panelcenter"  columns="2" >
-                                        <h:outputText  styleClass="ikont-hot-modalciudadanofinobra"  value="#{var.modalciudadanofinobra}"></h:outputText>    
-                                        <h:outputText  styleClass="ikont-hot-datefecfinobra"  value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.datefecfinobra}"></h:outputText>
+                                        <h:outputText  stylestyleClassikont-hot-modalciudadanofinobra"  value="#{var.modalciudadanofinobra}"></h:outputText>    
+                                        <h:outputText  stylestyleClassikont-hot-datefecfinobra"  value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.datefecfinobra}"></h:outputText>
                                     </h:panelGrid>
                                 </h:panelGrid>
-                                <h:panelGroup layout="block" styleClass="ikont-hpg-asiva"  >
+                                <h:panelGroup layout="block" stylestyleClassikont-hpg-asiva"  >
                                     <h:panelGroup layout="block" >
                                         <center>
-                                            <h:outputText  styleClass="ikont-hot-asiva"  value="#{Ciudadano$PerfilCiudadano.asi_va}%"></h:outputText>
+                                            <h:outputText  stylestyleClassikont-hot-asiva"  value="#{Ciudadano$PerfilCiudadano.asi_va}%"></h:outputText>
                                             <interkont:spacer  height="5"/>
-                                            <h:outputText  styleClass="ikont-hot-modalciudadanoasiva"  value="#{var.modalciudadanoasiva}"></h:outputText>
+                                            <h:outputText  stylestyleClassikont-hot-modalciudadanoasiva"  value="#{var.modalciudadanoasiva}"></h:outputText>
                                         </center>
                                     </h:panelGroup>
                                     <h:panelGroup layout="block">
-                                        <h:graphicImage  styleClass="ikont-hgi-circuloasiva "   url="/resources/imgs/valla/circulo.png" />
-                                        <h:graphicImage  styleClass="ikont-hgi-asivaavancefisico"  url="/resources/imgs/valla/avance_fisico.png" />
+                                        <h:graphicImage  stylestyleClassikont-hgi-circuloasiva "   url="/resources/imgs/valla/circulo.png" />
+                                        <h:graphicImage  stylestyleClassikont-hgi-asivaavancefisico"  url="/resources/imgs/valla/avance_fisico.png" />
                                     </h:panelGroup>
                                     <h:panelGroup layout="block" >
                                         <center>
-                                            <h:outputText  styleClass="ikont-hot-deberiair" value="#{Ciudadano$PerfilCiudadano.deberia_ir}%"></h:outputText>
+                                            <h:outputText  stylestyleClassikont-hot-deberiair" value="#{Ciudadano$PerfilCiudadano.deberia_ir}%"></h:outputText>
                                             <interkont:spacer  height="5"/>
-                                            <h:outputText  styleClass="ikont-hot-modalciudadanodeberiair" value="#{var.modalciudadanodeberiair}"></h:outputText>
+                                            <h:outputText  stylestyleClassikont-hot-modalciudadanodeberiair" value="#{var.modalciudadanodeberiair}"></h:outputText>
                                         </center>
                                     </h:panelGroup>
                                     <h:panelGroup layout="block" >
-                                        <h:graphicImage  styleClass="ikont-hgi-circulodeberiair "    url="/resources/imgs/valla/circulo.png" />
-                                        <h:graphicImage  styleClass="ikont-hgi-deberiairavancefisico" url="/resources/imgs/valla/avance_fisico.png"/>
+                                        <h:graphicImage  stylestyleClassikont-hgi-circulodeberiair "    url="/resources/imgs/valla/circulo.png" />
+                                        <h:graphicImage  stylestyleClassikont-hgi-deberiairavancefisico" url="/resources/imgs/valla/avance_fisico.png"/>
                                     </h:panelGroup>
 
                                 </h:panelGroup>                                                            
                             </h:panelGrid>
                         </h:panelGrid>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-modalciudadanocuantocuestatitle"  > 
+                        <h:panelGroup layout="block" stylestyleClassikont-hpg-modalciudadanocuantocuestatitle"  > 
                             <h:panelGrid  columns="3" >
                                 <br/>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanocuantocuestatitle" value="#{var.modalciudadanocuantocuestatitle}"></h:outputText> 
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanocuantocuestatitle" value="#{var.modalciudadanocuantocuestatitle}"></h:outputText> 
                                 <br/>
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-valorobra"  > 
-                            <h:outputText  styleClass="ikont-hot-valorobra" value="#{Ciudadano$PerfilCiudadano.valorobra}"></h:outputText>
+                        <h:panelGroup layout="block" stylestyleClassikont-hpg-valorobra"  > 
+                            <h:outputText  stylestyleClassikont-hot-valorobra" value="#{Ciudadano$PerfilCiudadano.valorobra}"></h:outputText>
                         </h:panelGroup>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-modalciudadanotitleubicacionproyecto"  > 
+                        <h:panelGroup layout="block" stylestyleClassikont-hpg-modalciudadanotitleubicacionproyecto"  > 
                             <h:panelGrid  columns="3" > 
                                 <br/>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanotitleubicacionproyecto" value="#{var.modalciudadanotitleubicacionproyecto}"></h:outputText> 
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanotitleubicacionproyecto" value="#{var.modalciudadanotitleubicacionproyecto}"></h:outputText> 
                                 <br/>
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGrid styleClass="ikont-hpg-ubicacionobra"   columns="3">
-                            <h:panelGrid styleClass="ikont-hpg-lugarobra"  >
-                                <h:outputText  styleClass="ikont-hot-modalciudadanodireccion" value="#{var.modalciudadanodireccion}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-strdireccion" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strdireccion}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanozona" value="#{var.modalciudadanozona}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-strdesclugarobra" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.lugarobra.strdesclugarobra}"></h:outputText>
+                        <h:panelGrid stylestyleClassikont-hpg-ubicacionobra"   columns="3">
+                            <h:panelGrid stylestyleClassikont-hpg-lugarobra"  >
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanodireccion" value="#{var.modalciudadanodireccion}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-strdireccion" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strdireccion}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanozona" value="#{var.modalciudadanozona}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-strdesclugarobra" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.lugarobra.strdesclugarobra}"></h:outputText>
                             </h:panelGrid>
                             <h:panelGrid >
-                                <h:panelGroup layout="block" styleClass="ikont-hpg-space"  ></h:panelGroup>
+                                <h:panelGroup layout="block" stylestyleClassikont-hpg-space"  ></h:panelGroup>
                             </h:panelGrid>
-                            <h:panelGrid styleClass="ikont-hpg-ubicacionobramapa"  >
-                                <h:outputText  styleClass="ikont-hot-modalciudadanolongitud" value="#{var.modalciudadanolongitud}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatlongitud" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.floatlongitud}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanolatitud" value="#{var.modalciudadanolatitud}"></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatlatitud" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.floatlatitud}"></h:outputText>
+                            <h:panelGrid stylestyleClassikont-hpg-ubicacionobramapa"  >
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanolongitud" value="#{var.modalciudadanolongitud}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatlongitud" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.floatlongitud}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanolatitud" value="#{var.modalciudadanolatitud}"></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatlatitud" value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.floatlatitud}"></h:outputText>
                             </h:panelGrid>
                         </h:panelGrid>
-                        <h:panelGrid styleClass="ikont-hpg-modalciudadanocontratante"   columns="2">
-                            <h:panelGroup layout="block" styleClass="ikont-hpg-ciudadanocontratante"  > 
+                        <h:panelGrid stylestyleClassikont-hpg-modalciudadanocontratante"   columns="2">
+                            <h:panelGroup layout="block" stylestyleClassikont-hpg-ciudadanocontratante"  > 
                                 <h:panelGrid  columns="3" > 
                                     <br/>
-                                    <h:outputText  styleClass="ikont-hot-modalciudadanocontratante" value="#{var.modalciudadanocontratante}"></h:outputText> 
+                                    <h:outputText  stylestyleClassikont-hot-modalciudadanocontratante" value="#{var.modalciudadanocontratante}"></h:outputText> 
                                     <br/>
                                 </h:panelGrid>
                             </h:panelGroup>
-                            <h:panelGroup layout="block" styleClass="ikont-hpg-modalciudadanocontratista"  > 
+                            <h:panelGroup layout="block" stylestyleClassikont-hpg-modalciudadanocontratista"  > 
                                 <h:panelGrid  columns="3" > 
                                     <br/>
-                                    <h:outputText  styleClass="ikont-hot-modalciudadanocontratista" value="#{var.modalciudadanocontratista}"></h:outputText> 
+                                    <h:outputText  stylestyleClassikont-hot-modalciudadanocontratista" value="#{var.modalciudadanocontratista}"></h:outputText> 
                                     <br/>
                                 </h:panelGrid>
                             </h:panelGroup>
-                            <h:outputText  styleClass="ikont-hot-strnombrecompleto " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.tercero.strnombrecompleto}"></h:outputText>
+                            <h:outputText  stylestyleClassikont-hot-strnombrecompleto " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.tercero.strnombrecompleto}"></h:outputText>
                             <h:panelGroup layout="block">
-                                <h:outputText  styleClass="ikont-hot-unocontratista" value="#{Ciudadano$PerfilCiudadano.unoContratista}" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas==1}"/>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanovercontratista " value="#{var.modalciudadanover}" id="verContratistas" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas>1}">
+                                <h:outputText  stylestyleClassikont-hot-unocontratista" value="#{Ciudadano$PerfilCiudadano.unoContratista}" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas==1}"/>
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanovercontratista " value="#{var.modalciudadanover}" id="verContratistas" rendered="#{Ciudadano$PerfilCiudadano.numeroContratistas>1}">
                                     <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                  verticalOffset="5"  styleClass="ikont-"   >
+                                                  verticalOffset="5"  stylestyleClassikont-"   >
                                         <a4j:repeat value="#{Ciudadano$PerfilCiudadano.list_contratistas_slider}"  var="contratistas">
-                                            <h:outputText  styleClass="ikont- "   value="#{contratistas}"></h:outputText>
+                                            <h:outputText  stylestyleClassikont- "   value="#{contratistas}"></h:outputText>
                                         </a4j:repeat>
                                     </rich:tooltip>
                                 </h:outputText>
                             </h:panelGroup>
                         </h:panelGrid>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-modalciudadanoobjeto"  > 
+                        <h:panelGroup layout="block" stylestyleClassikont-hpg-modalciudadanoobjeto"  > 
                             <h:panelGrid  columns="3" > 
                                 <br/>
-                                <h:outputText  styleClass="ikont-hot-modalciudadanoobjeto" value="#{var.modalciudadanoobjeto}"></h:outputText> 
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanoobjeto" value="#{var.modalciudadanoobjeto}"></h:outputText> 
                                 <br/>
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-strobjetoobra"  >
-                            <h:outputText  styleClass="ikont- " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strobjetoobra}"></h:outputText>
+                        <h:panelGroup layout="block" stylestyleClassikont-hpg-strobjetoobra"  >
+                            <h:outputText  stylestyleClassikont- " value="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strobjetoobra}"></h:outputText>
                         </h:panelGroup>
                     </h:panelGrid>
-                    <h:panelGrid styleClass="ikont-"  >
-                        <h:graphicImage  styleClass="ikont-hgi-strimagenobra" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strimagenobra}"/>
-                        <h:panelGrid styleClass="ikont-"   columns="5">
+                    <h:panelGrid stylestyleClassikont-"  >
+                        <h:graphicImage  stylestyleClassikont-hgi-strimagenobra" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strimagenobra}"/>
+                        <h:panelGrid stylestyleClassikont-"   columns="5">
                             <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_info_modal">
-                                <h:graphicImage  styleClass="ikont-hgi-btninfo"   value="/resources/imgs/valla/btn_info.png"/>
+                                <h:graphicImage  stylestyleClassikont-hgi-btninfo"   value="/resources/imgs/valla/btn_info.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                              verticalOffset="5"  styleClass="ikont-rtt-btninfo"   >
-                                    <h:outputText  styleClass="ikont-hot-btninfo"   value="Informacion" ></h:outputText>
+                                              verticalOffset="5"  stylestyleClassikont-rtt-btninfo"   >
+                                    <h:outputText  stylestyleClassikont-hot-btninfo"   value="Informacion" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
                             <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Ciudadano/ParticipacionCiudadano.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_coment_modal">
-                                <h:graphicImage  styleClass="ikont-hgi-btncomentarios "   value="/resources/imgs/valla/btn_comentarios.png"/>
+                                <h:graphicImage  stylestyleClassikont-hgi-btncomentarios "   value="/resources/imgs/valla/btn_comentarios.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                              verticalOffset="5"  styleClass="ikont-rtt-btncomentarios"   >
-                                    <h:outputText  styleClass="ikont-hot-btncomentarios"   value="Comentarios" ></h:outputText>
+                                              verticalOffset="5"  stylestyleClassikont-rtt-btncomentarios"   >
+                                    <h:outputText  stylestyleClassikont-hot-btncomentarios"   value="Comentarios" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
                             <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
-                                <h:graphicImage  styleClass="ikont-hgi-btnfotos "   value="/resources/imgs/valla/btn_fotos.png"/>
+                                <h:graphicImage  stylestyleClassikont-hgi-btnfotos "   value="/resources/imgs/valla/btn_fotos.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                              verticalOffset="5"  styleClass="ikont-rtt-btnfotos"   >
-                                    <h:outputText  styleClass="ikont-hot-btnfotos"   value="Fotos" ></h:outputText>
+                                              verticalOffset="5"  stylestyleClassikont-rtt-btnfotos"   >
+                                    <h:outputText  stylestyleClassikont-hot-btnfotos"   value="Fotos" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>                             
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" styleClass="ikont-acl-modalciudadanoverproyecto"  >
-                                <h:outputText  styleClass="ikont-hot-modalciudadanoverproyecto"   value="#{var.modalciudadanoverproyecto}"></h:outputText> 
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" stylestyleClassikont-acl-modalciudadanoverproyecto"  >
+                                <h:outputText  stylestyleClassikont-hot-modalciudadanoverproyecto"   value="#{var.modalciudadanoverproyecto}"></h:outputText> 
                             </a4j:commandLink>  
                         </h:panelGrid>
                     </h:panelGrid>

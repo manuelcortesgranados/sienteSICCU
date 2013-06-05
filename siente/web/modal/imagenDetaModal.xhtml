@@ -11,12 +11,12 @@
     <h:panelGroup id="panelImagenes" >
         <center>            
             <h:panelGrid width="60%" >
-                <h:panelGrid class="id-jsf-"   columns="2"
+                <h:panelGrid styleClass="id-jsf-"   columns="2"
                              columnClasses="column-grid-panel,column-grid-panel,column-grid-panel">
-                    <rich:panel header="#{var.asiestaba}" bodyClass="rich-panel-grid-body-imgs" class="id-jsf-"    headerClass="font-header-panel">
+                    <rich:panel header="#{var.asiestaba}" bodystyleClass="rich-panel-grid-body-imgs" styleClass="id-jsf-"    headerstyleClass="font-header-panel">
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima2">
-                                <h:graphicImage  class="id-jsf- "   value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
+                                <h:graphicImage  styleClass="id-jsf- "   value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenAnterior}"
                                                 
                                                 height="140" width="190"/>
                             </h:panelGroup>
@@ -24,17 +24,17 @@
                      <!--   <rich:effect event="onclick"  type="Highlight" params="duration:0.8" />
                         <rich:effect event="onclick"  for="highlightbox"  type="Appear" params="delay:3.0,duration:0.5" />-->
                     </rich:panel>
-                    <rich:panel header="#{var.asiahora}" bodyClass="rich-panel-grid-body-imgs" class="id-jsf-"   headerClass="font-header-panel">
+                    <rich:panel header="#{var.asiahora}" bodystyleClass="rich-panel-grid-body-imgs" styleClass="id-jsf-"   headerstyleClass="font-header-panel">
                         <h:panelGrid columns="1" >
                             <h:panelGroup id="ima1">
 
-                                <h:graphicImage  class="id-jsf- "   id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  styleClass="id-jsf- "   id="con" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
                                                 
                                                 height="140" width="190"  rendered="#{Supervisor$DetalleObra.boolimg}" onclick="#{rich:component('modalImagenvermas')}.show();return true;" />
 
 
 
-                                <h:graphicImage  class="id-jsf- "   id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
+                                <h:graphicImage  styleClass="id-jsf- "   id="sin" value="#{var.ipserver}#{var.versioncobra}#{Supervisor$DetalleObra.strimagenActual}"
                                                 
                                                 height="140" width="190" rendered="#{!Supervisor$DetalleObra.boolimg}"/>
 

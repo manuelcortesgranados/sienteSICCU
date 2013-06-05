@@ -9,17 +9,17 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelFiltroContrato"  width="600" autosized="true"   headerClass="header_filtro" >
+    <rich:popupPanel id="panelFiltroContrato"  width="600" autosized="true"   headerstyleClass="header_filtro" >
         <f:facet name="header" >
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.filtbusqueda} " class="id-jsf-"  />
-                <h:outputText  class="id-jsf- "   value="#{var.filtavanzada}" class="id-jsf-"  />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.filtbusqueda} " styleClass="id-jsf-"  />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.filtavanzada}" styleClass="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFiltroContrato" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelFiltroContrato" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -30,50 +30,50 @@
                     <h:panelGrid columns="2">
                         <h:inputText size="35"  id="lblNombreContrato"
                                      value="#{Supervisor$Contrato.filtrocontrato.palabraClave}"
-                                     onclick="this.value=''" class="id-jsf-"  />
+                                     onclick="this.value=''" styleClass="id-jsf-"  />
                     </h:panelGrid>
 
 
                     <h:panelGrid columns="2" columnClasses="panelizquierda, panelcenter"  >
 
-                        <h:outputLabel  class="id-jsf- "    id="label_donde" value="Cual es el Número de #{Supervisor$Contrato.tipoContCon}?" class="id-jsf-"   />
+                        <h:outputLabel  styleClass="id-jsf- "    id="label_donde" value="Cual es el Número de #{Supervisor$Contrato.tipoContCon}?" styleClass="id-jsf-"   />
                         <h:inputText size="25" value="#{Supervisor$Contrato.filtrocontrato.strnumcontrato}"/>
 
-                        <h:outputLabel  class="id-jsf- "    id="lblnumencargo"  value="#{var.cualeselnumdeencargo}?" class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="lblnumencargo"  value="#{var.cualeselnumdeencargo}?" styleClass="id-jsf-"  />
                         <h:inputText size="25" value="#{Supervisor$Contrato.filtrocontrato.intencargofidu}"/>
 
-                        <h:outputLabel  class="id-jsf- "    id="contratista"  value="#{var.houtquienescontra}" class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="contratista"  value="#{var.houtquienescontra}" styleClass="id-jsf-"  />
                         <h:inputText size="25" value="#{Supervisor$Contrato.filtrocontrato.contratista}"/>
 
                     </h:panelGrid>
                     <h:panelGrid columns="4" columnClasses="panelizquierda, panelcenter"  >
-                        <h:outputLabel  class="id-jsf- "    id="lblvalrocontrato"  value="Valor del #{Supervisor$Contrato.tipoContCon}?" class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="lblvalrocontrato"  value="Valor del #{Supervisor$Contrato.tipoContCon}?" styleClass="id-jsf-"  />
 
                         <h:inputText value="#{Supervisor$Contrato.filtrocontrato.costoInit}" size="8" id="txtCuantiaini" >
                             <f:validateLongRange minimum="0"/>
                             <f:validateLength maximum="15"/>
                         </h:inputText>
 
-                        <h:outputLabel  class="id-jsf- "    id="label8" value=" #{var.y} " class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="label8" value=" #{var.y} " styleClass="id-jsf-"  />
                         <h:inputText value="#{Supervisor$Contrato.filtrocontrato.costoFin}" size="8" id="txtCuantiafin">
                             <f:validateLongRange minimum="0"/>
                             <f:validateLength maximum="15"/>
                         </h:inputText>
 
 
-                        <h:outputLabel  class="id-jsf- "    id="lblperiodo"  value="#{var.periodoejecucionentre}?" class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="lblperiodo"  value="#{var.periodoejecucionentre}?" styleClass="id-jsf-"  />
 
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"   id="fec"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMin}">
 
                         </rich:calendar>
-                        <h:outputLabel  class="id-jsf- "    id="labely" value=" #{var.y} " class="id-jsf-"  />
+                        <h:outputLabel  styleClass="id-jsf- "    id="labely" value=" #{var.y} " styleClass="id-jsf-"  />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"  id="fech"
                                        inputSize="8" immediate="true" value="#{Supervisor$Contrato.filtrocontrato.fechaMax}">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="10" /><interkont:spacer height="10" />
-                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" class="id-jsf-"   onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;">
+                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" styleClass="id-jsf-"   onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;">
                         <a4j:ajax event="click" render="tabla-listado-contratoconvenio"  execute="@this" />
                     </h:commandLink>
                     <br/>

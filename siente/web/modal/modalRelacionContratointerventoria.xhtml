@@ -10,17 +10,17 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
-    <rich:popupPanel id="panelRelacionContratoInterventoria" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelRelacionContratoInterventoria" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="Asociar Contrato de Interventoria"/>
+                <h:outputText  styleClass="id-jsf- "   value="Asociar Contrato de Interventoria"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
 
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContratoInterventoria">
-                    <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;"/></h:form>
             </h:panelGroup>
@@ -31,34 +31,34 @@
 
                 <h:panelGroup id="layoutpanelRelacionContratoInterventoria">
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  class="id-jsf- "   value="Contrato Nº:" class="id-jsf-"  />                        
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" class="id-jsf-"  />
-                        <h:outputText  class="id-jsf- "   value="Valor contrato:" class="id-jsf-"  />                        
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}" class="id-jsf-"  >
+                        <h:outputText  styleClass="id-jsf- "   value="Contrato Nº:" styleClass="id-jsf-"  />                        
+                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" styleClass="id-jsf-"  />
+                        <h:outputText  styleClass="id-jsf- "   value="Valor contrato:" styleClass="id-jsf-"  />                        
+                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}" styleClass="id-jsf-"  >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>                        
-                        <h:outputText  class="id-jsf- "   value="Valor #{var.solicitudproyecto}:" class="id-jsf-"  />
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" class="id-jsf-"  >
+                        <h:outputText  styleClass="id-jsf- "   value="Valor #{var.solicitudproyecto}:" styleClass="id-jsf-"  />
+                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="id-jsf-"  >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
 
                     </h:panelGrid>
 
                     <interkont:spacer height="30"/>   
-                    <h:outputText  class="id-jsf- "   value="Este contrato posee disponibilidad" class="id-jsf-"   />
+                    <h:outputText  styleClass="id-jsf- "   value="Este contrato posee disponibilidad" styleClass="id-jsf-"   />
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  class="id-jsf- "   value="por" class="id-jsf-"  /> 
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" class="id-jsf-"  >
+                        <h:outputText  styleClass="id-jsf- "   value="por" styleClass="id-jsf-"  /> 
+                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" styleClass="id-jsf-"  >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
                     </h:panelGrid>
-                    <h:outputText  class="id-jsf- "   value="Qué valor desea asociar a este #{var.solicitudproyecto}?" class="id-jsf-"  />
+                    <h:outputText  styleClass="id-jsf- "   value="Qué valor desea asociar a este #{var.solicitudproyecto}?" styleClass="id-jsf-"  />
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  class="id-jsf- "   value="$" class="id-jsf-"  />
+                        <h:outputText  styleClass="id-jsf- "   value="$" styleClass="id-jsf-"  />
                         <rich:inputNumberSpinner minValue="0" value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalorrelacion}" inputSize="30"
                                                  maxValue="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}"/>
                     </h:panelGrid>
-                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.mensaje}"  />
+                    <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AsociarContratos.relacioncontratointer.mensaje}"  />
                    
                     
                     <h:panelGrid columns="2" >

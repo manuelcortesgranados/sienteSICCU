@@ -9,16 +9,16 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalFactoresAtraso"  headerClass="rich-panel-header" width="300" autosized="true">
+    <rich:popupPanel id="modalFactoresAtraso"  headerstyleClass="rich-panel-header" width="300" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="id-jsf- "   value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFactoresAtraso" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFactoresAtraso')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -36,19 +36,19 @@
                     <f:facet name="header">
                         <rich:columnGroup >
                             <rich:column width="150px" >
-                                <h:outputText  class="id-jsf- "   value="#{var.houtfactor}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{var.houtfactor}"/>
                             </rich:column>
                             <rich:column width="140px">
-                                <h:outputText  class="id-jsf- "   value="#{var.houttipofactor}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{var.houttipofactor}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup id="Cuerpo">
                         <rich:column id="descripcion" width="150px">
-                            <h:outputText  class="id-jsf- "   value="#{regist.strdescfactor}"/>
+                            <h:outputText  styleClass="id-jsf- "   value="#{regist.strdescfactor}"/>
                         </rich:column>
                         <rich:column id="tipfactor" width="140px">
-                            <h:outputText  class="id-jsf- "   value="#{regist.tipofactoratraso.strdesctipoatraso}"/>
+                            <h:outputText  styleClass="id-jsf- "   value="#{regist.tipofactoratraso.strdesctipoatraso}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </rich:dataTable>

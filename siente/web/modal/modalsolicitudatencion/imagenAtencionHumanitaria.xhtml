@@ -18,12 +18,12 @@
                         <center>
                             <div >
                                 <marquee scrolldelay="200" behavior="alternate" >
-                                    <rich:message for="txt_strnombre_imagen" class="id-jsf-"   />
+                                    <rich:message for="txt_strnombre_imagen" styleClass="id-jsf-"   />
                                 </marquee>
                             </div>
 
                             <h:panelGroup>
-                                <h:outputText  class="id-jsf- "    value="#{var.houtbusquedarapida} " />
+                                <h:outputText  styleClass="id-jsf- "    value="#{var.houtbusquedarapida} " />
                                 <h:inputText value="#{Supervisor$AdministrarObraNew.valorFiltroImagenevolucionobra}" size="52" immediate="true">
                                     <a4j:ajax event="keyup" render="tablaImagenesevolucion" execute="@this" />
                                 </h:inputText>
@@ -40,33 +40,33 @@
                                                  sortBy="#{currentRow.strnombre}" sortOrder="ascending"
                                                  width="470px">
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.descripcion}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.descripcion}" />
                                         </f:facet>
-                                        <h:outputText  class="id-jsf- "   value="#{currentRow.strnombre}" />
+                                        <h:outputText  styleClass="id-jsf- "   value="#{currentRow.strnombre}" />
                                     </rich:column>
 
                                     <rich:column sortBy="#{currentRow.datefecha}" sortOrder="ascending" width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.fechadelaimagen}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.fechadelaimagen}" />
                                         </f:facet>
                                         
-                                        <h:outputText  class="id-jsf- "   value="#{currentRow.datefecha}">
+                                        <h:outputText  styleClass="id-jsf- "   value="#{currentRow.datefecha}">
                                             <f:convertDateTime pattern="yyyy-MMM-dd" />
                                         </h:outputText>
                                     </rich:column>
 
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.Ver}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.Ver}" />
                                         </f:facet>
                                         
                                         <h:commandButton action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}"
-                                                         class="id-jsf-"   immediate="true" />
+                                                         styleClass="id-jsf-"   immediate="true" />
                                     </rich:column>
                                     
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.editar}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.editar}" />
                                         </f:facet>
                                         
                                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}" image="/resources/botones/lapiz.png"
@@ -76,10 +76,10 @@
                                     
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  class="id-jsf- "   value="#{var.eliminar}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.eliminar}" />
                                         </f:facet>
                                         
-                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" class="id-jsf-"  
+                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" styleClass="id-jsf-"  
                                                            rendered="#{!currentRow.tipoimagen.boolobligatorio}"
                                                            oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.show();" 
                                                            title="#{var.eliminar}" immediate="true" />
@@ -97,19 +97,19 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="3" >
-                                            <h:outputText  class="id-jsf- "   value="#{var.subidarapidadeimagenes}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.subidarapidadeimagenes}" />
                                         </rich:column>
                                         
                                         <rich:column breakRowBefore="true">
-                                            <h:outputText  class="id-jsf- "   value="#{var.descripcion}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.descripcion}" />
                                         </rich:column>
                                         
                                         <rich:column>
-                                            <h:outputText  class="id-jsf- "   value="#{var.fechadelaimagen}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.fechadelaimagen}" />
                                         </rich:column>
                                         
                                         <rich:column>
-                                            <h:outputText  class="id-jsf- "   value="#{var.subir}" />
+                                            <h:outputText  styleClass="id-jsf- "   value="#{var.subir}" />
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
@@ -126,11 +126,11 @@
                                         
                                         <rich:column>
                                             <h:panelGrid id="panel_subir_imagenevolucion"  columns="3">
-                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" class="id-jsf-"  
+                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" styleClass="id-jsf-"  
                                                                    oncomplete="#{rich:component('panelUploadImagenevolucion')}.show();" />
                                                 
                                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirImagenevolucion.files}" var="file" >
-                                                    <h:outputText  class="id-jsf- "   id="otxt_nombrearchivo" value=" #{file.onlyName}" />
+                                                    <h:outputText  styleClass="id-jsf- "   id="otxt_nombrearchivo" value=" #{file.onlyName}" />
                                                 </rich:dataGrid>
                                                 
                                                 <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_imagenevolucion_action}" image="/resources/botones/mas.png" title="#{var.agregar}"

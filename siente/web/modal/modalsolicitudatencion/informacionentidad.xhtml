@@ -10,11 +10,11 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelInformacionEntidad" autosized="true" width="300" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelInformacionEntidad" autosized="true" width="300" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
                 <center>
-                    <h:outputText  class="id-jsf- "   value="#{var.infoentidad}" class="id-jsf-"   />
+                    <h:outputText  styleClass="id-jsf- "   value="#{var.infoentidad}" styleClass="id-jsf-"   />
                 </center>
             </h:panelGroup>
         </f:facet>
@@ -23,25 +23,25 @@
             <h:form>
                 <center>
                     <h:panelGrid columns="2">
-                        <h:outputText  class="id-jsf- "   value="#{var.nombreah}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.nombreah}" />
                         <h:inputText id="nombreinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strnombrecompleto}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.nit}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.nit}" />
                         <h:inputText id="nitinfoentidad"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.intcedula}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.departamento}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.departamento}" />
                         <h:inputText id="departamento" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.municipio}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.municipio}" />
                         <h:inputText id="municipio" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.mail}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.mail}" />
                         <h:inputText  id="mail" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.stremail}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.website}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.website}" />
                         <h:inputText id="websiteinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strpaginaweb}" disabled="true" />
 
-                        <h:outputText  class="id-jsf- "   value="#{var.telefonoah}" />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.telefonoah}" />
                         <h:inputText id="telefonoinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono1}  #{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono2}" disabled="true" />
                     </h:panelGrid>
 

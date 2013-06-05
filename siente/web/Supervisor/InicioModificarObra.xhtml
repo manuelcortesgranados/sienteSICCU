@@ -18,8 +18,8 @@
         <h:outputScript  name="script_supervisor"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.modificarobra}"/>                
-        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  stylestyleClassikont- "   value="#{var.modificarobra}"/>                
+        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -35,29 +35,29 @@
                     <h:panelGrid id="panel_ModiInicial"  columns="4">
                         <interkont:spacer height="50"/>
                         <center>
-                            <h:panelGrid columns="3" styleClass="ikont-"   >
+                            <h:panelGrid columns="3" stylestyleClassikont-"   >
                                 <h:panelGrid id="panelProrroga" width="20" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}">
                                     <h:commandLink id="bt_Modif" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"
-                                                     styleClass="ikont-"     
+                                                     stylestyleClassikont-"     
                                                      action="#{Supervisor$AdministrarObraNew.mostrarModificar}" >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
                                 </h:panelGrid>
 
                                 <interkont:spacer width="50px" rendered="false" />
                                 <h:panelGrid id="panelSuspencion" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}">
-                                    <h:commandLink id="bt_suspension" styleClass="ikont-"     
+                                    <h:commandLink id="bt_suspension" stylestyleClassikont-"     
                                                      action="#{Supervisor$AdministrarObraNew.mostrarSuspender}"
                                                      >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.suspenderobra}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.suspenderobra}"/>
                                 </h:panelGrid>
                                 <h:panelGrid rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}" columns="1">
-                                    <h:commandLink id="bt_reinicio" styleClass="ikont-"     
+                                    <h:commandLink id="bt_reinicio" stylestyleClassikont-"     
                                                      action="#{Supervisor$SuspenderObra.cargarReinicio}"
                                                      >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.reiniciarlaobra}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.reiniciarlaobra}"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                         </center>

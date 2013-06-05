@@ -9,16 +9,16 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:interkont="http://www.interkont.com/jsf">
 
-    <rich:popupPanel id="mp-crear-girodirecto" moveable="true" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-crear-girodirecto" moveable="true" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.creargirodirecto}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.creargirodirecto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-crear-girodirecto" class="ikont-"  
+                    <a4j:commandLink id="esconder_mp-crear-girodirecto" styleClass="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp-crear-girodirecto')}.hide();
                                              return  false;">
@@ -31,48 +31,48 @@
                 <center>
                     <h:panelGrid columns="2"  width="100%" >
 
-                        <h:outputText  class="ikont- "   id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
+                        <h:outputText  styleClass="ikont- "   id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirofidu" inputSize="10" required="true"
                                            disabled="#{Supervisor$Contrato.boolcreargiro}" value="#{Supervisor$Contrato.movimientocontrato.datefechagirofiduprevisora}"/>
-                            <rich:message for="calendarfechagirofidu" class="ikont-"  />
+                            <rich:message for="calendarfechagirofidu" styleClass="ikont-"  />
                         </h:panelGrid>
-                        <h:outputText  class="ikont- "   id="lblnumvlrgiro"  value="(*)#{var.vlrgiro}"/>
+                        <h:outputText  styleClass="ikont- "   id="lblnumvlrgiro"  value="(*)#{var.vlrgiro}"/>
                         <h:panelGrid columns="2">
                             <rich:inputNumberSpinner id="numvlrgiro"  value="#{Supervisor$Contrato.movimientocontrato.numvlrgiro}"
                                                      minValue="0" maxValue="9000000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}">
                             </rich:inputNumberSpinner>
-                            <rich:message for="numvlrgiro" class="ikont-"  />
+                            <rich:message for="numvlrgiro" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  class="ikont- "   id="lblordenpago"  value="(*)#{var.ordenpago}"  />
+                        <h:outputText  styleClass="ikont- "   id="lblordenpago"  value="(*)#{var.ordenpago}"  />
                         <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
                             <h:selectOneMenu id="cmbordenpago"  value="#{Supervisor$Contrato.movimientocontrato.ordendepago.oidcodigoordenpago}" disabled="#{Supervisor$Contrato.boolcreargiro}" >
                                 <f:selectItems value="#{Supervisor$Contrato.ordenPagoitem}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
 
-                        <h:outputText  class="ikont- "   id="lbltipomovimiento"  value="(*)#{var.tipomovimiento}" />
+                        <h:outputText  styleClass="ikont- "   id="lbltipomovimiento"  value="(*)#{var.tipomovimiento}" />
                         <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
                             <h:selectOneMenu id="cmbtipomovimiento" value="#{Supervisor$Contrato.movimientocontrato.tipomovimiento.oidtipomovimiento}" disabled="#{Supervisor$Contrato.boolcreargiro}">
                                 <f:selectItems value="#{Supervisor$Contrato.tipoMovimientoitem}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
 
-                        <h:outputText  class="ikont- "   id="lblentidadcontratista"  value="(*)#{var.contratista}"/>
+                        <h:outputText  styleClass="ikont- "   id="lblentidadcontratista"  value="(*)#{var.contratista}"/>
                         <h:panelGrid columns="2">
                             <h:inputText  size="25" maxlength="250" id="txtentidadcontratante" value="#{Supervisor$Contrato.movimientocontrato.strentidadcontratante}" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
-                            <rich:message for="txtentidadcontratante" class="ikont-"  />
+                            <rich:message for="txtentidadcontratante" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  class="ikont- "   id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
+                        <h:outputText  styleClass="ikont- "   id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirocontratista" inputSize="10" required="true"
                                            value="#{Supervisor$Contrato.movimientocontrato.datefechagirocontratista}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
-                            <rich:message for="calendarfechagirocontratista" class="ikont-"  />
+                            <rich:message for="calendarfechagirocontratista" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  class="ikont- "   id="lblObservacion"  value="#{var.observaciones}" />
+                        <h:outputText  styleClass="ikont- "   id="lblObservacion"  value="#{var.observaciones}" />
                         <h:inputTextarea  id="textobservacion"  rows="4"  value="#{Supervisor$Contrato.movimientocontrato.textobservacion}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
                     </h:panelGrid>
 
@@ -94,19 +94,19 @@
                 </center>
                 <a4j:outputPanel id="panelErrorNuevocontratista">
                     <rich:messages id="messagesNuevocontratista" globalOnly="true"
-                                   class="ikont-"   ajaxRendered="true"
+                                   styleClass="ikont-"   ajaxRendered="true"
                                    >
                         <f:facet name="infoMarker">
-                            <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                            <h:graphicImage  styleClass="ikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                         </f:facet>
                         <f:facet name="warnMarker">
-                            <h:graphicImage  class="ikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                            <h:graphicImage  styleClass="ikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                         </f:facet>
                         <f:facet name="errorMarker">
-                            <h:graphicImage  class="ikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                            <h:graphicImage  styleClass="ikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                         </f:facet>
                         <f:facet name="fatalMarker">
-                            <h:graphicImage  class="ikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                            <h:graphicImage  styleClass="ikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                         </f:facet>
                     </rich:messages>
 

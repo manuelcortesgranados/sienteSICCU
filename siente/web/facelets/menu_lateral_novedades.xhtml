@@ -12,23 +12,23 @@
 
     <interkont:spacer  height="10"/>
 
-    <rich:panel headerClass="ikont-rp-sliderich" bodyClass="ikont-rp-sliderichcontentbluenovedades" header="Actividad Reciente" id="Novedades"  >
+    <rich:panel headerstyleClassikont-rp-sliderich" bodystyleClassikont-rp-sliderichcontentbluenovedades" header="Actividad Reciente" id="Novedades"  >
 
 
         <a4j:repeat value="#{HomeGestion.listarecientes}" var="item" >
             <h:panelGrid  columns="2"   >
 
 
-                <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
+                <h:graphicImage  stylestyleClassikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
-                <rich:panel  styleClass="ikont-rp-indicadores"  >
-                    <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
+                <rich:panel  stylestyleClassikont-rp-indicadores"  >
+                    <h:outputText  stylestyleClassikont-hot-textoinicial "   value="#{item.textoinicial}"/>
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" stylestyleClassikont-hcl-nombreobra"  
                                       onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra1"  
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" stylestyleClassikont-hcl-nombreobra1"  
                                       onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
-                    <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
-                    <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
+                    <h:outputText  stylestyleClassikont-hot-textofinal"   value=" #{item.textofinal}"/>
+                    <h:graphicImage  stylestyleClassikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
                 </rich:panel>
             </h:panelGrid>
         </a4j:repeat>

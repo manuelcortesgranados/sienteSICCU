@@ -8,23 +8,23 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelUploadCronograma" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelUploadCronograma" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="#{var.cargarcronograma}"/>
+                <h:outputText  styleClass="id-jsf- "    value="#{var.cargarcronograma}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_panelUploadCronograma" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadCronograma')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -43,20 +43,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoCrono">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirCronograma.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -66,7 +66,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarObra.borrarCronogramaSubido}" render="infoCrono, uploadCrono"
                                                    rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"     />
+                                                   styleClass="id-jsf-"     />
                                 <a4j:commandButton id="BTaceptarCrono" value="#{var.validar}" rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadCronograma')}.hide();"
                                                    render="panel_subirCronograma, layoutRegTip" action="#{Supervisor$ModificarObra.validarCrono}"

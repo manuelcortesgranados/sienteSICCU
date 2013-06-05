@@ -9,18 +9,18 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel autosized="true" id="panelGuardadoAlimentar" resizeable="false" 
-                     headerClass="rich-panel-header">
+                     headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="#{var.guardado}"/>
+                <h:outputText  styleClass="id-jsf- "    value="#{var.guardado}"/>
             </h:panelGroup>
         </f:facet>
-         <rich:panel class="id-jsf-"   >
+         <rich:panel styleClass="id-jsf-"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
-                    <h:outputText  class="id-jsf- "   value="#{var.laobra}" />
-                    <h:outputText  class="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" class="id-jsf-"  />
-                    <h:outputText  class="id-jsf- "   value="#{var.hasidoalimentadaexitosa}" />
+                    <h:outputText  styleClass="id-jsf- "   value="#{var.laobra}" />
+                    <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" styleClass="id-jsf-"  />
+                    <h:outputText  styleClass="id-jsf- "   value="#{var.hasidoalimentadaexitosa}" />
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"

@@ -10,16 +10,16 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
-    <rich:popupPanel id="mp-editar-polizas" moveable="true" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-editar-polizas" moveable="true" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikon-hot-mpeditarpolizas"   value="#{var.editar}"/>
+                <h:outputText  styleClass="ikon-hot-mpeditarpolizas"   value="#{var.editar}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-editar-polizas" class="ikon-acl-escondermpeditarpolizas"   
+                    <a4j:commandLink id="esconder_mp-editar-polizas" styleClass="ikon-acl-escondermpeditarpolizas"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-editar-polizas')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -29,7 +29,7 @@
                 <center>
                     <h:panelGrid id="gpModiPoliza" columns="2"  >
 
-                        <h:outputLabel  class="ikon-hol-lbltipopoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
+                        <h:outputLabel  styleClass="ikon-hol-lbltipopoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
                         </h:outputLabel>
                         <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
@@ -37,19 +37,19 @@
                             <a4j:ajax event="change"  />
                         </h:selectOneMenu>
 
-                        <h:outputLabel  class="ikon-hol-lblnumpolizacontrato"    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
+                        <h:outputLabel  styleClass="ikon-hol-lblnumpolizacontrato"    id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
 
                         </h:outputLabel>
                         <h:inputText id="numPolizaContrato" value="#{Supervisor$Contrato.polizacontrato.strnumpoliza}"/>
 
-                        <h:outputLabel  class="ikon-hol-lblvencimientopoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
+                        <h:outputLabel  styleClass="ikon-hol-lblvencimientopoliza"   id="lblVencimientoPoliza"  value=" #{var.vencimientoPoliza}:" for="calendarVenciPoliza">
 
                         </h:outputLabel>
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$Contrato.polizacontrato.datefechavecimiento}" />
 
 
-                        <h:outputLabel  class="ikon-hol-lblentidadpoliza"   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
+                        <h:outputLabel  styleClass="ikon-hol-lblentidadpoliza"   id="lblEntidadPoliza"  value=" #{var.entidadPoliza}:" for="comboentidadPoliza">
                         </h:outputLabel>
                         <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
                             <f:selectItems value="#{Supervisor$Contrato.companias}"/>

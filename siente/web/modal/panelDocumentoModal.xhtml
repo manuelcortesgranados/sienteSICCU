@@ -7,16 +7,16 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
     
-    <rich:popupPanel id="panelDocumento" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelDocumento" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.seleccionarcontrato}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionarcontrato}"/>
             </h:panelGroup>
         </f:facet>
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelDocumento" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelDocumento" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelDocumento')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -34,20 +34,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoDoc">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.subirContrato.size==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.subirContrato.size==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirContrato.files}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.onlyName}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.length/1024} Kb"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.onlyName}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.length/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -57,7 +57,7 @@
                                 <br/>
                                 <a4j:commandButton id="bt_borrar_docus" action="#{Supervisor$IngresarNuevaObra.cambioDocumento}" render="infoDoc, uploadDoc, layoutDocumento"
                                                    rendered="#{Supervisor$IngresarNuevaObra.subirContrato.size>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"     />
+                                                   styleClass="id-jsf-"     />
                                 <a4j:commandButton id="BTaceptarDoc" value="#{var.aceptar}"
                                                    onclick="#{rich:component('panelDocumento')}.hide(); return false;" rendered="#{Supervisor$IngresarNuevaObra.subirContrato.size>0}"
                                                    render="layoutDocNuevaObra" action="#{Supervisor$IngresarNuevaObra.guardarArchivoTemporal}"

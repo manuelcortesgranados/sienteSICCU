@@ -9,17 +9,17 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-EjecucionTotal" headerClass="rich-panel-header" >
+    <rich:popupPanel id="mp-EjecucionTotal" headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.ejecuciontotal}" class="id-jsf-"  />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.ejecuciontotal}" styleClass="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_EjecucionTotal" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-EjecucionTotal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -29,15 +29,15 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1">
-                    <h:outputText  class="id-jsf- "   value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
+                    <h:outputText  styleClass="id-jsf- "   value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
                                   />
                     <h:commandLink action="#{HomeGestion.reportePdfInversionFases}">
-                        <h:graphicImage  class="id-jsf- "   width="1000" value="#{var.imginversionfases}"/>
+                        <h:graphicImage  styleClass="id-jsf- "   width="1000" value="#{var.imginversionfases}"/>
                     </h:commandLink>
-                    <h:outputText  class="id-jsf- "   value="1. Consolidado Inversión"
+                    <h:outputText  styleClass="id-jsf- "   value="1. Consolidado Inversión"
                                   />
                     <h:commandLink action="#{HomeGestion.reportePdfInversionFasesDeptos}">
-                        <h:graphicImage  class="id-jsf- "   width="1000" value="#{var.imginversionfasesdeptos}"/>
+                        <h:graphicImage  styleClass="id-jsf- "   width="1000" value="#{var.imginversionfasesdeptos}"/>
                     </h:commandLink>
                 </h:panelGrid>
             </rich:panel>

@@ -18,8 +18,8 @@
 
     <ui:define name="title">
         <h:panelGroup id="layoutTitle">
-            <h:outputText  styleClass="ikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}" />
-            <h:outputText  styleClass="ikont- "    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
+            <h:outputText  stylestyleClassikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}" />
+            <h:outputText  stylestyleClassikont- "    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
         </h:panelGroup>
     </ui:define>
 
@@ -41,16 +41,16 @@
         <rich:panel id="pgcontratoconvenio">
             <center>
                 <h:panelGrid id="layoutdetalle"   rendered="true">
-                    <h:panelGrid id="detallecontrato" styleClass="ikont-"   columns="4"
+                    <h:panelGrid id="detallecontrato" stylestyleClassikont-"   columns="4"
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
-                        <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel" 
+                        <rich:panel id="tipo" header="#{var.tipo}" bodystyleClassrich-panel-grid-body" stylestyleClassikont-"   headerstyleClassfont-header-panel" 
                                     rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                             <h:panelGrid columns="1" >
                                 <interkont:spacer height="30" />
 
                                 <h:panelGroup>
                                     <center>
-                                        <h:outputText  styleClass="ikont- "   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
+                                        <h:outputText  stylestyleClassikont- "   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
                                     </center>
                                 </h:panelGroup>
 
@@ -58,13 +58,13 @@
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
+                        <rich:panel id="valor" header="#{var.valor}" bodystyleClassrich-panel-grid-body" stylestyleClassikont-"   headerstyleClassfont-header-panel">
                             <interkont:spacer height="50" />
 
                             <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
-                                        <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="ikont-"   >
+                                        <h:outputText  stylestyleClassikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" stylestyleClassikont-"   >
                                             <f:convertNumber pattern="$ ###,###" />
                                         </h:outputText>
                                     </h:panelGrid>
@@ -72,25 +72,25 @@
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
+                        <rich:panel id="duracioncontra" header="#{var.intduracion}" bodystyleClassrich-panel-grid-body" stylestyleClassikont-"   headerstyleClassfont-header-panel">
                             <h:panelGrid id="pnduracion" columns="1" columnClasses="column-grid-detail" >
-                                <h:outputText  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}"  />
+                                <h:outputText  stylestyleClassikont- "   value="#{Supervisor$Contrato.contrato.intduraciondias} #{var.dias}"  />
 
-                                <h:outputText  styleClass="ikont- "   value="desde"  />
+                                <h:outputText  stylestyleClassikont- "   value="desde"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" >
+                                <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.diashasta}"  />
+                                <h:outputText  stylestyleClassikont- "   value="#{var.diashasta}"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
+                                <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
                             </h:panelGrid>
                         </rich:panel>
 
-                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
+                        <rich:panel id="tiempoentrcontra" header="#{var.tiempoentrega}" bodystyleClassrich-panel-grid-body" stylestyleClassikont-"   headerstyleClassfont-header-panel">
                             <div id="refreshMe" >
                                 <center>
                                     <table width="149" border="0">
@@ -146,7 +146,7 @@
                         <h:panelGrid columns="1" >
                             <h:form>
                                 <h:panelGrid id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                    <h:outputLabel  styleClass="ikont- "   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
 
                                     <interkont:spacer width="20" />
 
@@ -156,10 +156,10 @@
                                                              action="#{Supervisor$Contrato.habilitarBotonModificarNumero}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
-                                                <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
-                                            <h:outputText  styleClass="ikont- "   id="txtNumero" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
+                                            <h:outputText  stylestyleClassikont- "   id="txtNumero" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificarNumero" rendered="#{Supervisor$Contrato.habilitarGuardarNumeroContrato}">
@@ -169,21 +169,21 @@
                                                              action="#{Supervisor$Contrato.actualizarContato}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
-                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink immediate="true" id="bt_cancelarModificarNumero" render="form_editarNumeroContrato"
                                                              action="#{Supervisor$Contrato.cancelarModifcacionNumeroContrato}"
                                                              execute="@this, txthabilitarModificarNumero,txthabilitarNumero">
-                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25"  height="25" value="/resources/imgs/bt_eliminar.png" />
                                             </a4j:commandLink>   
 
                                             <rich:message for="habilitarNumero"  />  
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strnumContrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
-                                    <h:outputLabel  styleClass="ikont- "   id="txtobjeto"  value="#{var.objeto} #{Supervisor$Contrato.tipoContCon}:" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="strnumContrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="txtobjeto"  value="#{var.objeto} #{Supervisor$Contrato.tipoContCon}:" />
 
                                     <interkont:spacer width="20" />                                        
 
@@ -193,10 +193,10 @@
                                                            title="#{var.editar}">
                                                 <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
 
-                                                <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </h:commandLink>
 
-                                            <h:outputText  styleClass="ikont- "   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
+                                            <h:outputText  stylestyleClassikont- "   id="txtObjeto" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificar" rendered="#{Supervisor$Contrato.modificartxt}">
@@ -204,62 +204,62 @@
                                             <a4j:commandLink id="btn_modificarObjeto" render="form_editar"
                                                              action="#{Supervisor$Contrato.guardarModficiacionObjetoContrato}"
                                                              execute="txthabilitarModificar,txthabilitarObjeto" title="#{var.editar}">
-                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink> 
 
                                             <a4j:commandLink id="bt_cancelar" immediate="true" render="form_editar"
                                                              action="#{Supervisor$Contrato.cancelarModificacionObjeto}"
                                                              execute="@this,txthabilitarModificar,txthabilitarObjeto">
-                                                <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
                                             </a4j:commandLink>   
 
                                             <rich:message for="habilitarObjeto"  />  
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
-                                    <h:outputText  styleClass="ikont- "   value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
+                                    <h:outputLabel  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
-                                    <h:outputLabel  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.periodoevento.strdescripcion}" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
-                                    <h:outputText  styleClass="ikont- "    value="#{var.modalidadcontratista} " rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
+                                    <h:outputLabel  stylestyleClassikont- "   value="#{Supervisor$Contrato.contrato.periodoevento.strdescripcion}" rendered="#{var.aplicaContralorias and  Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
+                                    <h:outputText  stylestyleClassikont- "    value="#{var.modalidadcontratista} " rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
-                                    <h:outputLabel  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel  stylestyleClassikont- "   value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
+                                    <h:outputLabel  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="contratista" value="#{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
-                                    <h:outputLabel  styleClass="ikont- "   id="enti" value="#{var.entidad}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="contratista" value="#{var.contratista}:" rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="enti" value="#{var.entidad}" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcontrcontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
-                                    <h:outputLabel  styleClass="ikont- "   id="fecsus" value="#{var.fechasus}:" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="strcontrcontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="fecsus" value="#{var.fechasus}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="strfecsuscontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="fecfin"  value="#{var.fechafinalizacion}:" />
-
-                                    <interkont:spacer width="20" />
-
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecfincontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" />
-
-                                    <h:outputLabel  styleClass="ikont- "   id="formapago" value="#{var.formadepago}" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="fecfin"  value="#{var.fechafinalizacion}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfrmapagocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursospropios" value="#{var.numrecursospropios} (Entidad Contratante):" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="strfecfincontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" />
+
+                                    <h:outputLabel  stylestyleClassikont- "   id="formapago" value="#{var.formadepago}" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
+                                    <h:outputLabel  stylestyleClassikont- "   id="strfrmapagocontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
+                                    <h:outputText  stylestyleClassikont- "   id="lblnumrecursospropios" value="#{var.numrecursospropios} (Entidad Contratante):" />
+
+                                    <interkont:spacer width="20" />
+
+                                    <h:outputLabel  stylestyleClassikont- "   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" stylestyleClassikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -273,11 +273,11 @@
                                         <rich:message for="Pch"  />
                                     </h:panelGrid>
 
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursosch"  value="#{var.numrecursosch}:" />
+                                    <h:outputText  stylestyleClassikont- "   id="lblnumrecursosch"  value="#{var.numrecursosch}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
+                                    <h:outputLabel  stylestyleClassikont- "   id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" stylestyleClassikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -291,11 +291,11 @@
                                         <rich:message for="Ich"  />
                                     </h:panelGrid>
 
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursoster" value="#{var.numrecursoster}:" />
+                                    <h:outputText  stylestyleClassikont- "   id="lblnumrecursoster" value="#{var.numrecursoster}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
+                                    <h:outputLabel  stylestyleClassikont- "   id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" stylestyleClassikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -308,7 +308,7 @@
                                         <rich:message for="Irp"  />
                                     </h:panelGrid>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="entiodadcontratante" value="#{var.entidad} Contratante:" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="entiodadcontratante" value="#{var.entidad} Contratante:" />
 
                                     <interkont:spacer width="20" />
 
@@ -319,26 +319,26 @@
                                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.actualizarEntidadContrato}" />
                                         </rich:inplaceSelect>
 
-                                        <h:outputLabel  styleClass="ikont- "   id="entiodadcontratantevalue" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
+                                        <h:outputLabel  stylestyleClassikont- "   id="entiodadcontratantevalue" stylestyleClassikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
                                     </h:panelGrid>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="costos" value="#{var.valortotal}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcostocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                    <h:outputLabel  stylestyleClassikont- "   id="strcostocontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="dispo" value="#{var.vlrdispo}:" />
+                                    <h:outputLabel  stylestyleClassikont- "   id="dispo" value="#{var.vlrdispo}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
+                                    <h:outputLabel  stylestyleClassikont- "   id="strdispocontrato" stylestyleClassikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
-                                    <h:outputText  styleClass="ikont- "   id="documento" value="#{var.documento}" />
+                                    <h:outputText  stylestyleClassikont- "   id="documento" value="#{var.documento}" />
 
                                     <interkont:spacer width="20" />
 
@@ -346,17 +346,17 @@
                                         <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelContratoDoc')}.show();"
                                                   listener="#{Supervisor$Contrato.llenarDocumentosContrato}" render="tabladocumento" />
 
-                                        <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
 
-                                    <h:outputText  styleClass="ikont- "   id="verplanificacion"  value="#{var.verplanificacion}:" />
+                                    <h:outputText  stylestyleClassikont- "   id="verplanificacion"  value="#{var.verplanificacion}:" />
 
                                     <interkont:spacer width="20" />
 
                                     <a4j:commandLink id="ververplanificacion" 
                                                      action="#{Supervisor$Contrato.llenarplanificacionpagos}" render="gpListadoPlanificacion"
                                                      oncomplete="#{rich:component('mp-listado-planificacion-pagos')}.show();">
-                                        <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
                                 </h:panelGrid>
                             </h:form>
@@ -365,15 +365,15 @@
                         <h:form target="_blank">
                             <h:panelGrid columns="2" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                 <h:panelGrid columnClasses="panelcenter">
-                                    <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReporteConvenio}" />
+                                    <h:commandLink stylestyleClassikont-"   action="#{Supervisor$Contrato.ReporteConvenio}" />
 
-                                    <h:outputText  styleClass="ikont- "   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
+                                    <h:outputText  stylestyleClassikont- "   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
                                 </h:panelGrid>
 
                                 <h:panelGrid columnClasses="panelcenter">
-                                    <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
+                                    <h:commandLink stylestyleClassikont-"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
 
-                                    <h:outputText  styleClass="ikont- "   id="reporteexcel" value="#{var.listadoproyectos}" />
+                                    <h:outputText  stylestyleClassikont- "   id="reporteexcel" value="#{var.listadoproyectos}" />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </h:form>
@@ -383,19 +383,19 @@
                 <h:form id="frmPago" rendered="#{Supervisor$ModificarContrato.permitirGuardar}">
                     <rich:collapsiblePanel id="stpformadepago" switchType="ajax" expanded="true">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont- "   value="2. #{var.outformapago}" />
+                            <h:outputText  stylestyleClassikont- "   value="2. #{var.outformapago}" />
                         </f:facet>
 
                         <a4j:ajax event="click" render="gpPrincipalFormaPago" />
 
                         <center>
-                            <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.contrato.numvlrcontrato==0}" value="#{var.debediligenciarvalorcontrato}" />
+                            <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$Contrato.contrato.numvlrcontrato==0}" value="#{var.debediligenciarvalorcontrato}" />
                         </center>
 
                         <h:panelGroup id="gpPrincipalFormaPago" rendered="#{Supervisor$Contrato.contrato.numvlrcontrato!=0}">
                             <center><!--acta unica-->
                                 <h:panelGrid columns="2">
-                                    <h:outputText  styleClass="ikont- "   id="lblformaPagoC" value="(*)#{var.formadepago}:" />
+                                    <h:outputText  stylestyleClassikont- "   id="lblformaPagoC" value="(*)#{var.formadepago}:" />
                                     <h:selectOneMenu id="cmbformaPagoC" value="#{Supervisor$Contrato.contrato.formapago.intidformapago}">
                                         <f:selectItems value="#{Supervisor$Contrato.formaPago}" />
 
@@ -407,13 +407,13 @@
 
                                 <h:panelGroup id="pgformapago">
                                     <h:panelGrid columns="2" id="gpFormas">
-                                        <h:outputText  styleClass="ikont- "   id="lbfechaformadepa" value="Fecha de Pago: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}" />
+                                        <h:outputText  stylestyleClassikont- "   id="lbfechaformadepa" value="Fecha de Pago: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}" />
                                         <rich:calendar  datePattern="yyyy-MM-dd" id="fecpagoactaunica" inputSize="10"
                                                         rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"
                                                         value="#{Supervisor$Contrato.planificacionpago.datefechapago}">
                                         </rich:calendar>
 
-                                        <h:outputText  styleClass="ikont- "   value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                                        <h:outputText  stylestyleClassikont- "   value="Porcentaje Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                         <h:panelGrid columns="2">
                                             <rich:inputNumberSpinner id="poranti" value="#{Supervisor$Contrato.porcentapagoanticipo}"
                                                                      rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
@@ -421,18 +421,18 @@
                                                 <a4j:ajax event="change" listener="#{Supervisor$Contrato.calculoActasParciales}" render="gpCuotas,gpFormas" />
                                             </rich:inputNumberSpinner>
 
-                                            <h:outputText  styleClass="ikont- "   value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                                            <h:outputText  stylestyleClassikont- "   value="%" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                         </h:panelGrid>
 
-                                        <h:outputText  styleClass="ikont- "   value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
-                                        <h:outputText  styleClass="ikont- "   id="vlranti" value="#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
+                                        <h:outputText  stylestyleClassikont- "   value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                                        <h:outputText  stylestyleClassikont- "   id="vlranti" value="#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                                             <f:convertNumber pattern="$ ###,###,###" />
                                         </h:outputText>
 
-                                        <h:outputText  styleClass="ikont- "   value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
+                                        <h:outputText  stylestyleClassikont- "   value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                         <rich:calendar  datePattern="yyyy-MM-dd" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}"
                                                         inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}" />
-                                        <h:outputText  styleClass="ikont- "   id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2 }" />
+                                        <h:outputText  stylestyleClassikont- "   id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2 }" />
 
                                         <rich:inputNumberSpinner id="innumactasparciales" minValue="0" maxValue="100" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2}"
                                                                  inputSize="20" value="#{Supervisor$Contrato.numdeactasparciales}">
@@ -447,20 +447,20 @@
                                                         rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2}">
                                             <rich:column id="porcub" width="100px">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.valorporcentaje}:" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.valorporcentaje}:" />
                                                 </f:facet>
 
                                                 <h:panelGrid columns="2">
                                                     <rich:inputNumberSpinner id = "otxt-strTipoPolizab" value = "#{arr.numvlrporcentage}"
                                                                              minValue="0" maxValue="100" inputSize="4" />
 
-                                                    <h:outputText  styleClass="ikont- "    value=" %" />
+                                                    <h:outputText  stylestyleClassikont- "    value=" %" />
                                                 </h:panelGrid>
                                             </rich:column>
 
                                             <rich:column id="fecuo">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.fechagiro}:" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.fechagiro}:" />
                                                 </f:facet>
                                                 <rich:calendar datePattern="yyyy-MM-dd" id="fecpagoactapargir"
                                                                inputSize="10" value="#{arr.datefechapago}">
@@ -489,7 +489,7 @@
 
                         <center>
                             <h:panelGroup id="notienepoliza">
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}" />
+                                <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}" />
                             </h:panelGroup>
 
                             <h:panelGroup id="polizasContrato">
@@ -498,39 +498,39 @@
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.tipoPolizaContrato}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.tipoPolizaContrato}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strTipoPoliza" styleClass="ikont-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                        <h:outputText  stylestyleClassikont- "   id="otxt-strTipoPoliza" stylestyleClassikont-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                     </rich:column>
 
                                     <rich:column id="tc-strnumPolizaContrato1" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.numPolizaContrato}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.numPolizaContrato}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
+                                        <h:outputText  stylestyleClassikont- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
                                     </rich:column>
 
                                     <rich:column id="tc-strVencimientoPolizaContr" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} #{var.vencimientoPoliza}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.fecha} #{var.vencimientoPoliza}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
+                                        <h:outputText  stylestyleClassikont- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
                                     </rich:column>
 
                                     <rich:column id="tc-strEntidadContr" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.entidadPoliza}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.entidadPoliza}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
+                                        <h:outputText  stylestyleClassikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
                                     </rich:column>
 
                                     <rich:column id="tc-streditarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarpoliza}">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.editar}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.editar}" />
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkEditarPoliza" title="#{var.editar}"
@@ -538,21 +538,21 @@
                                                          render="gpPolizaSelec, notienepoliza"
                                                          oncomplete="#{rich:component('mp_nueva_poliza')}.show();">
 
-                                            <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
+                                            <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             <a4j:param value="true" assignTo="#{Supervisor$Contrato.boolcrearpoliza}" />
                                         </a4j:commandLink>
                                     </rich:column>
 
                                     <rich:column id="tc-streliminarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_eliminarpoliza}">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.eliminar}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.eliminar}" />
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkEliminarPoliza" title="#{var.eliminar}"
                                                          action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
                                                          immediate="true" render="polizasContrato, notienepoliza">
 
-                                            <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
+                                            <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
@@ -580,7 +580,7 @@
                         <center>
                             <h:panelGroup id="tablaProyectosContrato">
                                 <h:panelGrid columns="3">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.consultar} #{var.proyectos} "  />
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.consultar} #{var.proyectos} "  />
                                     <h:inputText value="#{Supervisor$Contrato.buscarproyecto}" size="20" />
 
                                     <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.llenarObraAsociada}" render="tablacontratoconv" />
@@ -594,33 +594,33 @@
                                     <f:facet name="header">
                                         <rich:columnGroup>
                                             <rich:column colspan="9">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.proyectos} encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                                <h:outputText  stylestyleClassikont- "   value="#{var.proyectos} encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
                                             </rich:column>
 
                                             <rich:column width="150px" breakRowBefore="true">
-                                                <h:outputText  styleClass="ikont- "   id="st_nombre" value="#{var.nombreah}" />
+                                                <h:outputText  stylestyleClassikont- "   id="st_nombre" value="#{var.nombreah}" />
                                             </rich:column>
 
                                             <rich:column width="150px">
-                                                <h:outputText  styleClass="ikont- "   id="tc_consucont" value="#{var.consultar}" />
+                                                <h:outputText  stylestyleClassikont- "   id="tc_consucont" value="#{var.consultar}" />
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
 
                                     <rich:columnGroup id="cuerpoContrato">
                                         <rich:column width="150px" breakRowBefore="true">
-                                            <h:outputText  styleClass="ikont- "   value="#{row.strnombreobra}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{row.strnombreobra}" />
                                         </rich:column>
 
                                         <rich:column>
                                             <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btn_consultaproyecenconvenio}"
                                                              id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
-                                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
                                                              onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
-                                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                                <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                             </a4j:commandLink>
                                         </rich:column>
                                     </rich:columnGroup>
@@ -663,8 +663,8 @@
 
                         <center>
                             <h:panelGroup id="notienesubconvenio">
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaSubconvenios.size()==0}" value="No posee subconvenios asociados." />
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaSubconvenios.size()>0}" value="Subconvenios asociados: #{Supervisor$Contrato.listaSubconvenios.size()}" />
+                                <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$Contrato.listaSubconvenios.size()==0}" value="No posee subconvenios asociados." />
+                                <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$Contrato.listaSubconvenios.size()>0}" value="Subconvenios asociados: #{Supervisor$Contrato.listaSubconvenios.size()}" />
                             </h:panelGroup>
 
                             <h:panelGroup id="pgtablaSubconvenios">
@@ -674,52 +674,52 @@
                                                 var="row" rowKeyVar="filaSeleccionada">
                                     <rich:column id="id_num">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   value="#{row.strnumcontrato}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{row.strnumcontrato}" />
                                     </rich:column>
 
                                     <rich:column id="tc_nom"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.nombre} " />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.nombre} " />
                                         </f:facet>
                                         <h:inputTextarea id="intxtnombre" value="#{row.strnombre}" disabled="true" cols="35" rows="2" />
                                     </rich:column>
 
                                     <rich:column id="tc_tipo" width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="outipo" value="#{var.tipocontr}" />
+                                            <h:outputText  stylestyleClassikont- "   id="outipo" value="#{var.tipocontr}" />
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "   id="intipocc" value="#{row.tipocontrato.strdesctipocontrato}" />
+                                        <h:outputText  stylestyleClassikont- "   id="intipocc" value="#{row.tipocontrato.strdesctipocontrato}" />
                                     </rich:column>
 
                                     <rich:column id="tc_valor"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="ouvlrcc" value="#{var.valor}" />
+                                            <h:outputText  stylestyleClassikont- "   id="ouvlrcc" value="#{var.valor}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
+                                        <h:outputText  stylestyleClassikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
                                             <f:convertNumber pattern="$#,###.00" />
                                         </h:outputText>
                                     </rich:column>
 
                                     <rich:column id="tc_contra"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="outxtcontra" value="#{var.contratista}" />
+                                            <h:outputText  stylestyleClassikont- "   id="outxtcontra" value="#{var.contratista}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="nomcontratistacc" value="#{row.contratista.strnombre} #{row.contratista.strapellido1}" />
+                                        <h:outputText  stylestyleClassikont- "   id="nomcontratistacc" value="#{row.contratista.strnombre} #{row.contratista.strapellido1}" />
                                     </rich:column>
 
                                     <rich:column width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.consultar}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.consultar}" />
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkVerSubconvenio" action="#{Supervisor$Contrato.detalleConvenioHijo(filaSeleccionada)}"
                                                          render="pgcontratoconvenio" immediate="true" >
-                                            <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                            <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
                                     </rich:column>
                                     <f:facet name="footer">
@@ -744,7 +744,7 @@
 
                         <center>
                             <h:panelGroup id="notienehijo">
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaContrConvHijo.size()==0}" value="#{var.notienehijos}" />
+                                <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$Contrato.listaContrConvHijo.size()==0}" value="#{var.notienehijos}" />
                             </h:panelGroup>
 
                             <h:panelGroup id="pgtablaContratoHijo">
@@ -755,15 +755,15 @@
                                                 var="row">
                                     <rich:column id="id_num">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   value="#{row.strnumcontrato}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{row.strnumcontrato}" />
                                     </rich:column>
 
                                     <rich:column id="tc_nom"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.nombre} " />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.nombre} " />
                                         </f:facet>
 
                                         <h:inputTextarea id="intxtnombre" value="#{row.strnombre}"  disabled="true" cols="35" rows="2" />
@@ -771,39 +771,39 @@
 
                                     <rich:column id="tc_tipo"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="outipo" value="#{var.tipocontr}" />
+                                            <h:outputText  stylestyleClassikont- "   id="outipo" value="#{var.tipocontr}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="intipocc" value="#{row.tipocontrato.strdesctipocontrato}" />
+                                        <h:outputText  stylestyleClassikont- "   id="intipocc" value="#{row.tipocontrato.strdesctipocontrato}" />
                                     </rich:column>
 
                                     <rich:column id="tc_valor"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="ouvlrcc" value="#{var.valor}" />
+                                            <h:outputText  stylestyleClassikont- "   id="ouvlrcc" value="#{var.valor}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
+                                        <h:outputText  stylestyleClassikont- "   id="numvlrcc" value="#{row.numvlrcontrato}">
                                             <f:convertNumber pattern="$#,###.00" />
                                         </h:outputText>
                                     </rich:column>
 
                                     <rich:column id="tc_contra"  width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   id="outxtcontra" value="#{var.contratista}" />
+                                            <h:outputText  stylestyleClassikont- "   id="outxtcontra" value="#{var.contratista}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="nomcontratistacc" value="#{row.contratista.strnombre} #{row.contratista.strapellido1}" />
+                                        <h:outputText  stylestyleClassikont- "   id="nomcontratistacc" value="#{row.contratista.strnombre} #{row.contratista.strapellido1}" />
                                     </rich:column>
 
                                     <rich:column width="120px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.consultar}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.consultar}" />
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo(filaSeleccionada)}"
                                                          render="pgcontratoconvenio, pgtablaContratoHijo"
                                                          immediate="true" >
-                                            <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                            <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
                                     </rich:column>
 
@@ -832,7 +832,7 @@
                         <center>
                             <h:panelGroup id="pngirodirecto">
                                 <h:panelGroup id="notieneop">
-                                    <h:outputLabel  styleClass="ikont- "   rendered="#{!Supervisor$Contrato.booliniciargirodirecto}" value="#{var.noposeeop}" />
+                                    <h:outputLabel  stylestyleClassikont- "   rendered="#{!Supervisor$Contrato.booliniciargirodirecto}" value="#{var.noposeeop}" />
                                 </h:panelGroup>
 
                                 <h:panelGrid>
@@ -855,59 +855,59 @@
                                         <f:facet name="header">
                                             <rich:columnGroup>
                                                 <rich:column colspan="7">
-                                                    <h:outputText  styleClass="ikont- "   value="Total de Giros Directos #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="Total de Giros Directos #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
                                                 </rich:column>
 
                                                 <rich:column breakRowBefore="true">
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.ordenpago}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.ordenpago}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.fechagirofiduprevisora}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.fechagirofiduprevisora}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.fechagirocontratista}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.fechagirocontratista}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.vlrgiro}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.vlrgiro}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.entidadcontratante}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.entidadcontratante}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.editar}" />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.editar}" />
                                                 </rich:column>
 
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.eliminar} " />
+                                                    <h:outputText  stylestyleClassikont- "   value="#{var.eliminar} " />
                                                 </rich:column>
                                             </rich:columnGroup>
                                         </f:facet>
 
                                         <rich:column width="120px">
-                                            <h:outputText  styleClass="ikont- "   value="#{girodirecto.ordendepago.strordenpago}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{girodirecto.ordendepago.strordenpago}" />
                                         </rich:column>
 
                                         <rich:column id="tc_datefechafiduprevisora"  width="120px">
-                                            <h:outputText  styleClass="ikont- "   id="datefechafiduprevisora" value="#{girodirecto.datefechagirofiduprevisora}" />
+                                            <h:outputText  stylestyleClassikont- "   id="datefechafiduprevisora" value="#{girodirecto.datefechagirofiduprevisora}" />
                                         </rich:column>
 
                                         <rich:column width="120px">
-                                            <h:outputText  styleClass="ikont- "   value="#{girodirecto.datefechagirocontratista}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{girodirecto.datefechagirocontratista}" />
                                         </rich:column>
 
                                         <rich:column  width="120px">
-                                            <h:outputText  styleClass="ikont- "    value="#{girodirecto.numvlrgiro}">
+                                            <h:outputText  stylestyleClassikont- "    value="#{girodirecto.numvlrgiro}">
                                                 <f:convertNumber pattern="$#,###.00" />
                                             </h:outputText>
                                         </rich:column>
 
                                         <rich:column  width="120px">
-                                            <h:outputText  styleClass="ikont- "    value="#{girodirecto.strentidadcontratante}" />
+                                            <h:outputText  stylestyleClassikont- "    value="#{girodirecto.strentidadcontratante}" />
                                         </rich:column>
 
                                         <rich:column>
@@ -949,7 +949,7 @@
 
                         <h:panelGroup id="pnmodificar">
                             <h:panelGroup id="nomodificar">
-                                <h:outputLabel  styleClass="ikont- "    rendered="#{Supervisor$Contrato.listaModificarContrato.size()==0}" value="#{var.notienemodificar}" />
+                                <h:outputLabel  stylestyleClassikont- "    rendered="#{Supervisor$Contrato.listaModificarContrato.size()==0}" value="#{var.notienemodificar}" />
                             </h:panelGroup>
                             <rich:dataTable id="tablamodificar" sortMode="single" 
                                             value="#{Supervisor$Contrato.listaModificarContrato}"
@@ -958,61 +958,61 @@
                                             var="modificarcontr">
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.fechamodificacion} " />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.fechamodificacion} " />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "    id="datemodificacion" value="#{modificarcontr.datefechamodificacionseleccionada}" />
+                                    <h:outputText  stylestyleClassikont- "    id="datemodificacion" value="#{modificarcontr.datefechamodificacionseleccionada}" />
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.fechatermianter} " />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.fechatermianter} " />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "   id="datemodificacionanter" value="#{modificarcontr.datefechafin}" />
+                                    <h:outputText  stylestyleClassikont- "   id="datemodificacionanter" value="#{modificarcontr.datefechafin}" />
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.fechterminacion}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.fechterminacion}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "   id="dateterminacion" value="#{modificarcontr.datefechafinalizacion}" />
+                                    <h:outputText  stylestyleClassikont- "   id="dateterminacion" value="#{modificarcontr.datefechafinalizacion}" />
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.valorcontranter}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.valorcontranter}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "    value="#{modificarcontr.numvlrcontrato}">
+                                    <h:outputText  stylestyleClassikont- "    value="#{modificarcontr.numvlrcontrato}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.valorcontractua}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.valorcontractua}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "    value="#{modificarcontr.numvlrnuevo}">
+                                    <h:outputText  stylestyleClassikont- "    value="#{modificarcontr.numvlrnuevo}">
                                         <f:convertNumber pattern="$#,###.00" />
                                     </h:outputText>
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.modificaciones}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{var.modificaciones}" />
                                     </f:facet>
 
                                     <rich:list var="tipo" value="#{modificarcontr.listatiposmodificacion}" rows="5">
-                                        <h:outputText  styleClass="ikont- "   value="#{tipo.strdesctipomodif}" />
+                                        <h:outputText  stylestyleClassikont- "   value="#{tipo.strdesctipomodif}" />
                                     </rich:list>
                                 </rich:column>
 
                                 <rich:column width="120px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   id="documento" value="#{var.documento}" />
+                                        <h:outputText  stylestyleClassikont- "   id="documento" value="#{var.documento}" />
                                     </f:facet>
 
                                     <a4j:commandLink id="btAdjuntarImagenmodi" 
@@ -1020,7 +1020,7 @@
                                                      oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
                                                      render="tabladocumentomodi">
 
-                                        <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
+                                        <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
                                     </a4j:commandLink>
                                 </rich:column>
                             </rich:dataTable>

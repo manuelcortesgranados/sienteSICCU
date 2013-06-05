@@ -10,21 +10,21 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelConfirmarSolicitud" autosized="true" width="200" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmarSolicitud" autosized="true" width="200" headerstyleClass="rich-panel-header">
         <rich:panel>
             <f:facet name="header">
                 <h:panelGroup>
-                    <h:outputText  class="id-jsf- "   value= "#{var.atencion}" />
+                    <h:outputText  styleClass="id-jsf- "   value= "#{var.atencion}" />
                     <interkont:spacer width="105" />
                     <a4j:commandLink id="esconder_panelConfirmarSolicit"
                                        onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
                                                return false;"
-                                       immediate="true" class="id-jsf-"   />
+                                       immediate="true" styleClass="id-jsf-"   />
                 </h:panelGroup>
             </f:facet>
 
             <center> 
-                <h:outputText  class="id-jsf- "   value="#{var.estasegurodeenviar}" />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.estasegurodeenviar}" />
                 <h:panelGrid columns="2" id="layoutGuardar">
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
                                        oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"

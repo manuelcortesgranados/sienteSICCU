@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich" 
                 >
    
-    <h:panelGroup id="gpListaSeguimientos" styleClass="ikont-hpg-listaseguimientos"  >
+    <h:panelGroup id="gpListaSeguimientos" stylestyleClassikont-hpg-listaseguimientos"  >
             <rich:dataTable id="tablaSeguimientos"
                             rows="10"
                             var="segumiento"
@@ -20,51 +20,51 @@
                             sortMode="single"
                             value="#{SessionBeanCobra.cobraService.listaseguimientos}"
                             
-                            styleClass="ikont-rdt-listaseguimientos" >
+                            stylestyleClassikont-rdt-listaseguimientos" >
                 <f:facet name="header">
                     <rich:columnGroup>
                         <rich:column colspan="5">
-                            <h:outputText  styleClass="ikont-hot-seguimientos"   value="#{var.seguimientos}" />
+                            <h:outputText  stylestyleClassikont-hot-seguimientos"   value="#{var.seguimientos}" />
                         </rich:column>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  styleClass="ikont-hot-firmainter"   value="#{var.firmainter}"/>
+                            <h:outputText  stylestyleClassikont-hot-firmainter"   value="#{var.firmainter}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-visitadopor"   value="#{var.visitadopor}" />
+                            <h:outputText  stylestyleClassikont-hot-visitadopor"   value="#{var.visitadopor}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-fechavisita"   value="#{var.fechavisita}" />
+                            <h:outputText  stylestyleClassikont-hot-fechavisita"   value="#{var.fechavisita}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
+                            <h:outputText  stylestyleClassikont-hot-consultar"   value="#{var.consultar}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-reporte"   value="#{var.reporte}" />
+                            <h:outputText  stylestyleClassikont-hot-reporte"   value="#{var.reporte}" />
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
                 <rich:columnGroup >
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strnombrecompleto"   value="#{segumiento.strnombrecompleto}"/>
+                        <h:outputText  stylestyleClassikont-hot-strnombrecompleto"   value="#{segumiento.strnombrecompleto}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strvisitador"   value="#{segumiento.strvisitador}"/>
+                        <h:outputText  stylestyleClassikont-hot-strvisitador"   value="#{segumiento.strvisitador}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-datefechavisita"   value="#{segumiento.datefechavisita}">
+                        <h:outputText  stylestyleClassikont-hot-datefechavisita"   value="#{segumiento.datefechavisita}">
                             <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
                                        immediate="true">
-                            <h:graphicImage  styleClass="ikont-hgi-seguimientoconsul"    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  stylestyleClassikont-hgi-seguimientoconsul"    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>
 
                     </rich:column>
                     <rich:column> 
                         <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
-                            <h:graphicImage  styleClass="ikont-hgi-seguimientoreport"    value="/resources/imgs/bt_ver.png"/>
+                            <h:graphicImage  stylestyleClassikont-hgi-seguimientoreport"    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>                              
                     </rich:column>
                 </rich:columnGroup>
@@ -76,10 +76,10 @@
 
           
                 <h:panelGrid columnClasses="panelcenter" >
-                    <h:commandLink target="_blank"  styleClass="ikont-hcl-reporteinterventoriaseguimiento"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
+                    <h:commandLink target="_blank"  stylestyleClassikont-hcl-reporteinterventoriaseguimiento"   action="#{SupervisionExterna$ListadoSeguimientos.reporteInterventoriaSeguimiento}" />
                 </h:panelGrid>
             
-            <h:outputText  styleClass="ikont-hot-intervenreport"   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
+            <h:outputText  stylestyleClassikont-hot-intervenreport"   id="intervenreport" value="#{var.reporte} Comparativo Interventoria vs Seguimiento"/>
         </center>
     </h:panelGroup>
 

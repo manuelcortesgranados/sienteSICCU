@@ -674,7 +674,7 @@
         createElement: function(type, attrs){
             attrs = _V_.merge({
                 className: this.buildCSSClass(),
-                innerHTML: '<div><span class="vjs-control-text">' + (this.buttonText || "Need Text") + '</span></div>',
+                innerHTML: '<div><span styleClass="vjs-control-text">' + (this.buttonText || "Need Text") + '</span></div>',
                 role: "button",
                 tabIndex: 0
             }, attrs);
@@ -1134,7 +1134,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-load-progress",
-                innerHTML: '<span class="vjs-control-text">Loaded: 0%</span>'
+                innerHTML: '<span styleClass="vjs-control-text">Loaded: 0%</span>'
             });
         },
 
@@ -1151,7 +1151,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-play-progress",
-                innerHTML: '<span class="vjs-control-text">Progress: 0%</span>'
+                innerHTML: '<span styleClass="vjs-control-text">Progress: 0%</span>'
             });
         }
 
@@ -1162,7 +1162,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-seek-handle",
-                innerHTML: '<span class="vjs-control-text">00:00</span>'
+                innerHTML: '<span styleClass="vjs-control-text">00:00</span>'
             });
         }
 
@@ -1227,7 +1227,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-volume-level",
-                innerHTML: '<span class="vjs-control-text"></span>'
+                innerHTML: '<span styleClass="vjs-control-text"></span>'
             });
         }
 
@@ -1238,7 +1238,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-volume-handle",
-                innerHTML: '<span class="vjs-control-text"></span>'
+                innerHTML: '<span styleClass="vjs-control-text"></span>'
             });
         }
 
@@ -1255,7 +1255,7 @@
         createElement: function(){
             return this._super("div", {
                 className: "vjs-mute-control vjs-control",
-                innerHTML: '<div><span class="vjs-control-text">Mute</span></div>'
+                innerHTML: '<div><span styleClass="vjs-control-text">Mute</span></div>'
             });
         },
 

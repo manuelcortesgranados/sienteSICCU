@@ -9,10 +9,10 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
-    <rich:popupPanel id="modalactividadescontractuales" headerClass="rich-panel-header" autosized="true" >
+    <rich:popupPanel id="modalactividadescontractuales" headerstyleClassrich-panel-header" autosized="true" >
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont- "   value="ACTIVIDADES CONTRACTUALES" styleClass="ikont-"   />
+                <h:outputText  stylestyleClassikont- "   value="ACTIVIDADES CONTRACTUALES" stylestyleClassikont-"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -21,7 +21,7 @@
                     <a4j:commandLink id="esconder-modalactividadescontractuales" 
                                        onclick="#{rich:component('modalactividadescontractuales')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" stylestyleClassikont-"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -35,69 +35,69 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.actividades}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.actividades}"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.numero}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.numero}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.actividad}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.actividad}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.unidaddemedida}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.cantidadcontratada}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.cantidadcontratada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valortotal}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.cantidadejecutada}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.cantidadejecutada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.totalejecutado}" />
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.totalejecutado}" />
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.porcentajejecutado}"/>
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.porcentajejecutado}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.intidactividadseg}" />
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.intidactividadseg}" />
                         </rich:column>
                         <rich:column >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strdescripcion}"  />
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.strdescripcion}"  />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strunidadmedida}"  />
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.strunidadmedida}"  />
                         </rich:column>
                         <rich:column >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrunit}">
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.numvlrunit}">
                                 <f:convertNumber pattern="$###,###" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.floatcantcontra}" />
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.floatcantcontra}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.valortotalactividad}">
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.valortotalactividad}">
                                 <f:convertNumber pattern="$###,###" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.floatcantejec}" />
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.floatcantejec}" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrtotalejec}">
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.numvlrtotalejec}">
                                 <f:convertNumber pattern="$###,###.##" />
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.porcentajeEjecutado}">
+                            <h:outputText  stylestyleClassikont- "   value="#{currentRow.porcentajeEjecutado}">
                                 <f:convertNumber type="percent" integerOnly="true" maxIntegerDigits="3" maxFractionDigits="0" />
                             </h:outputText>
                         </rich:column>

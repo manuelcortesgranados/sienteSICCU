@@ -10,45 +10,45 @@
 
 
     <rich:popupPanel  id="panelFiltroAvanzadoCiud" autosized="true" resizeable="false" width="700" 
-                     headerClass="style-modal-dialog-head" class="id-jsf-"  >
+                     headerstyleClass="style-modal-dialog-head" styleClass="id-jsf-"  >
         <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  class="id-jsf- "   url="/resources/imgs/imagotipo_siente.png" width="45"/>
-                    <h:outputLabel  class="id-jsf- "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} " class="id-jsf-"  />
+                    <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/imagotipo_siente.png" width="45"/>
+                    <h:outputLabel  styleClass="id-jsf- "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} " styleClass="id-jsf-"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroAvanzadoCiud')}.hide(); return false;"/>
                     </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <!-- <h:panelGroup layout="block" class="id-jsf-"  >-->
-                <h:panelGroup layout="block" class="id-jsf-"  >
-                    <h:panelGroup layout="block" class="id-jsf-"  >
+            <!-- <h:panelGroup layout="block" styleClass="id-jsf-"  >-->
+                <h:panelGroup layout="block" styleClass="id-jsf-"  >
+                    <h:panelGroup layout="block" styleClass="id-jsf-"  >
                         <h:panelGrid >
-                            <h:panelGroup layout="block" class="id-jsf-"   >
-                                <h:outputLabel  class="id-jsf- "    value="#{var.label_palabraclave}"/>
+                            <h:panelGroup layout="block" styleClass="id-jsf-"   >
+                                <h:outputLabel  styleClass="id-jsf- "    value="#{var.label_palabraclave}"/>
                                 <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
                                              onclick="this.value=''"/>
                             </h:panelGroup>
                         </h:panelGrid>
 
                     </h:panelGroup>
-                    <h:panelGroup layout="block" class="id-jsf-"  >
+                    <h:panelGroup layout="block" styleClass="id-jsf-"  >
                         <center>
                             <h:panelGrid columns="2" >
 
-                                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/1.png" width="65" height="40" />
-                                <h:outputLabel  class="id-jsf- "   value="#{var.dondeestaubicado}" class="id-jsf-"  />
+                                <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/1.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="id-jsf- "   value="#{var.dondeestaubicado}" styleClass="id-jsf-"  />
 
                                 <interkont:spacer/>
-                                <h:panelGrid columns="2" columnClasses="panelcenter"  class="id-jsf-"  >
+                                <h:panelGrid columns="2" columnClasses="panelcenter"  styleClass="id-jsf-"  >
                                     <h:selectOneMenu value="#{HomeGestion.inttipoorigen}">
                                         <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                                         <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
@@ -76,13 +76,13 @@
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/2.png" width="65" height="40" />
-                                <h:outputLabel  class="id-jsf- "   value="#{var.quieneselcontratista}" class="id-jsf-"  />
+                                <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/2.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="id-jsf- "   value="#{var.quieneselcontratista}" styleClass="id-jsf-"  />
                                 <interkont:spacer/>
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
-                                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/3.png" width="65" height="40" />
-                                <h:outputLabel  class="id-jsf- "   value="#{var.quetipoproyectoes}" class="id-jsf-"  />
+                                <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/3.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="id-jsf- "   value="#{var.quetipoproyectoes}" styleClass="id-jsf-"  />
                                 <interkont:spacer/>
                                 <h:panelGroup>
                                     <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}">
@@ -98,11 +98,11 @@
                                     </h:panelGroup>
                                 </h:panelGroup>
 
-                                <h:graphicImage  class="id-jsf- "   url="/resources/imgs/4.png" width="65" height="40" />
+                                <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/4.png" width="65" height="40" />
                                 <h:panelGrid columns="2">
 
-                                    <h:outputLabel  class="id-jsf- "   value="#{var.verproyectosterminados}" class="id-jsf-"  />
-                                    <h:selectOneRadio id="boolcomentario"  class="id-jsf-" value="#{HomeGestion.filtro.boolobraterminada}"  >
+                                    <h:outputLabel  styleClass="id-jsf- "   value="#{var.verproyectosterminados}" styleClass="id-jsf-"  />
+                                    <h:selectOneRadio id="boolcomentario"  styleClass="id-jsf-" value="#{HomeGestion.filtro.boolobraterminada}"  >
                                         <f:selectItem itemLabel="#{var.si}" itemValue="true"  />
                                         <f:selectItem itemLabel="#{var.no}" itemValue="false" />
                                     </h:selectOneRadio>

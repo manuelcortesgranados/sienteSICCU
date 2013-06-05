@@ -10,8 +10,8 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.reiniciarlaobra}"/>
-        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  stylestyleClassikont- "   value="#{var.reiniciarlaobra}"/>
+        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -31,34 +31,34 @@
         <h:form>
             <h:panelGrid id="panelReiniciarObra"  >
                 <h:panelGroup id="layoutReiniciarObra">
-                    <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}" value="#{var.solosepuedereiniciar}" styleClass="ikont-"  />
+                    <h:outputText  stylestyleClassikont- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}" value="#{var.solosepuedereiniciar}" stylestyleClassikont-"  />
                     <interkont:spacer width="20"/>
                     <interkont:spacer  height="22"/>
                     <rich:panel header="#{var.reiniciarobra}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}">
                         <center>
-                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.laobrafuesuspendida} " />
-                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}">
+                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.laobrafuesuspendida} " />
+                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}">
                                 <f:convertDateTime type="date" dateStyle="medium"/>
                             </h:outputText>
                             <interkont:spacer height="20" />
                             <h:panelGrid columns="2" cellspacing="15">
-                                <h:outputText  styleClass="ikont- "    value="#{var.ingreselafechadereinicio} "/>
+                                <h:outputText  stylestyleClassikont- "    value="#{var.ingreselafechadereinicio} "/>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_Reinicio" inputSize="10"
                                                value="#{Supervisor$SuspenderObra.reinicio.datefecobrahist}">
                                 </rich:calendar>
                             </h:panelGrid>
                             <h:panelGrid id="panel_subirActaReinicio" columns="2">
                                 <a4j:commandButton id="adjuntarActaReinicio" value="#{var.adjuentaractaderei}" render="layoutDocActaReinicio"
-                                                   styleClass="ikont-"     
+                                                   stylestyleClassikont-"     
                                                    onclick="#{rich:component('panelUploadActaReinicio')}.show();" />
                                 <rich:panel>
-                                    <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos==0}" value="#{var.nohasubidoningun}"/>
+                                    <h:outputText  stylestyleClassikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos==0}" value="#{var.nohasubidoningun}"/>
                                     <center>
                                         <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaReinicio.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"
                                                        >
-                                            <h:outputText  styleClass="ikont- "   value=" #{file.nombre}" />
+                                            <h:outputText  stylestyleClassikont- "   value=" #{file.nombre}" />
                                             <interkont:spacer height="8" width="15"/>
-                                            <h:graphicImage  styleClass="ikont- "   url="/resources/botones/chulo.png" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"/>
+                                            <h:graphicImage  stylestyleClassikont- "   url="/resources/botones/chulo.png" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"/>
                                         </rich:dataGrid>
                                     </center>
                                 </rich:panel>
@@ -66,7 +66,7 @@
                             <center>
                                 <h:panelGrid columns="2">
                                     <a4j:commandButton id="btn_reiniciar_obra" action="#{Supervisor$SuspenderObra.reiniciarObra}" value="#{var.reiniciarlaobra}"
-                                                       styleClass="ikont-"     
+                                                       stylestyleClassikont-"     
                                                        oncomplete="#{rich:component('panelConfirmarReinicio')}.show();">
                                     </a4j:commandButton>
                                     <a4j:commandButton id="btn_cancelar_reinicio" value="#{var.cancelar}"  action="#{Supervisor$SuspenderObra.cancelarReinicio}"

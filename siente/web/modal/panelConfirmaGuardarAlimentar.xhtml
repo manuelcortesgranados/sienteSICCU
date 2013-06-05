@@ -8,27 +8,27 @@
 
 
     <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="false" width="350" 
-                     headerClass="rich-panel-header" >
+                     headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="#{var.confirmarguardadoali}"/>
+                <h:outputText  styleClass="id-jsf- "    value="#{var.confirmarguardadoali}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaGuardar" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelConfirmaGuardar" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaGuardar')}.hide();
                                              return false;"/>                    
                 </h:panelGroup>
             </h:form>
         </f:facet>
          <h:form >
-        <rich:panel class="id-jsf-"    >
+        <rich:panel styleClass="id-jsf-"    >
             <center>
                 <h:panelGrid id="layoutGuardar">
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}" class="id-jsf-"   value="#{Supervisor$Alimentar.mensajefin}"/>
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}" styleClass="id-jsf-"   value="#{Supervisor$Alimentar.mensajefin}"/>
                     <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
                    
                         <center>

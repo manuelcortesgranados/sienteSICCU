@@ -14,14 +14,14 @@
     <rich:popupPanel id="mp_cronograma_mod" resizeable="false" autosized="true"
                       >
         <f:facet name="header"  >
-            <h:panelGrid columnClasses="panelcenter" styleClass="ikont-hpg-mpcronogramamod"   >
-                <h:outputText  styleClass="ikont-hot-titmodalmodifcronogra"   value="#{var.titmodalmodifcronogra}" />
-                <h:outputText  styleClass="ikont-hot-titmodalmodifcronogra2"   value="#{var.titmodalmodifcronogra2}" />
+            <h:panelGrid columnClasses="panelcenter" stylestyleClassikont-hpg-mpcronogramamod"   >
+                <h:outputText  stylestyleClassikont-hot-titmodalmodifcronogra"   value="#{var.titmodalmodifcronogra}" />
+                <h:outputText  stylestyleClassikont-hot-titmodalmodifcronogra2"   value="#{var.titmodalmodifcronogra2}" />
             </h:panelGrid>
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandLink id="esconder_mp_cronograma_mod" styleClass="ikont-acl-escondermpcronogramamod"  
+                <a4j:commandLink id="esconder_mp_cronograma_mod" stylestyleClassikont-acl-escondermpcronogramamod"  
                                  title="#{var.cerrar}" immediate="true"
                                  onclick="#{rich:component('mp_cronograma_mod')}.hide();
                                          return false;">
@@ -31,45 +31,45 @@
         <rich:panel >
       
                 <h:panelGroup id="panelConfirmacionGenerarCronograma">
-                    <h:panelGroup styleClass="ikont-hpg-panelconfirmaciongeneralcronograma"  >
-                        <h:outputText  styleClass="ikont-hot-aldiligenciarproyecto" value="#{var.aldiligenciarproyecto}"  ></h:outputText>
+                    <h:panelGroup stylestyleClassikont-hpg-panelconfirmaciongeneralcronograma"  >
+                        <h:outputText  stylestyleClassikont-hot-aldiligenciarproyecto" value="#{var.aldiligenciarproyecto}"  ></h:outputText>
                         <center>
                             <interkont:spacer height="30" />
-                            <h:panelGrid columns="2"  styleClass="ikont-hpg-datoscronograma"   border="0" cellspacing="0" cellpadding="0" rowClasses="background_azul,background_blanco">
-                                <h:outputText  styleClass="ikont-hot-costodirecto"   value="#{var.costodirecto}"  ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-valortotalobraCosto"   value="#{Supervisor$ModificarProyecto.valortotalobraCosto}" >
+                            <h:panelGrid columns="2"  stylestyleClassikont-hpg-datoscronograma"   border="0" cellspacing="0" cellpadding="0" rowClasses="background_azul,background_blanco">
+                                <h:outputText  stylestyleClassikont-hot-costodirecto"   value="#{var.costodirecto}"  ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-valortotalobraCosto"   value="#{Supervisor$ModificarProyecto.valortotalobraCosto}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
-                                <h:outputText  styleClass="ikont-hot-administracion"   value="#{var.administracion}(%)" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatporadmon"   id="itfloatporadmon" value="#{Supervisor$ModificarProyecto.obra.floatporadmon}" />
-                                <h:outputText  styleClass="ikont-hot-imprevistos"   value="#{var.imprevistos}(%)" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatporimprevi"   id="itfloatporimprevi" value="#{Supervisor$ModificarProyecto.obra.floatporimprevi}" />
-                                <h:outputText  styleClass="ikont-hot-utilidad"   value="#{var.utilidad}(%)" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatporutilidad"   id="itfloatporutilidad" value="#{Supervisor$ModificarProyecto.obra.floatporutilidad}" />
-                                <h:outputText  styleClass="ikont-hot-floatporutilidad"   value="#{var.ivasobreutilidad}" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatporivasobreutil"   id="itfloatporivasobreutil" value="#{Supervisor$ModificarProyecto.obra.floatporivasobreutil}" />
-                                <h:outputText  styleClass="ikont-hot-otros"   value="#{var.otros}(%)" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-floatporotros"   id="itfloatporotros" value="#{Supervisor$ModificarProyecto.obra.floatporotros}" />
-                                <h:outputText  styleClass="ikont-hot-costototal"   value="#{var.costototal}" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$ModificarProyecto.obra.numvaltotobra}" >
+                                <h:outputText  stylestyleClassikont-hot-administracion"   value="#{var.administracion}(%)" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatporadmon"   id="itfloatporadmon" value="#{Supervisor$ModificarProyecto.obra.floatporadmon}" />
+                                <h:outputText  stylestyleClassikont-hot-imprevistos"   value="#{var.imprevistos}(%)" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatporimprevi"   id="itfloatporimprevi" value="#{Supervisor$ModificarProyecto.obra.floatporimprevi}" />
+                                <h:outputText  stylestyleClassikont-hot-utilidad"   value="#{var.utilidad}(%)" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatporutilidad"   id="itfloatporutilidad" value="#{Supervisor$ModificarProyecto.obra.floatporutilidad}" />
+                                <h:outputText  stylestyleClassikont-hot-floatporutilidad"   value="#{var.ivasobreutilidad}" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatporivasobreutil"   id="itfloatporivasobreutil" value="#{Supervisor$ModificarProyecto.obra.floatporivasobreutil}" />
+                                <h:outputText  stylestyleClassikont-hot-otros"   value="#{var.otros}(%)" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-floatporotros"   id="itfloatporotros" value="#{Supervisor$ModificarProyecto.obra.floatporotros}" />
+                                <h:outputText  stylestyleClassikont-hot-costototal"   value="#{var.costototal}" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-numvaltotobra"   value="#{Supervisor$ModificarProyecto.obra.numvaltotobra}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
-                                <h:outputText  styleClass="ikont-hot-ivasobrautilidad"   value="#{ivasobrautilidad}" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-ivasobrautilidad"   value="#{ivasobrautilidad}" ></h:outputText>
                             </h:panelGrid>
                         </center>
                         <interkont:spacer height="30" />
                         <h:panelGrid>
                             <h:panelGroup>
-                                <h:outputText  styleClass="ikont-hot-leyebda1modofparte3"   value="#{var.leyebda1modofparte3}" ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-leyebda2modofparte3"   value=" #{var.leyebda2modofparte3} " ></h:outputText>
-                                <h:outputText  styleClass="ikont-hot-leyebda3modofparte3"   value="#{var.leyebda3modofparte3}" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-leyebda1modofparte3"   value="#{var.leyebda1modofparte3}" ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-leyebda2modofparte3"   value=" #{var.leyebda2modofparte3} " ></h:outputText>
+                                <h:outputText  stylestyleClassikont-hot-leyebda3modofparte3"   value="#{var.leyebda3modofparte3}" ></h:outputText>
                             </h:panelGroup>
                         </h:panelGrid>
                         <interkont:spacer height="20" />
                      
                         <h:form>
                             <h:commandLink value="#{var.generarcronograma}"                                                
-                                         styleClass="ikont-hcl-generarcronograma"  
+                                         stylestyleClassikont-hcl-generarcronograma"  
                                          action="#{Supervisor$ModificarProyecto.btDescargarCronogramaAction}"
                                          onclick="#{rich:component('mp_cronograma_mod')}.hide();">
                             </h:commandLink>

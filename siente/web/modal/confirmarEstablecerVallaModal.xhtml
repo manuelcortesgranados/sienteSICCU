@@ -10,32 +10,32 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="mp_confirmarEstablecerVallaModal" moveable="false" height="150" width="350" 
-                     headerClass="rich-panel-header">
+                     headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.establecervalla}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.establecervalla}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" class="ikont-"  
+                    <a4j:commandLink id="esconder_mp_confirmarEstablecerVallaModal" styleClass="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  class="ikont-"   >
+        <rich:panel  styleClass="ikont-"   >
             <h:form>
                 <h:panelGrid  id="panelGridConfEstablecerValla">
                     <interkont:spacer height="10"/>
-                    <h:outputText  class="ikont- "   value="#{var.confestablecervalla}" />
+                    <h:outputText  styleClass="ikont- "   value="#{var.confestablecervalla}" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" >
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" class="ikont-"  
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerVallaAction}" styleClass="ikont-"  
                                            oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();" value="#{var.aceptar}"
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton class="ikont-"  
+                        <a4j:commandButton styleClass="ikont-"  
                                            onclick="jQuery('.CheckEstablecerValla#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
                                              #{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;" value="#{var.cancelar}"

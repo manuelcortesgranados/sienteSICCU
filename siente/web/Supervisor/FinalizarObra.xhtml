@@ -16,8 +16,8 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.finalizarproyecto}"/>                              
-        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  stylestyleClassikont- "   value="#{var.finalizarproyecto}"/>                              
+        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -31,15 +31,15 @@
             <h:panelGroup id="layoutFinalizar">
                 <center>
                     <h:panelGroup id="gpErrorFin">
-                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.mensajefinaliza}"/>
+                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Supervisor$AdministrarObraNew.mensajefinaliza}"/>
                     </h:panelGroup>
                     <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu">
                         <rich:panel header="#{var.finalizarobra}">
-                            <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
-                                          value="#{var.solopuedefinalizaobrasactivas}" styleClass="ikont-"  />
+                            <h:outputText  stylestyleClassikont- "   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
+                                          value="#{var.solopuedefinalizaobrasactivas}" stylestyleClassikont-"  />
                             <h:panelGroup>
                                 <center>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.pasosparafinalizarobra}" styleClass="ikont-"  />
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.pasosparafinalizarobra}" stylestyleClassikont-"  />
                                     <br/>
                                     <interkont:spacer height="15px;"/>
                                 </center>
@@ -47,22 +47,22 @@
                             <center>
                                 <h:panelGrid id="gridPasosFin" columns="1">
                                     <h:panelGroup >
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registrarelrecibofinal}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registrarelrecibofinal}"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 }"/>
-                                        <h:outputText  styleClass="ikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 }"/>
+                                        <h:outputText  stylestyleClassikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
                                     </h:panelGroup>
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registrarlaultimaacta}"/> <interkont:spacer width="15px;"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registrarlaultimaacta}"/> <interkont:spacer width="15px;"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}"/>
-                                        <h:outputText  styleClass="ikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
                                     </h:panelGroup>
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registraliquidacionfinal}"/><interkont:spacer width="15px;"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registraliquidacionfinal}"/><interkont:spacer width="15px;"/>
                                         <interkont:spacer width="10"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
-                                        <h:outputText  styleClass="ikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="(#{var.noseharealizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="(#{var.realizado})" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==2}"/>
                                     </h:panelGroup>
                                 </h:panelGrid>
                             </center>
@@ -70,72 +70,72 @@
                                 <center><interkont:spacer height="25px;"/>
                                     <h:panelGrid id="finPaso1"   columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1}">
                                         <h:panelGroup>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registrar} "/>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.elrecibofinaldeobra}"/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registrar} "/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.elrecibofinaldeobra}"/>
                                         </h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.antesderegistrarelrecibofinal}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.antesderegistrarelrecibofinal}"/>
                                         <interkont:spacer height="10px;"/>
                                         <h:panelGrid id="layoutActaRecFin" columns="2" width="500" columnClasses="labelsDetalle">
-                                            <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true"   styleClass="ikont-"  
+                                            <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true"   stylestyleClassikont-"  
                                                                onclick="#{rich:component('panelActaRecFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaRecFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactarecfin}" />
-                                            <h:outputText  styleClass="ikont- "    value="#{var.fechadelacta} "/>
+                                            <h:outputText  stylestyleClassikont- "    value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActaRecfin" value="#{Supervisor$AdministrarObraNew.obra.datefecrecfin}"/>
                                         </h:panelGrid>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.estatotalmenteseguroregistrar}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.estatotalmenteseguroregistrar}"/>
                                         <h:panelGroup>
-                                            <a4j:commandButton id="BTaceptarFinPaso1"  value="#{var.si}" styleClass="ikont-"   render="gpErrorFin, layoutFinalizar"
+                                            <a4j:commandButton id="BTaceptarFinPaso1"  value="#{var.si}" stylestyleClassikont-"   render="gpErrorFin, layoutFinalizar"
                                                                action="#{Supervisor$AdministrarObraNew.registrarReciboFinal}" >
                                             </a4j:commandButton>
                                             <interkont:spacer width="10"/>
-                                            <a4j:commandButton id="BTnoFinPaso1"  value="#{var.no}" styleClass="ikont-"   action="admindetalleObra"/>
+                                            <a4j:commandButton id="BTnoFinPaso1"  value="#{var.no}" stylestyleClassikont-"   action="admindetalleObra"/>
 
                                         </h:panelGroup>
                                         <interkont:spacer height="30" width="200"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.notaunavez}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.notaunavez}"/>
 
                                     </h:panelGrid>
                                     <h:panelGrid id="finPaso2"  columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==4}">
 
                                         <h:panelGroup>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registrar2}"/>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-" value="#{var.laultimaacta}"/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registrar2}"/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-" value="#{var.laultimaacta}"/>
                                         </h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "    value="#{var.estatotalmenteseguroregistrar}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="#{var.estatotalmenteseguroregistrar}"/>
                                         <h:panelGroup>
-                                            <h:outputText  styleClass="ikont- "    value="#{var.antesdedarclick}"/>
+                                            <h:outputText  stylestyleClassikont- "    value="#{var.antesdedarclick}"/>
                                         </h:panelGroup>
 
                                         <h:panelGroup>
-                                            <a4j:commandButton id="BTaceptarFinPaso2"  value="#{var.si}" styleClass="ikont-"  
+                                            <a4j:commandButton id="BTaceptarFinPaso2"  value="#{var.si}" stylestyleClassikont-"  
                                                                render="gpErrorFin, layoutFinalizar" action="#{Supervisor$AdministrarObraNew.registrarUltimaActaParcial}"
                                                                />
                                             <interkont:spacer width="10"/>
-                                            <a4j:commandButton id="BTno1"  value="#{var.no}" styleClass="ikont-"   action="admindetalleObra"/>
+                                            <a4j:commandButton id="BTno1"  value="#{var.no}" stylestyleClassikont-"   action="admindetalleObra"/>
                                         </h:panelGroup>
                                         <interkont:spacer height="30" width="200"/>
 
                                     </h:panelGrid>
                                     <h:panelGrid id="finPaso3"  columnClasses="aiu" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==5}">
                                         <h:panelGroup>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.registrar3} "/>
-                                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.laliquidaciondestaobra}"/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.registrar3} "/>
+                                            <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.laliquidaciondestaobra}"/>
                                         </h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "    value="#{var.antesderegistrarlaliquidacion}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="#{var.antesderegistrarlaliquidacion}"/>
                                         <h:panelGrid id="layoutActaFin" columns="2" width="500" columnClasses="labelsDetalle">
-                                            <a4j:commandButton id="btActaFin" styleClass="ikont-"   value="#{var.examinar}"  immediate="true"
+                                            <a4j:commandButton id="btActaFin" stylestyleClassikont-"   value="#{var.examinar}"  immediate="true"
                                                                oncomplete="#{rich:component('panelActaFin')}.show(); return true;" />
                                             <h:inputText size="40" id="txtActaFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactafin}" />
-                                            <h:outputText  styleClass="ikont- "    value="#{var.fechadelacta} "/>
+                                            <h:outputText  stylestyleClassikont- "    value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActafin" value="#{Supervisor$AdministrarObraNew.obra.datefecliqui}" >
                                                 <a4j:ajax execute="@this" ></a4j:ajax>
                                             </rich:calendar>
                                         </h:panelGrid>
-                                        <h:outputText  styleClass="ikont- "    value="#{var.estatotalmenteseguroliquidacion}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="#{var.estatotalmenteseguroliquidacion}"/>
                                         <h:panelGroup>
-                                            <h:outputText  styleClass="ikont- "    value="#{var.aldarclickensi}"/>
+                                            <h:outputText  stylestyleClassikont- "    value="#{var.aldarclickensi}"/>
                                         </h:panelGroup>
-                                        <a4j:commandButton id="BTaceptarFinPaso3" styleClass="ikont-"   value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
+                                        <a4j:commandButton id="BTaceptarFinPaso3" stylestyleClassikont-"   value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
                                                            render="gpErrorFin, layoutConfFin" oncomplete="#{rich:component('panelConfirmaFin')}.show(); return true;"  execute="@this">
                                             
                                         </a4j:commandButton>

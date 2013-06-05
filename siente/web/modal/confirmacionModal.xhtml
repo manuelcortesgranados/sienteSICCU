@@ -10,16 +10,16 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="ConfirmarMovil" autosized="true" width="400" headerClass="rich-panel-header">
+    <rich:popupPanel id="ConfirmarMovil" autosized="true" width="400" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.atencion}" class="ikont-"  />
+                <h:outputText  styleClass="ikont- "   value="#{var.atencion}" styleClass="ikont-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_ConfirmarMovil" class="ikont-"  
+                    <a4j:commandLink id="esconder_ConfirmarMovil" styleClass="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('ConfirmarMovil')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -28,7 +28,7 @@
             <h:form>
                 <h:panelGrid columns="1" id="layoutMovil">
                     <h:panelGrid >
-                        <h:outputText  class="ikont- "   value="El último reporte de avance no ha sido validado por el funcionario de Colombia Humanitaria. "  />
+                        <h:outputText  styleClass="ikont- "   value="El último reporte de avance no ha sido validado por el funcionario de Colombia Humanitaria. "  />
 
                     </h:panelGrid>
                     <h:panelGrid columns="2">

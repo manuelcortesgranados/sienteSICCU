@@ -8,16 +8,16 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalImagen" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="modalImagen" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "    value="#{var.imagen}"/>
+                <h:outputText  styleClass="id-jsf- "    value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -25,7 +25,7 @@
         <h:form>
             <rich:panel id="panelImagen" header="#{var.imagenproyectada}">
                 <h:panelGroup >
-                    <h:graphicImage  class="id-jsf- "   value="http://74.207.234.207/CobraManizales#{Supervisor$AdministrarObraNew.imagenevolucionobra.strubicacion}" width="200"/>
+                    <h:graphicImage  styleClass="id-jsf- "   value="http://74.207.234.207/CobraManizales#{Supervisor$AdministrarObraNew.imagenevolucionobra.strubicacion}" width="200"/>
                 </h:panelGroup>
             </rich:panel>
         </h:form>

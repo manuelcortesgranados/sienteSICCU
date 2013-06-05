@@ -10,17 +10,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_responder" moveable="false" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="mp_responder" moveable="false" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.rpanhea_responder}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.rpanhea_responder}" styleClass="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_responder" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp_responder" styleClass="id-jsf-"  
                                      onclick="#{rich:component('mp_responder')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <h:form id="form_responder">
                 <h:panelGroup >
                     <a4j:commandButton id="esconder_mp_responder" 
@@ -42,26 +42,26 @@
                     <h:panelGrid id="pg_camposResponder" columns="3" >
                         <interkont:spacer width="10" />
                         
-                        <h:outputLabel  class="id-jsf- "   value="#{var.houtfechayhora}" />
+                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.houtfechayhora}" />
                         <h:inputText id="txt-datefecmensaje-respuesta" value="#{Mensajes.mensajeRecibidoResponder.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
                         </h:inputText>
                         
                         <interkont:spacer width="10" />
                         
-                        <h:outputLabel  class="id-jsf- "   value="#{var.houtdestinatario}" />
+                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.houtdestinatario}" />
                         <h:inputText id="txt_fkusuariorecibe_respuesta" value="#{Mensajes.mensajeRecibidoResponder.jsfUsuarioByIntusurecibe.usuId} #{Mensajes.mensajeRecibidoResponder.jsfUsuarioByIntusurecibe.tercero.strapellido1}" size="65" readonly="true" />
                         
                         <interkont:spacer width="10" />
                         
-                        <h:outputLabel  class="id-jsf- "   value="#{var.houtasunto}" />
+                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.houtasunto}" />
                         <h:inputText id="txt_asunto_respuesta" value="#{Mensajes.mensajeRecibidoResponder.strasuntomensaje}" size="65" maxlength="250">
                             <h:message for="txt_asunto_respuesta" />
                         </h:inputText>
                         
                         <interkont:spacer width="10" />
                         
-                        <h:outputLabel  class="id-jsf- "   value="#{var.houtmensaje}" />
+                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_respuesta" value="#{Mensajes.mensajeRecibidoResponder.strtextomensaje}" cols="74" rows="14" required="true">
                             <h:message for="txt_strtextomensaje_respuesta" />
                         </h:inputTextarea>

@@ -24,8 +24,8 @@
                     <rich:panel header="#{var.ingresardatosencago}" id="PanelEncargo">
                         <h:panelGrid columns="4" columnClasses="inputsDetalle,inputsDetalle" >
                             <h:panelGrid id="mos" columns="4"  >
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputLabel  stylestyleClassikont- "   id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
 
                                 </h:outputLabel>
                                 <h:inputText  id="txtNumeroencargo" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.intnumencargofiduciario}"
@@ -33,27 +33,27 @@
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
                                 <rich:message for="txtNumeroencargo" />
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   id="lbldescripcion"  value="#{var.descripcion}"/>
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputText  stylestyleClassikont- "   id="lbldescripcion"  value="#{var.descripcion}"/>
                                 <h:inputTextarea id="txtdes" cols="23" rows="4" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.strdescripcion}"
                                                  required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}"/>
                                 <rich:message for="txtdes" />
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputLabel  stylestyleClassikont- "   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
                                 <h:inputText id="txtsaldoinicial" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoinicial}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoinicial" />
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsaldoactual"  value="#{var.saldoactual}"/>
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputLabel  stylestyleClassikont- "   id="lblsaldoactual"  value="#{var.saldoactual}"/>
                                 <h:inputText id="txtsaldoactual" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoactual}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoactual" />
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   id="lblfecha"  value="#{var.fecha}"/>
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputText  stylestyleClassikont- "   id="lblfecha"  value="#{var.fecha}"/>
                                 <h:panelGroup id="layoutFechaEncargo" >
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
@@ -63,20 +63,20 @@
                                 </h:panelGroup>
                                 <rich:message for="fechaapertura" />
 
-                                <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsolicitante"  value="#{var.solicitante}"/>
+                                <h:panelGrid stylestyleClassikont-"  />
+                                <h:outputLabel  stylestyleClassikont- "   id="lblsolicitante"  value="#{var.solicitante}"/>
                                 <h:panelGrid columns="4"  >
 
 
                                     <h:panelGroup id="solicitante" >
 
-                                        <h:outputLabel  styleClass="ikont- "   id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
+                                        <h:outputLabel  stylestyleClassikont- "   id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
                                                        #{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strapellido1}"/>
 
 
                                         <a4j:commandButton  id="bt-ver-listado-tercero" immediate="true"  disabled="#{!Financiera$FiduFinanciera.editarorden}"
                                                             oncomplete="#{rich:component('mp-listado-tercero')}.show();"  title="#{var.vertercero}"
-                                                            styleClass="ikont-"   render="gpTercero" action="#{Financiera$FiduFinanciera.verTercero}"
+                                                            stylestyleClassikont-"   render="gpTercero" action="#{Financiera$FiduFinanciera.verTercero}"
                                                             />
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -85,7 +85,7 @@
 
                         <interkont:spacer width="30"/>
 
-                        <a4j:commandButton id="guardar" action="#{Financiera$FiduFinanciera.guardarFinanciera}" value="#{var.guardar}" styleClass="ikont-"  
+                        <a4j:commandButton id="guardar" action="#{Financiera$FiduFinanciera.guardarFinanciera}" value="#{var.guardar}" stylestyleClassikont-"  
                                            render="panelConfGuardar"   onclick="#{rich:component('panelConfirmaguardado')}.show();">
 
                         </a4j:commandButton>

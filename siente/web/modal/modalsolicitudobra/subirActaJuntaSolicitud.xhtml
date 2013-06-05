@@ -13,12 +13,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadActa" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelUploadActa" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelUploadActa')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="#{var.seleccionaracta}" class="id-jsf-"   >
+        <rich:panel header="#{var.seleccionaracta}" styleClass="id-jsf-"   >
             <h:form>
                 <h:panelGroup id="gpActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -31,20 +31,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info_acta">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{SolicitudObra$GestionarSolicitudObra.subirActa.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirActa.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>

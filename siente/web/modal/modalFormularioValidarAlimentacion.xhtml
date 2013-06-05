@@ -10,16 +10,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalFormularioValidarAlimentacion"  autosized="true" width="700" headerClass="rich-panel-header" class="id-jsf-"   >
+    <rich:popupPanel id="modalFormularioValidarAlimentacion"  autosized="true" width="700" headerstyleClass="rich-panel-header" styleClass="id-jsf-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.listachequeo} "/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.listachequeo} "/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -40,29 +40,29 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">
-                                    <h:outputText  class="id-jsf- "   value="Listado de Chequeo" />
+                                    <h:outputText  styleClass="id-jsf- "   value="Listado de Chequeo" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="Categoría"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="Categoría"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="Descripción"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="Descripción"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="id-jsf- "   value="Cumple"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="Cumple"/>
                                 </rich:column>
                                
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true">
-                                <h:outputLabel  class="id-jsf- "   id="lblcategoria" class="id-jsf-"   value="#{row.tipoverificacion.strdescripcion}" />
+                                <h:outputLabel  styleClass="id-jsf- "   id="lblcategoria" styleClass="id-jsf-"   value="#{row.tipoverificacion.strdescripcion}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  class="id-jsf- "   id="lbldescripcion" class="id-jsf-"   value="#{row.strdescripcion}" />
+                                <h:outputLabel  styleClass="id-jsf- "   id="lbldescripcion" styleClass="id-jsf-"   value="#{row.strdescripcion}" />
                             </rich:column>
                             <rich:column>
-                                <h:selectBooleanCheckbox id="chkchequeo" class="id-jsf-"   value="#{row.respuesta}"/>
+                                <h:selectBooleanCheckbox id="chkchequeo" styleClass="id-jsf-"   value="#{row.respuesta}"/>
                             </rich:column>                            
                         </rich:columnGroup>
                         

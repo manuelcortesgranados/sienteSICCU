@@ -10,17 +10,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelDocCiu" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelDocCiu" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.selecdoc}" />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.selecdoc}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelDocCiu" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelDocCiu" styleClass="id-jsf-"  
                                      onclick="#{rich:component('panelDocCiu')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <h:form id="formDocCiu">
                 <h:panelGroup id="layoutDocCiu">
                     <h:panelGrid columnClasses="top,top" columns="2"> 
@@ -48,21 +48,21 @@
 
                         <h:panelGroup id="infoDoc">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}" /> 
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}" /> 
                                     </f:facet>
 
-                                    <h:outputText  class="id-jsf- "   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorDocumento.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -73,7 +73,7 @@
                                 <br/>
                                 <a4j:commandButton id="borrar_Acta" action="#{Ciudadano$PerfilCiudadano.borrarDoc}" render="infoDoc, uploadDoc, layoutDocCiu_par"
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"    />
+                                                   styleClass="id-jsf-"    />
 
                                 <a4j:commandButton id="BTaceptarDoc" value="#{var.aceptar}" 
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}"

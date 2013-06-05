@@ -52,107 +52,107 @@
         <h:panelGrid columns="1"  id="pgPrincipalComentario">
             <h:panelGrid columns="2" >
                 <h:panelGrid>
-                    <h:outputText  styleClass="ikont-hot-strnombrecompleto"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}"/>
-                    <h:outputText  styleClass="ikont-hot-municipiodepartamento"   value="#{SessionBeanCobra.ciudadanoservice.municipio} #{SessionBeanCobra.ciudadanoservice.departamento}" />
+                    <h:outputText  stylestyleClassikont-hot-strnombrecompleto"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}"/>
+                    <h:outputText  stylestyleClassikont-hot-municipiodepartamento"   value="#{SessionBeanCobra.ciudadanoservice.municipio} #{SessionBeanCobra.ciudadanoservice.departamento}" />
                 </h:panelGrid>
-                <h:graphicImage  styleClass="ikont-hgi-strfoto"  url="#{SessionBeanCobra.usuarioObra.tercero.strfoto}"  />
+                <h:graphicImage  stylestyleClassikont-hgi-strfoto"  url="#{SessionBeanCobra.usuarioObra.tercero.strfoto}"  />
             </h:panelGrid>
             <rich:panel>
                 <div id="header_content" >
-                    <div styleClass="star">
-                        <h:outputText  styleClass="ikont-hot-participacion"   value="#{var.participacion}" />
+                    <div stylestyleClassstar">
+                        <h:outputText  stylestyleClassikont-hot-participacion"   value="#{var.participacion}" />
                     </div>
                 </div>
             </rich:panel>
             <rich:panel >
                 <center>
-                    <h:panelGrid columns="3"  cellspacing="0" cellpadding="4" styleClass="ikont-hpg-ayudenos"  >
-                        <h:graphicImage  styleClass="ikont-hgi-p_controlar"    value="/resources/imgs/p_controlar.png"  ></h:graphicImage>
-                        <h:outputText  styleClass="ikont-hot-ayudenos" value="#{var.ayudenos}"></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-utilice" value="#{var.utilice}"></h:outputText>
+                    <h:panelGrid columns="3"  cellspacing="0" cellpadding="4" stylestyleClassikont-hpg-ayudenos"  >
+                        <h:graphicImage  stylestyleClassikont-hgi-p_controlar"    value="/resources/imgs/p_controlar.png"  ></h:graphicImage>
+                        <h:outputText  stylestyleClassikont-hot-ayudenos" value="#{var.ayudenos}"></h:outputText>
+                        <h:outputText  stylestyleClassikont-hot-utilice" value="#{var.utilice}"></h:outputText>
                     </h:panelGrid>
                 </center>
             </rich:panel>
             <h:panelGrid columns="2" rowClasses="rowtop"  >
                 <rich:panel>
                     <div id="header_content" >
-                        <div styleClass="comentario">
-                            <h:outputText  styleClass="ikont-hot-miopinion"   value="#{var.miopinion}" />
+                        <div stylestyleClasscomentario">
+                            <h:outputText  stylestyleClassikont-hot-miopinion"   value="#{var.miopinion}" />
                         </div>
                     </div>
                 </rich:panel>
                 <rich:panel>
                     <div id="header_content" >
-                        <div styleClass="star">
-                            <h:outputText  styleClass="ikont-hot-participacion"   value="#{var.participacion}" />
+                        <div stylestyleClassstar">
+                            <h:outputText  stylestyleClassikont-hot-participacion"   value="#{var.participacion}" />
                         </div>
                     </div>
                 </rich:panel>
                 <h:form id="frmparticiapcioncomentario">
                     <h:panelGrid columns="1"   >
-                        <h:outputText  styleClass="ikont-hot-paso" value="#{var.paso} 1" />
-                        <h:outputText  styleClass="ikont-hot-aseguresedeelegir" value="#{var.aseguresedeelegir}" />
+                        <h:outputText  stylestyleClassikont-hot-paso" value="#{var.paso} 1" />
+                        <h:outputText  stylestyleClassikont-hot-aseguresedeelegir" value="#{var.aseguresedeelegir}" />
                         <h:panelGrid    columnClasses="panelderecha">
                             <h:panelGroup>
-                                <a4j:commandLink  styleClass="ikont-acl-seleccionqueja"   action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
-                                <a4j:commandLink  styleClass="ikont-acl-seleccionopine"   action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
-                                <a4j:commandLink  styleClass="ikont-acl-seleccionfelicite"   action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
+                                <a4j:commandLink  stylestyleClassikont-acl-seleccionqueja"   action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
+                                <a4j:commandLink  stylestyleClassikont-acl-seleccionopine"   action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
+                                <a4j:commandLink  stylestyleClassikont-acl-seleccionfelicite"   action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
                             </h:panelGroup>
                         </h:panelGrid><br/>
                         <a4j:region id="idregion_par">
                             <h:panelGrid columns="2"  columnClasses="panelu, panelj" cellspacing="0" cellpadding="0" >
-                                <h:panelGrid id="panelopinion_par"  columns="1" styleClass="ikont-hpg-panelopinion_par"   cellpadding="0" cellspacing="0">
-                                    <h:outputText  styleClass="ikont-hot-nombretitulo" value="#{Ciudadano$PerfilCiudadano.nombretitulo}"></h:outputText>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion3" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}"></h:commandLink>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion2" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 2}"></h:commandLink>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion1" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 1}"></h:commandLink>
+                                <h:panelGrid id="panelopinion_par"  columns="1" stylestyleClassikont-hpg-panelopinion_par"   cellpadding="0" cellspacing="0">
+                                    <h:outputText  stylestyleClassikont-hot-nombretitulo" value="#{Ciudadano$PerfilCiudadano.nombretitulo}"></h:outputText>
+                                    <h:commandLink stylestyleClassikont-hcl-intidtipoopinion3" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}"></h:commandLink>
+                                    <h:commandLink stylestyleClassikont-hcl-intidtipoopinion2" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 2}"></h:commandLink>
+                                    <h:commandLink stylestyleClassikont-hcl-intidtipoopinion1" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 1}"></h:commandLink>
                                 </h:panelGrid>
                                 <h:panelGroup>
                                     <a4j:status id="idstatuscomentario2"/>
-                                    <h:outputText  styleClass="ikont-hot-idcontarmensaje2"   id="idcontarmensaje2" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
-                                    <h:inputTextarea  id="iacomentario2" styleClass="ikont-hit-iacomentario2"   rows="5" cols="40" onkeydown="return maximaLongitud(this,400)"  
+                                    <h:outputText  stylestyleClassikont-hot-idcontarmensaje2"   id="idcontarmensaje2" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
+                                    <h:inputTextarea  id="iacomentario2" stylestyleClassikont-hit-iacomentario2"   rows="5" cols="40" onkeydown="return maximaLongitud(this,400)"  
                                                       value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo(this);" >
                                         <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje2" status="idstatuscomentario2" />
                                     </h:inputTextarea>
                                 </h:panelGroup>
                             </h:panelGrid>
                         </a4j:region>
-                        <h:outputText  styleClass="ikont-hot-ingresesu" value="#{var.ingresesu}" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-nota" value="#{var.nota}"></h:outputText><br/><br/>
-                        <h:outputText  styleClass="ikont-hot-paso2" value="#{var.paso} 2" />
-                        <h:outputText  styleClass="ikont-hot-contenido" value="#{var.contenido}" />
+                        <h:outputText  stylestyleClassikont-hot-ingresesu" value="#{var.ingresesu}" ></h:outputText>
+                        <h:outputText  stylestyleClassikont-hot-nota" value="#{var.nota}"></h:outputText><br/><br/>
+                        <h:outputText  stylestyleClassikont-hot-paso2" value="#{var.paso} 2" />
+                        <h:outputText  stylestyleClassikont-hot-contenido" value="#{var.contenido}" />
                         <h:panelGrid  >
                             <h:panelGrid id="layoutImaCiu_par" columns="3"  columnClasses="panelizquierda,panelderecha">
-                                <h:inputText size="20"  id="txtfotografia" styleClass="ikont-hit-txtfotografia"   readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strfotoopinion}"  />
+                                <h:inputText size="20"  id="txtfotografia" stylestyleClassikont-hit-txtfotografia"   readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strfotoopinion}"  />
                                 <interkont:spacer width="30"/>
                                 <a4j:commandLink id="btimg" onclick="#{rich:component('modalImagenCiu')}.show(); return true;"
-                                                 styleClass="ikont-acl-btimg"   />
+                                                 stylestyleClassikont-acl-btimg"   />
                             </h:panelGrid>
                          
                             <h:panelGrid id="layoutDocCiu_par" columns="3" columnClasses="panelizquierda,panelderecha" >
-                                <h:inputText size="20" id="txtdocumen" styleClass="ikont-"   readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strdoc}" />
+                                <h:inputText size="20" id="txtdocumen" stylestyleClassikont-"   readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strdoc}" />
                                 <interkont:spacer width="30"/>
                                 <a4j:commandLink id="btnacta" onclick="#{rich:component('panelDocCiu')}.show(); return true;"
-                                                 styleClass="ikont-"  />
+                                                 stylestyleClassikont-"  />
                             </h:panelGrid>
                         </h:panelGrid>
                         <br/><br/>
-                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.paso} 3" />
-                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.privacidad}" />
-                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.desea}" />
-                        <h:selectOneRadio id="boolcomentario" styleClass="ikont-"   value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolcomentariooculto}"  >
+                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.paso} 3" />
+                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.privacidad}" />
+                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.desea}" />
+                        <h:selectOneRadio id="boolcomentario" stylestyleClassikont-"   value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolcomentariooculto}"  >
                             <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
                             <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
                         </h:selectOneRadio><br/><br/>
-                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.desea2}" />
-                        <h:selectOneRadio id="boolidentidad" styleClass="ikont-"    value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolidentidadoculta}"  >
+                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.desea2}" />
+                        <h:selectOneRadio id="boolidentidad" stylestyleClassikont-"    value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolidentidadoculta}"  >
                             <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
                             <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
                         </h:selectOneRadio>
                         <h:panelGrid   columnClasses="panelderecha">
                             <h:panelGroup>
-                                <a4j:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
-                                <a4j:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
+                                <a4j:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
+                                <a4j:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
                                 </a4j:commandLink>
                             </h:panelGroup>
                         </h:panelGrid>
@@ -163,33 +163,33 @@
                         <h:panelGroup>
                             <center>
                                 <h:panelGrid columns="4" id="paneltipoopinion"  columnClasses="panelcenter" cellpadding="0" cellspacing="0">
-                                    <h:panelGrid  styleClass="ikont-"    >
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.felicitacion}ciones"></h:outputText>
-                                        <h:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaFelicitacion}"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Ciudadano$PerfilCiudadano.felicitar}"></h:outputText>
+                                    <h:panelGrid  stylestyleClassikont-"    >
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.felicitacion}ciones"></h:outputText>
+                                        <h:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaFelicitacion}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Ciudadano$PerfilCiudadano.felicitar}"></h:outputText>
                                     </h:panelGrid>
-                                    <h:panelGrid columns="1" styleClass="ikont-"   >
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.opinar}iones"></h:outputText>
-                                        <h:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Ciudadano$PerfilCiudadano.opinar}"></h:outputText>
+                                    <h:panelGrid columns="1" stylestyleClassikont-"   >
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.opinar}iones"></h:outputText>
+                                        <h:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Ciudadano$PerfilCiudadano.opinar}"></h:outputText>
                                     </h:panelGrid>
-                                    <h:panelGrid columns="1" styleClass="ikont-"   >
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.quejas}as"></h:outputText>
-                                        <h:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Ciudadano$PerfilCiudadano.quejarse}"></h:outputText>
+                                    <h:panelGrid columns="1" stylestyleClassikont-"   >
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.quejas}as"></h:outputText>
+                                        <h:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Ciudadano$PerfilCiudadano.quejarse}"></h:outputText>
                                     </h:panelGrid>
-                                    <h:panelGrid columns="1" styleClass="ikont-"   >
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.todos}"></h:outputText>
-                                        <h:commandLink styleClass="ikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"/>
-                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Ciudadano$PerfilCiudadano.todos}"></h:outputText>
+                                    <h:panelGrid columns="1" stylestyleClassikont-"   >
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{var.todos}"></h:outputText>
+                                        <h:commandLink stylestyleClassikont-"   action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"/>
+                                        <h:outputText  stylestyleClassikont- "   stylestyleClassikont-"   value="#{Ciudadano$PerfilCiudadano.todos}"></h:outputText>
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </center>
                         </h:panelGroup>
                         <rich:panel>
                             <div id="header_content" >
-                                <div styleClass="comentario">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.opiniondelciudadano}" />
+                                <div stylestyleClasscomentario">
+                                    <h:outputText  stylestyleClassikont- "   value="#{var.opiniondelciudadano}" />
                                 </div>
                             </div>
                         </rich:panel>
@@ -200,35 +200,35 @@
                                 <a4j:repeat id="rpcomentario_par" value="#{Ciudadano$PerfilCiudadano.listopinion}"  binding="#{Ciudadano$PerfilCiudadano.repeatopinion}" var="rowcomentario_par" rows="4"  >
                                     <h:panelGrid columns="3">
                                         <h:panelGrid columns="3"  >
-                                            <h:panelGrid styleClass="ikont-hpg-fotocomentario"  >
-                                                <h:graphicImage  styleClass="ikont-hgi-fotocomentario"   url="#{var.ipserver}siente#{rowcomentario_par.jsfUsuario.tercero.strfoto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" />
-                                                <h:graphicImage  styleClass="ikont-hgi-bt_user"   url="/resources/imgs/bt_user.png" rendered="#{rowcomentario_par.boolidentidadoculta}" />
+                                            <h:panelGrid stylestyleClassikont-hpg-fotocomentario"  >
+                                                <h:graphicImage  stylestyleClassikont-hgi-fotocomentario"   url="#{var.ipserver}siente#{rowcomentario_par.jsfUsuario.tercero.strfoto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" />
+                                                <h:graphicImage  stylestyleClassikont-hgi-bt_user"   url="/resources/imgs/bt_user.png" rendered="#{rowcomentario_par.boolidentidadoculta}" />
                                                 <interkont:spacer width="30"/>
                                             </h:panelGrid>
                                         </h:panelGrid>
-                                        <h:graphicImage  styleClass="ikont-hgi-com_arrow"   url="/resources/imgs/com_arrow.png" />
-                                        <h:panelGrid styleClass="ikont-hpg-datosciudadano"    >
+                                        <h:graphicImage  stylestyleClassikont-hgi-com_arrow"   url="/resources/imgs/com_arrow.png" />
+                                        <h:panelGrid stylestyleClassikont-hpg-datosciudadano"    >
                                             <h:panelGrid columns="3">
                                                 <h:panelGroup>
-                                                    <h:outputText  styleClass="ikont-hot-idstrnombre_par"   id="idstrnombre_par" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" styleClass="ikont-"  />
-                                                    <h:outputText  styleClass="ikont-hot-idstrnombre_par_n"   id="idstrnombre_par_n" value="Anonimo" rendered="#{rowcomentario_par.boolidentidadoculta}" styleClass="ikont-"  />
+                                                    <h:outputText  stylestyleClassikont-hot-idstrnombre_par"   id="idstrnombre_par" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" stylestyleClassikont-"  />
+                                                    <h:outputText  stylestyleClassikont-hot-idstrnombre_par_n"   id="idstrnombre_par_n" value="Anonimo" rendered="#{rowcomentario_par.boolidentidadoculta}" stylestyleClassikont-"  />
 
                                                 </h:panelGroup>
                                                 <interkont:spacer width="10"/>
-                                                <h:outputText  styleClass="ikont-hot-iddate_par"   id="iddate_par" value="#{rowcomentario_par.datefechaopinion}" styleClass="ikont-"  >
+                                                <h:outputText  stylestyleClassikont-hot-iddate_par"   id="iddate_par" value="#{rowcomentario_par.datefechaopinion}" stylestyleClassikont-"  >
                                                     <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
                                                 </h:outputText>
                                             </h:panelGrid>
                                             <h:panelGrid >
-                                                <h:outputLabel  styleClass="ikont-hol-idcomentario_par"    id="idcomentario_par" value="#{rowcomentario_par.stropinion}"
+                                                <h:outputLabel  stylestyleClassikont-hol-idcomentario_par"    id="idcomentario_par" value="#{rowcomentario_par.stropinion}"
                                                                  />
                                             </h:panelGrid>
 
                                             <h:panelGrid  columnClasses="panelderecha" >
                                                 <h:panelGroup>
-                                                    <h:commandLink target="_blank" action="#{Ciudadano$PerfilCiudadano.abrirImagen}" styleClass="ikont-hcl-abririmagen"   rendered="#{rowcomentario_par.strfotoopinion != null}"></h:commandLink>
-                                                    <h:commandLink target="_blank" styleClass="ikont-hcl-strvideo"   rendered="#{rowcomentario_par.strvideo != null}"></h:commandLink>
-                                                    <h:commandLink target="_blank"  action="#{Ciudadano$PerfilCiudadano.abrirDoc}" styleClass="ikont-hcl-abrirdocumento"   rendered="#{rowcomentario_par.strdoc != null}" ></h:commandLink>
+                                                    <h:commandLink target="_blank" action="#{Ciudadano$PerfilCiudadano.abrirImagen}" stylestyleClassikont-hcl-abririmagen"   rendered="#{rowcomentario_par.strfotoopinion != null}"></h:commandLink>
+                                                    <h:commandLink target="_blank" stylestyleClassikont-hcl-strvideo"   rendered="#{rowcomentario_par.strvideo != null}"></h:commandLink>
+                                                    <h:commandLink target="_blank"  action="#{Ciudadano$PerfilCiudadano.abrirDoc}" stylestyleClassikont-hcl-abrirdocumento"   rendered="#{rowcomentario_par.strdoc != null}" ></h:commandLink>
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                         </h:panelGrid>
@@ -236,8 +236,8 @@
                                         <h:panelGroup></h:panelGroup>
                                         <h:panelGrid  columnClasses="panelderecha">
                                             <h:panelGroup rendered="false">
-                                                <h:commandLink styleClass="ikont-hcl-space1"    ></h:commandLink>
-                                                <h:commandLink styleClass="ikont-hcl-space2"   ></h:commandLink>
+                                                <h:commandLink stylestyleClassikont-hcl-space1"    ></h:commandLink>
+                                                <h:commandLink stylestyleClassikont-hcl-space2"   ></h:commandLink>
                                             </h:panelGroup>
 
                                         </h:panelGrid>

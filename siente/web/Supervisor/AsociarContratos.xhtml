@@ -16,7 +16,7 @@
             <h:outputScript name="script_supervisor.js"/>
         </ui:define>
         <ui:define name="title">
-            <h:outputText  styleClass="ikont- "   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
+            <h:outputText  stylestyleClassikont- "   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
         </ui:define>
 
 
@@ -38,7 +38,7 @@
 
                         <h:panelGrid id="pgconveniocontrato" columns="3"  >                            
                             <a4j:commandLink value="Asociar contrato" rendered="#{SessionBeanCobra.usuarioService.usuarioObra.usuId !=17}"
-                                             styleClass="ikont-"  
+                                             stylestyleClassikont-"  
                                              action="#{Supervisor$AsociarContratos.llenarContratos}" 
                                              oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();"
                                              render="gpTotalContAso">
@@ -47,7 +47,7 @@
 
 
                             <a4j:commandLink value="Interventoria" 
-                                             styleClass="ikont-"  
+                                             stylestyleClassikont-"  
                                              action="#{Supervisor$AsociarContratos.llenarContratosIntervento}" 
                                              render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();">
                              </a4j:commandLink>
@@ -62,15 +62,15 @@
                                                 rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}">
                                     <rich:column id="cocontr1" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="Número contrato" />
+                                            <h:outputText  stylestyleClassikont- "   value="Número contrato" />
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                        <h:outputText  stylestyleClassikont- "   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
                                     </rich:column>
                                     <rich:column id="co2" width="100px" >
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.valor}" />
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.valor}" />
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                        <h:outputText  stylestyleClassikont- "   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
                                             <f:convertNumber pattern="$ ###,###,###"/>
 
                                         </h:outputText>
@@ -79,34 +79,34 @@
                                     <rich:column id="vlcongtrhijosse"  width="150px"
                                                   >
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="Valor Disponible"/>
+                                            <h:outputText  stylestyleClassikont- "   value="Valor Disponible"/>
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "   id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
+                                        <h:outputText  stylestyleClassikont- "   id="vlcondisse" value="#{contrarow.contrato.numvlrcontrato-contrarow.contrato.numvlrsumahijos-contrarow.contrato.numvlrsumaproyectos}">
                                             <f:convertNumber pattern="$###,###,###"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column id="fechaincontse"  width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.datefechaini}"/>
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.datefechaini}"/>
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "    value="#{contrarow.contrato.datefechaini}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="#{contrarow.contrato.datefechaini}"/>
                                     </rich:column>
                                     <rich:column id="fechaficontse"  width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.datefechafin}"/>
+                                            <h:outputText  stylestyleClassikont- "   value="#{var.datefechafin}"/>
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "    value="#{contrarow.contrato.datefechafin}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="#{contrarow.contrato.datefechafin}"/>
                                     </rich:column>
                                     <rich:column id="tipocontrato"  width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="Tipo Contrato"/>
+                                            <h:outputText  stylestyleClassikont- "   value="Tipo Contrato"/>
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont- "    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
-                                        <h:outputText  styleClass="ikont- "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="Obra" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria==1}"/>
+                                        <h:outputText  stylestyleClassikont- "    value="Interventoria" rendered="#{contrarow.contrato.tipocontratoconsultoria.intidtipocontratoconsultoria>1}"/>
                                     </rich:column>
                                     <rich:column id="desasociar"  width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="Desasociar"/>
+                                            <h:outputText  stylestyleClassikont- "   value="Desasociar"/>
                                         </f:facet>
                                         <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria(filaSeleccionada)}"
                                                            render="datacontratosaso,pgcontrat1aso">
@@ -122,19 +122,19 @@
 
                         <a4j:outputPanel id="panelErrorAsoCont">
                             <rich:messages id="messagesAsoCon" globalOnly="true"
-                                           styleClass="ikont-"   ajaxRendered="true"
+                                           stylestyleClassikont-"   ajaxRendered="true"
                                            >
                                 <f:facet name="infoMarker">
-                                    <h:graphicImage  styleClass="ikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                    <h:graphicImage  stylestyleClassikont- "   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                 </f:facet>
                                 <f:facet name="warnMarker">
-                                    <h:graphicImage  styleClass="ikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                    <h:graphicImage  stylestyleClassikont- "   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                 </f:facet>
                                 <f:facet name="errorMarker">
-                                    <h:graphicImage  styleClass="ikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                    <h:graphicImage  stylestyleClassikont- "   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                 </f:facet>
                                 <f:facet name="fatalMarker">
-                                    <h:graphicImage  styleClass="ikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                    <h:graphicImage  stylestyleClassikont- "    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                 </f:facet>
                             </rich:messages>
 

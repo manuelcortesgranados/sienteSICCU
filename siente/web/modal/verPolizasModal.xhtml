@@ -10,17 +10,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelVerPolizaModal" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelVerPolizaModal" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.verpolizas}" />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.verpolizas}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelVerPolizaModal" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelVerPolizaModal" styleClass="id-jsf-"  
                                      onclick="#{rich:component('panelVerPolizaModal')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -36,34 +36,34 @@
                                 value="#{Supervisor$AdministrarObraNew.listaPolizacontratos}">
                     <rich:column id="tc-strTipoPoliza" width="100px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.tipoPolizaContrato}" />
+                            <h:outputText  styleClass="id-jsf- "   value="#{var.tipoPolizaContrato}" />
                         </f:facet>
 
-                        <h:outputText  class="id-jsf- "   id="otxt-strTipoPoliza" class="id-jsf-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                        <h:outputText  styleClass="id-jsf- "   id="otxt-strTipoPoliza" styleClass="id-jsf-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
                     </rich:column>
 
                     <rich:column id="tc-strnumPolizaContrato1" width="100px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.numPolizaContrato}" />
+                            <h:outputText  styleClass="id-jsf- "   value="#{var.numPolizaContrato}" />
                         </f:facet>
 
-                        <h:outputText  class="id-jsf- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
+                        <h:outputText  styleClass="id-jsf- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
                     </rich:column>
 
                     <rich:column id="tc-strEntidad" width="100px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.entidad}" />
+                            <h:outputText  styleClass="id-jsf- "   value="#{var.entidad}" />
                         </f:facet>
 
-                        <h:outputText  class="id-jsf- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
+                        <h:outputText  styleClass="id-jsf- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
                     </rich:column>
 
                     <rich:column id="tc-strVencimientoPoliza" width="100px">
                         <f:facet name="header">
-                            <h:outputText  class="id-jsf- "   value="#{var.vencimientoPoliza}" />
+                            <h:outputText  styleClass="id-jsf- "   value="#{var.vencimientoPoliza}" />
                         </f:facet>
 
-                        <h:outputText  class="id-jsf- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
+                        <h:outputText  styleClass="id-jsf- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
                     </rich:column>
                 </rich:dataTable>
 

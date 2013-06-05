@@ -15,8 +15,8 @@
         </ui:define>
 
         <ui:define name="title">
-            <h:outputText  styleClass="ikont- "    value="#{var.solicitarrevision}"/>
-            <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            <h:outputText  stylestyleClassikont- "    value="#{var.solicitarrevision}"/>
+            <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
         </ui:define>
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -34,27 +34,27 @@
                     <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" >
 
                         <h:panelGrid  rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}" columnClasses="panelcenter">
-                            <h:outputText  styleClass="ikont- "   value="SOLICITAR REVISION DE INFORME DE AVANCE" styleClass="ikont-"  />
+                            <h:outputText  stylestyleClassikont- "   value="SOLICITAR REVISION DE INFORME DE AVANCE" stylestyleClassikont-"  />
                             <interkont:spacer  height="15" />
                             <h:panelGroup>
                                 <h:panelGrid columnClasses="panelcenter" >
-                                    <h:outputText  styleClass="ikont- "   value="Informe a validar" styleClass="ikont-"  />
-                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.informeavalidar.strdescripcion} #{Supervisor$AdministrarObraNew.informeavalidar.porcentaje}" styleClass="ikont-"  />
+                                    <h:outputText  stylestyleClassikont- "   value="Informe a validar" stylestyleClassikont-"  />
+                                    <h:outputText  stylestyleClassikont- "   value="#{Supervisor$AdministrarObraNew.informeavalidar.strdescripcion} #{Supervisor$AdministrarObraNew.informeavalidar.porcentaje}" stylestyleClassikont-"  />
                                 </h:panelGrid>
                                 
                             </h:panelGroup>
                             <interkont:spacer  height="15" />
                             <h:panelGroup rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}">
-                                <h:outputText  styleClass="ikont- "   value="En este momento " styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   value="usted " styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   value="se encuentra Solicitando la Revisión del Informe de Avance por parte de Colombia Humanitaria. " styleClass="ikont-"  />
+                                <h:outputText  stylestyleClassikont- "   value="En este momento " stylestyleClassikont-"  />
+                                <h:outputText  stylestyleClassikont- "   value="usted " stylestyleClassikont-"  />
+                                <h:outputText  stylestyleClassikont- "   value="se encuentra Solicitando la Revisión del Informe de Avance por parte de Colombia Humanitaria. " stylestyleClassikont-"  />
                             </h:panelGroup>
-                            <h:outputText  styleClass="ikont- "   value="#{var.yaseencuentraenvalidacion}" styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
+                            <h:outputText  stylestyleClassikont- "   value="#{var.yaseencuentraenvalidacion}" stylestyleClassikont-"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
                             <interkont:spacer  height="20" rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
                             <h:panelGrid columnClasses="panelcenter"  rendered="#{!Supervisor$AdministrarObraNew.obra.enalimentacion}">
                                 <h:form  id="form_validarinfo">
                                     <a4j:commandLink value="#{var.solicitarrevision}" 
-                                                     styleClass="ikont-"   onclick="#{rich:component('confirmarSolicitudRevision')}.show();">
+                                                     stylestyleClassikont-"   onclick="#{rich:component('confirmarSolicitudRevision')}.show();">
                                     </a4j:commandLink>  
                                 </h:form>
                             </h:panelGrid>
@@ -65,13 +65,13 @@
                         <h:panelGrid columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra == null}"
                                      cellspacing="10" cellpadding="10" >
                             <interkont:spacer height="200"/>
-                            <h:outputText  styleClass="ikont- "   value="#{var.nodisponibletipoproyecto}" styleClass="ikont-"  />
+                            <h:outputText  stylestyleClassikont- "   value="#{var.nodisponibletipoproyecto}" stylestyleClassikont-"  />
 
                         </h:panelGrid>                        
                         <interkont:spacer  height="20"/>
                         <h:panelGrid columnClasses="panelcenter"  rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra != null}">
                             <h:form target="_blank">
-                                <h:commandLink  styleClass="ikont-"  
+                                <h:commandLink  stylestyleClassikont-"  
                                                 value="#{var.reporte} historial de revisiones de información" action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}" />                                    
                             </h:form>
                         </h:panelGrid>

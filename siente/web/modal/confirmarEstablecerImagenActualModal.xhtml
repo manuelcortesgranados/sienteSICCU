@@ -10,31 +10,31 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="mp_confirmarEstablecerImagenActualModal" moveable="false" height="150" width="350" 
-                     headerClass="rich-panel-header">
+                     headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.establecerimagenactual}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.establecerimagenactual}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_confirmarEstablecerImagenActualModal" class="ikont-"  
+                    <a4j:commandLink id="esconder_mp_confirmarEstablecerImagenActualModal" styleClass="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  class="ikont-"   >
+        <rich:panel  styleClass="ikont-"   >
             <h:form>
                 <h:panelGrid  id="panelGridConfEstablecerImagenActual">
                     <interkont:spacer height="10"/>
-                    <h:outputText  class="ikont- "   value="#{var.confestablecerimagenactual}" />
+                    <h:outputText  styleClass="ikont- "   value="#{var.confestablecerimagenactual}" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" >
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerImagenActualAction}" class="ikont-"  
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.btConfirmarEstablecerImagenActualAction}" styleClass="ikont-"  
                                            oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();" value="#{var.aceptar}"
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton class="ikont-"  
+                        <a4j:commandButton styleClass="ikont-"  
                                            onclick="jQuery('.CheckEstablecerImagenActual#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
                                                    #{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
                                                    return false;" value="#{var.cancelar}"

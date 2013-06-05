@@ -9,57 +9,57 @@
     xmlns:interkont="http://www.interkont.com/jsf"
   >
 
-    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodyClass="ikont-rp-tool" >
+    <rich:panel header="Registrar Solicitud" id="menuRegistrarAtencion" bodystyleClassikont-rp-tool" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
 
-            <h:panelGrid styleClass="ikont-hpg-deshformulario"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-datosb_atencion"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-deshformulario"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-datosb_atencion"   immediate="true"
                                  action="datosb_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-datosb_atencion2"   value="Datos Basicos"
+                <a4j:commandLink stylestyleClassikont-hcl-datosb_atencion2"   value="Datos Basicos"
                                  action="datosb_atencion" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="ikont-hpg-deshformulario1"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-consultardatosbasicos"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-deshformulario1"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-consultardatosbasicos"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-consultardatosbasicos1"   value="Datos Basicos"
+                <a4j:commandLink stylestyleClassikont-hcl-consultardatosbasicos1"   value="Datos Basicos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDatosBasicos}"
                                  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="ikont-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-img_atencion"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-img_atencion"   immediate="true"
                                  action="img_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-img_atencion1"   value="Imagenes"
+                <a4j:commandLink stylestyleClassikont-hcl-img_atencion1"   value="Imagenes"
                                  action="img_atencion"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="ikont-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-consultarimagenes"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-deshformulario2"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-consultarimagenes"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-consultarimagenes"   value="Imagenes"
+                <a4j:commandLink stylestyleClassikont-hcl-consultarimagenes"   value="Imagenes"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarImagenes}" execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="ikont-hpg-deshformulario3"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-doc_atencion"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-deshformulario3"   cellpadding="0" cellspacing="0" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-doc_atencion"   immediate="true"
                                  action="doc_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-doc_atencion1"   value="Documentos"
+                <a4j:commandLink stylestyleClassikont-hcl-doc_atencion1"   value="Documentos"
                                  action="doc_atencion"  execute="@this"/>
             </h:panelGrid>
 
-             <h:panelGrid styleClass="ikont-hpg-deshformulario4"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
-                <a4j:commandLink styleClass="ikont-hcl-consultardocumentos"   immediate="true"
+             <h:panelGrid stylestyleClassikont-hpg-deshformulario4"   cellpadding="0" cellspacing="0" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                <a4j:commandLink stylestyleClassikont-hcl-consultardocumentos"   immediate="true"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-consultardocumentos1"   value="Documentos"
+                <a4j:commandLink stylestyleClassikont-hcl-consultardocumentos1"   value="Documentos"
                                  action="#{AtencionHumanitaria$AdminSolicitudAtencion.ConsultarDocumentos}"  execute="@this"/>
             </h:panelGrid>
 
-            <h:panelGrid styleClass="ikont-hpg-video_atencion"   cellpadding="0" cellspacing="0" >
-                <a4j:commandLink styleClass="ikont-hcl-va"   immediate="true"
+            <h:panelGrid stylestyleClassikont-hpg-video_atencion"   cellpadding="0" cellspacing="0" >
+                <a4j:commandLink stylestyleClassikont-hcl-va"   immediate="true"
                                  action="video_atencion"  execute="@this"/>
-                <a4j:commandLink styleClass="ikont-hcl-va1"   value="Video"
+                <a4j:commandLink stylestyleClassikont-hcl-va1"   value="Video"
                                  action="video_atencion"  execute="@this"/>
             </h:panelGrid>
         </h:panelGrid>

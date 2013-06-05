@@ -10,11 +10,11 @@
 
     <rich:popupPanel id="panelUploadDocumento" autosized="true" >
 
-        <rich:panel header="Seleccionar documento" styleClass="ikont-rp-panelUploadDocumento"   >
+        <rich:panel header="Seleccionar documento" stylestyleClassikont-rp-panelUploadDocumento"   >
             <h:form>
                 <h:panelGroup >
 
-                    <a4j:commandLink id="esconder_panelUploadDocumento" styleClass="ikont-a4cl-esconderpanelUploadDocumento"   
+                    <a4j:commandLink id="esconder_panelUploadDocumento" stylestyleClassikont-a4cl-esconderpanelUploadDocumento"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadDocumento')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -31,20 +31,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info_documento">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClassinfo" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
+                                        <h:outputText  stylestyleClassikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  stylestyleClassikont-hot-nosuarc"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClassrich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont-hot-nomarc "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont-hot-nombre "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont-hot-taarc "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont-hot-numBytes "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  stylestyleClassikont-hot-nomarc "   value="#{var.nomarc}"/>
+                                                    <h:outputText  stylestyleClassikont-hot-nombre "   value="#{file.nombre}"/>
+                                                    <h:outputText  stylestyleClassikont-hot-taarc "   value="#{var.taarc}"/>
+                                                    <h:outputText  stylestyleClassikont-hot-numBytes "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -54,7 +54,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.borrarDatosSubidos}" render="info_documento, uploadDocumento, panel_subir"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirDocumento.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont-a4jcl-boarcsub"     />
+                                                   stylestyleClassikont-a4jcl-boarcsub"     />
                                 <a4j:commandButton value="#{var.aceptar}" 
                                                    onclick="#{rich:component('panelUploadDocumento')}.hide();" render="panel_subir,tablaDocumentos"
                                                    

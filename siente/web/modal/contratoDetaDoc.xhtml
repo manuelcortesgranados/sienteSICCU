@@ -8,16 +8,16 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelContratoDoc" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.documento}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelContratoDoc" class="ikont-"  
+                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelContratoDoc')}.hide();return false;">
                     </a4j:commandLink>
@@ -38,22 +38,22 @@
                         <rich:column id="strnombreimg"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  class="ikont- "   value="#{var.nombreah}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.nombreah}"/>
                             </f:facet>
-                            <h:outputText  class="ikont- "   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont- "   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
                         </rich:column>
 
                         <rich:column id="strfecha"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  class="ikont- "   value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.fecha}"/>
                             </f:facet>
-                            <h:outputText  class="ikont- "   id="st_strfecha" value="#{currentRow.datefecha}"/>
+                            <h:outputText  styleClass="ikont- "   id="st_strfecha" value="#{currentRow.datefecha}"/>
                         </rich:column>
 
                         <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText  class="ikont- "   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action(filaSeleccionada)}" immediate="true">
                             </h:commandButton>

@@ -9,17 +9,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-Alojamientos" headerClass="rich-panel-header" >
+    <rich:popupPanel id="mp-Alojamientos" headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont-hot-viviendasreparadas "   value="#{var.viviendasreparadas}"  />
+                <h:outputText  styleClass="ikont-hot-viviendasreparadas "   value="#{var.viviendasreparadas}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_Alojamientos" class="ikont-a4jcl-escondermpAlojamientos"   
+                    <a4j:commandLink id="esconder_mp_Alojamientos" styleClass="ikont-a4jcl-escondermpAlojamientos"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-Alojamientos')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -28,17 +28,17 @@
         <h:form target="_blank">
             <rich:panel >
                 <h:panelGrid columns="1" id="alojamiento">
-                    <h:outputText  class="ikont-hot-arriendos"   value="1. ARRIENDOS" />
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento"   id="imgalojamiento" value="#{var.imgalojamiento1}"/>
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento1 "   id="imgalojamiento1" value="#{var.imgalojamiento2}"/>
-                    <h:outputText  class="ikont-hot-reparacionviviendaspg "   value="2. REPARACION DE VIVIENDAS - PANORAMA GENERAL" />
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento2 "   id="imgalojamiento2" value="#{var.imgalojamiento3}"/>
-                    <h:outputText  class="ikont-hot-reparacionviviendaspn "   value="2. REPARACION DE VIVIENDAS - PANORAMA NACIONAL" />
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento3 "   id="imgalojamiento3" value="#{var.imgalojamiento4}"/>
-                    <h:outputText  class="ikont-hot-alberguespg "   value="3- ALBERGUES - PANORAMA GENERAL" />
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento4 "   id="imgalojamiento4" value="#{var.imgalojamiento5}"/>
-                    <h:outputText  class="ikont-hot-alberguespr "   value="3. ALBERGUES - PANORAMA REGIONAL" />
-                    <h:graphicImage  class="ikont-hgi-imgalojamiento5 "   id="imgalojamiento5" value="#{var.imgalojamiento6}"/>
+                    <h:outputText  styleClass="ikont-hot-arriendos"   value="1. ARRIENDOS" />
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento"   id="imgalojamiento" value="#{var.imgalojamiento1}"/>
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento1 "   id="imgalojamiento1" value="#{var.imgalojamiento2}"/>
+                    <h:outputText  styleClass="ikont-hot-reparacionviviendaspg "   value="2. REPARACION DE VIVIENDAS - PANORAMA GENERAL" />
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento2 "   id="imgalojamiento2" value="#{var.imgalojamiento3}"/>
+                    <h:outputText  styleClass="ikont-hot-reparacionviviendaspn "   value="2. REPARACION DE VIVIENDAS - PANORAMA NACIONAL" />
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento3 "   id="imgalojamiento3" value="#{var.imgalojamiento4}"/>
+                    <h:outputText  styleClass="ikont-hot-alberguespg "   value="3- ALBERGUES - PANORAMA GENERAL" />
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento4 "   id="imgalojamiento4" value="#{var.imgalojamiento5}"/>
+                    <h:outputText  styleClass="ikont-hot-alberguespr "   value="3. ALBERGUES - PANORAMA REGIONAL" />
+                    <h:graphicImage  styleClass="ikont-hgi-imgalojamiento5 "   id="imgalojamiento5" value="#{var.imgalojamiento6}"/>
                 </h:panelGrid>
             </rich:panel>
         </h:form>

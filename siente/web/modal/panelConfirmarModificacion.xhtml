@@ -8,27 +8,27 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <rich:popupPanel height="200" id="panelConfirmarModificacion" resizeable="false" width="350" 
-                     headerClass="rich-panel-header">
+                     headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.confirmarmodi}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.confirmarmodi}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarModificacion" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarModificacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <center>
                 <h:form>
                     <h:panelGrid id="layoutConfMod" columnClasses="aiu">
                         <interkont:spacer height="20"/>
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" class="id-jsf-"  />
+                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="id-jsf-"  />
                         <a4j:commandButton id="btCerrarCofMod" value="#{var.aceptar}"
                                            render="layoutPrincipal, layoutModificar, layoutMatrix, layoutDocOtroSi, layoutDocActaConvenio, layoutDocCronog"
                                               

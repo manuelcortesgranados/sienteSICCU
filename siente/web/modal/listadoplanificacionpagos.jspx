@@ -7,17 +7,17 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.verplanificacion}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.verplanificacion}" styleClass="id-jsf-"   />
                 <interkont:spacer width="30"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" class="id-jsf-"  
+                    <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"/>
                     <rich:componentControl attachTo="esconder-mp-listado-planificacion-pagos" event="onclick"  for="mp-listado-planificacion-pagos" operation="hide"/>
                 </h:panelGroup>
@@ -27,23 +27,23 @@
 
             <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
-                <h:outputLabel  class="id-jsf- "   value="#{var.formadepago}:"/>
+                <h:outputLabel  styleClass="id-jsf- "   value="#{var.formadepago}:"/>
                 <interkont:spacer width="20"/>
-                <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+                <h:outputLabel  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                <h:outputLabel  class="id-jsf- "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                <h:outputLabel  styleClass="id-jsf- "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
-                <h:outputLabel  class="id-jsf- "   class="id-jsf-"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                <h:outputLabel  styleClass="id-jsf- "   styleClass="id-jsf-"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
-                <h:outputLabel  class="id-jsf- "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="id-jsf- "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
 
-                <h:outputLabel  class="id-jsf- "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="id-jsf- "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                 </h:outputText>
 
@@ -65,30 +65,30 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column width="150px" breakBefore="true" colspan="3">
-                                    <h:outputText  class="id-jsf- "   value="#{var.numero} de Actas Parciales"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.numero} de Actas Parciales"/>
                                 </rich:column>
                                 <rich:column width="150px" breakBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column  width="150px" breakBefore="true">
-                                <h:outputText  class="id-jsf- "   value="% #{planificacion.numvlrporcentage}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="% #{planificacion.numvlrporcentage}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{planificacion.numvlrpago}">
+                                <h:outputText  styleClass="id-jsf- "   value="#{planificacion.numvlrpago}">
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="id-jsf- "   value="#{planificacion.datefechapago}">
+                                <h:outputText  styleClass="id-jsf- "   value="#{planificacion.datefechapago}">
                                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                 </h:outputText>
                             </rich:column>

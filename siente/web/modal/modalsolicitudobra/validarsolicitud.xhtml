@@ -10,16 +10,16 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="panelValidarSolicitud" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelValidarSolicitud" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.atencion}" class="id-jsf-"  />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.atencion}" styleClass="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelValidarSolicitud" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelValidarSolicitud" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelValidarSolicitud')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -27,7 +27,7 @@
         <rich:panel >
             <h:panelGrid columns="1" id="layoutGuardar">
                 <h:panelGroup >
-                    <h:outputText  class="id-jsf- "   value="#{SessionBeanCobra.solicitudService.mensaje}"  />
+                    <h:outputText  styleClass="id-jsf- "   value="#{SessionBeanCobra.solicitudService.mensaje}"  />
 
                 </h:panelGroup>
                 <center>

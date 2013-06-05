@@ -10,23 +10,23 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalVideo"  width="370" height="200" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="modalVideo"  width="370" height="200" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="VIDEO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="id-jsf- "   value="VIDEO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalVideo" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalVideo" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalVideo')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
-          <h:graphicImage  class="id-jsf- "   value="/resources/imgs/Logo_republica.png" width="185px" />
+          <h:graphicImage  styleClass="id-jsf- "   value="/resources/imgs/Logo_republica.png" width="185px" />
                         <h:panelGroup rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}">
                           
                         </h:panelGroup>

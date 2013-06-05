@@ -39,38 +39,38 @@
 
     <ui:define name="body">
         <h:form> 
-            <h:panelGroup layout="block" styleClass="ikont-hpg-gpLogPrinci"   id="gpLogPrinci">
-                <h:graphicImage  styleClass="ikont-hgi-logoLogin "   url="/resources/imgs/login/logo_login.png" width="350"/>
+            <h:panelGroup layout="block" stylestyleClassikont-hpg-gpLogPrinci"   id="gpLogPrinci">
+                <h:graphicImage  stylestyleClassikont-hgi-logoLogin "   url="/resources/imgs/login/logo_login.png" width="350"/>
                 <rich:panel>
                     <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
-                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  oncomplete="placehoder()">
+                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActivestyleClasstab-pestania-active-usu" headerInactivestyleClasstab-pestania-inactive-usu" contentstyleClasstab-div"  oncomplete="placehoder()">
                             <a4j:region>
                                 <h:panelGroup layout="block">
                                     <h:panelGrid   >
                                         <br/>
-                                        <h:outputText  styleClass="ikont-hot-logintabentrarbienvenido "   value="#{var.logintabentrarbienvenido}"    />
+                                        <h:outputText  stylestyleClassikont-hot-logintabentrarbienvenido "   value="#{var.logintabentrarbienvenido}"    />
                                         <br/>
-                                        <h:outputText  styleClass="ikont-hot-loginmensajeprincipal"   value="#{var.loginmensajeprincipal}"   />
-                                        <h:outputText  styleClass="ikont-hot-loginmensajeprincipal2 "   value="#{var.loginmensajeprincipal2}"    />
-                                        <h:outputText  styleClass="ikont-hot-loginmensajeprincipal3 "   value="#{var.loginmensajeprincipal3}"    />
+                                        <h:outputText  stylestyleClassikont-hot-loginmensajeprincipal"   value="#{var.loginmensajeprincipal}"   />
+                                        <h:outputText  stylestyleClassikont-hot-loginmensajeprincipal2 "   value="#{var.loginmensajeprincipal2}"    />
+                                        <h:outputText  stylestyleClassikont-hot-loginmensajeprincipal3 "   value="#{var.loginmensajeprincipal3}"    />
                                         <br/>
-                                        <h:outputText  styleClass="ikont-hot-logintabentraringresarcon "   value="#{var.logintabentraringresarcon}"   />
+                                        <h:outputText  stylestyleClassikont-hot-logintabentraringresarcon "   value="#{var.logintabentraringresarcon}"   />
                                         <h:panelGrid   rendered="false">
-                                            <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarconuno "   value="#{var.logintabentrarcontenidoingresarconuno}"   />    
-                                            <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarcondos "   value="#{var.logintabentrarcontenidoingresarcondos}"   />    
+                                            <h:outputText  stylestyleClassikont-hot-logintabentrarcontenidoingresarconuno "   value="#{var.logintabentrarcontenidoingresarconuno}"   />    
+                                            <h:outputText  stylestyleClassikont-hot-logintabentrarcontenidoingresarcondos "   value="#{var.logintabentrarcontenidoingresarcondos}"   />    
                                         </h:panelGrid>
-                                        <h:inputText id="usuariodos" title="Usuario" styleClass="ikont-hit-usuLogin"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
+                                        <h:inputText id="usuariodos" title="Usuario" stylestyleClassikont-hit-usuLogin"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
                                         <h:panelGrid  >
                                             <rich:message for="usuariodos" />
                                         </h:panelGrid>
                                         <h:panelGroup >
                                             <center>
                                                 <h:panelGrid columns="2">
-                                                    <h:inputSecret id="contrasenados"  styleClass="ikont-hit-contrasenados"   title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
+                                                    <h:inputSecret id="contrasenados"  stylestyleClassikont-hit-contrasenados"   title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
                                                         <f:validateLength maximum="20" minimum="8"/>
                                                     </h:inputSecret>
 
-                                                    <h:commandButton id="enviardos" styleClass="ikont-hcb-logintabentrarbtnentrar"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
+                                                    <h:commandButton id="enviardos" stylestyleClassikont-hcb-logintabentrarbtnentrar"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
                                                                      type="submit" 
                                                                      onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                 return true;"
@@ -84,7 +84,7 @@
                                         <h:panelGrid  >
                                             <center>
 
-                                                <a4j:commandLink value="#{var.logintabentrarolvidocontrasenia}"  styleClass="ikont-a4jcl-logintabentrarolvidocontrasenia"  
+                                                <a4j:commandLink value="#{var.logintabentrarolvidocontrasenia}"  stylestyleClassikont-a4jcl-logintabentrarolvidocontrasenia"  
                                                                  oncomplete="#{rich:component('panelRecordarContra')}.show(); return false; " execute="@this"/>
                                             </center>
                                         </h:panelGrid>
@@ -93,8 +93,8 @@
 
                                                 <h:panelGrid columns="3">
                                                     <h:selectBooleanCheckbox id="checkdos" />
-                                                    <h:outputText  styleClass="ikont-hot-logintabentrarcontentcheck "   value="#{var.logintabentrarcontentcheck}"   />
-                                                    <h:outputText  styleClass="ikont-hot-logintabentrarolvidocontrasenia "   value="#{var.logintabentrarolvidocontrasenia}" />
+                                                    <h:outputText  stylestyleClassikont-hot-logintabentrarcontentcheck "   value="#{var.logintabentrarcontentcheck}"   />
+                                                    <h:outputText  stylestyleClassikont-hot-logintabentrarolvidocontrasenia "   value="#{var.logintabentrarolvidocontrasenia}" />
                                                 </h:panelGrid>
                                             </center>
                                         </h:panelGroup> 
@@ -103,11 +103,11 @@
                                         <h:panelGroup >
                                             <center>
                                                 <h:panelGrid rendered="#{var.varcomentariologin}">
-                                                    <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado"   value="#{var.logingmensajeusuarioregistrado}"    />    
-                                                    <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado2 "   value="#{var.logingmensajeusuarioregistrado2}"   />    
-                                                    <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado3 "   value="#{var.logingmensajeusuarioregistrado3}"   />                                                            
-                                                    <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado4 "   value="#{var.logingmensajeusuarioregistrado4}"    />
-                                                    <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado5 "   value="#{var.logingmensajeusuarioregistrado5}"   />                                                            
+                                                    <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado"   value="#{var.logingmensajeusuarioregistrado}"    />    
+                                                    <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado2 "   value="#{var.logingmensajeusuarioregistrado2}"   />    
+                                                    <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado3 "   value="#{var.logingmensajeusuarioregistrado3}"   />                                                            
+                                                    <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado4 "   value="#{var.logingmensajeusuarioregistrado4}"    />
+                                                    <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado5 "   value="#{var.logingmensajeusuarioregistrado5}"   />                                                            
                                                 </h:panelGrid>
                                             </center>
                                         </h:panelGroup>
@@ -115,29 +115,29 @@
                                 </h:panelGroup>
                             </a4j:region> 
                         </rich:tab>
-                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActiveClass="tab-pestania-active" headerInactiveClass="tab-pestania-inactive" contentClass="tab-div">
+                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActivestyleClasstab-pestania-active" headerInactivestyleClasstab-pestania-inactive" contentstyleClasstab-div">
                             <h:panelGroup layout="block" id="gpLoginCiudadanoPrincipal">
 
                                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >
                                     <a4j:region >
                                         <h:panelGrid columnClasses="panelcenter"  >
                                             <br/>
-                                            <h:outputText  styleClass="ikont-hot-logintabentrarbienvenidociudadano "   value="#{var.logintabentrarbienvenido}"    />
+                                            <h:outputText  stylestyleClassikont-hot-logintabentrarbienvenidociudadano "   value="#{var.logintabentrarbienvenido}"    />
                                             <br/>
                                             <h:panelGrid columnClasses="panelcenter"  >
-                                                <h:outputText  styleClass="ikont-hot-loginmensajeprincipalciudadano "   value="#{var.loginmensajeprincipal}"    />
-                                                <h:outputText  styleClass="ikont-hot-loginmensajeprincipal2ciudadano "   value="#{var.loginmensajeprincipal2}"    />
-                                                <h:outputText  styleClass="ikont-hot-loginmensajeprincipal3ciudadano "   value="#{var.loginmensajeprincipal3}"    />
+                                                <h:outputText  stylestyleClassikont-hot-loginmensajeprincipalciudadano "   value="#{var.loginmensajeprincipal}"    />
+                                                <h:outputText  stylestyleClassikont-hot-loginmensajeprincipal2ciudadano "   value="#{var.loginmensajeprincipal2}"    />
+                                                <h:outputText  stylestyleClassikont-hot-loginmensajeprincipal3ciudadano "   value="#{var.loginmensajeprincipal3}"    />
 
                                             </h:panelGrid>
 
                                             <br/>
-                                            <h:outputText  styleClass="ikont-hot-logintabentraringresarsin "   value="#{var.logintabentraringresarsin}"    />
+                                            <h:outputText  stylestyleClassikont-hot-logintabentraringresarsin "   value="#{var.logintabentraringresarsin}"    />
                                             <h:panelGrid columnClasses="panelcenter"  >
-                                                <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarsinuno "   value="#{var.logintabentrarcontenidoingresarsinuno}"     />
-                                                <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarsindos "   value="#{var.logintabentrarcontenidoingresarsindos}"     />
+                                                <h:outputText  stylestyleClassikont-hot-logintabentrarcontenidoingresarsinuno "   value="#{var.logintabentrarcontenidoingresarsinuno}"     />
+                                                <h:outputText  stylestyleClassikont-hot-logintabentrarcontenidoingresarsindos "   value="#{var.logintabentrarcontenidoingresarsindos}"     />
                                             </h:panelGrid>
-                                            <h:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" styleClass="ikont-hcl-logintabentrarbtnentrar"   onclick="#{rich:component('ajaxLoadingModalBox')}.show();
+                                            <h:commandLink type="submit" action="#{login.usuarioSinRegistro}" value="#{var.logintabentrarbtnentrar} >" stylestyleClassikont-hcl-logintabentrarbtnentrar"   onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                 return true;" />
 
 
@@ -145,13 +145,13 @@
                                             <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columnClasses="panelcenter">
-                                                        <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado6 "   value="#{var.logingmensajeusuarioregistrado6}"    />    
-                                                        <h:outputText  styleClass="ikont-hot-logingmensajeusuarioregistrado7 "   value="#{var.logingmensajeusuarioregistrado7}"    />    
+                                                        <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado6 "   value="#{var.logingmensajeusuarioregistrado6}"    />    
+                                                        <h:outputText  stylestyleClassikont-hot-logingmensajeusuarioregistrado7 "   value="#{var.logingmensajeusuarioregistrado7}"    />    
 
                                                     </h:panelGrid>
                                                 </center>
                                             </h:panelGroup>
-                                            <a4j:commandLink type="ajax" action="#{SessionBeanCobra.habilitarRegistrate}" value="#{var.loguintabregistrarte} >" styleClass="ikont-a4jcl-loguintabregistrarte"   
+                                            <a4j:commandLink type="ajax" action="#{SessionBeanCobra.habilitarRegistrate}" value="#{var.loguintabregistrarte} >" stylestyleClassikont-a4jcl-loguintabregistrarte"   
                                                              execute="@this" render="gpLoginCiudadanoPrincipal" oncomplete="placehoder()">                                                    
                                             </a4j:commandLink>
                                         </h:panelGrid>
@@ -166,51 +166,51 @@
                                             <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columns="2">
-                                                        <h:outputText  styleClass="ikont-hot-logintabregistratetitle "   value="#{var.logintabregistratetitle}"   />
-                                                        <h:outputText  styleClass="ikont-hot-logintabregistratetitledos "   value="#{var.logintabregistratetitledos}"    />    
+                                                        <h:outputText  stylestyleClassikont-hot-logintabregistratetitle "   value="#{var.logintabregistratetitle}"   />
+                                                        <h:outputText  stylestyleClassikont-hot-logintabregistratetitledos "   value="#{var.logintabregistratetitledos}"    />    
                                                     </h:panelGrid>
                                                 </center>
                                             </h:panelGroup>
                                             <h:panelGrid columnClasses="panelcenter" >
-                                                <h:outputText  styleClass="ikont-hot-logintabregistratecontenidouno "   value="#{var.logintabregistratecontenidouno}"    />    
-                                                <h:outputText  styleClass="ikont-hot-logintabregistratecontenidodos "   value="#{var.logintabregistratecontenidodos}"     rendered="#{var.varcomentariologin}" />
+                                                <h:outputText  stylestyleClassikont-hot-logintabregistratecontenidouno "   value="#{var.logintabregistratecontenidouno}"    />    
+                                                <h:outputText  stylestyleClassikont-hot-logintabregistratecontenidodos "   value="#{var.logintabregistratecontenidodos}"     rendered="#{var.varcomentariologin}" />
                                             </h:panelGrid>
                                             <br/>
                                             <h:panelGroup >
                                                 <center>
                                                     <h:panelGrid columns="2">
                                                         <h:panelGrid >
-                                                            <h:inputText required="true" maxlength="250" id="textnombre" title="Nombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  />
+                                                            <h:inputText required="true" maxlength="250" id="textnombre" title="Nombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" stylestyleClassikont-hit-textnombre"  />
                                                             <h:panelGrid columnClasses="panelcenter" >
-                                                                <rich:message for="textnombre"  styleClass="ikont-rm-textnombre"  />
+                                                                <rich:message for="textnombre"  stylestyleClassikont-rm-textnombre"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true"  id="textusuario" title="Usuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario"  />
+                                                            <h:inputText required="true"  id="textusuario" title="Usuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" stylestyleClassikont-hittextusuario"  />
                                                             <h:panelGrid  columnClasses="panelcenter">
-                                                                <rich:message for="textusuario"  styleClass="ikont-rm-textusuario"  />
+                                                                <rich:message for="textusuario"  stylestyleClassikont-rm-textusuario"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true" maxlength="80" title="Em@il" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo"  />
+                                                            <h:inputText required="true" maxlength="80" title="Em@il" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" stylestyleClassikont-hit-textcorreo"  />
                                                             <h:panelGrid  columnClasses="panelcenter">
-                                                                <rich:message for="textcorreo"  styleClass="ikont-rm-textcorreo"  />
+                                                                <rich:message for="textcorreo"  stylestyleClassikont-rm-textcorreo"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret required="true" id="textpassword" title="Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword"  />
+                                                            <h:inputSecret required="true" id="textpassword" title="Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" stylestyleClassikont-hit-textpassword"  />
                                                             <h:panelGrid  columnClasses="panelcenter">
-                                                                <rich:message for="textpassword"  styleClass="ikont-rm-textpassword"  />
+                                                                <rich:message for="textpassword"  stylestyleClassikont-rm-textpassword"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret  required="true" id="textrepassword" title="Confirmar Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword"  />
+                                                            <h:inputSecret  required="true" id="textrepassword" title="Confirmar Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" stylestyleClassikont-hit-textrepassword"  />
                                                             <h:panelGrid  columnClasses="panelcenter">
-                                                                <rich:message for="textrepassword"  styleClass="ikont-rm-textrepassword"  />
+                                                                <rich:message for="textrepassword"  stylestyleClassikont-rm-textrepassword"  />
                                                             </h:panelGrid>
                                                             <interkont:spacer width="100%" height="5"/>
                                                         </h:panelGrid>
                                                         <h:panelGrid  width="30%">
-                                                            <h:panelGroup styleClass="ikont-hpg-imagenciudadano"   layout="block">
+                                                            <h:panelGroup stylestyleClassikont-hpg-imagenciudadano"   layout="block">
                                                                 <center>
-                                                                    <h:panelGroup styleClass="ikont-hpg-pgfotografia"   layout="block" id="pgfotografia">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-pathImaCiu "   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  height="100%"/>
+                                                                    <h:panelGroup stylestyleClassikont-hpg-pgfotografia"   layout="block" id="pgfotografia">
+                                                                        <h:graphicImage  stylestyleClassikont-hgi-pathImaCiu "   url="#{SessionBeanCobra.ciudadanoservice.pathImaCiu}"  height="100%"/>
                                                                     </h:panelGroup>
                                                                 </center>
                                                             </h:panelGroup>
-                                                            <a4j:commandLink styleClass="ikont-a4jcl-logintabregistratephoto"   value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
+                                                            <a4j:commandLink stylestyleClassikont-a4jcl-logintabregistratephoto"   value="#{var.logintabregistratephoto}" action="#{SessionBeanCobra.visualizarModalImagenCiudadano}" render="panelImagen" oncomplete="#{rich:component('modalImagenCorreo')}.show(); return true;" execute="@this">   
                                                             </a4j:commandLink>  
                                                         </h:panelGrid>
                                                     </h:panelGrid>
@@ -222,11 +222,11 @@
                                                     <h:panelGrid columns="2">
                                                         <a4j:commandLink id="btnGuardarCiudadano"  
                                                                          value="#{var.registrarme}"  
-                                                                         styleClass="ikont-a4jcl-btnGuardarCiudadano"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano" 
+                                                                         stylestyleClassikont-a4jcl-btnGuardarCiudadano"   action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano" 
                                                                          oncomplete="#{rich:component('confirmarCiudadano')}.show();">
                                                         </a4j:commandLink>
 
-                                                        <a4j:commandLink id="btnCancelarRegistro" value="#{var.cancelar}"  styleClass="ikont-a4jcl-btnCancelarRegistro"   action="#{SessionBeanCobra.deshabilitarRegistrate}" immediate="true" render="gpLoginCiudadanoPrincipal" execute="@this">
+                                                        <a4j:commandLink id="btnCancelarRegistro" value="#{var.cancelar}"  stylestyleClassikont-a4jcl-btnCancelarRegistro"   action="#{SessionBeanCobra.deshabilitarRegistrate}" immediate="true" render="gpLoginCiudadanoPrincipal" execute="@this">
 
                                                         </a4j:commandLink>
                                                     </h:panelGrid>
@@ -241,10 +241,10 @@
                         </rich:tab>
                     </rich:tabPanel>
                 </rich:panel>
-                <h:panelGroup layout="block" styleClass="ikont-hpg-renderedlogologin"   rendered="#{var.logologin}">
-                    <h:graphicImage  styleClass="ikont-hgi-logo_prin1png "   url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
-                    <h:graphicImage  styleClass="ikont-hgi-separadorpng "   url="/resources/imgs/login/separador.png" width="10" height="60"/>
-                    <h:graphicImage  styleClass="ikont-hgi-logo_prin2png "   url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
+                <h:panelGroup layout="block" stylestyleClassikont-hpg-renderedlogologin"   rendered="#{var.logologin}">
+                    <h:graphicImage  stylestyleClassikont-hgi-logo_prin1png "   url="/resources/imgs/login/logo_prin1.png" width="60" height="60" />
+                    <h:graphicImage  stylestyleClassikont-hgi-separadorpng "   url="/resources/imgs/login/separador.png" width="10" height="60"/>
+                    <h:graphicImage  stylestyleClassikont-hgi-logo_prin2png "   url="/resources/imgs/login/logo_prin2.png" width="120" height="60"/>
                 </h:panelGroup>
 
             </h:panelGroup>

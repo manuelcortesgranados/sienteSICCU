@@ -9,16 +9,16 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelConfirmaguardado" autosized="true" width="250"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmaguardado" autosized="true" width="250"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "    value="#{var.confirmarguardado}"/>
+                <h:outputText  styleClass="ikont- "    value="#{var.confirmarguardado}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaguardado" class="ikont-"  
+                    <a4j:commandLink id="esconder_panelConfirmaguardado" styleClass="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelConfirmaguardado')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -26,7 +26,7 @@
         </f:facet>
         <rich:panel id="panelConfGuardar" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
+                <h:outputText  styleClass="ikont- "   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
             </h:panelGroup>
             <center>
                 <h:form>

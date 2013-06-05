@@ -9,16 +9,16 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-ConsolidadoObras" headerClass="rich-panel-header" >
+    <rich:popupPanel id="mp-ConsolidadoObras" headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.consolidadoreport}" class="id-jsf-"  />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.consolidadoreport}" styleClass="id-jsf-"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-ConsolidadoObras')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,10 +27,10 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1" >
-                    <h:outputText  class="id-jsf- "   value="1. AVANCE FISICO POR TIPO DE OBRA" />
-                    <h:graphicImage  class="id-jsf- "   value="#{var.imgobras1}"/>                    
-                    <h:outputText  class="id-jsf- "   value="2 . AVANCE FISICO REGIONAL" />
-                    <h:graphicImage  class="id-jsf- "   value="#{var.imgobras2}"/>
+                    <h:outputText  styleClass="id-jsf- "   value="1. AVANCE FISICO POR TIPO DE OBRA" />
+                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.imgobras1}"/>                    
+                    <h:outputText  styleClass="id-jsf- "   value="2 . AVANCE FISICO REGIONAL" />
+                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.imgobras2}"/>
                 </h:panelGrid>
             </rich:panel>
         </h:form>

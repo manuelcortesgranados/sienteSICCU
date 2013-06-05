@@ -12,31 +12,31 @@
     >
 
      <rich:popupPanel id="mp_eliminar_imagenevolucion" moveable="false" height="150" width="350" 
-         headerClass="rich-panel-header">
+         headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikon-hot-mpeliminarimagenevolucion "   value="#{var.eliminarimagen}"/>
+                <h:outputText  styleClass="ikon-hot-mpeliminarimagenevolucion "   value="#{var.eliminarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" class="ikon-acl-escondermpeliminarimagenevolucion"   
+                    <a4j:commandLink id="esconder_mp_eliminar_imagenevolucion" styleClass="ikon-acl-escondermpeliminarimagenevolucion"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="ikon-rp-gpimagenmodaleliminar"   >
+        <rich:panel styleClass="ikon-rp-gpimagenmodaleliminar"   >
             <h:form>
                 <h:panelGrid  id="gpImagenModalEliminar">
                     <interkont:spacer height="10"/>
-                    <h:outputText  class="ikon-hot-stconfirmacioneliminar"   id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
+                    <h:outputText  styleClass="ikon-hot-stconfirmacioneliminar"   id="st_confirmacionEliminar" value="#{var.estaseguroeliminar}" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" >
-                        <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.bt_aceptar_eliminar_imagenevolucion_action}" class="ikon-acb-gpimagenmodaleliminaraceptar"  
+                        <a4j:commandButton action="#{Supervisor$IngresarNuevaObra.bt_aceptar_eliminar_imagenevolucion_action}" styleClass="ikon-acb-gpimagenmodaleliminaraceptar"  
                                            oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.hide();" value="#{var.aceptar}"
                                            render="panel_imagenesevolucion"  title="#{var.aceptar}"/>
-                        <a4j:commandButton value="#{var.cancelar}" class="ikon-acb-gpimagenmodaleliminarcancelar"   onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide();"/>
+                        <a4j:commandButton value="#{var.cancelar}" styleClass="ikon-acb-gpimagenmodaleliminarcancelar"   onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide();"/>
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>

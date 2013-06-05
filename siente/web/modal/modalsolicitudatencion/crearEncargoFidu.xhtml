@@ -10,10 +10,10 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelCrearEnc" autosized="true" width="400" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelCrearEnc" autosized="true" width="400" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.crear}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.crear}" styleClass="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -22,15 +22,15 @@
                 <a4j:commandLink id="esconder_panelCrearEnc" 
                                    onclick="#{rich:component('panelCrearEnc')}.hide();
                                            return false;"
-                                   title="#{var.cerrar}" immediate="true" class="id-jsf-"   />
+                                   title="#{var.cerrar}" immediate="true" styleClass="id-jsf-"   />
             </h:panelGroup>
 
             <h:form>
                 <h:panelGrid id="mos" columns="2"  columnClasses="panelizquierda, panelizquierda">
-                    <h:outputLabel  class="id-jsf- "   id="lblnumeroencargo" value="#{var.numeroencargo}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="lblnumeroencargo" value="#{var.numeroencargo}" />
                     <h:inputText id="txtNumeroencargo" required="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.intnumencargofiduciario}" />
 
-                    <h:outputText  class="id-jsf- "   id="lblfecha"  value="#{var.fecha}" />
+                    <h:outputText  styleClass="id-jsf- "   id="lblfecha"  value="#{var.fecha}" />
                     <h:panelGroup id="layoutFechaEncargo">
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                        required="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.datefechaaperturaencargofiduciario}">
@@ -38,18 +38,18 @@
                         </rich:calendar>
                     </h:panelGroup>
 
-                    <h:outputLabel  class="id-jsf- "   id="lblvalorencargo"  value="#{var.valorencargo}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="lblvalorencargo"  value="#{var.valorencargo}" />
                     <rich:inputNumberSpinner id="valorcrodenpagoAH" minValue="0" maxValue="5000000000" inputSize="10"
                                              value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.encargofiduciario.numsaldoinicial}" />
                 </h:panelGrid>
 
                 <center>
                     <h:panelGrid id="botones" columns="2">
-                        <a4j:commandButton id="crearencargo" class="id-jsf-"   value="#{var.crear}" 
+                        <a4j:commandButton id="crearencargo" styleClass="id-jsf-"   value="#{var.crear}" 
                                            onclick="#{rich:component('panelCrearEnc')}.hide();
                                            return false;"
                                            render="panelAprobacionFinanciera" />
-                        <a4j:commandButton id="Cancelarencargo" class="id-jsf-"   value="#{var.cancelar}" 
+                        <a4j:commandButton id="Cancelarencargo" styleClass="id-jsf-"   value="#{var.cancelar}" 
                                            onclick="#{rich:component('panelCrearEnc')}.hide();
                                            return false;" />
                     </h:panelGrid>

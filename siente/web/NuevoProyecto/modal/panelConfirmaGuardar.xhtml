@@ -9,10 +9,10 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
-    <rich:popupPanel id="panelConfirmaGuardar" autosized="true"  headerClass="rich-panel-header">
+    <rich:popupPanel id="panelConfirmaGuardar" autosized="true"  headerstyleClassrich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="Confirmar Guardar"/>
+                <h:outputText  stylestyleClassikont- "   value="Confirmar Guardar"/>
             </h:panelGroup>
         </f:facet>
         
@@ -21,11 +21,11 @@
             
                 <h:panelGrid columns="1" id="layoutGuardar">
                     <interkont:spacer height="30"/>
-                    <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
-                    <h:outputText  styleClass="ikont-hot-strnombreobra"   value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
-                    <h:outputText  styleClass="ikont-hot-hasidoanadidaconexito"   value="#{var.hasidoanadidaconexito}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
+                    <h:outputText  stylestyleClassikont-hot-laobra"   value="#{var.laobra}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
+                    <h:outputText  stylestyleClassikont-hot-strnombreobra"   value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
+                    <h:outputText  stylestyleClassikont-hot-hasidoanadidaconexito"   value="#{var.hasidoanadidaconexito}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
 
-                    <h:outputText  styleClass="ikont-hot-solicitudpry"   value="El #{var.solicitudproyecto} no pudo guardarse. Por favor revisar los datos faltantes."  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"/>
+                    <h:outputText  stylestyleClassikont-hot-solicitudpry"   value="El #{var.solicitudproyecto} no pudo guardarse. Por favor revisar los datos faltantes."  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"/>
                     
                     <interkont:spacer height="30"/>
                     <a4j:commandButton id="BTaceptarDocFin"  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"  value="#{var.aceptar}"

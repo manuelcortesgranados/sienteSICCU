@@ -8,23 +8,23 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="modalVideo" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="modalVideo" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.seleccionarvideo}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionarvideo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalVideo" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_modalVideo" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalVideo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <h:form id="formVideo">
                 <h:panelGroup id="panelVideo">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -44,19 +44,19 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infovideo">
                             <center>
-                                <rich:panel bodyClass="informa" >
+                                <rich:panel bodystyleClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorVideo.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -65,7 +65,7 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Video" action="#{Supervisor$Alimentar.borrarVideoAlimenta}"
                                                    render="infovideo, uploadvideo" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"     />
+                                                   styleClass="id-jsf-"     />
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarVideoTemporal}" id="BTaceptarVideo" render="layoutVideoMemoria"
                                                    value="#{var.aceptar}" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}"
                                                    onclick="#{rich:component('modalVideo')}.hide();return false;"

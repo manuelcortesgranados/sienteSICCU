@@ -7,16 +7,16 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp-listado-contratistas" autosized="true" moveable="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="mp-listado-contratistas" autosized="true" moveable="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.selecionecontratista}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.selecionecontratista}" styleClass="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-mp-listado-contratistas" class="id-jsf-"  
+                    <a4j:commandLink id="esconder-mp-listado-contratistas" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratistas')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -25,7 +25,7 @@
         <center>
             <h:form>
                 <h:panelGrid columns="2" >
-                    <h:outputText  class="id-jsf- "   value="#{var.consultar} #{var.nombre}" />
+                    <h:outputText  styleClass="id-jsf- "   value="#{var.consultar} #{var.nombre}" />
                     <h:panelGroup>
                         <h:inputText value="#{Supervisor$Contrato.nombre}" size="20" onfocus="clearText(this)" onblur="clearText(this)" />
                         <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarContratista}" render="tablaContratistas,gpTotalContratistas"/>
@@ -52,41 +52,41 @@
                             <rich:columnGroup>
 
                                 <rich:column colspan="6">
-                                    <h:outputText  class="id-jsf- "   value="#{var.contratista} encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.contratista} encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column width="150px" breakRowBefore="true">
-                                    <h:outputText  class="id-jsf- "   value="#{var.cedula}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.cedula}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}" />
                                 </rich:column>
                                 <!-- <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.apellido}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.apellido}" />
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.apellido}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.apellido}" />
                                 </rich:column>-->
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.seleccionar}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}" />
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  class="id-jsf- "   value="#{var.editar}" />
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.editar}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoObraPadres">
                             <rich:column  width="150px" breakRowBefore="true">
-                                <h:outputText  class="id-jsf- "   value="#{Contratista.intcedula}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{Contratista.intcedula}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{Contratista.strnombre} #{Contratista.strapellido1}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{Contratista.strnombre} #{Contratista.strapellido1}"/>
                             </rich:column>
                             <!--<rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{Contratista.strapellido1}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{Contratista.strapellido1}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="id-jsf- "   value="#{Contratista.strapellido2}"/>
+                                <h:outputText  styleClass="id-jsf- "   value="#{Contratista.strapellido2}"/>
                             </rich:column>-->
                             <rich:column >
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas(filaSeleccionada)}"

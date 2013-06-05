@@ -132,12 +132,12 @@ ChiliBook.recipes[ "php.js" ] =
 		}
 		, variable: {
 			  _match: /\$(\w+)/
-			, _replace: '<span class="keyword">$</span><span class="variable">$1</span>' 
+			, _replace: '<span styleClass="keyword">$</span><span styleClass="variable">$1</span>' 
 			, _style: "color: #4040c2;"
 		}
 		, heredoc: {
 			  _match: /(\<\<\<\s*)(\w+)((?:(?!\2).*\n)+)(\2)\b/
-			, _replace: '<span class="keyword">$1</span><span class="string1">$2</span><span class="string2">$3</span><span class="string1">$4</span>' 
+			, _replace: '<span styleClass="keyword">$1</span><span styleClass="string1">$2</span><span styleClass="string2">$3</span><span styleClass="string1">$4</span>' 
 		}
 	}
 }

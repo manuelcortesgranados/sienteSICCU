@@ -10,16 +10,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" >
+    <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerstyleClass="rich-panel-header" autosized="true" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont- "   value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDificultadd" class="ikont-"  
+                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="ikont-"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalDificultadDetalle')}.hide();return  false;">>
                     </a4j:commandLink>
@@ -38,34 +38,34 @@
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText  class="ikont- "   value="#{var.dificultad}es"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.dificultad}es"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText  class="ikont- "   id="tipodifdet" value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont- "   id="tipodifdet" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="ikont- "   id="dificultadodet" value="#{var.dificultad}"/>
+                                <h:outputText  styleClass="ikont- "   id="dificultadodet" value="#{var.dificultad}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="ikont- "   id="fechadet" value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont- "   id="fechadet" value="#{var.fecha}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText  class="ikont- "   id="usuariodifdet" value="#{var.usuario}"/>
+                                <h:outputText  styleClass="ikont- "   id="usuariodifdet" value="#{var.usuario}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column  breakRowBefore="true">
-                            <h:outputText  class="ikont- "   id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                            <h:outputText  styleClass="ikont- "   id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
                             <h:inputTextarea cols="60" rows="2" id="strdificultaddet" value="#{currentRow.strdificultad}" readonly="true" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="ikont- "   id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:outputText  styleClass="ikont- "   id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText  class="ikont- "   id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText  styleClass="ikont- "   id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                     </rich:columnGroup>

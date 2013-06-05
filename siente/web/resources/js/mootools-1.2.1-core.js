@@ -2159,7 +2159,7 @@ local.setDocument = function(document){
 
 			// Safari 3.2 getElementsByClassName caches results
 			try {
-				testNode.innerHTML = '<a class="f"></a><a class="b"></a>';
+				testNode.innerHTML = '<a styleClass="f"></a><a styleClass="b"></a>';
 				testNode.getElementsByClassName('b').length;
 				testNode.firstChild.className = 'b';
 				cachedGetElementsByClassName = (testNode.getElementsByClassName('b').length != 2);
@@ -2167,7 +2167,7 @@ local.setDocument = function(document){
 
 			// Opera 9.6 getElementsByClassName doesnt detects the class if its not the first one
 			try {
-				testNode.innerHTML = '<a class="a"></a><a class="f b a"></a>';
+				testNode.innerHTML = '<a styleClass="a"></a><a styleClass="f b a"></a>';
 				brokenSecondClassNameGEBCN = (testNode.getElementsByClassName('a').length != 2);
 			} catch(e){};
 
@@ -2184,7 +2184,7 @@ local.setDocument = function(document){
 
 			// Safari 3.2 querySelectorAll doesnt work with mixedcase on quirksmode
 			try {
-				testNode.innerHTML = '<a class="MiX"></a>';
+				testNode.innerHTML = '<a styleClass="MiX"></a>';
 				features.brokenMixedCaseQSA = !testNode.querySelectorAll('.MiX').length;
 			} catch(e){};
 
@@ -2196,7 +2196,7 @@ local.setDocument = function(document){
 
 			// IE returns incorrect results for attr[*^$]="" selectors on querySelectorAll
 			try {
-				testNode.innerHTML = '<a class=""></a>';
+				testNode.innerHTML = '<a styleClass=""></a>';
 				features.brokenEmptyAttributeQSA = (testNode.querySelectorAll('[class*=""]').length != 0);
 			} catch(e){};
 

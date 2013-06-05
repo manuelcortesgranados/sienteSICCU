@@ -8,32 +8,32 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <rich:popupPanel height="200" id="panelConfirmarReinicio" resizeable="false" width="350" 
-        headerClass="rich-panel-header">
+        headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.confirmarrein}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.confirmarrein}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     
-                    <a4j:commandLink id="esconder_panelConfirmarReinicio" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelConfirmarReinicio" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarReinicio')}.hide();
                                              return false;"/>                   
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <center>
                 <h:panelGrid id="layoutConfReinicio" >
                     <interkont:spacer height="20px"/>
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehareiniciado}" />
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelacta}" />
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.lafechadereiniciodebesemenor}" />
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechadereiniciosuspen}" />
-                    <h:outputText  class="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.debeingresarlafecha}" />
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehareiniciado}" />
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelacta}" />
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.lafechadereiniciodebesemenor}" />
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechadereiniciosuspen}" />
+                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.debeingresarlafecha}" />
                     <interkont:spacer height="20px"/>
                     <a4j:commandButton id="btCerrarConfReinicio" value="#{var.aceptar}"
                                        onclick="#{rich:component('panelConfirmarReinicio')}.hice();" action="#{Supervisor$AdministrarObraNew.mostrarModificar}"

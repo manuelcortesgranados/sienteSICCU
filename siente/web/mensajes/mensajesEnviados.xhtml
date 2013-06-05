@@ -15,7 +15,7 @@
 
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-mensajesenviados"   value="Mensajes enviados"/>
+        <h:outputText  stylestyleClassikont-hot-mensajesenviados"   value="Mensajes enviados"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -28,7 +28,7 @@
             <h:panelGroup >
                 <center>
                     <h:panelGroup id="panel_filtro_enviados">
-                        <h:outputText  styleClass="ikont-hot-houtbusquedarapida"    value="#{var.houtbusquedarapida} "/>
+                        <h:outputText  stylestyleClassikont-hot-houtbusquedarapida"    value="#{var.houtbusquedarapida} "/>
                         <h:inputText value="#{Mensajes.valorFiltroMensajeEnviado}" id="filtroEnviados" size="52">
                             <a4j:ajax event="keyup" render="tablaMensajesEnviados" />
                         </h:inputText>
@@ -43,33 +43,33 @@
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                         >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-houtasunto"   value="#{var.houtasunto}"/>
+                                    <h:outputText  stylestyleClassikont-hot-houtasunto"   value="#{var.houtasunto}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-strasuntomensaje"   value="#{currentRow.strasuntomensaje}"/>
+                                <h:outputText  stylestyleClassikont-hot-strasuntomensaje"   value="#{currentRow.strasuntomensaje}"/>
                             </rich:column>
                             <rich:column sortBy="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}" width="300px"
                                         >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-houtdestinatario"   value="#{var.houtdestinatario}"/>
+                                    <h:outputText  stylestyleClassikont-hot-houtdestinatario"   value="#{var.houtdestinatario}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-strnombrecompleto"   value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombrecompleto}"/>
+                                <h:outputText  stylestyleClassikont-strnombrecompleto"   value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombrecompleto}"/>
                             </rich:column>
                             <rich:column sortBy="#{currentRow.datefecmensaje}" width="140px"
                                         >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-pltablaenviadosfecha"   value="#{var.Fecha}"/>
+                                    <h:outputText  stylestyleClassikont-hot-pltablaenviadosfecha"   value="#{var.Fecha}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont-hot-pltablaenviadosdatefecmensaje"   value="#{currentRow.datefecmensaje}">
+                                <h:outputText  stylestyleClassikont-hot-pltablaenviadosdatefecmensaje"   value="#{currentRow.datefecmensaje}">
                                     <f:convertDateTime pattern="dd-MMM-yy hh:mm:ss"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column   width="60px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont-hot-pltablaenviadosver"   value="#{var.Ver}"/>
+                                    <h:outputText  stylestyleClassikont-hot-pltablaenviadosver"   value="#{var.Ver}"/>
                                 </f:facet>
                                 <a4j:commandLink action="#{Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
                                                  immediate="true" render="pg_camposVerEnviados,mp_ver_enviados" execute="@this,pg_camposVerEnviados,mp_ver_enviados">
-                                    <h:graphicImage  styleClass="ikont-hgi-btver"    value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  stylestyleClassikont-hgi-btver"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                             <f:facet name="footer">

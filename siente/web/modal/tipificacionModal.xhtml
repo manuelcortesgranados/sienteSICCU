@@ -10,17 +10,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelTipificacion" autosized="true" headerClass="rich-panel-header" width="300">
+    <rich:popupPanel id="panelTipificacion" autosized="true" headerstyleClass="rich-panel-header" width="300">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  class="id-jsf- "   value="#{var.tipificacionProyecto}" />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.tipificacionProyecto}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelTipificacion" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelTipificacion" styleClass="id-jsf-"  
                                      onclick="#{rich:component('panelTipificacion')}.hide();
                                                return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -31,14 +31,14 @@
         <rich:panel>
             <center>
                 <h:panelGrid columns="2">
-                    <h:outputLabel  class="id-jsf- "   id="sttipoProyecto" value="#{var.tipoProyecto}" />
-                    <h:outputLabel  class="id-jsf- "   id="sttipoProyectoout" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="sttipoProyecto" value="#{var.tipoProyecto}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="sttipoProyectoout" styleClass="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
 
-                    <h:outputLabel  class="id-jsf- "   id="stsubtipoProyecto" value="#{var.subtipoProyecto}" />
-                    <h:outputLabel  class="id-jsf- "   id="stsubtipoProyectoout" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="stsubtipoProyecto" value="#{var.subtipoProyecto}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="stsubtipoProyectoout" styleClass="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
 
-                    <h:outputLabel  class="id-jsf- "   id="stclaseProyecto" value="#{var.claseProyecto}" />
-                    <h:outputLabel  class="id-jsf- "   id="stclaseProyectoout" class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="stclaseProyecto" value="#{var.claseProyecto}" />
+                    <h:outputLabel  styleClass="id-jsf- "   id="stclaseProyectoout" styleClass="id-jsf-"   value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
                 </h:panelGrid>
 
                 <interkont:spacer height="20" />
@@ -47,7 +47,7 @@
                     <a4j:commandButton id="esconder_Tipificacion"
                                        onclick="#{rich:component('panelTipificacion')}.hide();
                                                return false;"
-                                       immediate="true" value="#{var.aceptar}" class="id-jsf-"   />
+                                       immediate="true" value="#{var.aceptar}" styleClass="id-jsf-"   />
                 </h:panelGroup>
             </center>
         </rich:panel>

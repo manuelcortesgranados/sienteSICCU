@@ -10,18 +10,18 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelFiltroObra" autosized="true"  headerClass="header_filtro">
+    <rich:popupPanel id="panelFiltroObra" autosized="true"  headerstyleClass="header_filtro">
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.filtbusqueda}" class="id-jsf-"   />
-                <h:outputText  class="id-jsf- "   value="#{var.filtavanzada}" class="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.filtbusqueda}" styleClass="id-jsf-"   />
+                <h:outputText  styleClass="id-jsf- "   value="#{var.filtavanzada}" styleClass="id-jsf-"   />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="id-jsf-"  
                                      onclick="#{rich:component('panelFiltroObra')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -33,11 +33,11 @@
             <center>
                 <h:panelGrid id="gppanelFiltroObra"  columnClasses="panelcenter">
                     <h:inputText size="35"  id="txtPalabra_Clave" value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"
-                                 onclick="this.value = '';" class="id-jsf-"   />
+                                 onclick="this.value = '';" styleClass="id-jsf-"   />
 
                     <h:panelGrid columns="2" id="layoutBusquedaAvanzada" columnClasses="panelcenter, panelcenter" >
-                        <h:outputText  class="id-jsf- "   value="#{var.estadosolicitud}" class="id-jsf-"   />
-                        <h:outputText  class="id-jsf- "   value="#{var.tiposol}" class="id-jsf-"   />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.estadosolicitud}" styleClass="id-jsf-"   />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.tiposol}" styleClass="id-jsf-"   />
 
                         <h:panelGroup>
                             <h:selectOneMenu id="estadosolicitud" value="#{SolicitudObra$GestionarSolicitudObra.filtro.intestadoSolicitud}" disabled="#{SessionBeanCobra.solicitudService.tablasver}">
@@ -54,8 +54,8 @@
                             <interkont:spacer width="10" />
                         </h:panelGroup>
 
-                        <h:outputText  class="id-jsf- "   value="#{var.tipoobra}:" class="id-jsf-"   />
-                        <h:outputLabel  class="id-jsf- "   id="label_donde" value="#{var.ubicacionsolicitud}" class="id-jsf-"   />
+                        <h:outputText  styleClass="id-jsf- "   value="#{var.tipoobra}:" styleClass="id-jsf-"   />
+                        <h:outputLabel  styleClass="id-jsf- "   id="label_donde" value="#{var.ubicacionsolicitud}" styleClass="id-jsf-"   />
                         <h:selectOneMenu id="selecttipoobra" value="#{SolicitudObra$GestionarSolicitudObra.filtro.inttipoObra}">
                             <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tipoobra}" />
                             <f:selectItem itemValue="-1" itemLabel="Todos" />
@@ -80,7 +80,7 @@
                         <h:panelGroup>
                             <center>
                                 <h:commandLink type="submit" action="#{SolicitudObra$GestionarSolicitudObra.buscar}" id="filtrarobra" value="#{var.buscar}"
-                                               class="id-jsf-"   />
+                                               styleClass="id-jsf-"   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

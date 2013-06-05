@@ -12,8 +12,8 @@
                 template="/facelets/template_main.xhtml">
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.reiniciarlaobra}" />                        
-        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
+        <h:outputText  stylestyleClassikont- "   value="#{var.reiniciarlaobra}" />                        
+        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
     </ui:define>
 
     <ui:define name="menu">
@@ -43,40 +43,40 @@
                         <center>
                             <h:panelGrid  columns="2">
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.ingreselafechadeini} " />
+                                <h:outputText  stylestyleClassikont- "   value="#{var.ingreselafechadeini} " />
                                 <h:panelGroup>
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_iniSuspe" 
                                                    inputSize="10"  value="#{Supervisor$SuspenderObra.suspension.datefecobrahist}" >
                                     </rich:calendar>
                                 </h:panelGroup>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.ingreselafechadefinali}" />
+                                <h:outputText  stylestyleClassikont- "   value="#{var.ingreselafechadefinali}" />
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="date_finSuspe"
                                                inputSize="10" value="#{Supervisor$SuspenderObra.suspension.datefecfinhist}" >
                                 </rich:calendar>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.ingreselajustificacion}" />
+                                <h:outputText  stylestyleClassikont- "   value="#{var.ingreselajustificacion}" />
                                 <h:panelGroup>
                                     <h:inputTextarea id="txtrazonSusp" value="#{Supervisor$SuspenderObra.suspension.strrazonmodif}" cols="60" rows="6" />
-                                    <rich:message styleClass="ikont-"   for="txtrazonSusp" />
+                                    <rich:message stylestyleClassikont-"   for="txtrazonSusp" />
                                 </h:panelGroup>
 
                                 <a4j:commandButton id="adjuntarActaSuspension" value="#{var.adjuntaractadesuspen}" render="layoutDocActaSuspension"
-                                                   styleClass="ikont-"   
+                                                   stylestyleClassikont-"   
                                                    onclick="#{rich:component('panelUploadActaSuspension')}.show();
                                                            return true;" />
                                 <h:panelGroup id="panel_subirActaSuspension">
                                     <rich:panel>
-                                        <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nohasubidoningun}" />
+                                        <h:outputText  stylestyleClassikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nohasubidoningun}" />
 
                                         <center>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaSuspension.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}"
                                                            >
-                                                <h:outputText  styleClass="ikont- "   value=" #{file.nombre}" />
+                                                <h:outputText  stylestyleClassikont- "   value=" #{file.nombre}" />
 
                                                 <interkont:spacer height="8" width="15" />
 
-                                                <h:graphicImage  styleClass="ikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}" />
+                                                <h:graphicImage  stylestyleClassikont- "   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos!=0}" />
                                             </rich:dataGrid>
                                         </center>
                                     </rich:panel>
@@ -86,7 +86,7 @@
                                     <h:panelGroup>
                                         <a4j:commandButton id="btn_registrar_suspension" action="#{Supervisor$SuspenderObra.registrarSuspension}"
                                                            value="#{var.registrarSuspension}" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
-                                                           styleClass="ikont-"   
+                                                           stylestyleClassikont-"   
                                                            oncomplete="#{rich:component('panelConfirmarSuspension')}.show();"
                                                            render="layoutConfSuspension, panelSuspenderObra">
 
@@ -94,7 +94,7 @@
 
                                         <a4j:commandButton id="btn_registrar_suspension1" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
                                                            action="#{Supervisor$SuspenderObra.registrarSuspension}" value="#{var.registrarSuspension}"
-                                                           styleClass="ikont-"    render="layoutConfSuspension,panelSuspenderObra">
+                                                           stylestyleClassikont-"    render="layoutConfSuspension,panelSuspenderObra">
                                         </a4j:commandButton>
 
                                         <interkont:spacer width="10" />

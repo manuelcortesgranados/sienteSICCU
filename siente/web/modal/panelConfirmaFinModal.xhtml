@@ -8,26 +8,26 @@
         xmlns:rich="http://richfaces.org/rich"
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel height="200" id="panelConfirmaFin" resizeable="false" width="350"  headerClass="rich-panel-header">
+    <rich:popupPanel height="200" id="panelConfirmaFin" resizeable="false" width="350"  headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.confirmarfinalizacion}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.confirmarfinalizacion}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaFin" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelConfirmaFin" styleClass="id-jsf-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaFin')}.hide();return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel styleClass="id-jsf-"   >
             <h:form>
                 <interkont:spacer height="20"/>
                 <h:panelGrid id="layoutConfFin" >
-                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{var.estaseguroderegistrar}" rendered="#{Supervisor$AdministrarObraNew.verFin}"/>
-                    <h:outputText  class="id-jsf- "   class="id-jsf-"   value="#{Supervisor$AdministrarObraNew.mensajefinaliza}" rendered="#{!Supervisor$AdministrarObraNew.verFin}"/>
+                    <h:outputText  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{var.estaseguroderegistrar}" rendered="#{Supervisor$AdministrarObraNew.verFin}"/>
+                    <h:outputText  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{Supervisor$AdministrarObraNew.mensajefinaliza}" rendered="#{!Supervisor$AdministrarObraNew.verFin}"/>
 
                     <a4j:commandButton id="BTaceptarFin" value="#{var.aceptar}"
                                        onclick="#{rich:component('panelConfirmaFin')}.hide();return false;" rendered="#{!Supervisor$AdministrarObraNew.verFin}"

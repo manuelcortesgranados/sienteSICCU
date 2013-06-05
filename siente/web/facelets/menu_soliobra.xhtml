@@ -10,38 +10,38 @@
     >
 
 
-    <div styleClass="topbar"><div styleClass="toptitle">
-            <h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
-        <div styleClass="sienteicon">
+    <div stylestyleClasstopbar"><div stylestyleClasstoptitle">
+            <h:outputText  stylestyleClassikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
+        <div stylestyleClasssienteicon">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont-hot-label_usuario"   id="label_usuario"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
-                <h:outputText  styleClass="ikont-hot-label_apellido"   id="label_apellido"   value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
-                <h:outputText  styleClass="ikont-hot-label_apellido2"   id="label_apellido2"    value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
-                <h:outputText  styleClass="ikont-hot-intcodigo"     value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
+                <h:outputText  stylestyleClassikont-hot-label_usuario"   id="label_usuario"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
+                <h:outputText  stylestyleClassikont-hot-label_apellido"   id="label_apellido"   value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
+                <h:outputText  stylestyleClassikont-hot-label_apellido2"   id="label_apellido2"    value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
+                <h:outputText  stylestyleClassikont-hot-intcodigo"     value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
             </h:panelGroup>
         </div>
     </div>
 
     <rich:toolbar>
         <rich:toolbarGroup>
-            <h:commandLink styleClass="ikont-hcl-sin4"/>
+            <h:commandLink stylestyleClassikont-hcl-sin4"/>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}">
-            <h:graphicImage  styleClass="ikont-hgi-modulo"   value="/resources/imgs/menu_middle.png"/>
+            <h:graphicImage  stylestyleClassikont-hgi-modulo"   value="/resources/imgs/menu_middle.png"/>
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                <a4j:commandLink styleClass="ikont-hcl-modulo"   onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
+                <a4j:commandLink stylestyleClassikont-hcl-modulo"   onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
                                  render="panelBody" immediate="true"/>
             </a4j:repeat>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos > 1}">
-            <h:graphicImage  styleClass="ikont-hgi-modulo1 "   value="/resources/imgs/menu_middle.png"/>
+            <h:graphicImage  stylestyleClassikont-hgi-modulo1 "   value="/resources/imgs/menu_middle.png"/>
         </rich:toolbarGroup>
 
         <rich:dropDownMenu rendered="#{SessionBeanCobra.countModulos > 1}">
             <f:facet name="label">
-                <h:outputText  styleClass="ikont- "   value="Inicio" styleClass="ikont-"  />
+                <h:outputText  stylestyleClassikont- "   value="Inicio" stylestyleClassikont-"  />
             </f:facet>
 
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
@@ -52,12 +52,12 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage  styleClass="ikont-hgi-modulos1 "   value="/resources/imgs/menu_middle.png"  />
+            <h:graphicImage  stylestyleClassikont-hgi-modulos1 "   value="/resources/imgs/menu_middle.png"  />
         </rich:toolbarGroup>
 
         <rich:dropDownMenu>
             <f:facet name="label">
-                <h:outputText  styleClass="ikont-hot-gestionar"   value="Gestionar" />
+                <h:outputText  stylestyleClassikont-hot-gestionar"   value="Gestionar" />
             </f:facet>
 
             <rich:menuGroup label="Solicitud Obra" iconDisabled="con-obrach">
@@ -88,24 +88,24 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage  styleClass="ikont-hgi-modulos2"   value="/resources/imgs/menu_middle.png" />
+            <h:graphicImage  stylestyleClassikont-hgi-modulos2"   value="/resources/imgs/menu_middle.png" />
         </rich:toolbarGroup>
 
         <rich:dropDownMenu>
             <f:facet name="label">
-                <h:outputText  styleClass="ikont-hot-miperfil"   value="Mi Perfil"  />
+                <h:outputText  stylestyleClassikont-hot-miperfil"   value="Mi Perfil"  />
             </f:facet>
 
           
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage  styleClass="ikont-hgi-modulos3"   value="/resources/imgs/menu_middle.png"  />
+            <h:graphicImage  stylestyleClassikont-hgi-modulos3"   value="/resources/imgs/menu_middle.png"  />
         </rich:toolbarGroup>
 
         <rich:dropDownMenu>
             <f:facet name="label">
-                <h:outputText  styleClass="ikont-hot-ayuda"   value="Ayuda"  />
+                <h:outputText  stylestyleClassikont-hot-ayuda"   value="Ayuda"  />
             </f:facet>
 
             <rich:menuItem label="Soporte en linea"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"
@@ -117,24 +117,24 @@
         </rich:dropDownMenu>
 
         <rich:toolbarGroup>
-            <h:graphicImage  styleClass="ikont-hgi-modulos4"   value="/resources/imgs/menu_middle.png"  styleClass="ikont-"  />
+            <h:graphicImage  stylestyleClassikont-hgi-modulos4"   value="/resources/imgs/menu_middle.png"  stylestyleClassikont-"  />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
              <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_up" immediate="true"
-                           styleClass="ikont-hcl-salir"  />
+                           stylestyleClassikont-hcl-salir"  />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup>
-            <h:graphicImage  styleClass="ikont-hgi-modulos5"   value="/resources/imgs/menu_middle.png"  />
+            <h:graphicImage  stylestyleClassikont-hgi-modulos5"   value="/resources/imgs/menu_middle.png"  />
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right" rendered="#{var.variconch}">
-            <a target="_blank" href="http://wsp.presidencia.gov.co/" styleClass="republica anchorLink"></a>
+            <a target="_blank" href="http://wsp.presidencia.gov.co/" stylestyleClassrepublica anchorLink"></a>
         </rich:toolbarGroup>
 
         <rich:toolbarGroup location="right">
-            <a target="_blank" href="#{var.linkcliente}" styleClass="ch anchorLink"></a>
+            <a target="_blank" href="#{var.linkcliente}" stylestyleClassch anchorLink"></a>
         </rich:toolbarGroup>
 
     </rich:toolbar>

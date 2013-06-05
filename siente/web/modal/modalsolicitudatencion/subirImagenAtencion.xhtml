@@ -11,13 +11,13 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadImagenAtencion" autosized="true" >
-        <rich:panel header="#{var.seleccionarimagen}" class="id-jsf-"   >
+        <rich:panel header="#{var.seleccionarimagen}" styleClass="id-jsf-"   >
             <h:form>
                 <h:panelGroup >
                     <a4j:commandLink id="esconder_panelUploadImagenAtencion"
                                        onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
                                                return false;"
-                                       immediate="true" class="id-jsf-"   />
+                                       immediate="true" styleClass="id-jsf-"   />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpImagenModalAtencion">
@@ -32,21 +32,21 @@
 
                         <h:panelGroup id="info_imagenAtencion">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="id-jsf- "   value="#{var.arcsub}" />
+                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText  class="id-jsf- "   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="id-jsf- "   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="id-jsf- "   value="#{var.nomarc}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{file.nombre}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{var.taarc}" />
-                                                    <h:outputText  class="id-jsf- "   value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -57,7 +57,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarImagenAtencion}" render="info_imagenAtencion, uploadImagenAtencion, gpImagenModalAtencion, panel_subirImagen"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="id-jsf-"    />
+                                                   styleClass="id-jsf-"    />
 
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadImagenAtencion')}.hide();

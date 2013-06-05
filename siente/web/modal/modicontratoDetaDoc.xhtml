@@ -9,16 +9,16 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="panelModiContratoDoc" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelModiContratoDoc" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.documento}"/>
+                <h:outputText  styleClass="id-jsf- "   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelModiContratoDoc" class="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelModiContratoDoc" styleClass="id-jsf-"  
                                      title="#{var.cerrar}" immediate="true" 
                                      onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;"/>
@@ -39,22 +39,22 @@
                             <rich:column id="strnombremodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText  class="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  class="id-jsf- "   id="st_strnombremodi" value="#{currentRow.strnombre}"/>
+                                <h:outputText  styleClass="id-jsf- "   id="st_strnombremodi" value="#{currentRow.strnombre}"/>
                             </rich:column>
 
                             <rich:column id="strfechamodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText  class="id-jsf- "   value="#{var.fecha}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.fecha}"/>
                                 </f:facet>
-                                <h:outputText  class="id-jsf- "   id="st_strfechamodi" value="#{currentRow.datefecha}"/>
+                                <h:outputText  styleClass="id-jsf- "   id="st_strfechamodi" value="#{currentRow.datefecha}"/>
                             </rich:column>
 
                             <rich:column  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText  class="id-jsf- "   value="#{var.Ver}"/>
+                                    <h:outputText  styleClass="id-jsf- "   value="#{var.Ver}"/>
                                 </f:facet>
                                 <h:commandButton value="Ver" id="boton" immediate="true"
                                                  action="#{Supervisor$ModificarContrato.bt_download_documento_action(filaSeleccionada)}" />
