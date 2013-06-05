@@ -11,16 +11,16 @@
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     >
 
-    <rich:popupPanel id="mp_cronograma_msjerror" resizeable="false" trimOverlayedElements="false"  autosized="true"  headerClass="rich-panel-header" minWidth="400" minHeight="150">
+    <rich:popupPanel id="mp_cronograma_msjerror" resizeable="false" trimOverlayedElements="false"  autosized="true" minWidth="400" minHeight="150">
         <f:facet name="header"  >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.titulomodalvalcronomod}" class="ikont-"  />
+                <h:outputText  class="ikont-hot-titulomodalvalcronomod"   value="#{var.titulomodalvalcronomod}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" class="ikont-"  
+                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" class="ikont-acl-escondermpcronogramamsjerror"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp_cronograma_msjerror')}.hide();
                                              return false;">
@@ -28,56 +28,56 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGrid id="panelMensajes" class="ikont-"  >
+        <h:panelGrid id="panelMensajes" class="ikont-hpg-panelmensajes"  >
             <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="ikont-"  >
+                <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" class="ikont-hpg-numeroarchivoscargarcronograma"  >
                     <h:panelGroup>
-                        <h:graphicImage  class="ikont- "   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                        <h:outputText  class="ikont- "   value="#{var.cronogramamodificacioninvalido}" class="ikont-"   />
+                        <h:graphicImage  class="ikont-hgi-msgerror"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                        <h:outputText  class="ikont-hot-cronogramamodificacioninvalido"   value="#{var.cronogramamodificacioninvalido}" />
                     </h:panelGroup>
-                    <h:outputText  class="ikont- "   value=" #{file.nombre}" class="ikont-"  />
+                    <h:outputText  class="ikont-hot-nombre"   value=" #{file.nombre}"/>
                 </h:panelGrid>
             </a4j:repeat>
             <rich:panel rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}">
                 <rich:dataTable id="tablalistaerror" rows="5" 
-                                rowClasses="background_azul,background_blanco" class="ikont-"  
+                                rowClasses="background_azul,background_blanco" class="ikont-rdt-tablalistaerror"  
                                 value="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.mensajesExcel}"
                                 var="actual">
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column colspan="3">
-                                <h:outputText  class="ikont- "   value="#{var.titulolistaerroresmodificar}"  />
+                                <h:outputText  class="ikont-hot-titulolistaerroresmodificar"   value="#{var.titulolistaerroresmodificar}"  />
                             </rich:column>
                             <rich:column breakRowBefore="true">
-                                <h:outputText  class="ikont- "   value="#{var.columna}"  />
+                                <h:outputText  class="ikont-hot-columna "   value="#{var.columna}"  />
                             </rich:column>
                             <rich:column  >
-                                <h:outputText  class="ikont- "   value="#{var.fila}" />
+                                <h:outputText  class="ikont-hot-fila"   value="#{var.fila}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  class="ikont- "   value="#{var.descripcion}"  />
+                                <h:outputText  class="ikont-hot-descripcion"   value="#{var.descripcion}"  />
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column  breakRowBefore="true">
-                            <h:outputText  class="ikont- "   value="#{actual.tituloColumna}"/>
+                            <h:outputText  class="ikont-hot-mensajeexeltitulocolumna"   value="#{actual.tituloColumna}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="ikont- "   value="#{actual.fila}"/>
+                            <h:outputText  class="ikont-hot-mensajeexelfila"   value="#{actual.fila}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  class="ikont- "   value="#{actual.detalle}"/>
+                            <h:outputText  class="ikont-hot-mensajeexeldatalle"   value="#{actual.detalle}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </rich:dataTable>
                 <h:form>
                     <rich:dataScroller for="tablalistaerror" maxPages="10">
                         <f:facet name="first">
-                            <h:outputText  class="ikont- "   value="#{var.primeroCiu}"/>
+                            <h:outputText  class="ikont-hot-tablalistaerrorprimerociu"   value="#{var.primeroCiu}"/>
                         </f:facet>
                         <f:facet name="last">
-                            <h:outputText  class="ikont- "   value="#{var.ultimoCiu}"/>
+                            <h:outputText  class="ikont-hot-tablalistaerror"   value="#{var.ultimoCiu}"/>
                         </f:facet>
                     </rich:dataScroller>
                 </h:form>

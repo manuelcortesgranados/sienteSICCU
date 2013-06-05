@@ -14,13 +14,13 @@
     <rich:popupPanel id="panelUploadCronograma" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "    value="#{var.cargarcronograma}"/>
+                <h:outputText  class="ikont-hot-cargarcronograma"    value="#{var.cargarcronograma}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadCronograma" class="ikont-"  
+                    <a4j:commandLink id="esconder_panelUploadCronograma" class="ikont-acl-esconderpaneluploadcronograma"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelUploadCronograma')}.hide();
                                              return false;">
@@ -28,7 +28,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="ikont-"   >
+        <rich:panel class="ikont-rp-paneluploadcronograma"   >
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -38,7 +38,6 @@
                             acceptedTypes="xls, xlsx"
                             immediateUpload="true"
                             maxFilesQuantity="1"
-                            
                             addLabel="#{var.adicionar}"
                             uploadLabel="#{var.subir}"
                             doneLabel="#{var.hecho}"
@@ -48,20 +47,20 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoCrono1">
                             <center>
-                                <rich:panel bodyClass="info" >
+                                <rich:panel >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
+                                        <h:outputText  class="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont- "   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  class="ikont-hot-nosuarc"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <rich:panel >
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  class="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  class="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  class="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  class="ikont-hot-numbytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -71,7 +70,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorCronograma.borrarDatosSubidos}" render="infoCrono1, uploadCrono, panelInfoCronoSubido"
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="ikont-"     />
+                                                   class="ikont-acl-boarcsub"     />
                                 <a4j:commandButton oncomplete="btValidarCronogramaOnComplete();" value="#{var.validar}" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos>0}"
                                                    render="panelMensajes,funcionBtValidarCronogramaOnComplete, panelInfoCronoSubido, messages" action="#{Supervisor$ModificarProyecto.btValidarCronogramaAction}"
                                                    />
