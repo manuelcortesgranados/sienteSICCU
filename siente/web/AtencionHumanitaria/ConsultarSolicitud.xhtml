@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  stylestyleClassikont- "   value="#{var.menu1_3_1}"/>
+        <h:outputText  styleClass="ikont- "   value="#{var.menu1_3_1}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -31,17 +31,17 @@
 
                         <h:panelGrid columns="4" cellspacing="5">
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.departamento}: " stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   id="txtDepartamentoatsoli" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.departamento}: " styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   id="txtDepartamentoatsoli" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}"/>
 
                             <interkont:spacer rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
                             <interkont:spacer rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
-                            <h:outputText  stylestyleClassikont- "   value="#{var.municipio}:" stylestyleClassikont-"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
-                            <h:outputLabel  stylestyleClassikont- "   id="txtmunicipiosoli"
+                            <h:outputText  styleClass="ikont- "   value="#{var.municipio}:" styleClass="ikont-"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}"/>
+                            <h:outputLabel  styleClass="ikont- "   id="txtmunicipiosoli"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vermunicipio}" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.contacto}:" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   id="contactoSoli" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}  #{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.contacto}:" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   id="contactoSoli" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}  #{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}"/>
 
 
                             <a4j:commandButton id="btContacto1" value="#{var.ver}" immediate="true" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.mostrar}" action="#{AtencionHumanitaria$AdminSolicitudAtencion.cargarSolicitante}"
@@ -67,38 +67,38 @@
                     <h:panelGroup>
 
                         <h:panelGrid columns="2" cellspacing="5" id="gpCombos">
-                            <h:outputText  stylestyleClassikont- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
+                            <h:outputText  styleClass="ikont- "   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}"/>
 
-                            <h:outputText  stylestyleClassikont- "    value="#{var.evento}:" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.evento.strnombre}"/>
+                            <h:outputText  styleClass="ikont- "    value="#{var.evento}:" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.evento.strnombre}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.periodo}:" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.strdescripcion}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.periodo}:" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.periodoevento.strdescripcion}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.fecha} Solicitud:" stylestyleClassikont-"  />
-                            <h:outputText  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechasolicitud}">
+                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} Solicitud:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.datefechasolicitud}">
                                 <f:convertDateTime pattern="dd,MMMM, yyyy"  />
                             </h:outputText>
 
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.nomsol}" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.nomsol}" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}"/>
 
-                            <h:outputLabel  stylestyleClassikont- "   id="lbltips"  value="#{var.tiposolicitud}:" stylestyleClassikont-"   />
-                            <h:outputLabel  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.strdnombretipoah}"/>
+                            <h:outputLabel  styleClass="ikont- "   id="lbltips"  value="#{var.tiposolicitud}:" styleClass="ikont-"   />
+                            <h:outputLabel  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.strdnombretipoah}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.objetosolicitud}:" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   id="txtobjet"
+                            <h:outputText  styleClass="ikont- "   value="#{var.objetosolicitud}:" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   id="txtobjet"
                                            value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.incluyeint}" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   value="Si" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
-                            <h:outputLabel  stylestyleClassikont- "   value="No" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.incluyeint}" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   value="Si" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
+                            <h:outputLabel  styleClass="ikont- "   value="No" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}"/>
 
-                            <h:outputText  stylestyleClassikont- "   value="#{var.porcentaje} Interventoria:" stylestyleClassikont-"  />
-                            <h:outputLabel  stylestyleClassikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}"
+                            <h:outputText  styleClass="ikont- "   value="#{var.porcentaje} Interventoria:" styleClass="ikont-"  />
+                            <h:outputLabel  styleClass="ikont- "   value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}">
                                 <f:convertNumber pattern="##,##%"/>
                             </h:outputLabel>
@@ -116,50 +116,50 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="6">
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.categoriaseleccionada}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.categoriaseleccionada}"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.categoria}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.categoria}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.familiasAtender}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.familiasAtender}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.tamFamilia}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.tamFamilia}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.valortotal}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.municipio}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.municipio}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.productoah.strdescripcionproductoah}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.productoah.strdescripcionproductoah}"/>
 
                         </rich:column>
                         <rich:column>
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.numcantidadsolicitadaitem}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.numcantidadsolicitadaitem}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.productoah.tipodefamilia.strdescripcionfamilia}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.productoah.tipodefamilia.strdescripcionfamilia}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.numvlrunitario}">
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.numvlrunitario}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.numvlrtotalitem}">
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.numvlrtotalitem}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  stylestyleClassikont- "   value="#{_Producto.localidad.strmunicipio}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{_Producto.localidad.strmunicipio}"/>
                         </rich:column>
                         <f:facet name="footer">
                             <rich:columnGroup>
@@ -173,20 +173,20 @@
 
                     <h:panelGroup id="gpvalortotalmaestroAtencons">
                         <h:panelGrid columns="2" cellspacing="5" >
-                            <h:outputText  stylestyleClassikont- "   value="#{var.totalfamilias}:" stylestyleClassikont-"  />
-                            <h:outputText  stylestyleClassikont- "   id="totalFamiliAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
+                            <h:outputText  styleClass="ikont- "   value="#{var.totalfamilias}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont- "   id="totalFamiliAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="###,###.##"/>
                             </h:outputText>
-                            <h:outputText  stylestyleClassikont- "   value="#{var.totalParcial}:" stylestyleClassikont-"  />
-                            <h:outputText  stylestyleClassikont- "   id="totalParcialAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
+                            <h:outputText  styleClass="ikont- "   value="#{var.totalParcial}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont- "   id="totalParcialAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
-                            <h:outputText  stylestyleClassikont- "   value="#{var.interventorObra}ia:" stylestyleClassikont-"  />
-                            <h:outputText  stylestyleClassikont- "    id="porcentajeAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje*AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial/100}">
+                            <h:outputText  styleClass="ikont- "   value="#{var.interventorObra}ia:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont- "    id="porcentajeAtcon" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje*AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial/100}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
-                            <h:outputText  stylestyleClassikont- "   value="#{var.valorsolicitud}:" stylestyleClassikont-"  />
-                            <h:outputText  stylestyleClassikont- "     id="valorTotalAtcon"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
+                            <h:outputText  styleClass="ikont- "   value="#{var.valorsolicitud}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont- "     id="valorTotalAtcon"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </h:panelGrid>

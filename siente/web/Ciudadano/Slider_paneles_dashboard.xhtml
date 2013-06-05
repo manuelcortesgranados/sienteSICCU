@@ -13,7 +13,7 @@
 
     <f:subview id="panelSliderDash" >
         <div id="container2">
-            <rich:panel id="inversiontotal" header="#{var.datosnacionales}" bodystyleClasssliderichcontentblue" headerstyleClasssliderichdatosnacionales">
+            <rich:panel id="inversiontotal" header="#{var.datosnacionales}" bodystyleClasssliderichcontentblue" headerClasssliderichdatosnacionales">
                 <div id="slider2">
                     <div >
                         <interkont:spacer height="50"/>
@@ -21,13 +21,13 @@
                             <h:panelGroup>
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-inversiontotalnal "   value="#{ControlGerencial.informaciondash.inversionTotalNal}"   >
+                                    <h:outputText  styleClass="ikont-hot-inversiontotalnal "   value="#{ControlGerencial.informaciondash.inversionTotalNal}"   >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
-                            <h:panelGroup stylestyleClassikont-"  >
-                                <h:outputText  stylestyleClassikont-hot-recursosinvertidos "   value="Recursos invertidos"  />
+                            <h:panelGroup styleClass="ikont-"  >
+                                <h:outputText  styleClass="ikont-hot-recursosinvertidos "   value="Recursos invertidos"  />
                             </h:panelGroup>
                         </h:panelGrid>
                     </div>
@@ -38,34 +38,14 @@
                             <h:panelGroup>
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-inversionobra"   value="#{ControlGerencial.informaciondash.inversionObra}">
+                                    <h:outputText  styleClass="ikont-hot-inversionobra"   value="#{ControlGerencial.informaciondash.inversionObra}">
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
 
-                            <h:panelGroup stylestyleClassikont-hpg-recursosaporbadosrehabilitacion"  >
-                                <h:outputText  stylestyleClassikont-hot-recursosaporbadosrehabilitacion"   value="Recursos aprobados rehabilitación"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-
-                    </div>
-                    <div>
-                        <interkont:spacer height="50"/>
-                        <h:panelGrid columns="1" columnClasses="panelcenter">
-
-                            <h:panelGroup>
-                                <interkont:spacer width="20"/>
-                                <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-inversionah"   value="#{ControlGerencial.informaciondash.inversionAh}" >
-                                        <f:convertNumber pattern="$###,###"/>
-                                    </h:outputText>
-                                </h:panelGroup>
-                            </h:panelGroup>
-
-                            <h:panelGroup stylestyleClassikont-hpg-atencionhumanitaria"  >
-                                <interkont:spacer width="20"/>
-                                <h:outputText  stylestyleClassikont-hot-atencionhumanitaria"   value="Atención Humanitaria" />
+                            <h:panelGroup styleClass="ikont-hpg-recursosaporbadosrehabilitacion"  >
+                                <h:outputText  styleClass="ikont-hot-recursosaporbadosrehabilitacion"   value="Recursos aprobados rehabilitación"/>
                             </h:panelGroup>
                         </h:panelGrid>
 
@@ -77,15 +57,35 @@
                             <h:panelGroup>
                                 <interkont:spacer width="20"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-persdamniff"   value="#{ControlGerencial.informaciondash.persdamnif}" >
+                                    <h:outputText  styleClass="ikont-hot-inversionah"   value="#{ControlGerencial.informaciondash.inversionAh}" >
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
+                                </h:panelGroup>
+                            </h:panelGroup>
+
+                            <h:panelGroup styleClass="ikont-hpg-atencionhumanitaria"  >
+                                <interkont:spacer width="20"/>
+                                <h:outputText  styleClass="ikont-hot-atencionhumanitaria"   value="Atención Humanitaria" />
+                            </h:panelGroup>
+                        </h:panelGrid>
+
+                    </div>
+                    <div>
+                        <interkont:spacer height="50"/>
+                        <h:panelGrid columns="1" columnClasses="panelcenter">
+
+                            <h:panelGroup>
+                                <interkont:spacer width="20"/>
+                                <h:panelGroup>
+                                    <h:outputText  styleClass="ikont-hot-persdamniff"   value="#{ControlGerencial.informaciondash.persdamnif}" >
                                         <f:convertNumber pattern="###,###"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
 
-                            <h:panelGroup stylestyleClassikont-hpg-personasdamnificadas"  >
+                            <h:panelGroup styleClass="ikont-hpg-personasdamnificadas"  >
                                 <interkont:spacer width="20"/>
-                                <h:outputText  stylestyleClassikont-hot-personasdamnificadas"   value="Personas Damnificadas" />
+                                <h:outputText  styleClass="ikont-hot-personasdamnificadas"   value="Personas Damnificadas" />
                             </h:panelGroup>
                         </h:panelGrid>
 
@@ -97,15 +97,15 @@
                             <h:panelGroup>
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-persafect"   value="#{ControlGerencial.informaciondash.persafect}">
+                                    <h:outputText  styleClass="ikont-hot-persafect"   value="#{ControlGerencial.informaciondash.persafect}">
                                         <f:convertNumber pattern="###,###.##"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
 
-                            <h:panelGroup stylestyleClassikont-hpg-personasafectadas"  >
+                            <h:panelGroup styleClass="ikont-hpg-personasafectadas"  >
                                 <interkont:spacer width="20"/>
-                                <h:outputText  stylestyleClassikont-hot-personasafectadas" value="Personas Afectadas" />
+                                <h:outputText  styleClass="ikont-hot-personasafectadas" value="Personas Afectadas" />
                             </h:panelGroup>
                         </h:panelGrid>
 
@@ -117,15 +117,15 @@
                             <h:panelGroup>
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-hogdamniff "   value="#{ControlGerencial.informaciondash.hogdamnif}">
+                                    <h:outputText  styleClass="ikont-hot-hogdamniff "   value="#{ControlGerencial.informaciondash.hogdamnif}">
                                         <f:convertNumber pattern="###,###"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
 
-                            <h:panelGroup stylestyleClassikont-hpg-hogaresdamnificados"  >
+                            <h:panelGroup styleClass="ikont-hpg-hogaresdamnificados"  >
                                 <interkont:spacer width="20"/>
-                                <h:outputText  stylestyleClassikont-hot-hogaresdamnificados"   value="Hogares Damnificados" />
+                                <h:outputText  styleClass="ikont-hot-hogaresdamnificados"   value="Hogares Damnificados" />
                             </h:panelGroup>
                         </h:panelGrid>
 
@@ -137,15 +137,15 @@
                             <h:panelGroup>
                                 <interkont:spacer width="30"/>
                                 <h:panelGroup>
-                                    <h:outputText  stylestyleClassikont-hot-hogaafect "   value="#{ControlGerencial.informaciondash.hogafect}">
+                                    <h:outputText  styleClass="ikont-hot-hogaafect "   value="#{ControlGerencial.informaciondash.hogafect}">
                                         <f:convertNumber pattern="###,###.##"/>
                                     </h:outputText>
                                 </h:panelGroup>
                             </h:panelGroup>
 
-                            <h:panelGroup stylestyleClassikont-hpg-hogaresafectados"  >
+                            <h:panelGroup styleClass="ikont-hpg-hogaresafectados"  >
                                 <interkont:spacer width="20"/>
-                                <h:outputText  stylestyleClassikont-hot-hogaresafectados"   value="Hogares Afectados"/>
+                                <h:outputText  styleClass="ikont-hot-hogaresafectados"   value="Hogares Afectados"/>
                             </h:panelGroup>
                         </h:panelGrid>
                     </div>

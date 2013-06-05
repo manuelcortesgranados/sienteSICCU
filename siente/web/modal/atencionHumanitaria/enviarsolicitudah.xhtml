@@ -9,17 +9,17 @@
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="panelConfirmarSolicitudAH" autosized="true"   headerstyleClassrich-panel-header">
+    <rich:popupPanel id="panelConfirmarSolicitudAH" autosized="true"   headerClassrich-panel-header">
 
         <rich:panel >
             <f:facet name="header">
 
                 <h:panelGroup>
 
-                    <h:outputText  stylestyleClassikont- "   value= "#{var.atencion}"/>
+                    <h:outputText  styleClass="ikont- "   value= "#{var.atencion}"/>
                     <interkont:spacer />
 
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" stylestyleClassikont-"   
+                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
                                              return false;"/>
 
@@ -28,7 +28,7 @@
             </f:facet>
 
             <center>
-                <h:outputText  stylestyleClassikont- "   value="#{var.estasegurodeenviar}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.estasegurodeenviar}"/>
 
                 <h:panelGrid columns="2" id="layoutGuardar">
 

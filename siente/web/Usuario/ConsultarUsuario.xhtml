@@ -15,7 +15,7 @@
     <ui:define name="head" ></ui:define>
 
     <ui:define name="title">
-        <h:outputText  stylestyleClassikont- "   value="Consultar usuario" />
+        <h:outputText  styleClass="ikont- "   value="Consultar usuario" />
     </ui:define>
 
     <ui:define name="menu">
@@ -33,10 +33,10 @@
                 <table  border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td>
-                            <div stylestyleClassbuscador">
+                            <div styleClassbuscador">
                                 <div id="buscador_space">
                                     <label>
-                                        <h:inputText id="txtPalabraClave" stylestyleClassikont-"    onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
+                                        <h:inputText id="txtPalabraClave" styleClass="ikont-"    onclick="this.value = '';" value="#{Perfil$Usuario.usuLogin}" />
                                         <a4j:commandButton type="button" action="#{Perfil$Usuario.buscarUsuarioporCriterios}" id="filtrar"  value="#{var.buscar}" render="pnconsultarUsuario"  />
 
                                     </label>
@@ -56,41 +56,41 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText  stylestyleClassikont- "   value="Usuarios encontrados" />
+                                        <h:outputText  styleClass="ikont- "   value="Usuarios encontrados" />
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  stylestyleClassikont- "   value="Nombre completo" />
+                                        <h:outputText  styleClass="ikont- "   value="Nombre completo" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  stylestyleClassikont- "   value="Login" />
+                                        <h:outputText  styleClass="ikont- "   value="Login" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  stylestyleClassikont- "   value="Cédula" />
+                                        <h:outputText  styleClass="ikont- "   value="Cédula" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  stylestyleClassikont- "   value="Perfil usuario" />
+                                        <h:outputText  styleClass="ikont- "   value="Perfil usuario" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  stylestyleClassikont- "   value="Ver" />
+                                        <h:outputText  styleClass="ikont- "   value="Ver" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
 
                             <rich:column breakRowBefore="true">
-                                <h:outputText  stylestyleClassikont- "   value="#{currentRow.tercero.strnombrecompleto}" />
+                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.strnombrecompleto}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  stylestyleClassikont- "   value="#{currentRow.usuLogin}" />
+                                <h:outputText  styleClass="ikont- "   value="#{currentRow.usuLogin}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  stylestyleClassikont- "   value="#{currentRow.tercero.intcedula}" />
+                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.intcedula}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  stylestyleClassikont- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink  action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
-                                    <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png" />
+                                    <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:dataTable>

@@ -11,53 +11,53 @@
     <rich:panel id="panelConfirmarColombiaHum">
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText  stylestyleClassikont- "   value="#{var.datosch}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.datosch}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="4">
-                    <h:outputLabel  stylestyleClassikont- "   id="lbestEdit"  value="#{var.estado}" />
+                    <h:outputLabel  styleClass="ikont- "   id="lbestEdit"  value="#{var.estado}" />
                     <h:selectOneMenu>
                         <f:selectItem itemValue="Seleccione" />
                     </h:selectOneMenu>
-                    <h:outputLabel  stylestyleClassikont- "   id="lblvlraproEdit"  value="#{var.valorap}" />
+                    <h:outputLabel  styleClass="ikont- "   id="lblvlraproEdit"  value="#{var.valorap}" />
                     <h:inputText value="" />
-                    <h:outputLabel  stylestyleClassikont- "   id="lblpriEdit"  value="#{var.prioridad}" />
+                    <h:outputLabel  styleClass="ikont- "   id="lblpriEdit"  value="#{var.prioridad}" />
                     <rich:inputNumberSpinner id="numberSpinnerPrioridad" minValue="1" maxValue="100"/>
-                    <h:outputLabel  stylestyleClassikont- "   id="lblFecjuEdit"  value="#{var.fechajunta}" />
+                    <h:outputLabel  styleClass="ikont- "   id="lblFecjuEdit"  value="#{var.fechajunta}" />
                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"  inputSize="10" value="" >
                     </rich:calendar>
-                    <h:outputLabel  stylestyleClassikont- "    value="#{var.observaciones}"/>
+                    <h:outputLabel  styleClass="ikont- "    value="#{var.observaciones}"/>
                 </h:panelGrid>
                 <h:panelGrid >
                     <h:inputTextarea cols="58"/>
                 </h:panelGrid>
                 <a4j:commandButton id="btAceptarSoliCH"  
                                    value="#{var.aceptar}"
-                                   stylestyleClassikont-"    />
+                                   styleClass="ikont-"    />
                 <a4j:commandButton id="btCancelarSoliCH"  
                                    value="#{var.cancelar}"
-                                   stylestyleClassikont-"    />
+                                   styleClass="ikont-"    />
             </center>
         </rich:collapsiblePanel>
 
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
-                <h:outputText  stylestyleClassikont- "   value="#{var.verdatosch}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.verdatosch}"/>
             </f:facet>
             <center>
                 <h:panelGrid  columns="2">
                     <h:panelGrid  columns="2">
-                        <h:outputLabel  stylestyleClassikont- "   id="lbest"  value="#{var.estado}" />
+                        <h:outputLabel  styleClass="ikont- "   id="lbest"  value="#{var.estado}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  stylestyleClassikont- "   id="lblvlrapro"  value="#{var.valorap}" />
+                        <h:outputLabel  styleClass="ikont- "   id="lblvlrapro"  value="#{var.valorap}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  stylestyleClassikont- "   id="lblpri"  value="#{var.prioridad}" />
+                        <h:outputLabel  styleClass="ikont- "   id="lblpri"  value="#{var.prioridad}" />
                         <h:inputText value="" disabled="true" />
                     </h:panelGrid>
                     <h:panelGrid  columns="2">
-                        <h:outputLabel  stylestyleClassikont- "   id="lblFecju"  value="#{var.fechajunta}" />
+                        <h:outputLabel  styleClass="ikont- "   id="lblFecju"  value="#{var.fechajunta}" />
                         <h:inputText value="" disabled="true" />
-                        <h:outputLabel  stylestyleClassikont- "    value="#{var.observaciones}"/>
+                        <h:outputLabel  styleClass="ikont- "    value="#{var.observaciones}"/>
                         <h:inputTextarea value="" cols="23" rows="3" disabled="true"/>
                     </h:panelGrid>
                 </h:panelGrid>

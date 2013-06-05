@@ -9,49 +9,49 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodystyleClassikont-rp-tool"  rendered="false">
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra1" bodystyleClass="ikont-rp-tool"  rendered="false">
 
-        <a4j:commandLink stylestyleClassikont-hcl-sin1"  />
+        <a4j:commandLink styleClass="ikont-hcl-sin1"  />
 
         
 
-        <a4j:commandLink stylestyleClassikont-hcl-sin2"  />
-        <a4j:commandLink stylestyleClassikont--hcl-consultarsoliapro"   value="Consultar Solicitudes Aprobadas"  action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}" 
+        <a4j:commandLink styleClass="ikont-hcl-sin2"  />
+        <a4j:commandLink styleClass="ikont--hcl-consultarsoliapro"   value="Consultar Solicitudes Aprobadas"  action="#{SolicitudObra$GestionarSolicitudObra.tablaPentiente}" 
 
                          render="panelBody"/>
 
         <div  />
     </rich:panel>
 
-    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodystyleClassikont-rp-menusolicitudobra-body" >
+    <rich:panel header="Solicitud Obra" id="menuSolicitudObra" bodystyleClass="ikont-rp-menusolicitudobra-body" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
-            <h:panelGrid stylestyleClassikont-hpg-crearSolicitud"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl"   immediate="true"
+            <h:panelGrid styleClass="ikont-hpg-crearSolicitud"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl"   immediate="true"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
-                <h:commandLink stylestyleClassikont-hcl-crearSolicitud1"   value="Registrar Solicitud"
+                <h:commandLink styleClass="ikont-hcl-crearSolicitud1"   value="Registrar Solicitud"
                                action="#{SolicitudObra$GestionarSolicitudObra.CrearSolicitud}"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-cancelarSolicitud"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-cancelarSolicitud"   immediate="true" action="cancelarSolicitud"/>
-                <a4j:commandLink stylestyleClassikont-hcl-consultartotalsoli"   value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
+            <h:panelGrid styleClass="ikont-hpg-cancelarSolicitud"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-cancelarSolicitud"   immediate="true" action="cancelarSolicitud"/>
+                <a4j:commandLink styleClass="ikont-hcl-consultartotalsoli"   value="Consultar Total Solicitudes" action="#{SolicitudObra$GestionarSolicitudObra.tablaAprobadas}"
                                  render="panelBody"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-irreportesdetalle"   immediate="true" action="irreportesdetalle"/>
-                <a4j:commandLink stylestyleClassikont-acl-irreportesdetalle1"   value="Reporte"  action="irreportesdetalle"/>
+            <h:panelGrid styleClass="ikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-irreportesdetalle"   immediate="true" action="irreportesdetalle"/>
+                <a4j:commandLink styleClass="ikont-acl-irreportesdetalle1"   value="Reporte"  action="irreportesdetalle"/>
             </h:panelGrid>
 
 
         </h:panelGrid>
     </rich:panel>
 
-    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodystyleClassikont-rp-menuNumSolicitudes-body" >
+    <rich:panel header="Resumen Solicitudes" id="menuNumSolicitudes" bodystyleClass="ikont-rp-menuNumSolicitudes-body" >
         <h:panelGrid columns="2"  cellpadding="1px"  >
-            <h:outputText  stylestyleClassikont-hot-textSolicitudes"   id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
-            <h:outputText  stylestyleClassikont-hot-numSolicitudes "   id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
+            <h:outputText  styleClass="ikont-hot-textSolicitudes"   id="textSolicitudes"  value="#{var.totalsolicitues}: "/>
+            <h:outputText  styleClass="ikont-hot-numSolicitudes "   id="numSolicitudes"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolUsu}" />
 
-            <h:outputText  stylestyleClassikont-hot-textSolicitudesApro"   id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
-            <h:outputText  stylestyleClassikont-hot-numSolicitudesApro"   id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
+            <h:outputText  styleClass="ikont-hot-textSolicitudesApro"   id="textSolicitudesApro"  value="#{var.solicitudesapro}: "/>
+            <h:outputText  styleClass="ikont-hot-numSolicitudesApro"   id="numSolicitudesApro"  value="#{SolicitudObra$GestionarSolicitudObra.totalSolApro}"/>
 
          
         </h:panelGrid>

@@ -18,7 +18,7 @@
             <h:panelGrid id="cambiocontra" columns="2" >
 
                 <h:panelGroup>
-                    <h:outputLabel  stylestyleClassikont-hot-usuario"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
+                    <h:outputLabel  styleClass="ikont-hot-usuario"   id="usuario"  value="#{var.username}:" for="txtusuario"/>
                     <rich:message for="txtusuario" />
                 </h:panelGroup>
 
@@ -28,29 +28,29 @@
 
 
                 <h:panelGroup>
-                    <h:outputLabel  stylestyleClassikont-hot-contrasenaact"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
+                    <h:outputLabel  styleClass="ikont-hot-contrasenaact"   id="contrasenaact"  value="#{var.contrasenaact}:" for="txtcontrasenaact"/>
                     <rich:message for="txtcontrasenaact" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenaact" stylestyleClassikont-his-txtcontrasenaact"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenaact" styleClass="ikont-his-txtcontrasenaact"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenaact}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  stylestyleClassikont-hol-contrasenanuev"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuev"   id="contrasenanuev"  value="#{var.contrasenanuev}:" for="txtcontrasenanuev"/>
                     <rich:message for="txtcontrasenanuev" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenanuev" stylestyleClassikont-his-txtcontrasenanuev"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenanuev" styleClass="ikont-his-txtcontrasenanuev"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuev}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
                 <h:panelGroup>
-                    <h:outputLabel  stylestyleClassikont-hol-contrasenanuevcom"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
+                    <h:outputLabel  styleClass="ikont-hol-contrasenanuevcom"   id="contrasenanuevcom"  value="#{var.contrasenanuevcom}:" for="txtcontrasenanuevcom" />
                     <rich:message for="txtcontrasenanuevcom" />
                 </h:panelGroup>
 
-                <h:inputSecret id="txtcontrasenanuevcom" stylestyleClassikont-his-txtcontrasenanuevcom"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
+                <h:inputSecret id="txtcontrasenanuevcom" styleClass="ikont-his-txtcontrasenanuevcom"   required="true" maxlength="11" value="#{Perfil$Usuario.contrasenanuevcomf}" onfocus="clearText(this);" onblur="clearText(this);" size="20">
                     <f:validateLength maximum="11" minimum="8"/>
                 </h:inputSecret>
 
@@ -58,7 +58,7 @@
 
             <h:commandButton id="enviar" onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                         return true;"
-                             value="Enviar" action="#{Perfil$Usuario.enviodatos}" stylestyleClassikont-hcl-enviar"   
+                             value="Enviar" action="#{Perfil$Usuario.enviodatos}" styleClass="ikont-hcl-enviar"   
                              type="submit">
 
             </h:commandButton>

@@ -9,94 +9,94 @@
         xmlns:interkont="http://www.interkont.com/jsf"
         >
 
-    <rich:panel header="Proyecto" id="menuProyecto" bodystyleClassikont-rp-adminproyectobody" >
+    <rich:panel header="Proyecto" id="menuProyecto" bodystyleClass="ikont-rp-adminproyectobody" >
 
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
-            <h:panelGrid stylestyleClassikont-hpg-navegarNuevaObra"   cellpadding="0" cellspacing="0">
-                <h:commandLink stylestyleClassikont-hcl-navegarNuevaObra"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
+            <h:panelGrid styleClass="ikont-hpg-navegarNuevaObra"   cellpadding="0" cellspacing="0">
+                <h:commandLink styleClass="ikont-hcl-navegarNuevaObra"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
                                  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
-                <h:commandLink stylestyleClassikont-hcl-tipificación"   value="Tipificación"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit"
+                <h:commandLink styleClass="ikont-hcl-tipificación"   value="Tipificación"   action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit"
                                  >
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-navegarNuevaObra1"   cellpadding="0" cellspacing="0">
-                <h:commandLink  stylestyleClassikont-hcl-navegarNuevaObra1"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
+            <h:panelGrid styleClass="ikont-hpg-navegarNuevaObra1"   cellpadding="0" cellspacing="0">
+                <h:commandLink  styleClass="ikont-hcl-navegarNuevaObra1"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
-                <h:commandLink stylestyleClassikont-hcl-datosbasicos"   value="Datos Basicos" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink styleClass="ikont-hcl-datosbasicos"   value="Datos Basicos" action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
                 </h:commandLink>
             </h:panelGrid>
 
 
-            <h:panelGrid stylestyleClassikont-hpg-pasaraUbicacion"   cellpadding="0" cellspacing="0" >
-                <h:commandLink  stylestyleClassikont-hcl-pasaraUbicacion"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+            <h:panelGrid styleClass="ikont-hpg-pasaraUbicacion"   cellpadding="0" cellspacing="0" >
+                <h:commandLink  styleClass="ikont-hcl-pasaraUbicacion"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
-                <h:commandLink stylestyleClassikont-hcl-ubicarpry"   value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                <h:commandLink styleClass="ikont-hcl-ubicarpry"   value="Ubicar Proyecto" action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-pasoGenerarCronograma"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-pasoGenerarCronograma"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
-                <h:commandLink stylestyleClassikont-hcl-cronograma"   value="Cronograma"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+            <h:panelGrid styleClass="ikont-hpg-pasoGenerarCronograma"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-pasoGenerarCronograma"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+                <h:commandLink styleClass="ikont-hcl-cronograma"   value="Cronograma"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-navegarNuevaObra2"   cellpadding="0" cellspacing="0">
-                <h:commandLink stylestyleClassikont-hcl-navegarNuevaObra2"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+            <h:panelGrid styleClass="ikont-hpg-navegarNuevaObra2"   cellpadding="0" cellspacing="0">
+                <h:commandLink styleClass="ikont-hcl-navegarNuevaObra2"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>
-                <h:commandLink stylestyleClassikont-hcl-subirfotos"   value="Subir Fotos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink styleClass="ikont-hcl-subirfotos"   value="Subir Fotos"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-navegarNuevaObra3"   cellpadding="0" cellspacing="0">
-                <h:commandLink stylestyleClassikont-hcl-navegarNuevaObra3"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+            <h:panelGrid styleClass="ikont-hpg-navegarNuevaObra3"   cellpadding="0" cellspacing="0">
+                <h:commandLink styleClass="ikont-hcl-navegarNuevaObra3"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
-                <h:commandLink stylestyleClassikont-hcl-contrato"   value="Contrato"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                <h:commandLink styleClass="ikont-hcl-contrato"   value="Contrato"  action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
                     <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-impactosocial"   cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink stylestyleClassikont-hcl-imps"   immediate="true"/>
-                <h:commandLink stylestyleClassikont-hcl-imps1"   value="Impacto Social"/>
+            <h:panelGrid styleClass="ikont-hpg-impactosocial"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink styleClass="ikont-hcl-imps"   immediate="true"/>
+                <h:commandLink styleClass="ikont-hcl-imps1"   value="Impacto Social"/>
             </h:panelGrid>
 
-            <h:panelGrid stylestyleClassikont-hpg-subirdocumento"   cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink stylestyleClassikont-hcl-sd"   immediate="true"/>
-                <h:commandLink stylestyleClassikont-hcl-subirdoc"   value="Subir Documentos"/>
+            <h:panelGrid styleClass="ikont-hpg-subirdocumento"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink styleClass="ikont-hcl-sd"   immediate="true"/>
+                <h:commandLink styleClass="ikont-hcl-subirdoc"   value="Subir Documentos"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-validarFinalizar"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-vf"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
-                <h:commandLink stylestyleClassikont-hcl-guardarpry"   value="Guardar Proyecto"  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+            <h:panelGrid styleClass="ikont-hpg-validarFinalizar"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-vf"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+                <h:commandLink styleClass="ikont-hcl-guardarpry"   value="Guardar Proyecto"  action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-guardadoIntermedio"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-guardadoIntermedio"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
-                <h:commandLink stylestyleClassikont-hcl-guardarborrador"   value="Guardar Borrador" action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+            <h:panelGrid styleClass="ikont-hpg-guardadoIntermedio"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-guardadoIntermedio"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+                <h:commandLink styleClass="ikont-hcl-guardarborrador"   value="Guardar Borrador" action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
             </h:panelGrid>
 
-            <h:panelGrid stylestyleClassikont-hpg-rp"   cellpadding="0" cellspacing="0" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra !=null}">
+            <h:panelGrid styleClass="ikont-hpg-rp"   cellpadding="0" cellspacing="0" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra !=null}">
 
-                <a4j:commandLink  stylestyleClassikont-hcl-rp"   execute="@this" immediate="true" id="rp"
+                <a4j:commandLink  styleClass="ikont-hcl-rp"   execute="@this" immediate="true" id="rp"
                                   onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}';" />                                    
 
-                <a4j:commandLink  stylestyleClassikont-hcl-hri"   execute="@this" immediate="true" id="rtT"
+                <a4j:commandLink  styleClass="ikont-hcl-hri"   execute="@this" immediate="true" id="rtT"
                                  value="Historial revisiones de información"  onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra}';"  />
 
 
             </h:panelGrid>  
-            <h:panelGrid stylestyleClassikont-hpg-irdatosbasicos"   cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$IngresarNuevaObra.obranueva.obra}">
-                <a4j:commandLink execute="@this" stylestyleClassikont-hcl-irdatosbasicos"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"
+            <h:panelGrid styleClass="ikont-hpg-irdatosbasicos"   cellpadding="0" cellspacing="0" rendered="#{!empty Supervisor$IngresarNuevaObra.obranueva.obra}">
+                <a4j:commandLink execute="@this" styleClass="ikont-hcl-irdatosbasicos"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"
                                  immediate="true" id="irDatosBasicos"  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
-                <a4j:commandLink execute="@this" stylestyleClassikont-hcl-irdatosbasicos1"   value="#{var.proysuperior}" immediate="true"
+                <a4j:commandLink execute="@this" styleClass="ikont-hcl-irdatosbasicos1"   value="#{var.proysuperior}" immediate="true"
                                  onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra == 0}"/>
-                <a4j:commandLink execute="@this" stylestyleClassikont-irdatosbasicos2"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"
+                <a4j:commandLink execute="@this" styleClass="ikont-irdatosbasicos2"   rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"
                             immediate="true" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';">
                 </a4j:commandLink>
-                <a4j:commandLink execute="@this" stylestyleClassikont-irdatosbasicos3"   value="#{var.proysuperior}" immediate="true"
+                <a4j:commandLink execute="@this" styleClass="ikont-irdatosbasicos3"   value="#{var.proysuperior}" immediate="true"
                                  onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}';" 
                                  rendered="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoestadobra.intestadoobra >= 1}"/>
             </h:panelGrid>

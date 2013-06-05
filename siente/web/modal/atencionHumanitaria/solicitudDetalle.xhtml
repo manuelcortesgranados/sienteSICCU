@@ -8,35 +8,35 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:panel id="panelsolicituddetalle" headerstyleClassrich-panel-header">
+    <rich:panel id="panelsolicituddetalle" headerClassrich-panel-header">
         <center>
             <h:panelGrid columns="6">
-                <h:panelGrid stylestyleClassikont-"  />
-                <h:outputLabel  stylestyleClassikont- "   id="lbldeptocrear"  value="#{var.departamento}:" />
+                <h:panelGrid styleClass="ikont-"  />
+                <h:outputLabel  styleClass="ikont- "   id="lbldeptocrear"  value="#{var.departamento}:" />
                 <h:selectOneMenu id="combodeptocrear" value="#{CrearSolicitudAtencion$Solicitud.codDepartamentoCrear}">
                     <f:selectItems value="#{CrearSolicitudAtencion$Solicitud.departamentoCrear}" />
                     <a4j:ajax event="onchange" render="gpmunicipiocrear" listener="#{CrearSolicitudAtencion$Solicitud.llenarMunicipios}" execute="@this"/>
                 </h:selectOneMenu>
 
-                <h:panelGrid stylestyleClassikont-"  />
-                <h:outputLabel  stylestyleClassikont- "   id="lblmuni"  value="#{var.municipio}:" />
+                <h:panelGrid styleClass="ikont-"  />
+                <h:outputLabel  styleClass="ikont- "   id="lblmuni"  value="#{var.municipio}:" />
                 <h:panelGroup id="gpmunicipiocrear">
                     <h:selectOneMenu value="#{CrearSolicitudAtencion$Solicitud.codMunicipioCrear}">
                         <f:selectItems value="#{CrearSolicitudAtencion$Solicitud.municipioCrear}"/>
                     </h:selectOneMenu>
                 </h:panelGroup>        
 
-                <h:panelGrid stylestyleClassikont-"  />
-                <h:outputLabel  stylestyleClassikont- "   id="lbl"  value="#{var.numerofamiliasah}:" />
+                <h:panelGrid styleClass="ikont-"  />
+                <h:outputLabel  styleClass="ikont- "   id="lbl"  value="#{var.numerofamiliasah}:" />
                 <rich:inputNumberSpinner id="number" minValue="1" maxValue="100"
                                          value="#{SessionBeanCobra.atencionhumanitariaService.solicituddetalle.numcantidadsolicitadaitem}"/>
 
-                <h:outputLabel  stylestyleClassikont- "   />
-                <h:outputLabel  stylestyleClassikont- "   />
-                <h:outputLabel  stylestyleClassikont- "   />
+                <h:outputLabel  styleClass="ikont- "   />
+                <h:outputLabel  styleClass="ikont- "   />
+                <h:outputLabel  styleClass="ikont- "   />
 
-                <h:panelGrid stylestyleClassikont-"  />
-                <h:outputLabel  stylestyleClassikont- "   id="lblDescripciondetalle"  value="#{var.descripcionah}:" />
+                <h:panelGrid styleClass="ikont-"  />
+                <h:outputLabel  styleClass="ikont- "   id="lblDescripciondetalle"  value="#{var.descripcionah}:" />
 
             </h:panelGrid>
             <center>
@@ -55,7 +55,7 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  stylestyleClassikont- "   value="#{var.productoah}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.productoah}"/>
                                 </rich:column>
                                 <rich:column>
                                     <h:outputText  styleClass="ikont- "   value="#{var.descripcionproducto}"/>

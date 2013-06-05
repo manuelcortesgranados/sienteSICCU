@@ -9,17 +9,17 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
-    <rich:popupPanel id="panelRelacionContrato" autosized="true"  headerstyleClassrich-panel-header">
+    <rich:popupPanel id="panelRelacionContrato" autosized="true"  headerClassrich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  stylestyleClassikont-hot-diligenciarR"   value="Diligenciar relación #{var.solicitudproyecto} con contrato"/>
+                <h:outputText  styleClass="ikont-hot-diligenciarR"   value="Diligenciar relación #{var.solicitudproyecto} con contrato"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
 
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContrato">
-                    <a4j:commandLink id="esconder_panelRelacionContrato" stylestyleClassikont-"  
+                    <a4j:commandLink id="esconder_panelRelacionContrato" styleClass="ikont-"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRelacionContrato')}.hide();
                                              return false;"/>
                 </h:form>
@@ -31,36 +31,36 @@
 
                 <h:panelGroup id="layoutpanelRelacionContrato">
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  stylestyleClassikont-hot-contratonumM"   value="Contrato Nº:"/>                        
-                        <h:outputText  stylestyleClassikont-hot-strnumcontratoM"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.strnumcontrato}"  /> 
-                        <h:outputText  stylestyleClassikont-hot-valorContratoM"   value="Valor contrato:" />                        
-                        <h:outputText  stylestyleClassikont-hot-numvlrcontratoM"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.numvlrcontrato}" >
+                        <h:outputText  styleClass="ikont-hot-contratonumM"   value="Contrato Nº:"/>                        
+                        <h:outputText  styleClass="ikont-hot-strnumcontratoM"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.strnumcontrato}"  /> 
+                        <h:outputText  styleClass="ikont-hot-valorContratoM"   value="Valor contrato:" />                        
+                        <h:outputText  styleClass="ikont-hot-numvlrcontratoM"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.contrato.numvlrcontrato}" >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>                        
-                        <h:outputText  stylestyleClassikont-hot-solicitudproyectoM"   value="Valor #{var.solicitudproyecto}:" />
-                        <h:outputText  stylestyleClassikont-hot-valortotalobraM"   value="#{Supervisor$IngresarNuevaObra.valortotalobra}" >
+                        <h:outputText  styleClass="ikont-hot-solicitudproyectoM"   value="Valor #{var.solicitudproyecto}:" />
+                        <h:outputText  styleClass="ikont-hot-valortotalobraM"   value="#{Supervisor$IngresarNuevaObra.valortotalobra}" >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
 
                     </h:panelGrid>
 
                     <interkont:spacer height="30"/>   
-                    <h:outputText  stylestyleClassikont-hot-diponi"   value="Este contrato posee disponibilidad"/>
+                    <h:outputText  styleClass="ikont-hot-diponi"   value="Este contrato posee disponibilidad"/>
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  stylestyleClassikont-hot-por"   value="por" /> 
-                        <h:outputText  stylestyleClassikont-hot-relacioncontrato"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible}">
+                        <h:outputText  styleClass="ikont-hot-por"   value="por" /> 
+                        <h:outputText  styleClass="ikont-hot-relacioncontrato"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalordisponible}">
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
                     </h:panelGrid>
-                    <h:outputText  stylestyleClassikont-hot-textobra6"   value="Qué valor desea asociar a #{var.textobra6}?"   />
+                    <h:outputText  styleClass="ikont-hot-textobra6"   value="Qué valor desea asociar a #{var.textobra6}?"   />
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  stylestyleClassikont-hot-pesos"   value="$"   />
+                        <h:outputText  styleClass="ikont-hot-pesos"   value="$"   />
                         <rich:inputNumberSpinner minValue="0" value="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalorrelacion}" inputSize="30"
                                                  maxValue="#{Supervisor$IngresarNuevaObra.relacioncontrato.numvalormaximo}" >
 
                         </rich:inputNumberSpinner>
                     </h:panelGrid>
-                    <h:outputText  stylestyleClassikont-hot-mensaje"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.mensaje}"  />                   
+                    <h:outputText  styleClass="ikont-hot-mensaje"   value="#{Supervisor$IngresarNuevaObra.relacioncontrato.mensaje}"  />                   
 
                     <h:panelGrid columns="2" >
 

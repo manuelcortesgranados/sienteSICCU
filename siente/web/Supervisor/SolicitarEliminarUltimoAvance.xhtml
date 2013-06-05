@@ -15,8 +15,8 @@
         </ui:define>
 
         <ui:define name="title">
-            <h:outputText  stylestyleClassikont- "    value="Eliminar Último Avance #{var.textoobra3}"/>
-            <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            <h:outputText  styleClass="ikont- "    value="Eliminar Último Avance #{var.textoobra3}"/>
+            <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
         </ui:define>
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -32,21 +32,21 @@
                 <h:panelGroup id="eliminarultavance">
                     <interkont:spacer  height="120"/>
                     <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" >
-                        <h:outputText  stylestyleClassikont- "   value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}" stylestyleClassikont-"  />
+                        <h:outputText  styleClass="ikont- "   value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}" styleClass="ikont-"  />
                         <interkont:spacer  height="15" />                            
-                        <h:outputText  stylestyleClassikont- "   value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función." stylestyleClassikont-"   />
+                        <h:outputText  styleClass="ikont- "   value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función." styleClass="ikont-"   />
                         <interkont:spacer  height="20" />
                         <h:panelGrid columnClasses="panelcenter"  >
                             <h:form  id="form_validareliavance">
                                 <a4j:commandLink value="Eliminar último avance #{var.textoobra3}"
-                                                 stylestyleClassikont-"   onclick="#{rich:component('confirmarEliminarAvance')}.show();return true;">
+                                                 styleClass="ikont-"   onclick="#{rich:component('confirmarEliminarAvance')}.show();return true;">
                                 </a4j:commandLink>  
                             </h:form>
                         </h:panelGrid>
                         <interkont:spacer  height="20" />
                         <h:panelGroup>
-                             <h:graphicImage  stylestyleClassikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
-                            <h:outputText  stylestyleClassikont- "    stylestyleClassikont-"  
+                             <h:graphicImage  styleClass="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                            <h:outputText  styleClass="ikont- "    styleClass="ikont-"  
                                            value="Recuerde que este procedimiento borrará el último reporte de avance y  
                                            los documentos asociados a él." />
               

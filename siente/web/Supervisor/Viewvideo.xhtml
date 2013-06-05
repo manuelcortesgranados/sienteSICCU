@@ -18,8 +18,8 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText  stylestyleClassikont- "   value="#{var.videosproyectos}" />
-        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
+        <h:outputText  styleClass="ikont- "   value="#{var.videosproyectos}" />
+        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
     </ui:define>
     
     <ui:define name="menu">
@@ -38,7 +38,7 @@
             <center>
                 <rich:panel id="pgvideo">
                     <h:panelGroup id="pgvidomostra">
-                        <h:outputLabel  stylestyleClassikont- "   rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
+                        <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
                     </h:panelGroup>
                     
                     <rich:panel id="idpanel" >
@@ -46,9 +46,9 @@
                             <rich:dataGrid value="#{Supervisor$AdministrarObraNew.listaVideoObra}"  var="videoRow" columns="#{Supervisor$AdministrarObraNew.cantidadColumnas}">
                                 <rich:panel >
                                     <h:panelGrid>
-                                        <h:outputText  stylestyleClassikont- "   escape="false" value="#{videoRow.videoHtml}" />
-                                        <h:outputText  stylestyleClassikont- "   id="otxt-strfechavideo"  value="#{videoRow.datefecha}" />
-                                        <h:outputText  stylestyleClassikont- "   id="otxt-strnomvideo"  stylestyleClassikont-"   value="#{videoRow.strnombre}" />
+                                        <h:outputText  styleClass="ikont- "   escape="false" value="#{videoRow.videoHtml}" />
+                                        <h:outputText  styleClass="ikont- "   id="otxt-strfechavideo"  value="#{videoRow.datefecha}" />
+                                        <h:outputText  styleClass="ikont- "   id="otxt-strnomvideo"  styleClass="ikont-"   value="#{videoRow.strnombre}" />
                                     </h:panelGrid>
                                 </rich:panel>
                             </rich:dataGrid>

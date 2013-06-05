@@ -17,7 +17,7 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText  stylestyleClassikont- "   value="#{var.miperfil}"/>
+        <h:outputText  styleClass="ikont- "   value="#{var.miperfil}"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -35,141 +35,141 @@
                 <br/> 
                 <br/>
                 <h:panelGrid columns="2" width="50%" id="pgmiperfil">
-                    <h:outputText  stylestyleClassikont- "   id="lblnombre" value="Nombre" stylestyleClassikont-"   />   
+                    <h:outputText  styleClass="ikont- "   id="lblnombre" value="Nombre" styleClass="ikont-"   />   
                     <h:panelGrid columns="2" width="80%" >
-                        <h:inputText required="true" stylestyleClassikont-"   id="txtnombre" value="#{Perfil$Usuario.usuariomod.tercero.strnombre}" disabled="#{Perfil$Usuario.modificarUsuario}" />
-                        <rich:message stylestyleClassikont-"    for="txtnombre"/>
+                        <h:inputText required="true" styleClass="ikont-"   id="txtnombre" value="#{Perfil$Usuario.usuariomod.tercero.strnombre}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <rich:message styleClass="ikont-"    for="txtnombre"/>
                     </h:panelGrid>
 
-                    <h:outputText  stylestyleClassikont- "   id="lblapellidousuario" value="Primer Apellido" stylestyleClassikont-"    />
-                    <h:inputText stylestyleClassikont-"   id="txtapellido" value="#{Perfil$Usuario.usuariomod.tercero.strapellido1}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                    <h:outputText  styleClass="ikont- "   id="lblapellidousuario" value="Primer Apellido" styleClass="ikont-"    />
+                    <h:inputText styleClass="ikont-"   id="txtapellido" value="#{Perfil$Usuario.usuariomod.tercero.strapellido1}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  stylestyleClassikont- "   id="lblapellidousuario1" value="Segundo Apellido" stylestyleClassikont-"   />
-                    <h:inputText stylestyleClassikont-"   id="txtapellido2" value="#{Perfil$Usuario.usuariomod.tercero.strapellido2}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                    <h:outputText  styleClass="ikont- "   id="lblapellidousuario1" value="Segundo Apellido" styleClass="ikont-"   />
+                    <h:inputText styleClass="ikont-"   id="txtapellido2" value="#{Perfil$Usuario.usuariomod.tercero.strapellido2}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  stylestyleClassikont- "   id="lblcedulausuario" value="Cédula" stylestyleClassikont-"   />
+                    <h:outputText  styleClass="ikont- "   id="lblcedulausuario" value="Cédula" styleClass="ikont-"   />
                     <h:panelGrid columns="2" width="80%">
-                        <h:inputText id="txtCedula" stylestyleClassikont-"   value="#{Perfil$Usuario.usuariomod.tercero.intcedula}" disabled="#{Perfil$Usuario.modificarUsuario}" />
-                        <rich:message stylestyleClassikont-"    for="txtCedula" />
+                        <h:inputText id="txtCedula" styleClass="ikont-"   value="#{Perfil$Usuario.usuariomod.tercero.intcedula}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <rich:message styleClass="ikont-"    for="txtCedula" />
                     </h:panelGrid>
 
-                    <h:outputText  stylestyleClassikont- "   id="lblcorreoelectronico" value="Correo" stylestyleClassikont-"    />
-                    <h:inputText stylestyleClassikont-"   id="textcorreo" value="#{Perfil$Usuario.usuariomod.tercero.stremail}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                    <h:outputText  styleClass="ikont- "   id="lblcorreoelectronico" value="Correo" styleClass="ikont-"    />
+                    <h:inputText styleClass="ikont-"   id="textcorreo" value="#{Perfil$Usuario.usuariomod.tercero.stremail}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  stylestyleClassikont- "   id="lblcelularusuario" value="#{var.celular}" stylestyleClassikont-"    />
-                    <h:inputText id="txtcelular" value="#{Perfil$Usuario.usuariomod.tercero.strmovil}" stylestyleClassikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" />
+                    <h:outputText  styleClass="ikont- "   id="lblcelularusuario" value="#{var.celular}" styleClass="ikont-"    />
+                    <h:inputText id="txtcelular" value="#{Perfil$Usuario.usuariomod.tercero.strmovil}" styleClass="ikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                    <h:outputText  stylestyleClassikont- "   value="Estado" stylestyleClassikont-"   /> 
+                    <h:outputText  styleClass="ikont- "   value="Estado" styleClass="ikont-"   /> 
                     <h:panelGrid columns="2" width="40%">
-                        <h:selectBooleanCheckbox title="#{Perfil$Usuario.estadousuario}" id="estadousuaqrio" stylestyleClassikont-"   value="#{Perfil$Usuario.usuariomod.usuEstado}" disabled="#{Perfil$Usuario.modificarUsuario}" />
-                        <h:outputText  stylestyleClassikont- "   value="#{Perfil$Usuario.estadousuario}" stylestyleClassikont-"   />
+                        <h:selectBooleanCheckbox title="#{Perfil$Usuario.estadousuario}" id="estadousuaqrio" styleClass="ikont-"   value="#{Perfil$Usuario.usuariomod.usuEstado}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <h:outputText  styleClass="ikont- "   value="#{Perfil$Usuario.estadousuario}" styleClass="ikont-"   />
                     </h:panelGrid>
                 </h:panelGrid>
 
                 <rich:collapsiblePanel  header="Detalle Usuario" expanded="true" switchType="ajax">
                     <h:panelGrid columns="4" columnClasses="20%" width="75%" id="tabladetalleusuario">
-                        <h:outputText  stylestyleClassikont- "   value="Tipo usuario" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   id="cmbtipotercero" value="#{Perfil$Usuario.usuariomod.tercero.tipotercero.intcodigotipotercero}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Tipo usuario" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   id="cmbtipotercero" value="#{Perfil$Usuario.usuariomod.tercero.tipotercero.intcodigotipotercero}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipotercerosoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Teléfono" stylestyleClassikont-"    />
-                        <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strtelefono1}" stylestyleClassikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <h:outputText  styleClass="ikont- "   value="Teléfono" styleClass="ikont-"    />
+                        <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strtelefono1}" styleClass="ikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                        <h:outputText  stylestyleClassikont- "   value="Departamento" stylestyleClassikont-"   />
-                        <h:selectOneMenu stylestyleClassikont-"   id="combodepartamentoUsuario" value="#{Perfil$Usuario.coddeptoselec}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Departamento" styleClass="ikont-"   />
+                        <h:selectOneMenu styleClass="ikont-"   id="combodepartamentoUsuario" value="#{Perfil$Usuario.coddeptoselec}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItem itemLabel="Todos" itemValue="#{Perfil$Usuario.todasLocalidad}" />
                             <f:selectItems value="#{Perfil$Usuario.deptosusuariooption}" />
                             <a4j:ajax event="change" listener="#{Perfil$Usuario.llenarMunicipiosUsuario}" execute="@this, combodepartamentoUsuario" render="gpMunicipioUsuario" />
                         </h:selectOneMenu> 
 
-                        <h:outputText  stylestyleClassikont- "   value="Municipio" stylestyleClassikont-"    />
+                        <h:outputText  styleClass="ikont- "   value="Municipio" styleClass="ikont-"    />
                         <h:panelGroup id="gpMunicipioUsuario">
-                            <h:selectOneMenu stylestyleClassikont-"   id="combomunicipioUsuario" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                            <h:selectOneMenu styleClass="ikont-"   id="combomunicipioUsuario" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrcodigolocalidad.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
                                 <f:selectItems value="#{Perfil$Usuario.municipiosusuariooption}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
 
-                        <h:outputText  stylestyleClassikont- "   value="Cargo" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   disabled="#{Perfil$Usuario.modificarUsuario}"
+                        <h:outputText  styleClass="ikont- "   value="Cargo" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   disabled="#{Perfil$Usuario.modificarUsuario}"
                                          value="#{Perfil$Usuario.usuariomod.tercero.cargo.intcargo}">
                             <f:selectItems value="#{Perfil$Usuario.cargosoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Género" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   id="cmbgeneroUsuario" value="#{Perfil$Usuario.usuariomod.tercero.genero.intgenero}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Género" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   id="cmbgeneroUsuario" value="#{Perfil$Usuario.usuariomod.tercero.genero.intgenero}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.generosoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Fecha nacimiento" stylestyleClassikont-"    />
-                        <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" stylestyleClassikont-"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
+                        <h:outputText  styleClass="ikont- "   value="Fecha nacimiento" styleClass="ikont-"    />
+                        <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
                                        value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
 
-                        <h:outputText  stylestyleClassikont- "   value="Dirección" stylestyleClassikont-"    />
-                        <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strdireccionprincipal}" stylestyleClassikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" /> 
+                        <h:outputText  styleClass="ikont- "   value="Dirección" styleClass="ikont-"    />
+                        <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strdireccionprincipal}" styleClass="ikont-"   disabled="#{Perfil$Usuario.modificarUsuario}" /> 
 
-                        <h:outputText  stylestyleClassikont- "   value="Tipo identificación" stylestyleClassikont-"   />
-                        <h:selectOneMenu stylestyleClassikont-"   id="cmbtipoidentificion" value="#{Perfil$Usuario.usuariomod.tercero.tipoidentificacion.intcodigotipoiden}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Tipo identificación" styleClass="ikont-"   />
+                        <h:selectOneMenu styleClass="ikont-"   id="cmbtipoidentificion" value="#{Perfil$Usuario.usuariomod.tercero.tipoidentificacion.intcodigotipoiden}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipoidentificacionsoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Estado civil" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   id="cmbestadocivilusuario" value="#{Perfil$Usuario.usuariomod.tercero.estadoCivil.intestadoCivil}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Estado civil" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   id="cmbestadocivilusuario" value="#{Perfil$Usuario.usuariomod.tercero.estadoCivil.intestadoCivil}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.estadocivilsoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Dpto. de expedición" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   id="combodepartamentosExpdocumento" value="#{Perfil$Usuario.coddeptoexpdocumento}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Dpto. de expedición" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   id="combodepartamentosExpdocumento" value="#{Perfil$Usuario.coddeptoexpdocumento}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.deptosusuariooption}" />
                             <a4j:ajax event="change" listener="#{Perfil$Usuario.llenarMunicipiosExpedicion}" execute="@this, combodepartamentosExpdocumento" render="gpMuniExpdocumento" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Mcpio. de expedición" stylestyleClassikont-"    />
+                        <h:outputText  styleClass="ikont- "   value="Mcpio. de expedición" styleClass="ikont-"    />
                         <h:panelGroup id="gpMuniExpdocumento">
-                            <h:selectOneMenu stylestyleClassikont-"   id="combomunicipioExpdocumento" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrlocalidadexpdocumento.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                            <h:selectOneMenu styleClass="ikont-"   id="combomunicipioExpdocumento" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrlocalidadexpdocumento.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
                                 <f:selectItems value="#{Perfil$Usuario.municipiosexpdocumentooption}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
 
-                        <h:outputText  stylestyleClassikont- "   value="Dpto. de Nacimiento" stylestyleClassikont-"    />
-                        <h:selectOneMenu stylestyleClassikont-"   id="combodepartamentoNacimiento" value="#{Perfil$Usuario.coddeptonacimiento}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Dpto. de Nacimiento" styleClass="ikont-"    />
+                        <h:selectOneMenu styleClass="ikont-"   id="combodepartamentoNacimiento" value="#{Perfil$Usuario.coddeptonacimiento}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.deptosusuariooption}" />
                             <a4j:ajax event="change" listener="#{Perfil$Usuario.llenarMunicipiosNacimiento}" execute="@this, combomunicipioNacimiento" render="gpMuniNacimiento" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Mcpio. de Nacimiento" stylestyleClassikont-"    />
+                        <h:outputText  styleClass="ikont- "   value="Mcpio. de Nacimiento" styleClass="ikont-"    />
                         <h:panelGroup id="gpMuniNacimiento">
-                            <h:selectOneMenu stylestyleClassikont-"   id="combomunicipioNacimiento" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
+                            <h:selectOneMenu styleClass="ikont-"   id="combomunicipioNacimiento" value="#{Perfil$Usuario.usuariomod.tercero.localidadByStrlocalidadnacimiento.strcodigolocalidad}" disabled="#{Perfil$Usuario.modificarUsuario}">
                                 <f:selectItems value="#{Perfil$Usuario.municipiosnacimientooption}" />
                             </h:selectOneMenu>
                         </h:panelGroup>
 
-                        <h:outputText  stylestyleClassikont- "   value="Tipo origen" stylestyleClassikont-"   />
-                        <h:selectOneMenu stylestyleClassikont-"   id="selecttiposorigenes" disabled="#{Perfil$Usuario.modificarUsuario}">
+                        <h:outputText  styleClass="ikont- "   value="Tipo origen" styleClass="ikont-"   />
+                        <h:selectOneMenu styleClass="ikont-"   id="selecttiposorigenes" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipoorigensoption}" />
                         </h:selectOneMenu>
 
-                        <h:outputText  stylestyleClassikont- "   value="Página web" stylestyleClassikont-"    />
-                        <h:inputText stylestyleClassikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strpaginaweb}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <h:outputText  styleClass="ikont- "   value="Página web" styleClass="ikont-"    />
+                        <h:inputText styleClass="ikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strpaginaweb}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                        <h:outputText  stylestyleClassikont- "   value="Twitter" stylestyleClassikont-"    />
-                        <h:inputText stylestyleClassikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strtwiter}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <h:outputText  styleClass="ikont- "   value="Twitter" styleClass="ikont-"    />
+                        <h:inputText styleClass="ikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strtwiter}" disabled="#{Perfil$Usuario.modificarUsuario}" />
 
-                        <h:outputText  stylestyleClassikont- "   value="Facebook" stylestyleClassikont-"    />
-                        <h:inputText stylestyleClassikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strfacebook}" disabled="#{Perfil$Usuario.modificarUsuario}" />
+                        <h:outputText  styleClass="ikont- "   value="Facebook" styleClass="ikont-"    />
+                        <h:inputText styleClass="ikont-"   value="#{Perfil$Usuario.usuariomod.tercero.strfacebook}" disabled="#{Perfil$Usuario.modificarUsuario}" />
                     </h:panelGrid>
                     <center>
                         <h:panelGroup id="btndeshabilitarModificar">
                             <h:panelGrid rendered="#{Perfil$Usuario.deshabilitarBotonModificar}">
-                                <a4j:commandLink id="btnModificarUsuario" stylestyleClassikont-"   action="#{Perfil$Usuario.habilitarModificarUsuario}" 
+                                <a4j:commandLink id="btnModificarUsuario" styleClass="ikont-"   action="#{Perfil$Usuario.habilitarModificarUsuario}" 
                                                  render="formModificarUsuario, pgmiperfil, tabladetalleusuario" execute="btnHabilitarGuardarCancelar, btndeshabilitarModificar" />
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGroup id="btnHabilitarGuardarCancelar">
                             <h:panelGrid columns="2" rendered="#{Perfil$Usuario.habilitarBotonGuardar}">
-                                <a4j:commandLink id="btnGuardarModificacion" stylestyleClassikont-"   action="#{Perfil$Usuario.guardarModificacion}" 
+                                <a4j:commandLink id="btnGuardarModificacion" styleClass="ikont-"   action="#{Perfil$Usuario.guardarModificacion}" 
                                                  render="formModificarUsuario, pgmiperfil, tabladetalleusuario" execute="btnHabilitarGuardarCancelar, btndeshabilitarModificar" />
-                                <a4j:commandLink id="btnCancelarModificacion" stylestyleClassikont-"   action="#{Perfil$Usuario.btnCancelar}" 
+                                <a4j:commandLink id="btnCancelarModificacion" styleClass="ikont-"   action="#{Perfil$Usuario.btnCancelar}" 
                                                  render="formModificarUsuario, pgmiperfil, tabladetalleusuario" execute="@this, btnHabilitarGuardarCancelar, btndeshabilitarModificar" />
                             </h:panelGrid>
                         </h:panelGroup>

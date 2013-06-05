@@ -11,24 +11,24 @@
 
     <rich:panel header="Atención Humanitaria" id="menuAtencion">
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
-            <h:panelGrid stylestyleClassikont-hpg-menuatencion"   cellpadding="0" cellspacing="0" > 
-                <h:commandLink stylestyleClassikont-hcl-btnregistraratencionhumanitaria"   immediate="true"
+            <h:panelGrid styleClass="ikont-hpg-menuatencion"   cellpadding="0" cellspacing="0" > 
+                <h:commandLink styleClass="ikont-hcl-btnregistraratencionhumanitaria"   immediate="true"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}"                               
                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
-                <h:commandLink stylestyleClassikont-hcl-registrarsolicitud"   value="Registrar Solicitud"
+                <h:commandLink styleClass="ikont-hcl-registrarsolicitud"   value="Registrar Solicitud"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearsolicitudatencion}"
                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnregistrar_atencion_humanitaria}"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-homesolicitudes"   cellpadding="0" cellspacing="0" >
-                <h:commandLink stylestyleClassikont-hcl-homesolicitudes"   immediate="true"
+            <h:panelGrid styleClass="ikont-hpg-homesolicitudes"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-homesolicitudes"   immediate="true"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
-                <h:commandLink stylestyleClassikont-hcl-consultarsolicitudes"   value="Consultar Solicitudes"
+                <h:commandLink styleClass="ikont-hcl-consultarsolicitudes"   value="Consultar Solicitudes"
                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.homeSolicitudes}"/>
 
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >  
-                <h:commandLink stylestyleClassikont-hcl-irreportesdetalle"   immediate="true" action="irreportesdetalle" />
-                <a4j:commandLink stylestyleClassikont-a4j-irreportesdetalle"   value="Reporte"  action="irreportesdetalle"/>
+            <h:panelGrid styleClass="ikont-hpg-irreportesdetalle"   cellpadding="0" cellspacing="0" >  
+                <h:commandLink styleClass="ikont-hcl-irreportesdetalle"   immediate="true" action="irreportesdetalle" />
+                <a4j:commandLink styleClass="ikont-a4j-irreportesdetalle"   value="Reporte"  action="irreportesdetalle"/>
             </h:panelGrid>
             
 

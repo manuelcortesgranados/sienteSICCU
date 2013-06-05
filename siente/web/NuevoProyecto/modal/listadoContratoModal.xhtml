@@ -9,24 +9,24 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="mp-listado-contratos" moveable="true"   headerstyleClassrich-panel-header" autosized="true">
+    <rich:popupPanel id="mp-listado-contratos" moveable="true"   headerClassrich-panel-header" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  stylestyleClassikont-hot-listarcontratos"   value="#{var.listarcontratos}" />
+                <h:outputText  styleClass="ikont-hot-listarcontratos"   value="#{var.listarcontratos}" />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-contratos" immediate="true"
-                                       stylestyleClassikont-hcl-listadocontratos"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
+                                       styleClass="ikont-hcl-listadocontratos"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
                 <h:panelGroup id="gpTotalCont">
                     <h:panelGrid columns="2" >
-                        <h:outputText  stylestyleClassikont-hot-buscar"   value="#{var.buscar} " />
+                        <h:outputText  styleClass="ikont-hot-buscar"   value="#{var.buscar} " />
                         <h:panelGroup>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.filtrocontrato.palabraClave}" size="20"/>
                             <a4j:commandButton value="#{var.buscar}" action="#{Supervisor$IngresarNuevaObra.buscarContrato}" render="tablacontratos,gpTotalCont"/>
@@ -37,7 +37,7 @@
 
                     <rich:panel >
                         <h:panelGrid >
-                            <h:outputText  stylestyleClassikont-hot-dilienidad"   value="Debe diligenciar el campo Entidad Contratante"  rendered="#{Supervisor$IngresarNuevaObra.obranueva.tercero.intcodigo==0}"/>
+                            <h:outputText  styleClass="ikont-hot-dilienidad"   value="Debe diligenciar el campo Entidad Contratante"  rendered="#{Supervisor$IngresarNuevaObra.obranueva.tercero.intcodigo==0}"/>
                             <interkont:spacer height="5" />
 
                             <rich:dataTable id="tablacontratos" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tercero.intcodigo!=0}"
@@ -51,53 +51,53 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="7">
-                                            <h:outputText  stylestyleClassikont-hot-contratos"   value="#{var.contratos} #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina}#{var.deCiu}#{Supervisor$IngresarNuevaObra.totalpaginas}" />
+                                            <h:outputText  styleClass="ikont-hot-contratos"   value="#{var.contratos} #{Supervisor$IngresarNuevaObra.totalfilas} #{var.paginaCiu} #{Supervisor$IngresarNuevaObra.pagina}#{var.deCiu}#{Supervisor$IngresarNuevaObra.totalpaginas}" />
                                         </rich:column>
                                         <rich:column  breakRowBefore="true">
-                                            <h:outputText  stylestyleClassikont-hot-numerocontrato"   value="#{var.numerocontrato}"/>
+                                            <h:outputText  styleClass="ikont-hot-numerocontrato"   value="#{var.numerocontrato}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-nombre"   value="#{var.nombre}"/>
+                                            <h:outputText  styleClass="ikont-hot-nombre"   value="#{var.nombre}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-valorContrato"   value="Valor Contrato"/>
+                                            <h:outputText  styleClass="ikont-hot-valorContrato"   value="Valor Contrato"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-valordisponible"   value="Valor Disponible"/>
+                                            <h:outputText  styleClass="ikont-hot-valordisponible"   value="Valor Disponible"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-datefechaini"   value="#{var.datefechaini}"/>
+                                            <h:outputText  styleClass="ikont-hot-datefechaini"   value="#{var.datefechaini}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-datefechafin"   value="#{var.datefechafin}"/>
+                                            <h:outputText  styleClass="ikont-hot-datefechafin"   value="#{var.datefechafin}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont-hot-seleccionar"   value="#{var.seleccionar}"/>
+                                            <h:outputText  styleClass="ikont-hot-seleccionar"   value="#{var.seleccionar}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:columnGroup id="cuerpoContrato">
                                     <rich:column  breakRowBefore="true">
-                                        <h:outputText  stylestyleClassikont-hot-txt_contrato"   id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
+                                        <h:outputText  styleClass="ikont-hot-txt_contrato"   id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
                                     </rich:column>
                                     <rich:column >
                                         <h:inputTextarea id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"  disabled="true" cols="35" rows="2"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  stylestyleClassikont-hot-outvlcontrato"   id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
+                                        <h:outputText  styleClass="ikont-hot-outvlcontrato"   id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  stylestyleClassikont-hot-vlcondis "   id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
+                                        <h:outputText  styleClass="ikont-hot-vlcondis "   id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  stylestyleClassikont-hot-datefechaini1"    value="#{currentRow.datefechaini}"/>
+                                        <h:outputText  styleClass="ikont-hot-datefechaini1"    value="#{currentRow.datefechaini}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  stylestyleClassikont-hot-datefechafin1 "    value="#{currentRow.datefechafin}"/>
+                                        <h:outputText  styleClass="ikont-hot-datefechafin1 "    value="#{currentRow.datefechafin}"/>
                                     </rich:column>
                                     <rich:column  >
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.agregarContrato(filaSeleccionada)}"                                                           

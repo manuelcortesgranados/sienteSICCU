@@ -9,45 +9,45 @@
     xmlns:interkont="http://www.interkont.com/jsf">
 
     <rich:panel header="#{SessionBeanCobra.cobraService.headerNombre}" id="menuInicio" >
-        <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  stylestyleClassikont-hpg-menulateralgestion"  >
+        <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  styleClass="ikont-hpg-menulateralgestion"  >
 
-            <h:panelGrid stylestyleClassikont-hpg-nuevoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
-                <a4j:commandLink  stylestyleClassikont-acl-crearnuevoproyecto"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true"  />
-                <a4j:commandLink  stylestyleClassikont-acl-nuevoproyecto"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true" />
+            <h:panelGrid styleClass="ikont-hpg-nuevoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
+                <a4j:commandLink  styleClass="ikont-acl-crearnuevoproyecto"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true"  />
+                <a4j:commandLink  styleClass="ikont-acl-nuevoproyecto"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}" render="panelBody" immediate="true" />
             </h:panelGrid>
 
-            <h:panelGrid stylestyleClassikont-hpg-mapa"   cellpadding="0" cellspacing="0" >
-                <h:commandLink  stylestyleClassikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
-                <h:commandLink  stylestyleClassikont-hcl-activarmapa"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false" />
+            <h:panelGrid styleClass="ikont-hpg-mapa"   cellpadding="0" cellspacing="0" >
+                <h:commandLink  styleClass="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
+                <h:commandLink  styleClass="ikont-hcl-activarmapa"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false" />
             </h:panelGrid>
 
-            <h:panelGrid stylestyleClassikont-hpg-iniciartablerocontrol"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
-                <h:commandLink  stylestyleClassikont-hcl-iniciartablerocontrol"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />
-                <h:commandLink  stylestyleClassikont-hcl-tablerocontrol"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
+            <h:panelGrid styleClass="ikont-hpg-iniciartablerocontrol"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
+                <h:commandLink  styleClass="ikont-hcl-iniciartablerocontrol"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />
+                <h:commandLink  styleClass="ikont-hcl-tablerocontrol"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
             </h:panelGrid>
 
-            <h:panelGrid stylestyleClassikont-hpg-iniciarreporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"> 
-                <h:commandLink stylestyleClassikont-hcl-iniciarreporte"   action="reportes" immediate="true" />
-                <h:commandLink stylestyleClassikont-hcl-reporte"   value="Reportes" action="reportes" immediate="true" />
+            <h:panelGrid styleClass="ikont-hpg-iniciarreporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarreporte"   action="reportes" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-reporte"   value="Reportes" action="reportes" immediate="true" />
             </h:panelGrid>           
-            <h:panelGrid stylestyleClassikont-hcl-nuevocontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"> 
-                <a4j:commandLink stylestyleClassikont-acl-iniciarnuevocontrato"    actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato" />
-                <a4j:commandLink stylestyleClassikont-acl-nuevocontrato"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato"/>
+            <h:panelGrid styleClass="ikont-hcl-nuevocontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"> 
+                <a4j:commandLink styleClass="ikont-acl-iniciarnuevocontrato"    actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato" />
+                <a4j:commandLink styleClass="ikont-acl-nuevocontrato"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}" render="panelBody" action="nuevoContrato"/>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-iniciarnuevoconvenio"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"> 
-                <a4j:commandLink stylestyleClassikont-acl-iniciarnuevoconvenio"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
+            <h:panelGrid styleClass="ikont-hpg-iniciarnuevoconvenio"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"> 
+                <a4j:commandLink styleClass="ikont-acl-iniciarnuevoconvenio"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
                     <f:attribute name="isContrato" value="#{false}" />
                 </a4j:commandLink>
-                <a4j:commandLink stylestyleClassikont-acl-nuevoconvenio"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.contratoConvenio}" action="nuevoContrato" >
+                <a4j:commandLink styleClass="ikont-acl-nuevoconvenio"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.contratoConvenio}" action="nuevoContrato" >
                 </a4j:commandLink>
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-iniciarindicadores"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnindicadores}"> 
-                <a4j:commandLink stylestyleClassikont-acl-iniciarindicadores"   action="indicadores" immediate="true" />
-                <a4j:commandLink stylestyleClassikont-acl-indicadores"   value="Indicadores" action="indicadores" immediate="true" />
+            <h:panelGrid styleClass="ikont-hpg-iniciarindicadores"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnindicadores}"> 
+                <a4j:commandLink styleClass="ikont-acl-iniciarindicadores"   action="indicadores" immediate="true" />
+                <a4j:commandLink styleClass="ikont-acl-indicadores"   value="Indicadores" action="indicadores" immediate="true" />
             </h:panelGrid>
-            <h:panelGrid stylestyleClassikont-hpg-iniciarsoporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"> 
-                <h:outputLink stylestyleClassikont-hol-iniciarsoporte"   target="_blank" value="#{var.linksoporte}" />
-                <a4j:commandLink id="btSoporte" stylestyleClassikont-acl-soporte"   value="Soporte" onclick="document.location.href='#{var.linksoporte}';"
+            <h:panelGrid styleClass="ikont-hpg-iniciarsoporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"> 
+                <h:outputLink styleClass="ikont-hol-iniciarsoporte"   target="_blank" value="#{var.linksoporte}" />
+                <a4j:commandLink id="btSoporte" styleClass="ikont-acl-soporte"   value="Soporte" onclick="document.location.href='#{var.linksoporte}';"
                                  />
             </h:panelGrid>
 

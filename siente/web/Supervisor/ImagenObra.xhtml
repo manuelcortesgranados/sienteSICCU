@@ -18,8 +18,8 @@
         <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  stylestyleClassikont- "    value="#{var.imagenesproyecto}"/>            
-        <h:outputText  stylestyleClassikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  styleClass="ikont- "    value="#{var.imagenesproyecto}"/>            
+        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -40,7 +40,7 @@
                     <h:panelGroup >
                         <center>
                             <h:panelGroup>
-                                <h:outputText  stylestyleClassikont- "    value="#{var.houtbusquedarapida} "/>
+                                <h:outputText  styleClass="ikont- "    value="#{var.houtbusquedarapida} "/>
                                 <h:inputText id="idpalabraclave" value="#{Supervisor$AdministrarObraNew.palabraclave}" size="52"/>
                                 <a4j:commandButton render="tablaImagenesevolucion" action="#{Supervisor$AdministrarObraNew.buscarimg}" value="Buscar" execute="idpalabraclave, @this"/>
                             </h:panelGroup>
@@ -57,11 +57,11 @@
                                                 rowClasses="cabezo_tabla01, cabezo_tabla02">
                                     <rich:column sortBy="#{currentRow.strubicacion}" width="470px" id="Imagen" >
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.imagenes}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.imagenes}"/>
                                         </f:facet>
                                         <center>
                                             <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}" immediate="true">
-                                                <h:graphicImage  stylestyleClassikont- "   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
+                                                <h:graphicImage  styleClass="ikont- "   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
                                                                 />
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
@@ -75,49 +75,49 @@
                                     <rich:column 
                                         sortBy="#{currentRow.strnombre}" width="470px">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.descripcion}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.descripcion}"/>
                                         </f:facet>
-                                        <h:outputText  stylestyleClassikont- "   value="#{currentRow.strnombre}"/>
+                                        <h:outputText  styleClass="ikont- "   value="#{currentRow.strnombre}"/>
                                     </rich:column>
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.tipo}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
                                         </f:facet>
-                                        <h:outputText  stylestyleClassikont- "   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                        <h:outputText  styleClass="ikont- "   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
                                     </rich:column>
                                     <rich:column sortBy="#{currentRow.datefecha}" width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   id="fechadelaimagen" value="#{var.fechadelaimagen}"/>
+                                            <h:outputText  styleClass="ikont- "   id="fechadelaimagen" value="#{var.fechadelaimagen}"/>
                                         </f:facet>
-                                        <h:outputText  stylestyleClassikont- "   value="#{currentRow.datefecha}">
+                                        <h:outputText  styleClass="ikont- "   value="#{currentRow.datefecha}">
                                             <f:convertDateTime pattern="yyyy-MMM-dd"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.Ver}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
                                         </f:facet>
                                         <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}"
                                                        immediate="true">
-                                            <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_ver.png"/>
+                                            <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
                                         </h:commandLink>
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.editar}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.editar}"/>
                                         </f:facet>
                                         <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action(filaSeleccionada)}"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" execute="@this"
                                                          oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show(); return true;"
                                                          title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true">
-                                            <h:graphicImage  stylestyleClassikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
+                                            <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.establecervalla}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.establecervalla}"/>
                                         </f:facet>
-                                        <h:selectBooleanCheckbox  stylestyleClassikont-"  value="#{currentRow.booleanvalla}" 
+                                        <h:selectBooleanCheckbox  styleClass="ikont-"  value="#{currentRow.booleanvalla}" 
                                                                  disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.show(); return true;"
@@ -126,9 +126,9 @@
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_editarimagen}">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.establecerimagenactual}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.establecerimagenactual}"/>
                                         </f:facet>
-                                        <h:selectBooleanCheckbox  stylestyleClassikont-"  value="#{currentRow.booleanactual}" 
+                                        <h:selectBooleanCheckbox  styleClass="ikont-"  value="#{currentRow.booleanactual}" 
                                                                  disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.show(); return true;"
@@ -137,12 +137,12 @@
                                     </rich:column>
                                     <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.ver_eliminarimagen}">
                                         <f:facet name="header">
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.eliminar}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
                                         </f:facet>
                                         <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action(filaSeleccionada)}" execute="@this"
                                                          render="tablaImagenesevolucion"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" title="#{var.eliminar}"  immediate="true">
-                                            <h:graphicImage  stylestyleClassikont- "    value="/resources/imgs/bt_eliminar.png"/>
+                                            <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_eliminar.png"/>
                                         </a4j:commandLink>
                                     </rich:column>
                                     <f:facet name="footer">
@@ -164,19 +164,19 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="3" >
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.subidarapidadeimagenes}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.subidarapidadeimagenes}"/>
                                         </rich:column>
                                         <rich:column breakRowBefore="true" >
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.descripcion}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.descripcion}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.tipo}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.fechadelaimagen}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.fechadelaimagen}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  stylestyleClassikont- "   value="#{var.subir}"/>
+                                            <h:outputText  styleClass="ikont- "   value="#{var.subir}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
@@ -200,10 +200,10 @@
 
                                         <rich:column >
                                             <h:panelGrid id="panel_subir_imagenevolucion"  columns="3">
-                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" stylestyleClassikont-"  
+                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" styleClass="ikont-"  
                                                                    oncomplete="#{rich:component('panelUploadImagenevolucion')}.show(); return true;"/>
                                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file" >
-                                                    <h:outputText  stylestyleClassikont- "   id="otxt_nombrearchivo" value=" #{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont- "   id="otxt_nombrearchivo" value=" #{file.nombre}"/>
                                                 </rich:dataGrid>
                                                 <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_imagenevolucion_action}"
                                                                    title="#{var.agregar}"

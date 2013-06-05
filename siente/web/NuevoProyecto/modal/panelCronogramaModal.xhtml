@@ -8,17 +8,17 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerstyleClassrich-panel-header">
+    <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClassrich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  stylestyleClassikont-hot-atencion"   value="#{var.atencion}"  />
+                <h:outputText  styleClass="ikont-hot-atencion"   value="#{var.atencion}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
 
             <h:panelGroup>
                 <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
-                                 stylestyleClassikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
+                                 styleClass="ikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
                                                   return false;"/>
             </h:panelGroup>
 
@@ -32,20 +32,20 @@
 
                     <h:panelGroup>
 
-                        <h:outputText  stylestyleClassikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
-                        <h:outputText  stylestyleClassikont-hot-cobra"     value="#{var.cobra} "/>
-                        <h:outputText  stylestyleClassikont-hot-vaagenerar"     value="#{var.vaagenerar} "/>
-                        <h:outputText  stylestyleClassikont-hot-cronograma"    value="#{var.cronograma} "/>
-                        <h:outputText  stylestyleClassikont-hot-en"      value="#{var.en} "/>
-                        <h:outputText  stylestyleClassikont-hot-excel"    value="#{var.excel} "/>
-                        <h:outputText  stylestyleClassikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}"/>
-                        <h:outputText  stylestyleClassikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
-                        <h:outputText  stylestyleClassikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
+                        <h:outputText  styleClass="ikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
+                        <h:outputText  styleClass="ikont-hot-cobra"     value="#{var.cobra} "/>
+                        <h:outputText  styleClass="ikont-hot-vaagenerar"     value="#{var.vaagenerar} "/>
+                        <h:outputText  styleClass="ikont-hot-cronograma"    value="#{var.cronograma} "/>
+                        <h:outputText  styleClass="ikont-hot-en"      value="#{var.en} "/>
+                        <h:outputText  styleClass="ikont-hot-excel"    value="#{var.excel} "/>
+                        <h:outputText  styleClass="ikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}"/>
+                        <h:outputText  styleClass="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
+                        <h:outputText  styleClass="ikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
                     </h:panelGroup>
 
                     <h:panelGrid>
                         <interkont:spacer height="5"/>
-                        <h:outputText  stylestyleClassikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
+                        <h:outputText  styleClass="ikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
 
                     </h:panelGrid>
 
@@ -54,7 +54,7 @@
                         <h:form>
                             <interkont:spacer height="20"/>
                             <h:commandButton value="#{var.generarcronograma}"                                                
-                                             stylestyleClassikont-"  
+                                             styleClass="ikont-"  
                                              action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
                                              onclick="#{rich:component('mp_cronograma')}.hide();">
                             </h:commandButton>

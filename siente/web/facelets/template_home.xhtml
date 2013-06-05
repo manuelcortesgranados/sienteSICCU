@@ -9,7 +9,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><h:outputText  stylestyleClassikont-hot-titulogeneral "   value="#{var.titulogeneral}"></h:outputText></title>
+        <title><h:outputText  styleClass="ikont-hot-titulogeneral "   value="#{var.titulogeneral}"></h:outputText></title>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>           
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/home.css?#{var.version}" rel="stylesheet" type="text/css"/>
@@ -50,7 +50,7 @@
     <h:body>
         <h:form>
             <h:commandLink type="submit" action="#{SessionBeanCobra.cerrarSession_action}" id="salir"
-                           stylestyleClassikont-hcl-salir"  />
+                           styleClass="ikont-hcl-salir"  />
       </h:form>
         <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
             <tr>
@@ -64,7 +64,7 @@
         <h:panelGroup rendered="#{var.logologin}">
             <table width="620" border="0" cellspacing="0" cellpadding="0" align="center">
                 <tr>
-                    <td stylestyleClasstext02" align="center"><img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/Logo_republica.png" width="70" height="70"/></td>
+                    <td styleClasstext02" align="center"><img src="#{facesContext.externalContext.requestContextPath}/resources/imgs/Logo_republica.png" width="70" height="70"/></td>
                 </tr>
             </table>
         </h:panelGroup>

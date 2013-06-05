@@ -9,26 +9,26 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel height="200" id="panelGuardado" resizeable="false" width="350" 
-                     headerstyleClassrich-panel-header">
+                     headerClassrich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  stylestyleClassikont-hot-guardado"    value="#{var.guardado}"/>
+                <h:outputText  styleClass="ikont-hot-guardado"    value="#{var.guardado}"/>
             </h:panelGroup>
         </f:facet>
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelGuardado" stylestyleClassikont-hcl-esconder"  
+                    <a4j:commandLink id="esconder_panelGuardado" styleClass="ikont-hcl-esconder"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelGuardado')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel stylestyleClassikont-"   >
+        <rich:panel styleClass="ikont-"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
-                    <h:outputText  stylestyleClassikont-hot-laobra"   value="#{var.laobra}" />
-                    <h:outputText  stylestyleClassikont-hot-strnombreobra "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"  />
-                    <h:outputText  stylestyleClassikont-hot-aliexi"   value="#{var.hasidoalimentadaexitosa}" />
+                    <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" />
+                    <h:outputText  styleClass="ikont-hot-strnombreobra "   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"  />
+                    <h:outputText  styleClass="ikont-hot-aliexi"   value="#{var.hasidoalimentadaexitosa}" />
                 </h:panelGrid>
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}"

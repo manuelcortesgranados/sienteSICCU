@@ -10,33 +10,33 @@
     >
 
     <interkont:spacer  height="10"/>
-    <rich:panel stylestyleClassikont-rp-infogeneral"   header="Información General" id="infogeneral">
-        <h:graphicImage stylestyleClassikont-hgi-strimagneobra" url="#{var.ipserver}#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.strimagenobra}" />
+    <rich:panel styleClass="ikont-rp-infogeneral"   header="Información General" id="infogeneral">
+        <h:graphicImage styleClass="ikont-hgi-strimagneobra" url="#{var.ipserver}#{var.versioncobra}#{Supervisor$AdministrarObraNew.obra.strimagenobra}" />
         <h:panelGrid columns="6">
             <interkont:spacer width="35"/>
-            <h:graphicImage  stylestyleClassikont- "    url="/resources/imgs/star_a.png"/>
-            <h:graphicImage  stylestyleClassikont- "    url="/resources/imgs/star_a.png"/>
-            <h:graphicImage  stylestyleClassikont- "    url="/resources/imgs/star_a.png"/>
-            <h:graphicImage  stylestyleClassikont- "    url="/resources/imgs/star_a.png"/>
-            <h:graphicImage  stylestyleClassikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
+            <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/star_a.png"/>
         </h:panelGrid>
-        <h:panelGrid stylestyleClassikont-hpg-strobjetoobra"   >
-            <h:outputText  stylestyleClassikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
+        <h:panelGrid styleClass="ikont-hpg-strobjetoobra"   >
+            <h:outputText  styleClass="ikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" />
         </h:panelGrid>
         <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda">
-            <h:outputText  stylestyleClassikont-hot-valor "   value="#{var.valor}"/>
-            <h:outputText  stylestyleClassikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+            <h:outputText  styleClass="ikont-hot-valor "   value="#{var.valor}"/>
+            <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                 <f:convertNumber pattern="$###,###"/>
             </h:outputText>
-            <h:outputText  stylestyleClassikont-hot-avancefisico"   value="#{var.avancefisico}" />
-            <h:outputText  stylestyleClassikont-hot-totalavancefisico"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+            <h:outputText  styleClass="ikont-hot-avancefisico"   value="#{var.avancefisico}" />
+            <h:outputText  styleClass="ikont-hot-totalavancefisico"   value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                 <f:convertNumber pattern="###.## %"/>
             </h:outputText>
-            <h:outputText  stylestyleClassikont-hot-intduration"   value="#{var.intduracion}" />
-            <h:outputText  stylestyleClassikont-hot-intplazoobra"   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
-            <h:outputText  stylestyleClassikont-hot-contratistas"   value="#{var.contratista}(s)" />
+            <h:outputText  styleClass="ikont-hot-intduration"   value="#{var.intduracion}" />
+            <h:outputText  styleClass="ikont-hot-intplazoobra"   value="#{Supervisor$AdministrarObraNew.obra.intplazoobra} #{var.dias}" />
+            <h:outputText  styleClass="ikont-hot-contratistas"   value="#{var.contratista}(s)" />
             <rich:panel   >
-                <h:outputLabel  stylestyleClassikont-hol-contratistanombrecomple" id="st_strnomcontratista" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
+                <h:outputLabel  styleClass="ikont-hol-contratistanombrecomple" id="st_strnomcontratista" value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
             </rich:panel>
         </h:panelGrid>
     </rich:panel>
