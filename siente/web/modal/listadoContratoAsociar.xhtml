@@ -10,7 +10,7 @@
     <rich:popupPanel id="mp-listado-contratos-asociar" moveable="true"  width="800" height="400" headerstyleClass="rich-panel-header" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.listarcontratos}" styleClass="id-jsf-"   />
+                <h:outputText  styleClass="ikont "   value="#{var.listarcontratos}" styleClass="ikont"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -18,7 +18,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-contratos-asociar"
                                      onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); return false;" immediate="true"
-                                     styleClass="id-jsf-"   />
+                                     styleClass="ikont"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -26,7 +26,7 @@
             <h:form>
                 <h:panelGroup id="gpTotalContAso">
                     <h:panelGrid columns="2" >
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.buscar} " />
+                        <h:outputText  styleClass="ikont "   value="#{var.buscar} " />
                         <h:panelGroup>
                             <h:inputText value="#{Supervisor$AsociarContratos.nomcontraro}" size="20"/>
                             <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$AsociarContratos.buscarContrato}" render="tablacontratosasociar,gpTotalContAso"/>
@@ -51,53 +51,53 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="7">
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.contratos} #{Supervisor$AsociarContratos.totalfilas} #{var.paginaCiu} #{Supervisor$AsociarContratos.pagina}#{var.deCiu}#{Supervisor$AsociarContratos.totalpaginas}" />
+                                            <h:outputText  styleClass="ikont "   value="#{var.contratos} #{Supervisor$AsociarContratos.totalfilas} #{var.paginaCiu} #{Supervisor$AsociarContratos.pagina}#{var.deCiu}#{Supervisor$AsociarContratos.totalpaginas}" />
                                         </rich:column>
                                         <rich:column  breakRowBefore="true">
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.numerocontrato}"/>
+                                            <h:outputText  styleClass="ikont "   value="#{var.numerocontrato}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}"/>
+                                            <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="id-jsf- "   value="Valor Contrato"/>
+                                            <h:outputText  styleClass="ikont "   value="Valor Contrato"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="id-jsf- "   value="Valor Disponible"/>
+                                            <h:outputText  styleClass="ikont "   value="Valor Disponible"/>
                                         </rich:column>
                                         <rich:column width="150px">
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.datefechaini}"/>
+                                            <h:outputText  styleClass="ikont "   value="#{var.datefechaini}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.datefechafin}"/>
+                                            <h:outputText  styleClass="ikont "   value="#{var.datefechafin}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}"/>
+                                            <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:columnGroup id="cuerpoContrato">
                                     <rich:column  breakRowBefore="true">
-                                        <h:outputText  styleClass="id-jsf- "   id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
+                                        <h:outputText  styleClass="ikont "   id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
                                     </rich:column>
                                     <rich:column >
                                         <h:inputTextarea id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"  disabled="true" cols="35" rows="2"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="id-jsf- "   id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
+                                        <h:outputText  styleClass="ikont "   id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="id-jsf- "   id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
+                                        <h:outputText  styleClass="ikont "   id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="id-jsf- "    value="#{currentRow.datefechaini}"/>
+                                        <h:outputText  styleClass="ikont "    value="#{currentRow.datefechaini}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="id-jsf- "    value="#{currentRow.datefechafin}"/>
+                                        <h:outputText  styleClass="ikont "    value="#{currentRow.datefechafin}"/>
                                     </rich:column>
                                     <rich:column width="120px" >
                                         <a4j:commandButton value="Seleccionar" action="#{Supervisor$AsociarContratos.agregarContratoInterventoria(filaSeleccionada)}"

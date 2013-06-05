@@ -12,14 +12,14 @@
     <rich:popupPanel id="mp-PresupuestoEjecucion" headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.presupuesto} En ejecución" styleClass="id-jsf-"  />
+                <h:outputText  styleClass="ikont "   value="#{var.presupuesto} En ejecución" styleClass="ikont"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_PresupuestoEjecucion" styleClass="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_PresupuestoEjecucion" styleClass="ikont"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-PresupuestoEjecucion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -28,9 +28,9 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1">
-                    <h:outputText  styleClass="id-jsf- "   value="1. Presupuesto en Ejecución"
+                    <h:outputText  styleClass="ikont "   value="1. Presupuesto en Ejecución"
                                   />
-                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.imgejecuciontotal}"/>
+                    <h:graphicImage  styleClass="ikont "   value="#{var.imgejecuciontotal}"/>
                 </h:panelGrid>
             </rich:panel>
         </h:form>

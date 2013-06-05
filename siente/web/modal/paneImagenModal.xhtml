@@ -11,13 +11,13 @@
     <rich:popupPanel  id="panelImagen" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionarimagen}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.seleccionarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelImagen" styleClass="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelImagen" styleClass="ikont"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelImagen')}.hide();"/>                    
                 </h:panelGroup>
             </h:form>
@@ -36,17 +36,17 @@
                         <center>
                             <rich:panel >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$IngresarNuevaObra.subirImagen.size==0}" value="#{var.nosuarc}"/>
+                                <h:outputText  styleClass="ikont "   rendered="#{Supervisor$IngresarNuevaObra.subirImagen.size==0}" value="#{var.nosuarc}"/>
                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagen.files}" var="file">
                                     <h:panelGroup>
                                         <h:panelGrid columns="1">
                                             <h:panelGrid columns="2">
-                                                <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
-                                                <h:outputText  styleClass="id-jsf- "   value="#{file.onlyName}"/>
-                                                <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
-                                                <h:outputText  styleClass="id-jsf- "   value="#{file.length/1024} Kb"/>
+                                                <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
+                                                <h:outputText  styleClass="ikont "   value="#{file.onlyName}"/>
+                                                <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
+                                                <h:outputText  styleClass="ikont "   value="#{file.length/1024} Kb"/>
                                             </h:panelGrid>
                                         </h:panelGrid>
                                     </h:panelGroup>
@@ -55,7 +55,7 @@
                             <interkont:spacer height="3"/>
                             <a4j:commandButton id="bt_aceptar_imagen" action="#{Supervisor$IngresarNuevaObra.cambioImagen}" render="layoutImagen, info, upload"
                                                rendered="#{Supervisor$IngresarNuevaObra.subirImagen.size>0}" value="#{var.boarcsub}"  onclick="#{rich:component('panelCargando')}.hide();"
-                                               styleClass="id-jsf-"     
+                                               styleClass="ikont"     
                                                oncomplete= "#{rich:component('panelCargando')}.hide();"/>
                             <a4j:commandButton action="#{Supervisor$DetalleObra.cargaImagenActual}" id="BTaceptarImagen"
                                                onclick="#{rich:component('panelCargando')}.show();"

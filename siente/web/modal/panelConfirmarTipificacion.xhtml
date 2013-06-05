@@ -9,16 +9,16 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel height="100" id="panelConfirmarTipificacion" resizeable="false" width="500" >
-        <rich:panel header="#{var.atencion}" styleClass="id-jsf-"   >
+        <rich:panel header="#{var.atencion}" styleClass="ikont"   >
             <h:form id="frpaconfi">
                 <h:panelGroup >
                     
                     <a4j:commandButton id="esconder_panelConfirmarTipificacion" onclick="#{rich:component('panelConfirmarTipificacion')}.hide();" immediate="true"
-                                       styleClass="id-jsf-"    />
+                                       styleClass="ikont"    />
                 </h:panelGroup>
                 <h:panelGrid id="layoutConfTipificacion" columnClasses="aiu">
                     <interkont:spacer height="20"/>
-                    <!--<h:outputText  styleClass="id-jsf- "   value="#{Supervisor$IngresarNuevaObra.mensaje}" styleClass="id-jsf-"  />-->
+                    <!--<h:outputText  styleClass="ikont "   value="#{Supervisor$IngresarNuevaObra.mensaje}" styleClass="ikont"  />-->
 
                     <a4j:commandButton id="btCerrarCofTip"  render="layoutModificar" value="#{var.aceptar}" onclick="#{rich:component('panelConfirmarTipificacion')}.hide();"
                                           />

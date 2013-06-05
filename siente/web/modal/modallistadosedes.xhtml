@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp-listado-sedeseducativas" width="800" height="450" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.sedeseducativas}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.sedeseducativas}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-sedeseducativas" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp-listado-sedeseducativas" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;"/>
                       </h:panelGroup>
@@ -33,7 +33,7 @@
 
                         <h:panelGrid columns="2">
 
-                            <h:outputText  styleClass="id-jsf- "   value="Cual es el campo por el que desea buscar" />
+                            <h:outputText  styleClass="ikont "   value="Cual es el campo por el que desea buscar" />
                             <h:selectOneMenu id="cmbbusqueda" value="#{Supervisor$EntidadConvenio.busqueseleccion}">
                                 <f:selectItem itemValue="0" itemLabel="Seleccione"/>
                                 <f:selectItem itemValue="1" itemLabel="Codigo DANE"/>
@@ -43,9 +43,9 @@
                             </h:selectOneMenu>
 
                             <h:panelGroup id="parametro">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.escribapalabra} Codigo DANE de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.escribapalabra} Nombre de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.escribapalabra} Nombre de la sede"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.escribapalabra} Codigo DANE de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.escribapalabra} Nombre de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.escribapalabra} Nombre de la sede"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
                             </h:panelGroup>
                             <h:panelGroup id="palabrabus">
                                 <h:inputText  size="30" value="#{Supervisor$EntidadConvenio.parametrobus}" rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
@@ -65,37 +65,37 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
                                     </rich:column>
                                     <rich:column width="200px" breakRowBefore="true">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.codigodane}"/>
+                                        <h:outputText  styleClass="ikont "   value="#{var.codigodane}"/>
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.institucion}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.institucion}" />
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.codsede}"/>
+                                        <h:outputText  styleClass="ikont "   value="#{var.codsede}"/>
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.nombre} Sede" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.nombre} Sede" />
                                     </rich:column>
                                     <rich:column width="200px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.SELECCION}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="200px" breakRowBefore="true">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{sede.institucioneducativa.strnombre}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{sede.institucioneducativa.strnombre}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{sede.strcodigosedeeducativa}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{sede.strcodigosedeeducativa}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{sede.strnombre}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{sede.strnombre}"/>
                                 </rich:column>
                                 <rich:column width="200px">
                                     <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"

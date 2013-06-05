@@ -13,14 +13,14 @@
     <rich:popupPanel id="panelCancelarSolicitud" autosized="true" width="250" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="id-jsf- "   value="Cancelar Solicitud" />
+                <h:outputText  styleClass="ikont "   value="Cancelar Solicitud" />
             </h:panelGroup>
         </f:facet>
         
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelCancelarSolicitud" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelCancelarSolicitud" styleClass="ikont"  
                                      onclick="#{rich:component('panelCancelarSolicitud')}.hide();
                                              return false;"
                                              title="#{var.cerrar}" immediate="true" />
@@ -30,7 +30,7 @@
         
         <rich:panel id="panelConfCancelarAH">
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.confirmacancelarah}" styleClass="id-jsf-"   />
+                <h:outputText  styleClass="ikont "   value="#{var.confirmacancelarah}" styleClass="ikont"   />
             </h:panelGroup>
             
             <center>

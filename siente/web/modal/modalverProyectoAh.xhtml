@@ -9,16 +9,16 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel id="modaltablaproyectoah" autosized="true" headerstyleClass="rich-panel-header" styleClass="id-jsf-"   width="700">
+    <rich:popupPanel id="modaltablaproyectoah" autosized="true" headerstyleClass="rich-panel-header" styleClass="ikont"   width="700">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.verobra}s"/>
+                <h:outputText  styleClass="ikont "   value="#{var.verobra}s"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modaltablaproyectosah" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_modaltablaproyectosah" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modaltablaproyectoah')}.hide(); return false;"/>
                 </h:panelGroup>
@@ -36,50 +36,50 @@
 
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.nombreobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.nombreobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.tab_tipoobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.tab_tipoobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.estadoproyecto}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.estadoproyecto}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.valor}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.valor}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.duracionobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{var.duracionobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.ver} Más..."/>
+                                <h:outputText  styleClass="ikont "   value="#{var.ver} Más..."/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:columnGroup>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.strnombreobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.strnombreobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.tipoobra.strdesctipoobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.tipoobra.strdesctipoobra}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.tipoestadobra.strdesctipoestado}"/>
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.tipoestadobra.strdesctipoestado}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.numvaltotobra}">
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.numvaltotobra}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.intplazoobra}"/>
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.intplazoobra}"/>
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{currentRow.intcodigoobra}';">
-                                    <h:graphicImage  styleClass="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  styleClass="ikont "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                                 <a4j:commandLink  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{currentRow.intcodigoobra}';">
-                                    <h:graphicImage  styleClass="id-jsf- "    value="/resources/imgs/bt_ver.png"/>
+                                    <h:graphicImage  styleClass="ikont "    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
                         </rich:columnGroup>
@@ -97,8 +97,8 @@
                 <center>
                     <h:panelGrid columns="1">
                         <center>
-                            <h:outputLabel  styleClass="id-jsf- "   value="Esta solicitud no tiene #{var.solicitudproyecto}s,"/>
-                            <h:outputLabel  styleClass="id-jsf- "   value="Desea crear #{var.solicitudproyecto}?"/>
+                            <h:outputLabel  styleClass="ikont "   value="Esta solicitud no tiene #{var.solicitudproyecto}s,"/>
+                            <h:outputLabel  styleClass="ikont "   value="Desea crear #{var.solicitudproyecto}?"/>
                             <a4j:commandButton title="#{var.crear} #{var.solicitudproyecto}"  value="Crear #{var.proyecto}"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.crearProyecto}">
                             </a4j:commandButton>

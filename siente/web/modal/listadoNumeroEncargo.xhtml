@@ -10,18 +10,18 @@
     <rich:popupPanel id="mp-listado-numencargo" moveable="true" headerstyleClass="rich-panel-header" autosized="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   id="listarNumencargo" value="#{var.listar} #{var.numeroencargo}"/>
+                <h:outputText  styleClass="ikont "   id="listarNumencargo" value="#{var.listar} #{var.numeroencargo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-numencargo" onclick="#{rich:component('mp-listado-numencargo')}.hide(); return false;" immediate="true"
-                                       styleClass="id-jsf-"    />
+                                       styleClass="ikont"    />
                 </h:panelGroup>
         </f:facet>
         <center>
                 <h:panelGrid columns="3" >
-                    <h:outputText  styleClass="id-jsf- "   value="#{var.consultar} #{var.numeroencargo} " />
+                    <h:outputText  styleClass="ikont "   value="#{var.consultar} #{var.numeroencargo} " />
                     <rich:inputNumberSpinner enableManualInput="true" minValue="0" value="#{Supervisor$Contrato.codigoencargo}"
                                              inputSize="10" maxValue="100000" onfocus="clearText(this)" onblur="clearText(this)" />
                     <a4j:commandButton value="#{var.buscarProyecto}" action="#{Supervisor$Contrato.buscarEncargo}" render="tabla-listado-numencargo,gpTotalNumEncar"/>
@@ -44,40 +44,40 @@
                             <rich:columnGroup>
 
                                 <rich:column colspan="7">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.encargofiduciario} encontrado #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont "   value="#{var.encargofiduciario} encontrado #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column width="200px" breakRowBefore="true">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.numeroencargo}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.numeroencargo}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.fechaapertura}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.fechaapertura}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.saldoinicial}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.saldoinicial}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.saldoactual}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.saldoactual}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoEncargos">
                             <rich:column  width="200px" breakRowBefore="true">
-                                <h:outputText  styleClass="id-jsf- "   value="#{currentRow.intnumencargofiduciario}"/>
+                                <h:outputText  styleClass="ikont "   value="#{currentRow.intnumencargofiduciario}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   id="txt_fechaapertura" value="#{currentRow.datefechaaperturaencargofiduciario}"/>
+                                <h:outputText  styleClass="ikont "   id="txt_fechaapertura" value="#{currentRow.datefechaaperturaencargofiduciario}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   id="txt_saldoini" value="#{currentRow.numsaldoinicial}">
+                                <h:outputText  styleClass="ikont "   id="txt_saldoini" value="#{currentRow.numsaldoinicial}">
                                     <f:convertNumber pattern="$ ###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="id-jsf- "   id="txt_saldoactu" value="#{currentRow.numsaldoactual}">
+                                <h:outputText  styleClass="ikont "   id="txt_saldoactu" value="#{currentRow.numsaldoactual}">
                                     <f:convertNumber pattern="$ ###,###"/>
                                 </h:outputText>
                             </rich:column>

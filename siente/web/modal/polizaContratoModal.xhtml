@@ -13,14 +13,14 @@
     <rich:popupPanel id="panelPolizaContrato" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="id-jsf- "   value="#{var.agregarPoliza}" />
+                <h:outputText  styleClass="ikont "   value="#{var.agregarPoliza}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelPolizaContrato" styleClass="ikont"  
                                      onclick="#{rich:component('panelPolizaContrato')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -36,26 +36,26 @@
                     <interkont:spacer height="14" />
                     <interkont:spacer height="20" />
                     <h:panelGrid columns="3" >
-                        <h:panelGrid styleClass="id-jsf-"   />
+                        <h:panelGrid styleClass="ikont"   />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" />
-                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.tipopoliza.strdesctipopoliza}" />
+                        <h:outputLabel  styleClass="ikont "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" />
+                        <h:outputText  styleClass="ikont "   value="#{Supervisor$ModificarObra.polizaeditar.tipopoliza.strdesctipopoliza}" />
 
-                        <h:panelGrid styleClass="id-jsf-"   />
+                        <h:panelGrid styleClass="ikont"   />
 
-                        <h:outputLabel  styleClass="id-jsf- "    id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" />
-                        <h:outputText  styleClass="id-jsf- "    value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}" />
+                        <h:outputLabel  styleClass="ikont "    id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" />
+                        <h:outputText  styleClass="ikont "    value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}" />
 
-                        <h:panelGrid styleClass="id-jsf-"   />
+                        <h:panelGrid styleClass="ikont"   />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="lblVencimientoPoliza" value="#{var.vencimientoPoliza}" />
+                        <h:outputLabel  styleClass="ikont "   id="lblVencimientoPoliza" value="#{var.vencimientoPoliza}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
                                        value="#{Supervisor$ModificarObra.polizaeditar.datefechavecimiento}" />
 
-                        <h:panelGrid styleClass="id-jsf-"   />
+                        <h:panelGrid styleClass="ikont"   />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="lblEntidadPoliza" value="#{var.entidadPoliza}" />
-                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.aseguradora.strnombreentidad}" /><!--entidad.strnombreentidad-->
+                        <h:outputLabel  styleClass="ikont "   id="lblEntidadPoliza" value="#{var.entidadPoliza}" />
+                        <h:outputText  styleClass="ikont "   value="#{Supervisor$ModificarObra.polizaeditar.aseguradora.strnombreentidad}" /><!--entidad.strnombreentidad-->
                     </h:panelGrid>
                 </h:panelGrid>
 
@@ -64,7 +64,7 @@
                     
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="panel_botonsoporte"
                                        oncomplete="#{rich:component('panelPolizaContrato')}.hide();"
-                                       action="#{Supervisor$ModificarObra.modificarPoliza}"  styleClass="id-jsf-"   />
+                                       action="#{Supervisor$ModificarObra.modificarPoliza}"  styleClass="ikont"   />
                 </h:panelGrid>
             </h:form>
         </h:panelGroup>

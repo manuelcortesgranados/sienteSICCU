@@ -11,24 +11,24 @@
                      headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.confirmarmodi}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.confirmarmodi}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="ikont"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarModificacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="id-jsf-"   >
+        <rich:panel styleClass="ikont"   >
             <center>
                 <h:form>
                     <h:panelGrid id="layoutConfMod" columnClasses="aiu">
                         <interkont:spacer height="20"/>
-                        <h:outputText  styleClass="id-jsf- "   value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="id-jsf-"  />
+                        <h:outputText  styleClass="ikont "   value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="ikont"  />
                         <a4j:commandButton id="btCerrarCofMod" value="#{var.aceptar}"
                                            render="layoutPrincipal, layoutModificar, layoutMatrix, layoutDocOtroSi, layoutDocActaConvenio, layoutDocCronog"
                                               

@@ -13,14 +13,14 @@
     <rich:popupPanel id="mp_ver_enviados" moveable="false" autosized="true"  headerstyleClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="id-jsf- "   value="#{var.rpanhea_vermensajeenviado}" />
+                <h:outputText  styleClass="ikont "   value="#{var.rpanhea_vermensajeenviado}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ver_enviados" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp_ver_enviados" styleClass="ikont"  
                                      onclick="#{rich:component('mp_ver_enviados')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,31 +28,31 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="id-jsf-"   >
+        <rich:panel styleClass="ikont"   >
             <h:form id="form_ver_enviado">
                 <h:panelGrid >
                     <interkont:spacer height="20"  />
                     <h:panelGrid id="pg_camposVerEnviados" columns="3" >
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{var.houtfechayhora}" />
+                        <h:outputLabel  styleClass="ikont "    value="#{var.houtfechayhora}" />
                         <h:inputText id="txt-datefecmensaje-ver-enviado" value="#{Mensajes.mensajeEnviadoVer.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
                         </h:inputText>
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{var.houtdestinatario}" />
+                        <h:outputLabel  styleClass="ikont "    value="#{var.houtdestinatario}" />
                         <h:inputText id="txt_fkusuariorecibe_ver_enviado" value="#{Mensajes.mensajeEnviadoVer.jsfUsuarioByIntusurecibe.tercero.strnombrecompleto}" size="65" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{var.houtasunto}" />
+                        <h:outputLabel  styleClass="ikont "    value="#{var.houtasunto}" />
                         <h:inputText id="txt_asunto_ver_enviado" value="#{Mensajes.mensajeEnviadoVer.strasuntomensaje}" size="65" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{var.houtmensaje}" />
+                        <h:outputLabel  styleClass="ikont "    value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_ver_enviado" value="#{Mensajes.mensajeEnviadoVer.strtextomensaje}" cols="74" rows="14" readonly="true" />
                     </h:panelGrid>
                 </h:panelGrid>

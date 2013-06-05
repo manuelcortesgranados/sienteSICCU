@@ -10,13 +10,13 @@
     <rich:popupPanel id="mp-listado-proyectosPadres" headerstyleClass="rich-panel-header" autosized="true">
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.encontrarPadreProyecto}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.encontrarPadreProyecto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-proyectosPadres" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp-listado-proyectosPadres" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-proyectosPadres')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -26,7 +26,7 @@
                 <h:panelGrid >
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-proyectosPadres">
-                        <h:outputText  styleClass="id-jsf- "    value="#{var.buscarProyecto} "/>
+                        <h:outputText  styleClass="ikont "    value="#{var.buscarProyecto} "/>
                         <h:inputText  id="filtro-proyectosPadres" value="#{Supervisor$IngresarNuevaObra.valorFiltroObra}" immediate="true">
                             <a4j:ajax event="blur" render="tabla-listado-proyectosPadres" execute="@this" >
                                 <a4j:queue  ignoreDupResponses="true"/>
@@ -34,7 +34,7 @@
                         </h:inputText>
 
                         <f:facet name="header">
-                            <h:outputText  styleClass="id-jsf- "   value="#{var.filtrar}"/>
+                            <h:outputText  styleClass="ikont "   value="#{var.filtrar}"/>
                         </f:facet>
                         <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
                         <a4j:ajax event="clik" render="tabla-listado-proyectosPadres" execute="@this">
@@ -47,19 +47,19 @@
                                         rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.numero}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.numero}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="id-jsf- "   id="otxt_numobra-listado" value="#{currentRow.intcodigoobra}"/>
+                                <h:outputText  styleClass="ikont "   id="otxt_numobra-listado" value="#{currentRow.intcodigoobra}"/>
                             </rich:column>
                             <rich:column id="nombrecontratista"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="id-jsf- "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombreobra}"/>
+                                <h:outputText  styleClass="ikont "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombreobra}"/>
                             </rich:column>
                             <rich:column id="seleccionar" width="120px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
                                 </f:facet>
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"

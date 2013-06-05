@@ -11,13 +11,13 @@
 
 
     <rich:popupPanel id="modalImagenvermas" autosized="true" 
-                      headerstyleClass="style-modal-dialog-head" styleClass="id-jsf-"  >
+                      headerstyleClass="style-modal-dialog-head" styleClass="ikont"  >
         
              <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="3">
-                    <h:graphicImage  styleClass="id-jsf- "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  styleClass="id-jsf- "   value="#{var.imagen}" styleClass="id-jsf-"  />
+                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
+                    <h:outputText  styleClass="ikont "   value="#{var.imagen}" styleClass="ikont"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
@@ -25,7 +25,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagenvermas" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalImagenvermas" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenvermas')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -36,8 +36,8 @@
                 <div>
                     <div id="SliderName_2" styleClass="SliderName_2">
                         <a4j:repeat value="#{Supervisor$DetalleObra.listaImagenesevolucionobra}" var="item" >
-                            <h:graphicImage  styleClass="id-jsf- "   width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
-                            <div styleClass="SliderName_2Description"><h:outputText  styleClass="id-jsf- "   value="#{item.strnombre} - #{item.datefecha}"/></div>
+                            <h:graphicImage  styleClass="ikont "   width="700" height="450"  alt="Demo2 first" title="Demo2 first" value="#{var.ipserver}/#{var.versioncobra}#{item.strubicacion}" />
+                            <div styleClass="SliderName_2Description"><h:outputText  styleClass="ikont "   value="#{item.strnombre} - #{item.datefecha}"/></div>
 
                         </a4j:repeat>
 

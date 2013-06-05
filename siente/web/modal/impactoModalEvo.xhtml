@@ -11,13 +11,13 @@
     <rich:popupPanel id="modalImpacto"  width="380" height="200" autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont "   value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImpacto" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_modalImpacto" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImpacto')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -25,15 +25,15 @@
         <center>
             <rich:dataGrid id="tablaaliperim" value="#{Supervisor$DetalleObra.alimentacionmostrar}" var="currentRow">
                 <h:panelGrid columns="2" >
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{currentRow.numempdirectos}"/>
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{currentRow.numempindirectos}"/>
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                        <h:outputLabel  styleClass="id-jsf- "   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
-                        <h:outputLabel  styleClass="id-jsf- "    value="#{currentRow.numhabafectados}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numempdirectos}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numempindirectos}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                        <h:outputLabel  styleClass="ikont "   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numhabafectados}"/>
                 </h:panelGrid>
             </rich:dataGrid>
         </center>

@@ -15,62 +15,62 @@
             <h:panelGrid columns="3" >
                 <interkont:spacer width="100" />
                 <h:panelGroup>
-                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.ubicacionproyect}" />                    
+                    <h:graphicImage  styleClass="ikont "   value="#{var.ubicacionproyect}" />                    
                     <h:panelGrid columns="3"  columnClasses="panelderecha, panelizquierda, panelizquierda">
-                        <h:outputLabel  styleClass="id-jsf- "   id="strZona" value="#{var.zona}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strZona" value="#{var.zona}"  />
                         <interkont:spacer width="20" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
+                        <h:outputLabel  styleClass="ikont "   id="strZonaOut" value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strComuna" value="#{var.comuna}"  rendered="false" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strComunaOut" value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" rendered="false" />
+                        <h:outputLabel  styleClass="ikont "   id="strComuna" value="#{var.comuna}"  rendered="false" />
+                        <h:outputLabel  styleClass="ikont "   id="strComunaOut" value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" rendered="false" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strBarrio" value="#{var.barrio}"  rendered="false" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strBarrioOut" value="#{Supervisor$AdministrarObraNew.obra.strbarrio}" rendered="false" />
+                        <h:outputLabel  styleClass="ikont "   id="strBarrio" value="#{var.barrio}"  rendered="false" />
+                        <h:outputLabel  styleClass="ikont "   id="strBarrioOut" value="#{Supervisor$AdministrarObraNew.obra.strbarrio}" rendered="false" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strDireccionProyecto" value="#{var.label_direccion}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strDireccionProyecto" value="#{var.label_direccion}"  />
                         <interkont:spacer width="20" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
+                        <h:outputLabel  styleClass="ikont "   id="strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strLatitud"  value="#{var.latitud}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strLatitud"  value="#{var.latitud}"  />
                         <interkont:spacer width="20" />
                         <h:panelGrid>
                             <!-- # {SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}-->
                             <rich:inplaceInput  id="inplaceInputLatitud" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" showControls="true" rendered="false">
                                 <a4j:ajax listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}" rendered="false" render="panelUbicacion,mapastatic,tabla" />
                             </rich:inplaceInput>
-                            <h:outputLabel  styleClass="id-jsf- "   id="Latitud" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}" />
+                            <h:outputLabel  styleClass="ikont "   id="Latitud" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLatitudProyecto}" />
                         </h:panelGrid>     
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strLongitud" value="#{var.longitud}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strLongitud" value="#{var.longitud}"  />
                         <interkont:spacer width="20" />
                         <h:panelGrid>
                             <!-- # {SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}-->
                             <rich:inplaceInput id="inplaceInputLongitud" showControls="true" defaultLabel="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="false">
                                 <a4j:ajax  listener="#{Supervisor$AdministrarObraNew.actualizarUbicacion1}"  rendered="false" render="panelUbicacion,mapastatic,tabla" />
                             </rich:inplaceInput> 
-                            <h:outputLabel  styleClass="id-jsf- "   id="Longitud" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}" />
+                            <h:outputLabel  styleClass="ikont "   id="Longitud" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarLonguitudProyecto}" />
                         </h:panelGrid>
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strRuta" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{var.rutas}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strRuta" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{var.rutas}"  />
                         <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.boolruta}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strRutaOut" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{Supervisor$AdministrarObraNew.obra.ruta.strnombretramo}" />
+                        <h:outputLabel  styleClass="ikont "   id="strRutaOut" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{Supervisor$AdministrarObraNew.obra.ruta.strnombretramo}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strSede" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.sede}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strSede" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.sede}"  />
                         <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strSedeOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.strnombre}" />
+                        <h:outputLabel  styleClass="ikont "   id="strSedeOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.strnombre}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strInstitucion" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.institucion} Educativa"  />
+                        <h:outputLabel  styleClass="ikont "   id="strInstitucion" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.institucion} Educativa"  />
                         <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strInstitucionOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.strnombre}" />
+                        <h:outputLabel  styleClass="ikont "   id="strInstitucionOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.strnombre}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strLocalidad" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.departamento}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strLocalidad" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.departamento}"  />
                         <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strLocalidadOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strdepartamento}" />
+                        <h:outputLabel  styleClass="ikont "   id="strLocalidadOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strdepartamento}" />
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}"  />
+                        <h:outputLabel  styleClass="ikont "   id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}"  />
                         <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}" />
-                        <h:outputLabel  styleClass="id-jsf- "   id="strMunicipioOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
+                        <h:outputLabel  styleClass="ikont "   id="strMunicipioOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
                     </h:panelGrid>
 
                     <h:panelGroup>
@@ -80,7 +80,7 @@
                 </h:panelGroup>
 
                 <h:panelGrid columns="1" id="mapastatic"  columnClasses="panelizquierda">
-                    <h:graphicImage  styleClass="id-jsf- "   height="100%" value="#{Supervisor$AdministrarObraNew.ubicacionmapa}" width="400px"
+                    <h:graphicImage  styleClass="ikont "   height="100%" value="#{Supervisor$AdministrarObraNew.ubicacionmapa}" width="400px"
                                      />
                 </h:panelGrid>
             </h:panelGrid>
@@ -92,31 +92,31 @@
                                     var="_row"
                                     rendered="#{Supervisor$AdministrarObraNew.puntootro}">
                         <f:facet name="header">
-                            <h:outputLabel  styleClass="id-jsf- "   value="#{var.otrospuntos}" />
+                            <h:outputLabel  styleClass="ikont "   value="#{var.otrospuntos}" />
                         </f:facet>
 
                         <rich:column id="tc_strdireccion"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.direccion}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.direccion}" />
                             </f:facet>
 
-                            <h:outputText  styleClass="id-jsf- "   id="st_strdireccion" value="#{_row.obra.strdireccion}" />
+                            <h:outputText  styleClass="ikont "   id="st_strdireccion" value="#{_row.obra.strdireccion}" />
                         </rich:column>
 
                         <rich:column id="tc_strlatitud" width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.latitud}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.latitud}" />
                             </f:facet>
 
-                            <h:outputText  styleClass="id-jsf- "   id="st_strlatitud" value="#{_row.strlatitud}" />
+                            <h:outputText  styleClass="ikont "   id="st_strlatitud" value="#{_row.strlatitud}" />
                         </rich:column>
 
                         <rich:column id="tc_strlongitud"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.longitud}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.longitud}" />
                             </f:facet>
 
-                            <h:outputText  styleClass="id-jsf- "   id="st_strlongitud" value="#{_row.strlongitud}" />
+                            <h:outputText  styleClass="ikont "   id="st_strlongitud" value="#{_row.strlongitud}" />
                         </rich:column>
                     </rich:dataTable>
                 </center>
@@ -125,43 +125,43 @@
             <h:panelGrid width="95%">
                 <center>
                     <rich:dataTable id="tabla" sortMode="single" 
-                                    styleClass="id-jsf-"   var="row"
+                                    styleClass="ikont"   var="row"
                                     value="#{Supervisor$AdministrarObraNew.obra}"
                                     rendered="#{Supervisor$AdministrarObraNew.obra.booleantienehijos==false}">
                         <f:facet name="header">
-                            <h:outputLabel  styleClass="id-jsf- "   value="#{var.subproyectos}" />
+                            <h:outputLabel  styleClass="ikont "   value="#{var.subproyectos}" />
                         </f:facet>
 
                         <rich:column id="tc_direccion" width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.direccion}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.direccion}" />
                             </f:facet>
                             
-                            <h:outputText  styleClass="id-jsf- "   id="st_direccion" value="#{row.strdireccion}" />
+                            <h:outputText  styleClass="ikont "   id="st_direccion" value="#{row.strdireccion}" />
                         </rich:column>
 
                         <rich:column id="tc_nombre" width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.nombre}" />
                             </f:facet>
                             
-                            <h:outputText  styleClass="id-jsf- "   id="st_nombre"  value="#{row.strnombreobra}" />
+                            <h:outputText  styleClass="ikont "   id="st_nombre"  value="#{row.strnombreobra}" />
                         </rich:column>
 
                         <rich:column id="tc_floatlatitud" width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.latitud}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.latitud}" />
                             </f:facet>
                             
-                            <h:outputText  styleClass="id-jsf- "   id="st_floatlatitud" value="#{row.floatlatitud}" />
+                            <h:outputText  styleClass="ikont "   id="st_floatlatitud" value="#{row.floatlatitud}" />
                         </rich:column>
 
                         <rich:column id="tc_floatlongitud"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="id-jsf- "   value="#{var.longitud}" />
+                                <h:outputText  styleClass="ikont "   value="#{var.longitud}" />
                             </f:facet>
                             
-                            <h:outputText  styleClass="id-jsf- "   id="st_floatlongitud" value="#{row.floatlongitud}" />
+                            <h:outputText  styleClass="ikont "   id="st_floatlongitud" value="#{row.floatlongitud}" />
                         </rich:column>
                     </rich:dataTable>
                 </center>

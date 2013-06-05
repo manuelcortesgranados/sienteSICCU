@@ -10,19 +10,19 @@
     <rich:popupPanel id="panelActaRecFin" autosized="true"  headerstyleClass="rich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionaractarecivofinal}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.seleccionaractarecivofinal}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelActaRecFin" styleClass="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelActaRecFin" styleClass="ikont"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelActaRecFin')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="id-jsf-"   >
+        <rich:panel styleClass="ikont"   >
             <h:form id="formActaRecFin">
                 <h:panelGroup id="layoutDocActaRecFin">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -36,18 +36,18 @@
                             <center>
                                 <rich:panel bodystyleClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="id-jsf- "   rendered="#{Supervisor$AdministrarObraNew.subirActaRecFin.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$AdministrarObraNew.subirActaRecFin.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirActaRecFin.archivos}" var="file">
                                         <rich:panel bodystyleClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="id-jsf- "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="id-jsf- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -57,7 +57,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$AdministrarObraNew.borrarActaReciboFinal}" render="infoActaRecFin, uploadActaRecFin, layoutActaRecFin"
                                                    rendered="#{Supervisor$AdministrarObraNew.subirActaRecFin.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="id-jsf-"     />
+                                                   styleClass="ikont"     />
 
                                 <a4j:commandButton id="BTaceptarActa" value="#{var.aceptar}"
                                                    oncomplete="#{rich:component('panelActaRecFin')}.hide();return false;"

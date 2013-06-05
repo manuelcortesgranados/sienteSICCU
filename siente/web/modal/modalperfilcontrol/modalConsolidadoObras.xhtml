@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp-ConsolidadoObras" headerstyleClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.consolidadoreport}" styleClass="id-jsf-"  />
+                <h:outputText  styleClass="ikont "   value="#{var.consolidadoreport}" styleClass="ikont"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="ikont"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-ConsolidadoObras')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,10 +27,10 @@
         <h:form target="_blank">
             <rich:panel>
                 <h:panelGrid columns="1" >
-                    <h:outputText  styleClass="id-jsf- "   value="1. AVANCE FISICO POR TIPO DE OBRA" />
-                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.imgobras1}"/>                    
-                    <h:outputText  styleClass="id-jsf- "   value="2 . AVANCE FISICO REGIONAL" />
-                    <h:graphicImage  styleClass="id-jsf- "   value="#{var.imgobras2}"/>
+                    <h:outputText  styleClass="ikont "   value="1. AVANCE FISICO POR TIPO DE OBRA" />
+                    <h:graphicImage  styleClass="ikont "   value="#{var.imgobras1}"/>                    
+                    <h:outputText  styleClass="ikont "   value="2 . AVANCE FISICO REGIONAL" />
+                    <h:graphicImage  styleClass="ikont "   value="#{var.imgobras2}"/>
                 </h:panelGrid>
             </rich:panel>
         </h:form>

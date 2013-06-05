@@ -10,13 +10,13 @@
     <rich:popupPanel id="mp-listado-tercero" moveable="true" width="1300" height="420" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.rpanhea_listadotercero}"/>
+                <h:outputText  styleClass="ikont "   value="#{var.rpanhea_listadotercero}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -32,7 +32,7 @@
                     <rich:panel id="pl-tabla-listado-tercero" >
 
                         <h:panelGrid columns="2">
-                            <h:outputText  styleClass="id-jsf- "   value="#{var.buscarpalabraclave} " />
+                            <h:outputText  styleClass="ikont "   value="#{var.buscarpalabraclave} " />
                             <h:inputText value="#{Financiera$FiduFinanciera.financieraService.tercero.strnombre}" size="100">
                                 <a4j:ajax event="keyup" render="tablaTercero" listener="#{Financiera$FiduFinanciera.filtrar}"/>
                             </h:inputText>
@@ -50,7 +50,7 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="4">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                     </rich:column>
                                     <rich:column colspan="4" breakRowBefore="true">
                                         <center>
@@ -67,28 +67,28 @@
                                         </center>
                                     </rich:column>
                                     <rich:column width="150px" breakRowBefore="true">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.cedulaContratista}"/>
+                                        <h:outputText  styleClass="ikont "   value="#{var.cedulaContratista}"/>
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.nombre}" />
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.apellidoContratista}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.apellidoContratista}" />
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="id-jsf- "   value="#{var.SELECCION}" />
+                                        <h:outputText  styleClass="ikont "   value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{_Tercero.intcedula}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.intcedula}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="id-jsf- "   value="#{_Tercero.strnombre}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.strnombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="id-jsf- "   value="#{_Tercero.strapellido1}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.strapellido1}"/>
                                 </rich:column>
                                 <rich:column >
                                     <a4j:commandButton id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP(filaSeleccionada)}"

@@ -13,13 +13,13 @@
     <rich:popupPanel id="modalComentario"  autosized="true" headerstyleClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="COMENTARIOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont "   value="COMENTARIOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalComentario" styleClass="id-jsf-"   title="#{var.cerrar}" immediate="true"
+                    <a4j:commandLink id="esconder_modalComentario" styleClass="ikont"   title="#{var.cerrar}" immediate="true"
                                   onclick="#{rich:component('modalComentario')}.hide(); return false;"/>
                     
                 </h:panelGroup>
@@ -27,7 +27,7 @@
         </f:facet>
         <center>
             <rich:dataGrid id="tablaalipercomen" value="#{Supervisor$DetalleObra.alimentacionmostrar}" var="currentRow">
-                <h:outputLabel  styleClass="id-jsf- "    value="#{currentRow.textcomentario}"/>
+                <h:outputLabel  styleClass="ikont "    value="#{currentRow.textcomentario}"/>
             </rich:dataGrid>
         </center>
     </rich:popupPanel>

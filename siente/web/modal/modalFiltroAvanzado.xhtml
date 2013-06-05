@@ -12,14 +12,14 @@
     <rich:popupPanel id="panelFiltroAvanzado" width="600" autosized="true"    headerstyleClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.filtbusqueda} " styleClass="id-jsf-"  />
-                <h:outputText  styleClass="id-jsf- "   value="#{var.filtavanzada}" styleClass="id-jsf-"  />
+                <h:outputText  styleClass="ikont "   value="#{var.filtbusqueda} " styleClass="ikont"  />
+                <h:outputText  styleClass="ikont "   value="#{var.filtavanzada}" styleClass="ikont"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('panelFiltroAvanzado')}.hide(); return false;"/>
                     
                 </h:panelGroup>
@@ -30,11 +30,11 @@
                 <h:panelGrid id="gppanelFiltroAvanzado"  columnClasses="panelcenter">
                     <center>
                         <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
-                                     onclick="this.value=''" styleClass="id-jsf-"  />
+                                     onclick="this.value=''" styleClass="ikont"  />
 
                         <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" >
-                            <h:outputLabel  styleClass="id-jsf- "    id="lblevente" value="#{var.eventopertenece}" styleClass="id-jsf-"  />
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}" styleClass="id-jsf-"  />
+                            <h:outputLabel  styleClass="ikont "    id="lblevente" value="#{var.eventopertenece}" styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}" styleClass="ikont"  />
                             <h:panelGroup>
                                 <h:selectOneMenu  id="even" value="#{HomeGestion.filtro.intcodevento}">
                                     <f:selectItems value="#{HomeGestion.eventos}" />
@@ -58,20 +58,20 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_fase" value="#{var.fasepertenece}:"  styleClass="id-jsf-"  />
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_cuanti"  value="#{var.cuantocuesta}" styleClass="id-jsf-"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_fase" value="#{var.fasepertenece}:"  styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_cuanti"  value="#{var.cuantocuesta}" styleClass="ikont"  />
                             <h:selectOneMenu  id="fase" value="#{HomeGestion.filtro.intcodfase}">
                                 <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                 <f:selectItems value="#{HomeGestion.fases}" />
                             </h:selectOneMenu>
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="id-jsf- "    id="label_cuantias" value="#{var.entre} " styleClass="id-jsf-"  />
+                                <h:outputLabel  styleClass="ikont "    id="label_cuantias" value="#{var.entre} " styleClass="ikont"  />
                                 <h:inputText value="#{HomeGestion.filtro.cuantiaini}" size="13" id="txtCuantiaini" >
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="15"/>
                                 </h:inputText>
 
-                                <h:outputLabel  styleClass="id-jsf- "    id="label8" value=" #{var.y} " styleClass="id-jsf-"  />
+                                <h:outputLabel  styleClass="ikont "    id="label8" value=" #{var.y} " styleClass="ikont"  />
                                 <h:inputText value="#{HomeGestion.filtro.cuantiafin}" size="13" id="txtCuantiafin">
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="15"/>
@@ -79,9 +79,9 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_donde" value="#{var.dondeestaubicado}:"  styleClass="id-jsf-"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_donde" value="#{var.dondeestaubicado}:"  styleClass="ikont"  />
 
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_quetan"  value="#{var.quetanavanzado}:" styleClass="id-jsf-"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_quetan"  value="#{var.quetanavanzado}:" styleClass="ikont"  />
                             <h:panelGrid columns="1" columnClasses="panelcenter" >
                                 <h:selectOneMenu value="#{HomeGestion.inttipoorigen}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
@@ -114,18 +114,18 @@
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.avance1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="id-jsf- "   id="label10" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont "   id="label10" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner  maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.avance2}">
                                 </rich:inputNumberSpinner>
                             </h:panelGrid>
 
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_entidad" value="#{var.queentidadcontrato}" styleClass="id-jsf-"  />
-                            <h:outputLabel  styleClass="id-jsf- "    id="label_porcent" value="#{var.queporcentajesehapagado}" styleClass="id-jsf-"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_entidad" value="#{var.queentidadcontrato}" styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont "    id="label_porcent" value="#{var.queporcentajesehapagado}" styleClass="ikont"  />
 
                             <h:panelGrid  columnClasses="panelcenter" columns="2">
                                 <interkont:spacer width="10px"/>
-                                <rich:select  styleClass="id-jsf-"  
+                                <rich:select  styleClass="ikont"  
                                                defaultLabel="Ingrese Entidad" value="#{HomeGestion.filtro.strentidad}">
                                     <f:selectItems value="#{HomeGestion.tercerosUsuario}" />
                                     <a4j:ajax event="change" listener="#{HomeGestion.comboEntidadesContratoguardar}" render="coddane" execute="@this" >
@@ -138,7 +138,7 @@
                                 <rich:inputNumberSpinner inputSize="5" maxValue="100" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.pocentajepro1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="id-jsf- "   id="label11" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont "   id="label11" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.pocentajepro2}">
                                 </rich:inputNumberSpinner>
@@ -149,13 +149,13 @@
 
                         <h:panelGrid columns="2"  >
                             <h:panelGrid columns="1" columnClasses="panelcenter" >
-                                <h:outputLabel  styleClass="id-jsf- "    id="label_contratista" value="#{var.quieneselcontratista}" styleClass="id-jsf-"  />
+                                <h:outputLabel  styleClass="ikont "    id="label_contratista" value="#{var.quieneselcontratista}" styleClass="ikont"  />
 
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
 
 
-                                <h:outputLabel  styleClass="id-jsf- "   id="label_estado_obra" value="#{var.enqueestadoseencuentra}" styleClass="id-jsf-"  />
+                                <h:outputLabel  styleClass="ikont "   id="label_estado_obra" value="#{var.enqueestadoseencuentra}" styleClass="ikont"  />
 
 
                                 <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}">
@@ -167,7 +167,7 @@
                             <h:panelGroup>
                                 <h:panelGrid columns="1" columnClasses="panelcenter" >
                                     <h:panelGroup>
-                                        <h:outputLabel  styleClass="id-jsf- "    id="label_tipointe" value="Tipo de intervención:"  styleClass="id-jsf-"  />
+                                        <h:outputLabel  styleClass="ikont "    id="label_tipointe" value="Tipo de intervención:"  styleClass="ikont"  />
                                         <h:selectOneMenu  id="tipoIntervencion" value="#{HomeGestion.filtro.tipointervencion}">
                                             <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                             <f:selectItem itemLabel="Atención humanitaria" itemValue="1"/>
@@ -178,7 +178,7 @@
                                     </h:panelGroup>
                                     <interkont:spacer height="5" />
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="id-jsf- "   styleClass="id-jsf-"   value="#{var.verproyectosterminados}"/>
+                                        <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.verproyectosterminados}"/>
                                         <h:selectBooleanCheckbox value="#{HomeGestion.filtro.boolobraterminada}"  />
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -186,7 +186,7 @@
                             <h:panelGroup >
                                 <h:panelGrid columns="1" columnClasses="panelcenter"  id="panelfiltroencargo">
                                     <center>
-                                        <h:outputLabel  styleClass="id-jsf- "    id="label_encargofidu" value="#{var.cualeselencargo}" styleClass="id-jsf-"  />
+                                        <h:outputLabel  styleClass="ikont "    id="label_encargofidu" value="#{var.cualeselencargo}" styleClass="ikont"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtencargofidu" value="#{HomeGestion.filtro.encargofidu}" disabled="#{HomeGestion.filtro.tipointervencion==-1}"/>
@@ -195,7 +195,7 @@
                                 <h:panelGrid id="coddane" >
                                     <h:panelGroup rendered="#{HomeGestion.filtro.vercodigosedeeducativa}">
                                     <center>
-                                        <h:outputLabel  styleClass="id-jsf- "    id="label_codigodane" value="#{var.codigodane}" styleClass="id-jsf-"  />
+                                        <h:outputLabel  styleClass="ikont "    id="label_codigodane" value="#{var.codigodane}" styleClass="ikont"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtcodigodane" value="#{HomeGestion.filtro.coddanesedeeducativa}"/>
@@ -207,7 +207,7 @@
                             <h:panelGroup>
                                 <center>
                                     <h:commandLink type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar"  value="#{var.buscar}" 
-                                                   styleClass="id-jsf-"   
+                                                   styleClass="ikont"   
                                                    />
                                 </center>
                             </h:panelGroup>

@@ -13,15 +13,15 @@
     <rich:popupPanel id="panelBusquedaAvanzadaAtencion" autosized="true"     headerstyleClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="id-jsf- "   value="#{var.filtbusqueda} " styleClass="id-jsf-"   />
-                <h:outputText  styleClass="id-jsf- "   value="#{var.filtavanzada}" styleClass="id-jsf-"   />
+                <h:outputText  styleClass="ikont "   value="#{var.filtbusqueda} " styleClass="ikont"   />
+                <h:outputText  styleClass="ikont "   value="#{var.filtavanzada}" styleClass="ikont"   />
             </h:panelGroup>
         </f:facet>
         
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelBusquedaAvanzadaAtencion" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelBusquedaAvanzadaAtencion" styleClass="ikont"  
                                      onclick="#{rich:component('panelBusquedaAvanzadaAtencion')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -33,10 +33,10 @@
             <center>
                 <h:panelGrid id="gppanelBusquedaAvanzadaAtencion"  columnClasses="panelcenter">
                     <h:inputText size="35"  id="txtPalabraClave" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"
-                                 onclick="this.value = '';" styleClass="id-jsf-"   />
+                                 onclick="this.value = '';" styleClass="ikont"   />
 
                     <h:panelGrid columns="2" columnClasses="panelizquierda, panelizquierda" >
-                        <h:outputLabel  styleClass="id-jsf- "    id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" styleClass="id-jsf-"   />
+                        <h:outputLabel  styleClass="ikont "    id="label_tipo_proyectoge" value=" #{var.estadosolicitud}" styleClass="ikont"   />
                         <h:selectOneMenu id="estadosolicitudAH" 
                                          value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intestadoSolicitud}"
                                          >
@@ -44,7 +44,7 @@
                             <a4j:ajax event="change" execute="@this, estadosolicitudAH" />
                         </h:selectOneMenu>
                         
-                        <h:outputLabel  styleClass="id-jsf- "   id="label_fase" value="#{var.tipoAyudaHum}" styleClass="id-jsf-"   />
+                        <h:outputLabel  styleClass="ikont "   id="label_fase" value="#{var.tipoAyudaHum}" styleClass="ikont"   />
                         <h:panelGroup>
                             <h:panelGrid>
                                 <h:selectOneMenu id="combotipoah1"
@@ -63,7 +63,7 @@
                             </h:panelGrid>
                         </h:panelGroup>
 
-                        <h:outputLabel  styleClass="id-jsf- "   id="label_regionalizacion" value="#{var.region}alización" styleClass="id-jsf-"   />
+                        <h:outputLabel  styleClass="ikont "   id="label_regionalizacion" value="#{var.region}alización" styleClass="ikont"   />
                         <h:panelGroup>
                             <h:selectOneMenu value="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas}" >
                                 <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1" />
@@ -72,7 +72,7 @@
                             </h:selectOneMenu>
                         </h:panelGroup>
                         
-                        <h:outputLabel  styleClass="id-jsf- "   id="label_donde" value="#{var.ubicacionsolicitud}" styleClass="id-jsf-"   />
+                        <h:outputLabel  styleClass="ikont "   id="label_donde" value="#{var.ubicacionsolicitud}" styleClass="ikont"   />
                         <h:panelGrid id="pgorigen">
                             <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.vistazonas == 1}" 
                                          >
@@ -96,7 +96,7 @@
                             </h:panelGroup>
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="id-jsf- "   id="outpago" value="N° de Giro" styleClass="id-jsf-"   />
+                        <h:outputText  styleClass="ikont "   id="outpago" value="N° de Giro" styleClass="ikont"   />
                         <rich:inputNumberSpinner id="spago" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.intordensolicitud}"
                                                  minValue="0" maxValue="5" inputSize="5" />
 
@@ -111,7 +111,7 @@
                         <interkont:spacer height="5" />
 
                         <h:panelGroup >
-                            <h:commandLink type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" styleClass="id-jsf-"   />
+                            <h:commandLink type="submit" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscarFiltro}" id="filtrar" value="#{var.buscar}" styleClass="ikont"   />
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:panelGrid>

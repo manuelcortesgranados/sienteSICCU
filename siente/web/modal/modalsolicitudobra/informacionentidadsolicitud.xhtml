@@ -14,14 +14,14 @@
         <f:facet name="header" >
             <h:panelGroup >
                 <center>
-                    <h:outputText  styleClass="id-jsf- "   value="#{var.infoentidad}" styleClass="id-jsf-"  />
+                    <h:outputText  styleClass="ikont "   value="#{var.infoentidad}" styleClass="ikont"  />
                 </center>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelInformacionEntidad" styleClass="id-jsf-"  
+                    <a4j:commandLink id="esconder_panelInformacionEntidad" styleClass="ikont"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelInformacionEntidad')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -31,25 +31,25 @@
                 <center>
                     <h:panelGrid columns="2" >
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.nombreah}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.nombreah}"/>
                         <h:inputText id="nombreinfoentidad" value="#{SessionBeanCobra.solicitudService.entidad.strnombrecompleto}" disabled="true" />
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.nit}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.nit}"/>
                         <h:inputText  id="nitinfoentidad"  value="#{SessionBeanCobra.solicitudService.entidad.intcedula}" disabled="true" />
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.departamento}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.departamento}"/>
                         <h:inputText id="departamento" value="#{SessionBeanCobra.solicitudService.entidad.localidadByStrcodigolocalidad.strdepartamento}" disabled="true"/>
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.municipio}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.municipio}"/>
                         <h:inputText id="municipio" value="#{SessionBeanCobra.solicitudService.entidad.localidadByStrcodigolocalidad.strmunicipio}" disabled="true"/>
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.mail}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.mail}"/>
                         <h:inputText  id="mail" value="#{SessionBeanCobra.solicitudService.entidad.stremail}" disabled="true" />
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.website}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.website}"/>
                         <h:inputText id="websiteinfoentidad" value="#{SessionBeanCobra.solicitudService.entidad.strpaginaweb}" disabled="true" />
 
-                        <h:outputText  styleClass="id-jsf- "   value="#{var.telefonoah}"/>
+                        <h:outputText  styleClass="ikont "   value="#{var.telefonoah}"/>
                         <h:inputText id="telefonoinfoentidad" value="#{SessionBeanCobra.solicitudService.entidad.strtelefono1} - #{SessionBeanCobra.solicitudService.entidad.strtelefono2}" disabled="true"/>
 
                     </h:panelGrid>

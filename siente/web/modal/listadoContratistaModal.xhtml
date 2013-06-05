@@ -13,13 +13,13 @@
         <rich:popupPanel id="mp-listado-contratista" moveable="true" width="500" height="420" headerstyleClass="rich-panel-header">
             <f:facet name="header" >
                 <h:panelGroup >
-                    <h:outputText  styleClass="id-jsf- "   value="#{var.listarcontratistas}" />
+                    <h:outputText  styleClass="ikont "   value="#{var.listarcontratistas}" />
                 </h:panelGroup>
             </f:facet>
             <f:facet name="controls">
                 <h:form>
                     <h:panelGroup>
-                        <a4j:commandLink id="esconder_mp-listado-contratista" styleClass="id-jsf-"  
+                        <a4j:commandLink id="esconder_mp-listado-contratista" styleClass="ikont"  
                                          title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratista')}.hide(); return false;"/>
                     </h:panelGroup>
                 </h:form>
@@ -28,7 +28,7 @@
                 <h:panelGrid width=     "100%">
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
-                        <h:outputText  styleClass="id-jsf- "    value="#{var.houtbusquedarapida} "/>
+                        <h:outputText  styleClass="ikont "    value="#{var.houtbusquedarapida} "/>
                         <h:inputText  id="filtro-contratista" value="#{Supervisor$IngresarNuevaObra.valorFiltroContratistas}" immediate="true">
                             <a4j:ajax  event="blur" render="tabla-listado-contratista"  execute="@this" >
                             <a4j:queue ignoreDupResponses="true"/>
@@ -36,7 +36,7 @@
                         </h:inputText>
 
                         <f:facet name="header">
-                            <h:outputText  styleClass="id-jsf- "   value="#{var.filtrar}"/>
+                            <h:outputText  styleClass="ikont "   value="#{var.filtrar}"/>
                         </f:facet>
                         <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
                         <a4j:ajax event="click" render="tabla-listado-contratista" execute="@this">
@@ -54,19 +54,19 @@
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"  
                                          >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.numerocontratista}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.numerocontratista}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="id-jsf- "   id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
+                                <h:outputText  styleClass="ikont "   id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
                             </rich:column>
                             <rich:column id="nombrecontratista"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="id-jsf- "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
+                                <h:outputText  styleClass="ikont "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
                             </rich:column>
                             <rich:column id="seleccionar" width="120px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="id-jsf- "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
                                 </f:facet>
                                 <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarContratista}"
                                                    render="mostrarContratistaSeleccionado,gpContratoSelec"                                                   
