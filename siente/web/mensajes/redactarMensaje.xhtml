@@ -15,7 +15,7 @@
 
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="ikont- "   value="Redactar mensaje"/>
+        <h:outputText  class="ikont-hot-redactarmensaje"   value="Redactar mensaje"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -26,26 +26,26 @@
     <ui:define name="body">                
         <h:form id="form_nuevo">
             <center>
-                <rich:panel style = "width:100%;">
+                <rich:panel  class="ikont-rp-formnuevomensaje" >
                     <interkont:spacer height="20" />
                     <h:panelGrid id="pg_camposNuevo" columns="3" >
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  class="ikont- "    value="#{var.houtfechayhora}"/>
+                        <h:outputLabel  class="ikont-hol-houtfechayhora"    value="#{var.houtfechayhora}"/>
                         <h:inputText id="txt-datefecmensaje-nuevo" value="#{Mensajes.mensajeNuevo.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  class="ikont- "    value="#{var.houtdestinatario}"/>
+                        <h:outputLabel  class="ikont-hol-houtdestinatario"    value="#{var.houtdestinatario}"/>
                         <h:selectOneMenu id="select_usuarios-nuevo" value="#{Mensajes.mensajeNuevo.jsfUsuarioByIntusurecibe.tercero.intcedula}">
                             <f:selectItems value="#{Mensajes.selectItemUsuarios}" />
                         </h:selectOneMenu>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  class="ikont- "    value="#{var.houtasunto}"/>
+                        <h:outputLabel  class="ikont-hol-houtasunto"    value="#{var.houtasunto}"/>
                         <h:inputText id="txt_asunto_nuevo" value="#{Mensajes.mensajeNuevo.strasuntomensaje}" size="65" required="true" maxlength="250">
                             <h:message for="txt_asunto_nuevo"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  class="ikont- "    value="#{var.houtmensaje}" />
+                        <h:outputLabel  class="ikont-hol-houtmensaje"    value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_nuevo" value="#{Mensajes.mensajeNuevo.strtextomensaje}" cols="74" rows="14" required="true">
                             <h:message for="txt_strtextomensaje_nuevo"/>
                         </h:inputTextarea>
