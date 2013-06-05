@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp_editar_imagenevolucion" moveable="false" width="592" height="430"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.editarimagen}"/>
+                <h:outputText  class="ikont-hot-mpeditarimagenevolucion"   value="#{var.editarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_editar_imagenevolucion" class="ikont-"  
+                    <a4j:commandLink id="esconder_mp_editar_imagenevolucion" class="ikont-acl-escondermpeditarimagenevolucion"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_editar_imagenevolucion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -26,11 +26,11 @@
         </f:facet>
 
         <h:form> 
-            <rich:panel class="ikont-"   >
+            <rich:panel class="ikont-rp-mpeditarimagenevolucion"   >
 
-                <h:panelGrid width="100%" id="gpImagenModalEditar">
+                <h:panelGrid class="ikont-hpg-gpimagenmodaleditar" id="gpImagenModalEditar">
                     <interkont:spacer height="70px"/>
-                    <h:panelGrid id="pg_campos_editar_imagenevolucion" columns="3" width="100%" >
+                    <h:panelGrid id="pg_campos_editar_imagenevolucion" columns="3" class="ikont-hpg-gpimagenmodaleditar" >
                         <interkont:spacer width="60"/>
                         <h:outputLabel  class="ikont- "   value="#{var.nombre}"/>
                         <h:inputText id="txt_strnombre_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.strnombre}" required="true">

@@ -15,23 +15,23 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.eleimardocumento}"/>
+                <h:outputText  class="ikon-hot-mpeliminar"   value="#{var.eleimardocumento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_eliminar" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_mp_eliminar" class="ikon-acl-escondermpeliminar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar')}.hide(); return false;"/>
                     
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="id-jsf-"   >
+        <rich:panel class="ikon-rp-gpimagen"   >
             <h:form>
                 <h:panelGrid >
                     <interkont:spacer height="10"/>
-                    <h:outputText  class="id-jsf- "   id="st_confirmacionEliminar" value="#{var.estaseguroeliminardocumento}" />
+                    <h:outputText  class="ikon-hot-stconfirmacioneliminar"   id="st_confirmacionEliminar" value="#{var.estaseguroeliminardocumento}" />
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="2" >
                         <a4j:commandButton id="aceptar_eliminar_documento" action="#{Supervisor$AdministrarObraNew.bt_aceptar_eliminar_documento_action}"

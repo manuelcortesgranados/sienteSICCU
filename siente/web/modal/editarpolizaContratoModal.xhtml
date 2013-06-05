@@ -15,13 +15,13 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="id-jsf- "   value="#{var.agregarPoliza}"/>
+                <h:outputText  class="ikont-hot-panelpolizacontrato"   value="#{var.agregarPoliza}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelPolizaContrato" class="id-jsf-"   
+                    <a4j:commandLink id="esconder_panelPolizaContrato" class="ikont-acl-esconderpanelpolizacontrato"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelPolizaContrato')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -35,36 +35,36 @@
                     <interkont:spacer height="14"/>
                     <interkont:spacer height="20"/>
                     <h:panelGrid columns="3" >
-                        <h:panelGrid class="id-jsf-"  />
-                        <h:outputLabel  class="id-jsf- "   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" for="comboTipoPoliza">
+                        <h:panelGrid class="ikont-hpg-lbltipopoliza"  />
+                        <h:outputLabel  class="ikont-hol-lbltipopoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}" for="comboTipoPoliza">
 
                         </h:outputLabel>
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.strdescripcion}"/>
+                        <h:outputText  class="ikont-hot-pgpolizacontratostrdescripcion"   value="#{Supervisor$ModificarObra.polizaeditar.strdescripcion}"/>
 
 
-                        <h:panelGrid class="id-jsf-"  />
+                        <h:panelGrid class="ikont-hpg-space"  />
 
-                        <h:outputLabel  class="id-jsf- "    id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" for="numPolizaContrato">
+                        <h:outputLabel  class="ikont-hol-lblnumpolizacontrato"    id="lblnumPolizaContrato"  value="#{var.numPolizaContrato}" for="numPolizaContrato">
 
                         </h:outputLabel>
 
-                        <h:outputText  class="id-jsf- "    value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}"/>
+                        <h:outputText  class="ikont-hol-pgpolizacontratostrnumpoliza"    value="#{Supervisor$ModificarObra.polizaeditar.strnumpoliza}"/>
 
 
-                        <h:panelGrid class="id-jsf-"  />
+                        <h:panelGrid class="ikont-hpg-space1"  />
 
                         <h:panelGroup>
-                            <h:outputLabel  class="id-jsf- "   id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza"/>
+                            <h:outputLabel  class="ikont-hol-lblvencimientopoliza"   id="lblVencimientoPoliza"  value="#{var.vencimientoPoliza}" for="calendarVenciPoliza"/>
                             <rich:message for="calendarVenciPoliza" />
                         </h:panelGroup>
 
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarVenciPoliza" inputSize="10"
                                        value="#{Supervisor$IngresarNuevaObra.polizacontrato.datefechavecimiento}" required="true"/>
 
-                        <h:panelGrid class="id-jsf-"  />
-                        <h:outputLabel  class="id-jsf- "   id="lblEntidadPoliza"  value="#{var.entidadPoliza}" for="comboentidadPoliza">
+                        <h:panelGrid class="ikont-hpg-space2"  />
+                        <h:outputLabel  class="ikont-hol-lblentidadpoliza"   id="lblEntidadPoliza"  value="#{var.entidadPoliza}" for="comboentidadPoliza">
                         </h:outputLabel>
-                        <h:outputText  class="id-jsf- "   value="#{Supervisor$ModificarObra.polizaeditar.entidad.strnombreentidad}"/>
+                        <h:outputText  class="ikont-hot-pgpolizacontratostrnombreentidad"   value="#{Supervisor$ModificarObra.polizaeditar.entidad.strnombreentidad}"/>
 
 
                     </h:panelGrid>
@@ -72,7 +72,7 @@
                 <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle"  >
                     <h:panelGrid />
                     <a4j:commandButton value="#{var.guardar}" id="agregar_poliza" render="tablaPolizas, gpPolizaContrato"
-                                       execute="@this"  class="id-jsf-"    />
+                                       execute="@this"  class="ikont-acb-agregarpoliza"    />
                 </h:panelGrid>
 
 
