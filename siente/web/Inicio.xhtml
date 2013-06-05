@@ -43,7 +43,7 @@
                 <h:graphicImage  styleClass="ikont-hgi-logoLogin "   url="/resources/imgs/login/logo_login.png" width="350"/>
                 <rich:panel>
                     <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
-                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActivestyleClasstab-pestania-active-usu" headerInactivestyleClasstab-pestania-inactive-usu" contentstyleClasstab-div"  oncomplete="placehoder()">
+                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  oncomplete="placehoder()">
                             <a4j:region>
                                 <h:panelGroup layout="block">
                                     <h:panelGrid   >
@@ -115,7 +115,7 @@
                                 </h:panelGroup>
                             </a4j:region> 
                         </rich:tab>
-                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActivestyleClasstab-pestania-active" headerInactivestyleClasstab-pestania-inactive" contentstyleClasstab-div">
+                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActiveClass="tab-pestania-active" headerInactiveClass="tab-pestania-inactive" contentClass="tab-div">
                             <h:panelGroup layout="block" id="gpLoginCiudadanoPrincipal">
 
                                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >

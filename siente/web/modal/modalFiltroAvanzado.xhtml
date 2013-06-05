@@ -12,14 +12,14 @@
     <rich:popupPanel id="panelFiltroAvanzado" width="600" autosized="true"    headerClass="header_filtro" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.filtbusqueda} " styleClass="ikont"  />
-                <h:outputText  styleClass="ikont "   value="#{var.filtavanzada}" styleClass="ikont"  />
+                <h:outputText  styleClass="ikont-hot-filtbusqueda"   value="#{var.filtbusqueda} " />
+                <h:outputText  styleClass="ikont-hot-filtavanzada"   value="#{var.filtavanzada}"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelFiltroAvanzado" styleClass="ikont-acl-esconder"  
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('panelFiltroAvanzado')}.hide(); return false;"/>
                     
                 </h:panelGroup>
@@ -30,11 +30,11 @@
                 <h:panelGrid id="gppanelFiltroAvanzado"  columnClasses="panelcenter">
                     <center>
                         <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
-                                     onclick="this.value=''" styleClass="ikont"  />
+                                     onclick="this.value=''" styleClass="ikont-hit-txtPalabraClave"  />
 
-                        <h:panelGrid columns="2" columnClasses="panelcenter, panelcenter" >
-                            <h:outputLabel  styleClass="ikont "    id="lblevente" value="#{var.eventopertenece}" styleClass="ikont"  />
-                            <h:outputLabel  styleClass="ikont "    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}" styleClass="ikont"  />
+                        <h:panelGrid columns="2" >
+                            <h:outputLabel  styleClass="ikont-hol-lblevente"    id="lblevente" value="#{var.eventopertenece}"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_tipo_proyectoge"    id="label_tipo_proyectoge"  value="#{var.quetipoproyectoes}"  />
                             <h:panelGroup>
                                 <h:selectOneMenu  id="even" value="#{HomeGestion.filtro.intcodevento}">
                                     <f:selectItems value="#{HomeGestion.eventos}" />
@@ -58,20 +58,20 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="ikont "    id="label_fase" value="#{var.fasepertenece}:"  styleClass="ikont"  />
-                            <h:outputLabel  styleClass="ikont "    id="label_cuanti"  value="#{var.cuantocuesta}" styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_fase "    id="label_fase" value="#{var.fasepertenece}:" />
+                            <h:outputLabel  styleClass="ikont -hol-label_cuanti"    id="label_cuanti"  value="#{var.cuantocuesta}" />
                             <h:selectOneMenu  id="fase" value="#{HomeGestion.filtro.intcodfase}">
                                 <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                 <f:selectItems value="#{HomeGestion.fases}" />
                             </h:selectOneMenu>
                             <h:panelGroup>
-                                <h:outputLabel  styleClass="ikont "    id="label_cuantias" value="#{var.entre} " styleClass="ikont"  />
+                                <h:outputLabel  styleClass="ikont-hol-label_cuantias"    id="label_cuantias" value="#{var.entre} "/>
                                 <h:inputText value="#{HomeGestion.filtro.cuantiaini}" size="13" id="txtCuantiaini" >
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="15"/>
                                 </h:inputText>
 
-                                <h:outputLabel  styleClass="ikont "    id="label8" value=" #{var.y} " styleClass="ikont"  />
+                                <h:outputLabel  styleClass="ikont-hol-label8"    id="label8" value=" #{var.y} " />
                                 <h:inputText value="#{HomeGestion.filtro.cuantiafin}" size="13" id="txtCuantiafin">
                                     <f:validateLongRange minimum="0"/>
                                     <f:validateLength maximum="15"/>
@@ -79,9 +79,9 @@
                             </h:panelGroup>
 
 
-                            <h:outputLabel  styleClass="ikont "    id="label_donde" value="#{var.dondeestaubicado}:"  styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_donde"    id="label_donde" value="#{var.dondeestaubicado}:"/>
 
-                            <h:outputLabel  styleClass="ikont "    id="label_quetan"  value="#{var.quetanavanzado}:" styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_quetan"    id="label_quetan"  value="#{var.quetanavanzado}:" />
                             <h:panelGrid columns="1" columnClasses="panelcenter" >
                                 <h:selectOneMenu value="#{HomeGestion.inttipoorigen}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
@@ -89,14 +89,14 @@
                                     <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
                                 </h:selectOneMenu>
                                 <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
-                                    <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{HomeGestion.inttipoorigen == 0}" >
+                                    <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
                                         <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                             <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
                                             <f:selectItems value="#{HomeGestion.zonaespe}"/>
                                             <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
                                         </h:selectOneMenu>
                                     </h:panelGrid>
-                                    <h:panelGrid id="filtrodeptos" columnClasses="panelcenter" columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
+                                    <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
                                         <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                             <f:selectItems value="#{HomeGestion.departamentos}"/>
                                             <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
@@ -114,18 +114,18 @@
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.avance1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="ikont "   id="label10" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont-hol-label10"   id="label10" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner  maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.avance2}">
                                 </rich:inputNumberSpinner>
                             </h:panelGrid>
 
-                            <h:outputLabel  styleClass="ikont "    id="label_entidad" value="#{var.queentidadcontrato}" styleClass="ikont"  />
-                            <h:outputLabel  styleClass="ikont "    id="label_porcent" value="#{var.queporcentajesehapagado}" styleClass="ikont"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_entidad"    id="label_entidad" value="#{var.queentidadcontrato}"  />
+                            <h:outputLabel  styleClass="ikont-hol-label_porcent"    id="label_porcent" value="#{var.queporcentajesehapagado}" />
 
                             <h:panelGrid  columnClasses="panelcenter" columns="2">
                                 <interkont:spacer width="10px"/>
-                                <rich:select  styleClass="ikont"  
+                                <rich:select  styleClass="ikont-rs-ingresarEntidad"  
                                                defaultLabel="Ingrese Entidad" value="#{HomeGestion.filtro.strentidad}">
                                     <f:selectItems value="#{HomeGestion.tercerosUsuario}" />
                                     <a4j:ajax event="change" listener="#{HomeGestion.comboEntidadesContratoguardar}" render="coddane" execute="@this" >
@@ -134,11 +134,11 @@
                             </h:panelGrid>
                            
 
-                            <h:panelGrid columns="3"  columnClasses="panelcenter"  id="porcentajefil">
+                            <h:panelGrid columns="3"   id="porcentajefil">
                                 <rich:inputNumberSpinner inputSize="5" maxValue="100" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                          value="#{HomeGestion.filtro.pocentajepro1}">
                                 </rich:inputNumberSpinner>
-                                <h:outputLabel  styleClass="ikont "   id="label11" value="#{var.houta}"/>
+                                <h:outputLabel  styleClass="ikont-hol-label11"   id="label11" value="#{var.houta}"/>
                                 <rich:inputNumberSpinner maxValue="100" inputSize="5" disabled="#{HomeGestion.filtro.intestadoobra==0 || HomeGestion.filtro.intestadoobra== -1}"
                                                         value="#{HomeGestion.filtro.pocentajepro2}">
                                 </rich:inputNumberSpinner>
@@ -148,14 +148,14 @@
                      </h:panelGrid>
 
                         <h:panelGrid columns="2"  >
-                            <h:panelGrid columns="1" columnClasses="panelcenter" >
-                                <h:outputLabel  styleClass="ikont "    id="label_contratista" value="#{var.quieneselcontratista}" styleClass="ikont"  />
+                            <h:panelGrid columns="1" >
+                                <h:outputLabel  styleClass="ikont-hol-label_contratista"    id="label_contratista" value="#{var.quieneselcontratista}" />
 
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
 
 
-                                <h:outputLabel  styleClass="ikont "   id="label_estado_obra" value="#{var.enqueestadoseencuentra}" styleClass="ikont"  />
+                                <h:outputLabel  styleClass="ikont-hol-label_estado_obra"   id="label_estado_obra" value="#{var.enqueestadoseencuentra}"  />
 
 
                                 <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}">

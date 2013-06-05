@@ -15,37 +15,36 @@
         <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/imagotipo_siente.png" width="45"/>
-                    <h:outputLabel  styleClass="ikont "   value="#{var.recordarcontra} " styleClass="ikont"  />
+                    <h:graphicImage  styleClass="ikont-hgi-imagotipo_siente"   url="/resources/imgs/imagotipo_siente.png" width="45"/>
+                    <h:outputLabel  styleClass="ikont-hol-recordarcontra"   value="#{var.recordarcontra} "  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelRecordarContra" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelRecordarContra" styleClass="ikont-acl-esconder"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRecordarContra')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <a4j:region>
-                <h:panelGroup layout="block" styleClass="ikont"  >
+                <h:panelGroup layout="block" styleClass="ikont-hpg-principalrecordarcontra"  >
                     <h:panelGroup layout="block" >
                         <h:panelGrid >
                             <h:panelGroup layout="block" >
-                                <h:outputLabel  styleClass="ikont "    value="#{var.ingresarcorreo}"/><br/><br/>
+                                <h:outputLabel  styleClass="ikont-hol-ingresarcorreo"    value="#{var.ingresarcorreo}"/><br/><br/>
                                 <h:inputText   id="txtolvidocontra"  required="true"
                                                onclick="this.value=''"  value="#{SessionBeanCobra.usuarioCorreo}"/><br/><br/>
                                 <h:panelGrid width="40%" >
-                                   <!-- <rich:message for="txtolvidocontra" styleClass="ikont"   /> -->                                       
                                     <rich:messages id="messagerepass" globalOnly="true" 
-                                                   styleClass="ikont"   ajaxRendered="true" >                                                    
+                                                   styleClass="ikont-rm-messagerepass"   ajaxRendered="true" >                                                    
                                     </rich:messages> 
                                 </h:panelGrid>
 
-                                <a4j:commandButton value="#{var.enviar}" styleClass="ikont"   action="#{SessionBeanCobra.cambiarContrasenaUsuario}" execute="@this txtolvidocontra" render="messagerepass"/>
-                                <h:commandButton value="#{var.cancelar}" styleClass="ikont"    />
+                                <a4j:commandButton value="#{var.enviar}" styleClass="ikont-acb-enviar"   action="#{SessionBeanCobra.cambiarContrasenaUsuario}" execute="@this txtolvidocontra" render="messagerepass"/>
+                                <h:commandButton value="#{var.cancelar}" styleClass="ikont-acb-cancelar"    />
                             </h:panelGroup>
                         </h:panelGrid>                        
                     </h:panelGroup>
