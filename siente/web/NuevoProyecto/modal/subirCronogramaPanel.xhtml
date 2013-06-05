@@ -18,7 +18,7 @@
     <rich:popupPanel id="mp_subircronograma" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont-hot-subircronogramadilingeciado"   value="#{var.subircronogramadilingeciado}"  />
+                <h:outputText  styleClass="ikont-hot-subircronogramadilingeciado"   value="#{var.subircronogramadilingeciado}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -26,7 +26,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder_mp_subircronograma" 
                                      title="#{var.cerrar}" immediate="true" render="pasoGenCron"
-                                     class="ikont-hcl-subircronograma"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
+                                     styleClass="ikont-hcl-subircronograma"   onclick="#{rich:component('mp_subircronograma')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -54,17 +54,17 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont-hot-arcsub1"   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-arcsub1"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont-hot-numArchivos"   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-numArchivos"   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file">
                                         <h:panelGroup>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont-hot-nomarc"   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont-hot-nombre"   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont-hot-taarc"   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </h:panelGroup>
@@ -87,19 +87,19 @@
                             </center>
                                 <a4j:outputPanel id="panelErrorGC">
                                 <rich:messages id="messagesGC" globalOnly="true"
-                                               class="ikont-rm-messagesGC"   ajaxRendered="true"
+                                               styleClass="ikont-rm-messagesGC"   ajaxRendered="true"
                                                >
                                     <f:facet name="infoMarker">
-                                        <h:graphicImage  class="ikont-hgi-infoMarker"    url="/resources/imgs/msginfo.png" />
+                                        <h:graphicImage  styleClass="ikont-hgi-infoMarker"    url="/resources/imgs/msginfo.png" />
                                     </f:facet>
                                     <f:facet name="warnMarker">
-                                        <h:graphicImage  class="ikont-hgi-warnMarker"    url="/resources/imgs/msgwarn.png" />
+                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker"    url="/resources/imgs/msgwarn.png" />
                                     </f:facet>
                                     <f:facet name="errorMarker">
-                                        <h:graphicImage  class="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                     <f:facet name="fatalMarker">
-                                        <h:graphicImage  class="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
+                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
                                     </f:facet>
                                 </rich:messages>
 

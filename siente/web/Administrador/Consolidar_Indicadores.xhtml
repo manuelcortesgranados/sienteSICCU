@@ -28,7 +28,7 @@
                     <h:panelGrid id="consolidarIndicadores"  >
                         <h:panelGroup id="layoutConsolidarIndicadores">
                             <center>
-                                <h:outputText  class="ikont- "    value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" class="ikont-"  />
+                                <h:outputText  styleClass="ikont- "    value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" styleClass="ikont-"  />
 
                                 <h:panelGrid columns="2">
 
@@ -38,7 +38,7 @@
                                     <a4j:commandButton id="consolidar_no" value="#{var.no}"  oncomplete="true" render="consolidarIndicadores"/>
                                 </h:panelGrid>
                                 <h:panelGrid id="PanelConsolidado">
-                                    <h:outputLabel  class="ikont- "   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
                                 </h:panelGrid>
                             </center>
                         </h:panelGroup>

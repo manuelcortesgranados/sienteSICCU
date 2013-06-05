@@ -39,21 +39,21 @@
 
     </ui:define>
     <ui:define name="title">
-        <!--<h:outputText  class="ikont- "   value="Mapa" rendered="#{SessionBeanCobra.cobraService.ciu}"/>-->
+        <!--<h:outputText  styleClass="ikont- "   value="Mapa" rendered="#{SessionBeanCobra.cobraService.ciu}"/>-->
         <h:panelGroup id="gpPaginacion" >
-            <h:outputText  class="ikont-hot-obrasvigentes"   value="#{var.obrasvigentes} " rendered="#{HomeGestion.filtro.intestadoobra==1}"/>
-            <h:outputText  class="ikont-hot-obrasprupuestas"   value="#{var.obraspropuestas} " rendered="#{HomeGestion.filtro.intestadoobra==0}"/>
-            <h:outputText  class="ikont-hot-obrassuspendidas"   value="#{var.obrassuspendidas} " rendered="#{HomeGestion.filtro.intestadoobra==6}"/>
-            <h:outputText  class="ikont-hot-obrasfinalizadas"   value="#{var.obrasfinalizadas} " rendered="#{HomeGestion.filtro.intestadoobra==2}"/>
-            <h:outputText  class="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/>
-            <h:outputText  class="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
-            <h:outputText  class="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/>
-            <h:outputText  class="ikont-hot-convenios"   value="-Convenios " rendered="#{HomeGestion.filtro.tipointervencion==3}"/>
-            <h:outputText  class="ikont-hot-infraestructura"   value="-Infraestructura " rendered="#{HomeGestion.filtro.tipointervencion==2}"/>
-            <h:outputText  class="ikont-hot-atencionhumanitaria"   value="-Atención humanitaria " rendered="#{HomeGestion.filtro.tipointervencion==1}"/>
-            <h:outputText  class="ikont-hot-proyectostotalfilas"   value="(Total #{var.proyecto}s #{HomeGestion.totalfilas}" rendered="#{HomeGestion.filtro.intvista==1}" />
-            <h:outputText  class="ikont-hot-visualizado"   value=" - Visualizando #{HomeGestion.filtro.factorpagina}" rendered="#{HomeGestion.filtro.intvista==1 and HomeGestion.obrasEncontradas>HomeGestion.filtro.factorpagina}"/>
-            <h:outputText  class="ikont-hot-filtrointvisita"   value=")" rendered="#{HomeGestion.filtro.intvista==1}" />
+            <h:outputText  styleClass="ikont-hot-obrasvigentes"   value="#{var.obrasvigentes} " rendered="#{HomeGestion.filtro.intestadoobra==1}"/>
+            <h:outputText  styleClass="ikont-hot-obrasprupuestas"   value="#{var.obraspropuestas} " rendered="#{HomeGestion.filtro.intestadoobra==0}"/>
+            <h:outputText  styleClass="ikont-hot-obrassuspendidas"   value="#{var.obrassuspendidas} " rendered="#{HomeGestion.filtro.intestadoobra==6}"/>
+            <h:outputText  styleClass="ikont-hot-obrasfinalizadas"   value="#{var.obrasfinalizadas} " rendered="#{HomeGestion.filtro.intestadoobra==2}"/>
+            <h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/>
+            <h:outputText  styleClass="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
+            <h:outputText  styleClass="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/>
+            <h:outputText  styleClass="ikont-hot-convenios"   value="-Convenios " rendered="#{HomeGestion.filtro.tipointervencion==3}"/>
+            <h:outputText  styleClass="ikont-hot-infraestructura"   value="-Infraestructura " rendered="#{HomeGestion.filtro.tipointervencion==2}"/>
+            <h:outputText  styleClass="ikont-hot-atencionhumanitaria"   value="-Atención humanitaria " rendered="#{HomeGestion.filtro.tipointervencion==1}"/>
+            <h:outputText  styleClass="ikont-hot-proyectostotalfilas"   value="(Total #{var.proyecto}s #{HomeGestion.totalfilas}" rendered="#{HomeGestion.filtro.intvista==1}" />
+            <h:outputText  styleClass="ikont-hot-visualizado"   value=" - Visualizando #{HomeGestion.filtro.factorpagina}" rendered="#{HomeGestion.filtro.intvista==1 and HomeGestion.obrasEncontradas>HomeGestion.filtro.factorpagina}"/>
+            <h:outputText  styleClass="ikont-hot-filtrointvisita"   value=")" rendered="#{HomeGestion.filtro.intvista==1}" />
         </h:panelGroup>
     </ui:define>
     <ui:define name="menu">
@@ -79,18 +79,18 @@
                 <tr>
                     <td><div ><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" class="ikont-hit-palabraclave"    value="#{HomeGestion.filtro.palabraclave}" /><!--obrafiltrar.strnombreobra-->
-                                    <a4j:commandButton type="button" class="ikont-acb-primerolistproyectos"   action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" render="vistaMapa" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
+                                    <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palabraclave"    value="#{HomeGestion.filtro.palabraclave}" /><!--obrafiltrar.strnombreobra-->
+                                    <a4j:commandButton type="button" styleClass="ikont-acb-primerolistproyectos"   action="#{HomeGestion.primeroListProyectos}" id="filtrar"  value="#{var.buscar}" render="vistaMapa" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"/>
 
                                     <h:commandLink action="#{HomeGestion.primeroListProyectos}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}">
-                                        <h:graphicImage  class="ikont-hgi-bnver"    url="/resources/imgs/bt_ver.png"/>
+                                        <h:graphicImage  styleClass="ikont-hgi-bnver"    url="/resources/imgs/bt_ver.png"/>
                                     </h:commandLink>
                                 </label>
                             </div></div></td>
-                    <td><a4j:commandLink class="ikont-acl-busquedaavanzada"   render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
+                    <td><a4j:commandLink styleClass="ikont-acl-busquedaavanzada"   render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
                                          oncomplete="#{rich:component('panelFiltroAvanzado')}.show();return true;"/>
 
-                        <a4j:commandLink class="ikont-acl-btnfiltrociudadano"   render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
+                        <a4j:commandLink styleClass="ikont-acl-btnfiltrociudadano"   render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
                                          oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show();return true;"/>
 
 
@@ -99,16 +99,16 @@
                             <tr>
                                 <td >Vistas</td>
                                 <td><div >
-                                        <h:commandLink class="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" />
+                                        <h:commandLink styleClass="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" />
 
                                     </div></td>
                                 <td><div >
-                                        <a4j:commandLink class="ikont-acl-filtrarobrasporestado"   render="form_gestion,vistaThumb" execute="@this"
+                                        <a4j:commandLink styleClass="ikont-acl-filtrarobrasporestado"   render="form_gestion,vistaThumb" execute="@this"
                                                          action="#{HomeGestion.filtrarObrasPorEstado}"    >
                                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intvista}"/>
                                         </a4j:commandLink>
                                     </div></td>
-                                <td><div ><a4j:commandLink class="ikont-acl-filtrarobraporestado"   render="form_gestion,vistaLista" execute="@this"
+                                <td><div ><a4j:commandLink styleClass="ikont-acl-filtrarobraporestado"   render="form_gestion,vistaLista" execute="@this"
                                                            action="#{HomeGestion.filtrarObrasPorEstado}"   >
                                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
                                         </a4j:commandLink>
@@ -122,7 +122,7 @@
                 <tr>
                     <td>
                         <blink>
-                            <h:outputText  class="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
+                            <h:outputText  styleClass="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
                         </blink>
                     </td>
                 </tr>
@@ -163,22 +163,22 @@
 
             <h:panelGrid id="vistaThumb"  rendered="#{HomeGestion.filtro.intvista == 2}">
 
-                <rich:dataGrid class="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
+                <rich:dataGrid styleClass="ikont-rdg-listaobras"   id="vitasthumbnail" value="#{HomeGestion.listaobrasusu}" var="obras" columns="3" elements="#{HomeGestion.filtro.factorpagina}"
                                rendered="#{HomeGestion.obrasEncontradas == null or HomeGestion.obrasEncontradas > 0 }">
                     <f:facet name="header">
-                        <h:outputText  class="ikont-hot-totalproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
+                        <h:outputText  styleClass="ikont-hot-totalproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
                     </f:facet>
                     <center>
                         <h:panelGrid columns="1">
                             <a4j:commandLink id="irNuevaObra"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra==0}" disabled="#{SessionBeanCobra.cobraService.ciu or !SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
-                                <h:graphicImage  class="ikont- " value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
+                                <h:graphicImage  styleClass="ikont- " value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
                             </a4j:commandLink>
                             <a4j:commandLink id="irDetalle"  onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{obras.intcodigoobra}';" rendered="#{obras.tipoestadobra.intestadoobra>0}">
-                                <h:graphicImage  class="ikont-hgi-strimagneobra" value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
+                                <h:graphicImage  styleClass="ikont-hgi-strimagneobra" value="#{var.ipserver}/#{facesContext.externalContext.requestContextPath}#{obras.strimagenobra}" />
                             </a4j:commandLink>
                         </h:panelGrid>
-                        <rich:tooltip followMouse="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"  showDelay="500" class="ikont-rtt-btndetalleproyecto"  >
-                            <h:outputLabel  class="ikont-hol-strnombreobra"   value="#{obras.strnombreobra}"/>
+                        <rich:tooltip followMouse="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}"  showDelay="500" styleClass="ikont-rtt-btndetalleproyecto"  >
+                            <h:outputLabel  styleClass="ikont-hol-strnombreobra"   value="#{obras.strnombreobra}"/>
                         </rich:tooltip>
                     </center>
                     <f:facet name="footer">
@@ -204,84 +204,84 @@
                         <rich:columnGroup>
 
                             <rich:column colspan="9">
-                                <h:outputText  class="ikont-hot-totallistaproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
+                                <h:outputText  styleClass="ikont-hot-totallistaproyectos"   value="Total #{var.proyecto}s #{HomeGestion.totalfilas} #{var.paginaCiu} #{HomeGestion.pagina} #{var.deCiu} #{HomeGestion.totalpaginas}" />
                             </rich:column>
                             <rich:column id="estadoObra" breakRowBefore="true" width="180px">
-                                <h:outputText  class="ikont-hot-ubicacion"   value="Ubicación" />
+                                <h:outputText  styleClass="ikont-hot-ubicacion"   value="Ubicación" />
                             </rich:column>
                             <rich:column id="nombreObra"   width="350px">
-                                <h:outputText  class="ikont-hot-nombreobra"   value="Nombre Obra" />
+                                <h:outputText  styleClass="ikont-hot-nombreobra"   value="Nombre Obra" />
                             </rich:column>
                             <rich:column id="nombreConvenio" rendered="#{HomeGestion.filtro.tipointervencion==3 or HomeGestion.filtro.tipointervencion==-1}"  width="100px">
-                                <h:outputText  class="ikont-hot-convenio"   value="Convenio" />
+                                <h:outputText  styleClass="ikont-hot-convenio"   value="Convenio" />
                             </rich:column>
                             <rich:column id="tipoObra" width="100px">
-                                <h:outputText  class="ikont-hot-tipoobra"   value="Tipo Obra" />
+                                <h:outputText  styleClass="ikont-hot-tipoobra"   value="Tipo Obra" />
                             </rich:column>
                             <rich:column id="valorObra" width="80px">
-                                <h:outputText  class="ikont-hot-valor"   value="Valor" />
+                                <h:outputText  styleClass="ikont-hot-valor"   value="Valor" />
                             </rich:column>
                             <rich:column id="duracionObra" width="60px">
-                                <h:outputText  class="ikont-hot-duracion"   value="Duración" />
+                                <h:outputText  styleClass="ikont-hot-duracion"   value="Duración" />
                             </rich:column>
                             <rich:column id="avanceObra" width="50px">
-                                <h:outputText  class="ikont-hot-avance"   value="Avance" />
+                                <h:outputText  styleClass="ikont-hot-avance"   value="Avance" />
                             </rich:column>
                             <rich:column id="verObra" width="50px">
-                                <h:outputText  class="ikont-hot-tipointervencion"   value="Tipo de intervención" />
+                                <h:outputText  styleClass="ikont-hot-tipointervencion"   value="Tipo de intervención" />
                             </rich:column>
                             <rich:column width="50px">
-                                <h:outputText  class="ikont-hot-seguimientos"   value="Seguimientos" />
+                                <h:outputText  styleClass="ikont-hot-seguimientos"   value="Seguimientos" />
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column id="estadoObras" width="180px">
                             <rich:list var="loc" value="#{obra.listalocalidades}" rows="5">
-                                <h:outputText  class="ikont-hot-strdepartamento"   value="#{loc.strdepartamento}-#{loc.strmunicipio}" rendered="#{loc.strcodigolocalidad!='169'}"/>
-                                <h:outputText  class="ikont-hot-strpais"   value="#{loc.strpais}" rendered="#{loc.strcodigolocalidad=='169'}"/>
+                                <h:outputText  styleClass="ikont-hot-strdepartamento"   value="#{loc.strdepartamento}-#{loc.strmunicipio}" rendered="#{loc.strcodigolocalidad!='169'}"/>
+                                <h:outputText  styleClass="ikont-hot-strpais"   value="#{loc.strpais}" rendered="#{loc.strcodigolocalidad=='169'}"/>
                             </rich:list>
                         </rich:column>
                         <rich:column id="nombreObras" width="400px">
-                            <h:outputText  class="ikont-hot-nombreobras"   id="otxt-nombreObras" value="#{obra.strnombreobra}"/>
+                            <h:outputText  styleClass="ikont-hot-nombreobras"   id="otxt-nombreObras" value="#{obra.strnombreobra}"/>
                         </rich:column>
                         <rich:column id="nombreConvenios" rendered="#{obra.contrato !=null or HomeGestion.filtro.tipointervencion==-1}"  width="100px">
-                            <h:outputText  class="ikont-hot-strnombre"   id="otxt-nombreconvenio" value="#{obra.contrato.strnombre}" rendered="#{obra.contrato !=null}"/>
-                            <h:outputText  class="ikont-hot-nombreconvenio"   id="otxt-nonombreconvenio" value="N/A" rendered="#{obra.contrato ==null}"/>
+                            <h:outputText  styleClass="ikont-hot-strnombre"   id="otxt-nombreconvenio" value="#{obra.contrato.strnombre}" rendered="#{obra.contrato !=null}"/>
+                            <h:outputText  styleClass="ikont-hot-nombreconvenio"   id="otxt-nonombreconvenio" value="N/A" rendered="#{obra.contrato ==null}"/>
                         </rich:column>
                         <rich:column id="tipoObras" width="100px">
-                            <h:outputText  class="ikont-hot-strdestipobra"   id="otxt-tipoObras" value="#{obra.tipoobra.strdesctipoobra}"/>
+                            <h:outputText  styleClass="ikont-hot-strdestipobra"   id="otxt-tipoObras" value="#{obra.tipoobra.strdesctipoobra}"/>
                         </rich:column>
                         <rich:column id="valorObras" width="80px">
-                            <h:outputText  class="ikont-hot-numvalortotalobra"   id="otxt-valorObras" value="#{obra.numvaltotobra}">
+                            <h:outputText  styleClass="ikont-hot-numvalortotalobra"   id="otxt-valorObras" value="#{obra.numvaltotobra}">
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column id="duracionObras" width="60px">
-                            <h:outputText  class="ikont-hot-duracionobras"   id="otxt-duracionObras" value="#{obra.intplazoobra/30}">
+                            <h:outputText  styleClass="ikont-hot-duracionobras"   id="otxt-duracionObras" value="#{obra.intplazoobra/30}">
                                 <f:convertNumber pattern="###,### meses"/>
                             </h:outputText>
                         </rich:column>
-                        <rich:column id="avanceObras" width="50px"  class="ikont-rcl-avanceobras">
-                            <h:outputText  class="ikont-hot-numvalavanfisicodeclarado"   id="otxt-avanceObras" value="#{obra.numvalavanfisicodeclarado}">
+                        <rich:column id="avanceObras" width="50px"  styleClass="ikont-rcl-avanceobras">
+                            <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclarado"   id="otxt-avanceObras" value="#{obra.numvalavanfisicodeclarado}">
                                 <f:convertNumber maxFractionDigits="2" />
                             </h:outputText>
-                            <h:outputText  class="ikont-hot-numvalavanfisicodeclaradoporcentaje"   value=" %"/>
+                            <h:outputText  styleClass="ikont-hot-numvalavanfisicodeclaradoporcentaje"   value=" %"/>
                         </rich:column>
                         <rich:column id="verDetalles" width="50px">
-                            <h:outputText  class="ikont-hot-detallesconvenio"   value="Convenio" rendered="#{obra.contrato !=null}"/>
-                            <h:outputText  class="ikont-hot-solicitudobra"   value="Infraestructura " rendered="#{obra.solicitud_obra !=null}"/>
-                            <h:outputText  class="ikont-hot-solitudmaestro"   value="Atención humanitaria " rendered="#{obra.solicitudmaestro !=null}"/>
+                            <h:outputText  styleClass="ikont-hot-detallesconvenio"   value="Convenio" rendered="#{obra.contrato !=null}"/>
+                            <h:outputText  styleClass="ikont-hot-solicitudobra"   value="Infraestructura " rendered="#{obra.solicitud_obra !=null}"/>
+                            <h:outputText  styleClass="ikont-hot-solitudmaestro"   value="Atención humanitaria " rendered="#{obra.solicitudmaestro !=null}"/>
                             <a4j:commandLink type="submit" execute="@this" rendered="#{obra.tipoestadobra.intestadoobra == 0 and SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and !SessionBeanCobra.cobraService.ciu}" id="irDatosBasicos" onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{obra.intcodigoobra}';">
-                                <h:graphicImage  class="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-detallesbtnver"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                             <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{obra.intcodigoobra}';">
-                                <h:graphicImage  class="ikont-hgi-bnverdetalle"    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-bnverdetalle"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column id="verSeguimientos" width="50px">
                             <a4j:commandLink rendered="#{obra.tipoestadobra.intestadoobra != 0 and obra.solicitud_obra !=null}" onclick="document.location.href = '../faces/SupervisionExterna/ListadoSeguimientos.xhtml?id=#{obra.intcodigoobra}';">
-                                <h:graphicImage  class="ikont-hgi-seguimientosbnver"    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-seguimientosbnver"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                     </rich:columnGroup>

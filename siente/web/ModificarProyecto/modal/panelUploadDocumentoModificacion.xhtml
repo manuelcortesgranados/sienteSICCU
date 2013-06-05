@@ -13,13 +13,13 @@
     <rich:popupPanel id="panelUploadDocumentoModificacion" autosized="true"  >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont-hot-paneluploaddocumentomodificacion"   value="#{var.adjuntardoc}"/>
+                <h:outputText  styleClass="ikont-hot-paneluploaddocumentomodificacion"   value="#{var.adjuntardoc}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadDocumentoModificacion" class="ikont-acl-esconderpaneluploaddocumentomodificacion"  
+                    <a4j:commandLink id="esconder_panelUploadDocumentoModificacion" styleClass="ikont-acl-esconderpaneluploaddocumentomodificacion"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelUploadDocumentoModificacion')}.hide();
                                              return false;">
@@ -27,7 +27,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="ikont-rp-paneluploaddocumentomodificacion"   >
+        <rich:panel styleClass="ikont-rp-paneluploaddocumentomodificacion"   >
             <h:form id="formDocumentoModificacion">
                 <h:panelGroup id="layoutDocModificacion">
 
@@ -50,17 +50,17 @@
                             <center>
                                 <rich:panel  >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont-hot-infodocmodificacioarcsub"   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-infodocmodificacioarcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont-hot-infodocmodificacionumarchivos "   rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-infodocmodificacionumarchivos "   rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorDocumentos.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont-hot-infodocmodificacionomarc"   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont-hot-infodocmodificacionombre"   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont-hot-infodocmodificaciotaarc"   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont-hot-infodocmodificacionumbyte "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-infodocmodificacionomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infodocmodificacionombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infodocmodificaciotaarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infodocmodificacionumbyte "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -71,7 +71,7 @@
                                 <a4j:commandButton action="#{Supervisor$ModificarProyecto.cargadorDocumentos.borrarDatosSubidos}"
                                                    render="infoDocModificacio, uploadDocModi"
                                                    rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="ikont-acl-infodocmodificacioborrararchivos"     />
+                                                   styleClass="ikont-acl-infodocmodificacioborrararchivos"     />
                                 <interkont:spacer width="10"/>
                                 <a4j:commandButton id="BTaceptarModificarDocs"  value="#{var.aceptar}" rendered="#{Supervisor$ModificarProyecto.cargadorDocumentos.numArchivos>0}"
                                                    oncomplete="#{rich:component('panelUploadDocumentoModificacion')}.hide();return false;" render="panelListadoArchivosCargados"

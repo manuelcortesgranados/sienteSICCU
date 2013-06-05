@@ -11,14 +11,14 @@
     <rich:popupPanel id="mp_cronograma" moveable="true" width="300" height="270" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont-hot-atencion"   value="#{var.atencion}"  />
+                <h:outputText  styleClass="ikont-hot-atencion"   value="#{var.atencion}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
 
             <h:panelGroup>
                 <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
-                                 class="ikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
+                                 styleClass="ikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
                                                   return false;"/>
             </h:panelGroup>
 
@@ -32,20 +32,20 @@
 
                     <h:panelGroup>
 
-                        <h:outputText  class="ikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
-                        <h:outputText  class="ikont-hot-cobra"     value="#{var.cobra} "/>
-                        <h:outputText  class="ikont-hot-vaagenerar"     value="#{var.vaagenerar} "/>
-                        <h:outputText  class="ikont-hot-cronograma"    value="#{var.cronograma} "/>
-                        <h:outputText  class="ikont-hot-en"      value="#{var.en} "/>
-                        <h:outputText  class="ikont-hot-excel"    value="#{var.excel} "/>
-                        <h:outputText  class="ikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}"/>
-                        <h:outputText  class="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
-                        <h:outputText  class="ikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
+                        <h:outputText  styleClass="ikont-hot-aldarclickenelboto"    value="#{var.aldarclickenelboto} "/>
+                        <h:outputText  styleClass="ikont-hot-cobra"     value="#{var.cobra} "/>
+                        <h:outputText  styleClass="ikont-hot-vaagenerar"     value="#{var.vaagenerar} "/>
+                        <h:outputText  styleClass="ikont-hot-cronograma"    value="#{var.cronograma} "/>
+                        <h:outputText  styleClass="ikont-hot-en"      value="#{var.en} "/>
+                        <h:outputText  styleClass="ikont-hot-excel"    value="#{var.excel} "/>
+                        <h:outputText  styleClass="ikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}"/>
+                        <h:outputText  styleClass="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} "/>
+                        <h:outputText  styleClass="ikont-hot-recuerdequedebeguar"     value="(#{var.recuerdequedebeguar})"/>
                     </h:panelGroup>
 
                     <h:panelGrid>
                         <interkont:spacer height="5"/>
-                        <h:outputText  class="ikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
+                        <h:outputText  styleClass="ikont-hot-deseacerrar "    value="#{var.silodeseapuedecerrar}"/>
 
                     </h:panelGrid>
 
@@ -54,7 +54,7 @@
                         <h:form>
                             <interkont:spacer height="20"/>
                             <h:commandButton value="#{var.generarcronograma}"                                                
-                                             class="ikont-"  
+                                             styleClass="ikont-"  
                                              action="#{Supervisor$IngresarNuevaObra.bt_download_action}"
                                              onclick="#{rich:component('mp_cronograma')}.hide();">
                             </h:commandButton>

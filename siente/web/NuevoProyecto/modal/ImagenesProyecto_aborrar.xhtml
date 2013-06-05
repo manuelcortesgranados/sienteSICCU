@@ -17,21 +17,21 @@
                 <h:form>
                     <rich:panel>
                         <f:facet name="header">
-                            <h:outputText  class="ikont-hot-subirimagenes"   value="#{var.subirimagenes}"/>
+                            <h:outputText  styleClass="ikont-hot-subirimagenes"   value="#{var.subirimagenes}"/>
                         </f:facet>
                         <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
-                            <h:outputText  class="ikont-hot-subalasimagenesantes"   value="#{var.subalasimagenesantes}"/>
+                            <h:outputText  styleClass="ikont-hot-subalasimagenesantes"   value="#{var.subalasimagenesantes}"/>
                             <h:panelGrid columns="2" >
 
                                 <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="rich-panel-grid-body">
                                     <center>
-                                        <h:panelGrid id="layoutImagen" class="ikont-"   columnClasses="aiu">
+                                        <h:panelGrid id="layoutImagen" styleClass="ikont-"   columnClasses="aiu">
 
-                                            <a4j:commandLink id="btAdjuntarImagen" class="ikont-hcl-btAdjuntarImagen"   >
+                                            <a4j:commandLink id="btAdjuntarImagen" styleClass="ikont-hcl-btAdjuntarImagen"   >
                                                 <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
-                                            <h:outputText  class="ikont-hot-ImagenAtencionppal"   id="ImagenAtencionppal" value="#{var.nombre}"/>
+                                            <h:outputText  styleClass="ikont-hot-ImagenAtencionppal"   id="ImagenAtencionppal" value="#{var.nombre}"/>
                                             <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
                                             <!--<rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.subirImagenevolucion.files}" var="file" >
@@ -41,7 +41,7 @@
                                         <center>
                                             <!--
                                             <h:panelGrid>
-                                                <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" class="ikont-"   value="#{var.subir}"
+                                                <a4j:commandLink id="bt_agregarImagenppal"  title="#{var.subir}" styleClass="ikont-"   value="#{var.subir}"
                                                                  action="#{Supervisor$IngresarNuevaObra.subirImagenaPrincipal}"
                                                                  render="tablaImagenes,spimagen,panelImagenProyecto"/>
                                             </h:panelGrid>-->
@@ -51,12 +51,12 @@
                                 <rich:panel id="imagensecundaria" header="#{var.imagensecundaria}" bodyClass="ikont-rp-grid-body" >
                                     <center>
                                         <h:panelGrid id="panel_subirImagen"  columns="1" >
-                                            <a4j:commandLink id="adjuntarImagen" class="ikont-"   >
+                                            <a4j:commandLink id="adjuntarImagen" styleClass="ikont-"   >
                                                 <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
                                             </a4j:commandLink>
 
 
-                                            <h:outputText  class="ikont-hot-imagenAtencion"   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
+                                            <h:outputText  styleClass="ikont-hot-imagenAtencion"   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
                                             <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.imagenevolucionobra.strnombre}" size="18"/>
 
                                           
@@ -71,34 +71,34 @@
                                 <rich:dataTable id="tablaImagenes" value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
                                                 var="currentRow"  binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}" rows="3" >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
+                                        <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
                                     </f:facet>
                                     <rich:column breakRowBefore="true"  >
                                         <f:facet name="header" >
-                                            <h:outputText  class="ikont-hot-tipo"   value="#{var.tipo}"/>
+                                            <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
                                         </f:facet>
-                                        <h:outputText  class="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                        <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
                                     </rich:column>
 
                                     <rich:column  >
                                         <f:facet name="header" >
-                                            <h:outputText  class="ikont-hot-nombreah"   value="#{var.nombreah}"/>
+                                            <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
                                         </f:facet>
-                                        <h:outputText  class="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
+                                        <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
                                     </rich:column>
                                     <rich:column  id="Imagen">
                                         <f:facet name="header" >
-                                            <h:outputText  class="ikont-hot-imagen"   value="#{var.imagen}"/>
+                                            <h:outputText  styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
                                         </f:facet>
 
-                                        <h:graphicImage  class="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"  />
+                                        <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"  />
                                     </rich:column>
 
                                     <rich:column >
                                         <f:facet name="header">
-                                            <h:outputText  class="ikont-hot-eliminar"   value="#{var.eliminar}"/>
+                                            <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                         </f:facet>
-                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}" class="ikont-acb-eliminar"   
+                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}" styleClass="ikont-acb-eliminar"   
                                                              render="tablaImagenes"
                                                              action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
                                     </rich:column>

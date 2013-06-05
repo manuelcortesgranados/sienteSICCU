@@ -19,16 +19,16 @@
             <h:panelGrid  columns="2"   >
 
 
-                <h:graphicImage  class="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
+                <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
-                <rich:panel  class="ikont-rp-indicadores"  >
-                    <h:outputText  class="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="ikont-hcl-nombreobra"  
+                <rich:panel  styleClass="ikont-rp-indicadores"  >
+                    <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
                                       onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" class="ikont-hcl-nombreobra1"  
+                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra1"  
                                       onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
-                    <h:outputText  class="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
-                    <h:graphicImage  class="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
+                    <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
+                    <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
                 </rich:panel>
             </h:panelGrid>
         </a4j:repeat>

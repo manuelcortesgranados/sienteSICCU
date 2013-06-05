@@ -15,8 +15,8 @@
         </ui:define>
 
         <ui:define name="title">
-            <h:outputText  class="ikont- "    value="Solicitar Cambio Estado #{var.textoobra3}"/>
-            <h:outputText  class="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+            <h:outputText  styleClass="ikont- "    value="Solicitar Cambio Estado #{var.textoobra3}"/>
+            <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
         </ui:define>
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -32,22 +32,22 @@
                 <h:panelGroup id="validarcambio">
                     <interkont:spacer  height="120"/>
                     <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" >
-                        <h:outputText  class="ikont- "   value="SOLICITAR CAMBIO DE ESTADO DE #{var.textobra7}" class="ikont-"  />
+                        <h:outputText  styleClass="ikont- "   value="SOLICITAR CAMBIO DE ESTADO DE #{var.textobra7}" styleClass="ikont-"  />
                         <interkont:spacer  height="15" />                            
-                        <h:outputText  class="ikont- "   value="Si usted desea actualizar la programación del #{var.solicitudproyecto} o actualizar los datos básicos #{var.textoobra3} haga uso de esta función para cambiar el estado #{var.textoobra3} a ejecución incompleta." class="ikont-"   />
+                        <h:outputText  styleClass="ikont- "   value="Si usted desea actualizar la programación del #{var.solicitudproyecto} o actualizar los datos básicos #{var.textoobra3} haga uso de esta función para cambiar el estado #{var.textoobra3} a ejecución incompleta." styleClass="ikont-"   />
                         <interkont:spacer  height="20" />
                         <h:panelGrid columnClasses="panelcenter"  >
                             <h:form  id="form_validarcambio">
                                 <a4j:commandLink value="Cambiar estado #{var.textoobra3}"
-                                                 class="ikont-"   
+                                                 styleClass="ikont-"   
                                                  onclick="#{rich:component('confirmarCambioEstado')}.show();return true;">
                                 </a4j:commandLink>  
                             </h:form>
                         </h:panelGrid>
                         <interkont:spacer  height="20" />
                         <h:panelGroup>
-                             <h:graphicImage  class="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
-                            <h:outputText  class="ikont- "    class="ikont-"  
+                             <h:graphicImage  styleClass="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                            <h:outputText  styleClass="ikont- "    styleClass="ikont-"  
                                            value="Recuerde que este procedimiento borrará todos los Reportes de Avances, 
                                            los documentos e imágenes asociados a estos reportes y el cronograma" />
               

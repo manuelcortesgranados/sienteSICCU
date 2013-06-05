@@ -16,10 +16,10 @@
 
                 <h:panelGroup>
 
-                    <h:outputText  class="ikont- "   value= "#{var.atencion}"/>
+                    <h:outputText  styleClass="ikont- "   value= "#{var.atencion}"/>
                     <interkont:spacer />
 
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" class="ikont-"   
+                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
                                              return false;"/>
 
@@ -28,7 +28,7 @@
             </f:facet>
 
             <center>
-                <h:outputText  class="ikont- "   value="#{var.estasegurodeenviar}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.estasegurodeenviar}"/>
 
                 <h:panelGrid columns="2" id="layoutGuardar">
 

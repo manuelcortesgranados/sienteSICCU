@@ -13,7 +13,7 @@
 
     </ui:define>
     <ui:define name="title">
-        <h:outputText  class="ikont-hot-cronogramavalidacion"   value="#{var.ingresarnuevoproyecto} - #{var.cronogramavalidacion}"/>
+        <h:outputText  styleClass="ikont-hot-cronogramavalidacion"   value="#{var.ingresarnuevoproyecto} - #{var.cronogramavalidacion}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -32,37 +32,37 @@
                     <h:form id="formCronograma">
                         <rich:panel id="pasoGenCron"  >
                             <f:facet name="header">
-                                <h:outputText  class="ikont-hot-generarcronograma"   value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                <h:outputText  class="ikont-hot-booleantienehijos"   value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                <h:outputText  styleClass="ikont-hot-generarcronograma"   value="#{var.generarcronograma}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                <h:outputText  styleClass="ikont-hot-booleantienehijos"   value="#{var.totalobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
                             </f:facet>
                             <interkont:spacer width="20"/>
                             <rich:collapsiblePanel switchType="client"  expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}" header="#{var.pgenerarcronograma}">
                                 <center>
                                     <h:panelGrid  columns="1" >
                                         <h:panelGroup>
-                                            <h:outputText  class="ikont-hot-diligenciardatos "   value="#{var.debediligenciartodoslosdatos}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                            <h:graphicImage  class="ikont-hgi-msgerror"   height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:outputText  styleClass="ikont-hot-diligenciardatos "   value="#{var.debediligenciartodoslosdatos}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                            <h:graphicImage  styleClass="ikont-hgi-msgerror"   height="20px" width="20px" url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                         </h:panelGroup>
                                         <a4j:commandLink rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"
                                                          action="#{Supervisor$IngresarNuevaObra.generarXLSPOI}" 
                                                          execute="@this"
                                                          oncomplete="#{rich:component('mp_cronograma')}.show();"
-                                                         class="ikont-hcl-datosbasicos"  
+                                                         styleClass="ikont-hcl-datosbasicos"  
                                                          value="cronograma"
                                                          >
                                         </a4j:commandLink>
 
 
                                     </h:panelGrid>
-                                    <h:outputLabel  class="ikont-hol-generarcronograma"   value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-generarcronograma"   value="#{var.generarcronograma}" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
                                 </center>
                             </rich:collapsiblePanel>
                             <rich:collapsiblePanel switchType="client" header="#{var.subircronograma}" expanded="true"  rendered="#{Supervisor$IngresarNuevaObra.disableCronograma==0}">
                                 <center>
                                     <h:panelGrid columns="1" >
-                                        <h:outputLabel  class="ikont-hol-importarcronograma"   value="#{var.importeelcronograma}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-importarcronograma"   value="#{var.importeelcronograma}"/>
                                         <interkont:spacer width="40"/>
-                                        <a4j:commandButton class="ikont-hcb-examinar"    value="#{var.examinar}"  id="subircronograma"
+                                        <a4j:commandButton styleClass="ikont-hcb-examinar"    value="#{var.examinar}"  id="subircronograma"
                                                            onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
                                     </h:panelGrid>
 
@@ -71,20 +71,20 @@
 
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorCronograma.archivos}" var="file" rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos!=0}"
                                                            >
-                                                <h:outputText  class="ikont-hot-nombre"   value=" #{file.nombre}" />
+                                                <h:outputText  styleClass="ikont-hot-nombre"   value=" #{file.nombre}" />
                                                 <interkont:spacer height="8" width="15"/>
-                                                <h:graphicImage  class="ikont-hgi-bt_ok"   url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
-                                                <h:outputText  class="ikont-hot-archivovalido"   value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
-                                                <h:graphicImage  class="ikont-hgi-eliminar"   url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
-                                                <h:outputText  class="ikont-hot-archivosinvalidar"   value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
-                                                <h:outputText  class="ikont-hot-elarchivonoesvalido"   value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}"/>
+                                                <h:graphicImage  styleClass="ikont-hgi-bt_ok"   url="/resources/imgs/bt_ok" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:outputText  styleClass="ikont-hot-archivovalido"   value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}"/>
+                                                <h:graphicImage  styleClass="ikont-hgi-eliminar"   url="/resources/botones/ELIMINAR.png" rendered="#{Supervisor$IngresarNuevaObra.valido!=1}"/>
+                                                <h:outputText  styleClass="ikont-hot-archivosinvalidar"   value="#{var.archivosinvalidarArchivo}" rendered="#{Supervisor$IngresarNuevaObra.valido==0}"/>
+                                                <h:outputText  styleClass="ikont-hot-elarchivonoesvalido"   value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}"/>
                                             </rich:dataGrid>
-                                            <h:outputText  class="ikont-hot-nosuarc"   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}" value="#{var.nosuarc}"/>
-                                            <h:panelGroup class="ikont-hpg-generarcronog"  
+                                            <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}" value="#{var.nosuarc}"/>
+                                            <h:panelGroup styleClass="ikont-hpg-generarcronog"  
                                                           rendered="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos==0 and !empty Supervisor$IngresarNuevaObra.nombreArchivoCronograma}">
-                                                <h:outputText  class="ikont-hot-nombrearchicrono"   value="#{Supervisor$IngresarNuevaObra.nombreArchivoCronograma}"/>
-                                                <h:outputText  class="ikont-hot-archivalido"   value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" />
-                                                <h:outputText  class="ikont-hot-archivonova"   value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}" />
+                                                <h:outputText  styleClass="ikont-hot-nombrearchicrono"   value="#{Supervisor$IngresarNuevaObra.nombreArchivoCronograma}"/>
+                                                <h:outputText  styleClass="ikont-hot-archivalido"   value="#{var.archivovalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" />
+                                                <h:outputText  styleClass="ikont-hot-archivonova"   value="#{var.elarchivonoesvalido}" rendered="#{Supervisor$IngresarNuevaObra.valido==2}" />
                                             </h:panelGroup>
                                         </rich:panel>
                                     </h:panelGroup>
@@ -92,7 +92,7 @@
                             </rich:collapsiblePanel>
                             <rich:collapsiblePanel header="#{var.presupuesto}" switchType="client" expanded="true" id="stpPresupuesto" rendered="#{Supervisor$IngresarNuevaObra.valido==1}" >
                                 <f:facet name="header">
-                                    <h:outputText  class="ikont-hot-presupuesto"   value="#{var.presupuesto}"/>
+                                    <h:outputText  styleClass="ikont-hot-presupuesto"   value="#{var.presupuesto}"/>
                                 </f:facet>
 
 
@@ -100,13 +100,13 @@
                                     <h:panelGrid >
 
                                         <h:panelGrid columns="2">
-                                            <h:outputLabel  class="ikont-hol-definaelcostototal"   value="#{var.definaelcostototal}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-definaelcostototal"   value="#{var.definaelcostototal}"/>
                                         </h:panelGrid>
 
                                         <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle"  id="panelCostosComb" >
 
-                                            <h:outputText  class="ikont-hot-activiconaiu"   value="Las actividades del cronograma incluyen el AIU?" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
-                                            <h:outputText  class="ikont-hot-costoaiu"   value="El costo #{var.textoobra3} incluye el AIU?" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                            <h:outputText  styleClass="ikont-hot-activiconaiu"   value="Las actividades del cronograma incluyen el AIU?" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
+                                            <h:outputText  styleClass="ikont-hot-costoaiu"   value="El costo #{var.textoobra3} incluye el AIU?" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}"/>
                                             <h:selectOneMenu id="cmbanalisisprecio" value="#{Supervisor$IngresarNuevaObra.obranueva.boolincluyeaiu}"  >
                                                 <f:selectItem itemValue="false" itemLabel="No"/>
                                                 <f:selectItem itemValue="true" itemLabel="Si"/> 
@@ -114,7 +114,7 @@
    
                                             </h:selectOneMenu>
 
-                                            <h:outputLabel  class="ikont-hol-lbltipocosto"   id="lbltipocosto"  value="#{var.tipocosto}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-lbltipocosto"   id="lbltipocosto"  value="#{var.tipocosto}"/>
 
                                             <h:selectOneMenu id="combotipocosto" value="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto}"  >
                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.tipoCostoOption}" />
@@ -127,9 +127,9 @@
 
                                         <h:panelGrid columns="2"  id="panelCostos" >
 
-                                            <h:outputLabel  class="ikont-hl-lblcostodirecto"   id="lblcostodirecto"  value="#{var.costodirecto}"/>
+                                            <h:outputLabel  styleClass="ikont-hl-lblcostodirecto"   id="lblcostodirecto"  value="#{var.costodirecto}"/>
                                             <h:panelGroup id="layoutCostoDirecto">
-                                                <h:outputText  class="ikont-hot-stcostodirecto"   id="stcostodirecto"  value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
+                                                <h:outputText  styleClass="ikont-hot-stcostodirecto"   id="stcostodirecto"  value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{!Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}">
                                                     <f:convertNumber pattern="$#,###.00"/>
                                                 </h:outputText>
                                                 <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaltotobra}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" size="20">
@@ -138,33 +138,33 @@
                                                 </h:inputText>
                                             </h:panelGroup>
 
-                                            <h:outputLabel  class="ikont-hol-lbladministracion"   id="lbladministracion"  value="#{var.administracion} (%):" />
+                                            <h:outputLabel  styleClass="ikont-hol-lbladministracion"   id="lbladministracion"  value="#{var.administracion} (%):" />
                                             <rich:inputNumberSpinner id="admini"  value="#{Supervisor$IngresarNuevaObra.obranueva.floatporadmon}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
                                                 <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                             </rich:inputNumberSpinner>                                                    
-                                            <h:outputLabel  class="ikont-hot-lblImprevistos"   id="lblImprevistos"  value="#{var.imprevistos} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+                                            <h:outputLabel  styleClass="ikont-hot-lblImprevistos"   id="lblImprevistos"  value="#{var.imprevistos} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
                                             <rich:inputNumberSpinner id="imprevistos" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporimprevi}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"  >
                                                 <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                             </rich:inputNumberSpinner>
-                                            <h:outputLabel  class="ikont-hot-lblUtilidad"   id="lblUtilidad"  value="Utilidad (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+                                            <h:outputLabel  styleClass="ikont-hot-lblUtilidad"   id="lblUtilidad"  value="Utilidad (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
                                             <rich:inputNumberSpinner id="utilidad" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporutilidad}" minValue="0" maxValue="1000" inputSize="20" step="0.1" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}" >
                                                 <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                             </rich:inputNumberSpinner>                                                    
-                                            <h:outputLabel  class="ikont-hol-lblIva"   id="lblIva"  value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-lblIva"   id="lblIva"  value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto==1}"/>
 
-                                            <h:outputLabel  class="ikont-hol-lblIvaAdmon"   id="lblIvaAdmon"  value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto!=1}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-lblIvaAdmon"   id="lblIvaAdmon"  value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipocosto.inttipocosto!=1}"/>
                                             <rich:inputNumberSlider id="ivautilidad" maxValue="16" step="1"
                                                                     value="#{Supervisor$IngresarNuevaObra.obranueva.floatporivasobreutil}" >
                                                 <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                             </rich:inputNumberSlider>                                                    
-                                            <h:outputLabel  class="ikont-hol-lblotros"   id="lblotros"  value="#{var.otros} (%):" />
+                                            <h:outputLabel  styleClass="ikont-hol-lblotros"   id="lblotros"  value="#{var.otros} (%):" />
                                             <rich:inputNumberSpinner id="otros" value="#{Supervisor$IngresarNuevaObra.obranueva.floatporotros}" minValue="0" maxValue="1000" inputSize="20" step="0.1" >
                                                 <a4j:ajax event="change" render="layoutCostoTotal" listener="#{Supervisor$IngresarNuevaObra.validarCostos}" />                                                   
                                             </rich:inputNumberSpinner>
 
-                                            <h:outputLabel  class="ikont-hol-lblCostoTotal"   id="lblCostoTotal"  value="#{var.costototal}:"/>
+                                            <h:outputLabel  styleClass="ikont-hol-lblCostoTotal"   id="lblCostoTotal"  value="#{var.costototal}:"/>
                                             <h:panelGroup id="layoutCostoTotal">                                                            
-                                                <h:outputText  class="ikont-hot-stCosto"  id="stCosto"  
+                                                <h:outputText  styleClass="ikont-hot-stCosto"  id="stCosto"  
                                                               value="#{Supervisor$IngresarNuevaObra.valortotalobra}">
                                                     <f:convertNumber pattern="$ ###,###,###"/>
                                                 </h:outputText>
@@ -186,19 +186,19 @@
                                 </h:commandButton>
                                 <a4j:outputPanel id="panelErrorGen">
                                     <rich:messages id="messagesGen" globalOnly="true"
-                                                   class="ikont-rm-messagesGen"   ajaxRendered="true"
+                                                   styleClass="ikont-rm-messagesGen"   ajaxRendered="true"
                                                    >
                                         <f:facet name="infoMarker">
-                                            <h:graphicImage  class="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                            <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
                                         </f:facet>
                                         <f:facet name="warnMarker">
-                                            <h:graphicImage  class="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                            <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
                                         </f:facet>
                                         <f:facet name="errorMarker">
-                                            <h:graphicImage  class="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                         <f:facet name="fatalMarker">
-                                            <h:graphicImage  class="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                            <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                                         </f:facet>
                                     </rich:messages>
                                 </a4j:outputPanel>

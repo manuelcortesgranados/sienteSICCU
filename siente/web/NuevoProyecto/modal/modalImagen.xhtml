@@ -14,14 +14,14 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-imagen" onclick="#{rich:component('modalImagen')}.hide();" immediate="true"
-                                       class="ikont-hcl-esconder"    />
+                                       styleClass="ikont-hcl-esconder"    />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <rich:panel id="panelImagen" header="#{var.imagen}">
                 <h:panelGroup >
-                    <h:graphicImage  class="ikont-hgi-pathImagen"   url="#{Supervisor$IngresarNuevaObra.pathImagen}"  />
+                    <h:graphicImage  styleClass="ikont-hgi-pathImagen"   url="#{Supervisor$IngresarNuevaObra.pathImagen}"  />
                 </h:panelGroup>
             </rich:panel>
         </h:form>

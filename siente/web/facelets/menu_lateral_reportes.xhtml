@@ -13,7 +13,7 @@
         <table  align="center" border="0" cellspacing="0" cellpadding="0">
             <td>
                 <tr>
-                    <h:outputText  class="ikont-hot-reportes"   value="Reportes" />
+                    <h:outputText  styleClass="ikont-hot-reportes"   value="Reportes" />
                 </tr>
                 <tr>
                     <div id="navIndicadores" >
@@ -22,11 +22,11 @@
                         </div>-->
 
                         <ul>
-                            <li><h:commandLink value="#{var.header1}" class="ikont-hcl-reporteselect"                                              
+                            <li><h:commandLink value="#{var.header1}" styleClass="ikont-hcl-reporteselect"                                              
                                              action="#{Reportes.reporteSelect}" /></li>
-                            <li><h:commandLink value="#{var.header5}" class="ikont-hcl-reporteselectdi"                                                 
+                            <li><h:commandLink value="#{var.header5}" styleClass="ikont-hcl-reporteselectdi"                                                 
                                              action="#{Reportes.reporteSelectDi}" /></li>
-                            <li><h:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" class="ikont-hcl-reportes_administrativos"  
+                            <li><h:commandLink rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_reportes_administrativos}" value="#{var.header6}" styleClass="ikont-hcl-reportes_administrativos"  
                                                action="#{Reportes.reporteSelectAdministrativo}" /></li>
                         </ul>
                     </div>

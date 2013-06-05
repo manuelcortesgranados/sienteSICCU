@@ -12,20 +12,20 @@
                      headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.acta} #{var.deCiu} Precios"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.acta} #{var.deCiu} Precios"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalActaPrecios" class="ikont-"   
+                    <a4j:commandLink id="esconder_modalActaPrecios" styleClass="ikont-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalActaPrecios')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="Acta de Precios" class="ikont-"   >
+        <rich:panel header="Acta de Precios" styleClass="ikont-"   >
             <h:form>
                 <h:panelGroup>
                     <h:panelGrid id="faltarender" columnClasses="top,top" columns="2">
@@ -48,17 +48,17 @@
                             <center>
                                 <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont- "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont- "   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont- "   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont- "   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActaPrecios.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont- "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont- "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont- "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont- "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont- "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont- "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont- "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -68,7 +68,7 @@
                                 <a4j:commandButton id="borrarDatos_ActaPrecios" action="#{Supervisor$Alimentar.borrarActadePrecios}"
                                                    render="layoutActasDetalle, validarguardar, infoActas, informa, uploadActas"
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="ikont-"     />
+                                                   styleClass="ikont-"     />
                                 <a4j:commandButton action="#{Supervisor$Alimentar.guardarActadePrecios}"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalActaPrecios')}.hide(); "
                                                    rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos>0}"

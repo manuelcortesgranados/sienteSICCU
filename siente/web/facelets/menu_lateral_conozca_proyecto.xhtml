@@ -13,29 +13,29 @@
             <h:panelGrid columns="3" border="0"  columnClasses="panelderechaconoz, panelcenter, panelizquierdaconoz">
                 <interkont:spacer width="1" />
                 <h:panelGroup>
-                    <a4j:commandLink class="ikont-acl-iniciardeta"    
+                    <a4j:commandLink styleClass="ikont-acl-iniciardeta"    
                         action="#{Supervisor$AdministrarObraNew.iniciardeta}">
                     </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink class="ikont-hcl-houinfo" value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
+                <h:commandLink styleClass="ikont-hcl-houinfo" value="#{var.houinfo}" action="#{Supervisor$AdministrarObraNew.iniciardeta}" />
 
-                <h:outputText  class="ikont-hot-comen" value="#{SessionBeanCobra.cobraService.comen}" />
+                <h:outputText  styleClass="ikont-hot-comen" value="#{SessionBeanCobra.cobraService.comen}" />
                 <h:panelGroup>
-                    <a4j:commandLink  class="ikont-acl-iniciaropciones"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
+                    <a4j:commandLink  styleClass="ikont-acl-iniciaropciones"   action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}" >
                      </a4j:commandLink>
                 </h:panelGroup>
-                <h:commandLink class="ikont-hcl-comentarios"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
+                <h:commandLink styleClass="ikont-hcl-comentarios"   value="#{var.comentarios}" action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"  />
 
-                <h:outputText  class="ikont-hot-cobraserviceimag"  value="#{SessionBeanCobra.cobraService.imag}" />
+                <h:outputText  styleClass="ikont-hot-cobraserviceimag"  value="#{SessionBeanCobra.cobraService.imag}" />
                 <h:panelGroup>                   
-                        <a4j:commandLink class="ikont-acl-iniciarimagenes"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
+                        <a4j:commandLink styleClass="ikont-acl-iniciarimagenes"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />                    
                 </h:panelGroup>
-                <h:commandLink class="ikont-hcl-iniciarimagenes"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
-                <h:outputText  class="ikont-hot-documentos" value="#{SessionBeanCobra.cobraService.docu}"  />
+                <h:commandLink styleClass="ikont-hcl-iniciarimagenes"   value="#{var.fotos}" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" />
+                <h:outputText  styleClass="ikont-hot-documentos" value="#{SessionBeanCobra.cobraService.docu}"  />
                 <h:panelGroup>                    
-                        <a4j:commandLink class="ikont-acl-iniciardocumentos"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
+                        <a4j:commandLink styleClass="ikont-acl-iniciardocumentos"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}" immediate="true"/>                    
                </h:panelGroup>
-                <h:commandLink class="ikont-hcl-iniciardocumentos"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
+                <h:commandLink styleClass="ikont-hcl-iniciardocumentos"   value="#{var.documento}" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"  />
                 
             </h:panelGrid>
         </center>

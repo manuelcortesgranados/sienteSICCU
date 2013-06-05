@@ -12,42 +12,42 @@
 
     <rich:panel header="#{Supervisor$Contrato.tipoContCon}" id="menuContrato" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
-            <h:panelGrid class="ikont-hpg-crearproyecto"   cellpadding="0" cellspacing="0" 
+            <h:panelGrid styleClass="ikont-hpg-crearproyecto"   cellpadding="0" cellspacing="0" 
                          rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
                                      and Supervisor$Contrato.tipoContCon == 'Convenio' and Supervisor$Contrato.contrato.intidcontrato!=0}">
-                <h:commandLink  class="ikont-hcl-crearproyecto"   action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
-                <h:commandLink  class="ikont-hcl-nuevaproyecto"   value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
+                <h:commandLink  styleClass="ikont-hcl-crearproyecto"   action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
+                <h:commandLink  styleClass="ikont-hcl-nuevaproyecto"   value="Nuevo Proyecto" action="#{Supervisor$Contrato.crearProyecto}" 
                                 immediate="true" />
             </h:panelGrid>
-            <h:panelGrid class="ikont-hpg-datosbasicos"   cellpadding="0" cellspacing="0" rendered="false" >
-                <h:commandLink class="ikont-hcl-consultarcontrato"   immediate="true" action="consultarContrato"/>
-                <h:commandLink class="ikont-hcl-datosbasicos"   value="Datos Básicos" action="consultarContrato"/>
+            <h:panelGrid styleClass="ikont-hpg-datosbasicos"   cellpadding="0" cellspacing="0" rendered="false" >
+                <h:commandLink styleClass="ikont-hcl-consultarcontrato"   immediate="true" action="consultarContrato"/>
+                <h:commandLink styleClass="ikont-hcl-datosbasicos"   value="Datos Básicos" action="consultarContrato"/>
             </h:panelGrid>
-            <h:panelGrid class="ikont-hpg-registropoliza"   cellpadding="0" cellspacing="0" rendered="false">
-                <h:commandLink class="ikont-hcl-registropoliza"   immediate="true" action="consultarContrato" id="x1" >
+            <h:panelGrid styleClass="ikont-hpg-registropoliza"   cellpadding="0" cellspacing="0" rendered="false">
+                <h:commandLink styleClass="ikont-hcl-registropoliza"   immediate="true" action="consultarContrato" id="x1" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>  
-                <h:commandLink class="ikont-hcl-poliza"   value="Poliza"
+                <h:commandLink styleClass="ikont-hcl-poliza"   value="Poliza"
                                action="consultarContrato" id="x2" >
                     <a4j:ajax event="click" render="rsgtpoliz"/>
                 </h:commandLink>
             </h:panelGrid>
-            <h:panelGrid class="ikont-hpg-detallecontrato"   cellpadding="0" cellspacing="0" >
-                <h:commandLink class="ikont-hcl-detallecontrato"   immediate="true" action="detalleContrato"/>
-                <h:commandLink class="ikont-hcl-detallecontrato"   value="Detalle Contrato" action="detalleContrato"/>
+            <h:panelGrid styleClass="ikont-hpg-detallecontrato"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-detallecontrato"   immediate="true" action="detalleContrato"/>
+                <h:commandLink styleClass="ikont-hcl-detallecontrato"   value="Detalle Contrato" action="detalleContrato"/>
             </h:panelGrid>
-            <h:panelGrid class="ikont-hpg-documentocontrato"   cellpadding="0" cellspacing="0" >
-                <h:commandLink class="ikont-hcl-documentocontrato"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
-                <h:commandLink class="ikont-hcl-documentos"   value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
+            <h:panelGrid styleClass="ikont-hpg-documentocontrato"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-documentocontrato"   immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
+                <h:commandLink styleClass="ikont-hcl-documentos"   value="Documentos" action="#{Supervisor$Contrato.documentocontrato}"/>
             </h:panelGrid>
-            <h:panelGrid class="ikont-hpg-modificarcontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
-                <h:commandLink class="ikont-hcl-iniciarmodificarcontrato"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
-                <h:commandLink class="ikont-hcl-modificarcontrato"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
+            <h:panelGrid styleClass="ikont-hpg-modificarcontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                <h:commandLink styleClass="ikont-hcl-iniciarmodificarcontrato"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
+                <h:commandLink styleClass="ikont-hcl-modificarcontrato"   value="#{var.modificarcontrato}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}" />
             </h:panelGrid>
 
-            <h:panelGrid class="ikont-hpg-iniciarevolucioncontrato"   cellpadding="0" cellspacing="0" >
-                <h:commandLink class="ikont-hcl-iniciarevolucioncontrato"   action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
-                <h:commandLink class="ikont-hcl-evolucioncontrato"   value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+            <h:panelGrid styleClass="ikont-hpg-iniciarevolucioncontrato"   cellpadding="0" cellspacing="0" >
+                <h:commandLink styleClass="ikont-hcl-iniciarevolucioncontrato"   action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
+                <h:commandLink styleClass="ikont-hcl-evolucioncontrato"   value="Evolucion" action="#{Supervisor$Contrato.iniciarEvolucionContrato}"  />
             </h:panelGrid>
         </h:panelGrid>
 

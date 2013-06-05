@@ -12,14 +12,14 @@
     <rich:popupPanel id="modalAdicioarActividades" width="500" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="Adición de actividades/ítems no previstos"/>
+                <h:outputText  styleClass="ikont- "   value="Adición de actividades/ítems no previstos"/>
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalAdicioarActividades" class="ikont-"   
+                    <a4j:commandLink id="esconder_modalAdicioarActividades" styleClass="ikont-"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAdicioarActividades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -29,22 +29,22 @@
         <rich:panel id="panelAdicionarActividades" >
             <center>
                 <h:form>
-                    <rich:panel class="ikont-"  
+                    <rich:panel styleClass="ikont-"  
                                 bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid id="objetoactividad" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                <h:outputText  class="ikont- "   value="Actividad / ítem no previsto:"/>
+                                <h:outputText  styleClass="ikont- "   value="Actividad / ítem no previsto:"/>
                                 <interkont:spacer width="20" />
                                 <h:inputTextarea cols="30" rows="2" value="#{Supervisor$Alimentar.actividadobra.strdescactividad}"/>
 
-                                <h:outputText  class="ikont- "   value="#{var.unidaddemedida}:"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.unidaddemedida}:"/>
                                 <interkont:spacer width="20" />
                                 <h:inputText alt="Metros / M"
                                              size="20"
                                              maxlength="10"
                                              value="#{Supervisor$Alimentar.actividadobra.strtipounidadmed}"/>
 
-                                <h:outputText  class="ikont- "   value="#{var.valorunitaio}:"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.valorunitaio}:"/>
                                 <interkont:spacer width="20" />
                                 <h:panelGrid columns="1">
                                     <h:inputText onfocus="clearText(this);" required="true"
@@ -52,7 +52,7 @@
                                         <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                         <f:validateDoubleRange minimum="0"/>
                                     </h:inputText>
-                                    <rich:message for="numHabitantes" class="ikont-"  />
+                                    <rich:message for="numHabitantes" styleClass="ikont-"  />
                                 </h:panelGrid>
                             </h:panelGrid>
                         </center>
@@ -78,39 +78,39 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="5">
-                                    <h:outputText  class="ikont- "   value="#{var.actividades} Adicionadas"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.actividades} Adicionadas"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  class="ikont- "   value="Actividad / ítem no previsto"/>
+                                    <h:outputText  styleClass="ikont- "   value="Actividad / ítem no previsto"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="ikont- "   value="#{var.unidaddemedida}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="ikont- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
-                                    <h:outputText  class="ikont- "   value="#{var.valortotal}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.valortotal}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  class="ikont- "   value="#{var.eliminar}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column>
-                                <h:outputText  class="ikont- "   value="#{itemsprevis.strdescactividad}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{itemsprevis.strdescactividad}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="ikont- "   value="#{itemsprevis.strtipounidadmed}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{itemsprevis.strtipounidadmed}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  class="ikont- "   value="#{itemsprevis.calcularValorUnitario}">
+                                <h:outputText  styleClass="ikont- "   value="#{itemsprevis.calcularValorUnitario}">
                                     <f:convertNumber pattern="$#,###.00"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
-                                <h:outputText  class="ikont- "   value="#{itemsprevis.numvalorplanifao}">
+                                <h:outputText  styleClass="ikont- "   value="#{itemsprevis.numvalorplanifao}">
                                     <f:convertNumber pattern="$#,###.00"/>
                                 </h:outputText>
                             </rich:column>
@@ -130,18 +130,18 @@
 
                     <interkont:spacer height="20" />
 
-                    <rich:panel id="reportatentodos" header="#{var.definaelcostototal}" class="ikont-"  
+                    <rich:panel id="reportatentodos" header="#{var.definaelcostototal}" styleClass="ikont-"  
                                 bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
                         <center>
                             <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle,inputsDetalle">
-                                <h:outputText  class="ikont- "   value="El valor unitario de las actividades incluye el AIU?"/>
+                                <h:outputText  styleClass="ikont- "   value="El valor unitario de las actividades incluye el AIU?"/>
                                 <h:selectOneMenu value="#{Supervisor$AdministrarObraNew.obra.aplicaaiu}" >
                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                     <f:selectItem itemValue="true" itemLabel="Si"/>
                                     <a4j:ajax event="valueChange" render="gpPanelTipoCostos"/>
                                 </h:selectOneMenu>
 
-                                <h:outputLabel  class="ikont- "   value="#{var.tipocosto}"/>
+                                <h:outputLabel  styleClass="ikont- "   value="#{var.tipocosto}"/>
                                 <h:selectOneMenu value="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto}" disabled="true">
                                     <f:selectItems value="#{Supervisor$Alimentar.tipoCostoOption}" />
                                 </h:selectOneMenu>
@@ -150,38 +150,38 @@
                             <h:panelGroup id="gpPanelTipoCostos">
                                 <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda" rendered="#{!Supervisor$AdministrarObraNew.obra.aplicaaiu}">
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.costodirecto}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.costodirecto}"/>
                                     <interkont:spacer width="20" />
                                     <h:panelGroup>
-                                        <h:outputText  class="ikont- "   class="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                        <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.administracion} (%):" />
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.administracion} (%):" />
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporadmon}%"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporadmon}%"/>
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.imprevistos} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.imprevistos} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporimprevi}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporimprevi}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
 
-                                    <h:outputLabel  class="ikont- "   value="Utilidad (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="Utilidad (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporutilidad}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporutilidad}%" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
-                                    <h:outputLabel  class="ikont- "   value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto!=1}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.ivasobreutilidad} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto==1}"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.ivasobreadministracion} (%):" rendered="#{Supervisor$AdministrarObraNew.obra.tipocosto.inttipocosto!=1}"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporivasobreutil}%"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporivasobreutil}%"/>
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.otros} (%):" />
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.otros} (%):" />
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporotros}%"/>
+                                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.obra.floatporotros}%"/>
 
-                                    <h:outputLabel  class="ikont- "   value="#{var.costototal}:"/>
+                                    <h:outputLabel  styleClass="ikont- "   value="#{var.costototal}:"/>
                                     <interkont:spacer width="20" />
-                                    <h:outputText  class="ikont- "   class="ikont-"  
+                                    <h:outputText  styleClass="ikont- "   styleClass="ikont-"  
                                                   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                         <f:convertNumber pattern="$ ###,###,###"/>
                                     </h:outputText>

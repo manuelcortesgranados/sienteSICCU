@@ -11,34 +11,34 @@
 
 
     <rich:popupPanel  id="confirmarEliminarAvance" autosized="true"
-                      headerClass="sliderich" class="ikont-"   >
+                      headerClass="sliderich" styleClass="ikont-"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "    value="ELIMINAR ULTIMO REPORTE DE AVANCE"/>
+                <h:outputText  styleClass="ikont- "    value="ELIMINAR ULTIMO REPORTE DE AVANCE"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_confirmarEliminarAvance" class="ikont-"  
+                    <a4j:commandLink id="esconder_confirmarEliminarAvance" styleClass="ikont-"  
                                      title="#{var.cerrar}" onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
             <center>
-                <h:panelGrid id="pgconfirmarEliminarAvance"  columnClasses="panelcenter" width="400px" class="ikont-"   cellpadding="0" cellspacing="0" >
-                    <h:graphicImage  class="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                <h:panelGrid id="pgconfirmarEliminarAvance"  columnClasses="panelcenter" width="400px" styleClass="ikont-"   cellpadding="0" cellspacing="0" >
+                    <h:graphicImage  styleClass="ikont- "   height="60px" width="60px" url="/resources/imgs/alerta.png" />
                     <h:panelGroup>
                         <center>
-                            <h:outputText  class="ikont- "   class="ikont-"   value="Está completamente seguro de solicitar borrar el último reporte de avance?" />
+                            <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="Está completamente seguro de solicitar borrar el último reporte de avance?" />
                         </center>
                     </h:panelGroup>
                     <h:panelGroup>
                         <interkont:spacer width="120" height="10"/>
                         <center>
-                            <a4j:commandButton id="BTaceptarEliAvance1" value="Si" class="ikont-"     action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}" oncomplete="#{rich:component('confirmarEliminarAvance')}.hide();"/>
-                            <a4j:commandButton id="BTaceptarEliAvance2" value="NO" class="ikont-"     onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
+                            <a4j:commandButton id="BTaceptarEliAvance1" value="Si" styleClass="ikont-"     action="#{Supervisor$AdministrarObraNew.solicitarEliminarUltimoAvance}" oncomplete="#{rich:component('confirmarEliminarAvance')}.hide();"/>
+                            <a4j:commandButton id="BTaceptarEliAvance2" value="NO" styleClass="ikont-"     onclick="#{rich:component('confirmarEliminarAvance')}.hide(); return false;"/>
                         </center>
                     </h:panelGroup>
                 </h:panelGrid>

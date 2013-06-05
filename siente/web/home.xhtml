@@ -13,20 +13,20 @@
     <ui:define name="body">
         <h:form prependId="false">
 
-            <h:panelGroup layout="block" class="ikont-hpg-productgallery"   id="product_gallery">
+            <h:panelGroup layout="block" styleClass="ikont-hpg-productgallery"   id="product_gallery">
                 <h:panelGroup layout="block"  id="sliderpanel_outer">
                     <h:panelGroup layout="block"  id="sliderpanel_inner">
                         <h:panelGroup layout="block" id="sliderpanel_items">
                             <a4j:region id="form_home">
                                 <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                                    <h:panelGroup layout="block" class="ikont-hpg-panelhome"   >
+                                    <h:panelGroup layout="block" styleClass="ikont-hpg-panelhome"   >
 
-                                        <h:panelGroup layout="block" class="ikont-hpg-strmodNmbre"  >
+                                        <h:panelGroup layout="block" styleClass="ikont-hpg-strmodNmbre"  >
 
-                                            <h:outputText  class="ikont-hot-strmodNmbre "   value="#{modulo.strmodNmbre}" />
+                                            <h:outputText  styleClass="ikont-hot-strmodNmbre "   value="#{modulo.strmodNmbre}" />
 
                                         </h:panelGroup>
-                                        <h:outputLink  class="ikont-hol-strurlMdloRuta"
+                                        <h:outputLink  styleClass="ikont-hol-strurlMdloRuta"
                                                       value="#{facesContext.externalContext.requestContextPath}/faces#{modulo.strurlMdloRuta}">
 
                                         </h:outputLink>

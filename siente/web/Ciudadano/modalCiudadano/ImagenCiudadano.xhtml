@@ -15,19 +15,19 @@
                     >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  class="ikont- "   value="#{var.imagen}"/>
+                <h:outputText  styleClass="ikont- "   value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" class="ikont-acl-escondermodalimagen"   
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="ikont-acl-escondermodalimagen"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel class="ikont-rp-uploadimagenciudadano"   >
+        <rich:panel styleClass="ikont-rp-uploadimagenciudadano"   >
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen" >
                 <h:panelGrid columnClasses="top,top" columns="2" rendered="#{SessionBeanCobra.ciudadanoservice.vermodalimagen}">
@@ -49,17 +49,17 @@
                             <center>
                                 <rich:panel >
                                     <f:facet name="header">
-                                        <h:outputText  class="ikont-hot-headeruploadimagenciudadano"   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-headeruploadimagenciudadano"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  class="ikont-hot-numarchivosuploadimagenciudadano "   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-numarchivosuploadimagenciudadano "   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorFoto.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  class="ikont-hot-nomarcuploadimagenciudadano "   value="#{var.nomarc}"/>
-                                                    <h:outputText  class="ikont-hot-nombreuploadimagenciudadano "   value="#{file.nombre}"/>
-                                                    <h:outputText  class="ikont-hot-taarcuploadimagenciudadano "   value="#{var.taarc}"/>
-                                                    <h:outputText  class="ikont-hot-numbytesuploadimagenciudadano "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarcuploadimagenciudadano "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombreuploadimagenciudadano "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarcuploadimagenciudadano "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numbytesuploadimagenciudadano "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -68,7 +68,7 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
-                                                   class="ikont-acl-borrardatosimagen"     />
+                                                   styleClass="ikont-acl-borrardatosimagen"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
