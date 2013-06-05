@@ -10,7 +10,7 @@
 
     <!-- DataSource Definition -->
     <bean id="dataSource"
-          styleClassorg.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
     <property name="driverClassName">
             <value>org.postgresql.Driver</value>
         </property>
@@ -25,7 +25,7 @@
         </property>
     </bean>
     <!-- Hibernate SessionFactory Definition -->
-    <bean id="sessionFactory" styleClassorg.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>
                 <value>co/com/interkont/cobra/to/Fase.hbm.xml</value>
@@ -226,7 +226,7 @@
     </bean>
     <!-- Spring Data Access Exception Translator Defintion -->
     <bean id="jdbcExceptionTranslator"
-          styleClassorg.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
+          class="org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
@@ -234,7 +234,7 @@
 
     <!-- Hibernate Template Defintion -->
     <bean id="hibernateTemplate"
-          styleClassorg.springframework.orm.hibernate3.HibernateTemplate">
+          class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory">
             <ref bean="sessionFactory" />
         </property>
@@ -244,7 +244,7 @@
     </bean>
 
     <!-- Hibernate Transaction Manager Definition -->
-    <bean id="transactionManager" styleClassorg.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory">
             <ref local="sessionFactory" />
         </property>
@@ -253,7 +253,7 @@
     <!-- ========================= Start of DAO DEFINITIONS ========================= -->
 
         <!-- TODO DAO Definition: Hibernate implementation -->
-    <bean id="AbstractSpringDao" abstract="true" styleClasscobra.dao.AbstractSpringDao" scope="prototype">
+    <bean id="AbstractSpringDao" abstract="true" class="cobra.dao.AbstractSpringDao" scope="prototype">
         <property name="hibernateTemplate">
             <ref bean="hibernateTemplate" />
         </property>
@@ -261,42 +261,42 @@
 
 
     <!-- TODO DAO Definition: Hibernate implementation -->
-    <bean id="usuarioDao" styleClasscobra.dao.UsuarioDaoImpl" parent="AbstractSpringDao" scope="prototype">
+    <bean id="usuarioDao" class="cobra.dao.UsuarioDaoImpl" parent="AbstractSpringDao" scope="prototype">
 
     </bean>
 
-    <bean id="cobraDao" styleClasscobra.dao.CobraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="modificarProyectoDao" styleClasscobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="financieraDao" styleClassfinanciera.dao.FinancieraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="atencionhumanitariaDao" styleClassatencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="solicitudDao" styleClasschsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="supervisionExternaDao" styleClasssupervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="indicadorDao" styleClasscobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
-    <bean id="ciudadanoDao" styleClassciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="cobraDao" class="cobra.dao.CobraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="modificarProyectoDao" class="cobra.dao.ModificarProyectoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="atencionhumanitariaDao" class="atencionHumanitaria.dao.AtencionHumanitariaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="solicitudDao" class="chsolicitud.dao.SolicitudDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="supervisionExternaDao" class="supervision.dao.SupervisionExternaDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="indicadorDao" class="cobra.dao.IndicadorDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
+    <bean id="ciudadanoDao" class="ciudadano.dao.CiudadanoDaoImpl" parent="AbstractSpringDao" scope="prototype"></bean>
 
     <!--
-    <bean id="financieraDao" styleClassfinanciera.dao.FinancieraDaoImpl" parent="AbstractSpringDao"></bean>
+    <bean id="financieraDao" class="financiera.dao.FinancieraDaoImpl" parent="AbstractSpringDao"></bean>
 
-   <bean id="administrarDao" styleClasscobra.dao.AdministrarDaoImpl" parent="AbstractSpringDao"></bean>-->
+   <bean id="administrarDao" class="cobra.dao.AdministrarDaoImpl" parent="AbstractSpringDao"></bean>-->
     <!-- ========================= Start of SERVICE DEFINITIONS ========================= -->
 
         <!-- TODO Service Definition -->
     <bean id="usuarioServiceTarget" scope="prototype"
-          styleClasscobra.service.UsuarioServiceImpl">
+          class="cobra.service.UsuarioServiceImpl">
         <property name="usuarioDao">
             <ref local="usuarioDao" />
         </property>
     </bean>
 
     <bean id="cobraServiceTarget" scope="prototype"
-          styleClasscobra.service.CobraServiceImpl">
+          class="cobra.service.CobraServiceImpl">
         <property name="cobraDao">
             <ref local="cobraDao" />
         </property>
     </bean>
 
     <bean id="modificarProyectoServiceTarget" scope="prototype"
-          styleClasscobra.service.ModificarProyectoServiceImpl">
+          class="cobra.service.ModificarProyectoServiceImpl">
         <property name="modificarProyectoDao">
             <ref local="modificarProyectoDao" />
         </property>
@@ -306,42 +306,42 @@
     </bean>
 
     <bean id="financieraServiceTarget" scope="prototype"
-          styleClassfinanciera.service.FinancieraServiceImpl">
+          class="financiera.service.FinancieraServiceImpl">
         <property name="financieraDao">
             <ref local="financieraDao" />
         </property>
     </bean>
 
     <bean id="atencionhumanitariaServiceTarget" scope="prototype"
-          styleClassatencionHumanitaria.service.AtencionHumanitariaServiceImpl">
+          class="atencionHumanitaria.service.AtencionHumanitariaServiceImpl">
         <property name="atencionHumanitariaDao">
             <ref local="atencionhumanitariaDao" />
         </property>
     </bean>
 
     <bean id="solicitudServiceTarget" scope="prototype"
-          styleClasschsolicitud.dao.service.SolicitudServiceImpl">
+          class="chsolicitud.dao.service.SolicitudServiceImpl">
         <property name="solicitudDao">
             <ref local="solicitudDao" />
         </property>
     </bean>
 
     <bean id="supervisionExternaTarget" scope="prototype"
-          styleClasssupervision.service.SupervisionExternaServiceImpl">
+          class="supervision.service.SupervisionExternaServiceImpl">
         <property name="supervisionExternaDao">
             <ref local="supervisionExternaDao"/>
         </property>
     </bean>
 
     <bean id="indicadorServiceTarget" scope="prototype"
-          styleClasscobra.service.IndicadorServiceImpl">
+          class="cobra.service.IndicadorServiceImpl">
         <property name="indicadorDao">
             <ref local="indicadorDao" />
         </property>
     </bean>
 
     <bean id="ciudadanoServiceTarget" scope="prototype"
-          styleClassciudadano.service.CiudadanoServiceImpl">
+          class="ciudadano.service.CiudadanoServiceImpl">
         <property name="ciudadanoDao">
             <ref local="ciudadanoDao" />
         </property>
@@ -349,14 +349,14 @@
 
     <!--
     <bean id="financieraServiceTarget"
-          styleClassfinanciera.service.FinancieraServiceImpl">
+          class="financiera.service.FinancieraServiceImpl">
         <property name="financieraDao">
             <ref local="financieraDao" />
         </property>
     </bean>
 
     <bean id="administrarServiceTarget"
-                styleClasscobra.service.AdministrarServiceImpl">
+                class="cobra.service.AdministrarServiceImpl">
         <property name="administrarDao">
             <ref local="administrarDao" />
         </property>
@@ -364,7 +364,7 @@
 -->
     <!-- Transactional proxy for the TODO Service -->
     <bean id="usuarioService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -383,7 +383,7 @@
     </bean>
 
     <bean id="cobraService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -406,7 +406,7 @@
 
 
     <bean id="financieraService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -428,7 +428,7 @@
 
     <!--
     <bean id="financieraService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -449,7 +449,7 @@
     </bean>
 
     <bean id="administrarService" scope="prototype"
-                styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+                class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -469,7 +469,7 @@
     </bean>-->
 
     <bean id="atencionhumanitariaService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -490,7 +490,7 @@
     </bean>
 
     <bean id="solicitudService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -510,7 +510,7 @@
     </bean>
 
     <bean id="supervisionExternaService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -530,7 +530,7 @@
     </bean>
 
     <bean id="indicadorService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -551,7 +551,7 @@
     </bean>
 
     <bean id="ciudadanoService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
@@ -572,7 +572,7 @@
     </bean>
     
     <bean id="modificarProyectoService" scope="prototype"
-          styleClassorg.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />
         </property>
