@@ -11,20 +11,20 @@
     <rich:popupPanel id="panelUploadCronograma" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.cargarcronograma}"/>
+                <h:outputText  styleClass="ikont-hot-cargarcronograma"    value="#{var.cargarcronograma}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="ikont-a4jcl-esconderpanelUploadCronograma"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadCronograma')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-cronograma"   >
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -45,18 +45,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirCronograma.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numByteskb"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -66,7 +66,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarObra.borrarCronogramaSubido}" render="infoCrono, uploadCrono"
                                                    rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
+                                                   styleClass="ikont-a4jcb-boarcsub"     />
                                 <a4j:commandButton id="BTaceptarCrono" value="#{var.validar}" rendered="#{Supervisor$ModificarObra.subirCronograma.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadCronograma')}.hide();"
                                                    render="panel_subirCronograma, layoutRegTip" action="#{Supervisor$ModificarObra.validarCrono}"
