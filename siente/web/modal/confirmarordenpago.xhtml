@@ -11,13 +11,13 @@
     <rich:popupPanel id="panelConfirmaOrden" autosized="true"   headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{var.confirmarorden}"/>
+                <h:outputText  styleClass="ikont-hot-panelconfirmaorden"   value="#{var.confirmarorden}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaOrden" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_panelConfirmaOrden" styleClass="ikont-acl-esconderpanelconfirmaorden"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelConfirmaOrden')}.hide();return false;">
                     </a4j:commandLink>
@@ -26,7 +26,7 @@
         </f:facet>
         <rich:panel id="panelConfGuardar" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
+                <h:outputText  styleClass="ikont-hot-panelconfguardarmensaje"   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
             </h:panelGroup>
             <center>
                 <h:form>

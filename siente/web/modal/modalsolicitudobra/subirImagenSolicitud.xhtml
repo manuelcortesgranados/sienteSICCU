@@ -13,12 +13,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadImagenSolicitud" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelUploadImagenSolicitud" styleClass="ikont-acl-esconderpaneluploadimagensolicitud"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelUploadImagenSolicitud')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="ikont"   >
+        <rich:panel header="#{var.seleccionarimagen}" styleClass="ikont-rp-seleccionarimagen"   >
             <h:form>
                 <h:panelGroup id="gpImagenModalAtencion">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -33,18 +33,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-infoimagenatencionarcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-infoimagenatencionnumarchivos"   rendered="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-infoimagenatencionnomarc "   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infoimagenatencionnombre "   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infoimagenatenciontaarc "   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-infoimagenatencionnumbyte"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>

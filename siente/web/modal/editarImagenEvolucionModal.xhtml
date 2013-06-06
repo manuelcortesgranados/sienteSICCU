@@ -32,29 +32,29 @@
                     <interkont:spacer height="70px"/>
                     <h:panelGrid id="pg_campos_editar_imagenevolucion" columns="3" styleClass="ikont-hpg-gpimagenmodaleditar" >
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont- "   value="#{var.nombre}"/>
+                        <h:outputLabel  styleClass="ikont-hol-gpimagenmodaleditarnombre "   value="#{var.nombre}"/>
                         <h:inputText id="txt_strnombre_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.strnombre}" required="true">
                             <h:message for="txt_strnombre_imgev_ed"/>
                         </h:inputText>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont- "   value="#{var.tipo}"/>
+                        <h:outputLabel  styleClass="ikont-hol-gpimagenmodaleditartipo"   value="#{var.tipo}"/>
                         <h:selectOneMenu id="select_tipoimageneditar" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.tipoimagen.intidtipoimagen}">
                             <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoImagen}" />
                         </h:selectOneMenu>
 
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont- "   value="#{var.fecha}" />
+                        <h:outputLabel  styleClass="ikont-hol-gpimagenmodaleditarfecha"   value="#{var.fecha}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_imgev_ed" value="#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.datefecha}" required="true">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="80px"/>
                     <h:panelGrid columns="2" width="100%" >
-                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" styleClass="ikont-"  
+                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_imagenevolucion_action}" id="bt_aceptarEliminar" styleClass="ikont-acb-mpeditarimagenevolucionaceptar"  
                                            value="#{var.aceptar}"
                                            oncomplete="#{rich:component('mp_editar_imagenevolucion')}.hide();"
                                            render="panel_imagenesevolucion" title="#{var.aceptar}"/>
                         <a4j:commandButton onclick="#{rich:component('mp_editar_imagenevolucion')}.hide();
-                                             return false;" styleClass="ikont"   value="#{var.cancelar}"/>
+                                             return false;" styleClass="ikont-acb-mpeditarimagenevolucioncancelar"   value="#{var.cancelar}"/>
 
                     </h:panelGrid>
                 </h:panelGrid>

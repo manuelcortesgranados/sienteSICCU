@@ -13,13 +13,13 @@
     <rich:popupPanel id="panelValidarSolicitud" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.atencion}" styleClass="ikont"  />
+                <h:outputText  styleClass="ikont-hot-panelvalidarsolicitud"   value="#{var.atencion}"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelValidarSolicitud" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelValidarSolicitud" styleClass="ikont-acl-esconderpanelvalidarsolicitud"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelValidarSolicitud')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -27,7 +27,7 @@
         <rich:panel >
             <h:panelGrid columns="1" id="layoutGuardar">
                 <h:panelGroup >
-                    <h:outputText  styleClass="ikont "   value="#{SessionBeanCobra.solicitudService.mensaje}"  />
+                    <h:outputText  styleClass="ikont-hot-layoutguardar"   value="#{SessionBeanCobra.solicitudService.mensaje}"  />
 
                 </h:panelGroup>
                 <center>
