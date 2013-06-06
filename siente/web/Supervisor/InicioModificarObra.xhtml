@@ -18,8 +18,8 @@
         <h:outputScript  name="script_supervisor"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.modificarobra}"/>                
-        <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  styleClass="ikont- hot-"   value="#{var.modificarobra}"/>                
+        <h:outputText  styleClass="ikont- hot-"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -41,7 +41,7 @@
                                                      styleClass="ikont-"     
                                                      action="#{Supervisor$AdministrarObraNew.mostrarModificar}" >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
                                 </h:panelGrid>
 
                                 <interkont:spacer width="50px" rendered="false" />
@@ -50,14 +50,14 @@
                                                      action="#{Supervisor$AdministrarObraNew.mostrarSuspender}"
                                                      >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.suspenderobra}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.suspenderobra}"/>
                                 </h:panelGrid>
                                 <h:panelGrid rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}" columns="1">
                                     <h:commandLink id="bt_reinicio" styleClass="ikont-"     
                                                      action="#{Supervisor$SuspenderObra.cargarReinicio}"
                                                      >
                                     </h:commandLink>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.reiniciarlaobra}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.reiniciarlaobra}"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                         </center>

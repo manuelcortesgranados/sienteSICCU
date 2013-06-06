@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalubicacionsupervision" headerClass="rich-panel-header" height="108" width="368" moveable="false">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont- "   value="Ubicación Georeferenciada" styleClass="ikont-"   />
+                <h:outputText  styleClass="ikont- hot-"   value="Ubicación Georeferenciada" styleClass="ikont-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -30,16 +30,16 @@
 
         <h:panelGrid columns="2">
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- "   id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="ikont-"   />
+                <h:outputText  styleClass="ikont- hot-"   id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="ikont-"   />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- "   id="verLatitudNorte" value="#{Supervision$Externa.objetoSeguimiento.strlatitud}" />
+                <h:outputText  styleClass="ikont- hot-"   id="verLatitudNorte" value="#{Supervision$Externa.objetoSeguimiento.strlatitud}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- "   id="titLatitudEste" value="#{var.longitudeste}" styleClass="ikont-"   />
+                <h:outputText  styleClass="ikont- hot-"   id="titLatitudEste" value="#{var.longitudeste}" styleClass="ikont-"   />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- "   id="verLongitudEste" value="#{Supervision$Externa.objetoSeguimiento.strlongitud}" />
+                <h:outputText  styleClass="ikont- hot-"   id="verLongitudEste" value="#{Supervision$Externa.objetoSeguimiento.strlongitud}" />
             </rich:panel>
         </h:panelGrid>
     </rich:popupPanel>

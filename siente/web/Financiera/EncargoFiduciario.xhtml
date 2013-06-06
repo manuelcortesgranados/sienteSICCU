@@ -25,7 +25,7 @@
                         <h:panelGrid columns="4" columnClasses="inputsDetalle,inputsDetalle" >
                             <h:panelGrid id="mos" columns="4"  >
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
+                                <h:outputLabel  styleClass="ikont-hol- "   id="lblnumeroencargo"  value="#{var.numeroencargo}" for="txtNumeroencargo">
 
                                 </h:outputLabel>
                                 <h:inputText  id="txtNumeroencargo" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.intnumencargofiduciario}"
@@ -34,26 +34,26 @@
                                 </h:inputText>
                                 <rich:message for="txtNumeroencargo" />
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   id="lbldescripcion"  value="#{var.descripcion}"/>
+                                <h:outputText  styleClass="ikont- hot-"   id="lbldescripcion"  value="#{var.descripcion}"/>
                                 <h:inputTextarea id="txtdes" cols="23" rows="4" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.strdescripcion}"
                                                  required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}"/>
                                 <rich:message for="txtdes" />
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
+                                <h:outputLabel  styleClass="ikont-hol- "   id="lblsaldoincial"  value="#{var.saldoinicial}"/>
                                 <h:inputText id="txtsaldoinicial" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoinicial}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoinicial" />
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsaldoactual"  value="#{var.saldoactual}"/>
+                                <h:outputLabel  styleClass="ikont-hol- "   id="lblsaldoactual"  value="#{var.saldoactual}"/>
                                 <h:inputText id="txtsaldoactual" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.numsaldoactual}"
                                              required="true" disabled="#{!Financiera$FiduFinanciera.editarorden}">
                                     <f:convertNumber pattern="#,###.00"/>
                                 </h:inputText>
                                 <rich:message for="txtsaldoactual" />
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputText  styleClass="ikont- "   id="lblfecha"  value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont- hot-"   id="lblfecha"  value="#{var.fecha}"/>
                                 <h:panelGroup id="layoutFechaEncargo" >
                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                                    value="#{Financiera$FiduFinanciera.financieraService.encargofidu.datefechaaperturaencargofiduciario}"
@@ -64,13 +64,13 @@
                                 <rich:message for="fechaapertura" />
 
                                 <h:panelGrid styleClass="ikont-"  />
-                                <h:outputLabel  styleClass="ikont- "   id="lblsolicitante"  value="#{var.solicitante}"/>
+                                <h:outputLabel  styleClass="ikont-hol- "   id="lblsolicitante"  value="#{var.solicitante}"/>
                                 <h:panelGrid columns="4"  >
 
 
                                     <h:panelGroup id="solicitante" >
 
-                                        <h:outputLabel  styleClass="ikont- "   id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
+                                        <h:outputLabel  styleClass="ikont-hol- "   id="lblnombre" value="#{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strnombre}
                                                        #{Financiera$FiduFinanciera.financieraService.encargofidu.tercero.strapellido1}"/>
 
 

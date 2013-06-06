@@ -120,8 +120,8 @@
                                                                 </h:panelGroup>
 
                                                                 <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
-                                                                    <h:outputLabel  styleClass="ikont- "   id="st_ValorObraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
+                                                                    <h:outputLabel  styleClass="ikont-hol- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
+                                                                    <h:outputLabel  styleClass="ikont-hol- "   id="st_ValorObraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
                                                                         <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ #,###,###.00"/>
                                                                     </h:outputLabel>
                                                                 </h:panelGroup>
@@ -171,7 +171,7 @@
                                                         </rich:dataGrid>
                                                     </h:panelGroup>
                                                     <h:panelGrid columns="2" id="tiposoli">
-                                                        <h:outputLabel  styleClass="ikont- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
+                                                        <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
                                                         <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
                                                             <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
                                                                 <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                

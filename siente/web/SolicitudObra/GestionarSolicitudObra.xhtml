@@ -15,7 +15,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.gestionarsolicitudobra}"/>
+        <h:outputText  styleClass="ikont- hot-"   value="#{var.gestionarsolicitudobra}"/>
     </ui:define>
     <ui:define name="menu">
         <!--<ui:include src="/facelets/menu_soliobra.xhtml"/>-->
@@ -34,28 +34,28 @@
                         <h:panelGroup>
 
                             <h:panelGrid columns="5" cellspacing="15">
-                                <h:outputText  styleClass="ikont- "   value="#{var.entidad}"/>                                        
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.entidad}"/>                                        
                                 <a4j:commandButton id="entidadbutton" value="#{var.ver}" immediate="true"
                                                    oncomplete="#{rich:component('panelInformacionEntidad')}.show()"
                                                    /> 
 
                                 <interkont:spacer width="20"/>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.contacto}"/>                                        
-                                <h:outputText  styleClass="ikont- "   id="strcontactoLogueo"
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.contacto}"/>                                        
+                                <h:outputText  styleClass="ikont- hot-"   id="strcontactoLogueo"
                                               value="#{SessionBeanCobra.usuarioObra.tercero.stremail}"
                                               rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}"/>
-                                <h:outputText  styleClass="ikont- "   id="strcontacto"
+                                <h:outputText  styleClass="ikont- hot-"   id="strcontacto"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.strcontacto}"
                                               rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo != 5}"/>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.nombreContratista}:"/>
-                                <h:outputText  styleClass="ikont- "   id="nombreLogueo"
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.nombreContratista}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   id="nombreLogueo"
                                               value="#{SessionBeanCobra.usuarioObra.tercero.strnombre}
                                               #{SessionBeanCobra.usuarioObra.tercero.strapellido1}
                                               #{SessionBeanCobra.usuarioObra.tercero.strapellido2}"
                                               rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}"/>
-                                <h:outputText  styleClass="ikont- "   id="nombreSolicitante"
+                                <h:outputText  styleClass="ikont- hot-"   id="nombreSolicitante"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.tercero.strnombre}
                                               #{SessionBeanCobra.solicitudService.solicitudObrach.tercero.strapellido1}
                                               #{SessionBeanCobra.solicitudService.solicitudObrach.tercero.strapellido2}"
@@ -71,14 +71,14 @@
                     <center>
                         <h:panelGroup>
                             <center> 
-                                <h:outputText  styleClass="ikont- "   value="#{var.textdatosgenerales}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.textdatosgenerales}"/>
                             </center>
                             <h:panelGrid columns="2" cellspacing="15" >
-                                <h:outputText  styleClass="ikont- "   value="#{var.usuario}" rendered="#{!SolicitudObra$GestionarSolicitudObra.deshabilitardepartamentos}"/>
-                                <h:outputLabel  styleClass="ikont- "   value="#{SessionBeanCobra.usuarioService.usuarioObra.tercero.tipoOrigen.strnombre}"
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.usuario}" rendered="#{!SolicitudObra$GestionarSolicitudObra.deshabilitardepartamentos}"/>
+                                <h:outputLabel  styleClass="ikont-hol- "   value="#{SessionBeanCobra.usuarioService.usuarioObra.tercero.tipoOrigen.strnombre}"
                                                rendered="#{!SolicitudObra$GestionarSolicitudObra.deshabilitardepartamentos}"/>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.departamento}:" rendered="#{SolicitudObra$GestionarSolicitudObra.verdepartamento}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}:" rendered="#{SolicitudObra$GestionarSolicitudObra.verdepartamento}"/>
                                 <h:selectOneMenu id="combodepto" value="#{SolicitudObra$GestionarSolicitudObra.codDepartamento}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.deshabilitardepartamentos}"
                                                  rendered="#{SolicitudObra$GestionarSolicitudObra.verdepartamento}">
@@ -86,9 +86,9 @@
                                     <a4j:ajax event="change" render="gpmunicipio" listener="#{SolicitudObra$GestionarSolicitudObra.llenarMunicipios}" execute="@this"/>
                                 </h:selectOneMenu>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.municipio}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}:"/>
                                 <h:panelGroup id="gpmunicipio">
-                                    <h:outputLabel  styleClass="ikont- "   value="#{SolicitudObra$GestionarSolicitudObra.codMunicipio}" rendered="#{!SolicitudObra$GestionarSolicitudObra.verdepartamento}"/>
+                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{SolicitudObra$GestionarSolicitudObra.codMunicipio}" rendered="#{!SolicitudObra$GestionarSolicitudObra.verdepartamento}"/>
                                     <h:selectOneMenu id="munidiana" value="#{SessionBeanCobra.solicitudService.solicitudObrach.localidad.strcodigolocalidad}"
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
@@ -101,15 +101,15 @@
                                 </h:panelGroup>
 
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.consecutivo}:" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.consecutivo}:" />
                                 <h:inputText size="8" id="consecutivo" disabled="true"
                                              value="#{SessionBeanCobra.solicitudService.solicitudObrach.strconsecutivo}"
                                              rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}" />
-                                <h:outputText  styleClass="ikont- "   value="#{SessionBeanCobra.solicitudService.solicitudObrach.strconsecutivo}"
+                                <h:outputText  styleClass="ikont- hot-"   value="#{SessionBeanCobra.solicitudService.solicitudObrach.strconsecutivo}"
                                               rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"/>
 
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.evento}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.evento}:"/>
                                 <h:selectOneMenu id="selectevnto" value="#{SolicitudObra$GestionarSolicitudObra.eventovalue}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
@@ -121,7 +121,7 @@
                                               execute="@this"/>
                                 </h:selectOneMenu>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.periodo}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.periodo}:"/>
                                 <h:panelGroup id="pgperiodoevento">
                                     <h:selectOneMenu id="selectperiodoevento"
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -133,7 +133,7 @@
                                     </h:selectOneMenu>
                                 </h:panelGroup>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.fechasol}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.fechasol}:"/>
                                 <rich:calendar locale="#{var.rcalendarlocale}"
                                                datePattern="yyyy-MM-dd" rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -145,11 +145,11 @@
                                                value="#{SessionBeanCobra.solicitudService.solicitudObrach.datefecharecibido}"
                                                inputSize="10">
                                 </rich:calendar>
-                                <h:outputText  styleClass="ikont- "   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.datefecharecibido}">
                                 </h:outputText>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.nomsol}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.nomsol}"/>
                                 <h:inputTextarea id="nomsol" cols="30" rows="3"
                                                  value="#{SessionBeanCobra.solicitudService.solicitudObrach.strnombresolicitud}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -158,10 +158,10 @@
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
                                                  rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}" />
-                                <h:outputText  styleClass="ikont- "   value="#{SessionBeanCobra.solicitudService.solicitudObrach.strnombresolicitud}"
+                                <h:outputText  styleClass="ikont- hot-"   value="#{SessionBeanCobra.solicitudService.solicitudObrach.strnombresolicitud}"
                                               rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"/>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.tiposol}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.tiposol}:"/>
                                 <h:selectOneMenu id="selecttiposolicitudobra" rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
@@ -172,11 +172,11 @@
                                     <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tiposolicitudobra}"/>
                                     <a4j:ajax event="change" render="panelvalorclase" listener="#{SolicitudObra$GestionarSolicitudObra.validarclaseobra}"/>
                                 </h:selectOneMenu>
-                                <h:outputText  styleClass="ikont- "   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.tiposolicitudobra.strdescripcion}">
                                 </h:outputText>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.tipoobra}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.tipoobra}:"/>
                                 <h:selectOneMenu id="selecttipoobra" rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
@@ -186,11 +186,11 @@
                                                  value="#{SessionBeanCobra.solicitudService.solicitudObrach.tipoobra.inttipoobra}">
                                     <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tipoobra}"/>
                                 </h:selectOneMenu>
-                                <h:outputText  styleClass="ikont- "   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.tipoobra.strdesctipoobra}">
                                 </h:outputText>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.incluyeint}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.incluyeint}:"/>
                                 <h:selectOneMenu id="incluyeinterventoria"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
@@ -202,7 +202,7 @@
                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                 </h:selectOneMenu>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.objetosolicitud}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.objetosolicitud}:"/>
                                 <h:panelGroup>
                                     <h:inputTextarea id="txtobjetosolicitud" cols="30" rows="3"
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -214,11 +214,11 @@
                                                      rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"/>
                                     <rich:message styleClass="ikont-"   for="txtobjetosolicitud"/>
                                 </h:panelGroup>
-                                <h:outputText  styleClass="ikont- "   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciones}">
                                 </h:outputText>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.vlrsolicittud}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.vlrsolicittud}:"/>
                                 <h:panelGroup id="panelvalorclase">
                                     <rich:inputNumberSpinner minValue="0" maxValue="#{SolicitudObra$GestionarSolicitudObra.validarclaseobra}" inputSize="10"
                                                              disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -228,12 +228,12 @@
                                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
                                                              value="#{SessionBeanCobra.solicitudService.solicitudObrach.doublevalorsolicitado}"
                                                              rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"/>
-                                    <h:outputText  styleClass="ikont- "   styleClass="ikont-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                                   value="#{SessionBeanCobra.solicitudService.solicitudObrach.doublevalorsolicitado}">
                                         <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputText>
                                 </h:panelGroup>
-                                <h:outputText  styleClass="ikont- "   value="#{var.defprioridad}:"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.defprioridad}:"/>
                                 <h:selectOneMenu id="selecprioridad"
                                                  rendered="#{!SolicitudObra$GestionarSolicitudObra.consul}"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.consul ||
@@ -253,7 +253,7 @@
                                     <f:selectItem itemValue="9" itemLabel="9"/>
                                     <f:selectItem itemValue="10" itemLabel="10"/>
                                 </h:selectOneMenu>
-                                <h:outputText  styleClass="ikont- "   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
+                                <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.consul}"
                                               value="#{SessionBeanCobra.solicitudService.solicitudObrach.intordenprioridad}">
                                 </h:outputText>
                             </h:panelGrid>
@@ -265,7 +265,7 @@
 
                 <rich:collapsiblePanel header="3. #{var.imagenes}" switchType="ajax" id="gpDatosBasicos"  expanded="#{!SolicitudObra$GestionarSolicitudObra.consul}">
                     <center>
-                        <h:outputText  styleClass="ikont- "   value="#{var.textsubirimagen}"/>
+                        <h:outputText  styleClass="ikont- hot-"   value="#{var.textsubirimagen}"/>
                         <interkont:spacer height="3"/>
                         <h:panelGrid id="panel_subirImagen"  columns="6" columnClasses=",,,,buttonsmall">
 
@@ -273,13 +273,13 @@
                                                onclick="#{rich:component('panelUploadImagenSolicitud')}.show();">
                             </a4j:commandButton>
                             <interkont:spacer height="3"/>
-                            <h:outputText  styleClass="ikont- "   id="ImagenAtencion" value="#{var.descripcionImagen}:"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="ImagenAtencion" value="#{var.descripcionImagen}:"/>
                             <h:inputText id="inputNombre" value="#{SessionBeanCobra.solicitudService.imagensolicitud.strdescripcion}"/>
                             <a4j:commandLink id="bt_agregarImagen" styleClass="ikont-"   title="#{var.agregar}"
                                              action="#{SolicitudObra$GestionarSolicitudObra.subirImagenaLista}" 
                                              render="tablaImagenes,gpDatosBasicos,panelUploadImagenSolicitud"/>
                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.archivos}" var="file" >
-                                <h:outputText  styleClass="ikont- "   id="otxt_nombreImagen" value=" #{file.nombre}"/>
+                                <h:outputText  styleClass="ikont- hot-"   id="otxt_nombreImagen" value=" #{file.nombre}"/>
                             </rich:dataGrid>
                         </h:panelGrid>
 
@@ -287,17 +287,17 @@
                             <rich:dataTable id="tablaImagenes" value="#{SessionBeanCobra.solicitudService.imagensolicituds}"
                                             rowKeyVar="filaSeleccionada" var="currentRow"  rows="3" >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.imgseleccionadas}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.imgseleccionadas}"/>
                                 </f:facet>
                                 <rich:column breakRowBefore="true"  width="100px">
                                     <f:facet name="header" >
-                                        <h:outputText  styleClass="ikont- "   value="#{var.descripcionImagen}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.descripcionImagen}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont- "   value="#{currentRow.strdescripcion}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strdescripcion}"/>
                                 </rich:column>
                                 <rich:column  width="100px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.imagen}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.imagen}"/>
                                     </f:facet>
                                     <center>
                                         <h:graphicImage  styleClass="ikont- "   value="#{currentRow.strurlimagen}" width="100" height="100"  />
@@ -309,7 +309,7 @@
                                 </rich:column>
                                 <rich:column  width="60px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
                                     </f:facet>
                                     <a4j:commandButton id="eliminar" value="#{var.eliminar}" render="tablaImagenes" execute="@this"
                                                        action="#{SolicitudObra$GestionarSolicitudObra.eliminarImagenLista(filaSeleccionada)}"/>
@@ -326,16 +326,16 @@
 
                 <rich:collapsiblePanel header="4. #{var.nombredoc}" switchType="ajax" id="gpDatosBasicos1"  expanded="#{!SolicitudObra$GestionarSolicitudObra.consul}">
                     <center>
-                        <h:outputText  styleClass="ikont- "   value="#{var.textsubirdoc}"/>
+                        <h:outputText  styleClass="ikont- hot-"   value="#{var.textsubirdoc}"/>
                         <interkont:spacer height="3"/>
                         <h:panelGrid id="panel_subir"  columns="6" columnClasses=",,,,,buttonsmall">
 
                             <a4j:commandButton id="adjuntarDocumento" styleClass="ikont-"   value="#{var.examinar}" immediate="true" 
                                                onclick="#{rich:component('panelUploadDocumento')}.show();">
                             </a4j:commandButton>
-                            <h:outputText  styleClass="ikont- "   id="Documento" value="#{var.descipcionDocumento}"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="Documento" value="#{var.descipcionDocumento}"/>
                             <h:inputText id="inputDescDocument" value="#{SessionBeanCobra.solicitudService.documentosolicitud.strdescripcion}"/>
-                            <h:outputText  styleClass="ikont- "    id="tiposol"  value="#{var.tipoDocumento}"/>
+                            <h:outputText  styleClass="ikont- hot-"    id="tiposol"  value="#{var.tipoDocumento}"/>
                             <h:selectOneMenu id="selecttipodocumento" value="#{SolicitudObra$GestionarSolicitudObra.tipodoc}">
                                 <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tipodocumento}"/>
                             </h:selectOneMenu>                                   
@@ -346,7 +346,7 @@
                             </a4j:commandLink>
 
                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirDocumentoSolicitud.archivos}" var="file" >
-                                <h:outputText  styleClass="ikont- "   id="otxt_nombrearchivo" value="#{file.nombre}"/>
+                                <h:outputText  styleClass="ikont- hot-"   id="otxt_nombrearchivo" value="#{file.nombre}"/>
                             </rich:dataGrid>
 
                         </h:panelGrid>
@@ -357,24 +357,24 @@
                             <f:facet name="header" >
                                 <rich:columnGroup >
                                     <rich:column colspan="5">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.docseleccionados}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.docseleccionados}"/>
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.tipoDocumento}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.tipoDocumento}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- "   value="#{var.descipcionDocumento}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.descipcionDocumento}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tipodocumentosolicitud.strdesctipodocsol}" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tipodocumentosolicitud.strdesctipodocsol}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.strdescripcion}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strdescripcion}"/>
                             </rich:column>
                             <rich:column >
                                 <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentos" execute="@this"
@@ -394,11 +394,11 @@
                 <interkont:spacer height="3"/>
                 <rich:collapsiblePanel header="5. #{var.nombrevideo}" switchType="ajax" id="gpDatosBasicos2" >
                     <center>
-                        <h:outputText  styleClass="ikont- "   value="#{var.textsubirvideo}"/>
+                        <h:outputText  styleClass="ikont- hot-"   value="#{var.textsubirvideo}"/>
                         <interkont:spacer height="3"/>
                         <h:panelGrid columns="5" columnClasses=",,,buttonsmall,,">
                             <a4j:commandButton id="examinarvideo" value="#{var.examinar}"/>
-                            <h:outputText  styleClass="ikont- "   value="#{var.nombrevideo}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.nombrevideo}"/>
                             <h:inputText size="10" id="nombrevideo" disabled="true"/>
                             <a4j:commandLink styleClass="ikont-"  />
                         </h:panelGrid>                            
@@ -429,19 +429,19 @@
                             <h:panelGrid>
                                 <rich:panel header="#{var.resumendocumentosdili}" bodyClass="tool" >
                                     <h:panelGrid id="resuDocu" columns="1">
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolcartaasumiradicionales}" value="#{var.cartaasumiradicionales}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolcartaasumiradicionales}" value="#{var.cartaasumiradicionales}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.booldeclaracionnosolicitudotraentidad}" value="#{var.declaracionnosolicitudotraentidad}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.booldeclaracionnosolicitudotraentidad}" value="#{var.declaracionnosolicitudotraentidad}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolpresupuesto}" value="#{var.presupuesto}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolpresupuesto}" value="#{var.presupuesto}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolviabilidadalasolicitud}" value="#{var.viabilidaddelasolicitud}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolviabilidadalasolicitud}" value="#{var.viabilidaddelasolicitud}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolanexaactaclopadocrepad}" value="#{var.anexaactaclopadocrepad}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolanexaactaclopadocrepad}" value="#{var.anexaactaclopadocrepad}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolcartafirmada}" value="#{var.cartafirmada}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{!SessionBeanCobra.solicitudService.solicitudObrach.boolcartafirmada}" value="#{var.cartafirmada}"/>
 
-                                        <h:outputText  styleClass="ikont- "   rendered="#{SessionBeanCobra.solicitudService.solicitudObrach.boolcartafirmada and
+                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{SessionBeanCobra.solicitudService.solicitudObrach.boolcartafirmada and
                                                                   SessionBeanCobra.solicitudService.solicitudObrach.boolanexaactaclopadocrepad and
                                                                   SessionBeanCobra.solicitudService.solicitudObrach.boolviabilidadalasolicitud and
                                                                   SessionBeanCobra.solicitudService.solicitudObrach.boolpresupuesto and
@@ -452,7 +452,7 @@
                             </h:panelGrid>
                             <h:panelGrid id="gestionaraprobacionjunta" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.definirestadodocumentacion}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.definirestadodocumentacion}"/>
                                 <h:panelGroup id="docucomple">
                                     <h:selectOneMenu id="selectestadodocumentacion"
                                                      disabled="true"
@@ -461,7 +461,7 @@
                                     </h:selectOneMenu>
                                 </h:panelGroup>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.lasolicitudesviable}?"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.lasolicitudesviable}?"/>
                                 <h:selectOneMenu id="solicitudviable"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -471,7 +471,7 @@
                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                 </h:selectOneMenu>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.estadosolicitud}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.estadosolicitud}"/>
                                 <h:panelGroup id="panelEstado" >
                                     <h:selectOneMenu id="comboestadosoli" value="#{SolicitudObra$GestionarSolicitudObra.valueestadosolich}"
                                                      disabled="true">
@@ -479,7 +479,7 @@
                                         <a4j:ajax event="change" render="gpsubestadosoli" listener="#{SolicitudObra$GestionarSolicitudObra.llenarSubestadosolicitud}" execute="@this"/>
                                     </h:selectOneMenu>
                                 </h:panelGroup>
-                                <h:outputText  styleClass="ikont- "   value="#{var.subestadosolici}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.subestadosolici}"/>
                                 <h:panelGroup id="gpsubestadosoli">
                                     <h:selectOneMenu id="subestadosolicitud"
                                                      disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
@@ -490,7 +490,7 @@
                                     </h:selectOneMenu>
                                 </h:panelGroup>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.valoraprobado}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.valoraprobado}"/>
                                 <rich:inputNumberSpinner 
                                     minValue="0" disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -499,7 +499,7 @@
                                     value="#{SessionBeanCobra.solicitudService.solicitudObrach.doublevaloraprobado}">
                                 </rich:inputNumberSpinner>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.estaenvisor}?"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.estaenvisor}?"/>
                                 <h:selectOneMenu id="estaenvisor"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -509,7 +509,7 @@
                                     <f:selectItem itemValue="false" itemLabel="No"/>
                                 </h:selectOneMenu>
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.observaciones}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.observaciones}"/>
                                 <h:inputTextarea disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
@@ -517,7 +517,7 @@
                                                  value="#{SessionBeanCobra.solicitudService.solicitudObrach.textjustifica}"
                                                  cols="20" />
 
-                                <h:outputText  styleClass="ikont- "    value="#{var.fechajuntadirectiva}"/>
+                                <h:outputText  styleClass="ikont- hot-"    value="#{var.fechajuntadirectiva}"/>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd"
                                                disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                            SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -527,14 +527,14 @@
                                 </rich:calendar>
 
 
-                                <h:outputText  styleClass="ikont- "    value="#{var.actajuntadirectiva}"/>
+                                <h:outputText  styleClass="ikont- hot-"    value="#{var.actajuntadirectiva}"/>
 
                                 <h:panelGrid id="panel_subirActa"  columns="6">
 
                                     <a4j:commandButton id="adjuntarActa" styleClass="ikont-"   value="#{var.examinar}" immediate="true" 
                                                        onclick="#{rich:component('panelUploadActa')}.show();">
                                     </a4j:commandButton>
-                                    <h:outputText  styleClass="ikont- "   id="txtActaRuta" value="#{var.rutadocumento}" />
+                                    <h:outputText  styleClass="ikont- hot-"   id="txtActaRuta" value="#{var.rutadocumento}" />
                                     <h:inputText id="inputDescActa"
                                                  disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7 ||
                                                              SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
@@ -570,7 +570,7 @@
 
                     <center>
                         <h:panelGrid id="panelAprobacion" columns="2" columnClasses="panelderecha, panelizquierda" >
-                            <h:outputText  styleClass="ikont- "   value="#{var.aprobar}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.aprobar}"/>
                             <h:selectOneMenu id="aprobardirector"
                                              disabled="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 8 ||
                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 9}"
@@ -579,36 +579,36 @@
                                 <f:selectItem itemValue="false" itemLabel="No"/>
                             </h:selectOneMenu>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.observaciones}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.observaciones}"/>
                             <h:inputTextarea id="observacionesaprobacion" rows="3" cols="43"
                                              value="#{SessionBeanCobra.solicitudService.solicitudObrach.textobservaciondeavance}"/>
                         </h:panelGrid>
 
                         <h:panelGrid id="pagos" columns="4">
-                            <h:outputText  styleClass="ikont- "   value="#{var.anticipopago} #{var.pago} 1"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.anticipopago} #{var.pago} 1"/>
                             <rich:inputNumberSpinner minValue="0" maxValue="100"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago1}" inputSize="3">
                                 <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
-                            <h:outputText  styleClass="ikont- "   value="%"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
                                          value="#{SolicitudObra$GestionarSolicitudObra.valorpago1}"/>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.pago} 2"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.pago} 2"/>
                             <rich:inputNumberSpinner minValue="0" maxValue="100"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago2}" inputSize="3">
                                 <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
-                            <h:outputText  styleClass="ikont- "   value="%"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
                                          value="#{SolicitudObra$GestionarSolicitudObra.valorpago2}"/>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.pago} 3"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.pago} 3"/>
                             <rich:inputNumberSpinner minValue="0" maxValue="100"
                                                      value="#{SolicitudObra$GestionarSolicitudObra.porpago3}" inputSize="3">
                                 <a4j:ajax event="change" render="pagos" />
                             </rich:inputNumberSpinner>
-                            <h:outputText  styleClass="ikont- "   value="%"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="%"/>
                             <h:inputText size="20" disabled="true" maxlength="10"
                                          value="#{SolicitudObra$GestionarSolicitudObra.valorpago3}"/>
                         </h:panelGrid>
@@ -635,12 +635,12 @@
 
                         <h:panelGrid id="panelGestionarOrden" columns="3" columnClasses="panelizquierda, panelizquierda" >
 
-                            <h:outputLabel  styleClass="ikont- "   id="lblCarta"  value="#{var.anexarcarta}" for="txtCarta"/>
+                            <h:outputLabel  styleClass="ikont-hol- "   id="lblCarta"  value="#{var.anexarcarta}" for="txtCarta"/>
                             <h:inputText size="40" id="txtCarta" readonly="true"  />
                             <a4j:commandButton id="btOrden" value="#{var.examinar}" immediate="true"
                                                />
 
-                            <h:outputText  styleClass="ikont- "    value="#{var.fechadecarta}"/>
+                            <h:outputText  styleClass="ikont- hot-"    value="#{var.fechadecarta}"/>
                             <interkont:spacer width="95"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" 
                                            direction="topRight" id="fecorden" inputSize="10"
@@ -648,7 +648,7 @@
                                            immediate="true">
                             </rich:calendar>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.observaciones}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.observaciones}"/>
                             <interkont:spacer width="95"/>
                             <h:inputTextarea id="observacionesOrden" rows="3" cols="43" value="#{SessionBeanCobra.solicitudService.ordendepago.strdescripcionordenpago}" />
 
@@ -673,14 +673,14 @@
                     <center>
                         <h:panelGrid id="panelAprobacionFinanciera" columns="2" columnClasses="panelizquierda, panelizquierda" >
 
-                            <h:outputText  styleClass="ikont- "    value="#{var.fechaapertura}"/>
+                            <h:outputText  styleClass="ikont- hot-"    value="#{var.fechaapertura}"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecInfo" inputSize="10" immediate="true">
                                 <a4j:ajax  event="changed" onbeforesubmit="#{rich:component('panelCargando')}.show();">
                                     <a4j:ajax event="complete" onbeforesubmit="#{rich:component('panelCargando')}.hide();"/>
                                 </a4j:ajax>
                             </rich:calendar>
 
-                            <h:outputLabel  styleClass="ikont- "   id="lblEncargo"  value="#{var.encargofiduciario}" for="txtEncargo"/>
+                            <h:outputLabel  styleClass="ikont-hol- "   id="lblEncargo"  value="#{var.encargofiduciario}" for="txtEncargo"/>
                             <h:panelGroup>
                                 <h:inputText size="10" id="txtEncargo" readonly="true"  />
 
@@ -689,15 +689,15 @@
                                                    />
                             </h:panelGroup>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.numeroencargo}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.numeroencargo}"/>
                             <h:inputText id="numeroencargo" size="10"/>
 
-                            <h:outputText  styleClass="ikont- "   value="#{var.valorordendepago}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valorordendepago}"/>
                             <h:inputText id="valorordenpago" size="10"/>
                         </h:panelGrid>
 
                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda">
-                            <h:outputText  styleClass="ikont- "   value="#{var.observaciones}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{var.observaciones}"/>
                             <interkont:spacer width="50"/>
                             <h:inputTextarea id="observaciones" rows="3" cols="25" />
                         </h:panelGrid>

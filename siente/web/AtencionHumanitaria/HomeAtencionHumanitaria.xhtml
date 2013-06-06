@@ -14,7 +14,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "    value="#{var.encontrarsolah}"/>
+        <h:outputText  styleClass="ikont- hot-"    value="#{var.encontrarsolah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -50,66 +50,66 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="12">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.codigo}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.codigo}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.nombreah}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombreah}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valorSolicitado}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.departamento}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.municipio}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.tipo} solicitud"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.tipo} solicitud"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.consultar}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.editar}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.editar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.ver} Proyecto"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.ver} Proyecto"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.oidcodigosolicitudmaestro}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.oidcodigosolicitudmaestro}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strnombresolicitud}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strnombresolicitud}"/>
                         </rich:column>
                         <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrsolicitado}">
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.localidad.strdepartamento}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.localidad.strmunicipio}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- "   value="#{currentRow.tipoah.strdnombretipoah}"/>
+                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tipoah.strdnombretipoah}"/>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 

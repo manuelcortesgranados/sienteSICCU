@@ -12,13 +12,13 @@
     <rich:popupPanel id="modalDocumento"  autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont-hot-modaldocumento"   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();return  false;"   styleClass="ikont-"   immediate="true">
+                    <a4j:commandLink id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();return  false;"   styleClass="ikont-acl-modaldocumento"   immediate="true">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
@@ -32,25 +32,25 @@
                                     value="#{Supervisor$DetalleObra.listaDocsAlimentacion}"
                                     var="currentRow"
                                     rowKeyVar="filaSeleccioanda">
-                        <rich:column id="tc_strnombre"  width="120px">
+                        <rich:column id="tc_strnombre" styleClass="ikont-rc-tcstrnombre">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.houtnomdocu} "/>
+                                <h:outputText  styleClass="ikont-hot-tcstrnombre"   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_strnombre" value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont-hot-ststrnombre"   id="st_strnombre" value="#{currentRow.strnombre}"/>
                         </rich:column>
-                        <rich:column id="tc_fktipodoc" width="120px">
+                        <rich:column id="tc_fktipodoc" styleClass="ikont-rc-tcfktipodoc">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont-hot-tcfktipodoctipo"   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  styleClass="ikont-hot-sttipostrnom"   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
 
-                        <rich:column id="tc_verAli"  width="50px">
+                        <rich:column id="tc_verAli"  styleClass="ikont-rc-tcverali">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont-hot-tcveraliver"   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action(filaSeleccionada)}" id="bt_downloadAli">
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btdownloadali"    value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
                     </rich:dataTable>

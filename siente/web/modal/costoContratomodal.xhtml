@@ -11,13 +11,13 @@
     <rich:popupPanel id="panelCostoContrato" autosized="true" headerClass="rich-panel-header">       
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{var.costo}"/>
+                <h:outputText  styleClass="ikont-hot-panelcostocontrato"   value="#{var.costo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelCostoContrato" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_panelCostoContrato" styleClass="ikont-acl-esconderpanelcostocontrato"   
                                      title="#{var.cerrar}" immediate="true"
                                       onclick="#{rich:component('panelCostoContrato')}.hide();return false;">
                     </a4j:commandLink>
@@ -36,66 +36,60 @@
                                     var="currentRow"
                                     rowKeyVar="filaSeleccionada">
 
-                        <rich:column id="tc_tipocosto"  width="120px">
+                        <rich:column id="tc_tipocosto" styleClass="ikont-rc-tctipocosto">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.tipocosto}"/>
+                                <h:outputText  styleClass="ikont-hot-tctipocostotipocosto"   value="#{var.tipocosto}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
+                            <h:outputText  styleClass="ikont-hot-sttipocosto"   id="st_tipocosto" value="#{currentRow.tipocosto.strdesctipocosto}"/>
                         </rich:column>
 
                         
 
-                        <rich:column id="tc_numvaltotobra"  width="120px">
+                        <rich:column id="tc_numvaltotobra" styleClass="ikont-rc-tcnumvaltotobra">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.costodirecto}"/>
+                                <h:outputText  styleClass="ikont-hot-tcnumvaltotobracostodirecto"   value="#{var.costodirecto}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
+                            <h:outputText  styleClass="ikont-hot-stnumvaltotobra"   id="st_numvaltotobra" value="#{currentRow.numvaltotobra}">
                                 <f:convertNumber pattern="$###,###"/>
                             </h:outputText>
                         </rich:column>
 
-                        <!-- <rich:column id="tc_stContratistaObra"  width="120px">
-                            <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.houtcontratis}"/>
-                            </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_stContratistaObra" value="#{currentRow.strcontratista}"/>
-                        </rich:column>-->
 
-                        <rich:column id="tc_floatporadmon"  width="120px">
+                        <rich:column id="tc_floatporadmon" styleClass="ikont-rc-tcfloatporadmon">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.administracion} (%)"/>
+                                <h:outputText  styleClass="ikont-hot-tcfloatporadmonadministracion"   value="#{var.administracion} (%)"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
+                            <h:outputText  styleClass="ikont-hot-stfloatporadmon "   id="st_floatporadmon" value="#{currentRow.floatporadmon}"/>
                         </rich:column>
 
-                        <rich:column id="tc_floatporimprevi"  width="120px">
+                        <rich:column id="tc_floatporimprevi"  styleClass="ikont-rc-tcfloatporimprevi">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.imprevistos}(%)"/>
+                                <h:outputText  styleClass="ikont-hot-tcfloatporimprevi-imprevistos"   value="#{var.imprevistos}(%)"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
+                            <h:outputText  styleClass="ikont-hot-stfloatporimprevi"   id="st_floatporimprevi" value="#{currentRow.floatporimprevi}"/>
                         </rich:column>
 
-                        <rich:column id="tc_floatporutilidad"  width="120px">
+                        <rich:column id="tc_floatporutilidad" styleClass="ikont-rc-tcfloatporutilidad">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.utilidad}(%)"/>
+                                <h:outputText  styleClass="ikont-hot-tcfloatporutilidadutilidad"   value="#{var.utilidad}(%)"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
+                            <h:outputText  styleClass="ikont-hot-stfloatporutilidad"   id="st_floatporutilidad" value="#{currentRow.floatporutilidad}"/>
                         </rich:column>
 
-                        <rich:column id="tc_floatporivasobreutil"  width="120px">
+                        <rich:column id="tc_floatporivasobreutil"  styleClass="ikont-rc-tcfloatporivasobreutil">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.ivasobreutilidad}(%)"/>
+                                <h:outputText  styleClass="ikont-hot-tcfloatporivasobreutilivasobreutilidad"   value="#{var.ivasobreutilidad}(%)"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
+                            <h:outputText  styleClass="ikont-hot-stfloatporivasobreutil"   id="st_floatporivasobreutil" value="#{currentRow.floatporivasobreutil}"/>
                         </rich:column>
 
-                        <rich:column id="tc_CostoTotal"  width="120px">
+                        <rich:column id="tc_CostoTotal" styleClass="ikont-rc-tccostoTotal">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.costototal}"/>
+                                <h:outputText  styleClass="ikont-hot-tccostototal"   value="#{var.costototal}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
+                            <h:outputText  styleClass="ikont-hot-stcostototal"   id="st_CostoTotal" value="#{currentRow.numvaltotobra + currentRow.numvaltotobra*currentRow.floatporivasobreutil/100*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporutilidad/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporimprevi/100
                                                                       +currentRow.numvaltotobra*currentRow.floatporadmon/100
@@ -110,7 +104,6 @@
                 <center>
                     <h:panelGrid columns="5">
                         <a4j:commandButton id="confirmarCosto" render="layoutLugar" value="#{var.aceptar}"
-                                            
                                             onclick="#{rich:component('panelCostoContrato')}.hide();return false;">
                         </a4j:commandButton>
                     </h:panelGrid>
