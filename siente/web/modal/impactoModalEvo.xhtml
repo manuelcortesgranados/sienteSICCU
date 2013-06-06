@@ -10,14 +10,15 @@
 
     <rich:popupPanel id="modalImpacto"  width="380" height="200" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
+             <h:outputScript library="css" name="/resources/css/modal/impactoModalEvo.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont-hot-impactosocial" value="Ver Impacto Social para#{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImpacto" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalImpacto" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImpacto')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -25,15 +26,15 @@
         <center>
             <rich:dataGrid id="tablaaliperim" value="#{Supervisor$DetalleObra.alimentacionmostrar}" var="currentRow">
                 <h:panelGrid columns="2" >
-                        <h:outputLabel  styleClass="ikont "   value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel  styleClass="ikont "   value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numempdirectos}"/>
-                        <h:outputLabel  styleClass="ikont "   value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
-                        <h:outputLabel  styleClass="ikont "   value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numempindirectos}"/>
-                        <h:outputLabel  styleClass="ikont "   value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
-                        <h:outputLabel  styleClass="ikont "   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{currentRow.numhabafectados}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numempleodirecto" value="#{var.numEmpleoDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  styleClass="ikont-hol-impinst" value="#{var.imp_inst}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numempdirectos" value="#{currentRow.numempdirectos}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numempindirectos" value="#{var.numEmpleoInDirecto}" rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra!=59}"/>
+                        <h:outputLabel  styleClass="ikont-hol-impacto" value="#{var.imp_acto}"  rendered="#{Supervisor$AdministrarObraNew.obra.tipoobra.inttipoobra==59}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numempindirectos" value="#{currentRow.numempindirectos}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numerohabitantes" value="#{var.numeroHabitantes}" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
+                        <h:outputLabel  styleClass="ikont-hol-poblacionestudiantil" value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
+                        <h:outputLabel  styleClass="ikont-hol-numhabafaectados" value="#{currentRow.numhabafectados}"/>
                 </h:panelGrid>
             </rich:dataGrid>
         </center>

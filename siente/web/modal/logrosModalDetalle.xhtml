@@ -12,14 +12,15 @@
 
     <rich:popupPanel id="modalLogrosDetalle" autosized="true"  headerClass="rich-panel-header" styleClass="ikont"   >
         <f:facet name="header" >
+            <h:outputScript library="css" name="/resources/css/modal/logrosModalDetalle.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont-hot-verlogro" value="Ver logros para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalLogros" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalLogros" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalLogrosDetalle')}.hide();return  false;">
                     </a4j:commandLink>
@@ -37,35 +38,35 @@
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText  styleClass="ikont "   value="#{var.logro}s"/>
+                                <h:outputText  styleClass="ikont-hot-logros" value="#{var.logro}s"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText  styleClass="ikont "   id="tipodet" value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont-tipologro" id="tipodet" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont "   id="logrodet" value="#{var.logro}"/>
+                                <h:outputText  styleClass="ikont-hot-logromodal" id="logrodet" value="#{var.logro}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText  styleClass="ikont "   id="usuariodet" value="#{var.username}"/>
+                                <h:outputText  styleClass="ikont-hot-usernamemodal" id="usuariodet" value="#{var.username}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont "   id="fechadet" value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont-hot-fechalogro" id="fechadet" value="#{var.fecha}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  styleClass="ikont "   id="tipologrodet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                            <h:outputText  styleClass="ikont-hot-nombrelogro" id="tipologrodet" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
                             <h:inputTextarea cols="60" rows="2" value="#{currentRow.strlogro}" readonly="true"  />
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText  styleClass="ikont "   id="strusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText  styleClass="ikont-hot-nombreterceromodal" id="strusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont "   id="datefechadet" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:outputText  styleClass="ikont-hot-datefechamodal"   id="datefechadet" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                     </rich:columnGroup>
                     <f:facet name="footer">

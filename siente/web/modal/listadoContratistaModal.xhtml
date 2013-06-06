@@ -8,37 +8,38 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:panel id="panelLocalidadProyecto"  >
+    <rich:panel id="panelLocalidadProyecto">
 
         <rich:popupPanel id="mp-listado-contratista" moveable="true" width="500" height="420" headerClass="rich-panel-header">
             <f:facet name="header" >
+                 <h:outputScript library="css" name="/resources/css/modal/listadoContratistaModal.css"/>
                 <h:panelGroup >
-                    <h:outputText  styleClass="ikont "   value="#{var.listarcontratistas}" />
+                    <h:outputText  styleClass="ikont-hot-listarcontratistas" value="#{var.listarcontratistas}" />
                 </h:panelGroup>
             </f:facet>
             <f:facet name="controls">
                 <h:form>
                     <h:panelGroup>
-                        <a4j:commandLink id="esconder_mp-listado-contratista" styleClass="ikont"  
+                        <a4j:commandLink id="esconder_mp-listado-contratista" styleClass="ikont-acl-cerrar"  
                                          title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratista')}.hide(); return false;"/>
                     </h:panelGroup>
                 </h:form>
             </f:facet>
             <rich:panel  id="gpTotalContratista" >            
-                <h:panelGrid width=     "100%">
+                <h:panelGrid width="100%">
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
-                        <h:outputText  styleClass="ikont "    value="#{var.houtbusquedarapida} "/>
-                        <h:inputText  id="filtro-contratista" value="#{Supervisor$IngresarNuevaObra.valorFiltroContratistas}" immediate="true">
+                        <h:outputText styleClass="ikont-hot-busquedarapida" value="#{var.houtbusquedarapida} "/>
+                        <h:inputText  styleClass="ikon-hit-vlrfiltrocontratista" id="filtro-contratista" value="#{Supervisor$IngresarNuevaObra.valorFiltroContratistas}" immediate="true">
                             <a4j:ajax  event="blur" render="tabla-listado-contratista"  execute="@this" >
                             <a4j:queue ignoreDupResponses="true"/>
                             </a4j:ajax>
                         </h:inputText>
 
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.filtrar}"/>
+                            <h:outputText  styleClass="ikont-hot-filtrar" value="#{var.filtrar}"/>
                         </f:facet>
-                        <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
+                        <a4j:commandButton styleClass="ikont-acb-aceptar" value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
                         <a4j:ajax event="click" render="tabla-listado-contratista" execute="@this">
                         <a4j:queue ignoreDupResponses="true"/>
                         </a4j:ajax>
@@ -54,21 +55,21 @@
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"  
                                          >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.numerocontratista}"/>
+                                    <h:outputText  styleClass="ikont-hot-numerocontratista" value="#{var.numerocontratista}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
+                                <h:outputText  styleClass="ikont-hot-codigocontratista" id="txt_codigocontratista" value="#{currentRow.intcodigocontratista}"/>
                             </rich:column>
                             <rich:column id="nombrecontratista"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre" value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
+                                <h:outputText  styleClass="ikont-hot-strnombre" id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"/>
                             </rich:column>
                             <rich:column id="seleccionar" width="120px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont-hot-seleccionar" value="#{var.seleccionar}"/>
                                 </f:facet>
-                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarContratista}"
+                                <a4j:commandButton styleClass="ikont-acb-seleccionar" value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarContratista}"
                                                    render="mostrarContratistaSeleccionado,gpContratoSelec"                                                   
                                                    oncomplete="#{rich:component('mp-listado-contratista')}.hide();"/>
                             </rich:column>

@@ -9,14 +9,15 @@
 
     <rich:popupPanel id="mp-listado-tercero" moveable="true" width="1300" height="420" headerClass="rich-panel-header">
         <f:facet name="header" >
+            <h:outputScript library="css" name="/resources/css/modal/listadotercero.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.rpanhea_listadotercero}"/>
+                <h:outputText  styleClass="ikont-hot-listtercero" value="#{var.rpanhea_listadotercero}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -50,48 +51,48 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="4">
-                                        <h:outputText  styleClass="ikont "   value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
+                                        <h:outputText  styleClass="ikont-hot-listatercero" value="#{var.listadetercero} #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                     </rich:column>
                                     <rich:column colspan="4" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.primerosreales}"
+                                                <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.primerosreales}"
                                                                    onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
-                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.anterioresReales}"
+                                                <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.anterioresReales}"
                                                                    onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
-                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.siguientesReales}"
+                                                <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.siguientesReales}"
                                                                    onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
-                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.ultimoReales}"
+                                                <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" render="tablaTercero" action="#{Financiera$FiduFinanciera.ultimoReales}"
                                                                    onclick="#{rich:component('panelIngre')}.show();" oncomplete="#{rich:component('panelIngre')}.hide();"/>
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>
                                     <rich:column width="150px" breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont "   value="#{var.cedulaContratista}"/>
+                                        <h:outputText  styleClass="ikont-hot-cedcontratista" value="#{var.cedulaContratista}"/>
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.nombre}" />
+                                        <h:outputText  styleClass="ikont-hot-nombretercero" value="#{var.nombre}" />
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.apellidoContratista}" />
+                                        <h:outputText  styleClass="ikont-hot-aplcontratista" value="#{var.apellidoContratista}" />
                                     </rich:column>
                                     <rich:column width="150px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.SELECCION}" />
+                                        <h:outputText  styleClass="ikont-hot-selecciontercero" value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.intcedula}"/>
+                                    <h:outputText  styleClass="ikont-hot-intcedulater" value="#{_Tercero.intcedula}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.strnombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-strnombreterce" value="#{_Tercero.strnombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont "   value="#{_Tercero.strapellido1}"/>
+                                    <h:outputText  styleClass="ikont-hot-strapellido" value="#{_Tercero.strapellido1}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <a4j:commandButton id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP(filaSeleccionada)}"
+                                    <a4j:commandButton styleClass="ikotn-acb-selecciontercero" id="aaaa" action="#{Financiera$FiduFinanciera.seleccionarTerceroOP(filaSeleccionada)}"
                                                        render="soliOrden" title="#{var.agregar}"
                                                        onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;" />
                                 </rich:column>

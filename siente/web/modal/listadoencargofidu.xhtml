@@ -9,14 +9,15 @@
 
     <rich:popupPanel id="mp-listado-encargo" moveable="true" width="600" height="500" headerClass="rich-panel-header">
         <f:facet name="header" >
+            <h:outputScript library="css" name="/resources/css/modal/listadoencargofidu.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.listadoencargo}"/>
+                <h:outputText  styleClass="ikont-hot-listaencargofi" value="#{var.listadoencargo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-encargo" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_mp-listado-encargo" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-encargo')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -24,11 +25,11 @@
         <center>
             <h:form>
                 <h:panelGrid columns="3">
-                    <h:outputText  styleClass="ikont "   value="#{var.consultar} #{var.numeroencargo} " />
+                    <h:outputText  styleClass="ikont-hot-listnumencargofidu" value="#{var.consultar} #{var.numeroencargo} " />
                     <rich:inputNumberSpinner enableManualInput="true" minValue="0" value="#{Financiera$FiduFinanciera.intencargofidu}"
                                              inputSize="10" maxValue="1000000" onfocus="clearText(this)" onblur="clearText(this)" />
 
-                    <a4j:commandButton render="tablaEncargo" action="#{Financiera$FiduFinanciera.filtrarEncargo}" value="Buscar"/>
+                    <a4j:commandButton styleClass="ikont-acb-filtroencargo" render="tablaEncargo" action="#{Financiera$FiduFinanciera.filtrarEncargo}" value="Buscar"/>
 
                 </h:panelGrid>
             </h:form>
@@ -50,45 +51,45 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
-                                        <h:outputText  styleClass="ikont "   value="#{var.listadoencargo} #{Financiera$FiduFinanciera.totalfilasencargo} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina} #{var.deCiu} #{Financiera$FiduFinanciera.totalpaginasencargo}" />
+                                        <h:outputText  styleClass="ikont-hot-listencargofinanc" value="#{var.listadoencargo} #{Financiera$FiduFinanciera.totalfilasencargo} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina} #{var.deCiu} #{Financiera$FiduFinanciera.totalpaginasencargo}" />
                                     </rich:column>
                                     <rich:column width="250px" breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont "   value="#{var.numeroencargo}"/>
+                                        <h:outputText  styleClass="ikont-hot-listnumencargo"  value="#{var.numeroencargo}"/>
                                     </rich:column>
 
                                     <rich:column width="250px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.fechaapertura}"/>
+                                        <h:outputText  styleClass="ikont-hot-dateapertura" value="#{var.fechaapertura}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.saldoinicial}"/>
+                                        <h:outputText  styleClass="ikont-hot-saldoini" value="#{var.saldoinicial}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.saldoactual}"/>
+                                        <h:outputText  styleClass="ikont-hot-saldoactualencargo" value="#{var.saldoactual}"/>
                                     </rich:column>
                                     <rich:column width="250px">
-                                        <h:outputText  styleClass="ikont "   value="#{var.SELECCION}" />
+                                        <h:outputText  styleClass="ikont-hot-seleccion" value="#{var.SELECCION}" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:columnGroup id="CuerpoOpi">
                                 <rich:column  width="250px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont "   value="#{_Encargo.intnumencargofiduciario}"/>
+                                    <h:outputText  styleClass="ikont-hot-encargofidu" value="#{_Encargo.intnumencargofiduciario}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont "   value="#{_Encargo.datefechaaperturaencargofiduciario}"/>
+                                    <h:outputText  styleClass="ikont-hot-datencargofidu" value="#{_Encargo.datefechaaperturaencargofiduciario}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont "   value="#{_Encargo.numsaldoinicial}">
+                                    <h:outputText  styleClass="ikont-hot-numsaldoinicial" value="#{_Encargo.numsaldoinicial}">
                                         <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont "    value="#{_Encargo.numsaldoactual}">
+                                    <h:outputText  styleClass="ikont-hot-numsaldoactualfidu" value="#{_Encargo.numsaldoactual}">
                                         <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
-                                    <a4j:commandButton id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo(filaSeleccionada)}"
+                                    <a4j:commandButton styleClass="ikont-acb-seleccionencargo" id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo(filaSeleccionada)}"
                                                        title="#{var.agregar}" render="encargoorden" value="Seleccionar"
                                                        onclick="#{rich:component('mp-listado-encargo')}.hide();" >
                                     </a4j:commandButton>
@@ -99,10 +100,10 @@
                                     <rich:column colspan="7" breakRowBefore="true">
                                         <center>
                                             <h:panelGrid columns="4">
-                                                <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}"  action="#{Financiera$FiduFinanciera.primerosrealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
-                                                <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" action="#{Financiera$FiduFinanciera.anterioresRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
-                                                <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.siguientesRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
-                                                <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.ultimoRealesEncargo}" render="tablaEncargo, mp-listado-encargo" />
+                                                <a4j:commandButton styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}"  action="#{Financiera$FiduFinanciera.primerosrealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Financiera$FiduFinanciera.veranteriorreales}" action="#{Financiera$FiduFinanciera.anterioresRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton styleClass="ikont-acb-suguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.siguientesRealesEncargo}" render="tablaEncargo, mp-listado-encargo"/>
+                                                <a4j:commandButton styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Financiera$FiduFinanciera.verultimosreales}" action="#{Financiera$FiduFinanciera.ultimoRealesEncargo}" render="tablaEncargo, mp-listado-encargo" />
                                             </h:panelGrid>
                                         </center>
                                     </rich:column>

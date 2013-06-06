@@ -9,14 +9,15 @@
 
     <rich:popupPanel id="mp-listado-proyectosPadres" headerClass="rich-panel-header" autosized="true">
         <f:facet name="header">
+            <h:outputScript library="css" name="/resources/css/modal/listadoObrasSuperiores.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.encontrarPadreProyecto}"/>
+                <h:outputText  styleClass="ikont-hot-encontrarpadreproy" value="#{var.encontrarPadreProyecto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp-listado-proyectosPadres" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_mp-listado-proyectosPadres" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-proyectosPadres')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
@@ -26,17 +27,17 @@
                 <h:panelGrid >
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-proyectosPadres">
-                        <h:outputText  styleClass="ikont "    value="#{var.buscarProyecto} "/>
-                        <h:inputText  id="filtro-proyectosPadres" value="#{Supervisor$IngresarNuevaObra.valorFiltroObra}" immediate="true">
+                        <h:outputText  styleClass="ikont-hot-buscarproyecto" value="#{var.buscarProyecto} "/>
+                        <h:inputText  styleClass="ikont-hit-vlrfiltrobra" id="filtro-proyectosPadres" value="#{Supervisor$IngresarNuevaObra.valorFiltroObra}" immediate="true">
                             <a4j:ajax event="blur" render="tabla-listado-proyectosPadres" execute="@this" >
                                 <a4j:queue  ignoreDupResponses="true"/>
                             </a4j:ajax>
                         </h:inputText>
 
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.filtrar}"/>
+                            <h:outputText  styleClass="ikont-hot-filtrarobra" value="#{var.filtrar}"/>
                         </f:facet>
-                        <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
+                        <a4j:commandButton styleClass="ikont-acb-filtrarcontratista" value="#{var.aceptar}" action="#{Supervisor$IngresarNuevaObra.filtrarContratistas}"/>
                         <a4j:ajax event="clik" render="tabla-listado-proyectosPadres" execute="@this">
                             <a4j:queue  ignoreDupResponses="true"/>
                         </a4j:ajax>
@@ -47,21 +48,21 @@
                                         rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.numero}"/>
+                                    <h:outputText  styleClass="ikont-hot-numero" value="#{var.numero}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="otxt_numobra-listado" value="#{currentRow.intcodigoobra}"/>
+                                <h:outputText  styleClass="ikont-hot-codigoobra" id="otxt_numobra-listado" value="#{currentRow.intcodigoobra}"/>
                             </rich:column>
                             <rich:column id="nombrecontratista"  >
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombreobra" value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="otxt_strnombreobra-listado" value="#{currentRow.strnombreobra}"/>
+                                <h:outputText  styleClass="ikont-hot-nombreobrasup" id="otxt_strnombreobra-listado" value="#{currentRow.strnombreobra}"/>
                             </rich:column>
                             <rich:column id="seleccionar" width="120px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
+                                    <h:outputText  styleClass="ikont-hot-seleccionarobrasup" value="#{var.seleccionar}"/>
                                 </f:facet>
-                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
+                                <a4j:commandButton styleClass="ikont-acb-seleccionarobrasup" value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"
                                                    oncomplete="#{rich:component('mp-listado-proyectosPadres')}.hide();" >
                                 </a4j:commandButton>

@@ -13,9 +13,8 @@
         <h:panelGrid   >
             <center>
                 <f:facet name="header">
-                    <h:outputLabel  styleClass="ikont "   value="#{var.prorroga}">
-
-                    </h:outputLabel>
+                     <h:outputScript library="css" name="/resources/css/modal/historialModiModal.css"/>
+                    <h:outputLabel  styleClass="ikont-hot-prorroga" value="#{var.prorroga}"/>
                 </f:facet>
 
                 <rich:dataTable id="tablahistoria" sortMode="single" 
@@ -23,30 +22,30 @@
                                 var="_row" >
                     <rich:column id="tc_strfecha"  width="120px">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.fecha} "/>
+                            <h:outputText  styleClass="ikont-hot-fechaprorroga" value="#{var.fecha} "/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont "   id="st_strfechahis" value="#{_row.datefechist}"/>
+                        <h:outputText  styleClass="ikont-hot-datefechhist" id="st_strfechahis" value="#{_row.datefechist}"/>
                     </rich:column>
 
                     <rich:column id="tc_strdias"  width="120px">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.diasadicionales} "/>
+                            <h:outputText  styleClass="ikont-hot-diasadicionales "   value="#{var.diasadicionales} "/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont "   id="st_strdias" value="#{_row.intplazoobra}"/>
+                        <h:outputText  styleClass="ikont-hot-plazoobra" id="st_strdias" value="#{_row.intplazoobra}"/>
                     </rich:column>
 
                     <rich:column id="tc_strfechater" width="120px">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.fechaterminacion}"/>
+                            <h:outputText  styleClass="ikont-hot-fechaterminacion" value="#{var.fechaterminacion}"/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont "   id="st_strfecha" value="#{_row.datefecfinhist}"/>
+                        <h:outputText  styleClass="ikont-hot-datefecfinhit" id="st_strfecha" value="#{_row.datefecfinhist}"/>
                     </rich:column>
 
                     <rich:column id="tc_estado" width="120px">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont "   value="#{var.estado}"/>
+                            <h:outputText  styleClass="ikont-hot-estado" value="#{var.estado}"/>
                         </f:facet>
-                        <h:outputText  styleClass="ikont "    value="#{_row.booltieneespe}"/>
+                        <h:outputText  styleClass="ikont-hot-booltienespe" value="#{_row.booltieneespe}"/>
                     </rich:column>
 
 

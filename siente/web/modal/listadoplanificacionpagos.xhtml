@@ -9,15 +9,16 @@
 
     <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerClass="rich-panel-header">
         <f:facet name="header" >
+            <h:outputScript library="css" name="/resources/css/modal/listadoplanificacionpagos.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.verplanificacion}" styleClass="ikont"   />
+                <h:outputText  styleClass="ikont-hot-verplanificacion" value="#{var.verplanificacion}"/>
                 <interkont:spacer width="30"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" styleClass="ikont"  
+                    <a4j:commandLink id="esconder-mp-listado-planificacion-pagos" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-planificacion-pagos')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,23 +28,23 @@
 
             <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.formadepago}:"/>
+                <h:outputLabel  styleClass="ikont-hol-formapago" value="#{var.formadepago}:"/>
                 <interkont:spacer width="20"/>
-                <h:outputLabel  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+                <h:outputLabel  styleClass="ikont-hol-descformapago" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                <h:outputLabel  styleClass="ikont-hol-porcentancitipo" value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
-                <h:outputLabel  styleClass="ikont "   styleClass="ikont"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                <h:outputLabel  styleClass="ikont-hol-porcanticipo" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="ikont-hol-vlanticipo" value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="ikont-hot-vlanticipo" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="ikont-hot-datantipago" value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="ikont-hot-datpago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                 </h:outputText>
 
@@ -63,30 +64,30 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column  breakRowBefore="true" colspan="3">
-                                    <h:outputText  styleClass="ikont "   value="#{var.numero} de Actas Parciales"/>
+                                    <h:outputText  styleClass="ikont-hot-nmactaparcial" value="#{var.numero} de Actas Parciales"/>
                                 </rich:column>
                                 <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont "   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                    <h:outputText  styleClass="ikont-hot-porcnacta" value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont "   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                    <h:outputText  styleClass="ikont-hot-vlracta" value="#{var.valor} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont "   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                    <h:outputText  styleClass="ikont-hot-dateacta" value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column   breakRowBefore="true">
-                                <h:outputText  styleClass="ikont "   value="% #{planificacion.numvlrporcentage}"/>
+                                <h:outputText  styleClass="ikont-hot-nmvlrporcentaje" value="% #{planificacion.numvlrporcentage}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont "   value="#{planificacion.numvlrpago}">
+                                <h:outputText  styleClass="ikont-hot-nmvlrpago" value="#{planificacion.numvlrpago}">
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont "   value="#{planificacion.datefechapago}">
+                                <h:outputText  styleClass="ikont-hot-datpago" value="#{planificacion.datefechapago}">
                                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                 </h:outputText>
                             </rich:column>

@@ -9,8 +9,9 @@
 
     <rich:popupPanel id="mp-listado-contratos-asociar" moveable="true"  width="800" height="400" headerClass="rich-panel-header" autosized="true">
         <f:facet name="header" >
+             <h:outputScript library="css" name="/resources/css/modal/listadoContratoAsociar.css"/>
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.listarcontratos}" styleClass="ikont"   />
+                <h:outputText  styleClass="ikont-hot-listacontratos" value="#{var.listarcontratos}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -18,7 +19,7 @@
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-contratos-asociar"
                                      onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); return false;" immediate="true"
-                                     styleClass="ikont"   />
+                                     styleClass="ikont-acl-cerrar"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -26,10 +27,10 @@
             <h:form>
                 <h:panelGroup id="gpTotalContAso">
                     <h:panelGrid columns="2" >
-                        <h:outputText  styleClass="ikont "   value="#{var.buscar} " />
+                        <h:outputText  styleClass="ikont-hot-buscar" value="#{var.buscar} " />
                         <h:panelGroup>
-                            <h:inputText value="#{Supervisor$AsociarContratos.nomcontraro}" size="20"/>
-                            <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$AsociarContratos.buscarContrato}" render="tablacontratosasociar,gpTotalContAso"/>
+                            <h:inputText styleClass="ikont-hit-nomcontrato" value="#{Supervisor$AsociarContratos.nomcontraro}" size="20"/>
+                            <a4j:commandButton styleClass="ikont-acb-aceptar" value="#{var.aceptar}" action="#{Supervisor$AsociarContratos.buscarContrato}" render="tablacontratosasociar,gpTotalContAso"/>
 
                         </h:panelGroup>
                     </h:panelGrid>
@@ -51,56 +52,56 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="7">
-                                            <h:outputText  styleClass="ikont "   value="#{var.contratos} #{Supervisor$AsociarContratos.totalfilas} #{var.paginaCiu} #{Supervisor$AsociarContratos.pagina}#{var.deCiu}#{Supervisor$AsociarContratos.totalpaginas}" />
+                                            <h:outputText  styleClass="ikont-hot-contratosasociar" value="#{var.contratos} #{Supervisor$AsociarContratos.totalfilas} #{var.paginaCiu} #{Supervisor$AsociarContratos.pagina}#{var.deCiu}#{Supervisor$AsociarContratos.totalpaginas}" />
                                         </rich:column>
                                         <rich:column  breakRowBefore="true">
-                                            <h:outputText  styleClass="ikont "   value="#{var.numerocontrato}"/>
+                                            <h:outputText  styleClass="ikont-hot-numerocontrato" value="#{var.numerocontrato}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
+                                            <h:outputText  styleClass="ikont-hot-nombrecontrato" value="#{var.nombre}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont "   value="Valor Contrato"/>
+                                            <h:outputText  styleClass="ikont-hot-valrcontrato" value="Valor Contrato"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont "   value="Valor Disponible"/>
+                                            <h:outputText  styleClass="ikont-hot-valrdisponible" value="Valor Disponible"/>
                                         </rich:column>
                                         <rich:column width="150px">
-                                            <h:outputText  styleClass="ikont "   value="#{var.datefechaini}"/>
+                                            <h:outputText  styleClass="ikont-hot-datefechaini" value="#{var.datefechaini}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont "   value="#{var.datefechafin}"/>
+                                            <h:outputText  styleClass="ikont-hot-datefechafin" value="#{var.datefechafin}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont "   value="#{var.seleccionar}"/>
+                                            <h:outputText  styleClass="ikont-hot-seleccionarcontrto" value="#{var.seleccionar}"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:columnGroup id="cuerpoContrato">
                                     <rich:column  breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont "   id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
+                                        <h:outputText  styleClass="ikont-hot-numcontrato" id="txt_contrato" value="#{currentRow.strnumcontrato}"/>
                                     </rich:column>
                                     <rich:column >
-                                        <h:inputTextarea id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"  disabled="true" cols="35" rows="2"/>
+                                        <h:inputTextarea styleClass="ikont-hit-strnombre" id="otxt_strnombreobra-listado" value="#{currentRow.strnombre}"  disabled="true" cols="35" rows="2"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont "   id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
+                                        <h:outputText  styleClass="ikont-hot-numvlrcontrato" id="outvlcontrato" value="#{currentRow.numvlrcontrato}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont "   id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
+                                        <h:outputText  styleClass="ikont-hot-numvlrsumproyectos" id="vlcondis" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}" >
                                             <f:convertNumber pattern="$#,###.00"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont "    value="#{currentRow.datefechaini}"/>
+                                        <h:outputText  styleClass="ikont-hot-datefechaini" value="#{currentRow.datefechaini}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont "    value="#{currentRow.datefechafin}"/>
+                                        <h:outputText  styleClass="ikont-hot-datefechafin" value="#{currentRow.datefechafin}"/>
                                     </rich:column>
                                     <rich:column width="120px" >
-                                        <a4j:commandButton value="Seleccionar" action="#{Supervisor$AsociarContratos.agregarContratoInterventoria(filaSeleccionada)}"
+                                        <a4j:commandButton styleClass="ikont-acb-seleccionar" value="Seleccionar" action="#{Supervisor$AsociarContratos.agregarContratoInterventoria(filaSeleccionada)}"
                                                            oncomplete="#{rich:component('panelRelacionContratoInterventoria')}.show();" render="layoutpanelRelacionContratoInterventoria">
                                                           
                                         </a4j:commandButton>
@@ -111,16 +112,16 @@
                                         <rich:column colspan="8" breakRowBefore="true" >
                                             <center>
                                                 <h:panelGrid columns="4">
-                                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.primeroContratos}">
+                                                    <a4j:commandButton styleClass="ikont-acb-primerociu" id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.primeroContratos}">
                                                         <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.anterioresContrato}">
+                                                    <a4j:commandButton styleClass="ikont-acb-anteriorciu" id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$AsociarContratos.veranteriorcontrato}" action="#{Supervisor$AsociarContratos.anterioresContrato}">
                                                         <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.siguienteContrato}">
+                                                    <a4j:commandButton styleClass="ikont-acb-siguienteciu" id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.siguienteContrato}">
                                                         <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.ultimoContrato}">
+                                                    <a4j:commandButton styleClass="ikont-acb-ultimociu" id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$AsociarContratos.verultimoscontrato}" action="#{Supervisor$AsociarContratos.ultimoContrato}">
                                                         <a4j:ajax event="complete" render="tablacontratosasociar,gpTotalContAso"/>
                                                     </a4j:commandButton>
                                                 </h:panelGrid>
