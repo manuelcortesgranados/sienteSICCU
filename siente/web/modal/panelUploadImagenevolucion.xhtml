@@ -11,21 +11,21 @@
     <rich:popupPanel id="panelUploadImagenevolucion" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.seleccionarimagen}"/>
+                <h:outputText  styleClass="ikont-hot-seleccionarimagen" value="#{var.seleccionarimagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_panelUploadImagenevolucion" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelUploadImagenevolucion" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadImagenevolucion')}.hide();
                                              return false;"/>
 
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel >
             <h:form>
                 <h:panelGroup id="gpImagenModal">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -47,18 +47,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-uploadimage" value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nouploadimage"   rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorImagenes.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarchivo" value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre" value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-tamañoarch" value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-bytearchivo" value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -68,8 +68,8 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$AdministrarObraNew.cargadorImagenes.borrarDatosSubidos}" render="info_imagenevolucion, uploadImagenevolucion, gpImagenModal"
                                                    rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
-                                <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}"
+                                                   styleClass="ikont-acb-borrararchivo" />
+                                <a4j:commandButton styleClass="ikont-acb-aceptar" value="#{var.aceptar}" rendered="#{Supervisor$AdministrarObraNew.cargadorImagenes.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadImagenevolucion')}.hide();"
                                                    render="panel_subir_imagenevolucion"
                                                    />

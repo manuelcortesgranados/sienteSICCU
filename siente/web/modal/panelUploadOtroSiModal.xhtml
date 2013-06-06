@@ -11,21 +11,21 @@
     <rich:popupPanel id="panelUploadOtroSi" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.cargarotrosi}"/>
+                <h:outputText  styleClass="ikont-hot-cargarotrosi" value="#{var.cargarotrosi}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_panelUploadOtroSi" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelUploadOtroSi" styleClass="ikont-hot-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadOtroSi')}.hide();
                                              return false;"/>
 
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel>
             <h:form id="formOtroSi">
                 <h:panelGroup id="layoutDocOtroSi">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -46,18 +46,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-subirarchivo" value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosubioarchivo" rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombrearchivo" value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-archivonombre" value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-sizearchivo" value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-bytarchivo" value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -67,8 +67,8 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$ModificarObra.subirOtroSi.borrarDatosSubidos}" render="infoOtroSi, uploadOtroSi"
                                                    rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
-                                <a4j:commandButton id="BTaceptarOtroSi" value="#{var.aceptar}"  rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}"
+                                                   styleClass="ikont-acb-borrararchivo"/>
+                                <a4j:commandButton styleClass="ikont-acb-acept" id="BTaceptarOtroSi" value="#{var.aceptar}"  rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadOtroSi')}.hide(); return false;"
                                                    render="panel_subirOtroSi"
                                                    />

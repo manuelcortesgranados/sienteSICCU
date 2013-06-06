@@ -11,20 +11,20 @@
     <rich:popupPanel id="modalVideo" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.seleccionarvideo}"/>
+                <h:outputText  styleClass="ikont-hot-seleccionvideo" value="#{var.seleccionarvideo}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalVideo" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_modalVideo" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalVideo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel>
             <h:form id="formVideo">
                 <h:panelGroup id="panelVideo">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -46,17 +46,17 @@
                             <center>
                                 <rich:panel bodyClass="informa" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-subirvideo"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosubiovideo"   rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorVideo.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombrearchivo" value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-archivonombre" value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-sizearchivo" value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-bytarchivo" value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -65,8 +65,8 @@
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Video" action="#{Supervisor$Alimentar.borrarVideoAlimenta}"
                                                    render="infovideo, uploadvideo" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
-                                <a4j:commandButton action="#{Supervisor$Alimentar.guardarVideoTemporal}" id="BTaceptarVideo" render="layoutVideoMemoria"
+                                                   styleClass="ikont-acb-borrarvideo" />
+                                <a4j:commandButton styleClass="ikont-acb-aceptarvideo" action="#{Supervisor$Alimentar.guardarVideoTemporal}" id="BTaceptarVideo" render="layoutVideoMemoria"
                                                    value="#{var.aceptar}" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}"
                                                    onclick="#{rich:component('modalVideo')}.hide();return false;"
                                                    />
