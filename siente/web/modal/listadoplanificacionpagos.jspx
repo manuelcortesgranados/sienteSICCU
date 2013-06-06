@@ -10,7 +10,7 @@
     <rich:popupPanel id="mp-listado-planificacion-pagos" autosized="true" moveable="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.verplanificacion}" styleClass="ikont"   />
+                <h:outputText  styleClass="ikont-hot-verplainificacion "   value="#{var.verplanificacion}" />
                 <interkont:spacer width="30"/>
             </h:panelGroup>
         </f:facet>
@@ -27,23 +27,23 @@
 
             <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.formadepago}:"/>
+                <h:outputLabel  styleClass="ikont-hol-fomapago" value="#{var.formadepago}:"/>
                 <interkont:spacer width="20"/>
-                <h:outputLabel  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+                <h:outputLabel  styleClass="ikont-hol-descformapago" value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                <h:outputLabel  styleClass="ikont-hol-anticipopago"  value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
-                <h:outputLabel  styleClass="ikont "   styleClass="ikont"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                <h:outputLabel  styleClass="ikont-hol-porcenanticipo" value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="ikont-hol-vlranticipo" value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="ikont-hot-vlranticipo" value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertNumber pattern="$###,###"/>
                 </h:outputText>
 
-                <h:outputLabel  styleClass="ikont "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                <h:outputLabel  styleClass="ikont-hol-anticipopago"   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                 <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                <h:outputText  styleClass="ikont-hot-fechapago" value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                     <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                 </h:outputText>
 

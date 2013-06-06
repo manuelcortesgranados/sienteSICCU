@@ -10,7 +10,6 @@
 
     <rich:popupPanel id="mp-listado-contratos" moveable="true" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header" >
-             <h:outputScript library="css" name="/resources/css/modal/listadoContratoBasicoModal.css"/>
             <h:panelGroup id="gpHeadercontratos">
                 <h:outputText  styleClass="ikont-hot-listarcontrato" id="listarcontrato" value="#{var.listar} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
                 <h:outputText  styleClass="ikont-hot-listarconvenio" id="listarconvenio" value="#{var.listar} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
