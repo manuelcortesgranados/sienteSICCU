@@ -12,13 +12,13 @@
     <rich:popupPanel id="mp_editar" moveable="false"   headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="#{var.editardocuento}"/>
+                <h:outputText  styleClass="ikont-hot-mpeditardocumento"   value="#{var.editardocuento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_editar" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_mp_editar" styleClass="ikont-acl-escondermpeditardocumento"  
                                        title="#{var.cerrar}" immediate="true"
                                        onclick="#{rich:component('mp_editar')}.hide();return  false;">
                      </a4j:commandLink>
@@ -26,33 +26,33 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-"   >
+        <rich:panel styleClass="ikont-rp-mpeditardocumento"   >
             <h:form>
-                <h:panelGrid width="100%">
+                <h:panelGrid styleClass="ikont-hpg-mpeditardocumento" >
                     <interkont:spacer height="70px"/>
-                    <h:panelGrid id="pg_campos_editar_documento" columns="3" width="100%" >
+                    <h:panelGrid id="pg_campos_editar_documento" columns="3"  styleClass="ikont-hpg-pgcamposeditardocumento" >
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont-hol- "   value="#{var.nombre}" />
+                        <h:outputLabel  styleClass="ikont-hol-pgcamposeditardocumentonombre"   value="#{var.nombre}" />
                         <h:inputText id="txt_strnombre_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.strnombre}" required="true">
                             <h:message for="txt_strnombre_ed"/>
                         </h:inputText>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont-hol- "   value="Tipo:" />
+                        <h:outputLabel  styleClass="ikont-hol-pgcamposeditardocumentotipo "   value="Tipo:" />
                         <h:selectOneMenu id="select_tipodocumento2" value="#{Supervisor$AdministrarObraNew.documentoobraEd.tipodocumento.inttipodoc}">
                             <f:selectItems value="#{Supervisor$AdministrarObraNew.selectItemTipoDocumento}" />
                         </h:selectOneMenu>
                         <interkont:spacer width="60"/>
-                        <h:outputLabel  styleClass="ikont-hol- "   value="#{var.fecha}" />
+                        <h:outputLabel  styleClass="ikont-hol-pgcamposeditardocumentofecha "   value="#{var.fecha}" />
                         <rich:calendar locale="#{var.rcalendarlocale}" id="calendar_datefecha_ed" value="#{Supervisor$AdministrarObraNew.documentoobraEd.datefecha}" required="true">
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="80px"/>
                     <h:panelGrid columns="2" width="100%" >
                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_aceptar_editar_documento_action}" id="bt_aceptarEliminar"
-                                           styleClass="ikont-"   value="#{var.aceptar}"
+                                           styleClass="ikont-acb-mpeditardocumentoaceptar"   value="#{var.aceptar}"
                                            oncomplete="#{rich:component('mp_editar')}.hide();"
                                            render="panel_docu"  title="#{var.aceptar}"/>
-                        <a4j:commandButton styleClass="ikont-"   value="#{var.cancelar}" 
+                        <a4j:commandButton styleClass="ikont-acb-mpeditardocumentocancelar"   value="#{var.cancelar}" 
                                            oncomplete="#{rich:component('mp_editar')}.hide();"/>
 
                     </h:panelGrid>

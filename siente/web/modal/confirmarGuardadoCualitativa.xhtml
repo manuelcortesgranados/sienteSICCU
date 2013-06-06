@@ -12,13 +12,13 @@
     <rich:popupPanel id="panelConfGuardadoCualitativa" moveable="true" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="#{var.atencion}"/>
+                <h:outputText  styleClass="ikont-hot-panelconfguardadocualitativa"   value="#{var.atencion}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfGuardadoCualitativa" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_panelConfGuardadoCualitativa" styleClass="ikont-acl-esconderpanelconfguardadocualitativa"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelConfGuardadoCualitativa')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -28,7 +28,7 @@
         <center>
             <h:form>
                 <h:panelGrid id="layoutMensajeCualitativa" width="300px"  columnClasses="panelcenter">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$Alimentar.mensaje}" styleClass="ikont-"   />
+                    <h:outputText  styleClass="ikont-hot-layoutmensajecualitativa"   value="#{Supervisor$Alimentar.mensaje}"   />
                     <a4j:commandButton value="#{var.aceptar}" id="aceptarCuali" render="Cualitativa, tablaAvancesCualitativos"
                                        action="#{Supervisor$Alimentar.limpiarCualitativa}" onclick="#{rich:component('panelConfGuardadoCualitativa')}.hide();"/>
                 </h:panelGrid>

@@ -11,13 +11,13 @@
     <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="#{var.documento}"/>
+                <h:outputText  styleClass="ikont-hot-panelcontratodoc"   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_panelContratoDoc" styleClass="ikont-acl-esconderpanelcontratodoc"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelContratoDoc')}.hide();return false;">
                     </a4j:commandLink>
@@ -28,32 +28,32 @@
             <h:form id="fcontrato" target="_blank">
             <center>
 
-                <h:panelGrid  width="100%" >
+                <h:panelGrid styleClass="ikont-hpg-fcontrato" >
                     <rich:dataTable id="tabladocumento"  
                                     sortMode="single" 
                                      
                                     value="#{Supervisor$Contrato.listadocuContrato}"
                                     var="currentRow"
                                     rowKeyVar="filaSeleccionada">
-                        <rich:column id="strnombreimg"  width="120px">
+                        <rich:column id="strnombreimg"  styleClass="ikont-rc-strnombreimg">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.nombreah}"/>
+                                <h:outputText  styleClass="ikont-hot-strnombreimgnombreah"   value="#{var.nombreah}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- hot-"   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont-hot-ststrnombreimg"   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
                         </rich:column>
 
-                        <rich:column id="strfecha"  width="120px">
+                        <rich:column id="strfecha"  styleClass="ikont-rc-strfecha">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont-hot-strfechafecha"   value="#{var.fecha}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- hot-"   id="st_strfecha" value="#{currentRow.datefecha}"/>
+                            <h:outputText  styleClass="ikont-hot-ststrfecha"   id="st_strfecha" value="#{currentRow.datefecha}"/>
                         </rich:column>
 
-                        <rich:column  width="60px">
+                        <rich:column  styleClass="ikont-rc-strver">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont-"   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action(filaSeleccionada)}" immediate="true">
                             </h:commandButton>

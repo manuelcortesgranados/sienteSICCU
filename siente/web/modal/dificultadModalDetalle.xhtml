@@ -13,13 +13,13 @@
     <rich:popupPanel id="modalDificultadDetalle" moveable="true" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont-hot-modaldificultadd"   value="Ver dificultad para #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_modalDificultadd" styleClass="ikont-acl-escondermodaldificultadd"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalDificultadDetalle')}.hide();return  false;">>
                     </a4j:commandLink>
@@ -38,34 +38,34 @@
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  colspan="4" breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.dificultad}es"/>
+                                <h:outputText  styleClass="ikont-hot-tabladificultaddetdificultades"   value="#{var.dificultad}es"/>
                             </rich:column>
                             <rich:column  breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- hot-"   id="tipodifdet" value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont-hot-tabladificultaddettipo"   id="tipodifdet" value="#{var.tipo}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   id="dificultadodet" value="#{var.dificultad}"/>
+                                <h:outputText  styleClass="ikont-hot-tabladificultaddetdificultad "   id="dificultadodet" value="#{var.dificultad}"/>
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- hot-"   id="fechadet" value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont-hot-tabladificultaddetfecha "   id="fechadet" value="#{var.fecha}"/>
                             </rich:column>
                             <rich:column rendered="false">
-                                <h:outputText  styleClass="ikont- hot-"   id="usuariodifdet" value="#{var.usuario}"/>
+                                <h:outputText  styleClass="ikont-hot-tabladificultaddetusuario "   id="usuariodifdet" value="#{var.usuario}"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:columnGroup>
                         <rich:column  breakRowBefore="true">
-                            <h:outputText  styleClass="ikont- hot-"   id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
+                            <h:outputText  styleClass="ikont-hot-tabladificultaddetstrnombre"   id="tipodificultaddet" value="#{currentRow.tipocualitativa.strnombre}"/>
                         </rich:column>
                         <rich:column>
                             <h:inputTextarea cols="60" rows="2" id="strdificultaddet" value="#{currentRow.strdificultad}" readonly="true" />
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
+                            <h:outputText  styleClass="ikont-hot-difidatefehadet "   id="difidatefehadet" value="#{currentRow.alimentacion.datefecha}"/>
                         </rich:column>
                         <rich:column rendered="false">
-                            <h:outputText  styleClass="ikont- hot-"   id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
+                            <h:outputText  styleClass="ikont-hot-difiusuariodet"   id="difiusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                     </rich:columnGroup>
