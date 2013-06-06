@@ -10,10 +10,9 @@
 
     <ui:define name="head">
         <title>Atención Humanitaria</title>
-        <h:outputScript library="css" name="/resources/css/AtencionHumanitaria/AprobacionDirectorCh.css"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-generarsolicitud" value="#{var.generarsolicitudah}"/>
+        <h:outputText  styleClass="ikont- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -29,57 +28,57 @@
             <rich:collapsiblePanel id="AprobacionDirector" switchType="ajax">
 
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont-hot-aprobacionasesor" value="#{var.aprobaciondeasesor}"/>
+                    <h:outputText  styleClass="ikont- "   value="#{var.aprobaciondeasesor}"/>
                 </f:facet>
                 <interkont:spacer height="3"/>
                 <center>
                     <h:panelGrid id="panelAprobacion" columns="2" columnClasses="panelizquierda, panelizquierda" >
-                        <h:outputText  styleClass="ikont-hot-aprobar" value="#{var.aprobar}:"/>
+                        <h:outputText  styleClass="ikont- "   value="#{var.aprobar}:" styleClass="ikont-"  />
                         <h:selectOneMenu  id="aprobarfuncionario" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaproaltofun}"
                                           rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <f:selectItem itemValue="0" itemLabel="Si"/>
                             <f:selectItem itemValue="1" itemLabel="No"/>
                         </h:selectOneMenu>
 
-                        <h:outputLabel  styleClass="ikont-hol-lblsi" value="Si"
-                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaproaltofun}"/>
+                        <h:outputLabel  styleClass="ikont- "   value="Si"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaproaltofun}"/>
 
-                        <h:outputLabel  styleClass="ikont-hol-lblno" value="No"
-                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaproaltofun}"/>
+                        <h:outputLabel  styleClass="ikont- "   value="No"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario and !AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolaproaltofun}"/>
 
-                        <h:outputText  styleClass="ikont-hot-vlrpagar" value="#{var.valorapagar}:"/>
+                        <h:outputText  styleClass="ikont- "   value="#{var.valorapagar}:" styleClass="ikont-"  />
                         <h:panelGrid columns="3">
                             <rich:inputNumberSpinner minValue="0" maxValue="100" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                                      value="#{SessionBeanCobra.atencionhumanitariaService.valorPagar}" inputSize="3">
                                 <a4j:ajax event="change" render="txtValorPagar" />
                             </rich:inputNumberSpinner>
 
-                            <h:outputText  styleClass="ikont-hot-vlrpagardirect" value="#{SessionBeanCobra.atencionhumanitariaService.valorPagar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
+                            <h:outputText  styleClass="ikont- "    value="#{SessionBeanCobra.atencionhumanitariaService.valorPagar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                                 <f:convertNumber  pattern="##.## %"/>
                             </h:outputText>
 
-                            <h:outputText  styleClass="ikont-hot-txtvlrpag" id="txtValorPagar" value="-"/>
-                            <h:outputText  styleClass="ikont-hot-vlrapagar" value="#{AtencionHumanitaria$AdminSolicitudAtencion.valoraPagar}">
+                            <h:outputText  styleClass="ikont- "    id="txtValorPagar" value="-"/>
+                            <h:outputText  styleClass="ikont- "    value="#{AtencionHumanitaria$AdminSolicitudAtencion.valoraPagar}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
 
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont-hot-observaciones" value="#{var.observaciones}"/>
-                        <h:inputTextarea styleClass="ikont-hit-observdirecto" id="observaciones" rows="3" cols="35" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.textobservaciondirec}"
+                        <h:outputText  styleClass="ikont- "   value="#{var.observaciones}" styleClass="ikont-"  />
+                        <h:inputTextarea id="observaciones" rows="3" cols="35" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.textobservaciondirec}"
                                          rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
-                        <h:outputLabel  styleClass="ikont-hol-txtobsevindirecto" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.textobservaciondirec}"
-                                        rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                        <h:outputLabel  styleClass="ikont- "   value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.textobservaciondirec}"
+                                       rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
                     </h:panelGrid>
 
                     <center>
                         <h:panelGrid columns="2">
-                            <a4j:commandButton id="enviarapro" styleClass="ikont-acb-enviar" value="#{var.enviar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario }"
+                            <a4j:commandButton id="enviarapro" styleClass="ikont-"   value="#{var.enviar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario }"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}">
                             </a4j:commandButton>
-                            <a4j:commandButton id="Cancelarapro" styleClass="ikont-acb-cancelar" value="#{var.cancelar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
+                            <a4j:commandButton id="Cancelarapro" styleClass="ikont-"   value="#{var.cancelar}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.cancelarSolicitud}"/>
 
                         </h:panelGrid>

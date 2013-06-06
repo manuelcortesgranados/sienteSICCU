@@ -10,10 +10,9 @@
 
     <ui:define name="head">
         <title>Atención Humanitaria</title>
-        <h:outputScript library="css" name="/resources/css/AtencionHumanitaria/MovimientosFinancieros.css"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-gensolicitudah" value="#{var.generarsolicitudah}"/>
+        <h:outputText  styleClass="ikont- "   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -27,7 +26,7 @@
         <h:form id="form_imagenes" target="_blank">
             <rich:collapsiblePanel id="MovimientosFinancieros" switchType="ajax">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont-hot-movfinanc" value="#{var.movimientosfinancieros}"/>
+                    <h:outputText  styleClass="ikont- "   value="#{var.movimientosfinancieros}"/>
                 </f:facet>
                 <interkont:spacer height="3"/>
                 <rich:dataTable id="tablaMovimientos"
@@ -36,87 +35,87 @@
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true" colspan="12">
-                                <h:outputText  styleClass="ikont-hot-movfinanc" value="Movimientos Financieros" />
+                                <h:outputText  styleClass="ikont- "   value="Movimientos Financieros" />
                             </rich:column>
                             <rich:column breakRowBefore="true">
-                                <h:outputText  styleClass="ikont-hot-comprfid" value="#{var.comprobantefidu}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.comprobantefidu}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-descpt" value="#{var.descripcion}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.descripcion}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-vlrmovim" value="#{var.valor} Movimiento"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.valor} Movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-vlrejec" value="#{var.valor} Ejecutado"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.valor} Ejecutado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-vlrlegal" value="#{var.valor} Legalizado"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.valor} Legalizado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-porceject" value="#{var.porcentajejecutado}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.porcentajejecutado}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-porcenlegali" value="% Legalizado"/>
+                                <h:outputText  styleClass="ikont- "   value="% Legalizado"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-feclegliza" value="#{var.fecha} legalización"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.fecha} legalización"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-tipmovim" value="#{var.tipom} Movimiento"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.tipom} Movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-estmovimient" value="Estado movimiento"/>
+                                <h:outputText  styleClass="ikont- "   value="Estado movimiento"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-ordpag" value="Orden de pago"/>
+                                <h:outputText  styleClass="ikont- "   value="Orden de pago"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-nomcontratista" value="#{var.nombre} Contratista"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.nombre} Contratista"/>
                             </rich:column>
                         </rich:columnGroup>
                     </f:facet>
                     <rich:column breakRowBefore="true">
-                        <h:outputText  styleClass="ikont-hot-strcomprobant" value="#{currentRow.strcomprobantefidu}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.strcomprobantefidu}"/>
                     </rich:column>
                     <rich:column >
-                        <h:outputText  styleClass="ikont-hot-descripmovimiento" value="#{currentRow.strdescripcionmovimiento}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.strdescripcionmovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-nmvlrmovimiento" value="#{currentRow.numvlrmovimiento}">
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrmovimiento}">
                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column styleClass="ikont-"  >
-                        <h:outputText  styleClass="ikont-hot-nmvlrejecutado" value="#{currentRow.numvlrejecutado}">
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrejecutado}">
                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-nmvlrlegalizad" value="#{currentRow.numvlrlegalizado}">
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.numvlrlegalizado}">
                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                         </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-floatejec" value="#{currentRow.floatporejecucion}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.floatporejecucion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-floatlegalizacion"   value="#{currentRow.floatporcentajelegalizacion}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.floatporcentajelegalizacion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-fechligaliza" value="#{currentRow.datefechalegalizacion}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.datefechalegalizacion}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strnombremov" value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strdescmov" value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strordnpag" value="#{currentRow.ordendepago.strordenpago}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.ordendepago.strordenpago}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText  styleClass="ikont-hot-strnombcontrat" value="#{currentRow.strnombrecontratista}"/>
+                        <h:outputText  styleClass="ikont- "   value="#{currentRow.strnombrecontratista}"/>
                     </rich:column>
                 </rich:dataTable>
             </rich:collapsiblePanel>
