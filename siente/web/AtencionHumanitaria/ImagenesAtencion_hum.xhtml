@@ -10,9 +10,10 @@
 
     <ui:define name="head">
         <title>Atención Humanitaria</title>
+        <h:outputScript library="css" name="/resources/css/AtencionHumanitaria/ImagenesAtencion_hum.css"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.generarsolicitudah}"/>
+        <h:outputText  styleClass="ikont-hot-genslicah" value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -27,28 +28,28 @@
 
             <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" >
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- "   value="#{var.imagenes}"/>
+                    <h:outputText  styleClass="ikont-hot-img" value="#{var.imagenes}"/>
 
                 </f:facet>
                 <center>
 
-                    <h:outputText  styleClass="ikont- "   value="#{var.textsubirimagen}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                    <h:outputText  styleClass="ikont-hot-subirimg" value="#{var.textsubirimagen}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
                     <interkont:spacer height="3"/>
 
                     <h:panelGrid id="panel_subirImagen"  columns="6" columnClasses=",,,,buttonsmall" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario }">
 
-                        <a4j:commandButton id="adjuntarImagen" styleClass="ikont-"   value="#{var.examinar}" immediate="true" 
+                        <a4j:commandButton id="adjuntarImagen" styleClass="ikont-adjimg" value="#{var.examinar}" immediate="true" 
                                            onclick="#{rich:component('panelUploadImagenAtencion')}.show();">
                         </a4j:commandButton>
                         <interkont:spacer height="3"/>
-                        <h:outputText  styleClass="ikont- "   id="ImagenAtencion" value="#{var.descripcionImagen}:" styleClass="ikont-"  />
-                        <h:inputText id="inputNombre" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.imagen.strdescripcion}"/>
-                        <a4j:commandLink id="bt_agregarImagen" styleClass="ikont-"   title="#{var.agregar}"
+                        <h:outputText  styleClass="ikont-hot-descimg" id="ImagenAtencion" value="#{var.descripcionImagen}:" />
+                        <h:inputText styleClass="ikont-hit-strdescrip" id="inputNombre" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.imagen.strdescripcion}"/>
+                        <a4j:commandLink id="bt_agregarImagen" styleClass="ikont-acl-agregar" title="#{var.agregar}"
                                          action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenaLista}"
                                          render="tablaImagenes,gpDatosBasicos,panelUploadImagenAtencion"/>
                         <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.files}" var="file" >
-                            <h:outputText  styleClass="ikont- "   id="otxt_nombreImagen" value=" #{file.onlyName}"/>
+                            <h:outputText  styleClass="ikont-hot-nombreimg" id="otxt_nombreImagen" value=" #{file.onlyName}"/>
                         </rich:dataGrid>
                     </h:panelGrid>
 
@@ -57,20 +58,20 @@
                                         value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadoimagensolicitud}"
                                          rows="3" >
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.imgseleccionadas}"/>
+                                <h:outputText  styleClass="ikont-hot-imgselect" value="#{var.imgseleccionadas}"/>
                             </f:facet>
                             <rich:column breakRowBefore="true"  width="100px">
                                 <f:facet name="header" >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.descripcionImagen}"/>
+                                    <h:outputText  styleClass="ikont-hot-descpimg" value="#{var.descripcionImagen}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.strdescripcion}"/>
+                                <h:outputText  styleClass="ikont-hot-descripcion" value="#{currentRow.strdescripcion}"/>
                             </rich:column>
                             <rich:column  width="100px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.imagen}"/>
+                                    <h:outputText  styleClass="ikont-hot-img"   value="#{var.imagen}"/>
                                 </f:facet>
                                 <h:panelGroup>
-                                    <h:graphicImage  styleClass="ikont- "   value="#{currentRow.strurlimagen}" />
+                                    <h:graphicImage  styleClass="ikont-hgi-strurlimg" value="#{currentRow.strurlimagen}" />
                                     <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                     <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                     <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
@@ -81,7 +82,7 @@
                             </rich:column>
                             <rich:column  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.eliminar}"/>
+                                    <h:outputText  styleClass="ikont-hot-eliminarimg" value="#{var.eliminar}"/>
                                 </f:facet>
                                 <a4j:commandButton id="eliminar" value="#{var.eliminar}" styleClass="ikont-"  
                                                     render="tablaImagenes"
