@@ -2,7 +2,8 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
@@ -28,7 +29,7 @@
                     <h:panelGrid id="consolidarIndicadores"  >
                         <h:panelGroup id="layoutConsolidarIndicadores">
                             <center>
-                                <h:outputText  styleClass="ikont- "    value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?" styleClass="ikont-"  />
+                                <h:outputText  styleClass="ikont-hot-estaseguro"  value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?"  />
 
                                 <h:panelGrid columns="2">
 
@@ -38,7 +39,7 @@
                                     <a4j:commandButton id="consolidar_no" value="#{var.no}"  oncomplete="true" render="consolidarIndicadores"/>
                                 </h:panelGrid>
                                 <h:panelGrid id="PanelConsolidado">
-                                    <h:outputLabel  styleClass="ikont- "   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-consoli"   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
                                 </h:panelGrid>
                             </center>
                         </h:panelGroup>

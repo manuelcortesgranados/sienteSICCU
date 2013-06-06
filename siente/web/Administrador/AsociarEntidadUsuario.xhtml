@@ -14,7 +14,7 @@
 
         </ui:define>
         <ui:define name="title">
-            <h:outputText  styleClass="ikont- "   value="#{var.asociarentidadusuario}"/>
+            <h:outputText  styleClass="ikont-hot-asociarentidadusuario"   value="#{var.asociarentidadusuario}"/>
         </ui:define>
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,19 +29,19 @@
                     <center>
                         <h:panelGrid >
                             <interkont:spacer height="20" />
-                            <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-"  >
+                            <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >
 
                                 <h:panelGrid columns="2">
-                                    <h:outputLabel  styleClass="ikont- "   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
+                                    <h:outputLabel  styleClass="ikont-hol-enticonvcontrato"   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
                                     <h:selectOneMenu value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
                                         <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                         <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
                                     </h:selectOneMenu>
                                 </h:panelGrid>
                                 <h:panelGrid id="prueba" columns="3">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.Usuario}"/>
+                                    <h:outputText  styleClass="ikont-hot-usu"   value="#{var.Usuario}"/>
                                     <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
-                                    <rich:message for="txtusu_login" styleClass="ikont-"  />
+                                    <rich:message for="txtusu_login" styleClass="ikont-rm-txtusu_login"  />
                                 </h:panelGrid>                                    
                                <br/>
                                <br/>                                
