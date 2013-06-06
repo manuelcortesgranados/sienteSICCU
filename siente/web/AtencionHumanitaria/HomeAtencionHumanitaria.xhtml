@@ -12,9 +12,10 @@
     <ui:define name="head">
         <title>Inicio Solicitudes de Obra</title>
         <h:outputScript name="script_supervisor.js"/>
+        <h:outputScript library="css" name="/resources/css/AtencionHumanitaria/HomeAtencionHumanitaria.css"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"    value="#{var.encontrarsolah}"/>
+        <h:outputText  styleClass="ikont-hot-encsolah" value="#{var.encontrarsolah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -27,14 +28,14 @@
         <h:form>
             <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td><div styleClassbuscador"><div id="buscador_space">
+                    <td><div><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="ikont-"   onfocus="clearText(this);" onblur="clearText(this);" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
-                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-"  />
+                                    <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palclav" onfocus="clearText(this);" onblur="clearText(this);" value="#{AtencionHumanitaria$AdminSolicitudAtencion.filtroAh.palabraclave}"/>
+                                    <h:commandButton type="button" action="#{AtencionHumanitaria$AdminSolicitudAtencion.buscar}"  id="filtrar"  value="#{var.buscar}" styleClass="ikont-hcb-buscr"  />
                                 </label>
                             </div></div></td>
                     <td>
-                        <a4j:commandLink styleClass="ikont-"  
+                        <a4j:commandLink styleClass="ikont-acl-busqavan"  
                                          render="tablaAtencionHumanitaria" value="#{var.houtbusquedaavanza}">
                             <rich:componentControl event="click" target="panelBusquedaAvanzadaAtencion" operation="show" />
                         </a4j:commandLink>
@@ -50,71 +51,71 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="12">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont-hot-totpag" value="#{var.misolicitues} #{AtencionHumanitaria$AdminSolicitudAtencion.totalfilas} #{var.paginaCiu} #{AtencionHumanitaria$AdminSolicitudAtencion.pagina}#{var.deCiu}#{AtencionHumanitaria$AdminSolicitudAtencion.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.codigo}"/>
+                                    <h:outputText  styleClass="ikont-hot-codigo" value="#{var.codigo}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombreah}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombreah" value="#{var.nombreah}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valorSolicitado}"/>
+                                    <h:outputText  styleClass="ikont-hot-vlrsolicita" value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}"/>
+                                    <h:outputText  styleClass="ikont-hot-departo" value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}"/>
+                                    <h:outputText  styleClass="ikont-hot-munici" value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-estadsolic" value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.tipo} solicitud"/>
+                                    <h:outputText  styleClass="ikont-hot-tipsolicit" value="#{var.tipo} solicitud"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar}"/>
+                                    <h:outputText  styleClass="ikont-hot-conslt" value="#{var.consultar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.editar}"/>
+                                    <h:outputText  styleClass="ikont-hot-edit" value="#{var.editar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
+                                    <h:outputText  styleClass="ikont-hot-txtelimar" value="#{var.eliminar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.ver} Proyecto"/>
+                                    <h:outputText  styleClass="ikont-hot-verproy" value="#{var.ver} Proyecto"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column breakRowBefore="true">
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.oidcodigosolicitudmaestro}"/>
+                            <h:outputText  styleClass="ikont-hot-codsolicmaestro" value="#{currentRow.oidcodigosolicitudmaestro}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strnombresolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-nombrsolic" value="#{currentRow.strnombresolicitud}"/>
                         </rich:column>
-                        <rich:column styleClass="ikont-"  >
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.numvlrsolicitado}">
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-nmvlrsolic"  value="#{currentRow.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.localidad.strdepartamento}"/>
+                            <h:outputText  styleClass="ikont-hot-strdepto" value="#{currentRow.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.localidad.strmunicipio}"/>
+                            <h:outputText  styleClass="ikont-hot-strmunicip" value="#{currentRow.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-nombresolic" value="#{currentRow.subestadosolicitudch.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tipoah.strdnombretipoah}"/>
+                            <h:outputText  styleClass="ikont-hot-strnomtipah" value="#{currentRow.tipoah.strdnombretipoah}"/>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.consultarSolicitud(filaSeleccionada)}" >
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btver"  value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
@@ -122,14 +123,14 @@
                                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneditar_solicitud_ah}"
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.identificados_Modif(filaSeleccionada)}"
                                               render="DatosBasicosSolicitud">
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_editar.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-bteditar" value="/resources/imgs/bt_editar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud==4}" >
                             <a4j:commandButton  title="#{var.eliminar}" 
                                                 action="#{AtencionHumanitaria$AdminSolicitudAtencion.SolicitudAeliminar(filaSeleccionada)}"
                                                 oncomplete="#{rich:component('panelConfirmaborrado')}.show();"
-                                                styleClass="ikont-"   execute="@this"
+                                                styleClass="ikont-acb-eliminar" execute="@this"
                                                 />
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud!=4}">
@@ -138,7 +139,7 @@
                             <a4j:commandLink  title="#{var.ver} Proyecto" 
                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               oncomplete="#{rich:component('modaltablaproyectoah')}.show();" execute="@this">
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  styleClass="ikont-acl-btconsult" value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -146,10 +147,10 @@
                                 <rich:column colspan="12" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
-                                            <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.veranteriorreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.primerosreales}"/>
-                                            <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.veranteriorreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.anterioresReales}"/>
-                                            <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.verultimosreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.siguientesReales}"/>
-                                            <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.verultimosreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.ultimoReales}"/>
+                                            <a4j:commandButton styleClass="ikont-acb-primerciu" value="#{var.primeroCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.veranteriorreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.primerosreales}"/>
+                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.veranteriorreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.anterioresReales}"/>
+                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.verultimosreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.siguientesReales}"/>
+                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!AtencionHumanitaria$AdminSolicitudAtencion.verultimosreales}" render="tablaAtencionHumanitaria" action="#{AtencionHumanitaria$AdminSolicitudAtencion.ultimoReales}"/>
                                         </h:panelGrid>
                                     </center>
                                 </rich:column>
