@@ -13,7 +13,6 @@
         <h:panelGrid   >
             <center>
                 <f:facet name="header">
-                     <h:outputScript library="css" name="/resources/css/modal/historialModiModal.css"/>
                     <h:outputLabel  styleClass="ikont-hot-prorroga" value="#{var.prorroga}"/>
                 </f:facet>
 
@@ -29,7 +28,7 @@
 
                     <rich:column id="tc_strdias"  width="120px">
                         <f:facet name="header">
-                            <h:outputText  styleClass="ikont-hot-diasadicionales "   value="#{var.diasadicionales} "/>
+                            <h:outputText  styleClass="ikont-hot-diasadicionales" value="#{var.diasadicionales} "/>
                         </f:facet>
                         <h:outputText  styleClass="ikont-hot-plazoobra" id="st_strdias" value="#{_row.intplazoobra}"/>
                     </rich:column>
