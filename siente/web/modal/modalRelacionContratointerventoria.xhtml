@@ -13,14 +13,14 @@
     <rich:popupPanel id="panelRelacionContratoInterventoria" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="Asociar Contrato de Interventoria"/>
+                <h:outputText  styleClass="ikont-hot-asocontrato"   value="Asociar Contrato de Interventoria"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
 
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContratoInterventoria">
-                    <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelRelacionContratoInterventoria" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelRelacionContratoInterventoria')}.hide(); return false;"/></h:form>
             </h:panelGroup>
@@ -31,34 +31,34 @@
 
                 <h:panelGroup id="layoutpanelRelacionContratoInterventoria">
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  styleClass="ikont "   value="Contrato Nº:" styleClass="ikont"  />                        
-                        <h:outputText  styleClass="ikont "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" styleClass="ikont"  />
-                        <h:outputText  styleClass="ikont "   value="Valor contrato:" styleClass="ikont"  />                        
-                        <h:outputText  styleClass="ikont "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}" styleClass="ikont"  >
+                        <h:outputText  styleClass="ikont-hot-contratonum"   value="Contrato Nº:"  />                        
+                        <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.strnumcontrato}" />
+                        <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="Valor contrato:" />                        
+                        <h:outputText  styleClass="ikont-hot-numvlrcontrato1 "   value="#{Supervisor$AsociarContratos.relacioncontratointer.contrato.numvlrcontrato}">
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>                        
-                        <h:outputText  styleClass="ikont "   value="Valor #{var.solicitudproyecto}:" styleClass="ikont"  />
-                        <h:outputText  styleClass="ikont "   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}" styleClass="ikont"  >
+                        <h:outputText  styleClass="ikont-hot-solipry"   value="Valor #{var.solicitudproyecto}:" />
+                        <h:outputText  styleClass="ikont-hot-numvaltotobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
 
                     </h:panelGrid>
 
                     <interkont:spacer height="30"/>   
-                    <h:outputText  styleClass="ikont "   value="Este contrato posee disponibilidad" styleClass="ikont"   />
+                    <h:outputText  styleClass="ikont-hot-disponible"   value="Este contrato posee disponibilidad"/>
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  styleClass="ikont "   value="por" styleClass="ikont"  /> 
-                        <h:outputText  styleClass="ikont "   value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" styleClass="ikont"  >
+                        <h:outputText  styleClass="ikont-hot-por"   value="por"  /> 
+                        <h:outputText  styleClass="ikont-hot-numvalordisponible"   value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}" >
                             <f:convertNumber pattern="$#,###.00"/>
                         </h:outputText>
                     </h:panelGrid>
-                    <h:outputText  styleClass="ikont "   value="Qué valor desea asociar a este #{var.solicitudproyecto}?" styleClass="ikont"  />
+                    <h:outputText  styleClass="ikont-hot-valsolicipry"   value="Qué valor desea asociar a este #{var.solicitudproyecto}?"/>
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
-                        <h:outputText  styleClass="ikont "   value="$" styleClass="ikont"  />
+                        <h:outputText  styleClass="ikont-hot-pesos"   value="$"   />
                         <rich:inputNumberSpinner minValue="0" value="#{Supervisor$AsociarContratos.relacioncontratointer.numvalorrelacion}" inputSize="30"
                                                  maxValue="#{Supervisor$AsociarContratos.relacioncontratointer.numvalordisponible}"/>
                     </h:panelGrid>
-                    <h:outputText  styleClass="ikont "   value="#{Supervisor$AsociarContratos.relacioncontratointer.mensaje}"  />
+                    <h:outputText  styleClass="ikont-hot-mns"   value="#{Supervisor$AsociarContratos.relacioncontratointer.mensaje}"  />
                    
                     
                     <h:panelGrid columns="2" >

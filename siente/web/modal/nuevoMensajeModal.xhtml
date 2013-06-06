@@ -11,32 +11,32 @@
           xmlns:ui="http://java.sun.com/jsf/facelets">
     
     <rich:popupPanel id="mp_nuevo" moveable="false" autosized="true" >
-        <rich:panel header="#{var.rpanhea_enviarmensaje}" id="pl_tabla_listado_resumen_semanal" styleClass="ikont"   >
+        <rich:panel header="#{var.rpanhea_enviarmensaje}" id="pl_tabla_listado_resumen_semanal" styleClass="ikont-rp-resumen_semanal"   >
             <h:panelGroup >
                 <a4j:commandButton id="esconder_mp_nuevo" onclick="#{rich:component('mp_nuevo')}.hide(); return false;" 
-                                   styleClass="ikont"   />
+                                   styleClass="ikont-acb-esconder"   />
             </h:panelGroup>
             <h:form id="form_nuevo">
                 <h:panelGrid >
                     <interkont:spacer height="20" />
                     <h:panelGrid id="pg_camposNuevo" columns="3" >
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{var.houtfechayhora}"/>
+                        <h:outputLabel  styleClass="ikont-hol-houtfechayhora"    value="#{var.houtfechayhora}"/>
                         <h:inputText id="txt-datefecmensaje-nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{var.houtdestinatario}"/>
+                        <h:outputLabel  styleClass="ikont-hol-houtdestinatario"    value="#{var.houtdestinatario}"/>
                         <h:selectOneMenu id="select_usuarios-nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.jsfUsuarioByIntusurecibe.tercero.strnombre}">
                             <f:selectItems value="#{Supervisor$Mensajes.selectItemUsuarios}" />
                         </h:selectOneMenu>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{var.houtasunto}"/>
+                        <h:outputLabel  styleClass="ikont-hol-houtasunto"    value="#{var.houtasunto}"/>
                         <h:inputText id="txt_asunto_nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.strasuntomensaje}" size="65" required="true" maxlength="250">
                             <h:message for="txt_asunto_nuevo"/>
                         </h:inputText>
                         <interkont:spacer width="10"/>
-                        <h:outputLabel  styleClass="ikont "    value="#{var.houtmensaje}" />
+                        <h:outputLabel  styleClass="ikont-hol-houtmensaje"    value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_nuevo" value="#{Supervisor$Mensajes.mensajeNuevo.strtextomensaje}" cols="74" rows="14" required="true">
                             <h:message for="txt_strtextomensaje_nuevo"/>
                         </h:inputTextarea>
@@ -46,7 +46,7 @@
                 <center>
                     <a4j:commandButton id="bt_aceptarNuevo" action="#{Supervisor$Mensajes.aceptar_nuevo_action}" oncomplete= "#{rich:component('mp_nuevo')}.hide();"
                                               value="#{var.enviar}"
-                                       styleClass="ikont"     render="pl_tabla_enviados"/>
+                                       styleClass="ikont-acb-bt_aceptarNuevo"     render="pl_tabla_enviados"/>
                 </center>
             </h:form>
         </rich:panel>

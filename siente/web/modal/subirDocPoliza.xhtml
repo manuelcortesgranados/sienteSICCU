@@ -11,21 +11,27 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadDoc" autosized="true" >
-        <rich:panel header="#{var.seleccionaracta}" styleClass="ikont"   >
+        <rich:panel header="#{var.seleccionaracta}" styleClass="ikont-rp-selectacta"   >
             <h:form>
                 <h:panelGroup >
                     <a4j:commandLink id="esconder_panelUploadDoc"
                                        onclick="#{rich:component('panelUploadDoc')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="ikont"   />
+                                       immediate="true" styleClass="ikont-acl-esconder"   />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpDoc">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}" id="uploadDoc" immediateUpload="true"
-                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
+                                         clearAllLabel="#{var.borrartodo}"
+                                         clearLabel="#{var.eliminar}"
+                                         doneLabel="#{var.hecho}"
+                                         fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}"
+                                         id="uploadDoc"
+                                         immediateUpload="true"
+                                         listHeight="150"
+                                         maxFilesQuantity="1" 
+                                         uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_doc,panel_subirDoc" />
                         </rich:fileUpload>
 
@@ -33,19 +39,19 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}" />
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$Contrato.subirDocPol.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$Contrato.subirDocPol.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocPol.archivos}" var="file">
                                         <rich:panel>
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes /1024} Kb" />
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes /1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -56,7 +62,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$Contrato.subirDocPol.borrarDatosSubidos}" render="info_doc, uploadDoc, gpDoc, panel_subirDoc"
                                                    rendered="#{Supervisor$Contrato.subirDocPol.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"    />
+                                                   styleClass="ikont-acb-borrar"    />
 
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$Contrato.subirDocPol.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadDoc')}.hide();

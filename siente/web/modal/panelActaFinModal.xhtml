@@ -10,13 +10,13 @@
     <rich:popupPanel id="panelActaFin" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.selecionaractaliquidar}"/>
+                <h:outputText  styleClass="ikont-hot-selliqui"   value="#{var.selecionaractaliquidar}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelActaFin" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelActaFin" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelActaFin')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -45,18 +45,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirActaFin.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -66,7 +66,7 @@
                                 <br/>
                                 <a4j:commandButton action="#{Supervisor$AdministrarObraNew.borrarActaFinal}" render="infoActaFin, uploadActaFin, layoutActaFin"
                                                    rendered="#{Supervisor$AdministrarObraNew.subirActaFin.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"     />
+                                                   styleClass="ikont-acb-borrar"     />
 
                                 <a4j:commandButton id="BTaceptarActaFin" value="#{var.aceptar}"
                                                    oncomplete="#{rich:component('panelActaFin')}.hide(); return false;"

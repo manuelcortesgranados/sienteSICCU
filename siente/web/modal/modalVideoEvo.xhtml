@@ -13,20 +13,20 @@
     <rich:popupPanel id="modalVideo"  width="370" height="200" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="VIDEO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont-hot-video"   value="VIDEO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalVideo" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalVideo" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalVideo')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
-          <h:graphicImage  styleClass="ikont "   value="/resources/imgs/Logo_republica.png" width="185px" />
+          <h:graphicImage  styleClass="ikont-hgi-Logo_republica"   value="/resources/imgs/Logo_republica.png" width="185px" />
                         <h:panelGroup rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}">
                           
                         </h:panelGroup>

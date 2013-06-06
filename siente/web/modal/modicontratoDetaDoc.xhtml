@@ -12,7 +12,7 @@
     <rich:popupPanel id="panelModiContratoDoc" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.documento}"/>
+                <h:outputText  styleClass="ikont-hot-doc"   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -31,30 +31,29 @@
 
                     <h:panelGrid   >
                         <rich:dataTable id="tabladocumentomodi" 
-                                        sortMode="single" 
-                                         
+                                        sortMode="single"                                          
                                         value="#{Supervisor$ModificarContrato.listadocuModifContrato}"
                                         var="currentRow"
                                         rowKeyVar="filaSeleccionada">
                             <rich:column id="strnombremodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText  styleClass="ikont "   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nom"   value="#{var.nombre}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="st_strnombremodi" value="#{currentRow.strnombre}"/>
+                                <h:outputText  styleClass="ikont-hot-st_strnombremodi"   id="st_strnombremodi" value="#{currentRow.strnombre}"/>
                             </rich:column>
 
                             <rich:column id="strfechamodi"  width="120px">
                                 <f:facet name="header">
 
-                                    <h:outputText  styleClass="ikont "   value="#{var.fecha}"/>
+                                    <h:outputText  styleClass="ikont-hot-fec"   value="#{var.fecha}"/>
                                 </f:facet>
-                                <h:outputText  styleClass="ikont "   id="st_strfechamodi" value="#{currentRow.datefecha}"/>
+                                <h:outputText  styleClass="ikont-hot-st_strfechamodi"   id="st_strfechamodi" value="#{currentRow.datefecha}"/>
                             </rich:column>
 
                             <rich:column  width="60px">
                                 <f:facet name="header">
-                                    <h:outputText  styleClass="ikont "   value="#{var.Ver}"/>
+                                    <h:outputText  styleClass="ikont-hot-ver"   value="#{var.Ver}"/>
                                 </f:facet>
                                 <h:commandButton value="Ver" id="boton" immediate="true"
                                                  action="#{Supervisor$ModificarContrato.bt_download_documento_action(filaSeleccionada)}" />

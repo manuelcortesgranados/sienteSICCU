@@ -11,13 +11,13 @@
     <rich:popupPanel id="modalImagen" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.imagen}"/>
+                <h:outputText  styleClass="ikont-hot-imagen"    value="#{var.imagen}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagen')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -25,7 +25,7 @@
         <h:form>
             <rich:panel id="panelImagen" header="#{var.imagenproyectada}">
                 <h:panelGroup >
-                    <h:graphicImage  styleClass="ikont "   value="http://74.207.234.207/CobraManizales#{Supervisor$AdministrarObraNew.imagenevolucionobra.strubicacion}" width="200"/>
+                    <h:graphicImage  styleClass="ikont-hgi-imagenpry"   value="http://74.207.234.207/CobraManizales#{Supervisor$AdministrarObraNew.imagenevolucionobra.strubicacion}" width="200"/>
                 </h:panelGroup>
             </rich:panel>
         </h:form>

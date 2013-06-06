@@ -13,13 +13,13 @@
     <rich:popupPanel id="modalFormularioValidarAlimentacion"  autosized="true" width="700" headerClass="rich-panel-header" styleClass="ikont"   >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.listachequeo} "/>
+                <h:outputText  styleClass="ikont-hot-listachequeo"   value="#{var.listachequeo} "/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
@@ -40,29 +40,29 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">
-                                    <h:outputText  styleClass="ikont "   value="Listado de Chequeo" />
+                                    <h:outputText  styleClass="ikont-hot-col1"   value="Listado de Chequeo" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont "   value="Categoría"/>
+                                    <h:outputText  styleClass="ikont-hot-col2"   value="Categoría"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont "   value="Descripción"/>
+                                    <h:outputText  styleClass="ikont-hot-col3"   value="Descripción"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont "   value="Cumple"/>
+                                    <h:outputText  styleClass="ikont-hot-col4 "   value="Cumple"/>
                                 </rich:column>
                                
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true">
-                                <h:outputLabel  styleClass="ikont "   id="lblcategoria" styleClass="ikont"   value="#{row.tipoverificacion.strdescripcion}" />
+                                <h:outputLabel  styleClass="ikont-hot-col1d"   id="lblcategoria"   value="#{row.tipoverificacion.strdescripcion}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont "   id="lbldescripcion" styleClass="ikont"   value="#{row.strdescripcion}" />
+                                <h:outputLabel  styleClass="ikont-hot-col2d"   id="lbldescripcion"  value="#{row.strdescripcion}" />
                             </rich:column>
                             <rich:column>
-                                <h:selectBooleanCheckbox id="chkchequeo" styleClass="ikont"   value="#{row.respuesta}"/>
+                                <h:selectBooleanCheckbox id="chkchequeo" styleClass="ikont-hot-col3d"   value="#{row.respuesta}"/>
                             </rich:column>                            
                         </rich:columnGroup>
                         

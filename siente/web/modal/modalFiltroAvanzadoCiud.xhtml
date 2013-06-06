@@ -10,30 +10,29 @@
 
 
     <rich:popupPanel  id="panelFiltroAvanzadoCiud" autosized="true" resizeable="false" width="700" 
-                     headerClass="style-modal-dialog-head" styleClass="ikont"  >
+                     headerClass="style-modal-dialog-head" styleClass="ikont-rpp-panelFiltroAvanzadoCiud">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/imagotipo_siente.png" width="45"/>
-                    <h:outputLabel  styleClass="ikont "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} " styleClass="ikont"  />
+                    <h:graphicImage  styleClass="ikont-hgi-imagotipo_siente"   url="/resources/imgs/imagotipo_siente.png" width="45"/>
+                    <h:outputLabel  styleClass="ikont-hol-panelFiltroAvanzadoCiud "   value="#{var.filtbusquedaciud} #{var.filtavanzadaciud} "  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelFiltroAvanzadoCiud" styleClass="ikont-hcl-esconder"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroAvanzadoCiud')}.hide(); return false;"/>
                     </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <!-- <h:panelGroup layout="block" styleClass="ikont"  >-->
-                <h:panelGroup layout="block" styleClass="ikont"  >
-                    <h:panelGroup layout="block" styleClass="ikont"  >
+               <h:panelGroup layout="block" styleClass="ikont-hpg-p1"  >
+                    <h:panelGroup layout="block" styleClass="ikont-hpg-p2"  >
                         <h:panelGrid >
-                            <h:panelGroup layout="block" styleClass="ikont"   >
-                                <h:outputLabel  styleClass="ikont "    value="#{var.label_palabraclave}"/>
+                            <h:panelGroup layout="block" styleClass="ikont-hpg-p3"   >
+                                <h:outputLabel  styleClass="ikont-hol-label_palabraclave"    value="#{var.label_palabraclave}"/>
                                 <h:inputText size="35"  id="txtPalabraClave" value="#{HomeGestion.filtro.palabraclave}"
                                              onclick="this.value=''"/>
                             </h:panelGroup>
@@ -44,17 +43,17 @@
                         <center>
                             <h:panelGrid columns="2" >
 
-                                <h:graphicImage  styleClass="ikont "   url="/resources/imgs/1.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont "   value="#{var.dondeestaubicado}" styleClass="ikont"  />
+                                <h:graphicImage  styleClass="ikont-hgi-1"   url="/resources/imgs/1.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="ikont-hol-dondeestaubicado"   value="#{var.dondeestaubicado}" />
 
                                 <interkont:spacer/>
-                                <h:panelGrid columns="2" columnClasses="panelcenter"  styleClass="ikont"  >
+                                <h:panelGrid columns="2" columnClasses="panelcenter"  styleClass="ikont-hpg-p4"  >
                                     <h:selectOneMenu value="#{HomeGestion.inttipoorigen}">
                                         <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                                         <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
                                         <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
                                     </h:selectOneMenu>
-                                    <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
+                                    <h:panelGrid id="tipoorigen" columns="1">
                                         <h:panelGrid id="filtrozonaes" columns="1" columnClasses="panelcenter" rendered="#{HomeGestion.inttipoorigen == 0}" >
                                             <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                                 <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
@@ -76,17 +75,16 @@
                                     </h:panelGrid>
                                 </h:panelGrid>
 
-                                <h:graphicImage  styleClass="ikont "   url="/resources/imgs/2.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont "   value="#{var.quieneselcontratista}" styleClass="ikont"  />
+                                <h:graphicImage  styleClass="ikont-hgi-2"   url="/resources/imgs/2.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="ikont-hol-quieneselcontratista"   value="#{var.quieneselcontratista}" />
                                 <interkont:spacer/>
                                 <h:inputText size="23" id="txtContratista" value="#{HomeGestion.filtro.strcontratista}"/>
 
-                                <h:graphicImage  styleClass="ikont "   url="/resources/imgs/3.png" width="65" height="40" />
-                                <h:outputLabel  styleClass="ikont "   value="#{var.quetipoproyectoes}" styleClass="ikont"  />
+                                <h:graphicImage  styleClass="ikont-hgi-3"   url="/resources/imgs/3.png" width="65" height="40" />
+                                <h:outputLabel  styleClass="ikont-hol-quetipoproyectoes"   value="#{var.quetipoproyectoes}"  />
                                 <interkont:spacer/>
                                 <h:panelGroup>
                                     <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}">
-
                                         <f:selectItems value="#{HomeGestion.tiposProyectos}" />
                                         <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
                                                      render="subtiposProyecto"/>
@@ -98,11 +96,11 @@
                                     </h:panelGroup>
                                 </h:panelGroup>
 
-                                <h:graphicImage  styleClass="ikont "   url="/resources/imgs/4.png" width="65" height="40" />
+                                <h:graphicImage  styleClass="ikont-hgi-4"   url="/resources/imgs/4.png" width="65" height="40" />
                                 <h:panelGrid columns="2">
 
-                                    <h:outputLabel  styleClass="ikont "   value="#{var.verproyectosterminados}" styleClass="ikont"  />
-                                    <h:selectOneRadio id="boolcomentario"  styleClass="ikont" value="#{HomeGestion.filtro.boolobraterminada}"  >
+                                    <h:outputLabel  styleClass="ikont-hol-verproyectosterminados"   value="#{var.verproyectosterminados}" />
+                                    <h:selectOneRadio id="boolcomentario"  styleClass="ikont-hsor-boolcomentario" value="#{HomeGestion.filtro.boolobraterminada}"  >
                                         <f:selectItem itemLabel="#{var.si}" itemValue="true"  />
                                         <f:selectItem itemLabel="#{var.no}" itemValue="false" />
                                     </h:selectOneRadio>

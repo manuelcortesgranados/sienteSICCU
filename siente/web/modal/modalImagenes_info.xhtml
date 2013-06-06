@@ -23,19 +23,19 @@
         </script>
 
     <rich:popupPanel  id="modal_imagen_info" autosized="true" resizeable="false"  
-                      headerClass="style-modal-dialog-head" styleClass="ikont"   onshow="completModal()" >
+                      headerClass="style-modal-dialog-head" styleClass="ikont-rpp-modal_imagen_info"   onshow="completModal()" >
         <f:facet name="header" >            
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  styleClass="ikont "    value="Galeria de Imagenes" styleClass="ikont"  />
+                    <h:graphicImage  styleClass="ikont-hgi-imagotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
+                    <h:outputText  styleClass="ikont-hot-galeriaimg"    value="Galeria de Imagenes"  />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modal_imagen_info" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modal_imagen_info" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modal_imagen_info')}.hide(); return false;"/>
    
                     </h:panelGroup>

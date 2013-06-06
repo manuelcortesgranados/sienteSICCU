@@ -13,14 +13,14 @@
     <rich:popupPanel id="mp_ver" moveable="false" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.rpanhea_vermensajerecibido}" />
+                <h:outputText  styleClass="ikont-hot-vermsgrecibido1"   value="#{var.rpanhea_vermensajerecibido}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ver" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_mp_ver" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('mp_ver')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel1"   >
             <h:form id="form_ver">
                 <h:panelGrid >
                     <interkont:spacer height="20"  />
@@ -36,24 +36,24 @@
                     <h:panelGrid id="pg_camposVer" columns="3" >
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="ikont "   value="#{var.houtfechayhora}" />
+                        <h:outputLabel  styleClass="ikont-hol-houtfechayhora"   value="#{var.houtfechayhora}" />
                         <h:inputText id="txt-datefecmensaje-ver" value="#{Mensajes.mensajeRecibidoVer.datefecmensaje}" size="65" readonly="true">
                             <f:convertDateTime pattern="dd-MMM-yyyy hh:mm" />
                         </h:inputText>
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="ikont "   value="#{var.houtremitente}" />
+                        <h:outputLabel  styleClass="ikont-hol-remitente "   value="#{var.houtremitente}" />
                         <h:inputText id="txt_fkusuariorecibe_ver" value="#{Mensajes.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strnombre} #{Mensajes.mensajeRecibidoVer.jsfUsuarioByIntusuenvia.tercero.strapellido1}" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="ikont "   value="#{var.houtasunto}" />
+                        <h:outputLabel  styleClass="ikont-hol-houtasunto"   value="#{var.houtasunto}" />
                         <h:inputText id="txt_asunto_ver" value="#{Mensajes.mensajeRecibidoVer.strasuntomensaje}" size="65" readonly="true" />
 
                         <interkont:spacer width="10" />
 
-                        <h:outputLabel  styleClass="ikont "   value="#{var.houtmensaje}" />
+                        <h:outputLabel  styleClass="ikont-hol-houtmensaje"   value="#{var.houtmensaje}" />
                         <h:inputTextarea id="txt_strtextomensaje_ver" value="#{Mensajes.mensajeRecibidoVer.strtextomensaje}" cols="74" rows="14" readonly="true" />
                     </h:panelGrid>
                 </h:panelGrid>

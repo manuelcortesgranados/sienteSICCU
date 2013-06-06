@@ -10,19 +10,19 @@
     <rich:popupPanel id="panelActa" autosized="true" headerClass="rich-panel-header">
          <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.seleccionaracta}"/>
+                <h:outputText  styleClass="ikont-hot-selacta"   value="#{var.seleccionaracta}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelActa" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelActa" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelActa')}.hide();
                                              return false;"/>                   
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel1"   >
             <h:form id="formActa">
                 <h:panelGroup id="layoutDocActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -30,8 +30,7 @@
                                 id="uploadActa"
                                 fileUploadListener="#{Supervisor$Alimentar.cargadorActa.listener}"
                                 immediateUpload="true"
-                                maxFilesQuantity="1"
-                                
+                                maxFilesQuantity="1"                                
                                 listHeight="150"
                                 addLabel="#{var.adicionar}"
                                 doneLabel="#{var.hecho}"
@@ -44,18 +43,18 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}"/>
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos==0}" value="#{var.nosuarc}"/>
+                                    <h:outputText  styleClass="ikont-hot-nosuarc "   rendered="#{Supervisor$Alimentar.cargadorActa.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActa.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}"/>
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb"/>
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}"/>
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>

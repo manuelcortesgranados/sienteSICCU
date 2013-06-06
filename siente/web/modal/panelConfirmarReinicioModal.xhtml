@@ -11,29 +11,29 @@
         headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.confirmarrein}"/>
+                <h:outputText  styleClass="ikont-hot-confiin"   value="#{var.confirmarrein}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     
-                    <a4j:commandLink id="esconder_panelConfirmarReinicio" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelConfirmarReinicio" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarReinicio')}.hide();
                                              return false;"/>                   
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel6">
             <center>
                 <h:panelGrid id="layoutConfReinicio" >
                     <interkont:spacer height="20px"/>
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehareiniciado}" />
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelacta}" />
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.lafechadereiniciodebesemenor}" />
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechadereiniciosuspen}" />
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.debeingresarlafecha}" />
+                    <h:outputText  styleClass="ikont-hot-datoval1"   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehareiniciado}" />
+                    <h:outputText  styleClass="ikont-hot-datoval2"   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelacta}" />
+                    <h:outputText  styleClass="ikont-hot-datoval3"   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.lafechadereiniciodebesemenor}" />
+                    <h:outputText  styleClass="ikont-hot-datoval5"   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechadereiniciosuspen}" />
+                    <h:outputText  styleClass="ikont-hot-datoval6"   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.debeingresarlafecha}" />
                     <interkont:spacer height="20px"/>
                     <a4j:commandButton id="btCerrarConfReinicio" value="#{var.aceptar}"
                                        onclick="#{rich:component('panelConfirmarReinicio')}.hice();" action="#{Supervisor$AdministrarObraNew.mostrarModificar}"

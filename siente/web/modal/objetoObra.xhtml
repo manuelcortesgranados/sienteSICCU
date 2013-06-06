@@ -12,13 +12,13 @@
     <rich:popupPanel id="modalObjeto" width="400"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.objeto}"/>
+                <h:outputText  styleClass="ikont-hot-obj"   value="#{var.objeto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup >
-                    <a4j:commandLink id="esconder_modalobjeto" styleClass="ikont"    render="form_editar"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
+                    <a4j:commandLink id="esconder_modalobjeto" styleClass="ikont-acl-esconder"    render="form_editar"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalObjeto')}.hide(); return false;"/>                    
                 </h:panelGroup>
             </h:form>
@@ -27,15 +27,15 @@
         <h:form>
             <rich:panel>
                 <h:panelGrid columns="1" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_modificarobjetoobra}">
-                    <h:outputText  styleClass="ikont "   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
+                    <h:outputText  styleClass="ikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
                 </h:panelGrid>
                 <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_modificarobjetoobra}"  >
                     <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$AdministrarObraNew.btn_habilitarModificarObjeto}">
-                       <h:outputText  styleClass="ikont "     id="txtObjeto"  styleClass="ikont"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
+                       <h:outputText  styleClass="ikont-hot-txtObjeto"     id="txtObjeto"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
                             <br/>
                             <br/>
                         <a4j:commandLink id = "btn_editarObjetoObra"   action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
-                            <h:graphicImage  styleClass="ikont "    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                            <h:graphicImage  styleClass="ikont-hgi-bt_editar"    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
                         </a4j:commandLink>
                     </h:panelGroup>
                     <h:panelGroup  id="txthabilitarModificar" rendered="#{Supervisor$AdministrarObraNew.modificarObjetoObra}" >
@@ -43,7 +43,7 @@
                         <a4j:commandLink   id="bt_editarpolizas1"  action="#{Supervisor$AdministrarObraNew.guardarModificacionObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
                             <br/>
                             <br/>
-                            <h:graphicImage  styleClass="ikont "    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                            <h:graphicImage  styleClass="ikont-hgi-bt_editar1"    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
                         </a4j:commandLink>  
                         <rich:message for="habilitarObjeto" />  
                     </h:panelGroup>

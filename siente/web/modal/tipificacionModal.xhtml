@@ -13,14 +13,14 @@
     <rich:popupPanel id="panelTipificacion" autosized="true" headerClass="rich-panel-header" width="300">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.tipificacionProyecto}" />
+                <h:outputText  styleClass="ikont-hot-tipipry"   value="#{var.tipificacionProyecto}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelTipificacion" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelTipificacion" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('panelTipificacion')}.hide();
                                                return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -31,14 +31,14 @@
         <rich:panel>
             <center>
                 <h:panelGrid columns="2">
-                    <h:outputLabel  styleClass="ikont "   id="sttipoProyecto" value="#{var.tipoProyecto}" />
-                    <h:outputLabel  styleClass="ikont "   id="sttipoProyectoout" styleClass="ikont"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
+                    <h:outputLabel  styleClass="ikont-hol-sttipoProyecto"   id="sttipoProyecto" value="#{var.tipoProyecto}" />
+                    <h:outputLabel  styleClass="ikont-hol-sttipoProyectoout"   id="sttipoProyectoout"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
 
-                    <h:outputLabel  styleClass="ikont "   id="stsubtipoProyecto" value="#{var.subtipoProyecto}" />
-                    <h:outputLabel  styleClass="ikont "   id="stsubtipoProyectoout" styleClass="ikont"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                    <h:outputLabel  styleClass="ikont-hol-stsubtipoProyecto"   id="stsubtipoProyecto" value="#{var.subtipoProyecto}" />
+                    <h:outputLabel  styleClass="ikont-hol-stsubtipoProyectoout"   id="stsubtipoProyectoout"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
 
-                    <h:outputLabel  styleClass="ikont "   id="stclaseProyecto" value="#{var.claseProyecto}" />
-                    <h:outputLabel  styleClass="ikont "   id="stclaseProyectoout" styleClass="ikont"   value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                    <h:outputLabel  styleClass="ikont-hol-stclaseProyecto"   id="stclaseProyecto" value="#{var.claseProyecto}" />
+                    <h:outputLabel  styleClass="ikont-hol-stclaseProyectoout"   id="stclaseProyectoout"   value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
                 </h:panelGrid>
 
                 <interkont:spacer height="20" />
@@ -47,7 +47,7 @@
                     <a4j:commandButton id="esconder_Tipificacion"
                                        onclick="#{rich:component('panelTipificacion')}.hide();
                                                return false;"
-                                       immediate="true" value="#{var.aceptar}" styleClass="ikont"   />
+                                       immediate="true" value="#{var.aceptar}" styleClass="ikont-acb-esconder"   />
                 </h:panelGroup>
             </center>
         </rich:panel>

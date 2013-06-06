@@ -13,14 +13,14 @@
     <rich:popupPanel id="viewvideo" moveable="true" width="400" height="400" headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.vervideo}" />
+                <h:outputText  styleClass="ikont-hot-vervideo"   value="#{var.vervideo}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_viewvideo" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_viewvideo" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('viewvideo')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -29,7 +29,7 @@
         </f:facet>
 
         <h:panelGroup id="videohtml">
-            <h:outputText  styleClass="ikont "   escape="false" 
+            <h:outputText  styleClass="ikont -hot-videoHtml"   escape="false" 
                           value="#{Supervisor$AdministrarObraNew.videoHtml}" />
         </h:panelGroup>
     </rich:popupPanel>

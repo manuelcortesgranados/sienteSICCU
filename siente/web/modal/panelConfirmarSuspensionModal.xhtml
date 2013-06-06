@@ -11,32 +11,32 @@
         headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.confirmarsus}"/>
+                <h:outputText  styleClass="ikont-hot-confsus"    value="#{var.confirmarsus}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarSuspension" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelConfirmarSuspension" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSuspension')}.hide();
-                                             return false;"/>
+                                      return false;"/>
                     
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel6"   >
             <h:form>
                 <center>
-                    <h:panelGrid id="layoutConfSuspension" styleClass="ikont"    >
+                    <h:panelGrid id="layoutConfSuspension" styleClass="ikont-hpg-confsuspen"    >
                         <interkont:spacer height="20px"/>
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehasuspendido}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelact}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.debeingresarlajusti}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechafinaldesus}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.lafechainicialdesus}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==5}"      value="#{var.lafechasuspdebesermenor}" />
-                        <h:outputText  styleClass="ikont "   rendered="#{Supervisor$SuspenderObra.datoInvalido==6}"      value="#{var.debeingresarlasfechasdeini}" />
+                        <h:outputText  styleClass="ikont-hot-datovl1"   rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"      value="#{var.laobrasehasuspendido}" />
+                        <h:outputText  styleClass="ikont-hot-datovl2"   rendered="#{Supervisor$SuspenderObra.datoInvalido==1}"      value="#{var.debeadjuntarelact}" />
+                        <h:outputText  styleClass="ikont-hot-datovl3"   rendered="#{Supervisor$SuspenderObra.datoInvalido==2}"      value="#{var.debeingresarlajusti}" />
+                        <h:outputText  styleClass="ikont-hot-datovl4"   rendered="#{Supervisor$SuspenderObra.datoInvalido==3}"      value="#{var.lafechafinaldesus}" />
+                        <h:outputText  styleClass="ikont-hot-datovl5"   rendered="#{Supervisor$SuspenderObra.datoInvalido==4}"      value="#{var.lafechainicialdesus}" />
+                        <h:outputText  styleClass="ikont-hot-datovl6"   rendered="#{Supervisor$SuspenderObra.datoInvalido==5}"      value="#{var.lafechasuspdebesermenor}" />
+                        <h:outputText  styleClass="ikont-hot-datovl7"   rendered="#{Supervisor$SuspenderObra.datoInvalido==6}"      value="#{var.debeingresarlasfechasdeini}" />
                         <interkont:spacer height="20px"/>
                         <a4j:commandButton id="btCerrarCofSus" value="#{var.aceptar}" render="layoutModificar" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
                                            onclick="#{rich:component('panelConfirmarSuspension')}.hide();" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"

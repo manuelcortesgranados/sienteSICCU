@@ -13,14 +13,14 @@
     <rich:popupPanel id="panelDocCiu" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.selecdoc}" />
+                <h:outputText  styleClass="ikont-hot-selecdoc"   value="#{var.selecdoc}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelDocCiu" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelDocCiu" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('panelDocCiu')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel7">
             <h:form id="formDocCiu">
                 <h:panelGroup id="layoutDocCiu">
                     <h:panelGrid columnClasses="top,top" columns="2"> 
@@ -50,19 +50,19 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont "   value="#{var.arcsub}" /> 
+                                        <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}" /> 
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont "   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorDocumento.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont "   value="#{var.nomarc}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{file.nombre}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{var.taarc}" />
-                                                    <h:outputText  styleClass="ikont "   value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="ikont-hot-taarc"   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -73,7 +73,7 @@
                                 <br/>
                                 <a4j:commandButton id="borrar_Acta" action="#{Ciudadano$PerfilCiudadano.borrarDoc}" render="infoDoc, uploadDoc, layoutDocCiu_par"
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont"    />
+                                                   styleClass="ikont-hcb-"    />
 
                                 <a4j:commandButton id="BTaceptarDoc" value="#{var.aceptar}" 
                                                    rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos>0}"

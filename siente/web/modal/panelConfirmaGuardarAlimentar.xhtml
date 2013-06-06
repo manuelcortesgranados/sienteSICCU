@@ -11,24 +11,24 @@
                      headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "    value="#{var.confirmarguardadoali}"/>
+                <h:outputText  styleClass="ikont-hot-configuard"    value="#{var.confirmarguardadoali}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmaGuardar" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_panelConfirmaGuardar" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaGuardar')}.hide();
                                              return false;"/>                    
                 </h:panelGroup>
             </h:form>
         </f:facet>
          <h:form >
-        <rich:panel styleClass="ikont"    >
+        <rich:panel styleClass="ikont-rp-panel4"    >
             <center>
                 <h:panelGrid id="layoutGuardar">
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
-                    <h:outputText  styleClass="ikont "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}" styleClass="ikont"   value="#{Supervisor$Alimentar.mensajefin}"/>
+                    <h:outputText  styleClass="ikont-hot-estadoali1"   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
+                    <h:outputText  styleClass="ikont-hot-estadoali2 "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}"  value="#{Supervisor$Alimentar.mensajefin}"/>
                     <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
                    
                         <center>

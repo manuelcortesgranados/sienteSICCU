@@ -13,14 +13,14 @@
     <rich:popupPanel id="mp_cronograma" moveable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.cronograma}" />
+                <h:outputText  styleClass="ikont-hot-cronog"   value="#{var.cronograma}" />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_cronograma" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_mp_cronograma" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('mp_cronograma')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,34 +28,34 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-panel7">
             <center>
                 <h:form>
                     <h:panelGroup id="layoutCron">
                         <interkont:spacer height="25" />
-                        
+
                         <h:panelGroup>
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.aldarclickenelboto}" />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.cobra} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.vaagenerar} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.cronograma} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.en} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.excel} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.queusteddebera} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.unavezdiligenciado}" />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.alsistemaeimporte} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.cobra} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.puedahacer} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.laproyeccion} " />
-                            <h:outputText  styleClass="ikont "   styleClass="ikont"   value="(#{var.recuerdequedebeguar})" />
+                            <h:outputText  styleClass="ikont-hot-aldarclickenelboto"      value="#{var.aldarclickenelboto}" />
+                            <h:outputText  styleClass="ikont-hot-cobra"      value="#{var.cobra} " />
+                            <h:outputText  styleClass="ikont-hot-vaagenerar"      value="#{var.vaagenerar} " />
+                            <h:outputText  styleClass="ikont-hot-cronograma "      value="#{var.cronograma} " />
+                            <h:outputText  styleClass="ikont-hot-en"      value="#{var.en} " />
+                            <h:outputText  styleClass="ikont-hot-excel"      value="#{var.excel} " />
+                            <h:outputText  styleClass="ikont-hot-queusteddebera"      value="#{var.queusteddebera} " />
+                            <h:outputText  styleClass="ikont-hot-unavezdiligenciado"      value="#{var.unavezdiligenciado}" />
+                            <h:outputText  styleClass="ikont-hot-alsistemaeimporte"      value="#{var.alsistemaeimporte} " />
+                            <h:outputText  styleClass="ikont-hot-cobra"      value="#{var.cobra} " />
+                            <h:outputText  styleClass="ikont-hot-puedahacer"      value="#{var.puedahacer} " />
+                            <h:outputText  styleClass="ikont-hot-laproyeccion"      value="#{var.laproyeccion} " />
+                            <h:outputText  styleClass="ikont-hot-recuerdequedebeguar"      value="(#{var.recuerdequedebeguar})" />
                         </h:panelGroup>
 
                         <center>
                             <interkont:spacer height="35px"  />
 
                             <h:panelGrid columns="2" >
-                                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.nota} " />
-                                <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.silodeseapuedecerrar}" />
+                                <h:outputText  styleClass="ikont-hot- "   value="#{var.nota} " />
+                                <h:outputText  styleClass="ikont-hot-sicerrar"    value="#{var.silodeseapuedecerrar}" />
                             </h:panelGrid>
 
                             <interkont:spacer height="25px"  />
@@ -64,7 +64,7 @@
                                              return false;"
                                              action="Download"
                                              id="btn_generar_cronograma2" value="#{var.generarcronograma}"
-                                             styleClass="ikont"    />
+                                             styleClass="ikont-hcb-cronog2"/>
                         </center>
                     </h:panelGroup>
                 </h:form>
