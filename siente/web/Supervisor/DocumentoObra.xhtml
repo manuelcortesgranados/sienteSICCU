@@ -22,8 +22,8 @@
                 <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
             </ui:define>
             <ui:define name="title">
-                <h:outputText  styleClass="ikont- "   value="#{var.documentosproyecto1}"/>
-                <h:outputText  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="#{var.documentosproyecto1}"/>
+                <h:outputText  styleClass="ikont- hot-"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
             </ui:define>
             <ui:define name="menusuperior">
                 <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
@@ -40,7 +40,7 @@
                         </div>
                         <center>
                             <h:panelGroup>
-                                <h:outputText  styleClass="ikont- "    value="#{var.houtbusquedarapida} "/>
+                                <h:outputText  styleClass="ikont- hot-"    value="#{var.houtbusquedarapida} "/>
                                 <h:inputText id="idpalabradoc" value="#{Supervisor$AdministrarObraNew.palabradoc}" size="52" immediate="true"/>
                                 <a4j:commandButton render="tablaDocumentos" action="#{Supervisor$AdministrarObraNew.buscarDocs}" value="Buscar" execute="@this,idpalabradoc" />
                             </h:panelGroup>
@@ -57,28 +57,28 @@
                                 
                                 <rich:column sortBy="#{currentRow.strnombre}" width="320px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   id="houtnomdocu" value="#{var.houtnomdocu} "/>
+                                        <h:outputText  styleClass="ikont- hot-"   id="houtnomdocu" value="#{var.houtnomdocu} "/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont- "   value="#{currentRow.strnombre}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strnombre}"/>
                                 </rich:column>
                                 <rich:column sortBy="#{currentRow.tipodocumento.strdesctipodoc}" width="150px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.tipo}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                                 </rich:column>
                                 <rich:column sortBy="#{currentRow.datefecha}" width="150px"
                                              >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "    value="#{var.fechadeldocumento}"/>
+                                        <h:outputText  styleClass="ikont- hot-"    value="#{var.fechadeldocumento}"/>
                                     </f:facet>
-                                    <h:outputText  styleClass="ikont- "   value="#{currentRow.datefecha}">
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.datefecha}">
                                         <f:convertDateTime pattern="yyyy-MMM-dd"/>
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column  width="60px">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
                                     </f:facet>                                    
 
                                     <h:commandLink id="boton_" action="#{Supervisor$AdministrarObraNew.bt_download_documento_action(filaSeleccionada)}"  immediate="true">
@@ -87,7 +87,7 @@
                                 </rich:column>
                                 <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.ver_editardoc}">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "    value="#{var.editar}"/>
+                                        <h:outputText  styleClass="ikont- hot-"    value="#{var.editar}"/>
                                     </f:facet>
                                     <a4j:commandLink id="bt_editardoc" action="#{Supervisor$AdministrarObraNew.bt_editar_documento_action(filaSeleccionada)}"
                                                      oncomplete="#{rich:component('mp_editar')}.show();" title="#{var.editar}"
@@ -97,7 +97,7 @@
                                 </rich:column>
                                 <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto and SessionBeanCobra.usuarioObra.renderrecurso.ver_eliminardoc}">
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "    value="#{var.eliminar}"/>
+                                        <h:outputText  styleClass="ikont- hot-"    value="#{var.eliminar}"/>
                                     </f:facet>
                                     <a4j:commandLink id="bt_eliminardoc" action="#{Supervisor$AdministrarObraNew.bt_eliminar_documento_action(filaSeleccionada)}"
                                                      rendered="#{!currentRow.tipodocumento.obligatorio and currentRow.contrato==null}"
@@ -119,19 +119,19 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="4" >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.subidarapidadedocumentos}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.subidarapidadedocumentos}"/>
                                 </rich:column>
                                 <rich:column breakRowBefore="true" >
-                                    <h:outputText  styleClass="ikont- "    value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont- hot-"    value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.tipo}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.fechadeldocumento}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.fechadeldocumento}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- "   value="#{var.subir}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.subir}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
@@ -153,7 +153,7 @@
                                         <a4j:commandButton id="adjuntarDocumento" styleClass="ikont-"   value="#{var.examinar}" immediate="true"
                                                        oncomplete="#{rich:component('panelUploadDocumento')}.show();"/>
                                         <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.cargadorDocumentos.archivos}" var="file" >
-                                            <h:outputText  styleClass="ikont- "   id="otxt_nombrearchivo" value=" #{file.nombre}"/>
+                                            <h:outputText  styleClass="ikont- hot-"   id="otxt_nombrearchivo" value=" #{file.nombre}"/>
                                         </rich:dataGrid>
                                         <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_documento_action}"
                                                            title="#{var.agregar}" value="#{var.agregar}"

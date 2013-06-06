@@ -12,7 +12,7 @@
         <title>Atención Humanitaria</title>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.generarsolicitudah}"/>
+        <h:outputText  styleClass="ikont- hot-"   value="#{var.generarsolicitudah}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -26,12 +26,12 @@
         <h:form id="form_imagenes" target="_blank">
             <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos2" >
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- "   value="#{var.nombrevideo}"/>
+                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombrevideo}"/>
 
                 </f:facet>
                 <center>
 
-                    <h:outputText  styleClass="ikont- "   value="#{var.textsubirvideo}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
+                    <h:outputText  styleClass="ikont- hot-"   value="#{var.textsubirvideo}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}"/>
 
                     <interkont:spacer height="3"/>
 
@@ -41,14 +41,14 @@
                         <a4j:commandButton id="examinarvideo" value="#{var.examinar}" 
                                            onclick="#{rich:component('modalVideoAtencion')}.show();
                                                    return false;"/>
-                        <h:outputText  styleClass="ikont- "   value="#{var.nombrevideo}"/>
+                        <h:outputText  styleClass="ikont- hot-"   value="#{var.nombrevideo}"/>
                         <h:inputText size="40" id="txtVideoAtencion" readonly="true" value="#{AtencionHumanitaria$AdminSolicitudAtencion.pathVideo}"/>
                         <a4j:commandLink id="btAgregarVideoAt" styleClass="ikont-"   title="#{var.agregar}"
                                          action="#{AtencionHumanitaria$AdminSolicitudAtencion.subirVideoaSolicitud}"
                                          render="tablaVideos,gpDatosBasicos2" />
                         <interkont:spacer height="40"/>
                         <h:panelGroup>
-                            <h:outputLabel  styleClass="ikont- "   id="lblVideoAtencion"  value="Video: " for="txtVideoAtencion" />
+                            <h:outputLabel  styleClass="ikont-hol- "   id="lblVideoAtencion"  value="Video: " for="txtVideoAtencion" />
                             <rich:message for="txtVideoAtencion"/>
                         </h:panelGroup>
 

@@ -12,7 +12,7 @@
     <rich:popupPanel id="panelConfGuardadoCualitativa" moveable="true" resizeable="false" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{var.atencion}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="#{var.atencion}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -28,7 +28,7 @@
         <center>
             <h:form>
                 <h:panelGrid id="layoutMensajeCualitativa" width="300px"  columnClasses="panelcenter">
-                    <h:outputText  styleClass="ikont- "   value="#{Supervisor$Alimentar.mensaje}" styleClass="ikont-"   />
+                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$Alimentar.mensaje}" styleClass="ikont-"   />
                     <a4j:commandButton value="#{var.aceptar}" id="aceptarCuali" render="Cualitativa, tablaAvancesCualitativos"
                                        action="#{Supervisor$Alimentar.limpiarCualitativa}" onclick="#{rich:component('panelConfGuardadoCualitativa')}.hide();"/>
                 </h:panelGrid>

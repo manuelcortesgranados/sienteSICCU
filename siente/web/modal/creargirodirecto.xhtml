@@ -12,7 +12,7 @@
     <rich:popupPanel id="mp-crear-girodirecto" moveable="true" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{var.creargirodirecto}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="#{var.creargirodirecto}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -31,13 +31,13 @@
                 <center>
                     <h:panelGrid columns="2"  width="100%" >
 
-                        <h:outputText  styleClass="ikont- "   id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
+                        <h:outputText  styleClass="ikont- hot-"   id="lblfechagirofidu"  value="(*)#{var.fechagirofiduprevisora}" />
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirofidu" inputSize="10" required="true"
                                            disabled="#{Supervisor$Contrato.boolcreargiro}" value="#{Supervisor$Contrato.movimientocontrato.datefechagirofiduprevisora}"/>
                             <rich:message for="calendarfechagirofidu" styleClass="ikont-"  />
                         </h:panelGrid>
-                        <h:outputText  styleClass="ikont- "   id="lblnumvlrgiro"  value="(*)#{var.vlrgiro}"/>
+                        <h:outputText  styleClass="ikont- hot-"   id="lblnumvlrgiro"  value="(*)#{var.vlrgiro}"/>
                         <h:panelGrid columns="2">
                             <rich:inputNumberSpinner id="numvlrgiro"  value="#{Supervisor$Contrato.movimientocontrato.numvlrgiro}"
                                                      minValue="0" maxValue="9000000000000000" inputSize="20" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}">
@@ -45,34 +45,34 @@
                             <rich:message for="numvlrgiro" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont- "   id="lblordenpago"  value="(*)#{var.ordenpago}"  />
+                        <h:outputText  styleClass="ikont- hot-"   id="lblordenpago"  value="(*)#{var.ordenpago}"  />
                         <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
                             <h:selectOneMenu id="cmbordenpago"  value="#{Supervisor$Contrato.movimientocontrato.ordendepago.oidcodigoordenpago}" disabled="#{Supervisor$Contrato.boolcreargiro}" >
                                 <f:selectItems value="#{Supervisor$Contrato.ordenPagoitem}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont- "   id="lbltipomovimiento"  value="(*)#{var.tipomovimiento}" />
+                        <h:outputText  styleClass="ikont- hot-"   id="lbltipomovimiento"  value="(*)#{var.tipomovimiento}" />
                         <h:panelGrid columns="2" rendered="#{Supervisor$Contrato.booliniciargirodirecto}">
                             <h:selectOneMenu id="cmbtipomovimiento" value="#{Supervisor$Contrato.movimientocontrato.tipomovimiento.oidtipomovimiento}" disabled="#{Supervisor$Contrato.boolcreargiro}">
                                 <f:selectItems value="#{Supervisor$Contrato.tipoMovimientoitem}" />
                             </h:selectOneMenu>
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont- "   id="lblentidadcontratista"  value="(*)#{var.contratista}"/>
+                        <h:outputText  styleClass="ikont- hot-"   id="lblentidadcontratista"  value="(*)#{var.contratista}"/>
                         <h:panelGrid columns="2">
                             <h:inputText  size="25" maxlength="250" id="txtentidadcontratante" value="#{Supervisor$Contrato.movimientocontrato.strentidadcontratante}" required="true" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
                             <rich:message for="txtentidadcontratante" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont- "   id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
+                        <h:outputText  styleClass="ikont- hot-"   id="lblfechagirocontratista"  value="(*)#{var.fechagirocontratista}" />
                         <h:panelGrid columns="2">
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechagirocontratista" inputSize="10" required="true"
                                            value="#{Supervisor$Contrato.movimientocontrato.datefechagirocontratista}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
                             <rich:message for="calendarfechagirocontratista" styleClass="ikont-"  />
                         </h:panelGrid>
 
-                        <h:outputText  styleClass="ikont- "   id="lblObservacion"  value="#{var.observaciones}" />
+                        <h:outputText  styleClass="ikont- hot-"   id="lblObservacion"  value="#{var.observaciones}" />
                         <h:inputTextarea  id="textobservacion"  rows="4"  value="#{Supervisor$Contrato.movimientocontrato.textobservacion}" disabled="#{Supervisor$Contrato.boolcreargiro}"/>
                     </h:panelGrid>
 

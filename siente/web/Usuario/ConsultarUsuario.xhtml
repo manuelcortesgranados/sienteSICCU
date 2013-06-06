@@ -15,7 +15,7 @@
     <ui:define name="head" ></ui:define>
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="Consultar usuario" />
+        <h:outputText  styleClass="ikont- hot-"   value="Consultar usuario" />
     </ui:define>
 
     <ui:define name="menu">
@@ -56,37 +56,37 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="5">
-                                        <h:outputText  styleClass="ikont- "   value="Usuarios encontrados" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Usuarios encontrados" />
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont- "   value="Nombre completo" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Nombre completo" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  styleClass="ikont- "   value="Login" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Login" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  styleClass="ikont- "   value="Cédula" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Cédula" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  styleClass="ikont- "   value="Perfil usuario" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Perfil usuario" />
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  styleClass="ikont- "   value="Ver" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="Ver" />
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
 
                             <rich:column breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.strnombrecompleto}" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tercero.strnombrecompleto}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.usuLogin}" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.usuLogin}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.intcedula}" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tercero.intcedula}" />
                             </rich:column>
                             <rich:column >
-                                <h:outputText  styleClass="ikont- "   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
+                                <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
                                 <a4j:commandLink  action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">

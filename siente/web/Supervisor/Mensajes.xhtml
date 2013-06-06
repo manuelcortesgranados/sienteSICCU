@@ -19,14 +19,14 @@
         <ui:include src="/facelets/footer.xhtml" />
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- "   value="#{var.houtbuzondemensajes}"/>                              
+        <h:outputText  styleClass="ikont- hot-"   value="#{var.houtbuzondemensajes}"/>                              
     </ui:define>
     <ui:define name="body">
         <h:form id="form1">
             
             <center>
                 <h:panelGrid columns="5" >
-                    <h:outputLabel  styleClass="ikont- "   id="label_ubicacion" styleClass="ikont-"   value="#{var.houtbuzondemensajes}"/>
+                    <h:outputLabel  styleClass="ikont-hol- "   id="label_ubicacion" styleClass="ikont-"   value="#{var.houtbuzondemensajes}"/>
                 </h:panelGrid>
             </center>
             <h:panelGrid id="layoutPrincipal"  styleClass="ikont-"  >
@@ -42,7 +42,7 @@
                         <h:panelGroup >
                             <center>
                                 <h:panelGroup id="panel_filtro_recibidos">
-                                    <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.houtbusquedarapida} "/>
+                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.houtbusquedarapida} "/>
                                     <h:inputText value="#{Supervisor$Mensajes.valorFiltroMensajeRecibido}" id="filtroRecibidos" size="52">
                                         <a4j:ajax event="keyup" render="tablaMensajesRecibidos" />
                                     </h:inputText>
@@ -53,29 +53,29 @@
                                         <rich:column filterExpression="#{Supervisor$Mensajes.filtrarMensajesRecibidos}" id="tc-strasuntomensaje" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                                     >
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.houtasunto}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.houtasunto}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   id="otxt-strasuntomensajerecibido" value="#{currentRow.strasuntomensaje}"/>
+                                            <h:outputText  styleClass="ikont- hot-"   id="otxt-strasuntomensajerecibido" value="#{currentRow.strasuntomensaje}"/>
                                         </rich:column>
                                         <rich:column id="tc-fkusuarioenviarecibido" sortBy="#{currentRow.jsfUsuarioByFkusuarioenvia}" width="230px"
                                                      >
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.houtremitente}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.houtremitente}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   id="st_fkusuarioenvia" value="#{currentRow.jsfUsuarioByIntusuenvia.tercero.strnombre}"/>
+                                            <h:outputText  styleClass="ikont- hot-"   id="st_fkusuarioenvia" value="#{currentRow.jsfUsuarioByIntusuenvia.tercero.strnombre}"/>
                                         </rich:column>
                                         <rich:column id="tc-datefecmensajerecibido" sortBy="#{currentRow.datefecmensaje}" width="150px"
                                                     >
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.Fecha}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Fecha}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   id="otxt-fkdatefecmensajerecibido" value="#{currentRow.datefecmensaje}">
+                                            <h:outputText  styleClass="ikont- hot-"   id="otxt-fkdatefecmensajerecibido" value="#{currentRow.datefecmensaje}">
                                                 <f:convertDateTime pattern="dd-MMM-yyyy hh:mm"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column    id="tc-verrecibidos"  width="60px">
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
                                             </f:facet>
                                             <a4j:commandButton action="#{Supervisor$Mensajes.bt_verrecibidos_action(filaSeleccionada)}" id="bt-ver-recibidos" oncomplete="#{rich:component('mp_ver')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVer"
                                                                styleClass="ikont-"    />
@@ -92,7 +92,7 @@
                         <h:panelGroup >
                             <center>
                                 <h:panelGroup id="panel_filtro_enviados">
-                                    <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{var.houtbusquedarapida} "/>
+                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.houtbusquedarapida} "/>
                                     <h:inputText value="#{Supervisor$Mensajes.valorFiltroMensajeEnviado}" id="filtroEnviados" size="52">
                                         <a4j:ajax event="keyup" render="tablaMensajesEnviados" />
                                     </h:inputText>
@@ -103,28 +103,28 @@
                                         <rich:column filterExpression="#{Supervisor$Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                                     >
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.houtasunto}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.houtasunto}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strasuntomensaje}"/>
+                                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strasuntomensaje}"/>
                                         </rich:column>
                                         <rich:column sortBy="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombre}" width="300px"
                                                     >
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.houtremitente}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.houtremitente}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombre} #{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}"/>
+                                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombre} #{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}"/>
                                         </rich:column>
                                         <rich:column sortBy="#{currentRow.datefecmensaje}" width="140px">
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.Fecha}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Fecha}"/>
                                             </f:facet>
-                                            <h:outputText  styleClass="ikont- "   value="#{currentRow.datefecmensaje}">
+                                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.datefecmensaje}">
                                                 <f:convertDateTime pattern="dd-MMM-yy hh:mm:ss"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column   width="60px">
                                             <f:facet name="header">
-                                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
                                             </f:facet>
                                             <a4j:commandButton action="#{Supervisor$Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVerEnviados"
                                                                styleClass="ikont-"    />

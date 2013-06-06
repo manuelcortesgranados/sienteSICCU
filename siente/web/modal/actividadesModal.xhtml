@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalactividades"  autosized="true" headerClass="rich-panel-header" moveable="true">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="ACTIVIDADES PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="ACTIVIDADES PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -38,68 +38,68 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="8">
-                                    <h:outputText  styleClass="ikont- "   value="Listado de Actividades #{Supervisor$DetalleObra.totalfilas} #{var.paginaCiu} #{Supervisor$DetalleObra.pagina}#{var.deCiu}#{Supervisor$DetalleObra.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont- hot-"   value="Listado de Actividades #{Supervisor$DetalleObra.totalfilas} #{var.paginaCiu} #{Supervisor$DetalleObra.pagina}#{var.deCiu}#{Supervisor$DetalleObra.totalpaginas}" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- "   value="#{var.actividad}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.actividad}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.unidaddemedida}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.unidaddemedida}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.valorunitaio}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valorunitaio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.cantidadprogramada}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.cantidadprogramada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.cantidadejecutada}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.cantidadejecutada}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.cantidadejecutadaacumulado}"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.cantidadejecutadaacumulado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.porcentajealimentacion}%"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.porcentajealimentacion}%"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- "   value="#{var.porcentajetotalactividad}%"/>
+                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.porcentajetotalactividad}%"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
                             <rich:column breakRowBefore="true">
-                                <h:outputLabel  styleClass="ikont- "   id="layoutactividad" styleClass="ikont-"   value="#{row.actividadobra.strdescactividad}" />
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutactividad" styleClass="ikont-"   value="#{row.actividadobra.strdescactividad}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutunidad" styleClass="ikont-"   value="#{row.actividadobra.strtipounidadmed}" />
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutunidad" styleClass="ikont-"   value="#{row.actividadobra.strtipounidadmed}" />
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutcantidad" styleClass="ikont-"   value="#{row.actividadobra.numvalorplanifao}" >
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutcantidad" styleClass="ikont-"   value="#{row.actividadobra.numvalorplanifao}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutcostounitario" styleClass="ikont-"   value="#{row.actividadobra.floatcantplanifao}" >
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutcostounitario" styleClass="ikont-"   value="#{row.actividadobra.floatcantplanifao}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutcantidadejecutada" styleClass="ikont-"   value="#{row.floatcantejec}" >
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutcantidadejecutada" styleClass="ikont-"   value="#{row.floatcantejec}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutcantidadejecutadaacumulado" styleClass="ikont-"   value="#{row.actividadobra.floatcantidadejecutao}" >
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutcantidadejecutadaacumulado" styleClass="ikont-"   value="#{row.actividadobra.floatcantidadejecutao}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutporcentajealimentacion" styleClass="ikont-"   value="#{row.floatcantejec/row.actividadobra.floatcantplanifao*100}" >
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutporcentajealimentacion" styleClass="ikont-"   value="#{row.floatcantejec/row.actividadobra.floatcantplanifao*100}" >
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>
                             <rich:column>
-                                <h:outputLabel  styleClass="ikont- "   id="layoutporcentajetotalactividad" styleClass="ikont-"   value="#{row.actividadobra.floatcantidadejecutao/row.actividadobra.floatcantplanifao*100}">
+                                <h:outputLabel  styleClass="ikont-hol- "   id="layoutporcentajetotalactividad" styleClass="ikont-"   value="#{row.actividadobra.floatcantidadejecutao/row.actividadobra.floatcantplanifao*100}">
                                     <f:convertNumber pattern="###,###"/>
                                 </h:outputLabel>
                             </rich:column>

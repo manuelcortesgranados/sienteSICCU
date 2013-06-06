@@ -75,7 +75,7 @@
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="ikont-hsbc-adicionpresu" onchange="checkAdicionarPresupuestoOnChangue();"/>
-                                    <h:outputLabel  styleClass="ikont- "   value="#{var.nuevovaloradicionmodificacion}" />
+                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{var.nuevovaloradicionmodificacion}" />
                                 </h:panelGroup>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="12"
                                                value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" inputstyleClassdatefecfinhist"  >
@@ -263,7 +263,7 @@
                                             <h:graphicImage  styleClass="ikont-hgi-msgerror2"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                                             <h:outputText  styleClass="ikont-hot-cronogramamodificacioninvalido"   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                                         </h:panelGroup>
-                                        <h:outputText  styleClass="ikont- "   value=" #{file.nombre}"  />
+                                        <h:outputText  styleClass="ikont- hot-"   value=" #{file.nombre}"  />
                                     </h:panelGrid>
                                 </a4j:repeat>
                             </h:panelGrid>

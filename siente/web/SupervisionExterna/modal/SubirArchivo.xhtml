@@ -13,7 +13,7 @@
     <rich:popupPanel id="panelUploadArchivoSuper" autosized="true" >
         <f:facet name="header">
             <h:panelGrid>
-                <h:outputText  styleClass="ikont- "   value="Seleccionar documento" />
+                <h:outputText  styleClass="ikont- hot-"   value="Seleccionar documento" />
             </h:panelGrid>
         </f:facet>
 
@@ -47,19 +47,19 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont- "   value="#{var.arcsub}" />
+                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont- "   rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
                                     
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervision$Externa.subirListado.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.nomarc}" />
-                                                    <h:outputText  styleClass="ikont- "   value="#{file.nombre}" />
-                                                    <h:outputText  styleClass="ikont- "   value="#{var.taarc}" />
-                                                    <h:outputText  styleClass="ikont- "   value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="ikont- hot-"   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="ikont- hot-"   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>

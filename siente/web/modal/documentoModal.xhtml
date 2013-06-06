@@ -12,7 +12,7 @@
     <rich:popupPanel id="modalDocumento"  autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="DOCUMENTOS PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -34,20 +34,20 @@
                                     rowKeyVar="filaSeleccioanda">
                         <rich:column id="tc_strnombre"  width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.houtnomdocu} "/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_strnombre" value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="st_strnombre" value="#{currentRow.strnombre}"/>
                         </rich:column>
                         <rich:column id="tc_fktipodoc" width="120px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="st_tipostrnom" value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
 
                         <rich:column id="tc_verAli"  width="50px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action(filaSeleccionada)}" id="bt_downloadAli">
                                 <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>

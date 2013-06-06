@@ -11,7 +11,7 @@
     <rich:popupPanel id="panelContratoDoc" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="#{var.documento}"/>
+                <h:outputText  styleClass="ikont- hot-"   value="#{var.documento}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -38,22 +38,22 @@
                         <rich:column id="strnombreimg"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.nombreah}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.nombreah}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="st_strnombreimg" value="#{currentRow.strnombre}"/>
                         </rich:column>
 
                         <rich:column id="strfecha"  width="120px">
                             <f:facet name="header">
 
-                                <h:outputText  styleClass="ikont- "   value="#{var.fecha}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.fecha}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- "   id="st_strfecha" value="#{currentRow.datefecha}"/>
+                            <h:outputText  styleClass="ikont- hot-"   id="st_strfecha" value="#{currentRow.datefecha}"/>
                         </rich:column>
 
                         <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont- hot-"   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandButton  value="Ver" id="boton" action="#{Supervisor$Contrato.bt_download_documento_action(filaSeleccionada)}" immediate="true">
                             </h:commandButton>
