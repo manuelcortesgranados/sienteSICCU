@@ -11,7 +11,6 @@
 
     <rich:popupPanel id="modalFactoresAtraso"  headerClass="rich-panel-header" width="300" autosized="true">
         <f:facet name="header" >
-             <h:outputScript library="css" name="/resources/css/modal/factoresAtrasoModal.css"/>
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-factoratraso" value="FACTORES ATRASO PARA #{Supervisor$DetalleObra.mensageFechaSeleccio}"/>
             </h:panelGroup>
@@ -19,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_modalFactoresAtraso" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFactoresAtraso')}.hide();
                                              return false;"/>
                 </h:panelGroup>
