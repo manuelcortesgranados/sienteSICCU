@@ -14,17 +14,17 @@
         <rich:panel>
             <f:facet name="header">
                 <h:panelGroup>
-                    <h:outputText  styleClass="ikont "   value= "#{var.atencion}" />
+                    <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}" />
                     <interkont:spacer width="105" />
-                    <a4j:commandLink id="esconder_panelConfirmarSolicit"
+                   <a4j:commandLink value="X" id="esconder_panelConfirmarSolicit"
                                        onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="ikont"   />
+                                       immediate="true" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicit"   />
                 </h:panelGroup>
             </f:facet>
 
             <center> 
-                <h:outputText  styleClass="ikont "   value="#{var.estasegurodeenviar}" />
+                <h:outputText  styleClass="ikont-hot-estasegurodeenviar"   value="#{var.estasegurodeenviar}" />
                 <h:panelGrid columns="2" id="layoutGuardar">
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
                                        oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"

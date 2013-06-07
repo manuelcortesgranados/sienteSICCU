@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modaltablaproyectos" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink value="X" id="esconder_modaltablaproyectos" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modaltablaproyectos')}.hide(); return false;"
                                      />
@@ -76,7 +76,7 @@
                                 <h:outputText  styleClass="ikont-hot-cold5"   value="#{currentRow.intplazoobra}"/>
                             </rich:column>
                              <rich:column>
-                                <a4j:commandLink  title="#{var.ver} #{var.proyecto}" 
+                               <a4j:commandLink value="X"  title="#{var.ver} #{var.proyecto}" 
                                                   action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli(filaSeleccionada)}"
                                                   oncomplete="#{rich:component('modaltablaproyectos')}.show();">
                                     <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
