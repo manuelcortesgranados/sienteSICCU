@@ -167,7 +167,7 @@
                             <h:panelGroup>
                                 <h:panelGrid columns="1" columnClasses="panelcenter" >
                                     <h:panelGroup>
-                                        <h:outputLabel  styleClass="ikont "    id="label_tipointe" value="Tipo de intervención:"  styleClass="ikont"  />
+                                        <h:outputLabel  styleClass="ikont-hol-label_tipointe"    id="label_tipointe" value="Tipo de intervención:"   />
                                         <h:selectOneMenu  id="tipoIntervencion" value="#{HomeGestion.filtro.tipointervencion}">
                                             <f:selectItem itemLabel="Todos" itemValue="-1"/>
                                             <f:selectItem itemLabel="Atención humanitaria" itemValue="1"/>
@@ -178,7 +178,7 @@
                                     </h:panelGroup>
                                     <interkont:spacer height="5" />
                                     <h:panelGroup>
-                                        <h:outputText  styleClass="ikont "   styleClass="ikont"   value="#{var.verproyectosterminados}"/>
+                                        <h:outputText  styleClass="ikont-hot-verproyectosterminados" value="#{var.verproyectosterminados}"/>
                                         <h:selectBooleanCheckbox value="#{HomeGestion.filtro.boolobraterminada}"  />
                                     </h:panelGroup>
                                 </h:panelGrid>
@@ -186,7 +186,7 @@
                             <h:panelGroup >
                                 <h:panelGrid columns="1" columnClasses="panelcenter"  id="panelfiltroencargo">
                                     <center>
-                                        <h:outputLabel  styleClass="ikont "    id="label_encargofidu" value="#{var.cualeselencargo}" styleClass="ikont"  />
+                                        <h:outputLabel  styleClass="ikont-label_encargofidu "    id="label_encargofidu" value="#{var.cualeselencargo}"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtencargofidu" value="#{HomeGestion.filtro.encargofidu}" disabled="#{HomeGestion.filtro.tipointervencion==-1}"/>
@@ -195,7 +195,7 @@
                                 <h:panelGrid id="coddane" >
                                     <h:panelGroup rendered="#{HomeGestion.filtro.vercodigosedeeducativa}">
                                     <center>
-                                        <h:outputLabel  styleClass="ikont "    id="label_codigodane" value="#{var.codigodane}" styleClass="ikont"  />
+                                        <h:outputLabel  styleClass="ikont-hol-codigodane"    id="label_codigodane" value="#{var.codigodane}"  />
                                     </center>
                                     <center>
                                         <h:inputText size="23" id="txtcodigodane" value="#{HomeGestion.filtro.coddanesedeeducativa}"/>

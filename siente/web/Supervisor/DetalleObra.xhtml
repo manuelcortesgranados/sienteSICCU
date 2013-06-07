@@ -45,7 +45,7 @@
                 left: auto; 
             }                    
         </style>
-       
+
 
       <!--  <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />-->
         <h:outputScript name="script_supervisor.js"/>
@@ -126,8 +126,8 @@
                                     <h:panelGrid columnClasses="panelcenter" >
 
                                         <h:graphicImage  styleClass="ikont-hgi- imgSemaObra"   id="imgSemaObra"
-                                                        value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
-                                                        rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
+                                                         value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
+                                                         rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
 
                                         <h:outputText  styleClass="ikont-hot-semaf"   value="#{Supervisor$DetalleObra.semaforo}"  />
 
@@ -289,7 +289,7 @@
                                     <h:panelGrid id="empleos" columns="1"  >
                                         <center>
                                             <h:outputLabel  styleClass="ikont-hol-numhabbeneficiados"    
-                                                           value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
+                                                            value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"  />
 
                                             <h:outputText  styleClass="ikont- hot-imp_bene"   value="#{var.imp_bene}"  rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa==null}"/>
                                             <h:outputText  styleClass="ikont- hot-poblacionestudiantil1"   value="#{var.poblacionestudiantil}"  rendered="#{Supervisor$AdministrarObraNew.obra.sedeeducativa!=null}"/>
@@ -300,13 +300,13 @@
                                                     <h:panelGroup>
                                                         <center>
                                                             <h:outputLabel  styleClass="ikont-hol-numempdirectos "  
-                                                                           value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}" />
+                                                                            value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}" />
                                                         </center>
                                                     </h:panelGroup>
                                                     <h:panelGroup>
                                                         <center>
                                                             <h:outputLabel  styleClass="ikont-hol-numempindirectos"  
-                                                                           value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" />
+                                                                            value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" />
                                                         </center>
                                                     </h:panelGroup>
                                                     <h:panelGroup>
@@ -410,7 +410,7 @@
                                             return false;" title="Abrir PopUp" id="abrirPop">
 
                                                 <h:outputText  styleClass="ikont-hot-stEstado"   id="stEstado" 
-                                                              value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                               value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                     <f:convertNumber  pattern="##.## %"/>
                                                 </h:outputText><br/>
                                                 <h:graphicImage  styleClass="ikont-hgi-vertacometro"   value="#{var.vertacometro}" width="150px"/><br/>
@@ -450,7 +450,7 @@
                             <h:panelGrid columns="2">
                                 <a4j:commandLink id="btlogros" styleClass="ikont-acl-mostrarcuali"  
                                                  action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
-                                                 
+
                                                  render="modalLogrosDetalle">
                                     <rich:componentControl  target="modalLogrosDetalle" operation="show" />
                                 </a4j:commandLink>
@@ -483,49 +483,49 @@
 
                                             <h:outputText  styleClass="ikont- hot-fechaapertura"   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                            <h:outputText  styleClass="ikont- hot-encargofiduciario"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
                                                 <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                             </h:outputText>
 
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.saldoinicial}: "/>
+                                            <h:outputText  styleClass="ikont- hot-saldoinicial"   value="#{var.saldoinicial}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoinicial}">
+                                            <h:outputText  styleClass="ikont- hot-numsaldoinicial"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoinicial}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.saldoactual}: "/>
+                                            <h:outputText  styleClass="ikont- hot-saldoactual"   value="#{var.saldoactual}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoactual}">
+                                            <h:outputText  styleClass="ikont- hot-numsaldoactual"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.encargofiduciario.numsaldoactual}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
                                         </h:panelGrid>
                                     </center>
                                 </rich:panel>
-                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-"  
+                                <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-rp-infoencargofiduciario"  
                                             bodyClass="rich-panel-grid-body-report" headerClass="font-header-panel"
                                             rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro != null}">
                                     <center>
                                         <h:panelGrid columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.numeroencargo}: "/>
+                                            <h:outputText  styleClass="ikont- hot-numeroencargo1"   value="#{var.numeroencargo}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
+                                            <h:outputText  styleClass="ikont- hot-intnumencargofidu"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
 
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.fechaapertura}: "/>
+                                            <h:outputText  styleClass="ikont- hot-fechaapertura"   value="#{var.fechaapertura}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                            <h:outputText  styleClass="ikont- hot-datefechaapertura"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
                                                 <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                             </h:outputText>
 
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.saldoinicial}: "/>
+                                            <h:outputText  styleClass="ikont- hot-saldoinicial1"   value="#{var.saldoinicial}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoinicial}">
+                                            <h:outputText  styleClass="ikont- hot-numsaldoinicial1"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoinicial}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.saldoactual}: "/>
+                                            <h:outputText  styleClass="ikont- hot-saldoactual1"   value="#{var.saldoactual}: "/>
                                             <interkont:spacer width="20"/>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoactual}">
+                                            <h:outputText  styleClass="ikont- hot-numsaldoactual1"   value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.encargofiduciario.numsaldoactual}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
 
@@ -544,74 +544,74 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column breakRowBefore="true" colspan="12">
-                                            <h:outputText  styleClass="ikont- hot-"   value="Movimientos Financieros" />
+                                            <h:outputText  styleClass="ikont- hot-rco1"   value="Movimientos Financieros" />
                                         </rich:column>
                                         <rich:column breakRowBefore="true">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.comprobantefidu}"/>
+                                            <h:outputText  styleClass="ikont- hot-rco2"   value="#{var.comprobantefidu}"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valor} Movimiento"/>
+                                            <h:outputText  styleClass="ikont- hot-rco3"   value="#{var.valor} Movimiento"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valor} Ejecutado"/>
+                                            <h:outputText  styleClass="ikont- hot-rco4"   value="#{var.valor} Ejecutado"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.porcentajejecutado}"/>
+                                            <h:outputText  styleClass="ikont- hot-rco5"   value="#{var.porcentajejecutado}"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="% Legalizado"/>
+                                            <h:outputText  styleClass="ikont- hot-rco6"   value="% Legalizado"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.fecha} legalizaciÃ³n"/>
+                                            <h:outputText  styleClass="ikont- hot-rco7"   value="#{var.fecha} legalizaciÃ³n"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.tipom} Movimiento"/>
+                                            <h:outputText  styleClass="ikont- hot-rco7"   value="#{var.tipom} Movimiento"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="Estado movimiento"/>
+                                            <h:outputText  styleClass="ikont- hot-rco8"   value="Estado movimiento"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="Orden de pago"/>
+                                            <h:outputText  styleClass="ikont- hot-rco9"   value="Orden de pago"/>
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.nombre} Contratista"/>
+                                            <h:outputText  styleClass="ikont- hot-rco10"   value="#{var.nombre} Contratista"/>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:columnGroup>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strcomprobantefidu}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod1"   value="#{currentRow.strcomprobantefidu}"/>
                                     </rich:column>
-                                    <rich:column styleClass="ikont-"  >
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.numvlrmovimiento}">
+                                    <rich:column styleClass="ikont-rc-colum1"  >
+                                        <h:outputText  styleClass="ikont- hot-rcod1"   value="#{currentRow.numvlrmovimiento}">
                                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                         </h:outputText>
                                     </rich:column>
-                                    <rich:column styleClass="ikont-"  >
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.numvlrejecutado}">
+                                    <rich:column styleClass="ikont-rc-column2"  >
+                                        <h:outputText  styleClass="ikont- hot-rcod2"   value="#{currentRow.numvlrejecutado}">
                                             <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.floatporejecucion}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod3"   value="#{currentRow.floatporejecucion}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.floatporcentajelegalizacion}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod4"   value="#{currentRow.floatporcentajelegalizacion}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.datefechalegalizacion}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod5"   value="#{currentRow.datefechalegalizacion}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod6"   value="#{currentRow.tipomovimiento.strnombretipomovimiento}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod7"   value="#{currentRow.estadomovimiento.strdescripcionestadomovimiento}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.ordendepago.strordenpago}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod8"   value="#{currentRow.ordendepago.strordenpago}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{currentRow.strnombrecontratista}"/>
+                                        <h:outputText  styleClass="ikont- hot-rcod9"   value="#{currentRow.strnombrecontratista}"/>
                                     </rich:column>
                                 </rich:columnGroup>
                                 <f:facet name="footer">
@@ -621,13 +621,13 @@
                                                 TOTALES
                                             </center>
                                         </rich:column>
-                                        <rich:column styleClass="ikont-"  >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$DetalleObra.totales[1]}" styleClass="ikont-"  >
+                                        <rich:column styleClass="ikont-rc-colu3"  >
+                                            <h:outputText  styleClass="ikont- hot-rcof1"   value="#{Supervisor$DetalleObra.totales[1]}"  >
                                                 <f:convertNumber pattern="$#,###.00"/>
                                             </h:outputText>
                                         </rich:column>
-                                        <rich:column styleClass="ikont-"  >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$DetalleObra.totales[2]}" styleClass="ikont-"  >
+                                        <rich:column styleClass="ikont-rc-colu4"  >
+                                            <h:outputText  styleClass="ikont- hot-rcof2"   value="#{Supervisor$DetalleObra.totales[2]}"  >
                                                 <f:convertNumber pattern="$#,###.00"/>
                                             </h:outputText>
                                         </rich:column>
@@ -666,64 +666,64 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="8">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.contrato} #{var.interventorObra}ia" />
+                                            <h:outputText  styleClass="ikont- hot-invo"   value="#{var.contrato} #{var.interventorObra}ia" />
                                         </rich:column>
                                         <rich:column breakRowBefore="true">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.houtnrocontrato}" />
+                                            <h:outputText  styleClass="ikont- hot-nroc"   value="#{var.houtnrocontrato}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.objetocontrato}" />
+                                            <h:outputText  styleClass="ikont- hot-oc"   value="#{var.objetocontrato}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.houtcontratis}" />
+                                            <h:outputText  styleClass="ikont- hot-contra"   value="#{var.houtcontratis}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.fechadeinicio}" />
+                                            <h:outputText  styleClass="ikont- hot-fecini"   value="#{var.fechadeinicio}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.fechadefinalizacion}" />
+                                            <h:outputText  styleClass="ikont- hotfecfin-"   value="#{var.fechadefinalizacion}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.intduracion}" />
+                                            <h:outputText  styleClass="ikont- hot-intdur"   value="#{var.intduracion}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.vlrcontra}" />
+                                            <h:outputText  styleClass="ikont- hot-vlrc"   value="#{var.vlrcontra}" />
                                         </rich:column>
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valorasociadoaproyecto}" />
+                                            <h:outputText  styleClass="ikont- hot-valasocon"   value="#{var.valorasociadoaproyecto}" />
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
                                 <rich:columnGroup>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.strnumcontrato}"/>
+                                        <h:outputText  styleClass="ikont- hot-strnrocon"   value="#{contraInterven.contrato.strnumcontrato}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.textobjeto}"/>
+                                        <h:outputText  styleClass="ikont- hot-txto"   value="#{contraInterven.contrato.textobjeto}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.contratista.strnombre} #{contraInterven.contrato.contratista.strapellido1}"/>
+                                        <h:outputText  styleClass="ikont- hot-strape"   value="#{contraInterven.contrato.contratista.strnombre} #{contraInterven.contrato.contratista.strapellido1}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.datefechaini}">
+                                        <h:outputText  styleClass="ikont- hot-dtfecini"   value="#{contraInterven.contrato.datefechaini}">
 
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.datefechafin}">
+                                        <h:outputText  styleClass="ikont- hot-datfin"   value="#{contraInterven.contrato.datefechafin}">
 
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.intduraciondias}"/>
+                                        <h:outputText  styleClass="ikont- hot-intdura"   value="#{contraInterven.contrato.intduraciondias}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.contrato.numvlrcontrato}">
+                                        <h:outputText  styleClass="ikont- hot-numvalcon"   value="#{contraInterven.contrato.numvlrcontrato}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </rich:column>
                                     <rich:column >
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{contraInterven.numvalorrelacion}">
+                                        <h:outputText  styleClass="ikont- hot-numvalrel"   value="#{contraInterven.numvalorrelacion}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </rich:column>
@@ -743,9 +743,9 @@
                                 <center>
                                     Generar reporte en:
                                     <h:panelGrid columns="3">
-                                        <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="ikont-"    />
-                                        <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="ikont-"    />
-                                        <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="ikont-"    />
+                                        <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="ikont-hcl-reportePdf"    />
+                                        <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="ikont-hcl-reporteExcel"    />
+                                        <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="ikont-hcl-reporteWord"    />
                                     </h:panelGrid>
                                 </center>
                             </h:form>
@@ -769,59 +769,59 @@
                                     <f:facet name="header">
                                         <rich:columnGroup>
                                             <rich:column  colspan="11" breakRowBefore="true">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.listabeneficiario} por #{var.solicitudproyecto} (#{Supervisor$DetalleObra.totalben})"/>
+                                                <h:outputText  styleClass="ikont- hot-lstben"   value="#{var.listabeneficiario} por #{var.solicitudproyecto} (#{Supervisor$DetalleObra.totalben})"/>
                                             </rich:column>
                                             <rich:column breakRowBefore="true">
-                                                <h:outputText  styleClass="ikont- hot-"   id="tipodocumento" value="#{var.tipoDocumento}"/>
+                                                <h:outputText  styleClass="ikont- hot-tipdoc"   id="tipodocumento" value="#{var.tipoDocumento}"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="identificacion" value="#{var.numero} de IdentificaciÃ³n"/>
+                                                <h:outputText  styleClass="ikont- hot-ident"   id="identificacion" value="#{var.numero} de IdentificaciÃ³n"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="nombrecompleto" value="Nombre completo"/>
+                                                <h:outputText  styleClass="ikont- hot-nomcomp"   id="nombrecompleto" value="Nombre completo"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="departamento" value="#{var.departamento} de residencia"/>
+                                                <h:outputText  styleClass="ikont- hot-dpto"   id="departamento" value="#{var.departamento} de residencia"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="municipio" value="#{var.municipio} de residencia"/>
+                                                <h:outputText  styleClass="ikont- hot-muni"   id="municipio" value="#{var.municipio} de residencia"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
+                                                <h:outputText  styleClass="ikont- hot-dir"   id="direccion" value="#{var.direccion} / Nombre de la finca"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="telefono" value="#{var.telefono}"/>
+                                                <h:outputText  styleClass="ikont- hot-tel"   id="telefono" value="#{var.telefono}"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="email" value="#{var.correo} Electronico"/>
+                                                <h:outputText  styleClass="ikont- hot-email"   id="email" value="#{var.correo} Electronico"/>
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
                                     <rich:columnGroup id="cuerpo">
                                         <rich:column  breakRowBefore="true" >
-                                            <h:outputText  styleClass="ikont- hot-"   id="documento2" value="#{rowbeneficiariopr.strtipoidentificacion}" />
+                                            <h:outputText  styleClass="ikont- hot-doc2"   id="documento2" value="#{rowbeneficiariopr.strtipoidentificacion}" />
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="identificacion2" value="#{rowbeneficiariopr.intcedula}"/>
+                                            <h:outputText  styleClass="ikont- hot-iden2"   id="identificacion2" value="#{rowbeneficiariopr.intcedula}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="verstrnombrecompleto" value="#{rowbeneficiariopr.strnombrecompleto}" />
+                                            <h:outputText  styleClass="ikont- hot-nomcompl2"   id="verstrnombrecompleto" value="#{rowbeneficiariopr.strnombrecompleto}" />
                                         </rich:column>
 
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="departamento2" value="#{rowbeneficiariopr.strdepartamento}" />
+                                            <h:outputText  styleClass="ikont- hot-depto2"   id="departamento2" value="#{rowbeneficiariopr.strdepartamento}" />
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="municipio2" value="#{rowbeneficiariopr.strmunicipio}" />
+                                            <h:outputText  styleClass="ikont- hot-muni2"   id="municipio2" value="#{rowbeneficiariopr.strmunicipio}" />
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="direccion2" value="#{rowbeneficiariopr.strdireccionprincipal}" />
+                                            <h:outputText  styleClass="ikont- hot-dir2"   id="direccion2" value="#{rowbeneficiariopr.strdireccionprincipal}" />
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="telefono2" value="#{rowbeneficiariopr.strtelefono1}" />
+                                            <h:outputText  styleClass="ikont- hot-tel2"   id="telefono2" value="#{rowbeneficiariopr.strtelefono1}" />
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   id="email2" value="#{rowbeneficiariopr.stremail}" />
+                                            <h:outputText  styleClass="ikont- hot-em2"   id="email2" value="#{rowbeneficiariopr.stremail}" />
                                         </rich:column>
 
                                     </rich:columnGroup>
@@ -850,38 +850,38 @@
                                         <rich:columnGroup>
                                             <rich:column id= "actividades" colspan="1" width="300px">
 
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.actividades}"/>
+                                                <h:outputText  styleClass="ikont- hot-acti"   value="#{var.actividades}"/>
                                             </rich:column>
                                             <rich:column id= "total" colspan="4" >
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.totalactividad}"/>
+                                                <h:outputText  styleClass="ikont- hot-totalact"   value="#{var.totalactividad}"/>
                                             </rich:column>
                                             <rich:column id= "totalEjecutado" colspan="3" >
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.totalejecutado}"/>
+                                                <h:outputText  styleClass="ikont- hot-totejec"   value="#{var.totalejecutado}"/>
                                             </rich:column>
 
                                             <rich:column id= "descripcion" breakRowBefore="true" rowspan="2" width="250px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.descripcion}" />
+                                                <h:outputText  styleClass="ikont- hot-desc"   value="#{var.descripcion}" />
                                             </rich:column>
                                             <rich:column id= "unidad" rowspan="2" width="25px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.unidad}"/>
+                                                <h:outputText  styleClass="ikont- hot-uni-uni"   value="#{var.unidad}"/>
                                             </rich:column>
                                             <rich:column id= "valorUnitario" rowspan="2" width="25px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.valorunitaio}"/>
+                                                <h:outputText  styleClass="ikont- hot-valuni"   value="#{var.valorunitaio}"/>
                                             </rich:column>
                                             <rich:column id= "cantidad" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.cantidad}"/>
+                                                <h:outputText  styleClass="ikont- hot-cant"   value="#{var.cantidad}"/>
                                             </rich:column>
                                             <rich:column id= "precio" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.valorprogramado}"/>
+                                                <h:outputText  styleClass="ikont- hot-valorprog"   value="#{var.valorprogramado}"/>
                                             </rich:column>
                                             <rich:column id= "cantidad2" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.cantidadejecutada}"/>
+                                                <h:outputText  styleClass="ikont- hot-cantejec"   value="#{var.cantidadejecutada}"/>
                                             </rich:column>
                                             <rich:column id= "precio2" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.valorejecutado}"/>
+                                                <h:outputText  styleClass="ikont- hot-valorejec"   value="#{var.valorejecutado}"/>
                                             </rich:column>
                                             <rich:column id= "cantidad3" rowspan="2" width="30px">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{var.porcentajeavance}"/>
+                                                <h:outputText  styleClass="ikont- hot-porceavan"   value="#{var.porcentajeavance}"/>
                                             </rich:column>
                                         </rich:columnGroup>
                                     </f:facet>
@@ -889,41 +889,41 @@
                                     <rich:columnGroup >
                                         <rich:column id="Descripcion" width="250px">
                                             <h:panelGroup >
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{registros.strdescactividad}"
+                                                <h:outputText  styleClass="ikont- hot-desacti"   value="#{registros.strdescactividad}"
                                                                rendered="#{!registros.boolimprevisto}"/>
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{registros.strdescactividad}"
+                                                <h:outputText  styleClass="ikont- hot-desacti1"   value="#{registros.strdescactividad}"
                                                                rendered="#{registros.boolimprevisto}"/>
                                             </h:panelGroup>
                                         </rich:column>
                                         <rich:column id="Unidad"  >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{registros.strtipounidadmed}" styleClass="ikont-"  />
+                                            <h:outputText  styleClass="ikont- hot-tipou"   value="#{registros.strtipounidadmed}" />
                                         </rich:column>
                                         <rich:column id="Precio" >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{registros.numvalorplanifao}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont- hot-numplani"   value="#{registros.numvalorplanifao}"  >
                                                 <f:convertNumber pattern="$#,###.00"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="Cantidad2" >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{registros.floatcantplanifao}" styleClass="ikont-"  />
+                                            <h:outputText  styleClass="ikont- hot-cantplani"   value="#{registros.floatcantplanifao}"  />
                                         </rich:column>
                                         <rich:column id="TotalActividad" >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{registros.numvalorplanifao*registros.floatcantplanifao}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont- hot-totacti"   value="#{registros.numvalorplanifao*registros.floatcantplanifao}" >
                                                 <f:convertNumber pattern="$#,###.00"/>
                                             </h:outputText>
                                         </rich:column>
 
                                         <rich:column id="ValorEjec" >
-                                            <h:outputText  styleClass="ikont- hot-"   id="ValorEjecObra" value="#{registros.floatcantidadejecutao}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont- hot-valejecobra"   id="ValorEjecObra" value="#{registros.floatcantidadejecutao}"  >
 
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="ValorFaltanAct" >
-                                            <h:outputText  styleClass="ikont- hot-"   id="valorFaltante"  value="#{registros.numvalorejecutao}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont- hot-valfalta"   id="valorFaltante"  value="#{registros.numvalorejecutao}"  >
                                                 <f:convertNumber pattern="$#,###.00"/>
                                             </h:outputText>
                                         </rich:column>
                                         <rich:column id="CantidadEjec" >
-                                            <h:outputText  styleClass="ikont- hot-"    id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
+                                            <h:outputText  styleClass="ikont- hot-txtCantEjec"    id="txtCantEjec" value="#{(registros.boolimprevisto) ? 0 : (registros.floatcantidadejecutao/registros.floatcantplanifao)}" >
                                                 <f:convertNumber type="percent"/>
 
                                             </h:outputText>
@@ -938,7 +938,7 @@
                                                 <interkont:spacer width="2"/>
                                             </rich:column>
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" styleClass="ikont-"  >
+                                                <h:outputText  styleClass="ikont- hot-Pie0"   id="Pie0" value="#{Supervisor$DetalleObra.totalprogramado}" >
                                                     <f:convertNumber pattern="$#,###.00"/>
                                                 </h:outputText>
                                             </rich:column>
@@ -948,7 +948,7 @@
                                             </rich:column>
 
                                             <rich:column >
-                                                <h:outputText  styleClass="ikont- hot-"   id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}" styleClass="ikont-"  >
+                                                <h:outputText  styleClass="ikont- hot-Pie1"   id="Pie1" value="#{Supervisor$DetalleObra.totalejecutado}"  >
                                                     <f:convertNumber pattern="$#,###.00"/>
                                                 </h:outputText>
                                             </rich:column>
@@ -979,31 +979,31 @@
                                         <f:facet name="header">
                                             <rich:columnGroup>
                                                 <rich:column colspan="2">
-                                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.detnumsubproyectos}: "/>
-                                                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$DetalleObra.numSubproyectos}"/>
+                                                    <h:outputText  styleClass="ikont- hot-detnumsubpry"   value="#{var.detnumsubproyectos}: "/>
+                                                    <h:outputText  styleClass="ikont- hot-numsubpry"   value="#{Supervisor$DetalleObra.numSubproyectos}"/>
                                                 </rich:column>
                                                 <rich:column width="90%" breakRowBefore="true">
-                                                    <h:outputText  styleClass="ikont- hot-"   id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
+                                                    <h:outputText  styleClass="ikont- hot-txtnomspry"   id="outputTextNombreSubProyecto" value="#{var.nombreobra}"/>
                                                 </rich:column>
                                                 <rich:column width="10%">
-                                                    <h:outputText  styleClass="ikont- hot-"   id="outputTexConsultarSubProyecto" value="#{var.consultar}" styleClass="ikont-"  />
+                                                    <h:outputText  styleClass="ikont- hot-txtconsulspry"   id="outputTexConsultarSubProyecto" value="#{var.consultar}" />
                                                 </rich:column>
                                             </rich:columnGroup>
                                         </f:facet>
                                         <rich:columnGroup id="cuerpoTablaSubproyectos">
                                             <rich:column width="150px" breakRowBefore="true">
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{row.strnombreobra}"/>
+                                                <h:outputText  styleClass="ikont- hot-nomo"   value="#{row.strnombreobra}"/>
                                             </rich:column>
                                             <rich:column>
-                                                <h:panelGroup styleClass="ikont-"  >
+                                                <h:panelGroup styleClass="ikont-hpg-datbasico"  >
                                                     <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
                                                                      id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
-                                                        <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
+                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
 
                                                     <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
                                                                      onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
-                                                        <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
+                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
                                                 </h:panelGroup>
                                             </rich:column>
@@ -1034,67 +1034,67 @@
                 <h:panelGrid  id="gpPrincipalInfCiudad" >
                     <h:form prependId="false">
 
-                        <div id="sideline"><label styleClasstextlittle2">INFORMACIÃ“N GENERAL #{vat.textobra8}</label></div>
-                        <h:outputText  styleClass="ikont- hot-"   value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})" styleClass="ikont-"   />
+                        <div id="sideline"><label class="textlittle2">INFORMACIÃ“N GENERAL #{vat.textobra8}</label></div>
+                        <h:outputText  styleClass="ikont- hot-intcodobra"   value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"   />
                         <h:panelGrid columns="2"  columnClasses="panelizquierda, panelderecha">
-                            <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.strnombrecrot}" styleClass="ikont-"   />
+                            <h:outputText  styleClass="ikont- hot-nomcor"   value="#{Supervisor$AdministrarObraNew.obra.strnombrecrot}"  />
                             <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
-                                <h:commandButton  styleClass="ikont-"   value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
+                                <h:commandButton  styleClass="ikont-hcb-seguirspry"   value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
                                 </h:commandButton>
-                                <h:commandButton  styleClass="ikont-"   value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
+                                <h:commandButton  styleClass="ikont-hcb-sinseguirpry"   value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
                                 </h:commandButton>
                             </h:panelGroup>
                         </h:panelGrid>
                         <h:panelGrid id="pg_detalle"  columns="4" rowClasses="alignverticaldetalle" columnClasses="pg_detalle_col1,pg_detalle_col2,pg_detalle_col3,pg_detalle_col4">
                             <h:panelGrid id="detalles"   rowClasses="alignverticaldetalle, alignverticaldetallebottom">
-                                <div id="sideline"><label styleClasstextlittle2">DETALLES</label></div>
+                                <div id="sideline"><label class="textlittle2">DETALLES</label></div>
                                 <h:panelGrid  >
-                                    <h:panelGrid columns="2" styleClass="ikont-"   >
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.contratistaciu}:" styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" />
+                                    <h:panelGrid columns="2" styleClass="ikont-hpg-griddeta"   >
+                                        <h:outputText  styleClass="ikont- hot-contraticiu"   value="#{var.contratistaciu}:"   rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" />
 
 
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
-                                        <h:outputText  styleClass="ikont- hot-"   id="otContratistas" styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
+                                        <h:outputText  styleClass="ikont- hot-nbre"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
+                                        <h:outputText  styleClass="ikont- hot-otContratistas"   id="otContratistas"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
                                             <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                          verticalOffset="5"  styleClass="ikont-"   >
+                                                          verticalOffset="5"  styleClass="ikont-rtt-tool"   >
                                                 <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                    <h:outputText  styleClass="ikont- hot-"   value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
+                                                    <h:outputText  styleClass="ikont- hot-nbre1"   value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
                                                 </a4j:repeat>
                                             </rich:tooltip>
                                         </h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.contrataneciu}:" styleClass="ikont-"  ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.supervisorciu}:" styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"  ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.ncontratociu}:" styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
-                                        <h:outputText  styleClass="ikont- hot-"   id="otNumContratos" styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratos" rendered="#{Supervisor$AdministrarObraNew.numContratosObra >1}">
+                                        <h:outputText  styleClass="ikont- hot-contrataneciu"   value="#{var.contrataneciu}:" ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{var.supervisorciu}:"  rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"  ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-strinterventor"  value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-ncontratociu"   value="#{var.ncontratociu}:" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
+                                        <h:outputText  styleClass="ikont- hot-otNumContratos"   id="otNumContratos"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratos" rendered="#{Supervisor$AdministrarObraNew.numContratosObra >1}">
                                             <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                          verticalOffset="5"  styleClass="ikont-"   >
+                                                          verticalOffset="5"  styleClass="ikont-rtt-tool2"   >
                                                 <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
-                                                    <h:outputText  styleClass="ikont- hot-"   value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
+                                                    <h:outputText  styleClass="ikont- hot-lstcontrobra"   value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
                                                 </a4j:repeat>
                                             </rich:tooltip>
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGrid columns="3" >
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.objeto} #{vat.textoobra3}" styleClass="ikont-"   ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   value=". . . . . . . . ." styleClass="ikont-"  ></h:outputText>
-                                        <h:commandButton id="ver_objeto" value="#{var.verinfciu}" styleClass="ikont-"    >
+                                        <h:outputText  styleClass="ikont- hot-textoobra3"   value="#{var.objeto} #{vat.textoobra3}" ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-punto"   value=". . . . . . . . ."  ></h:outputText>
+                                        <h:commandButton id="ver_objeto" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
                                             <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                          verticalOffset="5"  styleClass="ikont-"   >
+                                                          verticalOffset="5"  styleClass="ikont-rtt-tool3"   >
                                             </rich:tooltip>
                                         </h:commandButton>
-                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value="#{var.contrato} de interventoria" styleClass="ikont-"   ></h:outputText>
-                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value=". . . . . . . . ." styleClass="ikont-"  ></h:outputText>
-                                        <h:commandButton rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" id="btncontratoInterventoria" value="#{var.verinfciu}" styleClass="ikont-"   >
+                                        <h:outputText  styleClass="ikont- hot-ctrato"   rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value="#{var.contrato} de interventoria"  ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-puntos"   rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" value=". . . . . . . . ."  ></h:outputText>
+                                        <h:commandButton rendered="#{Supervisor$AdministrarObraNew.numContratosInterventoria>=1}" id="btncontratoInterventoria" value="#{var.verinfciu}">
                                             <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
-                                                          verticalOffset="5"  styleClass="ikont-"   >
+                                                          verticalOffset="5"  styleClass="ikont-rtt-tool4"   >
                                                 <a4j:repeat id="rpNumContratosInterventoria" value="#{Supervisor$AdministrarObraNew.listaContratoInterventoria}" var="relacionContratoInterventoria">
-                                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.objetocontrato}: " /><br/>
-                                                    <h:outputText  styleClass="ikont- hot-"   value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
-                                                    <h:outputText  styleClass="ikont- hot-"    value="#{var.houtnrocontrato}"/><br/>
-                                                    <h:outputText  styleClass="ikont- hot-"   value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/>
+                                                    <h:outputText  styleClass="ikont- hot-obtocontra"   value="#{var.objetocontrato}: " /><br/>
+                                                    <h:outputText  styleClass="ikont- hot-strnombrecon"   value="#{relacionContratoInterventoria.contrato.strnombre}" /><br/>
+                                                    <h:outputText  styleClass="ikont- hot-houtnrocontrato"    value="#{var.houtnrocontrato}"/><br/>
+                                                    <h:outputText  styleClass="ikont- hot-strtnrocontrato1"   value="- #{relacionContratoInterventoria.contrato.strnumcontrato}"></h:outputText><br/>
                                                 </a4j:repeat>
                                             </rich:tooltip>
                                         </h:commandButton>
@@ -1103,49 +1103,49 @@
                             </h:panelGrid>
                             <h:panelGrid     rowClasses="alignverticaldetalle, alignverticaldetallebottom" >
 
-                                <div id="sideline"><label styleClasstextlittle2">ESTADO</label></div>
+                                <div id="sideline"><label class="textlittle2">ESTADO</label></div>
                                 <h:panelGrid  columnClasses="panelcenter">
 
 
-                                    <h:graphicImage  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.imagenEstadoObra}"  height="117px"></h:graphicImage>
+                                    <h:graphicImage  styleClass="ikont-hgi-imgestobra "    value="#{Supervisor$AdministrarObraNew.obra.imagenEstadoObra}"  height="117px"></h:graphicImage>
 
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$AdministrarObraNew.obra.estadoObra}" styleClass="ikont-"  ></h:outputText>
+                                    <h:outputText  styleClass="ikont- hot-estobra"   value="#{Supervisor$AdministrarObraNew.obra.estadoObra}"  ></h:outputText>
                                 </h:panelGrid>
                             </h:panelGrid>
                             <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom">
 
-                                <div id="sideline"><label styleClasstextlittle2">SEMÃ�FORO</label></div>
+                                <div id="sideline"><label class="textlittle2">SEMÃ�FORO</label></div>
                                 <h:panelGrid  columnClasses="panelcenter">
-                                    <h:graphicImage  styleClass="ikont- "   id="imgSemaObra"
-                                                    value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
-                                                    rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-imgSemaObra"   id="imgSemaObra"
+                                                     value="#{Supervisor$DetalleObra.obraMapa.semaforo}"
+                                                     rendered="#{Supervisor$DetalleObra.obraMapa.semaforo != null}"/>
 
 
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$DetalleObra.semaforo}"  />
+                                    <h:outputText  styleClass="ikont- hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}"  />
 
                                 </h:panelGrid>
                             </h:panelGrid>
                             <h:panelGrid   rowClasses="alignverticaldetalle, alignverticaldetallebottom"  >
                                 <h:panelGrid   rowClasses="alignverticaldetalle" columns="2">
 
-                                    <div id="sideline"><label styleClasstextlittle2">ANTES Y AHORA </label></div>
+                                    <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
                                     <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
-                                        <a4j:commandLink styleClass="ikont-"   onclick=" #{rich:component('modalImagenvermas')}.show();
+                                        <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
                                             return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
                                         <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
 
                                     </h:panelGrid>
                                 </h:panelGrid>
                                 <h:panelGrid columns="2"  columnClasses="panelcenter">
-                                    <h:panelGrid styleClass="ikont-"    columnClasses="panelcenter">
-                                        <h:graphicImage  styleClass="ikont- "    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
-                                        <h:outputText  styleClass="ikont- hot-"   value="Antes" styleClass="ikont-"  ></h:outputText>
+                                    <h:panelGrid styleClass="ikont-hpg-griddetaob2"    columnClasses="panelcenter">
+                                        <h:graphicImage  styleClass="ikont-hgi-imganterior "    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
+                                        <h:outputText  styleClass="ikont- hot-antes"   value="Antes"   ></h:outputText>
 
                                     </h:panelGrid>
 
-                                    <h:panelGrid styleClass="ikont-"    columnClasses="panelcenter">
-                                        <h:graphicImage  styleClass="ikont- "    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenActual}"/>
-                                        <h:outputText  styleClass="ikont- hot-"   value="Ahora" styleClass="ikont-"  ></h:outputText>
+                                    <h:panelGrid styleClass="ikont-hpg-griddetaob3"    columnClasses="panelcenter">
+                                        <h:graphicImage  styleClass="ikont-hgi-imgactual"    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenActual}"/>
+                                        <h:outputText  styleClass="ikont- hot-ahora"   value="Ahora"  ></h:outputText>
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </h:panelGrid>
@@ -1153,54 +1153,54 @@
                         <h:panelGrid id="pg_valores_financieros"  columns="4"  rowClasses="alignverticaldetalle"
                                      columnClasses="pg_valores_financieros_col1,pg_valores_financieros_col2,pg_valores_financieros_col3,pg_valores_financieros_col4">
                             <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom">
-                                <div id="sideline"><label styleClasstextlittle2">Â¿CUANTO CUESTA #{vat.textobra9}?</label></div>
-                                <h:panelGrid  styleClass="ikont-"   >
-                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
+                                <div id="sideline"><label class="textlittle2">Â¿CUANTO CUESTA #{vat.textobra9}?</label></div>
+                                <h:panelGrid  styleClass="ikont-hpg-griddetaob4"   >
+                                    <h:outputText  styleClass="ikont- hot-numvobra"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}"  >
                                         <f:convertNumber pattern="$###,###" />
                                     </h:outputText>
                                 </h:panelGrid>
                                 <interkont:spacer height="10" />
                                 <h:panelGrid columns="3" >
-                                    <h:panelGrid  styleClass="ikont-"    >
-                                        <div id="sideline"><label styleClasstextlittle2">VALOR</label></div>
-                                        <h:outputText  styleClass="ikont- hot-"   value="APROBADO" styleClass="ikont-"   ></h:outputText>
+                                    <h:panelGrid  styleClass="ikont-hpg-griddetaob5"    >
+                                        <div id="sideline"><label class="textlittle2">VALOR</label></div>
+                                        <h:outputText  styleClass="ikont- hot-aprobado"   value="APROBADO" ></h:outputText>
                                         <interkont:spacer height="5" />
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
+                                        <h:outputText  styleClass="ikont- hot-soliobra" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null}" value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGrid  styleClass="ikont-"  >
-                                        <div id="sideline"><label styleClasstextlittle2">VALOR</label></div>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.textobra9}" styleClass="ikont-"  ></h:outputText>
+                                        <div id="sideline"><label class="textlittle2">VALOR</label></div>
+                                        <h:outputText  styleClass="ikont- hot-textobra9"   value="#{var.textobra9}"  ></h:outputText>
                                         <interkont:spacer height="5" />
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                        <h:outputText  styleClass="ikont- hot-numvaltotobra"    value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGrid>
                                     <h:panelGrid   styleClass="ikont-"  >
-                                        <div id="sideline"><label styleClasstextlittle2">VALOR</label></div>
-                                        <h:outputText  styleClass="ikont- hot-"   value="INTERVENTORIA" styleClass="ikont-"  ></h:outputText>
+                                        <div id="sideline"><label class="textlittle2">VALOR</label></div>
+                                        <h:outputText  styleClass="ikont- hot-intertxt"   value="INTERVENTORIA"  ></h:outputText>
                                         <interkont:spacer height="5" />
-                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"    value="#{Supervisor$DetalleObra.valorinterventoria}">
+                                        <h:outputText  styleClass="ikont- hot-vlinterv"   value="#{Supervisor$DetalleObra.valorinterventoria}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </h:panelGrid>
-                            <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom"  styleClass="ikont-"   >
+                            <h:panelGrid  rowClasses="alignverticaldetalle, alignverticaldetallebottom"  styleClass="ikont-hpg-griddetaob"   >
                                 <h:panelGrid >
-                                    <div id="sideline"><label styleClasstextlittle2">DURACIÃ“N</label></div>
+                                    <div id="sideline"><label class="textlittle2">DURACIÃ“N</label></div>
                                 </h:panelGrid>
                                 <interkont:spacer height="15" />
-                                <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"    value="#{Supervisor$AdministrarObraNew.obra.intplazoobra}" ></h:outputText>
-                                <h:outputText  styleClass="ikont- hot-"   value=" #{var.diasciu}" styleClass="ikont-"   ></h:outputText>
+                                <h:outputText  styleClass="ikont- hot-intplazoo"     value="#{Supervisor$AdministrarObraNew.obra.intplazoobra}" ></h:outputText>
+                                <h:outputText  styleClass="ikont- hot-diasciu"   value=" #{var.diasciu}"  ></h:outputText>
                                 <h:panelGrid columns="2" >
-                                    <h:outputText  styleClass="ikont- hot-"   value="Desde:" styleClass="ikont-"  ></h:outputText>
-                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
+                                    <h:outputText  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputText>
+                                    <h:outputText  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
                                         <f:convertDateTime pattern="yyyy-MMM-dd" />
                                     </h:outputText>
-                                    <h:outputText  styleClass="ikont- hot-"   value="Hasta:" styleClass="ikont-"  ></h:outputText>
-                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
+                                    <h:outputText  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputText>
+                                    <h:outputText  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
                                         <f:convertDateTime pattern="yyyy-MMM-dd"/>
                                     </h:outputText>
                                 </h:panelGrid>
@@ -1209,10 +1209,10 @@
 
                             </h:panelGrid>
 
-                            <h:panelGrid    styleClass="ikont-"   >
-                                <div id="sideline"><label styleClasstextlittle2">AVANCE FÃ�SICO</label></div>
+                            <h:panelGrid    styleClass="ikont-hpg-griddetaob"   >
+                                <div id="sideline"><label class="textlittle2">AVANCE FÃ�SICO</label></div>
                                 <h:panelGrid columns="2" >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
+                                    <h:outputText  styleClass="ikont- hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
                                     <div id="graficoAvanceFisico" >
                                     </div>
@@ -1223,16 +1223,16 @@
                             <h:panelGrid   styleClass="ikont-"   >
                                 <h:panelGrid >
 
-                                    <div id="sideline"><label styleClasstextlittle2">TIPO</label></div>
+                                    <div id="sideline"><label class="textlittle2">TIPO</label></div>
                                 </h:panelGrid>
-                                <h:graphicImage  styleClass="ikont- "    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strurlimagen}"  height="130" ></h:graphicImage>
+                                <h:graphicImage  styleClass="ikont-hgi-strurlimagen"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strurlimagen}"  height="130" ></h:graphicImage>
                                 <h:panelGrid columns="2"  >
-                                    <h:outputLabel  styleClass="ikont-hol- "     value="#{var.claseProyecto}" styleClass="ikont-"   />
-                                    <h:outputLabel  styleClass="ikont-hol- "    styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
-                                    <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tipoProyecto}" styleClass="ikont-"    />
-                                    <h:outputLabel  styleClass="ikont-hol- "    styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  />
-                                    <h:outputLabel  styleClass="ikont-hol- "     value="Subtipo:"  styleClass="ikont-"   />
-                                    <h:outputLabel  styleClass="ikont-hol- "    styleClass="ikont-"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                    <h:outputLabel  styleClass="ikont-hol-clspry "     value="#{var.claseProyecto}" />
+                                    <h:outputLabel  styleClass="ikont-hol-strdescclaseobra"     value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                                    <h:outputLabel  styleClass="ikont-hol-tipoPry"    value="#{var.tipoProyecto}"    />
+                                    <h:outputLabel  styleClass="ikont-hol-tipprynom"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  />
+                                    <h:outputLabel  styleClass="ikont-hol-subtipo "     value="Subtipo:"     />
+                                    <h:outputLabel  styleClass="ikont-hol-strdesctipoobra"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
 
                                 </h:panelGrid>
 
@@ -1243,68 +1243,68 @@
                         <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2"  columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2" >
                             <h:panelGrid  >
 
-                                <div id="sideline"><label styleClasstextlittle2">Â¿DÃ“NDE ESTÃ� UBICADO #{var.textobra8}?</label></div>
+                                <div id="sideline"><label class="textlittle2">Â¿DÃ“NDE ESTÃ� UBICADO #{var.textobra8}?</label></div>
                                 <interkont:spacer height="5" />
                                 <h:panelGrid columns="2" >
                                     <h:panelGrid width="30%" >
                                         <h:panelGrid   columnClasses="panelderecha, panelizquierda, panelizquierda">
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strZona" value="#{var.zona}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strZona"   id="strZona" value="#{var.zona}"   />
                                             <interkont:spacer width="20"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strZonaOut" styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strZonaOut"   id="strZonaOut"  value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}"/>
 
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strComuna" value="#{var.comuna}" styleClass="ikont-"   rendered="false"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strComunaOut" value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" rendered="false"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strComuna"   id="strComuna" value="#{var.comuna}"    rendered="false"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strComunaOut"   id="strComunaOut" value="#{Supervisor$AdministrarObraNew.obra.strcomuna}" rendered="false"/>
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strBarrio" value="#{var.barrio}"  rendered="false"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strBarrioOut" value="#{Supervisor$AdministrarObraNew.obra.strbarrio}" rendered="false"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strBarrio"   id="strBarrio" value="#{var.barrio}"  rendered="false"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strBarrio "   id="strBarrioOut" value="#{Supervisor$AdministrarObraNew.obra.strbarrio}" rendered="false"/>
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strDireccionProyecto" value="#{var.label_direccion}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strDireccionProyecto"   id="strDireccionProyecto" value="#{var.label_direccion}" />
                                             <interkont:spacer width="20"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strDireccionProyectoOut" styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                            <h:outputLabel  styleClass="ikont-hol-strDireccionProyectoOut"   id="strDireccionProyectoOut"    value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLatitud"  value="#{var.latitud}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strLatitud"   id="strLatitud"  value="#{var.latitud}"  />
                                             <interkont:spacer width="20"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLatitudOut" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}" styleClass="ikont-"   />
+                                            <h:outputLabel  styleClass="ikont-hol-strLatitudOut"   id="strLatitudOut" value="#{Supervisor$AdministrarObraNew.obra.floatlatitud}"  />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLongitud" value="#{var.longitud}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strLongitud"   id="strLongitud" value="#{var.longitud}" />
                                             <interkont:spacer width="20"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLongitudOut" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}" styleClass="ikont-"   />
+                                            <h:outputLabel  styleClass="ikont-hol-strLongitudOut"   id="strLongitudOut" value="#{Supervisor$AdministrarObraNew.obra.floatlongitud}"   />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strRuta" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{var.rutas}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strRuta"   id="strRuta" rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{var.rutas}"   />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.boolruta}"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strRutaOut"  styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{Supervisor$AdministrarObraNew.obra.ruta.strnombretramo}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strRutaOut"   id="strRutaOut"  rendered="#{Supervisor$AdministrarObraNew.boolruta}" value="#{Supervisor$AdministrarObraNew.obra.ruta.strnombretramo}" />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strSede" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.sede}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strSede"   id="strSede" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.sede}"  />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strSedeOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.strnombre}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strSedeOut "   id="strSedeOut" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.strnombre}" />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strInstitucion" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.institucion} Educativa" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strInstitucion"   id="strInstitucion" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.institucion} Educativa"  />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strInstitucionOut" styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.strnombre}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strInstitucionOut "   id="strInstitucionOut"   rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.strnombre}" />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLocalidad" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.departamento}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strLocalidad"   id="strLocalidad" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.departamento}" />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strLocalidadOut"  styleClass="ikont-"   rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strdepartamento}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strLocalidadOut"   id="strLocalidadOut"    rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strdepartamento}" />
 
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}" styleClass="ikont-"  />
+                                            <h:outputLabel  styleClass="ikont-hol-strmunicipio"   id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}"  />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}"/>
-                                            <h:outputLabel  styleClass="ikont-hol- "   id="strMunicipioOut" styleClass="ikont-"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strMunicipioOut"   id="strMunicipioOut"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
                                         </h:panelGrid>
                                     </h:panelGrid>
 
                                     <h:panelGrid columns="1" id="mapastatic" width="70%" columnClasses="panelizquierda" >
-                                        <h:graphicImage  styleClass="ikont- "   value="#{Supervisor$AdministrarObraNew.ubicacionmapa}"
-                                                        width="350" height="193" />
+                                        <h:graphicImage  styleClass="ikont-hgi-ubicacionmapa"   value="#{Supervisor$AdministrarObraNew.ubicacionmapa}"
+                                                         width="350" height="193" />
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </h:panelGrid>
 
                             <h:panelGrid  >
 
-                                <div id="sideline"><label styleClasstextlittle2">CONÃ“ZCA LA EVOLUCIÃ“N</label></div>
+                                <div id="sideline"><label class="textlittle2">CONÃ“ZCA LA EVOLUCIÃ“N</label></div>
                                 <h:panelGrid columnClasses="panelderecha" >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
+                                    <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
 
                                     <div id="graficoEvolucionProyecto" >
                                     </div>
@@ -1315,7 +1315,7 @@
                     <h:form target="_blank">
                         <h:panelGrid id="pg_varios" columns="2"  rowClasses="alignverticaldetalle" columnClasses="pg_varioscol1,pg_varioscol2,pg_varioscol3">
                             <h:panelGrid id="pg_reloj"  >
-                                <div id="sideline"><label styleClasstextlittle2">TIEMPO PARA LA ENTREGA</label></div>
+                                <div id="sideline"><label class="textlittle2">TIEMPO PARA LA ENTREGA</label></div>
                                 <center>
                                     <ul >
                                         <li >
@@ -1350,19 +1350,19 @@
                                 </center>
 
                             </h:panelGrid>
-                            <h:panelGrid id="pg_impactosocial"  styleClass="ikont-"   >
+                            <h:panelGrid id="pg_impactosocial"  styleClass="ikont-hpg-pg_impactosocial"   >
 
-                                <div id="sideline"><label styleClasstextlittle2">IMPACTO SOCIAL</label></div>
+                                <div id="sideline"><label class="textlittle2">IMPACTO SOCIAL</label></div>
 
-                                <h:graphicImage  styleClass="ikont- "     url="/resources/imgs/impacto.png" width="150" height="90"></h:graphicImage>
+                                <h:graphicImage  styleClass="ikont-hgi-impacto"     url="/resources/imgs/impacto.png" width="150" height="90"></h:graphicImage>
 
                                 <h:panelGrid columns="2"  >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.personasbeneficiadas}" styleClass="ikont-"  ></h:outputText>
-                                    <h:outputLabel  styleClass="ikont-hol- "   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputLabel>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.empleosdirectos}:" styleClass="ikont-"  ></h:outputText>
-                                    <h:outputLabel  styleClass="ikont-hol- "   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputLabel>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.empleosindirectos}:" styleClass="ikont-"  ></h:outputText>
-                                    <h:outputLabel  styleClass="ikont-hol- "   styleClass="ikont-"   value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" ></h:outputLabel>
+                                    <h:outputText  styleClass="ikont- hot-personasbeneficiadas"   value="#{var.personasbeneficiadas}"   ></h:outputText>
+                                    <h:outputLabel  styleClass="ikont-hol-numhabbeneficiados"     value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputLabel>
+                                    <h:outputText  styleClass="ikont- hot-empleosdirectos"   value="#{var.empleosdirectos}:"  ></h:outputText>
+                                    <h:outputLabel  styleClass="ikont-hol-numempdirectos"    value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputLabel>
+                                    <h:outputText  styleClass="ikont- hot-empleosindirectos"   value="#{var.empleosindirectos}:"  ></h:outputText>
+                                    <h:outputLabel  styleClass="ikont-hol-numempindirectos"    value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" ></h:outputLabel>
                                 </h:panelGrid>
 
 
@@ -1371,11 +1371,11 @@
                             </h:panelGrid>
                             <h:panelGrid rendered="false" id="pg_descargarReportes"   styleClass="ikont-"  >
 
-                                <div id="sideline"><label styleClasstextlittle2">DESCARGAR REPORTES</label></div>
+                                <div id="sideline"><label class="textlittle2">DESCARGAR REPORTES</label></div>
                                 <h:panelGrid columns="3" >
-                                    <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="ikont-"    />
-                                    <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="ikont-"    />
-                                    <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="ikont-"    />
+                                    <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}"   />
+                                    <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}"/>
+                                    <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}"/>
 
                                 </h:panelGrid>
                             </h:panelGrid>
@@ -1401,15 +1401,15 @@
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider_ciu.css" rel="stylesheet" type="text/css" />
         <script  language="javascript"></script>
         <script type="text/javascript">
-                                    var $jpanel = jQuery.noConflict();
-                                    $jpanel(document).ready(function() {
-                                        var $i = jQuery.noConflict();
-                                        $i('#slider3').slider3({
-                                            speed: 1800
+                                        var $jpanel = jQuery.noConflict();
+                                        $jpanel(document).ready(function() {
+                                            var $i = jQuery.noConflict();
+                                            $i('#slider3').slider3({
+                                                speed: 1800
+
+                                            });
 
                                         });
-
-                                    });
 
         </script>
     </ui:define>

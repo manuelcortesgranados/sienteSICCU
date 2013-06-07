@@ -74,7 +74,7 @@
                     </f:facet>
 
                     <div id="container">
-                        <div id="slider" styleClassdivSlider">
+                        <div id="slider" class="divSlider">
                             <a4j:repeat value="#{ControlGerencial.listaimagenesslider}" var="imagen">
                                 <div>
                                     <h:graphicImage  styleClass="ikont-hgi-strnombrecrot"   alt="#{imagen.obra.strnombrecrot}" url="#{var.ipserver}siente#{imagen.strubicacion}" />
@@ -192,7 +192,7 @@
                                     <div id="capaContent">
                                         <div>
                                             <canvas id="meterds" width="270" height="137">
-                                                <div styleClasscanvasfallback">[No canvas support]</div></canvas>
+                                                <div class="canvasfallback">[No canvas support]</div></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +263,7 @@
                                     <interkont:spacer height="50"/>
                                     <a4j:repeat value="#{ControlGerencial.listaServiciosAHAtendidas}" var="item">
 
-                                        <li styleClassliItemAtencion">
+                                        <li class="liItemAtencion">
                                             <h:outputText  styleClass="ikont-hot-etiqueta"   value="#{item.etiqueta}:"/>
 
                                             <h:outputText  styleClass="ikont-hot-valormoney"   value="#{item.valormoney}">
