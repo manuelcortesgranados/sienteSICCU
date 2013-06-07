@@ -14,7 +14,7 @@
         <f:facet name="header">
             <h:panelGroup >
                 <center>
-                    <h:outputText  styleClass="ikont "   value="#{var.infocontacto}" />
+                    <h:outputText  styleClass="ikont-hot-infcontact" value="#{var.infocontacto}" />
                 </center>
             </h:panelGroup>
         </f:facet>
@@ -23,38 +23,38 @@
             <h:form>
                 <center>
                     <h:panelGrid columns="2" id="infocontacto">
-                        <h:outputText  styleClass="ikont "   value="#{var.nombreah}" />
-                        <h:inputText id="nombreahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-nmah" value="#{var.nombreah}" />
+                        <h:inputText styleClass="ikont-hit-nmahsol" id="nombreahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strnombre}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.apellidoah}" />
-                        <h:inputText id="apellidoahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}" disabled="true" />
+                        <h:outputText styleClass="ikont-hot-apel" value="#{var.apellidoah}" />
+                        <h:inputText  styleClass="ikont-hit-apelah" id="apellidoahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strapellido1}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.cedulaah}" />
-                        <h:inputText id="cedulaahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.intcedula}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-ced" value="#{var.cedulaah}" />
+                        <h:inputText styleClass="ikont-hit-cedah" id="cedulaahsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.intcedula}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.departamento}" />
-                        <h:inputText id="departamentosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
+                        <h:outputText styleClass="ikont-hot-depto" value="#{var.departamento}" />
+                        <h:inputText styleClass="ikont-hit-deptoah" id="departamentosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.municipio}" />
-                        <h:inputText id="municipiosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-munic" value="#{var.municipio}" />
+                        <h:inputText styleClass="ikont-hit-municah" id="municipiosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.entidadah}" />
-                        <h:inputText id="entidad" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-enti" value="#{var.entidadah}" />
+                        <h:inputText styleClass="ikont-hit-entiah" id="entidad" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.CARGO}" />
-                        <h:inputText id="cargosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.cargo.strdescripcion}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-carg" value="#{var.CARGO}" />
+                        <h:inputText  styleClass="ikont-hit-cargah" id="cargosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.cargo.strdescripcion}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.mail}" />
-                        <h:inputText id="mailsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.stremail}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-mail" value="#{var.mail}" />
+                        <h:inputText styleClass="ikont-hit-mailah" id="mailsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.stremail}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.telefonoah}" />
-                        <h:inputText id="telefonosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strtelefono1}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-telf" value="#{var.telefonoah}" />
+                        <h:inputText styleClass="ikont-hit-telfah" id="telefonosol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strtelefono1}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.celular}" />
-                        <h:inputText id="celularsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strmovil}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-cel" value="#{var.celular}" />
+                        <h:inputText styleClass="ikont-hit-celah" id="celularsol" value="#{SessionBeanCobra.atencionhumanitariaService.solicitudmaestro.tercero.strmovil}" disabled="true" />
                     </h:panelGrid>
 
-                    <a4j:commandButton id="btn_aceptar" value="#{var.aceptar}"
+                    <a4j:commandButton id="btn_aceptar" value="#{var.aceptar}" style="ikont-acb-acept"
                                        onclick="#{rich:component('panelinformacioncontacto')}.hide();
                                                return false;"
                                         />

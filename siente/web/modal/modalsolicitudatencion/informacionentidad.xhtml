@@ -14,7 +14,7 @@
         <f:facet name="header">
             <h:panelGroup>
                 <center>
-                    <h:outputText  styleClass="ikont "   value="#{var.infoentidad}" />
+                    <h:outputText  styleClass="ikont-hot-infenti"  value="#{var.infoentidad}" />
                 </center>
             </h:panelGroup>
         </f:facet>
@@ -23,29 +23,29 @@
             <h:form>
                 <center>
                     <h:panelGrid columns="2">
-                        <h:outputText  styleClass="ikont "   value="#{var.nombreah}" />
-                        <h:inputText id="nombreinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strnombrecompleto}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-nom" value="#{var.nombreah}" />
+                        <h:inputText styleClass="ikont-hit-nomah" id="nombreinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strnombrecompleto}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.nit}" />
-                        <h:inputText id="nitinfoentidad"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.intcedula}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-nit" value="#{var.nit}" />
+                        <h:inputText styleClass="ikont-hit-nitah" id="nitinfoentidad"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.intcedula}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.departamento}" />
-                        <h:inputText id="departamento" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-dpto" value="#{var.departamento}" />
+                        <h:inputText styleClass="ikont-hit-dptoah" id="departamento" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strdepartamento}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.municipio}" />
-                        <h:inputText id="municipio" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-muni" value="#{var.municipio}" />
+                        <h:inputText styleClass="ikont-hit-muniah" id="municipio" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.localidadByStrcodigolocalidad.strmunicipio}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.mail}" />
-                        <h:inputText  id="mail" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.stremail}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-meil" value="#{var.mail}" />
+                        <h:inputText   styleClass="ikont-hit-meilah" id="mail" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.stremail}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.website}" />
-                        <h:inputText id="websiteinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strpaginaweb}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-web" value="#{var.website}" />
+                        <h:inputText styleClass="ikont-hit-webah" id="websiteinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strpaginaweb}" disabled="true" />
 
-                        <h:outputText  styleClass="ikont "   value="#{var.telefonoah}" />
-                        <h:inputText id="telefonoinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono1}  #{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono2}" disabled="true" />
+                        <h:outputText  styleClass="ikont-hot-telfon" value="#{var.telefonoah}" />
+                        <h:inputText styleClass="ikont-hit-telfonah" id="telefonoinfoentidad" value="#{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono1}  #{AtencionHumanitaria$AdminSolicitudAtencion.entidadUsuario.strtelefono2}" disabled="true" />
                     </h:panelGrid>
 
-                    <a4j:commandButton id="btn_aceptar"  value="#{var.aceptar}"
+                    <a4j:commandButton id="btn_aceptar"  value="#{var.aceptar}" styleClass="ikont-acb-acpt"
                                        onclick="#{rich:component('panelInformacionEntidad')}.hide();
                                                return false;"
                                         />
