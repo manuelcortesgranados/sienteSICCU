@@ -18,13 +18,13 @@
                         <center>
                             <div >
                                 <marquee scrolldelay="200" behavior="alternate" >
-                                    <rich:message for="txt_strnombre_imagen" styleClass="ikont"   />
+                                    <rich:message for="txt_strnombre_imagen" styleClass="ikont-rm-nombreimg"/>
                                 </marquee>
                             </div>
 
                             <h:panelGroup>
-                                <h:outputText  styleClass="ikont "    value="#{var.houtbusquedarapida} " />
-                                <h:inputText value="#{Supervisor$AdministrarObraNew.valorFiltroImagenevolucionobra}" size="52" immediate="true">
+                                <h:outputText  styleClass="ikont-hot-busqrapida" value="#{var.houtbusquedarapida} "/>
+                                <h:inputText styleClass="ikont-hit-filtroimgevol" value="#{Supervisor$AdministrarObraNew.valorFiltroImagenevolucionobra}" size="52" immediate="true">
                                     <a4j:ajax event="keyup" render="tablaImagenesevolucion" execute="@this" />
                                 </h:inputText>
                             </h:panelGroup>
@@ -40,46 +40,46 @@
                                                  sortBy="#{currentRow.strnombre}" sortOrder="ascending"
                                                  width="470px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont "   value="#{var.descripcion}" />
+                                            <h:outputText  styleClass="ikont-hot-descp" value="#{var.descripcion}" />
                                         </f:facet>
-                                        <h:outputText  styleClass="ikont "   value="#{currentRow.strnombre}" />
+                                        <h:outputText  styleClass="ikont-hot-strnombreimg" value="#{currentRow.strnombre}" />
                                     </rich:column>
 
                                     <rich:column sortBy="#{currentRow.datefecha}" sortOrder="ascending" width="150px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont "   value="#{var.fechadelaimagen}" />
+                                            <h:outputText  styleClass="ikont-hot-fecimg" value="#{var.fechadelaimagen}" />
                                         </f:facet>
                                         
-                                        <h:outputText  styleClass="ikont "   value="#{currentRow.datefecha}">
+                                        <h:outputText  styleClass="ikont-hot-datefech" value="#{currentRow.datefecha}">
                                             <f:convertDateTime pattern="yyyy-MMM-dd" />
                                         </h:outputText>
                                     </rich:column>
 
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont "   value="#{var.Ver}" />
+                                            <h:outputText  styleClass="ikont-hot-ver" value="#{var.Ver}" />
                                         </f:facet>
                                         
                                         <h:commandButton action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}"
-                                                         styleClass="ikont"   immediate="true" />
+                                                         styleClass="ikont-hcb-downimg" immediate="true" />
                                     </rich:column>
                                     
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont "   value="#{var.editar}" />
+                                            <h:outputText  styleClass="ikont-hot-editarimg" value="#{var.editar}" />
                                         </f:facet>
                                         
                                         <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}" image="/resources/botones/lapiz.png"
-                                                           oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show();" 
+                                                           oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show();" styleClass="ikont-acb-editarimg"
                                                            title="#{var.editar}" render="pg_campos_editar_imagenevolucion" immediate="true" />
                                     </rich:column>
                                     
                                     <rich:column  width="60px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont "   value="#{var.eliminar}" />
+                                            <h:outputText  styleClass="ikont-hot-elimiarimg" value="#{var.eliminar}" />
                                         </f:facet>
                                         
-                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" styleClass="ikont"  
+                                        <a4j:commandButton action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" styleClass="ikont-acb-eliminarimg"  
                                                            rendered="#{!currentRow.tipoimagen.boolobligatorio}"
                                                            oncomplete="#{rich:component('mp_eliminar_imagenevolucion')}.show();" 
                                                            title="#{var.eliminar}" immediate="true" />
@@ -97,19 +97,19 @@
                                 <f:facet name="header">
                                     <rich:columnGroup>
                                         <rich:column colspan="3" >
-                                            <h:outputText  styleClass="ikont "   value="#{var.subidarapidadeimagenes}" />
+                                            <h:outputText  styleClass="ikont-hot-subimg" value="#{var.subidarapidadeimagenes}" />
                                         </rich:column>
                                         
                                         <rich:column breakRowBefore="true">
-                                            <h:outputText  styleClass="ikont "   value="#{var.descripcion}" />
+                                            <h:outputText  styleClass="ikont-hot-descrp" value="#{var.descripcion}" />
                                         </rich:column>
                                         
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont "   value="#{var.fechadelaimagen}" />
+                                            <h:outputText  styleClass="ikont-hot-fecimg" value="#{var.fechadelaimagen}" />
                                         </rich:column>
                                         
                                         <rich:column>
-                                            <h:outputText  styleClass="ikont "   value="#{var.subir}" />
+                                            <h:outputText  styleClass="ikont-hot-up" value="#{var.subir}" />
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
@@ -117,7 +117,7 @@
                                 <f:facet name="footer">
                                     <rich:columnGroup >
                                         <rich:column>
-                                            <h:inputText id="txt_strnombre_imagen" value="#{Supervisor$AdministrarObraNew.imagenevolucionobra.strnombre}" required="true" requiredMessage="#{var.debeproporcionaadescrip}" size="30" />
+                                            <h:inputText styleClass="ikont-hit-nomimg" id="txt_strnombre_imagen" value="#{Supervisor$AdministrarObraNew.imagenevolucionobra.strnombre}" required="true" requiredMessage="#{var.debeproporcionaadescrip}" size="30" />
                                         </rich:column>
                                         
                                         <rich:column>
@@ -126,22 +126,21 @@
                                         
                                         <rich:column>
                                             <h:panelGrid id="panel_subir_imagenevolucion"  columns="3">
-                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" styleClass="ikont"  
+                                                <a4j:commandButton id="adjuntarImagenevolucion"  immediate="true"  value="#{var.examinar}" styleClass="ikont-acb-adjimg"  
                                                                    oncomplete="#{rich:component('panelUploadImagenevolucion')}.show();" />
                                                 
                                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$AdministrarObraNew.subirImagenevolucion.files}" var="file" >
-                                                    <h:outputText  styleClass="ikont "   id="otxt_nombrearchivo" value=" #{file.onlyName}" />
+                                                    <h:outputText  styleClass="ikont-hot-nomarchiv" id="otxt_nombrearchivo" value=" #{file.onlyName}" />
                                                 </rich:dataGrid>
                                                 
                                                 <a4j:commandButton id="bt_agregar" action="#{Supervisor$AdministrarObraNew.bt_agregar_imagenevolucion_action}" image="/resources/botones/mas.png" title="#{var.agregar}"
-                                                                   render="panel_imagenesevolucion, gpImagenModal"
+                                                                   render="panel_imagenesevolucion, gpImagenModal" styleClass="ikont-acb-addimg"
                                                                    rendered="#{Supervisor$AdministrarObraNew.subirImagenevolucion.size!=0}" />
                                             </h:panelGrid>
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
-                            </rich:dataTable>
-                            
+                            </rich:dataTable>                            
                             <interkont:spacer height="20px"  />
                         </center>
                     </h:panelGroup>

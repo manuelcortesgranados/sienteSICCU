@@ -15,20 +15,20 @@
         <f:facet name="header" >            
             <h:panelGroup >
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont "   url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
-                    <h:outputText  styleClass="ikont "    value="#{var.loginfoterquees}" styleClass="ikont"  />
+                    <h:graphicImage  styleClass="ikont-hgi-imagotipo"  url="/resources/imgs/modal/imagotipo_siente.png" width="45"/>
+                    <h:outputText  styleClass="ikont-hot-logfoter" value="#{var.loginfoterquees}" />
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_queessiente" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_queessiente" styleClass="ikont-acl-esconder"   
                              title="#{var.cerrar}" immediate="true" onclick="#{rich:component('queessiente')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:form styleClass="ikont"  >
+        <h:form >
             <h:panelGroup  layout="block" >
 
                 <h:panelGroup   layout="block" >
@@ -47,8 +47,8 @@
                             <li id="slider-li-one" >
                                 <div >                                        
                                     <p id="what-siente">                                            
-                                        <label id="what-siente-title"><h:outputText  styleClass="ikont "   value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
-                                        <h:outputText  styleClass="ikont "   value="#{var.leyendamodalquees}"></h:outputText>
+                                        <label id="what-siente-title"><h:outputText  styleClass="ikont-hot-logfoterquees"   value="#{var.loginfoterquees}"></h:outputText></label><br/><br/>
+                                        <h:outputText  styleClass="ikont-hot-leyendmodal" value="#{var.leyendamodalquees}"></h:outputText>
 
                                     </p>
                                     <div styleClass="what-siente-img">
@@ -71,11 +71,11 @@
                                     <h:panelGroup rendered="#{var.vartextoquees}">
                                         <rich:panel  >
                                             <p id="what-siente">
-                                                <label id="what-siente-title"><h:outputText  styleClass="ikont "   value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona2}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona3}"  > </h:outputText>
-                                                <h:outputText  styleClass="ikont "    value="#{var.leyendamodalqueesfunciona4}"  > </h:outputText>
+                                                <label id="what-siente-title"><h:outputText  styleClass="ikont-lbl-titmodal" value="#{var.titulomodalquees}"></h:outputText></label><br/><br/>
+                                                <h:outputText  styleClass="ikont-hot-leyenfuncion" value="#{var.leyendamodalqueesfunciona}" > </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyenfuncion2" value="#{var.leyendamodalqueesfunciona2}"> </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyenfuncion3" value="#{var.leyendamodalqueesfunciona3}"> </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-leyenfuncion4" value="#{var.leyendamodalqueesfunciona4}"> </h:outputText>
                                             </p>
                                         </rich:panel>
                                     </h:panelGroup>

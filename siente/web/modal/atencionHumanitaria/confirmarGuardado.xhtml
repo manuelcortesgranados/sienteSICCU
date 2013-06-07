@@ -25,7 +25,7 @@
                     <h:panelGrid columns="2" >
 
                         <h:commandButton  action="#{Financiera$FiduFinanciera.confirma}" value="#{var.aceptar}" rendered="#{Financiera$FiduFinanciera.financieraService.guardado}"
-                                          onclick="#{rich:component('panelConfirmaguardado')}.hide();" />
+                                          onclick="#{rich:component('panelConfirmaguardado')}.hide();" title="X"/>
 
                         <h:form >
                             <a4j:commandButton id="aceptar"

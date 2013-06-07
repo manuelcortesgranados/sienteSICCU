@@ -22,7 +22,7 @@
         <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-tipoContCon"   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
+        <h:outputText  styleClass="ikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
     </ui:define>
     <ui:define name="body">
         <h:form target="_blank" > 
@@ -35,7 +35,8 @@
                 <interkont:spacer height="20px" />
                 <h:panelGroup id="panel_docu_contrato">
                     <rich:dataTable id="tablaDocumentosContrato"
-                                    sortMode="single"                                    
+                                    sortMode="single"
+                                    
                                     value="#{SessionBeanCobra.cobraService.listaDocumentosContrato}"
                                     var="currentRow" 
                                     rowKeyVar="filaSeleccionada"
@@ -43,40 +44,40 @@
                                     rowClasses="cabezo_tabla01, cabezo_tabla02" >
                         <rich:column width="320px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-houtnomdocu"   value="#{var.houtnomdocu} "/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.houtnomdocu} "/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- hot-strnom"   value="#{currentRow.strnombre}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{currentRow.strnombre}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-tipo"   value="#{var.tipo}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- hot-strdesctipod"   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{currentRow.tipodocumento.strdesctipodoc}"/>
                         </rich:column>
                         <rich:column width="150px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-fechadoc"    value="#{var.fechadeldocumento}"/>
+                                <h:outputText  styleClass="ikont- "    value="#{var.fechadeldocumento}"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont- hot-datfec"   value="#{currentRow.datefecha}">
+                            <h:outputText  styleClass="ikont- "   value="#{currentRow.datefecha}">
                                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column  width="60px">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-ver"   value="#{var.Ver}"/>
+                                <h:outputText  styleClass="ikont- "   value="#{var.Ver}"/>
                             </f:facet>
                             <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo(filaSeleccionada)}"  immediate="true">
-                                <h:graphicImage  styleClass="ikont-hgi-bt_ver"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
                         <rich:column  width="60px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalleproyecto}">
                             <f:facet name="header">
-                                <h:outputText  styleClass="ikont- hot-del"    value="#{var.eliminar}"/>
+                                <h:outputText  styleClass="ikont- "    value="#{var.eliminar}"/>
                             </f:facet>
                             <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action(filaSeleccionada)}"
                                              rendered="#{!currentRow.tipodocumento.obligatorio}" execute="@this"
                                              title="#{var.eliminar}"  immediate="true" render="tablaDocumentosContrato">
-                                <h:graphicImage  styleClass="ikont-hgi-bt-del"    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -93,19 +94,19 @@
                 <f:facet name="header">
                     <rich:columnGroup>
                         <rich:column colspan="4" >
-                            <h:outputText  styleClass="ikont- hot-rccoldoc1"   value="#{var.subidarapidadedocumentos}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.subidarapidadedocumentos}"/>
                         </rich:column>
                         <rich:column breakRowBefore="true" >
-                            <h:outputText  styleClass="ikont- hot-rccoldoc2"    value="#{var.nombre}"/>
+                            <h:outputText  styleClass="ikont- "    value="#{var.nombre}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  styleClass="ikont- hot-rccoldoc3"   value="#{var.tipo}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.tipo}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  styleClass="ikont- hot-rccoldoc4"   value="#{var.fechadeldocumento}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.fechadeldocumento}"/>
                         </rich:column>
                         <rich:column >
-                            <h:outputText  styleClass="ikont- hot-rccoldoc5"   value="#{var.subir}"/>
+                            <h:outputText  styleClass="ikont- "   value="#{var.subir}"/>
                         </rich:column>
                     </rich:columnGroup>
                 </f:facet>
@@ -124,10 +125,10 @@
                         </rich:column>
                         <rich:column >
                             <h:panelGrid id="panelsubido" columns="3">
-                               <a4j:commandButton styleClass="ikont-acb-exa"   value="#{var.examinar}" immediate="true"
+                               <a4j:commandButton styleClass="ikont-"   value="#{var.examinar}" immediate="true"
                                                            oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
                                  <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" >
-                                            <h:outputText  styleClass="ikont- hot-filenom"   value=" #{file.nombre}"/>
+                                            <h:outputText  styleClass="ikont- "   value=" #{file.nombre}"/>
                                         </rich:dataGrid>
                                <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"
                                                            title="#{var.agregar}" value="#{var.agregar}"
