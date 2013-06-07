@@ -11,13 +11,15 @@
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  styleClass="ikont-hpg-menulateralgestion"  >
 
             <h:panelGrid styleClass="ikont-hpg-nuevoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
-                <h:commandLink  styleClass="ikont-acl-crearnuevoproyecto"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true"  />
+                <h:commandLink  styleClass="ikont-acl-crearnuevoproyecto"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true"   />
                 <h:commandLink  styleClass="ikont-acl-nuevoproyecto"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" />
             </h:panelGrid>
 
             <h:panelGrid styleClass="ikont-hpg-mapa"   cellpadding="0" cellspacing="0" >
                 <h:commandLink  styleClass="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
-                <h:commandLink  styleClass="ikont-hcl-activarmapa"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false" />
+                <h:commandLink  styleClass="ikont-hcl-activarmapa"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false">
+                
+                </h:commandLink>
             </h:panelGrid>
 
             <h:panelGrid styleClass="ikont-hpg-iniciartablerocontrol"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
