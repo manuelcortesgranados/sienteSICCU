@@ -14,7 +14,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"   value="Cargar Giros"/>
+        <h:outputText  styleClass="ikont-hot-cargargiros"   value="Cargar Giros"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -29,7 +29,7 @@
                     <center>
                         <h:panelGrid columns="2" id="panelen">
 
-                            <h:outputLabel  styleClass="ikont-hol- "   id="lblnumeroorden"  value="#{var.numeroorden}" for="txtNumeroorden"/>
+                            <h:outputLabel  styleClass="ikont-hol-lblnumeroorden"   id="lblnumeroorden"  value="#{var.numeroorden}" for="txtNumeroorden"/>
                             <h:panelGroup>
                                 <h:inputText  id="txtNumeroorden"  value="#{Financiera$FiduFinanciera.financieraService.ordendepago.strordenpago}"
                                               required="true">
@@ -37,16 +37,16 @@
                                 <rich:message for="txtNumeroorden" />
                             </h:panelGroup>
 
-                            <h:outputText  styleClass="ikont- hot-"    value="#{var.fecha}"/>
+                            <h:outputText  styleClass="ikont-hot-fecha"    value="#{var.fecha}"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fechaorden"
                                            value="#{Financiera$FiduFinanciera.financieraService.ordendepago.datefechaordenpago}" inputSize="10" immediate="true">
 
                             </rich:calendar>
 
-                            <h:outputLabel  styleClass="ikont-hol- "   id="lblencargo"  value="#{var.encargofiduciario}"/>
+                            <h:outputLabel  styleClass="ikont-hol-lblencargo"   id="lblencargo"  value="#{var.encargofiduciario}"/>
                             <h:panelGrid columns="3"  >
                                 <h:panelGroup id="encargoorden" >
-                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{Financiera$FiduFinanciera.financieraService.ordendepago.encargofiduciario.strdescripcion}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-strdescripcion"   value="#{Financiera$FiduFinanciera.financieraService.ordendepago.encargofiduciario.strdescripcion}"/>
 
                                     <a4j:commandButton  id="bt-ver-listado-encargo"
                                                         oncomplete="#{rich:component('mp-listado-encargo')}.show();"  value="#{var.verencargo}" immediate="true"
@@ -55,14 +55,14 @@
                                 </h:panelGroup>
                             </h:panelGrid>
 
-                            <h:outputText  styleClass="ikont- hot-"   id="lbldescripcionorden"  value="#{var.descripcion}"/>
+                            <h:outputText  styleClass="ikont-hot-lbldescripcionorden"   id="lbldescripcionorden"  value="#{var.descripcion}"/>
                             <h:panelGroup>
                                 <h:inputTextarea id="txtdescripcionorden" cols="23" rows="4" value="#{Financiera$FiduFinanciera.financieraService.ordendepago.strdescripcionordenpago}"
                                                  required="true"/>
                                 <rich:message for="txtdescripcionorden"  />
                             </h:panelGroup>
 
-                            <h:outputLabel  styleClass="ikont-hol- "   id="lblvalororden"  value="#{var.valororden}"/>
+                            <h:outputLabel  styleClass="ikont-hol-lblvalororden"   id="lblvalororden"  value="#{var.valororden}"/>
                             <h:panelGroup>
                                 <h:inputText id="txtvalororden" value="#{Financiera$FiduFinanciera.financieraService.ordendepago.numvlrordenpago}"
                                              required="true" >
@@ -90,7 +90,7 @@
             <h:form>
                 <rich:collapsiblePanel id="ordenpago" header="Listado Ordenes De Pago" switchType="ajax" expanded="false">
                     <h:panelGrid columns="3">
-                        <h:outputText  styleClass="ikont- hot-"   value="#{var.buscarpalabraclave} " />
+                        <h:outputText  styleClass="ikont-hot-buscarpalabraclave"   value="#{var.buscarpalabraclave} " />
                         <h:inputText value="#{Financiera$FiduFinanciera.filtro}" size="100"/>
 
                         <a4j:commandButton render="tablaOrden" action="#{Financiera$FiduFinanciera.filtrarOrden}" value="Buscar"/>
@@ -108,43 +108,43 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="4">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.listadetercero} de Orden de pago  #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont-hot-listadetercero"   value="#{var.listadetercero} de Orden de pago  #{Financiera$FiduFinanciera.totalfilas} #{var.paginaCiu} #{Financiera$FiduFinanciera.pagina}#{var.deCiu}#{Financiera$FiduFinanciera.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.numeroorden}"/>
+                                    <h:outputText  styleClass="ikont-hot-numeroorden"   value="#{var.numeroorden}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.fecha}" />
+                                    <h:outputText  styleClass="ikont-hot-fecha"   value="#{var.fecha}" />
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valor}"/>
+                                    <h:outputText  styleClass="ikont-hot-valor"   value="#{var.valor}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.numeroencargo}"/>
+                                    <h:outputText  styleClass="ikont-hot-numeroencargo"   value="#{var.numeroencargo}"/>
                                 </rich:column>
                                 <rich:column width="150px">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.solicitante}"/>
+                                    <h:outputText  styleClass="ikont-hot-solicitante"   value="#{var.solicitante}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="CuerpoOrden">
                             <rich:column  width="150px" breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Orden.strordenpago}"/>
+                                <h:outputText  styleClass="ikont-hot-strordenpago"   value="#{_Orden.strordenpago}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Orden.datefechaordenpago}"/>
+                                <h:outputText  styleClass="ikont-hot-datefechaordenpago"   value="#{_Orden.datefechaordenpago}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   id="otxt-valorObras" value="#{_Orden.numvlrordenpago}">
+                                <h:outputText  styleClass="ikont-hot-numvlrordenpago"   id="otxt-valorObras" value="#{_Orden.numvlrordenpago}">
                                     <f:convertNumber pattern="$ ###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Orden.encargofiduciario.intnumencargofiduciario}"/>
+                                <h:outputText  styleClass="ikont-hot-intnumencargofiduciario"   value="#{_Orden.encargofiduciario.intnumencargofiduciario}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Orden.tercero.strnombrecompleto}"/>
+                                <h:outputText  styleClass="ikont-hot-strnombrecompleto"   value="#{_Orden.tercero.strnombrecompleto}"/>
                             </rich:column>
                         </rich:columnGroup>
                         <f:facet name="footer">
