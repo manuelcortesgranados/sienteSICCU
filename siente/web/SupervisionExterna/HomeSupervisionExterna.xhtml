@@ -14,10 +14,11 @@
     <ui:define name="head">
         <title>Proyectos Supervisión Externa</title>
         <h:outputScript name="script_supervisor.js" />
+        <h:outputScript library="css" name="/resources/css/SupervisionExterna/HomeSupervisionExterna.css"/>
     </ui:define>
     
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"   value="Mis Proyectos" />
+        <h:outputText  styleClass="ikont-hot-misproyect" value="Mis Proyectos" />
     </ui:define>
     
     <ui:define name="menu">
@@ -33,17 +34,17 @@
             <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <div styleClassbuscador">
+                        <div>
                             <div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClaveProyecto" styleClass="ikont-"   onfocus="clearText(this);" onblur="clearText(this);" />
-                                    <h:commandButton type="button" id="filtrarVlaveProyecto"  value="#{var.buscar}" styleClass="ikont-"   />
+                                    <h:inputText id="txtPalabraClaveProyecto" styleClass="ikont-hit-palabraclavproy" onfocus="clearText(this);" onblur="clearText(this);" />
+                                    <h:commandButton type="button" id="filtrarVlaveProyecto" value="#{var.buscar}" styleClass="ikont-hcb-buscar"/>
                                 </label>
                             </div>
                         </div>
                     </td>
                     <td>
-                        <a4j:commandLink styleClass="ikont-"   type="submit" value="Búsqueda avanzada" />
+                        <a4j:commandLink styleClass="ikont-acl-busqavanzada" type="submit" value="Búsqueda avanzada" />
                     </td>
                 </tr>
             </table>

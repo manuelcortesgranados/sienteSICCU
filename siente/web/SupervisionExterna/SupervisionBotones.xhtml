@@ -11,61 +11,64 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/facelets/template_supervision.xhtml">
 
+    <ui:define name="head">
+        <h:outputScript library="css" name="/resources/css/SupervisionExterna/SupervisionBotones.css"/>
+    </ui:define>
     <ui:define name="body">
-        <div id="sliderpanel_outer">
-            <div id="sliderpanel_inner">
-                <div id="sliderpanel_items">
-                    <div id="sliderpanel_items">
+        <div id="sliderpanel_outer" class="ikont-d-sliderout">
+            <div id="sliderpanel_inner" class="ikont-d-sliderinn">
+                <div id="sliderpanel_items" class="ikont-d-slideritem">
+                    <div id="sliderpanel_items" class="ikont-d-slideritems">
                         <h:form id="form_supervision">
                             <a4j:repeat>
-                                <div styleClasssliderpanel_element">
+                                <div>
                                     <strong>Información general</strong>
-                                    <a href=".#supervision" styleClasssupervision01 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-infgen"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div >
                                     <strong>Informe de visita</strong>
-                                    <a href=".#supervision" styleClasssupervision02 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-infvisita" />
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div >
                                     <strong>Información financiera</strong>
-                                    <a href=".#supervision" styleClasssupervision03 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-inffinanc"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div>
                                     <strong>Pólizas contrato de obra</strong>
-                                    <a href=".#supervision" styleClasssupervision04 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-polcontra"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div >
                                     <strong>Impacto social</strong>
-                                    <a href=".#supervision" styleClasssupervision05 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-inpcsocial" />
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div >
                                     <strong>Ubicación georeferenciada</strong>
-                                    <a href=".#supervision" styleClasssupervision06 anchorLink" />
+                                    <a href=".#supervision"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div>
                                     <strong>Actividades contractuales</strong>
-                                    <a href=".#supervision" styleClasssupervision07 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-actcontract" />
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div >
                                     <strong>Inf. general interventoría</strong>
-                                    <a href=".#supervision" styleClasssupervision08 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-infgenintervent"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div>
                                     <strong>Inf. financiera interventoría</strong>
-                                    <a href=".#supervision" styleClasssupervision09 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-inffininterv"/>
                                 </div>
-                                
-                                <div styleClasssliderpanel_element">
+
+                                <div>
                                     <strong>Pólizas interventoría</strong>
-                                    <a href=".#supervision" styleClasssupervision10 anchorLink" />
+                                    <a href=".#supervision" class="ikont-a-polinterv"/>
                                 </div>
                             </a4j:repeat>
                         </h:form>
@@ -74,24 +77,24 @@
             </div>
         </div>
     </ui:define>
-    
+
     <ui:include src="../SupervisionExterna/modal/InfoGeneralSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/InfoFinancieraSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/ImpactoSocialSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/InformeVisitaSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/UbicacionSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/PolizaContratoSupervision.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/InfoPolizaInterventoria.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/InfoGeneralInterventoria.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/ActividadesContractuales.xhtml" />
-    
+
     <ui:include src="../SupervisionExterna/modal/infoFinancieraInterventoria.xhtml" />    
 </ui:composition>

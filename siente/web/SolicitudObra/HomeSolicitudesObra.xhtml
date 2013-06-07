@@ -15,7 +15,7 @@
         <h:outputScript name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"   value="#{var.encontrarsolobra}"/>
+        <h:outputText  styleClass="ikont-hot-encontrarsolobra"   value="#{var.encontrarsolobra}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_soliobra.xhtml"/>
@@ -27,16 +27,16 @@
         <h:form>
             <table  border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td><div styleClassbuscador"><div id="buscador_space">
+                    <td><div styleClass="ikont-div-buscador"><div id="buscador_space">
                                 <label>
-                                    <h:inputText id="txtPalabraClave" styleClass="ikont-"   
+                                    <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave"   
                                                  value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"/>
                                     <a4j:commandButton type="button" action="#{SolicitudObra$GestionarSolicitudObra.buscar}"
-                                                       id="filtrar"  value="#{var.buscar}" styleClass="ikont-"   render="pn-proyectosPadres"/>
+                                                       id="filtrar"  value="#{var.buscar}" styleClass="ikont-a4jcb-filtrar"   render="pn-proyectosPadres"/>
                                 </label>
                             </div></div>
                     </td>
-                    <td><a4j:commandLink styleClass="ikont-"   type="submit" render="panelFiltroObra" value="#{var.houtbusquedaavanza}"
+                    <td><a4j:commandLink styleClass="ikont-a4jcl-houtbusquedaavanza"   type="submit" render="panelFiltroObra" value="#{var.houtbusquedaavanza}"
                                          oncomplete="#{rich:component('panelFiltroObra')}.show();" 
                                          action="#{SolicitudObra$GestionarSolicitudObra.iniciarfiltro}"/>
                     </td>
@@ -44,7 +44,7 @@
                 <tr>
                     <td>
                         <blink>
-                            <h:outputText  styleClass="ikont- hot-"   rendered="#{SolicitudObra$GestionarSolicitudObra.resulbusqueda}" value="#{SessionBeanCobra.solicitudService.mensaje}" />
+                            <h:outputText  styleClass="ikont-hot-mensaje"   rendered="#{SolicitudObra$GestionarSolicitudObra.resulbusqueda}" value="#{SessionBeanCobra.solicitudService.mensaje}" />
                         </blink>
                     </td>
                 </tr>
@@ -66,93 +66,93 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.totalsolicitues} #{SolicitudObra$GestionarSolicitudObra.totalfilas} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.pagina} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginas}" />
+                                    <h:outputText  styleClass="ikont-hot-totales"   value="#{var.totalsolicitues} #{SolicitudObra$GestionarSolicitudObra.totalfilas} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.pagina} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginas}" />
                                 </rich:column>
 
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.codigoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-codigoSolicitud"   value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.NOMBRE}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{var.NOMBRE}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valorSolicitado}"/>
+                                    <h:outputText  styleClass="ikont-hot-valorSolicitado"   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}"/>
+                                    <h:outputText  styleClass="ikont-hot-departamento"   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}"/>
+                                    <h:outputText  styleClass="ikont-hot-municipio"   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-estadoSolicitud"   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.tipoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-tipoSolicitud"   value="#{var.tipoSolicitud}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar}"/>
+                                    <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5 ||
                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 6 ||
                                                          SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.editar}"/>
+                                    <h:outputText  styleClass="ikont-hot-editar"   value="#{var.editar}"/>
                                 </rich:column>
                                 <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
+                                    <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar} #{var.proyectos}"/>
+                                    <h:outputText  styleClass="ikont-hot-consultarproyectos"   value="#{var.consultar} #{var.proyectos}"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.strconsecutivo}"/>
+                            <h:outputText  styleClass="ikont-hot-strconsecutivo"   value="#{currentRowTemp.strconsecutivo}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.strnombresolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-strnombresolicitud"   value="#{currentRowTemp.strnombresolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.doublevalorsolicitado}">
+                            <h:outputText  styleClass="ikont-hot-doublevalorsolicitado"   value="#{currentRowTemp.doublevalorsolicitado}">
                                 <f:convertNumber pattern="$ ###,###"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.localidad.strdepartamento}"/>
+                            <h:outputText  styleClass="ikont-hot-strdepartamento"   value="#{currentRowTemp.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.localidad.strmunicipio}"/>
+                            <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{currentRowTemp.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-strnombreestadosolicitud"   value="#{currentRowTemp.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowTemp.tiposolicitudobra.strdescripcion}"/>
+                            <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRowTemp.tiposolicitudobra.strdescripcion}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  title="#{var.buscarProyecto}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
-                                                styleClass="ikont-"   value="#{var.consultar}"/>
+                                                styleClass="ikont-a4jcb-buscarProyecto"   value="#{var.consultar}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6||
                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud != 1}"
-                                                styleClass="ikont-"   />
+                                                styleClass="ikont-a4jcb-editarsolicitud"   />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.aprobar}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud == 1 and
                                                 currentRowTemp.boolaprobado != false}"
-                                                styleClass="ikont-"   />
+                                                styleClass="ikont-a4jcb-aprobar"   />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.modificarobra}"
                                                 rendered="#{currentRowTemp.boolnuevo}"
                                                 action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud(filaSeleccionada)}"
                                                 oncomplete="#{rich:component('panelEliminarSolicitud')}.show();"
-                                                styleClass="ikont-"  />
+                                                styleClass="ikont-a4jcb-modificarobra"  />
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" 
@@ -161,7 +161,7 @@
                                               rendered="#{currentRowTemp.boolaprobado}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" 
                                               >
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btconsultarpng"    value="/resources/imgs/bt_consultar.png"/>
                                 </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">
@@ -192,84 +192,84 @@
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.solicitudesapro} #{SolicitudObra$GestionarSolicitudObra.totalfilasobra} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.paginaobra} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginasobra}" />
+                                    <h:outputText  styleClass="ikont-hot-totales"   value="#{var.solicitudesapro} #{SolicitudObra$GestionarSolicitudObra.totalfilasobra} #{var.paginaCiu} #{SolicitudObra$GestionarSolicitudObra.paginaobra} #{var.deCiu} #{SolicitudObra$GestionarSolicitudObra.totalpaginasobra}" />
                                 </rich:column>
                                 <rich:column breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.codigoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-codigoSolicitud"   value="#{var.codigoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.NOMBRE}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{var.NOMBRE}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.valorSolicitado}"/>
+                                    <h:outputText  styleClass="ikont-hot-valorSolicitado"   value="#{var.valorSolicitado}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}"/>
+                                    <h:outputText  styleClass="ikont-hot-departamento"   value="#{var.departamento}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}"/>
+                                    <h:outputText  styleClass="ikont-hot-municipio"   value="#{var.municipio}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.estadoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-estadoSolicitud"   value="#{var.estadoSolicitud}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.tipoSolicitud}"/>
+                                    <h:outputText  styleClass="ikont-hot-tipoSolicitud"   value="#{var.tipoSolicitud}"/>
                                 </rich:column>
                                 <!--
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar}"/>
+                                    <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}"/>
                                 </rich:column>                                        
                                 -->
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.asociarproyecto}"/>
+                                    <h:outputText  styleClass="ikont-hot-asociarproyecto"   value="#{var.asociarproyecto}"/>
                                 </rich:column>
                                 <rich:column>
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.consultar} Proyecto"/>
+                                    <h:outputText  styleClass="ikont-hot-consultarproyecto"   value="#{var.consultar} Proyecto"/>
                                 </rich:column>
                             </rich:columnGroup>
                         </f:facet>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.strconsecutivo}"/>
+                            <h:outputText  styleClass="ikont-hot-strconsecutivo"   value="#{currentRowObra.strconsecutivo}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.strnombresolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-strnombresolicitud"   value="#{currentRowObra.strnombresolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.doublevalorsolicitado}">
+                            <h:outputText  styleClass="ikont-hot-doublevalorsolicitado"   value="#{currentRowObra.doublevalorsolicitado}">
                                 <f:convertNumber pattern="$ ###,###"/>
                             </h:outputText>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.localidad.strdepartamento}"/>
+                            <h:outputText  styleClass="ikont-hot-strdepartamento"   value="#{currentRowObra.localidad.strdepartamento}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.localidad.strmunicipio}"/>
+                            <h:outputText  styleClass="ikont-hot-strmunicipio"   value="#{currentRowObra.localidad.strmunicipio}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.estadosolicitudch.strnombreestadosolicitud}"/>
+                            <h:outputText  styleClass="ikont-hot-strnombreestadosolicitud"   value="#{currentRowObra.estadosolicitudch.strnombreestadosolicitud}"/>
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{currentRowObra.tiposolicitudobra.strdescripcion}"/>
+                            <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRowObra.tiposolicitudobra.strdescripcion}"/>
                         </rich:column>
                         <!--
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 
                                               action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector(filaSeleccionada)}" >
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         -->
                         <rich:column>
                             <a4j:commandLink  title="#{var.asociarproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_contrato.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btcontratopng"    value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}"  execute="@this"
                                               action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" render="modaltablaproyectos, tablaproyectos" >
-                                <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_consultar.png"/>
+                                <h:graphicImage  styleClass="ikont-hgi-btconsultarpng"    value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <f:facet name="footer">

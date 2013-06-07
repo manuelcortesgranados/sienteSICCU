@@ -14,7 +14,7 @@
         <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"   value="#{var.cuentaprincipal}"/>
+        <h:outputText  styleClass="ikont-hot-cuentaprincipal"   value="#{var.cuentaprincipal}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_soliobra.xhtml"/>
@@ -30,54 +30,54 @@
 
                 <rich:collapsiblePanel switchType="ajax" id="gpDatosBasicos" >
                     <f:facet name="header">
-                        <h:outputText  styleClass="ikont- hot-"   value="1. #{var.cuentaprincipal}"/>
+                        <h:outputText  styleClass="ikont-hot-cuentaprincipal2"   value="1. #{var.cuentaprincipal}"/>
                     </f:facet>
                     <center>
                         <h:panelGroup>
 
                             <h:panelGrid columns="2" cellspacing="15" >
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.nombredecuenta}"/>
+                                <h:outputText  styleClass="ikont-hot-nombredecuenta"   value="#{var.nombredecuenta}"/>
                                 <h:inputText size="8" id="nombrecuenta"/>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.tipodecuenta}"/>
+                                <h:outputText  styleClass="ikont-hot-tipodecuenta"   value="#{var.tipodecuenta}"/>
                                 <h:selectOneMenu id="tipocuenta"/>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.montocuenta}"/>
+                                <h:outputText  styleClass="ikont-hot-montocuenta"   value="#{var.montocuenta}"/>
                                 <h:inputText size="8" id="montocuenta"/>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{var.saldoactual}"/>
+                                <h:outputText  styleClass="ikont-hot-saldoactual"   value="#{var.saldoactual}"/>
                                 <h:inputText size="8" id="saldoactual"/>
                             </h:panelGrid>
                             <h:panelGrid columns="1" cellspacing="15">
-                                <a4j:commandButton id="agregar" value="#{var.agregar}" styleClass="ikont-"     >
+                                <a4j:commandButton id="agregar" value="#{var.agregar}" styleClass="ikont-a4jcb-agregar"     >
                                 </a4j:commandButton>
                             </h:panelGrid>
                             <rich:dataTable id="tablacuentas"  var="currentRow" rows="7" >
                                 <f:facet name="header" >
                                     <rich:columnGroup >
                                         <rich:column colspan="4">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.listacuentas}"/>
+                                            <h:outputText  styleClass="ikont-hot-listacuentas"   value="#{var.listacuentas}"/>
                                         </rich:column>
                                         <rich:column breakRowBefore="true" >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.nombrecuenta}"/>
+                                            <h:outputText  styleClass="ikont-hot-nombrecuenta"   value="#{var.nombrecuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.tipocuenta}"/>
+                                            <h:outputText  styleClass="ikont-hot-tipocuenta"   value="#{var.tipocuenta}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.monto}"/>
+                                            <h:outputText  styleClass="ikont-hot-monto"   value="#{var.monto}"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminarcuenta}"/>
+                                            <h:outputText  styleClass="ikont-hot-eliminarcuenta"   value="#{var.eliminarcuenta}"/>
                                         </rich:column>
                                     </rich:columnGroup>
 
                                 </f:facet>
                                 <rich:column  >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre1"   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre2"   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
-                                    <h:outputText  styleClass="ikont- hot-"   value="#{var.nombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-nombre3"   value="#{var.nombre}"/>
                                 </rich:column>
                                 <rich:column >
                                     <a4j:commandLink value="Ir"/>

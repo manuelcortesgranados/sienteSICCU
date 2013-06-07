@@ -11,10 +11,11 @@
     <ui:define name="head">
         <title>Atención Humanitaria</title>
         <h:outputScript library="js" name="validarletra.js"/>
+        <h:outputScript library="css" name="/resources/css/AtencionHumanitaria/GenerarAtencionHumanitaria.css"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-"   value="#{var.generarsolicitudah}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
-        <h:outputText  styleClass="ikont- hot-"   value="#{var.menu1_2}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
+        <h:outputText  styleClass="ikont-hot-gensolicah" value="#{var.generarsolicitudah}" rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
+        <h:outputText  styleClass="ikont-hot-menu" value="#{var.menu1_2}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.editarsolicitud}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_atencion.xhtml"/>
@@ -33,7 +34,7 @@
 
                         <h:panelGrid columns="4" cellspacing="15" id="DatosBasicosSolicitud">
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.departamento}: " styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-depto" value="#{var.departamento}: "/>
                             <h:selectOneMenu rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
                                              id="cmbDepartamentoAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.codDepartamento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.departamento}"/>
@@ -42,10 +43,10 @@
                                            execute="@this,cmbMunicipioAt,cmbMunicipioCrear" render="CombomunicipoAt,panelContacto,cmbMunicipioCrear">
                                 </a4j:ajax>
                             </h:selectOneMenu>
-                            <h:outputLabel  styleClass="ikont-hol- "   id="txtDepartamentoatsoli"
+                            <h:outputLabel  styleClass="ikont-hol-deptosoli" id="txtDepartamentoatsoli"
                                            value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strdepartamento}"
                                            rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante}"/>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}:" styleClass="ikont-"   rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
+                            <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}:" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
                             <h:panelGroup id="CombomunicipoAt">
                                 <h:selectOneMenu id="cmbMunicipioAt" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
                                                  value="#{AtencionHumanitaria$AdminSolicitudAtencion.strmunicipio}">
@@ -55,14 +56,14 @@
                                     </a4j:ajax>
                                 </h:selectOneMenu>
                             </h:panelGroup>
-                            <h:outputLabel  styleClass="ikont-hol- "   id="txtmunicipiosoli" value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strmunicipio}"
+                            <h:outputLabel  styleClass="ikont-hol-strmuni" id="txtmunicipiosoli" value="#{SessionBeanCobra.usuarioObra.tercero.localidadByStrcodigolocalidad.strmunicipio}"
                                            rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante || SessionBeanCobra.usuarioObra.tercero.cargo.intcargo==9}"/>
 
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.contacto}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-contacto" value="#{var.contacto}:"/>
 
                             <h:panelGroup id="panelContacto">
-                                <h:outputLabel  styleClass="ikont-hol- "   id="contacto" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}"
+                                <h:outputLabel  styleClass="ikont-hol-nomyapel" id="contacto" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}"
                                                rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_solicitante}"/>
 
                                 <h:selectOneMenu  id="itemContacto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmostrar_datos_altofuncionario}"
@@ -70,9 +71,9 @@
                                     <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.solicitante}"/>
                                 </h:selectOneMenu>
                             </h:panelGroup>
-                            <h:outputLabel  styleClass="ikont-hol- "   id="contactolabel" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu==10}"/>
+                            <h:outputLabel  styleClass="ikont-hol-strnomyapel" id="contactolabel" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} #{SessionBeanCobra.usuarioObra.tercero.strapellido1}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu==10}"/>
 
-                            <a4j:commandButton id="btContacto1" value="#{var.ver}" immediate="true"
+                            <a4j:commandButton styleClass="ikont-acb-ver" id="btContacto1" value="#{var.ver}" immediate="true"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.cargarSolicitante}"
                                                oncomplete="#{rich:component('panelinformacioncontacto')}.show();"
                                                render="infocontacto"
@@ -91,35 +92,35 @@
 
             <rich:panel id="DatosGenerales" header="2. #{var.datosgenerales}" >
                 <center>
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.textdatosgeneralesAtencion}"/>
+                    <h:outputText  styleClass="ikont-hot-dtgeneral" value="#{var.textdatosgeneralesAtencion}"/>
                 </center>
 
                 <center>
                     <h:panelGroup>
 
                         <h:panelGrid columns="2" cellspacing="15" id="gpCombos">
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}" styleClass="ikont-"  />
-                            <h:outputLabel  styleClass="ikont-hol- "   id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
+                            <h:outputText  styleClass="ikont-hot-codigosol" value="#{var.codigosolicitud}:" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}"/>
+                            <h:outputLabel  styleClass="ikont-hol-solicmaestro" id="codigosolicitud" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.oidcodigosolicitudmaestro}"
                                            rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.codigosol}"/>
 
-                            <h:outputText  styleClass="ikont- hot-"    value="#{var.evento}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-evento" value="#{var.evento}:"/>
                             <h:selectOneMenu  id="comboeventoAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.eventoSolicitud.intidevento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.evento}"/>
                                 <a4j:ajax  execute="comboeventoAt" event="change" render="DatosBasicos" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarPeriodoEvento}"  />
                             </h:selectOneMenu>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.periodo}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-periodo" value="#{var.periodo}:"/>
                             <h:selectOneMenu  id="periodoAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.periodoEvento.intidperiodoevento}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.periodoevento}"/>
                             </h:selectOneMenu>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.nomsol}" styleClass="ikont-"  />
-                            <h:inputTextarea  id="nomsolAt" cols="30" rows="3"
+                            <h:outputText  styleClass="ikont-hot-nomsol" value="#{var.nomsol}" />
+                            <h:inputTextarea  styleClass="ikont-hit-nomsolic" id="nomsolAt" cols="30" rows="3"
                                               value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strnombresolicitud}">
                                 <f:validateLength maximum="200"/>
                             </h:inputTextarea>
 
-                            <h:outputLabel  styleClass="ikont-hol- "   id="lbltips"  value="#{var.tiposolicitud}:" styleClass="ikont-"   />
+                            <h:outputLabel  styleClass="ikont-hol-tipsol" id="lbltips"  value="#{var.tiposolicitud}:" />
                             <h:selectOneMenu id="combotipoah" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.tipoah.oidcodigotipoah}"
                                              disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.deshcategoria}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipoah}"/>
@@ -127,7 +128,7 @@
                                            listener="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProductos}" execute="@this" />
                             </h:selectOneMenu>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.selecategoria}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-seleccateg" value="#{var.selecategoria}:" />
                             <h:selectOneMenu  id="selcategoria" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.productoNuevo.oidcodigoproductoah}"
                                               disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14
                                                           ||AtencionHumanitaria$AdminSolicitudAtencion.deshcategoria}">
@@ -139,21 +140,21 @@
                             </h:selectOneMenu>
 
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.objetosolicitud}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-objsolicit" value="#{var.objetosolicitud}:"/>
                             <h:panelGroup>
-                                <h:inputTextarea id="txtobjetosolicitudAt" cols="35" rows="6"
+                                <h:inputTextarea styleClass="ikont-hit-justif" id="txtobjetosolicitudAt" cols="35" rows="6"
                                                  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.strjustificacion}" disabled="#{AtencionHumanitaria$AdminSolicitudAtencion.grupousu ==14}">
                                 </h:inputTextarea>
-                                <rich:message styleClass="ikont-"   for="txtobjetosolicitud"/>
+                                <rich:message styleClass="ikont-rm-objsolic" for="txtobjetosolicitud"/>
                             </h:panelGroup>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.incluyeint}" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-incluyeint" value="#{var.incluyeint}"/>
                             <h:selectOneMenu  id="incluyeIntAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.boolincluyeinterventoria}">
                                 <f:selectItem itemValue="true" itemLabel="Si"/>
                                 <f:selectItem itemValue="false" itemLabel="No"/>
                                 <a4j:ajax event="change" listener="#{AtencionHumanitaria$AdminSolicitudAtencion.calcularValorSolicitudDetalle}"
                                           render="gpvalortotalmaestroAten,porceninterventoria"/>
                             </h:selectOneMenu>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valor} interventoria" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-txtvlr" value="#{var.valor} interventoria" />
                             <rich:inputNumberSpinner minValue="0" maxValue="100" inputSize="3" id="porceninterventoria"
                                                      value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.floatporcentaje}">
 
@@ -172,19 +173,19 @@
                     <h:panelGroup id="gpDatosProducto">
                         <h:panelGrid  id="panelproductos" columns="2" cellspacing="15">
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.escojaMunicipio}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-escojamuni" value="#{var.escojaMunicipio}:" />
                             <h:selectOneMenu id="cmbMunicipioCrear"
                                              value="#{AtencionHumanitaria$AdminSolicitudAtencion.strmunicipio}" >
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.municipio}"/>
                             </h:selectOneMenu>
 
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.numFamilias}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-numflia" value="#{var.numFamilias}:"/>
                             <rich:inputNumberSpinner minValue="1" maxValue="100000" inputSize="10" required="true"
                                                      value="#{SessionBeanCobra.atencionhumanitariaService.solicituddetalle.numcantidadsolicitadaitem}"/>
 
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.tamFamilia}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-tamflia" value="#{var.tamFamilia}:" />
                             <h:selectOneMenu  id="tamFamiliaAt"
                                               value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipofamiliavalue}">
                                 <f:selectItems value="#{AtencionHumanitaria$AdminSolicitudAtencion.tipofamilia}"/>
@@ -192,14 +193,14 @@
                                           render="valoruni"/>
                             </h:selectOneMenu>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valorunitaio}:" styleClass="ikont-"  />
+                            <h:outputText  styleClass="ikont-hot-vlrunitaio" value="#{var.valorunitaio}:"/>
                             <h:inputText id="valoruni" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicituddetalle.numvlrunitario}"
                                          size="15" onkeypress="return validar(event);" >
                                 <f:convertNumber maxFractionDigits="6" minFractionDigits="2" type="number"  />
                             </h:inputText>
 
                             <interkont:spacer height="3"/>
-                            <a4j:commandButton id="btAgregarPdoAt" value="#{var.agregar}"
+                            <a4j:commandButton styleClass="ikont-acb-agregar" id="btAgregarPdoAt" value="#{var.agregar}"
                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.anadirItem}"
                                                 render="tablaProductosSeleccionados,gpvalortotalmaestroAten,panelproductos,gpCombos">
                             </a4j:commandButton>
@@ -214,56 +215,56 @@
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.categoriaseleccionada}"/>
+                                        <h:outputText  styleClass="ikont-hot-catselect" value="#{var.categoriaseleccionada}"/>
                                     </rich:column>
                                     <rich:column breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.categoria}"/>
+                                        <h:outputText  styleClass="ikont-hot-cat" value="#{var.categoria}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.familiasAtender}"/>
+                                        <h:outputText  styleClass="ikont-hot-fliatender" value="#{var.familiasAtender}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.tamFamilia}"/>
+                                        <h:outputText  styleClass="ikont-hot-tamflia" value="#{var.tamFamilia}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.valorunitaio}"/>
+                                        <h:outputText  styleClass="ikont-hot-vlrunit" value="#{var.valorunitaio}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.valortotal}"/>
+                                        <h:outputText  styleClass="ikont-hot-vlrtot" value="#{var.valortotal}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.municipio}"/>
+                                        <h:outputText  styleClass="ikont-hot-munic" value="#{var.municipio}"/>
                                     </rich:column>
                                     <rich:column>
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.eliminar}"/>
+                                        <h:outputText  styleClass="ikont-hot-eliminar" value="#{var.eliminar}"/>
                                     </rich:column>
                                 </rich:columnGroup>
                             </f:facet>
                             <rich:column breakRowBefore="true">
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.productoah.strdescripcionproductoah}"/>
+                                <h:outputText  styleClass="ikont-hot-descprodah" value="#{_Detalle.productoah.strdescripcionproductoah}"/>
 
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.numcantidadsolicitadaitem}"/>
+                                <h:outputText  styleClass="ikont-hot-cantsolitem" value="#{_Detalle.numcantidadsolicitadaitem}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.productoah.tipodefamilia.strdescripcionfamilia}"/>
+                                <h:outputText  styleClass="ikont-hot-descpflia" value="#{_Detalle.productoah.tipodefamilia.strdescripcionfamilia}"/>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.numvlrunitario}">
+                                <h:outputText  styleClass="ikont-hot-numvlunit" value="#{_Detalle.numvlrunitario}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.numvlrtotalitem}">
+                                <h:outputText  styleClass="ikont-hot-nmvlrtoitem" value="#{_Detalle.numvlrtotalitem}">
                                     <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ ###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <h:outputText  styleClass="ikont- hot-"   value="#{_Detalle.localidad.strmunicipio}"/>
+                                <h:outputText  styleClass="ikont-hot-strmuni" value="#{_Detalle.localidad.strmunicipio}"/>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton  title="#{var.eliminar}"  styleClass="ikont-"  
+                                <a4j:commandButton  title="#{var.eliminar}"  styleClass="ikont-acb-elim"  
                                                     value="#{var.eliminar}"
                                                     render="tablaProductosSeleccionados, gpvalortotalmaestroAten, gpCombos"
                                                     action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem(filaSeleccionada)}"/>
@@ -281,22 +282,22 @@
 
                     <h:panelGroup id="gpvalortotalmaestroAten">
                         <h:panelGrid columns="2" cellspacing="15" >
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.totalfamilias}:" styleClass="ikont-"  />
-                            <h:outputText  styleClass="ikont- hot-"   id="totalFamiliasAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
+                            <h:outputText  styleClass="ikont-hot-totflia" value="#{var.totalfamilias}:"/>
+                            <h:outputText  styleClass="ikont- "   id="totalFamiliasAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.totalfamilias}">
 
                             </h:outputText>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.totalParcial}:" styleClass="ikont-"  />
-                            <h:outputText  styleClass="ikont- hot-"   id="totalParcialAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
+                            <h:outputText  styleClass="ikont-hot-totparcial" value="#{var.totalParcial}:"/>
+                            <h:outputText  styleClass="ikont-hot-nmtotparcial" id="totalParcialAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrtotalparcial}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
 
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.interventorObra}ia:" styleClass="ikont-"  />
-                            <h:outputText  styleClass="ikont- hot-"    id="porcentajeAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.valorporcentaje}">
+                            <h:outputText  styleClass="ikont-hot-intobra" value="#{var.interventorObra}ia:" />
+                            <h:outputText  styleClass="ikont-hot-vlrporcent" id="porcentajeAt" value="#{AtencionHumanitaria$AdminSolicitudAtencion.valorporcentaje}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
-                            <h:outputText  styleClass="ikont- hot-"   value="#{var.valorsolicitud}:" styleClass="ikont-"  />
-                            <h:outputText  styleClass="ikont- hot-"     id="valorTotalAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
+                            <h:outputText  styleClass="ikont-hot-vlrsolcit" value="#{var.valorsolicitud}:"/>
+                            <h:outputText  styleClass="ikont-hot-nmvlrsolict" id="valorTotalAt"  value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.solicitudmaestro.numvlrsolicitado}">
                                 <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###.##"/>
                             </h:outputText>
                         </h:panelGrid>
@@ -308,12 +309,12 @@
             <center>
                 <h:panelGrid columns="2" cellspacing="10">
 
-                    <a4j:commandButton id="eviarsolsubirarchivos2" value="#{var.eviarsol}"
+                    <a4j:commandButton styleClass="ikont-acb-envsol" id="eviarsolsubirarchivos2" value="#{var.eviarsol}"
                                        render="layoutConfirmarGuardadoAtencion, layoutConfirmarGuardadoAtencion"
                                        action="#{AtencionHumanitaria$AdminSolicitudAtencion.guardarSolicitud}"
                                        oncomplete="#{rich:component('panelConfirmarGuardadoAtencion')}.show();"/>
 
-                    <a4j:commandButton id="cancelarsubirarchivos2" value="#{var.cancelar}" styleClass="ikont-"     
+                    <a4j:commandButton id="cancelarsubirarchivos2" value="#{var.cancelar}" styleClass="ikont-acb-cancel"     
                                        oncomplete="#{rich:component('panelCancelarSolicitud')}.show(); return false;"/>
                 </h:panelGrid>
             </center>
