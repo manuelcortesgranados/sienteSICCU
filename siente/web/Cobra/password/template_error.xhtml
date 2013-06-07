@@ -10,7 +10,7 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <title><h:outputText  styleClass="ikont- "   value="#{var.titulogeneral}"></h:outputText></title>
+            <title><h:outputText  styleClass="ikont-hot-titulgen" value="#{var.titulogeneral}"></h:outputText></title>
             <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
             <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
             <style type="text/css">
@@ -90,16 +90,16 @@
                             <h:form>
                                 <table  border="0" cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td align="center"  styleClassmsg">
-                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{var.errorunokeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 1}"/>
-                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{var.errordoskeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 2}"/>
-                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{var.errortreskeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 3}"/>
-                                    <br />Si lo desea podrá reportar el problema a nuestra <strong><a styleClasscolorSoporte" href="#{var.linksoporte}">Red de soporte.</a></strong>
+                                        <td align="center">
+                                    <h:outputLabel  styleClass="ikont-hol-recordarkey" value="#{var.errorunokeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 1}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-recordarcontra" value="#{var.errordoskeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 2}"/>
+                                    <h:outputLabel  styleClass="ikont-hol-recordarpass" value="#{var.errortreskeyrecordarcontrasenia}" rendered="#{SessionBeanCobra.msgerrorkeyrespas == 3}"/>
+                                    <br />Si lo desea podrá reportar el problema a nuestra <strong><a href="#{var.linksoporte}">Red de soporte.</a></strong>
                                     </td>
                                     <td>
-                                        <div styleClassregresar">
+                                        <div>
 
-                                            <a4j:commandLink styleClass="ikont-"  
+                                            <a4j:commandLink styleClass="ikont-acl-cerrarsess"  
                                                              action="cerrarSession"/>
 
                                         </div>
