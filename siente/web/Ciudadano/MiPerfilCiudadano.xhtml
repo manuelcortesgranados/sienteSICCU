@@ -89,7 +89,7 @@
                 <h:panelGrid  >
                     <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario"   bgcolor="#F2F7FA" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
                         <h:outputText  styleClass="ikont-hot-idioma2"   id="lblidiomaotro"  value="#{var.idioma}" />
-                        <h:outputLabel  styleClass="ikont-hol- "     value="Español" />
+                        <h:outputLabel  styleClass="ikont-hol-esp"  value="Español" />
                         <interkont:spacer height="5"/>
                         <interkont:spacer height="5"/>
                         <h:outputText  styleClass="ikont-hot-lblubicacionotro"   id="lblubicacionotro"  value="#{var.ubicacionciudadano}"    />
@@ -115,7 +115,7 @@
             </h:panelGrid>
         </h:form>
         <div id="header_content1">
-            <div styleClassstar">
+            <div>
                 <h:outputText  styleClass="ikont-hot-contenido"   value="Contenido"/>
             </div>
         </div>
@@ -151,7 +151,7 @@
             </h:panelGrid>
         </h:form>
         <div id="header_content">
-            <div styleClasscomentario">
+            <div>
                 <h:outputText  styleClass="ikont-hot-mimuro"   value="Mi muro" rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}"/>
                 <h:outputText  styleClass="ikont-hot-muro"   value="Muro" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}"/>
             </div>
@@ -179,7 +179,7 @@
                             <h:panelGrid columns="3"  >
 
                                 <h:panelGrid styleClass="ikont-hpg-cargarusuarioperfil"  >
-                                    <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuarioPerfil}" type="submit" >
+                                    <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuarioPerfil}" type="submit" styleClass="ikont-acl-cargarusuperf">
                                         <h:graphicImage  styleClass="ikont-hgi-cargarusuarioperfil"   url="#{var.ipserver}siente#{rowcomentario.jsfUsuariocomento.tercero.strfoto}" />
                                     </a4j:commandLink>
                                     <interkont:spacer width="30"/>

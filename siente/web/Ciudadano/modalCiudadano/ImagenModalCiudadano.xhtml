@@ -71,7 +71,7 @@
                                                    styleClass="ikont-acl-borrardatosimagen"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalImagenCiu')}.hide(); return false;" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
-                                                   render="layoutImagenDetalleCiu"
+                                                   render="layoutImagenDetalleCiu" styleClass="ikont-acb-aceptimg"
                                                    />
                             </center>
                         </h:panelGroup>
