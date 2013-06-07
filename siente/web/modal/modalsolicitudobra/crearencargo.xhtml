@@ -13,30 +13,30 @@
     <rich:popupPanel id="panelCrearEncargo" autosized="true" width="400"  headerClass="rich-panel-header">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont "   value="#{var.crear}" styleClass="ikont"   />
+                <h:outputText  styleClass="ikont-hot-crear"   value="#{var.crear}" />
             </h:panelGroup>
         </f:facet>
 
         <rich:panel id="panelCrearEncargoFidu">
             <h:panelGroup >
-                <a4j:commandLink id="esconder_panelCrearEncargo"
+               <a4j:commandLink value="X" id="esconder_panelCrearEncargo"
                                    onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
-                                   immediate="true" styleClass="ikont"   />
+                                   immediate="true" styleClass="ikont-a4jcl-esconderpanelCrearEncargo"   />
             </h:panelGroup>
             <h:form>
                 <h:panelGrid id="mos" columns="2"  columnClasses="panelizquierda, panelizquierda">
-                    <h:outputLabel  styleClass="ikont "   id="lblnumeroencargo" value="#{var.numeroencargo}" for="txtNumeroencargo" />
+                    <h:outputLabel  styleClass="ikont-hol-lblnumeroencargo"   id="lblnumeroencargo" value="#{var.numeroencargo}" for="txtNumeroencargo" />
                     <h:inputText id="txtNumeroencargo" required="true" value="#{SessionBeanCobra.solicitudService.encargofiduciario.intnumencargofiduciario}" />
 
-                    <h:outputText  styleClass="ikont "   id="lblfecha" value="#{var.fecha}" />
+                    <h:outputText  styleClass="ikont-hot-lblfecha"   id="lblfecha" value="#{var.fecha}" />
                     <h:panelGroup id="layoutFechaEncargo">
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fechaapertura" inputSize="10"
                                        required="true"
                                        value="#{SessionBeanCobra.solicitudService.encargofiduciario.datefechaaperturaencargofiduciario}" />
                     </h:panelGroup>
 
-                    <h:outputLabel  styleClass="ikont "   id="lblvalorencargo" value="#{var.valorencargo}" />
+                    <h:outputLabel  styleClass="ikont-hol-lblvalorencargo"   id="lblvalorencargo" value="#{var.valorencargo}" />
                     <h:inputText id="txtValor" required="true" disabled="true"
                                  value="#{SessionBeanCobra.solicitudService.solicitudObrachD.doublevaloraprobado}">
                         <f:convertNumber pattern="#,###.00" />
@@ -45,12 +45,12 @@
 
                 <center>
                     <h:panelGrid id="botones" columns="2">
-                        <a4j:commandButton id="crearencargo" styleClass="ikont"   value="#{var.crear}"
+                        <a4j:commandButton id="crearencargo" styleClass="ikont-a4jcb-crearencargo"   value="#{var.crear}"
                                            onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
                                            render="panelAprobacionFinanciera" />
 
-                        <a4j:commandButton id="Cancelarencargo" styleClass="ikont"   value="#{var.cancelar}"
+                        <a4j:commandButton id="Cancelarencargo" styleClass="ikont-a4jcb-Cancelarencargo"   value="#{var.cancelar}"
                                            onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;" />
                     </h:panelGrid>

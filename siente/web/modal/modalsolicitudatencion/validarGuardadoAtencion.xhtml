@@ -11,23 +11,23 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel height="150" id="panelConfirmarGuardadoAtencion" resizeable="false" width="350" >
-        <rich:panel styleClass="ikont"   >
+        <rich:panel styleClass="ikont-rp-confirmarGuardadoAtencion"   >
             <f:facet name="header">
                 <h:panelGroup>
-                    <h:outputText  styleClass="ikont "   value= "#{var.atencion}" />
+                    <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}" />
                     <interkont:spacer width="265" />
-                    <a4j:commandLink id="esconder_panelConfirmarGuardadoAtencion"
+                    <a4j:commandLink value="X" id="esconder_panelConfirmarGuardadoAtencion"
                                        onclick="#{rich:component('panelConfirmarGuardadoAtencion')}.hide();
                                                return false;"
-                                       immediate="true" styleClass="ikont"   />
+                                       immediate="true" styleClass="ikont-a4jcl-esconderpanelConfirmarGuardadoAtencion"   />
                 </h:panelGroup>
             </f:facet>
 
             <h:form>
                 <center>
-                    <h:panelGrid id="layoutConfirmarGuardadoAtencion" styleClass="ikont"   >
+                    <h:panelGrid id="layoutConfirmarGuardadoAtencion" styleClass="ikont-hpg-layoutConfirmarGuardadoAtencion"   >
                         <interkont:spacer height="20px" />
-                        <h:outputText  styleClass="ikont "    value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.mensaje}" />
+                        <h:outputText  styleClass="ikont-hot-mensaje"    value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.mensaje}" />
 
                         <interkont:spacer height="20px" />
                         <a4j:commandButton id="btCerrarGuardSuss" value="#{var.aceptar}" render="layoutConfirmarGuardadoAtencion" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.guardadosol || AtencionHumanitaria$AdminSolicitudAtencion.noguardo}"

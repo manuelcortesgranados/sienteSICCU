@@ -84,7 +84,7 @@
                         <f:facet name="header">
                             <h:outputText  styleClass="ikont-hot-varpolizas"   value="#{var.verpolizas}"/>
                         </f:facet>
-                        <a4j:commandLink id="verpoliza"  
+                        <a4j:commandLink  value="X" id="verpoliza"  
                                          action="#{Supervisor$AdministrarObraNew.listaPolizacontratos}" render="panelContrato"
                                          onclick="#{rich:component('panelVerPolizaModal')}.hide();return false;">
                             <h:graphicImage  styleClass="ikont-hgi-verpoliza"    value="/resources/imgs/bt_ver.png"/>
@@ -97,7 +97,7 @@
                         <f:facet name="header">
                             <h:outputText  styleClass="ikont-hot-vercosto"   value="#{var.vercosto}"/>
                         </f:facet>
-                        <a4j:commandLink id="vercosto"  
+                        <a4j:commandLink  value="X" id="vercosto"  
                                           render="panelContrato"
                                          onclick="#{rich:component('panelCostoContrato')}.show();return true;">
                             <h:graphicImage  styleClass="ikont-hgi-vercosto"    value="/resources/imgs/bt_ver.png"/>

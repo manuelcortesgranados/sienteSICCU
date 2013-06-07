@@ -13,15 +13,15 @@
     <rich:popupPanel id="panelFiltroObra" autosized="true"  headerClass="header_filtro">
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont "   value="#{var.filtbusqueda}" styleClass="ikont"   />
-                <h:outputText  styleClass="ikont "   value="#{var.filtavanzada}" styleClass="ikont"   />
+                <h:outputText  styleClass="ikont-hot-filtbusqueda"   value="#{var.filtbusqueda}"  />
+                <h:outputText  styleClass="ikont-hot-filtavanzada"   value="#{var.filtavanzada}"  />
             </h:panelGroup>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont"  
+                   <a4j:commandLink value="X" id="esconder_panelConfirmarSolicitud" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicitud"  
                                      onclick="#{rich:component('panelFiltroObra')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -33,11 +33,11 @@
             <center>
                 <h:panelGrid id="gppanelFiltroObra"  columnClasses="panelcenter">
                     <h:inputText size="35"  id="txtPalabra_Clave" value="#{SolicitudObra$GestionarSolicitudObra.filtro.palabraclave}"
-                                 onclick="this.value = '';" styleClass="ikont"   />
+                                 onclick="this.value = '';" styleClass="ikont-hit-txtPalabraClave"   />
 
                     <h:panelGrid columns="2" id="layoutBusquedaAvanzada" columnClasses="panelcenter, panelcenter" >
-                        <h:outputText  styleClass="ikont "   value="#{var.estadosolicitud}" styleClass="ikont"   />
-                        <h:outputText  styleClass="ikont "   value="#{var.tiposol}" styleClass="ikont"   />
+                        <h:outputText  styleClass="ikont-hot-estadosolicitud"   value="#{var.estadosolicitud}" />
+                        <h:outputText  styleClass="ikont-hot-tiposol"   value="#{var.tiposol}" />
 
                         <h:panelGroup>
                             <h:selectOneMenu id="estadosolicitud" value="#{SolicitudObra$GestionarSolicitudObra.filtro.intestadoSolicitud}" disabled="#{SessionBeanCobra.solicitudService.tablasver}">
@@ -54,8 +54,8 @@
                             <interkont:spacer width="10" />
                         </h:panelGroup>
 
-                        <h:outputText  styleClass="ikont "   value="#{var.tipoobra}:" styleClass="ikont"   />
-                        <h:outputLabel  styleClass="ikont "   id="label_donde" value="#{var.ubicacionsolicitud}" styleClass="ikont"   />
+                        <h:outputText  styleClass="ikont-hot-tipoobra"   value="#{var.tipoobra}:" />
+                        <h:outputLabel  styleClass="ikont-hot-label_donde"   id="label_donde" value="#{var.ubicacionsolicitud}"/>
                         <h:selectOneMenu id="selecttipoobra" value="#{SolicitudObra$GestionarSolicitudObra.filtro.inttipoObra}">
                             <f:selectItems value="#{SolicitudObra$GestionarSolicitudObra.tipoobra}" />
                             <f:selectItem itemValue="-1" itemLabel="Todos" />
@@ -80,7 +80,7 @@
                         <h:panelGroup>
                             <center>
                                 <h:commandLink type="submit" action="#{SolicitudObra$GestionarSolicitudObra.buscar}" id="filtrarobra" value="#{var.buscar}"
-                                               styleClass="ikont"   />
+                                               styleClass="ikont-hcl-filtrarobra"   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
