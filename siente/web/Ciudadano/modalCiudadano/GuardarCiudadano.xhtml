@@ -32,7 +32,7 @@
                             <interkont:spacer width="120"/>
                             <a4j:commandButton id="BTvalidar" value="#{var.aceptar}" 
                                                action="#{Ciudadano$PerfilCiudadano.volverinicio}"
-                                               render="pgingresociudadano" styleClass="ikont-acb-validar"> 
+                                               render="pgingresociudadano">
                                 <a4j:ajax event="click"  onbeforesubmit="#{rich:component('guardarCiudadano')}.show(); return true;"/>
                             </a4j:commandButton>
                         </h:panelGroup>

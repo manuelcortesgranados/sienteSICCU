@@ -13,7 +13,7 @@
     <rich:popupPanel id="modaldatosobrasgenerales" headerClass="rich-panel-header" height="400" width="600" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="DATOS GENERALES DEL CONTRATO DE OBRA" styleClass="ikont-"   />
+                <h:outputText  styleClass="ikont-hot-modaldatosobrasgenerales"   value="DATOS GENERALES DEL CONTRATO DE OBRA"  />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -22,198 +22,198 @@
                     <a4j:commandLink id="esconder-datosobrasgenerales"
                                        onclick="#{rich:component('modaldatosobrasgenerales')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-acl-esconderdatosobrasgenerales"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titDepto" value="#{var.departamento}:" />
+                <h:outputText  styleClass="ikont-hot-titDepto"   id="titDepto" value="#{var.departamento}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inDepto" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.localidad.strdepartamento}" />
+                <h:outputText  styleClass="ikont-hot-inDepto"   id="inDepto" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.localidad.strdepartamento}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titMpio" value="#{var.municipio}:" />
+                <h:outputText  styleClass="ikont-hot-titMpio"   id="titMpio" value="#{var.municipio}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inMpio" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.localidad.strmunicipio}" />
+                <h:outputText  styleClass="ikont-hot-inMpio"   id="inMpio" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.localidad.strmunicipio}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titCodProyecto" value="#{var.codProyecto}:" />
+                <h:outputText  styleClass="ikont-hot-titCodProyecto"   id="titCodProyecto" value="#{var.codProyecto}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inCodProyecto" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.strconsecutivo}" />
+                <h:outputText  styleClass="ikont-hot-inCodProyecto"   id="inCodProyecto" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.strconsecutivo}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titEncargoFidu" value="#{var.encargofiduciario}" />
+                <h:outputText  styleClass="ikont-hot-titEncargoFidu"   id="titEncargoFidu" value="#{var.encargofiduciario}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inEncargoFidu" value="#{Supervision$Externa.objetoSeguimiento.intnumencargofidu}" />
+                <h:outputText  styleClass="ikont-hot-inEncargoFidu "   id="inEncargoFidu" value="#{Supervision$Externa.objetoSeguimiento.intnumencargofidu}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titConsecutivo" value="#{var.consecutivo}:" />
+                <h:outputText  styleClass="ikont-hot-titConsecutivo"   id="titConsecutivo" value="#{var.consecutivo}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inConsecutivo" value="#{Supervision$Externa.objetoSeguimiento.intidseguimiento}" />
+                <h:outputText  styleClass="ikont-hot-inConsecutivo"   id="inConsecutivo" value="#{Supervision$Externa.objetoSeguimiento.intidseguimiento}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titContratoobra" value="#{var.contratoobra}:" />
+                <h:outputText  styleClass="ikont-hot-titContratoobra"   id="titContratoobra" value="#{var.contratoobra}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inContratoobra" value="#{Supervision$Externa.objetoSeguimiento.strnumcontrato}" />
+                <h:outputText  styleClass="ikont-hot-inContratoobra"   id="inContratoobra" value="#{Supervision$Externa.objetoSeguimiento.strnumcontrato}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titenteEjecutor" value="#{var.enteEjecutor}:" />
+                <h:outputText  styleClass="ikont-hot-titenteEjecutor"   id="titenteEjecutor" value="#{var.enteEjecutor}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inenteEjecutor" value="#{Supervision$Externa.objetoSeguimiento.strenteejecutor}" />
+                <h:outputText  styleClass="ikont-hot-inenteEjecutor "   id="inenteEjecutor" value="#{Supervision$Externa.objetoSeguimiento.strenteejecutor}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titTipoObra" value="#{var.tipoobra}:" />
+                <h:outputText  styleClass="ikont-hot-titTipoObra"   id="titTipoObra" value="#{var.tipoobra}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inTipoObra" value="#{Supervision$Externa.objetoSeguimiento.tipoobra.strdesctipoobra}" />
+                <h:outputText  styleClass="ikont-hot-inTipoObra"   id="inTipoObra" value="#{Supervision$Externa.objetoSeguimiento.tipoobra.strdesctipoobra}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titObjetoContrato" value="#{var.objetocontratoaprobado}:" />
+                <h:outputText  styleClass="ikont-hot-titObjetoContrato "   id="titObjetoContrato" value="#{var.objetocontratoaprobado}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inObjetoContrato" value="#{Supervision$Externa.objetoSeguimiento.textobjetoproyecto}" />
+                <h:outputText  styleClass="ikont-hot-inObjetoContrato"   id="inObjetoContrato" value="#{Supervision$Externa.objetoSeguimiento.textobjetoproyecto}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titObjetoContratoConst" value="#{var.objetocontratoconstruccion}:" />
+                <h:outputText  styleClass="ikont-hot-titObjetoContratoConst"   id="titObjetoContratoConst" value="#{var.objetocontratoconstruccion}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inObjetoContratoConst" value="#{Supervision$Externa.objetoSeguimiento.textobjetocontruccion}" />
+                <h:outputText  styleClass="ikont-hot-inObjetoContratoConst "   id="inObjetoContratoConst" value="#{Supervision$Externa.objetoSeguimiento.textobjetocontruccion}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titObservaciongral" value="#{var.observaciongeneral}:" />
+                <h:outputText  styleClass="ikont-hot-titObservaciongral "   id="titObservaciongral" value="#{var.observaciongeneral}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inObservaciongral" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.textobservaciones}" />
+                <h:outputText  styleClass="ikont-hot-inObservaciongral "   id="inObservaciongral" value="#{Supervision$Externa.objetoSeguimiento.solicitudObrach.textobservaciones}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titvalorContrato" value="#{var.valorcontratosupervisor}" />
+                <h:outputText  styleClass="ikont-hot-titvalorContrato "   id="titvalorContrato" value="#{var.valorcontratosupervisor}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="invalorContrato" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}">
+                <h:outputText  styleClass="ikont-hot-invalorContrato "   id="invalorContrato" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrato}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titContratista" value="#{var.contratista}:" />
+                <h:outputText  styleClass="ikont-hot-titContratista "   id="titContratista" value="#{var.contratista}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inContratista" value="#{Supervision$Externa.objetoSeguimiento.strcontratista}" />
+                <h:outputText  styleClass="ikont-hot-inContratista "   id="inContratista" value="#{Supervision$Externa.objetoSeguimiento.strcontratista}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titPlazoMeses" value="#{var.houtplazomeses}:" />
+                <h:outputText  styleClass="ikont-hot-titPlazoMeses "   id="titPlazoMeses" value="#{var.houtplazomeses}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inPlazoMeses" value="#{Supervision$Externa.objetoSeguimiento.intplazocontrato}" />
+                <h:outputText  styleClass="ikont-hot-inPlazoMeses "   id="inPlazoMeses" value="#{Supervision$Externa.objetoSeguimiento.intplazocontrato}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titFechaActaInicio" value="#{var.fechainicioacta}:" />
+                <h:outputText  styleClass="ikont-hot-titFechaActaInicio "   id="titFechaActaInicio" value="#{var.fechainicioacta}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inFechaActaInicio" value="#{Supervision$Externa.objetoSeguimiento.datefecactaini}" />
+                <h:outputText  styleClass="ikont-hot-inFechaActaInicio "   id="inFechaActaInicio" value="#{Supervision$Externa.objetoSeguimiento.datefecactaini}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titFechaFinalizacion" value="#{var.fechafinalizacion}:" />
+                <h:outputText  styleClass="ikont-hot-titFechaFinalizacion "   id="titFechaFinalizacion" value="#{var.fechafinalizacion}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inFechaFinalizacion" value="#{Supervision$Externa.objetoSeguimiento.datefecactafin}" />
+                <h:outputText  styleClass="ikont-hot-inFechaFinalizacion "   id="inFechaFinalizacion" value="#{Supervision$Externa.objetoSeguimiento.datefecactafin}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titProrroga" value="#{var.prorroga}:" />
+                <h:outputText  styleClass="ikont-hot-titProrroga "   id="titProrroga" value="#{var.prorroga}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inProrroga" value="#{Supervision$Externa.objetoSeguimiento.intmesesprorroga}" />
+                <h:outputText  styleClass="ikont-hot-inProrroga "   id="inProrroga" value="#{Supervision$Externa.objetoSeguimiento.intmesesprorroga}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titFechaFinalizacionProrroga" value="#{var.fechafinalizacionprorroga}:" />
+                <h:outputText  styleClass="ikont-hot-titFechaFinalizacionProrroga "   id="titFechaFinalizacionProrroga" value="#{var.fechafinalizacionprorroga}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inFechaFinalizacionProrroga" value="#{Supervision$Externa.objetoSeguimiento.datefecfinprorroga}" />
+                <h:outputText  styleClass="ikont-hot-inFechaFinalizacionProrroga "   id="inFechaFinalizacionProrroga" value="#{Supervision$Externa.objetoSeguimiento.datefecfinprorroga}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titAdiciones" value="#{var.adicciones}:" />
+                <h:outputText  styleClass="ikont-hot-titAdiciones "   id="titAdiciones" value="#{var.adicciones}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inAdiciones" value="#{Supervision$Externa.objetoSeguimiento.numvlradicion}">
+                <h:outputText  styleClass="ikont-hot-inAdiciones "   id="inAdiciones" value="#{Supervision$Externa.objetoSeguimiento.numvlradicion}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titvalorTotal" value="#{var.valortotal}:" />
+                <h:outputText  styleClass="ikont-hot-titvalorTotal "   id="titvalorTotal" value="#{var.valortotal}:" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="invalorTotal" value="#{Supervision$Externa.objetoSeguimiento.numvlrtotal}">
+                <h:outputText  styleClass="ikont-hot-invalorTotal"   id="invalorTotal" value="#{Supervision$Externa.objetoSeguimiento.numvlrtotal}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titrelacioncausalidad" value="#{var.relacioncausalidad}" />
+                <h:outputText  styleClass="ikont-hot-titrelacioncausalidad"   id="titrelacioncausalidad" value="#{var.relacioncausalidad}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inrelacioncausalidad" value="#{Supervision$Externa.relacioncasualInforme}" />
+                <h:outputText  styleClass="ikont-hot-inrelacioncausalidad "   id="inrelacioncausalidad" value="#{Supervision$Externa.relacioncasualInforme}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titobrarte" value="#{var.obrarte}" />
+                <h:outputText  styleClass="ikont-hot-titobrarte "   id="titobrarte" value="#{var.obrarte}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inobrarte" value="#{Supervision$Externa.obradearte}" />
+                <h:outputText  styleClass="ikont-hot-inobrarte "   id="inobrarte" value="#{Supervision$Externa.obradearte}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titdisenios" value="#{var.disenios}" />
+                <h:outputText  styleClass="ikont-hot-titdisenios "   id="titdisenios" value="#{var.disenios}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="indisenios" value="#{Supervision$Externa.disenios}" />
+                <h:outputText  styleClass="ikont-hot-indisenios "   id="indisenios" value="#{Supervision$Externa.disenios}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titpermisoslicencias" value="#{var.permisoslicencias}" />
+                <h:outputText  styleClass="ikont-hot-titpermisoslicencias "   id="titpermisoslicencias" value="#{var.permisoslicencias}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inpermisoslicencias" value="#{Supervision$Externa.permisosLicencias}" />
+                <h:outputText  styleClass="ikont-hot-inpermisoslicencias "   id="inpermisoslicencias" value="#{Supervision$Externa.permisosLicencias}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titplanosobra" value="#{var.planosobra}" />
+                <h:outputText  styleClass="ikont-hot-titplanosobra "   id="titplanosobra" value="#{var.planosobra}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inplanosobra" value="#{Supervision$Externa.planosobra}" />
+                <h:outputText  styleClass="ikont-hot-inplanosobra "   id="inplanosobra" value="#{Supervision$Externa.planosobra}" />
             </rich:panel>
 
             <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- hot-"   id="titespecifictecnicas" value="#{var.especifictecnicas}" />
+                <h:outputText  styleClass="ikont-hot-titespecifictecnicas "   id="titespecifictecnicas" value="#{var.especifictecnicas}" />
             </rich:panel>
             <rich:panel bodyClass="inpanelBody">
-                <h:outputText  styleClass="ikont- hot-"   id="inespecifictecnicas" value="#{Supervision$Externa.especifTecnica}" />
+                <h:outputText  styleClass="ikont-hot-inespecifictecnicas "   id="inespecifictecnicas" value="#{Supervision$Externa.especifTecnica}" />
             </rich:panel>
         </h:panelGrid>
     </rich:popupPanel>

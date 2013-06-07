@@ -26,20 +26,20 @@
         <h:form>
             <h:panelGrid id="panel_modificarobra"  rendered="#{Supervisor$AdministrarObraNew.verModificar or Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==3}">
                 <h:panelGroup  rendered="#{!Supervisor$AdministrarObraNew.verSuspender and !Supervisor$AdministrarObraNew.verReiniciar}">
-                    <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" value="#{var.solosepuedemodificar}" styleClass="ikont-"   />
+                    <h:outputText  styleClass="ikont-hot-panelmodificarobra"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" value="#{var.solosepuedemodificar}" />
                     <interkont:spacer width="20"/>
                     <a4j:commandButton id="bt_VolverModif" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
                                        rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}" render="layoutModificar" value="#{var.volver}"
-                                       styleClass="ikont-"      execute="@this">
+                                       styleClass="ikont-acb-brvolvermodif"      execute="@this">
                     </a4j:commandButton>
                     <interkont:spacer  height="12"/>
                     <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==1 || Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==3}">
                         <h:panelGroup>
                             <center>
                                 <interkont:spacer height="10px" />
-                                <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.amigosupervisorantesdereemplazar}" />
+                                <h:outputText  styleClass="ikont-hot-amigosupervisorantesdereemplazar" value="#{var.amigosupervisorantesdereemplazar}" />
                                 <interkont:spacer height="15px" />
-                                <h:outputText  styleClass="ikont- hot-"    value="#{var.ingreselafechadeesta} "/>
+                                <h:outputText  styleClass="ikont-hot-ingreselafechadeesta"    value="#{var.ingreselafechadeesta} "/>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_fechaModificacion" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecobrahist}"
                                                disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                 <interkont:spacer height="10px" />
@@ -48,10 +48,10 @@
                                         <h:panelGrid   columns="2">
                                             <interkont:spacer height="22"/><interkont:spacer height="22"/>
                                             <h:panelGrid>
-                                                <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="1. #{var.sivaahaceruna}"/>
+                                                <h:outputText  styleClass="ikont-hot-sivaahaceruna" value="1. #{var.sivaahaceruna}"/>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.ingreselanueva} "/>
+                                                    <h:outputText  styleClass="ikont-hot-ingreselanueva" value="#{var.ingreselanueva} "/>
                                                     <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="10" value="#{Supervisor$ModificarObra.historicoobra.datefecfinhist}"
                                                                    disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" event="changed" render="panel_botonsoporte" />
@@ -59,10 +59,10 @@
                                                 </h:panelGrid>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGrid>
-                                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="2. #{var.sihayunaadicion}"/>
+                                                    <h:outputText  styleClass="ikont-hot-sihayunaadicion" value="2. #{var.sihayunaadicion}"/>
                                                     <interkont:spacer height="10"/>
                                                     <h:panelGrid columns="2">
-                                                        <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.ingresevaloradicion} " />
+                                                        <h:outputText  styleClass="ikont-hot-ingresevaloradicion" value="#{var.ingresevaloradicion} " />
                                                         <rich:inputNumberSpinner id="txt_adicionPresupuesto" value="#{Supervisor$ModificarObra.valorhistorico}" minValue="0" maxValue="400000000" inputSize="20" disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                             <a4j:ajax event="change" render="panel_botonsoporte" listener="#{Supervisor$ModificarObra.evaluarVerSoportes}" />
                                                         </rich:inputNumberSpinner>
@@ -72,33 +72,33 @@
 
                                             </h:panelGrid>
                                             <h:panelGrid>
-                                                <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="3. #{var.siexisteunconvenio}"/>
+                                                <h:outputText  styleClass="ikont-hot-siexisteunconvenio" value="3. #{var.siexisteunconvenio}"/>
                                                 <interkont:spacer height="10"/>
 
-                                                <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.decidasisetrata}"/>
+                                                <h:outputText  styleClass="ikont-hot-decidasisetrata" value="#{var.decidasisetrata}"/>
                                                 <interkont:spacer height="10"/>
                                                 <h:panelGroup>
-                                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.cambiosdeprecios}"/>
+                                                    <h:outputText  styleClass="ikont-hot-cambiosdeprecios" value="#{var.cambiosdeprecios}"/>
                                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarObra.cambioPrecios}" disabled="#{Supervisor$ModificarObra.tipificacionValida}" >
                                                         <a4j:ajax event="change" render="panel_subirActaConvenio, layoutDocActaConvenio"/>
                                                     </h:selectBooleanCheckbox>
-                                                    <h:outputText  styleClass="ikont- hot-"   styleClass="ikont-"   value="#{var.modificaciondeactividades}"/>
+                                                    <h:outputText  styleClass="ikont-hot-modificaciondeactividades" value="#{var.modificaciondeactividades}"/>
                                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarObra.adicionActividades}" disabled="#{Supervisor$ModificarObra.tipificacionValida}">
                                                         <a4j:ajax event="change" render="panel_subirActaConvenio, layoutDocActaConvenio"/>
                                                     </h:selectBooleanCheckbox>
                                                 </h:panelGroup>
                                                 <h:panelGrid id="panel_subirActaConvenio"  columns="2">
-                                                    <a4j:commandButton id="adjuntarActaConvenio" styleClass="ikont-"   value="#{var.adjuntaractadeconvenio}"  rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}"
+                                                    <a4j:commandButton id="adjuntarActaConvenio" styleClass="ikont-acb-adjuntaractaconvenio"   value="#{var.adjuntaractadeconvenio}"  rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}"
                                                                        onclick="#{rich:component('panelUploadActaConvenio')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
 
                                                     <rich:panel rendered="#{Supervisor$ModificarObra.cambioPrecios || Supervisor$ModificarObra.adicionActividades}">
-                                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nohasubidoningun}"/>
+                                                        <h:outputText  styleClass="ikont-hot-subiractaconvenio"   rendered="#{Supervisor$ModificarObra.subirActaConvenio.size==0}" value="#{var.nohasubidoningun}"/>
                                                         <center>
                                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirActaConvenio.files}" var="file" rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"
                                                                            >
-                                                                <h:outputText  styleClass="ikont- hot-"   value=" #{file.onlyName}" />
+                                                                <h:outputText  styleClass="ikont-hot-onlyname"   value=" #{file.onlyName}" />
                                                                 <interkont:spacer height="8" width="15"/>
-                                                                <h:graphicImage  styleClass="ikont- "    rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"/>
+                                                                <h:graphicImage  styleClass="ikont-hgi-subiractaconvenio"    rendered="#{Supervisor$ModificarObra.subirActaConvenio.size!=0}"/>
 
                                                             </rich:dataGrid>
                                                         </center>
@@ -117,46 +117,46 @@
                                 <h:panelGroup id="gpPolizaContrato" rendered="#{Supervisor$ModificarObra.verSoportes}">
                                     <rich:panel>
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- hot-"   value="#{var.ingresardocumento}"/>
+                                            <h:outputText  styleClass="ikont-hot-ingresardocumento"   value="#{var.ingresardocumento}"/>
                                         </f:facet>
                                         <h:panelGrid id="panel_subirOtroSi"  columns="2" width="80%">
-                                            <a4j:commandButton id="adjuntarOtroSi" value="#{var.adjuntarotrosi}" styleClass="ikont-"     
+                                            <a4j:commandButton id="adjuntarOtroSi" value="#{var.adjuntarotrosi}" styleClass="ikont-acb-adjuntarotrosi"     
                                                                immediate="true"
                                                                onclick="#{rich:component('panelUploadOtroSi')}.show(); return true;" disabled="#{Supervisor$ModificarObra.tipificacionValida}"/>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.files}" var="file" >
-                                                <h:outputText  styleClass="ikont- hot-"   id="txt_nombreArchivoOtroSi" value=" #{file.onlyName}"/>
+                                                <h:outputText  styleClass="ikont-hot-txtnombreArchivoOtroSi"   id="txt_nombreArchivoOtroSi" value=" #{file.onlyName}"/>
                                             </rich:dataGrid>
                                         </h:panelGrid>
                                         <h:panelGroup id="tablaPolizas" >
                                             <rich:dataTable id="dtPolizas"  rows="6" 
                                                             rowKeyVar="filaSeleccionada" var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
-                                                <rich:column id="tc-strTipoPoliza" width="100px">
+                                                <rich:column id="tc-strTipoPoliza"  styleClass="ikont-rc-tcstrtipopoliza">
                                                     <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.tipoPolizaContrato}" />
+                                                        <h:outputText  styleClass="ikont-hot-tipopolizacontrato"   value="#{var.tipoPolizaContrato}" />
                                                     </f:facet>
-                                                    <h:outputText  styleClass="ikont- hot-"   id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
+                                                    <h:outputText  styleClass="ikont-hot-otxtstrtipopoliza"   id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}"/>
                                                 </rich:column>
-                                                <rich:column id="tc-strnumPolizaContrato" width="100px">
+                                                <rich:column id="tc-strnumPolizaContrato" styleClass="ikont-rc-tcstrtipopoliza">
                                                     <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.numPolizaContrato}" />
+                                                        <h:outputText  styleClass="ikont-hot-numpolizacontrato"   value="#{var.numPolizaContrato}" />
                                                     </f:facet>
-                                                    <h:outputText  styleClass="ikont- hot-"   id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
+                                                    <h:outputText  styleClass="ikont-hot-otxtstrnumpolizacontrato"   id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}"/>
                                                 </rich:column>
-                                                <rich:column id="tc-strVencimientoPoliza" width="100px">
+                                                <rich:column id="tc-strVencimientoPoliza" styleClass="ikont-rc-tcstrvencimientopoliza">
                                                     <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.vencimientoPoliza}" />
+                                                        <h:outputText  styleClass="ikont-hot-vencimientopoliza"   value="#{var.vencimientoPoliza}" />
                                                     </f:facet>
-                                                    <h:outputText  styleClass="ikont- hot-"   id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
+                                                    <h:outputText  styleClass="ikont-hot-otxtstrvencimientopoliza"   id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}">
                                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                                                     </h:outputText>
                                                 </rich:column>
-                                                <rich:column id="tc-strEntidadPoliza" width="100px">
+                                                <rich:column id="tc-strEntidadPoliza"  styleClass="ikont-rc-tcstrentidadpoliza">
                                                     <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.entidadPoliza}" />
+                                                        <h:outputText  styleClass="ikont-hot-entidadpoliza"   value="#{var.entidadPoliza}" />
                                                     </f:facet>
-                                                    <h:outputText  styleClass="ikont- hot-"   id="otxt-strEntidadPoliza" value="#{registro.entidad.strnombreentidad}"/>
+                                                    <h:outputText  styleClass="ikont-hot-otxtstrentidadpoliza"   id="otxt-strEntidadPoliza" value="#{registro.entidad.strnombreentidad}"/>
                                                 </rich:column>
-                                                <rich:column id="tc-streliminarPoliza" width="250px">
+                                                <rich:column id="tc-streliminarPoliza"  styleClass="ikont-rc-tcstrstreliminarpoliza">
                                                     <f:facet name="header"/>
                                                     <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar(filaSeleccionada)}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
                                                                        oncomplete="#{rich:component('panelPolizaContrato')}.show(); return true;"   render="gpPolizaContratoModal"/>
@@ -193,30 +193,30 @@
                                     <h:panelGrid>
                                         <a4j:commandButton id="generarcronograma"  render="layoutCronMod"
                                                            value="#{var.generarcronograma}" action="#{Supervisor$ModificarObra.generarCronograma}"
-                                                           styleClass="ikont-"     
+                                                           styleClass="ikont-acb-generarcronograma"     
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}">
                                             <a4j:ajax event="complete"  onbeforesubmit="#{rich:component('mp_cronogramaMod')}.show(); return true;" render="layoutCronMod"/>
                                         </a4j:commandButton>
                                         <a4j:commandButton id="boton_tipificar_modificacion" action="#{Supervisor$ModificarObra.registrarTipificacion}" value="#{var.tipificarmodificacion}"
                                                            rendered="#{!Supervisor$ModificarObra.tipificacionValida}" render="layoutAdministrar"
-                                                           styleClass="ikont-"     >
+                                                           styleClass="ikont-acb-botontipificarmodificacion"     >
                                             <a4j:ajax event="oncomplete"  onbeforesubmit="#{rich:component('panelConfirmarTipificacion')}.show(); return true;" render="layoutAdministrar"/>
                                         </a4j:commandButton>
 
-                                        <a4j:commandButton id="btn_subir_diligenciado" value="#{var.subirarchivodiligenciado}" styleClass="ikont-"     
+                                        <a4j:commandButton id="btn_subir_diligenciado" value="#{var.subirarchivodiligenciado}" styleClass="ikont-acb-btnsubirdiligenciado"     
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida}" onclick="#{rich:component('panelUploadCronograma')}.show(); return false;" render="layoutDocCronog"/>
                                     </h:panelGrid>
                                     <rich:panel rendered="#{Supervisor$ModificarObra.tipificacionValida}">
 
-                                        <h:outputText  styleClass="ikont- hot-"   rendered="#{Supervisor$ModificarObra.subirCronograma.size==0}" value="#{var.nohasubidoningun}"/>
+                                        <h:outputText  styleClass="ikont-hot-nohasubidoningun"   rendered="#{Supervisor$ModificarObra.subirCronograma.size==0}" value="#{var.nohasubidoningun}"/>
                                         <center>
                                             <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirCronograma.files}" var="file" rendered="#{Supervisor$ModificarObra.subirCronograma.size!=0}"
                                                            >
-                                                <h:outputText  styleClass="ikont- hot-"   value=" #{file.onlyName}" />
+                                                <h:outputText  styleClass="ikont-hot-tipificacionValidaonlyName"   value=" #{file.onlyName}" />
                                                 <interkont:spacer height="8" width="15"/>
-                                                <h:graphicImage  styleClass="ikont- "   rendered="#{Supervisor$ModificarObra.cronovalido}"/>
-                                                <h:graphicImage  styleClass="ikont- "   rendered="#{!Supervisor$ModificarObra.cronovalido}"/>
-                                                <h:outputText  styleClass="ikont- hot-"   value="#{Supervisor$ModificarObra.mensajeModificacion}" styleClass="ikont-"  />
+                                                <h:graphicImage  styleClass="ikont-hgi-cronovalido"   rendered="#{Supervisor$ModificarObra.cronovalido}"/>
+                                                <h:graphicImage  styleClass="ikont-hgi-crononovalido"   rendered="#{!Supervisor$ModificarObra.cronovalido}"/>
+                                                <h:outputText  styleClass="ikont-hot-mensajeModificacion"   value="#{Supervisor$ModificarObra.mensajeModificacion}" />
                                             </rich:dataGrid>
                                         </center>
                                     </rich:panel>
@@ -228,7 +228,7 @@
                                             <a4j:ajax event="complete" render="layoutModificar, layoutDocOtroSi"  />
                                         </a4j:commandButton>
 
-                                        <a4j:commandButton id="btn_registrar_modificacion" value="#{var.registrarmodificacion}" styleClass="ikont-"     
+                                        <a4j:commandButton id="btn_registrar_modificacion" value="#{var.registrarmodificacion}" styleClass="ikont-acb-btnregistrarmodificacion"     
                                                            action="#{Supervisor$ModificarObra.registrarModificacion}" render="layoutConfMod"
                                                            rendered="#{Supervisor$ModificarObra.tipificacionValida and Supervisor$ModificarObra.cronovalido}" >
                                             <a4j:ajax event="complete" render="layoutPrincipal, layoutModificar, layoutMatrix, layoutConfMod" onbeforesubmit="#{rich:component('panelConfirmarModificacion')}.show();return true;"/>

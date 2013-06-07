@@ -13,21 +13,21 @@
     <rich:popupPanel id="panelUploadArchivoSuper" autosized="true" >
         <f:facet name="header">
             <h:panelGrid>
-                <h:outputText  styleClass="ikont-hot-selecdoc" value="Seleccionar documento" />
+                <h:outputText  styleClass="ikont-hot-panelUploadArchivoSuper"   value="Seleccionar documento" />
             </h:panelGrid>
         </f:facet>
 
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadArchivoSuper" immediate="true" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_panelUploadArchivoSuper" immediate="true" styleClass="ikont-acl-esconderpanelUploadArchivoSuper"  
                                        onclick="#{rich:component('panelUploadArchivoSuper')}.hide();
                                                return false;" />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel>
+        <rich:panel styleClass="ikont-rp-panelUploadArchivoSuper"   >
             <h:form id="formSubirSubirArchivoMatriz">
                 <h:panelGroup id="panelGroupSubirArchivoMatriz">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -47,19 +47,19 @@
                             <center>
                                 <rich:panel bodyClass="info" >
                                     <f:facet name="header">
-                                        <h:outputText  styleClass="ikont-hot-subarchiv" value="#{var.arcsub}" />
+                                        <h:outputText  styleClass="ikont--hot-arcsub"   value="#{var.arcsub}" />
                                     </f:facet>
 
-                                    <h:outputText  styleClass="ikont-hot-nosubarchiv" rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
+                                    <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervision$Externa.subirListado.numArchivos==0}" value="#{var.nosuarc}" />
                                     
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervision$Externa.subirListado.archivos}" var="file">
                                         <rich:panel bodyClass="rich-laguna-panel-no-header">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
-                                                    <h:outputText  styleClass="ikont-hot-namearchiv" value="#{var.nomarc}" />
-                                                    <h:outputText  styleClass="ikont-hot-nombrearch" value="#{file.nombre}" />
-                                                    <h:outputText  styleClass="ikont-hot-tamañoarchiv" value="#{var.taarc}" />
-                                                    <h:outputText  styleClass="ikont-hot-bytearchiv" value="#{file.numBytes/1024} Kb" />
+                                                    <h:outputText  styleClass="ikont-hot-infodocumentosupernomarc"   value="#{var.nomarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-infodocumentosupernombre"   value="#{file.nombre}" />
+                                                    <h:outputText  styleClass="ikont-hot-infodocumentosupertaarc"   value="#{var.taarc}" />
+                                                    <h:outputText  styleClass="ikont-hot-infodocumentosupernumbyte "   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
                                         </rich:panel>
@@ -72,8 +72,8 @@
                                 <a4j:commandButton id="bt_borrarListadoSubido" action="#{Supervision$Externa.cambioListado}"
                                                    render="info_documentoSuper, uploadDocAt, panelInformacionArchivo"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0}" value="#{var.boarcsub}"
-                                                   styleClass="ikont-acb-camblista" />
-                                <a4j:commandButton styleClass="ikont-acb-acept" value="#{var.aceptar}" id="bt_aceptarListadoSubido"
+                                                   styleClass="ikontbt_borrarlistadosubido"    />
+                                <a4j:commandButton value="#{var.aceptar}" id="bt_aceptarListadoSubido"
                                                    rendered="#{Supervision$Externa.subirListado.numArchivos>0}"
                                                    render="panelInformacionArchivo"
                                                    oncomplete="#{rich:component('panelUploadArchivoSuper')}.hide();"

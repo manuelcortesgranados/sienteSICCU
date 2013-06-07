@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalpolizacontratosuper" headerClass="rich-panel-header" height="400" width="600" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- hot-"   value="INFORMACIÓN DE PÓLIZAS" styleClass="ikont-"   />
+                <h:outputText  styleClass="ikont-hot-modalpolizacontratosuper"   value="INFORMACIÓN DE PÓLIZAS"  />
             </h:panelGroup>
         </f:facet>
         
@@ -23,7 +23,7 @@
                     <a4j:commandLink id="esconder-modalpolizacontratosuper"
                                        onclick="#{rich:component('modalpolizacontratosuper')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-acl-esconder-modalpolizacontratosuper"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -31,74 +31,74 @@
         <center>
             <rich:panel headerClass="tooltip">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.cumplimiento}" />
+                    <h:outputText  styleClass="ikont-hot-cumplimiento"   value="#{var.cumplimiento}" />
                 </f:facet>
                 
                 <h:panelGrid columns="2" cellspacing="15">
-                    <h:outputText  styleClass="ikont- hot-"   id="outNumPolizaC" value="#{var.numPolizaContrato}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inNumPolizaC" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outFechaVencimientoC" value="#{var.fechaVencimiento}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inFechaVencimientoC" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outAseguradoraC" value="#{var.entidadPoliza}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inAseguradoraC" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                    <h:outputText  styleClass="ikont-hot-outNumPolizaC"   id="outNumPolizaC" value="#{var.numPolizaContrato}:" />
+                    <h:outputText  styleClass="ikont-hot-inNumPolizaC"   id="inNumPolizaC" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText  styleClass="ikont-hot-outFechaVencimientoC"   id="outFechaVencimientoC" value="#{var.fechaVencimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-inFechaVencimientoC"   id="inFechaVencimientoC" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText  styleClass="ikont-hot-outAseguradoraC"   id="outAseguradoraC" value="#{var.entidadPoliza}:" />
+                    <h:outputText  styleClass="ikont-hot-inAseguradoraC"   id="inAseguradoraC" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
                 </h:panelGrid>
             </rich:panel>
 
             <rich:panel headerClass="tooltip">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.pagossalariosprestaciones}" />
+                    <h:outputText  styleClass="ikont-hot-pagossalariosprestaciones"   value="#{var.pagossalariosprestaciones}" />
                 </f:facet>
                 
                 <h:panelGrid columns="2" cellspacing="15">
-                    <h:outputText  styleClass="ikont- hot-"   id="outNumPolizasS" value="#{var.numPolizaContrato}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inNumPolizaS" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outFechaVencimientosS" value="#{var.fechaVencimiento}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inFechaVencimientoS" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outAseguradorasS" value="#{var.entidadPoliza}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inAseguradoraS" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                    <h:outputText  styleClass="ikont-hot-outNumPolizasS"   id="outNumPolizasS" value="#{var.numPolizaContrato}:" />
+                    <h:outputText  styleClass="ikont-hot-inNumPolizaS"   id="inNumPolizaS" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText  styleClass="ikont-hot-outFechaVencimientosS"   id="outFechaVencimientosS" value="#{var.fechaVencimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-inFechaVencimientoS"   id="inFechaVencimientoS" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText  styleClass="ikont-hot-outAseguradorasS"   id="outAseguradorasS" value="#{var.entidadPoliza}:" />
+                    <h:outputText  styleClass="ikont-hot-inAseguradoraS"   id="inAseguradoraS" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
                 </h:panelGrid>
             </rich:panel>
 
             <rich:panel headerClass="tooltip">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.buenmanejodelanticipo}" />
+                    <h:outputText  styleClass="ikont-hot-buenmanejodelanticipo"   value="#{var.buenmanejodelanticipo}" />
                 </f:facet>
                 <h:panelGrid columns="2" cellspacing="15">
-                    <h:outputText  styleClass="ikont- hot-"   id="outNumPolizasA" value="#{var.numPolizaContrato}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inNumPolizaA" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outFechaVencimientosA" value="#{var.fechaVencimiento}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inFechaVencimientoA" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outAseguradorasA" value="#{var.entidadPoliza}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inAseguradoraA" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                    <h:outputText  styleClass="ikont-hot-outNumPolizasA"   id="outNumPolizasA" value="#{var.numPolizaContrato}:" />
+                    <h:outputText  styleClass="ikont-hot-inNumPolizaA"   id="inNumPolizaA" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText  styleClass="ikont-hot-outFechaVencimientosA"   id="outFechaVencimientosA" value="#{var.fechaVencimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-inFechaVencimientoA"   id="inFechaVencimientoA" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText  styleClass="ikont-hot-outAseguradorasA"   id="outAseguradorasA" value="#{var.entidadPoliza}:" />
+                    <h:outputText  styleClass="ikont-hot-inAseguradoraA"   id="inAseguradoraA" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
                 </h:panelGrid>
             </rich:panel>
 
             <rich:panel headerClass="tooltip">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.responsabcivilextra}" />
+                    <h:outputText  styleClass="ikont-hot-responsabcivilextra"   value="#{var.responsabcivilextra}" />
                 </f:facet>
                 <h:panelGrid columns="2" cellspacing="15">
-                    <h:outputText  styleClass="ikont- hot-"   id="outNumPolizasB" value="#{var.numPolizaContrato}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inNumPolizaB" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outFechaVencimientosB" value="#{var.fechaVencimiento}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inFechaVencimientoB" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outAseguradorasB" value="#{var.entidadPoliza}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inAseguradoraB" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                    <h:outputText  styleClass="ikont-hot-outNumPolizasB"   id="outNumPolizasB" value="#{var.numPolizaContrato}:" />
+                    <h:outputText  styleClass="ikont-hot-inNumPolizaB"   id="inNumPolizaB" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText  styleClass="ikont-hot-outFechaVencimientosB"   id="outFechaVencimientosB" value="#{var.fechaVencimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-inFechaVencimientoB"   id="inFechaVencimientoB" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText  styleClass="ikont-hot-outAseguradorasB"   id="outAseguradorasB" value="#{var.entidadPoliza}:" />
+                    <h:outputText  styleClass="ikont-hot-inAseguradoraB"   id="inAseguradoraB" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
                 </h:panelGrid>
             </rich:panel>
 
             <rich:panel headerClass="tooltip">
                 <f:facet name="header">
-                    <h:outputText  styleClass="ikont- hot-"   value="#{var.estabilidadsupervisor}" />
+                    <h:outputText  styleClass="ikont-hot-estabilidadsupervisor"   value="#{var.estabilidadsupervisor}" />
                 </f:facet>
                 
                 <h:panelGrid columns="2" cellspacing="15">
-                    <h:outputText  styleClass="ikont- hot-"   id="outNumPolizasE" value="#{var.numPolizaContrato}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inNumPolizaE" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outFechaVencimientosE" value="#{var.fechaVencimiento}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inFechaVencimientoE" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
-                    <h:outputText  styleClass="ikont- hot-"   id="outAseguradorasE" value="#{var.entidadPoliza}:" />
-                    <h:outputText  styleClass="ikont- hot-"   id="inAseguradoraE" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
+                    <h:outputText  styleClass="ikont-hot-outNumPolizasE"   id="outNumPolizasE" value="#{var.numPolizaContrato}:" />
+                    <h:outputText  styleClass="ikont-hot-inNumPolizaE"   id="inNumPolizaE" value="#{Supervision$Externa.objetoPolizaSeguimiento.strnropoliza}" />
+                    <h:outputText  styleClass="ikont-hot-outFechaVencimientosE"   id="outFechaVencimientosE" value="#{var.fechaVencimiento}:" />
+                    <h:outputText  styleClass="ikont-hot-inFechaVencimientoE"   id="inFechaVencimientoE" value="#{Supervision$Externa.objetoPolizaSeguimiento.datefecvenc}" />
+                    <h:outputText  styleClass="ikont-hot-outAseguradorasE"   id="outAseguradorasE" value="#{var.entidadPoliza}:" />
+                    <h:outputText  styleClass="ikont-hot-inAseguradoraE"   id="inAseguradoraE" value="#{Supervision$Externa.objetoPolizaSeguimiento.straseguradora}" />
                 </h:panelGrid>
             </rich:panel>
         </center>
