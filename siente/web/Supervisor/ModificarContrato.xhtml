@@ -305,9 +305,9 @@
                                                         rowKeyVar="filaSeleccionada">
                                             <rich:column id="tc-strTipoPolizaModi" styleClass="ikont-rc-tcstrTipoPolizaModi" >
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{var.tipoPolizaContrato}"/>
+                                                    <h:outputText  styleClass="ikont-hot-tcstrTipoPolizaModi"   value="#{var.tipoPolizaContrato}"/>
                                                 </f:facet>
-                                                <h:outputText  styleClass="ikont-hot-"   id="otxt-TipoPolizaModi"  value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                                <h:outputText  styleClass="ikont-hot-otxtTipoPolizaModi"   id="otxt-TipoPolizaModi"  value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                             </rich:column>
                                             <rich:column id="tc-strnumPolizaModi" styleClass="ikont-rc-tcstrnumPolizaModi" >
                                                 <f:facet name="header">
@@ -316,24 +316,24 @@
                                                 <h:outputText  styleClass="ikont-hot-otxtstrnumPolizaModi"   id="otxt-strnumPolizaModi" value="#{localRow.strnumpoliza}"/>
                                             </rich:column>
 
-                                            <rich:column id="tc-strVencimientoPolizaModi" width="100px">
+                                            <rich:column id="tc-strVencimientoPolizaModi"  styleClass="ikont-rc-tcstrVencimientoPolizaModi">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{var.fecha} #{var.vencimientoPoliza}" />
+                                                    <h:outputText  styleClass="ikont-hot-vencimientoPoliza"   value="#{var.fecha} #{var.vencimientoPoliza}" />
                                                 </f:facet>
-                                                <h:outputText  styleClass="ikont-hot-"   id="otxt-strVencimientoPolizaModi" value="#{localRow.datefechavecimiento}">
+                                                <h:outputText  styleClass="ikont-hot-otxtstrVencimientoPolizaModi"   id="otxt-strVencimientoPolizaModi" value="#{localRow.datefechavecimiento}">
                                                     <f:convertDateTime pattern="yyyy-MMM-dd"/>
                                                 </h:outputText>
                                             </rich:column>
 
-                                            <rich:column id="tc-strEntidadContr" styleClass="ikont-rc-tcstrnumPolizaModi">
+                                            <rich:column id="tc-strEntidadContr" styleClass="ikont-rc-strEntidadContr">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{var.entidadPoliza}" />
+                                                    <h:outputText  styleClass="ikont-hot-entidadPoliza"   value="#{var.entidadPoliza}" />
                                                 </f:facet>
-                                                <h:outputText  styleClass="ikont-hot-"   id="otxt-strEntidadModi" value="#{localRow.aseguradora.strnombreentidad}"/>
+                                                <h:outputText  styleClass="ikont-hot-otxtstrEntidadModi"   id="otxt-strEntidadModi" value="#{localRow.aseguradora.strnombreentidad}"/>
                                             </rich:column>
-                                            <rich:column id="otxt-Editar" styleClass="ikont-rc-tcstrnumPolizaModi">
+                                            <rich:column id="otxt-Editar" styleClass="ikont-rc-otxtEditar">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{var.editar}" />
+                                                    <h:outputText  styleClass="ikont-hot-otxtEditar"   value="#{var.editar}" />
                                                 </f:facet>
                                                 <a4j:commandButton id="btnPolizas" value="#{var.editar}" oncomplete="#{rich:component('mp-editar-polizas')}.show();" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.seleccionareditarPoliza(filaSeleccionada)}" render="rpPolizas">
@@ -342,7 +342,7 @@
                                             </rich:column>
                                             <rich:column id="tc-streliminarPolizaModi" styleClass="ikont-rc-tcstrnumPolizaModi">
                                                 <f:facet name="header">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{var.eliminar}" />
+                                                    <h:outputText  styleClass="ikont-hot-streliminarPolizaModi"   value="#{var.eliminar}" />
                                                 </f:facet>
                                                 <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" execute="@this"
                                                                    action="#{Supervisor$ModificarContrato.eliminarPoliza(filaSeleccionada)}">
@@ -355,7 +355,7 @@
 
                                     <h:panelGrid id="pgdocumentosModi" columns="6">
                                         <h:panelGroup>
-                                            <h:outputLabel  styleClass="ikont- "   id="lblPoliza"  value="#{var.anadirpolizas}:" for="txtPoliza"/>
+                                            <h:outputLabel  styleClass="ikont-hol-lblPoliza"   id="lblPoliza"  value="#{var.anadirpolizas}:" for="txtPoliza"/>
                                             <rich:message for="txtPoliza"/>
                                         </h:panelGroup>
                                         <interkont:spacer width="42"/>
@@ -370,7 +370,7 @@
                                 </rich:panel> 
                                 <h:panelGrid id="pgdocumentosOtrosi" columns="6" rendered="#{Supervisor$ModificarContrato.modificarcontrato.presupuesto>=1 or Supervisor$ModificarContrato.modificarcontrato.prorroga>=1}" >
                                     <h:panelGroup>
-                                        <h:outputLabel  styleClass="ikont- "   id="lblOtrosi"  value="#{var.adjuntarotrosi}:" for="txtOtrosi"/>
+                                        <h:outputLabel  styleClass="ikont-hol-lblOtrosi"   id="lblOtrosi"  value="#{var.adjuntarotrosi}:" for="txtOtrosi"/>
                                         <rich:message for="txtOtrosi"/>
                                     </h:panelGroup>
                                     <interkont:spacer width="42"/>
@@ -388,10 +388,10 @@
                         <rich:panel  rendered="#{Supervisor$ModificarContrato.cual==4}">
                             <f:facet name="header" >
                                 <h:panelGroup >
-                                    <h:outputText  styleClass="ikont-hot-"   value="4.#{var.outformapago}"   />
+                                    <h:outputText  styleClass="ikont-hot-outformapago"   value="4.#{var.outformapago}"   />
                                 </h:panelGroup>
                             </f:facet>
-                            <h:outputLabel  styleClass="ikont- "   value="#{var.modificarpagoscontrato}"/>
+                            <h:outputLabel  styleClass="ikont-hol-modificarpagoscontrato"   value="#{var.modificarpagoscontrato}"/>
 
                             <h:selectOneMenu id="pagos" immediate="true" value="#{Supervisor$ModificarContrato.modificarcontrato.planificacion}">
                                 <f:selectItem itemValue="0" itemLabel="No"/>
@@ -405,29 +405,29 @@
                                 <rich:panel  rendered="#{Supervisor$ModificarContrato.modificarcontrato.planificacion==1}">
                                     <f:facet name="header" >
                                         <h:panelGroup >
-                                            <h:outputText  styleClass="ikont-hot-"   value="Planificación de pagos" styleClass="ikont-"   />
+                                            <h:outputText  styleClass="ikont-hot-planificacionpagos"   value="Planificación de pagos"   />
                                         </h:panelGroup>
                                     </f:facet>
 
                                     <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
 
-                                        <h:outputLabel  styleClass="ikont- "   value="#{var.formadepago}:"/>
+                                        <h:outputLabel  styleClass="ikont-hol-formadepago"   value="#{var.formadepago}:"/>
                                         <interkont:spacer width="20"/>
-                                        <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-strdescformapago"    value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}"/>
 
-                                        <h:outputLabel  styleClass="ikont- "   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-porcentajeanticipopago"   value="#{var.porcentaje} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma==1}"/>
                                         <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
-                                        <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-porcenanticipo"    value="% #{Supervisor$Contrato.porcenanticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1}"/>
 
-                                        <h:outputLabel  styleClass="ikont- "   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-valoranticipo"   value="#{var.valoranticipo}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                                         <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                                        <h:outputText  styleClass="ikont-hot-"   styleClass="ikont-"   value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                                        <h:outputText  styleClass="ikont-hot-vloranticipo"    value="#{Supervisor$Contrato.vloranticipo}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                                             <f:convertNumber pattern="$###,###"/>
                                         </h:outputText>
 
-                                        <h:outputLabel  styleClass="ikont- "   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
+                                        <h:outputLabel  styleClass="ikont-anticipopago"   value="#{var.fecha} #{var.anticipopago}:" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
                                         <interkont:spacer width="20" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}"/>
-                                        <h:outputText  styleClass="ikont-hot-"   styleClass="ikont-"   value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
+                                        <h:outputText  styleClass="ikont-hot-fechapago"      value="#{Supervisor$Contrato.fechapago}" rendered="#{Supervisor$Contrato.anticiforma == 1 or Supervisor$Contrato.anticiforma == 3}">
                                             <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                         </h:outputText>
 
@@ -445,33 +445,33 @@
                                             <f:facet name="header">
                                                 <rich:columnGroup>
                                                     <rich:column  breakRowBefore="true" colspan="3">
-                                                        <h:outputText  styleClass="ikont-hot-"   value="#{var.numero} de Actas Parciales"/>
+                                                        <h:outputText  styleClass="ikont-hot-numeroactas"   value="#{var.numero} de Actas Parciales"/>
                                                     </rich:column>
                                                     <rich:column  breakRowBefore="true">
-                                                        <h:outputText  styleClass="ikont-hot-"   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
+                                                        <h:outputText  styleClass="ikont-hot-tablaPlanificacionporcentajeacta"   value="#{var.porcentaje} #{var.deCiu}l #{var.acta}"/>
                                                     </rich:column>
                                                     <rich:column >
-                                                        <h:outputText  styleClass="ikont-hot-"   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
+                                                        <h:outputText  styleClass="ikont-hot-tablaPlanificacionvaloracta"   value="#{var.valor} #{var.deCiu}l #{var.acta}" />
                                                     </rich:column>
                                                     <rich:column >
-                                                        <h:outputText  styleClass="ikont-hot-"   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
+                                                        <h:outputText  styleClass="ikont-hot-tablaPlanificacionfechaacta"   value="#{var.fecha} #{var.deCiu}l #{var.acta}" />
                                                     </rich:column>
                                                     <rich:column >
-                                                        <h:outputText  styleClass="ikont-hot-"   value="#{var.editar}" />
+                                                        <h:outputText  styleClass="ikont-hot-tablaPlanificacioneditar"   value="#{var.editar}" />
                                                     </rich:column>
                                                 </rich:columnGroup>
                                             </f:facet>
                                             <rich:columnGroup>
                                                 <rich:column   breakRowBefore="true">
-                                                    <h:outputText  styleClass="ikont-hot-"   value="% #{planificacion.numvlrporcentage}"/>
+                                                    <h:outputText  styleClass="ikont-hot-numvlrporcentage"   value="% #{planificacion.numvlrporcentage}"/>
                                                 </rich:column>
                                                 <rich:column>
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{planificacion.numvlrpago}">
+                                                    <h:outputText  styleClass="ikont-hot-numvlrpago"   value="#{planificacion.numvlrpago}">
                                                         <f:convertNumber pattern="$###,###"/>
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >
-                                                    <h:outputText  styleClass="ikont-hot-"   value="#{planificacion.datefechapago}">
+                                                    <h:outputText  styleClass="ikont-hot-datefechapago"   value="#{planificacion.datefechapago}">
                                                         <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
                                                     </h:outputText>
                                                 </rich:column>
@@ -494,19 +494,19 @@
                         <a4j:commandButton  value="#{var.finalizar}" action="#{Supervisor$ModificarContrato.guardarModificarContrato}" rendered="#{Supervisor$ModificarContrato.cual==3}" render="pgprincipal, layoutdetalleModificar" />
                         <a4j:outputPanel id="panelErrorModpolizas">
                             <rich:messages id="messagesModPolizas" globalOnly="true"
-                                           styleClass="ikont-"   ajaxRendered="true"
+                                           styleClass="ikont-rm-messagesModPolizas"   ajaxRendered="true"
                                            >
                                 <f:facet name="infoMarker">
-                                    <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/msginfo.png" />
+                                    <h:graphicImage  styleClass="ikont-hgi-msginfo "    url="/resources/imgs/msginfo.png" />
                                 </f:facet>
                                 <f:facet name="warnMarker">
-                                    <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/msgwarn.png" />
+                                    <h:graphicImage  styleClass="ikont-hgi-msgwarn "    url="/resources/imgs/msgwarn.png" />
                                 </f:facet>
                                 <f:facet name="errorMarker">
-                                    <h:graphicImage  styleClass="ikont- "    url="/resources/imgs/msgerror.png" />
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror "    url="/resources/imgs/msgerror.png" />
                                 </f:facet>
                                 <f:facet name="fatalMarker">
-                                    <h:graphicImage  styleClass="ikont- "     url="/resources/imgs/msgerror.png" />
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror"     url="/resources/imgs/msgerror.png" />
                                 </f:facet>
                             </rich:messages>
 
