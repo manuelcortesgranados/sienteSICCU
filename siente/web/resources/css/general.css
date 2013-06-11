@@ -1,0 +1,16 @@
+/* 
+    Document   : general
+    Created on : 11/06/2013, 04:26:37 PM
+    Author     : desarrollo5
+    Description:
+        En este archivo css contiene las reglas correspondientes a los estilos
+        que deben ser aplicados a lo largo de toda la aplicación y que aplican
+        para todos los clientes. Por lo tanto aquí se adicionará el estilo más
+        general de toda la alicación. Se debe tener especial cuidado en no
+        incluir aquí, estilos para páginas específicas.
+*/
+
+root { 
+    display: block;
+}
+
