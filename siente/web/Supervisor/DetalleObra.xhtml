@@ -838,8 +838,8 @@
                     </rich:collapsiblePanel>
                     <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
 
-                        <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="client" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
-                            <a4j:ajax event="click" render="rpListaActividadesProyecto" />
+                        <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
+                           <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
                             <rich:panel id="rpListaActividadesProyecto" >
                                 <rich:dataTable id="listaActividadesAlimentar2"
                                                 onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
