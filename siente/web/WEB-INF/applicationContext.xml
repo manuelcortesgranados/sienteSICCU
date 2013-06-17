@@ -209,8 +209,6 @@
                 <value>co/com/interkont/cobra/to/RestaurarPassword.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Terceroentidad.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Modalidadcontratista.hbm.xml</value>
-                                
-                <value>co/com/interkont/cobra/to/UbicacionobraBarrioVereda.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">
