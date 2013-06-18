@@ -743,9 +743,10 @@
                                 <center>
                                     Generar reporte en:
                                     <h:panelGrid columns="3">
-                                        <h:commandLink id="pdf" action="#{Supervisor$DetalleObra.reportePdf}" styleClass="ikont-hcl-reportePdf"    />
-                                        <h:commandLink id="excel" action="#{Supervisor$DetalleObra.reporteExcel}" styleClass="ikont-hcl-reporteExcel"    />
-                                        <h:commandLink id="word" action="#{Supervisor$DetalleObra.reporteWord}" styleClass="ikont-hcl-reporteWord"    />
+                                         
+                                        <h:commandLink id="pdf" onclick="document.location.href='#{var.birtpdfdetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf"  value="PDF"  target="_blank"  />
+                                        <h:commandLink id="excel" onclick="document.location.href='#{var.birtexceldetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel"  value="EXCEL"  target="_blank" />
+                                        <h:commandLink id="word" onclick="document.location.href='#{var.birtworddetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord"  value="WORD" target="_blank" />
                                     </h:panelGrid>
                                 </center>
                             </h:form>
@@ -1373,9 +1374,10 @@
 
                                 <div id="sideline"><label class="textlittle2">DESCARGAR REPORTES</label></div>
                                 <h:panelGrid columns="3" >
-                                    <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}"   />
-                                    <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}"/>
-                                    <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}"/>
+                                    <h:outputLabel value="probar"/>
+                                       <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" value="PDf" />
+                                    <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}" value="EXCEL"/>
+                                    <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}" value="WORD"/>
 
                                 </h:panelGrid>
                             </h:panelGrid>

@@ -33,19 +33,20 @@
     <ui:define name="body">
         <h:form id="form_indicadores">
             <h:panelGrid columns="1">
-                <h:graphicImage  styleClass="ikont-hgi-dashboardsiente"   url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
+                <h:graphicImage url="/resources/imgs/elementos_indicadores/dashboardsiente_r1_c1.png"/>
 
                 <h:panelGrid columns="2" >
-                    <h:outputText  styleClass="ikont-hot-fechaconsolidacion"   value="Fecha de consolidación:"/>
+                    <h:outputText value="Fecha de consolidación:"/>
 
                     <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.idconsolidadoselec}"  >
                         <f:selectItems value="#{GraficarIndicadores.itemsCortes}"/>
 
                     </h:selectOneMenu>
-                    <h:outputText  styleClass="ikont-hot-indicador"   value="Indicador: "/>                           
+                    <h:outputText value="Indicador: "/>                           
 
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==0}">
                         <f:selectItem itemValue="0" itemLabel="Presupuesto en ejecución" />
+                        <!--<f:selectItem itemValue="1" itemLabel="Consolidado general" />-->
                         <a4j:ajax event="change" listener="#{GraficarIndicadores.cambioIndicador}" render="cmbLoc, cmbOpcion"/>
                     </h:selectOneMenu>
                     <h:selectOneMenu value="#{GraficarIndicadores.indicadorselec}" rendered="#{GraficarIndicadores.seleccionmenu==1}">
@@ -66,7 +67,7 @@
 
                     <h:panelGroup id="cmbLoc" >
 
-                        <h:selectOneMenu id="cmbselec" value="#{GraficarIndicadores.filtrolocalidad.filtroselec}"  rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}" onchange="submit()" >
+                        <h:selectOneMenu id="cmbselec" value="#{GraficarIndicadores.filtrolocalidad.filtroselec}"  rendered="#{GraficarIndicadores.filtrolocalidad.verfiltroloc}" onchange="submit()" style="width:200px;">
                             <f:selectItem itemLabel="#{var.zonaespec}" itemValue="1"/>
                             <f:selectItem itemLabel="#{var.localidad}" itemValue="0"/>
 
@@ -78,7 +79,7 @@
 
                             <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec !=1}">
                                 <h:panelGroup >
-                                    <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"    >
+                                    <h:selectOneMenu id="cmbdeptos" value="#{GraficarIndicadores.filtrolocalidad.deptoselec}"   style="width:200px;" >
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.sedeptos}" />
                                         <a4j:ajax event="change" listener="#{GraficarIndicadores.llenarMunicipios}" render="municipioincomindica"/>
@@ -86,7 +87,7 @@
                                 </h:panelGroup>
                                 <interkont:spacer width="10"/>
                                 <h:panelGroup id="municipioincomindica" >
-                                    <h:selectOneMenu id="cmbmuni" value="#{GraficarIndicadores.filtrolocalidad.muniselec}"  >
+                                    <h:selectOneMenu id="cmbmuni" value="#{GraficarIndicadores.filtrolocalidad.muniselec}"  style="width:200px;">
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.semuni}" />
                                     </h:selectOneMenu>
@@ -95,7 +96,7 @@
 
                             <h:panelGrid columns="3" rendered="#{GraficarIndicadores.filtrolocalidad.filtroselec == 1}" >
                                 <h:panelGroup >
-                                    <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.intzona}"  >
+                                    <h:selectOneMenu value="#{GraficarIndicadores.filtrolocalidad.intzona}"  style="width:200px;">
                                         <f:selectItem itemValue="0" itemLabel="Todos"/>
                                         <f:selectItems value="#{GraficarIndicadores.zonaespecifica}"/>
                                     </h:selectOneMenu>
@@ -111,50 +112,50 @@
 
             <h:panelGroup id="gpIndicadores">
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==0}">
-                    <h:outputText  styleClass="ikont-hot-piepresupuesto"   value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
-                    <div id="presupuestoejec" ></div>
+                    <h:outputText value="#{GraficarIndicadores.piepresupuesto.scriptPie}" escape="false"/>
+                    <div id="presupuestoejec" style="width: 100%; height: 600px;"></div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==1}">
 
-                    <rich:dataTable id="tablaConsolGen"   var="fila" 
+                    <rich:dataTable id="tablaConsolGen"  style="text-align:left; width:100%;" var="fila" 
                                     value="#{GraficarIndicadores.listaconsolidadosgen}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">                                            
-                                    <h:outputText  styleClass="ikont-hot-estadoavance"   value="Estado de avance y resultados"/>                                           
+                                    <h:outputText value="Estado de avance y resultados"/>                                           
                                 </rich:column>
                                 <rich:column colspan="6">                                            
-                                    <h:outputText  styleClass="ikont-hot-nacional"   value="Nacional"/>                                           
+                                    <h:outputText value="Nacional"/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText  styleClass="ikont-hot-space"   value=" "/>                                           
+                                    <h:outputText value=" "/>                                           
                                 </rich:column>
 
                                 <rich:column colspan="1" >                                            
-                                    <h:outputText  styleClass="ikont-hot-aprovado"   value="Aprobado miles de pesos"/>                                           
+                                    <h:outputText value="Aprobado miles de pesos"/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-tipo"   value="Tipo"/>                                            
+                                    <h:outputText value="Tipo"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-numero"   value="Número"/>                                            
+                                    <h:outputText value="Número"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-terminados"   value="Terminados"/>                                            
+                                    <h:outputText value="Terminados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-giroporcentaje"   value="Giro %"/>                                            
+                                    <h:outputText value="Giro %"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-porcentajeavancefisico"   value="% Avance físico"/>                                            
+                                    <h:outputText value="% Avance físico"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-resultadosfamilias"   value="Resultados familias atendidas"/>                                            
+                                    <h:outputText value="Resultados familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-empleosdirectos"   value="Empleos directos"/>                                            
+                                    <h:outputText value="Empleos directos"/>                                            
                                 </rich:column>
 
                             </rich:columnGroup>
@@ -162,45 +163,45 @@
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
 
-                                <h:outputText  styleClass="ikont-hot-etiqueta" value="#{fila.etiqueta}" />
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText  styleClass="ikont-hot-valoraprobado "   value="#{fila.valorAprobado}"  >
+                                    <h:outputText value="#{fila.valorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText  styleClass="ikont-hot-etiquetatotal"   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
+                                    <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.etiqueta!='Total'}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-tipoetiqueta"  value="#{fila.id.tipoEtiqueta}"/>
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.id.tipoEtiqueta}"/>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-numetiqueta" value="#{fila.numEtiquetas}"/>
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetas}"/>
 
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-numetiquetater" value="#{fila.numEtiquetasTer}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.numEtiquetasTer}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-numgiro"  value="#{fila.numGiro}" > 
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.numGiro}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-numavancefisico" value="#{fila.numAvanFisico}" > 
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.numAvanFisico}" > 
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-famatendi" value="#{fila.famAtendi}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.famAtendi}" >
 
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-empledirec" value="#{fila.empleDirec}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.empleDirec}" >
 
                                 </h:outputText>
                             </rich:column>
@@ -215,130 +216,132 @@
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==2}">
 
-                    <rich:dataTable id="tablaAvanceHUm"   var="fila" 
+                    <rich:dataTable id="tablaAvanceHUm"  style="text-align:left; width:100%;" var="fila" 
                                     value="#{GraficarIndicadores.listaavanceshum}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="2">                                            
-                                    <h:outputText  styleClass="ikont-hot-space2"   value=" "/>                                           
+                                    <h:outputText value=" "/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  styleClass="ikont-hot-primergiro"   value="Primer giro"/>                                           
+                                    <h:outputText value="Primer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  styleClass="ikont-hot-segundogiro"   value="Segundo giro"/>                                           
+                                    <h:outputText value="Segundo giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="4">                                            
-                                    <h:outputText  styleClass="ikont-hot-tercergiro"   value="Tercer giro"/>                                           
+                                    <h:outputText value="Tercer giro"/>                                           
                                 </rich:column>
                                 <rich:column colspan="1" breakRowBefore="true">                                            
-                                    <h:outputText  styleClass="ikont-hot-space3"   value=" "/>                                           
+                                    <h:outputText value=" "/>                                           
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-aprovadomillones"   value="Aprobado en  millones de pesos"/>                                            
+                                    <h:outputText value="Aprobado en  millones de pesos"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-recursosaprobados"   value="Recursos aprobados"/>                                            
+                                    <h:outputText value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatender"   value="Familias atender"/>                                            
+                                    <h:outputText value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatendidas"   value="Familias atendidas"/>                                            
+                                    <h:outputText value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-porcentajeavance"   value="% avance"/>                                            
+                                    <h:outputText value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-recursosaprobados2"   value="Recursos aprobados"/>                                            
+                                    <h:outputText value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatender2"   value="Familias atender"/>                                            
+                                    <h:outputText value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatendidas2"   value="Familias atendidas"/>                                            
+                                    <h:outputText value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-porcentajeavance2"   value="% avance"/>                                            
+                                    <h:outputText value="% avance"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-recursosaprobados3"   value="Recursos aprobados"/>                                            
+                                    <h:outputText value="Recursos aprobados"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatender3"   value="Familias atender"/>                                            
+                                    <h:outputText value="Familias atender"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-familiasatendidas3"   value="Familias atendidas"/>                                            
+                                    <h:outputText value="Familias atendidas"/>                                            
                                 </rich:column>
                                 <rich:column>                                            
-                                    <h:outputText  styleClass="ikont-hot-porcentajeavance3"   value="% avance"/>                                            
+                                    <h:outputText value="% avance"/>                                            
                                 </rich:column>
+
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup id="cuerpo">
                             <rich:column>
-                                <h:outputText  styleClass="ikont-hot-etiqueta2" value="#{fila.etiqueta}" />
+
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.etiqueta}" />
                             </rich:column>
                             <rich:column>                                        
                                 <h:panelGrid columns="2">
-                                    <h:outputText  styleClass="ikont-hot-pgvaloraprobado" value="#{fila.pgValorAprobado}"  >
+                                    <h:outputText value="#{fila.pgValorAprobado}"  >
                                         <f:convertNumber pattern="$###,###"/>
                                     </h:outputText>
-                                    <h:outputText  styleClass="ikont-hot-idcodigo"   value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
+                                    <h:outputText value="#{fila.graf3d.scriptbarra3d}" escape="false" rendered="#{fila.id.codigo!=1}"/>
                                 </h:panelGrid>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-pgrecursosaprobados" value="#{fila.pgRecursosAprobados}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-pgfamiliasatender" value="#{fila.pgFamiliasAtender}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-pgfamiliasatendidas" value="#{fila.pgFamiliasAtendidas}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-pgporcentajeavance" value="#{fila.pgPorcentajeAvance}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.pgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-sgrecursosaprobados" value="#{fila.sgRecursosAprobados}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-sgfamiliasaterder"  value="#{fila.sgFamiliasAtender}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-sgfamiliasatendidas" value="#{fila.sgFamiliasAtendidas}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-sgporcentajeavance" value="#{fila.sgPorcentajeAvance}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.sgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-tgrecursosaprobados" value="#{fila.tgRecursosAprobados}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgRecursosAprobados}" >
                                     <f:convertNumber pattern="$###,###"/>
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-tgfamiliasatender" value="#{fila.tgFamiliasAtender}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtender}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-tgfamiliasatendidas" value="#{fila.tgFamiliasAtendidas}" >                                            
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgFamiliasAtendidas}" >                                            
                                 </h:outputText>
                             </rich:column>
                             <rich:column>                                        
-                                <h:outputText  styleClass="ikont-hot-tgporcentajeavance" value="#{fila.tgPorcentajeAvance}" >
+                                <h:outputText  styleClass="txt_outtext" value="#{fila.tgPorcentajeAvance}" >
                                     <f:convertNumber pattern="###,###.##" />
                                 </h:outputText>
                             </rich:column>
@@ -349,20 +352,20 @@
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==3}">
-                    <h:outputText  styleClass="ikont-hot-barrascomparativoentterr" value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
+                    <h:outputText value="#{GraficarIndicadores.barrascomparativoentterr.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
 
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==4}">
-                    <h:outputText  styleClass="ikont-hot-barrascomparativoentnac"   value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText value="#{GraficarIndicadores.barrascomparativoentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==5}">
-                    <h:outputText  styleClass="ikont-hot-barrascomparativofinancieroentnac"   value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
+                    <h:outputText value="#{GraficarIndicadores.barrascomparativofinancieroentnac.scriptbarra3d}" escape="false"/>
 
                 </h:panelGroup>
                 <h:panelGroup rendered="#{GraficarIndicadores.indicadorselec==6}">
-                    <h:outputText  styleClass="ikont-hot-radarconvenios"   value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
+                    <h:outputText value="#{GraficarIndicadores.radarconvenios.scriptPie}" escape="false"/>
 
 
                 </h:panelGroup>

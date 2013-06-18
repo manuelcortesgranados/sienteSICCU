@@ -1161,6 +1161,7 @@ public class DetalleObra implements Serializable{
 
     public String reportePdf() {
         try {
+            System.out.println("entre reporte pdf");
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("birtpdfdetalle") + getAdministrarObraNew().getObra().getIntcodigoobra());
         } catch (IOException ex) {
             Logger.getLogger(DetalleObra.class.getName()).log(Level.SEVERE, null, ex);
