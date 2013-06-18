@@ -600,7 +600,6 @@ public class HomeGestion implements Serializable {
          * @param FiltroObra Version cobra
          */
         //Version cobra para saber que bundle esta apuntando para el conteo de los proyectos en cobrafonade
-        filtro.setVersioncobra(getSessionBeanCobra().getBundle().getString("versioncobra"));
         filtro.setCuantiaini(null);
         filtro.setCuantiafin(null);
         filtro.setFactorpagina(100);
@@ -617,8 +616,6 @@ public class HomeGestion implements Serializable {
         filtro.setStrmunicipio("0");
         filtro.setEncargofidu(0);
         filtro.setVercodigosedeeducativa(false);
-        filtro.setFiltrarinfraestructura(Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("filtrarinfraestructura")));
-        filtro.setVerconveniosciudadano(Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("verconveniosciudadano")));
         //filtro.setIntcodigoentidad(0);
         filtro.setCoddanesedeeducativa("");
 

@@ -43,7 +43,7 @@
                 <h:graphicImage  styleClass="ikont-hgi-logoLogin "   url="/resources/imgs/login/logo_login.png" width="350"/>
                 <rich:panel>
                     <rich:tabPanel switchType="ajax" id="tab_login"  immediate="true"  activeItem="tab_dos" >
-                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  oncomplete="placehoder()">
+                        <rich:tab header="#{var.logintabinterventor}"  id="tab_dos" name="tab_dos" headerActiveClass="tab-pestania-active-usu" headerInactiveClass="tab-pestania-inactive-usu" contentClass="tab-div"  >
                             <a4j:region>
                                 <h:panelGroup layout="block">
                                     <h:panelGrid   >
@@ -59,15 +59,18 @@
                                             <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarconuno "   value="#{var.logintabentrarcontenidoingresarconuno}"   />    
                                             <h:outputText  styleClass="ikont-hot-logintabentrarcontenidoingresarcondos "   value="#{var.logintabentrarcontenidoingresarcondos}"   />    
                                         </h:panelGrid>
-                                        <h:inputText id="usuariodos" title="Usuario" styleClass="ikont-hit-usuLogin"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" onfocus="clearText(this);" onblur="clearText(this);" size="35"/>
+                                        <h:inputText id="usuariodos" styleClass="ikont-hit-usuLogin"   required="true" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}" size="35">
+                                            <rich:placeholder value="Usuario" />
+                                        </h:inputText>
                                         <h:panelGrid  >
                                             <rich:message for="usuariodos" />
                                         </h:panelGrid>
                                         <h:panelGroup >
                                             <center>
                                                 <h:panelGrid columns="2">
-                                                    <h:inputSecret id="contrasenados"  styleClass="ikont-hit-contrasenados"   title="Contraseña" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" onfocus="clearText(this);" onblur="clearText(this);" size="35">
+                                                    <h:inputSecret id="contrasenados"  styleClass="ikont-hit-contrasenados"    required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}" size="35">
                                                         <f:validateLength maximum="20" minimum="8"/>
+                                                        <rich:placeholder value="Contraseña" />
                                                     </h:inputSecret>
 
                                                     <h:commandButton id="enviardos" styleClass="ikont-hcb-logintabentrarbtnentrar"    value="#{var.logintabentrarbtnentrar}" action="#{login.enviar_action}"                              
@@ -115,7 +118,7 @@
                                 </h:panelGroup>
                             </a4j:region> 
                         </rich:tab>
-                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"  oncomplete="placehoder()" headerActiveClass="tab-pestania-active" headerInactiveClass="tab-pestania-inactive" contentClass="tab-div">
+                        <rich:tab header="#{var.logintabciudadano}" id="tab_uno" name="tab_uno"   headerActiveClass="tab-pestania-active" headerInactiveClass="tab-pestania-inactive" contentClass="tab-div">
                             <h:panelGroup layout="block" id="gpLoginCiudadanoPrincipal">
 
                                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.verregistrarse}" >
@@ -152,7 +155,7 @@
                                                 </center>
                                             </h:panelGroup>
                                             <a4j:commandLink type="ajax" action="#{SessionBeanCobra.habilitarRegistrate}" value="#{var.loguintabregistrarte} >" styleClass="ikont-a4jcl-loguintabregistrarte"   
-                                                             execute="@this" render="gpLoginCiudadanoPrincipal" oncomplete="placehoder()">                                                    
+                                                             execute="@this" render="gpLoginCiudadanoPrincipal" >                                                    
                                             </a4j:commandLink>
                                         </h:panelGrid>
                                     </a4j:region>
@@ -180,23 +183,33 @@
                                                 <center>
                                                     <h:panelGrid columns="2">
                                                         <h:panelGrid >
-                                                            <h:inputText required="true" maxlength="250" id="textnombre" title="Nombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  />
+                                                            <h:inputText required="true" maxlength="250" id="textnombre" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strnombre}" styleClass="ikont-hit-textnombre"  >
+                                                                <rich:placeholder value="Nombre" />
+                                                            </h:inputText>
                                                             <h:panelGrid columnClasses="panelcenter" >
                                                                 <rich:message for="textnombre"  styleClass="ikont-rm-textnombre"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true"  id="textusuario" title="Usuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario"  />
+                                                            <h:inputText required="true"  id="textusuario" maxlength="25" value="#{SessionBeanCobra.ciudadanoservice.ciudadano.usuLogin}" styleClass="ikont-hittextusuario"  >
+                                                                <rich:placeholder value="Usuario" />
+                                                            </h:inputText>
                                                             <h:panelGrid  columnClasses="panelcenter">
                                                                 <rich:message for="textusuario"  styleClass="ikont-rm-textusuario"  />
                                                             </h:panelGrid>
-                                                            <h:inputText required="true" maxlength="80" title="Em@il" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo"  />
+                                                            <h:inputText required="true" maxlength="80" id="textcorreo"  value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.stremail}" styleClass="ikont-hit-textcorreo" >
+                                                                <rich:placeholder value="Em@il" />
+                                                            </h:inputText>
                                                             <h:panelGrid  columnClasses="panelcenter">
                                                                 <rich:message for="textcorreo"  styleClass="ikont-rm-textcorreo"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret required="true" id="textpassword" title="Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword"  />
+                                                            <h:inputSecret required="true" id="textpassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.password}" styleClass="ikont-hit-textpassword"  >
+                                                                <rich:placeholder value="Contraseña" />
+                                                            </h:inputSecret>
                                                             <h:panelGrid  columnClasses="panelcenter">
                                                                 <rich:message for="textpassword"  styleClass="ikont-rm-textpassword"  />
                                                             </h:panelGrid>
-                                                            <h:inputSecret  required="true" id="textrepassword" title="Confirmar Contraseña" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword"  />
+                                                            <h:inputSecret  required="true" id="textrepassword" size="25" value="#{SessionBeanCobra.ciudadanoservice.repassword}" styleClass="ikont-hit-textrepassword"  >
+                                                                <rich:placeholder value="Confirmar Contraseña" />
+                                                            </h:inputSecret>
                                                             <h:panelGrid  columnClasses="panelcenter">
                                                                 <rich:message for="textrepassword"  styleClass="ikont-rm-textrepassword"  />
                                                             </h:panelGrid>

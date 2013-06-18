@@ -63,24 +63,8 @@ function style_background(){
         if(_heigth != 0){
             document.body.style.height = _heigth;
         }
-        placehoder();
     }
     dimension();
     
-}
-
-function placehoder(){
-    var _array =  document.getElementsByTagName('input');
-    var _num = _array.length;
-    for(var i = 0; i < _num; i++){
-        if(_array[i].getAttribute('type') == 'text'){
-            _array[i].setAttribute('placeholder', _array[i].getAttribute('title'));
-            _array[i].removeAttribute('title');
-        }else if(_array[i].getAttribute('type') == 'password'){
-            _array[i].setAttribute('placeholder', _array[i].getAttribute('title'));
-            _array[i].removeAttribute('title');
-        }
-    }
-        
 }
 

@@ -17,6 +17,10 @@
         <param-name>maxRequestSize</param-name>
         <param-value>1000000</param-value>
     </context-param>
+    <context-param>
+        <param-name>org.richfaces.skin</param-name>
+        <param-value>general</param-value>
+    </context-param>
     <listener>
         <listener-class>
             org.springframework.web.context.ContextLoaderListener

@@ -296,7 +296,7 @@
                 </rich:menuItem>
             </rich:menuGroup>
 
-            <rich:menuGroup label="#{var.conentidadesnacionales}" icon="/resources/imgs/bt_convenio.png"  rendered="#{HomeGestion.filtro.verconveniosciudadano}">
+            <rich:menuGroup label="#{var.conentidadesnacionales}" icon="/resources/imgs/bt_convenio.png"  rendered="#{var.verconveniosciudadano}">
                 <rich:menuItem label="#{var.vigentes}" icon="/resources/imgs/bt_vigentes.png" immediate="true"
                                action="#{HomeGestion.activarvistamapa}" render="panelBody" >
                     <a4j:param value="1" assignTo="#{HomeGestion.filtro.intestadoobra}" />
