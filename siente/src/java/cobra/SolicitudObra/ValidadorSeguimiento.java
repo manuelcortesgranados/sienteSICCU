@@ -16,7 +16,6 @@ import co.com.interkont.cobra.to.Tipopolizaseguimiento;
 import co.com.interkont.cobra.to.Tiposolicitudobra;
 import co.com.interkont.cobra.to.Tipovisita;
 import co.com.interkont.cobra.to.Visita;
-import com.googlecode.gmaps4jsf.services.ReverseGeocoderServiceImpl.*;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -3242,41 +3241,43 @@ public class ValidadorSeguimiento  implements Serializable{
 
 
                     //  getAdminSupervisionExterna().guardarVisita();
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarSeguimiento(listaSegui);//guarda seguimiento
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarSeguimiento(listaSegui);//guarda seguimiento
                     //poliza 1
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliSeguiCum);//cumplimiento
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliSalaPres);//sala y oresta
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliManAnti);//poliSeguManeAnti
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliRespoCiv);//respociv
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliEstabi);//estabili
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliSeguiCum);//cumplimiento
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliSalaPres);//sala y oresta
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliManAnti);//poliSeguManeAnti
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliRespoCiv);//respociv
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliEstabi);//estabili
                     //poliza interventoria 2
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliSeguiCumInter);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliCalidaInter);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliManAntInter);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliSalaPresInter);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarPolizaSeguimi(listaPoliRespoCivInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliSeguiCumInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliCalidaInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliManAntInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliSalaPresInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarPolizaSeguimi(listaPoliRespoCivInter);
                     //activida de seguimiento
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiUno);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiDos);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiTres);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiCuatro);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiCinco);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiSeis);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiSiete);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiOcho);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActiviSeguimi(lisActiSeguiNueve);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiUno);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiDos);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiTres);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiCuatro);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiCinco);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiSeis);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiSiete);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiOcho);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActiviSeguimi(lisActiSeguiNueve);
                     //actores seguimiento
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorContra);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorInter);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorAlcGob);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorSuper);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorRepDele);
-                    getSessionBeanCobra().getCobraService().guardarOrActualizarActorSeguimi(listActorProVis);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorContra);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorInter);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorAlcGob);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorSuper);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorRepDele);
+                    getSessionBeanCobra().getSupervisionExternaService().guardarOrActualizarActorSeguimi(listActorProVis);
+                    getSessionBeanCobra().getSupervisionExternaService().actualizarSeguimientosxVisita((int)getSessionBeanCobra().getSupervisionExternaService().
+                            getVisita().getOidvisita(), getSessionBeanCobra().getUsuarioObra());
                     getSessionBeanCobra().getCobraService().getLog().info("Finalizó validar");
                     getSessionBeanCobra().getSupervisionExternaService().setVisita(new Visita());
                     String x = getAdminSupervisionExterna().cambioListado();
                     getAdminSupervisionExterna().setVarmostrarBotonexcelMatris(0);
-                    FacesUtils.addInfoMessage("Inserccion Satisfactoria de los Registros se han Insertado  " + numFilasLlenas + " ");
+                    FacesUtils.addInfoMessage("Inserción Satisfactoria de los Registros se han Insertado  " + numFilasLlenas + " ");
                 }
 
             }

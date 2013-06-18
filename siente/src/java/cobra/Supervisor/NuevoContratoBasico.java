@@ -81,7 +81,7 @@ import javax.servlet.ServletContext;
  * @author carlosalbertoloaizaguerrero
  * @author Leonardo Montes
  */
-public class NuevoContratoBasico implements Serializable  {
+public class NuevoContratoBasico implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -726,8 +726,8 @@ public class NuevoContratoBasico implements Serializable  {
      */
     private boolean boolmodifca = false;
     /**
-    * Objeto para acceder a los atributos de modalidadcontratista
-    */
+     * Objeto para acceder a los atributos de modalidadcontratista
+     */
     private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
 
     public Modalidadcontratista getModalidadcontratista() {
@@ -766,8 +766,9 @@ public class NuevoContratoBasico implements Serializable  {
      * Variable para habilitar El boton Guardar
      */
     public boolean habilitarGuardarNumeroContrato = false;
-    
+
     public boolean habilitarModificarTxtObjeto = true;
+
     /**
      *
      */
@@ -775,8 +776,7 @@ public class NuevoContratoBasico implements Serializable  {
      * Set y get de todas las variables anteriores
      *
      */
-    
-        public boolean isHabilitarModificarNumero() {
+    public boolean isHabilitarModificarNumero() {
         return habilitarModificarNumero;
     }
 
@@ -815,6 +815,7 @@ public class NuevoContratoBasico implements Serializable  {
     public void setHabilitarmodificar(boolean habilitarmodificar) {
         this.habilitarmodificar = habilitarmodificar;
     }
+
     /**
      *
      */
@@ -2108,21 +2109,21 @@ public class NuevoContratoBasico implements Serializable  {
      */
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
-       // System.out.println("constructor nuevo contrato = ");
+        // System.out.println("constructor nuevo contrato = ");
         limpiarContrato();
         llenarTipoContratoconsultoria();
-        llenarTipoContrato();        
-        llenarEventos();        
+        llenarTipoContrato();
+        llenarEventos();
         llenarPeriodoxEvento();
         llenarTipodocumentos();
         //llenarPolizas();
         llenarFormaPago();
         llenarComboContratista();
         iniciarFiltroAvanzado();
-         if(getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")){
-        llenarModalidadContratista();
-        }        
-      
+        if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
+            llenarModalidadContratista();
+        }
+
     }
 
     public String instanciarPolizar() {
@@ -2162,7 +2163,7 @@ public class NuevoContratoBasico implements Serializable  {
 
     public void llenarEntidadesContratantes() {
         try {
-         
+
             List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
             TerceroOption = new SelectItem[lis.size()];
             int i = 0;
@@ -2170,7 +2171,6 @@ public class NuevoContratoBasico implements Serializable  {
             for (Tercero ter : lis) {
 
                 // itemTercero = new SelectItem(ter.getStrnombrecompleto() + "-" + ter.getLocalidadByStrcodigolocalidad().getStrdepartamento());
-
 //                }else{
 //                      itemTercero = new SelectItem(ter.getStrnombrecompleto());
 //                }
@@ -2182,12 +2182,10 @@ public class NuevoContratoBasico implements Serializable  {
                     contrato.getTercero().setStrnombrecompleto(ter.getStrnombrecompleto());
                 }
 
-
                 TerceroOption[i++] = itemTercero;
             }
         } catch (Exception e) {
         }
-
 
     }
 
@@ -2310,6 +2308,10 @@ public class NuevoContratoBasico implements Serializable  {
                 case 1://Anticipo y Actas parciales
                     int i = 0;
                     BigDecimal total = BigDecimal.ZERO;
+                    if (bundle.getString("fechaformapago").equals("false")) {
+                        fechapagoanticipo = new Date();
+                    }
+
                     if (fechapagoanticipo != null) {
 
                         if (valorpagoanticipo == null && valorpagoanticipo.compareTo(BigDecimal.ONE) <= 0) {
@@ -2325,9 +2327,13 @@ public class NuevoContratoBasico implements Serializable  {
 
                                 while (i < lisplanifiactapar.size()) {
                                     if (lisplanifiactapar.get(i).getDatefechapago() == null) {
-                                        lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
-                                        FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
-                                        return false;
+                                        if (bundle.getString("fechaformapago").equals("false")) {
+                                            lisplanifiactapar.get(i).setDatefechapago(new Date());
+                                        } else {
+                                            lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
+                                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
+                                            return false;
+                                        }
                                     }
                                     if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
                                         lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
@@ -2358,40 +2364,42 @@ public class NuevoContratoBasico implements Serializable  {
 
                                 if (total.compareTo(BigDecimal.valueOf(100)) != 0) {
                                     lisplanifiactapar.remove(lisplanifiactapar.size() - 1);
-                                    if(bundle.getString("fechaformapago").equals("true")){
-                                    FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
-                                    return false;
+                                    if (bundle.getString("fechaformapago").equals("true")) {
+                                        FacesUtils.addErrorMessage("El valor de la suma de los porcentajes(" + total + "%) de las actas parciales difiere del 100%)");
+                                        return false;
                                     }
                                 } else {
                                     return true;
                                 }
 
-
-
                             } else {
-                                if(bundle.getString("fechaformapago").equals("true")){
-                                FacesUtils.addErrorMessage("Debe distribuir los pagos en al menos un acta parcial.");
-                                return false;
+                                if (bundle.getString("fechaformapago").equals("true")) {
+                                    FacesUtils.addErrorMessage("Debe distribuir los pagos en al menos un acta parcial.");
+                                    return false;
                                 }
                             }
                         }
                     } else {
-                        if(bundle.getString("fechaformapago").equals("true")){
+
                         FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del anticipo.");
                         return false;
-                        }
-                    }
 
+                    }
 
                 case 2://Actas
                     i = 0;
                     total = BigDecimal.ZERO;
 
                     if (lisplanifiactapar.size() > 1) {
+
                         while (i < lisplanifiactapar.size()) {
                             if (lisplanifiactapar.get(i).getDatefechapago() == null) {
-                                FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
-                                return false;
+                                if (bundle.getString("fechaformapago").equals("true")) {
+                                    FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta parcial.");
+                                    return false;
+                                } else {
+                                    lisplanifiactapar.get(i).setDatefechapago(new Date());
+                                }
                             }
                             if (lisplanifiactapar.get(i).getNumvlrporcentage() == null || lisplanifiactapar.get(i).getNumvlrporcentage().compareTo(BigDecimal.ONE) < 0) {
 
@@ -2427,15 +2435,15 @@ public class NuevoContratoBasico implements Serializable  {
                         }
 
                     } else {
-                        if(bundle.getString("fechaformapago").equals("true")){
+
                         FacesUtils.addErrorMessage("Debe distribuir los pagos en al menos dos actas parciales.");
                         return false;
-                        }
+
                     }
 
                 case 3://Acta unica
-                    if(bundle.getString("fechaformapago").equals("true")){
-                    if (planificacionpago.getDatefechapago() != null ) {
+                    if (bundle.getString("fechaformapago").equals("true")) {
+                    if (planificacionpago.getDatefechapago() != null) {
                         planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
                         planificacionpago.setStrdescripcion("");
                         planificacionpago.setBoolactivo(true);
@@ -2450,25 +2458,26 @@ public class NuevoContratoBasico implements Serializable  {
 
                         return true;
                     } else {
-                        if(bundle.getString("fechaformapago").equals("true")){
-                        FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
-                        return false;
+                        if (bundle.getString("fechaformapago").equals("true")) {
+                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
+                            return false;
                         }
                     }
-                    }else{
-                        planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
-                        planificacionpago.setStrdescripcion("");
-                        planificacionpago.setBoolactivo(true);
-                        planificacionpago.setBoolrealizado(false);
-                        planificacionpago.setDateusucreacion(new Date());
-                        planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
-                        planificacionpago.setContrato(contrato);
-                        //setplani.add(planificacionpago);
-                        planificacionpago.setNumvlrporcentage(new BigDecimal(100));
-                        contrato.setPlanificacionpagos(new LinkedHashSet());
-                        contrato.getPlanificacionpagos().add(planificacionpago);
-                        return true;
-                    }
+                } else {
+                    planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
+                    planificacionpago.setStrdescripcion("");
+                    planificacionpago.setBoolactivo(true);
+                    planificacionpago.setBoolrealizado(false);
+                    planificacionpago.setDateusucreacion(new Date());
+                    planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                    planificacionpago.setContrato(contrato);
+                    planificacionpago.setDatefechapago(contrato.getDatefechaini());
+                    //setplani.add(planificacionpago);
+                    planificacionpago.setNumvlrporcentage(new BigDecimal(100));
+                    contrato.setPlanificacionpagos(new LinkedHashSet());
+                    contrato.getPlanificacionpagos().add(planificacionpago);
+                    return true;
+                }
             }
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar la forma de pago.");
@@ -2513,7 +2522,7 @@ public class NuevoContratoBasico implements Serializable  {
                     }
                 }
                 //getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                if (validarDiligenciamientoFormadePago()) {                    
+                if (validarDiligenciamientoFormadePago()) {
                     contrato.setDatefechacreacion(new Date());
                     contrato.setDatefechamodificacion(new Date());
                     contrato.setDatefechaultimaprorroga(null);
@@ -2533,7 +2542,7 @@ public class NuevoContratoBasico implements Serializable  {
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
                     }
-                    if(getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")){
+                    if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")) {
                         contrato.setModalidadcontratista(null);
                     }
                     //contrato.setContrato(null);
@@ -2548,13 +2557,13 @@ public class NuevoContratoBasico implements Serializable  {
 //                            setBooltipocontratoconvenio(true);
 //                         }
                     /*se verifica el tipo de proyecto si es contraloria debe realizar la validacion de los documentos*/
-                    String contra =  bundle.getString("aplicaContralorias");
+                    String contra = bundle.getString("aplicaContralorias");
                     if (contra.equals("true")) {
                         boolean valdocumento = validarDocumentosContralorias();
                         if (valdocumento == false) {
                             FacesUtils.addErrorMessage("Debe diligenciar los tres documentos obligatorios que son: 1. Contrato, 2. Certificado de Disponibilidad Presupuestal (CDP), 3. Registro Presupuestal (RP)");
                         } else {
-                          validadcionGuardarContrato();
+                            validadcionGuardarContrato();
                         }
                     } else {
                         validadcionGuardarContrato();
@@ -2574,10 +2583,11 @@ public class NuevoContratoBasico implements Serializable  {
     }
 
     /**
-     * validadcionGuardarContrato
-     * metodo que ejecuta la ultima parte de guardar nuevo contrato, 
-     * se separo del metodo inicial para no duplicar las lineas de codigo con la 
-     * nueva logica que se necesita para validar los documetos cuando es una contraloria
+     * validadcionGuardarContrato metodo que ejecuta la ultima parte de guardar
+     * nuevo contrato, se separo del metodo inicial para no duplicar las lineas
+     * de codigo con la nueva logica que se necesita para validar los documetos
+     * cuando es una contraloria
+     *
      * @return no retorna nada
      */
     private void validadcionGuardarContrato() {
@@ -2587,8 +2597,8 @@ public class NuevoContratoBasico implements Serializable  {
         getSessionBeanCobra().getCobraService().guardarContrato(contrato);
         for (Documentoobra docContrato : listadocumentos) {
             try {
-                String nuevaRutaWeb =
-                        ArchivoWebUtil.copiarArchivo(
+                String nuevaRutaWeb
+                        = ArchivoWebUtil.copiarArchivo(
                         docContrato.getStrubicacion(),
                         MessageFormat.format(RutasWebArchivos.DOCS_CONTRATO, "" + getContrato().getIntidcontrato()),
                         true, false);
@@ -2698,8 +2708,6 @@ public class NuevoContratoBasico implements Serializable  {
 //                contrato.setDatefechafin(hoy.getTime());
 //            }
 //        }
-
-
         return null;
 
     }
@@ -2871,7 +2879,7 @@ public class NuevoContratoBasico implements Serializable  {
 
     /**
      * Metodo para guardar las poliza nueva en el detalle del contrato
-     * 
+     *
      */
     public String insertarPoliza() {
 
@@ -2884,14 +2892,14 @@ public class NuevoContratoBasico implements Serializable  {
             polizacontrato.setPolizacontratos(new LinkedHashSet(listapolizas));
             listapolizas.add(polizacontrato);
             getSessionBeanCobra().getCobraService().guardarNuevaPoliza(polizacontrato);
-            boolpolizas=true;
+            boolpolizas = true;
             polizacontrato = new Polizacontrato();
             polizacontrato.setTipopoliza(new Tipopoliza());
             polizacontrato.setAseguradora(new Aseguradora());
             polizacontrato.setContrato(new Contrato());
             llenarPolizas();
             instanciarPolizar();
-        
+
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
 
@@ -2914,8 +2922,6 @@ public class NuevoContratoBasico implements Serializable  {
         return null;
 
     }
-    
-    
 
     /**
      * Método que se utiliza para agregar una poliza a una lista, valida que se
@@ -2940,7 +2946,7 @@ public class NuevoContratoBasico implements Serializable  {
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
         }
-        
+
         return null;
     }
 
@@ -2969,13 +2975,13 @@ public class NuevoContratoBasico implements Serializable  {
     public String eliminarPolizaNueva(int filaSeleccionada) {
         NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Polizacontrato polizacontratoEliminada = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
-        
+
         listapolizas.remove(polizacontratoEliminada);
-        
+
         getSessionBeanCobra().getCobraService().borrarPolizaContrato(polizacontratoEliminada);
-        
+
         llenarPolizas();
-        
+
         return null;
     }
 
@@ -3029,7 +3035,6 @@ public class NuevoContratoBasico implements Serializable  {
             filtrocontrato.setBooltienehijo(true);
             aplicafiltrocontrato = false;
 
-
         }
         if (preguntacontrato == 2) {
 
@@ -3081,7 +3086,7 @@ public class NuevoContratoBasico implements Serializable  {
      * @return No retorna ningun valor
      */
     public String contratoPadreSelec(int filaSeleccionada) {
-        varmostrarcontrpa = 1;       
+        varmostrarcontrpa = 1;
         contrpadre = listacontratos.get(filaSeleccionada);
         return null;
 
@@ -3093,7 +3098,7 @@ public class NuevoContratoBasico implements Serializable  {
      * @return No retorna ningun valor
      */
     public String contratoPadreSelecContratista(int filaSeleccionada) {
-        varmostrarcontrpa = 1;  
+        varmostrarcontrpa = 1;
         contrpadre = listacontratoscontratista.get(filaSeleccionada);
         return null;
     }
@@ -3122,7 +3127,6 @@ public class NuevoContratoBasico implements Serializable  {
 
         contrato.setTercero(new Tercero());
 
-
         ////Inicializando variables del formulario
 //        contrato.setIntidcontrato(0);
 //        contrato.setStrnombre(null);
@@ -3141,7 +3145,6 @@ public class NuevoContratoBasico implements Serializable  {
         contrato.setFormapago(new Formapago());
 //        contrato.setDocumentoobras(new HashSet());
         contrato.setBooleantienehijos(false);
-
 
         polizacontrato = new Polizacontrato();
         documentoobra = new Documentoobra();
@@ -3180,8 +3183,6 @@ public class NuevoContratoBasico implements Serializable  {
         mostrarAgregarPol = 0;
         preguntacontrato = 0;
 
-
-
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         realArchivoPath = theApplicationsServletContext.getRealPath(URL);
         subirDocPol = new CargadorArchivosWeb();
@@ -3195,6 +3196,7 @@ public class NuevoContratoBasico implements Serializable  {
 
     /**
      * Elimina el contrato padre seleccionado.
+     *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
      */
@@ -3310,8 +3312,6 @@ public class NuevoContratoBasico implements Serializable  {
         }
         if (numdeactasparciales > 0) {
 
-
-
             BigDecimal sumaarraB = new BigDecimal(BigInteger.ZERO);
             BigDecimal ceroB = new BigDecimal(BigInteger.ZERO);
             BigDecimal porcuoptB = new BigDecimal(BigInteger.ZERO);
@@ -3321,10 +3321,8 @@ public class NuevoContratoBasico implements Serializable  {
                 sumaarraB = sumaarraB.add(porcuoptB);
             }
 
-
 //            BigDecimal vlcu = new BigDecimal(BigInteger.ONE);
 //            vlcu = contrato.getNumvlrcontrato().divide(new BigDecimal(numdeactasparciales), RoundingMode.HALF_EVEN);
-
 //            for (int vxi = 0; vxi < numdeactasparciales; vxi++) {//hallo el total de valor de procentajes
 //                sumaarraB = sumaarraB.add(lsBigporcecuo.get(vxi));
 //
@@ -3346,7 +3344,6 @@ public class NuevoContratoBasico implements Serializable  {
                 plp.setNumvlrpago(contrato.getNumvlrcontrato().multiply(lsBigporcecuo.get(c).divide(cienporciento, 0, RoundingMode.HALF_UP)));
                 lisplanifiactapar.add(plp);
             }
-
 
             if (sumaarraB.compareTo(cienporciento) != 0) {
 
@@ -3626,11 +3623,11 @@ public class NuevoContratoBasico implements Serializable  {
      * @return
      */
     public String detalleContrato(int filaSeleccionada) {
-         NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-         Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
-          //boolconthijo = false;
+        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
+        //boolconthijo = false;
         ///Revisar este método se totea pero no siempre
-         cargarContrato(contratotabla);
+        cargarContrato(contratotabla);
 //        setContrato(contratotabla);
 //        finentrega = contratotabla.getDatefechafin().toString();
 
@@ -3656,7 +3653,8 @@ public class NuevoContratoBasico implements Serializable  {
      *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
-     * @return consultarContrato Refresca la página para mostrar el detalle del contrato hijo.
+     * @return consultarContrato Refresca la página para mostrar el detalle del
+     * contrato hijo.
      */
     public String detalleContrHijo(int filaSeleccionada) {
         NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
@@ -3670,12 +3668,13 @@ public class NuevoContratoBasico implements Serializable  {
     /**
      * Seleccionar el contrato desde la tabla detalle conveniohijo
      *
-     * @return consultarContrato Refresca la página para mostrar los detalles de subconvenio.
+     * @return consultarContrato Refresca la página para mostrar los detalles de
+     * subconvenio.
      */
     public String detalleConvenioHijo(int filaSeleccionada) {
         NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         Contrato contratoConvenioHijo = nuevoContratoBasico.getListaSubconvenios().get(filaSeleccionada);
-      
+
         cargarContrato(contratoConvenioHijo);
 
         return "consultarContrato";
@@ -3768,7 +3767,7 @@ public class NuevoContratoBasico implements Serializable  {
     public String bt_download_documento_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        
+
         NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         doc.getListadocuContrato().get(filaSeleccionada);
         getSessionBeanCobra().setUrlAbri(doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
@@ -3785,7 +3784,7 @@ public class NuevoContratoBasico implements Serializable  {
     public String bt_download_documento_action_modulo(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc =  getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
+        Documentoobra doc = getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
@@ -3826,7 +3825,6 @@ public class NuevoContratoBasico implements Serializable  {
             totalfilas = getSessionBeanCobra().getCobraService().getNumContratistas();
         }
 
-
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -3851,7 +3849,6 @@ public class NuevoContratoBasico implements Serializable  {
      * @return null
      */
     public String siguientesReales() {
-
 
         int num = (pagina) * 5;
         if (aplicafiltro) {
@@ -3922,7 +3919,6 @@ public class NuevoContratoBasico implements Serializable  {
     public String ultimoReales() {
         int num = totalfilas % 5;
 
-
         if (aplicafiltro) {
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarContratistas(nombre);
             listaContratista = getSessionBeanCobra().getCobraService().filtrarContratistas(nombre, totalfilas - num, totalfilas);
@@ -3972,7 +3968,7 @@ public class NuevoContratoBasico implements Serializable  {
      * @return
      */
     public String seleccionarContratistas(int filaSeleccinada) {
-        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");      
+        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
         return null;
     }
@@ -4001,9 +3997,9 @@ public class NuevoContratoBasico implements Serializable  {
     public String editarPoliza(int filaSeleccionada) {
         NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         polizacontrato = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
-        
+
         boolcrearpoliza = true;
-        
+
         return null;
     }
 
@@ -4210,7 +4206,7 @@ public class NuevoContratoBasico implements Serializable  {
      */
     public String guardarContratista() {
         boolcrearcontratista = true;
-        if (getContratista().getTipotercero().getIntcodigotipotercero() == 2) {            
+        if (getContratista().getTipotercero().getIntcodigotipotercero() == 2) {
             contratista.setStrapellido1(null);
             contratista.setStrapellido2(null);
         }
@@ -4268,7 +4264,6 @@ public class NuevoContratoBasico implements Serializable  {
         contratista.setTipotercero(new Tipotercero(1));
         contratista.setTipoidentificacion(new Tipoidentificacion());
 
-
         return null;
     }
 
@@ -4296,7 +4291,7 @@ public class NuevoContratoBasico implements Serializable  {
      * @return
      */
     public String buscarContrato() {
-        
+
         try {
             // aplicafiltrocontrato = false;
             listacontratos.clear();
@@ -4402,7 +4397,6 @@ public class NuevoContratoBasico implements Serializable  {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), num, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
-
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4526,14 +4520,11 @@ public class NuevoContratoBasico implements Serializable  {
      */
     public String ultimoDetcontrato() {
 
-
         int num = totalfilas % 5;
-
 
 //        if (aplicafiltrocontrato) {
         totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);
         listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, totalfilas - num, totalfilas);
-
 
 //        } else {
 //
@@ -4541,7 +4532,6 @@ public class NuevoContratoBasico implements Serializable  {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtro);
 //
 //        }
-
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -4596,11 +4586,10 @@ public class NuevoContratoBasico implements Serializable  {
      *
      * @return la pagina detallecontrato
      */
-
     public String iniciarDetaContrato() {
         habilitarmodificar = true;
         modificartxt = false;
-         habilitarModificarNumero = true;
+        habilitarModificarNumero = true;
         habilitarGuardarNumeroContrato = false;
         listacontratos.clear();
         listacontratoscontratista.clear();
@@ -4658,7 +4647,6 @@ public class NuevoContratoBasico implements Serializable  {
      * @return
      */
     public String llenarplanificacionpagos() {
-
 
         setAnticiforma(new Integer(0));
         setVloranticipo(new BigDecimal(0));
@@ -4915,7 +4903,6 @@ public class NuevoContratoBasico implements Serializable  {
             totalfilas = getSessionBeanCobra().getCobraService().getNumEncargo();
         }
 
-
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -5025,7 +5012,6 @@ public class NuevoContratoBasico implements Serializable  {
 
         int num = totalfilas % 5;
 
-
         if (aplicafiltrocontrato) {
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarEncargo(codigoencargo);
             listaEncargofiduciario = getSessionBeanCobra().getCobraService().filtroAvanzadoEncargo(codigoencargo, totalfilas - num, totalfilas);
@@ -5084,7 +5070,6 @@ public class NuevoContratoBasico implements Serializable  {
 //            totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato());
 //        }
 
-
         pagina = 1;
         if (totalfilas <= 5) {
             totalpaginas = 1;
@@ -5133,7 +5118,6 @@ public class NuevoContratoBasico implements Serializable  {
         }
         veranteriorobra = true;
 
-
         return null;
     }
 
@@ -5178,8 +5162,6 @@ public class NuevoContratoBasico implements Serializable  {
      */
     public String ultimoObra() {
         int num = totalfilas % 5;
-
-
 
         listaObraContrato = getSessionBeanCobra().getCobraService().encontrarObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, totalfilas - num, 5, booltipocontratoconvenio);
         totalfilas = getSessionBeanCobra().getCobraService().getNumObraxContratos(getContrato().getIntidcontrato(), buscarproyecto, booltipocontratoconvenio);
@@ -5247,8 +5229,6 @@ public class NuevoContratoBasico implements Serializable  {
 //        filtrocontrato.setBooltienehijo(false);
 //        filtrocontrato.setBooltipocontconv(true);
 //        primeroDetcontrato();
-
-
     }
 
     /**
@@ -5459,7 +5439,6 @@ public class NuevoContratoBasico implements Serializable  {
         }
         veranteriorobra = true;
 
-
         return null;
     }
 
@@ -5529,7 +5508,7 @@ public class NuevoContratoBasico implements Serializable  {
 
     /**
      * Se elige el giro directo que se quiere editar
-
+     *
      *
      * @param filaSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
@@ -5537,7 +5516,7 @@ public class NuevoContratoBasico implements Serializable  {
      */
     public String editarGirodirecto(int filaSeleccionada) {
         booleditargirodirecto = true;
-        
+
         NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         movimientocontrato = nuevoContratoBasico.getListaGirodirecto().get(filaSeleccionada);
 
@@ -5694,7 +5673,7 @@ public class NuevoContratoBasico implements Serializable  {
      * eliminar el documento seleccionado
      */
     public void bt_eliminar_documento_action(int filaSeleccionada) {
-        SessionBeanCobra sbc=(SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");        
+        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         Documentoobra doc = sbc.getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().getCobraService().borrarDocumento(doc);
         getSessionBeanCobra().getCobraService().getListaDocumentosContrato().remove(doc);
@@ -5766,7 +5745,9 @@ public class NuevoContratoBasico implements Serializable  {
     }
 
     /**
-     * Metodo Utilizado para habilitar los botones de Guardar y cancelar el objeto del contrato
+     * Metodo Utilizado para habilitar los botones de Guardar y cancelar el
+     * objeto del contrato
+     *
      * @return void
      */
     public void habilitarBotonModificar() {
@@ -5790,34 +5771,39 @@ public class NuevoContratoBasico implements Serializable  {
      * Metodo Utilizado para habilitar el boton Modificar
      *
      * @return void
-     */ 
+     */
     public void cancelarModificacionObjeto() {
         habilitarmodificar = true;
         modificartxt = false;
     }
+
     /**
      * Metodo Utilizado para cancelar el numero del contrato
+     *
      * @return void
-     */ 
-        public void cancelarModifcacionNumeroContrato() {
+     */
+    public void cancelarModifcacionNumeroContrato() {
         habilitarModificarNumero = true;
         habilitarGuardarNumeroContrato = false;
     }
 
     /**
      * Metodo Utilizado para habilitar el boton Modificar el numero del contrato
+     *
      * @return void
-     */ 
+     */
     public void habilitarBotonModificarNumero() {
 
         habilitarModificarNumero = false;
         habilitarGuardarNumeroContrato = true;
 
     }
+
     /**
      * Metodo Utilizado actualizar el numero del contrato
+     *
      * @return void
-     */ 
+     */
     public void actualizarContato() {
         getSessionBeanCobra().getCobraService().guardarContrato(getContrato());
         FacesUtils.addInfoMessage("Se actualizo correctamente el contrato");
@@ -5825,7 +5811,7 @@ public class NuevoContratoBasico implements Serializable  {
         habilitarGuardarNumeroContrato = false;
     }
 
-     /**
+    /**
      * Llena el combo de modalidad de contratista.
      */
     private List<Modalidadcontratista> listModalidadContratista;
@@ -5838,18 +5824,17 @@ public class NuevoContratoBasico implements Serializable  {
         this.listModalidadContratista = listModalidadContratista;
     }
 
-    public void llenarModalidadContratista(){
+    public void llenarModalidadContratista() {
         listModalidadContratista = getSessionBeanCobra().getCobraService().encontrarModalidadContratista();
         modalidadContratista = new SelectItem[listModalidadContratista.size()];
         int i = 0;
         for (Modalidadcontratista modalidad : listModalidadContratista) {
             SelectItem itModalidad = new SelectItem(modalidad.getIntidmodalidadcontratista(), modalidad.getStrdescripcionmodalidad());
-            if (i == 0) {                
+            if (i == 0) {
                 contrato.getModalidadcontratista().setIntidmodalidadcontratista(modalidad.getIntidmodalidadcontratista());
             }
             modalidadContratista[i++] = itModalidad;
-       }
+        }
     }
-
 
 }
