@@ -19,6 +19,7 @@ import co.com.interkont.cobra.to.Tipoopinion;
 import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tiposolicitante;
 import co.com.interkont.cobra.to.Tipotercero;
+import co.com.interkont.cobra.to.Tipousuario;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.ArchivoWeb;
 import cobra.CargadorArchivosWeb;
@@ -533,6 +534,7 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaCrcion(new Date());
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuFchaVncmnto(new Date(2012, 11, 31));
             getSessionBeanCobra().getCiudadanoservice().getCiudadano().setUsuEstado(Boolean.FALSE);
+            getSessionBeanCobra().getCiudadanoservice().getCiudadano().setTipousuario(new  Tipousuario(1));
             getSessionBeanCobra().getCiudadanoservice().guardarTercero(getSessionBeanCobra().getCiudadanoservice().getCiudadano().getTercero());
             getSessionBeanCobra().getCiudadanoservice().guardarCiudadano(getSessionBeanCobra().getCiudadanoservice().getCiudadano());
             String rutaFoto = null;
