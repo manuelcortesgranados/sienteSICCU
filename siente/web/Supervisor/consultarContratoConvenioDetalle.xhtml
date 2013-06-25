@@ -64,7 +64,7 @@
                             <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
-                                        <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="ikont-"   >
+                                        <h:outputText   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="ikont-"   >
                                             <f:convertNumber pattern="$ ###,###" />
                                         </h:outputText>
                                     </h:panelGrid>
@@ -78,13 +78,13 @@
 
                                 <h:outputText  styleClass="ikont- "   value="desde"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" >
+                                <h:outputText  styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
 
                                 <h:outputText  styleClass="ikont- "   value="#{var.diashasta}"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
+                                <h:outputText   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
                             </h:panelGrid>
@@ -147,19 +147,17 @@
                             <h:form>
                                 <h:panelGrid id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
                                     <h:outputLabel  styleClass="ikont- "   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
-
                                     <interkont:spacer width="20" />
 
                                     <h:panelGroup id="form_editarNumeroContrato">
                                         <h:panelGroup id="txthabilitarNumero" rendered="#{Supervisor$Contrato.habilitarModificarNumero}">
+                                            <h:outputText   id="txtNumero" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                             <a4j:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificarNumero"
                                                              action="#{Supervisor$Contrato.habilitarBotonModificarNumero}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
-
-                                            <h:outputText  styleClass="ikont- "   id="txtNumero" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificarNumero" rendered="#{Supervisor$Contrato.habilitarGuardarNumeroContrato}">
@@ -169,7 +167,7 @@
                                                              action="#{Supervisor$Contrato.actualizarContato}"
                                                              render="form_editarNumeroContrato" execute="txthabilitarModificarNumero,txthabilitarNumero"
                                                              title="#{var.editar}">
-                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_guardar.png" />
                                             </a4j:commandLink>
 
                                             <a4j:commandLink immediate="true" id="bt_cancelarModificarNumero" render="form_editarNumeroContrato"
@@ -182,21 +180,19 @@
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strnumContrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
+                                    <h:outputLabel    id="strnumContrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
                                     <h:outputLabel  styleClass="ikont- "   id="txtobjeto"  value="#{var.objeto} #{Supervisor$Contrato.tipoContCon}:" />
-
                                     <interkont:spacer width="20" />                                        
 
                                     <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}">
                                         <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
+                                            <h:outputText   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                             <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
                                                            title="#{var.editar}">
                                                 <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
 
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </h:commandLink>
-
-                                            <h:outputText  styleClass="ikont- "   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificar" rendered="#{Supervisor$Contrato.modificartxt}">
@@ -204,7 +200,7 @@
                                             <a4j:commandLink id="btn_modificarObjeto" render="form_editar"
                                                              action="#{Supervisor$Contrato.guardarModficiacionObjetoContrato}"
                                                              execute="txthabilitarModificar,txthabilitarObjeto" title="#{var.editar}">
-                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_editar.png" />
+                                                <h:graphicImage  styleClass="ikont- "    width="25"  height="25" value="/resources/imgs/bt_guardar.png" />
                                             </a4j:commandLink> 
 
                                             <a4j:commandLink id="bt_cancelar" immediate="true" render="form_editar"
@@ -217,7 +213,7 @@
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel    styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
                                     <h:outputText  styleClass="ikont- "   value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
@@ -228,7 +224,7 @@
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
                                     <h:outputLabel  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel    styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
 
                                     <interkont:spacer width="20" />
 
@@ -237,96 +233,137 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcontrcontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
+                                    <h:outputLabel  styleClass="ikont- "   id="strcontrcontrato"  value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
                                     <h:outputLabel  styleClass="ikont- "   id="fecsus" value="#{var.fechasus}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
+                                    <h:outputLabel  styleClass="ikont- "   id="strfecsuscontrato"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="fecfin"  value="#{var.fechafinalizacion}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecfincontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" />
+                                    <h:outputLabel  styleClass="ikont- "   id="strfecfincontrato"  value="#{Supervisor$Contrato.contrato.datefechafin}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="formapago" value="#{var.formadepago}" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfrmapagocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursospropios" value="#{var.numrecursospropios} (Entidad Contratante):" />
+                                    <h:outputLabel  styleClass="ikont- "   id="strfrmapagocontrato"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
 
-                                    <interkont:spacer width="20" />
-
-                                    <h:outputLabel  styleClass="ikont- "   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
-                                        <f:convertNumber pattern="$ ###,###" />
+                                    <h:outputText id="lblnumrecursospropios"  value="#{var.numrecursospropios} (Entidad Contratante):"/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputLabel id="numrecursospropios" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="txt_outtext">
+                                        <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
-                                        <rich:inplaceInput id="Pch" value="#{Supervisor$Contrato.contrato.numrecursospropios}" showControls="true" required="true" validatorMessage="No se permite valores menores de 0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
-                                            <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
+                                    <h:panelGroup id="form_recursosPropios" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}" >
+                                        <h:panelGroup id="txthabilitarrecursopropios" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
-                                            <f:validateDoubleRange minimum="0" />
-                                        </rich:inplaceInput>
+                                            <h:outputText   id="txtrecurpropios"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursospropios}"/>
+                                            <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurpropios" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont- "  width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                            </a4j:commandLink>
+                                        </h:panelGroup>
+                                        <h:panelGroup  id="txthabilitarModificarecurpropios" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
+                                            <h:inputText  required="true" id="habilitarrecurpropios"   value="#{Supervisor$Contrato.contrato.numrecursospropios}"/>
+                                            <a4j:commandLink   id="btn_modificarRecurpropios"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont- "  width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                            </a4j:commandLink> 
+                                            <a4j:commandLink   immediate="true" id="bt_cancelarModificarrecurpropios"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="@this,txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
+                                                <h:graphicImage styleClass="ikont- "  width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                            </a4j:commandLink>   
+                                            <rich:message for="habilitarrecurpropios" styleClass="ikont- " />  
+                                        </h:panelGroup>
+                                    </h:panelGroup>
 
-                                        <rich:message for="Pch"  />
-                                    </h:panelGrid>
-
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursosch"  value="#{var.numrecursosch}:" />
-
-                                    <interkont:spacer width="20" />
-
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
-                                        <f:convertNumber pattern="$ ###,###" />
+                                    <h:outputText id="lblnumrecursosch"  value="#{var.numrecursosch}:"/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputLabel id="spinumrecursosch" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="txt_outtext">
+                                        <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
-                                        <rich:inplaceInput id="Ich" value="#{Supervisor$Contrato.contrato.numrecursosch}" showControls="true" required="true" validatorMessage="No se permite valores menores de 0"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
-                                            <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
 
-                                            <f:validateDoubleRange minimum="0" />
-                                        </rich:inplaceInput>
+                                    <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}"  id="form_recursosch">
+                                        <h:panelGroup id="txthabilitarrecursoch" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
-                                        <rich:message for="Ich"  />
-                                    </h:panelGrid>
+                                            <h:outputText   id="txtrecurch"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursosch}"/>
+                                            <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurch" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio" execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                            </a4j:commandLink>
+                                        </h:panelGroup>
+                                        <h:panelGroup  id="txthabilitarModificarecurch" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
+                                            <h:inputText  required="true" id="habilitarrecurch" value="#{Supervisor$Contrato.contrato.numrecursosch}"/>
+                                            <a4j:commandLink   id="btn_modificarRecurch"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}"  render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont- " width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                            </a4j:commandLink> 
+                                            <a4j:commandLink  immediate="true" id="bt_cancelarModificarrecurch"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="@this,txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                            </a4j:commandLink>   
+                                            <rich:message for="habilitarrecurch" style="color: red;"/>  
+                                        </h:panelGroup>
+                                    </h:panelGroup>                  
 
-                                    <h:outputText  styleClass="ikont- "   id="lblnumrecursoster" value="#{var.numrecursoster}:" />
-
-                                    <interkont:spacer width="20" />
-
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
-                                        <f:convertNumber pattern="$ ###,###" />
+                                    <h:outputText id="lblnumrecursoster"  value="#{var.numrecursoster}:"/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputLabel id="spinumrecursoster"  rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="txt_outtext">
+                                        <f:convertNumber pattern="$ ###,###"/>
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
-                                        <rich:inplaceInput id="Irp" value="#{Supervisor$Contrato.contrato.numrecursostercero}" showControls="true" required="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}" validatorMessage="No se permite valores menores de 0">
-                                            <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
+                                    <h:panelGroup id="form_recursosTerceros" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
+                                        <h:panelGroup id="txthabilitarrecurtercero" rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}">
 
-                                            <f:validateDoubleRange minimum="0" />
-                                        </rich:inplaceInput>
-                                        <rich:message for="Irp"  />
-                                    </h:panelGrid>
+                                            <h:outputText   id="txtrecurtercero"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.numrecursostercero}"/>
+                                            <a4j:commandLink  rendered="#{Supervisor$ModificarContrato.habilitarBtnModificarValor}" id="bt_modificarrecurtercero" action="#{Supervisor$ModificarContrato.habilitarBotonModificarValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios">
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                            </a4j:commandLink>
+                                        </h:panelGroup>
+                                        <h:panelGroup  id="txthabilitarModificarecurtercero" rendered="#{Supervisor$ModificarContrato.habilitarBtnGuardarCancelarValor}" >
+                                            <h:inputText  validatorMessage="No se permite valores menores de 0" required="true" id="habilitarrecurtercero"   value="#{Supervisor$Contrato.contrato.numrecursostercero}"/>
+                                            <a4j:commandLink   id="btn_modificarRecurtercero"  action="#{Supervisor$ModificarContrato.modificarRecursosContrato}" render="form_recursosTerceros,form_recursosch,form_recursosPropios,pgcontratoconvenio,strcostocontrato,strdispocontrato,pgcontratoconvenio,valor"  execute="txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                            </a4j:commandLink> 
+                                            <a4j:commandLink   immediate="true" id="bt_cancelarModificarrecurtercero"  action="#{Supervisor$ModificarContrato.cancelarModificacionValor}" render="form_recursosTerceros,form_recursosch,form_recursosPropios"  execute="@this,txthabilitarModificarecurtercero,txtrecurtercero,txtrecurch,txthabilitarModificarecurch,txthabilitarModificarecurpropios,txtrecurpropios" >
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                            </a4j:commandLink>   
+                                            <rich:message for="habilitarrecurtercero" style="color: red;"/>  
+                                        </h:panelGroup>
+                                    </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="entiodadcontratante" value="#{var.entidad} Contratante:" />
+                                    <h:outputLabel id="entiodadcontratante"  value="#{var.entidad} Contratante:"/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputLabel id="entiodadcontratantevalue" styleClass="txt_outtext" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}">
+                                    </h:outputLabel>
 
-                                    <interkont:spacer width="20" />
+                                    <h:panelGroup id="form_editarEntidadContrato" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}">
+                                        <h:panelGroup id="txthabilitarEntidades" rendered="#{Supervisor$Contrato.habilitarBtnModificarcontrato}">
+                                            <h:outputText   id="txtEntidadro"  styleClass="txt_outtext" value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"/>
+                                            <a4j:commandLink rendered="#{Supervisor$Contrato.habilitarBtnModificarcontrato}" id="bt_modificarEntidad" action="#{Supervisor$Contrato.habilitarBotonModificarContrato}" render="form_editarEntidadContrato"  execute="txthabilitarModificarEntidad,txthabilitarEntidades"   title="#{var.editar}">
+                                                <h:graphicImage style="border:0px;border-style:none;" width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
+                                            </a4j:commandLink>
+                                        </h:panelGroup>
+                                        <h:panelGroup  id="txthabilitarModificarEntidad" rendered="#{Supervisor$Contrato.habilitarBtnGuardarCancelarContrato}" >
+                                            <h:selectOneMenu id="inplaceSelect"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
+                                                             value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"  >
+                                                <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
+                                            </h:selectOneMenu>
 
-                                    <h:panelGrid>
-                                        <rich:inplaceSelect id="inplaceSelect" showControls="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
-                                                            value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
-                                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-                                            <a4j:ajax event="change" listener="#{Supervisor$Contrato.actualizarEntidadContrato}" />
-                                        </rich:inplaceSelect>
-
-                                        <h:outputLabel  styleClass="ikont- "   id="entiodadcontratantevalue" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
-                                    </h:panelGrid>
+                                            <a4j:commandLink   id="btn_modificarEntidad"  action="#{Supervisor$Contrato.guardarModficiacionContrato}" render="form_editarEntidadContrato"  execute="txthabilitarModificarEntidad,txthabilitarEntidades"  title="#{var.editar}">
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_guardar.png"/>
+                                            </a4j:commandLink> 
+                                            <a4j:commandLink   immediate="true" id="bt_cancelarModificarEntidad"  action="#{Supervisor$Contrato.cancelarModificacionContrato}" render="form_editarEntidadContrato"  execute="@this,txthabilitarModificarEntidad,txthabilitarEntidades" >
+                                                <h:graphicImage styleClass="ikont-" width="25"  height="25" value="/resources/imgs/bt_eliminar.png"/>
+                                            </a4j:commandLink>   
+                                            <rich:message for="habilitarEntidad" style="color: red;"/>  
+                                        </h:panelGroup>
+                                    </h:panelGroup>
 
                                     <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcostocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                    <h:outputLabel  styleClass="ikont- "   id="strcostocontrato"  value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -334,7 +371,7 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
+                                    <h:outputLabel  styleClass="ikont- "   id="strdispocontrato"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -501,7 +538,7 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.tipoPolizaContrato}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strTipoPoliza" styleClass="ikont-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                        <h:outputText  styleClass="ikont- "   id="otxt-strTipoPoliza"  value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                     </rich:column>
 
                                     <rich:column id="tc-strnumPolizaContrato1" width="100px">
@@ -556,14 +593,14 @@
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
-                                
+
                                 <a4j:commandButton id="commandButtonNuevaPoliza" value="Nueva póliza"
                                                    rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}"
                                                    action="#{Supervisor$Contrato.instanciarPolizar}"
                                                    oncomplete="#{rich:component('mp_nueva_poliza')}.show();"
                                                    render="gpPolizaSelec">
-                                    
-                                     <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
+
+                                    <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
                                 </a4j:commandButton>
                             </h:panelGroup>
                         </center>
@@ -846,7 +883,7 @@
 
                                     <rich:dataTable id="tablagirodirecto"
                                                     sortMode="single"
-                                                    
+
                                                     value="#{Supervisor$Contrato.listaGirodirecto}"
                                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
