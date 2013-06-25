@@ -91,6 +91,7 @@ import org.apache.poi.hssf.util.CellReference;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.richfaces.component.UIDataTable;
 import org.apache.poi.ss.usermodel.*;
+
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
  * contains component definitions (and initialization code) for all components
@@ -102,7 +103,7 @@ import org.apache.poi.ss.usermodel.*;
  * @author Carlos Alberto Loaiza Guerrerro
  * @author David Andres Betancourth Botero
  */
-public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
+public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
 
     /**
      * Variables BigDecimal.
@@ -179,6 +180,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     private List<TerceroEntidadLista> temp = new ArrayList<TerceroEntidadLista>();
     private List<Obra> listaProyectosPadre = new ArrayList<Obra>();
     private Set<Actividadobra> actividadesobra = new LinkedHashSet<Actividadobra>();
+    private Barrio barrio = new Barrio();
+    private Vereda vereda = new Vereda();
+    private List<Barrio> listaBarrios = new ArrayList<Barrio>();
+    private List<Vereda> listaVeredas = new ArrayList<Vereda>();
+    private List<Barrio> listadobarrio;
+    private List<Vereda> listadovereda;
     // </editor-fold>
     /**
      * Objetos UIDataTable.
@@ -191,9 +198,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     private UIDataTable tablatiposolicitudobra = new UIDataTable();
     private UIDataTable tablaProyectosHijos = new UIDataTable();
     private UIDataTable tablalocalidades = new UIDataTable();
+    private UIDataTable tableLocalidadVereda = new UIDataTable();
+    private UIDataTable tableLocalidadbarrio = new UIDataTable();
     private UIDataTable tablatipoobra = new UIDataTable();
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
-    private UIDataTable tablalistacontratos = new UIDataTable();   
+    private UIDataTable tablalistacontratos = new UIDataTable();
     // </editor-fold>
     /**
      * Variables Int.
@@ -281,7 +290,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     private Imagenevolucionobra imagenevolucionobraEd = new Imagenevolucionobra();
     private Imagenevolucionobra imagenevolucionobraEl = new Imagenevolucionobra();
     private Imagenevolucionobra imagenevolucionobra = new Imagenevolucionobra();
-    private Relacioncontratoobra relacioncontrato = new Relacioncontratoobra();    
+    private Relacioncontratoobra relacioncontrato = new Relacioncontratoobra();
     private Fase faseelegida = new Fase();
     private BigDecimal sumValorContrato;
     private FiltroAvanzadoObra filtro = new FiltroAvanzadoObra();
@@ -292,35 +301,35 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     private String longitudmapa = getSessionBeanCobra().getBundle().getString("longitudmapa");
     private boolean redibujarmapa = false;
     private boolean tipoOrigenSoloLectura;
-    
+
     public boolean isTipoOrigenSoloLectura() {
         return tipoOrigenSoloLectura;
     }
-    
+
     public void setTipoOrigenSoloLectura(boolean tipoOrigenSoloLectura) {
         this.tipoOrigenSoloLectura = tipoOrigenSoloLectura;
     }
-    
+
     public boolean isRedibujarmapa() {
         return redibujarmapa;
     }
-    
+
     public void setRedibujarmapa(boolean redibujarmapa) {
         this.redibujarmapa = redibujarmapa;
     }
-    
+
     public String getLatitudmapa() {
         return latitudmapa;
     }
-    
+
     public void setLatitudmapa(String latitudmapa) {
         this.latitudmapa = latitudmapa;
     }
-    
+
     public String getLongitudmapa() {
         return longitudmapa;
     }
-    
+
     public void setLongitudmapa(String longitudmapa) {
         this.longitudmapa = longitudmapa;
     }
@@ -333,1071 +342,1119 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     public CargadorArchivosWeb getCargadorCronograma() {
         return cargadorCronograma;
     }
-    
+
     public void setCargadorCronograma(CargadorArchivosWeb cargadorCronograma) {
         this.cargadorCronograma = cargadorCronograma;
     }
-    
+
     public BigDecimal getValortotalobra() {
         return valortotalobra;
     }
-    
+
     public void setValortotalobra(BigDecimal valortotalobra) {
         this.valortotalobra = valortotalobra;
     }
-    
+
     public boolean isVertipocosto() {
         return vertipocosto;
     }
-    
+
     public void setVertipocosto(boolean vertipocosto) {
         this.vertipocosto = vertipocosto;
     }
-    
+
     public boolean isVerPrimario() {
         return verPrimario;
     }
-    
+
     public void setVerPrimario(boolean verPrimario) {
         this.verPrimario = verPrimario;
     }
-    
+
     public List<Marcador> getListamarcadores() {
         return listamarcadores;
     }
-    
+
     public void setListamarcadores(List<Marcador> listamarcadores) {
         this.listamarcadores = listamarcadores;
     }
-    
+
     public boolean isVerConfirmar() {
         return verConfirmar;
     }
-    
+
     public void setVerConfirmar(boolean verConfirmar) {
         this.verConfirmar = verConfirmar;
     }
-    
+
     public int getFormaseleccionada() {
         return formaseleccionada;
     }
-    
+
     public void setFormaseleccionada(int formaseleccionada) {
         this.formaseleccionada = formaseleccionada;
     }
-    
+
     public boolean isVerNuevo() {
         return verNuevo;
     }
-    
+
     public void setVerNuevo(boolean verNuevo) {
         this.verNuevo = verNuevo;
     }
-    
+
     public int getTiposelec() {
         return tiposelec;
     }
-    
+
     public void setTiposelec(int tiposelec) {
         this.tiposelec = tiposelec;
     }
-    
+
     public int getNavegacion() {
         return navegacion;
     }
-    
+
     public void setNavegacion(int navegacion) {
         this.navegacion = navegacion;
     }
-    
+
     public UIDataTable getTablalistacontratos() {
         return tablalistacontratos;
     }
-    
+
     public void setTablalistacontratos(UIDataTable tablalistacontratos) {
         this.tablalistacontratos = tablalistacontratos;
     }
-    
+
     public Relacioncontratoobra getRelacioncontrato() {
         return relacioncontrato;
     }
-    
+
     public void setRelacioncontrato(Relacioncontratoobra relacioncontrato) {
         this.relacioncontrato = relacioncontrato;
     }
-    
+
     public boolean isDesdeconvenio() {
         return desdeconvenio;
     }
-    
+
     public void setDesdeconvenio(boolean desdeconvenio) {
         this.desdeconvenio = desdeconvenio;
     }
-    
+
     public FiltroAvanzadoContrato getFiltrocontrato() {
         return filtrocontrato;
     }
-    
+
     public void setFiltrocontrato(FiltroAvanzadoContrato filtrocontrato) {
         this.filtrocontrato = filtrocontrato;
     }
-    
+
     public boolean isObjeto() {
         return objeto;
     }
-    
+
     public void setObjeto(boolean objeto) {
         this.objeto = objeto;
     }
-    
+
     public Tercero getSolicitante() {
         return solicitante;
     }
-    
+
     public void setSolicitante(Tercero solicitante) {
         this.solicitante = solicitante;
     }
     private ValidacionNuevoProyecto validacion = new ValidacionNuevoProyecto();
-    
+
     public ValidacionNuevoProyecto getValidacion() {
         return validacion;
     }
-    
+
     public void setValidacion(ValidacionNuevoProyecto validacion) {
         this.validacion = validacion;
     }
-    
+
     public boolean isBand() {
         return band;
     }
-    
+
     public void setBand(boolean band) {
         this.band = band;
     }
-    
+
     public String getPathImagenPpal() {
         return pathImagenPpal;
     }
-    
+
     public void setPathImagenPpal(String pathImagenPpal) {
         this.pathImagenPpal = pathImagenPpal;
     }
-    
+
     public FiltroAvanzadoObra getFiltro() {
         return filtro;
     }
-    
+
     public void setFiltro(FiltroAvanzadoObra filtro) {
         this.filtro = filtro;
     }
-    
+
     public String getJsZoon() {
         return jsZoon;
     }
-    
+
     public void setJsZoon(String jsZoon) {
         this.jsZoon = jsZoon;
     }
-    
+
     public String getJsVariable() {
         return jsVariable;
     }
-    
+
     public void setJsVariable(String jsVariable) {
         this.jsVariable = jsVariable;
     }
-    
+
     public String getId() {
         return id;
     }
-    
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public boolean isBooltipocontratoconvenio() {
         return booltipocontratoconvenio;
     }
-    
+
     public void setBooltipocontratoconvenio(boolean booltipocontratoconvenio) {
         this.booltipocontratoconvenio = booltipocontratoconvenio;
     }
-    
+
     public String getNomcontraro() {
         return nomcontraro;
     }
-    
+
     public void setNomcontraro(String nomcontraro) {
         this.nomcontraro = nomcontraro;
     }
-    
+
     public List<Contrato> getListacontratos() {
         return listacontratos;
     }
-    
+
     public void setListacontratos(List<Contrato> listacontratos) {
         this.listacontratos = listacontratos;
     }
-    
+
     public boolean isVeranteriorcontrato() {
         return veranteriorcontrato;
     }
-    
+
     public void setVeranteriorcontrato(boolean veranteriorcontrato) {
         this.veranteriorcontrato = veranteriorcontrato;
     }
-    
+
     public boolean isVerultimoscontrato() {
         return verultimoscontrato;
     }
-    
+
     public void setVerultimoscontrato(boolean verultimoscontrato) {
         this.verultimoscontrato = verultimoscontrato;
     }
-    
+
     public BigDecimal getSumValorContrato() {
         return sumValorContrato;
     }
-    
+
     public void setSumValorContrato(BigDecimal sumValorContrato) {
         this.sumValorContrato = sumValorContrato;
     }
-        
+
     public Fase getFaseelegida() {
         return faseelegida;
     }
-    
+
     public void setFaseelegida(Fase faseelegida) {
         this.faseelegida = faseelegida;
     }
-    
+
     public String getNombreobra() {
         return nombreobra;
     }
-    
+
     public void setNombreobra(String nombreobra) {
         this.nombreobra = nombreobra;
     }
-    
+
     public boolean isAplicafiltro() {
         return aplicafiltro;
     }
-    
+
     public void setAplicafiltro(boolean aplicafiltro) {
         this.aplicafiltro = aplicafiltro;
     }
-    
+
     public boolean isVeranteriorreales() {
         return veranteriorreales;
     }
-    
+
     public void setVeranteriorreales(boolean veranteriorreales) {
         this.veranteriorreales = veranteriorreales;
     }
-    
+
     public boolean isVerultimosreales() {
         return verultimosreales;
     }
-    
+
     public void setVerultimosreales(boolean verultimosreales) {
         this.verultimosreales = verultimosreales;
     }
-    
+
     public int getTotalpaginas() {
         return totalpaginas;
     }
-    
+
     public void setTotalpaginas(int totalpaginas) {
         this.totalpaginas = totalpaginas;
     }
-    
+
     public int getPagina() {
         return pagina;
     }
-    
+
     public void setPagina(int pagina) {
         this.pagina = pagina;
     }
-    
+
     public int getTotalfilas() {
         return totalfilas;
     }
-    
+
     public void setTotalfilas(int totalfilas) {
         this.totalfilas = totalfilas;
     }
-    
+
     public int getEstadoguardado() {
         return estadoguardado;
     }
-    
+
     public void setEstadoguardado(int estadoguardado) {
         this.estadoguardado = estadoguardado;
     }
-    
+
     public UIDataTable getTablatipoobra() {
         return tablatipoobra;
     }
-    
+
     public void setTablatipoobra(UIDataTable tablatipoobra) {
         this.tablatipoobra = tablatipoobra;
     }
     private boolean img = false;
     private boolean imgppal = false;
     private String nombreimg = "";
-    
+
     public boolean isImgppal() {
         return imgppal;
     }
-    
+
     public void setImgppal(boolean imgppal) {
         this.imgppal = imgppal;
     }
-    
+
     public String getNombreimg() {
         return nombreimg;
     }
-    
+
     public void setNombreimg(String nombreimg) {
         this.nombreimg = nombreimg;
     }
-    
+
     public boolean isImg() {
         return img;
     }
-    
+
     public void setImg(boolean img) {
         this.img = img;
     }
-    
+
     public String getMensaje() {
         return mensaje;
     }
-    
+
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
-    
+
     public Obra getObrapadre() {
         return obrapadre;
     }
-    
+
     public void setObrapadre(Obra obrapadre) {
         this.obrapadre = obrapadre;
     }
-    
+
     public int getVerEliminar() {
         return verEliminar;
     }
-    
+
     public void setVerEliminar(int verEliminar) {
         this.verEliminar = verEliminar;
     }
-    
+
     public List<Tercero> getListerentidad() {
         return listerentidad;
     }
-    
+
     public void setListerentidad(List<Tercero> listerentidad) {
         this.listerentidad = listerentidad;
     }
-    
+
     public int getDisableAiu() {
         return disableAiu;
     }
-    
+
     public void setDisableAiu(int disableAiu) {
         this.disableAiu = disableAiu;
     }
-    
+
     public int getDisableCronograma() {
         return disableCronograma;
     }
-    
+
     public void setDisableCronograma(int disableCronograma) {
         this.disableCronograma = disableCronograma;
     }
-    
+
     public int getSubtiposelec() {
         return subtiposelec;
     }
-    
+
     public void setSubtiposelec(int subtiposelec) {
         this.subtiposelec = subtiposelec;
     }
-    
+
     public CargadorArchivosWeb getCargadorImagenAnterior() {
         return cargadorImagenAnterior;
     }
-    
+
     public void setCargadorImagenAnterior(CargadorArchivosWeb cargadorImagenAnterior) {
         this.cargadorImagenAnterior = cargadorImagenAnterior;
     }
-    
+
     public CargadorArchivosWeb getCargadorImagenPrincipal() {
         return cargadorImagenPrincipal;
     }
-    
+
     public void setCargadorImagenPrincipal(CargadorArchivosWeb cargadorImagenPrincipal) {
         this.cargadorImagenPrincipal = cargadorImagenPrincipal;
     }
-    
+
     public Imagenevolucionobra getImagenevolucionobra() {
         return imagenevolucionobra;
     }
-    
+
     public void setImagenevolucionobra(Imagenevolucionobra imagenevolucionobra) {
         this.imagenevolucionobra = imagenevolucionobra;
     }
-    
+
     public Imagenevolucionobra getImagenevolucionobraEd() {
         return imagenevolucionobraEd;
     }
-    
+
     public void setImagenevolucionobraEd(Imagenevolucionobra imagenevolucionobraEd) {
         this.imagenevolucionobraEd = imagenevolucionobraEd;
     }
-    
+
     public Imagenevolucionobra getImagenevolucionobraEl() {
         return imagenevolucionobraEl;
     }
-    
+
     public void setImagenevolucionobraEl(Imagenevolucionobra imagenevolucionobraEl) {
         this.imagenevolucionobraEl = imagenevolucionobraEl;
     }
-    
+
     public String getValorFiltroImagenevolucionobra() {
         return valorFiltroImagenevolucionobra;
     }
-    
+
     public void setValorFiltroImagenevolucionobra(String valorFiltroImagenevolucionobra) {
         this.valorFiltroImagenevolucionobra = valorFiltroImagenevolucionobra;
     }
-    
+
     public UIDataTable getTablaImagenesevolucion() {
         return tablaImagenesevolucion;
     }
-    
+
     public void setTablaImagenesevolucion(UIDataTable tablaImagenesevolucion) {
         this.tablaImagenesevolucion = tablaImagenesevolucion;
     }
-    
+
     public List<Imagenevolucionobra> getListaImagenesevolucionobra() {
         return listaImagenesevolucionobra;
     }
-    
+
     public void setListaImagenesevolucionobra(List<Imagenevolucionobra> listaImagenesevolucionobra) {
         this.listaImagenesevolucionobra = listaImagenesevolucionobra;
     }
-    
+
     public List<Tercero> getTernew() {
         return ternew;
     }
-    
+
     public void setTernew(List<Tercero> ternew) {
         this.ternew = ternew;
     }
-    
+
     public int getTiahselect() {
         return tiahselect;
     }
-    
+
     public void setTiahselect(int tiahselect) {
         this.tiahselect = tiahselect;
     }
-    
+
     public boolean isVerObrasHijo() {
         return verObrasHijo;
     }
-    
+
     public void setVerObrasHijo(boolean verObrasHijo) {
         this.verObrasHijo = verObrasHijo;
     }
-    
+
     public UIDataTable getTablaProyectosHijos() {
         return tablaProyectosHijos;
     }
-    
+
     public void setTablaProyectosHijos(UIDataTable tablaProyectosHijos) {
         this.tablaProyectosHijos = tablaProyectosHijos;
     }
-    
+
     public UIDataTable getTablatipoproyecto() {
         return tablatipoproyecto;
     }
-    
+
     public void setTablatipoproyecto(UIDataTable tablatipoproyecto) {
         this.tablatipoproyecto = tablatipoproyecto;
     }
-    
+
     public UIDataTable getTablatiposolicitudobra() {
         return tablatiposolicitudobra;
     }
-    
+
     public void setTablatiposolicitudobra(UIDataTable tablatiposolicitudobra) {
         this.tablatiposolicitudobra = tablatiposolicitudobra;
     }
-    
+
     public int getMostrarbtguardado() {
         return mostrarbtguardado;
     }
-    
+
     public void setMostrarbtguardado(int mostrarbtguardado) {
         this.mostrarbtguardado = mostrarbtguardado;
     }
-    
+
     public int getMostrarpgconveniocontrato() {
         return mostrarpgconveniocontrato;
     }
-    
+
     public void setMostrarpgconveniocontrato(int mostrarpgconveniocontrato) {
         this.mostrarpgconveniocontrato = mostrarpgconveniocontrato;
     }
-    
+
     public int getPreguntaProyectoPadre() {
         return preguntaProyectoPadre;
     }
-    
+
     public void setPreguntaProyectoPadre(int preguntaProyectoPadre) {
         this.preguntaProyectoPadre = preguntaProyectoPadre;
     }
-    
+
     public int getPreguntaSubProyecto() {
         return preguntaSubProyecto;
     }
-    
+
     public void setPreguntaSubProyecto(int preguntaSubProyecto) {
         this.preguntaSubProyecto = preguntaSubProyecto;
     }
-    
+
     public SelectItem[] getPeriodoEventoItem() {
         return periodoEventoItem;
     }
-    
+
     public void setPeriodoEventoItem(SelectItem[] periodoEventoItem) {
         this.periodoEventoItem = periodoEventoItem;
     }
-    
+
     public int getIdevento() {
         return idevento;
     }
-    
+
     public void setIdevento(int idevento) {
         this.idevento = idevento;
     }
-    
+
     public SelectItem[] getEventoItem() {
         return eventoItem;
     }
-    
+
     public void setEventoItem(SelectItem[] eventoItem) {
         this.eventoItem = eventoItem;
     }
-    
+
     public SelectItem[] getBarrios() {
         return barrios;
     }
-    
+
     public void setBarrios(SelectItem[] barrios) {
         this.barrios = barrios;
     }
-    
+
     public SelectItem[] getVeredas() {
         return veredas;
     }
-    
+
     public void setVeredas(SelectItem[] veredas) {
         this.veredas = veredas;
     }
-    
+
     public int getIdcomuna() {
         return idcomuna;
     }
-    
+
     public void setIdcomuna(int idcomuna) {
         this.idcomuna = idcomuna;
     }
-    
+
     public int getIdcorregimiento() {
         return idcorregimiento;
     }
-    
+
     public void setIdcorregimiento(int idcorregimiento) {
         this.idcorregimiento = idcorregimiento;
     }
-    
+
     public SelectItem[] getComunas() {
         return comunas;
     }
-    
+
     public void setComunas(SelectItem[] comunas) {
         this.comunas = comunas;
     }
-    
+
     public SelectItem[] getCorregimientos() {
         return corregimientos;
     }
-    
+
     public void setCorregimientos(SelectItem[] corregimientos) {
         this.corregimientos = corregimientos;
     }
-    
+
     public boolean isVerObrasPadres() {
         return verObrasPadres;
     }
-    
+
     public void setVerObrasPadres(boolean verObrasPadres) {
         this.verObrasPadres = verObrasPadres;
     }
-    
+
     public UIDataTable getTablaMarkereli() {
         return tablaMarkereli;
     }
-    
+
     public void setTablaMarkereli(UIDataTable tablaMarkereli) {
         this.tablaMarkereli = tablaMarkereli;
     }
-    
+
     public List<Marcador> getMarli() {
         return marli;
     }
-    
+
     public void setMarli(List<Marcador> marli) {
         this.marli = marli;
     }
-    
+
     public boolean isEditarContrato() {
         return editarContrato;
     }
-    
+
     public void setEditarContrato(boolean editarContrato) {
         this.editarContrato = editarContrato;
     }
-    
+
     public List<Relacioncontratoobra> getListacontratosobra() {
         return listacontratosobra;
     }
-    
+
     public void setListacontratosobra(List<Relacioncontratoobra> listacontratosobra) {
         this.listacontratosobra = listacontratosobra;
     }
-    
+
     public String getValorFiltroContratos() {
         return valorFiltroContratos;
     }
-    
+
     public void setValorFiltroContratos(String valorFiltroContratos) {
         this.valorFiltroContratos = valorFiltroContratos;
     }
-    
+
     public String getLatNewmanu() {
         return latNewmanu;
     }
-    
+
     public void setLatNewmanu(String latNewmanu) {
         this.latNewmanu = latNewmanu;
     }
-    
+
     public String getLongNewmanu() {
         return longNewmanu;
     }
-    
+
     public void setLongNewmanu(String longNewmanu) {
         this.longNewmanu = longNewmanu;
     }
-    
+
     public String getZoom() {
         return zoom;
     }
-    
+
     public void setZoom(String zoom) {
         this.zoom = zoom;
     }
-    
+
     public String getAddress() {
         return address;
     }
-    
+
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public UIDataTable getTablacontratos() {
         return tablacontratos;
     }
-    
+
     public void setTablacontratos(UIDataTable tablacontratos) {
         this.tablacontratos = tablacontratos;
     }
-    
+
     public int getIdConvenio() {
         return idConvenio;
     }
-    
+
     public void setIdConvenio(int idConvenio) {
         this.idConvenio = idConvenio;
     }
-    
+
     public void setDecision(boolean decision) {
         this.decision = decision;
     }
-    
+
     public boolean isDecision() {
         return decision;
     }
-    
+
     public void setYesOrNo(SelectItem[] yesOrNo) {
         this.yesOrNo = yesOrNo;
     }
-    
+
     public SelectItem[] getYesOrNo() {
         return yesOrNo;
     }
-    
+
     public boolean isVerContrato() {
         return verContrato;
     }
-    
+
     public void setVerContrato(boolean verContrato) {
         this.verContrato = verContrato;
     }
-    
+
     public ResourceBundle getBundle() {
         return bundle;
     }
-    
+
     public void setBundle(ResourceBundle bundle) {
         this.bundle = bundle;
     }
-    
+
     public String getRealArchivoPath() {
         return realArchivoPath;
     }
-    
+
     public void setRealArchivoPath(String realArchivoPath) {
         this.realArchivoPath = realArchivoPath;
     }
-    
+
     public SelectItem[] getTipoTerceroOPtion() {
         return TipoTerceroOPtion;
     }
-    
+
     public void setTipoTerceroOPtion(SelectItem[] TipoTerceroOPtion) {
         this.TipoTerceroOPtion = TipoTerceroOPtion;
     }
-    
+
     public SelectItem[] getTerceroOption() {
         return TerceroOption;
     }
-    
+
     public void setTerceroOption(SelectItem[] TerceroOption) {
         this.TerceroOption = TerceroOption;
     }
-    
+
     public SelectItem[] getEstadoCivilOption() {
         return EstadoCivilOption;
     }
-    
+
     public void setEstadoCivilOption(SelectItem[] EstadoCivilOption) {
         this.EstadoCivilOption = EstadoCivilOption;
     }
-    
+
     public SelectItem[] getGeneroOption() {
         return GeneroOption;
     }
-    
+
     public void setGeneroOption(SelectItem[] GeneroOption) {
         this.GeneroOption = GeneroOption;
     }
-    
+
     public SelectItem[] getDepartamento() {
         return Departamento;
     }
-    
+
     public void setDepartamento(SelectItem[] Departamento) {
         this.Departamento = Departamento;
     }
-    
+
     public SelectItem[] getMunicipio() {
         return Municipio;
     }
-    
+
     public void setMunicipio(SelectItem[] Municipio) {
         this.Municipio = Municipio;
     }
-    
+
     public SelectItem[] getRegion() {
         return Region;
     }
-    
+
     public void setRegion(SelectItem[] Region) {
         this.Region = Region;
     }
-    
+
     public SelectItem[] getTipoOrigenes() {
         return TipoOrigenes;
     }
-    
+
     public void setTipoOrigenes(SelectItem[] TipoOrigenes) {
         this.TipoOrigenes = TipoOrigenes;
     }
-    
+
     public String getCodDepartamento() {
         return codDepartamento;
     }
-    
+
     public void setCodDepartamento(String codDepartamento) {
         this.codDepartamento = codDepartamento;
     }
-    
+
     public String getCodDepartamentoContratista() {
         return codDepartamentoContratista;
     }
-    
+
     public void setCodDepartamentoContratista(String codDepartamentoContratista) {
         this.codDepartamentoContratista = codDepartamentoContratista;
     }
-    
+
     public String getCodMunicipio() {
         return codMunicipio;
     }
-    
+
     public void setCodMunicipio(String codMunicipio) {
         this.codMunicipio = codMunicipio;
     }
-    
+
     public int getCodRegion() {
         return codRegion;
     }
-    
+
     public void setCodRegion(int codRegion) {
         this.codRegion = codRegion;
     }
-    
+
     public List<Obra> getListaProyectosPadre() {
         return listaProyectosPadre;
     }
-    
+
     public void setListaProyectosPadre(List<Obra> listaProyectosPadre) {
         this.listaProyectosPadre = listaProyectosPadre;
     }
-    
+
     public List<Localidad> getListaLocalidades() {
         return listaLocalidades;
     }
-    
+
     public void setListaLocalidades(List<Localidad> listaLocalidades) {
         this.listaLocalidades = listaLocalidades;
     }
-    
+
     public List<Region> getListaRegiones() {
         return listaRegiones;
     }
-    
+
     public void setListaRegiones(List<Region> listaRegiones) {
         this.listaRegiones = listaRegiones;
     }
-    
+
     public int getListadiligenciada() {
         return listadiligenciada;
     }
-    
+
     public void setListadiligenciada(int listadiligenciada) {
         this.listadiligenciada = listadiligenciada;
     }
-    
+
     public List<Localidad> getQueryDeptos() {
         return queryDeptos;
     }
-    
+
     public void setQueryDeptos(List<Localidad> queryDeptos) {
         this.queryDeptos = queryDeptos;
     }
-    
+
+    public Barrio getBarrio() {
+        return barrio;
+    }
+
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
+    }
+
+    public Vereda getVereda() {
+        return vereda;
+    }
+
+    public void setVereda(Vereda vereda) {
+        this.vereda = vereda;
+    }
+
+    public List<Barrio> getListaBarrios() {
+        return listaBarrios;
+    }
+
+    public void setListaBarrios(List<Barrio> listaBarrios) {
+        this.listaBarrios = listaBarrios;
+    }
+
+    public List<Vereda> getListaVeredas() {
+        return listaVeredas;
+    }
+
+    public void setListaVeredas(List<Vereda> listaVeredas) {
+        this.listaVeredas = listaVeredas;
+    }
+
+    public List<Barrio> getListadobarrio() {
+        return listadobarrio;
+    }
+
+    public void setListadobarrio(List<Barrio> listadobarrio) {
+        this.listadobarrio = listadobarrio;
+    }
+
+    public List<Vereda> getListadovereda() {
+        return listadovereda;
+    }
+
+    public void setListadovereda(List<Vereda> listadovereda) {
+        this.listadovereda = listadovereda;
+    }
+
     public List<Localidad> getQueryMunicipios() {
         return queryMunicipios;
     }
-    
+
     public void setQueryMunicipios(List<Localidad> queryMunicipios) {
         this.queryMunicipios = queryMunicipios;
     }
-    
+
     public List<Region> getQueryRegiones() {
         return queryRegiones;
     }
-    
+
     public void setQueryRegiones(List<Region> queryRegiones) {
         this.queryRegiones = queryRegiones;
     }
-    
+
     public UIDataTable getTablalocalidades() {
         return tablalocalidades;
     }
-    
+
     public void setTablalocalidades(UIDataTable tablalocalidades) {
         this.tablalocalidades = tablalocalidades;
     }
-    
+
     public UIDataTable getTablaregiones() {
         return tablaregiones;
     }
-    
+
     public void setTablaregiones(UIDataTable tablaregiones) {
         this.tablaregiones = tablaregiones;
     }
-    
+
     public Polizacontrato getPolizacontrato() {
         return polizacontrato;
     }
-    
+
     public void setPolizacontrato(Polizacontrato polizacontrato) {
         this.polizacontrato = polizacontrato;
     }
-    
+
     public int getTiproyectoselec() {
         return tiproyectoselec;
     }
-    
+
     public void setTiproyectoselec(int tiproyectoselec) {
         this.tiproyectoselec = tiproyectoselec;
     }
-    
+
     public Documentoobra getCdp() {
         return cdp;
     }
-    
+
     public void setCdp(Documentoobra cdp) {
         this.cdp = cdp;
     }
-    
+
     public Documentoobra getDocumentoobra() {
         return documentoobra;
     }
-    
+
     public void setDocumentoobra(Documentoobra documentoobra) {
         this.documentoobra = documentoobra;
     }
-    
+
     public boolean isDatosbas() {
         return datosbas;
     }
-    
+
     public void setDatosbas(boolean datosbas) {
         this.datosbas = datosbas;
     }
-    
+
     public int getValido() {
         return valido;
     }
-    
+
     public void setValido(int valido) {
         this.valido = valido;
     }
-    
+
     public int getEstado() {
         return estado;
     }
-    
+
     public void setEstado(int estado) {
         this.estado = estado;
     }
-    
+
     public SelectItem[] getTipoCostoOption() {
         return TipoCostoOption;
     }
-    
+
     public void setTipoCostoOption(SelectItem[] TipoCostoOption) {
         this.TipoCostoOption = TipoCostoOption;
     }
-    
+
     public SelectItem[] getFormaPago() {
         return FormaPago;
     }
-    
+
     public void setFormaPago(SelectItem[] Formapago) {
         this.FormaPago = Formapago;
     }
-    
+
     public SelectItem[] getPeriodoMedida() {
         return PeriodoMedida;
     }
-    
+
     public void setPeriodoMedida(SelectItem[] PeriodoMedida) {
         this.PeriodoMedida = PeriodoMedida;
     }
-    
+
     public Periodo[] getListadoperiodos() {
         return listadoperiodos;
     }
-    
+
     public void setListadoperiodos(Periodo[] listadoperiodos) {
         this.listadoperiodos = listadoperiodos;
     }
-    
+
     public String getNomImagen() {
         return nomImagen;
     }
-    
+
     public void setNomImagen(String nomImagen) {
         this.nomImagen = nomImagen;
     }
-    
+
     public String getPathImagen() {
         return pathImagen;
     }
-    
+
     public void setPathImagen(String pathImagen) {
         this.pathImagen = pathImagen;
     }
-    
+
     public Obra getObranueva() {
         return obranueva;
     }
-    
+
     public void setObranueva(Obra obranueva) {
         this.obranueva = obranueva;
     }
-    
+
     public int getDocumentoseleccionado() {
         return documentoseleccionado;
     }
-    
+
     public void setDocumentoseleccionado(int documentoseleccionado) {
         this.documentoseleccionado = documentoseleccionado;
     }
-    
+
     public String seleccionDcto() {
         documentoseleccionado = 1;
-        
+
         return null;
     }
-    
+
     public String seleccionDctoCDP() {
         documentoseleccionado = 2;
-        
+
         return null;
     }
-    
+
     public Set<Actividadobra> getActividadesobra() {
         return actividadesobra;
     }
-    
+
     public void setActividadesobra(Set<Actividadobra> actividadesobra) {
         this.actividadesobra = actividadesobra;
     }
-    
+
     public SelectItem[] getClaseObra() {
         return ClaseObra;
     }
-    
+
     public void setClaseObra(SelectItem[] ClaseObra) {
         this.ClaseObra = ClaseObra;
     }
-    
+
     public SelectItem[] getLugarObra() {
         return LugarObra;
     }
-    
+
     public void setLugarObra(SelectItem[] LugarObra) {
         this.LugarObra = LugarObra;
     }
@@ -1410,7 +1467,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         longNewmanu = "";
         return null;
     }
-    
+
     public PlaceMark doSearch() {
         PlaceMark placeMarkNew = new PlaceMark();
         try {
@@ -1432,27 +1489,27 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 latNewmanu = lo.get(0).getFloatlatitud().toString();
                 longNewmanu = lo.get(0).getFloatlongitud().toString();
             }
-            
+
             placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(latNewmanu, longNewmanu);
             placeMarkNew.setAddress(getAddress());
-            
+
             address = placeMarkNew.getAddress();
-            
-            
+
+
         } catch (Exception e) {
             address = "Faltante";
             placeMarkNew.setAddress(address);
         }
-        
-        
+
+
         obranueva.setStrdireccion(address);
         obranueva.setFloatlatitud(new BigDecimal(latNewmanu));
         obranueva.setFloatlongitud(new BigDecimal(longNewmanu));
-        
+
         return placeMarkNew;
-        
+
     }
-    
+
     public String lonlatmanual() {
         zoom = "14";
         try {
@@ -1480,6 +1537,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         llenarPeriodoxEvento();
         llenarFase();
         llenarTipoProyecto();
+        llenarCorregimientos();
+        llenarVeredas();
+        llenarComunas();
+        llenarBarrios();
     }
 
     /**
@@ -1525,6 +1586,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             System.out.println("excepcion = " + e);
         }
     }
+
     /**
      * <p>Return a reference to the scoped data bean.</p>
      *
@@ -1545,42 +1607,42 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     public String guardarArchivoObra(String nomarch, String URLorigen, String URLdestino) {
         String ArchivoPath = "";
-        
+
         ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        
+
         ArchivoPath = theApplicationsServletContext.getRealPath(URLorigen + nomarch);
         try {
-            
+
             File carpeta = new File(ArchivoPath);
             if (carpeta.exists()) {
                 ArchivoPath = theApplicationsServletContext.getRealPath(URLdestino);
                 try {
-                    
+
                     File carpetadest = new File(ArchivoPath);
                     if (!carpetadest.exists()) {
                         carpetadest.mkdirs();
-                        
+
                     }
-                    
+
                 } catch (Exception ex) {
                     FacesUtils.addErrorMessage("No pudo crear carpeta ");
                 }
-                
-                
+
+
                 String cero = nomarch.substring(0, 1);
-                
-                
+
+
                 if (cero.compareTo("0") == 0) {
                     nomarch = getObranueva().getIntcodigoobra() + nomarch.substring(1, nomarch.length());
                 }
-                
+
                 carpeta.renameTo(new File(ArchivoPath + "/" + nomarch));
                 return nomarch;
             } else {
-                
+
                 return null;
             }
-            
+
         } catch (Exception ex) {
             FacesUtils.addErrorMessage(bundle.getString("nosepuedesubir"));
         }
@@ -1594,28 +1656,28 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     private void _init() {
     }
-    
+
     public void llenarPeriodo(int plazo) {
-        
+
         List<Periodomedida> periodoList = getSessionBeanCobra().getCobraService().encontrarPeriodosMedida();
         PeriodoMedida = null;
-        
+
         if (plazo >= 0 && plazo < 805) {
             PeriodoMedida = new SelectItem[periodoList.size()];
             int i = 0;
-            
-            
+
+
             for (Periodomedida perio : periodoList) {
                 SelectItem opt = new SelectItem(perio.getIntidperiomedida(), perio.getStrdescperiomedida());
                 PeriodoMedida[i++] = opt;
             }
-            
+
         } else {
             if (plazo > 804 && plazo < 3450) {
                 PeriodoMedida = new SelectItem[periodoList.size() - 1];
                 int i = 0;
-                
-                
+
+
                 for (Periodomedida perio : periodoList) {
                     if (perio.getIntidperiomedida() != 1) {
                         SelectItem opt = new SelectItem(perio.getIntidperiomedida(), perio.getStrdescperiomedida());
@@ -1624,7 +1686,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 }
             }
         }
-        
+
     }
 
     /**
@@ -1655,7 +1717,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String fechaCambio() {
-        
+
         Calendar hoy = Calendar.getInstance();
         if (obranueva.getDatefeciniobra() != null && obranueva.getDatefecfinobra() != null) {
             if (obranueva.getDatefecfinobra().compareTo(obranueva.getDatefeciniobra()) >= 0) {
@@ -1747,14 +1809,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String limpiarobra() {
-        
+
         cargadorImagenPrincipal = new CargadorArchivosWeb();
         cargadorImagenAnterior = new CargadorArchivosWeb();
         objeto = false;
         datosbas = false;
         cargadorCronograma = new CargadorArchivosWeb();
         sumValorContrato = BigDecimal.ZERO;
-        
+
         documentoseleccionado = 0;
         obranueva = new Obra();
         obranueva.setClaseobra(new Claseobra());
@@ -1768,7 +1830,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         obranueva.getTipoobra().setTipoproyecto(new Tipoproyecto(1, ""));
         obranueva.setEnalimentacion(false);
         obranueva.setBoolincluyeaiu(false);
-        
+
         polizacontrato = new Polizacontrato();
         polizacontrato.setTipopoliza(new Tipopoliza());
         polizacontrato.setAseguradora(new Aseguradora());
@@ -1797,7 +1859,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         preguntaProyectoPadre = 0;
         verContrato = false;
         verObrasPadres = false;
-        
+
         address = "Bogotá";
         tiproyectoselec = 0;
         subtiposelec = 0;
@@ -1821,8 +1883,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
         chequiarFase(0);
+        listaBarrios = new ArrayList<Barrio>();
+        listaVeredas = new ArrayList<Vereda>();
         return "nuevoProyecto";
-        
+
     }
 
     /// Manejo de Opciones Tipo de Obra
@@ -1831,12 +1895,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-   
-    
-    
     public void llenarClaseObra(int codfase) {
-        
-        
+
+
         List<Claseobra> lista = getSessionBeanCobra().getCobraService().encontrarClaseObraPorEstadoPorFase(codfase);
         ClaseObra = new SelectItem[lista.size()];
         int i = 0;
@@ -1846,15 +1907,15 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         }
         faseelegida.setIntidfase(tiahselect);
         tiproyectoselec = 0;
-        
+
     }
-    
-    public void obtenerFaseSeleccionada(int fila)
-    {        
+
+    public void obtenerFaseSeleccionada(int fila) {
         chequiarFase(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
         setTiahselect(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
         llenarClaseObra(getSessionBeanCobra().getCobraService().getFase().get(fila).getIntidfase());
-    }        
+    }
+
     /**
      * Llenado de selectitem LugarObra.
      */
@@ -1924,7 +1985,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             totalfilas = getSessionBeanCobra().getCobraService().numFiltrarObrasPadres(terbuscarobras, nombreobra);
             getNombreCorto();
         } else {
-            
+
             listaProyectosPadre = getSessionBeanCobra().getCobraService().encontrarObrasPadres(terbuscarobras, 0, 5);
             totalfilas = getSessionBeanCobra().getCobraService().getNumObrasPadre(terbuscarobras);
             getNombreCorto();
@@ -2010,7 +2071,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 totalpaginas++;
             }
         }
-        
+
         if (pagina > 1) {
             veranteriorreales = true;
         } else {
@@ -2068,10 +2129,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             guardarObraTemporal();
             String ArchivoPath = "";
             ServletContext theApplicationsServletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-            
+
             ArchivoPath = theApplicationsServletContext.getRealPath("/resources/Plantilla/" + bundle.getString("plantillaobra"));
             File archivo = new File(ArchivoPath);
-            
+
             if (archivo.exists()) {
                 InputStream inp = null;
                 try {
@@ -2158,14 +2219,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 
                     //Generando Periodos de Medida
                     int indiceperiodo = obranueva.getPeriodomedida().getIntidperiomedida();
-                    
+
                     int division = 0;
                     String perio = "";
                     switch (indiceperiodo) {
                         case 1:
                             perio = "SEMANA ";
                             division = obranueva.getIntplazoobra() / 7;
-                            
+
                             if (obranueva.getIntplazoobra() % 7 != 0) {
                                 division = division + 1;
                             }
@@ -2173,7 +2234,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         case 2:
                             perio = "QUINCENA ";
                             division = obranueva.getIntplazoobra() / 14;
-                            
+
                             if (obranueva.getIntplazoobra() % 14 != 0) {
                                 division = division + 1;
                             }
@@ -2181,18 +2242,18 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         case 3:
                             perio = "MES ";
                             division = obranueva.getIntplazoobra() / 30;
-                            
+
                             if (obranueva.getIntplazoobra() % 30 != 0) {
                                 division = division + 1;
                             }
                             break;
                     }
-                    
+
                     int i = 1;
                     int j = 8;
-                    
+
                     while (i <= division) {
-                        
+
                         cell = row.createCell(j);
                         cell.setCellValue("Q");
 //                        cell = row.createCell(j + 1);
@@ -2220,7 +2281,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 //                        sheet.addMergedRegion(new CellRangeAddress(7, 7, j, j + 1));
                         i++;
                         j = j + 1;
-                        
+
                     }
                     row = sheet.getRow(5);
                     int k = 65535;
@@ -2249,7 +2310,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         CellReference celda = new CellReference(k, j);
                         formulafalt = formulafalt + celda.formatAsString() + ":";
                         while (i <= division) {
-                            
+
                             cell = row.createCell(j + 1);
                             celda = new CellReference(k, j);
 //                            formula = "F" + (k + 1) + "*" + celda.formatAsString();
@@ -2264,12 +2325,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 //                        cell.setCellFormula(formulafalt + "(E" + (k + 1) + "*-1))*-1");
 
                         cell.setCellFormula(formulafalt + celda.formatAsString() + ")");
-                        
+
                         CellReference celdafalt = new CellReference(k, 7);
                         cell = row.createCell(j);
                         cell.setCellFormula("F" + (k + 1) + "*" + celdafalt.formatAsString());
                         cell.getCellStyle().setLocked(true);
-                        
+
                         k++;
                     }
                     row = sheet.getRow(3);
@@ -2281,7 +2342,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     File carpeta = new File(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()));
                     if (!carpeta.exists()) {
                         carpeta.mkdirs();
-                        
+
                     }
                     // Write the output to a file
                     FileOutputStream fileOut = new FileOutputStream(realArchivoPath + "/" + String.valueOf(obranueva.getIntcodigoobra()) + "/" + bundle.getString("plantillaobra"));
@@ -2428,7 +2489,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                             break;
                     }
                     if (!obranueva.isBooleantienehijos()) {
-                        
+
                         Set<Periodo> perios = new LinkedHashSet<Periodo>();
                         while (i < division) {
                             listadoperiodos[i].setObra(obranueva);
@@ -2548,6 +2609,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         }
                         obranueva.setActividadobras(actsguar);
                     }
+                    if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
+                        obranueva.setBarrios(new LinkedHashSet(listaBarrios));
+                        obranueva.setVeredas(new LinkedHashSet(listaVeredas));
+                    }
                     obranueva.setLocalidads(new LinkedHashSet());
                     obranueva.setRegions(new LinkedHashSet());
                     switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
@@ -2559,7 +2624,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                             obranueva.setRegions(new LinkedHashSet(listaRegiones));
                             break;
                     }
-                    
+
                     obranueva.setTipoestadobra(new Tipoestadobra(1));
                     cargarPuntosaobra();
                     getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), 1);
@@ -2593,7 +2658,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @throws Exception
      */
     public void cargarObra(Obra obra) throws Exception {
-        
+
         setObranueva(obra);
         getObranueva().setNumvaldeclarado(BigDecimal.ZERO);
         getObranueva().setNumvalavanfinanciaerodeclarado(BigDecimal.ZERO);
@@ -2605,6 +2670,8 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         preguntaProyectoPadre = 0;
         preguntaSubProyecto = 0;
         verContrato = false;
+        listaBarrios = new ArrayList<Barrio>();
+        listaVeredas = new ArrayList<Vereda>();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         listaLocalidades = new ArrayList<Localidad>();
         listaRegiones = new ArrayList<Region>();
@@ -2615,12 +2682,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         estadoguardado = 0;
         getObranueva().setEnalimentacion(false);
         getObranueva().setBoolincluyeaiu(false);
-        
+
         tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         tiahselect = getObranueva().getClaseobra().getFase().getIntidfase();
-        getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto()-1);
+        getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto() - 1);
         seleccionarsubtipo();
-        subtiposelec = getObranueva().getTipoobra().getInttipoobra();    
+        subtiposelec = getObranueva().getTipoobra().getInttipoobra();
         sumValorContrato = BigDecimal.ZERO;
         navegacion = 1;
         llenarClaseObra(getObranueva().getClaseobra().getFase().getIntidfase());
@@ -2643,14 +2710,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         if (getObranueva() != null && getObranueva().getFloatlatitud() != null && getObranueva().getFloatlongitud() != null && getObranueva().getFloatlatitud().compareTo(BigDecimal.valueOf(0.000000)) != 0 && getObranueva().getFloatlongitud().compareTo(BigDecimal.valueOf(0.000000)) != 0) {
             if (getObranueva().getTipoestadobra().getIntestadoobra() == 0) {//si es obra propuesta
                 PlaceMark placeMarkNewcargar = new PlaceMark();
-                
+
                 try {
                     placeMarkNewcargar = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(getObranueva().getFloatlatitud().toString(), getObranueva().getFloatlongitud().toString());
                     address = placeMarkNewcargar.getAddress();
                 } catch (Exception e) {
                     address = "Faltante";
                 }
-                
+
                 Marcador marca = new Marcador();
                 marca.setAddress(address);
 
@@ -2762,7 +2829,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 getEntidadConvenio().setIntentidadconvenio(2);
             }
         }
-        fechaCambio();        
+        fechaCambio();
         chequiarFase(getTiahselect());
         chequiarTipoProyecto(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto());
         chequiarTipoObra(getObranueva().getTipoobra().getInttipoobra());
@@ -2776,11 +2843,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String validarCronograma() {
-       
+
         disableAiu = 1;
         valido = 2;
         actividadesobra = new LinkedHashSet<Actividadobra>();
-        
+
         InputStream inp = null;
         File crono = null;
         try {
@@ -2791,10 +2858,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     crono = new File(ArchivoWebUtil.obtenerRutaAbsoluta(obranueva.getStrurlcronograma()));
                 }
             }
-            
+
             if (crono != null) {
                 inp = new FileInputStream(crono);
-                
+
                 Workbook wb;
                 Row row = null;
                 try {
@@ -2805,7 +2872,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     ///Se cuentan las filas de la hoja para saber el numero de actividades
                     int numFilasDeActividadLlenas = 0;
                     int numFilasDeActividad = 0;
-                    
+
                     for (Iterator rit = sheet.rowIterator(); rit.hasNext();) {
                         row = (Row) rit.next();
                         if (row.getRowNum() >= 9 && row.getCell(2) != null && !row.getCell(2).getStringCellValue().equals("")) {
@@ -2813,7 +2880,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         }
                         numFilasDeActividad++;
                     }
-                    
+
                     int i = numFilasDeActividadLlenas;
                     if (i > 0) {
 
@@ -2853,17 +2920,17 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                         //Verificar Total
                         row = sheet.getRow(2);
                         celda = row.getCell(6);
-                        
-                        
+
+
                         if (celda.getCellType() != 2) {
                             valido = 2;
                             //"Ha sido modificada la formula de valor total";
                             FacesUtils.addErrorMessage(bundle.getString("hasidomodificada"));
                             return null;
                         } else {
-                            
+
                             try {
-                                
+
                                 if (celda.getNumericCellValue() == 0) {
                                     valido = 2;
                                     //"El valor total de la obra no puede ser $0";
@@ -2873,7 +2940,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                     //verificar faltante
                                     row = sheet.getRow(3);
                                     celda = row.getCell(6);
-                                    
+
                                     if (celda.getCellType() != 2) {
                                         valido = 2;
                                         //"Ha sido modificada la formula de valor faltante";
@@ -2896,13 +2963,13 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                 Cell celdauni = row.getCell(3);
                                                 Cell celdacant = row.getCell(4);
                                                 Cell celdavalor = row.getCell(5);
-                                                
+
                                                 if (!verificarActividad(celda.getStringCellValue(), celdauni.getStringCellValue(), celdacant.getNumericCellValue(), celdavalor.getNumericCellValue(), j + 1)) {
                                                     //actividadesobra.clear();
                                                     valido = 2;
                                                     return null;
                                                 } else {
-                                                    
+
                                                     Cell celdafin = row.getCell(6);
                                                     if (celdafin.getCellType() != 2) {
                                                         valido = 2;
@@ -2935,30 +3002,30 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                             }
                                             int indiceperiodo = obranueva.getPeriodomedida().getIntidperiomedida();
                                             int division = 0;
-                                            
-                                            
+
+
                                             switch (indiceperiodo) {
                                                 case 1:
                                                     division = obranueva.getIntplazoobra() / 7;
-                                                    
+
                                                     if (obranueva.getIntplazoobra() % 7 != 0) {
                                                         division = division + 1;
                                                     }
                                                     obranueva.getPeriodomedida().setIntnrodiasperiomedida(7);
                                                     break;
                                                 case 2:
-                                                    
+
                                                     division = obranueva.getIntplazoobra() / 14;
-                                                    
+
                                                     if (obranueva.getIntplazoobra() % 14 != 0) {
                                                         division = division + 1;
                                                     }
                                                     obranueva.getPeriodomedida().setIntnrodiasperiomedida(14);
                                                     break;
                                                 case 3:
-                                                    
+
                                                     division = obranueva.getIntplazoobra() / 30;
-                                                    
+
                                                     if (obranueva.getIntplazoobra() % 30 != 0) {
                                                         division = division + 1;
                                                     }
@@ -2973,7 +3040,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                 cit.next();
                                                 i++;
                                             }
-                                            
+
                                             int totalcol = (i - 8);
                                             if (totalcol != division) {
                                                 //"Error en número de periodos";
@@ -2983,8 +3050,8 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                             } else {
                                                 //verificar la suma de totales
 
-                                                
-                                                
+
+
                                                 int filas = 9;
                                                 int u = 1;
                                                 int h = 5;
@@ -2992,14 +3059,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                 while (u <= numFilasDeActividadLlenas) {
                                                     row = sheet.getRow(filas);
                                                     j = 8;
-                                                    
+
                                                     while (j <= (i - 1)) {
                                                         Cell celdatotal = row.getCell(j);
                                                         Cell celdaMultipli = row.getCell(h);
                                                         //if (celdatotal.getCellType() != 0) {
 
                                                         if (celdatotal != null) {
-                                                            
+
                                                             if (celdatotal.getNumericCellValue() == 0) {
                                                                 //suma = suma.add(BigDecimal.valueOf(celdaMultipli.getNumericCellValue() * 0).setScale(2, BigDecimal.ROUND_HALF_UP));
                                                             } else {
@@ -3019,8 +3086,8 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                     filas++;
                                                     u++;
                                                 }
-                                                
-                                                
+
+
                                                 if (suma.compareTo(BigDecimal.valueOf(0)) == 0) {
                                                     //"ERROR LA SUMA DE LOS TOTALES ES O";
                                                     FacesUtils.addErrorMessage(bundle.getString("errorlasumadelostotaleseso"));
@@ -3044,11 +3111,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                 ///LLenar Matrix con los datos provenientes del excell
                                                 //llenar periodos
 
-                                                
+
                                                 Calendar fecha = Calendar.getInstance();
                                                 fecha.setTime(obranueva.getDatefeciniobra());
-                                                
-                                                
+
+
                                                 h = 5;
                                                 int k = 0;
                                                 j = 8;
@@ -3091,10 +3158,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                 }
                                                 ///LLenar actividades obra
                                                 j = 9;
-                                                
+
                                                 row = null;
                                                 actividadesobra.clear();
-                                                
+
                                                 while (j < total) {
                                                     row = sheet.getRow(j);
                                                     celda = row.getCell(2);
@@ -3125,17 +3192,17 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                     if (act.getFloatcantplanifao() == 0) {
                                                         act.setBoolimprevisto(true);
                                                     }
-                                                    
-                                                    
+
+
                                                     actividadesobra.add(act);
-                                                    
-                                                    
+
+
                                                     k = 8;
                                                     i = 0;
-                                                    
+
                                                     while (i < division) {
-                                                        
-                                                        
+
+
                                                         celda = row.getCell(k);
                                                         Relacionactividadobraperiodo relacion = new Relacionactividadobraperiodo();
                                                         if (celda == null) {
@@ -3156,19 +3223,19 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                                         relacion.setActividadobra(act);
                                                         relacion.setPeriodo(listadoperiodos[i]);
                                                         listadoperiodos[i].getRelacionactividadobraperiodos().add(relacion);
-                                                        
+
                                                         i++;
-                                                        
+
                                                         k++;
                                                     }
-                                                    
+
                                                     j++;
                                                 }
-                                                
+
                                             }
                                             valido = 1;
                                             estado = 1;
-                                            
+
                                             llenarTiposCosto();
                                             valortotalobra = obranueva.getNumvaltotobra();
                                             FacesUtils.addInfoMessage(bundle.getString("archivovalido"));
@@ -3179,25 +3246,25 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                                 }
                             } catch (java.lang.IllegalStateException e) {
                                 //"Fórmula con error";
-                                
-                                
+
+
                                 FacesUtils.addErrorMessage(bundle.getString("formulaconerror"));
                             }
                         }
-                        
+
                     } else {
                         //+"EL ARCHIVO NO TIENE ACTIVIDADES";
                         FacesUtils.addErrorMessage(bundle.getString("elarchivonotieneactivi"));
                         valido = 2;
                         return null;
                     }
-                    
+
                 } catch (Exception ex) {
-                    
+
                     Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         } catch (FileNotFoundException ex) {
             FacesUtils.addErrorMessage(bundle.getString("archivonoexixtenteerror"));
             Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
@@ -3312,17 +3379,17 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     public String validarDatosBasicos() {
         datosbas = false;
         if (obranueva.getStrnombreobra() != null && obranueva.getStrnombreobra().compareTo("") != 0 && obranueva.getStrobjetoobra() != null && obranueva.getStrobjetoobra().compareTo("") != 0 && obranueva.getDatefeciniobra() != null && obranueva.getDatefecfinobra() != null) {
-            
+
             if (obranueva.getDatefeciniobra() != null && obranueva.getDatefecfinobra() != null) {
-                
+
                 if (obranueva.getDatefeciniobra().compareTo(obranueva.getDatefecfinobra()) <= 0) {
-                    
+
                     if (listaLocalidades.size() > 0 || listaRegiones.size() > 0 || obranueva.getTipoorigen().getIntidtipoorigen() == 4) {
-                        
+
                         datosbas = true;
                     } else {
                         //"DEBE DILIGENCIAR TODOS LOS DATOS REQUERIDOS EN EL PASO 1";                        
-                        
+
                         FacesUtils.addErrorMessage(bundle.getString("debediligenciarlocalregion"));
                         datosbas = false;
                     }
@@ -3371,6 +3438,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     obranueva.setRegions(new LinkedHashSet(listaRegiones));
                     break;
             }
+            obranueva.setBarrios(new LinkedHashSet(listaBarrios));
+            obranueva.setVeredas(new LinkedHashSet(listaVeredas));
+
             obranueva.setRelacioncontratoobras(new LinkedHashSet());
             obranueva.getRelacioncontratoobras().clear();
             if (listacontratosobra.size() > 0) {
@@ -3446,28 +3516,28 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String guardadoIntermedio() {
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         if (comboEntidadesObraguardar()) {
             if (validarTipificacion()) {
                 obranueva.setTipoestadobra(new Tipoestadobra(0));
                 guardarObraTemporal();
-                
+
             } else {
                 //"Debe dar un nombre a la obra";
                 FacesUtils.addErrorMessage("Debe seleccionar un tipo de obra.");
-                
-                
+
+
                 return volverTipificacion();
             }
         } else {
             FacesUtils.addErrorMessage("Debe seleccionar una entidad contratante válida.");
             return "datosbasicosnuevoproyecto";
-            
+
         }
         return null;
-        
+
     }
 
     /**
@@ -3537,7 +3607,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     protected NuevoContratoBasico getNuevoContratoBasico() {
         return (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
     }
-    
+
     public void validarYesOrNo() {
 //        if (decision) {
 //            llenarConvenios();
@@ -3545,7 +3615,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 //            this.obranueva.setConvenio(null);
 //        }
     }
-    
+
     public void validarConvenio() {
 //        if (decisionConvenio == 1) {
 //            llenarConvenios();
@@ -3553,7 +3623,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 //            this.obranueva.setConvenio(null);
 //        }
     }
-    
+
     public void seleccionarConvenio() {
 //
 //        for (Convenio con : convenios) {
@@ -3564,7 +3634,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
 //            }
 //        }
     }
-    
+
     public String limpiarMensaje() {
         return null;
     }
@@ -3676,7 +3746,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String desasociarContrato(int filaSeleccionada) {
-        IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
         Relacioncontratoobra contselec = ign.getListacontratosobra().get(filaSeleccionada);
         listacontratosobra.remove(contselec);
         if (listacontratosobra.size() == 0) {
@@ -3702,11 +3772,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     obranueva.setTipoorigen(new Tipoorigen(tipo.getIntidtipoorigen(), ""));
                 }
                 TipoOrigenes[i++] = tpo;
-                
+
             }
         }
         if (lista.size() == 1) {
-            
+
             ingresaraModalLocalidad();
         }
     }
@@ -3737,13 +3807,13 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             temp.add(terce);
             TerceroOption[i++] = itemTercero;
         }
-        
+
         if (listerentidad.size() == 1) {
             obranueva.setTercero(listerentidad.get(0));
             setDesdeconvenio(false);
         }
-        
-        
+
+
     }
 
     /**
@@ -3799,12 +3869,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     public void llenarRegiones() {
         queryRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
-        
+
         Region = new SelectItem[queryRegiones.size()];
         int i = 0;
         for (Region regi : queryRegiones) {
             SelectItem reg = new SelectItem(regi.getIntidregion(), regi.getStrnombre());
-            
+
             Region[i++] = reg;
         }
     }
@@ -3818,6 +3888,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         }
         validarDatosBasicos();
     }
+
     public void agregarLocalidad() {
         switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
             case 1:
@@ -3946,7 +4017,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     public void llenarCorregimientos() {
         List<Corregimiento> lista = getSessionBeanCobra().getCobraService().encontrarCorregimientos();
-        
+
         corregimientos = new SelectItem[lista.size()];
         int i = 0;
         for (Corregimiento com : lista) {
@@ -3955,7 +4026,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 idcorregimiento = com.getIntcodigocorregimiento();
             }
             corregimientos[i++] = item;
-            
+
         }
     }
 
@@ -3963,29 +4034,25 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * Llenado de selectitem barrios.
      */
     public void llenarBarrios() {
-        List<Barrio> lista = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
-        barrios = new SelectItem[lista.size()];
+
+        listadobarrio = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
+        barrios = new SelectItem[listadobarrio.size()];
         int i = 0;
-        for (Barrio com : lista) {
+        for (Barrio com : listadobarrio) {
             SelectItem item = new SelectItem(com.getIntcodigobarrio(), com.getStrnombrebarrio());
-            if (i == 0) {
-                obranueva.setBarrio(new Barrio(com.getIntcodigobarrio(), null, com.getStrnombrebarrio()));
-            }
             barrios[i++] = item;
         }
     }
 
-    /**
-     * Llenado de selectitem veredas.
-     */
     public void llenarVeredas() {
-        List<Vereda> lista = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
-        veredas = new SelectItem[lista.size()];
+        listadovereda = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
+        veredas = new SelectItem[listadovereda.size()];
         int i = 0;
-        for (Vereda com : lista) {
+        for (Vereda com : listadovereda) {
             SelectItem item = new SelectItem(com.getIntcodigovereda(), com.getStrnombrevereda());
             veredas[i++] = item;
         }
+
     }
 
     /**
@@ -4024,11 +4091,10 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     public String llenarFase() {
         getSessionBeanCobra().getCobraService().setFase(getSessionBeanCobra().getCobraService().encontrarFase());
-        
+
         return null;
     }
-     
-          
+
     /**
      * Llenado de Listatipoproyecto.
      *
@@ -4037,31 +4103,31 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     public String llenarTipoProyecto() {
         getSessionBeanCobra().getCobraService().setListatipoproyecto(getSessionBeanCobra().getCobraService().encontrarTiposProyecto());
         setTiproyectoselec(0);
-        
+
         return null;
     }
-    
+
     /**
      * Obtener el tipo de proyecto seleccionado y cargar los subtipos
+     *
      * @param fila
      */
-    public void obtenerFilaTipoProyecto( int fila)
-    {
+    public void obtenerFilaTipoProyecto(int fila) {
         setTiproyectoselec(getSessionBeanCobra().getCobraService().getListatipoproyecto().get(fila).getIntidtipoproyecto());
         chequiarTipoProyecto(getSessionBeanCobra().getCobraService().getListatipoproyecto().get(fila).getIntidtipoproyecto());
         seleccionarsubtipo();
     }
+
     /**
      * LLenar la listatipodeobra dependiendo el tipoproyecto
-     *    
+     *
      */
     public void seleccionarsubtipo() {
-        
+
         getSessionBeanCobra().getCobraService().setListatipoobra(getSessionBeanCobra().getCobraService().encontrarSubTiposProyectoxtipoproyecto(getTiproyectoselec()));
-        
+
     }
 
-    
     /**
      * Encontrar la imagen evolucion por nombre
      *
@@ -4079,7 +4145,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             return false;
         }
     }
-    
+
     public void llenarTablaImagenevolucionobra() {
     }
 
@@ -4125,7 +4191,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         obranueva.getTipoobra().setTipoproyecto(new Tipoproyecto());
         obranueva.getTipoobra().getTipoproyecto().setIntidtipoproyecto(tiproyectoselec);
         chequiarTipoObra(subtipo);
-        
+
     }
 
     /**
@@ -4185,7 +4251,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String subirImagenInicial() {
-        
+
         if (nombreimg.compareTo("") != 0) {
             if (cargadorImagenAnterior.getNumArchivos() > 0) {
                 try {
@@ -4207,18 +4273,18 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                     Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
                     FacesUtils.addErrorMessage(bundle.getString("docexistenteerror"));
                 }
-                
+
             } else {
-                
+
                 FacesUtils.addErrorMessage(bundle.getString("debeadjuntarimagen"));
-                
+
             }
         } else {
-            
+
             FacesUtils.addErrorMessage(bundle.getString("debedarunnombre"));
         }
-        
-        
+
+
         return null;
     }
 
@@ -4229,7 +4295,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String eliminarImagenLista(int filaSeleccionada) {
-       IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
         Imagenevolucionobra imgborrar = ign.getListaImagenesevolucionobra().get(filaSeleccionada);
         if (imgborrar.getTipoimagen().getIntidtipoimagen() == 1) {
             img = false;
@@ -4315,14 +4381,14 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 if (!latNewmanu.equals("") && !longNewmanu.equals("")) {//address.compareTo("") != 0
                     if (isNumeric(latNewmanu)) {
                         try {
-                            
+
                             PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(latNewmanu, longNewmanu);
                             address = placeMarkNew.getAddress();
-                            
+
                         } catch (Exception e) {
                             address = "Faltante";
                         }
-                        
+
                         marke.setAddress(address);
                         marke.setLatitude(latNewmanu);
                         marke.setLongitude(longNewmanu);
@@ -4356,7 +4422,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             return true;
         } catch (NumberFormatException nfe) {
             return false;
-            
+
         }
     }
 
@@ -4445,7 +4511,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String eliminarMarker(int filaSeleccionada) {
-        IngresarNuevaObra ign=(IngresarNuevaObra)FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
         Marcador marEli = ign.getMarli().get(filaSeleccionada);
         marli.remove(marEli);
         listamarcadores.remove(marEli);
@@ -4501,7 +4567,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             validarCostos();
         }
         navegacion = 3;
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         return "datosgenerarCrono";
@@ -4607,9 +4673,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         primerosreales();
         return null;
     }
-    
+
     public boolean validarTipificacion() {
-        subtiposelec = obranueva.getTipoobra().getInttipoobra();        
+        subtiposelec = obranueva.getTipoobra().getInttipoobra();
         tiahselect = faseelegida.getIntidfase();
         if (tiahselect == 0 || subtiposelec == 0 || tiproyectoselec == 0) {
             return false;
@@ -4753,7 +4819,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         veranteriorcontrato = true;
         return null;
     }
-    
+
     public String buscarContrato() {
         // aplicafiltro = true;
         filtrocontrato.setBooltipocontconv(false);
@@ -4761,11 +4827,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         primeroContratos();
         return null;
     }
-    
+
     public String imprimirzoom() {
         return null;
     }
-    
+
     public void capturaZoom() {
         String[] u = jsVariable.split(",");
     }
@@ -4844,6 +4910,13 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         } else {
             validacion.setUbicacion(false);
         }
+        if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
+            if (listaBarrios.size() > 0 || listaVeredas.size() > 0) {
+                validacion.setUbicacion(true);
+            } else {
+                validacion.setUbicacion(false);
+            }
+        }
         if (!obranueva.isBooleantienehijos()) {
             validarCronograma();
         } else {
@@ -4863,7 +4936,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             }
             i++;
         }
-        
+
         if (!obranueva.isBooleantienehijos()) {
             validacion.setPresupuesto(true);
         }
@@ -4889,7 +4962,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             solicitante = getSessionBeanCobra().getCobraService().encontrarTerceroSolicitante((int) obranueva.getSolicitudmaestro().getOidcodigosolicitudmaestro(), solicitud);
         }
     }
-    
+
     public boolean comboEntidadesObraguardar() {
         if (getObranueva().getTercero().getStrnombrecompleto() != null) {
             Iterator ite = temp.iterator();
@@ -4933,9 +5006,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         try {
             marli = new ArrayList<Marcador>();
             EntidadConvenio rutaseleccion = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
-            Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);              
+            Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);
             getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(ruta.getStrcodigotramo()));
-            
+
             Marcador marc = new Marcador();
             int i = 0;
             while (i < getEntidadConvenio().getListapuntosruta().size()) {
@@ -4949,12 +5022,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
                 } catch (Exception e) {
                     marc.setAddress("Faltante");
                 }
-                
+
                 i++;
             }
             marli.add(marc);
             verPrimario = false;
-            
+
         } catch (Exception ex) {
             Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -4979,6 +5052,7 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      * El metodo aplica siempre y cuando sea un proyecto para el ministerio de
      * educacion debido a que se selecciona la sede donde se va a ejecutar el
      * Proyecto.
+     *
      * @param filaSeleccionada identificador de la fila seleccionada.
      * @return null
      */
@@ -4998,11 +5072,11 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             marc.setAddress(placeMarkNew.getAddress());
         } catch (Exception e) {
             marc.setAddress("Faltante");
-        }        
+        }
         listamarcadores.add(marc);
         marli.add(marc);
         verPrimario = false;
-        
+
         return null;
     }
 
@@ -5027,9 +5101,9 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
     public String navegarNuevaObra() {
         String regla = null;
         subtiposelec = obranueva.getTipoobra().getInttipoobra();
-        
+
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
-        
+
         switch (navegacion) {
             case 0:
                 regla = volverTipificacion();
@@ -5049,12 +5123,12 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             case 5:
                 regla = "datosAsociarContrato";
                 break;
-            
-            
+
+
         }
         return regla;
     }
-    
+
     public String pasaraUbicacion() {
         navegacion = 2;
         String regla = navegarNuevaObra();
@@ -5077,17 +5151,17 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
             Tipoorigen tipoorigen = new Tipoorigen();
             tipoorigen.setIntidtipoorigen(2);
             obranueva.setTipoorigen(tipoorigen);
-            
+
         }
         return regla;
     }
-    
+
     protected AdministrarObraNew getAdministrarObraNew() {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
-    
+
     public String reporteHistorialValidaciones() {
-        
+
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportehistorialvalidaciones") + obranueva.getIntcodigoobra());
         } catch (IOException ex) {
@@ -5142,69 +5216,90 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
         obranueva.setObra(getAdministrarObraNew().getObra());
         return ret;
     }
+
+    /**
+     * Elimina un barrio de la lista de barrios
+     *
+     * @return
+     * 
+     */
+    public String eliminarBarrio() {
+        listaBarrios.remove((Barrio) tableLocalidadbarrio.getRowData());
+        return null;
+    }
+
+    /**
+     * Elimina una vereda de la lista de veredas
+     *
+     * @return
+     */
+    public String eliminarVereda() {
+        listaVeredas.remove((Vereda) tableLocalidadVereda.getRowData());
+        return null;
+    }
+
+    public boolean verificarVereda(int intcodigovereda) {
+        for (Vereda v : listaVeredas) {
+            if (v.getIntcodigovereda() == intcodigovereda) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarBarrio(int intcodigobarrio) {
+        for (Barrio b : listaBarrios) {
+            if (b.getIntcodigobarrio() == intcodigobarrio) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /*
      * Método para chuliar la fase seleccionada
      * 
-     */    
-    
-    public void chequiarFase(int idfase)
-    {
-        for(Fase fas:getSessionBeanCobra().getCobraService().getFase())
-        {
-            if(fas.getIntidfase()==idfase)
-            {
+     */
+    public void chequiarFase(int idfase) {
+        for (Fase fas : getSessionBeanCobra().getCobraService().getFase()) {
+            if (fas.getIntidfase() == idfase) {
                 fas.setCheck(true);
-            } 
-            else
-            {
+            } else {
                 fas.setCheck(false);
-            }    
-        }    
-    }    
-    
+            }
+        }
+    }
+
     /*
      * Método para chuliar el tipo de proyecto seleccionado
      * 
-     */    
-    
-    public void chequiarTipoProyecto(int idtipo)
-    {
-        for(Tipoproyecto tip:getSessionBeanCobra().getCobraService().getListatipoproyecto())
-        {
-            if(tip.getIntidtipoproyecto()==idtipo)
-            {
+     */
+    public void chequiarTipoProyecto(int idtipo) {
+        for (Tipoproyecto tip : getSessionBeanCobra().getCobraService().getListatipoproyecto()) {
+            if (tip.getIntidtipoproyecto() == idtipo) {
                 tip.setCheck(true);
-            } 
-            else
-            {
+            } else {
                 tip.setCheck(false);
-            }    
-        }    
-    } 
+            }
+        }
+    }
     /*
      * Método para chuliar el tipo de obra seleccionado
      * 
-     */    
-    
-    public void chequiarTipoObra(int idtipo)
-    {
-        
-        for(Tipoobra tip:getSessionBeanCobra().getCobraService().getListatipoobra())
-        {
-            
-            if(tip.getInttipoobra()==idtipo)
-            {
-                tip.setCheck(true);
-                
-            } 
-            else
-            {
-                tip.setCheck(false);
-            }    
-        }    
-    } 
+     */
 
-   
+    public void chequiarTipoObra(int idtipo) {
+
+        for (Tipoobra tip : getSessionBeanCobra().getCobraService().getListatipoobra()) {
+
+            if (tip.getInttipoobra() == idtipo) {
+                tip.setCheck(true);
+
+            } else {
+                tip.setCheck(false);
+            }
+        }
+    }
 
     /**
      * @param datosValidos the datosValidos to set
@@ -5218,5 +5313,39 @@ public class IngresarNuevaObra  implements ILifeCycleAware, Serializable {
      */
     public int getDatosValidos() {
         return datosValidos;
+    }
+
+    public void modalModificarSelectUbicacion() {
+        System.out.println("reinstancie ingresa al lugar" + getObranueva().getLugarobra().getIntidlugarobra());
+
+        listaBarrios.clear();
+        listaVeredas.clear();
+
+    }
+
+    public void agregarUbicacioncomunalocalidad() {
+        switch (obranueva.getLugarobra().getIntidlugarobra()) {
+            case 1:
+                if (!verificarBarrio(getBarrio().getIntcodigobarrio())) {
+                    for (Barrio bar : listadobarrio) {
+                        if (bar.getIntcodigobarrio() == getBarrio().getIntcodigobarrio()) {
+                            listaBarrios.add(bar);
+
+                        }
+                    }
+                }
+                break;
+            case 2:
+
+                if (!verificarVereda(getVereda().getIntcodigovereda())) {
+                    for (Vereda ver : listadovereda) {
+                        if (ver.getIntcodigovereda() == getVereda().getIntcodigovereda()) {
+                            listaVeredas.add(ver);
+                            System.out.println("listaVeredas.size() = " + listaVeredas.size());
+                        }
+                    }
+                    break;
+                }
+        }
     }
 }
