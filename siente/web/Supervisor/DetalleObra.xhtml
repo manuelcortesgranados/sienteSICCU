@@ -47,7 +47,7 @@
         </style>
 
 
-      <!--  <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />-->
+       <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
         <h:outputScript name="script_supervisor.js"/>
         <h:outputScript name="coda-slider.1.1.1.pack.js" library="js"/>
         <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js"/>
@@ -64,6 +64,7 @@
         <h:outputScript name="slider.min_imagnes.js" library="js"/>
         <h:outputScript name="sliderman.1.3.6.js" library="js"/>
         <h:outputScript name="amcharts.js" library="../amcharts"/>
+        
 
 
         <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
@@ -348,52 +349,7 @@
                                         <h:outputLabel  styleClass="ikont-hol-numvalfisisco"   value="#{var.numvalavanfisicodeclarado}" />
                                     </f:facet>
                                     <interkont:spacer height="30"/>
-                                    <script>
 
-
-                                        function init() {
-                                            var estaen = document.getElementById("estaen").value;
-                                            var min = 0;
-                                            var max = 100;
-
-                                            var meter1 = new RGraph.Meter('meter1', min, max, estaen);
-
-                                            var grad1 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                            grad1.addColorStop(0, 'green');
-                                            grad1.addColorStop(1, 'white');
-
-                                            var grad2 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                            grad2.addColorStop(0, 'yellow');
-                                            grad2.addColorStop(1, 'white');
-
-                                            var grad3 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
-                                            grad3.addColorStop(0, 'red');
-                                            grad3.addColorStop(1, 'white');
-
-                                            meter1.Set('chart.labels.position', 'inside');
-                                            meter1.Set('chart.title', 'Avance Fisico');
-                                            meter1.Set('chart.title.vpos', 0.5);
-                                            meter1.Set('chart.title.color', 'black');
-                                            meter1.Set('chart.green.color', grad1);
-                                            meter1.Set('chart.yellow.color', grad2);
-                                            meter1.Set('chart.red.color', grad3);
-                                            meter1.Set('chart.border', false);
-                                            meter1.Set('chart.needle.linewidth', 5);
-                                            meter1.Set('chart.needle.tail', true);
-                                            meter1.Set('chart.tickmarks.big.num', 0);
-                                            meter1.Set('chart.tickmarks.small.num', 0);
-                                            meter1.Set('chart.segment.radius.start', 100);
-                                            meter1.Set('chart.needle.radius', 80);
-                                            meter1.Set('chart.needle.linewidth', 2);
-                                            meter1.Set('chart.linewidth.segments', 15);
-                                            meter1.Set('chart.strokestyle', 'white');
-                                            meter1.Set('chart.text.size', 14);
-                                            RGraph.Effects.Meter.Grow(meter1);
-                                        }
-
-
-
-                                    </script>
                                     <div id="capaPopUp"></div>
                                     <div id="popUpDiv">
                                         <div id="capaContent">
@@ -407,10 +363,10 @@
                                         <h3>
 
                                             <a href="javascript:void(0);" onclick="init();
-                                            return false;" title="Abrir PopUp" id="abrirPop">
+                return false;" title="Abrir PopUp" id="abrirPop">
 
                                                 <h:outputText  styleClass="ikont-hot-stEstado"   id="stEstado" 
-                                                               value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                              value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
                                                     <f:convertNumber  pattern="##.## %"/>
                                                 </h:outputText><br/>
                                                 <h:graphicImage  styleClass="ikont-hgi-vertacometro"   value="#{var.vertacometro}" width="150px"/><br/>
@@ -421,7 +377,7 @@
                                 </rich:panel>
                                 <rich:panel header="#{var.objeto}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-objeto"   headerClass="font-header-panel">
                                     <a4j:commandLink onclick="#{rich:component('modalObjeto')}.show();
-                                            return true;">
+                return true;">
                                         <h:graphicImage  styleClass="ikont-hgi-verobjeto"   value="#{var.verobjeto}" />
                                     </a4j:commandLink>
                                 </rich:panel>
@@ -743,10 +699,10 @@
                                 <center>
                                     Generar reporte en:
                                     <h:panelGrid columns="3">
-                                         
-                                        <h:commandLink id="pdf" onclick="document.location.href='#{var.birtpdfdetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf"  value="PDF"  target="_blank"  />
-                                        <h:commandLink id="excel" onclick="document.location.href='#{var.birtexceldetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel"  value="EXCEL"  target="_blank" />
-                                        <h:commandLink id="word" onclick="document.location.href='#{var.birtworddetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord"  value="WORD" target="_blank" />
+
+                                        <h:commandLink id="pdf" onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf"  value="PDF"  target="_blank"  />
+                                        <h:commandLink id="excel" onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel"  value="EXCEL"  target="_blank" />
+                                        <h:commandLink id="word" onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord"  value="WORD" target="_blank" />
                                     </h:panelGrid>
                                 </center>
                             </h:form>
@@ -840,7 +796,7 @@
                     <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
 
                         <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
-                           <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
+                            <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
                             <rich:panel id="rpListaActividadesProyecto" >
                                 <rich:dataTable id="listaActividadesAlimentar2"
                                                 onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
@@ -1132,7 +1088,7 @@
                                     <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
                                     <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
                                         <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
-                                            return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
+                return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
                                         <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
 
                                     </h:panelGrid>
@@ -1375,7 +1331,7 @@
                                 <div id="sideline"><label class="textlittle2">DESCARGAR REPORTES</label></div>
                                 <h:panelGrid columns="3" >
                                     <h:outputLabel value="probar"/>
-                                       <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" value="PDf" />
+                                    <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" value="PDf" />
                                     <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}" value="EXCEL"/>
                                     <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}" value="WORD"/>
 
@@ -1401,17 +1357,64 @@
         <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider_ciu.js" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider_ciu.css" rel="stylesheet" type="text/css" />
-        <script  language="javascript"></script>
+        <script src="/#{var.versioncobra}/resources/js/csspopup.js" type="text/javascript"></script>
         <script type="text/javascript">
-                                        var $jpanel = jQuery.noConflict();
-                                        $jpanel(document).ready(function() {
-                                            var $i = jQuery.noConflict();
-                                            $i('#slider3').slider3({
-                                                speed: 1800
+            var $jpanel = jQuery.noConflict();
+            $jpanel(document).ready(function() {
+                var $i = jQuery.noConflict();
+                $i('#slider3').slider3({
+                    speed: 1800
 
-                                            });
+                });
 
-                                        });
+            });
+
+        </script>
+        <script type="text/javascript">
+
+
+            function init() {
+                
+                var estaen = document.getElementById("estaen").value;
+                var min = 0;
+                var max = 100;
+
+                var meter1 = new RGraph.Meter('meter1', min, max, estaen);
+
+                var grad1 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                grad1.addColorStop(0, 'green');
+                grad1.addColorStop(1, 'white');
+
+                var grad2 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                grad2.addColorStop(0, 'yellow');
+                grad2.addColorStop(1, 'white');
+
+                var grad3 = meter1.context.createRadialGradient(meter1.canvas.width / 2, meter1.canvas.height - 25, 0, meter1.canvas.width / 2, meter1.canvas.height - 25, 200);
+                grad3.addColorStop(0, 'red');
+                grad3.addColorStop(1, 'white');
+
+                meter1.Set('chart.labels.position', 'inside');
+                meter1.Set('chart.title', 'Avance Fisico');
+                meter1.Set('chart.title.vpos', 0.5);
+                meter1.Set('chart.title.color', 'black');
+                meter1.Set('chart.green.color', grad1);
+                meter1.Set('chart.yellow.color', grad2);
+                meter1.Set('chart.red.color', grad3);
+                meter1.Set('chart.border', false);
+                meter1.Set('chart.needle.linewidth', 5);
+                meter1.Set('chart.needle.tail', true);
+                meter1.Set('chart.tickmarks.big.num', 0);
+                meter1.Set('chart.tickmarks.small.num', 0);
+                meter1.Set('chart.segment.radius.start', 100);
+                meter1.Set('chart.needle.radius', 80);
+                meter1.Set('chart.needle.linewidth', 2);
+                meter1.Set('chart.linewidth.segments', 15);
+                meter1.Set('chart.strokestyle', 'white');
+                meter1.Set('chart.text.size', 14);
+                RGraph.Effects.Meter.Grow(meter1);
+            }
+
+
 
         </script>
     </ui:define>
