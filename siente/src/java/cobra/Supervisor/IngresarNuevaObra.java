@@ -60,6 +60,7 @@ import cobra.CargadorArchivosWeb;
 import cobra.Cobra.Download;
 import cobra.FiltroAvanzadoContrato;
 import cobra.FiltroAvanzadoObra;
+import cobra.Geocodeimplementacion;
 import cobra.Marcador;
 import cobra.SessionBeanCobra;
 import cobra.gestion.HomeGestion;
@@ -180,12 +181,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private List<TerceroEntidadLista> temp = new ArrayList<TerceroEntidadLista>();
     private List<Obra> listaProyectosPadre = new ArrayList<Obra>();
     private Set<Actividadobra> actividadesobra = new LinkedHashSet<Actividadobra>();
-    private Barrio barrio = new Barrio();
-    private Vereda vereda = new Vereda();
-    private List<Barrio> listaBarrios = new ArrayList<Barrio>();
-    private List<Vereda> listaVeredas = new ArrayList<Vereda>();
-    private List<Barrio> listadobarrio;
-    private List<Vereda> listadovereda;
     // </editor-fold>
     /**
      * Objetos UIDataTable.
@@ -198,8 +193,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablatiposolicitudobra = new UIDataTable();
     private UIDataTable tablaProyectosHijos = new UIDataTable();
     private UIDataTable tablalocalidades = new UIDataTable();
-    private UIDataTable tableLocalidadVereda = new UIDataTable();
-    private UIDataTable tableLocalidadbarrio = new UIDataTable();
     private UIDataTable tablatipoobra = new UIDataTable();
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
@@ -1223,54 +1216,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.queryDeptos = queryDeptos;
     }
 
-    public Barrio getBarrio() {
-        return barrio;
-    }
-
-    public void setBarrio(Barrio barrio) {
-        this.barrio = barrio;
-    }
-
-    public Vereda getVereda() {
-        return vereda;
-    }
-
-    public void setVereda(Vereda vereda) {
-        this.vereda = vereda;
-    }
-
-    public List<Barrio> getListaBarrios() {
-        return listaBarrios;
-    }
-
-    public void setListaBarrios(List<Barrio> listaBarrios) {
-        this.listaBarrios = listaBarrios;
-    }
-
-    public List<Vereda> getListaVeredas() {
-        return listaVeredas;
-    }
-
-    public void setListaVeredas(List<Vereda> listaVeredas) {
-        this.listaVeredas = listaVeredas;
-    }
-
-    public List<Barrio> getListadobarrio() {
-        return listadobarrio;
-    }
-
-    public void setListadobarrio(List<Barrio> listadobarrio) {
-        this.listadobarrio = listadobarrio;
-    }
-
-    public List<Vereda> getListadovereda() {
-        return listadovereda;
-    }
-
-    public void setListadovereda(List<Vereda> listadovereda) {
-        this.listadovereda = listadovereda;
-    }
-
     public List<Localidad> getQueryMunicipios() {
         return queryMunicipios;
     }
@@ -1459,6 +1404,23 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.LugarObra = LugarObra;
     }
     // </editor-fold>
+    private Geocodeimplementacion geocode = new Geocodeimplementacion();
+
+    public List<TerceroEntidadLista> getTemp() {
+        return temp;
+    }
+
+    public void setTemp(List<TerceroEntidadLista> temp) {
+        this.temp = temp;
+    }
+
+    public Geocodeimplementacion getGeocode() {
+        return geocode;
+    }
+
+    public void setGeocode(Geocodeimplementacion geocode) {
+        this.geocode = geocode;
+    }
 
     public String habilitarNuevo() {
         verNuevo = true;
@@ -1537,10 +1499,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarPeriodoxEvento();
         llenarFase();
         llenarTipoProyecto();
-        llenarCorregimientos();
-        llenarVeredas();
-        llenarComunas();
-        llenarBarrios();
     }
 
     /**
@@ -1809,7 +1767,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String limpiarobra() {
-
+        latNewmanu="";
+        longNewmanu="";
         cargadorImagenPrincipal = new CargadorArchivosWeb();
         cargadorImagenAnterior = new CargadorArchivosWeb();
         objeto = false;
@@ -1883,8 +1842,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
         chequiarFase(0);
-        listaBarrios = new ArrayList<Barrio>();
-        listaVeredas = new ArrayList<Vereda>();
         return "nuevoProyecto";
 
     }
@@ -2425,7 +2382,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * El metodo se utiliza para para cargar las latitudes y longitudes de un
      * proyecto donde se va a ejecutar
      */
-    private void cargarPuntosaobra() {
+    private void cargarPuntosaobra() {  
         int i = 0;
         obranueva.setPuntoobras(new LinkedHashSet());
         obranueva.getPuntoobras().clear();
@@ -2441,6 +2398,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     puntonew.setObra(obranueva);
                     puntonew.setStrlatitud(marli.get(i).getLatitude().replaceAll(" ", ""));
                     puntonew.setStrlongitud(marli.get(i).getLongitude().replaceAll(" ", ""));
+                    puntonew.setStrdireccion(marli.get(i).getAddress());
                     obranueva.getPuntoobras().add(puntonew);
                 }
                 i++;
@@ -2609,10 +2567,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         }
                         obranueva.setActividadobras(actsguar);
                     }
-                    if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
-                        obranueva.setBarrios(new LinkedHashSet(listaBarrios));
-                        obranueva.setVeredas(new LinkedHashSet(listaVeredas));
-                    }
                     obranueva.setLocalidads(new LinkedHashSet());
                     obranueva.setRegions(new LinkedHashSet());
                     switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
@@ -2670,8 +2624,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         preguntaProyectoPadre = 0;
         preguntaSubProyecto = 0;
         verContrato = false;
-        listaBarrios = new ArrayList<Barrio>();
-        listaVeredas = new ArrayList<Vereda>();
         tiproyectoselec = obranueva.getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         listaLocalidades = new ArrayList<Localidad>();
         listaRegiones = new ArrayList<Region>();
@@ -2724,6 +2676,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 //marca.setAddress(obranueva.getStrdireccion());
                 marca.setLatitude(obranueva.getFloatlatitud().toString());
                 marca.setLongitude(obranueva.getFloatlongitud().toString());
+                marca.setAddress(obranueva.getStrdireccion().toString());
                 marca.setDraggable("false");
                 marca.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
                 marca.setTipo(0);
@@ -2742,7 +2695,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                             address = "Faltante";
                         }
                         marca = new Marcador();
-                        marca.setAddress(address);
+                        marca.setAddress(lispuntoobrapropues.get(i).getStrdireccion());
                         marca.setLatitude(lispuntoobrapropues.get(i).getStrlatitud());
                         marca.setLongitude(lispuntoobrapropues.get(i).getStrlongitud());
                         marca.setDraggable("false");
@@ -3438,9 +3391,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     obranueva.setRegions(new LinkedHashSet(listaRegiones));
                     break;
             }
-            obranueva.setBarrios(new LinkedHashSet(listaBarrios));
-            obranueva.setVeredas(new LinkedHashSet(listaVeredas));
-
             obranueva.setRelacioncontratoobras(new LinkedHashSet());
             obranueva.getRelacioncontratoobras().clear();
             if (listacontratosobra.size() > 0) {
@@ -4034,25 +3984,29 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Llenado de selectitem barrios.
      */
     public void llenarBarrios() {
-
-        listadobarrio = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
-        barrios = new SelectItem[listadobarrio.size()];
+        List<Barrio> lista = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
+        barrios = new SelectItem[lista.size()];
         int i = 0;
-        for (Barrio com : listadobarrio) {
+        for (Barrio com : lista) {
             SelectItem item = new SelectItem(com.getIntcodigobarrio(), com.getStrnombrebarrio());
+            if (i == 0) {
+                obranueva.setBarrio(new Barrio(com.getIntcodigobarrio(), null, com.getStrnombrebarrio()));
+            }
             barrios[i++] = item;
         }
     }
 
+    /**
+     * Llenado de selectitem veredas.
+     */
     public void llenarVeredas() {
-        listadovereda = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
-        veredas = new SelectItem[listadovereda.size()];
+        List<Vereda> lista = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
+        veredas = new SelectItem[lista.size()];
         int i = 0;
-        for (Vereda com : listadovereda) {
+        for (Vereda com : lista) {
             SelectItem item = new SelectItem(com.getIntcodigovereda(), com.getStrnombrevereda());
             veredas[i++] = item;
         }
-
     }
 
     /**
@@ -4362,21 +4316,24 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     marke.setDraggable("true");
                     marke.setTipo(tiposelec);
                     marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
-                    listamarcadores.add(marke);
+                    listamarcadores.add(marke);                    
                     redibujarmapa = false;
                 } catch (Exception ex) {
                     System.out.println("ex = " + ex);
                 }
                 break;
-            case 1:
-                marke.setLatitude(latNewmanu);
-                marke.setLongitude(longNewmanu);
-                marke.setDraggable("true");
-                marke.setTipo(tiposelec);
-                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
-                listamarcadores.add(marke);
-                redibujarmapa = false;
-                break;
+//                Esta parte se deshabilito ya hay un metodo (obtenerPuntopordireccion) que hace la busqueda por direccion
+//            case 1:
+//                System.out.println("latitidu = " + latNewmanu);
+//                System.out.println("longitud = " + longNewmanu);
+//                marke.setLatitude(latNewmanu);
+//                marke.setLongitude(longNewmanu);                
+//                marke.setDraggable("true");
+//                marke.setTipo(tiposelec);
+//                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
+//                listamarcadores.add(marke);
+//                redibujarmapa = false;
+//                break;
             case 2:
                 if (!latNewmanu.equals("") && !longNewmanu.equals("")) {//address.compareTo("") != 0
                     if (isNumeric(latNewmanu)) {
@@ -4435,16 +4392,20 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         verConfirmar = false;
         verNuevo = false;
         int i = listamarcadores.size();
-        try {
-            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(listamarcadores.get(i - 1).getLatitude(),
-                    listamarcadores.get(i - 1).getLongitude());
-            listamarcadores.get(i - 1).setAddress(placeMarkNew.getAddress().toString());
-            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
-        } catch (Exception ex) {
-            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
-            listamarcadores.get(i - 1).setAddress("Faltante");
-            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
-        }
+//        try {
+//            String lat = listamarcadores.get(i - 1).getLatitude();
+//            String longi = listamarcadores.get(i - 1).getLongitude();  
+//            PlaceMark placeMarkNew = GMaps4JSFServiceFactory.getReverseGeocoderService().getPlaceMark(lat,longi);
+//            listamarcadores.get(i - 1).setAddress(placeMarkNew.getAddress().toString());
+//            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+//        } catch (Exception ex) {
+//            //Logger.getLogger(IngresarNuevaObra.class.getName()).log(Level.SEVERE, null, ex);
+//            listamarcadores.get(i - 1).setAddress("Faltante");
+//            listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+//        }
+        listamarcadores.get(i - 1).setAddress(getGeocode().obtenerDireccionxLatyLong(listamarcadores.get(i - 1).getLatitude(), listamarcadores.get(i - 1).getLongitude()));
+        listamarcadores.get(i - 1).setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/pin.png");
+
         listamarcadores.get(i - 1).setDraggable("false");
         marli.add(listamarcadores.get(i - 1));
         //mostrarPanelmarker = 1;
@@ -4459,6 +4420,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             puntonew.setObra(obranueva);
             puntonew.setStrlatitud(listamarcadores.get(i - 1).getLatitude().replaceAll(" ", ""));
             puntonew.setStrlongitud(listamarcadores.get(i - 1).getLongitude().replaceAll(" ", ""));
+            puntonew.setStrdireccion(marli.get(i - 1).getAddress().toString());
             obranueva.getPuntoobras().add(puntonew);
             getSessionBeanCobra().getCobraService().guardarPunto(puntonew);
         }
@@ -4500,6 +4462,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         listamarcadores.remove(listamarcadores.size() - 1);
         verConfirmar = false;
         verNuevo = false;
+        formaseleccionada=0;
+        redibujarmapa = true;
         //  zoom = "6";      
         return null;
     }
@@ -4910,13 +4874,6 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         } else {
             validacion.setUbicacion(false);
         }
-        if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
-            if (listaBarrios.size() > 0 || listaVeredas.size() > 0) {
-                validacion.setUbicacion(true);
-            } else {
-                validacion.setUbicacion(false);
-            }
-        }
         if (!obranueva.isBooleantienehijos()) {
             validarCronograma();
         } else {
@@ -5216,50 +5173,11 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         obranueva.setObra(getAdministrarObraNew().getObra());
         return ret;
     }
-
-    /**
-     * Elimina un barrio de la lista de barrios
-     *
-     * @return
-     * 
-     */
-    public String eliminarBarrio() {
-        listaBarrios.remove((Barrio) tableLocalidadbarrio.getRowData());
-        return null;
-    }
-
-    /**
-     * Elimina una vereda de la lista de veredas
-     *
-     * @return
-     */
-    public String eliminarVereda() {
-        listaVeredas.remove((Vereda) tableLocalidadVereda.getRowData());
-        return null;
-    }
-
-    public boolean verificarVereda(int intcodigovereda) {
-        for (Vereda v : listaVeredas) {
-            if (v.getIntcodigovereda() == intcodigovereda) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean verificarBarrio(int intcodigobarrio) {
-        for (Barrio b : listaBarrios) {
-            if (b.getIntcodigobarrio() == intcodigobarrio) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /*
      * Método para chuliar la fase seleccionada
      * 
      */
+
     public void chequiarFase(int idfase) {
         for (Fase fas : getSessionBeanCobra().getCobraService().getFase()) {
             if (fas.getIntidfase() == idfase) {
@@ -5315,37 +5233,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         return datosValidos;
     }
 
-    public void modalModificarSelectUbicacion() {
-        System.out.println("reinstancie ingresa al lugar" + getObranueva().getLugarobra().getIntidlugarobra());
-
-        listaBarrios.clear();
-        listaVeredas.clear();
-
-    }
-
-    public void agregarUbicacioncomunalocalidad() {
-        switch (obranueva.getLugarobra().getIntidlugarobra()) {
-            case 1:
-                if (!verificarBarrio(getBarrio().getIntcodigobarrio())) {
-                    for (Barrio bar : listadobarrio) {
-                        if (bar.getIntcodigobarrio() == getBarrio().getIntcodigobarrio()) {
-                            listaBarrios.add(bar);
-
-                        }
-                    }
-                }
-                break;
-            case 2:
-
-                if (!verificarVereda(getVereda().getIntcodigovereda())) {
-                    for (Vereda ver : listadovereda) {
-                        if (ver.getIntcodigovereda() == getVereda().getIntcodigovereda()) {
-                            listaVeredas.add(ver);
-                            System.out.println("listaVeredas.size() = " + listaVeredas.size());
-                        }
-                    }
-                    break;
-                }
-        }
+    public void obtenerPuntopordireccion() {
+            Marcador marke = geocode.obtenerMarcadorporDireccion(address);
+            if (marke != null) {
+                marke.setDraggable("true");
+                marke.setTipo(tiposelec);
+                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
+                listamarcadores.add(marke);
+                redibujarmapa = false;
+                verConfirmar = true;
+            } else {
+                FacesUtils.addErrorMessage("No se encontro la Direccion");
+                verConfirmar = false;
+            }        
     }
 }
