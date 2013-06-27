@@ -1767,8 +1767,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return null
      */
     public String limpiarobra() {
-        latNewmanu="";
-        longNewmanu="";
+        latNewmanu = "";
+        longNewmanu = "";
         cargadorImagenPrincipal = new CargadorArchivosWeb();
         cargadorImagenAnterior = new CargadorArchivosWeb();
         objeto = false;
@@ -2382,7 +2382,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * El metodo se utiliza para para cargar las latitudes y longitudes de un
      * proyecto donde se va a ejecutar
      */
-    private void cargarPuntosaobra() {  
+    private void cargarPuntosaobra() {
         int i = 0;
         obranueva.setPuntoobras(new LinkedHashSet());
         obranueva.getPuntoobras().clear();
@@ -4316,7 +4316,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     marke.setDraggable("true");
                     marke.setTipo(tiposelec);
                     marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
-                    listamarcadores.add(marke);                    
+                    listamarcadores.add(marke);
                     redibujarmapa = false;
                 } catch (Exception ex) {
                     System.out.println("ex = " + ex);
@@ -4462,7 +4462,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         listamarcadores.remove(listamarcadores.size() - 1);
         verConfirmar = false;
         verNuevo = false;
-        formaseleccionada=0;
+        formaseleccionada = 0;
         redibujarmapa = true;
         //  zoom = "6";      
         return null;
@@ -5234,17 +5234,18 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     }
 
     public void obtenerPuntopordireccion() {
-            Marcador marke = geocode.obtenerMarcadorporDireccion(address);
-            if (marke != null) {
-                marke.setDraggable("true");
-                marke.setTipo(tiposelec);
-                marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
-                listamarcadores.add(marke);
-                redibujarmapa = false;
-                verConfirmar = true;
-            } else {
-                FacesUtils.addErrorMessage("No se encontro la Direccion");
-                verConfirmar = false;
-            }        
+        Marcador marke = geocode.obtenerMarcadorporDireccion(address);
+        if (marke != null) {
+            marke.setDraggable("true");
+            marke.setTipo(tiposelec);
+            marke.setConverterMessage("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/resources/images/marker.png");
+            listamarcadores.add(marke);
+            redibujarmapa = false;
+            verConfirmar = true;
+        } else {
+            //mensaje no encontro con la direccion suministrada
+            address ="";
+            verConfirmar = false;
+        }
     }
 }

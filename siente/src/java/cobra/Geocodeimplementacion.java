@@ -5,6 +5,7 @@
  */
 package cobra;
 
+import cobra.Supervisor.FacesUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -133,7 +134,7 @@ public class Geocodeimplementacion {
             JSONObject json = (JSONObject) JSONSerializer.toJSON(dirgoogle);
 
             JSONArray res = json.getJSONArray("results");
-
+            if (res.size() !=0){
             JSONObject son = res.getJSONObject(0);
     //le pone la direccion
             marca.setAddress(son.getString("formatted_address"));
@@ -144,6 +145,10 @@ public class Geocodeimplementacion {
             
             marca.setLatitude(songeometry.getString("lat"));
             marca.setLongitude(songeometry.getString("lng"));            
+            }else{
+                FacesUtils.addErrorMessage("La Direccion ingresada es erronea");
+                marca = null;
+            }
 
              // This returned String is JSON string from which you can retrieve all key value pair and can save it in POJO.
         } catch (UnsupportedEncodingException ex) {
