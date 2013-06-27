@@ -33,10 +33,14 @@
 
                                 <h:panelGrid columns="2">
                                     <h:outputLabel  styleClass="ikont-hol-enticonvcontrato"   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
-                                    <h:selectOneMenu value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
-                                        <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
+                                    <rich:select defaultLabel="Ingrese Entidad"  value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
+                                    <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                         <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
-                                    </h:selectOneMenu>
+                                    </rich:select>
+                                    <!--h:selectOneMenu  value="{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
+                                        <f:selectItems value="{Administrador$AdministrarEntidad.lstEntidad}" />
+                                        <a4j:ajax event="change" listener="{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
+                                    </h:selectOneMenu-->
                                 </h:panelGrid>
                                 <h:panelGrid id="prueba" columns="3">
                                     <h:outputText  styleClass="ikont-hot-usu"   value="#{var.Usuario}"/>

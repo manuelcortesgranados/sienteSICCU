@@ -18,8 +18,8 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup >
-                   <a4j:commandLink value="X" id="esconder_modalobjeto" styleClass="ikont-acl-esconder"    render="form_editar"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalObjeto')}.hide(); return false;"/>                    
+                   <a4j:commandLink value="X" id="esconder_modalobjeto" styleClass="ikont-acl-esconder"    render="form_editar,esconder_modalobjeto"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
+                                    title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalObjeto')}.hide(); return false;"/>                    
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -34,13 +34,13 @@
                        <h:outputText  styleClass="ikont-hot-txtObjeto"     id="txtObjeto"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
                             <br/>
                             <br/>
-                       <a4j:commandLink value="X" id = "btn_editarObjetoObra"   action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
+                       <a4j:commandLink id = "btn_editarObjetoObra"   action="#{Supervisor$AdministrarObraNew.habilitarBotonModificarObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
                             <h:graphicImage  styleClass="ikont-hgi-bt_editar"    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>
                         </a4j:commandLink>
                     </h:panelGroup>
                     <h:panelGroup  id="txthabilitarModificar" rendered="#{Supervisor$AdministrarObraNew.modificarObjetoObra}" >
                         <h:inputTextarea  required="true" id="habilitarObjeto" rows="4" cols="40" value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
-                       <a4j:commandLink value="X"   id="bt_editarpolizas1"  action="#{Supervisor$AdministrarObraNew.guardarModificacionObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
+                       <a4j:commandLink id="bt_editarpolizas1"  action="#{Supervisor$AdministrarObraNew.guardarModificacionObjeto}" render="form_editar"  execute="txthabilitarModificar,txthabilitarObjeto"  title="#{var.editar}">
                             <br/>
                             <br/>
                             <h:graphicImage  styleClass="ikont-hgi-bt_editar1"    width="25"  height="25" value="/resources/imgs/bt_editar.png"/>

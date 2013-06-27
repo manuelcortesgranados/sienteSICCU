@@ -238,7 +238,7 @@ public class AdiministrarEntidad implements Serializable {
     /**
      * guardarEntidad metodo que guarda una nueva entidad
      */
-    private void guardarEntidad() {
+   private void guardarEntidad() {
         if (getSessionBeanCobra().getUtil().isEmail(tercero.getStremail())) {
             tercero.setStrnombrecompleto(tercero.getStrnombre());
             tercero.setTipoidentificacion(new Tipoidentificacion(6, "NIT"));
@@ -253,19 +253,24 @@ public class AdiministrarEntidad implements Serializable {
                 tercero.setBoolentidadnacional(true);
                 tercero.setTiposolicitante(new Tiposolicitante(2));
                 tercero.setLocalidadByStrcodigolocalidad(new Localidad("169"));
-            } else {
+            }
+            if (tercero.getTipoOrigen().getIntidtipoorigen() == 1) {
                 tercero.setBoolobraslocalidad(true);
                 tercero.setBoolentidadnacional(false);
+            }
+            if (tercero.getTipoOrigen().getIntidtipoorigen() == 2) {
+                tercero.setBoolobraslocalidad(true);
+                tercero.setBoolentidadnacional(false);
+                tercero.setLocalidadByStrcodigolocalidad(new Localidad(codDepartamentoEntidad));
             }
             getSessionBeanCobra().getCiudadanoservice().guardarTercero(tercero);
             FacesUtils.addInfoMessage(bundle.getString("mensajeguardarentidad"));
             limpiartercero();
         } else {
-            FacesUtils.addErrorMessage(bundle.getString("correoinvalido"));
+        FacesUtils.addErrorMessage(bundle.getString("correoinvalido"));
         }
 
     }
-
     /**
      * iniciarCombos metodo que inicializa las variables de las listas para
      * crear una nueva entidad
@@ -339,19 +344,19 @@ public class AdiministrarEntidad implements Serializable {
         return null;
     }
 
-    public String llenarTipoOrigen() {
+        public String llenarTipoOrigen() {
         getSessionBeanCobra().getCobraService().setListaTipoOrigen(getSessionBeanCobra().getCobraService().listaTipoOrigen());
-        TipoOrigenEntidad = new SelectItem[getSessionBeanCobra().getCobraService().getListaTipoOrigen().size()];
+        TipoOrigenEntidad = new SelectItem[getSessionBeanCobra().getCobraService().getListaTipoOrigen().size() - 1];
         int i = 0;
         for (Tipoorigen tipoorigen : getSessionBeanCobra().getCobraService().getListaTipoOrigen()) {
             SelectItem tp = new SelectItem(tipoorigen.getIntidtipoorigen(), tipoorigen.getStrnombre());
-            if (i == 0) {
-                tp = new SelectItem(tipoorigen.getIntidtipoorigen(), tipoorigen.getStrnombre());
+            if (tipoorigen.getIntidtipoorigen() != 3) {
+                TipoOrigenEntidad[i++] = tp;
             }
-            TipoOrigenEntidad[i++] = tp;
         }
         return null;
     }
+
 
     public void llenarEntidadesUsuario() {
         try {
@@ -395,7 +400,6 @@ public class AdiministrarEntidad implements Serializable {
             Terceroentidad entidadUsuarioasociado = getSessionBeanCobra().getCobraService().encontrarEntidadUsuario(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo());
 
             if (entidadUsuarioasociado == null ) {
-                System.out.println("codigo :" + getTerceroEntidad().getId().getIntcodigotercero()) ;
                 getSessionBeanCobra().getCobraService().guardarEntidadUsuario(new Terceroentidad(new TerceroentidadId(getEntidadUsuario().getIntcodigo(), jsfUsuario.getTercero().getIntcodigo())));
                 FacesUtils.addInfoMessage(bundle.getString("asociarentidadvalida"));
                 limpiarEntidad();
@@ -418,7 +422,7 @@ public class AdiministrarEntidad implements Serializable {
 
     public void limpiartercero() {
         tercero = new Tercero();
-        tercero.setTipoOrigen(new Tipoorigen());
+        tercero.setTipoOrigen(new Tipoorigen(4, ""));
         tercero.setLocalidadByStrcodigolocalidad(new Localidad());
     }
     

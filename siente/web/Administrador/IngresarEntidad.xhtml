@@ -80,7 +80,7 @@
                                                     <h:selectOneMenu id="combotipoorigenentidad" styleClass="ikont-hsom-tipoorigenentidad"    immediate="true"
                                                                      value="#{Administrador$AdministrarEntidad.tercero.tipoOrigen.intidtipoorigen}" >
                                                         <f:selectItems value="#{Administrador$AdministrarEntidad.tipoOrigenEntidad}" />
-                                                        <a4j:ajax   event="change"   render="lbldepartamento,combodepartamento,lblmunicipio,combomunicipio" />
+                                                        <a4j:ajax   event="change" execute="lbldepartamento,combodepartamento,lblmunicipio,combomunicipio"  render="lbldepartamento,combodepartamento,lblmunicipio,combomunicipio" />
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>                                                
                                             </h:panelGrid>
