@@ -83,7 +83,7 @@
 
                             <h:outputLabel  styleClass="ikont-hol-label_quetan"    id="label_quetan"  value="#{var.quetanavanzado}:" />
                             <h:panelGrid columns="1" columnClasses="panelcenter" >
-                                <h:selectOneMenu value="#{HomeGestion.inttipoorigen}">
+                                <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}">
                                     <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                                     <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
                                     <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
@@ -97,7 +97,8 @@
                                         </h:selectOneMenu>
                                     </h:panelGrid>
                                     <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
-                                        <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
+                                        <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"
+                                                          rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                             <f:selectItems value="#{HomeGestion.departamentos}"/>
                                             <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
                                                          render="municipios"/>

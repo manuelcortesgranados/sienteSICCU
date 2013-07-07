@@ -629,6 +629,13 @@ public class HomeGestion implements Serializable {
             filtro.setIntcodigoentidad(0);
             filtro.setStrentidad("");
         }
+         //Fijar filtro departamento para Tolima
+        if(Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitarDepartamentoEjecutaraProyecto")))
+        {
+            setInttipoorigen(1);
+            getFiltro().setStrcoddepto(getSessionBeanCobra().getBundle().getString("codigoDepartamentoCobra"));
+            cargarMunicipios();
+        } 
 
     }
 

@@ -1638,6 +1638,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
 
         if (!listaContrato.isEmpty()) {
+            i=0;
             while (i < listaContrato.size()) {
                 listdoccontrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContrato.get(i).getContrato());
                 
@@ -1651,6 +1652,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
         
         if (!listaContratoInterventoria.isEmpty()) {
+            i=0;
             while (i < listaContratoInterventoria.size()) {
                 listdoccontratointerv = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContratoInterventoria.get(i).getContrato());
                 
