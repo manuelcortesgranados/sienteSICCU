@@ -1605,6 +1605,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         listaDocumentosobra = getSessionBeanCobra().getCobraService().obtenerDocumentosObra(getObra().getIntcodigoobra());
         int i = 0;
         List<Documentoobra> listdoccontrato = new ArrayList<Documentoobra>();
+         List<Documentoobra> listdoccontratointerv = new ArrayList<Documentoobra>();
         if (listaDocumentosobra == null) {
             listaDocumentosobra = new ArrayList<Documentoobra>();
         }
@@ -1612,10 +1613,23 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         if (!listaContrato.isEmpty()) {
             while (i < listaContrato.size()) {
                 listdoccontrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContrato.get(i).getContrato());
-
+                
                 if (!listdoccontrato.isEmpty()) {
 
                     listaDocumentosobra.addAll(listdoccontrato);
+                }
+
+                i++;
+            }
+        }
+        
+        if (!listaContratoInterventoria.isEmpty()) {
+            while (i < listaContratoInterventoria.size()) {
+                listdoccontratointerv = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContratoInterventoria.get(i).getContrato());
+                
+                if (!listdoccontratointerv.isEmpty()) {
+
+                    listaDocumentosobra.addAll(listdoccontratointerv);
                 }
 
                 i++;
