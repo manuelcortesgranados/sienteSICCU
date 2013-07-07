@@ -768,6 +768,15 @@ public class NuevoContratoBasico implements Serializable {
     public boolean habilitarGuardarNumeroContrato = false;
 
     public boolean habilitarModificarTxtObjeto = true;
+    /**
+     * Variable para habilitar el boton modificar Objeto contrato
+     */
+    private boolean habilitarBtnModificarcontrato = true;
+    /**
+     * Variable para habilitar los botones para modificar el objeto del contrato
+     */
+    private boolean habilitarBtnGuardarCancelarContrato = false;
+
 
     /**
      *
@@ -776,6 +785,24 @@ public class NuevoContratoBasico implements Serializable {
      * Set y get de todas las variables anteriores
      *
      */
+    
+    public boolean isHabilitarBtnModificarcontrato() {
+        return habilitarBtnModificarcontrato;
+    }
+
+    public void setHabilitarBtnModificarcontrato(boolean habilitarBtnModificarcontrato) {
+        this.habilitarBtnModificarcontrato = habilitarBtnModificarcontrato;
+    }
+
+    public boolean isHabilitarBtnGuardarCancelarContrato() {
+        return habilitarBtnGuardarCancelarContrato;
+    }
+
+    public void setHabilitarBtnGuardarCancelarContrato(boolean habilitarBtnGuardarCancelarContrato) {
+        this.habilitarBtnGuardarCancelarContrato = habilitarBtnGuardarCancelarContrato;
+    }
+
+    
     public boolean isHabilitarModificarNumero() {
         return habilitarModificarNumero;
     }
@@ -4587,6 +4614,8 @@ public class NuevoContratoBasico implements Serializable {
      * @return la pagina detallecontrato
      */
     public String iniciarDetaContrato() {
+        habilitarBtnModificarcontrato = true;
+        habilitarBtnGuardarCancelarContrato = false;
         habilitarmodificar = true;
         modificartxt = false;
         habilitarModificarNumero = true;
@@ -5809,6 +5838,39 @@ public class NuevoContratoBasico implements Serializable {
         FacesUtils.addInfoMessage("Se actualizo correctamente el contrato");
         habilitarModificarNumero = true;
         habilitarGuardarNumeroContrato = false;
+    }
+    /**
+     * Metodo Utilizado para habilitar los botones de Guardar y cancelar el
+     * objeto del contrato
+     *
+     * @return void
+     */
+    public void habilitarBotonModificarContrato() {
+        habilitarBtnModificarcontrato = false;
+        habilitarBtnGuardarCancelarContrato = true;
+    }
+
+    /**
+     * Método utilizado Guardar la Modificacion el objeto del contrato.
+     *
+     * @return NVoid
+     */
+    public void guardarModficiacionContrato() {
+        comboEntidadesContratoguardar();
+        habilitarBtnModificarcontrato = true;
+        habilitarBtnGuardarCancelarContrato = false;
+        getSessionBeanCobra().getCobraService().guardarContrato(getContrato());
+        FacesUtils.addInfoMessage("Se actualizo correctamente el contrato");
+    }
+
+    /**
+     * Metodo Utilizado para habilitar el boton Modificar
+     *
+     * @return void
+     */
+    public void cancelarModificacionContrato() {
+        habilitarBtnModificarcontrato = true;
+        habilitarBtnGuardarCancelarContrato = false;
     }
 
     /**

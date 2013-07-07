@@ -14,6 +14,8 @@
     <ui:define name="head">
         <title>Modificar Usuario</title>
         <h:outputScript name="script_supervisor.js"/>
+        <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
     </ui:define>
 
     <ui:define name="title">
@@ -65,8 +67,7 @@
                         <h:outputText  styleClass="ikont-hot-estadousuario"   value="#{Perfil$Usuario.estadousuario}"/>
                     </h:panelGrid>
                 </h:panelGrid>
-
-                <rich:collapsiblePanel  header="Detalle Usuario" expanded="true" switchType="ajax">
+                <rich:collapsiblePanel header="Detalle Usuario"  expanded="true" switchType="ajax">
                     <h:panelGrid columns="4" columnClasses="20%" width="75%" id="tabladetalleusuario">
                         <h:outputText  styleClass="ikont-hot-tipousuario"   value="Tipo usuario"     />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbtipotercero"   id="cmbtipotercero" value="#{Perfil$Usuario.usuariomod.tercero.tipotercero.intcodigotipotercero}" disabled="#{Perfil$Usuario.modificarUsuario}">

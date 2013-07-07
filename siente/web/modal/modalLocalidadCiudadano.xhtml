@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:rich="http://richfaces.org/rich"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel id="panelVerLocalidadCiudadano" autosized="true" resizeable="false"  
+                     headerClass="rich-panel-header" styleClass="ikont-rpp-panelVerLocalidadCiudadano" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="LOCALIDADES OBRA"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink value="X" id="esconder_panelVerLocalidadCiudadano" styleClass="ikont-hcl-esconder" 
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelVerLocalidadCiudadano')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <rich:panel>
+
+            <h:panelGrid  width="95%" >
+
+                <center>
+                       <h:panelGroup rendered="#{var.habilitacionLocalidadesBarrioVereda}">            
+                <h:panelGrid  width="95%" >
+                    <center> 
+                        <rich:dataTable id="tablaLocalidadBarrio" sortMode="single" styleClass="table-detalle"
+                                        value="#{Supervisor$AdministrarObraNew.listaBarrios}" rows="8"
+                                        rendered="#{Supervisor$AdministrarObraNew.obra.lugarobra.intidlugarobra==1}">
+                            <f:facet name="header">
+                                <h:outputLabel value="#{var.localidadesobra}" id="localidadesobra" styleClass="ikont-hol-header"> 
+                                </h:outputLabel>
+                            </f:facet>                          
+                           
+                            <rich:column id="comuna"  width="120px">
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.comuna} " styleClass="ikont- "/>
+                                </f:facet>
+                                    <h:outputText id="st_serial1" value="#{row.comuna.strnombrecomuna}" styleClass="ikont- "/>  
+                            </rich:column>
+
+                            <rich:column id="barrio"  width="120px" >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.barrio}" styleClass="ikont- "/>
+                                </f:facet>
+                                <h:outputText id="st_direccion2" value="#{row.strnombrebarrio}" styleClass="ikont- " />
+                            </rich:column>             
+                          
+
+                        </rich:dataTable>
+                        
+                        <rich:dataTable id="tablaLocalidadVereda" sortMode="single" style="text-align:left;" styleClass="table-detalle"
+                                        value="#{Supervisor$AdministrarObraNew.listaVeredas}"
+                                        var="row"
+                                        rendered="#{Supervisor$AdministrarObraNew.obra.lugarobra.intidlugarobra==2}">
+                            <f:facet name="header">
+                                <h:outputLabel value="#{var.localidadesobra}" styleClass="ikont-hol-localidadesobra"> 
+                                </h:outputLabel>
+                            </f:facet>                          
+                                                   
+                             <rich:column id="corregimiento"  width="120px" >
+                                <f:facet name="header" >
+                                    <h:outputText value="#{var.corregimiento}" styleClass="ikont- "/>
+                                </f:facet>
+                                <h:outputText id="st_serial" value="#{row.corregimiento.strnombrecorregimiento}" styleClass="ikont- "/>
+                            </rich:column>
+
+                            <rich:column id="vereda"  width="120px" >
+                                <f:facet name="header">
+                                    <h:outputText value="#{var.vereda}" styleClass="ikont- "/>
+                                </f:facet>
+                                <h:outputText id="st_direccion3" value="#{row.strnombrevereda}" styleClass="ikont- "/>
+                            </rich:column>
+                        </rich:dataTable>
+
+                    </center>
+                </h:panelGrid>
+            </h:panelGroup> 
+
+                </center>
+        </h:panelGrid>
+      </rich:panel>
+    <rich:hotKey key="esc"/>
+    </rich:popupPanel>
+    </ui:composition>

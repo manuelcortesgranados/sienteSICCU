@@ -119,8 +119,8 @@
 
                                                         </h:panelGrid>
                                                         <h:panelGrid >
-                                                            <h:commandButton styleClass="ikont-hcb-agregarmarcador"   value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}"  onclick="nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
-                                                            <h:commandButton styleClass="ikont-hcb-agregarmarcador1"   value="#{var.agregarmarcador}" onclick="return nuevoPuntoOnclick();" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
+                                                            <h:commandButton styleClass="ikont-hcb-agregarmarcador"   value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.nuevoPunto}"   rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada!=1}"/>
+                                                            <h:commandButton styleClass="ikont-hcb-agregarmarcador1"   value="#{var.agregarmarcador}" action="#{Supervisor$IngresarNuevaObra.obtenerPuntopordireccion}" rendered="#{Supervisor$IngresarNuevaObra.formaseleccionada==1}"/>
                                                         </h:panelGrid>
                                                     </h:panelGroup>
                                                 </h:panelGroup>
@@ -168,7 +168,7 @@
                                                     <f:facet name="header">
                                                         <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}" />
                                                     </f:facet>
-                                                    <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}"/>
+                                                    <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}" immediate="true"/>
                                                 </rich:column>
                                                 <f:facet name="footer">
                                                     <rich:dataScroller id="dsmar" for="datamarkers"/>
@@ -333,36 +333,6 @@
                     </rich:panel>
                 </td>
             </tr>
-        </table>
-         <script>
-            var geocoder = null;
-            function nuevoPuntoOnclick() {
-                    if(jQuery('.selectForma').val() === '1') {
-                    jQuery('.txtlatitudAdress').val('');
-                    jQuery('.txtlongitudAdress').val('');
-                    address = jQuery('.txtAddress').val();
-                        if(address !== '') {
-
-                        geocoder = new GClientGeocoder();
-                        if (geocoder) {
-                            alert('ingreso aqui geocoder');
-                            geocoder.getLatLng(
-                                    address,
-                                    function(point) {
-                                        if (!point) {
-                                            alert(address + " no fue encontrada");                                            
-                                        } else {
-                                            jQuery('.txtlatitudAdress').val(point.y);
-                                            jQuery('.txtlongitudAdress').val(point.x);
-                                            nuevoPsunto();
-                                        }
-                                    }
-                            );
-                        }
-                    }
-                }
-                return true;
-            }
-        </script>
+        </table>        
     </ui:define> 
 </ui:composition>

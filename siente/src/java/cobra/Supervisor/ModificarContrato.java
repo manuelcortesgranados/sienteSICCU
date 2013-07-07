@@ -36,7 +36,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo5
  */
-public class ModificarContrato implements Serializable{
+public class ModificarContrato implements Serializable {
 
     private Modificacioncontrato modificarcontrato = new Modificacioncontrato();
     private int cual = 1;
@@ -54,7 +54,24 @@ public class ModificarContrato implements Serializable{
     private BigDecimal valorModificadocontrato;
     private boolean permitirGuardar = false;
     StringBuilder renderVar = new StringBuilder("strcontrcontrato");
+    public boolean habilitarBtnModificarValor = true;
+    public boolean habilitarBtnGuardarCancelarValor = false;
 
+    public boolean isHabilitarBtnGuardarCancelarValor() {
+        return habilitarBtnGuardarCancelarValor;
+    }
+
+    public void setHabilitarBtnGuardarCancelarValor(boolean habilitarBtnGuardarCancelarValor) {
+        this.habilitarBtnGuardarCancelarValor = habilitarBtnGuardarCancelarValor;
+    }
+
+    public boolean isHabilitarBtnModificarValor() {
+        return habilitarBtnModificarValor;
+    }
+
+    public void setHabilitarBtnModificarValor(boolean habilitarBtnModificarValor) {
+        this.habilitarBtnModificarValor = habilitarBtnModificarValor;
+    }
 
     public BigDecimal getValorModificadocontrato() {
         return valorModificadocontrato;
@@ -362,6 +379,8 @@ public class ModificarContrato implements Serializable{
 //            if (getNuevoContratoBasico().getContrato().getContrato() != null) {
 //                 getSessionBeanCobra().getCobraService().guardarContrato(contratoModificado.getContrato());
 //            }
+                habilitarBtnGuardarCancelarValor = false;
+                habilitarBtnModificarValor = true;
                 FacesUtils.addInfoMessage("Por favor Ingrese Las Formas de Pago");
                 permitirGuardar = true;
 
@@ -605,7 +624,7 @@ public class ModificarContrato implements Serializable{
     }
 
     private String limpiarModificarContrato() {
-        
+
         modificarcontrato = new Modificacioncontrato();
         modificarcontrato.setNumnuevorecursosch(getNuevoContratoBasico().getContrato().getNumrecursosch());
         modificarcontrato.setNumnuevorecursospropios(getNuevoContratoBasico().getContrato().getNumrecursospropios());
@@ -785,10 +804,10 @@ public class ModificarContrato implements Serializable{
         return "consultarContrato";
     }
 
-    public String llenarDocumentosModifContrato(int filaSeleccionada) {    
-       NuevoContratoBasico contratobasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-       contratobasico.getListaModificarContrato().get(filaSeleccionada);
-       Modificacioncontrato modi = contratobasico.getListaModificarContrato().get(filaSeleccionada);
+    public String llenarDocumentosModifContrato(int filaSeleccionada) {
+        NuevoContratoBasico contratobasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        contratobasico.getListaModificarContrato().get(filaSeleccionada);
+        Modificacioncontrato modi = contratobasico.getListaModificarContrato().get(filaSeleccionada);
         listadocuModifContrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxModificacionContrato(modi);
         return null;
     }
@@ -803,7 +822,7 @@ public class ModificarContrato implements Serializable{
     public String bt_download_documento_action(int filaSeleccionada) {
         ModificarContrato modificarContrato = (ModificarContrato) FacesUtils.getManagedBean("Supervisor$ModificarContrato");
         Documentoobra documentoObra = modificarContrato.getListadocuModifContrato().get(filaSeleccionada);
-        
+
         getSessionBeanCobra().setUrlAbri(documentoObra.getStrubicacion());
 
         try {
@@ -854,6 +873,18 @@ public class ModificarContrato implements Serializable{
         this.permitirGuardar = permitirGuardar;
     }
 
+    /**
+     * metodo que se encarga de verificar si el valor a modificar del contrato
+     * es valido.
+     */
+    public void habilitarBotonModificarValor() {
+        habilitarBtnGuardarCancelarValor = true;
+        habilitarBtnModificarValor = false;
+        permitirGuardar = false;
+    }
 
-
+    public void cancelarModificacionValor() {
+        habilitarBtnGuardarCancelarValor = false;
+        habilitarBtnModificarValor = true;
+    }
 }

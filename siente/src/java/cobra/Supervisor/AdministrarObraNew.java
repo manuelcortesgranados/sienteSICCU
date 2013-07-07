@@ -4,6 +4,7 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.to.Barrio;
 import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -22,6 +23,7 @@ import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.to.Tipoimagen;
 import co.com.interkont.cobra.to.Tipoinforme;
 import co.com.interkont.cobra.to.Tiponovedad;
+import co.com.interkont.cobra.to.Vereda;
 import co.com.interkont.cobra.to.Videoevolucionobra;
 import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.ArchivoWeb;
@@ -89,6 +91,8 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private List<Tipodocumento> listaTipoDocumento;
     private Documentoobra documentoobraEd = new Documentoobra();
     private Documentoobra documentoobraEl = new Documentoobra();
+    private Barrio barrio = new Barrio();
+    private Vereda vereda = new Vereda();
     /**
      * Objeto utilizado para subir los archivos relacionados a la modificacion
      */
@@ -152,7 +156,30 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     private int cantidadColumnas = 3;
     public boolean btn_habilitarModificarObjeto = true;
     public boolean modificarObjetoObra = false;
+    private List<Barrio> listaBarrios = new ArrayList<Barrio>();
+    private List<Vereda> listaVeredas = new ArrayList<Vereda>();
 
+    public List<Barrio> getListaBarrios() {
+        for (Barrio documentoobra1 : listaBarrios) {
+            System.out.println("documentoobra1 Barrios = " + documentoobra1.getStrnombrebarrio());
+        }
+         System.out.println("gfdgfdgdfgfdgd" + listaBarrios);
+        return listaBarrios;
+    }
+
+    public void setListaBarrios(List<Barrio> listaBarrios) {
+        this.listaBarrios = listaBarrios;
+    }
+
+    public List<Vereda> getListaVeredas() {
+        return listaVeredas;
+    }
+
+    public void setListaVeredas(List<Vereda> listaVeredas) {
+        this.listaVeredas = listaVeredas;
+    }
+    
+    
     public int getCantidadColumnas() {
 
         if (listaVideoObra.size() < 3) {
@@ -2153,4 +2180,27 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     public void setNombreImpactoSocial(String nombreImpactoSocial) {
         this.nombreImpactoSocial = nombreImpactoSocial;
     }
+
+    public Barrio getBarrio() {
+        return barrio;
+    }
+
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
+    }
+
+    public Vereda getVereda() {
+        return vereda;
+    }
+
+    public void setVereda(Vereda vereda) {
+        this.vereda = vereda;
+    }
+    public String llenarLocalidadesBarrioVereda() {
+
+        getListaBarrios().addAll(getSessionBeanCobra().getCobraService().obtenerBarriosObra(getObra()));
+        getListaVeredas().addAll(getSessionBeanCobra().getCobraService().obtenerVeredasObra(getObra()));
+        return null;
+    }
+    
 }

@@ -64,7 +64,7 @@
                             <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
-                                        <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}" styleClass="ikont-"   >
+                                        <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                             <f:convertNumber pattern="$ ###,###" />
                                         </h:outputText>
                                     </h:panelGrid>
@@ -78,13 +78,13 @@
 
                                 <h:outputText  styleClass="ikont- "   value="desde"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" >
+                                <h:outputText  styleClass="ikont- "  value="#{Supervisor$Contrato.contrato.datefechaini}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
 
                                 <h:outputText  styleClass="ikont- "   value="#{var.diashasta}"  />
 
-                                <h:outputText  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" >
+                                <h:outputText  styleClass="ikont- "  value="#{Supervisor$Contrato.contrato.datefechafin}" >
                                     <f:convertDateTime pattern="yyyy-MMM-dd" />
                                 </h:outputText>
                             </h:panelGrid>
@@ -159,7 +159,7 @@
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
-                                            <h:outputText  styleClass="ikont- "   id="txtNumero" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
+                                            <h:outputText  styleClass="ikont- "   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificarNumero" rendered="#{Supervisor$Contrato.habilitarGuardarNumeroContrato}">
@@ -182,7 +182,7 @@
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strnumContrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
+                                    <h:outputLabel  styleClass="ikont- "   id="strnumContrato"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarNumeroContrato}" />
                                     <h:outputLabel  styleClass="ikont- "   id="txtobjeto"  value="#{var.objeto} #{Supervisor$Contrato.tipoContCon}:" />
 
                                     <interkont:spacer width="20" />                                        
@@ -196,7 +196,7 @@
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </h:commandLink>
 
-                                            <h:outputText  styleClass="ikont- "   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
+                                            <h:outputText   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificar" rendered="#{Supervisor$Contrato.modificartxt}">
@@ -217,7 +217,7 @@
                                         </h:panelGroup>
                                     </h:panelGroup>
 
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel    styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
                                     <h:outputText  styleClass="ikont- "   value="#{var.vigenciacontrato}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
 
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.periodoevento.intidperiodoevento>=1}" />
@@ -228,7 +228,7 @@
                                     <interkont:spacer width="20" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
 
                                     <h:outputLabel  styleClass="ikont- "   value="#{Supervisor$Contrato.contrato.modalidadcontratista.strdescripcionmodalidad}" rendered="#{var.aplicaContralorias and Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista>=1}" />
-                                    <h:outputLabel  styleClass="ikont- "   styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
+                                    <h:outputLabel  styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}" />
 
                                     <interkont:spacer width="20" />
 
@@ -237,29 +237,29 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcontrcontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
+                                    <h:outputLabel   id="strcontrcontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.contratista.strnombre} #{Supervisor$Contrato.contrato.contratista.strapellido1}" />
                                     <h:outputLabel  styleClass="ikont- "   id="fecsus" value="#{var.fechasus}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
+                                    <h:outputLabel    id="strfecsuscontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechaini}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="fecfin"  value="#{var.fechafinalizacion}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfecfincontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" />
+                                    <h:outputLabel    id="strfecfincontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.datefechafin}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="formapago" value="#{var.formadepago}" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strfrmapagocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
+                                    <h:outputLabel    id="strfrmapagocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.formapago.strdescformapago}" />
                                     <h:outputText  styleClass="ikont- "   id="lblnumrecursospropios" value="#{var.numrecursospropios} (Entidad Contratante):" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
+                                    <h:outputLabel   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -277,7 +277,7 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
+                                    <h:outputLabel     id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -295,7 +295,7 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
+                                    <h:outputLabel    id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -319,14 +319,14 @@
                                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.actualizarEntidadContrato}" />
                                         </rich:inplaceSelect>
 
-                                        <h:outputLabel  styleClass="ikont- "   id="entiodadcontratantevalue" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
+                                        <h:outputLabel    id="entiodadcontratantevalue" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
                                     </h:panelGrid>
 
                                     <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strcostocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                    <h:outputLabel    id="strcostocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -334,7 +334,7 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel  styleClass="ikont- "   id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
+                                    <h:outputLabel    id="strdispocontrato" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.numvlrcontrato-(Supervisor$Contrato.contrato.numvlrsumahijos+Supervisor$Contrato.contrato.numvlrsumaproyectos)}">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
@@ -501,7 +501,7 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.tipoPolizaContrato}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strTipoPoliza" styleClass="ikont-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                        <h:outputText   id="otxt-strTipoPoliza" styleClass="ikont-"   value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                     </rich:column>
 
                                     <rich:column id="tc-strnumPolizaContrato1" width="100px">

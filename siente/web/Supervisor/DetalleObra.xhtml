@@ -1291,6 +1291,10 @@
                                             <h:outputLabel  styleClass="ikont-hol-strmunicipio"   id="strmunicipio" rendered="#{Supervisor$AdministrarObraNew.sede}" value="#{var.municipio}"  />
                                             <interkont:spacer width="20" rendered="#{Supervisor$AdministrarObraNew.sede}"/>
                                             <h:outputLabel  styleClass="ikont-hol-strMunicipioOut"   id="strMunicipioOut"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
+                                            <h:panelGroup>
+                                                <h:commandButton styleClass="ikont-hcb-btnlocalidadubicacion" value="Ver localidades" 
+                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano')}.show(); return false;" />
+                                            </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGrid>
 
@@ -1394,6 +1398,7 @@
                 <ui:include src="/modal/modalImagenes_info.xhtml"/>
                 <ui:include src="/modal/dificultadModalDetalle.xhtml"/>
                 <ui:include src="/modal/logrosModalDetalle.xhtml"/>
+                <ui:include src="/modal/modalLocalidadCiudadano.xhtml"/>
             </h:panelGroup>
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/reloj.js"/>
 

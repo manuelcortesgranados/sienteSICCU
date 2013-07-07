@@ -87,11 +87,11 @@
                                     </h:commandLink>
                                 </label>
                             </div></div></td>
-                    <td><a4j:commandLink styleClass="ikont-acl-busquedaavanzada"   render="gppanelFiltroAvanzado" value="#{var.houtbusquedaavanza}" execute="@this" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                         oncomplete="#{rich:component('panelFiltroAvanzado')}.show();return true;"/>
+                    <td><h:commandButton styleClass="ikont-acl-busquedaavanzada"  value="#{var.houtbusquedaavanza}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
+                                     onclick="#{rich:component('panelFiltroAvanzado')}.show(); return false;" /> 
 
-                        <a4j:commandLink styleClass="ikont-acl-btnfiltrociudadano"   render="gppanelFiltroAvanzado" execute="@this" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
-                                         oncomplete="#{rich:component('panelFiltroAvanzadoCiud')}.show();return true;"/>
+                        <h:commandButton styleClass="ikont-acl-btnfiltrociudadano" value="#{var.filtrar}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
+                                         onclick="#{rich:component('panelFiltroAvanzadoCiud')}.show();return false;"/>
 
 
                     </td>
