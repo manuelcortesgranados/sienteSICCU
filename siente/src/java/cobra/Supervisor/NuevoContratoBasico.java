@@ -12,6 +12,7 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Encargofiduciario;
 import co.com.interkont.cobra.to.EstadoCivil;
+import co.com.interkont.cobra.to.Estadoconvenio;
 import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
 import co.com.interkont.cobra.to.Formapago;
@@ -2566,12 +2567,13 @@ public class NuevoContratoBasico implements Serializable {
                     contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
                     contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
                     contrato.setIntcantproyectos(0);
+                    contrato.setEstadoconvenio(new Estadoconvenio (2));
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
                     }
                     if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")) {
                         contrato.setModalidadcontratista(null);
-                    }
+                    }                    
                     //contrato.setContrato(null);
 //                        if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
 //                            contrato.setEncargofiduciario(null);
