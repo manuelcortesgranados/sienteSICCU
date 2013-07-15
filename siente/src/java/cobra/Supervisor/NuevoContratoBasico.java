@@ -729,7 +729,7 @@ public class NuevoContratoBasico implements Serializable {
     /**
      * Objeto para acceder a los atributos de modalidadcontratista
      */
-    private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
+    private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();   
 
     public Modalidadcontratista getModalidadcontratista() {
         return modalidadcontratista;
@@ -738,7 +738,7 @@ public class NuevoContratoBasico implements Serializable {
     public void setModalidadcontratista(Modalidadcontratista modalidadcontratista) {
         this.modalidadcontratista = modalidadcontratista;
     }
-
+    
     /**
      * Variable para mostrar la modalidad seleccionada por el contratista
      */
@@ -802,8 +802,8 @@ public class NuevoContratoBasico implements Serializable {
     public void setHabilitarBtnGuardarCancelarContrato(boolean habilitarBtnGuardarCancelarContrato) {
         this.habilitarBtnGuardarCancelarContrato = habilitarBtnGuardarCancelarContrato;
     }
-
     
+
     public boolean isHabilitarModificarNumero() {
         return habilitarModificarNumero;
     }
@@ -2153,6 +2153,7 @@ public class NuevoContratoBasico implements Serializable {
         if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
             llenarModalidadContratista();
         }
+        llenarEstadoConvenio();
 
     }
 
@@ -2223,7 +2224,7 @@ public class NuevoContratoBasico implements Serializable {
      * Dependiendo si es contrato o convenio se seta la variable y se inicializa
      * el paginador para el llenado de los contratos por entidades
      */
-    public void comboEntidadesContrato() {
+    public void comboEntidadesContrato() {  
         if (tipoContCon.compareTo("Convenio") == 0) {
             filtrocontrato.setRaiz(true);
         } else {
@@ -2473,7 +2474,27 @@ public class NuevoContratoBasico implements Serializable {
 
                 case 3://Acta unica
                     if (bundle.getString("fechaformapago").equals("true")) {
-                    if (planificacionpago.getDatefechapago() != null) {
+                        if (planificacionpago.getDatefechapago() != null) {
+                            planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
+                            planificacionpago.setStrdescripcion("");
+                            planificacionpago.setBoolactivo(true);
+                            planificacionpago.setBoolrealizado(false);
+                            planificacionpago.setDateusucreacion(new Date());
+                            planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                            planificacionpago.setContrato(contrato);
+                            //setplani.add(planificacionpago);
+                            planificacionpago.setNumvlrporcentage(new BigDecimal(100));
+                            contrato.setPlanificacionpagos(new LinkedHashSet());
+                            contrato.getPlanificacionpagos().add(planificacionpago);
+
+                            return true;
+                        } else {
+                            if (bundle.getString("fechaformapago").equals("true")) {
+                                FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
+                                return false;
+                            }
+                        }
+                    } else {
                         planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
                         planificacionpago.setStrdescripcion("");
                         planificacionpago.setBoolactivo(true);
@@ -2481,33 +2502,13 @@ public class NuevoContratoBasico implements Serializable {
                         planificacionpago.setDateusucreacion(new Date());
                         planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                         planificacionpago.setContrato(contrato);
+                        planificacionpago.setDatefechapago(contrato.getDatefechaini());
                         //setplani.add(planificacionpago);
                         planificacionpago.setNumvlrporcentage(new BigDecimal(100));
                         contrato.setPlanificacionpagos(new LinkedHashSet());
                         contrato.getPlanificacionpagos().add(planificacionpago);
-
                         return true;
-                    } else {
-                        if (bundle.getString("fechaformapago").equals("true")) {
-                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
-                            return false;
-                        }
                     }
-                } else {
-                    planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
-                    planificacionpago.setStrdescripcion("");
-                    planificacionpago.setBoolactivo(true);
-                    planificacionpago.setBoolrealizado(false);
-                    planificacionpago.setDateusucreacion(new Date());
-                    planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
-                    planificacionpago.setContrato(contrato);
-                    planificacionpago.setDatefechapago(contrato.getDatefechaini());
-                    //setplani.add(planificacionpago);
-                    planificacionpago.setNumvlrporcentage(new BigDecimal(100));
-                    contrato.setPlanificacionpagos(new LinkedHashSet());
-                    contrato.getPlanificacionpagos().add(planificacionpago);
-                    return true;
-                }
             }
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar la forma de pago.");
@@ -2575,7 +2576,7 @@ public class NuevoContratoBasico implements Serializable {
                     }
                     if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("false")) {
                         contrato.setModalidadcontratista(null);
-                    }                    
+                    }
                     //contrato.setContrato(null);
 //                        if (contrato.getEncargofiduciario().getIntnumencargofiduciario() == 0) {
 //                            contrato.setEncargofiduciario(null);
@@ -4348,9 +4349,9 @@ public class NuevoContratoBasico implements Serializable {
 //        if (aplicafiltrocontrato) {
 
         if (comboEntidadesContratoguardar()) {
-            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
-            totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);
-            //        } else {
+                listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+                totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+                //        } else {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), 0, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
@@ -4632,6 +4633,7 @@ public class NuevoContratoBasico implements Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
+        filtrocontrato.getEstadoConvenio();
         limpiarContrato();
         primeroDetcontrato();
         return "consultarContratoConvenio";
@@ -5881,6 +5883,32 @@ public class NuevoContratoBasico implements Serializable {
      * Llena el combo de modalidad de contratista.
      */
     private List<Modalidadcontratista> listModalidadContratista;
+    /**
+     * Llena el Estado del convenio
+     */
+    private List<Estadoconvenio> listEstadoConvenio;
+    /**
+     * Select item listaestadoconvenio
+     *
+     * @return
+     */
+    SelectItem[] estadoConvenioOption;
+
+     public SelectItem[] getEstadoConvenioOption() {
+        return estadoConvenioOption;
+    }
+
+    public void setEstadoConvenioOption(SelectItem[] estadoConvenioOption) {
+        this.estadoConvenioOption = estadoConvenioOption;
+    }
+
+    public List<Estadoconvenio> getListEstadoConvenio() {
+        return listEstadoConvenio;
+    }
+
+    public void setListEstadoConvenio(List<Estadoconvenio> listEstadoConvenio) {
+        this.listEstadoConvenio = listEstadoConvenio;
+    }
 
     public List<Modalidadcontratista> getListModalidadContratista() {
         return listModalidadContratista;
@@ -5902,6 +5930,7 @@ public class NuevoContratoBasico implements Serializable {
             modalidadContratista[i++] = itModalidad;
         }
     }
+
 public String irApaginaconvenio() {
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
             return "nuevoConvenioPo";
@@ -5931,6 +5960,22 @@ public String irApaginaconvenio() {
     public void actualizarPanel(int panelPantalla){
         this.panelPantalla=panelPantalla;
         System.out.println("panelPantalla = " + panelPantalla);
+    }
+
+
+/**
+ * Metodo que llena los estados del convenio
+ * @return  void
+ */
+    public void llenarEstadoConvenio() {
+        listEstadoConvenio = getSessionBeanCobra().getCobraService().encontrarEstadoConvenio();
+        estadoConvenioOption = new SelectItem[listEstadoConvenio.size()];
+        int i = 0;
+        for (Estadoconvenio estado : listEstadoConvenio) {
+            SelectItem itEstado = new SelectItem(estado.getIdestadoconvenio(), estado.getStrestadoconv());
+            estadoConvenioOption[i++] = itEstado;
+        }
+        
     }
 
 }
