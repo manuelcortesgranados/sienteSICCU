@@ -21,8 +21,8 @@
 
     <ui:define name="title">
         <h:form>  
-            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hcl-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true" execute="@this"/>
+            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
@@ -66,6 +66,12 @@
                 </rich:panel>
 
             </a4j:region>
+            
+            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" immediate="true" />
+                <a4j:commandLink value="#{var.guardarbo}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" immediate="true" />
+                     
+            </h:panelGrid>
 
         </h:form>
 

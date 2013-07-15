@@ -729,7 +729,7 @@ public class NuevoContratoBasico implements Serializable {
     /**
      * Objeto para acceder a los atributos de modalidadcontratista
      */
-    private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();   
+    private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
 
     public Modalidadcontratista getModalidadcontratista() {
         return modalidadcontratista;
@@ -738,7 +738,6 @@ public class NuevoContratoBasico implements Serializable {
     public void setModalidadcontratista(Modalidadcontratista modalidadcontratista) {
         this.modalidadcontratista = modalidadcontratista;
     }
-    
     /**
      * Variable para mostrar la modalidad seleccionada por el contratista
      */
@@ -767,7 +766,6 @@ public class NuevoContratoBasico implements Serializable {
      * Variable para habilitar El boton Guardar
      */
     public boolean habilitarGuardarNumeroContrato = false;
-
     public boolean habilitarModificarTxtObjeto = true;
     /**
      * Variable para habilitar el boton modificar Objeto contrato
@@ -778,7 +776,6 @@ public class NuevoContratoBasico implements Serializable {
      */
     private boolean habilitarBtnGuardarCancelarContrato = false;
 
-
     /**
      *
      */
@@ -786,7 +783,6 @@ public class NuevoContratoBasico implements Serializable {
      * Set y get de todas las variables anteriores
      *
      */
-    
     public boolean isHabilitarBtnModificarcontrato() {
         return habilitarBtnModificarcontrato;
     }
@@ -802,7 +798,6 @@ public class NuevoContratoBasico implements Serializable {
     public void setHabilitarBtnGuardarCancelarContrato(boolean habilitarBtnGuardarCancelarContrato) {
         this.habilitarBtnGuardarCancelarContrato = habilitarBtnGuardarCancelarContrato;
     }
-    
 
     public boolean isHabilitarModificarNumero() {
         return habilitarModificarNumero;
@@ -2130,13 +2125,12 @@ public class NuevoContratoBasico implements Serializable {
      */
     private void _init() throws Exception {
     }
-
     // </editor-fold>
     /**
      * <p>Construct a new Page bean instance.</p>
      */
     private int panelPantalla;
-    
+
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
@@ -2172,6 +2166,7 @@ public class NuevoContratoBasico implements Serializable {
         llenarFormaPago();
         return null;
     }
+
     /**
      * Se buscan las pólizas asociadas al contrato y se llenan en el consultar
      * del contrato
@@ -2224,7 +2219,7 @@ public class NuevoContratoBasico implements Serializable {
      * Dependiendo si es contrato o convenio se seta la variable y se inicializa
      * el paginador para el llenado de los contratos por entidades
      */
-    public void comboEntidadesContrato() {  
+    public void comboEntidadesContrato() {
         if (tipoContCon.compareTo("Convenio") == 0) {
             filtrocontrato.setRaiz(true);
         } else {
@@ -2570,7 +2565,7 @@ public class NuevoContratoBasico implements Serializable {
                     contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
                     contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
                     contrato.setIntcantproyectos(0);
-                    contrato.setEstadoconvenio(new Estadoconvenio (2));
+                    contrato.setEstadoconvenio(new Estadoconvenio(2));
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
                     }
@@ -2629,8 +2624,7 @@ public class NuevoContratoBasico implements Serializable {
         getSessionBeanCobra().getCobraService().guardarContrato(contrato);
         for (Documentoobra docContrato : listadocumentos) {
             try {
-                String nuevaRutaWeb
-                        = ArchivoWebUtil.copiarArchivo(
+                String nuevaRutaWeb = ArchivoWebUtil.copiarArchivo(
                         docContrato.getStrubicacion(),
                         MessageFormat.format(RutasWebArchivos.DOCS_CONTRATO, "" + getContrato().getIntidcontrato()),
                         true, false);
@@ -4349,9 +4343,9 @@ public class NuevoContratoBasico implements Serializable {
 //        if (aplicafiltrocontrato) {
 
         if (comboEntidadesContratoguardar()) {
-                listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
-                totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);
-                //        } else {
+            listacontratos = getSessionBeanCobra().getCobraService().filtroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato, 0, 5);
+            totalfilas = getSessionBeanCobra().getCobraService().cantidadfFiltroAvanzadoContratoContratante(getContrato().getTercero().getIntcodigo(), filtrocontrato);
+            //        } else {
 //            listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getContrato().getTercero().getIntcodigo(), 0, 5, filtro);
 //            totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getContrato().getTercero().getIntcodigo(), filtro);
 //        }
@@ -5845,6 +5839,7 @@ public class NuevoContratoBasico implements Serializable {
         habilitarModificarNumero = true;
         habilitarGuardarNumeroContrato = false;
     }
+
     /**
      * Metodo Utilizado para habilitar los botones de Guardar y cancelar el
      * objeto del contrato
@@ -5878,7 +5873,6 @@ public class NuevoContratoBasico implements Serializable {
         habilitarBtnModificarcontrato = true;
         habilitarBtnGuardarCancelarContrato = false;
     }
-
     /**
      * Llena el combo de modalidad de contratista.
      */
@@ -5894,7 +5888,7 @@ public class NuevoContratoBasico implements Serializable {
      */
     SelectItem[] estadoConvenioOption;
 
-     public SelectItem[] getEstadoConvenioOption() {
+    public SelectItem[] getEstadoConvenioOption() {
         return estadoConvenioOption;
     }
 
@@ -5931,7 +5925,7 @@ public class NuevoContratoBasico implements Serializable {
         }
     }
 
-public String irApaginaconvenio() {
+    public String irApaginaconvenio() {
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
             return "nuevoConvenioPo";
         }
@@ -5951,22 +5945,21 @@ public String irApaginaconvenio() {
     public void setPanelPantalla(int panelPantalla) {
         this.panelPantalla = panelPantalla;
     }
-    
-      
+
     /*
-    * metodo que se encarga de actualizar el panel actual de la pantalla
-    * @param panelPantalla int
-    */
-    public void actualizarPanel(int panelPantalla){
-        this.panelPantalla=panelPantalla;
+     * metodo que se encarga de actualizar el panel actual de la pantalla
+     * @param panelPantalla int
+     */
+    public void actualizarPanel(int panelPantalla) {
+        this.panelPantalla = panelPantalla;
         System.out.println("panelPantalla = " + panelPantalla);
     }
 
-
-/**
- * Metodo que llena los estados del convenio
- * @return  void
- */
+    /**
+     * Metodo que llena los estados del convenio
+     *
+     * @return void
+     */
     public void llenarEstadoConvenio() {
         listEstadoConvenio = getSessionBeanCobra().getCobraService().encontrarEstadoConvenio();
         estadoConvenioOption = new SelectItem[listEstadoConvenio.size()];
@@ -5975,7 +5968,24 @@ public String irApaginaconvenio() {
             SelectItem itEstado = new SelectItem(estado.getIdestadoconvenio(), estado.getStrestadoconv());
             estadoConvenioOption[i++] = itEstado;
         }
-        
-    }
 
+    }
+    
+     /*
+     *metodo que se encarga de guardar el convenio
+     * en estado en estructuración.
+     * 
+     */    
+    public void guardarBorradorConvenio(){
+    
+    }
+    
+     /*
+     *metodo que se encarga de guardar el convenio
+     * en estado en ejecución.
+     * 
+     */ 
+    public void finalizarGuardado(){
+    
+    }
 }
