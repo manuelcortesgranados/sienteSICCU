@@ -620,6 +620,10 @@
             <from-outcome>nuevoContrato</from-outcome>
             <to-view-id>/Supervisor/NuevoContratoBasico.xhtml</to-view-id>
         </navigation-case>
+          <navigation-case>
+            <from-outcome>nuevoConvenioPo</from-outcome>
+            <to-view-id>/Supervisor/nuevoContratoPlanOperativo.xhtml</to-view-id>
+        </navigation-case>
         <navigation-case>
             <from-outcome>modificarContrato</from-outcome>
             <to-view-id>/Supervisor/ModificarContrato.xhtml</to-view-id>

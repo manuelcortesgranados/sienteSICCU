@@ -2135,6 +2135,8 @@ public class NuevoContratoBasico implements Serializable {
     /**
      * <p>Construct a new Page bean instance.</p>
      */
+    private int panelPantalla;
+    
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
@@ -5899,6 +5901,36 @@ public class NuevoContratoBasico implements Serializable {
             }
             modalidadContratista[i++] = itModalidad;
         }
+    }
+public String irApaginaconvenio() {
+        if (Propiedad.getValor("conplanoperativo").equals("true")) {
+            return "nuevoConvenioPo";
+        }
+        return "nuevoContrato";
+    }
+
+    /**
+     * @return the panelPantalla
+     */
+    public int getPanelPantalla() {
+        return panelPantalla;
+    }
+
+    /**
+     * @param panelPantalla the panelPantalla to set
+     */
+    public void setPanelPantalla(int panelPantalla) {
+        this.panelPantalla = panelPantalla;
+    }
+    
+      
+    /*
+    * metodo que se encarga de actualizar el panel actual de la pantalla
+    * @param panelPantalla int
+    */
+    public void actualizarPanel(int panelPantalla){
+        this.panelPantalla=panelPantalla;
+        System.out.println("panelPantalla = " + panelPantalla);
     }
 
 }

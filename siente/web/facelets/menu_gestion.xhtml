@@ -208,7 +208,7 @@
 
             <rich:menuGroup label="Convenio" icon="/resources/imgs/bt_convenio.png" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}">
                 <rich:menuItem  label="Nuevo" icon="/resources/imgs/bt_nuevo.png"
-                                actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"/>
+                                actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="#{Supervisor$Contrato.irApaginaconvenio}" immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"/>
                 <rich:menuItem  label="Consultar" icon="/resources/imgs/bt_consultar.png"
                                 action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>
             </rich:menuGroup>

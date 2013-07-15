@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../facelets/template_main.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich">
+
+    <ui:define name="head">
+        head
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:form>  
+            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hcl-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true" execute="@this"/>
+                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="frmpanelgeneral">
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
+                <rich:panel style="width: 700px;height:400px;">
+                    datos basicos
+                </rich:panel>
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo">
+                <rich:panel style="width:700px;height:400px;">
+                    plan operativo
+                </rich:panel>                
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==3}" id="reg-polizas">
+                <rich:panel style="width:700px;height:400px;">
+                    polizas
+                </rich:panel>
+
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==4}" id="reg-formas-pago">
+                <rich:panel style="width:700px;height:400px;">
+                    forma pago
+                </rich:panel>
+
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==5}" id="reg-documentos">
+                <rich:panel style="width: 700px;height:400px;">
+                    documentos
+                </rich:panel>
+
+            </a4j:region>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
