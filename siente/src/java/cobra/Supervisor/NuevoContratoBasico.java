@@ -16,6 +16,7 @@ import co.com.interkont.cobra.to.Estadoconvenio;
 import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
 import co.com.interkont.cobra.to.Formapago;
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Genero;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Modalidadcontratista;
@@ -26,6 +27,7 @@ import co.com.interkont.cobra.to.Ordendepago;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Planificacionpago;
 import co.com.interkont.cobra.to.Polizacontrato;
+import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import co.com.interkont.cobra.to.Tipocontratoconsultoria;
@@ -56,10 +58,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -775,6 +779,23 @@ public class NuevoContratoBasico implements Serializable {
      * Variable para habilitar los botones para modificar el objeto del contrato
      */
     private boolean habilitarBtnGuardarCancelarContrato = false;
+    /*
+     * variables para realizar la carga de las entidades 
+     */
+    private SelectItem[] entidades;
+    /*
+     * variables para realizar la carga de los gerentes de convenio
+     */
+    private SelectItem[] gerentesDeConvenio;
+    /*
+     * variables para realizar la carga de los roles 
+     */
+    private SelectItem[] roles;
+    /*
+     * variables para realizar la carga del tipo de aporte
+     */
+    private SelectItem[] tipoAporte;
+    private String variabletitulo;
 
     /**
      *
@@ -2129,7 +2150,9 @@ public class NuevoContratoBasico implements Serializable {
     /**
      * <p>Construct a new Page bean instance.</p>
      */
+    /* variables para el funcionamiento del plan operativo*/
     private int panelPantalla;
+    Fuenterecursosconvenio fuenteRecursoConvenio;
 
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
@@ -2148,6 +2171,9 @@ public class NuevoContratoBasico implements Serializable {
             llenarModalidadContratista();
         }
         llenarEstadoConvenio();
+
+        fuenteRecursoConvenio = new Fuenterecursosconvenio();
+        variabletitulo = Propiedad.getValor("primerodatosbasicos");
 
     }
 
@@ -5927,6 +5953,7 @@ public class NuevoContratoBasico implements Serializable {
 
     public String irApaginaconvenio() {
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
+            panelPantalla = 1;
             return "nuevoConvenioPo";
         }
         return "nuevoContrato";
@@ -5952,7 +5979,25 @@ public class NuevoContratoBasico implements Serializable {
      */
     public void actualizarPanel(int panelPantalla) {
         this.panelPantalla = panelPantalla;
-        System.out.println("panelPantalla = " + panelPantalla);
+        switch (panelPantalla) {
+            case 1:
+                variabletitulo = Propiedad.getValor("primerodatosbasicos");
+                break;
+            case 2:
+                variabletitulo = Propiedad.getValor("segundoplanoperativo");
+                break;
+            case 3:
+                variabletitulo = Propiedad.getValor("terceropolizas");
+                break;
+            case 4:
+                variabletitulo = Propiedad.getValor("cuartoformapago");
+                break;
+            case 5:
+                variabletitulo = Propiedad.getValor("quintodocumento");
+                break;
+
+        }
+
     }
 
     /**
@@ -5970,22 +6015,172 @@ public class NuevoContratoBasico implements Serializable {
         }
 
     }
-    
-     /*
+
+    /*
      *metodo que se encarga de guardar el convenio
      * en estado en estructuración.
      * 
-     */    
-    public void guardarBorradorConvenio(){
-    
+     */
+    public void guardarBorradorConvenio() {
     }
-    
-     /*
+
+    /*
      *metodo que se encarga de guardar el convenio
      * en estado en ejecución.
      * 
-     */ 
-    public void finalizarGuardado(){
-    
+     */
+    public void finalizarGuardado() {
+    }
+
+    /*
+     *metodo que se encarga de adicionar una fuente de recurso a la
+     * fuente de recursos del convenio.
+     *      
+     */
+    public void adicionarFuenteRecursos() {
+        contrato.getFuenterecursosconvenios().add(fuenteRecursoConvenio);
+    }
+
+    /*
+     *metodo que se encarga de eliminar una fuente de recurso a las
+     * fuente de recursos del convenio.
+     *      
+     */
+    public void eliminarFuenteRecursos(int filaFuenteRecursoEliminar) {
+        int contador = 0;
+        for (Iterator i = contrato.getFuenterecursosconvenios().iterator(); i.hasNext();) {
+            if (contador == filaFuenteRecursoEliminar) {
+                Fuenterecursosconvenio fuenteRecursosEliminar = (Fuenterecursosconvenio) i.next();
+                contrato.getFuenterecursosconvenios().remove(fuenteRecursosEliminar);
+            } else {
+                contador++;
+            }
+        }
+    }
+
+    /*
+     *metodo que  carga las entidades de fonade en la lista de seleccion
+     *      
+     */
+    public void llenarEntidades() {
+        List<Tercero> lstentidades = new ArrayList<Tercero>();
+        lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
+        setEntidades(new SelectItem[lstentidades.size()]);
+        int i = 0;
+        for (Tercero tercero : lstentidades) {
+            SelectItem itTercero = new SelectItem(tercero, tercero.getStrnombrecompleto());
+            getEntidades()[i++] = itTercero;
+        }
+
+    }
+
+    /*
+     *metodo que  carga los roles de las entidades en la lista de seleccion
+     *      
+     */
+    public void llenarRoles() {
+        List<Rolentidad> lstRoles = new ArrayList<Rolentidad>();
+        lstRoles = getSessionBeanCobra().getCobraService().encontrarRolesEntidad();
+        setRoles(new SelectItem[lstRoles.size()]);
+        int i = 0;
+        for (Rolentidad rolEntidad : lstRoles) {
+            SelectItem itRolEntidad = new SelectItem(rolEntidad, rolEntidad.getStrnombre());
+            getRoles()[i++] = itRolEntidad;
+        }
+
+    }
+
+    /*
+     *metodo que  carga los tipos de aportes en la lista de seleccion
+     *      
+     */
+    public void llenarTipoAporte() {
+        setTipoAporte(new SelectItem[]{new SelectItem(1, "Porcentual"), new SelectItem(2, "Valor")});
+    }
+
+    /*
+     *metodo que  carga los tipos de aportes en la lista de seleccion
+     *      
+     */
+    public void llenarGerentes() {
+        List<Tercero> lstgerentesConvenio = new ArrayList<Tercero>();
+        lstgerentesConvenio = getSessionBeanCobra().getCobraService().encontrarGerentesConvenio();
+        setGerentesDeConvenio(new SelectItem[lstgerentesConvenio.size()]);
+        int i = 0;
+        for (Tercero gerenteConvenio : lstgerentesConvenio) {
+            SelectItem itGerenteConvenio = new SelectItem(gerenteConvenio, gerenteConvenio.getStrnombrecompleto());
+            getGerentesDeConvenio()[i++] = itGerenteConvenio;
+        }
+
+    }
+
+    /**
+     * @return the entidades
+     */
+    public SelectItem[] getEntidades() {
+        return entidades;
+    }
+
+    /**
+     * @param entidades the entidades to set
+     */
+    public void setEntidades(SelectItem[] entidades) {
+        this.entidades = entidades;
+    }
+
+    /**
+     * @return the gerentesDeConvenio
+     */
+    public SelectItem[] getGerentesDeConvenio() {
+        return gerentesDeConvenio;
+    }
+
+    /**
+     * @param gerentesDeConvenio the gerentesDeConvenio to set
+     */
+    public void setGerentesDeConvenio(SelectItem[] gerentesDeConvenio) {
+        this.gerentesDeConvenio = gerentesDeConvenio;
+    }
+
+    /**
+     * @return the roles
+     */
+    public SelectItem[] getRoles() {
+        return roles;
+    }
+
+    /**
+     * @param roles the roles to set
+     */
+    public void setRoles(SelectItem[] roles) {
+        this.roles = roles;
+    }
+
+    /**
+     * @return the tipoAporte
+     */
+    public SelectItem[] getTipoAporte() {
+        return tipoAporte;
+    }
+
+    /**
+     * @param tipoAporte the tipoAporte to set
+     */
+    public void setTipoAporte(SelectItem[] tipoAporte) {
+        this.tipoAporte = tipoAporte;
+    }
+
+    /**
+     * @return the variabletitulo
+     */
+    public String getVariabletitulo() {
+        return variabletitulo;
+    }
+
+    /**
+     * @param variabletitulo the variabletitulo to set
+     */
+    public void setVariabletitulo(String variabletitulo) {
+        this.variabletitulo = variabletitulo;
     }
 }
