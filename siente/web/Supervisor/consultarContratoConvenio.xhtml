@@ -37,7 +37,7 @@
                                     <label>
                                         <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave"  
                                                      onclick="this.value = '';"
-                                                     value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" />
+                                                     value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" />                                        
 
                                         <a4j:commandButton id="filtrar" value="#{var.buscar}" execute="@this, txtPalabraClave"
                                                            action="#{Supervisor$Contrato.buscarContrato}"
@@ -63,15 +63,28 @@
                                 <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
 
                                 <h:selectOneMenu 
-                                                 value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
-                                                 label="Ingrese una entidad" >
+                                    value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
+                                    label="Ingrese una entidad" >
                                     <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-                                    
+
                                     <a4j:ajax event="valueChange"
                                               listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                               render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                               execute="@this" />
-                                </h:selectOneMenu>
+                                </h:selectOneMenu>                                                             
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" rendered="#{var.boolestadoconvenio}">
+                                <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
+                                <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}"
+                                                 >
+                                    <f:selectItems value="#{Supervisor$Contrato.estadoConvenioOption}" />     
+                                    <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                    <a4j:ajax event="valueChange"
+                                              listener="#{Supervisor$Contrato.comboEntidadesContrato()}"
+                                              render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
+                                              execute="@this"/>
+                                </h:selectOneMenu>  
                             </h:panelGrid>
                         </h:panelGroup>
 
