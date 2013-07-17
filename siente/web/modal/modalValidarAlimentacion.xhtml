@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" 
-        xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
     <rich:popupPanel id="modalValidarAlimentacion"  width="500" autosized="true" headerClass="rich-panel-header" styleClass="ikont"   >
@@ -19,10 +19,11 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_modalValidarAlimentacion" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink value="X" id="esconder_modalValidarAlimentacion" styleClass="ikont-acl-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
-                                     onclick="#{rich:component('modalValidarAlimentacion')}.hide(); return false;"/>
-                       </h:panelGroup>
+                                     onclick="#{rich:component('modalValidarAlimentacion')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
             </h:form>
         </f:facet>
 
@@ -42,14 +43,14 @@
                     </h:selectOneMenu>                                    
                     <h:outputLabel  styleClass="ikont-hol-lblValidarAlimentacion"   id="lblValidarAlimentacion" value="#{var.observacionesProyecto}: "/>
                     <h:panelGrid>
-                    <h:inputTextarea id="validarAlimentacionArea" cols="35" rows="6" 
-                                     value="#{Supervisor$DetalleObra.valialiment.textobservacion}"  />
-                        
-                       </h:panelGrid>
+                        <h:inputTextarea id="validarAlimentacionArea" cols="35" rows="6" 
+                                         value="#{Supervisor$DetalleObra.valialiment.textobservacion}"  />
+
+                    </h:panelGrid>
                     <h:outputLabel  styleClass="ikont-hol-lbllistachequeo"   id="lbllistachequeo" value="#{var.listachequeo}"/>
 
                     <a4j:commandButton id="btnlistaverificar"  value="Lista de Verificacion"   action="#{Supervisor$DetalleObra.llenarListaverificacion}"
-                                        immediate="true"
+                                       immediate="true"
                                        oncomplete="#{rich:component('modalFormularioValidarAlimentacion')}.hide();" render="listarchequeo" />
 
 
@@ -59,19 +60,19 @@
                         <h:panelGrid columns="3" styleClass="ikont-hpg-p1"  >
                             <a4j:commandButton id="btnguardar" action="#{Supervisor$DetalleObra.guardarAprobacionAlimentacionSi}" value="#{var.guardar}" >
                                 <a4j:ajax event="complete" render="panelVali"
-                                             oncomplete="#{rich:component('modalValidarAlimentacion')}.hide();"/>
+                                          oncomplete="#{rich:component('modalValidarAlimentacion')}.hide();"/>
                             </a4j:commandButton>
                             <interkont:spacer width="5"/>
                             <a4j:commandButton id="btncancelar"  value="#{var.cancelar}"  >
                                 <a4j:ajax event="complete" render="panelVali"
-                                             oncomplete="#{rich:component('modalValidarAlimentacion')}.hide();"/>
+                                          oncomplete="#{rich:component('modalValidarAlimentacion')}.hide();"/>
                             </a4j:commandButton>
                         </h:panelGrid>                            
                     </h:panelGroup>
                 </center>
             </rich:panel>
-                <rich:panel rendered="#{!Supervisor$DetalleObra.permitirvalidar}">
-                    <center>
+            <rich:panel rendered="#{!Supervisor$DetalleObra.permitirvalidar}">
+                <center>
                     <h:panelGroup >
                         <h:panelGrid columns="3" styleClass="ikont-hpg-permitirvalidar"  >
                             <h:outputText  styleClass="ikont-hot-solipryapro"   value="El #{var.solicitudproyecto} ya fue aprobado en su último informe 100%"/>
@@ -81,8 +82,8 @@
                         </h:panelGrid>                            
                     </h:panelGroup>
                 </center>
-                    
-                </rich:panel>
+
+            </rich:panel>
         </h:form>
 
     </rich:popupPanel>

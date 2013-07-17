@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<rich:popupPanel id="panelCDP" autosized="true" headerClass="rich-panel-header">
+    <rich:popupPanel id="panelCDP" autosized="true" headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-selcdp"   value="#{var.seleccionarcdp}"/>
             </h:panelGroup>
         </f:facet>
-         <f:facet name="controls">
+        <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelCDP" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink value="X" id="esconder_panelCDP" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelCDP')}.hide();
                                              return false;"/>                   
                 </h:panelGroup>
@@ -28,14 +28,14 @@
                 <h:panelGroup id="layoutCDP">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}"
-                                         clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$IngresarNuevaObra.subirCDP.listener}"
-                                         id="uploadCDP"
-                                         immediateUpload="true"
-                                         listHeight="150" 
-                                         maxFilesQuantity="1" 
-                                         uploadLabel="#{var.subir}">
+                                          clearAllLabel="#{var.borrartodo}"
+                                          clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                          fileUploadListener="#{Supervisor$IngresarNuevaObra.subirCDP.listener}"
+                                          id="uploadCDP"
+                                          immediateUpload="true"
+                                          listHeight="150" 
+                                          maxFilesQuantity="1" 
+                                          uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="infoCDP, layoutCDP"/>
                         </rich:fileUpload>
                         <h:panelGroup id="infoCDP">
@@ -65,8 +65,8 @@
                                                    styleClass="ikont-acb-borar"     />
                                 <a4j:commandButton id="BTaceptarCDP" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.subirCDP.size>0}"
                                                    onclick="#{rich:component('panelCDP')}.hide();"
-                                                  render="layoutDocNuevaObra" action="#{Supervisor$IngresarNuevaObra.guardarArchivoTemporal}"
-                                                      />
+                                                   render="layoutDocNuevaObra" action="#{Supervisor$IngresarNuevaObra.guardarArchivoTemporal}"
+                                                   />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>

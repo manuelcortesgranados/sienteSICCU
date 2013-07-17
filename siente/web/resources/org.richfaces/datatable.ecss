@@ -142,7 +142,7 @@
     border-right-width: '#{richSkin.tableBorderWidth}';
     border-right-style: solid;
     border-right-color: '#{richSkin.tableBorderColor}';
-    color: '#{richSkin.generalTextColor}';
+    color: '#{richSkin.headerTextColor}';
     background-color: '#{richSkin.tableFooterBackgroundColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';

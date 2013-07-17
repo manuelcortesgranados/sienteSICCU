@@ -2321,7 +2321,7 @@ public class HomeGestion implements Serializable {
                 
                 //marker.setInformationWindow(descripcion.toString().replaceAll("\"", ""));
                 marker.setInformationWindow(descripcion.toString());
-               System.out.println(descripcion.toString());
+               
                 if (obra.getRuta() != null) {
 
                     marker.setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(obra.getRuta().getStrcodigotramo()));

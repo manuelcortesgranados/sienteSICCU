@@ -21,7 +21,7 @@
 
                 <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
-                <rich:panel  styleClass="ikont-rp-indicadores"  >
+                <h:panelGroup layout="block">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
                     <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
                                       onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
@@ -29,7 +29,7 @@
                                       onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
                     <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
                     <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
-                </rich:panel>
+                </h:panelGroup>
             </h:panelGrid>
         </a4j:repeat>
 

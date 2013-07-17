@@ -14,8 +14,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink  value="X" id="esconder_mp_subirexcelgiros" styleClass="ikont-acl-escondermpsubirexcelgiros"  
-                                     title="#{var.cerrar}" onclick="#{rich:component('mp_subirexcelgiros')}.hide();
-                                             return false;"/>
+                                      title="#{var.cerrar}" onclick="#{rich:component('mp_subirexcelgiros')}.hide();
+                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -31,7 +31,7 @@
                                          clearAllLabel="#{var.borrartodo}"
                                          clearLabel="#{var.eliminar}" 
                                          fileUploadListener="#{Financiera$CargarExcel.cargadorArchivoMovimientos.listener}" id="uploadDocumentoMovs" immediateUpload="true"
-                                         
+
                                          maxFilesQuantity="1">
                             <a4j:ajax event="uploadcomplete" render="gpUploadDocAt"/>
                         </rich:fileUpload>

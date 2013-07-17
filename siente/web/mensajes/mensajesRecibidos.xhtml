@@ -41,21 +41,21 @@
                                         var="currentRow" rows="10" 
                                         binding="#{Mensajes.tablaMensajesRecibidos}">
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesRecibidos}" id="tc-strasuntomensaje" sortBy="#{currentRow.datefecmensaje}" 
-                                       >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-houtasunto"   value="#{var.houtasunto}" />
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-otxtstrasuntomensajerecibido"   id="otxt-strasuntomensajerecibido" value="#{currentRow.strasuntomensaje}"/>
                             </rich:column>
                             <rich:column id="tc-fkusuarioenviarecibido" sortBy="#{currentRow.jsfUsuarioByIntusuenvia.tercero.apellido1}" 
-                                       >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-houtremitente"   value="#{var.houtremitente}"/>
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-stfkusuarioenvia"   id="st_fkusuarioenvia" value="#{currentRow.jsfUsuarioByIntusuenvia.tercero.strnombrecompleto}"/>
                             </rich:column>
                             <rich:column id="tc-datefecmensajerecibido" sortBy="#{currentRow.datefecmensaje}" 
-                                      >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-tcdatefecmensajerecibido"   value="#{var.Fecha}"/>
                                 </f:facet>
