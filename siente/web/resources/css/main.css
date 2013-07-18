@@ -305,6 +305,10 @@
     width: 100%;
 }
 
+.templatecontentinfo{
+    width: 100%;
+}
+
 .templatetablacontent{
     width: 85%;
 }
@@ -338,3 +342,94 @@
     height:25px;
     margin:5px 0 6px 5px;
 }
+
+.ikont-acl-activarlista{
+    background-image:url(../imgs/bt_vista_lista.png);
+    width: 25px;
+    height: 25px;
+    background-position: 0px -30px;
+    display: block;
+}
+
+.ikont-acl-activarimgs{
+    background-image: url(../imgs/bt_vista_icono.png);
+    width: 25px;
+    height: 25px;
+    background-position: 0px -30px;
+    display: block;
+}
+.ikont-hcl-activarmapabutton{
+    background-image:url(../imgs/bt_vista_mapa.png);
+    width: 25px;
+    height: 25px;
+    background-position: 0px -30px;
+    display: block;
+}
+
+.ikont-acl-activarlista:hover, .ikont-acl-activarimgs:hover, .ikont-hcl-activarmapabutton:hover{
+    background-position: 0px -0px;
+}
+
+
+.text01 {
+    text-align: center;
+    font-size:10px;
+    color:#777;
+}
+
+.mapsearchbar{
+    width: 100%
+}
+
+.viewmapbuttons{
+    float: right;
+    margin-right: 11%;
+}
+
+input[type="text"].ikont-hit-palabraclave{
+    width: 550px;
+}
+
+input[type="submit"].ikont-acl-busquedaavanzada{
+    background-image:url(../imgs/bt_buscar.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    text-indent: 15px;
+    width: 150px;
+    padding: 5px 5px;
+}
+
+input[type="submit"].ikont-acl-busquedaavanzada:hover{
+    background-image:url(../imgs/bt_buscar.png);
+    background-repeat: no-repeat;
+    background-position: left;
+}
+.ikont-hot-textoinicial, .ikont-hot-textofinal{
+    padding: 0px;
+    text-align: left;
+    font-size: 10px;
+}
+
+.ikont-hpg-contentnovedad{
+    width: 200px;
+}
+
+.ikont-hgi-textofinal{
+    width: 200px
+}
+
+input[type="submit"].ikont-acl-btnfiltrociudadano{
+    background:url(../imgs/bt_filtrar.png);
+    width:110px;
+    height:30px;
+    display:block;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    border: transparent;
+}
+input[type="submit"].ikont-acl-btnfiltrociudadano:hover{    
+    background:url(../imgs/bt_filtrar.png);
+    background-position: 0px -31px;
+    background-repeat: no-repeat;
+}
+

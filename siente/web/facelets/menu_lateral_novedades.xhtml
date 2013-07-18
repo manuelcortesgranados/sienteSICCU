@@ -7,7 +7,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
-   >
+    >
 
 
     <interkont:spacer  height="10"/>
@@ -16,19 +16,22 @@
 
 
         <a4j:repeat value="#{HomeGestion.listarecientes}" var="item" >
-            <h:panelGrid  columns="2"   >
+            <h:panelGrid  columns="2"  styleClass="ikont-hpg-contentnovedad">
 
 
                 <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
                 <h:panelGroup layout="block">
-                    <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
-                                      onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
-                    <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra1"  
-                                      onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
-                    <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
-                    <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
+                    <div class="ikont-hpg-contentnovedad">
+                        <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
+                        <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
+                                          onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                        <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra1"  
+                                          onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
+                        <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
+                        <interkont:spacer height="3"/>
+                        <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
+                    </div>
                 </h:panelGroup>
             </h:panelGrid>
         </a4j:repeat>

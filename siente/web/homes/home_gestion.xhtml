@@ -74,8 +74,7 @@
     <ui:define name="body">
 
         <h:form id="form_gestion" prependId="false" >
-
-            <table  border="0" cellspacing="0" cellpadding="0">
+            <table  border="0" cellspacing="0" cellpadding="0" class="mapsearchbar">
                 <tr>
                     <td><div ><div id="buscador_space">
                                 <label>
@@ -90,25 +89,25 @@
                     <td><h:commandButton styleClass="ikont-acl-busquedaavanzada"  value="#{var.houtbusquedaavanza}" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
                                      onclick="#{rich:component('panelFiltroAvanzado')}.show(); return false;" /> 
 
-                        <h:commandButton styleClass="ikont-acl-btnfiltrociudadano" value="#{var.filtrar}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
+                        <h:commandButton styleClass="ikont-acl-btnfiltrociudadano" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfiltro_ciudadano}"
                                          onclick="#{rich:component('panelFiltroAvanzadoCiud')}.show();return false;"/>
 
 
                     </td>
-                    <td ><table   border="0" cellspacing="5" cellpadding="0">
+                    <td ><table   border="0" cellspacing="5" cellpadding="0" class="viewmapbuttons">
                             <tr>
-                                <td >Vistas</td>
+                                <td class="text01">Vistas</td>
                                 <td><div >
-                                        <h:commandLink styleClass="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" />
+                                        <h:commandLink styleClass="ikont-hcl-activarmapabutton"   action="#{HomeGestion.activarvistamapa}" />
 
                                     </div></td>
                                 <td><div >
-                                        <a4j:commandLink styleClass="ikont-acl-filtrarobrasporestado"   render="form_gestion,vistaThumb" execute="@this"
+                                        <a4j:commandLink styleClass="ikont-acl-activarimgs"   render="form_gestion,vistaThumb" execute="@this"
                                                          action="#{HomeGestion.filtrarObrasPorEstado}"    >
                                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intvista}"/>
                                         </a4j:commandLink>
                                     </div></td>
-                                <td><div ><a4j:commandLink styleClass="ikont-acl-filtrarobraporestado"   render="form_gestion,vistaLista" execute="@this"
+                                <td><div ><a4j:commandLink styleClass="ikont-acl-activarlista"   render="form_gestion,vistaLista" execute="@this"
                                                            action="#{HomeGestion.filtrarObrasPorEstado}"   >
                                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
                                         </a4j:commandLink>
@@ -128,7 +127,7 @@
                 </tr>
             </table>
 
-            <h:panelGrid id="vistaMapa" style="width:95%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+            <h:panelGrid id="vistaMapa" style="width:98%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
 
 
                 <m:map  latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
