@@ -797,6 +797,7 @@ public class NuevoContratoBasico implements Serializable {
     private String infogeneralcrearconvenio;
     private int panelPantalla;
     private Fuenterecursosconvenio fuenteRecursoConvenio;
+    private boolean boolguardofuente; 
 
     /**
      *
@@ -6049,6 +6050,7 @@ public class NuevoContratoBasico implements Serializable {
      */
     public void adicionarFuenteRecursos() {
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
+        boolguardofuente=Boolean.TRUE;
         limpiarFuenteRecurso();
         System.out.println("fuentes = " + contrato.getFuenterecursosconvenios().size());
     }
@@ -6229,9 +6231,24 @@ public class NuevoContratoBasico implements Serializable {
         fuenteRecursoConvenio.setReservaiva(null);
         fuenteRecursoConvenio.setValorcuotagerencia(null);
         fuenteRecursoConvenio.setTipoaporte(null);
-        fuenteRecursoConvenio.setRolentidad(null);
-        fuenteRecursoConvenio.setRolentidad(null);
-        fuenteRecursoConvenio.setTercero(null);
+        fuenteRecursoConvenio.setRolentidad(new Rolentidad());
+        fuenteRecursoConvenio.setTercero(new Tercero());
+       
 
+    }
+
+    /**
+     * @return the boolguardofuente
+     */
+    public boolean isBoolguardofuente() {
+        System.out.println("this = " +boolguardofuente);
+        return boolguardofuente;
+    }
+
+    /**
+     * @param boolguardofuente the boolguardofuente to set
+     */
+    public void setBoolguardofuente(boolean boolguardofuente) {
+        this.boolguardofuente = boolguardofuente;
     }
 }
