@@ -3,11 +3,11 @@
 <!-- =========== FULL CONFIGURATION FILE ================================== -->
 
 <faces-config version="2.1"
-              xmlns="http://java.sun.com/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
 
-    <lifecycle>
+  <lifecycle>
         <phase-listener>cobra.Supervisor.AppPhaseListener</phase-listener>
     </lifecycle>
 
@@ -53,7 +53,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean>
+    <managed-bean>        
         <managed-bean-name>Perfil$Usuario</managed-bean-name>
         <managed-bean-class>cobra.perfil.Usuario</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -263,7 +263,7 @@
     </managed-bean>
     <!-- Fin de Managed Beans de Supervisor -->
 
-    <!-- Inicio de Managed Beans generales para Cobra -->
+        <!-- Inicio de Managed Beans generales para Cobra -->
     <managed-bean>
         <managed-bean-name>login</managed-bean-name>
         <managed-bean-class>cobra.Login</managed-bean-class>
@@ -273,6 +273,12 @@
     <managed-bean>
         <managed-bean-name>perfilcontrol</managed-bean-name>
         <managed-bean-class>cobra.DatosGeneralesPerfilControl</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <!--Inicio de Managed Bean Plan Operativo-->
+     <managed-bean>
+        <managed-bean-name>PlanOperativo</managed-bean-name>
+        <managed-bean-class>cobra.PlanOperativo.FlujoCaja</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
@@ -382,7 +388,7 @@
             <from-outcome>consultarContrato</from-outcome>
             <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
+    </navigation-rule>  
     <navigation-rule>
         <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
         <navigation-case>
@@ -431,6 +437,11 @@
             <from-outcome>restaurar_password</from-outcome>
             <to-view-id>/Cobra/password/restaurarPassword.xhtml</to-view-id>
         </navigation-case>
+          <navigation-case>
+            <from-outcome>FlujoCaja</from-outcome>
+            <to-view-id>Supervisor/Flujocaja.xhtml</to-view-id>
+        </navigation-case>
+        
         <navigation-case>
             <from-outcome>ingresarEntidad</from-outcome>
             <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
@@ -1011,7 +1022,7 @@
     
     <navigation-rule>
         <from-view-id>/*</from-view-id>
-        <navigation-case>
+       <navigation-case>
             <from-outcome>Solicitud de Atención Humanitaria</from-outcome>
             <to-view-id>/AtencionHumanitaria/HomeAtencionHumanitaria.xhtml</to-view-id>
         </navigation-case>
@@ -1035,7 +1046,7 @@
             <from-outcome>Indicadores</from-outcome>
             <to-view-id>/homes/home_indicadores.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
+</navigation-rule>
 
     <navigation-rule>
         <from-view-id>/NuevoProyecto/AsociarContrato.xhtml</from-view-id>
