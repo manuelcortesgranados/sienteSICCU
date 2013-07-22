@@ -5,48 +5,50 @@
     <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.password">cobradatabase</property>
-    <property name="hibernate.connection.url">jdbc:postgresql:cobrasiente</property>
+    <property name="hibernate.connection.url">jdbc:postgresql:cobrasienten</property>
     <property name="hibernate.connection.username">cobra</property>
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="hibernate.connection.pool_size">400</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping resource="co/com/interkont/cobra/to2/Obra.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Contrato.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Relacioncontratoobra.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Tipolocalidad.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Localidad.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/MuniReunido.hbm.xml"/>
-    <mapping/>
-    <mapping resource="co/com/interkont/cobra/to2/Tipoverificacion.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/JsfUsuario.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Resultadolistaverificacion.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Listaverificacion.hbm.xml"/>
-    <mapping/>
-    <mapping resource="co/com/interkont/cobra/to2/Eventoscorreo.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Zonaseguimiento.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Localidadzonaseguimiento.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Relacioneventoscorreousuario.hbm.xml"/>
-    <mapping/>
-    <mapping resource="co/com/interkont/cobra/to2/Tercero.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Tercerozonaseguimiento.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Alimentacion.hbm.xml"/>
+    <mapping resource="pojos/Tipoestadobra.hbm.xml"/>
+    <mapping resource="pojos/Tipocontratoconsultoria.hbm.xml"/>
+    <mapping resource="pojos/Evento.hbm.xml"/>
+    <mapping resource="pojos/Modalidadcontratista.hbm.xml"/>
+    <mapping resource="pojos/Tipocontrato.hbm.xml"/>
+    <mapping resource="pojos/Periodoevento.hbm.xml"/>
+    <mapping resource="pojos/Contrato.hbm.xml"/>
+    <mapping resource="pojos/Tercero.hbm.xml"/>
+    <mapping resource="pojos/Estadoconvenio.hbm.xml"/>
+    <mapping resource="pojos/Formapago.hbm.xml"/>
     <mapping/>
     <mapping/>
-    <mapping resource="co/com/interkont/cobra/to2/Validacionalimentacion.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Beneficiario.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to2/Solicitudmaestro.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/Solicitudmaestro.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/Tipolocalidad.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/Tipoah.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/AhGlobal.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/MuniVivienda.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/AsishumaMunicipal.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/ArriendoMuni.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/Localidad.hbm.xml"/>
-    <mapping resource="co/com/interkont/cobra/to/seguimientosah/AlberguesMunicipal.hbm.xml"/>
     <mapping/>
     <mapping/>
-    <mapping resource="co/com/interkont/cobra/to2/Supervisorzonaseguimiento.hbm.xml"/>
+    <mapping/>
+    <mapping resource="pojos/SubTipoTercero.hbm.xml"/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping resource="pojos/Tipotercero.hbm.xml"/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping/>
+    <mapping resource="pojos/Clasificaciontercero.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

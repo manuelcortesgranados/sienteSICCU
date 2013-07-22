@@ -7,7 +7,7 @@
                 xmlns:rich="http://richfaces.org/rich">
 
     <ui:define name="head">
-        head
+        
     </ui:define>
 
     <ui:define name="menu">
@@ -40,11 +40,11 @@
                     <br/>
                     <h:outputText value="#{Supervisor$Contrato.variabletitulo}"/>
                     <br/>                
-                   <h:outputText value="#{var.infogeneralcrearconvenio}"/>
+                   <h:outputText value="#{Supervisor$Contrato.infogeneralcrearconvenio}"/>
                 </center>
             </h:panelGroup>
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
-                <rich:panel style="width: 800px;height:400px;" styleClass="ikont-rp-db">
+                <rich:panel style="width: 900px;" styleClass="ikont-rp-db">
                     <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
                 </rich:panel>
             </a4j:region>
@@ -82,11 +82,10 @@
             <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">
                 <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" immediate="true" />
                 <a4j:commandLink value="#{var.guardarbo}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" immediate="true" />
-
             </h:panelGrid>
-
         </h:form>
 
+        <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
 
     </ui:define>
 

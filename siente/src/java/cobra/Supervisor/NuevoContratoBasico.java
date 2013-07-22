@@ -58,12 +58,10 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -796,6 +794,11 @@ public class NuevoContratoBasico implements Serializable {
      */
     private SelectItem[] tipoAporte;
     private String variabletitulo;
+    private String infogeneralcrearconvenio;
+    private int panelPantalla;
+    private Fuenterecursosconvenio fuenteRecursoConvenio;
+    private boolean boolguardofuente; 
+    private List<Fuenterecursosconvenio> lstFuentesRecursos;
 
     /**
      *
@@ -2147,33 +2150,38 @@ public class NuevoContratoBasico implements Serializable {
     private void _init() throws Exception {
     }
     // </editor-fold>
+
     /**
      * <p>Construct a new Page bean instance.</p>
      */
     /* variables para el funcionamiento del plan operativo*/
-    private int panelPantalla;
-    Fuenterecursosconvenio fuenteRecursoConvenio;
-
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
-        limpiarContrato();
-        llenarTipoContratoconsultoria();
-        llenarTipoContrato();
-        llenarEventos();
-        llenarPeriodoxEvento();
-        llenarTipodocumentos();
-        //llenarPolizas();
-        llenarFormaPago();
-        llenarComboContratista();
-        iniciarFiltroAvanzado();
-        if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
-            llenarModalidadContratista();
+        if (!Propiedad.getValor("conplanoperativo").equals("true")) {
+            limpiarContrato();
+            llenarTipoContratoconsultoria();
+            llenarTipoContrato();
+            llenarEventos();
+            llenarPeriodoxEvento();
+            llenarTipodocumentos();
+            //llenarPolizas();
+            llenarFormaPago();
+            llenarComboContratista();
+            iniciarFiltroAvanzado();
+            if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
+                llenarModalidadContratista();
+            }
+        } else {
+            fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
+            lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
+            variabletitulo = Propiedad.getValor("primerodatosbasicos");
+            llenarEstadoConvenio();
+            llenarEntidades();
+            llenarRoles();
+            llenarGerentes();
+            llenarTipoAporte();
         }
-        llenarEstadoConvenio();
-
-        fuenteRecursoConvenio = new Fuenterecursosconvenio();
-        variabletitulo = Propiedad.getValor("primerodatosbasicos");
 
     }
 
@@ -5912,7 +5920,7 @@ public class NuevoContratoBasico implements Serializable {
      *
      * @return
      */
-    SelectItem[] estadoConvenioOption;
+    private SelectItem[] estadoConvenioOption;
 
     public SelectItem[] getEstadoConvenioOption() {
         return estadoConvenioOption;
@@ -5982,18 +5990,23 @@ public class NuevoContratoBasico implements Serializable {
         switch (panelPantalla) {
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
                 variabletitulo = Propiedad.getValor("terceropolizas");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 4:
                 variabletitulo = Propiedad.getValor("cuartoformapago");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 5:
                 variabletitulo = Propiedad.getValor("quintodocumento");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
 
         }
@@ -6038,7 +6051,10 @@ public class NuevoContratoBasico implements Serializable {
      *      
      */
     public void adicionarFuenteRecursos() {
-        contrato.getFuenterecursosconvenios().add(fuenteRecursoConvenio);
+        contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
+        lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
+        boolguardofuente=Boolean.TRUE;
+        limpiarFuenteRecurso();
     }
 
     /*
@@ -6068,7 +6084,7 @@ public class NuevoContratoBasico implements Serializable {
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
         for (Tercero tercero : lstentidades) {
-            SelectItem itTercero = new SelectItem(tercero, tercero.getStrnombrecompleto());
+            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
             getEntidades()[i++] = itTercero;
         }
 
@@ -6084,7 +6100,7 @@ public class NuevoContratoBasico implements Serializable {
         setRoles(new SelectItem[lstRoles.size()]);
         int i = 0;
         for (Rolentidad rolEntidad : lstRoles) {
-            SelectItem itRolEntidad = new SelectItem(rolEntidad, rolEntidad.getStrnombre());
+            SelectItem itRolEntidad = new SelectItem(rolEntidad.getIdrolentidad(), rolEntidad.getStrnombre());
             getRoles()[i++] = itRolEntidad;
         }
 
@@ -6108,7 +6124,7 @@ public class NuevoContratoBasico implements Serializable {
         setGerentesDeConvenio(new SelectItem[lstgerentesConvenio.size()]);
         int i = 0;
         for (Tercero gerenteConvenio : lstgerentesConvenio) {
-            SelectItem itGerenteConvenio = new SelectItem(gerenteConvenio, gerenteConvenio.getStrnombrecompleto());
+            SelectItem itGerenteConvenio = new SelectItem(gerenteConvenio.getIntcodigo(), gerenteConvenio.getStrnombrecompleto());
             getGerentesDeConvenio()[i++] = itGerenteConvenio;
         }
 
@@ -6183,4 +6199,74 @@ public class NuevoContratoBasico implements Serializable {
     public void setVariabletitulo(String variabletitulo) {
         this.variabletitulo = variabletitulo;
     }
+
+    /**
+     * @return the fuenteRecursoConvenio
+     */
+    public Fuenterecursosconvenio getFuenteRecursoConvenio() {
+        return fuenteRecursoConvenio;
+    }
+
+    /**
+     * @param fuenteRecursoConvenio the fuenteRecursoConvenio to set
+     */
+    public void setFuenteRecursoConvenio(Fuenterecursosconvenio fuenteRecursoConvenio) {
+        this.fuenteRecursoConvenio = fuenteRecursoConvenio;
+    }
+
+    /**
+     * @return the infogeneralcrearconvenio
+     */
+    public String getInfogeneralcrearconvenio() {
+        return infogeneralcrearconvenio;
+    }
+
+    /**
+     * @param infogeneralcrearconvenio the infogeneralcrearconvenio to set
+     */
+    public void setInfogeneralcrearconvenio(String infogeneralcrearconvenio) {
+        this.infogeneralcrearconvenio = infogeneralcrearconvenio;
+    }
+
+    public void limpiarFuenteRecurso() {
+        fuenteRecursoConvenio.setOtrasreservas(null);
+        fuenteRecursoConvenio.setReservaiva(null);
+        fuenteRecursoConvenio.setValorcuotagerencia(null);
+        fuenteRecursoConvenio.setTipoaporte(null);
+        fuenteRecursoConvenio.setRolentidad(new Rolentidad());
+        fuenteRecursoConvenio.setTercero(new Tercero());
+       
+
+    }
+    
+    /**
+     * @return the boolguardofuente
+     */
+    public boolean isBoolguardofuente() {
+        System.out.println("this = " +boolguardofuente);
+        return boolguardofuente;
+    }
+
+    /**
+     * @param boolguardofuente the boolguardofuente to set
+     */
+    public void setBoolguardofuente(boolean boolguardofuente) {
+        this.boolguardofuente = boolguardofuente;
+    }
+
+    /**
+     * @return the lstFuentesRecursos
+     */
+    public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
+        return lstFuentesRecursos;
+    }
+
+    /**
+     * @param lstFuentesRecursos the lstFuentesRecursos to set
+     */
+    public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
+        this.lstFuentesRecursos = lstFuentesRecursos;
+    }
+    
+    
 }

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <rich:popupPanel  id="ver-fuenterecursos" autosized="true"
+                      headerClass="sliderich" styleClass="ikont-"   >
+
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  value="X" id="esconder_confirmarCambioEstado" styleClass="ikont-acl-esconderconfirmarverfuenterecursos"  
+                                      title="#{var.cerrar}" onclick="#{rich:component('ver-fuenterecursos')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:form>
+            <center>
+                <rich:dataTable id="fuenteRecurso"
+                                var="fuente"
+                                value="#{Supervisor$Contrato.lstFuentesRecursos}"
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                sortMode="single"
+                                style="text-align:center;"
+                                rowKeyVar="filaSeleccionada"
+                                >                                      
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column colspan="7" id="titulo">
+                                <h:outputText value="#{var.fuenterecurso} "/>
+                            </rich:column>
+                            <rich:column width="200px" breakRowBefore="true">
+                                <h:outputText value="#{var.entidad}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.rol}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.reservaiva}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.otrasreservas}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.cuotagerencia}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.eliminar}"/>
+                            </rich:column>
+                        </rich:columnGroup>      
+                    </f:facet>
+                    <rich:columnGroup id="cuepofuente">
+                        <rich:column width="200px" breakRowBefore="true">
+                            <h:outputText value="#{fuente.tercero.intcodigo}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{fuente.rolentidad.idrolentidad}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{fuente.reservaiva}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText value="#{fuente.otrasreservas}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText value="#{fuente.valorcuotagerencia}"/>
+                        </rich:column>
+                        <rich:column>
+                            <a4j:commandLink   value="#{var.eliminar}" id="bt_eliminarfuente" action="#{Supervisor$Contrato.eliminarFuenteRecursos(filaSeleccionada)}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </rich:dataTable>
+            </center>
+
+        </h:form>
+    </rich:popupPanel>
+
+</ui:composition>

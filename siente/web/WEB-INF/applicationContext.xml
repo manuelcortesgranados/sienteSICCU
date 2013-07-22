@@ -227,9 +227,7 @@
                 <value>co/com/interkont/cobra/to/Rubro.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Parametricaactividadesobligatorias.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/SubTipoTercero.hbm.xml</value>
-              
-                
+               
             </list>
         </property>
         <property name="hibernateProperties">
