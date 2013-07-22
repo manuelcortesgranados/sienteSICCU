@@ -4,6 +4,7 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.AreaContratista;
 import co.com.interkont.cobra.to.Aseguradora;
 import co.com.interkont.cobra.to.Cargo;
@@ -58,10 +59,12 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -2154,34 +2157,38 @@ public class NuevoContratoBasico implements Serializable {
     /**
      * <p>Construct a new Page bean instance.</p>
      */
-    /* variables para el funcionamiento del plan operativo*/
+    /* variables para el funcionamiento del plan operativo*/   
+
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
         if (!Propiedad.getValor("conplanoperativo").equals("true")) {
-            limpiarContrato();
-            llenarTipoContratoconsultoria();
-            llenarTipoContrato();
-            llenarEventos();
-            llenarPeriodoxEvento();
-            llenarTipodocumentos();
-            //llenarPolizas();
-            llenarFormaPago();
-            llenarComboContratista();
-            iniciarFiltroAvanzado();
-            if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
-                llenarModalidadContratista();
-            }
+        limpiarContrato();
+        llenarTipoContratoconsultoria();
+        llenarTipoContrato();
+        llenarEventos();
+        llenarPeriodoxEvento();
+        llenarTipodocumentos();
+        //llenarPolizas();
+        llenarFormaPago();
+        llenarComboContratista();
+        iniciarFiltroAvanzado();
+        if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
+            llenarModalidadContratista();
+        }
         } else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
             lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
-            llenarEstadoConvenio();
+        llenarEstadoConvenio();
             llenarEntidades();
             llenarRoles();
             llenarGerentes();
             llenarTipoAporte();
         }
+
+        fuenteRecursoConvenio = new Fuenterecursosconvenio();
+        variabletitulo = Propiedad.getValor("primerodatosbasicos");
 
     }
 
@@ -2996,7 +3003,6 @@ public class NuevoContratoBasico implements Serializable {
             polizacontrato.setTipopoliza(getSessionBeanCobra().getCobraService().encontrarTipoPolizaPorId(tipointpoli));
             polizacontrato.setContrato(contrato);
             polizacontrato.setStrdocpoliza("");
-            System.out.println("aseguradora" + polizacontrato.getAseguradora().getStrnombreentidad());
             listapolizas.add(polizacontrato);
             listaPolizacontratos.add(polizacontrato);//Se guarda en la lista desde modificar contrato
             polizacontrato = new Polizacontrato();
@@ -5994,11 +6000,11 @@ public class NuevoContratoBasico implements Serializable {
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
                 variabletitulo = Propiedad.getValor("terceropolizas");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 4:
                 variabletitulo = Propiedad.getValor("cuartoformapago");
@@ -6006,7 +6012,7 @@ public class NuevoContratoBasico implements Serializable {
                 break;
             case 5:
                 variabletitulo = Propiedad.getValor("quintodocumento");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
 
         }
@@ -6035,6 +6041,14 @@ public class NuevoContratoBasico implements Serializable {
      * 
      */
     public void guardarBorradorConvenio() {
+       Actividadobra actobra = new Actividadobra();
+       actobra.setNumvalorplanifao(new BigDecimal(BigInteger.ZERO));  
+       actobra.setFloatcantplanifao(15);
+       
+      List<Actividadobra> actividadobra = new  ArrayList<Actividadobra>();
+      actividadobra.add(actobra);
+       contrato.setActividadobras((Set) actividadobra);
+       guardarContrato();
     }
 
     /*
@@ -6199,27 +6213,27 @@ public class NuevoContratoBasico implements Serializable {
     public void setVariabletitulo(String variabletitulo) {
         this.variabletitulo = variabletitulo;
     }
-
+    
     /**
      * @return the fuenteRecursoConvenio
      */
     public Fuenterecursosconvenio getFuenteRecursoConvenio() {
         return fuenteRecursoConvenio;
     }
-
+    
     /**
      * @param fuenteRecursoConvenio the fuenteRecursoConvenio to set
      */
     public void setFuenteRecursoConvenio(Fuenterecursosconvenio fuenteRecursoConvenio) {
         this.fuenteRecursoConvenio = fuenteRecursoConvenio;
     }
-
+    
     /**
      * @return the infogeneralcrearconvenio
      */
     public String getInfogeneralcrearconvenio() {
         return infogeneralcrearconvenio;
-    }
+}
 
     /**
      * @param infogeneralcrearconvenio the infogeneralcrearconvenio to set
