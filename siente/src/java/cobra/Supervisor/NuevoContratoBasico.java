@@ -2175,17 +2175,7 @@ public class NuevoContratoBasico implements Serializable {
             if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
                 llenarModalidadContratista();
             }
-        } else {
-            fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
-            lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
-            variabletitulo = Propiedad.getValor("primerodatosbasicos");
-            llenarEstadoConvenio();
-            llenarEntidades();
-            llenarRoles();
-            llenarGerentes();
-            llenarTipoAporte();
-        }
-        } else {
+        }  else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
             lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
