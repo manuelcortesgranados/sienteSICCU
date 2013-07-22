@@ -53,7 +53,7 @@
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
-    <managed-bean>
+    <managed-bean>        
         <managed-bean-name>Perfil$Usuario</managed-bean-name>
         <managed-bean-class>cobra.perfil.Usuario</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
@@ -275,6 +275,12 @@
         <managed-bean-class>cobra.DatosGeneralesPerfilControl</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <!--Inicio de Managed Bean Plan Operativo-->
+     <managed-bean>
+        <managed-bean-name>PlanOperativo</managed-bean-name>
+        <managed-bean-class>cobra.PlanOperativo.FlujoCaja</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <managed-bean>
         <managed-bean-name>SessionBeanCobra</managed-bean-name>
@@ -382,7 +388,7 @@
             <from-outcome>consultarContrato</from-outcome>
             <to-view-id>/Supervisor/consultarContratoConvenioDetalle.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
+    </navigation-rule>  
     <navigation-rule>
         <from-view-id>/Supervisor/ModificarContrato.xhtml</from-view-id>
         <navigation-case>
@@ -431,6 +437,11 @@
             <from-outcome>restaurar_password</from-outcome>
             <to-view-id>/Cobra/password/restaurarPassword.xhtml</to-view-id>
         </navigation-case>
+          <navigation-case>
+            <from-outcome>FlujoCaja</from-outcome>
+            <to-view-id>Supervisor/Flujocaja.xhtml</to-view-id>
+        </navigation-case>
+        
         <navigation-case>
             <from-outcome>ingresarEntidad</from-outcome>
             <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
@@ -620,6 +631,10 @@
         <navigation-case>
             <from-outcome>nuevoContrato</from-outcome>
             <to-view-id>/Supervisor/NuevoContratoBasico.xhtml</to-view-id>
+        </navigation-case>
+          <navigation-case>
+            <from-outcome>nuevoConvenioPo</from-outcome>
+            <to-view-id>/Supervisor/nuevoContratoPlanOperativo.xhtml</to-view-id>
         </navigation-case>
           <navigation-case>
             <from-outcome>nuevoConvenioPo</from-outcome>

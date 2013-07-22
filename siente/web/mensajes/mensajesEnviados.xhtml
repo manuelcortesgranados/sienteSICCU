@@ -40,21 +40,21 @@
                                         rows="10"
                                         rowKeyVar="filaSeleccionada">
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
-                                        >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-houtasunto"   value="#{var.houtasunto}"/>
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-hot-strasuntomensaje"   value="#{currentRow.strasuntomensaje}"/>
                             </rich:column>
                             <rich:column sortBy="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strapellido1}" width="300px"
-                                        >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-houtdestinatario"   value="#{var.houtdestinatario}"/>
                                 </f:facet>
                                 <h:outputText  styleClass="ikont-strnombrecompleto"   value="#{currentRow.jsfUsuarioByIntusurecibe.tercero.strnombrecompleto}"/>
                             </rich:column>
                             <rich:column sortBy="#{currentRow.datefecmensaje}" width="140px"
-                                        >
+                                         >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-pltablaenviadosfecha"   value="#{var.Fecha}"/>
                                 </f:facet>
