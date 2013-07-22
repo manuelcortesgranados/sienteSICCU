@@ -8,7 +8,7 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel height="220" id="panelConfirmarSuspension" resizeable="false" width="350" 
-        headerClass="rich-panel-header">
+                     headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-confsus"    value="#{var.confirmarsus}"/>
@@ -17,10 +17,10 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelConfirmarSuspension" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink value="X" id="esconder_panelConfirmarSuspension" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSuspension')}.hide();
-                                      return false;"/>
-                    
+                                             return false;"/>
+
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -40,12 +40,12 @@
                         <interkont:spacer height="20px"/>
                         <a4j:commandButton id="btCerrarCofSus" value="#{var.aceptar}" render="layoutModificar" action="#{Supervisor$AdministrarObraNew.mostrarMenuModificar}"
                                            onclick="#{rich:component('panelConfirmarSuspension')}.hide();" rendered="#{Supervisor$SuspenderObra.datoInvalido==0}"
-                                              >
+                                           >
                             <a4j:ajax event="complete" render="layoutConfSuspension,layoutModificar"/>
                         </a4j:commandButton>
                         <a4j:commandButton id="btCerrarCofSusDos" value="#{var.aceptar}" render="layoutModificar" rendered="#{Supervisor$SuspenderObra.datoInvalido!=0}"
                                            onclick="#{rich:component('panelConfirmarSuspension')}.hide();"
-                                              >
+                                           >
                             <a4j:ajax event="complete" render="layoutConfSuspension,layoutModificar"/>
                         </a4j:commandButton>
                     </h:panelGrid>

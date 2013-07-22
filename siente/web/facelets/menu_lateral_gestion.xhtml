@@ -9,49 +9,41 @@
 
     <rich:panel header="#{SessionBeanCobra.cobraService.headerNombre}" id="menuInicio" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0"  styleClass="ikont-hpg-menulateralgestion"  >
-
             <h:panelGrid styleClass="ikont-hpg-nuevoproyecto"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}">
-                <h:commandLink  styleClass="ikont-acl-crearnuevoproyecto"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true"   />
-                <h:commandLink  styleClass="ikont-acl-nuevoproyecto"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" />
+                <h:commandLink  styleClass="ikont-acl-crearnuevoproyecto img-button-panel"   action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true"   />
+                <h:commandLink  styleClass="ikont-acl-nuevoproyecto text-button-panel"   value="Nuevo Proyecto" action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" />
             </h:panelGrid>
-
             <h:panelGrid styleClass="ikont-hpg-mapa"   cellpadding="0" cellspacing="0" >
-                <h:commandLink  styleClass="ikont-hcl-activarvistamapa"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
-                <h:commandLink  styleClass="ikont-hcl-activarmapa"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false">
-                
-                </h:commandLink>
+                <h:commandLink  styleClass="ikont-hcl-activarvistamapa img-button-panel"   action="#{HomeGestion.activarvistamapa}" immediate="false"  />
+                <h:commandLink  styleClass="ikont-hcl-activarmapa text-button-panel"   value="Mapa" action="#{HomeGestion.activarvistamapa}"  immediate="false"/>    
             </h:panelGrid>
-
             <h:panelGrid styleClass="ikont-hpg-iniciartablerocontrol"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btntablero}">
-                <h:commandLink  styleClass="ikont-hcl-iniciartablerocontrol"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />
-                <h:commandLink  styleClass="ikont-hcl-tablerocontrol"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
+                <h:commandLink  styleClass="ikont-hcl-iniciartablerocontrol img-button-panel"   action="#{ControlGerencial.iniciargerencial}" immediate="true"  />    
+                <h:commandLink  styleClass="ikont-hcl-tablerocontrol text-button-panel"   value="Tablero de control" action="#{ControlGerencial.iniciargerencial}"  immediate="true" />
             </h:panelGrid>
-
             <h:panelGrid styleClass="ikont-hpg-iniciarreporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"> 
-                <h:commandLink styleClass="ikont-hcl-iniciarreporte"   action="reportes" immediate="true" />
-                <h:commandLink styleClass="ikont-hcl-reporte"   value="Reportes" action="reportes" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-iniciarreporte img-button-panel"   action="reportes" immediate="true" />
+                <h:commandLink styleClass="ikont-hcl-reporte text-button-panel"   value="Reportes" action="reportes" immediate="true" />
             </h:panelGrid>           
             <h:panelGrid styleClass="ikont-hcl-nuevocontrato"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"> 
-                <h:commandLink styleClass="ikont-acl-iniciarnuevocontrato"    actionListener="#{Supervisor$Contrato.iniciarContrato}"  action="nuevoContrato" />
-                <h:commandLink styleClass="ikont-acl-nuevocontrato"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}"  action="nuevoContrato"/>
+                <h:commandLink styleClass="ikont-acl-iniciarnuevocontrato img-button-panel"    actionListener="#{Supervisor$Contrato.iniciarContrato}"  action="nuevoContrato" />
+                <h:commandLink styleClass="ikont-acl-nuevocontrato text-button-panel"   value="Nuevo Contrato" actionListener="#{Supervisor$Contrato.iniciarContrato}"  action="nuevoContrato"/>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-iniciarnuevoconvenio"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnconvenio}"> 
-                <h:commandLink styleClass="ikont-acl-iniciarnuevoconvenio"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
+                <h:commandLink styleClass="ikont-acl-iniciarnuevoconvenio img-button-panel"   actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
                     <f:attribute name="isContrato" value="#{false}" />
                 </h:commandLink>
-                <h:commandLink styleClass="ikont-acl-nuevoconvenio"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
+                <h:commandLink styleClass="ikont-acl-nuevoconvenio text-button-panel"   value="Nuevo Convenio" actionListener="#{Supervisor$Contrato.iniciarConvenio}" action="nuevoContrato" >
                 </h:commandLink>
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-iniciarindicadores"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnindicadores}"> 
-                <h:commandLink styleClass="ikont-acl-iniciarindicadores"   action="indicadores" immediate="true" />
-                <h:commandLink styleClass="ikont-acl-indicadores"   value="Indicadores" action="indicadores" immediate="true" />
+                <h:commandLink styleClass="ikont-acl-iniciarindicadores img-button-panel"   action="indicadores" immediate="true" />
+                <h:commandLink styleClass="ikont-acl-indicadores text-button-panel"   value="Indicadores" action="indicadores" immediate="true" />
             </h:panelGrid>
             <h:panelGrid styleClass="ikont-hpg-iniciarsoporte"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"> 
-                <h:outputLink styleClass="ikont-hol-iniciarsoporte"   target="_blank" value="#{var.linksoporte}" />
-                <h:commandLink id="btSoporte" styleClass="ikont-acl-soporte"   value="Soporte" onclick="document.location.href='#{var.linksoporte}';"
-                                 />
+                <h:outputLink styleClass="ikont-hol-iniciarsoporte img-button-panel"   target="_blank" value="#{var.linksoporte}" />
+                <h:commandLink id="btSoporte" styleClass="ikont-acl-soporte text-button-panel"   value="Soporte" onclick="document.location.href = '#{var.linksoporte}';"/>
             </h:panelGrid>
-
         </h:panelGrid>
     </rich:panel>
 

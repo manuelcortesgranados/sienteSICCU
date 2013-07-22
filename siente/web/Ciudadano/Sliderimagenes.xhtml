@@ -22,36 +22,33 @@
                 </div>
             </div>
             <center>
-                <rich:panel id="sliderimages"   bodyClass="middleinfosliderciuda" >
-                    <div id="container">
-                        <div id="slider">
-                            <a4j:repeat value="#{SessionBeanCobra.ciudadanoservice.listaSliderGeneral}" var="imagen" binding="#{Ciudadano$PerfilCiudadano.repeatslider}">
-                                <div>
-                                    <a4j:commandLink     action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"
-                                                         render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal"
-                                                         oncomplete="#{rich:component('modalDetalleObra')}.show();" 
-                                                         immediate="true"
-                                                         >
-                                       
-                                        <h:graphicImage  styleClass="ikont-hgi-strubicacion"   url="#{var.ipserver}#{var.versioncobra}#{imagen.strubicacion}" />
-                                    </a4j:commandLink>
+                <div id="container" class="middleinfosliderciuda">
+                    <div id="slider">
+                        <a4j:repeat value="#{SessionBeanCobra.ciudadanoservice.listaSliderGeneral}" var="imagen" binding="#{Ciudadano$PerfilCiudadano.repeatslider}">
+                            <div>
+                                <a4j:commandLink     action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"
+                                                     render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal"
+                                                     oncomplete="#{rich:component('modalDetalleObra')}.show();" 
+                                                     immediate="true"
+                                                     >
 
-                                    <a4j:commandLink    value="#{imagen.obra.strnombrecrot}" action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"                                               
-                                                        render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal"
-                                                        oncomplete="#{rich:component('modalDetalleObra')}.show();"
-                                                        immediate="true">
-                                       
-                                    </a4j:commandLink>
+                                    <h:graphicImage  styleClass="ikont-hgi-strubicacion"   url="#{var.ipserver}#{var.versioncobra}#{imagen.strubicacion}" />
+                                </a4j:commandLink>
 
-                                </div>
-                            </a4j:repeat>
-                        </div>
+                                <a4j:commandLink    value="#{imagen.obra.strnombrecrot}" action="#{Ciudadano$PerfilCiudadano.cargarObraSliderImagenes}"                                               
+                                                    render="gpHeaderMOdalDetaCiudadano,gpDetaObraModal"
+                                                    oncomplete="#{rich:component('modalDetalleObra')}.show();"
+                                                    immediate="true">
+
+                                </a4j:commandLink>
+
+                            </div>
+                        </a4j:repeat>
                     </div>
-                </rich:panel>
+                </div>
             </center>
-
         </h:form>
-        
+
         <ui:include src="/Ciudadano/modalCiudadano/ModalDetalleObraCiud.xhtml"/>
 
     </f:subview>

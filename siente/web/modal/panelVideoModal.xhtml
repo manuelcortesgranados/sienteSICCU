@@ -18,7 +18,7 @@
             <h:form>
                 <h:panelGroup>
 
-                   <a4j:commandLink value="X" id="esconder_modalVideo" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink value="X" id="esconder_modalVideo" styleClass="ikont-acl-cerrar"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalVideo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -68,7 +68,8 @@
                                                    styleClass="ikont-acb-borrarvideo" />
                                 <a4j:commandButton styleClass="ikont-acb-aceptarvideo" action="#{Supervisor$Alimentar.guardarVideoTemporal}" id="BTaceptarVideo" render="layoutVideoMemoria"
                                                    value="#{var.aceptar}" rendered="#{Supervisor$Alimentar.cargadorVideo.numArchivos>0}"
-                                                   onclick="#{rich:component('modalVideo')}.hide();return false;"
+                                                   onclick="#{rich:component('modalVideo')}.hide();
+                                             return false;"
                                                    />
                             </center>
                         </h:panelGroup>

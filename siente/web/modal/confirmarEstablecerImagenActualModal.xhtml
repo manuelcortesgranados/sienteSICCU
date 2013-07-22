@@ -20,7 +20,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink  value="X" id="esconder_mp_confirmarEstablecerImagenActualModal" styleClass="ikont-acl-econdermpconfirmarestablecerimagenactualmodal"  
-                                     title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide(); return false;"/>
+                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
+                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -36,8 +37,8 @@
                                            render="panelTablaImagenesevolucion"  title="#{var.aceptar}"/>
                         <a4j:commandButton styleClass="ikont-acb-confestablecerimagenactualcancelar"  
                                            onclick="jQuery('.CheckEstablecerImagenActual#{Supervisor$AdministrarObraNew.imagenevolucionobraEd.intidimagen}').removeAttr('checked');
-                                                   #{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
-                                                   return false;" value="#{var.cancelar}"
+                                           #{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
+                                              return false;" value="#{var.cancelar}"
                                            title="#{var.cancelar}"/>
                     </h:panelGrid>
                 </h:panelGrid>

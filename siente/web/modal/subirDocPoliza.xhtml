@@ -14,24 +14,24 @@
         <rich:panel header="#{var.seleccionaracta}" styleClass="ikont-rp-selectacta"   >
             <h:form>
                 <h:panelGroup >
-                   <a4j:commandLink value="X" id="esconder_panelUploadDoc"
-                                       onclick="#{rich:component('panelUploadDoc')}.hide();
-                                               return false;"
-                                       immediate="true" styleClass="ikont-acl-esconder"   />
+                    <a4j:commandLink value="X" id="esconder_panelUploadDoc"
+                                     onclick="#{rich:component('panelUploadDoc')}.hide();
+                                             return false;"
+                                     immediate="true" styleClass="ikont-acl-esconder"   />
                 </h:panelGroup>
 
                 <h:panelGroup id="gpDoc">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}"
-                                         clearLabel="#{var.eliminar}"
-                                         doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}"
-                                         id="uploadDoc"
-                                         immediateUpload="true"
-                                         listHeight="150"
-                                         maxFilesQuantity="1" 
-                                         uploadLabel="#{var.subir}">
+                                          clearAllLabel="#{var.borrartodo}"
+                                          clearLabel="#{var.eliminar}"
+                                          doneLabel="#{var.hecho}"
+                                          fileUploadListener="#{Supervisor$Contrato.subirDocPol.listener}"
+                                          id="uploadDoc"
+                                          immediateUpload="true"
+                                          listHeight="150"
+                                          maxFilesQuantity="1" 
+                                          uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_doc,panel_subirDoc" />
                         </rich:fileUpload>
 
@@ -66,7 +66,7 @@
 
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{Supervisor$Contrato.subirDocPol.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadDoc')}.hide();
-                                               return false;"
+                                             return false;"
                                                    render="panel_subirDoc"  />
                             </center>
                         </h:panelGroup>

@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelVerPolizaModal" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink value="X" id="esconder_panelVerPolizaModal" styleClass="ikont-acl-cerrar"  
                                      onclick="#{rich:component('panelVerPolizaModal')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -73,7 +73,7 @@
                         <a4j:commandButton id="confirmarPoliza" render="layoutLugar" value="#{var.aceptar}"
                                            onclick="#{rich:component('panelVerPolizaModal')}.hide();
                                              return false;"
-                                            />
+                                           />
                     </h:panelGrid>
                 </center>
             </h:form>

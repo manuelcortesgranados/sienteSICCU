@@ -59,7 +59,7 @@
                         </rich:column>
                         <rich:column rendered="false">
                             <h:outputText  styleClass="ikont "   id="strusuariodet" value="#{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strnombre}
-                                          #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
+                                           #{currentRow.alimentacion.jsfUsuarioByIntusuAlimenta.tercero.strapellido1}"/>
                         </rich:column>
                         <rich:column>
                             <h:outputText  styleClass="ikont "   id="datefechadet" value="#{currentRow.alimentacion.datefecha}"/>

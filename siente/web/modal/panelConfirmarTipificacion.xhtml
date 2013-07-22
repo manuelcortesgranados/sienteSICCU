@@ -2,27 +2,27 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel height="100" id="panelConfirmarTipificacion" resizeable="false" width="500" >
         <rich:panel header="#{var.atencion}" styleClass="ikont-rp-atencion"   >
             <h:form id="frpaconfi">
                 <h:panelGroup >
-                    
+
                     <a4j:commandButton id="esconder_panelConfirmarTipificacion" onclick="#{rich:component('panelConfirmarTipificacion')}.hide();" immediate="true"
                                        styleClass="ikont-acb-cerar"    />
                 </h:panelGroup>
                 <h:panelGrid id="layoutConfTipificacion" columnClasses="aiu">
                     <interkont:spacer height="20"/>
-                
+
                     <a4j:commandButton id="btCerrarCofTip"  render="layoutModificar" value="#{var.aceptar}" onclick="#{rich:component('panelConfirmarTipificacion')}.hide();" />
                 </h:panelGrid>
             </h:form>
         </rich:panel>
     </rich:popupPanel>
-    
+
 </ui:composition>

@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" 
-        xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j" 
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="mp-listado-sedeseducativas" width="800" height="450" headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -18,111 +18,113 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_mp-listado-sedeseducativas" styleClass="ikont-hgi-cerrar"  
+                    <a4j:commandLink value="X" id="esconder_mp-listado-sedeseducativas" styleClass="ikont-hgi-cerrar"  
                                      title="#{var.cerrar}" immediate="true"
-                                     onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;"/>
-                      </h:panelGroup>
+                                     onclick="#{rich:component('mp-listado-sedeseducativas')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
             </h:form>
         </f:facet>
 
-        
 
-            <h:form id="form-mp-listado-sedeseducativas">
-                <h:panelGrid >
-                    <rich:panel id="pl-tabla-listado-sedeseducativas" >
 
-                        <h:panelGrid columns="2">
+        <h:form id="form-mp-listado-sedeseducativas">
+            <h:panelGrid >
+                <rich:panel id="pl-tabla-listado-sedeseducativas" >
 
-                            <h:outputText  styleClass="ikont-hot-campobuscar"   value="Cual es el campo por el que desea buscar" />
-                            <h:selectOneMenu id="cmbbusqueda" value="#{Supervisor$EntidadConvenio.busqueseleccion}">
-                                <f:selectItem itemValue="0" itemLabel="Seleccione"/>
-                                <f:selectItem itemValue="1" itemLabel="Codigo DANE"/>
-                                <f:selectItem itemValue="2" itemLabel="Nombre Institución"/>
-                                <f:selectItem itemValue="3" itemLabel="Nombre Sede"/>
-                                <a4j:ajax event="change" listener="#{Supervisor$EntidadConvenio.buscarSede}" render="palabrabus,parametro" />
-                            </h:selectOneMenu>
+                    <h:panelGrid columns="2">
 
-                            <h:panelGroup id="parametro">
-                                <h:outputText  styleClass="ikont-hot-coddane"   value="#{var.escribapalabra} Codigo DANE de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
-                                <h:outputText  styleClass="ikont-hot-nominsti"   value="#{var.escribapalabra} Nombre de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
-                                <h:outputText  styleClass="ikont-hot-nomsede"   value="#{var.escribapalabra} Nombre de la sede"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
-                            </h:panelGroup>
-                            <h:panelGroup id="palabrabus">
-                                <h:inputText  size="30" value="#{Supervisor$EntidadConvenio.parametrobus}" rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
-                                <a4j:commandButton value="#{var.buscar}" action="#{Supervisor$EntidadConvenio.buscarSede}" render="tablasedeseducativas,pl-tabla-listado-sedeseducativas"
-                                                   rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
-                            </h:panelGroup>
-                        </h:panelGrid>
-                        <interkont:spacer height="10" />
-                        <rich:dataTable id="tablasedeseducativas"
-                                        rows="3"
-                                        var ="sede"
-                                        rowKeyVar="filaSeleccionada"
-                                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                        sortMode="single"
-                                        value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
-                                        >
-                            <f:facet name="header">
-                                <rich:columnGroup>
-                                    <rich:column colspan="5">
-                                        <h:outputText  styleClass="ikont-hot-colum1"   value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
-                                    </rich:column>
-                                    <rich:column width="200px" breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont-hot-colum1"   value="#{var.codigodane}"/>
-                                    </rich:column>
-                                    <rich:column width="200px">
-                                        <h:outputText  styleClass="ikont-hot-colum2"   value="#{var.institucion}" />
-                                    </rich:column>
-                                    <rich:column width="200px">
-                                        <h:outputText  styleClass="ikont-hot-colum3"   value="#{var.codsede}"/>
-                                    </rich:column>
-                                    <rich:column width="200px">
-                                        <h:outputText  styleClass="ikont-hot-colum4"   value="#{var.nombre} Sede" />
-                                    </rich:column>
-                                    <rich:column width="200px">
-                                        <h:outputText  styleClass="ikont-hot-colum5"   value="#{var.SELECCION}" />
-                                    </rich:column>
-                                </rich:columnGroup>
-                            </f:facet>
-                            <rich:columnGroup id="CuerpoOpi">
-                                <rich:column  width="200px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-columd1"   value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
+                        <h:outputText  styleClass="ikont-hot-campobuscar"   value="Cual es el campo por el que desea buscar" />
+                        <h:selectOneMenu id="cmbbusqueda" value="#{Supervisor$EntidadConvenio.busqueseleccion}">
+                            <f:selectItem itemValue="0" itemLabel="Seleccione"/>
+                            <f:selectItem itemValue="1" itemLabel="Codigo DANE"/>
+                            <f:selectItem itemValue="2" itemLabel="Nombre Institución"/>
+                            <f:selectItem itemValue="3" itemLabel="Nombre Sede"/>
+                            <a4j:ajax event="change" listener="#{Supervisor$EntidadConvenio.buscarSede}" render="palabrabus,parametro" />
+                        </h:selectOneMenu>
+
+                        <h:panelGroup id="parametro">
+                            <h:outputText  styleClass="ikont-hot-coddane"   value="#{var.escribapalabra} Codigo DANE de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==1}"/>
+                            <h:outputText  styleClass="ikont-hot-nominsti"   value="#{var.escribapalabra} Nombre de la institución"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==2}"/>
+                            <h:outputText  styleClass="ikont-hot-nomsede"   value="#{var.escribapalabra} Nombre de la sede"  rendered="#{Supervisor$EntidadConvenio.seleccionbus==3}"/>
+                        </h:panelGroup>
+                        <h:panelGroup id="palabrabus">
+                            <h:inputText  size="30" value="#{Supervisor$EntidadConvenio.parametrobus}" rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
+                            <a4j:commandButton value="#{var.buscar}" action="#{Supervisor$EntidadConvenio.buscarSede}" render="tablasedeseducativas,pl-tabla-listado-sedeseducativas"
+                                               rendered="#{Supervisor$EntidadConvenio.seleccionbus!=0}"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+                    <interkont:spacer height="10" />
+                    <rich:dataTable id="tablasedeseducativas"
+                                    rows="3"
+                                    var ="sede"
+                                    rowKeyVar="filaSeleccionada"
+                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                    sortMode="single"
+                                    value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
+                                    >
+                        <f:facet name="header">
+                            <rich:columnGroup>
+                                <rich:column colspan="5">
+                                    <h:outputText  styleClass="ikont-hot-colum1"   value="#{var.sedeseducativas} #{Supervisor$EntidadConvenio.totalfilas} #{var.paginaCiu} #{Supervisor$EntidadConvenio.pagina} #{var.deCiu} #{Supervisor$EntidadConvenio.totalpaginas}" />
+                                </rich:column>
+                                <rich:column width="200px" breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-colum1"   value="#{var.codigodane}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="ikont-hot-columd2"   value="#{sede.institucioneducativa.strnombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-colum2"   value="#{var.institucion}" />
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="ikont-hot-columd3"   value="#{sede.strcodigosedeeducativa}"/>
+                                    <h:outputText  styleClass="ikont-hot-colum3"   value="#{var.codsede}"/>
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <h:outputText  styleClass="ikont-hot-columd4"   value="#{sede.strnombre}"/>
+                                    <h:outputText  styleClass="ikont-hot-colum4"   value="#{var.nombre} Sede" />
                                 </rich:column>
                                 <rich:column width="200px">
-                                    <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"
-                                                       title="#{var.agregar}" render="gpEducacion" value="Seleccionar"
-                                                       onclick="#{rich:component('mp-listado-sedeseducativas')}.hide(); return false;" />
+                                    <h:outputText  styleClass="ikont-hot-colum5"   value="#{var.SELECCION}" />
                                 </rich:column>
                             </rich:columnGroup>
-                            <f:facet name="footer">
-                                <rich:columnGroup>
-                                    <rich:column colspan="5" breakRowBefore="true">
-                                        <center>
-                                            <h:panelGrid columns="4">
-                                                <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.primeroSedes}"/>
-                                                <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.anterioresSedes}"/>
-                                                <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.siguientesSedes}"/>
-                                                <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.ultimoSede}"/>
-                                            </h:panelGrid>
-                                        </center>
-                                    </rich:column>
-                                </rich:columnGroup>
-                            </f:facet>
-                        </rich:dataTable>
-                        <interkont:spacer height="20"/>
-                    </rich:panel>
-                </h:panelGrid>
-            </h:form>
-       
+                        </f:facet>
+                        <rich:columnGroup id="CuerpoOpi">
+                            <rich:column  width="200px" breakRowBefore="true">
+                                <h:outputText  styleClass="ikont-hot-columd1"   value="#{sede.institucioneducativa.strcodigoinstitucion}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText  styleClass="ikont-hot-columd2"   value="#{sede.institucioneducativa.strnombre}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText  styleClass="ikont-hot-columd3"   value="#{sede.strcodigosedeeducativa}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText  styleClass="ikont-hot-columd4"   value="#{sede.strnombre}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"
+                                                   title="#{var.agregar}" render="gpEducacion" value="Seleccionar"
+                                                   onclick="#{rich:component('mp-listado-sedeseducativas')}.hide();
+                                             return false;" />
+                            </rich:column>
+                        </rich:columnGroup>
+                        <f:facet name="footer">
+                            <rich:columnGroup>
+                                <rich:column colspan="5" breakRowBefore="true">
+                                    <center>
+                                        <h:panelGrid columns="4">
+                                            <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.primeroSedes}"/>
+                                            <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$EntidadConvenio.veranterior}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.anterioresSedes}"/>
+                                            <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.siguientesSedes}"/>
+                                            <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$EntidadConvenio.verultimo}" render="tablasedeseducativas" action="#{Supervisor$EntidadConvenio.ultimoSede}"/>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                    </rich:dataTable>
+                    <interkont:spacer height="20"/>
+                </rich:panel>
+            </h:panelGrid>
+        </h:form>
+
     </rich:popupPanel>
 
 </ui:composition>

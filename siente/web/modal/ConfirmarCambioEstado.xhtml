@@ -21,7 +21,8 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink  value="X" id="esconder_confirmarCambioEstado" styleClass="ikont-acl-esconderconfirmarcambioestado"  
-                                     title="#{var.cerrar}" onclick="#{rich:component('confirmarCambioEstado')}.hide(); return false;"/>
+                                      title="#{var.cerrar}" onclick="#{rich:component('confirmarCambioEstado')}.hide();
+                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -38,7 +39,8 @@
                         <interkont:spacer height="15" />
                         <h:panelGroup>
                             <a4j:commandButton id="BTaceptarCambio" value="Si" styleClass="ikont-acb-btaceptarcambio"   oncomplete="#{rich:component('confirmarCambioEstado')}.hide();" action="#{Supervisor$AdministrarObraNew.solicitarCambioEstado}"/>
-                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" styleClass="ikont-acb-btnoaceptarcambio"   onclick="#{rich:component('confirmarCambioEstado')}.hide(); return false;"/>
+                            <a4j:commandButton id="BTnoaceptarCambio" value="NO" styleClass="ikont-acb-btnoaceptarcambio"   onclick="#{rich:component('confirmarCambioEstado')}.hide();
+                                              return false;"/>
                         </h:panelGroup>
                     </center>
                 </h:panelGrid>

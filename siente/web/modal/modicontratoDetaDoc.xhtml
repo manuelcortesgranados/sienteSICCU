@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelModiContratoDoc" styleClass="ikont"  
+                    <a4j:commandLink value="X" id="esconder_panelModiContratoDoc" styleClass="ikont"  
                                      title="#{var.cerrar}" immediate="true" 
                                      onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;"/>
@@ -65,7 +65,7 @@
                     <center>
                         <h:panelGrid columns="5">
                             <a4j:commandButton id="confirmarContratomodi"  value="#{var.aceptar}"
-                                               
+
                                                onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;" />
                         </h:panelGrid>

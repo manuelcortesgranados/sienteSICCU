@@ -5,12 +5,14 @@
 }
 
 .rf-sel-cntr {
-    border-width: 1px;
-    border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-radius:'#{richSkin.borderRadius}';
     display: inline-block;
     font-size: 1px;
     white-space: nowrap;
+    padding-left:3px;
 }
 
 input.rf-sel-inp {
@@ -51,7 +53,7 @@ input.rf-sel-inp {
     background-image: "url(#{resource['org.richfaces.images:comboDownButton.png']})";
     cursor: pointer;
     width: 15px;
-    height: 16px;
+    height: 23px;
     display: inline-block;
 }
 

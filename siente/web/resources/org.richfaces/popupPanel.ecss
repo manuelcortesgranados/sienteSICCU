@@ -17,13 +17,13 @@
     height: 100%;
     top: 0px;
     left: 0px;
-    background-color: #D0D0D0;
+    background-color: #000000;
     opacity: 0.5;
     filter: 'alpha(opacity=50)';
 }
 
 .rf-pp-shdw {
-    background-color: #000000;
+    background-color: transparent;
     opacity: 0.1;
     filter: 'alpha(opacity=10)';
     position: absolute;
@@ -35,21 +35,27 @@
 }
 
 .rf-pp-cntr {
-    border: '1px solid #{richSkin.panelBorderColor}';
-    border-radius: '#{richSkin.panelBorderRadius}';
-    background: '#{richSkin.generalBackgroundColor}';
+    background: transparent;
     z-index: 100;
 }
 
 .rf-pp-hdr {
     background: "url(#{resource['org.richfaces.images:gradientA.png']})";
-    repeat-x: 'top left #{richSkin.headerBackgroundColor}';
+    background-position: top left;
+    background-repeat: repeat-x;
+    background-color : '#{richSkin.headerBackgroundColor}';
     position: relative;
     padding-left: 10px;
     cursor: move;
-    padding: 2px;
-    border-top-left-radius: '#{richSkin.panelBorderRadius}';
-    border-top-right-radius: '#{richSkin.panelBorderRadius}';
+    padding: 8px;
+    border-top-left-radius: '#{richSkin.borderRadius}';
+    border-top-right-radius: '#{richSkin.borderRadius}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-bottom-color: transparent;
+    border-bottom-width: '#{richSkin.borderWeight}';
+    border-bottom-style: 0px;
 }
 
 .rf-pp-hdr-cnt {
@@ -66,8 +72,8 @@
 
 .rf-pp-hdr-cntrls {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 4px;
+    right: 15px;
     white-space: nowrap;
     cursor: default;
     font-weight: '#{richSkin.headerWeightFont}';
@@ -75,6 +81,16 @@
     font-family: '#{richSkin.headerFamilyFont}';
     font-size: '#{richSkin.headerSizeFont}';
     z-index: 100;
+}
+
+.rf-pp-hdr-cntrls  a{
+    font-size: 22px;
+    color:'#{richSkin.headerTextColor}';
+    text-decoration: none;
+}
+
+.rf-pp-hdr-cntrls  a:hover {
+    text-shadow: '2px 2px 2px #{richSkin.headerTextColor}';
 }
 
 .rf-pp-cnt-scrlr {
@@ -91,8 +107,11 @@
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
-    border-bottom-left-radius: '#{richSkin.panelBorderRadius}';
-    border-bottom-right-radius: '#{richSkin.panelBorderRadius}';
+    border-bottom-left-radius: '#{richSkin.borderRadius}';
+    border-bottom-right-radius: '#{richSkin.borderRadius}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
 }
 
 .rf-pp-hndlr {

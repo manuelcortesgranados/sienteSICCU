@@ -20,12 +20,14 @@
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
 .rf-insp {
-    border-width: 1px;
-    border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-radius: '#{richSkin.borderRadius}';
     display: inline-block;
     font-size: 1px;
     white-space: nowrap;
+    padding-left: 3px;
 }
 
 input.rf-insp-inp[type="text"] {
@@ -58,7 +60,7 @@ input.rf-insp-inp[type="text"] {
     background-position: 50% 40%;
     background-repeat: no-repeat;
     display: block;
-    height: 8px;
+    height: 12px;
     width: 15px;
 }
 

@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
     <rich:popupPanel id="modalFormularioValidarAlimentacion"  autosized="true" width="700" headerClass="rich-panel-header" styleClass="ikont"   >
@@ -19,24 +19,25 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont-acl-cerrar"  
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide(); return false;"/>
-                     </h:panelGroup>
+                    <a4j:commandLink value="X" id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont-acl-cerrar"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide();
+                                             return false;"/>
+                </h:panelGroup>
             </h:form>
         </f:facet>
 
-        
-           <center>
+
+        <center>
             <h:form id="frmformularioValidarAlimentacion">
                 <rich:panel id="listarchequeo"  >
                     <rich:dataTable 
-                                    
-                                    var="row" 
-                                    value="#{Supervisor$DetalleObra.listaverificacion}"
-                                    onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
-                                    onrowmouseover="this.style.backgroundColor='#B4DDEC'"                                    
-                                    rowKeyVar="filaSeleccionada"
-                                    >
+
+                        var="row" 
+                        value="#{Supervisor$DetalleObra.listaverificacion}"
+                        onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                        onrowmouseover="this.style.backgroundColor='#B4DDEC'"                                    
+                        rowKeyVar="filaSeleccionada"
+                        >
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="3">
@@ -51,7 +52,7 @@
                                 <rich:column>
                                     <h:outputText  styleClass="ikont-hot-col4 "   value="Cumple"/>
                                 </rich:column>
-                               
+
                             </rich:columnGroup>
                         </f:facet>
                         <rich:columnGroup>
@@ -65,17 +66,18 @@
                                 <h:selectBooleanCheckbox id="chkchequeo" styleClass="ikont-hot-col3d"   value="#{row.respuesta}"/>
                             </rich:column>                            
                         </rich:columnGroup>
-                        
+
                     </rich:dataTable>
                 </rich:panel>
-                    <a4j:commandButton value="#{var.guardar}" action="#{Supervisor$DetalleObra.guardarListaVerificacion}" oncomplete="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();"/>
-                    <a4j:commandButton value="#{var.cancelar}" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hidden(); return false;"/>
-                
+                <a4j:commandButton value="#{var.guardar}" action="#{Supervisor$DetalleObra.guardarListaVerificacion}" oncomplete="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();"/>
+                <a4j:commandButton value="#{var.cancelar}" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();
+                                             return false;"/>
+
             </h:form>
         </center>
-        
+
 
     </rich:popupPanel>
-   
+
 
 </ui:composition>

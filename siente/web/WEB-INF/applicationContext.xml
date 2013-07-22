@@ -15,7 +15,7 @@
             <value>org.postgresql.Driver</value>
         </property>
         <property name="url">
-            <value>jdbc:postgresql:cobrasienten</value>
+            <value>jdbc:postgresql:cobrasiente</value>
         </property>
         <property name="username">
             <value>cobra</value>

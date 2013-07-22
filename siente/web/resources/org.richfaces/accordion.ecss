@@ -8,11 +8,10 @@
 }
 
 .rf-ac-itm-hdr {
-    border-width: 1px;
-    border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
-    border-top-left-radius: '#{richSkin.panelBorderRadius}';
-    border-top-right-radius: '#{richSkin.panelBorderRadius}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-radius: '#{richSkin.borderRadius}';
     background-image: "url(#{resource['org.richfaces.images:gradientA.png']})";
     background-repeat: repeat-x;
     background-position: top left;
@@ -29,11 +28,11 @@
 }
 
 .rf-ac-itm-cnt {
-    border-width: 1px;
-    border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
-    border-bottom-left-radius: '#{richSkin.panelBorderRadius}';
-    border-bottom-right-radius: '#{richSkin.panelBorderRadius}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-bottom-left-radius: '#{richSkin.borderRadius}';
+    border-bottom-right-radius: '#{richSkin.borderRadius}';
     position: relative;
     overflow: auto;
     overflow-x: hidden;
@@ -82,11 +81,11 @@
 }
 
 .rf-ac-itm-lbl-act {
-    
+    color: '#{richSkin.headerTextColor}';
 }
 
 .rf-ac-itm-lbl-inact {
-    
+    color: '#{richSkin.headerTextColor}';
 }
 
 .rf-ac-itm-hdr-act .rf-ac-itm-ico-act {

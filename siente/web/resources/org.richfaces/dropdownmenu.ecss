@@ -8,21 +8,21 @@
 }
 
 .rf-ddm-lbl {
-    padding: 2px 5px;
+    padding: 5px 10px;
 }
 
 .rf-ddm-unsel {
-    border: 1px solid transparent;
+    border: 0px solid transparent;
 }
 
-.rf-ddm-sel {
-    background-image: "url(#{resource['org.richfaces.images:menu_item_bg.png']})";
-    background-repeat: repeat-x;
+.rf-ddm-sel {    
     background-position: bottom left;
-    background-color: '#{richSkin.additionalBackgroundColor}';
-    /*from additionalBackgroundColor (top) to tabBackgroundColor (bottom) additionalBackgroundColor*/
-    border: 1px solid; /*headerBackgroundColor*/
-    border-color: '#{richSkin.headerBackgroundColor}';
+    background-repeat: repeat-x;
+    background-image: "url(#{resource['org.richfaces.images:buttonHoverBackgroundImage.png']})";
+    background-color: '#{richSkin.headerBackgroundColor}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-color: '#{richSkin.headerGradientColor}';
     cursor: pointer;
 }
 
@@ -39,15 +39,30 @@
 }
 
 .rf-ddm-lbl-dec {
-    font-weight: '#{richSkin.headerWeightFont}';
     cursor: pointer;
+    height: 50px;
+    line-height: 50px;
+}
+
+.rf-ddm-lbl-dec span{
+    width:'#{richSkin.menuBarWidth}';
+    height:'#{richSkin.menuBarHeight}';
+    float:'#{richSkin.menuBarFloat}';
+    padding-left:'#{richSkin.menuBarPaddingLeft}';
+    font-size:'#{richSkin.menuBarfontSize}';
+    line-height:'#{richSkin.menuBarlineHeight}';
+    text-indent:'#{richSkin.menuBartextIndent}';
+    font-style:'#{richSkin.menuBarfontStyle}';
+    font-weight:'#{richSkin.menuBarFontWeight}';
+    display :'#{richSkin.menuBarDisplay}';
 }
 
 .rf-ddm-lst {
-    border: 1px solid; /*#bfbfc0*/ /*panelBorderColor*/
-    border-color: '#{richSkin.panelBorderColor}';
-    border-radius: '#{richSkin.panelBorderRadius}';
-    background-color: '#{richSkin.additionalBackgroundColor}'; /*#e7f2fb;/  /*additionalBackgroundColor*/
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-radius: '#{richSkin.borderRadius}';
+    background-color: '#{richSkin.backgroundDropdowmenu}'; 
     min-width: 250px;
     position: absolute;
     z-index: 10;
@@ -60,40 +75,47 @@
     left: 13px;
 }
 
+/*
+se bloquea esta clase  porque es la que agrega un background al icono del item, 
+los bordes los maneja la clase *..rf-ddm-lst que es el contenedor padre
 .rf-ddm-lst-bg {
-    border: 1px solid; /* #e7f2fb;*/ /*additionalBackgroundColor*/
+    border: 1px solid; 
     border-color: '#{richSkin.additionalBackgroundColor}';
     border-radius: '#{richSkin.panelBorderRadius}';
     background-repeat: repeat-y;
     background-position: left;
     background-image: "url(#{resource['org.richfaces.images:menu_list_bg.png']})";
-    /*from additionalBackgroundColor (left) to tabBackgroundColor (right)*/
+    
 }
+*/
 
 .rf-ddm-itm {
-    padding: 1px 35px 1px 1px;
+    padding: 5px 35px 5px 5px;
     white-space: nowrap;
     font-family: '#{richSkin.generalFamilyFont}'; /*verdana;*/ /*generalFamilyFont*/
     font-size: '#{richSkin.generalSizeFont}'; /*12px;*/ /*generalSizeFont*/
     position: relative;
+    height : '#{richSkin.heightItem}';
 }
 
 .rf-ddm-itm-unsel {
-    border: 1px solid transparent;
-    padding: 1px 36px 2px 2px;
+    border-bottom-color: '#{richSkin.borderColor}';
+    border-bottom-width: '#{richSkin.borderWeight}';
+    border-bottom-style: '#{richSkin.borderStyle}';
+    padding: 5px 36px 6px 6px;
+    height : '#{richSkin.heightItem}';
 }
 
-.rf-ddm-itm-sel {
-    border: 1px solid; /* #4a70ab;*/ /*headerBackgroundColor*/
+.rf-ddm-itm-sel {    
     border-color: '#{richSkin.headerBackgroundColor}';
-    border-radius: '#{richSkin.panelBorderRadius}';
+    border-width: '#{richSkin.borderWeight}';
+    border-style: '#{richSkin.borderStyle}';
+    border-radius:'#{richSkin.borderRadius}';
     cursor: pointer;
-    padding: 1px 36px 2px 2px;
-    background-color: '#{richSkin.additionalBackgroundColor}';
-    background-repeat: repeat-x;
-    background-position: bottom left;
-    background-image: "url(#{resource['org.richfaces.images:menu_item_bg.png']})";
+    padding: 5px 36px 6px 6px;
+    background-color: '#{richSkin.backgroundItemHover}';
     z-index: 10;
+    height : '#{richSkin.heightItem}';
 }
 
 .rf-ddm-itm-dis {
@@ -130,7 +152,7 @@
     font-size: 1px;
     width: 7px;
     height: 7px;
-    top: 7px;
+    top: 15px;
     right: 6px;
     position: absolute;
 }
@@ -158,4 +180,9 @@
     background-repeat: no-repeat;
     border-style: inset;
     border-width: 1px;
+}
+
+*.rf-ddm-itm-ic > img{
+    width: 25px;
+    height:25px;
 }

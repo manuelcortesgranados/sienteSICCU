@@ -53,7 +53,7 @@ a.rf-ds-btn {
 }
 
 .rf-ds-dis:hover {
-    color: '#{richSkin.tableBorderColor}';
+    color: '#{richSkin.generalTextColorDisable}';
     cursor: default;
 }
 
@@ -120,6 +120,6 @@ a.rf-ds-btn {
 }
 
 .rf-ds-dis {
-    color: '#{richSkin.tableBorderColor}';
+    color: '#{richSkin.generalTextColorDisable}';
     cursor: default;
 }
