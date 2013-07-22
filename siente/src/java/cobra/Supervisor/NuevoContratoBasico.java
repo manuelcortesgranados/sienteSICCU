@@ -798,6 +798,7 @@ public class NuevoContratoBasico implements Serializable {
     private int panelPantalla;
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente; 
+    private List<Fuenterecursosconvenio> lstFuentesRecursos;
 
     /**
      *
@@ -2173,6 +2174,7 @@ public class NuevoContratoBasico implements Serializable {
             }
         } else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
+            lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
             llenarEntidades();
@@ -6050,9 +6052,9 @@ public class NuevoContratoBasico implements Serializable {
      */
     public void adicionarFuenteRecursos() {
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
+        lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente=Boolean.TRUE;
         limpiarFuenteRecurso();
-        System.out.println("fuentes = " + contrato.getFuenterecursosconvenios().size());
     }
 
     /*
@@ -6236,7 +6238,7 @@ public class NuevoContratoBasico implements Serializable {
        
 
     }
-
+    
     /**
      * @return the boolguardofuente
      */
@@ -6251,4 +6253,20 @@ public class NuevoContratoBasico implements Serializable {
     public void setBoolguardofuente(boolean boolguardofuente) {
         this.boolguardofuente = boolguardofuente;
     }
+
+    /**
+     * @return the lstFuentesRecursos
+     */
+    public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
+        return lstFuentesRecursos;
+    }
+
+    /**
+     * @param lstFuentesRecursos the lstFuentesRecursos to set
+     */
+    public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
+        this.lstFuentesRecursos = lstFuentesRecursos;
+    }
+    
+    
 }

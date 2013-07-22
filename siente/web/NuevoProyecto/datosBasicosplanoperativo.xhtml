@@ -107,7 +107,6 @@
                 <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}" required="true" onkeypress="return validar(event);">
                     <f:validateLongRange minimum="0"/>
                     <f:validateLength maximum="26" minimum="1"/>
-                    <f:convertNumber pattern="$ ###,###.###"/>
                     <rich:placeholder value="cuota gerencia" />
                 </h:inputText>
 
@@ -125,7 +124,7 @@
                 <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.adicionarFuenteRecursos}" render="hpg-fuenter-conv,hpg-fuenter-cuotag,conf">
 
                 </a4j:commandLink>
-                <a4j:commandLink value="#{var.ver}"/>
+                <a4j:commandLink value="#{var.ver}"  onclick="#{rich:component('ver-fuenterecursos')}.show();" execute="@this" immediate="true"/>
             </h:panelGrid>
 
             <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
