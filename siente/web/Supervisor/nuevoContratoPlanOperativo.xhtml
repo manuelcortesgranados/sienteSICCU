@@ -9,7 +9,7 @@
                 xmlns:interkont="http://www.interkont.com/jsf">
 
     <ui:define name="head">
-        
+
     </ui:define>
 
     <ui:define name="menu">
@@ -42,7 +42,7 @@
                     <br/>
                     <h:outputText value="#{Supervisor$Contrato.variabletitulo}"/>
                     <br/>                
-                   <h:outputText value="#{Supervisor$Contrato.infogeneralcrearconvenio}"/>
+                    <h:outputText value="#{Supervisor$Contrato.infogeneralcrearconvenio}"/>
                 </center>
             </h:panelGroup>
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
@@ -58,14 +58,24 @@
                     <a4j:commandLink value="#{var.reportes}"/>
                 </h:panelGrid>                
                 <rich:panel style="width:800px;height:400px;" styleClass="ikont-rp-po">
-                    <h:panelGroup>
-                        <h:commandButton value="Consolidado"/>
-                        <h:commandButton value="Cronograma"/>
-                        <h:commandButton value="Presupuesto"/>
-                        <h:commandButton value="Flujo de caja"/>
-                        <h:commandButton value="Plan operativo"/>
-                        <h:commandButton value="Plan de contratación"/>
-                    </h:panelGroup>
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(1)}" value="Consolidado"  />
+                    </h:panelGrid>
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(2)}" value="Cronograma" />
+                    </h:panelGrid>
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(3)}" value="Presupuesto"  />
+                    </h:panelGrid>                     
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(4)}" value="Flujo de caja" />
+                    </h:panelGrid>
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(5)}" value="Plan operativo" />
+                    </h:panelGrid>
+                    <h:panelGrid columnClasses="panelcenter">
+                        <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReportesPlanOperativo(6)}"  value="Plan de contratación" />
+                    </h:panelGrid>                   
                     plan operativo
                 </rich:panel>                
             </a4j:region> 
@@ -171,67 +181,67 @@
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==5}" id="reg-documentos">
                 <rich:panel style="width:800px;height:400px;">
-                        <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
+                    <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
 
-                            <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
-                                               onclick="#{rich:component('panelUploadDocumentocc')}.show();">
+                        <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
+                                           onclick="#{rich:component('panelUploadDocumentocc')}.show();">
+                        </a4j:commandButton>
+                        <h:outputText  styleClass="ikont-hot-descdocumento" id="Documentocc" value="#{var.descipcionDocumento}:"/>
+                        <h:inputText id="inputDescDocument" value="#{Supervisor$Contrato.documentoobra.strnombre}" />
+                        <h:outputText  styleClass="ikont-hot-tipodocumento" id="tipodocc"  value="#{var.tipoDocumento}:"/>
+                        <h:selectOneMenu id="selecttipodocumentocc" value="#{Supervisor$Contrato.tipodoc}">
+                            <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>
+                        </h:selectOneMenu>
+
+                        <a4j:commandLink id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}" value="agregar"
+                                         action="#{Supervisor$Contrato.subirDocContrato}" 
+                                         render="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato">
+                        </a4j:commandLink>                          
+
+                    </h:panelGrid>
+                    <interkont:spacer height="14"/>
+                    <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" >
+                        <h:outputText  styleClass="ikont-nomarch" id="txt_nombrearchivocc" value=" #{file.nombre}"/>
+                    </rich:dataGrid>
+                    <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
+                                    var="currentRow"
+                                    rows="7" rowKeyVar="filaSeleccionada"
+                                    value="#{Supervisor$Contrato.listadocumentos}"                                        >
+                        <f:facet name="header" >
+                            <rich:columnGroup >
+                                <rich:column colspan="5">
+                                    <h:outputText  styleClass="ikont-hot-docseleccion" value="#{var.docseleccionados}"/>
+                                </rich:column>
+                                <rich:column breakRowBefore="true">
+                                    <h:outputText  styleClass="ikont-hot-tipodocuments" value="#{var.tipoDocumento}:"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-nombredoc" value="#{var.nombre}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText  styleClass="ikont-hot-eliminardoc" value="#{var.eliminar}:"/>
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-desciptdocs" value="#{currentRow.tipodocumento.strdesctipodoc}" />
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-nombredocs" value="#{currentRow.strnombre}" />
+                        </rich:column>
+                        <rich:column >
+                            <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
+                                               action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
                             </a4j:commandButton>
-                            <h:outputText  styleClass="ikont-hot-descdocumento" id="Documentocc" value="#{var.descipcionDocumento}:"/>
-                            <h:inputText id="inputDescDocument" value="#{Supervisor$Contrato.documentoobra.strnombre}" />
-                            <h:outputText  styleClass="ikont-hot-tipodocumento" id="tipodocc"  value="#{var.tipoDocumento}:"/>
-                            <h:selectOneMenu id="selecttipodocumentocc" value="#{Supervisor$Contrato.tipodoc}">
-                                <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>
-                            </h:selectOneMenu>
-
-                            <a4j:commandLink id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}" value="agregar"
-                                             action="#{Supervisor$Contrato.subirDocContrato}" 
-                                             render="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato">
-                            </a4j:commandLink>                          
-
-                        </h:panelGrid>
-                        <interkont:spacer height="14"/>
-                        <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" >
-                            <h:outputText  styleClass="ikont-nomarch" id="txt_nombrearchivocc" value=" #{file.nombre}"/>
-                        </rich:dataGrid>
-                        <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
-                                        var="currentRow"
-                                        rows="7" rowKeyVar="filaSeleccionada"
-                                        value="#{Supervisor$Contrato.listadocumentos}"                                        >
-                            <f:facet name="header" >
-                                <rich:columnGroup >
-                                    <rich:column colspan="5">
-                                        <h:outputText  styleClass="ikont-hot-docseleccion" value="#{var.docseleccionados}"/>
-                                    </rich:column>
-                                    <rich:column breakRowBefore="true">
-                                        <h:outputText  styleClass="ikont-hot-tipodocuments" value="#{var.tipoDocumento}:"/>
-                                    </rich:column>
-                                    <rich:column>
-                                        <h:outputText  styleClass="ikont-hot-nombredoc" value="#{var.nombre}"/>
-                                    </rich:column>
-                                    <rich:column>
-                                        <h:outputText  styleClass="ikont-hot-eliminardoc" value="#{var.eliminar}:"/>
-                                    </rich:column>
-                                </rich:columnGroup>
-                            </f:facet>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-desciptdocs" value="#{currentRow.tipodocumento.strdesctipodoc}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-nombredocs" value="#{currentRow.strnombre}" />
-                            </rich:column>
-                            <rich:column >
-                                <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
-                                                   action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
-                                </a4j:commandButton>
-                            </rich:column>
-                            <f:facet name="footer">
-                                <rich:columnGroup>
-                                    <rich:column colspan="4" breakRowBefore="true" >
-                                        <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont" render="tablaDocumentoscont"/>
-                                    </rich:column>
-                                </rich:columnGroup>
-                            </f:facet>
-                        </rich:dataTable>
+                        </rich:column>
+                        <f:facet name="footer">
+                            <rich:columnGroup>
+                                <rich:column colspan="4" breakRowBefore="true" >
+                                    <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont" render="tablaDocumentoscont"/>
+                                </rich:column>
+                            </rich:columnGroup>
+                        </f:facet>
+                    </rich:dataTable>
                 </rich:panel>
             </a4j:region>           
 
