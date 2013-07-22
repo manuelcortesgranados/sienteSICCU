@@ -25,7 +25,7 @@
         </property>
     </bean>
     <!-- Hibernate SessionFactory Definition -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+       <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
         <property name="mappingResources">
             <list>
                 <value>co/com/interkont/cobra/to/Fase.hbm.xml</value>
@@ -146,7 +146,7 @@
                 <value>co/com/interkont/cobra/to/Sector.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Tiposolicitante.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Zonaespecifica.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Clasificaciontipodesarrollo.hbm.xml</value>                
                 
                 <value>co/com/interkont/cobra/to/Historicoplanificacionpago.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Registrovalidador.hbm.xml</value>
@@ -199,7 +199,7 @@
                 <value>co/com/interkont/cobra/to/seguimientosah/MuniVivienda.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/seguimientosah/AsishumaMunicipal.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/seguimientosah/ArriendoMuni.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/seguimientosah/AlberguesMunicipal.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/seguimientosah/AlberguesMunicipal.hbm.xml</value>                             
                              
                 <value>co/com/interkont/cobra/vista/VistaObraMapa.hbm.xml</value>
                 <value>co/com/interkont/cobra/tipo/dashboard.hbm.xml</value>
@@ -345,6 +345,13 @@
           class="ciudadano.service.CiudadanoServiceImpl">
         <property name="ciudadanoDao">
             <ref local="ciudadanoDao" />
+        </property>
+    </bean>
+    
+    <bean id="gwtServiceTarget" scope="prototype"
+          class="co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl">
+        <property name="cobraDao">
+            <ref local="cobraDao" />
         </property>
     </bean>
 
@@ -590,6 +597,26 @@
                 <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
                 <prop key="guardar*">PROPAGATION_REQUIRED</prop>
                 <prop key="funcion*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="cobraGwtService" scope="prototype"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
+        <property name="transactionManager">
+            <ref local="transactionManager" />
+        </property>
+        <property name="target">
+            <ref local="gwtServiceTarget" />
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="encontrar*">PROPAGATION_REQUIRED,readOnly</prop>
+                <prop key="obtener*">PROPAGATION_REQUIRED,readOnly</prop>
             </props>
         </property>
     </bean>
