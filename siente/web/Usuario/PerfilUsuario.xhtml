@@ -10,7 +10,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/facelets/template_main.xhtml">
-    
+
     <ui:define name="head">
         <title>Modificar Usuario</title>
         <h:outputScript name="script_supervisor.js"/>
@@ -104,7 +104,7 @@
 
                         <h:outputText  styleClass="ikont-hot-fechanacimiento"   value="Fecha nacimiento"/>
                         <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-rc-calendarfechnacimiento"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
-                                       value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
+                                        value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
 
                         <h:outputText  styleClass="ikont-hot-direccion"   value="Dirección"/>
                         <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strdireccionprincipal}" styleClass="ikont-hit-strdireccionprincipal"   disabled="#{Perfil$Usuario.modificarUsuario}" /> 

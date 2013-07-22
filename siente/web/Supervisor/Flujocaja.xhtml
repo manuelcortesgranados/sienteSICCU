@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../facelets/template_main.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="head" />
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:form>  
+            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form>
+            <rich:dataTable style="width:700px;" var="record" value="#{PlanOperativo.expReport.records}">            
+                <rich:column colspan="#{record.column}" style="background: #f0f9ff;" >
+                    <center>
+                        <h:outputText value="#{record.city}"/>
+                    </center>   
+                </rich:column>               
+                <rich:column breakRowBefore="true" colspan="3" rowspan="2" rendered="#{record.city == 'San Jose'}"  >
+                </rich:column>      
+                <rich:column breakRowBefore="true" rowspan="2" colspan="3" rendered="#{record.city == 'Seattle'}">
+                </rich:column> 
+                <rich:column rowspan="2" >
+                    <h:outputText value="Meals" />
+                </rich:column>
+                <rich:column rowspan="2" >
+                    <h:outputText value="subtotals"/>
+                </rich:column>
+                <rich:column rendered="#{record.city == 'Seattle'}" rowspan="2">
+                    <h:outputText value="Hotels"  />
+                </rich:column>
+                <rich:column rendered="#{record.city == 'Seattle'}" rowspan="2"  >
+                    <h:outputText value="Transport"  />
+                </rich:column> 
+                <rich:columnGroup binding="#{HomeGestion.columnagrupado}" >
+
+                </rich:columnGroup>             
+
+                <rich:collapsibleSubTable var="expense" value="#{record.items}" >
+                    <rich:column rendered="#{record.city == 'Seattle'}" colspan="3">
+                        <h:outputText value="#{expense.day}"></h:outputText>
+                        <f:facet name="footer">
+                            <h:outputText value="Totales"/>
+                        </f:facet>
+                    </rich:column>
+                    <rich:column colspan="3" rendered="#{record.city == 'San Jose'}">
+                        <h:outputText value="#{expense.day}"></h:outputText>
+                        <f:facet name="footer">
+                            <h:outputText value="Totales"/>
+                        </f:facet>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText value="#{expense.meals}">
+                            <f:convertNumber pattern="$####.00" />
+                        </h:outputText>
+                        <f:facet name="footer">
+                            <h:outputText value="#{record.totalMeals}">
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </f:facet>
+                    </rich:column>
+                    <rich:column rendered="#{record.city == 'Seattle'}">
+                        <rich:inplaceInput defaultLabel="#{expense.hotels}" >
+                        <!--<h:outputText value="#{expense.hotels}" >-->
+                            <f:convertNumber pattern="$####.00" />
+                            <!--</h:outputText>-->
+                        </rich:inplaceInput>
+                        <f:facet name="footer">
+                            <h:outputText value="#{record.totalHotels}" >
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </f:facet>
+                    </rich:column>
+
+                    <rich:column rendered="#{record.city == 'Seattle'}">
+                        <h:outputText value="#{expense.transport}" >
+                            <f:convertNumber pattern="$####.00" />
+                        </h:outputText>
+                        <f:facet name="footer">
+                            <rich:inplaceInput defaultLabel="#{record.totalTransport}">
+                            <!--<h:outputText value="#{record.totalTransport}">-->
+                                <f:convertNumber pattern="$####.00" />
+                                <!--</h:outputText>-->
+                            </rich:inplaceInput>
+                        </f:facet>
+                    </rich:column>
+
+                    <rich:column>
+                        <f:facet name="footer">                            
+                            <h:outputText value="#{record.total}">
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </f:facet>
+                    </rich:column>                
+
+                </rich:collapsibleSubTable>
+
+                <f:facet name="footer">
+
+                    <rich:columnGroup>
+                        <rich:column colspan="3">Totals</rich:column>
+                        <rich:column>
+                            <h:outputText value="#{PlanOperativo.expReport.totalMeals}" >                                
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{PlanOperativo.expReport.totalHotels}">
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{PlanOperativo.expReport.totalTransport}">
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{PlanOperativo.expReport.grandTotal}">
+                                <f:convertNumber pattern="$####.00" />
+                            </h:outputText>
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+            </rich:dataTable>
+        </h:form>        
+    </ui:define>
+</ui:composition>

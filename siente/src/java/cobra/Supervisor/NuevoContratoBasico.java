@@ -12,9 +12,11 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Documentoobra;
 import co.com.interkont.cobra.to.Encargofiduciario;
 import co.com.interkont.cobra.to.EstadoCivil;
+import co.com.interkont.cobra.to.Estadoconvenio;
 import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
 import co.com.interkont.cobra.to.Formapago;
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Genero;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Modalidadcontratista;
@@ -25,6 +27,7 @@ import co.com.interkont.cobra.to.Ordendepago;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Planificacionpago;
 import co.com.interkont.cobra.to.Polizacontrato;
+import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import co.com.interkont.cobra.to.Tipocontratoconsultoria;
@@ -737,7 +740,6 @@ public class NuevoContratoBasico implements Serializable {
     public void setModalidadcontratista(Modalidadcontratista modalidadcontratista) {
         this.modalidadcontratista = modalidadcontratista;
     }
-
     /**
      * Variable para mostrar la modalidad seleccionada por el contratista
      */
@@ -766,7 +768,6 @@ public class NuevoContratoBasico implements Serializable {
      * Variable para habilitar El boton Guardar
      */
     public boolean habilitarGuardarNumeroContrato = false;
-
     public boolean habilitarModificarTxtObjeto = true;
     /**
      * Variable para habilitar el boton modificar Objeto contrato
@@ -776,7 +777,28 @@ public class NuevoContratoBasico implements Serializable {
      * Variable para habilitar los botones para modificar el objeto del contrato
      */
     private boolean habilitarBtnGuardarCancelarContrato = false;
-
+    /*
+     * variables para realizar la carga de las entidades 
+     */
+    private SelectItem[] entidades;
+    /*
+     * variables para realizar la carga de los gerentes de convenio
+     */
+    private SelectItem[] gerentesDeConvenio;
+    /*
+     * variables para realizar la carga de los roles 
+     */
+    private SelectItem[] roles;
+    /*
+     * variables para realizar la carga del tipo de aporte
+     */
+    private SelectItem[] tipoAporte;
+    private String variabletitulo;
+    private String infogeneralcrearconvenio;
+    private int panelPantalla;
+    private Fuenterecursosconvenio fuenteRecursoConvenio;
+    private boolean boolguardofuente; 
+    private List<Fuenterecursosconvenio> lstFuentesRecursos;
 
     /**
      *
@@ -785,7 +807,6 @@ public class NuevoContratoBasico implements Serializable {
      * Set y get de todas las variables anteriores
      *
      */
-    
     public boolean isHabilitarBtnModificarcontrato() {
         return habilitarBtnModificarcontrato;
     }
@@ -802,7 +823,6 @@ public class NuevoContratoBasico implements Serializable {
         this.habilitarBtnGuardarCancelarContrato = habilitarBtnGuardarCancelarContrato;
     }
 
-    
     public boolean isHabilitarModificarNumero() {
         return habilitarModificarNumero;
     }
@@ -2129,26 +2149,38 @@ public class NuevoContratoBasico implements Serializable {
      */
     private void _init() throws Exception {
     }
-
     // </editor-fold>
+
     /**
      * <p>Construct a new Page bean instance.</p>
      */
+    /* variables para el funcionamiento del plan operativo*/
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
-        limpiarContrato();
-        llenarTipoContratoconsultoria();
-        llenarTipoContrato();
-        llenarEventos();
-        llenarPeriodoxEvento();
-        llenarTipodocumentos();
-        //llenarPolizas();
-        llenarFormaPago();
-        llenarComboContratista();
-        iniciarFiltroAvanzado();
-        if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
-            llenarModalidadContratista();
+        if (!Propiedad.getValor("conplanoperativo").equals("true")) {
+            limpiarContrato();
+            llenarTipoContratoconsultoria();
+            llenarTipoContrato();
+            llenarEventos();
+            llenarPeriodoxEvento();
+            llenarTipodocumentos();
+            //llenarPolizas();
+            llenarFormaPago();
+            llenarComboContratista();
+            iniciarFiltroAvanzado();
+            if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
+                llenarModalidadContratista();
+            }
+        } else {
+            fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
+            lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
+            variabletitulo = Propiedad.getValor("primerodatosbasicos");
+            llenarEstadoConvenio();
+            llenarEntidades();
+            llenarRoles();
+            llenarGerentes();
+            llenarTipoAporte();
         }
 
     }
@@ -2168,6 +2200,7 @@ public class NuevoContratoBasico implements Serializable {
         llenarFormaPago();
         return null;
     }
+
     /**
      * Se buscan las pólizas asociadas al contrato y se llenan en el consultar
      * del contrato
@@ -2470,7 +2503,27 @@ public class NuevoContratoBasico implements Serializable {
 
                 case 3://Acta unica
                     if (bundle.getString("fechaformapago").equals("true")) {
-                    if (planificacionpago.getDatefechapago() != null) {
+                        if (planificacionpago.getDatefechapago() != null) {
+                            planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
+                            planificacionpago.setStrdescripcion("");
+                            planificacionpago.setBoolactivo(true);
+                            planificacionpago.setBoolrealizado(false);
+                            planificacionpago.setDateusucreacion(new Date());
+                            planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                            planificacionpago.setContrato(contrato);
+                            //setplani.add(planificacionpago);
+                            planificacionpago.setNumvlrporcentage(new BigDecimal(100));
+                            contrato.setPlanificacionpagos(new LinkedHashSet());
+                            contrato.getPlanificacionpagos().add(planificacionpago);
+
+                            return true;
+                        } else {
+                            if (bundle.getString("fechaformapago").equals("true")) {
+                                FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
+                                return false;
+                            }
+                        }
+                    } else {
                         planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
                         planificacionpago.setStrdescripcion("");
                         planificacionpago.setBoolactivo(true);
@@ -2478,33 +2531,13 @@ public class NuevoContratoBasico implements Serializable {
                         planificacionpago.setDateusucreacion(new Date());
                         planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                         planificacionpago.setContrato(contrato);
+                        planificacionpago.setDatefechapago(contrato.getDatefechaini());
                         //setplani.add(planificacionpago);
                         planificacionpago.setNumvlrporcentage(new BigDecimal(100));
                         contrato.setPlanificacionpagos(new LinkedHashSet());
                         contrato.getPlanificacionpagos().add(planificacionpago);
-
                         return true;
-                    } else {
-                        if (bundle.getString("fechaformapago").equals("true")) {
-                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
-                            return false;
-                        }
                     }
-                } else {
-                    planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
-                    planificacionpago.setStrdescripcion("");
-                    planificacionpago.setBoolactivo(true);
-                    planificacionpago.setBoolrealizado(false);
-                    planificacionpago.setDateusucreacion(new Date());
-                    planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
-                    planificacionpago.setContrato(contrato);
-                    planificacionpago.setDatefechapago(contrato.getDatefechaini());
-                    //setplani.add(planificacionpago);
-                    planificacionpago.setNumvlrporcentage(new BigDecimal(100));
-                    contrato.setPlanificacionpagos(new LinkedHashSet());
-                    contrato.getPlanificacionpagos().add(planificacionpago);
-                    return true;
-                }
             }
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar la forma de pago.");
@@ -2566,6 +2599,7 @@ public class NuevoContratoBasico implements Serializable {
                     contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
                     contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
                     contrato.setIntcantproyectos(0);
+                    contrato.setEstadoconvenio(new Estadoconvenio(2));
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
                     }
@@ -2624,8 +2658,7 @@ public class NuevoContratoBasico implements Serializable {
         getSessionBeanCobra().getCobraService().guardarContrato(contrato);
         for (Documentoobra docContrato : listadocumentos) {
             try {
-                String nuevaRutaWeb
-                        = ArchivoWebUtil.copiarArchivo(
+                String nuevaRutaWeb = ArchivoWebUtil.copiarArchivo(
                         docContrato.getStrubicacion(),
                         MessageFormat.format(RutasWebArchivos.DOCS_CONTRATO, "" + getContrato().getIntidcontrato()),
                         true, false);
@@ -4628,6 +4661,7 @@ public class NuevoContratoBasico implements Serializable {
         filtrocontrato.setBoolcontrconsultoria(false);
         filtrocontrato.setBooltienehijo(false);
         filtrocontrato.setBooltipocontconv(false);
+        filtrocontrato.getEstadoConvenio();
         limpiarContrato();
         primeroDetcontrato();
         return "consultarContratoConvenio";
@@ -5839,6 +5873,7 @@ public class NuevoContratoBasico implements Serializable {
         habilitarModificarNumero = true;
         habilitarGuardarNumeroContrato = false;
     }
+
     /**
      * Metodo Utilizado para habilitar los botones de Guardar y cancelar el
      * objeto del contrato
@@ -5872,11 +5907,36 @@ public class NuevoContratoBasico implements Serializable {
         habilitarBtnModificarcontrato = true;
         habilitarBtnGuardarCancelarContrato = false;
     }
-
     /**
      * Llena el combo de modalidad de contratista.
      */
     private List<Modalidadcontratista> listModalidadContratista;
+    /**
+     * Llena el Estado del convenio
+     */
+    private List<Estadoconvenio> listEstadoConvenio;
+    /**
+     * Select item listaestadoconvenio
+     *
+     * @return
+     */
+    private SelectItem[] estadoConvenioOption;
+
+    public SelectItem[] getEstadoConvenioOption() {
+        return estadoConvenioOption;
+    }
+
+    public void setEstadoConvenioOption(SelectItem[] estadoConvenioOption) {
+        this.estadoConvenioOption = estadoConvenioOption;
+    }
+
+    public List<Estadoconvenio> getListEstadoConvenio() {
+        return listEstadoConvenio;
+    }
+
+    public void setListEstadoConvenio(List<Estadoconvenio> listEstadoConvenio) {
+        this.listEstadoConvenio = listEstadoConvenio;
+    }
 
     public List<Modalidadcontratista> getListModalidadContratista() {
         return listModalidadContratista;
@@ -5899,4 +5959,314 @@ public class NuevoContratoBasico implements Serializable {
         }
     }
 
+    public String irApaginaconvenio() {
+        if (Propiedad.getValor("conplanoperativo").equals("true")) {
+            panelPantalla = 1;
+            return "nuevoConvenioPo";
+        }
+        return "nuevoContrato";
+    }
+
+    /**
+     * @return the panelPantalla
+     */
+    public int getPanelPantalla() {
+        return panelPantalla;
+    }
+
+    /**
+     * @param panelPantalla the panelPantalla to set
+     */
+    public void setPanelPantalla(int panelPantalla) {
+        this.panelPantalla = panelPantalla;
+    }
+
+    /*
+     * metodo que se encarga de actualizar el panel actual de la pantalla
+     * @param panelPantalla int
+     */
+    public void actualizarPanel(int panelPantalla) {
+        this.panelPantalla = panelPantalla;
+        switch (panelPantalla) {
+            case 1:
+                variabletitulo = Propiedad.getValor("primerodatosbasicos");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                break;
+            case 2:
+                variabletitulo = Propiedad.getValor("segundoplanoperativo");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                break;
+            case 3:
+                variabletitulo = Propiedad.getValor("terceropolizas");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                break;
+            case 4:
+                variabletitulo = Propiedad.getValor("cuartoformapago");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                break;
+            case 5:
+                variabletitulo = Propiedad.getValor("quintodocumento");
+                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                break;
+
+        }
+
+    }
+
+    /**
+     * Metodo que llena los estados del convenio
+     *
+     * @return void
+     */
+    public void llenarEstadoConvenio() {
+        listEstadoConvenio = getSessionBeanCobra().getCobraService().encontrarEstadoConvenio();
+        estadoConvenioOption = new SelectItem[listEstadoConvenio.size()];
+        int i = 0;
+        for (Estadoconvenio estado : listEstadoConvenio) {
+            SelectItem itEstado = new SelectItem(estado.getIdestadoconvenio(), estado.getStrestadoconv());
+            estadoConvenioOption[i++] = itEstado;
+        }
+
+    }
+
+    /*
+     *metodo que se encarga de guardar el convenio
+     * en estado en estructuración.
+     * 
+     */
+    public void guardarBorradorConvenio() {
+    }
+
+    /*
+     *metodo que se encarga de guardar el convenio
+     * en estado en ejecución.
+     * 
+     */
+    public void finalizarGuardado() {
+    }
+
+    /*
+     *metodo que se encarga de adicionar una fuente de recurso a la
+     * fuente de recursos del convenio.
+     *      
+     */
+    public void adicionarFuenteRecursos() {
+        contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
+        lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
+        boolguardofuente=Boolean.TRUE;
+        limpiarFuenteRecurso();
+    }
+
+    /*
+     *metodo que se encarga de eliminar una fuente de recurso a las
+     * fuente de recursos del convenio.
+     *      
+     */
+    public void eliminarFuenteRecursos(int filaFuenteRecursoEliminar) {
+        int contador = 0;
+        for (Iterator i = contrato.getFuenterecursosconvenios().iterator(); i.hasNext();) {
+            if (contador == filaFuenteRecursoEliminar) {
+                Fuenterecursosconvenio fuenteRecursosEliminar = (Fuenterecursosconvenio) i.next();
+                contrato.getFuenterecursosconvenios().remove(fuenteRecursosEliminar);
+            } else {
+                contador++;
+            }
+        }
+    }
+
+    /*
+     *metodo que  carga las entidades de fonade en la lista de seleccion
+     *      
+     */
+    public void llenarEntidades() {
+        List<Tercero> lstentidades = new ArrayList<Tercero>();
+        lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
+        setEntidades(new SelectItem[lstentidades.size()]);
+        int i = 0;
+        for (Tercero tercero : lstentidades) {
+            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
+            getEntidades()[i++] = itTercero;
+        }
+
+    }
+
+    /*
+     *metodo que  carga los roles de las entidades en la lista de seleccion
+     *      
+     */
+    public void llenarRoles() {
+        List<Rolentidad> lstRoles = new ArrayList<Rolentidad>();
+        lstRoles = getSessionBeanCobra().getCobraService().encontrarRolesEntidad();
+        setRoles(new SelectItem[lstRoles.size()]);
+        int i = 0;
+        for (Rolentidad rolEntidad : lstRoles) {
+            SelectItem itRolEntidad = new SelectItem(rolEntidad.getIdrolentidad(), rolEntidad.getStrnombre());
+            getRoles()[i++] = itRolEntidad;
+        }
+
+    }
+
+    /*
+     *metodo que  carga los tipos de aportes en la lista de seleccion
+     *      
+     */
+    public void llenarTipoAporte() {
+        setTipoAporte(new SelectItem[]{new SelectItem(1, "Porcentual"), new SelectItem(2, "Valor")});
+    }
+
+    /*
+     *metodo que  carga los tipos de aportes en la lista de seleccion
+     *      
+     */
+    public void llenarGerentes() {
+        List<Tercero> lstgerentesConvenio = new ArrayList<Tercero>();
+        lstgerentesConvenio = getSessionBeanCobra().getCobraService().encontrarGerentesConvenio();
+        setGerentesDeConvenio(new SelectItem[lstgerentesConvenio.size()]);
+        int i = 0;
+        for (Tercero gerenteConvenio : lstgerentesConvenio) {
+            SelectItem itGerenteConvenio = new SelectItem(gerenteConvenio.getIntcodigo(), gerenteConvenio.getStrnombrecompleto());
+            getGerentesDeConvenio()[i++] = itGerenteConvenio;
+        }
+
+    }
+
+    /**
+     * @return the entidades
+     */
+    public SelectItem[] getEntidades() {
+        return entidades;
+    }
+
+    /**
+     * @param entidades the entidades to set
+     */
+    public void setEntidades(SelectItem[] entidades) {
+        this.entidades = entidades;
+    }
+
+    /**
+     * @return the gerentesDeConvenio
+     */
+    public SelectItem[] getGerentesDeConvenio() {
+        return gerentesDeConvenio;
+    }
+
+    /**
+     * @param gerentesDeConvenio the gerentesDeConvenio to set
+     */
+    public void setGerentesDeConvenio(SelectItem[] gerentesDeConvenio) {
+        this.gerentesDeConvenio = gerentesDeConvenio;
+    }
+
+    /**
+     * @return the roles
+     */
+    public SelectItem[] getRoles() {
+        return roles;
+    }
+
+    /**
+     * @param roles the roles to set
+     */
+    public void setRoles(SelectItem[] roles) {
+        this.roles = roles;
+    }
+
+    /**
+     * @return the tipoAporte
+     */
+    public SelectItem[] getTipoAporte() {
+        return tipoAporte;
+    }
+
+    /**
+     * @param tipoAporte the tipoAporte to set
+     */
+    public void setTipoAporte(SelectItem[] tipoAporte) {
+        this.tipoAporte = tipoAporte;
+    }
+
+    /**
+     * @return the variabletitulo
+     */
+    public String getVariabletitulo() {
+        return variabletitulo;
+    }
+
+    /**
+     * @param variabletitulo the variabletitulo to set
+     */
+    public void setVariabletitulo(String variabletitulo) {
+        this.variabletitulo = variabletitulo;
+    }
+
+    /**
+     * @return the fuenteRecursoConvenio
+     */
+    public Fuenterecursosconvenio getFuenteRecursoConvenio() {
+        return fuenteRecursoConvenio;
+    }
+
+    /**
+     * @param fuenteRecursoConvenio the fuenteRecursoConvenio to set
+     */
+    public void setFuenteRecursoConvenio(Fuenterecursosconvenio fuenteRecursoConvenio) {
+        this.fuenteRecursoConvenio = fuenteRecursoConvenio;
+    }
+
+    /**
+     * @return the infogeneralcrearconvenio
+     */
+    public String getInfogeneralcrearconvenio() {
+        return infogeneralcrearconvenio;
+    }
+
+    /**
+     * @param infogeneralcrearconvenio the infogeneralcrearconvenio to set
+     */
+    public void setInfogeneralcrearconvenio(String infogeneralcrearconvenio) {
+        this.infogeneralcrearconvenio = infogeneralcrearconvenio;
+    }
+
+    public void limpiarFuenteRecurso() {
+        fuenteRecursoConvenio.setOtrasreservas(null);
+        fuenteRecursoConvenio.setReservaiva(null);
+        fuenteRecursoConvenio.setValorcuotagerencia(null);
+        fuenteRecursoConvenio.setTipoaporte(null);
+        fuenteRecursoConvenio.setRolentidad(new Rolentidad());
+        fuenteRecursoConvenio.setTercero(new Tercero());
+       
+
+    }
+    
+    /**
+     * @return the boolguardofuente
+     */
+    public boolean isBoolguardofuente() {
+        System.out.println("this = " +boolguardofuente);
+        return boolguardofuente;
+    }
+
+    /**
+     * @param boolguardofuente the boolguardofuente to set
+     */
+    public void setBoolguardofuente(boolean boolguardofuente) {
+        this.boolguardofuente = boolguardofuente;
+    }
+
+    /**
+     * @return the lstFuentesRecursos
+     */
+    public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
+        return lstFuentesRecursos;
+    }
+
+    /**
+     * @param lstFuentesRecursos the lstFuentesRecursos to set
+     */
+    public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
+        this.lstFuentesRecursos = lstFuentesRecursos;
+    }
+    
+    
 }

@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelFiltroContrato"  width="600" autosized="true"   headerClass="header_filtro" >
         <f:facet name="header" >
@@ -19,8 +19,9 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelFiltroContrato" styleClass="ikont-acl-cerrar"  
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;"/>
+                    <a4j:commandLink value="X" id="esconder_panelFiltroContrato" styleClass="ikont-acl-cerrar"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFiltroContrato')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -30,7 +31,7 @@
                     <h:panelGrid columns="2">
                         <h:inputText size="35"  id="lblNombreContrato"
                                      value="#{Supervisor$Contrato.filtrocontrato.palabraClave}"
-                                     onclick="this.value=''" styleClass="ikont-hit-palabraClave"  />
+                                     onclick="this.value = ''" styleClass="ikont-hit-palabraClave"  />
                     </h:panelGrid>
 
 
@@ -73,7 +74,8 @@
                         </rich:calendar>
                     </h:panelGrid>
                     <interkont:spacer height="10" /><interkont:spacer height="10" />
-                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" styleClass="ikont"   onclick="#{rich:component('panelFiltroContrato')}.hide(); return false;">
+                    <h:commandLink type="button" action="#{Supervisor$Contrato.buscarContrato}" id="filtrar"  value="#{var.buscar}" styleClass="ikont"   onclick="#{rich:component('panelFiltroContrato')}.hide();
+                                             return false;">
                         <a4j:ajax event="click" render="tabla-listado-contratoconvenio"  execute="@this" />
                     </h:commandLink>
                     <br/>

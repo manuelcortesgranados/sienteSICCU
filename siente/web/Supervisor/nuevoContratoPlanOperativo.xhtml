@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../facelets/template_main.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich">
+
+    <ui:define name="head">
+        
+    </ui:define>
+
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml" />
+    </ui:define>
+
+    <ui:define name="menu_lateral">
+        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+    </ui:define>
+
+    <ui:define name="title">
+        <h:form>  
+            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
+            </h:panelGrid>
+        </h:form>
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="frmpanelgeneral">
+            <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" style="width: 500px;height:200px;" rendered="#{Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5 }">
+                <center>
+                    <h:outputText value="#{var.nuevoconvenio}"/>
+                    <br/>
+                    <h:outputText value="#{Supervisor$Contrato.variabletitulo}"/>
+                    <br/>                
+                   <h:outputText value="#{Supervisor$Contrato.infogeneralcrearconvenio}"/>
+                </center>
+            </h:panelGroup>
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
+                <rich:panel style="width: 900px;" styleClass="ikont-rp-db">
+                    <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
+                </rich:panel>
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo" >
+                <h:panelGrid columns="3" cellspacing="15" cellpadding="0" id="menu-plan-operativo" styleClass="ikont-hpg-menu-plan-operativo">
+                    <a4j:commandLink value="#{var.planificacion}"/>
+                    <a4j:commandLink value="#{var.flujocaja}" action="#{Supervisor$Contrato.flujoCaja}" immediate="true"/>
+                    <a4j:commandLink value="#{var.reportes}"/>
+                </h:panelGrid>
+                <rich:panel style="width:800px;height:400px;" styleClass="ikont-rp-po">
+                    plan operativo
+                </rich:panel>                
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==3}" id="reg-polizas">
+                <rich:panel style="width:800px;height:400px;">
+                    polizas
+                </rich:panel>
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==4}" id="reg-formas-pago">
+                <rich:panel style="width:800px;height:400px;">
+                    forma pago
+                </rich:panel>
+
+            </a4j:region>
+
+            <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==5}" id="reg-documentos">
+                <rich:panel style="width: 800px;height:400px;">
+                    documentos
+                </rich:panel>
+            </a4j:region>
+
+            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" immediate="true" />
+                <a4j:commandLink value="#{var.guardarbo}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" immediate="true" />
+            </h:panelGrid>
+        </h:form>
+
+        <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
+
+    </ui:define>
+
+</ui:composition>

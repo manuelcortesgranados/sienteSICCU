@@ -682,7 +682,7 @@ public class CargarArchivoFinanciera  implements Serializable{
             //Valida que el valor reintegro del excel sea mayor a cero y mayor al valor legalizado del movimiento
             if (valorreintegro.compareTo(BigDecimal.ZERO) > 0 && valorreintegro.compareTo(movimiento.getNumvlrreintegro()) > 0) {
 
-                movimiento.setNumvlrreintegro(valorreintegro);
+                //movimiento.setNumvlrreintegro(valorreintegro);
             }
 
 
@@ -747,7 +747,7 @@ public class CargarArchivoFinanciera  implements Serializable{
 
             movimiento.setNumvlrejecutado(valorEjecutado);
             movimiento.setNumvlrlegalizado(valorLegalizado);
-            movimiento.setNumvlrreintegro(valorreintegro);
+           // movimiento.setNumvlrreintegro(valorreintegro);
 
             if (rowData.getTipoMovimiento() != null) {
 

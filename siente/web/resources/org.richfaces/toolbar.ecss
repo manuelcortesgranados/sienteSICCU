@@ -1,6 +1,6 @@
 .rf-tb {
     border: 1px solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: '#{richSkin.headerBackgroundColor}';
     color: '#{richSkin.headerTextColor}';
     font-family: '#{richSkin.headerFamilyFont}';
     font-size: '#{richSkin.headerSizeFont}';
@@ -9,16 +9,45 @@
     background-color: '#{richSkin.headerBackgroundColor}';
     background-position: left top;
     background-repeat: repeat-x;
-    /*check gradient  from headerGradientColor to headerBackgroundColor*/
     background-image: url("#{resource['org.richfaces.images:gradientA.png']}");
     border-collapse: collapse;
     border-spacing : 0;
+    -webkit-box-shadow: '3px 3px 3px #{richSkin.boxShadow}';
+    -moz-box-shadow: '3px 3px 3px #{richSkin.boxShadow}';
+    -o-box-shadow: '3px 3px 3px #{richSkin.boxShadow}';
+    -ms-box-shadow: '3px 3px 3px #{richSkin.boxShadow}';
+    box-shadow:'3px 3px 3px #{richSkin.boxShadow}';
 }
 
 .rf-tb-itm {
-    padding: 0 8px;
+    padding: 0 0px;
     border: 0;
     white-space: nowrap;
+}
+
+*.rf-tb-itm > a{
+    color:'#{richSkin.headerTextColor}';
+    text-decoration: none; 
+    height:'#{richSkin.menuBarHeight}';
+    float:'#{richSkin.menuBarFloat}';
+    padding-left:'#{richSkin.menuBarPaddingLeft}';
+    padding-right:'#{richSkin.menuBarPaddingLeft}';
+    font-size:'#{richSkin.menuBarfontSize}';
+    line-height:65px;
+    text-indent:'#{richSkin.menuBartextIndent}';
+    font-style:'#{richSkin.menuBarfontStyle}';
+    font-weight:'#{richSkin.menuBarFontWeight}';
+    display :'#{richSkin.menuBarDisplay}';
+}
+
+.rf-tb-itm:hover{
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    background-image: "url(#{resource['org.richfaces.images:buttonHoverBackgroundImage.png']})";
+    background-color: '#{richSkin.headerBackgroundColor}';
+    border-color: '#{richSkin.borderColor}';
+    border-width: '#{richSkin.borderWeight}';
+    border-color: '#{richSkin.headerGradientColor}';
 }
 
 .rf-tb-sep {

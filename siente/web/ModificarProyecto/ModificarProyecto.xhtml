@@ -79,7 +79,7 @@
                                 </h:panelGroup>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="12"
                                                value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" inputstyleClassdatefecfinhist"  >
-                                    <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
+                                               <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                 </rich:calendar>
                                 <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
                                     <f:convertNumber pattern="###,###" maxFractionDigits="6"/>
