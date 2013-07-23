@@ -89,8 +89,7 @@
                                         <h:outputText  styleClass="ikont- hot-btndetpry"    value="#{var.editar}"/>
                                     </f:facet>
                                     <a4j:commandLink id="bt_editardoc" action="#{Supervisor$AdministrarObraNew.bt_editar_documento_action(filaSeleccionada)}"
-                                                     oncomplete="#{rich:component('mp_editar')}.show();" title="#{var.editar}"
-                                                     immediate="true" execute="@this" >
+                                                     oncomplete="#{rich:component('mp_editar')}.show();" title="#{var.editar}" render="pg_editar_documento" >
                                         <h:graphicImage  styleClass="ikont-hgi-bt_editar"    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                                     </a4j:commandLink>
                                 </rich:column>
