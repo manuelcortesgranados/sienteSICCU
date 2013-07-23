@@ -1264,6 +1264,24 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.tablalocalidades = tablalocalidades;
     }
 
+    public UIDataTable getTableLocalidadVereda() {
+        return tableLocalidadVereda;
+    }
+
+    public void setTableLocalidadVereda(UIDataTable tableLocalidadVereda) {
+        this.tableLocalidadVereda = tableLocalidadVereda;
+    }
+
+    public UIDataTable getTableLocalidadbarrio() {
+        return tableLocalidadbarrio;
+    }
+
+    public void setTableLocalidadbarrio(UIDataTable tableLocalidadbarrio) {
+        this.tableLocalidadbarrio = tableLocalidadbarrio;
+    }
+    
+
+    
     public UIDataTable getTablaregiones() {
         return tablaregiones;
     }
@@ -1554,7 +1572,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarBarrios();
         llenarVeredas();
         llenarComunas();
-        llenarContratos();
+       llenarCorregimientos();
     }
 
     /**
@@ -4033,7 +4051,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     /**
      * Llenado de selectitem comunas.
      */
-    public void llenarComunas() {
+    public String llenarComunas() {
         List<Comuna> lista = getSessionBeanCobra().getCobraService().encontrarComunas();
         comunas = new SelectItem[lista.size()];
         int i = 0;
@@ -4044,12 +4062,23 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             }
             comunas[i++] = item;
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem corregimientos.
+     *  public String llenarMunicipio() {
+        queryMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(codDepartamento);
+        Municipio = new SelectItem[queryMunicipios.size()];
+        int i = 0;
+        for (Localidad muni : queryMunicipios) {
+            SelectItem mun = new SelectItem(muni.getStrcodigolocalidad(), muni.getStrmunicipio());
+            Municipio[i++] = mun;
+        }
+        return null;
+    }
      */
-    public void llenarCorregimientos() {
+    public String llenarCorregimientos() {
         List<Corregimiento> lista = getSessionBeanCobra().getCobraService().encontrarCorregimientos();
 
         corregimientos = new SelectItem[lista.size()];
@@ -4062,12 +4091,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             corregimientos[i++] = item;
 
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem barrios.
+     *
      */
-    public void llenarBarrios() {
+    public String llenarBarrios() {
         listadobarrio = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
         barrios = new SelectItem[listadobarrio.size()];
         int i = 0;
@@ -4075,12 +4106,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem item = new SelectItem(com.getIntcodigobarrio(), com.getStrnombrebarrio());
             barrios[i++] = item;
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem veredas.
      */
-    public void llenarVeredas() {
+    public String llenarVeredas() {
         listadovereda = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
         veredas = new SelectItem[listadovereda.size()];
         int i = 0;
@@ -4088,6 +4120,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             SelectItem item = new SelectItem(com.getIntcodigovereda(), com.getStrnombrevereda());
             veredas[i++] = item;
         }
+       return  null;
     }
 
     /**
@@ -5325,6 +5358,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Elimina un barrio de la lista de barrios
      *
      * @return
+     * 
      */
     public String eliminarBarrio() {
         listaBarrios.remove((Barrio) tableLocalidadbarrio.getRowData());
