@@ -1551,6 +1551,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarPeriodoxEvento();
         llenarFase();
         llenarTipoProyecto();
+        llenarBarrios();
+        llenarVeredas();
+        llenarComunas();
+        llenarContratos();
     }
 
     /**
