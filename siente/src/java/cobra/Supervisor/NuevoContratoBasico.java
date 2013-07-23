@@ -319,6 +319,10 @@ public class NuevoContratoBasico implements Serializable {
      */
     private boolean aplicafiltro = false;
     /**
+     * Variable para habilitar y ver los reportes de plan operativo
+     */
+    private boolean boolreporte = false;
+    /**
      * Lista para llenar los Encargos fiduciarios asociados a los contratos
      */
     private List<Contratista> listaContratista = new ArrayList<Contratista>();
@@ -1493,6 +1497,14 @@ public class NuevoContratoBasico implements Serializable {
 
     public void setNomcontrato(String nomcontrato) {
         this.nomcontrato = nomcontrato;
+    }
+
+    public boolean isBoolreporte() {
+        return boolreporte;
+    }
+
+    public void setBoolreporte(boolean boolreporte) {
+        this.boolreporte = boolreporte;
     }
 
     public boolean isHabidescontratista() {
@@ -6007,6 +6019,8 @@ public class NuevoContratoBasico implements Serializable {
      * @param panelPantalla int
      */
     public void actualizarPanel(int panelPantalla) {
+//       variable para esconder los botones que llaman a los reportes
+        boolreporte = false;
         this.panelPantalla = panelPantalla;
         switch (panelPantalla) {
             case 1:
@@ -6301,15 +6315,14 @@ public class NuevoContratoBasico implements Serializable {
      * Reportes de plan operativo
      *
      * @return
-     */   
-
+     */
     public void ReportesPlanOperativo(int reportOption) {
         this.reportoption = reportOption;
         switch (reportoption) {
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportconsolidado") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6317,7 +6330,7 @@ public class NuevoContratoBasico implements Serializable {
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportcronograma") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6325,7 +6338,7 @@ public class NuevoContratoBasico implements Serializable {
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportpresupuesto") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6333,7 +6346,7 @@ public class NuevoContratoBasico implements Serializable {
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportflujocaja") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6341,7 +6354,7 @@ public class NuevoContratoBasico implements Serializable {
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplanoperativo") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6349,11 +6362,21 @@ public class NuevoContratoBasico implements Serializable {
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportepdfconvenio") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplancontratacion") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
 
+    }
+
+    public String flujoCaja() {        
+        return "FlujoCaja";
+
+    }
+
+    public String verReportes() {   
+        boolreporte = true;
+        return null;
     }
 }
