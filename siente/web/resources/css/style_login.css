@@ -38,7 +38,7 @@ body{
     background: transparent !important;
 }
 
-.content-tab-login{
+.ikont-hpg-gpLogPrinci{
     width: 400px !important;
     position: relative !important;
     float : right !important;
@@ -47,12 +47,12 @@ body{
     font-family: "century";
 }
 
-.content-tab-login .rf-p{
+.ikont-hpg-gpLogPrinci .rf-p{
     border: solid 0px transparent !important;
     background: transparent !important;
 }
 
-.content-tab-login .rf-tab-hdr-brd {
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-brd {
     display: none !important;
 }
 
@@ -388,7 +388,7 @@ body{
     margin-left: 10px;
 }
 
-.header-login{
+.ikont-hpg-loginheader{
     position : fixed;
     top : -0px;
     left:-0px;
@@ -400,7 +400,7 @@ body{
     z-index : 100
 }
 
-.header-login-title{
+.ikont-hot-loginheader{
     color : #F2F2F2;
     position: relative;
     font-size: 16px;
@@ -411,7 +411,7 @@ body{
     font-family: "futura";
 }
 
-.footer-login{
+.ikont-hpg-loginfooter{
     position : fixed;
     bottom : -0px;
     left:-0px;
@@ -424,14 +424,14 @@ body{
     font-family: "furura";
 }
 
-.footer-login-title{
+.ikont-hot-loginfotercopy{
     color : #BDBDBD;
     margin-left : 10px;
     position: relative;
     font-size: 16px;
     top: 10px;
 }
-.footer-login-titel-link{
+.ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees{
     color : #BDBDBD;
     margin-left : 10px;
     position: relative;
@@ -440,7 +440,7 @@ body{
     text-decoration: none;
 }
 
-.header-login-img{   
+.ikont-hgi-iconheaderpng{   
     margin-left: 20px!important; 
     float: left !important;
     width:40px;
@@ -448,14 +448,14 @@ body{
 
 }
 
-.footer-login-img{   
+.ikont-hgi-iconfooterpng{   
     margin-left: 20px!important; 
     float: left !important;
     width:40px;
     height:40px;
 }
 
-.footer-login-img-social{
+.ikont-hgi-iconytpng, .ikont-hgi-iconfbpng, .ikont-hgi-icontwpng {
     position: relative !important; 
     float: right !important; 
     margin-right: 20px;
