@@ -181,6 +181,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private List<TerceroEntidadLista> temp = new ArrayList<TerceroEntidadLista>();
     private List<Obra> listaProyectosPadre = new ArrayList<Obra>();
     private Set<Actividadobra> actividadesobra = new LinkedHashSet<Actividadobra>();
+    private Barrio barrio = new Barrio();
+    private Vereda vereda = new Vereda();
+    private List<Barrio> listaBarrios = new ArrayList<Barrio>();
+    private List<Vereda> listaVeredas = new ArrayList<Vereda>();
+    private List<Barrio> listadobarrio;
+    private List<Vereda> listadovereda;
     // </editor-fold>
     /**
      * Objetos UIDataTable.
@@ -193,6 +199,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablatiposolicitudobra = new UIDataTable();
     private UIDataTable tablaProyectosHijos = new UIDataTable();
     private UIDataTable tablalocalidades = new UIDataTable();
+    private UIDataTable tableLocalidadVereda = new UIDataTable();
+    private UIDataTable tableLocalidadbarrio = new UIDataTable();
     private UIDataTable tablatipoobra = new UIDataTable();
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
@@ -1216,6 +1224,22 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.queryDeptos = queryDeptos;
     }
 
+    public List<Barrio> getListadobarrio() {
+        return listadobarrio;
+    }
+
+    public void setListadobarrio(List<Barrio> listadobarrio) {
+        this.listadobarrio = listadobarrio;
+    }
+
+    public List<Vereda> getListadovereda() {
+        return listadovereda;
+    }
+
+    public void setListadovereda(List<Vereda> listadovereda) {
+        this.listadovereda = listadovereda;
+    }
+
     public List<Localidad> getQueryMunicipios() {
         return queryMunicipios;
     }
@@ -1240,6 +1264,24 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.tablalocalidades = tablalocalidades;
     }
 
+    public UIDataTable getTableLocalidadVereda() {
+        return tableLocalidadVereda;
+    }
+
+    public void setTableLocalidadVereda(UIDataTable tableLocalidadVereda) {
+        this.tableLocalidadVereda = tableLocalidadVereda;
+    }
+
+    public UIDataTable getTableLocalidadbarrio() {
+        return tableLocalidadbarrio;
+    }
+
+    public void setTableLocalidadbarrio(UIDataTable tableLocalidadbarrio) {
+        this.tableLocalidadbarrio = tableLocalidadbarrio;
+    }
+    
+
+    
     public UIDataTable getTablaregiones() {
         return tablaregiones;
     }
@@ -1403,6 +1445,34 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     public void setLugarObra(SelectItem[] LugarObra) {
         this.LugarObra = LugarObra;
     }
+
+    public Barrio getBarrio() {
+        return barrio;
+    }
+
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
+    }
+
+    public Vereda getVereda() {
+        return vereda;
+    }
+
+    public void setVereda(Vereda vereda) {
+        this.vereda = vereda;
+    }
+
+    public List<Barrio> getListaBarrios() {
+        return listaBarrios;
+    }
+
+    public void setListaBarrios(List<Barrio> listaBarrios) {
+        this.listaBarrios = listaBarrios;
+    }
+
+    public List<Vereda> getListaVeredas() {
+        return listaVeredas;
+    }
     // </editor-fold>
     private Geocodeimplementacion geocode = new Geocodeimplementacion();
 
@@ -1499,6 +1569,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         llenarPeriodoxEvento();
         llenarFase();
         llenarTipoProyecto();
+        llenarBarrios();
+        llenarVeredas();
+        llenarComunas();
+       llenarCorregimientos();
     }
 
     /**
@@ -1812,6 +1886,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         verNuevo = false;
         //cargar = 0;
         listaLocalidades = new ArrayList<Localidad>();
+        listaBarrios = new ArrayList<Barrio>();
+        listaVeredas = new ArrayList<Vereda>();
         listaProyectosPadre = new ArrayList<Obra>();
         listaRegiones = new ArrayList<Region>();
         preguntaSubProyecto = 0;
@@ -2567,6 +2643,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                         }
                         obranueva.setActividadobras(actsguar);
                     }
+                    if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
+                        obranueva.setBarrios(new LinkedHashSet(listaBarrios));
+                        obranueva.setVeredas(new LinkedHashSet(listaVeredas));
+                    }
                     obranueva.setLocalidads(new LinkedHashSet());
                     obranueva.setRegions(new LinkedHashSet());
                     switch (obranueva.getTipoorigen().getIntidtipoorigen()) {
@@ -2576,6 +2656,15 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                             break;
                         case 3:
                             obranueva.setRegions(new LinkedHashSet(listaRegiones));
+                            break;
+                    }
+                    obranueva.setBarrios(new LinkedHashSet());
+                    obranueva.setVeredas(new LinkedHashSet());
+                    switch (obranueva.getLugarobra().getIntidlugarobra()) {
+                        case 1:
+                            obranueva.setBarrios(new LinkedHashSet(listaBarrios));
+                        case 2:
+                            obranueva.setVeredas(new LinkedHashSet(listaVeredas));
                             break;
                     }
 
@@ -2634,7 +2723,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         estadoguardado = 0;
         getObranueva().setEnalimentacion(false);
         getObranueva().setBoolincluyeaiu(false);
-
+        listaBarrios = new ArrayList<Barrio>();
+        listaVeredas = new ArrayList<Vereda>();
         tiproyectoselec = getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto();
         tiahselect = getObranueva().getClaseobra().getFase().getIntidfase();
         getSessionBeanCobra().getCobraService().getListatipoproyecto().get(getObranueva().getTipoobra().getTipoproyecto().getIntidtipoproyecto() - 1);
@@ -2657,6 +2747,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                 listaLocalidades = new ArrayList<Localidad>();
                 break;
         }
+        getListaBarrios().addAll(getSessionBeanCobra().getCobraService().obtenerBarriosObra(obranueva));
+        getListaVeredas().addAll(getSessionBeanCobra().getCobraService().obtenerVeredasObra(obranueva));
         List<Puntoobra> lispuntoobrapropues = getSessionBeanCobra().getCobraService().encontrarPuntosObraxObra(getObranueva().getIntcodigoobra());
         getObranueva().setPuntoobras(new LinkedHashSet(lispuntoobrapropues));
         if (getObranueva() != null && getObranueva().getFloatlatitud() != null && getObranueva().getFloatlongitud() != null && getObranueva().getFloatlatitud().compareTo(BigDecimal.valueOf(0.000000)) != 0 && getObranueva().getFloatlongitud().compareTo(BigDecimal.valueOf(0.000000)) != 0) {
@@ -3391,6 +3483,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
                     obranueva.setRegions(new LinkedHashSet(listaRegiones));
                     break;
             }
+            if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
+                obranueva.setBarrios(new LinkedHashSet(listaBarrios));
+                obranueva.setVeredas(new LinkedHashSet(listaVeredas));
+            } else {
+                obranueva.setBarrios(new LinkedHashSet());
+                obranueva.setVeredas(new LinkedHashSet());
+            }
+
             obranueva.setRelacioncontratoobras(new LinkedHashSet());
             obranueva.getRelacioncontratoobras().clear();
             if (listacontratosobra.size() > 0) {
@@ -3405,6 +3505,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             }
             guardarImagenesaobra(RutasWebArchivos.IMGS_OBRA_PROCESO);
             getSessionBeanCobra().getCobraService().guardarObra(obranueva, getSessionBeanCobra().getUsuarioObra(), -1);
+            obranueva.getBarrios().clear();
+            obranueva.getVeredas().clear();
             FacesUtils.addInfoMessage(bundle.getString("losdatosdelaobrasehanguardao"));
         } else {
             //"Debe dar un nombre a la obra";
@@ -3949,7 +4051,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     /**
      * Llenado de selectitem comunas.
      */
-    public void llenarComunas() {
+    public String llenarComunas() {
         List<Comuna> lista = getSessionBeanCobra().getCobraService().encontrarComunas();
         comunas = new SelectItem[lista.size()];
         int i = 0;
@@ -3960,12 +4062,23 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             }
             comunas[i++] = item;
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem corregimientos.
+     *  public String llenarMunicipio() {
+        queryMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(codDepartamento);
+        Municipio = new SelectItem[queryMunicipios.size()];
+        int i = 0;
+        for (Localidad muni : queryMunicipios) {
+            SelectItem mun = new SelectItem(muni.getStrcodigolocalidad(), muni.getStrmunicipio());
+            Municipio[i++] = mun;
+        }
+        return null;
+    }
      */
-    public void llenarCorregimientos() {
+    public String llenarCorregimientos() {
         List<Corregimiento> lista = getSessionBeanCobra().getCobraService().encontrarCorregimientos();
 
         corregimientos = new SelectItem[lista.size()];
@@ -3978,35 +4091,36 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
             corregimientos[i++] = item;
 
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem barrios.
+     *
      */
-    public void llenarBarrios() {
-        List<Barrio> lista = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
-        barrios = new SelectItem[lista.size()];
+    public String llenarBarrios() {
+        listadobarrio = getSessionBeanCobra().getCobraService().encontrarBarrios(idcomuna);
+        barrios = new SelectItem[listadobarrio.size()];
         int i = 0;
-        for (Barrio com : lista) {
+        for (Barrio com : listadobarrio) {
             SelectItem item = new SelectItem(com.getIntcodigobarrio(), com.getStrnombrebarrio());
-            if (i == 0) {
-                obranueva.setBarrio(new Barrio(com.getIntcodigobarrio(), null, com.getStrnombrebarrio()));
-            }
             barrios[i++] = item;
         }
+        return  null;
     }
 
     /**
      * Llenado de selectitem veredas.
      */
-    public void llenarVeredas() {
-        List<Vereda> lista = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
-        veredas = new SelectItem[lista.size()];
+    public String llenarVeredas() {
+        listadovereda = getSessionBeanCobra().getCobraService().encontrarVeredas(idcorregimiento);
+        veredas = new SelectItem[listadovereda.size()];
         int i = 0;
-        for (Vereda com : lista) {
+        for (Vereda com : listadovereda) {
             SelectItem item = new SelectItem(com.getIntcodigovereda(), com.getStrnombrevereda());
             veredas[i++] = item;
         }
+       return  null;
     }
 
     /**
@@ -4874,6 +4988,13 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         } else {
             validacion.setUbicacion(false);
         }
+        if (Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("habilitacionLocalidadesBarrioVereda"))) {
+            if (listaBarrios.size() > 0 || listaVeredas.size() > 0) {
+                validacion.setUbicacion(true);
+            } else {
+                validacion.setUbicacion(false);
+            }
+        }
         if (!obranueva.isBooleantienehijos()) {
             validarCronograma();
         } else {
@@ -5231,6 +5352,78 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public int getDatosValidos() {
         return datosValidos;
+    }
+
+    /**
+     * Elimina un barrio de la lista de barrios
+     *
+     * @return
+     * 
+     */
+    public String eliminarBarrio() {
+        listaBarrios.remove((Barrio) tableLocalidadbarrio.getRowData());
+        return null;
+    }
+
+    /**
+     * Elimina una vereda de la lista de veredas
+     *
+     * @return
+     */
+    public String eliminarVereda() {
+        listaVeredas.remove((Vereda) tableLocalidadVereda.getRowData());
+        return null;
+    }
+
+    public boolean verificarVereda(int intcodigovereda) {
+        for (Vereda v : listaVeredas) {
+            if (v.getIntcodigovereda() == intcodigovereda) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean verificarBarrio(int intcodigobarrio) {
+        for (Barrio b : listaBarrios) {
+            if (b.getIntcodigobarrio() == intcodigobarrio) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void modalModificarSelectUbicacion() {
+
+        listaBarrios.clear();
+        listaVeredas.clear();
+
+    }
+
+    public void agregarUbicacioncomunalocalidad() {
+        switch (obranueva.getLugarobra().getIntidlugarobra()) {
+            case 1:
+                if (!verificarBarrio(getBarrio().getIntcodigobarrio())) {
+                    for (Barrio bar : listadobarrio) {
+                        if (bar.getIntcodigobarrio() == getBarrio().getIntcodigobarrio()) {
+                            listaBarrios.add(bar);
+
+                        }
+                    }
+                }
+                break;
+            case 2:
+
+                if (!verificarVereda(getVereda().getIntcodigovereda())) {
+                    for (Vereda ver : listadovereda) {
+                        if (ver.getIntcodigovereda() == getVereda().getIntcodigovereda()) {
+                            listaVeredas.add(ver);
+
+                        }
+                    }
+                    break;
+                }
+        }
     }
 
     public void obtenerPuntopordireccion() {

@@ -672,13 +672,11 @@ public class Usuario implements Serializable {
      * y deshabilitar el boton de Modificar
      * @return No retorna ningun Valor.
      */
-    public String habilitarModificarUsuario() {
+    public void habilitarModificarUsuario() {
         modificarUsuario = false;
         habilitarBotonGuardar = true;
         deshabilitarBotonModificar = false;
-
-        return null;
-    }
+            }
      /**
      * Este metodo es utilizado habilitar el boton de Modificar
      * y deshabilitar los botones de Guardar y Cancelar
