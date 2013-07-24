@@ -218,7 +218,7 @@
                 <value>co/com/interkont/cobra/to/Itemflujocaja.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Estadoconvenio.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Monto.hbm.xml</value>
-                <value>co/com/interkont/cobra/to/Objetivos.hbm.xml</value>
+                <!--<value>co/com/interkont/cobra/to/Objetivos.hbm.xml</value>-->
                 <value>co/com/interkont/cobra/to/Obrafuenterecursosconvenios.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Periodoflujocaja.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Planificacionmovconvenio.hbm.xml</value>
@@ -621,7 +621,7 @@
         </property>
     </bean>
     
-    <bean id="cobraGwtService" scope="prototype"
+    <bean id="cobraGwtServiceAble" scope="prototype"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" >
         <property name="transactionManager">
             <ref local="transactionManager" />

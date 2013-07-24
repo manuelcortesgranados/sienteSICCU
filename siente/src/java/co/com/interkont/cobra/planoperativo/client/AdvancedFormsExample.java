@@ -22,7 +22,7 @@ import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
-import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAsyncAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -42,7 +42,7 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
     private VerticalPanel vp;
  
     
-    private final CobraGwtServiceAsyncAble service= GWT.create(CobraGwtServiceAble.class);
+    private final CobraGwtServiceAbleAsync service= GWT.create(CobraGwtServiceAble.class);
    
     
     

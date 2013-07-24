@@ -21,7 +21,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  *
  * @author desarrollo9
  */
-public interface CobraGwtServiceAsyncAble {
+public interface CobraGwtServiceAbleAsync {
   
    void findAlarma(int id_alarma, AsyncCallback<AlarmaDTO> call);
   }

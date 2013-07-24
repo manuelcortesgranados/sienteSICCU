@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
  *
  * @author desarrollo9
  */
-@Service("cobraGwtService")
+@Service("cobraGwtServiceAble")
 public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraGwtServiceAble {
     
     @Autowired

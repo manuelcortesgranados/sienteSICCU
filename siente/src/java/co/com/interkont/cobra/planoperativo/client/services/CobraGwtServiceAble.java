@@ -25,7 +25,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  *
  * @author desarrollo9
  */
-@RemoteServiceRelativePath("springGwtServices/cobraGwtService")
+@RemoteServiceRelativePath("springGwtServices/cobraGwtServiceAble")
 public interface CobraGwtServiceAble extends RemoteService{    
      public AlarmaDTO findAlarma(int id_alarma) throws Exception;
 }
