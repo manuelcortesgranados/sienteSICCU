@@ -319,6 +319,10 @@ public class NuevoContratoBasico implements Serializable {
      */
     private boolean aplicafiltro = false;
     /**
+     * Variable para habilitar y ver los reportes de plan operativo
+     */
+    private boolean boolreporte = false;
+    /**
      * Lista para llenar los Encargos fiduciarios asociados a los contratos
      */
     private List<Contratista> listaContratista = new ArrayList<Contratista>();
@@ -800,8 +804,22 @@ public class NuevoContratoBasico implements Serializable {
     private String infogeneralcrearconvenio;
     private int panelPantalla;
     private Fuenterecursosconvenio fuenteRecursoConvenio;
-    private boolean boolguardofuente; 
+    private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
+    private int reportoption;
+
+    /**
+     * Variable para ver los reportes de plan operativo
+     *
+     * @return
+     */
+    public int getReportoption() {
+        return reportoption;
+    }
+
+    public void setReportoption(int reportoption) {
+        this.reportoption = reportoption;
+    }
 
     /**
      *
@@ -1479,6 +1497,14 @@ public class NuevoContratoBasico implements Serializable {
 
     public void setNomcontrato(String nomcontrato) {
         this.nomcontrato = nomcontrato;
+    }
+
+    public boolean isBoolreporte() {
+        return boolreporte;
+    }
+
+    public void setBoolreporte(boolean boolreporte) {
+        this.boolreporte = boolreporte;
     }
 
     public boolean isHabidescontratista() {
@@ -2161,25 +2187,26 @@ public class NuevoContratoBasico implements Serializable {
     public NuevoContratoBasico() {
 //        contrato.setBooltipocontratoconvenio(false);
         // System.out.println("constructor nuevo contrato = ");
+        System.out.println("ingresoo al constructoor");
+        llenarTipodocumentos();
+        llenarPolizas();
         if (!Propiedad.getValor("conplanoperativo").equals("true")) {
             limpiarContrato();
             llenarTipoContratoconsultoria();
             llenarTipoContrato();
             llenarEventos();
             llenarPeriodoxEvento();
-            llenarTipodocumentos();
-            //llenarPolizas();
             llenarFormaPago();
             llenarComboContratista();
             iniciarFiltroAvanzado();
             if (getSessionBeanCobra().getBundle().getString("aplicaContralorias").equals("true")) {
                 llenarModalidadContratista();
             }
-        }  else {
+        } else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
-            lstFuentesRecursos=new ArrayList<Fuenterecursosconvenio>();
+            lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
-        llenarEstadoConvenio();
+            llenarEstadoConvenio();
             llenarEntidades();
             llenarRoles();
             llenarGerentes();
@@ -3569,6 +3596,7 @@ public class NuevoContratoBasico implements Serializable {
      * @return
      */
     public String llenarTipodocumentos() {
+        System.out.println("ingresoo a tipodocumentos");
         List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
         tipodocumento = new SelectItem[listatipodocumento.size()];
         int i = 0;
@@ -5991,6 +6019,8 @@ public class NuevoContratoBasico implements Serializable {
      * @param panelPantalla int
      */
     public void actualizarPanel(int panelPantalla) {
+//       variable para esconder los botones que llaman a los reportes
+        boolreporte = false;
         this.panelPantalla = panelPantalla;
         switch (panelPantalla) {
             case 1:
@@ -5999,11 +6029,11 @@ public class NuevoContratoBasico implements Serializable {
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
                 variabletitulo = Propiedad.getValor("terceropolizas");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 4:
                 variabletitulo = Propiedad.getValor("cuartoformapago");
@@ -6011,7 +6041,7 @@ public class NuevoContratoBasico implements Serializable {
                 break;
             case 5:
                 variabletitulo = Propiedad.getValor("quintodocumento");
-                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+//                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
 
         }
@@ -6040,6 +6070,14 @@ public class NuevoContratoBasico implements Serializable {
      * 
      */
     public void guardarBorradorConvenio() {
+        Actividadobra actobra = new Actividadobra();
+        actobra.setNumvalorplanifao(new BigDecimal(BigInteger.ZERO));
+        actobra.setFloatcantplanifao(15);
+
+        List<Actividadobra> actividadobra = new ArrayList<Actividadobra>();
+        actividadobra.add(actobra);
+        contrato.setActividadobras((Set) actividadobra);
+        guardarContrato();
     }
 
     /*
@@ -6058,7 +6096,7 @@ public class NuevoContratoBasico implements Serializable {
     public void adicionarFuenteRecursos() {
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
-        boolguardofuente=Boolean.TRUE;
+        boolguardofuente = Boolean.TRUE;
         limpiarFuenteRecurso();
     }
 
@@ -6240,15 +6278,15 @@ public class NuevoContratoBasico implements Serializable {
         fuenteRecursoConvenio.setTipoaporte(null);
         fuenteRecursoConvenio.setRolentidad(new Rolentidad());
         fuenteRecursoConvenio.setTercero(new Tercero());
-       
+
 
     }
-    
+
     /**
      * @return the boolguardofuente
      */
     public boolean isBoolguardofuente() {
-        System.out.println("this = " +boolguardofuente);
+        System.out.println("this = " + boolguardofuente);
         return boolguardofuente;
     }
 
@@ -6272,6 +6310,73 @@ public class NuevoContratoBasico implements Serializable {
     public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
         this.lstFuentesRecursos = lstFuentesRecursos;
     }
-    
-    
+
+    /**
+     * Reportes de plan operativo
+     *
+     * @return
+     */
+    public void ReportesPlanOperativo(int reportOption) {
+        this.reportoption = reportOption;
+        switch (reportoption) {
+            case 1:
+                /*Reporte Consolidado*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportconsolidado") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:
+                /*Reporte Cronograma*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportcronograma") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 3:
+                /*Reporte Presupuesto*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportpresupuesto") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 4:
+                /*Reporte Flujo de caja*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportflujocaja") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 5:
+                /*Reporte Plan operativo*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplanoperativo") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 6:
+                /*Reporte Plan de contratación*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplancontratacion") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+
+    }
+
+    public String flujoCaja() {        
+        return "FlujoCaja";
+
+    }
+
+    public String verReportes() {   
+        boolreporte = true;
+        return null;
+    }
 }

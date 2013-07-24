@@ -1347,7 +1347,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         //getSessionBeanCobra().getCobradao().cerrarSession();
         //documentoObraDao.guardarOrActualizar(this.documentoobraEd);
         getSessionBeanCobra().getCobraService().guardarDocumento(this.documentoobraEd);
-        this.documentoobraEd = new Documentoobra();
+         this.documentoobraEd = new Documentoobra();
         //cargarObra(obra);
 
         return null;
