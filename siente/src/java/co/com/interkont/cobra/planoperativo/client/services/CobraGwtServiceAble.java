@@ -26,19 +26,6 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  * @author desarrollo9
  */
 @RemoteServiceRelativePath("springGwtServices/cobraGwtService")
-public interface CobraGwtService extends RemoteService{
-    
-//    public String hola(String saludo) throws Exception;
-//    public Sector findSector(int id_sector) throws Exception;
-//    public void saveOrUpdate(Sector sec) throws Exception;
-     //public Evento findContrato(int id_contrato) throws Exception;
-//    public Evento findContrato(int id_contrato) throws Exception;
-    //public List encontrarTiposObra() throws Exception;
-//    public ArrayList<Sector> getSector() throws Exception;
-     
+public interface CobraGwtServiceAble extends RemoteService{    
      public AlarmaDTO findAlarma(int id_alarma) throws Exception;
-            
-    
-    
-  
 }
