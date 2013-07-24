@@ -85,13 +85,13 @@
                 <a4j:commandLink styleClass="ikont-acl-eliminaravance"   value="Eliminar último avance" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"
                                  render="panelBody"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="ikont-hpg-revisioninformacion"   cellpadding="0" cellspacing="0" rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra !=null and SessionBeanCobra.usuarioObra.renderrecurso.btnhistorevinformacion}">
+            <h:panelGrid styleClass="ikont-hpg-revisioninformacion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null or SessionBeanCobra.usuarioObra.renderrecurso.btn_habilitar_validacion }">
 
                 <a4j:commandLink  styleClass="ikont-acl-revisioninformacion"    execute="@this" immediate="true"
-                                action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}" />                                    
+                                onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';" />                                    
 
                 <a4j:commandLink styleClass="ikont-acl-historialrevisioninformacion"    execute="@this" immediate="true"
-                                 value="Historial revisiones de información" action="#{Supervisor$DetalleObra.reporteHistorialValidaciones}"  />
+                                 value="Historial revisiones de información" onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  />
 
 
             </h:panelGrid>

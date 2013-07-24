@@ -11,7 +11,7 @@
 
     <ui:define name="head">
         <ui:include src="/includes/google_maps_key.xhtml" />
-     </ui:define>
+    </ui:define>
     <ui:define name="title">
         <h:outputText  styleClass="ikont- hot-"   value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre}"/>
     </ui:define>
@@ -32,15 +32,6 @@
                     <rich:panel id="pgubicolo" header="#{var.ubicacionproyectocolo}" >
                         <a4j:outputPanel id="panelMapa"   >
                             <h:form id="fr">
-                                <hr />
-                                <h:panelGrid columns="3" >
-                                    <interkont:spacer width="385" height="5"/>
-                                    <h:outputLabel  styleClass="ikont-hol-lbllugarproyecto"   id="lbllugarproyecto"  value="#{var.zonaubi}" for="combolugarproyecto" />
-                                    <h:selectOneMenu id="combolugarproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
-                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.lugarObra}" />
-                                        <a4j:ajax event="valueChange" render="gpLblComuna, gpCmbComuna, gpLblBarrio" />
-                                    </h:selectOneMenu>
-                                </h:panelGrid>
                                 <hr/>
                                 <rich:collapsiblePanel id="simpleToggleSelecMapa" header="#{var.ubicacionproyectogeogra}"  >
 
@@ -127,9 +118,9 @@
                                             </h:panelGroup>
                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.verConfirmar}">
                                                 <h:commandButton value="#{var.confirmarpunto}" id="confpunto" styleClass="ikont-hcb-confirmarpunto"   action="#{Supervisor$IngresarNuevaObra.confirmarPunto}"
-                                                                   />
+                                                                 />
                                                 <h:commandButton value="#{var.cancelarpunto}" id="cancpunto" styleClass="ikont-hcb-cancelarpunto"   action="#{Supervisor$IngresarNuevaObra.cancelarDireccion}"
-                                                                   />
+                                                                 />
                                                 <rich:hotKey id="Keyconf" key="return" onkeyup="#{rich:element('confpunto')}.click();" selector="#txtAddress" />
                                             </h:panelGroup>
                                         </h:panelGrid>
@@ -241,10 +232,142 @@
                                                     <interkont:spacer width="485" height="5"/>
                                                     <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarLocalidad}" render="layoutLocalidades" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}"
                                                                         value="#{var.agregar}" execute=" @this, combodepartamentoproyecto,combomunicipioproyecto,comboregion"
-                                                                         disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                                                                        disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
                                                 </h:panelGrid>
                                             </h:panelGroup>  
-                                        </rich:panel>  
+                                        </rich:panel>
+                                        <rich:panel id="id_cobras_municipales" rendered="#{var.habilitacionLocalidadesBarrioVereda}">
+
+                                            <h:panelGrid columns="3" >
+                                                <interkont:spacer width="200" height="5"/>
+                                                <h:outputLabel id="lbllugarproyecto"  value="#{var.zonaubi}"  for="combolugarproyecto" />
+                                                <h:selectOneMenu id="combolugarproyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra}"  >
+                                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.lugarObra}" />
+                                                    <a4j:ajax  event="valueChange" execute="@this" listener="#{Supervisor$IngresarNuevaObra.modalModificarSelectUbicacion}" 
+                                                               render="id_cobras_municipales,tablelocalidadcomu_corregi,tablebarrio,tablevereda"  />
+                                                </h:selectOneMenu>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="6" id="panelcorregimiento" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==2}" >
+                                                <interkont:spacer width="200" height="5"/>
+                                                <h:outputLabel id="lblcorregimientoproyecto"  value="#{var.corregimiento}" for="combocorregimiento" />
+                                                <h:selectOneMenu id="combocorregimiento" value="#{Supervisor$IngresarNuevaObra.idcorregimiento}" >
+                                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.corregimientos}"/>
+                                                    <a4j:ajax  event="valueChange"  listener="#{Supervisor$IngresarNuevaObra.llenarVeredas}" execute="@this,combovereda"
+                                                               render="panelgroupvereda" />
+                                                </h:selectOneMenu>
+                                                <interkont:spacer width="30" height="4"/>
+                                                <h:outputLabel id="lblveredaproyecto"  value="#{var.vereda}"  for="combovereda" />
+                                                <h:panelGroup id="panelgroupvereda" >
+                                                    <h:selectOneMenu id="combovereda"  value="#{Supervisor$IngresarNuevaObra.vereda.intcodigovereda}" >
+                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.veredas}" />
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="6" id="panelcomuna" rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==1}" >
+                                                <interkont:spacer width="200" height="5"/>
+                                                <h:outputLabel id="lblcomunaproyecto"  value="#{var.comuna}" for="combocomuna" />
+                                                <h:selectOneMenu id="combocomuna" value="#{Supervisor$IngresarNuevaObra.idcomuna}"  >
+                                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.comunas}"/>
+                                                    <a4j:ajax  event="valueChange"  listener="#{Supervisor$IngresarNuevaObra.llenarBarrios}"  execute="@this,combobarrio" 
+                                                               render="panelgroupcomuna" />
+                                                </h:selectOneMenu>
+                                                <interkont:spacer width="30" height="4"/>
+                                                <h:outputLabel id="lblbarrioproyecto" for="combobarrio"  value="#{var.barrio}"  />
+                                                <h:panelGroup id="panelgroupcomuna" >
+                                                    <h:selectOneMenu id="combobarrio" value="#{Supervisor$IngresarNuevaObra.barrio.intcodigobarrio}" >
+                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.barrios}" />
+                                                    </h:selectOneMenu>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+
+                                            <h:panelGrid columns="2">
+                                                <interkont:spacer width="485" height="5"/>
+                                                <a4j:commandButton  action="#{Supervisor$IngresarNuevaObra.agregarUbicacioncomunalocalidad}" render="tablelocalidadcomu_corregi,id_cobras_municipales" 
+                                                                    value="#{var.agregar}" execute="@this,combolugarproyecto,combocorregimiento,combovereda,combocomuna,combobarrio" />
+                                            </h:panelGrid>
+
+
+
+                                            <rich:panel id="tablelocalidadcomu_corregi"  header="#{var.lugar}" styleClass="rich-panel-body" style="padding:0px;">
+                                                <rich:dataTable   id="tableLocalidadbarrio" sortMode="single" style="text-align:center;"
+                                                    value="#{Supervisor$IngresarNuevaObra.listaBarrios}"
+                                                    var="_tabla"  rows="4" binding="#{Supervisor$IngresarNuevaObra.tableLocalidadbarrio}"
+                                                    rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==1}">
+                                                    <f:facet name="header">
+                                                        <h:outputLabel value="#{var.localidadesobra}"> 
+                                                        </h:outputLabel>
+                                                    </f:facet>                          
+
+                                                    <rich:column   width="120px"  >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{var.comuna} " />
+                                                        </f:facet>
+                                                        <h:outputText  value="#{_tabla.comuna.strnombrecomuna}"/>
+                                                    </rich:column>
+
+                                                    <rich:column   width="120px" >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{var.barrio}"/>
+                                                        </f:facet>
+                                                        <h:outputText  value="#{_tabla.strnombrebarrio}"/>
+                                                    </rich:column> 
+
+                                                    <rich:column   width="120px" >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{var.eliminar}"/>
+                                                        </f:facet>
+                                                        <a4j:commandButton  value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarBarrio}" render="tablelocalidadcomu_corregi"/>
+                                                    </rich:column>  
+                                                    <f:facet name="footer">
+                                                        <rich:columnGroup >
+                                                            <rich:column colspan="4">
+                                                                <rich:dataScroller id="dsBarrio" for="tableLocalidadbarrio" render="tableLocalidadbarrio"/>
+                                                            </rich:column>
+                                                        </rich:columnGroup>
+                                                    </f:facet>
+                                                </rich:dataTable>
+
+                                                <rich:dataTable rows="4" id="tableLocalidadVereda"  sortMode="single" style="text-align:left;" 
+                                                                value="#{Supervisor$IngresarNuevaObra.listaVeredas}"
+                                                                var="_tabla" binding="#{Supervisor$IngresarNuevaObra.tableLocalidadVereda}"
+                                                                rendered="#{Supervisor$IngresarNuevaObra.obranueva.lugarobra.intidlugarobra==2}">
+                                      
+                                                    <f:facet name="header">
+                                                        <h:outputLabel value="#{var.localidadesobra}"> 
+                                                        </h:outputLabel>
+                                                    </f:facet>                          
+
+                                                    <rich:column   width="120px" >
+                                                        <f:facet name="header" >
+                                                            <h:outputText value="#{var.corregimiento}" />
+                                                        </f:facet>
+                                                        <h:outputText  value="#{_tabla.corregimiento.strnombrecorregimiento}"/>
+                                                    </rich:column>
+
+                                                    <rich:column   width="120px" >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{var.vereda}"/>
+                                                        </f:facet>
+                                                        <h:outputText  value="#{_tabla.strnombrevereda}"/>
+                                                    </rich:column>
+                                                    <rich:column   width="120px" >
+                                                        <f:facet name="header">
+                                                            <h:outputText value="#{var.eliminar}"/>
+                                                        </f:facet>
+                                                        <a4j:commandButton  value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarVereda}" render="tableLocalidadVereda"/>
+                                                    </rich:column>  
+                                                    <f:facet name="footer">
+                                                        <rich:columnGroup >
+                                                            <rich:column colspan="4">
+                                                                <rich:dataScroller id="dsVerdas" for="tableLocalidadVereda" render="tableLocalidadVereda"/>
+                                                            </rich:column>
+                                                        </rich:columnGroup>
+                                                    </f:facet>
+                                                </rich:dataTable>
+                                            </rich:panel>   
+                                        </rich:panel>
                                         <center>
                                             <rich:panel id="layoutLocalidades" header="#{var.localidades}" styleClass="ikont-"    rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoorigen.intidtipoorigen!=4}">
                                                 <h:panelGroup >

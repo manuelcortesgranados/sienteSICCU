@@ -89,19 +89,19 @@
                                 <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.tercero.tiposolicitante.strnombre}" />
                             </rich:column>
                             <rich:column>
-                                <a4j:commandLink  action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
+                                <h:commandLink   action="#{Perfil$Usuario.irperfilUsuario(filaSeleccioanda)}">
                                     <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                                </a4j:commandLink>
+                                </h:commandLink>
                             </rich:column>
                         </rich:dataTable>
                         <interkont:spacer height="10px"  /> 
-
-                        <rich:column colspan="7" breakRowBefore="true">
-                            <center>
-                                <rich:dataScroller for="tabla-listado-buscarusuario" render="tabla-listado-buscarusuario" />
-                            </center>
-                        </rich:column>
-
+                       
+                            <rich:column colspan="7" breakRowBefore="true">
+                                <center>
+                                    <rich:dataScroller for="tabla-listado-buscarusuario" render="tabla-listado-buscarusuario" />
+                                </center>
+                            </rich:column>
+                       
                     </h:panelGrid>
                 </center>
             </rich:panel>
