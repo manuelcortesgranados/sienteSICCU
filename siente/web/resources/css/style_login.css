@@ -47,13 +47,27 @@ body{
     font-family: "century";
 }
 
-.ikont-hpg-gpLogPrinci .rf-p{
+.ikont-hpg-gpLogPrinci .rf-p, .ikont-hpg-gpLogPrinci .rf-p-b{
     border: solid 0px transparent !important;
     background: transparent !important;
 }
 
 .ikont-hpg-gpLogPrinci .rf-tab-hdr-brd {
     display: none !important;
+}
+
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
+    background: transparent;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 0px;
+    padding-top: 0px;
+    overflow: visible;
+    height: 25px;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 6px;
 }
 
 .content-tab-login .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
@@ -90,7 +104,7 @@ body{
 }
 
 .tab-pestania-inactive-usu{
-     position: relative!important;
+    position: relative!important;
     bottom: -1px !important;
     width: 100px!important;  
     height: 31px!important;
@@ -178,7 +192,7 @@ body{
 
 .tab-login-label-contenido{
     color: white;
-    font-size: 0.74em!important;
+    font-size: 0.67em!important;
     font-family: "futura"!important;
 
 }   
@@ -244,48 +258,49 @@ body{
     padding: 5px 5px 0px 5px;
 }
 
-.tab-login-input-button{
-    height: 21px !important;
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
+    height: 23px !important;
+    color: #000;
     width: 50px !important;
     text-align: center !important;
     line-height: inherit !important;
     background-color: whitesmoke !important;
     font-size: 10px !important;
     font-family: "century"!important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
+    -moz-border-radius: 5px !important; 
+    -ms-border-radius: 5px !important; 
+    -webkit-border-radius: 5px !important; 
+    border-radius: 5px !important; 
     background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
     background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
     background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
     background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
     border: solid 1px #F6A502 !important;
+    font-weight: bold;
 }
 
 .tab-login-input-button-register{
-    height: 21px !important;
     color: black !important;
-    width: 50px !important;
     font-family: "century"!important;
     text-align: center !important;
     line-height: inherit !important;
     background-color: whitesmoke !important;
     font-size: 10px !important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
+    -moz-border-radius: 5px !important; 
+    -ms-border-radius: 5px !important; 
+    -webkit-border-radius: 5px !important; 
+    border-radius: 5px !important; 
     background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
     background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
     background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
     background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
     border: solid 1px #F6A502 !important;
     margin-left: 10px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 20px;
-    padding-right: 20px;    
+    padding: 3px 10px;
+    text-decoration: none;
+    position: relative;
+    top: 8px;
+    font-weight: bold;
 }
 
 .tab-login-input-button-sin-login{
@@ -297,10 +312,10 @@ body{
     background-color: whitesmoke !important;
     font-size: 10px !important;
     font-family: "century"!important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
+    -moz-border-radius: 5px !important; 
+    -ms-border-radius: 5px !important; 
+    -webkit-border-radius: 5px !important; 
+    border-radius: 5px !important; 
     background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
     background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
     background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
@@ -310,6 +325,7 @@ body{
     padding-top: 2px;
     padding-left: 10px;
     padding-right: 5px;    
+    text-decoration: none;
 }
 
 .tab-login-input-button-sin-login:hover{
@@ -320,13 +336,13 @@ body{
     color: white !important;
 }
 
-.tab-login-input-button-photo:hover{
+.ikont-a4jcl-logintabregistratephoto:hover{
     color: white !important;
 }
 
-.tab-login-input-button-photo{
+.ikont-a4jcl-logintabregistratephoto{
     position: relative;
-    left: 30px;
+    left: 7px;
     width: 80px !important;
     height: 21px !important;
     color: black !important;
@@ -336,15 +352,17 @@ body{
     background-color: whitesmoke !important;
     font-size: 10px !important;
     font-family: "century";
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
+    -moz-border-radius: 5px !important; 
+    -ms-border-radius: 5px !important; 
+    -webkit-border-radius: 5px !important; 
+    border-radius: 5px !important; 
     background: -webkit-gradient(linear, left top, left bottom, from(#F2F2F2), to(#A4A4A4), color-stop(0.7, #A4A4A4))!important;
     background: -moz-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
     background: -ms-linear-gradient(top, rgba(242,242,242, 1) 0%, rgba(164,164,164,1) 100%)!important;
     background: -o-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
     border: solid 1px #A4A4A4 !important;
+    text-decoration: none;
+    padding: 3px 9px;
 }
 
 .tab-div{
@@ -365,8 +383,8 @@ body{
     background: -moz-linear-gradient(top, rgba(29,98,159,0.8), rgba(28,43,56,0.8)) !important;
     background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
     background: -o-linear-gradient(top,rgba(29,98,159,0.8), rgba(28,43,56,0.8)) !important;
-    width: 350px !important;
-    height: 380px !important;
+    width: 320px !important;
+    height: 360px !important;
     margin-top: 1px !important;
     margin-left: 1px !important;
 }
@@ -378,13 +396,13 @@ body{
 
 
 
-.div-login-imgs{
+.ikont-hpg-renderedlogologin{
     position: relative;
     top: 20px;
     left: 70px;
 }
 
-.div-login-imgs img{
+.ikont-hpg-renderedlogologin img{
     margin-left: 10px;
 }
 
@@ -461,10 +479,10 @@ body{
     margin-right: 20px;
 }
 
-.div-login-photo-register-first{
+.ikont-hpg-imagenciudadano{
     position: relative;
     top : -12px;
-    left: 15px;
+    left: 7px;
     width: 100px;
     height: 120px;
     -moz-border-radius: 10px; 
@@ -474,7 +492,7 @@ body{
     background-color: #F2F2F2;    
 }
 
-.div-login-photo-register-last{
+.ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
     width: 80px;
@@ -490,4 +508,15 @@ body{
     -o-background-size : cover;
     -moz-background-size : cover;
     -ms-background-size : cover;
+}
+
+
+.ikont-a4jcl-logintabentrarolvidocontrasenia{
+    color: #FFF;
+    text-decoration: none;
+    margin-left: 120px;
+}
+
+input[type="password"].ikont-hit-contrasenados, input[type="text"].ikont-hit-contrasenados{
+    width: 142px;
 }
