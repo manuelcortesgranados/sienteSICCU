@@ -8,6 +8,7 @@ import Seguridad.Encrypter;
 import atencionHumanitaria.service.AtencionHumanitariaServiceAble;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import ciudadano.service.CiudadanoServiceAble;
+import co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Documentoobra;
@@ -91,6 +92,9 @@ public class SessionBeanCobra implements Serializable {
     private String keyrepass = "";
     private boolean ciudadano = true;
     private int obraseguida = 0;
+    private CobraGwtServiceImpl cobraGwtService;
+    
+    
 
     public int getObraseguida() {
         return obraseguida;
@@ -1089,5 +1093,19 @@ public class SessionBeanCobra implements Serializable {
     
     public String nombreModulo(Modulo modulo){
         return modulo.getStrmodNmbre();
+    }
+
+    /**
+     * @return the cobraGwtService
+     */
+    public CobraGwtServiceImpl getCobraGwtService() {
+        return cobraGwtService;
+    }
+
+    /**
+     * @param cobraGwtService the cobraGwtService to set
+     */
+    public void setCobraGwtService(CobraGwtServiceImpl cobraGwtService) {
+        this.cobraGwtService = cobraGwtService;
     }
 }

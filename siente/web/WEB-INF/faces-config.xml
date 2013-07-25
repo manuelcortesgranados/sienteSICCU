@@ -322,6 +322,10 @@
             <property-name>modificarProyectoService</property-name>
             <value>#{modificarProyectoService}</value>
         </managed-property>
+        <managed-property>
+            <property-name>cobraGwtService</property-name>
+            <value>#{cobraGwtService}</value>
+        </managed-property>
 
     </managed-bean>
     <managed-bean>
