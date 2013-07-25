@@ -6,12 +6,17 @@ package co.com.interkont.cobra.planoperativo.server.services;
 
 
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.SemaforoDTO;
 import co.com.interkont.cobra.to.Alarma;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Semaforo;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import com.interkont.cobra.dto.ActividadObraDTO;
+import com.interkont.cobra.util.CobraUtil;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -28,6 +33,14 @@ public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraG
     
     @Autowired
     private CobraDaoAble cobraDao;  
+    
+    Contrato contrato=new Contrato();
+    
+    private ContratoDTO contratoDto=new ContratoDTO();
+    
+     /*constantes para sabes a que va a convertir*/
+    final int VAR_DTO=1;
+    final int VAR_TO=2;
 
 
     public CobraDaoAble getCobraDao() {
@@ -38,31 +51,64 @@ public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraG
         this.cobraDao = cobraDao;
     }
 
-    
-    @Override
-    public AlarmaDTO findAlarma(int id_alarma) {       
-       // Alarma alarma  = (Alarma) cobraDao.encontrarPorId(Alarma.class, id_alarma);
-         Alarma alarma  = (Alarma) cobraDao.encontrarA(id_alarma);
-        System.out.println("sali = " + alarma.getIntidalarma() + "Valor ini" + alarma.getNumvalorfin() + "Relacion" + alarma.getTipoobras().size());
+ @Override
+    public AlarmaDTO findAlarma(int id_alarma) {
+        System.out.println("id_alarma = " + id_alarma);
+        Alarma alarma = (Alarma) cobraDao.encontrarA(id_alarma);
         AlarmaDTO alarmaDTO = new AlarmaDTO(alarma.getIntidalarma(), alarma.getNumvalorini(), alarma.getNumvalorfin());
         Set<Semaforo> semforos = alarma.getSemaforos();
         Set<SemaforoDTO> semforosdto = new HashSet<SemaforoDTO>();
         if (semforos != null) {
-            for (Semaforo s : semforos) {
-                SemaforoDTO semdto = new SemaforoDTO(s.getIntidsemaforo(), alarmaDTO, s.getIntporini(), s.getIntporfin(), s.getStrimagen(), s.isBooleanatraso());
-                semforosdto.add(semdto);
+            semforosdto = CobraUtil.convertirSet(semforos, "SemaforoDTO", "Semaforo",VAR_DTO,alarmaDTO,"alarma");
         }
-        }
-        System.out.println("Sali semaforo = ");
-           alarmaDTO.setSemaforos(semforosdto);
-        Iterator it = alarmaDTO.getSemaforos().iterator();
-        SemaforoDTO s = (SemaforoDTO) it.next();
-        System.out.println("" + s.getAlarma().getIntidalarma());
+        alarmaDTO.setSemaforos(semforosdto);
         return alarmaDTO;
     }
 
+//    @Override
+//    public void agregarContratoTemporal(ContratoDTO contratoDto) throws Exception {
+//        this.setContratoDto(contratoDto);
+//        contrato.setIntidcontrato(contratoDto.getIntidcontrato());
+//        System.out.println("contratoDto = " + contrato.getIntidcontrato());
+//    }
+//
+//    @Override
+//    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public void actualizarTareaTemporal(ActividadObraDTO actividadDto) throws Exception {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public void agregarDependencia(DependenciaDTO dependenciaDto) throws Exception {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    @Override
+//    public void eliminarDependencia(DependenciaDTO dependenciaDto) throws Exception {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    /**
+//     * @return the contratoDto
+//     */
+//    @Override
+//    public ContratoDTO getContratoDto() {
+//        return contratoDto;
+//    }
+//
+//    /**
+//     * @param contratoDto the contratoDto to set
+//     */
+//    @Override
+//    public void setContratoDto(ContratoDTO contratoDto) {
+//        this.contratoDto = contratoDto;
+//    }
+// 
+//    
+
   
-
-
- 
 }

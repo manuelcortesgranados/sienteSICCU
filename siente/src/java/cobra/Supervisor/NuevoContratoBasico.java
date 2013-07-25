@@ -807,6 +807,7 @@ public class NuevoContratoBasico implements Serializable {
     private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
     private int reportoption;
+    private int subpantalla;
 
     /**
      * Variable para ver los reportes de plan operativo
@@ -6026,6 +6027,7 @@ public class NuevoContratoBasico implements Serializable {
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
+                subpantalla=1;
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
@@ -6046,6 +6048,10 @@ public class NuevoContratoBasico implements Serializable {
 
         }
 
+    }
+
+    public void actualizarSubpantallaPlanOperativo(int subPantalla) {
+        this.setSubpantalla(subPantalla);
     }
 
     /**
@@ -6370,13 +6376,27 @@ public class NuevoContratoBasico implements Serializable {
 
     }
 
-    public String flujoCaja() {        
+    public String flujoCaja() {
         return "FlujoCaja";
 
     }
 
-    public String verReportes() {   
+    public String verReportes() {
         boolreporte = true;
         return null;
+    }
+
+    /**
+     * @return the subpantalla
+     */
+    public int getSubpantalla() {
+        return subpantalla;
+    }
+
+    /**
+     * @param subpantalla the subpantalla to set
+     */
+    public void setSubpantalla(int subpantalla) {
+        this.subpantalla = subpantalla;
     }
 }
