@@ -33,11 +33,6 @@ body{
     background-color: black;
 }
 
-.tab-login{
-    border: solid 0px transparent !important;
-    background: transparent !important;
-}
-
 .ikont-hpg-gpLogPrinci{
     width: 400px !important;
     position: relative !important;
@@ -180,15 +175,6 @@ body{
     padding: 8px 6px !important;
 }
 
-.tab-login-label-contenido-line-one{
-    position: relative;
-    top: -3px;
-}
-
-.tab-login-label-contenido-line-two{
-    position: relative;
-    top: -6px;
-}
 
 .tab-login-label-contenido{
     color: white;
@@ -204,59 +190,19 @@ body{
     font-weight: bold;
     text-align: justify !important;
     background-color: white;
-    /*background-image: url("../imgs/modal/msgerror.png");
-    background-repeat: no-repeat;
-    background-position: 0px;*/
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px;    
+    -moz-border-radius: 5px; 
+    -ms-border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    border-radius: 5px;    
+    width: 200px;
+    margin: 0px auto;
 }   
-
-.tab-login-label-contenido-msg{
-    float: left;
-    position: relative;
-    left: 90px;
-    font-family: "futura";
-}
 
 .tab-login-label-title{
     color: white !important;
     font-size: 15px!important;
     font-family: "medium"!important;
 }   
-
-.tab-login-input-text{
-    width: 175px;
-    height: 22px;    
-    color: black;
-    background-color: white;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px; 
-    border: solid 1px #1D629F;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px 5px 0px 5px;
-    font-family: "futura";
-}    
-.tab-login-input-password{
-    width: 123px;
-    height: 22px;
-    color: black;
-    background-color: white;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px; 
-    border: solid 1px #1D629F;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px 5px 0px 5px;
-}
 
 input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     height: 23px !important;
@@ -301,35 +247,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     position: relative;
     top: 8px;
     font-weight: bold;
-}
-
-.tab-login-input-button-sin-login{
-    height: 21px !important;
-    color: black !important;
-    width: 50px !important;
-    text-align: center !important;
-    line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century"!important;
-    -moz-border-radius: 5px !important; 
-    -ms-border-radius: 5px !important; 
-    -webkit-border-radius: 5px !important; 
-    border-radius: 5px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 10px;
-    padding-right: 5px;    
-    text-decoration: none;
-}
-
-.tab-login-input-button-sin-login:hover{
-    color: white !important;
 }
 
 .tab-login-input-button-register:hover{
@@ -514,9 +431,9 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
 .ikont-a4jcl-logintabentrarolvidocontrasenia{
     color: #FFF;
     text-decoration: none;
-    margin-left: 120px;
+    margin-left: 130px;
 }
 
 input[type="password"].ikont-hit-contrasenados, input[type="text"].ikont-hit-contrasenados{
-    width: 142px;
+    width: 146px;
 }
