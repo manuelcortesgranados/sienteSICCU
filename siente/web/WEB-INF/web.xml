@@ -37,7 +37,7 @@
     </servlet>
      <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>/faces/*</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>dispatcher</servlet-name>
@@ -63,6 +63,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Inicio.xhtml</welcome-file>
+        <welcome-file>/faces/Inicio.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
