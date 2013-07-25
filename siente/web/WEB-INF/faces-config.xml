@@ -441,8 +441,12 @@
             <from-outcome>FlujoCaja</from-outcome>
             <to-view-id>Supervisor/Flujocaja.xhtml</to-view-id>
         </navigation-case>
+         <navigation-case>
+            <from-outcome>PlanOperativo</from-outcome>
+            <to-view-id>Supervisor/PlanOperativo.xhtml</to-view-id>
+        </navigation-case>
         
-        <navigation-case>
+         <navigation-case>
             <from-outcome>ingresarEntidad</from-outcome>
             <to-view-id>/Administrador/IngresarEntidad.xhtml</to-view-id>
         </navigation-case>
