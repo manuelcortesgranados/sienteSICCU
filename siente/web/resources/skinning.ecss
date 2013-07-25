@@ -14,41 +14,41 @@ hr {
 	border-style: '#{richSkin.borderStyle}';
 	border-color: '#{richSkin.headerBackgroundColor}';
 }
-
+/* clase para centrar en las tablas*/
 .panelcenter {
     text-align: center;
 }
-
+/* clase para el tamaño del texto en paneles*/
 .panelfontsize{
     font-size: '#{richSkin.generalSizeFont}';
 }
-
+/* clase para el tamaño de los paneles de control gerencial*/
 .panel-control-gerencial{
     height: 22em;
     min-width: 26em;
     text-align: center;
 }
-
+/* clase para el margen entre paneles*/
 .margin-panel{
     margin: 5px;
 }
-
+/* clase para alinear todos los elementenos al top*/
 .verticalalingtop{
     vertical-align: top;
 }
-
+/* clase para titulos de los paneles de control gerencial*/
 .tituloValor{
    color: '#{richSkin.tituloValorColor}';
    font-size:'#{richSkin.tituloValorFontSize}';
    font-weight:'#{richSkin.tituloValorFontWeight}';
 }
-
+/* clase para titulos de los paneles de control gerencial*/
 .labelItemAtencion {
     color: '#{richSkin.labelItemAtencionColor}';
     font-size: '#{richSkin.labelItemAtencionFontSize}';
     vertical-align: middle;
 }
-
+/* clase para titulos de los paneles de control gerencial*/
 .valorItemAtencion {
     color: '#{richSkin.valorItemAtencionColor}';
     font-size:'#{richSkin.valorItemAtencionFontSize}';
@@ -56,7 +56,7 @@ hr {
     vertical-align: middle;
     padding-left: 0.1em;
 }
-
+/* propiedades generales */
 a {
 	color: #0078D0;
 }
@@ -135,6 +135,7 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
 	color: '#{richSkin.headerBackgroundColor}';
 	cursor: default;
 }
+/* fin de propiedades generales */
 
 .ikont-hpg-menulateralgestion .text-button-panel{
     width: '#{richSkin.textPanelwidth}';
@@ -286,12 +287,12 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     border-bottom-left-radius: '#{richSkin.borderRadius}';
     border-bottom-right-radius: '#{richSkin.borderRadius}';
 }
-
+/*propiedades para el slider de ultimos proyectos*/
 .middleinfoslidercontrolgeren {
     border-radius: '#{richSkin.borderRadius}';
     height : 165px;
 }
-
+/*degradados para el slider de ultimos proyectos*/
 .middleinfosliderciuda, .middleinfoslidercontrolgeren {
     background: '#{richSkin.sliderUltProyeDegradadoMoz}';
 }
@@ -307,7 +308,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
 .middleinfosliderciuda, .middleinfoslidercontrolgeren {
     background: '#{richSkin.sliderUltProyeDegradado}';
 }
-
+/*propiedades para el boton de buscar de ciudadano*/
 .ikont-hgi-bnver{
     width: 21px;
     height: 21px;
@@ -316,6 +317,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     margin-bottom: -8px;
     margin-left: 3px;
 }
+/*degradados para el boton de buscar del ciudadano*/
 .ikont-hgi-bnver{
     background: '#{richSkin.butonCiudadanoDegradadoMoz}';
 }
@@ -347,6 +349,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     background: '#{richSkin.butonCiudadanoDegradadoHover}';
 }
 
+/*propiedades para los botones especiales del control gerencial*/
 .butonvercontrolgeren{
     border-radius: '#{richSkin.butonVerControlGerenBorderRadius}';
     border:'#{richSkin.butonVerControlGerenBorder}';
@@ -354,6 +357,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     color : '#{richSkin.butonVerControlGerenColor}';
     font-family:'#{richSkin.generalFamilyFont}';
 }
+/*propiedades para los botones especiales del control gerencial degradados*/
 .butonvercontrolgeren{
     background: '#{richSkin.butonVerControlGerenDegradadoMoz}';
 }
