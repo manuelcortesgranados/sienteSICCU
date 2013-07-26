@@ -9,7 +9,10 @@ import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +52,13 @@ public class FlujoCaja {
     public void setExpReport(ExpenseReport expReport) {
         this.expReport = expReport;
     }
+    
+    public String iniciarFlujoCaja() {
+        this.crearPeriodosFlujoCaja();
+        this.crearEstructuraFlujoIngresos();
+        
+        return "FlujoCaja";
+    }
    
     public void crearPeriodosFlujoCaja() {
         periodosFlujoCaja = new ArrayList<Periodoflujocaja>();
@@ -56,9 +66,14 @@ public class FlujoCaja {
         
         while (i <= 12) {
             Periodoflujocaja periodoFlujoCaja = new Periodoflujocaja();
+            Calendar calendario = Calendar.getInstance();
             
-            periodoFlujoCaja.setFechainicio(new Date("1-"+i+"2013"));
-            periodoFlujoCaja.setFechafin(new Date("28"+i+"2013"));
+            
+            calendario.set(2013, 1, i);
+            periodoFlujoCaja.setFechainicio(calendario.getTime());
+            
+            calendario.set(2013, 28, i);
+            periodoFlujoCaja.setFechafin(calendario.getTime());
             
             periodosFlujoCaja.add(periodoFlujoCaja);
             
