@@ -4,11 +4,6 @@
  */
 package co.com.interkont.cobra.planoperativo.client;
 
-
-
-
-import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.SemaforoDTO;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -31,22 +26,13 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
-import java.util.Iterator;
-
 
 public class AdvancedFormsExample implements IsWidget, EntryPoint {
 
     private static final int COLUMN_FORM_WIDTH = 680;
     private VerticalPanel vp;
- 
-    
-    private final CobraGwtServiceAbleAsync service= GWT.create(CobraGwtServiceAble.class);
-   
-    
-    
-     
+    private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     @Override
     public Widget asWidget() {
@@ -61,21 +47,21 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
 
     @Override
     public void onModuleLoad() {
-        
+
         RootPanel.get().add(asWidget());
-        
+
     }
 
     private void crearFormulario() {
-        
+
         final TextBox nameField = new TextBox();
         nameField.setText("GWT User");
         RootPanel.get().add(nameField);
         nameField.setFocus(true);
         nameField.selectAll();
-        
+
         final Button enviar = new Button("Enviar");
-         
+
         FramedPanel panel = new FramedPanel();
         panel.setHeadingText("Ingresar Datos de Evento");
         panel.setWidth(COLUMN_FORM_WIDTH);
@@ -87,19 +73,13 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
 
         final TextField evento = new TextField();
         evento.setAllowBlank(false);
-        evento.setWidth(cw);        
+        evento.setWidth(cw);
         con.add(new FieldLabel(evento, "nombre del evento"), new HtmlData(".ne"));
-        
-              
-        
 
         TextField descripcion = new TextField();
         descripcion.setAllowBlank(false);
         descripcion.setWidth(cw);
         con.add(new FieldLabel(descripcion, "Descripcion del evento"), new HtmlData(".de"));
-        
-        
-       
 
         DateField fechainicio = new DateField();
         fechainicio.setWidth(cw);
@@ -112,17 +92,8 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
         final DialogBox dialogBox = new DialogBox();
         dialogBox.setText("Remote Procedure Call");
         con.add(dialogBox);
-       
-        
-        final HTML serverResponseLabel = new HTML();
-		VerticalPanel dialogVPanel = new VerticalPanel();
-		dialogVPanel.addStyleName("dialogVPanel");
-                dialogVPanel.add(serverResponseLabel);
-                dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
-                
-       
-        class Controlador implements ClickHandler,KeyUpHandler{
-            
+
+        class Controlador implements ClickHandler, KeyUpHandler {
 
             @Override
             public void onClick(ClickEvent event) {
@@ -132,121 +103,40 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
             @Override
             public void onKeyUp(KeyUpEvent event) {
                 if (event.getNativeKeyCode() == KeyCodes.KEY_ENTER) {
-                                        enviarAlServer();
-                                }
+                    enviarAlServer();
+                }
             }
-            
-            private void enviarAlServer(){
-                
-                 String idsector =evento.getText();
-                 
-                 service.findAlarma(Integer.parseInt(idsector), new AsyncCallback<AlarmaDTO>() {
+
+            private void enviarAlServer() {
+
+
+                service.pruebacomGWTJSF(Integer.parseInt(evento.getText()), new AsyncCallback<Void>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        dialogBox.setText("Remote Procedure Call - Failure" + caught.toString());
+                        dialogBox.setText(caught.toString());
                     }
 
                     @Override
-                    public void onSuccess(AlarmaDTO result) {
-
-                        if (result != null) {
-
-                            dialogBox.setText("sectir" + result.getIntidalarma() + "" + result.getSemaforos().size());
-                            StringBuilder semaf = new StringBuilder();
-                            Iterator it = result.getSemaforos().iterator();
-                            while (it.hasNext()) {
-                                SemaforoDTO sdto=(SemaforoDTO) it.next();
-                                semaf.append("id semaforo=");
-                                semaf.append(+sdto.getIntidsemaforo());
-                              
-                            }
-
-                            dialogBox.setText(" lstSemaforo"+semaf);
-////                            for (int i = 0; i < semaforos.size(); i++) {
-////                                semaf.append(semaforos.get(i).getIntidsemaforo());
-////
-////                            }
-//                            dialogBox.setText(""+semaforos.size());
-                            serverResponseLabel.setHTML("id <br>Id : " + result.getIntidalarma() + "<br> nombre:" + result.getNumvalorini());
-
-                        } else {
-                            serverResponseLabel.setHTML("No employee with the specified id found");
-                        }
-                        dialogBox.center();
+                    public void onSuccess(Void result) {
+                        dialogBox.setText("Guarde");
                     }
                 });
+            }
+        }
 
-//                 service.findContrato(Integer.parseInt(idsector), new AsyncCallback<Evento>() {
-//
-//                     @Override
-//                     public void onFailure(Throwable caught) {
-//                         dialogBox.setText("Remote Procedure Call - Failure"+caught.getCause());
-//                     }
-//
-//                     @Override
-//                     public void onSuccess(Evento result) {
-//                          if(result!= null){
-//                                dialogBox.setText("sectir" + result.getStrnombre());
-//                                
-//                                               serverResponseLabel.setHTML("id <br>Id : " + result.getStrnombre()+ "<br> nombre:"  );
-////                                                                    
-//                                                                }
-//                                else{
-//                                                                    serverResponseLabel.setHTML("No employee with the specified id found");
-//                                                                }									
-//								dialogBox.center();
-//                     }
-//                 });
-//                 
-
-//           
-//                  service.findSector(Integer.parseInt(idsector), new AsyncCallback<Sector>() {
-//
-//                        @Override
-//                        public void onFailure(Throwable caught) {
-//                            dialogBox.setText("Remote Procedure Call - Failure"+caught.getCause());
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(Sector result) {
-//                            if(result!= null){
-//                                dialogBox.setText("sectir" + result.getStrnombre());
-//                                
-//                                              serverResponseLabel.setHTML("id <br>Id : " + result.getIntsector()+ "<br> nombre:" + result.getStrnombre() );
-////                                                                    
-//                                                                }
-//                                else{
-//                                                                    serverResponseLabel.setHTML("No employee with the specified id found");
-//                                                                }									
-//								dialogBox.center();
-////                                     
-//                        }
-//                    });
-//  
-                               
-//                                    
-//                                  service.hola(nameField.getText(), new  AsyncCallback<String>() {
-//                                        @Override
-//                                        public void onFailure(Throwable caught) {
-//                                            dialogBox.setText(caught.toString());
-//                                        }
-//                    
-//                         
-        }}
-        
         Controlador contol = new Controlador();
         enviar.addClickHandler(contol);
-        nameField.addKeyUpHandler(contol);     
-         vp.add(panel);
+        nameField.addKeyUpHandler(contol);
+        vp.add(panel);
     }
-    
+
     private native String getTableMarkup() /*-{
-    return [ '<table width=100% cellpadding=0 cellspacing=0>',
-        '<tr><td class=ne width=50%></td></tr>',
-        '<tr><td class=de></td></tr>',
-        '<tr><td class=fi></td></tr>',
-        '<tr><td class=ff></td></tr>',
-        '</table>' 
-    ].join("");
-  }-*/;
+     return [ '<table width=100% cellpadding=0 cellspacing=0>',
+     '<tr><td class=ne width=50%></td></tr>',
+     '<tr><td class=de></td></tr>',
+     '<tr><td class=fi></td></tr>',
+     '<tr><td class=ff></td></tr>',
+     '</table>' 
+     ].join("");
+     }-*/;
 }

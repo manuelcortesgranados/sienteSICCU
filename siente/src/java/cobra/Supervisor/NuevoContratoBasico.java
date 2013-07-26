@@ -6027,7 +6027,7 @@ public class NuevoContratoBasico implements Serializable {
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
-                subpantalla=1;
+                subpantalla = 1;
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
@@ -6398,5 +6398,17 @@ public class NuevoContratoBasico implements Serializable {
      */
     public void setSubpantalla(int subpantalla) {
         this.subpantalla = subpantalla;
+    }
+
+    public void comunicacionGWTJSF() {
+        System.out.println("comunicacionGWTJSF ");
+        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        this.contrato = sbc.getCobraGwtService().getContrato();
+       if(contrato!=null){
+        System.out.println("sbc = " + contrato.getIntidcontrato());
+       }else{
+           System.out.println("sbc no tiene datos" );
+       }
+        subpantalla = 2;
     }
 }
