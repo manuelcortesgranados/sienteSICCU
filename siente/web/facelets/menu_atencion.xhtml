@@ -30,7 +30,7 @@
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}">
             <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle1"  />
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                <a4j:commandLink styleClass="ikont-acl-strurlmdloruta"   onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
+                <a4j:commandLink styleClass="ikont-acl-strurlmdloruta"   onclick="document.location.href='#{modulo.strurlMdloRuta}';" value="Inicio"
                                  render="panelBody" immediate="true"/>
             </a4j:repeat>
         </rich:toolbarGroup>
@@ -47,7 +47,7 @@
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo">
 
                 <rich:menuItem  render="form_menu" label="#{modulo.strmodNmbre}" iconDisabled="#{modulo.striconoInicio}"
-                               onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" immediate="true" />
+                               onclick="document.location.href='../#{modulo.strurlMdloRuta}';" immediate="true" />
             </a4j:repeat>
         </rich:dropDownMenu>
 
