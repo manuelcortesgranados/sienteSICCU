@@ -13,13 +13,13 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>#{var.titulogeneral}</title>
-            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
-            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/favicon.ico" type="image/x-icon"/>
+            <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+            <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/login.css" rel="stylesheet" type="text/css"/>
             <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
-           <ui:insert name="head"/>
+            <ui:insert name="head"/>
         </head>
 
         <body>
@@ -43,27 +43,27 @@
 
                                 <tr>
                                     <td align="center">
-                                         <h:form>
-                                        <table  border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                                <td align="center" class="colorTexto">La session ha vencido.<br />Debido a más de 30 minutos de inactividad
+                                        <h:form>
+                                            <table  border="0" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td align="center" class="colorTexto">La session ha vencido.<br />Debido a más de 30 minutos de inactividad
                                                     </td>
-                                                <td><div class="regresar">
-                                                       
-                                                        <a4j:commandLink styleClass="ikont-a4jcl-cerrarSession"   
-                                                                         action="cerrarSession"/>                                                       
-                                                        
-                                                    </div></td>
-                                            </tr>
-                                        </table>
-                                     </h:form></td>
+                                                    <td><div class="regresar">
+
+                                                            <a4j:commandLink styleClass="ikont-a4jcl-cerrarSession"   
+                                                                             action="cerrarSession"/>                                                       
+
+                                                        </div></td>
+                                                </tr>
+                                            </table>
+                                        </h:form></td>
                                 </tr>
                                 <h:panelGroup rendered="#{var.logologin}">
-                                <tr>
-                                    <td class="text02" align="center">
-                                        <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="text02" align="center">
+                                            <img src="/#{var.versioncobra}/resources/imgs/Logo_republica.png" width="70" height="70"/>
+                                        </td>
+                                    </tr>
                                 </h:panelGroup>
                             </table>
                         </td>
@@ -78,13 +78,13 @@
             </center>
 
             <div id="login_image"></div>
-        <h:panelGroup rendered="#{var.logologin}">
-            <div class="social">
-                <a href="#{var.btnfacebook}" class="fb anchorLink" target="_blank"></a>
-                <a href="#{var.btntwitter}" classt="w anchorLink" target="_blank"></a>
-                <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
-            </div>
-        </h:panelGroup>
+            <h:panelGroup rendered="#{var.logologin}">
+                <div class="social">
+                    <a href="#{var.btnfacebook}" class="fb anchorLink" target="_blank"></a>
+                    <a href="#{var.btntwitter}" classt="w anchorLink" target="_blank"></a>
+                    <a href="#{var.btnyoutube}" class="yt anchorLink" target="_blank"></a>
+                </div>
+            </h:panelGroup>
         </body>
     </html>
 </ui:composition>
