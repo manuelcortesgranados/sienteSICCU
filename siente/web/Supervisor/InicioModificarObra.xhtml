@@ -30,15 +30,15 @@
     </ui:define>
     <ui:define name="body">
        <h:form id="form_modificar">
-            <h:panelGrid id="layoutModificar" >
+           <h:panelGrid id="layoutModificar" styleClass="totalwidth">
                 
-                    <h:panelGrid id="panel_ModiInicial"  columns="4">
+                    <h:panelGrid id="panel_ModiInicial"  columns="4" styleClass="totalwidth">
                         <interkont:spacer height="50"/>
                         <center>
                             <h:panelGrid columns="3" styleClass="ikont-hpg-panelmodiinicial"   >
                                 <h:panelGrid id="panelProrroga" width="20" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}">
                                     <h:commandLink id="bt_Modif" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"
-                                                     styleClass="ikont-hcl-bnmodif"     
+                                                     styleClass="ikont-hcl-bnmodif prorroga"     
                                                      action="#{Supervisor$AdministrarObraNew.mostrarModificar}" >
                                     </h:commandLink>
                                     <h:outputText  styleClass="ikont-hot-prorrogasadcciones"   value="#{var.prorrogasadcciones}" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.vermodificarproyecto}"/>
@@ -46,14 +46,14 @@
 
                                 <interkont:spacer width="50px" rendered="false" />
                                 <h:panelGrid id="panelSuspencion" rowClasses="panelcenter" columnClasses="panelcenter" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=3}">
-                                    <h:commandLink id="bt_suspension" styleClass="ikont-hcl-btsuspension"     
+                                    <h:commandLink id="bt_suspension" styleClass="ikont-hcl-btsuspension suspension"     
                                                      action="#{Supervisor$AdministrarObraNew.mostrarSuspender}"
                                                      >
                                     </h:commandLink>
                                     <h:outputText  styleClass="ikont-hot-suspenderobra"   value="#{var.suspenderobra}"/>
                                 </h:panelGrid>
                                 <h:panelGrid rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra==6}" columns="1">
-                                    <h:commandLink id="bt_reinicio" styleClass="ikont-hcl-btreinicio"     
+                                    <h:commandLink id="bt_reinicio" styleClass="ikont-hcl-btreinicio reiniciar"     
                                                      action="#{Supervisor$SuspenderObra.cargarReinicio}"
                                                      >
                                     </h:commandLink>

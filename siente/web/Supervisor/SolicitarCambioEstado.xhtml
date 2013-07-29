@@ -32,10 +32,10 @@
             <center>
                 <h:panelGroup id="validarcambio">
                     <interkont:spacer  height="120"/>
-                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" >
-                        <h:outputText  styleClass="ikont-hot-cambioestadoobra" value="SOLICITAR CAMBIO DE ESTADO DE #{var.textobra7}"/>
+                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" styleClass="marcocambioestado" >
+                        <h:outputText  styleClass="ikont-hot-cambioestadoobra vtitle02" value="SOLICITAR CAMBIO DE ESTADO DE #{var.textobra7}"/>
                         <interkont:spacer  height="15" />                            
-                        <h:outputText  styleClass="ikont-funccambioestado" value="Si usted desea actualizar la programación del #{var.solicitudproyecto} o actualizar los datos básicos #{var.textoobra3} haga uso de esta función para cambiar el estado #{var.textoobra3} a ejecución incompleta."/>
+                        <h:outputText  styleClass="ikont-funccambioestado vtitle03" value="Si usted desea actualizar la programación del #{var.solicitudproyecto} o actualizar los datos básicos #{var.textoobra3} haga uso de esta función para cambiar el estado #{var.textoobra3} a ejecución incompleta."/>
                         <interkont:spacer  height="20" />
                         <h:panelGrid columnClasses="panelcenter"  >
                             <h:form  id="form_validarcambio">
@@ -48,7 +48,7 @@
                         <interkont:spacer  height="20" />
                         <h:panelGroup>
                              <h:graphicImage  styleClass="ikont-hgi-urlalerta" height="60px" width="60px" url="/resources/imgs/alerta.png" />
-                            <h:outputText  styleClass="ikont-hot-alertaviso"
+                            <h:outputText  styleClass="ikont-hot-alertaviso vtitle03"
                                            value="Recuerde que este procedimiento borrará todos los Reportes de Avances, 
                                            los documentos e imágenes asociados a estos reportes y el cronograma" />
               
