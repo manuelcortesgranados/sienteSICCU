@@ -32,12 +32,12 @@
             <center>
                 <h:panelGroup id="eliminarultavance">
                     <interkont:spacer  height="120"/>
-                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" >
-                        <h:outputText  styleClass="ikont-hot-ultimoavance" value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}"/>
+                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" styleClass="marcocambioestado">
+                        <h:outputText  styleClass="ikont-hot-ultimoavance vtitle02" value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}"/>
                         <interkont:spacer  height="15" />                            
-                        <h:outputText  styleClass="ikont-hot-ultimoavancereportado" value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función."/>
+                        <h:outputText  styleClass="ikont-hot-ultimoavancereportado vtitle03" value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función."/>
                         <interkont:spacer  height="20" />
-                        <h:panelGrid columnClasses="panelcenter"  >
+                        <h:panelGrid columnClasses="panelcenter"  styleClass="centerelement">
                             <h:form  id="form_validareliavance">
                                 <a4j:commandLink value="Eliminar último avance #{var.textoobra3}"
                                                  styleClass="ikont-acl-deleteultimoavance" onclick="#{rich:component('confirmarEliminarAvance')}.show();return true;">
@@ -47,7 +47,7 @@
                         <interkont:spacer  height="20" />
                         <h:panelGroup>
                              <h:graphicImage  styleClass="ikont-hgi-imgalerta" height="60px" width="60px" url="/resources/imgs/alerta.png" />
-                            <h:outputText  styleClass="ikont-hot-alertavisoavance"  
+                            <h:outputText  styleClass="ikont-hot-alertavisoavance vtitle03"  
                                            value="Recuerde que este procedimiento borrará el último reporte de avance y  
                                            los documentos asociados a él." />
               
