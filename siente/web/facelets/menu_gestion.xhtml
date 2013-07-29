@@ -29,7 +29,7 @@
         <rich:toolbarGroup rendered="#{SessionBeanCobra.countModulos == 1}" >
             <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-menumiddle1"  />
             <a4j:repeat value="#{SessionBeanCobra.modulos}" var="modulo" >
-                <a4j:commandLink onclick="document.location.href='../faces#{modulo.strurlMdloRuta}';" value="Inicio"
+                <a4j:commandLink onclick="document.location.href='../#{modulo.strurlMdloRuta}';" value="Inicio"
                                  render="panelBody" immediate="true"  styleClass="ikont-hot-inicio"/>
             </a4j:repeat>
         </rich:toolbarGroup>
@@ -467,7 +467,7 @@
             
             
             <rich:menuItem  label="Tutorial"  immediate="true" icon="/resources/imgs/bt_tutorial.png" 
-                           onclick="window.open(document.location.href='#{facesContext.externalContext.requestContextPath}/faces/ayuda/manual.xhtml','_blank'); "/>
+                           onclick="window.open(document.location.href='#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml','_blank'); "/>
             
             
             <rich:menuItem label="Preguntas Frecuentes" immediate="true"

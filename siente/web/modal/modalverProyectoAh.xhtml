@@ -75,10 +75,10 @@
                                 <h:outputText  styleClass="ikont-hot-cold5"   value="#{currentRow.intplazoobra}"/>
                             </rich:column>
                             <rich:column>
-                               <a4j:commandLink value="X" type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../faces/NuevoProyecto/datosBasicos.xhtml?id=#{currentRow.intcodigoobra}';">
+                               <a4j:commandLink value="X" type="submit" execute="@this" rendered="#{currentRow.tipoestadobra.intestadoobra == 0}" id="irDatosBasicos" onclick="document.location.href='../NuevoProyecto/datosBasicos.xhtml?id=#{currentRow.intcodigoobra}';">
                                     <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
-                               <a4j:commandLink value="X"  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../faces/Supervisor/DetalleObra.xhtml?id=#{currentRow.intcodigoobra}';">
+                               <a4j:commandLink value="X"  rendered="#{currentRow.tipoestadobra.intestadoobra != 0}" id="irDetalle" onclick="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{currentRow.intcodigoobra}';">
                                     <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
                             </rich:column>
