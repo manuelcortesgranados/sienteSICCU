@@ -324,7 +324,7 @@
         </managed-property>
         <managed-property>
             <property-name>cobraGwtService</property-name>
-            <value>#{cobraGwtService}</value>
+            <value>#{cobraGwtServiceAble}</value>
         </managed-property>
 
     </managed-bean>

@@ -4,7 +4,6 @@
  */
 package co.com.interkont.cobra.planoperativo.server.services;
 
-
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
@@ -23,25 +22,20 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author desarrollo9
  */
 @Service("cobraGwtServiceAble")
-public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraGwtServiceAble {
-    
-    @Autowired
-    private CobraDaoAble cobraDao;  
-    
-    Contrato contrato=new Contrato();
-    
-    private ContratoDTO contratoDto=new ContratoDTO();
-    
-     /*constantes para sabes a que va a convertir*/
-    final int VAR_DTO=1;
-    final int VAR_TO=2;
+public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGwtServiceAble {
 
+    @Autowired
+    private CobraDaoAble cobraDao;
+    Contrato contrato = new Contrato();
+    private ContratoDTO contratoDto = new ContratoDTO();
+    /*constantes para sabes a que va a convertir*/
+    final int VAR_DTO = 1;
+    final int VAR_TO = 2;
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -51,7 +45,7 @@ public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraG
         this.cobraDao = cobraDao;
     }
 
- @Override
+    @Override
     public AlarmaDTO findAlarma(int id_alarma) {
         System.out.println("id_alarma = " + id_alarma);
         Alarma alarma = (Alarma) cobraDao.encontrarA(id_alarma);
@@ -59,12 +53,22 @@ public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraG
         Set<Semaforo> semforos = alarma.getSemaforos();
         Set<SemaforoDTO> semforosdto = new HashSet<SemaforoDTO>();
         if (semforos != null) {
-            semforosdto = CobraUtil.convertirSet(semforos, "SemaforoDTO", "Semaforo",VAR_DTO,alarmaDTO,"alarma");
+            semforosdto = CobraUtil.convertirSet(semforos, "SemaforoDTO", "Semaforo", VAR_DTO, alarmaDTO, "alarma");
         }
         alarmaDTO.setSemaforos(semforosdto);
         return alarmaDTO;
     }
 
+    @Override
+    public Contrato getContrato() {
+        System.out.println("retorne contrato desde GWT" );
+        return contrato;
+    }
+
+    @Override
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
 //    @Override
 //    public void agregarContratoTemporal(ContratoDTO contratoDto) throws Exception {
 //        this.setContratoDto(contratoDto);
@@ -110,5 +114,8 @@ public class CobraGwtServiceImpl  extends RemoteServiceServlet implements CobraG
 // 
 //    
 
-  
+    @Override
+    public void pruebacomGWTJSF(int cont) throws Exception {
+    contrato.setIntidcontrato(cont);
+    }
 }

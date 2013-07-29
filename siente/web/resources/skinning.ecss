@@ -1,3 +1,26 @@
+/* ---------- tipos de fuentes --------------*/
+
+@font-face {
+    font-family: "bebas";
+    src: url("font/BEBAS___.TTF");
+
+}
+
+@font-face {
+    font-family: "century";
+    src: url("font/Century-Gothic.ttf");
+}
+
+@font-face {
+    font-family: "futura";
+    src: url("font/futura-light-bt.ttf");
+}
+
+@font-face {
+    font-family: "medium";
+    src: url("font/Futura.ttc");
+}
+
 input, select, textarea, button, keygen, isindex, legend, a {
 	font-size: '#{richSkin.generalSizeFont}';
 	font-family: '#{richSkin.generalFamilyFont}';
@@ -14,41 +37,41 @@ hr {
 	border-style: '#{richSkin.borderStyle}';
 	border-color: '#{richSkin.headerBackgroundColor}';
 }
-/* clase para centrar en las tablas*/
+
 .panelcenter {
     text-align: center;
 }
-/* clase para el tamaño del texto en paneles*/
+
 .panelfontsize{
     font-size: '#{richSkin.generalSizeFont}';
 }
-/* clase para el tamaño de los paneles de control gerencial*/
+
 .panel-control-gerencial{
     height: 22em;
     min-width: 26em;
     text-align: center;
 }
-/* clase para el margen entre paneles*/
+
 .margin-panel{
     margin: 5px;
 }
-/* clase para alinear todos los elementenos al top*/
+
 .verticalalingtop{
     vertical-align: top;
 }
-/* clase para titulos de los paneles de control gerencial*/
+
 .tituloValor{
    color: '#{richSkin.tituloValorColor}';
    font-size:'#{richSkin.tituloValorFontSize}';
    font-weight:'#{richSkin.tituloValorFontWeight}';
 }
-/* clase para titulos de los paneles de control gerencial*/
+
 .labelItemAtencion {
     color: '#{richSkin.labelItemAtencionColor}';
     font-size: '#{richSkin.labelItemAtencionFontSize}';
     vertical-align: middle;
 }
-/* clase para titulos de los paneles de control gerencial*/
+
 .valorItemAtencion {
     color: '#{richSkin.valorItemAtencionColor}';
     font-size:'#{richSkin.valorItemAtencionFontSize}';
@@ -56,7 +79,7 @@ hr {
     vertical-align: middle;
     padding-left: 0.1em;
 }
-/* propiedades generales */
+
 a {
 	color: #0078D0;
 }
@@ -135,7 +158,6 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
 	color: '#{richSkin.headerBackgroundColor}';
 	cursor: default;
 }
-/* fin de propiedades generales */
 
 .ikont-hpg-menulateralgestion .text-button-panel{
     width: '#{richSkin.textPanelwidth}';
@@ -287,12 +309,12 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     border-bottom-left-radius: '#{richSkin.borderRadius}';
     border-bottom-right-radius: '#{richSkin.borderRadius}';
 }
-/*propiedades para el slider de ultimos proyectos*/
+
 .middleinfoslidercontrolgeren {
     border-radius: '#{richSkin.borderRadius}';
     height : 165px;
 }
-/*degradados para el slider de ultimos proyectos*/
+
 .middleinfosliderciuda, .middleinfoslidercontrolgeren {
     background: '#{richSkin.sliderUltProyeDegradadoMoz}';
 }
@@ -308,7 +330,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
 .middleinfosliderciuda, .middleinfoslidercontrolgeren {
     background: '#{richSkin.sliderUltProyeDegradado}';
 }
-/*propiedades para el boton de buscar de ciudadano*/
+
 .ikont-hgi-bnver{
     width: 21px;
     height: 21px;
@@ -317,7 +339,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     margin-bottom: -8px;
     margin-left: 3px;
 }
-/*degradados para el boton de buscar del ciudadano*/
+
 .ikont-hgi-bnver{
     background: '#{richSkin.butonCiudadanoDegradadoMoz}';
 }
@@ -349,7 +371,6 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     background: '#{richSkin.butonCiudadanoDegradadoHover}';
 }
 
-/*propiedades para los botones especiales del control gerencial*/
 .butonvercontrolgeren{
     border-radius: '#{richSkin.butonVerControlGerenBorderRadius}';
     border:'#{richSkin.butonVerControlGerenBorder}';
@@ -357,7 +378,7 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
     color : '#{richSkin.butonVerControlGerenColor}';
     font-family:'#{richSkin.generalFamilyFont}';
 }
-/*propiedades para los botones especiales del control gerencial degradados*/
+
 .butonvercontrolgeren{
     background: '#{richSkin.butonVerControlGerenDegradadoMoz}';
 }
@@ -372,4 +393,152 @@ input[type="submit"].ikont-acl-busquedaavanzada:hover{
 }
 .butonvercontrolgeren{
     background: '#{richSkin.butonVerControlGerenDegradado}';
+}
+
+.tab-pestania-inactive, .tab-pestania-inactive-usu{
+    color: '#{richSkin.styleLoginColorPestaniaInactive}' !important;
+    font-family: "'#{richSkin.styleLoginFontFamilyroundPestaniaInactive }'";
+    font-size: '#{richSkin.styleLoginFontSizePestaniaInactive}' !important;
+    font-weight: '#{richSkin.styleLoginFontWidthPestaniaInactive}'!important;
+    background-color: '#{richSkin.styleLoginBackgroundPestaniaInactive}'!important;
+    -ms-background-color: '#{richSkin.styleLoginBackgroundPestaniaInactive}' !important;
+}
+
+.tab-pestania-inactive-usu:hover, .tab-pestania-inactive:hover{
+    color: '#{richSkin.styleLoginPestaniaInactiveHover}' !important;
+}
+
+
+.tab-pestania-active, .tab-pestania-active-usu{
+    color: '#{richSkin.styleLoginColorPestaniaActive}'!important;
+    font-family: "'#{richSkin.styleLoginFontFamilyroundPestaniaInactive }'";
+    font-size: '#{richSkin.styleLoginFontSizePestaniaInactive}' !important;
+    font-weight: '#{richSkin.styleLoginFontWidthPestaniaInactive}'!important;
+    background-color: '#{richSkin.styleLoginBackgroundPestaniaActive}'!important;
+}
+
+
+.tab-login-label-contenido{
+    color: '#{richSkin.styleLoginColorContenidoTexto}';
+    font-size: '#{richSkin.styleLoginFontSizeContenidoTexto}'!important;
+    font-family: "'#{richSkin.styleLoginFontFamiliContenidoTexto}'"!important;
+}   
+
+.tab-login-label-error{
+    color: red;
+    font-size: '#{richSkin.styleLoginFontSizePestaniaInactive}' !important;
+    font-family:"'#{richSkin.styleLoginFontFamilyLabelError}'"!important;
+    font-weight: '#{richSkin.styleLoginFontWidthLabelError}';
+    background-color: '#{richSkin.styleLoginBackgroudLabelError}';
+    -moz-border-radius: '#{richSkin.borderRadius}';
+    -ms-border-radius: '#{richSkin.borderRadius}';
+    border-radius: '#{richSkin.borderRadius}';   
+} 
+
+.tab-login-label-title{
+    color: '#{richSkin.styleLoginColorContenidoTexto}' !important;
+    font-size: '#{richSkin.styleLoginFontSizeTituloTexto}'!important;
+    font-family: "'#{richSkin.styleLoginFontFamiliTituloTexto}'"!important;
+}   
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{
+    color: '#{richSkin.styleLoginColorButonEntrar}' !important;
+    font-size: '#{richSkin.styleLoginFontSizePestaniaInactive}' !important;
+    font-family: "'#{richSkin.styleLoginFontFamilyLabelError}'"!important;
+    -moz-border-radius: '#{richSkin.borderRadius}';
+    -ms-border-radius: '#{richSkin.borderRadius}';
+    border-radius: '#{richSkin.borderRadius}';
+    border-color:  '#{richSkin.styleLoginBorderColorButonEntrar}'!important;
+    font-weight: '#{richSkin.styleLoginFontWidthLabelError}';
+}
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{
+    background: '#{richSkin.styleLoginDegradadoMozButonEntrar}';
+}
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{
+    background: '#{richSkin.styleLoginDegradadoWenkitButonEntrar}';
+}
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{
+    background: '#{richSkin.styleLoginDegradadoMsButonEntrar}';
+}
+
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar, .tab-login-input-button-register{
+    background: '#{richSkin.styleLoginDegradadoOButonEntrar}';
+}
+
+.tab-login-input-button-register:hover, .ikont-a4jcl-logintabregistratephoto:hover{
+    color: '#{richSkin.styleLoginButonFotoHover}';
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    color: '#{richSkin.styleLoginColorButonEntrar}' !important;
+    font-size: '#{richSkin.styleLoginFontSizePestaniaInactive}' !important;
+    font-family: "'#{richSkin.styleLoginFontFamilyLabelError}'"!important;
+    -moz-border-radius: '#{richSkin.borderRadius}';
+    -ms-border-radius: '#{richSkin.borderRadius}';
+    border-radius: '#{richSkin.borderRadius}';
+    border-color:  '#{richSkin.styleLoginBorderColorButonFoto}'!important;
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    background: '#{richSkin.styleLoginDegradadoMozButonFoto}';
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    background: '#{richSkin.styleLoginDegradadoWenkitButonFoto}';
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    background: '#{richSkin.styleLoginDegradadoMsButonFoto}';
+}
+
+.ikont-a4jcl-logintabregistratephoto{
+    background: '#{richSkin.styleLoginDegradadoOButonFoto}';
+}
+
+.tab-div{
+    background: '#{richSkin.styleLoginDegradadoMozTabDiv}';
+}
+
+.tab-div{
+    background: '#{richSkin.styleLoginDegradadoWenkitTabDiv}';
+}
+
+.tab-div{
+    background: '#{richSkin.styleLoginDegradadoMsTabDiv}';
+}
+
+.tab-div{
+    background: '#{richSkin.styleLoginDegradadoOTabDiv}';
+}
+
+
+.ikont-hpg-loginheader, .ikont-hpg-loginfooter{
+    background-color : '#{richSkin.styleLoginColorHeaderFooter}';
+    font-family: '#{richSkin.styleLoginFontFamilyHeader}';
+}
+
+.ikont-hot-loginheader{
+    color : '#{richSkin.styleLoginColorTextHeader}';
+    font-size: '#{richSkin.styleLoginFontSizeHeader}';
+    font-family: '#{richSkin.styleLoginFontFamilyHeader}';
+}
+
+.ikont-hot-loginfotercopy{
+    color : '#{richSkin.styleLoginColorTextFooter}';
+    font-size: '#{richSkin.styleLoginFontSizeHeader}';
+}
+.ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees{
+    color : '#{richSkin.styleLoginColorTextFooter}';
+    font-size: '#{richSkin.styleLoginFontSizeFooter}';
+}
+
+.ikont-a4jcl-logintabentrarolvidocontrasenia{
+    color: '#{richSkin.styleLoginColorContenidoTexto}';
+}
+
+.ikont-hpg-imagenciudadano{
+    background-color : '#{richSkin.styleLoginBackgroundFoto}';
 }

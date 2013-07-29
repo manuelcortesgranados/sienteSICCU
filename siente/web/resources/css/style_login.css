@@ -73,15 +73,11 @@ body{
     height: 30px!important;
 }
 
-.tab-pestania-inactive{
+.tab-pestania-inactive, .tab-pestania-inactive-usu{
     position: relative!important;
     bottom: -1px !important;
     width: 100px!important;  
     height: 31px!important;
-    color: #1D629F !important;
-    font-family: "medium";
-    font-size: 10px !important;
-    font-weight: inherit!important;
     text-align: center!important;
     border : transparent!important;
     -moz-border-top-left-radius: 10px!important; 
@@ -92,52 +88,20 @@ body{
     -webkit-border-top-right-radius: 10px!important; 
     border-top-left-radius: 10px!important; 
     border-top-right-radius: 10px!important; 
-    background-color: rgba(172,202,246,0.8) !important;
-    -ms-background-color: rgba(172,202,246,0.7) !important;
     cursor: pointer;
+}
+
+.tab-pestania-inactive, .tab-pestania-active {
     padding: 8px 36px !important;
 }
 
-.tab-pestania-inactive-usu{
-    position: relative!important;
-    bottom: -1px !important;
-    width: 100px!important;  
-    height: 31px!important;
-    color: #1D629F !important;
-    font-family: "medium";
-    font-size: 10px !important;
-    font-weight: inherit!important;
-    text-align: center!important;
-    border : transparent!important;
-    -moz-border-top-left-radius: 10px!important; 
-    -moz-border-top-right-radius: 10px!important; 
-    -ms-border-top-left-radius: 10px!important; 
-    -ms-border-top-right-radius: 10px!important; 
-    -webkit-border-top-left-radius: 10px!important; 
-    -webkit-border-top-right-radius: 10px!important; 
-    border-top-left-radius: 10px!important; 
-    border-top-right-radius: 10px!important; 
-    background-color: rgba(172,202,246,0.8) !important;
-    -ms-background-color: rgba(172,202,246,0.7) !important;
-    cursor: pointer;
-    padding: 8px 6px !important;
+.tab-pestania-inactive-usu, .tab-pestania-active-usu {
+    padding: 8px 10px !important;
 }
 
-.tab-pestania-inactive-usu:hover{
-    color: whitesmoke!important;
-}
-
-.tab-pestania-inactive:hover{
-    color: whitesmoke!important;
-}
-
-.tab-pestania-active{
+.tab-pestania-active, .tab-pestania-active-usu{
     width: 100px !important;  
     height: 31px !important;
-    color: white!important;
-    font-family: "medium" !important;
-    font-size: 10px !important;
-    font-weight: inherit!important;
     text-align: center !important;
     border : transparent!important;
     -moz-border-top-left-radius: 10px !important; 
@@ -148,105 +112,35 @@ body{
     -webkit-border-top-right-radius: 10px !important; 
     border-top-left-radius: 10px !important; 
     border-top-right-radius: 10px !important; 
-    background-color: rgba(29,98,159,0.8) !important;
     border : transparent!important;
-    padding: 8px 36px !important;
 }
-
-.tab-pestania-active-usu{
-    width: 100px !important;  
-    height: 31px !important;
-    color: white!important;
-    font-family: "medium" !important;
-    font-size: 10px !important;
-    font-weight: inherit!important;
-    text-align: center !important;
-    border : transparent!important;
-    -moz-border-top-left-radius: 10px !important; 
-    -moz-border-top-right-radius: 10px !important; 
-    -ms-border-top-left-radius: 10px !important; 
-    -ms-border-top-right-radius: 10px !important; 
-    -webkit-border-top-left-radius: 10px !important; 
-    -webkit-border-top-right-radius: 10px !important; 
-    border-top-left-radius: 10px !important; 
-    border-top-right-radius: 10px !important; 
-    background-color: rgba(29,98,159,0.8) !important;
-    border : transparent!important;
-    padding: 8px 6px !important;
-}
-
-
-.tab-login-label-contenido{
-    color: white;
-    font-size: 0.67em!important;
-    font-family: "futura"!important;
-
-}   
-
+ 
 .tab-login-label-error{
-    color: red;
-    font-size: 10px!important;
-    font-family: "century";
-    font-weight: bold;
     text-align: justify !important;
-    background-color: white;
-    -moz-border-radius: 5px; 
-    -ms-border-radius: 5px; 
-    -webkit-border-radius: 5px; 
-    border-radius: 5px;    
     width: 200px;
     margin: 0px auto;
 }   
 
-.tab-login-label-title{
-    color: white !important;
-    font-size: 15px!important;
-    font-family: "medium"!important;
-}   
-
 input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     height: 23px !important;
-    color: #000;
     width: 50px !important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century"!important;
-    -moz-border-radius: 5px !important; 
-    -ms-border-radius: 5px !important; 
-    -webkit-border-radius: 5px !important; 
-    border-radius: 5px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
+    border-style: solid;
+    border-width: 1px !important;
     font-weight: bold;
 }
 
 .tab-login-input-button-register{
-    color: black !important;
-    font-family: "century"!important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    -moz-border-radius: 5px !important; 
-    -ms-border-radius: 5px !important; 
-    -webkit-border-radius: 5px !important; 
-    border-radius: 5px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
+    border-style: solid!important;
+    border-width: 1px!important;
     margin-left: 10px;
     padding: 3px 10px;
     text-decoration: none;
     position: relative;
     top: 8px;
-    font-weight: bold;
 }
 
 .tab-login-input-button-register:hover{
@@ -262,22 +156,11 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     left: 7px;
     width: 80px !important;
     height: 21px !important;
-    color: black !important;
     width: 50px !important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century";
-    -moz-border-radius: 5px !important; 
-    -ms-border-radius: 5px !important; 
-    -webkit-border-radius: 5px !important; 
-    border-radius: 5px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F2F2F2), to(#A4A4A4), color-stop(0.7, #A4A4A4))!important;
-    background: -moz-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
-    background: -ms-linear-gradient(top, rgba(242,242,242, 1) 0%, rgba(164,164,164,1) 100%)!important;
-    background: -o-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
-    border: solid 1px #A4A4A4 !important;
+    border-style: solid;
+    border-width: 1px!important;
     text-decoration: none;
     padding: 3px 9px;
 }
@@ -296,10 +179,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     -ms-border-bottom-left-radius: 10px !important; 
     -webkit-bottom-left-radius: 10px !important; 
     border-bottom-left-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(29,98,159,0.8)), to(rgba(28,43,56,0.8))) !important;
-    background: -moz-linear-gradient(top, rgba(29,98,159,0.8), rgba(28,43,56,0.8)) !important;
-    background: -ms-linear-gradient(top, rgba(29,98,159,0.8) 30%, rgba(28,43,56,0.8) 70%)!important;
-    background: -o-linear-gradient(top,rgba(29,98,159,0.8), rgba(28,43,56,0.8)) !important;
     width: 320px !important;
     height: 360px !important;
     margin-top: 1px !important;
@@ -331,19 +210,15 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     height : 40px;
     margin: 0px;
     padding : 0px;
-    background-color : black;
     z-index : 100
 }
 
 .ikont-hot-loginheader{
-    color : #F2F2F2;
     position: relative;
-    font-size: 16px;
     text-align: left;
     float: left;
     margin-left: 10px;
     margin-top: 10px;
-    font-family: "futura";
 }
 
 .ikont-hpg-loginfooter{
@@ -352,7 +227,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     left:-0px;
     width : 100%;
     height : 40px;
-    background-color : black;
     margin: 0px;
     padding: 0px;
     z-index : 100;
@@ -360,17 +234,13 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
 }
 
 .ikont-hot-loginfotercopy{
-    color : #BDBDBD;
     margin-left : 10px;
     position: relative;
-    font-size: 16px;
     top: 10px;
 }
 .ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees{
-    color : #BDBDBD;
     margin-left : 10px;
     position: relative;
-    font-size: 15px;
     top: 10px;
     text-decoration: none;
 }
@@ -406,7 +276,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     -ms-border-radius: 10px; 
     -webkit-border-radius: 10px; 
     border-radius: 10px; 
-    background-color: #F2F2F2;    
 }
 
 .ikont-hpg-pgfotografia{
@@ -429,7 +298,6 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
 
 
 .ikont-a4jcl-logintabentrarolvidocontrasenia{
-    color: #FFF;
     text-decoration: none;
     margin-left: 130px;
 }
