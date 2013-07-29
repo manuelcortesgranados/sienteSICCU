@@ -17,11 +17,7 @@
     
     <entry-point class="co.com.interkont.cobra.planoperativo.client.MainEntryPoint"/>
     <source path="client"/>
-    <collapse-all-properties/>
-    <set-property name="user.agent" value="gecko1_8"></set-property>
     
     
-  
-   
    
 </module>
