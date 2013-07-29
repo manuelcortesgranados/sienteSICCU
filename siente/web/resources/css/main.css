@@ -3,6 +3,10 @@
     background-image:url(../imgs/Cobra_bt44.png);
 }
 
+.ikont-hcl-iniciarevolucioncontrato, .ikont-hcl-iniciarevolucion{
+    background-image:url(../imgs/Cobra_bt40.png);
+}
+
 .tablaadminproyecto > tbody > tr > td >a.impsocial {
     background-image:url(../imgs/Cobra_bt30.png);
 }
@@ -19,11 +23,27 @@
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.verfotos {
+.ikont-hcl-iniciarimagenes{
     background-image:url(../imgs/Cobra_bt12.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.mproyectos {
+.ikont-hcl-iniciarvideos{
+    background-image:url(../imgs/Cobra_bt13.png);
+}
+
+.ikont-hcl-iniciardeta{
+    background-image:url(../imgs/Cobra_bt08.png);
+}
+
+.ikont-hcl-iniciaraliment{
+    background-image:url(../imgs/Cobra_bt20.png);
+}
+
+.ikont-hcl-iniciarfinalizar{
+    background-image:url(../imgs/Cobra_bt42.png);
+}
+
+.ikont-hcl-iniciardetallecontrato, .ikont-hcl-documentocontrato, .ikont-hcl-iniciarmodificarcontrato{
     background-image:url(../imgs/Cobra_bt02.png);
 }
 
@@ -39,7 +59,7 @@
     background-image:url(../imgs/Cobra_bt54.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.historialvalidacion {
+.ikont-acl-revisioninformacion{
     background-image:url(../imgs/bt_validar_hist.png);
 }
 
@@ -60,7 +80,7 @@
     background-image:url(../imgs/Cobra_bt55.png);
 }
 
-.ikont-hcl-iniciarreporte {
+.ikont-hcl-iniciarreporte, .ikont-hcl-irreportesdetalle{
     background-image:url(../imgs/Cobra_bt03.png);
 }
 
@@ -130,7 +150,7 @@
     background-image:url(../imgs/Cobra_bt24.png);
 }
 /* asociar a convenio */
-.ikont-acl-iniciarnuevoconvenio{
+.ikont-acl-iniciarnuevoconvenio, .ikont-hcl-iniciarasociarcontratos{
     background-image:url(../imgs/Cobra_bt25.png);
 }
 
@@ -162,27 +182,35 @@
 .tablamenugestion > tbody > tr > td > a.proyectosnew {
     background-image:url(../imgs/Cobra_bt50.png);
 }
-.tablamenugestion > tbody > tr > td > a.consobra {
+.ikont-hcl-homesolicitudes {
     background-image:url(../imgs/Cobra_bt47.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.consatencion {
+.ikont-hcl-btnregistraratencionhumanitaria{
     background-image:url(../imgs/Cobra_bt46.png);
+}
+
+.ikont-hcl-iniciarmodificar{
+    background-image:url(../imgs/Cobra_bt41.png);
+}
+
+.ikont-hcl-iniciardocumentos{
+    background-image:url(../imgs/Cobra_bt02.png);
 }
 
 .tablamenugestion > tbody > tr > td > a.regsolicitud {
     background-image:url(../imgs/Cobra_bt48.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.solvalinfo {
+.ikont-hcl-iniciarvalidarinformacion{
     background-image:url(../imgs/Cobra_bt56.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.eliminarrepo {
+.ikont-hcl-eliminaravance{
     background-image:url(../imgs/Cobra_bt57.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.cambiarestado {
+.ikont-hcl-estadoproyecto{
     background-image:url(../imgs/Cobra_bt58.png);
 }
 
@@ -386,11 +414,11 @@
     margin-right: 11%;
 }
 
-input[type="text"].ikont-hit-palabraclave{
+input[type="text"].ikont-hit-palabraclave, input[type="text"].ikont-hit-palclav{
     width: 550px;
 }
 
-input[type="submit"].ikont-acl-busquedaavanzada{
+input[type="submit"].ikont-acl-busquedaavanzada, input[type="submit"].ikont-acl-busqavan{
     background-image:url(../imgs/bt_buscar.png);
     background-repeat: no-repeat;
     background-position: left;
@@ -571,4 +599,114 @@ a.pdf {
     text-align:center; 
     background:url(../imgs/line.png) bottom no-repeat;
     width: 100%;
+}
+
+
+#navIndicadores {
+    margin: 0;
+    padding:0;
+    height: auto;
+    width:100%;
+    text-align:left;
+    clear: both;
+    float: left;
+    position:relative;
+    z-index:9999;
+}
+#elipse {
+    width:28px;
+    height:323px;
+    background-repeat:no-repeat;
+    float:left;
+    position:absolute;
+    left:0px;
+    z-index:10000;
+    background:url(../imgs/elipse.png);
+
+
+}
+
+#navIndicadores ul {
+    margin:0;
+    padding:0;
+    vertical-align:left;
+}
+#navIndicadores li {
+    margin:0;
+    padding:0;
+    list-style: none;
+    float: left;
+    position:relative;
+}
+
+#navIndicadores ul li a {
+    width:200px;
+    height:33px;
+    float:left;
+    position:relative;
+    display:block;
+    padding-right:10px;
+    padding-left:10px;
+    padding-top: 3px;
+    padding-bottom:4px;
+    margin-top:10px;
+    font-size:12px;
+    vertical-align:middle;
+    line-height:13px;
+    text-indent:20px;
+    font-style:italic;
+    font-weight:500;
+    text-align:center;
+    margin-right: 0;
+    margin-bottom: 0;
+    border: #FFF thin solid;
+    text-decoration: none;
+}
+
+#navIndicadores ul li a.ikont-hcl-menuConsolidados {
+    font-family:Arial, Helvetica, sans-serif;
+    color:#fff;
+    background-color:#006496;
+}
+
+#navIndicadores ul li a.ikont-hcl-menuAvanceAh {
+    font-family:Arial, Helvetica, sans-serif;
+    color:#fff;
+    background-color:#CDB80D;
+    vertical-align:middle;
+}
+
+#navIndicadores ul li a.ikont-hcl-menuAvanceObras {
+    font-family:Arial, Helvetica, sans-serif;
+    color:#fff;
+    background-color:#F1AC04;
+}
+
+#navIndicadores ul li a.ikont-hcl-menuAvanceConvenios {
+    font-family:Arial, Helvetica, sans-serif;
+    color:#fff;
+    background-color:#EF6703;
+}
+
+#navIndicadores ul li a.ikont-hcl-menuAvanceConvenios:hover, #navIndicadores ul li a.ikont-hcl-menuAvanceObras:hover, #navIndicadores ul li a.ikont-hcl-menuAvanceAh:hover, #navIndicadores ul li a.ikont-hcl-menuConsolidados:hover{
+    background-color:#949494;
+    -moz-opacity: 0.9;
+    filter:alpha opacity 90;
+}
+
+.ikont-acl-agregar{
+    background-image:url(../imgs/bt_anadir.png);
+    width: 25px;
+    height: 25px;
+    background-position: 0px 0px;
+}
+.ikont-acl-agregar:hover {
+    background-position: 0px -30px;
+}
+.buttonsmall > a {
+    float: left;;
+    height: 25px;
+    width: 25px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
 }

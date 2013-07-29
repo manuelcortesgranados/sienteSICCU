@@ -159,7 +159,7 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
 	cursor: default;
 }
 
-.ikont-hpg-menulateralgestion .text-button-panel{
+.text-button-panel{
     width: '#{richSkin.textPanelwidth}';
     height: '#{richSkin.textPanelheight}';
     font-size: '#{richSkin.textPanelfontSize}';
@@ -249,12 +249,12 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
     padding: 0px;
 }
 
-input[type="submit"].ikont-acl-busquedaavanzada, {
+input[type="submit"].ikont-acl-busquedaavanzada, .ikont-acl-busqavan{
     background-color: '#{richSkin.botonBusquedaAvanzadaBackgroud}';
     border-color: '#{richSkin.botonBusquedaAvanzadaBorderColor}';
     color: '#{richSkin.botonBusquedaAvanzadaColor}';
 }
-input[type="submit"].ikont-acl-busquedaavanzada:hover{
+input[type="submit"].ikont-acl-busquedaavanzada:hover, .ikont-acl-busqavan:hover{
     background-color: '#{richSkin.botonBusquedaAvanzadaBackgroudHover}';
     border-color: '#{richSkin.botonBusquedaAvanzadaBorderColorHover}';
     color: '#{richSkin.botonBusquedaAvanzadaColorHover}';

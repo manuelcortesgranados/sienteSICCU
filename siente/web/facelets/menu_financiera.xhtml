@@ -10,18 +10,16 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-
-    <div ><div ><h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
-        <div >
+    <div class="topbar"><div > <h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
+        <div id="iconosientw" class="sienteicon">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont-hot-strnombre"   id="label_usuario" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
-                <h:outputText  styleClass="ikont-hot-apellido1"   id="label_apellido" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
-                <h:outputText  styleClass="ikont-hot-apellido2"   id="label_apellido2" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
-                <h:outputText  styleClass="ikont-hot-codigotercero"     value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
+                <h:outputText  styleClass="ikont-hot-strnombre" id="label_usuario" value="#{SessionBeanCobra.usuarioObra.tercero.strnombre} "/>
+                <h:outputText  styleClass="ikont-hot-apellido1" id="label_apellido" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido1} "/>
+                <h:outputText  styleClass="ikont-hot-apellido2" id="label_apellido2" value="#{SessionBeanCobra.usuarioObra.tercero.strapellido2} "/>
+                <h:outputText  styleClass="ikont-hot-codigotercero" value="(#{SessionBeanCobra.usuarioObra.tercero.intcodigo})"/>
             </h:panelGroup>
         </div>
     </div>
-
     <rich:toolbar>
         <rich:toolbarGroup>
             <h:commandLink styleClass="ikont-hcl-siente"  />
