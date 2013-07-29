@@ -1,4 +1,6 @@
-
+.totalwidth{
+    width: 100%;
+}
 .tablaadminproyecto  > tbody > tr > td > a.datos {
     background-image:url(../imgs/Cobra_bt44.png);
 }
@@ -709,4 +711,158 @@ a.pdf {
     width: 25px; /* for validator */
     display: block;
     background-repeat: no-repeat;
+}
+
+.labelsDatos {
+    font-size : 0.7em;
+}
+
+.ikont-hot-strnombremedio, .ikont-hot-obrastrnombremedio, .ikont-hot-nommedio{
+    font-size : 0.7em;
+    float: right;
+}
+
+.ikont-hot-intcodobra{
+    font-size : 0.7em;
+    float: right;
+}
+
+.ikont-hot-prorrogasadcciones, .ikont-hot-suspenderobra, .ikont-hot-reiniciarlaobra, .ikont-hot-houtbusquedarapida{
+    font-size : 0.7em;
+}
+
+a.prorroga {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/bt_obra_prorroga.png);
+    background-position: 0px 20px;
+}
+a.prorroga:hover {
+    background-position: 0px -144px;
+}
+a.suspension {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_obra_suspension.png);
+    background-position: 0px 20px;
+}
+a.suspension:hover {
+    background-position: 0px -144px;
+}
+a.reiniciar {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_inicio_suspender.png);
+    background-position: 0px 20px;
+}
+a.reiniciar:hover {
+    background-position: 0px -144px;
+}
+
+a.ikont-acl-asocontrato {
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url(../imgs/bt_asociarcontrato.png);
+    background-position: 0px 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    font-style:italic;
+    color:#003;
+    text-align:center;
+    line-height:280px;
+    text-decoration: none;
+}
+a.ikont-acl-asocontrato:hover {
+    background-position: 0px -144px;
+}
+
+a.ikont-acl-interven {
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    background-image: url(../imgs/bt_interventoria.png);
+    background-position: 0px 20px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    font-style:italic;
+    color:#003;
+    text-align:center;
+    line-height:280px;
+    text-decoration: none;
+}
+a.ikont-acl-interven:hover {
+    background-position: 0px -144px;
+}
+
+.vtitle02 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:20px;
+    font-style:italic;
+    font-weight:bold;
+    color:#F90;
+    line-height:20px;
+}
+
+.vtitle03 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:15px;
+    font-style:italic;
+    color:#004670;
+    line-height:15px;
+    padding-bottom: 10px;
+}
+
+a.ikont-acl-cambioestado {
+    background: #ff9735;
+    background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
+    background: -webkit-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -o-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -ms-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9735', endColorstr='#f8763c',GradientType=0 );
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: #FFF 2px solid;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#fff;
+    text-align:center;
+    padding:8px;
+    text-decoration: none;
+}
+a.ikont-acl-cambioestado:hover {
+    background: #f8763c;
+    background: -moz-linear-gradient(top,  #f8763c 48%, #ff9735 50%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#f8763c), color-stop(50%,#ff9735));
+    background: -webkit-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
+    background: -o-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
+    background: -ms-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
+    background: linear-gradient(top,  #f8763c 48%,#ff9735 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8763c', endColorstr='#ff9735',GradientType=0 );
+}
+
+.marcocambioestado{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: #C1D1E7 thin solid;
 }

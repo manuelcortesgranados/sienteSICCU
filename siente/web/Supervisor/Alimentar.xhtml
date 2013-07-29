@@ -102,7 +102,7 @@
 
                             <rich:panel header="#{var.comentarioobra}"   >
                                 <center>
-                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" border="1"  >
+                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" >
 
                                         <h:inputTextarea cols="60" id="comentSem"  rows="8" styleClass="ikont-hita-comentSem"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
                                         <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
@@ -266,22 +266,21 @@
                                                 <h:outputText  styleClass="ikont-hot-rcalimd3"   value="#{registros.actividadobra.floatcantplanifao}"  />
                                             </rich:column>
                                             <rich:column id="TotalActividad" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd4"   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" styleClass="ikont-"  >
+                                                <h:outputText  styleClass="ikont-hot-rcalimd4"   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" >
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="CantFaltAct" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd5"   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}" styleClass="ikont-"  />
+                                                <h:outputText  styleClass="ikont-hot-rcalimd5"   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}"  />
                                             </rich:column>
 
                                             <rich:column id="ValorEjec" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd6"   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" styleClass="ikont-"  >
+                                                <h:outputText  styleClass="ikont-hot-rcalimd6"   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" >
                                                     <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="ValorFaltanAct" >                                          
-                                                <h:outputText  styleClass="ikont-hot-rcalimd7"   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}" styleClass="ikont-"  >
-                                                    <f:convertNumber type="percent"/>
+                                                <h:outputText  styleClass="ikont-hot-rcalimd7"   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}"  >                                                    <f:convertNumber type="percent"/>
                                                 </h:outputText>
                                             </rich:column>
                                             <rich:column id="CantidadEjec" >
@@ -307,7 +306,7 @@
                                             <interkont:spacer width="2"/>
                                         </rich:column>
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont-hot-Pie0"   id="Pie0" value="#{Supervisor$Alimentar.totales[0]}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont-hot-Pie0"   id="Pie0" value="#{Supervisor$Alimentar.totales[0]}" >
                                                 <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                             </h:outputText>
                                         </rich:column>
@@ -317,7 +316,7 @@
                                         </rich:column>
 
                                         <rich:column >
-                                            <h:outputText  styleClass="ikont-hot-Pie1"   id="Pie1" value="#{Supervisor$Alimentar.totales[1]}" styleClass="ikont-"  >
+                                            <h:outputText  styleClass="ikont-hot-Pie1"   id="Pie1" value="#{Supervisor$Alimentar.totales[1]}" >
                                                 <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
                                             </h:outputText>
                                         </rich:column>

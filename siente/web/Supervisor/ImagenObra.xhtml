@@ -36,12 +36,12 @@
     <ui:define name="body">
         <body >
             <h:form target="_blank">
-                <h:panelGrid id="panel_imagenesevolucion" >
+                <h:panelGrid id="panel_imagenesevolucion" styleClass="totalwidth">
                     <h:panelGroup >
                         <center>
                             <h:panelGroup>
                                 <h:outputText  styleClass="ikont-hot-houtbusquedarapida"    value="#{var.houtbusquedarapida} "/>
-                                <h:inputText id="idpalabraclave" value="#{Supervisor$AdministrarObraNew.palabraclave}" size="52"/>
+                                <h:inputText id="idpalabraclave" styleClass="ikont-hit-palclav" value="#{Supervisor$AdministrarObraNew.palabraclave}" size="52"/>
                                 <a4j:commandButton render="tablaImagenesevolucion" action="#{Supervisor$AdministrarObraNew.buscarimg}" value="Buscar" execute="idpalabraclave, @this"/>
                             </h:panelGroup>
 
