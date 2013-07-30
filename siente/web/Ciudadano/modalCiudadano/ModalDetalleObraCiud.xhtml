@@ -161,28 +161,28 @@
                     <h:panelGrid styleClass="ikont-"  >
                         <h:graphicImage  styleClass="ikont-hgi-strimagenobra" url="#{Ciudadano$PerfilCiudadano.vistaobraciudadano.strimagenobra}"/>
                         <h:panelGrid styleClass="ikont-"   columns="5">
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_info_modal">
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_info_modal">
                                 <h:graphicImage  styleClass="ikont-hgi-btninfo"   value="/resources/imgs/valla/btn_info.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="ikont-rtt-btninfo"   >
                                     <h:outputText  styleClass="ikont-hot-btninfo"   value="Informacion" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Ciudadano/ParticipacionCiudadano.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_coment_modal">
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/Ciudadano/ParticipacionCiudadano.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_coment_modal">
                                 <h:graphicImage  styleClass="ikont-hgi-btncomentarios "   value="/resources/imgs/valla/btn_comentarios.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="ikont-rtt-btncomentarios"   >
                                     <h:outputText  styleClass="ikont-hot-btncomentarios"   value="Comentarios" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>
-                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/ImagenObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
+                            <a4j:commandLink  rendered="#{SessionBeanCobra.ciudadano}" onclick="document.location.href='/#{var.versioncobra}/Supervisor/ImagenObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" id="btn_fotos_modal">
                                 <h:graphicImage  styleClass="ikont-hgi-btnfotos "   value="/resources/imgs/valla/btn_fotos.png"/>
                                 <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                               verticalOffset="5"  styleClass="ikont-rtt-btnfotos"   >
                                     <h:outputText  styleClass="ikont-hot-btnfotos"   value="Fotos" ></h:outputText>
                                 </rich:tooltip>
                             </a4j:commandLink>                             
-                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/faces/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" styleClass="ikont-acl-modalciudadanoverproyecto"  >
+                            <a4j:commandLink  onclick="document.location.href='/#{var.versioncobra}/Supervisor/DetalleObra.xhtml?id=#{Ciudadano$PerfilCiudadano.vistaobraciudadano.intcodigoobra}';" styleClass="ikont-acl-modalciudadanoverproyecto"  >
                                 <h:outputText  styleClass="ikont-hot-modalciudadanoverproyecto"   value="#{var.modalciudadanoverproyecto}"></h:outputText> 
                             </a4j:commandLink>  
                         </h:panelGrid>

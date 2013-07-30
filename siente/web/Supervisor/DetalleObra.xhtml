@@ -998,12 +998,12 @@
                                             <rich:column>
                                                 <h:panelGroup styleClass="ikont-hpg-datbasico"  >
                                                     <a4j:commandLink type="submit" execute="@this" rendered="#{row.tipoestadobra.intestadoobra == 0}"
-                                                                     id="irDatosBasicos"  onclick="document.location.href = '../faces/NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
+                                                                     id="irDatosBasicos"  onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{row.intcodigoobra}';">
                                                         <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
 
                                                     <a4j:commandLink rendered="#{row.tipoestadobra.intestadoobra >= 1}" id="irDetalle"
-                                                                     onclick="document.location.href = '../faces/Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
+                                                                     onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{row.intcodigoobra}';">
                                                         <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    value="/resources/imgs/bt_ver.png"/>
                                                     </a4j:commandLink>
                                                 </h:panelGroup>

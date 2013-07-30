@@ -8,9 +8,8 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:interkont="http://www.interkont.com/jsf">
 
-    <ui:define name="head">
-         <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
-        </ui:define>
+    <ui:define name="head">       
+    </ui:define>
 
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
@@ -60,8 +59,8 @@
                 
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==1}"  id="reg-plan-operativo-planificacion" >
                     <rich:panel style="width: 900px;" styleClass="ikont-rp-planificacion">
-                      
-                        
+                      planoperativo
+                       
                     </rich:panel>
                 </a4j:region>
                 

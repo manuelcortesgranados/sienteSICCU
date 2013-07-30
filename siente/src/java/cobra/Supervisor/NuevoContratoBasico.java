@@ -73,6 +73,7 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import javax.swing.text.StyledEditorKit;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
@@ -6014,6 +6015,15 @@ public class NuevoContratoBasico implements Serializable {
     public void setPanelPantalla(int panelPantalla) {
         this.panelPantalla = panelPantalla;
     }
+private Boolean boolpruea=false;
+
+    public Boolean getBoolpruea() {
+        return boolpruea;
+    }
+
+    public void setBoolpruea(Boolean boolpruea) {
+        this.boolpruea = boolpruea;
+    }
 
     /*
      * metodo que se encarga de actualizar el panel actual de la pantalla
@@ -6031,6 +6041,7 @@ public class NuevoContratoBasico implements Serializable {
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
+                boolpruea=true;
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:

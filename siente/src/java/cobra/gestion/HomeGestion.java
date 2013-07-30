@@ -835,10 +835,10 @@ public class HomeGestion implements Serializable {
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
-                String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/DetalleObra.xhtml";
-                String urlSeguimiento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/SupervisionExterna/ListadoSeguimientos.xhtml";
+                String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DetalleObra.xhtml";
+                String urlSeguimiento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/SupervisionExterna/ListadoSeguimientos.xhtml";
 
-                String urlnuevo = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/NuevoProyecto/datosBasicos.xhtml";
+                String urlnuevo = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/NuevoProyecto/datosBasicos.xhtml";
 
                 BigDecimal porcentaje = BigDecimal.valueOf(0);
                 if (obra.getNumvalejecobra() != null && obra.getTipoestadobra().getIntestadoobra() > 0) {
@@ -2026,10 +2026,10 @@ public class HomeGestion implements Serializable {
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
-                String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/DetalleObra.xhtml";
-                String urlDocumento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/DocumentoObra.xhtml";
-                String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Supervisor/ImagenObra.xhtml";
-                String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/faces/Ciudadano/ParticipacionCiudadano.xhtml";
+                String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DetalleObra.xhtml";
+                String urlDocumento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DocumentoObra.xhtml";
+                String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/ImagenObra.xhtml";
+                String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Ciudadano/ParticipacionCiudadano.xhtml";
                 BigDecimal porcentaje = BigDecimal.valueOf(0);
                 if (obra.getNumvalejecobra() != null && obra.getTipoestadobra().getIntestadoobra() > 0) {
                     porcentaje = obra.getNumvalejecobra();

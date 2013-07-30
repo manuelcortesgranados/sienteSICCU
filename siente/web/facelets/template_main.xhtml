@@ -8,9 +8,8 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf">
-
+    
     <h:head>
-        <script src="/#{var.versioncobra}/resources/js/zopim/#{var.srczopim}" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
         <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
@@ -84,7 +83,7 @@
                                                         </f:facet>
                                                     </rich:messages>
                                                     <ui:insert name="menusuperior"/>
-                                                    <ui:insert name="body"/>
+                                                    <ui:insert name="body"/>                                                   
                                                     <ui:include src="/facelets/ajaxStatus.xhtml" />                                                     
                                                     <ui:include src="/facelets/AvisoSupervisor.xhtml"/>
                                                 </a4j:outputPanel>
