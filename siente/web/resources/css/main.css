@@ -2,14 +2,13 @@
     width: 100%;
 }
 
-.centerelement{
-    margin: 0px auto;
+.alingtableproyecto{
+    margin-top: -22px;
+    margin-left: -6px;
 }
 
-.ocultarpanel {
-    border-color: transparent;
-    border-style: solid;
-    border-width: 0px;
+.centerelement{
+    margin: 0px auto;
 }
 
 .ikont-hcl-navegarNuevaObra1{
@@ -36,7 +35,7 @@
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
-.ikont-hcl-iniciarimagenes, ikont-hcl-navegarNuevaObra2{
+.ikont-hcl-iniciarimagenes, .ikont-hcl-navegarNuevaObra2{
     background-image:url(../imgs/Cobra_bt12.png);
 }
 
@@ -64,11 +63,11 @@
     background-image:url(../imgs/Cobra_bt26.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.guardar {
+.ikont-hcl-vf{
     background-image:url(../imgs/Cobra_bt53.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.guardarborrador {
+.ikont-hcl-guardadoIntermedio{
     background-image:url(../imgs/Cobra_bt54.png);
 }
 
@@ -115,7 +114,7 @@
     background-image:url(../imgs/Cobra_bt07.png);
 }
 
-.ikont-acl-iniciarnuevocontrato, ikont-hcl-navegarNuevaObra3{
+.ikont-acl-iniciarnuevocontrato, .ikont-hcl-navegarNuevaObra3{
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
@@ -782,7 +781,7 @@ a.reiniciar:hover {
     background-position: 0px -144px;
 }
 
-a.ikont-acl-asocontrato {
+a.ikont-acl-asocontrato, a.ikont-hcl-asociarcontrato {
     height: 163px;
     width: 150px; /* for validator */
     display: block;
@@ -798,7 +797,7 @@ a.ikont-acl-asocontrato {
     line-height:280px;
     text-decoration: none;
 }
-a.ikont-acl-asocontrato:hover {
+a.ikont-acl-asocontrato:hover, a.ikont-hcl-asociarcontrato:hover {
     background-position: 0px -144px;
 }
 

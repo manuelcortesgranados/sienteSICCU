@@ -16,263 +16,290 @@
                 <title>#{var.titulonuevoproyecto}</title>
                 <h:outputScript library="js" name="/resources/script_supervisor.js"/>
             </ui:define>
-            <ui:define name="title">
-                <h:outputText  styleClass="ikont-hot-tipifipry"   value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
-            </ui:define>
             <ui:define name="menu">
                 <ui:include src="/facelets/menu_gestion.xhtml"/>
             </ui:define>
 
             <ui:define name="body">
                 <h:form id="form_datos_tipificacion" >
-                    <table   align="center" border="0" cellspacing="8" cellpadding="0">
+                    <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
                         <tr>
-                            <td rowspan="6" valign="top" >
-                                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                                <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
+                            <td valign="top" class="templatetablamenulateral">
+                                <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
+                                    <tr>
+                                        <td  >
+                                            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                                            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>                            
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
-                            <td valign="top" height="35" >
+                            <td class="templatetablacontent verticalalingtop">
+                                <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
+                                    <tr>
+                                        <td>
+                                            <div id="header_content">
+                                                <div class="ubicacion">
+                                                    <h:outputText  styleClass="ikont-hot-tipifipry"   value="#{var.ingresarnuevoproyecto} - #{var.tipificaciondelproyecto}"/>
+                                                </div>
+                                            </div>
 
-                                <rich:panel id="rpTipificacion">
-                                    <f:facet name="header" >
-                                        <h:panelGroup >
-                                            <h:outputText  styleClass="ikont-hot-pasosIniciales"   value="#{var.pasosIniciales}"  />
-                                        </h:panelGroup>
-                                    </f:facet>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td valign="top" height="35" >
+                                            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                                                <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
+                                                    <tr>
+                                                        <td>
+                                                            <rich:panel id="rpTipificacion">
+                                                                <f:facet name="header" >
+                                                                    <h:panelGroup >
+                                                                        <h:outputText  styleClass="ikont-hot-pasosIniciales"   value="#{var.pasosIniciales}"  />
+                                                                    </h:panelGroup>
+                                                                </f:facet>
 
-                                    <rich:collapsiblePanel  header="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
+                                                                <rich:collapsiblePanel  header="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
 
 
-                                        <rich:panel  id="gpTotalProyectosPadres" >                            
-                                            <h:panelGrid >                                    
-                                                <h:panelGroup id="panel-periodo-evento">
-                                                    <h:panelGrid columns="2" >
-                                                        <h:outputText  styleClass="ikont-hot-escogerEvento"    value="#{var.escogerEvento} "/>
-                                                        <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" >
-                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
-                                                        </h:selectOneMenu>
-                                                        <h:outputText  styleClass="ikont-hot-escogerPeriodo"    value="#{var.escogerPeriodo} "/>
-                                                        <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" >
-                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoEventoItem}" />
-                                                        </h:selectOneMenu>
-                                                        <h:outputText  styleClass="ikont-hot-incluyeSubproyectos"    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
-                                                        <h:selectOneMenu id="cmbIncluyeSubproyectos" value="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" rendered="#{var.permitirSubproyectos}">
-                                                            <f:selectItem itemValue="false" itemLabel="No"/>
-                                                            <f:selectItem itemValue="true" itemLabel="Si"/>
-                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.fnEsProyectoPadre}"/>
-                                                        </h:selectOneMenu>
-                                                    </h:panelGrid>
-                                                </h:panelGroup>
+                                                                    <rich:panel  id="gpTotalProyectosPadres" >                            
+                                                                        <h:panelGrid >                                    
+                                                                            <h:panelGroup id="panel-periodo-evento">
+                                                                                <h:panelGrid columns="2" >
+                                                                                    <h:outputText  styleClass="ikont-hot-escogerEvento"    value="#{var.escogerEvento} "/>
+                                                                                    <h:selectOneMenu id="cmbEventoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.evento.intidevento}" >
+                                                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.eventoItem}" />
+                                                                                    </h:selectOneMenu>
+                                                                                    <h:outputText  styleClass="ikont-hot-escogerPeriodo"    value="#{var.escogerPeriodo} "/>
+                                                                                    <h:selectOneMenu id="cmbPeriodoProyecto" value="#{Supervisor$IngresarNuevaObra.obranueva.periodoevento.intidperiodoevento}" >
+                                                                                        <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoEventoItem}" />
+                                                                                    </h:selectOneMenu>
+                                                                                    <h:outputText  styleClass="ikont-hot-incluyeSubproyectos"    value="#{var.incluyeSubproyectos} " rendered="#{var.permitirSubproyectos}"/>
+                                                                                    <h:selectOneMenu id="cmbIncluyeSubproyectos" value="#{Supervisor$IngresarNuevaObra.obranueva.booleantienehijos}" rendered="#{var.permitirSubproyectos}">
+                                                                                        <f:selectItem itemValue="false" itemLabel="No"/>
+                                                                                        <f:selectItem itemValue="true" itemLabel="Si"/>
+                                                                                        <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.fnEsProyectoPadre}"/>
+                                                                                    </h:selectOneMenu>
+                                                                                </h:panelGrid>
+                                                                            </h:panelGroup>
+                                                                        </h:panelGrid>
+
+                                                                        <h:panelGroup id="gpproyectoSeleccionado" >
+                                                                            <rich:panel id="panel-buscarPadreProy">
+
+                                                                            </rich:panel>
+                                                                            <interkont:spacer height="10px" />
+                                                                            <center>
+                                                                                <h:panelGrid columns="1" id="gp_datos"  rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}">
+                                                                                    <rich:panel id="mp-datos-proySeleccionado">
+                                                                                        <f:facet name="header" >
+                                                                                            <h:panelGroup >
+                                                                                                <h:outputText  styleClass="ikont-hot-datospry"   value="#{var.datosproyectoseleccionado}" />
+                                                                                            </h:panelGroup>
+                                                                                        </f:facet>
+                                                                                        <h:panelGrid columns="3"   >
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strnroobraPadre"   id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strnroobraPadre"   id="st_strnroobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
+                                                                                            </h:panelGroup>
+                                                                                            <interkont:spacer width="50"/>
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strnomobraPadre"   id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strnomobraPadre"   id="st_strnomobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
+                                                                                            </h:panelGroup>
+
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_numvaltotobraPadre"   id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_numvaltotobraPadre"   id="st_numvaltotobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
+                                                                                            </h:panelGroup>
+                                                                                            <interkont:spacer width="50"/>
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strestobraPadre"   id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strestobraPadre"   id="st_strestobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
+                                                                                            </h:panelGroup>
+
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strplzobraPadre"   id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-ho-st_strplzobraPadre"   id="st_strplzobraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
+                                                                                            </h:panelGroup>
+                                                                                            <interkont:spacer width="50"/>
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strIntervobraPadre"   id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strIntervobraPadre"   id="st_strIntervobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
+                                                                                            </h:panelGroup>
+
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strfechIbraPadre"   id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strfechIobraPadre"   id="st_strfechIobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
+                                                                                            </h:panelGroup>
+                                                                                            <interkont:spacer width="50"/>
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-tc_strfechFobraPadre"   id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_strfechFobraPadre"   id="st_strfechFobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
+                                                                                            </h:panelGroup>
+
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol- "   id="st_ValorObraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
+                                                                                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ #,###,###.00"/>
+                                                                                                </h:outputLabel>
+                                                                                            </h:panelGroup>
+                                                                                            <interkont:spacer width="50"/>
+                                                                                            <h:panelGroup>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-lblvlrsumahijos"   id="lblvlrsumahijos"  value="Valor Disponible:"/>
+                                                                                                <h:outputLabel  styleClass="ikont-hol-st_Valosumhi"   id="st_Valosumhi" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
+                                                                                                    <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###"/>
+                                                                                                </h:outputLabel>
+                                                                                            </h:panelGroup>
+                                                                                        </h:panelGrid>
+                                                                                    </rich:panel>
+                                                                                </h:panelGrid>
+                                                                            </center>
+                                                                        </h:panelGroup>
+
+                                                                    </rich:panel>
+                                                                </rich:collapsiblePanel>
+                                                                <!--paso 2 fase tipo subtipo-->
+
+                                                                <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
+
+                                                                    <center>
+                                                                        <h:panelGrid id="pgtipi" columns="1" >
+                                                                            <rich:panel>
+                                                                                <f:facet name="header">
+                                                                                    <h:outputText  styleClass="ikont-hot-escojafase"   value="1. #{var.escojafase}" />
+                                                                                </f:facet>
+                                                                                <h:panelGroup id="tablatipoah">
+
+                                                                                    <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" rowKeyVar="faseele"
+                                                                                                    columns="#{var.column}"   >
+                                                                                        <center>
+                                                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
+                                                                                                <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
+                                                                                                    <h:graphicImage  styleClass="ikont-hgi-fase"   url="/resources/imgs/#{fase.intidfase}fase.png"  />
+                                                                                                </a4j:commandLink>
+
+                                                                                                <a4j:commandLink styleClass="ikont-hcl-fasestrnombre"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
+
+                                                                                                </a4j:commandLink>
+                                                                                                <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
+
+                                                                                            </h:panelGrid>
+                                                                                        </center>
+
+                                                                                    </rich:dataGrid>
+                                                                                </h:panelGroup>
+                                                                                <h:panelGrid columns="2" id="tiposoli">
+                                                                                    <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
+                                                                                    <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
+                                                                                        <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
+                                                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
+                                                                                        </h:selectOneMenu>
+                                                                                    </h:panelGroup>
+                                                                                </h:panelGrid>
+                                                                            </rich:panel>
+                                                                            <h:panelGroup id="panelTipo">
+                                                                                <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
+                                                                                    <f:facet name="header">
+                                                                                        <h:outputText  styleClass="ikont-hot-escojatipo"   value="2.#{var.escojatipo}"/>
+                                                                                    </f:facet>
+                                                                                    <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
+                                                                                                   columns="4"  rowKeyVar="fila">
+                                                                                        <center>                                                        
+                                                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
+                                                                                                <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
+                                                                                                    <h:graphicImage  styleClass="ikont- "   url="#{tipoproyecto.strurlimagen}" height="60px"/>
+                                                                                                </a4j:commandLink>
+
+                                                                                                <a4j:commandLink styleClass="ikont-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
+                                                                                                </a4j:commandLink>
+                                                                                                <h:selectBooleanCheckbox value="#{tipoproyecto.check}" disabled="true"  />
+
+                                                                                            </h:panelGrid>
+                                                                                        </center>
+                                                                                    </rich:dataGrid>
+
+
+                                                                                </rich:panel>
+                                                                                <h:panelGroup id="panelSubTipo">
+                                                                                    <rich:panel id="rpTipoObra" rendered="#{Supervisor$IngresarNuevaObra.tiproyectoselec!=0}">
+                                                                                        <f:facet name="header">
+                                                                                            <h:outputText  styleClass="ikont-hot-tipoObra"   value="3. #{var.subtipoProyecto}"/>
+                                                                                        </f:facet>
+
+
+                                                                                        <rich:dataGrid id="tablatipoobra" value="#{SessionBeanCobra.cobraService.listatipoobra}" var="tipoobra" 
+                                                                                                       columns="4"  rowKeyVar="fila" >
+
+                                                                                            <center>                                                        
+                                                                                                <h:panelGrid columns="1" columnClasses="panelcenter">
+                                                                                                    <a4j:commandLink  execute="@this"  
+                                                                                                                      action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
+                                                                                                                      render="tablatipoobra" >
+                                                                                                        <h:graphicImage  styleClass="ikont-hgi-strurlimagen"   url="#{tipoobra.strurlimagen}"/>
+                                                                                                    </a4j:commandLink>
+
+                                                                                                    <a4j:commandLink styleClass="ikont-hcl-strnombremedio"   value="#{tipoobra.strnombremedio}"  execute="@this"  
+                                                                                                                     action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
+                                                                                                                     render="tablatipoobra"  />
+
+                                                                                                    <h:selectBooleanCheckbox value="#{tipoobra.check}" disabled="true"  />
+
+                                                                                                </h:panelGrid>
+                                                                                            </center>
+
+                                                                                        </rich:dataGrid>
+                                                                                    </rich:panel>
+                                                                                </h:panelGroup>
+                                                                            </h:panelGroup>
+
+                                                                        </h:panelGrid>
+                                                                    </center>
+
+                                                                </rich:collapsiblePanel>
+
+                                                                <h:panelGroup >                            
+                                                                    <h:commandButton value="#{var.continuar}" action="#{Supervisor$IngresarNuevaObra.pasarDatosBasicos}" />  
+
+
+                                                                    <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
+                                                                                     action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                                                    </h:commandButton>
+
+                                                                    <a4j:outputPanel id="panelErrorTip">
+                                                                        <rich:messages id="messagesTip" globalOnly="true"
+                                                                                       styleClass="ikont-rm-messagesTip"   ajaxRendered="true"
+                                                                                       >
+                                                                            <f:facet name="infoMarker">
+                                                                                <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                                                            </f:facet>
+                                                                            <f:facet name="warnMarker">
+                                                                                <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                                                            </f:facet>
+                                                                            <f:facet name="errorMarker">
+                                                                                <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                                            </f:facet>
+                                                                            <f:facet name="fatalMarker">
+                                                                                <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                                                            </f:facet>
+                                                                        </rich:messages>
+
+                                                                    </a4j:outputPanel>
+
+                                                                </h:panelGroup>
+
+                                                            </rich:panel>  
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </h:panelGrid>
-
-                                            <h:panelGroup id="gpproyectoSeleccionado" >
-                                                <rich:panel id="panel-buscarPadreProy">
-
-                                                </rich:panel>
-                                                <interkont:spacer height="10px" />
-                                                <center>
-                                                    <h:panelGrid columns="1" id="gp_datos"  rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}">
-                                                        <rich:panel id="mp-datos-proySeleccionado">
-                                                            <f:facet name="header" >
-                                                                <h:panelGroup >
-                                                                    <h:outputText  styleClass="ikont-hot-datospry"   value="#{var.datosproyectoseleccionado}" />
-                                                                </h:panelGroup>
-                                                            </f:facet>
-                                                            <h:panelGrid columns="3"   >
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strnroobraPadre"   id="tc_strnroobraPadre"  value=" #{var.numeroObra}:"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strnroobraPadre"   id="st_strnroobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.intcodigoobra}"/>
-                                                                </h:panelGroup>
-                                                                <interkont:spacer width="50"/>
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strnomobraPadre"   id="tc_strnomobraPadre"  value=" #{var.nombre}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strnomobraPadre"   id="st_strnomobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strnombreobra}"/>
-                                                                </h:panelGroup>
-
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_numvaltotobraPadre"   id="tc_numvaltotobraPadre"  value=" #{var.tipoProyecto}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_numvaltotobraPadre"   id="st_numvaltotobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.tipoobra.strdesctipoobra}"/>
-                                                                </h:panelGroup>
-                                                                <interkont:spacer width="50"/>
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strestobraPadre"   id="tc_strestobraPadre"  value=" #{var.houtesydi}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strestobraPadre"   id="st_strestobraPadre"   value="#{Supervisor$IngresarNuevaObra.obranueva.obra.strestydis}"/>
-                                                                </h:panelGroup>
-
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strplzobraPadre"   id="tc_strplzobraPadre"  value=" #{var.plazodias}"/>
-                                                                    <h:outputLabel  styleClass="ikont-ho-st_strplzobraPadre"   id="st_strplzobraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.intplazoobra}"/>
-                                                                </h:panelGroup>
-                                                                <interkont:spacer width="50"/>
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strIntervobraPadre"   id="tc_strIntervobraPadre"  value=" #{var.interventorObra}:"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strIntervobraPadre"   id="st_strIntervobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.strinterventor}"/>
-                                                                </h:panelGroup>
-
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strfechIbraPadre"   id="tc_strfechIbraPadre"  value=" #{var.fechadeinicio}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strfechIobraPadre"   id="st_strfechIobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefeciniobra}"/>
-                                                                </h:panelGroup>
-                                                                <interkont:spacer width="50"/>
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-tc_strfechFobraPadre"   id="tc_strfechFobraPadre"  value=" #{var.fechadefinalizacion}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_strfechFobraPadre"   id="st_strfechFobraPadre"  value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.datefecfinobra}"/>
-                                                                </h:panelGroup>
-
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol- "   id="tc_strvalorObraPadre"  value=" #{var.valor}:"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol- "   id="st_ValorObraPadre"   value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvaltotobra}">
-                                                                        <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$ #,###,###.00"/>
-                                                                    </h:outputLabel>
-                                                                </h:panelGroup>
-                                                                <interkont:spacer width="50"/>
-                                                                <h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-lblvlrsumahijos"   id="lblvlrsumahijos"  value="Valor Disponible:"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-st_Valosumhi"   id="st_Valosumhi" value=" #{Supervisor$IngresarNuevaObra.obranueva.obra.numvlrsumahijos}">
-                                                                        <f:convertNumber locale="#{var.rcalendarlocale}" pattern="$###,###"/>
-                                                                    </h:outputLabel>
-                                                                </h:panelGroup>
-                                                            </h:panelGrid>
-                                                        </rich:panel>
-                                                    </h:panelGrid>
-                                                </center>
-                                            </h:panelGroup>
-
-                                        </rich:panel>
-                                    </rich:collapsiblePanel>
-                                    <!--paso 2 fase tipo subtipo-->
-
-                                    <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
-
-                                        <center>
-                                            <h:panelGrid id="pgtipi" columns="1" >
-                                                <rich:panel>
-                                                    <f:facet name="header">
-                                                        <h:outputText  styleClass="ikont-hot-escojafase"   value="1. #{var.escojafase}" />
-                                                    </f:facet>
-                                                    <h:panelGroup id="tablatipoah">
-
-                                                        <rich:dataGrid  value="#{SessionBeanCobra.cobraService.fase}" var="fase" rowKeyVar="faseele"
-                                                                        columns="#{var.column}"   >
-                                                            <center>
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink   action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}"  execute="@this"  render="tiposoli, tablatipoah,panelTipo"                                                                 >
-                                                                    <h:graphicImage  styleClass="ikont-hgi-fase"   url="/resources/imgs/#{fase.intidfase}fase.png"  />
-                                                                </a4j:commandLink>
-
-                                                                <a4j:commandLink styleClass="ikont-hcl-fasestrnombre"   value="#{fase.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFaseSeleccionada(faseele)}" execute="@this"  render="tiposoli,tablatipoah,panelTipo" >
-                                                                
-                                                                </a4j:commandLink>
-                                                                <h:selectBooleanCheckbox value="#{fase.check}" disabled="true"  />
-                                                                               
-                                                            </h:panelGrid>
-                                                            </center>
-
-                                                        </rich:dataGrid>
-                                                    </h:panelGroup>
-                                                    <h:panelGrid columns="2" id="tiposoli">
-                                                        <h:outputLabel  styleClass="ikont-hol- "    value="#{var.tiposolicitud} :" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}"/>
-                                                        <h:panelGroup id="layoutClase" rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
-                                                            <h:selectOneMenu id="comboclaseobra" value="#{Supervisor$IngresarNuevaObra.obranueva.claseobra.intidclaseobra}"  >
-                                                                <f:selectItems value="#{Supervisor$IngresarNuevaObra.claseObra}" />                                                                
-                                                            </h:selectOneMenu>
-                                                        </h:panelGroup>
-                                                    </h:panelGrid>
-                                                </rich:panel>
-                                                <h:panelGroup id="panelTipo">
-                                                    <rich:panel rendered="#{Supervisor$IngresarNuevaObra.tiahselect!=0}">
-                                                        <f:facet name="header">
-                                                            <h:outputText  styleClass="ikont-hot-escojatipo"   value="2.#{var.escojatipo}"/>
-                                                        </f:facet>
-                                                        <rich:dataGrid id="tablasubtipoah" value="#{SessionBeanCobra.cobraService.listatipoproyecto}" var="tipoproyecto" 
-                                                                       columns="4"  rowKeyVar="fila">
-                                                            <center>                                                        
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink  action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
-                                                                    <h:graphicImage  styleClass="ikont- "   url="#{tipoproyecto.strurlimagen}" height="60px"/>
-                                                                </a4j:commandLink>
-
-                                                                <a4j:commandLink styleClass="ikont-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
-                                                                </a4j:commandLink>
-                                                                <h:selectBooleanCheckbox value="#{tipoproyecto.check}" disabled="true"  />
-                                                                               
-                                                            </h:panelGrid>
-                                                            </center>
-                                                        </rich:dataGrid>
-
-
-                                                    </rich:panel>
-                                                    <h:panelGroup id="panelSubTipo">
-                                                        <rich:panel id="rpTipoObra" rendered="#{Supervisor$IngresarNuevaObra.tiproyectoselec!=0}">
-                                                            <f:facet name="header">
-                                                                <h:outputText  styleClass="ikont-hot-tipoObra"   value="3. #{var.subtipoProyecto}"/>
-                                                            </f:facet>
-
-
-                                                            <rich:dataGrid id="tablatipoobra" value="#{SessionBeanCobra.cobraService.listatipoobra}" var="tipoobra" 
-                                                                           columns="4"  rowKeyVar="fila" >
-                                                                
-                                                                    <center>                                                        
-                                                            <h:panelGrid columns="1" columnClasses="panelcenter">
-                                                                <a4j:commandLink  execute="@this"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
-                                                                                              render="tablatipoobra" >
-                                                                    <h:graphicImage  styleClass="ikont-hgi-strurlimagen"   url="#{tipoobra.strurlimagen}"/>
-                                                                </a4j:commandLink>
-
-                                                                <a4j:commandLink styleClass="ikont-hcl-strnombremedio"   value="#{tipoobra.strnombremedio}"  execute="@this"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
-                                                                                              render="tablatipoobra"  />
-                                                                
-                                                                <h:selectBooleanCheckbox value="#{tipoobra.check}" disabled="true"  />
-                                                                               
-                                                            </h:panelGrid>
-                                                            </center>
-                                                               
-                                                            </rich:dataGrid>
-                                                        </rich:panel>
-                                                    </h:panelGroup>
-                                                </h:panelGroup>
-
-                                            </h:panelGrid>
-                                        </center>
-
-                                    </rich:collapsiblePanel>
-
-                                    <h:panelGroup >                            
-                                        <h:commandButton value="#{var.continuar}" action="#{Supervisor$IngresarNuevaObra.pasarDatosBasicos}" />  
-
-
-                                        <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
-                                                         action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                        </h:commandButton>
-
-                                        <a4j:outputPanel id="panelErrorTip">
-                                            <rich:messages id="messagesTip" globalOnly="true"
-                                                           styleClass="ikont-rm-messagesTip"   ajaxRendered="true"
-                                                           >
-                                                <f:facet name="infoMarker">
-                                                    <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                </f:facet>
-                                                <f:facet name="warnMarker">
-                                                    <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                </f:facet>
-                                                <f:facet name="errorMarker">
-                                                    <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                </f:facet>
-                                                <f:facet name="fatalMarker">
-                                                    <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                </f:facet>
-                                            </rich:messages>
-
-                                        </a4j:outputPanel>
-
-                                    </h:panelGroup>
-
-                                </rich:panel>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
-                        </tr>
-                    </table>
+                        </tr>                       
+                </table>
                 </h:form>
             </ui:define>
         </ui:composition>
