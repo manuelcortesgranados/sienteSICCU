@@ -2634,6 +2634,7 @@ public class NuevoContratoBasico implements Serializable {
                     contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
                     contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
                     contrato.setIntcantproyectos(0);
+                    //guarda el contrato siente en ejecucion
                     contrato.setEstadoconvenio(new Estadoconvenio(2));
                     if (lisplanifiactapar.size() > 0) {//Actas Parciales
                         contrato.setPlanificacionpagos(new LinkedHashSet(lisplanifiactapar));
@@ -6060,7 +6061,10 @@ private Boolean boolpruea=false;
         }
 
     }
-
+    /*
+     * Metodo que muestra la subpantalla del plan operativo de acuerdo a la opción seleccionada
+     * @void
+     */
     public void actualizarSubpantallaPlanOperativo(int subPantalla) {
         this.setSubpantalla(subPantalla);
     }
@@ -6330,8 +6334,7 @@ private Boolean boolpruea=false;
 
     /**
      * Reportes de plan operativo
-     *
-     * @return
+     * @void
      */
     public void ReportesPlanOperativo(int reportOption) {
         this.reportoption = reportOption;
@@ -6339,7 +6342,7 @@ private Boolean boolpruea=false;
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportconsolidado") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6347,7 +6350,7 @@ private Boolean boolpruea=false;
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportcronograma") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6355,7 +6358,7 @@ private Boolean boolpruea=false;
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportpresupuesto") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6363,7 +6366,7 @@ private Boolean boolpruea=false;
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportflujocaja") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6371,7 +6374,7 @@ private Boolean boolpruea=false;
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplanoperativo") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -6379,7 +6382,7 @@ private Boolean boolpruea=false;
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reportplancontratacion") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
