@@ -38,7 +38,7 @@
             <h:inputHidden id="finfecha" value="#{Supervisor$Contrato.finentrega}" />
         </h:form>
 
-        <rich:panel id="pgcontratoconvenio" styleClass="ocultarpanel">
+        <h:panelGroup layout="block" id="pgcontratoconvenio" >
             <center>
                 <h:panelGrid id="layoutdetalle"   rendered="true">
                     <h:panelGrid id="detallecontrato" styleClass="ikont-"   columns="4"
@@ -365,13 +365,13 @@
                         <h:form target="_blank">
                             <h:panelGrid columns="2" columnClasses="panelcenter" rendered="#{Supervisor$Contrato.contrato.booltipocontratoconvenio}">
                                 <h:panelGrid columnClasses="panelcenter">
-                                    <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.ReporteConvenio}" />
+                                    <h:commandLink styleClass="pdf butonreport"   action="#{Supervisor$Contrato.ReporteConvenio}" />
 
                                     <h:outputText  styleClass="ikont- "   id="reporteconvenio" value="#{var.reporte} #{var.convenio}" />
                                 </h:panelGrid>
 
                                 <h:panelGrid columnClasses="panelcenter">
-                                    <h:commandLink styleClass="ikont-"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
+                                    <h:commandLink styleClass="excel butonreport"   action="#{Supervisor$Contrato.reporteProyectosConvenio}" id="excel" target="_blank" />
 
                                     <h:outputText  styleClass="ikont- "   id="reporteexcel" value="#{var.listadoproyectos}" />
                                 </h:panelGrid>
@@ -1043,7 +1043,7 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
 
         <ui:include src="/modal/gestionpolizas/nuevapoliza.xhtml" />
         <ui:include src="/modal/contratoDetaDoc.xhtml" />

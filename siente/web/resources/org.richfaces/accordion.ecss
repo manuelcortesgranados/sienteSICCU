@@ -25,21 +25,23 @@
     cursor: pointer;
     /* gain layout trigger for IE7 */
     min-height: 0px;
+    width : 100%;
 }
 
 .rf-ac-itm-cnt {
     border-color: '#{richSkin.borderColor}';
     border-width: '#{richSkin.borderWeight}';
     border-style: '#{richSkin.borderStyle}';
-    border-bottom-left-radius: '#{richSkin.borderRadius}';
-    border-bottom-right-radius: '#{richSkin.borderRadius}';
+    border-radius: '#{richSkin.borderRadius}';
     position: relative;
     overflow: auto;
     overflow-x: hidden;
     padding: 10px;
-    font-size: '#{richSkin.generalSizeFont}';
+    font-size: 0.9em;
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
+    width : 100%;
+    height : 80px;
 }
 
 .rf-ac-itm-hdr-act {

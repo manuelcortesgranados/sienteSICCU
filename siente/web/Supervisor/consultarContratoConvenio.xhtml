@@ -91,7 +91,7 @@
                     <interkont:spacer height="10px"  />
 
                     <!-- Listado de convenios según la entidad del contratante -->
-                    <rich:panel id="pl-tabla-listado-contratoconvenio" styleClass="ocultarpanel">
+                    <h:panelGroup layout="block" id="pl-tabla-listado-contratoconvenio" >
                         <h:panelGrid rendered="#{empty Supervisor$Contrato.listacontratos and empty Supervisor$Contrato.listacontratoscontratista}">
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-noencontrocontratoentidad"   value="No se encontró #{Supervisor$Contrato.tipoContCon} para esta entidad" />
@@ -243,12 +243,12 @@
 
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>
+                    </h:panelGroup>
 
                     <interkont:spacer height="10px"  />
 
                     <!-- Listado de convenios según la entidad del contratista -->
-                    <rich:panel id="pl-tabla-listado-contratoconvenio-contratista" styleClass="ocultarpanel">
+                    <h:panelGroup id="pl-tabla-listado-contratoconvenio-contratista" >
                         <rich:dataTable id="tabla-listado-contratoconvenio-contratista"
                                         rowKeyVar="filaSeleccionada"
                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
@@ -391,7 +391,7 @@
 
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGrid>
             
 
