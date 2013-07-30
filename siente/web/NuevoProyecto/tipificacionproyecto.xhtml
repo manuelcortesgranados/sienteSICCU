@@ -61,8 +61,8 @@
 
                                                                 <rich:collapsiblePanel  header="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
 
-
-                                                                    <rich:panel  id="gpTotalProyectosPadres" >                            
+                                                                    <h:panelGroup layout="block" id="gpTotalProyectosPadres">
+                                                                                            
                                                                         <h:panelGrid >                                    
                                                                             <h:panelGroup id="panel-periodo-evento">
                                                                                 <h:panelGrid columns="2" >
@@ -85,12 +85,12 @@
                                                                         </h:panelGrid>
 
                                                                         <h:panelGroup id="gpproyectoSeleccionado" >
-                                                                            <rich:panel id="panel-buscarPadreProy">
-
-                                                                            </rich:panel>
+                                                                            <h:panelGroup layout="block" id="panel-buscarPadreProy">
+                                                                                
+                                                                            </h:panelGroup>                                                                            
                                                                             <interkont:spacer height="10px" />
                                                                             <center>
-                                                                                <h:panelGrid columns="1" id="gp_datos"  rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}">
+                                                                                <h:panelGrid columns="1" id="gp_datos"  rendered="#{Supervisor$IngresarNuevaObra.verObrasPadres==true}" styleClass="totalwidth tipificacionpro">
                                                                                     <rich:panel id="mp-datos-proySeleccionado">
                                                                                         <f:facet name="header" >
                                                                                             <h:panelGroup >
@@ -157,14 +157,14 @@
                                                                             </center>
                                                                         </h:panelGroup>
 
-                                                                    </rich:panel>
+                                                                    </h:panelGroup>
                                                                 </rich:collapsiblePanel>
                                                                 <!--paso 2 fase tipo subtipo-->
 
                                                                 <rich:collapsiblePanel header="#{var.numeropanel}. #{var.tipificaciondelproyecto}" switchType="client">
 
                                                                     <center>
-                                                                        <h:panelGrid id="pgtipi" columns="1" >
+                                                                        <h:panelGrid id="pgtipi" columns="1" styleClass="totalwidth tipificacionpro">
                                                                             <rich:panel>
                                                                                 <f:facet name="header">
                                                                                     <h:outputText  styleClass="ikont-hot-escojafase"   value="1. #{var.escojafase}" />

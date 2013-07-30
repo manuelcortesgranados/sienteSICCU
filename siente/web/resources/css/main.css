@@ -7,6 +7,22 @@
     margin-left: -6px;
 }
 
+.totalwidth.tipificacionpro a{
+    text-decoration: none;
+    margin: 0px;
+    font-family: Verdana, Geneva, sans-serif;
+    color: #000;
+}
+
+.totalwidth.tipificacionpro .rf-dg-c{
+    width: 125px;
+    height: 125px;
+}
+
+.totalwidth.tipificacionpro table{
+    margin: 0px auto;
+}
+
 .centerelement{
     margin: 0px auto;
 }
@@ -898,4 +914,32 @@ a.busquedavanzada {
 a.busquedavanzada:hover {
     background-color:#87A7BB;
     color: black;
+}
+
+a.anadirimagen {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_anadirimagen.png);
+    background-position: 0px 20px;
+}
+a.anadirimagen:hover {
+    background-position: 0px -144px;
+}
+
+a.anadirimagenes {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_anadirimagenmas.png);
+    background-position: 0px 20px;
+}
+a.anadirimagenes:hover {
+    background-position: 0px -144px;
 }
