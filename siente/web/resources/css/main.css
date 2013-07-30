@@ -6,13 +6,13 @@
     margin: 0px auto;
 }
 
-.ocultarpanel .rf-p-b {
+.ocultarpanel {
     border-color: transparent;
     border-style: solid;
     border-width: 0px;
 }
 
-.tablaadminproyecto  > tbody > tr > td > a.datos {
+.ikont-hcl-navegarNuevaObra1{
     background-image:url(../imgs/Cobra_bt44.png);
 }
 
@@ -24,11 +24,11 @@
     background-image:url(../imgs/Cobra_bt30.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.gencrono {
+.ikont-hcl-pasoGenerarCronograma{
     background-image:url(../imgs/Cobra_bt31.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.ubiproyecto {
+.ikont-hcl-pasaraUbicacion{
     background-image:url(../imgs/Cobra_bt32.png);
 }
 
@@ -36,7 +36,7 @@
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
-.ikont-hcl-iniciarimagenes{
+.ikont-hcl-iniciarimagenes, ikont-hcl-navegarNuevaObra2{
     background-image:url(../imgs/Cobra_bt12.png);
 }
 
@@ -76,7 +76,7 @@
     background-image:url(../imgs/bt_validar_hist.png);
 }
 
-.ikont-acl-crearnuevoproyecto {
+.ikont-acl-crearnuevoproyecto, .ikont-hcl-crearproyecto{
     background-image:url(../imgs/Cobra_bt01.png);
 }
 
@@ -115,7 +115,7 @@
     background-image:url(../imgs/Cobra_bt07.png);
 }
 
-.ikont-acl-iniciarnuevocontrato{
+.ikont-acl-iniciarnuevocontrato, ikont-hcl-navegarNuevaObra3{
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
@@ -167,7 +167,7 @@
     background-image:url(../imgs/Cobra_bt25.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.tipiobra {
+.ikont-hcl-navegarNuevaObra{
     background-image:url(../imgs/Cobra_bt26.png);
 }
 /* contractuales */
@@ -655,12 +655,17 @@ a.pdf {
 #navIndicadores ul li a {
     width:200px;
     height:33px;
+    float:left;
+    position:relative;
     display:block;
+    padding-right:10px;
+    padding-left:10px;
     padding-top: 3px;
     padding-bottom:4px;
     margin-top:10px;
     font-size:12px;
     vertical-align:middle;
+    line-height:13px;
     text-indent:20px;
     font-style:italic;
     font-weight:500;
@@ -895,4 +900,3 @@ a.busquedavanzada:hover {
     background-color:#87A7BB;
     color: black;
 }
-
