@@ -23,12 +23,12 @@
     </script>
 
     <h:panelGroup  id="paneldatosbasicopo" >
-        <rich:messages ajaxRendered="true" />
+        
         <center>
             <h:outputLabel value="#{var.informacionbasica}"/>
             <h:panelGrid columns="2" cellpadding="10" cellspacing="20">
                 <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" style="height: 60px;">
-                    <f:convertNumber type="currency" currencySymbol="$" />
+                   
                     <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />
                 </h:inputText>
 
@@ -73,16 +73,16 @@
             <br/>
             <h:outputLabel id="hol-fuenterecsubtitulo" value="#{var.subfuenterecursos}"/>
             <h:panelGrid columns="2" cellpadding="10" cellspacing="20" id="hpg-fuenter-conv">
-                <rich:select id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.tercero.intcodigo}" required="true">
+                <rich:select id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.tercero.intcodigo}" >
                     <f:selectItems value="#{Supervisor$Contrato.entidades}" />
                 </rich:select>
 
 
-                <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.reservaiva}" required="true">
+                <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.reservaiva}" >
                     <rich:placeholder value="#{var.reservaiva}" />
                 </h:inputText>
 
-                <rich:select id="rs-rol" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.rolentidad.idrolentidad}" required="true">
+                <rich:select id="rs-rol" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.rolentidad.idrolentidad}" >
                     <f:selectItems value="#{Supervisor$Contrato.roles}" />
                 </rich:select>
 
@@ -99,12 +99,12 @@
                     <rich:placeholder value="#{var.cuotagerencia}" />
                 </h:inputText>
 
-                <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}" required="true">
+                <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}">
                     <f:selectItems value="#{Supervisor$Contrato.tipoAporte}"  />
                 </rich:select> 
 
 
-                <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}" required="true" onkeypress="return validar(event);">
+                <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}"  onkeypress="return validar(event);">
                     <f:validateLongRange minimum="0"/>
                     <f:validateLength maximum="26" minimum="1"/>
                     <rich:placeholder value="cuota gerencia" />

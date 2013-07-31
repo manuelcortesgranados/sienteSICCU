@@ -5,6 +5,7 @@
 package co.com.interkont.cobra.planoperativo.client.dto;
 
 import co.com.interkont.cobra.to.Contrato;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;

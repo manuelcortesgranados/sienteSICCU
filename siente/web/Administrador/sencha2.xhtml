@@ -11,24 +11,15 @@
 
     <ui:composition template="/facelets/template_main.xhtml">
         <ui:define name="head">
-
         <script type="text/javascript"  src="../planoperativo/planoperativo.nocache.js"></script>
-
-        </ui:define>
-        <ui:define name="title">
-            <h:outputText  styleClass="ikont-hot-asociarentidadusuario"   value="#{var.asociarentidadusuario}"/>
-        </ui:define>
+        </ui:define>       
         <ui:define name="menu">
             <ui:include src="/facelets/menu_gestion.xhtml"/>
-        </ui:define>
-        <ui:define name="menu_lateral">
-            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-        </ui:define>
+        </ui:define>       
         <ui:define name="body">
-            <h:form>
+         
                     <iframe src="javascript:''" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
-            </h:form>
+           
         </ui:define>
     </ui:composition>
 </ui:composition>   

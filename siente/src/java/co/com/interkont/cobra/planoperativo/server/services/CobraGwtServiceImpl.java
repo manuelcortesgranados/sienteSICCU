@@ -4,9 +4,9 @@
  */
 package co.com.interkont.cobra.planoperativo.server.services;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.SemaforoDTO;
 import co.com.interkont.cobra.to.Alarma;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
@@ -14,10 +14,8 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Semaforo;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.interkont.cobra.dto.ActividadObraDTO;
 import com.interkont.cobra.util.CobraUtil;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +34,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     /*constantes para sabes a que va a convertir*/
     final int VAR_DTO = 1;
     final int VAR_TO = 2;
+    private ActividadobraDTO actividadObraDTO;
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -67,8 +66,24 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public void setContrato(Contrato contrato) {
+        System.out.println("contrato 2 = ");
         this.contrato = contrato;
     }
+
+    @Override
+    public ActividadobraDTO getActividadObraDTO() {
+        System.out.println("get A = " );
+        System.out.println("get A = " );
+        return actividadObraDTO;
+    }
+
+    @Override
+    public void setActividadObraDTO(ActividadobraDTO actividadObraDTO) {
+        System.out.println("SetA" );
+        this.actividadObraDTO = actividadObraDTO;
+    }
+    
+    
 //    @Override
 //    public void agregarContratoTemporal(ContratoDTO contratoDto) throws Exception {
 //        this.setContratoDto(contratoDto);

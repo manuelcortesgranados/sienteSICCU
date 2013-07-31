@@ -4,13 +4,12 @@
  */
 package co.com.interkont.cobra.planoperativo.client.services;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.to.Contrato;
 //import co.com.interkont.cobra.planoperativo.shared.dto.Sector;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.interkont.cobra.dto.ActividadObraDTO;
+
 
 /**
  *
@@ -25,6 +24,8 @@ public interface CobraGwtServiceAbleAsync {
     void findAlarma(int id_alarma, AsyncCallback<AlarmaDTO> call);
   
     void pruebacomGWTJSF(int cont,AsyncCallback<Void> call);
+    void getActividadObraDTO(AsyncCallback<ActividadobraDTO> call );
+    void setActividadObraDTO(ActividadobraDTO actividadObraDTO, AsyncCallback<Void> call);
 
 //    void agregarContratoTemporal(ContratoDTO contratoDto, AsyncCallback<Void> call) throws Exception;
 //

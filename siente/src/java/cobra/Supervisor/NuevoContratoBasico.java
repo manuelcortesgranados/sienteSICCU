@@ -47,6 +47,7 @@ import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
+import com.gantt.client.config.GanttConfig;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import coral.dao.DataAccessLayerException;
 import java.io.FileNotFoundException;
@@ -2215,8 +2216,7 @@ public class NuevoContratoBasico implements Serializable {
             llenarTipoAporte();
         }
 
-        fuenteRecursoConvenio = new Fuenterecursosconvenio();
-        variabletitulo = Propiedad.getValor("primerodatosbasicos");
+        
 
     }
 
@@ -6095,7 +6095,7 @@ private Boolean boolpruea=false;
         actividadobra.add(actobra);
         contrato.setActividadobras((Set) actividadobra);
         guardarContrato();
-    }
+        }
 
     /*
      *metodo que se encarga de guardar el convenio
@@ -6422,4 +6422,9 @@ private Boolean boolpruea=false;
        }
         subpantalla = 2;
     }
+    
+    public String planOperativo(){    
+       return "PlanOperativo";        
+    }
+    
 }

@@ -23,8 +23,8 @@
     <ui:define name="title">
         <h:form>  
             <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}"  immediate="true"/>
+                <h:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.planOperativo()}"  immediate="true"/>
                 <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>

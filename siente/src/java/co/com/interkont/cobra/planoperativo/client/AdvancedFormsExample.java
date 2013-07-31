@@ -37,7 +37,7 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
     @Override
     public Widget asWidget() {
         if (vp == null) {
-            vp = new VerticalPanel();
+                vp = new VerticalPanel();
             vp.setSpacing(10);
             crearFormulario();
             //createTabForm();

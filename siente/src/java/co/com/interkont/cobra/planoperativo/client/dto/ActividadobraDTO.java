@@ -4,21 +4,19 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Actividadobra;
 import com.gantt.client.config.GanttConfig.TaskType;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  *
  * @author desarrollo9
  */
-public final class ActividadobraDTO implements Serializable {
+public class ActividadobraDTO implements Serializable {
 
 	String id;
 	String name;
@@ -27,10 +25,13 @@ public final class ActividadobraDTO implements Serializable {
 	int duration;
 	int percentDone;
 	TaskType taskType;
-     
+        
         
 
-	private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
+    public ActividadobraDTO() {
+    }
+             
+    private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public List<ActividadobraDTO> getChildren() {
         return children;

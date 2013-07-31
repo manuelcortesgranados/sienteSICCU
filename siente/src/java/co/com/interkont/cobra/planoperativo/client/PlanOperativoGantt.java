@@ -4,7 +4,6 @@
  */
 package co.com.interkont.cobra.planoperativo.client;
 
-
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig;
@@ -22,11 +21,15 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.user.client.ui.FormPanel;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
 import com.scheduler.client.core.TimeResolution;
 import com.scheduler.client.core.config.SchedulerConfig;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -55,62 +58,74 @@ import com.sencha.gxt.widget.core.client.grid.HeaderGroupConfig;
 import com.sencha.gxt.widget.core.client.grid.editing.GridInlineEditing;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
-import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
-
 /**
  *
  * @author desarrollo9
  */
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
-    
+//     private static final int COLUMN_FORM_WIDTH = 680;
+
     public interface GanttExampleStyle extends CssResource {
     }
- 
+
     public interface GanttExampleResources extends ClientBundle {
+
         @Source({"Gantt.css"})
         GanttExampleStyle css();
     }
     @SuppressWarnings("unused")
     private static final GanttExampleResources resources = GWT.create(GanttExampleResources.class);
-    
+    private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
+    ActividadobraDTO root;
 //    private static final TaskProps props = GWT.create(TaskProps.class);
 //    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
-    
-   
-  ListStore<ActividadobraDTO> taskStore;
+    ListStore<ActividadobraDTO> taskStore;
     /**
      * Almacena la tarea que ha sido seleccionada en el gantt
      */
     private ActividadobraDTO tareaSeleccionada;
-    
 
     @SuppressWarnings("unchecked")
     @Override
     public Widget asWidget() {
-        
+        final Button enviar = new Button("Enviar");
+
+        final DialogBox dialogBox = new DialogBox();
+        dialogBox.setText("Remote Procedure Call");
+
+//        taskStore.setAutoCommit(true);
+
+//        for (Task base : root.getChildren()) {
+//            taskStore.add(base);
+//            if (base.hasChildren()) {
+//                processFolder(taskStore, base);
+//            }
+//        }
+
+
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
-        taskStore.setAutoCommit(true);  
-        
-        ActividadobraDTO root = GanttDummyData.getTasks();
-        
+        taskStore.setAutoCommit(true);
+        //ActividadobraDTO root = GanttDummyData.getTasks();         
+
+
+
         for (ActividadobraDTO base : root.getChildren()) {
             taskStore.add(base);
-          if (base.hasChildren()) {
+            if (base.hasChildren()) {
                 processFolder(taskStore, base);
             }
         }
-      
-        
+
+
 
         ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
         depStore.addAll(GanttDummyData.getDependencies());
@@ -144,10 +159,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.columnWidth = 40;
         // Enable task contextMenu
         config.taskContextMenuEnabled = true;
-        config.dependencyContextMenuEnabled=true;
+        config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = true;
-        
-        
+
+
 
         /**
          * Diálogo Personalizado
@@ -169,21 +184,20 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
          * Personalizando el menú
          */
         config.taskContextMenu = new Menu();
-        
-           
+
+
         Menu crearProyectoMenuItem = new Menu();
-                
-        
+
+
         crearProyectoMenuItem.addSelectionHandler(
                 new SelectionHandler<Item>() {
-          
             @Override
             public void onSelection(SelectionEvent<Item> event) {
                 proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
-                        crearProyectoDialog.show();
+                crearProyectoDialog.show();
             }
         });
-        
+
         config.taskContextMenu.add(crearProyectoMenuItem);
 
         // Enable dependency contextMenu
@@ -199,12 +213,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         ArrayList<ZoneGeneratorInt> zoneGenerators = new ArrayList<ZoneGeneratorInt>();
         zoneGenerators.add(new WeekendZoneGenerator()); // Create a zone every weekend
         config.zoneGenerators = zoneGenerators;
-        
-        
-        
+
+
+
 
         // Create the Gxt Scheduler
-        
+
 
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
@@ -218,21 +232,20 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             ;
              
             @Override
-             public ActividadobraDTO createTaskModel(String  id, Date startDateTime, int duration) {
-               // return new ActividadobraDTO(id, "Nueva Actividad", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
-                 return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
+            public ActividadobraDTO createTaskModel(String id, Date startDateTime, int duration) {
+                // return new ActividadobraDTO(id, "Nueva Actividad", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
+                return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
             }
         };
 
         gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
-
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
             }
         });
-                
-         // Editing
+
+        // Editing
         GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
         editing.addEditor(config.leftColumns.getColumn(0), new TextField());
         editing.addEditor(config.leftColumns.getColumn(1), new DateField());
@@ -249,17 +262,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 ((TreeGrid<ActividadobraDTO>) gantt.getLeftGrid()).expandAll();
             }
         });
-
+ 
         DateWrapper dw = new DateWrapper(new Date()).clearTime();
         // Set start and end date.
         gantt.setStartEnd(dw.addDays(-7).asDate(), dw.addMonths(1).asDate());
 
         FlowLayoutContainer main = new FlowLayoutContainer();
         main.getElement().setMargins(new Margins(5));
-        HTML text = new HTML("Basic Gantt");
+        HTML text = new HTML("Plan Operativo");
         main.add(text);
         ContentPanel cp = new ContentPanel();
-        cp.setHeadingText("Basic Gantt");
+        cp.setHeadingText("Plan Operativo");
         cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
         cp.setPixelSize(1000, 460);
         cp.getElement().setMargins(new Margins(5));
@@ -268,6 +281,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         cp.setWidget(vc);
         vc.add(createToolBar(), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
+        vc.add(enviar);
         main.add(cp);
         return main;
     }
@@ -301,12 +315,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         tbar.add(critical);
 
 
+
         return tbar;
     }
-  
-    
-    // Creates the static columns
 
+    // Creates the static columns
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ColumnModel<ActividadobraDTO> createStaticColumns() {
         List<ColumnConfig<ActividadobraDTO, ?>> configs = new ArrayList<ColumnConfig<ActividadobraDTO, ?>>();
@@ -351,17 +364,33 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     @Override
     public void onModuleLoad() {
+        cargar();
         RootPanel.get("planoperativoclient").add(asWidget());
     }
 
     private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {
-        for(ActividadobraDTO child: folder.getChildren()){
+        for (ActividadobraDTO child : folder.getChildren()) {
             store.add(folder, child);
             if (child.hasChildren()) {
                 processFolder(store, child);
             }
         }
-        
+
     }
     
+    public void cargar(){
+        service.getActividadObraDTO(new AsyncCallback<ActividadobraDTO>() {
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        
+                    }
+
+                    @Override
+                    public void onSuccess(ActividadobraDTO result) {
+                        root = result;
+                        
+
+                    }
+                });
+    }
 }

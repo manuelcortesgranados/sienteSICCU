@@ -10,14 +10,13 @@ package co.com.interkont.cobra.planoperativo.client.services;
 
 
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.to.Contrato;
 //import co.com.interkont.cobra.planoperativo.shared.dto.Sector;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.interkont.cobra.dto.ActividadObraDTO;
+
 
 
 
@@ -32,7 +31,8 @@ public interface CobraGwtServiceAble extends RemoteService{
   
     public Contrato getContrato();
     public void setContrato(Contrato contrato);
-      
+    public ActividadobraDTO getActividadObraDTO();
+    public void setActividadObraDTO(ActividadobraDTO actividadObraDTO);      
     public AlarmaDTO findAlarma(int id_alarma) throws Exception;
     public void pruebacomGWTJSF(int cont)  throws Exception;
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
