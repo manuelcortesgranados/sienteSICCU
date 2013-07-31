@@ -16,9 +16,9 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder-mp-listado-contratos-asociar"
+                    <a4j:commandLink id="esconder-mp-listado-contratos-asociar"
                                      onclick="#{rich:component('mp-listado-contratos-asociar')}.hide(); return false;" immediate="true"
-                                     styleClass="ikont-acl-cerrar"/>
+                                     styleClass="ikont-acl-cerrar closemodal"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -34,7 +34,7 @@
                         </h:panelGroup>
                     </h:panelGrid>
 
-                    <rich:panel >
+                    <h:panelGroup layout="block" >
 
 
                         <h:panelGrid >
@@ -132,7 +132,7 @@
 
                         </h:panelGrid>
 
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGroup>
             </h:form>
         </center>

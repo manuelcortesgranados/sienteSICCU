@@ -19,18 +19,18 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalAdicioarActividades" styleClass="ikont-a4jcl-escondermodalAdicioarActividades" value="X"  
+                    <a4j:commandLink id="esconder_modalAdicioarActividades" styleClass="ikont-a4jcl-escondermodalAdicioarActividades closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalAdicioarActividades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel id="panelAdicionarActividades" >
+        <h:panelGroup layout="block" id="panelAdicionarActividades" >
             <center>
                 <h:form>
-                    <rich:panel styleClass="ikont-rp-gridbodyactivimodal"  
-                                bodyClass="rich-panel-grid-body-activimodal" headerClass="font-header-panel">
+                    <h:panelGroup layout="block" styleClass="ikont-rp-gridbodyactivimodal"  
+                                >
                         <center>
                             <h:panelGrid id="objetoactividad" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
                                 <h:outputText  styleClass="ikont-hot-actividaditemnoprevisto"   value="Actividad / ítem no previsto:"/>
@@ -56,7 +56,7 @@
                                 </h:panelGrid>
                             </h:panelGrid>
                         </center>
-                    </rich:panel>
+                    </h:panelGroup>
                     <a4j:commandButton value="#{var.adicionar} #{var.actividad}"
                                        action="#{Supervisor$Alimentar.agregaractividad}"
                                        oncomplete="true"
@@ -207,7 +207,7 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 

@@ -16,14 +16,15 @@
                 <h:outputText  styleClass="ikont-hot-crear"   value="#{var.crear}" />
             </h:panelGroup>
         </f:facet>
-
-        <rich:panel id="panelCrearEncargoFidu">
-            <h:panelGroup >
-               <a4j:commandLink value="X" id="esconder_panelCrearEncargo"
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink  id="esconder_panelCrearEncargo"
                                    onclick="#{rich:component('panelCrearEncargo')}.hide();
                                            return false;"
-                                   immediate="true" styleClass="ikont-a4jcl-esconderpanelCrearEncargo"   />
+                                   immediate="true" styleClass="ikont-a4jcl-esconderpanelCrearEncargo closemodal"   />
             </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block" id="panelCrearEncargoFidu">
             <h:form>
                 <h:panelGrid id="mos" columns="2"  columnClasses="panelizquierda, panelizquierda">
                     <h:outputLabel  styleClass="ikont-hol-lblnumeroencargo"   id="lblnumeroencargo" value="#{var.numeroencargo}" for="txtNumeroencargo" />
@@ -56,6 +57,6 @@
                     </h:panelGrid>
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

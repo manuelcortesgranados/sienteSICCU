@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_modalDificultadd" styleClass="ikont-acl-escondermodaldificultadd"  
+                    <a4j:commandLink  id="esconder_modalDificultadd" styleClass="ikont-acl-escondermodaldificultadd closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalDificultadDetalle')}.hide();return  false;">>
                     </a4j:commandLink>
@@ -28,7 +28,7 @@
         </f:facet>
 
         <h:form>
-            <rich:panel>
+            <h:panelGroup layout="block" >
                 <rich:dataTable id="tablaDificultadDet"                                
                                 value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -77,7 +77,7 @@
                         </rich:columnGroup>
                     </f:facet>
                 </rich:dataTable>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>

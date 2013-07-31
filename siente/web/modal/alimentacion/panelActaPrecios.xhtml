@@ -19,7 +19,7 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_modalActaPrecios" styleClass="ikont-a4jcl-escondermodalActaPrecios"  value="X" 
+                    <a4j:commandLink id="esconder_modalActaPrecios" styleClass="ikont-a4jcl-escondermodalActaPrecios closemodal"
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalActaPrecios')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -46,13 +46,13 @@
                         </rich:fileUpload>
                         <h:panelGroup id="infoActas">
                             <center>
-                                <rich:panel bodyClass="informa" >
+                                <rich:panel>
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-arcsub"   value="#{var.arcsub}"/>
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$Alimentar.cargadorActaPrecios.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Alimentar.cargadorActaPrecios.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
@@ -61,7 +61,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numBytesKb "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>

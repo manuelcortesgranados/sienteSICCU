@@ -10,22 +10,20 @@
 
 
     <rich:popupPanel id="panelConfirmarSolicitudAH" autosized="true"   headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicitud closemodal"   
+                                 title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
+                                         return false;" />
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block" >
 
-        <rich:panel >
-            <f:facet name="header">
-
-                <h:panelGroup>
-
-                    <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}"/>
-                    <interkont:spacer />
-
-                    <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicitud"   
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSolicitudAH')}.hide();
-                                         return false;" value="X"/>
-
-                </h:panelGroup>
-
-            </f:facet>
 
             <center>
                 <h:outputText  styleClass="ikont-hot-estasegurodeenviar"   value="#{var.estasegurodeenviar}"/>
@@ -45,7 +43,7 @@
 
                 </h:panelGrid>
             </center>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 </ui:composition>

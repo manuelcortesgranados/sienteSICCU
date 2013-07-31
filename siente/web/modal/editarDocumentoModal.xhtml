@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp_editar" styleClass="ikont-acl-escondermpeditardocumento"  
+                    <a4j:commandLink  id="esconder_mp_editar" styleClass="ikont-acl-escondermpeditardocumento closemodal"  
                                        title="#{var.cerrar}" immediate="true"
                                        onclick="#{rich:component('mp_editar')}.hide();return  false;">
                      </a4j:commandLink>
@@ -26,7 +26,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-rp-mpeditardocumento"   >
+        <h:panelGroup layout="block" >         
             <h:form>
                 <h:panelGrid id="pg_editar_documento" styleClass="ikont-hpg-mpeditardocumento" >
                     <interkont:spacer height="70px"/>
@@ -58,6 +58,6 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

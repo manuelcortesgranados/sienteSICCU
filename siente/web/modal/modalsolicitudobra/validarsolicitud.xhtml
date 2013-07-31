@@ -19,12 +19,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelValidarSolicitud" styleClass="ikont-acl-esconderpanelvalidarsolicitud"  
+                   <a4j:commandLink id="esconder_panelValidarSolicitud" styleClass="ikont-acl-esconderpanelvalidarsolicitud closemodal"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelValidarSolicitud')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel >
+        <h:panelGroup layout="block">
             <h:panelGrid columns="1" id="layoutGuardar">
                 <h:panelGroup >
                     <h:outputText  styleClass="ikont-hot-layoutguardar"   value="#{SessionBeanCobra.solicitudService.mensaje}"  />
@@ -38,6 +38,6 @@
                                         onclick="#{rich:component('panelValidarSolicitud')}.hide(); return false;"  />
                 </center>
             </h:panelGrid>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

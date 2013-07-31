@@ -16,7 +16,13 @@
                 <h:outputText  styleClass="ikont-hot-atencion"   value="#{var.atencion}" />
             </h:panelGroup>
         </f:facet>
-        <rich:panel id="panelConfGuardar" >
+        <f:facet name="controls">
+                <h:panelGroup>
+                    <a4j:commandLink onclick="#{rich:component('panelConfirmaguardado')}.hide(); return false;" immediate="true"
+                                       styleClass="ikont-acl-cerrar closemodal"/>
+                </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block" id="panelConfGuardar" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-mensaje"   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
             </h:panelGroup>
@@ -36,7 +42,7 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 

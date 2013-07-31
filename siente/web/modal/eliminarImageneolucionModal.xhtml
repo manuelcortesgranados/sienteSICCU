@@ -21,13 +21,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp_eliminar_imagenevolucion" styleClass="ikon-acl-escondermpeliminarimagenevolucion"   
+                    <a4j:commandLink  id="esconder_mp_eliminar_imagenevolucion" styleClass="ikon-acl-escondermpeliminarimagenevolucion closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp_eliminar_imagenevolucion')}.hide(); return false;"/>
                     
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="ikon-rp-gpimagenmodaleliminar"   >
+        <h:panelGroup layout="block" >         
             <h:form>
                 <h:panelGrid  id="gpImagenModalEliminar">
                     <interkont:spacer height="10"/>
@@ -41,6 +41,6 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

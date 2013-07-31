@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoConvenios" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_mp_ConsolidadoConvenios" styleClass="ikont-acl-cerrar closemodal"  
                                      onclick="#{rich:component('mp-ConsolidadoConvenios')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -29,7 +29,7 @@
         </f:facet>
         
         <h:form target="_blank">
-            <rich:panel>                
+            <h:panelGroup layout="block" >
                 <h:panelGrid columns="1">
                     <h:outputText  styleClass="ikont-hot-conejec"   value="1. Convenios en ejecución con entidades nacionales"
                                    />
@@ -53,7 +53,7 @@
                    
                     <h:graphicImage  styleClass="ikont-hgi-imgconsconvenio3 "   id="imgconsconvenio3" width="1000" value="#{var.imgconvenio3}" />
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

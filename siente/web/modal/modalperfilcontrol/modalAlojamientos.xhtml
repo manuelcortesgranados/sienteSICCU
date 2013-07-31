@@ -19,14 +19,14 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_Alojamientos" styleClass="ikont-a4jcl-escondermpAlojamientos" value="X"  
+                    <a4j:commandLink id="esconder_mp_Alojamientos" styleClass="ikont-a4jcl-escondermpAlojamientos closemodal"
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-Alojamientos')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form target="_blank">
-            <rich:panel >
+            <h:panelGroup layout="block"  >
                 <h:panelGrid columns="1" id="alojamiento">
                     <h:outputText  styleClass="ikont-hot-arriendos"   value="1. ARRIENDOS" />
                     <h:graphicImage  styleClass="ikont-hgi-imgalojamiento"   id="imgalojamiento" value="#{var.imgalojamiento1}"/>
@@ -40,7 +40,7 @@
                     <h:outputText  styleClass="ikont-hot-alberguespr "   value="3. ALBERGUES - PANORAMA REGIONAL" />
                     <h:graphicImage  styleClass="ikont-hgi-imgalojamiento5 "   id="imgalojamiento5" value="#{var.imgalojamiento6}"/>
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

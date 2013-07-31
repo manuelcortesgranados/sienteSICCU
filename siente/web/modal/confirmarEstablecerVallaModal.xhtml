@@ -19,13 +19,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp_confirmarEstablecerVallaModal" styleClass="ikont-acl-escondermpconfirmarestablecervallamodal"  
+                    <a4j:commandLink  id="esconder_mp_confirmarEstablecerVallaModal" styleClass="ikont-acl-escondermpconfirmarestablecervallamodal"  
                                      title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerVallaModal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="ikont-rp-mpconfirmarestablecervallamodal"   >
+        <h:panelGroup layout="block">
             <h:form>
                 <h:panelGrid  id="panelGridConfEstablecerValla">
                     <interkont:spacer height="10"/>
@@ -43,6 +43,6 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

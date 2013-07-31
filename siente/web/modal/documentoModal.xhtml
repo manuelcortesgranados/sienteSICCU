@@ -18,15 +18,15 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();
-                            return  false;"   styleClass="ikont-acl-modaldocumento"   immediate="true">
+                    <a4j:commandLink  id="esconder-modalDocumento" onclick="#{rich:component('modalDocumento')}.hide();
+                            return  false;"   styleClass="ikont-acl-modaldocumento closemodal"   immediate="true">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <center>
             <h:form target="_blank">
-                <rich:panel >
+                <h:panelGroup layout="block" >
                     <rich:dataTable id="tablaDocsAlim"  
                                     sortMode="single" 
 
@@ -55,7 +55,7 @@
                             </h:commandLink>
                         </rich:column>
                     </rich:dataTable>
-                </rich:panel>
+                </h:panelGroup>
             </h:form>
         </center>
     </rich:popupPanel>

@@ -13,7 +13,7 @@
     <h:panelGroup id="gpImagenAtencion" rendered="#{Supervisor$AdministrarObraNew.opcion==4}">
         <h:form>
             <h:panelGrid id="panel_imagenesevolucion" >
-                <rich:panel header="#{var.listaimagenesdeestaobra}">
+                <h:panelGroup layout="block" >
                     <h:panelGroup >
                         <center>
                             <div >
@@ -144,7 +144,7 @@
                             <interkont:spacer height="20px"  />
                         </center>
                     </h:panelGroup>
-                </rich:panel>
+                </h:panelGroup>
             </h:panelGrid>
         </h:form>
     </h:panelGroup>

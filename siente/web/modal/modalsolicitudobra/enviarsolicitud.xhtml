@@ -11,30 +11,32 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelConfirmarSolicitud" autosized="true" width="200" headerClass="rich-panel-header">
-        <rich:panel>
-            <f:facet name="header">
-                <h:panelGroup>
-                    <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}" />
-                    <interkont:spacer width="105" />
-                   <a4j:commandLink value="X" id="esconder_panelConfirmarSolicit"
-                                       onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
-                                               return false;"
-                                       immediate="true" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicit"   />
-                </h:panelGroup>
-            </f:facet>
-
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-atencion"   value= "#{var.atencion}" />
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_panelConfirmarSolicit"
+                                 onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
+                                         return false;"
+                                 immediate="true" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicit closemodal"   />
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block">
             <center> 
                 <h:outputText  styleClass="ikont-hot-estasegurodeenviar"   value="#{var.estasegurodeenviar}" />
                 <h:panelGrid columns="2" id="layoutGuardar">
                     <a4j:commandButton id="BTaceptarDoc2"  value="#{var.si}"
                                        oncomplete="#{rich:component('panelConfirmarSolicitud')}.hide();"
-                                        />
+                                       />
 
                     <a4j:commandButton id="BTaceptarDoc" value="#{var.no}" 
                                        onclick="#{rich:component('panelConfirmarSolicitud')}.hide();
-                                               return false;" />
+                                         return false;" />
                 </h:panelGrid>
             </center> 
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -12,11 +12,15 @@
 
     <rich:popupPanel  id="ver-fuenterecursos" autosized="true"
                       headerClass="sliderich" styleClass="ikont-"   >
-
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.seleccionarvideo}"/>
+            </h:panelGroup>
+        </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_confirmarCambioEstado" styleClass="ikont-acl-esconderconfirmarverfuenterecursos"  
+                    <a4j:commandLink  id="esconder_confirmarCambioEstado" styleClass="ikont-acl-esconderconfirmarverfuenterecursos closemodal"  
                                       title="#{var.cerrar}" onclick="#{rich:component('ver-fuenterecursos')}.hide();
                                               return false;"/>
                 </h:panelGroup>

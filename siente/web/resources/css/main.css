@@ -27,6 +27,22 @@
     margin: 0px auto;
 }
 
+a.closemodal{
+    float: left;
+    height: 20px;
+    width: 20px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/modal/btn_cerrar.png);
+    background-size: 16px;
+    margin-top: 5px;
+}
+
+a.closemodal:hover{
+    background-size: 20px;
+}
+
 .ikont-hcl-navegarNuevaObra1{
     background-image:url(../imgs/Cobra_bt44.png);
 }

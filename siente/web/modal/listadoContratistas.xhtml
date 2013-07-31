@@ -16,7 +16,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink  id="esconder-mp-listado-contratistas" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-contratistas')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -34,7 +34,7 @@
             </h:form>
         </center>
 
-        <rich:panel id="gpTotalContratistas">
+        <h:panelGroup layout="block" id="gpTotalContratistas">
                 <h:panelGrid >
 
 

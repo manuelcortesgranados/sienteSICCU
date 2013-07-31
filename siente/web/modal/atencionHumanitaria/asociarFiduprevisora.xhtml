@@ -8,7 +8,7 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:panel id="panelAsociarFiduprevisora">
+    <h:panelGroup layout="block" id="panelAsociarFiduprevisora">
         <rich:collapsiblePanel switchType="ajax"  >
             <f:facet name="header">
                 <h:outputText  styleClass="ikont-hot-datosfidu"   value="#{var.datosfidu}"/>
@@ -36,6 +36,6 @@
                 </h:panelGrid>
             </center>
         </rich:collapsiblePanel>
-    </rich:panel>
+    </h:panelGroup>
 
 </ui:composition>

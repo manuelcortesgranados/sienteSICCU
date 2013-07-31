@@ -17,14 +17,14 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_panelConfirmaOrden" styleClass="ikont-acl-esconderpanelconfirmaorden"  
+                    <a4j:commandLink  id="esconder_panelConfirmaOrden" styleClass="ikont-acl-esconderpanelconfirmaorden closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelConfirmaOrden')}.hide();return false;">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel id="panelConfGuardar" >
+        <h:panelGroup layout="block" >
             <h:panelGroup >
                 <h:outputText  styleClass="ikont-hot-panelconfguardarmensaje"   value="#{Financiera$FiduFinanciera.financieraService.mensaje}"   />
             </h:panelGroup>
@@ -44,7 +44,7 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
   
 

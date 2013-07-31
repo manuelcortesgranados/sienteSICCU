@@ -8,7 +8,7 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:popupPanel id="beneficiarioxperiodo" autosized="true" width="450"  headerClass="rich-panel-header"
+    <rich:popupPanel id="beneficiarioxperiodo" autosized="true" width="450"  
                      >
 
         <f:facet name="header" >
@@ -18,14 +18,14 @@
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandLink id="esconder_beneficiarioxperiodo" styleClass="ikont-a4jcl-esconderbeneficiarioxperiodo"  value="X" 
+                <a4j:commandLink id="esconder_beneficiarioxperiodo" styleClass="ikont-a4jcl-esconderbeneficiarioxperiodo closemodal"  
                                  title="#{var.cerrar}" immediate="true" onclick="#{rich:component('beneficiarioxperiodo')}.hide();
                                          return false;"/>
             </h:panelGroup>
         </f:facet>
         <center>
             <h:form>
-                <rich:panel id="rpListaBeneficiarios"  >
+                <h:panelGroup layout="block" id="rpListaBeneficiarios"  >
                     <rich:dataTable id="tablabeneficiarioxperiodo"
                                     value="#{Supervisor$DetalleObra.lstbeneficiario}"
                                     rowClasses="background_azul,background_blanco"
@@ -116,7 +116,7 @@
                             </rich:columnGroup>
                         </f:facet>
                     </rich:dataTable>
-                </rich:panel>
+                </h:panelGroup>
             </h:form>
         </center>
     </rich:popupPanel>

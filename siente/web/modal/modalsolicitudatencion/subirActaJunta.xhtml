@@ -11,21 +11,28 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadActa" autosized="true" >
-        <rich:panel header="#{var.seleccionaracta}" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.seleccionaracta}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_panelUploadActa" value="X"
+                                 onclick="#{rich:component('panelUploadActa')}.hide();
+                                         return false;"
+                                 immediate="true" styleClass="ikont-acl-cerrar closemodal"/>
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block">
             <h:form>
-                <h:panelGroup >
-                    <a4j:commandLink id="esconder_panelUploadActa" value="X"
-                                       onclick="#{rich:component('panelUploadActa')}.hide();
-                                               return false;"
-                                       immediate="true" styleClass="ikont-acl-cerrar"/>
-                </h:panelGroup>
 
                 <h:panelGroup id="gpActa">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="true"
-                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
+                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.listener}" id="uploadActa" immediateUpload="true"
+                                          listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_acta, panel_subirActa" />
                         </rich:fileUpload>
 
@@ -59,13 +66,13 @@
                                                    styleClass="ikont-acb-borrarsub" />
                                 <a4j:commandButton styleClass="ikont-acb-acept" value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadActa')}.hide();
-                                               return false;"
+                                         return false;"
                                                    render="panel_subirActa"  />
                             </center>
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>
