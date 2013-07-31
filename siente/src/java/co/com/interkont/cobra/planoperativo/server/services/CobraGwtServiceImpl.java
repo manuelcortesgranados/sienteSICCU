@@ -7,10 +7,12 @@ package co.com.interkont.cobra.planoperativo.server.services;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.AlarmaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.SemaforoDTO;
 import co.com.interkont.cobra.to.Alarma;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Semaforo;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -57,32 +59,33 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         alarmaDTO.setSemaforos(semforosdto);
         return alarmaDTO;
     }
+    
+    
 
     @Override
     public Contrato getContrato() {
+    
         System.out.println("retorne contrato desde GWT" );
+        System.out.println("contratoT" + contrato.getStrnumcontrato() );
         return contrato;
     }
 
     @Override
-    public void setContrato(Contrato contrato) {
-        System.out.println("contrato 2 = ");
+    public void setContrato(Contrato contrato) {        
         this.contrato = contrato;
+        System.out.println("contrato 2 = " + contrato.getStrnumcontrato());
     }
 
     @Override
     public ActividadobraDTO getActividadObraDTO() {
-        System.out.println("get A = " );
         System.out.println("get A = " );
         return actividadObraDTO;
     }
 
     @Override
     public void setActividadObraDTO(ActividadobraDTO actividadObraDTO) {
-        System.out.println("SetA" );
         this.actividadObraDTO = actividadObraDTO;
     }
-    
     
 //    @Override
 //    public void agregarContratoTemporal(ContratoDTO contratoDto) throws Exception {
@@ -133,4 +136,45 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void pruebacomGWTJSF(int cont) throws Exception {
     contrato.setIntidcontrato(cont);
     }
+    
+    
+//
+//    @Override
+//    public ContratoDTO casteoContrato(Contrato con) throws Exception {
+//        ContratoDTO con1 = new ContratoDTO(con);
+//        return  con1;
+//    }
+    
+        
+//    
+//    public ContratoDTO casteoContrato(){
+//        ContratoDTO con = new ContratoDTO(contrato);
+//        return ;
+//        
+//        
+//    }
+    
+
+    @Override
+    public ContratoDTO casteoContrato() throws Exception {
+        contrato.setStrnombre("hol");  
+      
+        ContratoDTO contratodto = new ContratoDTO(contrato);
+//        Set<Fuenterecursosconvenio> fuenterecursos= contrato.getFuenterecursosconvenios();
+//        Set<FuenterecursosconvenioDTO> fuenterecursosdto= new HashSet<FuenterecursosconvenioDTO>();
+//        if(fuenterecursos!=null){
+//            fuenterecursosdto = CobraUtil.convertirSet(fuenterecursos,"FuenterecursosconvenioDTO",  "Fuenterecursosconvenio", VAR_DTO, contratodto, "contrato");
+//        }
+//            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
+        return contratodto;
+    }
+    
+//    private Set fuenterecursosconvenios = new HashSet(0);
+// private Set montos = new HashSet(0);
+// private Set actividadobras = new HashSet(0);
+// private Set relacionobrafuenterecursoscontratos = new HashSet(0);
+// private Set obras = new HashSet(0);
+// private Set relacioncontratoobras = new HashSet(0);
+ 
+    
 }

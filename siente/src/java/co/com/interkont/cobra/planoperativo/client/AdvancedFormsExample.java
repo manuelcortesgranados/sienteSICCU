@@ -4,6 +4,8 @@
  */
 package co.com.interkont.cobra.planoperativo.client;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -26,13 +28,16 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.TextBox;
+import java.util.Iterator;
 
 public class AdvancedFormsExample implements IsWidget, EntryPoint {
 
     private static final int COLUMN_FORM_WIDTH = 680;
     private VerticalPanel vp;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    
 
     @Override
     public Widget asWidget() {
@@ -84,6 +89,12 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
         DateField fechainicio = new DateField();
         fechainicio.setWidth(cw);
         con.add(new FieldLabel(fechainicio, "Fecha de inicio"), new HtmlData(".fi"));
+        
+          final HTML serverResponseLabel = new HTML();
+		VerticalPanel dialogVPanel = new VerticalPanel();
+		dialogVPanel.addStyleName("dialogVPanel");
+                dialogVPanel.add(serverResponseLabel);
+                dialogVPanel.setHorizontalAlignment(VerticalPanel.ALIGN_RIGHT);
 
         DateField fechafin = new DateField();
         fechafin.setWidth(cw);
@@ -108,20 +119,62 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
             }
 
             private void enviarAlServer() {
+                
+                service.casteoContrato(new AsyncCallback<ContratoDTO>() {
 
-
-                service.pruebacomGWTJSF(Integer.parseInt(evento.getText()), new AsyncCallback<Void>() {
                     @Override
                     public void onFailure(Throwable caught) {
-                        dialogBox.setText(caught.toString());
+                        
+                        dialogBox.setText("sectir" + caught.toString());
                     }
 
                     @Override
-                    public void onSuccess(Void result) {
-                        dialogBox.setText("Guarde");
+                    public void onSuccess(ContratoDTO result) {
+                        if (result != null) {
+
+                            dialogBox.setText("sectir" + result.getFuenterecursosconvenios().size() );
+                            StringBuilder semaf = new StringBuilder();
+                            Iterator it = result.getFuenterecursosconvenios().iterator();
+                            while (it.hasNext()) {
+                                FuenterecursosconvenioDTO fuente = (FuenterecursosconvenioDTO) it.next();                
+                                
+                                semaf.append("idfuebnte o=");
+                                semaf.append(+fuente.getIdfuenterecursosconvenio());
+                              
+                            }
+
+                            dialogBox.setText(" lstSemaforo"+semaf);
+////                            for (int i = 0; i < semaforos.size(); i++) {
+////                                semaf.append(semaforos.get(i).getIntidsemaforo());
+////
+////                            }
+//                            dialogBox.setText(""+semaforos.size());
+                            serverResponseLabel.setHTML("id <br>Id : " + result.getIntidcontrato() + "<br> nombre:" + result.getStrnombre());
+
+                        } else {
+                            serverResponseLabel.setHTML("No employee with the specified id found");
+                        }
+                        dialogBox.center();
+                        dialogBox.setText("contrato" + result.getStrnombre());
+                        
                     }
                 });
+
+
+//                service.pruebacomGWTJSF(Integer.parseInt(evento.getText()), new AsyncCallback<Void>() {
+//                    @Override
+//                    public void onFailure(Throwable caught) {
+//                        dialogBox.setText(caught.toString());
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(Void result) {
+//                        dialogBox.setText("Guarde");
+//                    }
+//                });
             }
+            
+            
         }
 
         Controlador contol = new Controlador();

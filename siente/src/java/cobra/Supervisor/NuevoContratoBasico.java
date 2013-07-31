@@ -4,6 +4,8 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.AreaContratista;
 import co.com.interkont.cobra.to.Aseguradora;
@@ -6426,8 +6428,14 @@ private Boolean boolpruea=false;
         subpantalla = 2;
     }
     
-    public String planOperativo(){    
+    public String planOperativo(){  
+        //pruebaJsfGwt();
        return "PlanOperativo";        
     }
     
+    public void pruebaJsfGwt(){
+        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        sbc.getCobraGwtService().setContrato(contrato);
+      
+    }
 }
