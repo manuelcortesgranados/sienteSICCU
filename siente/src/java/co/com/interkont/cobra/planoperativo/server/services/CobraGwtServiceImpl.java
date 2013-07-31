@@ -159,14 +159,14 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public ContratoDTO casteoContrato() throws Exception {
         contrato.setStrnombre("hol");  
       
-        ContratoDTO contratodto = new ContratoDTO(contrato);
+    //    ContratoDTO contratodto = new ContratoDTO(contrato);
 //        Set<Fuenterecursosconvenio> fuenterecursos= contrato.getFuenterecursosconvenios();
 //        Set<FuenterecursosconvenioDTO> fuenterecursosdto= new HashSet<FuenterecursosconvenioDTO>();
 //        if(fuenterecursos!=null){
 //            fuenterecursosdto = CobraUtil.convertirSet(fuenterecursos,"FuenterecursosconvenioDTO",  "Fuenterecursosconvenio", VAR_DTO, contratodto, "contrato");
 //        }
 //            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
-        return contratodto;
+        return null;
     }
     
 //    private Set fuenterecursosconvenios = new HashSet(0);

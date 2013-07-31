@@ -7,6 +7,8 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 import co.com.interkont.cobra.to.Contrato;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,32 +17,27 @@ import java.util.Set;
  * @author desarrollo9
  */
 public class ContratoDTO implements Serializable {
-    
- private int intidcontrato;
- private String strnombre;
- private Set fuenterecursosconvenios = new HashSet(0);
- private Set montos = new HashSet(0);
- private Set actividadobras = new HashSet(0);
- private Set relacionobrafuenterecursoscontratos = new HashSet(0);
- private Set obras = new HashSet(0);
- private Set relacioncontratoobras = new HashSet(0);
 
+    private int intidcontrato;
+    private Date datefechaini;
+    private Date datefechafin;
+    private String strnumcontrato;
+    private BigDecimal numvlrcontrato;
+    private Date datefechacreacion;
+    private Set fuenterecursosconvenios = new HashSet(0);
+    private Set actividadobras = new HashSet(0);
+    
     public ContratoDTO() {
     }
     
-
-    public ContratoDTO(Contrato contrato) {
-        this.intidcontrato = contrato.getIntidcontrato();
-        this.strnombre = contrato.getStrnombre();               
-    }
     
-    public ContratoDTO(int intidcontrato, String strnombre) {
-        this.intidcontrato = intidcontrato;
-        this.strnombre = strnombre;
-    }
-    public ContratoDTO(int intidcontrato, String strnombre, Set fuenterecursosconvenios, Set montos, Set actividadobras, Set relacionobrafuenterecursoscontratos, Set obras, Set relacioncontratoobras    ) {
-        this.intidcontrato = intidcontrato;
-        this.strnombre = strnombre;
+    public ContratoDTO(Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion) {
+      
+        this.datefechaini = datefechaini;
+        this.datefechafin = datefechafin;
+        this.strnumcontrato = strnumcontrato;
+        this.numvlrcontrato = numvlrcontrato;
+        this.datefechacreacion = datefechacreacion;
     }
 
     /**
@@ -58,17 +55,73 @@ public class ContratoDTO implements Serializable {
     }
 
     /**
-     * @return the strnombre
+     * @return the datefechaini
      */
-    public String getStrnombre() {
-        return strnombre;
+    public Date getDatefechaini() {
+        return datefechaini;
     }
 
     /**
-     * @param strnombre the strnombre to set
+     * @param datefechaini the datefechaini to set
      */
-    public void setStrnombre(String strnombre) {
-        this.strnombre = strnombre;
+    public void setDatefechaini(Date datefechaini) {
+        this.datefechaini = datefechaini;
+    }
+
+    /**
+     * @return the datefechafin
+     */
+    public Date getDatefechafin() {
+        return datefechafin;
+    }
+
+    /**
+     * @param datefechafin the datefechafin to set
+     */
+    public void setDatefechafin(Date datefechafin) {
+        this.datefechafin = datefechafin;
+    }
+
+    /**
+     * @return the strnumcontrato
+     */
+    public String getStrnumcontrato() {
+        return strnumcontrato;
+    }
+
+    /**
+     * @param strnumcontrato the strnumcontrato to set
+     */
+    public void setStrnumcontrato(String strnumcontrato) {
+        this.strnumcontrato = strnumcontrato;
+    }
+
+    /**
+     * @return the numvlrcontrato
+     */
+    public BigDecimal getNumvlrcontrato() {
+        return numvlrcontrato;
+    }
+
+    /**
+     * @param numvlrcontrato the numvlrcontrato to set
+     */
+    public void setNumvlrcontrato(BigDecimal numvlrcontrato) {
+        this.numvlrcontrato = numvlrcontrato;
+    }
+
+    /**
+     * @return the datefechacreacion
+     */
+    public Date getDatefechacreacion() {
+        return datefechacreacion;
+    }
+
+    /**
+     * @param datefechacreacion the datefechacreacion to set
+     */
+    public void setDatefechacreacion(Date datefechacreacion) {
+        this.datefechacreacion = datefechacreacion;
     }
 
     /**
@@ -86,20 +139,6 @@ public class ContratoDTO implements Serializable {
     }
 
     /**
-     * @return the montos
-     */
-    public Set getMontos() {
-        return montos;
-    }
-
-    /**
-     * @param montos the montos to set
-     */
-    public void setMontos(Set montos) {
-        this.montos = montos;
-    }
-
-    /**
      * @return the actividadobras
      */
     public Set getActividadobras() {
@@ -112,49 +151,6 @@ public class ContratoDTO implements Serializable {
     public void setActividadobras(Set actividadobras) {
         this.actividadobras = actividadobras;
     }
-
-    /**
-     * @return the relacionobrafuenterecursoscontratos
-     */
-    public Set getRelacionobrafuenterecursoscontratos() {
-        return relacionobrafuenterecursoscontratos;
-    }
-
-    /**
-     * @param relacionobrafuenterecursoscontratos the relacionobrafuenterecursoscontratos to set
-     */
-    public void setRelacionobrafuenterecursoscontratos(Set relacionobrafuenterecursoscontratos) {
-        this.relacionobrafuenterecursoscontratos = relacionobrafuenterecursoscontratos;
-    }
-
-    /**
-     * @return the obras
-     */
-    public Set getObras() {
-        return obras;
-    }
-
-    /**
-     * @param obras the obras to set
-     */
-    public void setObras(Set obras) {
-        this.obras = obras;
-    }
-
-    /**
-     * @return the relacioncontratoobras
-     */
-    public Set getRelacioncontratoobras() {
-        return relacioncontratoobras;
-    }
-
-    /**
-     * @param relacioncontratoobras the relacioncontratoobras to set
-     */
-    public void setRelacioncontratoobras(Set relacioncontratoobras) {
-        this.relacioncontratoobras = relacioncontratoobras;
-    }
     
-
     
 }

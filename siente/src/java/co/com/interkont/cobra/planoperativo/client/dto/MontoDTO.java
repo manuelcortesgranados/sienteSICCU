@@ -31,14 +31,7 @@ public class MontoDTO implements Serializable{
         this.vigencia = vigencia;
     }
      
-       public MontoDTO(Monto monto) {
-        this.idmonto = monto.getIdmonto();
-        this.contratodto = new ContratoDTO(monto.getContrato());
-        this.rubrodto =new RubroDTO(monto.getRubro());
-        this.valor = monto.getValor();
-        this.vigencia = monto.getVigencia();
-    }
-
+   
     /**
      * @return the idmonto
      */

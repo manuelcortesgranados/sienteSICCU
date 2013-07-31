@@ -29,13 +29,7 @@ public class RelacionobrafuenterecursoscontratoDTO  implements java.io.Serializa
        this.valor = valor;
     }
     
-     public RelacionobrafuenterecursoscontratoDTO(Relacionobrafuenterecursoscontrato rofr) {
-       this.idrelacionobracontrato = rofr.getIdrelacionobracontrato();
-       this.contrato = new ContratoDTO(rofr.getContrato());
-       this.obrafuenterecursosconvenios =new ObrafuenterecursosconveniosDTO(rofr.getObrafuenterecursosconvenios());
-       this.valor = rofr.getValor();
-               
-    }
+    
 
     /**
      * @return the idrelacionobracontrato
