@@ -4,9 +4,12 @@
  */
 package cobra.PlanOperativo;
 
+import co.com.interkont.cobra.to.Itemflujocaja;
+import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +17,13 @@ import java.util.List;
  * @author desarrollo2
  */
 public class FlujoEgresos {
+
     Obrafuenterecursosconvenios fuenteRecursosConvenioObra;
-    List<EgresoPeriodo> egresosPeriodo;
-    BigDecimal sumatoriaEgresosPeriodos;
+    Obra proyecto;
+    Itemflujocaja itemFlujoEgresos;
+    boolean egresoProyecto;
+    BigDecimal egresos[];
+    BigDecimal totalEgresosFuente;
 
     public FlujoEgresos() {
     }
@@ -29,30 +36,59 @@ public class FlujoEgresos {
         this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
     }
 
-    public List<EgresoPeriodo> getEgresosPeriodo() {
-        return egresosPeriodo;
+    public Obra getProyecto() {
+        return proyecto;
     }
 
-    public void setEgresosPeriodo(List<EgresoPeriodo> egresosPeriodo) {
-        this.egresosPeriodo = egresosPeriodo;
+    public void setProyecto(Obra proyecto) {
+        this.proyecto = proyecto;
     }
 
-    public BigDecimal getSumatoriaEgresosPeriodos() {
-        return sumatoriaEgresosPeriodos;
+    public Itemflujocaja getItemFlujoEgresos() {
+        return itemFlujoEgresos;
     }
 
-    public void setSumatoriaEgresosPeriodos(BigDecimal sumatoriaEgresosPeriodos) {
-        this.sumatoriaEgresosPeriodos = sumatoriaEgresosPeriodos;
+    public void setItemFlujoEgresos(Itemflujocaja itemFlujoEgresos) {
+        this.itemFlujoEgresos = itemFlujoEgresos;
+    }
+
+    public boolean isEgresoProyecto() {
+        return egresoProyecto;
+    }
+
+    public void setEgresoProyecto(boolean egresoProyecto) {
+        this.egresoProyecto = egresoProyecto;
+    }
+
+    public BigDecimal[] getEgresos() {
+        return egresos;
+    }
+
+    public void setEgresos(BigDecimal[] egresos) {
+        this.egresos = egresos;
+    }
+
+    public BigDecimal getTotalEgresosFuente() {
+        return totalEgresosFuente;
+    }
+
+    public void setTotalEgresosFuente(BigDecimal totalEgresosFuente) {
+        this.totalEgresosFuente = totalEgresosFuente;
+    }
+
+    public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Periodoflujocaja> periodosFlujoCaja) {
+        this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
+        this.proyecto = proyecto;
+        this.egresoProyecto = true;
+        this.egresos = new BigDecimal[periodosFlujoCaja.size()];
+        int i = 0;
+        
+        while (i < periodosFlujoCaja.size()) {
+            egresos[i] = BigDecimal.valueOf(0.0);
+            i++;
+        }
     }
     
-    public void crearFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, List<Periodoflujocaja> periodosFlujoCaja) {
-        this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
-        
-         for (Periodoflujocaja periodoFlujoCaja : periodosFlujoCaja) {
-             EgresoPeriodo egresoPeriodo = new EgresoPeriodo();
-             egresoPeriodo.setPeriodoFlujoCaja(periodoFlujoCaja);
-             
-             egresosPeriodo.add(egresoPeriodo);
-         }
+    public void guardarFlujoEgresosProyecto() {
     }
 }
