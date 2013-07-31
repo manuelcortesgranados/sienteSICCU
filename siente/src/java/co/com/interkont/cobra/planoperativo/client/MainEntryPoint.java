@@ -27,11 +27,11 @@ public class MainEntryPoint implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
-       // ProyectoForm pr =new ProyectoForm();
+       //ProyectoForm pr =new ProyectoForm();
                 
-     PlanOperativoGantt pg= new PlanOperativoGantt();
-       // AdvancedFormsExample fejemplo = new AdvancedFormsExample();
-        RootPanel.get().add(pg);
+     //PlanOperativoGantt pg= new PlanOperativoGantt();
+       AdvancedFormsExample fejemplo = new AdvancedFormsExample();
+        RootPanel.get().add(fejemplo);
         
     }
 }
