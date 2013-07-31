@@ -22,6 +22,7 @@ public class FuenterecursosconvenioDTO {
     private int idfuenterecursosconvenio;
     private TerceroDTO tercero;
     private ContratoDTO contrato;
+    private RolentidadDTO rolentidad;
     private BigDecimal valoraportado;
     private BigDecimal otrasreservas;
     private BigDecimal reservaiva;
@@ -31,6 +32,8 @@ public class FuenterecursosconvenioDTO {
 
     public FuenterecursosconvenioDTO() {
     }
+    
+    
 
     public FuenterecursosconvenioDTO(Fuenterecursosconvenio fuenterecursosconvenio) {
         this.idfuenterecursosconvenio = fuenterecursosconvenio.getIdfuenterecursosconvenio();
@@ -42,16 +45,14 @@ public class FuenterecursosconvenioDTO {
         this.tipoaporte = fuenterecursosconvenio.getTipoaporte();
     }
 
-    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, TerceroDTO tercero, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte,Set obrafuenterecursosconvenioses) {
+    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte) {
         this.idfuenterecursosconvenio = idfuenterecursosconvenio;
-        this.tercero = tercero;
         this.contrato = contrato;
         this.valoraportado = valoraportado;
         this.otrasreservas = otrasreservas;
         this.reservaiva = reservaiva;
         this.valorcuotagerencia = valorcuotagerencia;
         this.tipoaporte = tipoaporte;
-        this.obrafuenterecursosconvenioses=obrafuenterecursosconvenioses;
     }
     
     
@@ -192,6 +193,20 @@ public class FuenterecursosconvenioDTO {
      */
     public void setObrafuenterecursosconvenioses(Set obrafuenterecursosconvenioses) {
         this.obrafuenterecursosconvenioses = obrafuenterecursosconvenioses;
+    }
+
+    /**
+     * @return the rolentidad
+     */
+    public RolentidadDTO getRolentidad() {
+        return rolentidad;
+    }
+
+    /**
+     * @param rolentidad the rolentidad to set
+     */
+    public void setRolentidad(RolentidadDTO rolentidad) {
+        this.rolentidad = rolentidad;
     }
     
 }

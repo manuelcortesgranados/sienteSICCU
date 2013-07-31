@@ -18,39 +18,72 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
+ * clase que se encarga de castear el Contrato a ContratoDTO o
+ * de ContratoDTO a contrato.
  *
- * @author Daniela
+ * @author Dgarcia
  */
 public class CasteoGWT {
-
+    
+    /*
+     * metodo que se encarga de convertir una contrato a contratoDTO
+     * @param contrato Contrato el cual va a castear.
+     * 
+     * @author Dgarcia
+     **/
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
-        return new ContratoDTO(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnombre(), contrato.getNumvlrcontrato(), contrato.getFechasuscripcion());
-        //set fuenterecursosconvenios
-    }
+        ContratoDTO contratoDTO=new ContratoDTO(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnombre(), contrato.getNumvlrcontrato(), contrato.getFechasuscripcion());
+        contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
+        return contratoDTO;
+     }
 
+    /*
+     * metodo que se encarga de convertir una tercero a terceroDTO
+     * @param tercero Tercero el cual va a castear.
+     * 
+     * @author Dgarcia
+     **/
     public static TerceroDTO castearTerceroToTerceroDTO(Tercero tercero) {
         return new TerceroDTO(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
     }
 
-    public static RolentidadDTO castearTerceroToTerceroDTO(Rolentidad rolEntidad) {
-        return null;
+     /*
+     * metodo que se encarga de convertir una Rolentidad a RolentidadDTO
+     * @param rolentidad Rolentidad el cual va a castear.
+     * 
+     * @author Dgarcia
+     **/
+    public static RolentidadDTO castearRolentidadToRolentidadDTO(Rolentidad rolEntidad, FuenterecursosconvenioDTO fuenteRecursoDto) {
+        RolentidadDTO rolentidadDTO = new RolentidadDTO(rolEntidad.getIdrolentidad(), rolEntidad.getStrnombre());
+        rolentidadDTO.getFuenterecursosconvenios().add(fuenteRecursoDto);
+        return rolentidadDTO;
+
 
     }
 
-    public static Set<Fuenterecursosconvenio> castearSetFuenteRecursosConvenio(Set<FuenterecursosconvenioDTO> fuentesRecursosConvenio) {
-        Set<Fuenterecursosconvenio> fuenteRecursosConvenios = new HashSet<Fuenterecursosconvenio>(fuentesRecursosConvenio.size());
-        for (Iterator it = fuentesRecursosConvenio.iterator(); it.hasNext();) {
-            
+    public static Set<FuenterecursosconvenioDTO> castearSetFuenteRecursosConvenio(Set<Fuenterecursosconvenio> fuentesRecursosConvenio, ContratoDTO contratoDto) {
+        Set<FuenterecursosconvenioDTO> fuenteRecursosConvenios = new HashSet<FuenterecursosconvenioDTO>(fuentesRecursosConvenio.size());
+        for(Iterator it = fuentesRecursosConvenio.iterator(); it.hasNext();) {
+            Fuenterecursosconvenio fuenteRecurso = (Fuenterecursosconvenio) it.next();
+            FuenterecursosconvenioDTO fuenteRecursoDto =castearFuenteRecursosConvenio(fuenteRecurso, contratoDto);
+            fuenteRecursosConvenios.add(fuenteRecursoDto);
         }
-        return null;
-//       private int idfuenterecursosconvenio;
-//    private Rolentidad rolentidad;
-//    private Tercero tercero;
-//    private Contrato contrato;
-//    private BigDecimal valoraportado;
-//    private BigDecimal otrasreservas;
-//    private BigDecimal reservaiva;
-//    private BigDecimal valorcuotagerencia;
-//    private Integer tipoaporte;
+
+        return fuenteRecursosConvenios;
+
+    }
+
+     /*
+     * metodo que se encarga de convertir una Fuenterecursosconvenio a FuenterecursosconvenioDTO
+     * @param fuenteRecurso Fuenterecursosconvenio el cual va a castear.
+     * @param contratoDto ContratoDTO contrato asociado a la fuente de recursos.
+     * 
+     * @author Dgarcia
+     **/
+    public static FuenterecursosconvenioDTO castearFuenteRecursosConvenio(Fuenterecursosconvenio fuenteRecurso, ContratoDTO contratoDto) {
+        FuenterecursosconvenioDTO fuenteRecursoDto = new FuenterecursosconvenioDTO(fuenteRecurso.getIdfuenterecursosconvenio(), contratoDto, fuenteRecurso.getValoraportado(), fuenteRecurso.getOtrasreservas(), fuenteRecurso.getReservaiva(), fuenteRecurso.getValorcuotagerencia(), fuenteRecurso.getTipoaporte());
+        fuenteRecursoDto.setTercero(castearTerceroToTerceroDTO(fuenteRecurso.getTercero()));
+        fuenteRecursoDto.setRolentidad(castearRolentidadToRolentidadDTO(fuenteRecurso.getRolentidad(), fuenteRecursoDto));
+        return fuenteRecursoDto;
     }
 }
