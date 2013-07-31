@@ -13,159 +13,191 @@
         <title>Nuevo #{var.proyecto} - Supervisor</title>
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
     </ui:define>
-    <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-imagenesproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
-    </ui:define>
+
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>            
     <ui:define name="body">
         <h:form id="formImagenesProy" >
-            <table   align="center" border="0" cellspacing="8" cellpadding="0">
+            <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
                 <tr>
-                    <td rowspan="6" valign="top" >
-                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>
+                    <td valign="top" class="templatetablamenulateral">
+                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
+                            <tr>
+                                <td  >
+                                    <h:form >
+                                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>                            
+                                    </h:form>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                    <td valign="top" height="35" >
-                        <rich:panel>
-                            <f:facet name="header">
-                                <h:outputText  styleClass="ikont-hot-subirimagenes"   value="#{var.subirimagenes}"/>
-                            </f:facet>
-                            <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
-                                <h:outputText  styleClass="ikont-hot-subalasimagenesantes"   value="#{var.subalasimagenesantes}"/>
-                                <h:panelGrid columns="2" >
+                    <td class="templatetablacontent verticalalingtop">
+                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
+                            <tr>
+                                <td>
+                                    <div id="header_content">
+                                        <div class="ubicacion">
+                                            <h:outputText  styleClass="ikont-hot-imagenesproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
+                                        </div>
+                                    </div>
 
-                                    <rich:panel id="imagenanterior" header="#{var.imagenanterior}" bodyClass="ikont-rp-imagenanterior-body"  >
-                                        <center>
-                                            <h:panelGrid id="layoutImagen"  columnClasses="aiu">
-                                                <center>
-                                                    <a4j:commandLink id="btAdjuntarImagen" styleClass="ikont-hcl-btAdjuntarImagen">
-                                                        <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenActual')}.show();"/>
-                                                    </a4j:commandLink>
-                                                </center>
-                                                <h:outputText  styleClass="ikont-hot-ImagenAtencionppal"   id="ImagenAtencionppal" value="#{var.nombre}"/>
-                                                <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.nombreimg}" size="40"/>                                                  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td valign="top" height="35" >
+                                    <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                                        <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
+                                            <tr>
+                                                <td>
+                                                    <rich:panel>
+                                                        <f:facet name="header">
+                                                            <h:outputText  styleClass="ikont-hot-subirimagenes"   value="#{var.subirimagenes}"/>
+                                                        </f:facet>
+                                                        <rich:collapsiblePanel switchType="client" header="#{var.imganteriores}" expanded="true" id="spimagen">
+                                                            <h:outputText  styleClass="ikont-hot-subalasimagenesantes"   value="#{var.subalasimagenesantes}"/>
+                                                            <h:panelGrid columns="2" styleClass="totalwidth">
 
-                                                <rich:dataGrid columns="1" rowKeyVar="row"  value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file" >
-                                                    <h:inputText id="nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
-                                                </rich:dataGrid>
-                                            </h:panelGrid>
-                                            <center>
-                                                <h:panelGrid>
-                                                    <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenInicial}" value="#{var.subir}"
-                                                                   rendered="#{!Supervisor$IngresarNuevaObra.img}" styleClass="ikont-"  >
-                                                    </h:commandLink>
-                                                </h:panelGrid>
-                                            </center>
-                                        </center>
-                                    </rich:panel>
-                                    <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="ikont-rp-imagenprincipal-body"  >
-                                        <center>
-                                            <h:panelGrid id="panel_subirImagen"  columns="1" >
-                                                <a4j:commandLink id="adjuntarImagen" styleClass="ikont-hcl-adjuntarImagen">
-                                                    <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
-                                                </a4j:commandLink>
+                                                                <rich:panel id="imagenanterior" header="#{var.imagenanterior}" bodyClass="ikont-rp-imagenanterior-body"  >
+                                                                    <center>
+                                                                        <h:panelGrid id="layoutImagen"  columnClasses="aiu">
+                                                                            <center>
+                                                                                <a4j:commandLink id="btAdjuntarImagen" styleClass="ikont-hcl-btAdjuntarImagen anadirimagen">
+                                                                                    <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenActual')}.show();"/>
+                                                                                </a4j:commandLink>
+                                                                            </center>
+                                                                            <h:outputText  styleClass="ikont-hot-ImagenAtencionppal"   id="ImagenAtencionppal" value="#{var.nombre}"/>
+                                                                            <h:inputText id="inputNombre" value="#{Supervisor$IngresarNuevaObra.nombreimg}" size="40"/>                                                  
 
-
-                                                <h:outputText  styleClass="ikont-hot-ImagenAtencion"   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
-                                                <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.nomImagen}" size="40"/>
-
-                                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.archivos}" var="file" >
-                                                    <h:inputText id="otxt_nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
-                                                </rich:dataGrid>
-                                            </h:panelGrid>
-                                            <h:outputLabel  styleClass="ikont-hol-fotoobligatoria"   value="(Foto de Valla Obligatoria - Circular 33)"/>
-                                        </center>
-
-                                        <center>
-                                            <h:panelGrid>
-                                                <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenPrincipal}" value="#{var.subir}"
-                                                               rendered="#{!Supervisor$IngresarNuevaObra.imgppal}" styleClass="ikont-"  >
-                                                 </h:commandLink>
-                                            </h:panelGrid>
-                                        </center>
-                                    </rich:panel>
-                                </h:panelGrid>
-                                <h:panelGroup>
-                                    <rich:dataTable id="tablaImagenes"
-                                                    value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
-                                                    var="currentRow"                                                    
-                                                    rowKeyVar="filaSeleccionada"
-                                                    rows="3" >
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
-                                        </f:facet>
-                                        <rich:column breakRowBefore="true"  width="100px">
-                                            <f:facet name="header" >
-                                                <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
-                                            </f:facet>
-                                            <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
-                                        </rich:column>
-
-                                        <rich:column  >
-                                            <f:facet name="header" >
-                                                <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
-                                            </f:facet>
-                                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
-                                        </rich:column>
-                                        <rich:column  id="Imagen">
-                                            <f:facet name="header" >
-                                                <h:outputText  styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
-                                            </f:facet>
-
-                                            <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"   />
-                                        </rich:column>
-
-                                        <rich:column  width="60px">
-                                            <f:facet name="header">
-                                                <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
-                                            </f:facet>
-                                            <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
-                                                               action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista(filaSeleccionada)}"/>
-                                        </rich:column>
-                                        <f:facet name="footer">
-                                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                                        </f:facet>
-                                    </rich:dataTable>
+                                                                            <rich:dataGrid columns="1" rowKeyVar="row"  value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file" >
+                                                                                <h:inputText id="nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
+                                                                            </rich:dataGrid>
+                                                                        </h:panelGrid>
+                                                                        <center>
+                                                                            <h:panelGrid>
+                                                                                <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenInicial}" value="#{var.subir}"
+                                                                                               rendered="#{!Supervisor$IngresarNuevaObra.img}" styleClass="butonvercontrolgeren ikont-hcl-vermasdashboard"  >
+                                                                                </h:commandLink>
+                                                                            </h:panelGrid>
+                                                                        </center>
+                                                                    </center>
+                                                                </rich:panel>
+                                                                <rich:panel id="imagenprincipal" header="#{var.imagenprincipal}" bodyClass="ikont-rp-imagenprincipal-body"  >
+                                                                    <center>
+                                                                        <h:panelGrid id="panel_subirImagen"  columns="1" >
+                                                                            <a4j:commandLink id="adjuntarImagen" styleClass="ikont-hcl-adjuntarImagen anadirimagenes">
+                                                                                <a4j:ajax event="click" onbeforesubmit="#{rich:component('panelImagenProyecto')}.show();"/>
+                                                                            </a4j:commandLink>
 
 
-                                </h:panelGroup>
+                                                                            <h:outputText  styleClass="ikont-hot-ImagenAtencion"   id="ImagenAtencion" value="#{var.descripcionImagen}"/>
+                                                                            <h:inputText id="inputNombresec" value="#{Supervisor$IngresarNuevaObra.nomImagen}" size="40"/>
 
-                                <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
-                                                   action="datosgenerarCrono" />
-                                <h:commandButton   value="#{var.continuar}"
-                                                     action="#{Supervisor$IngresarNuevaObra.pasoAsociarContrato}">
-                                </h:commandButton>
+                                                                            <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenPrincipal.archivos}" var="file" >
+                                                                                <h:inputText id="otxt_nombreImagen" value=" #{file.nombre}" disabled="true" size="60"/>
+                                                                            </rich:dataGrid>
+                                                                        </h:panelGrid>
+                                                                        <h:outputLabel  styleClass="ikont-hol-fotoobligatoria"   value="(Foto de Valla Obligatoria - Circular 33)"/>
+                                                                    </center>
 
-                                <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
-                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                </h:commandButton>
-                                <a4j:outputPanel id="panelErrorImag">
-                                    <rich:messages id="messagesImag" globalOnly="true"
-                                                   styleClass="ikont-rm-messagesImag"   ajaxRendered="true"
-                                                  >
-                                        <f:facet name="infoMarker">
-                                            <h:graphicImage  styleClass="ikont-hgi-infoMarker"    url="/resources/imgs/msginfo.png" />
-                                        </f:facet>
-                                        <f:facet name="warnMarker">
-                                            <h:graphicImage  styleClass="ikont-hgi-warnMarker "    url="/resources/imgs/msgwarn.png" />
-                                        </f:facet>
-                                        <f:facet name="errorMarker">
-                                            <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
-                                        </f:facet>
-                                        <f:facet name="fatalMarker">
-                                            <h:graphicImage  styleClass="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
-                                        </f:facet>
-                                    </rich:messages>
+                                                                    <center>
+                                                                        <h:panelGrid>
+                                                                            <h:commandLink action="#{Supervisor$IngresarNuevaObra.subirImagenPrincipal}" value="#{var.subir}"
+                                                                                           rendered="#{!Supervisor$IngresarNuevaObra.imgppal}" styleClass="butonvercontrolgeren ikont-hcl-vermasdashboard"  >
+                                                                            </h:commandLink>
+                                                                        </h:panelGrid>
+                                                                    </center>
+                                                                </rich:panel>
+                                                            </h:panelGrid>
+                                                            <h:panelGroup>
+                                                                <rich:dataTable id="tablaImagenes"
+                                                                                value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
+                                                                                var="currentRow"                                                    
+                                                                                rowKeyVar="filaSeleccionada"
+                                                                                rows="3" >
+                                                                    <f:facet name="header">
+                                                                        <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
+                                                                    </f:facet>
+                                                                    <rich:column breakRowBefore="true"  width="100px">
+                                                                        <f:facet name="header" >
+                                                                            <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                                                    </rich:column>
 
-                                </a4j:outputPanel>
+                                                                    <rich:column  >
+                                                                        <f:facet name="header" >
+                                                                            <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
+                                                                        </f:facet>
+                                                                        <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
+                                                                    </rich:column>
+                                                                    <rich:column  id="Imagen">
+                                                                        <f:facet name="header" >
+                                                                            <h:outputText  styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
+                                                                        </f:facet>
 
-                            </rich:collapsiblePanel>
-                        </rich:panel>
+                                                                        <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"   />
+                                                                    </rich:column>
+
+                                                                    <rich:column  width="60px">
+                                                                        <f:facet name="header">
+                                                                            <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
+                                                                        </f:facet>
+                                                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
+                                                                                           action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista(filaSeleccionada)}"/>
+                                                                    </rich:column>
+                                                                    <f:facet name="footer">
+                                                                        <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                                                    </f:facet>
+                                                                </rich:dataTable>
+
+
+                                                            </h:panelGroup>
+
+                                                            <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                                                             action="datosgenerarCrono" />
+                                                            <h:commandButton   value="#{var.continuar}"
+                                                                               action="#{Supervisor$IngresarNuevaObra.pasoAsociarContrato}">
+                                                            </h:commandButton>
+
+                                                            <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                                            </h:commandButton>
+                                                            <a4j:outputPanel id="panelErrorImag">
+                                                                <rich:messages id="messagesImag" globalOnly="true"
+                                                                               styleClass="ikont-rm-messagesImag"   ajaxRendered="true"
+                                                                               >
+                                                                    <f:facet name="infoMarker">
+                                                                        <h:graphicImage  styleClass="ikont-hgi-infoMarker"    url="/resources/imgs/msginfo.png" />
+                                                                    </f:facet>
+                                                                    <f:facet name="warnMarker">
+                                                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker "    url="/resources/imgs/msgwarn.png" />
+                                                                    </f:facet>
+                                                                    <f:facet name="errorMarker">
+                                                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
+                                                                    </f:facet>
+                                                                    <f:facet name="fatalMarker">
+                                                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
+                                                                    </f:facet>
+                                                                </rich:messages>
+
+                                                            </a4j:outputPanel>
+
+                                                        </rich:collapsiblePanel>
+                                                    </rich:panel>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </h:panelGrid>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
-                </tr>
+                </tr>                       
             </table>
+
         </h:form>
 
         <ui:include src="../NuevoProyecto/modal/panelImagenActual.xhtml"/>

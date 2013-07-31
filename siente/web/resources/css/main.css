@@ -1,7 +1,33 @@
 .totalwidth{
     width: 100%;
 }
-.tablaadminproyecto  > tbody > tr > td > a.datos {
+
+.alingtableproyecto{
+    margin-top: -22px;
+    margin-left: -6px;
+}
+
+.totalwidth.tipificacionpro a{
+    text-decoration: none;
+    margin: 0px;
+    font-family: Verdana, Geneva, sans-serif;
+    color: #000;
+}
+
+.totalwidth.tipificacionpro .rf-dg-c{
+    width: 125px;
+    height: 125px;
+}
+
+.totalwidth.tipificacionpro table{
+    margin: 0px auto;
+}
+
+.centerelement{
+    margin: 0px auto;
+}
+
+.ikont-hcl-navegarNuevaObra1{
     background-image:url(../imgs/Cobra_bt44.png);
 }
 
@@ -13,11 +39,11 @@
     background-image:url(../imgs/Cobra_bt30.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.gencrono {
+.ikont-hcl-pasoGenerarCronograma{
     background-image:url(../imgs/Cobra_bt31.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.ubiproyecto {
+.ikont-hcl-pasaraUbicacion{
     background-image:url(../imgs/Cobra_bt32.png);
 }
 
@@ -25,7 +51,7 @@
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
-.ikont-hcl-iniciarimagenes{
+.ikont-hcl-iniciarimagenes, .ikont-hcl-navegarNuevaObra2{
     background-image:url(../imgs/Cobra_bt12.png);
 }
 
@@ -53,11 +79,11 @@
     background-image:url(../imgs/Cobra_bt26.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.guardar {
+.ikont-hcl-vf{
     background-image:url(../imgs/Cobra_bt53.png);
 }
 
-.tablaadminproyecto > tbody > tr > td > a.guardarborrador {
+.ikont-hcl-guardadoIntermedio{
     background-image:url(../imgs/Cobra_bt54.png);
 }
 
@@ -65,7 +91,7 @@
     background-image:url(../imgs/bt_validar_hist.png);
 }
 
-.ikont-acl-crearnuevoproyecto {
+.ikont-acl-crearnuevoproyecto, .ikont-hcl-crearproyecto{
     background-image:url(../imgs/Cobra_bt01.png);
 }
 
@@ -104,7 +130,7 @@
     background-image:url(../imgs/Cobra_bt07.png);
 }
 
-.ikont-acl-iniciarnuevocontrato{
+.ikont-acl-iniciarnuevocontrato, .ikont-hcl-navegarNuevaObra3{
     background-image:url(../imgs/Cobra_bt09.png);
 }
 
@@ -156,7 +182,7 @@
     background-image:url(../imgs/Cobra_bt25.png);
 }
 
-.tablamenugestion > tbody > tr > td > a.tipiobra {
+.ikont-hcl-navegarNuevaObra{
     background-image:url(../imgs/Cobra_bt26.png);
 }
 /* contractuales */
@@ -416,7 +442,7 @@
     margin-right: 11%;
 }
 
-input[type="text"].ikont-hit-palabraclave, input[type="text"].ikont-hit-palclav{
+input[type="text"].ikont-hit-palabraclave, input[type="text"].ikont-hit-palclav, input[type="text"].ikont-hit-txtPalabraClave{
     width: 550px;
 }
 
@@ -644,12 +670,17 @@ a.pdf {
 #navIndicadores ul li a {
     width:200px;
     height:33px;
+    float:left;
+    position:relative;
     display:block;
+    padding-right:10px;
+    padding-left:10px;
     padding-top: 3px;
     padding-bottom:4px;
     margin-top:10px;
     font-size:12px;
     vertical-align:middle;
+    line-height:13px;
     text-indent:20px;
     font-style:italic;
     font-weight:500;
@@ -722,7 +753,7 @@ a.pdf {
     float: right;
 }
 
-.ikont-hot-prorrogasadcciones, .ikont-hot-suspenderobra, .ikont-hot-reiniciarlaobra, .ikont-hot-houtbusquedarapida{
+.ikont-hot-prorrogasadcciones, .ikont-hot-suspenderobra, .ikont-hot-reiniciarlaobra, .ikont-hot-houtbusquedarapida, .ikont-hol-lblEntidadconveniocontrato{
     font-size : 0.7em;
 }
 
@@ -766,7 +797,7 @@ a.reiniciar:hover {
     background-position: 0px -144px;
 }
 
-a.ikont-acl-asocontrato {
+a.ikont-acl-asocontrato, a.ikont-hcl-asociarcontrato {
     height: 163px;
     width: 150px; /* for validator */
     display: block;
@@ -782,7 +813,7 @@ a.ikont-acl-asocontrato {
     line-height:280px;
     text-decoration: none;
 }
-a.ikont-acl-asocontrato:hover {
+a.ikont-acl-asocontrato:hover, a.ikont-hcl-asociarcontrato:hover {
     background-position: 0px -144px;
 }
 
@@ -824,7 +855,7 @@ a.ikont-acl-interven:hover {
     padding-bottom: 10px;
 }
 
-a.ikont-acl-cambioestado {
+a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance{
     background: #ff9735;
     background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
@@ -844,7 +875,7 @@ a.ikont-acl-cambioestado {
     padding:8px;
     text-decoration: none;
 }
-a.ikont-acl-cambioestado:hover {
+a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover {
     background: #f8763c;
     background: -moz-linear-gradient(top,  #f8763c 48%, #ff9735 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#f8763c), color-stop(50%,#ff9735));
@@ -860,4 +891,55 @@ a.ikont-acl-cambioestado:hover {
     -moz-border-radius: 5px;
     border-radius: 5px;
     border: #C1D1E7 thin solid;
+}
+
+a.busquedavanzada {
+    width:150px;
+    height:25px;
+    background-color:#F3C031;
+    color:#003;
+    padding: 5px 20px 5px 30px;
+    background-image:url(../imgs/bt_buscar.png);
+    background-repeat:no-repeat;
+    background-position:left;
+    font-size:12px;
+    line-height:30px;
+    font-style:italic;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+a.busquedavanzada:hover {
+    background-color:#87A7BB;
+    color: black;
+}
+
+a.anadirimagen {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_anadirimagen.png);
+    background-position: 0px 20px;
+}
+a.anadirimagen:hover {
+    background-position: 0px -144px;
+}
+
+a.anadirimagenes {
+    float: left;
+    height: 163px;
+    width: 150px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image: url(../imgs/bt_anadirimagenmas.png);
+    background-position: 0px 20px;
+}
+a.anadirimagenes:hover {
+    background-position: 0px -144px;
 }

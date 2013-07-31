@@ -40,7 +40,6 @@ hr {
 
 .panelcenter {
     text-align: center;
-    margin : 0px auto;
 }
 
 .panelfontsize{
@@ -87,9 +86,7 @@ a {
 a:hover {
 	color: #0090FF;
 }
-a:visited {
-	color: #0090FF;
-}
+
 input, select, textarea, button, keygen, isindex {
         border-width: '#{richSkin.borderWeight}';
 	border-style: '#{richSkin.borderStyle}';
