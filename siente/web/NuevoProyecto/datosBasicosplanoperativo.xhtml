@@ -26,9 +26,9 @@
         
         <center>
             <h:outputLabel value="#{var.informacionbasica}"/>
+            <a4j:region id="datosBasicosConvenio">
             <h:panelGrid columns="2" cellpadding="10" cellspacing="20">
                 <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" style="height: 60px;">
-                   
                     <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />
                 </h:inputText>
 
@@ -92,6 +92,7 @@
 
 
             </h:panelGrid>
+            </a4j:region>
 
             <h:panelGrid id="hpg-fuenter-cuotag" columns="4" cellspacing="5" >
 
@@ -128,7 +129,7 @@
             </h:panelGrid>
 
             <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
-                <h:commandLink value="#{var.continuar}" action="#{Supervisor$Contrato.guardarBorradorConvenio}"/>
+                <a4j:commandLink value="#{var.continuar}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" execute="datosBasicosConvenio"/>
                 <h:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}"/>
             </h:panelGrid>
 
