@@ -35,72 +35,72 @@
                 <h:panelGroup >
                     <h:panelGroup id="pgPasos">
                         <h:panelGroup styleClass="ikont-hpg-varpaso1"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso1}">
-                            <h:outputText  styleClass="ikont-hot-textopaso1modificacion"   value="#{var.textopaso1modificacion}" />
-                            <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion1" value="#{var.tituloPaso1Modificacion1}" />
-                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion2"  value="#{var.tituloPaso1Modificacion2}" />
-                            <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-ingreselafechadeesta" value="#{var.ingreselafechadeesta}" />
-                            <interkont:spacer height="20px" />
+                            <h:outputText  styleClass="ikont-hot-textopaso1modificacion TextoTipificacionModificacion"   value="#{var.textopaso1modificacion}" />
+                            <interkont:spacer height="15" width="100" />
+                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion1 TituloModificarProyecto" value="#{var.tituloPaso1Modificacion1}" />
+                            <h:outputText  styleClass="ikont-hot-titulopaso1modificacion2 TituloModificarProyecto"  value="#{var.tituloPaso1Modificacion2}" />
+                            <interkont:spacer height="15" width="100"/>
+                            <h:outputText  styleClass="ikont-hot-ingreselafechadeesta TextoTipificacionModificacion" value="#{var.ingreselafechadeesta}" />
+                            <interkont:spacer height="20" width="100"/>
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight"
                                            id="date_fechaModificacion" inputSize="10"
                                            value="#{Supervisor$ModificarProyecto.historicoobra.datefecobrahist}"/>
-                            <interkont:spacer height="20" />
-                            <h:outputText  styleClass="ikont-hot-porfavorjustifique"   value="#{var.porfavorjustifique}" />
-                            <interkont:spacer height="20" />
+                            <interkont:spacer height="20" width="100" />
+                            <h:outputText  styleClass="ikont-hot-porfavorjustifique TextoTipificacionModificacion"   value="#{var.porfavorjustifique}" />
+                            <interkont:spacer height="20" width="100"/>
                             <h:inputTextarea rows="8" value="#{Supervisor$ModificarProyecto.historicoobra.strrazonmodif}" styleClass="ikont-hit-strrazonmodif"  />
-                            <interkont:spacer height="20" />
+                            <interkont:spacer height="20" width="100"/>
                             <h:panelGroup styleClass="ikont-hpg-accionespaso1"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="ikont-"   value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-"   value="#{var.cancelar}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso1Action}" render="pgPasos, messages" styleClass="ikont  BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont BotonesPasosModificar"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
                         </h:panelGroup>
 
 
                         <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso2}">
                             <interkont:spacer height="10px" />
-                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion1" value="#{var.tituloPaso2Modificacion1}"/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion2" value="#{var.tituloPaso2Modificacion2}"/>
+                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion1 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion1}"/>
+                            <h:outputText  styleClass="ikont-hot-titulopaso2modificacion2 TituloModificarProyecto" value="#{var.tituloPaso2Modificacion2}"/>
                             <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-textopaso2modificacion"   value="#{var.textopaso2modificacion}"/>
+                            <h:outputText  styleClass="ikont-hot-textopaso2modificacion TextoTipificacionModificacion"   value="#{var.textopaso2modificacion}"/>
                             <interkont:spacer height="15px" />
                             <h:panelGrid columns="2" styleClass="ikont-hpg-tipificacionmodificacion"   columnClasses="CeldaPanelTipificacionModificacion">
-                                <a4j:commandLink styleClass="ikont-acl-prorroga"   onclick="if (!prorrogaOnClick())
+                                <a4j:commandLink styleClass="ikont-acl-prorroga "   onclick="if (!prorrogaOnClick())
                                             return false;"/>
-                                <a4j:commandLink styleClass="ikont-acl-adicionpresupuesto"   onclick="if (!adicionPresupuestoOnClick())
+                                <a4j:commandLink styleClass="ikont-acl-adicionpresupuesto "   onclick="if (!adicionPresupuestoOnClick())
                                             return false;"/>
                                 <h:panelGroup>
                                     <h:selectBooleanCheckbox  value="#{Supervisor$ModificarProyecto.historicoobra.adiciontiempo}" styleClass="ikont-hsbc-adiciontiempo"   onchange="checkRealizarProrrogaOnChangue();"/>
-                                    <h:outputLabel  styleClass="ikont-hot-nuevafechaterminacionmodificacion"   value="#{var.nuevafechaterminacionmodificacion}" />
+                                    <h:outputLabel  styleClass="ikont-hot-nuevafechaterminacionmodificacion TextoTipificacionModificacion"   value="#{var.nuevafechaterminacionmodificacion}" />
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionpresu}" styleClass="ikont-hsbc-adicionpresu" onchange="checkAdicionarPresupuestoOnChangue();"/>
-                                    <h:outputLabel  styleClass="ikont-hol- "   value="#{var.nuevovaloradicionmodificacion}" />
+                                    <h:outputLabel  styleClass="ikont-hol TextoTipificacionModificacion "   value="#{var.nuevovaloradicionmodificacion}" />
                                 </h:panelGroup>
                                 <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="date_adicionTiempo" inputSize="12"
-                                               value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" inputstyleClassdatefecfinhist"  >
-                                               <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
+                                               value="#{Supervisor$ModificarProyecto.historicoobra.datefecfinhist}" styleClass="datefecfinhist"  >
+                                    <a4j:ajax event="change" oncomplete="datefecfinhistOnChange();" ></a4j:ajax>
                                 </rich:calendar>
                                 <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
                                     <f:convertNumber pattern="###,###" maxFractionDigits="6"/>
                                 </h:inputText>
                                 <interkont:spacer height="15px" />
                                 <interkont:spacer height="15px" />
-                                <a4j:commandLink styleClass="ikont-acl-cambioprecios"   onclick="if (!cambioPreciosOnClick())
+                                <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
-                                <a4j:commandLink styleClass="ikont-acl-adicionactividades"   onclick="if (!adicionActividadesOnClick())
+                                <a4j:commandLink styleClass="ikont-acl-adicionactividades "   onclick="if (!adicionActividadesOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
                                 <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.cambioprecios}" styleClass="ikont-hsbc-cambioprecios"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
                                 <h:selectBooleanCheckbox value="#{Supervisor$ModificarProyecto.historicoobra.adicionactivi}" styleClass="ikont-hsbc-adicionactividades"   rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
                             </h:panelGrid>
                             <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-notapaso2modificacion"   value="#{var.notapaso2modificacion}" />
+                            <h:outputText  styleClass="ikont-hot-notapaso2modificacion TextoTipificacionModificacion"   value="#{var.notapaso2modificacion}" />
                             <interkont:spacer height="10" />
 
                             <h:panelGroup styleClass="ikont-hpg-accionespaso2"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="ikont-acl-atras"   value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="ikont-acl-siguiente"   value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelar"   value="#{var.cancelar}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="ikont-acl-atras BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso2Action}" render="pgPasos, messages" styleClass="ikont-acl-siguiente BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelar BotonesPasosModificar"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
 
                             <f:verbatim>
@@ -213,12 +213,12 @@
                         <h:panelGroup styleClass="ikont-hpg-varpaso3"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
 
                             <interkont:spacer height="10px" />
-                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion1"   value="#{var.tituloPaso3Modificacion1}"/>
-                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion2"   value="#{var.tituloPaso3Modificacion2}"/>
+                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion1 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion1}"/>
+                            <h:outputText  styleClass="ikont-hot-titulopaso3modificacion2 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion2}"/>
                             <interkont:spacer height="15px" />
-                            <h:outputText  styleClass="ikont-hot-textopaso3modificacion"   value="#{var.textopaso3modificacion}"  />
+                            <h:outputText  styleClass="ikont-hot-textopaso3modificacion TextoTipificacionModificacion"   value="#{var.textopaso3modificacion}"  />
                             <interkont:spacer height="15px" />
-                            <h:panelGrid styleClass="ikont-hpg-pgenerarcronograma"   >
+                            <rich:panel >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-pgenerarcronograma "   value="#{var.pgenerarcronograma}"/>
                                 </f:facet>
@@ -231,55 +231,53 @@
                                     <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png"/>
                                 </h:panelGroup>
 
-                                <h:panelGrid columns="2" columnClasses="PanelGenerarCronogramaPaso3">
-                                    <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" 
-                                                     onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
-                                                     oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
-                                                     styleClass="ikont-acl-btgenerarcronogramaaction"   immediate="true" />
-                                    <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
-                                    <h:panelGroup>
-                                        <h:outputText  styleClass="ikont-hot-notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
-                                        <h:outputText  styleClass="ikont-hot-textonotapaso3modificacion" value="#{var.textonotapaso3modificacion}"/>
-                                    </h:panelGroup>
-                                </h:panelGrid>
-                            </h:panelGrid>
+                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btGenerarCronogramaAction}" 
+                                                 onclick="#{rich:component('ajaxLoadingModalBox')}.show();"
+                                                 oncomplete="#{rich:component('ajaxLoadingModalBox')}.hide();#{rich:component('mp_cronograma_mod')}.show();"
+                                                 styleClass="ikont-acl-btgenerarcronogramaaction excel butonreport"   immediate="true" />
+                                <h:outputLabel  styleClass="ikont-hot-pgenerarcronograma"   value="#{var.pgenerarcronograma}"/>
+                                <h:panelGroup>
+                                    <h:outputText  styleClass="ikont-hot-notapaso3modificacion" value="#{var.notapaso3modificacion} "/>
+                                    <h:outputText  styleClass="ikont-hot-textonotapaso3modificacion TextoTipificacionModificacion" value="#{var.textonotapaso3modificacion}"/>
+                                </h:panelGroup>
+                            </rich:panel>
                             <interkont:spacer height="15px" />
-                            <h:panelGrid id="panelInfoCronoSubido" styleClass="ikont-hpg-panelinfocronosubido"   columnClasses="PanelSubirCronogramaPaso3">
+                            <rich:panel >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-subircronograma "   value="#{var.subircronograma}"/>
                                 </f:facet>
-                                <h:outputLabel  styleClass="ikont-hol-importeelcronograma"   value="#{var.importeelcronograma}" />
+                                <h:outputLabel  styleClass="ikont-hol-importeelcronograma TextoTipificacionModificacion"   value="#{var.importeelcronograma}" />
                                 <interkont:spacer height="15px" />
                                 <a4j:commandButton styleClass="ikont-acl-subircronograma"    value="#{var.examinar}"  id="subircronograma"
                                                    oncomplete="#{rich:component('panelUploadCronograma')}.show(); return true;" />
                                 <interkont:spacer height="15px" />
-                                <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" />
+                                <h:outputText  styleClass="ikont-hot-nosuarc NoFileModificar"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}" />
 
                                 <a4j:repeat value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
                                     <h:panelGrid columns="1" rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos!=0}" styleClass="ikont-hpg-numeroarchivos"  >
                                         <h:panelGroup>
                                             <h:graphicImage  styleClass="ikont-hgi-msginfo"   url="/resources/imgs/msginfo.png" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                                            <h:outputText  styleClass="ikont-hot-validarcronograma"   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}"   />
+                                            <h:outputText  styleClass="ikont-hot-validarcronograma NoFileModificar"   value="#{var.archivovalido}" rendered="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}"   />
                                             <h:graphicImage  styleClass="ikont-hgi-msgerror2"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
-                                            <h:outputText  styleClass="ikont-hot-cronogramamodificacioninvalido"   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
+                                            <h:outputText  styleClass="ikont-hot-cronogramamodificacioninvalido NoFileModificar"   value="#{var.cronogramamodificacioninvalido}" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}" />
                                         </h:panelGroup>
                                         <h:outputText  styleClass="ikont- hot-"   value=" #{file.nombre}"  />
                                     </h:panelGrid>
                                 </a4j:repeat>
-                            </h:panelGrid>
+                            </rich:panel>
 
                             <interkont:spacer height="10" />
                             <h:panelGroup styleClass="ikont-hpg-accionespaso3"  >
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso3"   value="#{var.atras}" execute="@this"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso3"   value="#{var.siguiente}" execute="@form"/>
-                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso3"   value="#{var.cancelar}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso3 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso3Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso3 BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso3 BotonesPasosModificar"   value="#{var.cancelar}" execute="@this"/>
                             </h:panelGroup>
 
                         </h:panelGroup>
 
                         <h:panelGroup styleClass="ikont-hpg-varpaso4"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso4}">
-                            <h:outputText  styleClass="ikont-hot-paso4"   value="Paso 4" />
-                            <h:outputText  styleClass="ikont-hot-documentosrelacionados"   value="Anexe los documentos relacionados"/>
+                            <h:outputText  styleClass="ikont-hot-paso4 TituloModificarProyecto"   value="Paso 4" />
+                            <h:outputText  styleClass="ikont-hot-documentosrelacionados TituloModificarProyecto"   value="Anexe los documentos relacionados"/>
                             <interkont:spacer height="50"/>
 
                             <h:panelGrid styleClass="ikont-hpg-subirdocmodificacion"  >
@@ -381,17 +379,17 @@
                                 <interkont:spacer height="10" />
 
                                 <h:panelGroup styleClass="ikont-hpg-accionespaso4"  >
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso4"   value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso4"   value="#{var.siguiente}" execute="@form"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso4"   value="#{var.cancelar}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso4 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso4Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso4 BotonesPasosModificar"   value="#{var.siguiente}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso4 BotonesPasosModificar"   value="#{var.cancelar}" execute="@this"/>
                                 </h:panelGroup>
 
                             </h:panelGrid>
                         </h:panelGroup>
 
                         <h:panelGroup styleClass="ikont-hpg-varpaso5"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso5}">
-                            <h:outputText  styleClass="ikont-hot-paso5"   value="Paso 5" />
-                            <h:outputText  styleClass="ikont-hot-tituloseleccontratovalormodi"   value="#{var.tituloseleccontratovalormodi}" />
+                            <h:outputText  styleClass="ikont-hot-paso5 TituloModificarProyecto"   value="Paso 5" />
+                            <h:outputText  styleClass="ikont-hot-tituloseleccontratovalormodi TituloModificarProyecto"   value="#{var.tituloseleccontratovalormodi}" />
                             <interkont:spacer height="50"/>
 
                             <h:panelGrid styleClass="ikont-hpg-"  >
@@ -473,9 +471,9 @@
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="ikont-hpg-accionespaso5"  >
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso5"   value="#{var.atras}" execute="@this"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso5"   value="#{var.guardar}" execute="@form"/>
-                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso5"   value="#{var.cancelar}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-atraspaso5 BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btSiguientePaso5Action}" render="pgPasos, messages"  styleClass="ikont-acl-siguientepaso5 BotonesPasosModificar"   value="#{var.guardar}" execute="@form"/>
+                                    <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btCancelarModificacionAction}" render="messages"  styleClass="ikont-acl-cancelarpaso5 BotonesPasosModificar"   value="#{var.cancelar}" execute="@this"/>
                                 </h:panelGroup>
 
                             </h:panelGrid>

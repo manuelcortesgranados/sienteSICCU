@@ -138,7 +138,7 @@
 
                                     <h:panelGrid columns="1"  columnClasses="column-grid-detail">
                                         <h:panelGroup>
-                                            <rich:panel  >
+                                            <h:panelGroup layout="block">
                                                 <h:panelGrid columns="1" styleClass="ikont-hpg-griddetaob1"  >
                                                     <center>
                                                         <h:outputText  styleClass="ikont- hot-valoraprobado"   value="#{var.valoraprobado}"  rendered="#{Supervisor$AdministrarObraNew.obra.solicitud_obra!=null || Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"/>
@@ -164,7 +164,7 @@
 
                                                     </center>
                                                 </h:panelGrid>
-                                            </rich:panel>
+                                            </h:panelGroup>
                                         </h:panelGroup>
                                     </h:panelGrid>
                                 </rich:panel>
@@ -235,17 +235,17 @@
 
                                 <rich:panel id="contratista" header="#{var.contratista}" bodyClass="rich-panel-grid-body"
                                             styleClass="ikont-rp-contratista"   headerClass="font-header-panel" >
-                                    <rich:panel   >
+                                    <h:panelGroup  layout="block" >
                                         <h:outputLabel  styleClass="ikont-hol-st_strnomcontratista "   id="st_strnomcontratista"
                                                         value="#{Supervisor$DetalleObra.contratistanombrecomple}"/>
-                                    </rich:panel>
+                                    </h:panelGroup>
                                 </rich:panel>
 
 
                                 <rich:panel id="tipoproyecto" header="#{var.tipo}" bodyClass="rich-panel-grid-body" 
                                             styleClass="ikont-rp-tipoproyecto"   headerClass="font-header-panel">
                                     <center>
-                                        <rich:panel  >
+                                        <h:panelGroup layout="block" >
 
                                             <h:panelGrid id="tipo" columns="1"   columnClasses="panelcenter">
                                                 <h:outputLabel  styleClass="ikont-hol-stclaseProyecto"   id="stclaseProyecto"  value="#{var.claseProyecto}" />
@@ -280,7 +280,7 @@
 
                                             </h:panelGrid>
 
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </center>
                                 </rich:panel>
 
@@ -448,13 +448,13 @@
                     <rich:collapsiblePanel id="simpleToggleLogrosyDificultades" switchType="client" header="#{var.logro}s y #{var.dificultad}es" expanded="false" >
                         <center>
                             <h:panelGrid columns="2">
-                                <a4j:commandLink id="btlogros" styleClass="ikont-acl-mostrarcuali"  
+                                <a4j:commandLink id="btlogros" styleClass="ikont-acl-mostrarcuali evo01"  
                                                  action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
 
                                                  render="modalLogrosDetalle">
                                     <rich:componentControl  target="modalLogrosDetalle" operation="show" />
                                 </a4j:commandLink>
-                                <a4j:commandLink id="btlogrosx" styleClass="ikont-acl-infocuali"  
+                                <a4j:commandLink id="btlogrosx" styleClass="ikont-acl-infocuali evo02"  
                                                  action="#{Supervisor$DetalleObra.mostrarUltimasAlimentacionCualitativa}"
                                                  render="modalDificultadDetalle">
                                     <rich:componentControl  target="modalDificultadDetalle" operation="show" />
@@ -743,10 +743,10 @@
                                 <center>
                                     Generar reporte en:
                                     <h:panelGrid columns="3">
-                                         
-                                        <h:commandLink id="pdf" onclick="document.location.href='#{var.birtpdfdetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf"  value="PDF"  target="_blank"  />
-                                        <h:commandLink id="excel" onclick="document.location.href='#{var.birtexceldetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel"  value="EXCEL"  target="_blank" />
-                                        <h:commandLink id="word" onclick="document.location.href='#{var.birtworddetalle}'+'#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord"  value="WORD" target="_blank" />
+
+                                        <h:commandLink id="pdf" onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reportePdf pdf butonreport"  value="PDF"  target="_blank"  />
+                                        <h:commandLink id="excel" onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteExcel excel butonreport"  value="EXCEL"  target="_blank" />
+                                        <h:commandLink id="word" onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="ikont-hcl-reporteWord word butonreport"  value="WORD" target="_blank" />
                                     </h:panelGrid>
                                 </center>
                             </h:form>
@@ -840,7 +840,7 @@
                     <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
 
                         <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
-                           <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
+                            <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
                             <rich:panel id="rpListaActividadesProyecto" >
                                 <rich:dataTable id="listaActividadesAlimentar2"
                                                 onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
@@ -1293,7 +1293,8 @@
                                             <h:outputLabel  styleClass="ikont-hol-strMunicipioOut"   id="strMunicipioOut"   rendered="#{Supervisor$AdministrarOraNew.sede}" value="#{Supervisor$AdministrarObraNew.obra.sedeeducativa.institucioneducativa.localidad.strmunicipio}" />
                                             <h:panelGroup>
                                                 <h:commandButton styleClass="ikont-hcb-btnlocalidadubicacion" value="Ver localidades" 
-                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano')}.show(); return false;" />
+                                                                 id="btnlocalidadubicacion" onclick="#{rich:component('panelVerLocalidadCiudadano')}.show();
+                                            return false;" />
                                             </h:panelGroup>
                                         </h:panelGrid>
                                     </h:panelGrid>
@@ -1379,7 +1380,7 @@
                                 <div id="sideline"><label class="textlittle2">DESCARGAR REPORTES</label></div>
                                 <h:panelGrid columns="3" >
                                     <h:outputLabel value="probar"/>
-                                       <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" value="PDf" />
+                                    <h:commandLink id="pdf_infociu" action="#{Supervisor$DetalleObra.reportePdf}" value="PDf" />
                                     <h:commandLink id="excel_infociu" action="#{Supervisor$DetalleObra.reporteExcel}" value="EXCEL"/>
                                     <h:commandLink id="word_infociu" action="#{Supervisor$DetalleObra.reporteWord}" value="WORD"/>
 

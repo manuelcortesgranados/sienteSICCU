@@ -36,25 +36,25 @@
             <h:inputHidden id="sourceogg" value="#{Supervisor$AdministrarObraNew.urlvideo}" />
 
             <center>
-                <rich:panel id="pgvideo">
+                <h:panelGroup layout="block" id="pgvideo">
                     <h:panelGroup id="pgvidomostra">
                         <h:outputLabel  styleClass="ikont-hol-pgvidomostra"   rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
                     </h:panelGroup>
                     
-                    <rich:panel id="idpanel" >
+                    <h:panelGroup layout="block" id="idpanel" >
                         <a4j:region>
                             <rich:dataGrid value="#{Supervisor$AdministrarObraNew.listaVideoObra}"  var="videoRow" columns="#{Supervisor$AdministrarObraNew.cantidadColumnas}">
-                                <rich:panel >
+                                <h:panelGroup layout="block">
                                     <h:panelGrid>
                                         <h:outputText  styleClass="ikont-hot-videoHtml "   escape="false" value="#{videoRow.videoHtml}" />
                                         <h:outputText  styleClass="ikont-hot-df "   id="otxt-strfechavideo"  value="#{videoRow.datefecha}" />
                                         <h:outputText  styleClass="ikont-hot-strnomvid "   id="otxt-strnomvideo"    value="#{videoRow.strnombre}" />
                                     </h:panelGrid>
-                                </rich:panel>
+                                </h:panelGroup>
                             </rich:dataGrid>
                         </a4j:region>
-                    </rich:panel>
-                </rich:panel>
+                    </h:panelGroup>
+                </h:panelGroup>
             </center>
         </h:form>
     </ui:define>

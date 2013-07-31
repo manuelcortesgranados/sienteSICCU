@@ -855,7 +855,7 @@ a.ikont-acl-interven:hover {
     padding-bottom: 10px;
 }
 
-a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance{
+a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModificar{
     background: #ff9735;
     background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
@@ -875,7 +875,7 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance{
     padding:8px;
     text-decoration: none;
 }
-a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover {
+a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesPasosModificar:hover {
     background: #f8763c;
     background: -moz-linear-gradient(top,  #f8763c 48%, #ff9735 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#f8763c), color-stop(50%,#ff9735));
@@ -943,3 +943,116 @@ a.anadirimagenes {
 a.anadirimagenes:hover {
     background-position: 0px -144px;
 }
+
+
+a.evo01 {
+    background-image: url("../imgs/evo01.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    height: 40px;
+    margin: 5px;
+    width: 168px;
+    border-radius:5px;
+    border-color:#51809A;
+}
+a.evo01:hover {
+    background-position: 0 -42px;
+}
+a.evo02 {
+    background-image: url("../imgs/evo02.png");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    display: block;
+    float: left;
+    height: 40px;
+    margin: 5px;
+    width: 168px;
+}
+a.evo02:hover {
+    background-position: 0 -42px;
+}
+
+.TextoTipificacionModificacion {
+    color: #999999;
+    font-family: Verdana,Geneva,sans-serif;
+    font-style: italic;
+    text-align: left;
+    width: 100%;
+    font-size: 1em;
+}
+
+.TituloModificarProyecto {
+    color: #FF9900;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 1.5em;
+    font-style: italic;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.NoFileModificar {
+    color: #FF9900;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 9px;
+    font-style: italic;
+    line-height: 9px;
+}
+
+a.ikont-acl-prorroga {
+    float: left;
+    height: 60px;
+    width: 140px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/bt_01.png);
+    background-position: 0px 0px;
+}
+a.ikont-acl-prorroga:hover {
+    background-position: 0px -60px;
+}
+
+a.ikont-acl-adicionpresupuesto {
+    float: left;
+    height: 60px;
+    width: 140px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/bt_02.png);
+    background-position: 0px 0px;
+}
+a.ikont-acl-adicionpresupuesto:hover {
+    background-position: 0px -60px;
+}
+
+a.ikont-acl-adicionactividades {
+    float: left;
+    height: 60px;
+    width: 140px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/bt_04.png);
+    background-position: 0px 0px;
+}
+a.ikont-acl-adicionactividades:hover {
+    background-position: 0px -60px;
+}
+
+a.ikont-acl-cambioprecios {
+    float: left;
+    height: 60px;
+    width: 140px; /* for validator */
+    display: block;
+    background-repeat: no-repeat;
+    margin-right: 0px;
+    background-image:url(../imgs/bt_03.png);
+    background-position: 0px 0px;
+}
+a.ikont-acl-cambioprecios:hover {
+    background-position: 0px -60px;
+}
+
