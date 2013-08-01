@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="ikont-acl-esconderpaneluploadcronograma"  
+                    <a4j:commandLink id="esconder_panelUploadCronograma" styleClass="ikont-acl-esconderpaneluploadcronograma closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('panelUploadCronograma')}.hide();
                                              return false;">
@@ -28,7 +28,7 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-paneluploadcronograma"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-paneluploadcronograma"   >
             <h:form id="formCronograma">
                 <h:panelGroup id="layoutDocCronog">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -53,7 +53,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$ModificarProyecto.cargadorCronograma.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarProyecto.cargadorCronograma.archivos}" var="file">
-                                        <rich:panel >
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -63,7 +63,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numbytes"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -79,7 +79,7 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
     <h:panelGroup id="funcionBtValidarCronogramaOnComplete">
         <script type="text/javascript">

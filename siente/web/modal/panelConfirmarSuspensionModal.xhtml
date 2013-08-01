@@ -17,7 +17,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_panelConfirmarSuspension" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink id="esconder_panelConfirmarSuspension" styleClass="ikont-acl-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarSuspension')}.hide();
                                              return false;"/>
 
@@ -25,7 +25,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-rp-panel6"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-panel6"   >
             <h:form>
                 <center>
                     <h:panelGrid id="layoutConfSuspension" styleClass="ikont-hpg-confsuspen"    >
@@ -51,7 +51,7 @@
                     </h:panelGrid>
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </f:view>

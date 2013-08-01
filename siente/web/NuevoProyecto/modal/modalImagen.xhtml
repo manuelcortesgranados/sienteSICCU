@@ -10,11 +10,16 @@
 
 
     <rich:popupPanel id="modalImagen" autosized="true" headerClass="rich-panel-header">
+        <f:facet name="header">
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-encontrarpadreproy" value="#{var.imagen}"/>
+            </h:panelGroup>
+        </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-imagen" onclick="#{rich:component('modalImagen')}.hide();" immediate="true"
-                                       styleClass="ikont-hcl-esconder"    />
+                                       styleClass="ikont-hcl-esconder closemodal"    />
                 </h:panelGroup>
             </h:form>
         </f:facet>

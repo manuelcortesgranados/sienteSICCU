@@ -19,8 +19,16 @@
                 <h:outputText  styleClass="ikont-hot-guardarciudadano"    value="Ciudadano"/>
             </h:panelGroup>
         </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('guardarCiudadano')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
         <h:form>
-            <rich:panel styleClass="ikont-rp-guardarciudadano"   >
+            <h:panelGroup layout="block" styleClass="ikont-rp-guardarciudadano"   >
                 <center>
                     <h:panelGrid id="pgguardar"  >
                         <h:panelGroup>
@@ -38,7 +46,7 @@
                         </h:panelGroup>
                     </h:panelGrid>
                 </center>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

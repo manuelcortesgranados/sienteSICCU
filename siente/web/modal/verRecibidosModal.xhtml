@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_mp_ver" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_mp_ver" styleClass="ikont-acl-cerrar closemodal"  
                                      onclick="#{rich:component('mp_ver')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-rp-panel1"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-panel1"   >
             <h:form id="form_ver">
                 <h:panelGrid >
                     <interkont:spacer height="20"  />
@@ -66,6 +66,6 @@
                                        value="#{var.btnresponder}" render="pg_camposResponder" title="#{var.btnresponder}" />
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -24,9 +24,17 @@
                 </h:panelGrid>
             </h:panelGroup>
         </f:facet>       
-        <rich:panel styleClass="ikont-rp-confirmarciudadano"   >
+        <f:facet name="controls">
             <h:form>
-                <rich:panel styleClass="ikont-rp-pgguardarciudadano"   >
+                <h:panelGroup>
+                    <a4j:commandLink   styleClass="confirmarCiudadano closemodal"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" styleClass="ikont-rp-confirmarciudadano"   >
+            <h:form>
+                <h:panelGroup layout="block" styleClass="ikont-rp-pgguardarciudadano"   >
                     <center>                    
                         <h:panelGrid id="pgguardarCiudadano"  columnClasses="panelcenter" >
 
@@ -50,9 +58,9 @@
                             </h:panelGroup>
                         </h:panelGrid>
                     </center>
-                </rich:panel>
+                </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 </ui:composition>

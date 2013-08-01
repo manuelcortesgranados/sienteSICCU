@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelDocCiu" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink id="esconder_panelDocCiu" styleClass="ikont-acl-cerrar closemodal"  
                                      onclick="#{rich:component('panelDocCiu')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-rp-panel7">
+        <h:panelGroup layout="block" styleClass="ikont-rp-panel7">
             <h:form id="formDocCiu">
                 <h:panelGroup id="layoutDocCiu">
                     <h:panelGrid columnClasses="top,top" columns="2"> 
@@ -56,7 +56,7 @@
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Ciudadano$PerfilCiudadano.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorDocumento.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
@@ -65,7 +65,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
 
@@ -85,6 +85,6 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -17,13 +17,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_mp-listado-novedades" styleClass="ikont-a4jcl-escondermplistadonovedades"   
+                   <a4j:commandLink  id="esconder_mp-listado-novedades" styleClass="ikont-a4jcl-escondermplistadonovedades closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-novedades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel id="gpTotalNov">
+        <h:panelGroup layout="block" id="gpTotalNov">
             <h:form id="form-mp-listado-novedades">
                 <h:panelGrid >
                     <interkont:spacer height="20" />
@@ -34,7 +34,7 @@
                         </h:inputText>
                     </h:panelGroup>
                     <interkont:spacer height="10px" />
-                    <rich:panel id="pl-tabla-listado-novedades" >
+                    <h:panelGroup layout="block" id="pl-tabla-listado-novedades" >
                         <rich:dataTable id="tabla-listado-novedades"
                                         
                                         value="#{Supervisor$HomeSupervisor.listaTotalNovedades}" 
@@ -72,10 +72,10 @@
                                 <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 

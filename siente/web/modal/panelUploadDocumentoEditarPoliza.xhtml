@@ -9,15 +9,22 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadDocumentopoliza" autosized="true" >
-
-        <rich:panel header="Seleccionar Documento" styleClass="ikont-rp-seleccionardocumentopoliza"   >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-seleccionardoc"   value="Seleccionar Documento"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
             <h:form>
-                <h:panelGroup >
-
+                <h:panelGroup>
                     <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide(); return false;"
-                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentopoliza"    />
-
+                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentopoliza closemodal"    />
                 </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" styleClass="ikont-rp-seleccionardocumentopoliza"   >
+            <h:form>
+                
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
@@ -42,7 +49,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$ModificarContrato.cargadorPoliza.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarContrato.cargadorPoliza.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
@@ -51,7 +58,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numByteskb"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -68,6 +75,6 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

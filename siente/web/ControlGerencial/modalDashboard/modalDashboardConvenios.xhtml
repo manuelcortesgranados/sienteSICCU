@@ -23,7 +23,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" styleClass="ikont-hcl-esconder"  value="X" 
+                    <a4j:commandLink id="esconder_modalDashboard_entesterritoriales" styleClass="ikont-hcl-esconder closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDashboard_entesnacionales')}.hide();
                                      return false;"/>
                 </h:panelGroup>
@@ -31,7 +31,7 @@
         </f:facet>
 
 
-        <rich:panel id="modalDashboardConveniosInfo">
+        <h:panelGroup layout="block" id="modalDashboardConveniosInfo">
 
             <interkont:spacer height="20" />
             <h:panelGrid >
@@ -97,7 +97,7 @@
                    
                 </h:panelGrid>
             </center>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 

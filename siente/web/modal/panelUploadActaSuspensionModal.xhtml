@@ -17,13 +17,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelUploadActaSuspension" styleClass="ikont-a4jcl-esconderpanelUploadActaSuspension"   
+                   <a4j:commandLink  id="esconder_panelUploadActaSuspension" styleClass="ikont-a4jcl-esconderpanelUploadActaSuspension closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadActaSuspension')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-actasuspension"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-actasuspension"   >
             <h:form id="formActaSuspension">
                 <h:panelGroup id="layoutDocActaSuspension">
                     <interkont:spacer height="50"/>
@@ -50,7 +50,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$SuspenderObra.cargadorActaSuspension.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaSuspension.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}"/>
@@ -59,7 +59,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numByteskb"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -77,7 +77,7 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

@@ -18,12 +18,12 @@
 
             <h:panelGroup>
                 <a4j:commandLink id="esconder_mp_cronograma"  title="#{var.cerrar}" immediate="true"
-                                 styleClass="ikont-hcl-esconder"    onclick="#{rich:component('mp_cronograma')}.hide();
+                                 styleClass="ikont-hcl-esconder closemodal"    onclick="#{rich:component('mp_cronograma')}.hide();
                                                   return false;"/>
             </h:panelGroup>
 
         </f:facet>
-        <rich:panel >
+        <h:panelGroup layout="block" >
 
             <h:panelGroup id="layoutCron">
 
@@ -64,7 +64,7 @@
 
             </h:panelGroup>
 
-        </rich:panel>
+        </h:panelGroup>
         <rich:hotKey key="esc"  onkeyup="#{rich:component('mp_cronograma')}.hide();" />
     </rich:popupPanel>
 

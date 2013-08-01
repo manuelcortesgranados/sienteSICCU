@@ -22,11 +22,11 @@
                                      onclick="#{rich:component('panelConfirmaguardadoSuper')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true"
-                                     styleClass="ikont-"   />
+                                     styleClass="ikont- closemodal"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel id="panelConfGuardarSuper">
+        <h:panelGroup layout="block" id="panelConfGuardarSuper">
             <h:panelGroup >
                 <h:outputText  styleClass="ikont- "   />
             </h:panelGroup>
@@ -43,6 +43,6 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

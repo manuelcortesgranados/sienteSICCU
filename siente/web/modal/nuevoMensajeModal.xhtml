@@ -1,21 +1,31 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition  
-        xmlns:f="http://java.sun.com/jsf/core" 
-        xmlns:h="http://java.sun.com/jsf/html" 
-        xmlns:jsp="http://java.sun.com/JSP/Page"
-          xmlns:a4j="http://richfaces.org/a4j" 
-          xmlns:interkont="http://www.interkont.com/jsf" 
-          xmlns:rich="http://richfaces.org/rich"  
-          xmlns:m="http://code.google.com/p/gmaps4jsf/"
-          xmlns:ui="http://java.sun.com/jsf/facelets">
-    
+    xmlns:f="http://java.sun.com/jsf/core" 
+    xmlns:h="http://java.sun.com/jsf/html" 
+    xmlns:jsp="http://java.sun.com/JSP/Page"
+    xmlns:a4j="http://richfaces.org/a4j" 
+    xmlns:interkont="http://www.interkont.com/jsf" 
+    xmlns:rich="http://richfaces.org/rich"  
+    xmlns:m="http://code.google.com/p/gmaps4jsf/"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
     <rich:popupPanel id="mp_nuevo" moveable="false" autosized="true" >
-        <rich:panel header="#{var.rpanhea_enviarmensaje}" id="pl_tabla_listado_resumen_semanal" styleClass="ikont-rp-resumen_semanal"   >
+        <f:facet name="header" >
             <h:panelGroup >
-                <a4j:commandButton id="esconder_mp_nuevo" onclick="#{rich:component('mp_nuevo')}.hide(); return false;" 
-                                   styleClass="ikont-acb-esconder"   />
+                <h:outputText  styleClass="ikont-hot-doc"   value="#{var.rpanhea_enviarmensaje}"/>
             </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandButton id="esconder_mp_nuevo" onclick="#{rich:component('mp_nuevo')}.hide();
+                          return false;" 
+                                       styleClass="ikont-acb-esconder closemodal"   />
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" id="pl_tabla_listado_resumen_semanal" styleClass="ikont-rp-resumen_semanal"   >
             <h:form id="form_nuevo">
                 <h:panelGrid >
                     <interkont:spacer height="20" />
@@ -45,11 +55,11 @@
                 <interkont:spacer height="10" />
                 <center>
                     <a4j:commandButton id="bt_aceptarNuevo" action="#{Supervisor$Mensajes.aceptar_nuevo_action}" oncomplete= "#{rich:component('mp_nuevo')}.hide();"
-                                              value="#{var.enviar}"
+                                       value="#{var.enviar}"
                                        styleClass="ikont-acb-bt_aceptarNuevo"     render="pl_tabla_enviados"/>
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

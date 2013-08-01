@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalubicacionsupervision" headerClass="rich-panel-header" height="108" width="368" moveable="false">
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont- "   value="Ubicación Georeferenciada" styleClass="ikont-"   />
+                <h:outputText  value="Ubicación Georeferenciada" styleClass="ikont-"   />
             </h:panelGroup>
         </f:facet>
 
@@ -23,24 +23,24 @@
                     <a4j:commandLink id="esconder-modalubicacionsupervision"
                                        onclick="#{rich:component('modalubicacionsupervision')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont- closemodal"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2">
-            <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- "   id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="ikont-"   />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            <h:panelGroup layout="block" >
+                <h:outputText  id="titLatitudNorte" value="#{var.latitudnorte}" styleClass="ikont-"   />
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="verLatitudNorte" value="#{Supervision$Externa.objetoSeguimiento.strlatitud}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody" >
-                <h:outputText  styleClass="ikont- "   id="titLatitudEste" value="#{var.longitudeste}" styleClass="ikont-"   />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
+                <h:outputText  id="titLatitudEste" value="#{var.longitudeste}" styleClass="ikont-"   />
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="verLongitudEste" value="#{Supervision$Externa.objetoSeguimiento.strlongitud}" />
-            </rich:panel>
+            </h:panelGroup>
         </h:panelGrid>
     </rich:popupPanel>
 </ui:composition>

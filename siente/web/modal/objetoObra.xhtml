@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup >
-                    <a4j:commandLink value="X" id="esconder_modalobjeto" styleClass="ikont-acl-esconder"    render="form_editar,esconder_modalobjeto"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
+                    <a4j:commandLink  id="esconder_modalobjeto" styleClass="ikont-acl-esconder closemodal"    render="form_editar,esconder_modalobjeto"  action="#{Supervisor$AdministrarObraNew.habilitarBtnCancelar}"
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalObjeto')}.hide();
                                              return false;"/>                    
                 </h:panelGroup>
@@ -26,7 +26,7 @@
         </f:facet>
 
         <h:form>
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <h:panelGrid columns="1" rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_modificarobjetoobra}">
                     <h:outputText  styleClass="ikont-hot-strobjetoobra"   value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"/>
                 </h:panelGrid>
@@ -49,7 +49,7 @@
                         <rich:message for="habilitarObjeto" />  
                     </h:panelGroup>
                 </h:panelGroup>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

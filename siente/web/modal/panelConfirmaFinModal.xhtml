@@ -17,13 +17,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_panelConfirmaFin" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink id="esconder_panelConfirmaFin" styleClass="ikont-acl-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaFin')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont"   >
+        <h:panelGroup layout="block" styleClass="ikont"   >
             <h:form>
                 <interkont:spacer height="20"/>
                 <h:panelGrid id="layoutConfFin" >
@@ -49,7 +49,7 @@
                     </h:panelGroup>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

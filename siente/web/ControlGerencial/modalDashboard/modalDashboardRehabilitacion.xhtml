@@ -23,14 +23,14 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_rehabilitacion" styleClass="ikont-hcl-esconder"  
+                    <a4j:commandLink id="esconder_modalDashboard_rehabilitacion" styleClass="ikont-hcl-esconder closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDashboard_rehabilitacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel  >
+        <h:panelGroup layout="block"  >
             <interkont:spacer height="20" />
             <h:panelGrid >
                 <h:outputText  styleClass="ikont-hot-resumengeneralterritoriales"   value="#{var.resumengeneral} territoriales" ></h:outputText>
@@ -85,7 +85,7 @@
                         render="@this"/>
                 </h:panelGrid>
             </center>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 

@@ -12,7 +12,7 @@
     <rich:popupPanel id="modalactividadescontractuales" headerClass="rich-panel-header" autosized="true" >
         <f:facet name="header">
             <h:panelGroup>
-                <h:outputText  styleClass="ikont- "   value="ACTIVIDADES CONTRACTUALES" styleClass="ikont-"   />
+                <h:outputText   value="ACTIVIDADES CONTRACTUALES" styleClass="ikont-"   />
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -21,12 +21,12 @@
                     <a4j:commandLink id="esconder-modalactividadescontractuales" 
                                        onclick="#{rich:component('modalactividadescontractuales')}.hide();
                                                return false;"
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont- closemodal"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel >
+            <h:panelGroup layout="block" >
                 <center>
                     <rich:dataTable id="tablaactividadescontractuales"
                                     rows="4"
@@ -110,7 +110,7 @@
                         </f:facet>
                     </rich:dataTable>
                 </center>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

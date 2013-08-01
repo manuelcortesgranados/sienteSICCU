@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition     xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                    xmlns:f="http://java.sun.com/jsf/core"
+                    xmlns:h="http://java.sun.com/jsf/html"
+                    xmlns:rich="http://richfaces.org/rich"
+                    xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
     <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="false" width="350" 
@@ -17,46 +17,47 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelConfirmaGuardar" styleClass="ikont-acl-cerrar"   
+                    <a4j:commandLink id="esconder_panelConfirmaGuardar" styleClass="ikont-acl-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaGuardar')}.hide();
                                              return false;"/>                    
                 </h:panelGroup>
             </h:form>
         </f:facet>
-         <h:form >
-        <rich:panel styleClass="ikont-rp-panel4"    >
-            <center>
-                <h:panelGrid id="layoutGuardar">
-                    <h:outputText  styleClass="ikont-hot-estadoali1"   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
-                    <h:outputText  styleClass="ikont-hot-estadoali2 "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}"  value="#{Supervisor$Alimentar.mensajefin}"/>
-                    <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
-                   
+        <h:form >
+            <h:panelGroup layout="block" styleClass="ikont-rp-panel4"    >
+                <center>
+                    <h:panelGrid id="layoutGuardar">
+                        <h:outputText  styleClass="ikont-hot-estadoali1"   rendered="#{Supervisor$Alimentar.estadoalimentar==1}"  value="#{var.estaseguroquelosdatoscorre}"/>
+                        <h:outputText  styleClass="ikont-hot-estadoali2 "   rendered="#{Supervisor$Alimentar.estadoalimentar==0}"  value="#{Supervisor$Alimentar.mensajefin}"/>
+                        <rich:messages rendered="#{Supervisor$Alimentar.estadoalimentar==0}" />
+
                         <center>
                             <a4j:commandButton id="BTaceptarGuardar" value="#{var.aceptar}"
                                                rendered="#{Supervisor$Alimentar.estadoalimentar==0}"
-                                               onclick="#{rich:component('panelConfirmaGuardar')}.hide(); return false;">
+                                               onclick="#{rich:component('panelConfirmaGuardar')}.hide();
+                                             return false;">
                             </a4j:commandButton>
                         </center>
                         <h:panelGrid columns="2">
-                              
+
                             <a4j:commandButton value="#{var.si}" id="BTaceptar" action="#{Supervisor$Alimentar.finalizarModal_action}" 
                                                oncomplete="#{rich:component('panelGuardadoAlimentar')}.show();#{rich:component('panelConfirmaGuardar')}.hide()"
                                                execute="@this" immediate="true" rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
-                                 
+
                             </a4j:commandButton>                           
-                            
+
                             <a4j:commandButton id="BTcancelar" value="#{var.no}"
                                                rendered="#{Supervisor$Alimentar.estadoalimentar==1}" >
                                 <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.hide();"/>
                             </a4j:commandButton>
                         </h:panelGrid>
 
-                    
-                </h:panelGrid>
-            </center>
-        </rich:panel>
+
+                    </h:panelGrid>
+                </center>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
-   
+
 
 </ui:composition>

@@ -18,14 +18,14 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_panelModiContratoDoc" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelModiContratoDoc" styleClass="ikont closemodal"  
                                      title="#{var.cerrar}" immediate="true" 
                                      onclick="#{rich:component('panelModiContratoDoc')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel>
+        <h:panelGroup layout="block">
             <h:form id="fmodicontrato" target="_blank">
                 <center>
 
@@ -74,7 +74,7 @@
 
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
         <rich:hotKey key="esc"  onkeyup="#{rich:component('panelModiContratoDoc')}.hide();"/>
     </rich:popupPanel>
 

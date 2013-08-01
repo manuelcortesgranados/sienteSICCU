@@ -25,13 +25,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_modalImagenvermas" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink id="esconder_modalImagenvermas" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenvermas')}.hide(); return false;"/>
                      </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel>
+            <h:panelGroup layout="block">
 
                 <div>
                     <div id="SliderName_2" styleClass="SliderName_2">
@@ -62,7 +62,7 @@
                         });
                     </script>
 
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 

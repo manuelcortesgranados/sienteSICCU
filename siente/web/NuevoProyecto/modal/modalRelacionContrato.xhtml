@@ -19,7 +19,7 @@
 
             <h:panelGroup>
                 <h:form id="formCerrarRelacionContrato">
-                    <a4j:commandLink id="esconder_panelRelacionContrato" styleClass="ikont-"  
+                    <a4j:commandLink id="esconder_panelRelacionContrato" styleClass="ikont- closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelRelacionContrato')}.hide();
                                              return false;"/>
                 </h:form>
@@ -27,7 +27,7 @@
 
         </f:facet>
         <h:form id="frmpanelRelacionContrato">
-            <rich:panel >
+            <h:panelGroup layout="block" >
 
                 <h:panelGroup id="layoutpanelRelacionContrato">
                     <h:panelGrid columns="2" columnClasses="panelcenter" >
@@ -72,7 +72,7 @@
                     </h:panelGrid>
                 </h:panelGroup>
 
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>
