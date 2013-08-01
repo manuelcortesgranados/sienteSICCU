@@ -24,6 +24,7 @@ public class FlujoEgresos {
     boolean egresoProyecto;
     BigDecimal egresos[];
     BigDecimal totalEgresosFuente;
+    double contrapartida;
 
     public FlujoEgresos() {
     }
@@ -74,6 +75,14 @@ public class FlujoEgresos {
 
     public void setTotalEgresosFuente(BigDecimal totalEgresosFuente) {
         this.totalEgresosFuente = totalEgresosFuente;
+    }
+
+    public double getContrapartida() {
+        return contrapartida;
+    }
+
+    public void setContrapartida(double contrapartida) {
+        this.contrapartida = contrapartida;
     }
     
     public String getDescripcionFuenteEgreso() {
