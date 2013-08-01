@@ -4,16 +4,14 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Dependencia;
 import com.gantt.client.config.GanttConfig.DependencyType;
-import java.io.Serializable;
-import java.math.BigDecimal;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  *
  * @author desarrollo9
  */
-public class DependenciaDTO implements Serializable {
+public class DependenciaDTO implements IsSerializable {
 
    String id;
 	String fromId;

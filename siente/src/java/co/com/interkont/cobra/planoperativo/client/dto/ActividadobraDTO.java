@@ -6,31 +6,50 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 /**
  *
  * @author desarrollo9
  */
-public class ActividadobraDTO implements Serializable {
+public class ActividadobraDTO implements IsSerializable {
+    /*
+    Atributos con los nombres que relacion gxt en los props
+    */
+    String id;
+    String name;
+    Date startDateTime;
+    Date endDateTime;
+    int duration;
+    int percentDone;
+    /**
+    Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre, Milestone=Hito
+    */
+    TaskType taskType;
+    /**
+    Atributos del objeto actividadObraDto
+    */
+     private long oidactiviobra;
+    private String strdescactividad;
+    private Date fechaInicio;
+    private Date fechaFin;
+    private Integer peso;
+    private Double duracion;
+    private Integer estado;
+    private Set dependenciasForFkActividadOrigen = new HashSet(0);
+    private Set dependenciasForFkActividadDestino = new HashSet(0);
+    private ContratoDTO contrato;
 
-	String id;
-	String name;
-	Date startDateTime;
-	Date endDateTime;
-	int duration;
-	int percentDone;
-	TaskType taskType;
-        
-        
-
+    
+    
+    
     public ActividadobraDTO() {
     }
-             
+
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public List<ActividadobraDTO> getChildren() {
@@ -41,115 +60,92 @@ public class ActividadobraDTO implements Serializable {
         this.children = children;
     }
 
-	public ActividadobraDTO(List<ActividadobraDTO> children) {
-            setChildren(children);
-		
-	}
-	public ActividadobraDTO(String name, Date start, int duration, int percentDone,
-			TaskType taskType) {
-		this(name, name, start, duration, percentDone, taskType);
-	}
+    public ActividadobraDTO(List<ActividadobraDTO> children) {
+        setChildren(children);
 
-	public ActividadobraDTO(String id, String name, Date start, int duration,
-			int percentDone, TaskType taskType) {
-		this.id = id;
-		this.name = name;
-		this.startDateTime = start;
-		this.duration = duration;
-		this.percentDone = percentDone;
-		this.taskType = taskType;
-	}
+    }
 
-	public String getId() {
-		return id;
-	}
+    public ActividadobraDTO(String name, Date start, int duration, int percentDone,
+            TaskType taskType) {
+        this(name, name, start, duration, percentDone, taskType);
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType) {
+        this.id = id;
+        this.name = name;
+        this.startDateTime = start;
+        this.duration = duration;
+        this.percentDone = percentDone;
+        this.taskType = taskType;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public Date getStartDateTime() {
-		return startDateTime;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setStartDateTime(Date startDateTime) {
-		this.startDateTime = startDateTime;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getEndDateTime() {
-		return endDateTime;
-	}
+    public Date getStartDateTime() {
+        return startDateTime;
+    }
 
-	public void setEndDateTime(Date endDateTime) {
-		this.endDateTime = endDateTime;
-	}
+    public void setStartDateTime(Date startDateTime) {
+        this.startDateTime = startDateTime;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public Date getEndDateTime() {
+        return endDateTime;
+    }
 
-	public void setDuration(int duration) {
-		this.duration = duration;
-	}
+    public void setEndDateTime(Date endDateTime) {
+        this.endDateTime = endDateTime;
+    }
 
-	public int getPercentDone() {
-		return percentDone;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public void setPercentDone(int percentDone) {
-		this.percentDone = percentDone;
-	}
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
-	public TaskType getTaskType() {
-		return taskType;
-	}
+    public int getPercentDone() {
+        return percentDone;
+    }
 
-	public void setTaskType(TaskType taskType) {
-		this.taskType = taskType;
-	}
+    public void setPercentDone(int percentDone) {
+        this.percentDone = percentDone;
+    }
 
-		public void addChild(ActividadobraDTO child) {
-		getChildren().add(child);
-	}
+    public TaskType getTaskType() {
+        return taskType;
+    }
 
-	public boolean hasChildren() {
-		return !children.isEmpty();
-	}
-        
-//        
-//        private long oidactiviobra;
-//    private String strdescactividad;
-//    private Date fechaInicio;
-//    private Date fechaFin;
-//    private Integer peso;
-//    private Double duracion;
-//    private Integer estado;
-//    private Set dependenciasForFkActividadOrigen = new HashSet(0);
-//    private Set dependenciasForFkActividadDestino = new HashSet(0);
-//    private ContratoDTO contrato;
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
+
+    public void addChild(ActividadobraDTO child) {
+        getChildren().add(child);
+    }
+
+    public boolean hasChildren() {
+        return !children.isEmpty();
+    }
+
 //
-//    public ActividadobraDTO() {
-//    }
-//
-//    public ActividadobraDTO(Actividadobra actividadobra) {
-//        this.oidactiviobra = actividadobra.getOidactiviobra();
-//        this.strdescactividad = actividadobra.getStrdescactividad();
-//        this.fechaInicio = actividadobra.getFechaInicio();
-//        this.fechaFin = actividadobra.getFechaFin();
-//        this.peso = actividadobra.getPeso();
-//        this.duracion = actividadobra.getDuracion();
-//        this.estado = actividadobra.getEstado();
-//      
-//    }
-//
+//    
 //    public ActividadobraDTO(long oidactiviobra, String strdescactividad, Date fechaInicio, Date fechaFin, Integer peso, Double duracion, Integer estado, ContratoDTO contrato, Set dependenciasForFkActividadOrigen, Set dependenciasForFkActividadDestino) {
 //        this.oidactiviobra = oidactiviobra;
 //        this.strdescactividad = strdescactividad;
@@ -203,7 +199,6 @@ public class ActividadobraDTO implements Serializable {
 //    public void setStrdescactividad(String strdescactividad) {
 //        this.strdescactividad = strdescactividad;
 //    }
-
 //    /**
 //     * @return the fechaInicio
 //     */
@@ -280,7 +275,6 @@ public class ActividadobraDTO implements Serializable {
 //    public Set getDependenciasForFkActividadOrigen() {
 //        return dependenciasForFkActividadOrigen;
 //    }
-
 //    /**
 //     * @param dependenciasForFkActividadOrigen the
 //     * dependenciasForFkActividadOrigen to set
@@ -317,7 +311,5 @@ public class ActividadobraDTO implements Serializable {
 //    public void setContrato(ContratoDTO contrato) {
 //        this.contrato = contrato;
 //    }
-//  
-    
-    
+  
 }

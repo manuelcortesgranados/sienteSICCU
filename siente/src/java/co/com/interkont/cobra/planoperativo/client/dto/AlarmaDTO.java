@@ -4,12 +4,7 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Alarma;
-import co.com.interkont.cobra.to.Relaciontipoobraalarma;
-import co.com.interkont.cobra.to.Semaforo;
-import com.interkont.cobra.util.CobraUtil;
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +13,7 @@ import java.util.Set;
  *
  * @author desarrollo9
  */
-public class AlarmaDTO implements Serializable{
+public class AlarmaDTO implements IsSerializable{
     private int intidalarma;
     private BigDecimal numvalorini;
     private BigDecimal numvalorfin;
@@ -29,7 +24,7 @@ public class AlarmaDTO implements Serializable{
     }
 
     public AlarmaDTO(int intidalarma, BigDecimal numvalorini,BigDecimal numvalorfin) {
-        System.out.println("numvalorfin = " + intidalarma);
+        
         this.intidalarma = intidalarma;
         this.numvalorini = numvalorini;
         this.numvalorfin = numvalorfin;
@@ -37,7 +32,7 @@ public class AlarmaDTO implements Serializable{
     }
 
     public AlarmaDTO(int intidalarma, BigDecimal numvalorini, BigDecimal numvalorfin, Set semaforos, Set relaciontipoobraalarmas) {
-        System.out.println("relaciontipoobraalarmas = " );
+       
         this.intidalarma = intidalarma;
         this.numvalorini = numvalorini;
         this.numvalorfin = numvalorfin;
@@ -45,13 +40,6 @@ public class AlarmaDTO implements Serializable{
         this.relaciontipoobraalarmas = relaciontipoobraalarmas;
     }
 
-//    public AlarmaDTO(Alarma alarma){
-//        this.intidalarma = alarma.getIntidalarma();
-//        this.numvalorini = alarma.getNumvalorini();
-//        this.numvalorfin = alarma.getNumvalorfin();       
-//        
-//
-//    }
 
     public int getIntidalarma() {
         return this.intidalarma;

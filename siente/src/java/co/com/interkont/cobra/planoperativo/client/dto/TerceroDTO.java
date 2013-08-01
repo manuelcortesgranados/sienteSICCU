@@ -4,22 +4,16 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Tercero;
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  *
  * @author desarrollo9
  */
-public class TerceroDTO implements Serializable{
+public class TerceroDTO implements IsSerializable{
     
     private int intcodigo;
-    private String strnombrecompleto;
-
-    TerceroDTO(Tercero tercero) {
-       this.intcodigo=tercero.getIntcodigo();
-       this.strnombrecompleto=tercero.getStrnombrecompleto();
-    }
+    private String strnombrecompleto;   
 
     public TerceroDTO() {
     }
