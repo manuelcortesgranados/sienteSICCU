@@ -1072,3 +1072,264 @@ a.ikont-acl-cambioprecios:hover {
     background-position: 0px -60px;
 }
 
+.vtitle11 {
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:13px;
+    line-height:15px;
+    color:#095285;
+}
+
+a.ikont-hcl-imgTacometro {
+    width:85px;
+    height:85px;
+    display: block;
+    background-position: 0px 0px;
+    background-image:url(../imgs/bt_tacometro.png);
+}
+a.ikont-hcl-imgTacometro:hover {
+    background-position: 0px -85px;
+}
+
+#header_content .comentario {
+    background: url(../imgs/bt_comentario.png) no-repeat;
+    width:auto;
+    height:25px;
+    margin:5px 0 6px 5px;
+}
+
+.vtitle09 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:9px;
+    font-style:italic;
+    color:#999;
+    line-height:9px;
+}
+
+textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
+    background: #FFF;
+    border: #999 2px solid; 
+    color: #003; 
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 13px; 
+    line-height:13px; 
+    color:#003; 
+    font-weight:400; 
+    font-style:italic; 
+    text-align: justify; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+    width: 100%;
+    height: 90px;
+}
+.ikont-hpg-cargarusuario {
+    background: #FFF;
+    border: #999 2px solid; 
+    color: #003; 
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 13px; 
+    line-height:13px; 
+    color:#003; 
+    font-weight:400; 
+    font-style:italic; 
+    text-align: justify; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+}
+
+.ikont-hot-idcomentario{
+    color:#666; 
+    font-style:italic; 
+    text-align: justify; 
+    padding: 10px;
+    
+}
+
+.ikont-hpg-comentarios {
+    background: #f6f7f9; 
+    -moz-box-shadow: 0.1em 0.1em 0.1em #51819E; 
+    -webkit-box-shadow: 0.1em 0.1em 0.3em #51819E; 
+    color: #003; 
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-size: 11px; 
+    line-height:12px;
+    color:#666; 
+    font-style:italic; 
+    text-align: justify; 
+    -webkit-border-radius: 8px; 
+    border-radius: 8px;
+    width: 100%;
+}
+
+.ikont-hot-idcomentario{
+    align: justify;
+    padding: 10px;
+}
+
+.ikont-hgi-strfoto{
+    width: 85px;
+    height: 65px;
+}
+
+.vtitle12 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:9px;
+    font-style:italic;
+    color:#F90;
+    line-height:9px;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:9px;
+    font-style:italic;
+    color:#F90;
+    line-height:9px;
+}
+
+a.ikont-acl-agregarcomentario {
+    background-image:url(../imgs/bt_publicar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+a.ikont-acl-agregarcomentario:hover {
+    background-position: 0px -25px;
+}
+
+.ikont-hot-idcontarmensaje, .ikont-hot-contarmensaje{
+    float: right;
+}
+
+#header_content1 .star {
+    background: url("../imgs/star_g.png") no-repeat scroll 0 0 transparent;
+    height: 25px;
+    margin: 5px 0 6px 5px;
+    width: auto;
+
+}
+
+#header_content1 {
+    width:100%;
+    height: 30px;
+    color: #000033;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 30px;
+    border-bottom: #C1D1E7 thin solid;
+    text-indent: 30px;
+    background-position:center left;
+}
+
+.vtitle13 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:15px;
+    font-style:italic;
+    color:#FFF;
+    line-height:15px;
+}
+
+.ikont-hpg-pgcontenido, .ikont-rp-comentarios, .ikont-rp-fotos{
+    width: 200px;
+    height: 100px;
+    border-radius: 5px;
+}
+
+.vtitle14{
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:13px;
+    font-style:italic;
+    color:#FF9;
+    line-height:13px;
+    font-weight:500;
+}
+
+.vtitle15 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:30px;
+    font-style:italic;
+    font-weight:bold;
+    color:#F90;
+    line-height:20px;
+}
+
+a.ikont-acl-space {
+    background-image:url(../imgs/social_fb_.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+}
+a.ikont-acl-space:hover {
+    background-position: 0px -25px;
+}
+
+a.ikont-acl-space2 {
+    background-image:url(../imgs/social_tw_.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+}
+a.ikont-acl-space2:hover {
+    background-position: 0px -25px;
+}
+
+.vtitle17 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:18px;
+    font-style:italic;
+    color:#004670;
+    line-height:20px;
+}
+
+.vtitle18 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:13px;
+    font-style:italic;
+    color:#666;
+}
+
+.ikont-hgi-strfoto{
+    height: 113px;
+    border: #FFF 8px solid;
+}
+
+.bcg-tb-per-ciu {
+    background: #F2F7FA;
+}
+
+a.ikont-hcl-modificarusuario {
+    background-image:url(../imgs/perfil01.png);
+    width:160px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+}
+a.ikont-hcl-modificarusuario:hover {
+    background-position: 0px -25px;
+}
+
+.vtitle19 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:14px;
+    font-style:italic;
+    color:#004670;
+    line-height:15px;
+
+}
+
+.vtitle20 {
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:14px;
+    font-style:italic;
+    color:#666;
+    line-height:15px;
+}

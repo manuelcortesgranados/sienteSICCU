@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalFicha" styleClass="ikont"   
+                    <a4j:commandLink id="esconder_modalFicha" styleClass="ikont closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFicha')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -31,7 +31,7 @@
                     <a4j:commandButton value="Reporte Ficha de #{var.textoobra}" action="#{Reportes.intreportefichados}" render="Fichaimprimir"/>
                     <a4j:commandButton value="Reporte Ficha de los Convenios" action="#{Reportes.intreportefichatres}" render="Fichaimprimir"/>
                 </h:panelGrid>
-                <rich:panel id="Fichaimprimir">
+                <h:panelGroup layout="block" id="Fichaimprimir">
                     <h:panelGrid rendered="#{Reportes.intreporteficha == 1}">
                         <h:commandButton value="PDF" action="#{Reportes.reportePdfFichaCorto}"/>
                     </h:panelGrid>
@@ -41,7 +41,7 @@
                     <h:panelGrid rendered="#{Reportes.intreporteficha == 3}">
                         <h:commandButton value="PDF" action="#{Reportes.reportePdfFichaConvenio}"/>
                     </h:panelGrid>                   
-                </rich:panel>
+                </h:panelGroup>
             </center>
         </h:form>
     </rich:popupPanel>

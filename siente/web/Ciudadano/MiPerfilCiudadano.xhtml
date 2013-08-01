@@ -50,44 +50,44 @@
         </script>
         <h:form>
             <h:panelGrid columns="3"   id="pgmiperfil">
-                <h:panelGrid    columnClasses="panelcenter" >
+                <h:panelGrid    columnClasses="panelcenter" styleClass="ikont-hpg-fotociuda bcg-tb-per-ciu">
                     <h:graphicImage  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
-                    <h:outputLabel  styleClass="ikont-hol-strnombrecompleto"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}"/>
-                    <h:outputLabel  styleClass="ikont-hol-departamento"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"/>
+                    <h:outputLabel  styleClass="ikont-hol-strnombrecompleto vtitle17"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}"/>
+                    <h:outputLabel  styleClass="ikont-hol-departamento vtitle18"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"/>
                     <interkont:spacer width="30"/>
                 </h:panelGrid>
 
-                <h:panelGrid columns="2"  bgcolor="#F2F7FA" styleClass="ikont-hpg-falsoboolotrousuario"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                <h:panelGrid columns="2" styleClass="ikont-hpg-falsoboolotrousuario bcg-tb-per-ciu"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
 
-                    <h:outputText  styleClass="ikont-hot-correo"   id="lblcorreoelectronico"  value="#{var.correo}" />
-                    <h:outputLabel  styleClass="ikont-hol-stremail"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.stremail}" />
+                    <h:outputText  styleClass="ikont-hot-correo vtitle19"   id="lblcorreoelectronico"  value="#{var.correo}" />
+                    <h:outputLabel  styleClass="ikont-hol-stremail vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.stremail}" />
                     <interkont:spacer height="5" />
                     <interkont:spacer height="5" />
-                    <h:outputText  styleClass="ikont-hot-idioma"   id="lblidioma"  value="#{var.idioma}"/>
-                    <h:outputLabel  styleClass="ikont-hol-espaniol"     value="Español" />
+                    <h:outputText  styleClass="ikont-hot-idioma vtitle19"   id="lblidioma"  value="#{var.idioma}"/>
+                    <h:outputLabel  styleClass="ikont-hol-espaniol vtitle20"     value="Español" />
                     <interkont:spacer height="5"/>
                     <interkont:spacer height="5"/>
-                    <h:outputText  styleClass="ikont-hot-cedula"   id="lblcedula"  value="#{var.cedula}"/>
-                    <h:outputLabel  styleClass="ikont-hol-intcedula"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.intcedula}"/>
+                    <h:outputText  styleClass="ikont-hot-cedula vtitle19"   id="lblcedula"  value="#{var.cedula}"/>
+                    <h:outputLabel  styleClass="ikont-hol-intcedula vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.intcedula}"/>
                     <interkont:spacer height="5"/>
                     <interkont:spacer height="5"/>
-                    <h:outputText  styleClass="ikont-hot-fechadenacimiento"   id="lblfechanac"  value="#{var.fechadeNacimiento}" />
-                    <h:outputLabel  styleClass="ikont-hol-datefechanacimiento"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.datefechanacimiento}">
+                    <h:outputText  styleClass="ikont-hot-fechadenacimiento vtitle19"   id="lblfechanac"  value="#{var.fechadeNacimiento}" />
+                    <h:outputLabel  styleClass="ikont-hol-datefechanacimiento vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.datefechanacimiento}">
                         <f:convertDateTime dateStyle="long"/>
                     </h:outputLabel>
                     <interkont:spacer height="5"/>
                     <interkont:spacer height="5"/>
-                    <h:outputText  styleClass="ikont-hot-ubicacionciudadano"   id="lblubicacion"  value="#{var.ubicacionciudadano}" />
-                    <h:outputLabel  styleClass="ikont-hol-departamentociudadano"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}" />
+                    <h:outputText  styleClass="ikont-hot-ubicacionciudadano vtitle19"   id="lblubicacion"  value="#{var.ubicacionciudadano}" />
+                    <h:outputLabel  styleClass="ikont-hol-departamentociudadano vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}" />
 
                     <interkont:spacer height="5"/>
                     <interkont:spacer height="5"/>
-                    <h:outputText  styleClass="ikont-hot-celular"   id="lblcelular"  value="#{var.celular}" />
-                    <h:outputLabel  styleClass="ikont-hol-strtelefono1"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" />
+                    <h:outputText  styleClass="ikont-hot-celular vtitle19"   id="lblcelular"  value="#{var.celular}" />
+                    <h:outputLabel  styleClass="ikont-hol-strtelefono1 vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" />
                   
                 </h:panelGrid>
                 <h:panelGrid  >
-                    <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario"   bgcolor="#F2F7FA" rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
+                    <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario bcg-tb-per-ciu"    rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
                         <h:outputText  styleClass="ikont-hot-idioma2"   id="lblidiomaotro"  value="#{var.idioma}" />
                         <h:outputLabel  styleClass="ikont- "     value="Español" />
                         <interkont:spacer height="5"/>
@@ -96,18 +96,18 @@
                         <h:outputLabel  styleClass="ikont-hol-municipiodepartamento"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"  />
                     </h:panelGrid>
 
-                    <h:panelGrid columns="1"    bgcolor="#F2F7FA">
+                    <h:panelGrid columns="1"    styleClass="bcg-tb-per-ciu">
                         <interkont:spacer height="5"/>
                         <interkont:spacer height="5"/>
                         <interkont:spacer height="5"/>
                         <interkont:spacer height="5"/>
                         <h:outputLabel  styleClass="ikont-hol-strfacebook"   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfacebook}" />
-                        <a4j:commandLink styleClass="ikont-acl-space"   disabled="true"/>
+                        <a4j:commandLink styleClass="ikont-acl-space"  />
                         <h:outputLabel  styleClass="ikont-hol-strtwiter"   value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtwiter}"  />
-                        <a4j:commandLink styleClass="ikont-acl-space2"   disabled="true"/>
+                        <a4j:commandLink styleClass="ikont-acl-space2"   />
                     </h:panelGrid>
                     <interkont:spacer height="5"/>
-                    <h:panelGrid bgcolor="#F2F7FA"   rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                    <h:panelGrid styleClass="bcg-tb-per-ciu"   rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
                         <h:commandLink styleClass="ikont-hcl-modificarusuario"    action="#{Ciudadano$PerfilCiudadano.modificarUsuario}" immediate="true"/>
                     </h:panelGrid>
                 </h:panelGrid>
@@ -123,30 +123,30 @@
         <interkont:spacer height="20"/>
         <h:form>
             <h:panelGrid columns="2" id="pgcontenido">
-                <rich:panel styleClass="ikont-rp-pgcontenido"   >
-                    <h:outputLabel  styleClass="ikont-hol-proyecto"   value="#{var.proyecto}"/>
+                <h:panelGroup layout="block" styleClass="ikont-hpg-pgcontenido sliderichcontentblue "   >
+                    <h:outputLabel  styleClass="ikont-hol-proyecto vtitle13"   value="#{var.proyecto}"/>
                     <h:panelGrid columns="3">
                         <h:graphicImage  styleClass="ikont-hgi-ciudadano_01"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_01.png"  />
-                        <h:outputLabel  styleClass="ikont-hol-obraseguida "   value="#{SessionBeanCobra.obraseguida}" />
-                        <h:outputLabel  styleClass="ikont-hol-solicitudproyectos"   value="Ver #{var.solicitudproyecto}s" />
+                        <h:outputLabel  styleClass="ikont-hol-obraseguida vtitle15 "   value="#{SessionBeanCobra.obraseguida}" />
+                        <h:outputLabel  styleClass="ikont-hol-solicitudproyectos vtitle14"   value="Ver #{var.solicitudproyecto}s" />
                     </h:panelGrid>
-                </rich:panel>
-                <rich:panel styleClass="ikont-rp-comentarios">
-                    <h:outputLabel  styleClass="ikont-hol-comentarios"   value="Comentarios" />
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="ikont-rp-comentarios sliderichcontentblue">
+                    <h:outputLabel  styleClass="ikont-hol-comentarios vtitle13"   value="Comentarios" />
                     <h:panelGrid columns="3">
                         <h:graphicImage  styleClass="ikont-hgi-ciudadano_02"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_02.png"  />
-                        <h:outputLabel  styleClass="ikont-hol-intcomentario"   value="#{SessionBeanCobra.ciudadanoservice.intcomentario}" />
-                        <h:outputLabel  styleClass="ikont-hol-vermimuro"   value="Ver mi muro" />
+                        <h:outputLabel  styleClass="ikont-hol-intcomentario vtitle15"   value="#{SessionBeanCobra.ciudadanoservice.intcomentario}" />
+                        <h:outputLabel  styleClass="ikont-hol-vermimuro vtitle14"   value="Ver mi muro" />
                     </h:panelGrid>
-                </rich:panel>
-                <rich:panel styleClass="ikont-"   >
-                    <h:outputLabel  styleClass="ikont-hol-fotos"   value="Fotos" />
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="ikont-rp-fotos sliderichcontentblue"   >
+                    <h:outputLabel  styleClass="ikont-hol-fotos vtitle13"   value="Fotos" />
                     <h:panelGrid columns="3">
                         <h:graphicImage  styleClass="ikont-hgi-ciudadano_03"    url="#{var.ipserver}#{var.versioncobra}/resources/imgs/ciudadano_03.png" />
-                        <h:outputLabel  styleClass="ikont-hol-intfotos"   value="#{SessionBeanCobra.ciudadanoservice.intfotos}" />
-                        <h:outputLabel  styleClass="ikont-hol-verimagagenes"   value="Ver imágenes"  />
+                        <h:outputLabel  styleClass="ikont-hol-intfotos vtitle15"   value="#{SessionBeanCobra.ciudadanoservice.intfotos}" />
+                        <h:outputLabel  styleClass="ikont-hol-verimagagenes vtitle14"   value="Ver imágenes"  />
                     </h:panelGrid>
-                </rich:panel>
+                </h:panelGroup>
               
             </h:panelGrid>
         </h:form>
@@ -158,17 +158,17 @@
         </div>
         <interkont:spacer height="10"/>
         <h:form id="frmcomentariomuro">
-            <rich:panel id="panelmuro" >
+            <h:panelGroup layout="block" id="panelmuro" >
                 <h:panelGrid columns="1" >
                     <a4j:region id="idregion">
                         <h:panelGrid columns="1"   >
                             <a4j:status id="idstatuscomentario3"/>
-                            <h:outputText  styleClass="ikont-hot-contarmensaje"   id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" />
+                            <h:outputText  styleClass="ikont-hot-contarmensaje vtitle12"   id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" />
                             <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this,400)"
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo3(this);" >
                                 <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje3" status="idstatuscomentario3" />
                             </h:inputTextarea>
-                            <h:outputText  styleClass="ikont-hot-espacioparaopinar"   value="Utilice este espacio para opinar e intercambiar opiniones con los demás ciudadanos" />
+                            <h:outputText  styleClass="ikont-hot-espacioparaopinar vtitle09"   value="Utilice este espacio para opinar e intercambiar opiniones con los demás ciudadanos" />
                             <a4j:commandLink styleClass="ikont-acl-agregarcomentario"   action="#{Ciudadano$PerfilCiudadano.AgregarComentario}" render="pgmuro,panelmuro,pgcontenido">
                             </a4j:commandLink>
                         </h:panelGrid>
@@ -207,7 +207,7 @@
                     </h:panelGrid>
                     <rich:dataScroller for="rpmuro"  render="pgmuro"  />
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
         <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
 
