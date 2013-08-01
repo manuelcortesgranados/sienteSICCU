@@ -29,9 +29,9 @@ public class MainEntryPoint implements EntryPoint {
     public void onModuleLoad() {
        //ProyectoForm pr =new ProyectoForm();
                 
-     //PlanOperativoGantt pg= new PlanOperativoGantt();
-       AdvancedFormsExample fejemplo = new AdvancedFormsExample();
-        RootPanel.get().add(fejemplo);
-        
+     PlanOperativoGantt pg= new PlanOperativoGantt();
+     //  AdvancedFormsExample fejemplo = new AdvancedFormsExample();
+       // RootPanel.get().add(fejemplo);
+        RootPanel.get().add(pg);
     }
 }

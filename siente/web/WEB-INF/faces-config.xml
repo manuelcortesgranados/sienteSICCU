@@ -26,7 +26,7 @@
     <application>
         <resource-bundle>
             <!--Bundle para siente-->
-            <base-name>cobra/properties/Bundle</base-name>
+            <base-name>cobra/properties/BundleFonade</base-name>
             <!--Bundle para cali
             <base-name>cobra/properties/BundleCali</base-name>-->
             <!--Bundle para Fonade

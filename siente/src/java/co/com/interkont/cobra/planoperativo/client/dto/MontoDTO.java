@@ -4,15 +4,13 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Monto;
-import co.com.interkont.cobra.to.Rubro;
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  *
  * @author desarrollo9
  */
-public class MontoDTO implements Serializable{
+public class MontoDTO implements IsSerializable{
     
      private int idmonto;
      private ContratoDTO contratodto;
@@ -31,14 +29,7 @@ public class MontoDTO implements Serializable{
         this.vigencia = vigencia;
     }
      
-       public MontoDTO(Monto monto) {
-        this.idmonto = monto.getIdmonto();
-        this.contratodto = new ContratoDTO(monto.getContrato());
-        this.rubrodto =new RubroDTO(monto.getRubro());
-        this.valor = monto.getValor();
-        this.vigencia = monto.getVigencia();
-    }
-
+   
     /**
      * @return the idmonto
      */

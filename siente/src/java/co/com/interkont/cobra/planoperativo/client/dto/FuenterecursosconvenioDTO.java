@@ -4,11 +4,7 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Actividadobra;
-import co.com.interkont.cobra.to.Contrato;
-import co.com.interkont.cobra.to.Fuenterecursosconvenio;
-import co.com.interkont.cobra.to.Rolentidad;
-import co.com.interkont.cobra.to.Tercero;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +13,7 @@ import java.util.Set;
  *
  * @author desarrollo9
  */
-public class FuenterecursosconvenioDTO {
+public class FuenterecursosconvenioDTO implements IsSerializable {
 
     private int idfuenterecursosconvenio;
     private TerceroDTO tercero;
@@ -30,17 +26,7 @@ public class FuenterecursosconvenioDTO {
     private Set obrafuenterecursosconvenioses = new HashSet(0);
 
     public FuenterecursosconvenioDTO() {
-    }
-
-    public FuenterecursosconvenioDTO(Fuenterecursosconvenio fuenterecursosconvenio) {
-        this.idfuenterecursosconvenio = fuenterecursosconvenio.getIdfuenterecursosconvenio();
-        this.tercero = new TerceroDTO(fuenterecursosconvenio.getTercero());
-        this.valoraportado = fuenterecursosconvenio.getValoraportado();
-        this.otrasreservas = fuenterecursosconvenio.getOtrasreservas();
-        this.reservaiva = fuenterecursosconvenio.getReservaiva();
-        this.valorcuotagerencia = fuenterecursosconvenio.getValorcuotagerencia();
-        this.tipoaporte = fuenterecursosconvenio.getTipoaporte();
-    }
+    }    
 
     public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, TerceroDTO tercero, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte,Set obrafuenterecursosconvenioses) {
         this.idfuenterecursosconvenio = idfuenterecursosconvenio;

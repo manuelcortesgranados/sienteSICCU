@@ -149,13 +149,13 @@ public class AdvancedFormsExample implements IsWidget, EntryPoint {
 ////
 ////                            }
 //                            dialogBox.setText(""+semaforos.size());
-                            serverResponseLabel.setHTML("id <br>Id : " + result.getIntidcontrato() + "<br> nombre:" + result.getStrnombre());
+                            serverResponseLabel.setHTML("id <br>Id : " + result.getIntidcontrato() + "<br> nombre:" + result.getStrnumcontrato());
 
                         } else {
                             serverResponseLabel.setHTML("No employee with the specified id found");
                         }
                         dialogBox.center();
-                        dialogBox.setText("contrato" + result.getStrnombre());
+                        dialogBox.setText("contrato" + result.getStrnumcontrato());
                         
                     }
                 });

@@ -4,8 +4,7 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Rubro;
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +12,7 @@ import java.util.Set;
  *
  * @author desarrollo9
  */
-public class RubroDTO implements Serializable{
+public class RubroDTO implements IsSerializable{
 
      private int idrubro;
      private String strdescripcion;
@@ -23,10 +22,6 @@ public class RubroDTO implements Serializable{
     public RubroDTO() {
     }
     
-    RubroDTO(Rubro rubro) {
-       this.idrubro=rubro.getIdrubro();
-       this.strdescripcion=rubro.getStrdescripcion();       
-    }
 
     public RubroDTO(int idrubro, String strdescripcion,Set obrafuenterecursosconvenioses,Set montos) {
         this.idrubro = idrubro;
