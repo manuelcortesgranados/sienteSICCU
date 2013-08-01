@@ -46,7 +46,7 @@
                                     <h:outputText  styleClass="ikont-hot-numarch" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirActa.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarch" value="#{var.nomarc}" />
@@ -55,7 +55,7 @@
                                                     <h:outputText  styleClass="ikont-hot-bitarch" value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
 

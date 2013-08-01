@@ -31,7 +31,7 @@
     <ui:define name="body">
         <h:form>
             <center>
-                <rich:panel id="mp-regMatrizSupervision">
+                <h:panelGroup layout="block" id="mp-regMatrizSupervision">
                     <rich:panel header="1. Datos Visita">
                         <interkont:spacer height="3" />
 
@@ -57,7 +57,7 @@
                                              onclick="#{rich:component('panelUploadArchivoSuper')}.show(); return true;" />
                         </h:panelGrid>
                     </rich:panel>
-                </rich:panel>
+                </h:panelGroup>
             </center>
         </h:form>
         

@@ -57,14 +57,14 @@
                 </h:panelGrid>
                 <h:graphicImage  styleClass="ikont-hgi-strfoto"  url="#{SessionBeanCobra.usuarioObra.tercero.strfoto}"  />
             </h:panelGrid>
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <div id="header_content" >
                     <div class="ikont-div-headercontent star">
                         <h:outputText  styleClass="ikont-hot-participacion"   value="#{var.participacion}" />
                     </div>
                 </div>
-            </rich:panel>
-            <rich:panel >
+            </h:panelGroup>
+            <h:panelGroup layout="block">
                 <center>
                     <h:panelGrid columns="3"  cellspacing="0" cellpadding="4" styleClass="ikont-hpg-ayudenos"  >
                         <h:graphicImage  styleClass="ikont-hgi-p_controlar"    value="/resources/imgs/p_controlar.png"  ></h:graphicImage>
@@ -72,22 +72,22 @@
                         <h:outputText  styleClass="ikont-hot-utilice" value="#{var.utilice}"></h:outputText>
                     </h:panelGrid>
                 </center>
-            </rich:panel>
+            </h:panelGroup>
             <h:panelGrid columns="2" rowClasses="rowtop"  >
-                <rich:panel>
+                <h:panelGroup layout="block">
                     <div id="header_content" >
                         <div class="ikont-div-headercontent2">
                             <h:outputText  styleClass="ikont-hot-miopinion"   value="#{var.miopinion}" />
                         </div>
                     </div>
-                </rich:panel>
-                <rich:panel>
+                </h:panelGroup>
+                <h:panelGroup layout="block">
                     <div id="header_content2" >
                         <div class="ikont-div-headercontent3 star">
                             <h:outputText  styleClass="ikont-hot-participacion"   value="#{var.participacion}" />
                         </div>
                     </div>
-                </rich:panel>
+                </h:panelGroup>
                 <h:form id="frmparticiapcioncomentario">
                     <h:panelGrid columns="1"   >
                         <h:outputText  styleClass="ikont-hot-paso" value="#{var.paso} 1" />
@@ -186,13 +186,13 @@
                                 </h:panelGrid>
                             </center>
                         </h:panelGroup>
-                        <rich:panel>
+                        <h:panelGroup layout="block">
                             <div id="header_content" >
                                 <div class="ikont-div-headercontent3">
                                     <h:outputText  styleClass="ikont-hot-opiniondelciudadano"   value="#{var.opiniondelciudadano}" />
                                 </div>
                             </div>
-                        </rich:panel>
+                        </h:panelGroup>
                     </h:form>
                     <h:form target="_blank">
                         <h:panelGrid columns="3" >

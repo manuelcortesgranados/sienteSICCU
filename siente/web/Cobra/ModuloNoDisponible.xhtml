@@ -11,13 +11,13 @@
     <f:view locale="#{var.rcalendarlocale}">
         <h:form>
             <center>
-                <rich:panel >
+                <h:panelGroup layout="block" >
                     <h:panelGroup>
                         <h:graphicImage  styleClass="ikont-hgi-msginfo" value="/resources/imgs/msginfo.png"/>
                         <h2><h:outputText  styleClass="ikont-hot-modenconstruct" value="#{var.moduloenconstruccion}"/></h2>
                     </h:panelGroup>
                     <h:commandLink styleClass="ikont-hcl-volver" value="Volver" type="submit" action="volver" id="volver"/>
-                </rich:panel>
+                </h:panelGroup>
             </center>
         </h:form>
     </f:view>

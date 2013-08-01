@@ -47,7 +47,7 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <rich:panel >
+                                <h:panelGroup layout="block" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-headeruploadimagenciudadano"   value="#{var.arcsub}"/>
                                     </f:facet>
@@ -64,7 +64,7 @@
                                             </h:panelGrid>
                                         </h:panelGroup>
                                     </rich:dataGrid>
-                                </rich:panel>
+                                </h:panelGroup>
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"

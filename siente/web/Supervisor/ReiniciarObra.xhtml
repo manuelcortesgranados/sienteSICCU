@@ -52,7 +52,7 @@
                                 <a4j:commandButton id="adjuntarActaReinicio" value="#{var.adjuentaractaderei}" render="layoutDocActaReinicio"
                                                    styleClass="ikont-acb-actareincio"     
                                                    onclick="#{rich:component('panelUploadActaReinicio')}.show();" />
-                                <rich:panel>
+                                <h:panelGroup layout="block">
                                     <h:outputText  styleClass="ikont-hot-nosubiracta" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos==0}" value="#{var.nohasubidoningun}"/>
                                     <center>
                                         <rich:dataGrid styleClass="ikont-rdg-cargactareini" columns="1" rowKeyVar="row" value="#{Supervisor$SuspenderObra.cargadorActaReinicio.archivos}" var="file" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"
@@ -62,7 +62,7 @@
                                             <h:graphicImage  styleClass="ikont-hgi-actareinicio" url="/resources/botones/chulo.png" rendered="#{Supervisor$SuspenderObra.cargadorActaReinicio.numArchivos!=0}"/>
                                         </rich:dataGrid>
                                     </center>
-                                </rich:panel>
+                                </h:panelGroup>
                             </h:panelGrid>
                             <center>
                                 <h:panelGrid columns="2">

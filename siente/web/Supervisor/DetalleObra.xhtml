@@ -653,7 +653,7 @@
 
                     <rich:collapsiblePanel id="simpleToggleContratoInterventoria" switchType="client" header="#{var.contrato} #{var.interventorObra}ia" expanded="false" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.pnlcontratointerventoria}" toggleListener="#{Supervisor$DetalleObra.llenarContratosInterventoria}">
                         <a4j:ajax event="click"  render="panelInterventoriaContra"/>
-                        <rich:panel id="panelInterventoriaContra"  >
+                        <h:panelGroup layout="block" id="panelInterventoriaContra"  >
                             <rich:dataTable id="tablaInterventoria"
                                             rows="10"
                                             var="contraInterven"
@@ -732,12 +732,12 @@
                                     <rich:dataScroller for="tablaInterventoria" render="tablaInterventoria"></rich:dataScroller>
                                 </f:facet>
                             </rich:dataTable>
-                        </rich:panel>
+                        </h:panelGroup>
                     </rich:collapsiblePanel>
 
                     <rich:collapsiblePanel id="simpleToggleReportes" switchType="client" header="#{var.reportedeobra}" expanded="false">
                         <a4j:ajax event="click"  render="panelReporteObra"/>
-                        <rich:panel id="panelReporteObra"  >
+                        <h:panelGroup layout="block" id="panelReporteObra"  >
                             <h:form target="_blank">
 
                                 <center>
@@ -750,7 +750,7 @@
                                     </h:panelGrid>
                                 </center>
                             </h:form>
-                        </rich:panel>
+                        </h:panelGroup>
                     </rich:collapsiblePanel>
 
                     <rich:collapsiblePanel id="simpleToggleBeneficiariosxproyecto" switchType="client" expanded="false" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null
@@ -760,7 +760,7 @@
                         <a4j:ajax event="click"   render="rpListaBeneficiariosxproyecto"  />
 
                         <center>
-                            <rich:panel id="rpListaBeneficiariosxproyecto" >
+                            <h:panelGroup layout="block" id="rpListaBeneficiariosxproyecto" >
                                 <rich:dataTable id="tablabeneficiarioxproyecto"
                                                 value="#{Supervisor$DetalleObra.lstbeneficiario}"
                                                 rows="10"
@@ -834,14 +834,14 @@
                                         </rich:columnGroup>
                                     </f:facet>
                                 </rich:dataTable>
-                            </rich:panel>
+                            </h:panelGroup>
                         </center>
                     </rich:collapsiblePanel>
                     <h:form id="alimentaravance" rendered="#{!Supervisor$AdministrarObraNew.obra.booleantienehijos}">
 
                         <rich:collapsiblePanel id="simpleToggleActiviadesProyecto" switchType="ajax" expanded="false" header="#{var.actividadesproyecto}" toggleListener="#{Supervisor$DetalleObra.llenarActividadesxproyecto}">
                             <a4j:ajax event="switch" render="rpListaActividadesProyecto" />
-                            <rich:panel id="rpListaActividadesProyecto" >
+                            <h:panelGroup layout="block" id="rpListaActividadesProyecto" >
                                 <rich:dataTable id="listaActividadesAlimentar2"
                                                 onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'" sortMode="single"
@@ -961,7 +961,7 @@
                                         </rich:columnGroup>
                                     </f:facet>
                                 </rich:dataTable>
-                            </rich:panel>
+                            </h:panelGroup>
                         </rich:collapsiblePanel>
                     </h:form>
 
