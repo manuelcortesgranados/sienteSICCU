@@ -45,9 +45,9 @@
                 </center>
             </h:panelGroup>
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
-                <rich:panel style="width: 900px;" styleClass="ikont-rp-db">
+                <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-db">
                     <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
-                </rich:panel>
+                </h:panelGroup>
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >
@@ -58,20 +58,20 @@
                 </h:panelGrid>
                 
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==1}"  id="reg-plan-operativo-planificacion" >
-                    <rich:panel style="width: 900px;" styleClass="ikont-rp-planificacion">
+                    <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-planificacion">
                       planoperativo
                        
-                    </rich:panel>
+                    </h:panelGroup>
                 </a4j:region>
                 
                  <a4j:region rendered="#{Supervisor$Contrato.subpantalla==2}"  id="reg-plan-operativo-flujocaja" >
-                     <rich:panel style="width: 900px;" styleClass="ikont-rp-flujocaja">
+                     <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-flujocaja">
                          flujo caja
-                     </rich:panel>
+                     </h:panelGroup>
                 </a4j:region>
 
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==3}"  id="reg-plan-operativo-presupuesto">
-                    <rich:panel style="width:800px;height:400px;" styleClass="ikont-rp-po">
+                    <h:panelGroup layout="block" style="width:800px;height:400px;" styleClass="ikont-rp-po">
                         <center>
                             <h:panelGrid id="rpt-planoperativo" rendered="#{Supervisor$Contrato.boolreporte}" columns="3" cellpadding="0" cellspacing="20" >
                                 <h:panelGrid columnClasses="panelcenter">
@@ -95,12 +95,12 @@
                             </h:panelGrid>
                         </center>
                         plan operativo
-                    </rich:panel>   
+                    </h:panelGroup>   
                 </a4j:region>      
             </a4j:region> 
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==3}" id="reg-polizas">
-                <rich:panel style="width:800px;height:400px;">
+                <h:panelGroup layout="block" style="width:800px;height:400px;">
                     <center>
 
                         <h:panelGrid id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
@@ -188,18 +188,18 @@
                             </rich:dataTable>
                         </h:panelGrid>
                     </center>
-                </rich:panel>
+                </h:panelGroup>
             </a4j:region>  
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==4}" id="reg-formas-pago">
-                <rich:panel style="width:800px;height:400px;">
+                <h:panelGroup layout="block" style="width:800px;height:400px;">
                     forma pago
-                </rich:panel>
+                </h:panelGroup>
 
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==5}" id="reg-documentos">
-                <rich:panel style="width:800px;height:400px;">
+                <h:panelGroup layout="block" style="width:800px;height:400px;">
                     <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
 
                         <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
@@ -261,7 +261,7 @@
                             </rich:columnGroup>
                         </f:facet>
                     </rich:dataTable>
-                </rich:panel>
+                </h:panelGroup>
             </a4j:region>           
 
             <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">
