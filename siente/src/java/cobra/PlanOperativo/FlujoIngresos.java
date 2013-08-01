@@ -96,7 +96,7 @@ public class FlujoIngresos {
         }
     }
 
-    public void calcularTotalIngresosEntidad() {
+    public void calcularTotalIngresosFuente() {
         this.totalIngresosFuente = BigDecimal.valueOf(0.0);
         double totalIngresos = 0;
         int i = 0;

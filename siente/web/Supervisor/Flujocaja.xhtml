@@ -65,7 +65,7 @@
                             <h:outputLabel value="Mes #{columna + 1}" />
                         </f:facet>
                         <rich:inplaceInput value="#{fuenteIngresos.ingresos[columna]}" showControls="true">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="@form" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos" />
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
                         <f:facet name="footer">
@@ -75,7 +75,75 @@
                         </f:facet>
                     </rich:column>
                 </c:forEach>
+                <f:facet name="footer">
+                        <rich:column rowspan="2">
+                            <h:outputLabel value="Acumulados" />
+                        </rich:column>
+                        <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
+                            <rich:column>
+                                <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna]}">                                
+                                    <f:convertNumber currencySymbol="$ " type="currency" />
+                                </h:outputText>
+                            </rich:column>
+                        </c:forEach>
+                </f:facet>
             </rich:dataTable>
+        </h:form>
+
+        <h:form id="formFlujoEgresos">
+            <rich:extendedDataTable id="dataTableEgresos" var="fuenteEgresos" value="#{PlanOperativo.flujoEgresos}"
+                                    frozenColumns="2" style="width:800px;" selectionMode="none">
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Fuente egresos" />
+                    </f:facet>
+                    <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" />
+                    <f:facet name="footer">
+                        <h:outputLabel value="Totales" />
+                    </f:facet>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">
+                        <h:outputLabel value="Total egresos" />
+                    </f:facet>
+                    <h:outputText id="outputTextTotalEgresosFuente" value="#{fuenteEgresos.totalEgresosFuente}">
+                        <f:convertNumber currencySymbol="$ " type="currency" />
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText id="outputTextTotalEgresos" value="#{PlanOperativo.totalEgresos}">                                
+                            <f:convertNumber currencySymbol="$ " type="currency" />
+                        </h:outputText>
+                    </f:facet>
+                </rich:column>
+                <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Mes #{columna + 1}" />
+                        </f:facet>
+                        <rich:inplaceInput value="#{fuenteEgresos.egresos[columna]}" showControls="true">
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos" />
+                            <f:validateDoubleRange minimum="0" />
+                        </rich:inplaceInput>
+                        <f:facet name="footer">
+                            <h:outputText value="#{PlanOperativo.totalEgresosPeriodo[columna]}">                                
+                                <f:convertNumber currencySymbol="$ " type="currency" />
+                            </h:outputText>
+                        </f:facet>
+                    </rich:column>
+                </c:forEach>
+                <f:facet name="footer">
+                        <rich:column rowspan="2">
+                            <h:outputLabel value="Acumulados" />
+                        </rich:column>
+                        <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
+                            <rich:column>
+                                <h:outputText value="#{PlanOperativo.totalEgresosPeriodoAcumulativo[columna]}">                                
+                                    <f:convertNumber currencySymbol="$ " type="currency" />
+                                </h:outputText>
+                            </rich:column>
+                        </c:forEach>
+                </f:facet>
+            </rich:extendedDataTable>
         </h:form>
     </ui:define>
 </ui:composition>

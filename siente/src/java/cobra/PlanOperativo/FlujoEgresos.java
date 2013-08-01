@@ -75,6 +75,14 @@ public class FlujoEgresos {
     public void setTotalEgresosFuente(BigDecimal totalEgresosFuente) {
         this.totalEgresosFuente = totalEgresosFuente;
     }
+    
+    public String getDescripcionFuenteEgreso() {
+        if (!egresoProyecto) {
+            return itemFlujoEgresos.getStrdescriptcion();
+        }
+        
+        return proyecto.getStrnombreobra();
+    }
 
     public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Periodoflujocaja> periodosFlujoCaja) {
         this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
@@ -87,6 +95,20 @@ public class FlujoEgresos {
             egresos[i] = BigDecimal.valueOf(0.0);
             i++;
         }
+    }
+    
+    public void calcularTotalEgresosFuente() {
+        this.totalEgresosFuente = BigDecimal.valueOf(0.0);
+        double totalEgresos = 0;
+        int i = 0;
+
+        while (i < egresos.length) {
+            totalEgresos += egresos[i].doubleValue();
+
+            i++;
+        }
+
+        this.totalEgresosFuente = BigDecimal.valueOf(totalEgresos);
     }
     
     public void guardarFlujoEgresosProyecto() {

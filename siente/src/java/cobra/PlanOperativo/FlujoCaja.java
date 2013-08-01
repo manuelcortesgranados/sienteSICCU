@@ -29,7 +29,11 @@ public class FlujoCaja {
     List<FlujoIngresos> flujoIngresos;
     List<FlujoEgresos> flujoEgresos;
     double totalIngresosPeriodo[];
+    double totalIngresosPeriodoAcumulativo[];
+    double totalEgresosPeriodo[];
+    double totalEgresosPeriodoAcumulativo[];
     double totalIngresos;
+    double totalEgresos;
 
     public List<Periodoflujocaja> getPeriodosFlujoCaja() {
         return periodosFlujoCaja;
@@ -59,12 +63,44 @@ public class FlujoCaja {
         this.flujoIngresos = flujoIngresos;
     }
 
+    public List<FlujoEgresos> getFlujoEgresos() {
+        return flujoEgresos;
+    }
+
+    public void setFlujoEgresos(List<FlujoEgresos> flujoEgresos) {
+        this.flujoEgresos = flujoEgresos;
+    }
+
     public double[] getTotalIngresosPeriodo() {
         return totalIngresosPeriodo;
     }
 
     public void setTotalIngresosPeriodo(double[] totalIngresosPeriodo) {
         this.totalIngresosPeriodo = totalIngresosPeriodo;
+    }
+
+    public double[] getTotalIngresosPeriodoAcumulativo() {
+        return totalIngresosPeriodoAcumulativo;
+    }
+
+    public void setTotalIngresosPeriodoAcumulativo(double[] totalIngresosPeriodoAcumulativo) {
+        this.totalIngresosPeriodoAcumulativo = totalIngresosPeriodoAcumulativo;
+    }
+
+    public double[] getTotalEgresosPeriodo() {
+        return totalEgresosPeriodo;
+    }
+
+    public void setTotalEgresosPeriodo(double[] totalEgresosPeriodo) {
+        this.totalEgresosPeriodo = totalEgresosPeriodo;
+    }
+
+    public double[] getTotalEgresosPeriodoAcumulativo() {
+        return totalEgresosPeriodoAcumulativo;
+    }
+
+    public void setTotalEgresosPeriodoAcumulativo(double[] totalEgresosPeriodoAcumulativo) {
+        this.totalEgresosPeriodoAcumulativo = totalEgresosPeriodoAcumulativo;
     }
 
     public double getTotalIngresos() {
@@ -75,13 +111,20 @@ public class FlujoCaja {
         this.totalIngresos = totalIngresos;
     }
 
+    public double getTotalEgresos() {
+        return totalEgresos;
+    }
+
+    public void setTotalEgresos(double totalEgresos) {
+        this.totalEgresos = totalEgresos;
+    }
+
     public List<Integer> getColumnasPeriodos() {
         List<Integer> items = new ArrayList<Integer>();
         int i = 0;
 
         while (i < periodosFlujoCaja.size()) {
             Integer item = i;
-
             items.add(item);
 
             i++;
@@ -94,6 +137,8 @@ public class FlujoCaja {
         this.crearPeriodosFlujoCaja();
         this.crearEstructuraFlujoIngresos();
         this.iniciarTotalesIngresosPeriodo();
+        this.crearEstructuraFlujoEgresos();
+        this.iniciarTotalesEgresosPeriodo();
 
         return "FlujoCaja";
     }
@@ -138,7 +183,6 @@ public class FlujoCaja {
     }
 
     public void crearEstructuraFlujoIngresos() {
-        this.crearPeriodosFlujoCaja();
         this.flujoIngresos = new ArrayList<FlujoIngresos>();
         this.totalIngresos = 0;
 
@@ -151,7 +195,7 @@ public class FlujoCaja {
             Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
 
             flujoIngresosEntidad.crearEstructuraFlujoIngresosEntidad(fuenteRecursosConvenio, entidadAportante, periodosFlujoCaja);
-            flujoIngresosEntidad.calcularTotalIngresosEntidad();
+            flujoIngresosEntidad.calcularTotalIngresosFuente();
 
             flujoIngresos.add(flujoIngresosEntidad);
         }
@@ -159,17 +203,19 @@ public class FlujoCaja {
     
     public void iniciarTotalesIngresosPeriodo() {
         this.totalIngresosPeriodo = new double[this.periodosFlujoCaja.size()];
+        this.totalIngresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
         int i = 0;
         
         while (i < periodosFlujoCaja.size()) {
             this.totalIngresosPeriodo[i] = 0;
+            this.totalIngresosPeriodoAcumulativo[i] = 0;
             
             i++;
         }
     }
     
     public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
-        fuenteIngresos.calcularTotalIngresosEntidad();
+        fuenteIngresos.calcularTotalIngresosFuente();
         this.totalIngresosPeriodo[columna] = 0;
         this.totalIngresos = 0;
         
@@ -177,11 +223,20 @@ public class FlujoCaja {
             this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.ingresos[columna].doubleValue();
             this.totalIngresos += fuenteIngresosRecorrer.totalIngresosFuente.doubleValue();
         }
+        
+        int i = 1;
+        this.totalIngresosPeriodoAcumulativo[0] = this.totalIngresosPeriodo[0];
+        
+        while (i < this.totalIngresosPeriodo.length) {
+            this.totalIngresosPeriodoAcumulativo[i] = this.totalIngresosPeriodoAcumulativo[i-1] + this.totalIngresosPeriodo[i];
+            
+            i++;
+        }
     }
     
     public void crearEstructuraFlujoEgresos() {
-        this.crearPeriodosFlujoCaja();
         this.flujoEgresos = new ArrayList<FlujoEgresos>();
+        this.totalEgresos = 0;
 
         int codigoConvenio = 53;
 
@@ -191,9 +246,43 @@ public class FlujoCaja {
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
             FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
             Obra proyecto = getSessionBeanCobra().getCobraService().encontrarObraPorId(fuenteRecursosConvenioObra.getObra().getIntcodigoobra());
+            
             flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosFlujoCaja);
+            flujoEgresosProyecto.calcularTotalEgresosFuente();
 
             flujoEgresos.add(flujoEgresosProyecto);
         }
-    }    
+    }
+    
+    public void iniciarTotalesEgresosPeriodo() {
+        this.totalEgresosPeriodo = new double[this.periodosFlujoCaja.size()];
+        this.totalEgresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
+        int i = 0;
+        
+        while (i < periodosFlujoCaja.size()) {
+            this.totalEgresosPeriodo[i] = 0;
+            
+            i++;
+        }
+    }
+    
+    public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
+        fuenteEgresos.calcularTotalEgresosFuente();
+        this.totalEgresosPeriodo[columna] = 0;
+        this.totalEgresos = 0;
+        
+        for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
+            this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.egresos[columna].doubleValue();
+            this.totalEgresos += fuenteEgresosRecorrer.totalEgresosFuente.doubleValue();
+        }
+        
+        int i = 1;
+        this.totalEgresosPeriodoAcumulativo[0] = this.totalEgresosPeriodo[0];
+        
+        while (i < this.totalEgresosPeriodo.length) {
+            this.totalEgresosPeriodoAcumulativo[i] = this.totalEgresosPeriodoAcumulativo[i-1] + this.totalEgresosPeriodo[i];
+            
+            i++;
+        }
+    }
 }
