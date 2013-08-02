@@ -24,7 +24,7 @@ public class ActividadobraDTO implements IsSerializable {
     String name;
     Date startDateTime;
     Date endDateTime;
-    double duration;
+    int duration;
     int percentDone;
     
     /**
@@ -39,7 +39,7 @@ public class ActividadobraDTO implements IsSerializable {
     private Date fechaInicio;
     private Date fechaFin;
     private Double peso;
-    private Double duracion;
+    private int duracion;
     private Integer estado;
     private Set dependenciasForFkActividadOrigen = new HashSet(0);
     private Set dependenciasForFkActividadDestino = new HashSet(0);
@@ -69,12 +69,12 @@ public class ActividadobraDTO implements IsSerializable {
 
     }
 
-    public ActividadobraDTO(String name, Date start, double duration, int percentDone,
+    public ActividadobraDTO(String name, Date start, int duration, int percentDone,
             TaskType taskType) {
         this(name, name, start, duration, percentDone, taskType);
     }
 
-    public ActividadobraDTO(String id, String name, Date start, double duration,
+    public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType) {
         this.id = id;
         this.name = name;
@@ -116,7 +116,7 @@ public class ActividadobraDTO implements IsSerializable {
         this.endDateTime = endDateTime;
     }
 
-    public double getDuration() {
+    public int getDuration() {
         return duration;
     }
 
@@ -389,14 +389,14 @@ public class ActividadobraDTO implements IsSerializable {
     /**
      * @return the duracion
      */
-    public Double getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
     /**
      * @param duracion the duracion to set
      */
-    public void setDuracion(Double duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 

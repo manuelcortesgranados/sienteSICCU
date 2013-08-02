@@ -79,8 +79,8 @@ public class CasteoGWT {
         ActividadobraDTO activdadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
         Set act = new HashSet(actividadObra.getActividadobras());
         castearActividadesDeListaActividadesRaizTO(activdadObra, act, convenio);
-        System.out.println("hijos de acti" + activdadObra.getChildren().size()); 
-        
+        System.out.println("hijos de acti" + activdadObra.getChildren().size());
+
         //falta las dependencias
         return activdadObra;
     }
@@ -234,10 +234,11 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static TipocontratoDTO castearTipoContratoDTOToTipoContratoDTO(Tipocontrato tipoContrato) {
-      if(tipoContrato!=null)
-        return new TipocontratoDTO(tipoContrato.getInttipocontrato(), tipoContrato.getStrdesctipocontrato());
-      
-      return null;
+        if (tipoContrato != null) {
+            return new TipocontratoDTO(tipoContrato.getInttipocontrato(), tipoContrato.getStrdesctipocontrato());
+        }
+
+        return null;
     }
 
     /*
