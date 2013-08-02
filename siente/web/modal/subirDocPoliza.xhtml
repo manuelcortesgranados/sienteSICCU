@@ -11,14 +11,24 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadDoc" autosized="true" >
-        <rich:panel header="#{var.seleccionaracta}" styleClass="ikont-rp-selectacta"   >
+        <f:facet name="header">
+            <h:panelGroup>
+                <h:outputText  styleClass="ikont-hot-responder"   value="#{var.seleccionaracta}"  />
+            </h:panelGroup>
+        </f:facet>
+
+        <f:facet name="controls">
             <h:form>
-                <h:panelGroup >
-                    <a4j:commandLink value="X" id="esconder_panelUploadDoc"
+                <h:panelGroup>
+                   <a4j:commandLink  id="panelUploadDoc"
                                      onclick="#{rich:component('panelUploadDoc')}.hide();
                                              return false;"
-                                     immediate="true" styleClass="ikont-acl-esconder"   />
+                                     immediate="true" styleClass="ikont-acl-esconder closemodal"   />
                 </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" styleClass="ikont-rp-selectacta"   >
+            <h:form>
 
                 <h:panelGroup id="gpDoc">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -45,7 +55,7 @@
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$Contrato.subirDocPol.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocPol.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
@@ -54,7 +64,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numBytes"   value="#{file.numBytes /1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
 
@@ -73,6 +83,6 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -19,13 +19,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_ConfirmarMovil" styleClass="ikont-acl-esconderconfirmarmovil"  
+                    <a4j:commandLink  id="esconder_ConfirmarMovil" styleClass="ikont-acl-esconderconfirmarmovil closemodal"  
                                       title="#{var.cerrar}" onclick="#{rich:component('ConfirmarMovil')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel>
+        <h:panelGroup layout="block">
             <h:form>
                 <h:panelGrid columns="1" id="layoutMovil">
                     <h:panelGrid >
@@ -40,6 +40,6 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -19,7 +19,7 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink id="esconder-mp-listado-contratos" immediate="true"
-                                       styleClass="ikont-hcl-listadocontratos"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
+                                       styleClass="ikont-hcl-listadocontratos closemodal"    onclick="#{rich:component('mp-listado-contratos')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
@@ -35,7 +35,7 @@
                         
                     </h:panelGrid>
 
-                    <rich:panel >
+                    <h:panelGroup layout="block" >
                         <h:panelGrid >
                             <h:outputText  styleClass="ikont-hot-dilienidad"   value="Debe diligenciar el campo Entidad Contratante"  rendered="#{Supervisor$IngresarNuevaObra.obranueva.tercero.intcodigo==0}"/>
                             <interkont:spacer height="5" />
@@ -126,7 +126,7 @@
                                 </f:facet>
                             </rich:dataTable>
                         </h:panelGrid>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGroup>
         </center>
     </rich:popupPanel>

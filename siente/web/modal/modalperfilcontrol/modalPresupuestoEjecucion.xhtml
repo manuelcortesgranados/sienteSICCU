@@ -19,20 +19,20 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_PresupuestoEjecucion" styleClass="ikont-a4jcl-escondermpPresupuestoEjecucion"   
+                    <a4j:commandLink id="esconder_mp_PresupuestoEjecucion" styleClass="ikont-a4jcl-escondermpPresupuestoEjecucion closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-PresupuestoEjecucion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form target="_blank">
-            <rich:panel>
+            <h:panelGroup layout="block" >
                 <h:panelGrid columns="1">
                     <h:outputText  styleClass="ikont-hot-presupuestoejecucion"   value="1. Presupuesto en Ejecución"
                                    />
                     <h:graphicImage  styleClass="ikont-hgi-imgejecuciontotal"   value="#{var.imgejecuciontotal}"/>
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

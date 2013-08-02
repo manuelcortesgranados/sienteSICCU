@@ -17,15 +17,17 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalLogros" styleClass="ikont"  
-                                     title="#{var.cerrar}" immediate="true"/>
-                    <rich:componentControl attachTo="esconder_modalLogros" event="onclick" for="modalLogrosDetalle" operation="hide"/>
+                    <a4j:commandLink  id="esconder_modalLogros" styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" immediate="true"
+                                     onclick="#{rich:component('modalLogrosDetalle')}.hide();return  false;"
+                                     />
+                    
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:form prependId="false" >
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <rich:dataTable id="tablaLogrosDet"                                
                                 value="#{SessionBeanCobra.cobraService.listAlimetCualitativa}"
                                 onRowMouseOver="this.style.backgroundColor='#B4DDEC'"
@@ -73,7 +75,7 @@
                         </rich:columnGroup>
                     </f:facet>
                 </rich:dataTable>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>

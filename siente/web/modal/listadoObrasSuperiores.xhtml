@@ -16,12 +16,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp-listado-proyectosPadres" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink  id="esconder_mp-listado-proyectosPadres" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-proyectosPadres')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  id="gpTotalProyectosPadre" >
+        <h:panelGroup layout="block"  id="gpTotalProyectosPadre" >
             <h:form id="form-mp-listado-proyectosPadres">
                 <h:panelGrid >
                     <interkont:spacer height="20" />
@@ -42,7 +42,7 @@
                         </a4j:ajax>
                     </h:panelGroup>
                     <interkont:spacer height="10px" />
-                    <rich:panel id="pl-tabla-listado-proyectosPadres"  >
+                    <h:panelGroup layout="block" id="pl-tabla-listado-proyectosPadres"  >
                         <rich:dataTable id="tabla-listado-proyectosPadres" sortMode="single"  value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}" var="currentRow" 
                                         rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  >
@@ -71,10 +71,10 @@
                                 <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

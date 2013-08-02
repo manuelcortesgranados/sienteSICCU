@@ -19,13 +19,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp-editar-polizas" styleClass="ikon-acl-escondermpeditarpolizas"   
+                    <a4j:commandLink  id="esconder_mp-editar-polizas" styleClass="ikon-acl-escondermpeditarpolizas closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-editar-polizas')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpPolizas">
+            <h:panelGroup layout="block" id="rpPolizas">
                 <center>
                     <h:panelGrid id="gpModiPoliza" columns="2"  >
 
@@ -63,7 +63,7 @@
 
                     </h:panelGrid>
                 </center>
-            </rich:panel>
+            </h:panelGroup>
 
         </h:form>
     </rich:popupPanel> 

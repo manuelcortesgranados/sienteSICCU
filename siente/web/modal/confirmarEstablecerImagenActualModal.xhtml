@@ -19,13 +19,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp_confirmarEstablecerImagenActualModal" styleClass="ikont-acl-econdermpconfirmarestablecerimagenactualmodal"  
+                    <a4j:commandLink  id="esconder_mp_confirmarEstablecerImagenActualModal" styleClass="ikont-acl-econdermpconfirmarestablecerimagenactualmodal closemodal"  
                                       title="#{var.cerrar}" onclick="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel  styleClass="ikont-rp-mpconfirmarestablecerimagenactualmodal"   >
+        <h:panelGroup layout="block">
             <h:form>
                 <h:panelGrid  id="panelGridConfEstablecerImagenActual">
                     <interkont:spacer height="10"/>
@@ -43,6 +43,6 @@
                     </h:panelGrid>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -33,7 +33,7 @@
                     <h:panelGroup id="gpErrorFin">
                         <h:outputText  styleClass="ikont-hot-mensajefinalizar"  value="#{Supervisor$AdministrarObraNew.mensajefinaliza}"/>
                     </h:panelGroup>
-                    <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu">
+                    <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu" styleClass="totalwidth">
                         <rich:panel header="#{var.finalizarobra}">
                             <h:outputText  styleClass="ikont-hot-panelfinalizarpaso1"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
                                           value="#{var.solopuedefinalizaobrasactivas}" />

@@ -42,7 +42,7 @@
                     </td>
                 </tr>
             </table>
-            <rich:panel id="mp-homeAtencionHumanitaria">
+            <h:panelGroup layout="block" id="mp-homeAtencionHumanitaria">
 
                 <rich:panel header="#{var.solicitudatenciohum}">
                     <rich:dataTable id="tablaAtencionHumanitaria"
@@ -158,7 +158,7 @@
                         </f:facet>
                     </rich:dataTable>
                 </rich:panel>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
         <ui:include src="/modal/modalsolicitudatencion/busquedaavanzadaAtencion.xhtml"/>
         <ui:include src="/modal/atencionHumanitaria/confirmareliminar.xhtml"/>

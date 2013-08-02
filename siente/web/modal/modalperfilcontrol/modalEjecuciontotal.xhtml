@@ -19,7 +19,7 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="ikont-a4jcl-escondermpEjecucionTotal"   
+                    <a4j:commandLink id="esconder_mp_EjecucionTotal" styleClass="ikont-a4jcl-escondermpEjecucionTotal closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-EjecucionTotal')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,7 +27,7 @@
         </f:facet>
 
         <h:form target="_blank">
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <h:panelGrid columns="1">
                     <h:outputText  styleClass="ikont-hot-inversiontotalfasesahyr "   value="1. INVERSIÓN TOTAL EN FASES DE ATENCIÓN HUMANITARIA Y REHABILITACIÓN"
                                   />
@@ -40,7 +40,7 @@
                         <h:graphicImage  styleClass="ikont-hgi-imginversionfasesdeptos"   width="1000" value="#{var.imginversionfasesdeptos}"/>
                     </h:commandLink>
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>

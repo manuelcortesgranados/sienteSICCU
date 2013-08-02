@@ -8,7 +8,7 @@
                  xmlns:rich="http://richfaces.org/rich"
                  xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:panel id="panelConfirmarColombiaHum">
+    <h:panelGroup layout="block" id="panelConfirmarColombiaHum">
         <rich:collapsiblePanel switchType="ajax" >
             <f:facet name="header">
                 <h:outputText  styleClass="ikont-hot-datosch"   value="#{var.datosch}"/>
@@ -63,6 +63,6 @@
                 </h:panelGrid>
             </center>
         </rich:collapsiblePanel>
-    </rich:panel>
+    </h:panelGroup>
 
 </ui:composition>

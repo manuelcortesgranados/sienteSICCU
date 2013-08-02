@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_modalValidarAlimentacion" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_modalValidarAlimentacion" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modalValidarAlimentacion')}.hide();
                                              return false;"/>
@@ -28,7 +28,7 @@
         </f:facet>
 
         <h:form id="frmValidarAlimentacion">
-            <rich:panel rendered="#{Supervisor$DetalleObra.permitirvalidar}">
+            <h:panelGroup layout="block" rendered="#{Supervisor$DetalleObra.permitirvalidar}">
                 <h:panelGrid columns="2" columnClasses="panelderecha, panelizquierda" >
                     <h:outputLabel  styleClass="ikont-hol-lblFechaRevision"   id="lblFechaRevision" value="#{var.fecharevision}: "/>
                     <rich:calendar id="lblFechaRev" value="#{Supervisor$DetalleObra.valialiment.datefecharevision}"  disabled="true" buttonDisabledIcon="true"/>
@@ -56,7 +56,7 @@
 
                 </h:panelGrid>
                 <center>
-                    <h:panelGroup >
+                    <h:panelGroup layout="block">
                         <h:panelGrid columns="3" styleClass="ikont-hpg-p1"  >
                             <a4j:commandButton id="btnguardar" action="#{Supervisor$DetalleObra.guardarAprobacionAlimentacionSi}" value="#{var.guardar}" >
                                 <a4j:ajax event="complete" render="panelVali"
@@ -70,8 +70,8 @@
                         </h:panelGrid>                            
                     </h:panelGroup>
                 </center>
-            </rich:panel>
-            <rich:panel rendered="#{!Supervisor$DetalleObra.permitirvalidar}">
+            </h:panelGroup>
+            <h:panelGroup rendered="#{!Supervisor$DetalleObra.permitirvalidar}">
                 <center>
                     <h:panelGroup >
                         <h:panelGrid columns="3" styleClass="ikont-hpg-permitirvalidar"  >
@@ -83,7 +83,7 @@
                     </h:panelGroup>
                 </center>
 
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>

@@ -17,13 +17,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelConfirmarModificacion" styleClass="ikont-acl-cerrar"   
+                   <a4j:commandLink id="esconder_panelConfirmarModificacion" styleClass="ikont-acl-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmarModificacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-panel5"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-panel5"   >
             <center>
                 <h:form>
                     <h:panelGrid id="layoutConfMod" columnClasses="aiu">
@@ -37,6 +37,6 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

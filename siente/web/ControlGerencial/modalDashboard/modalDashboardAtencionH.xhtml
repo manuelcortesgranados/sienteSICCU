@@ -23,14 +23,14 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDashboard_ah" styleClass="ikont-esconder" value="X" 
+                    <a4j:commandLink id="esconder_modalDashboard_ah" styleClass="ikont-esconder closemodal" 
                                      title="#{var.cerrar}" immediate="true"  onclick="#{rich:component('modalDashboard_ah')}.hide();
                                      return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         
-            <rich:panel  id="modalDashboardAhInfo">
+        <h:panelGroup layout="block"  id="modalDashboardAhInfo">
                 <interkont:spacer height="20" />
                 <h:panelGrid >
                     <h:outputText  styleClass="ikont-hot-resumenatencion"   value="#{var.resumenatencion}"></h:outputText>
@@ -111,7 +111,7 @@
 
                     </h:panelGrid>
                 </center>
-            </rich:panel>
+            </h:panelGroup>
 
     </rich:popupPanel>
 

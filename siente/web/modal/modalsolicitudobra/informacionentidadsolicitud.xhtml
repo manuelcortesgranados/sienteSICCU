@@ -21,12 +21,12 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelInformacionEntidad" styleClass="ikont-acl-escoderpanelinformacionentidad"  
+                   <a4j:commandLink id="esconder_panelInformacionEntidad" styleClass="ikont-acl-escoderpanelinformacionentidad closemodal"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelInformacionEntidad')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel>
+        <h:panelGroup layout="block">
             <h:form>
                 <center>
                     <h:panelGrid columns="2" >
@@ -59,6 +59,6 @@
                 </center>
 
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

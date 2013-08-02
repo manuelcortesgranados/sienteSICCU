@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_mp-listado-sedeseducativas" styleClass="ikont-hgi-cerrar"  
+                    <a4j:commandLink id="esconder_mp-listado-sedeseducativas" styleClass="ikont-hgi-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp-listado-sedeseducativas')}.hide();
                                              return false;"/>
@@ -30,7 +30,7 @@
 
         <h:form id="form-mp-listado-sedeseducativas">
             <h:panelGrid >
-                <rich:panel id="pl-tabla-listado-sedeseducativas" >
+                <h:panelGroup layout="block" id="pl-tabla-listado-sedeseducativas" >
 
                     <h:panelGrid columns="2">
 
@@ -121,7 +121,7 @@
                         </f:facet>
                     </rich:dataTable>
                     <interkont:spacer height="20"/>
-                </rich:panel>
+                </h:panelGroup>
             </h:panelGrid>
         </h:form>
 

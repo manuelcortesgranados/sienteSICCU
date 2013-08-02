@@ -21,13 +21,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalImagen" styleClass="ikont-acl-escondermodalimagen"   
+                    <a4j:commandLink id="esconder_modalImagen" styleClass="ikont-acl-escondermodalimagen closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-uploadimagenciudadano"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-uploadimagenciudadano"   >
             <h:form id="formImagen">
                 <h:panelGroup id="panelImagen" >
                 <h:panelGrid columnClasses="top,top" columns="2" rendered="#{SessionBeanCobra.ciudadanoservice.vermodalimagen}">
@@ -47,13 +47,13 @@
                         </rich:fileUpload>
                         <h:panelGroup id="info">
                             <center>
-                                <rich:panel >
+                                <h:panelGroup layout="block" >
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-headeruploadimagenciudadano"   value="#{var.arcsub}"/>
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-numarchivosuploadimagenciudadano "   rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Ciudadano$PerfilCiudadano.cargadorFoto.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarcuploadimagenciudadano "   value="#{var.nomarc}"/>
@@ -62,9 +62,9 @@
                                                     <h:outputText  styleClass="ikont-hot-numbytesuploadimagenciudadano "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
-                                </rich:panel>
+                                </h:panelGroup>
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
                                                    render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
@@ -79,7 +79,7 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
 
     </rich:popupPanel>
 </ui:composition>

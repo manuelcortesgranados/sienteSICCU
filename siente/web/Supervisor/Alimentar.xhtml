@@ -117,7 +117,7 @@
                 <h:panelGroup id="pnActividades" rendered="#{Supervisor$Alimentar.editarActividades}">
                     <rich:collapsiblePanel header="#{var.actividadesproyecto}"  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
                        
-                        <rich:panel id="layoutTablaMatrix" >
+                        <h:panelGroup layout="block" id="layoutTablaMatrix" >
                             <h:panelGrid columns="2" >
                                 <rich:dataTable  id="datosgeneralesAlimentar" >
 
@@ -247,12 +247,12 @@
                                 
                                         <rich:columnGroup >
                                             <rich:column id="Descripcion" width="250px">
-                                                <rich:panel > 
+                                                <h:panelGroup layout="block" > 
 
                                                     <h:outputText  styleClass="ikont-hot-strdescactividad"   value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
                                                     <h:outputText  styleClass="ikont-hot-strdescactividad1"   value="#{registros.actividadobra.strdescactividad}"   rendered="#{registros.actividadobra.boolimprevisto}"/>
 
-                                                </rich:panel> 
+                                                </h:panelGroup> 
                                             </rich:column>
                                             <rich:column id="Unidad"  >
                                                 <h:outputText  styleClass="ikont-hot-rcalimd1"   value="#{registros.actividadobra.strtipounidadmed}" />
@@ -444,7 +444,7 @@
 
                                 </h:panelGrid>
                             </center>
-                        </rich:panel>
+                        </h:panelGroup>
                     </rich:collapsiblePanel>
                 </h:panelGroup>
                 <h:panelGrid id="layoutComentafactor" columns="2" columnClasses="top_align"  rendered="#{!Supervisor$Alimentar.editarActividades}">

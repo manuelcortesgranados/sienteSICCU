@@ -115,7 +115,7 @@
     border-right-style: solid;
     border-right-color: '#{richSkin.tableBorderColor}';
     background-color: '#{richSkin.tableSubfooterBackgroundColor}';
-    color: '#{richSkin.generalTextColor}';
+    color: '#{richSkin.headerTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
     font-weight: bold;

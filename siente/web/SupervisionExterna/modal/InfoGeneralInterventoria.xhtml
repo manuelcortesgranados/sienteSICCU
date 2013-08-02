@@ -13,7 +13,7 @@
     <rich:popupPanel id="modalinfogeneralint" headerClass="rich-panel-header" height="400" width="600" >
         <f:facet name="header">
             <h:panelGroup >
-                <h:outputText  styleClass="ikont- "   value="INFORMACIÓN GENERAL DE INTERVENTORÍA" styleClass="ikont-"  />
+                <h:outputText value="INFORMACIÓN GENERAL DE INTERVENTORÍA" styleClass="ikont-"  />
             </h:panelGroup>
         </f:facet>
 
@@ -23,106 +23,106 @@
                     <a4j:commandLink id="esconder-modalinfogeneralint"
                                        onclick="#{rich:component('modalinfogeneralint')}.hide();
                                                return false;" 
-                                       title="#{var.cerrar}" immediate="true" styleClass="ikont-"   />
+                                       title="#{var.cerrar}" immediate="true" styleClass="ikont- closemodal"   />
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
         <h:panelGrid columns="2"  >
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inNumContratoInt" value="#{var.numerocontrato}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="outNumContratoInt" value="#{Supervision$Externa.objetoSeguimiento.strcontraintervenum}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup layout="block"   >
                 <h:outputText  styleClass="ikont- "   id="inEncargoFiduNro" value="#{var.encargofiduciario} No." />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block"  >
                 <h:outputText  styleClass="ikont- "   id="outEncargoFiduNro" value="#{Supervision$Externa.objetoSeguimiento.intnumencargofidu}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="inContratistaInterventoria" value="#{var.contratista}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outContratistaInterventoria" value="#{Supervision$Externa.objetoSeguimiento.strcontratistainterven}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody"  >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inObjetodelContrato" value="#{var.objetodelcontrato}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="outObjetodelContrato" value="#{Supervision$Externa.objetoSeguimiento.strobjcontratointerven}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inPlazoMesesInterv" value="#{var.plazo} (Meses)" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="outPlazoMesesInterv" value="#{Supervision$Externa.objetoSeguimiento.intplazocontratointer}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inFechaInicioActa" value="#{var.fechainicioacta}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outFechaInicioActa" value="#{Supervision$Externa.objetoSeguimiento.datefecactainiinterv}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup   layout="block">
                 <h:outputText  styleClass="ikont- "   id="inFechaFinActa" value="#{var.fechafinalizacion}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  >
                 <h:outputText  styleClass="ikont- "   id="outFechaFinActa" value="#{Supervision$Externa.objetoSeguimiento.datefecactafininterv}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inProrrogaInterv" value="#{var.prorroga} (Meses)" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outProrrogaInterv" value="#{Supervision$Externa.objetoSeguimiento.intmesesprorrogainter}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody"  >
+            <h:panelGroup  layout="block"  >
                 <h:outputText  styleClass="ikont- "   id="inFechaFinInterv" value="#{var.fechafinalizacion}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outFechaFinInterv" value="#{Supervision$Externa.objetoSeguimiento.datefecfinalizavigeninter}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inVlInterventoriaCont" value="#{var.valorcontratosupervisor}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outVlInterventoriaCont" value="#{Supervision$Externa.objetoSeguimiento.numvlrcontrainter}">
                     <f:convertNumber pattern="$ ###,###.##" />
                 </h:outputText>
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inPreguentaContrato" value="#{var.preguntacontratointerventoria}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outPreguentaContrato" value="#{Supervision$Externa.relacionInterventoria}" />
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody" >
+            <h:panelGroup  layout="block" >
                 <h:outputText  styleClass="ikont- "   id="inPreguntavalorInterventoria" value="#{var.preguntavalorinterventoria}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup layout="block" >
                 <h:outputText  styleClass="ikont- "   id="outPreguntavalorInterventoria" value="#{Supervision$Externa.porcentajeInterventoria}">
                     <f:convertNumber pattern="% ###.##" />
                 </h:outputText>
-            </rich:panel>
+            </h:panelGroup>
 
-            <rich:panel bodyClass="inpanelBody"  >
+            <h:panelGroup  layout="block"  >
                 <h:outputText  styleClass="ikont- "   id="inPreguntaCondicionInterv" value="#{var.condicioninterventoria}" />
-            </rich:panel>
-            <rich:panel bodyClass="inpanelBody">
+            </h:panelGroup>
+            <h:panelGroup  layout="block">
                 <h:outputText  styleClass="ikont- "   id="outPreguntaCondicionInterv" value="#{Supervision$Externa.porcentajeMenorIgual}" />
-            </rich:panel>
+            </h:panelGroup>
         </h:panelGrid>
     </rich:popupPanel>
 </ui:composition>

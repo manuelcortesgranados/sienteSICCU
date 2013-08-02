@@ -18,12 +18,12 @@
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelGuardado" styleClass="ikont-hcl-esconder"  
+                    <a4j:commandLink id="esconder_panelGuardado" styleClass="ikont-hcl-esconder closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelGuardado')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-"   >
+        <h:panelGroup layout="block" styleClass="ikont-"   >
             <h:form>
                 <h:panelGrid id="layoutGuardado">
                     <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" />
@@ -37,6 +37,6 @@
                                        render="gpPrincipalAlimentar"/>
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

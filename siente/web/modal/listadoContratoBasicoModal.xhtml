@@ -18,13 +18,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder-mp-listado-contratos"  immediate="true" 
-                                     styleClass="ikont-acl-cerrar" onclick="#{rich:component('mp-listado-contratos')}.hide();
+                    <a4j:commandLink id="esconder-mp-listado-contratos"  immediate="true" 
+                                     styleClass="ikont-acl-cerrar closemodal" onclick="#{rich:component('mp-listado-contratos')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel id="gpTotalCont" >
+        <h:panelGroup layout="block" id="gpTotalCont" >
             <center>
                 <h:form>
                     <h:panelGrid columns="2" >
@@ -47,7 +47,7 @@
                     </h:panelGroup>
                     <h:outputText  styleClass="ikont-hot-entidadcontratante" value="Debe diligenciar el campo Entidad Contratante"  rendered="#{Supervisor$Contrato.contrato.tercero.intcodigo==0}"/>
                     <interkont:spacer height="10px" />
-                    <rich:panel id="pl-tabla-listado-contratospase">
+                    <h:panelGroup layout="block" id="pl-tabla-listado-contratospase">
 
                         <rich:dataTable id="tabla-listado-contratospad" rendered="#{!empty Supervisor$Contrato.listacontratos and Supervisor$Contrato.contrato.tercero.intcodigo!=0}"
                                         rowKeyVar="filaSeleccionada"
@@ -241,8 +241,8 @@
                                 </rich:columnGroup>
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>             
+                    </h:panelGroup>             
                 </h:panelGrid>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

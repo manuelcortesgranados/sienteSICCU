@@ -8,7 +8,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <rich:panel id="panelLocalidadProyecto">
+    <h:panelGroup layout="block" id="panelLocalidadProyecto">
 
         <rich:popupPanel id="mp-listado-contratista" moveable="true" width="500" height="420" headerClass="rich-panel-header">
             <f:facet name="header" >
@@ -25,7 +25,7 @@
                     </h:panelGroup>
                 </h:form>
             </f:facet>
-            <rich:panel  id="gpTotalContratista" >            
+            <h:panelGroup layout="block"  id="gpTotalContratista" >            
                 <h:panelGrid width="100%">
                     <interkont:spacer height="20" />
                     <h:panelGroup id="panel-filtro-novedades">
@@ -45,7 +45,7 @@
                         </a4j:ajax>
                     </h:panelGroup>
                     <interkont:spacer height="10px" />
-                    <rich:panel id="pl-tabla-listado-contratista" >   
+                    <h:panelGroup layout="block" id="pl-tabla-listado-contratista" >   
                         <rich:dataTable id="tabla-listado-contratista"                                         
                                         onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -78,10 +78,10 @@
                                 <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
                             </f:facet>
                         </rich:dataTable>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGrid>
 
-            </rich:panel>
+            </h:panelGroup>
         </rich:popupPanel>
-    </rich:panel>
+    </h:panelGroup>
 </ui:composition>

@@ -11,14 +11,21 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadImagenAtencion" autosized="true" >
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="ikont-rp-seleccionarimagen"   >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText   value="#{var.seleccionarimagen}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_panelUploadImagenAtencion"
+                                 onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
+                                         return false;"
+                                 immediate="true" styleClass="ikont-a4jcl-esconderpanelUploadImagenAtencion closemodal"   />
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block" >
             <h:form>
-                <h:panelGroup >
-                    <a4j:commandLink value="X" id="esconder_panelUploadImagenAtencion"
-                                       onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
-                                               return false;"
-                                       immediate="true" styleClass="ikont-a4jcl-esconderpanelUploadImagenAtencion"   />
-                </h:panelGroup>
 
                 <h:panelGroup id="gpImagenModalAtencion">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -40,7 +47,7 @@
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos==0}" value="#{var.nosuarc}" />
 
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
@@ -49,7 +56,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numByteskb"   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
 
@@ -61,7 +68,7 @@
 
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirImagenAtencion.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadImagenAtencion')}.hide();
-                                               return false;"
+                                         return false;"
                                                    render="tablaImagenes, panel_subirImagen"  />
                             </center>
                         </h:panelGroup>
@@ -69,6 +76,6 @@
 
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

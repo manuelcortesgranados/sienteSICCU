@@ -18,21 +18,21 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="ikont-a4jcl-escondermpConsolidadoObras"   
+                    <a4j:commandLink id="esconder_mp_ConsolidadoObras" styleClass="ikont-a4jcl-escondermpConsolidadoObras closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-ConsolidadoObras')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form target="_blank">
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <h:panelGrid columns="1" >
                     <h:outputText  styleClass="ikont-hot-avancefisicoXtipoobra"   value="1. AVANCE FISICO POR TIPO DE OBRA" />
                     <h:graphicImage  styleClass="ikont-hgi-imgobras1"   value="#{var.imgobras1}"/>                    
                     <h:outputText  styleClass="ikont-hot-avancefisicoregional"   value="2 . AVANCE FISICO REGIONAL" />
                     <h:graphicImage  styleClass="ikont-hgi-imgobras2"   value="#{var.imgobras2}"/>
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

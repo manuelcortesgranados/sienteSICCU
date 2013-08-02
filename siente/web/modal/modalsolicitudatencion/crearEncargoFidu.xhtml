@@ -17,12 +17,12 @@
             </h:panelGroup>
         </f:facet>
 
-        <rich:panel id="panelCrearEncFidu">
+        <h:panelGroup layout="block" id="panelCrearEncFidu">
             <h:panelGroup >
                 <a4j:commandLink id="esconder_panelCrearEnc" 
                                    onclick="#{rich:component('panelCrearEnc')}.hide();
                                            return false;"
-                                   title="#{var.cerrar}" immediate="true" styleClass="ikont-acl-cerrar"/>
+                                   title="#{var.cerrar}" immediate="true" styleClass="ikont-acl-cerrar closemodal"/>
             </h:panelGroup>
 
             <h:form>
@@ -55,6 +55,6 @@
                     </h:panelGrid>
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

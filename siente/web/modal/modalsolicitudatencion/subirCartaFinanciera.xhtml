@@ -11,21 +11,28 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadCartaAprobacion" autosized="true" >
-        <rich:panel header="#{var.seleccartaaprobacion}" styleClass="ikont-rp-seleccartaaprobacion"   >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  value="#{var.seleccartaaprobacion}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:panelGroup>
+                <a4j:commandLink id="esconder_panelUploadCartaAprobacion"
+                                 onclick="#{rich:component('panelUploadCartaAprobacion')}.hide();
+                                         return false;"
+                                 immediate="true" styleClass="ikont-a4jcl-esconderpanelUploadCartaAprobacion closemodal"   />
+            </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block" >
             <h:form>
-                <h:panelGroup >
-                    <a4j:commandLink value="X" id="esconder_panelUploadCartaAprobacion"
-                                       onclick="#{rich:component('panelUploadCartaAprobacion')}.hide();
-                                               return false;"
-                                       immediate="true" styleClass="ikont-a4jcl-esconderpanelUploadCartaAprobacion"   />
-                </h:panelGroup>
 
                 <h:panelGroup id="gpCartaAprobacion">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload  addLabel="#{var.adicionar}" 
-                                         clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
-                                         fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.listener}" id="uploadCartaAprobacion" immediateUpload="true"
-                                         listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
+                                          clearAllLabel="#{var.borrartodo}" clearLabel="#{var.eliminar}" doneLabel="#{var.hecho}"
+                                          fileUploadListener="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.listener}" id="uploadCartaAprobacion" immediateUpload="true"
+                                          listHeight="150" maxFilesQuantity="1" uploadLabel="#{var.subir}">
                             <a4j:ajax event="uploadcomplete" render="info_CartaAprobacion,panel_subirCartaAprobacion" />
                         </rich:fileUpload>
 
@@ -38,7 +45,7 @@
 
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos==0}" value="#{var.nosuarc}" />
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
                                                 <h:panelGrid columns="2">
                                                     <h:outputText  styleClass="ikont-hot-nomarc"   value="#{var.nomarc}" />
@@ -47,7 +54,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numByteskb"   value="#{file.numBytes/1024} Kb" />
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
 
@@ -57,10 +64,10 @@
                                 <a4j:commandButton action="#{AtencionHumanitaria$AdminSolicitudAtencion.borrarCartaAprobacion}" render="info_CartaAprobacion, uploadCartaAprobacion, gpCartaAprobacion, panel_subirCartaAprobacion"
                                                    rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="ikont-a4jcb-boarcsub"    />
-                                
+
                                 <a4j:commandButton value="#{var.aceptar}" rendered="#{AtencionHumanitaria$AdminSolicitudAtencion.subirCartaFinanciera.numArchivos>0}"
                                                    onclick="#{rich:component('panelUploadCartaAprobacion')}.hide();
-                                               return false;"
+                                         return false;"
                                                    render="panel_subirCartaAprobacion"  />
                             </center>
                         </h:panelGroup>
@@ -68,6 +75,6 @@
 
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

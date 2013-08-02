@@ -18,8 +18,13 @@
                 </center>
             </h:panelGroup>
         </f:facet>
-
-        <rich:panel>
+        <f:facet name="controls">
+                <h:panelGroup>
+                    <a4j:commandLink  onclick="#{rich:component('panelInformacionEntidad')}.hide(); return false;" immediate="true"
+                                       styleClass="ikont-acl-cerrar closemodal"/>
+                </h:panelGroup>
+        </f:facet>
+        <h:panelGroup layout="block">
             <h:form>
                 <center>
                     <h:panelGrid columns="2">
@@ -51,6 +56,6 @@
                                         />
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -24,13 +24,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_modalDetalleObra" styleClass="ikont-acl-escondermodaldetalleobra"   
+                    <a4j:commandLink id="esconder_modalDetalleObra" styleClass="ikont-acl-escondermodaldetalleobra closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalDetalleObra')}.hide(); return false; "/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel styleClass="ikont-rp-gpdetaobramodal"    id="gpDetaObraModal">
+            <h:panelGroup layout="block" styleClass="ikont-rp-gpdetaobramodal"    id="gpDetaObraModal">
                 <h:panelGrid  columns="2">
                     <h:panelGrid  styleClass="ikont-hpg-gpdetaobramodal"  >
                         <h:panelGrid  columns="3">
@@ -188,7 +188,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:panelGrid>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

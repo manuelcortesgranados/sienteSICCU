@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_modaltablaproyectos" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_modaltablaproyectos" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('modaltablaproyectos')}.hide();
                                              return false;"
@@ -29,7 +29,7 @@
         </f:facet>
 
         <h:form >
-            <rich:panel>
+            <h:panelGroup layout="block">
                 <rich:dataTable id="tablaproyectos"
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -93,7 +93,7 @@
                         </rich:columnGroup>
                     </f:facet>
                 </rich:dataTable>
-            </rich:panel>
+            </h:panelGroup>
         </h:form>
 
     </rich:popupPanel>

@@ -9,12 +9,22 @@
         xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelImagenActual" autosized="true" >
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="ikont-"   >
-            <h:form >
-                <h:panelGroup >
-                    <a4j:commandLink id="esconder_panelImagenActual" onclick="#{rich:component('panelImagenActual')}.hide();" immediate="true"
-                                       styleClass="ikont-"    />
+        <f:facet name="header">
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-encontrarpadreproy" value="#{var.seleccionarimagen}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink id="esconder_panelImagenActual" onclick="#{rich:component('panelImagenActual')}.hide(); return false;" immediate="true"
+                                       styleClass="ikont- closemodal"    />
                 </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" styleClass="ikont-"   >
+            <h:form >
+
                 <h:panelGroup id="gpImagen">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
@@ -42,7 +52,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-numArchivos"   rendered="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$IngresarNuevaObra.cargadorImagenAnterior.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -52,7 +62,7 @@
                                                     <h:outputText  styleClass="ikont- hot-"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -69,7 +79,7 @@
 
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

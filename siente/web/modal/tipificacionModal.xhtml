@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelTipificacion" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink id="esconder_panelTipificacion" styleClass="ikont-acl-cerrar closemodal"  
                                      onclick="#{rich:component('panelTipificacion')}.hide();
                                                return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
         
-        <rich:panel>
+        <h:panelGroup layout="block">
             <center>
                 <h:panelGrid columns="2">
                     <h:outputLabel  styleClass="ikont-hol-sttipoProyecto"   id="sttipoProyecto" value="#{var.tipoProyecto}" />
@@ -50,6 +50,6 @@
                                        immediate="true" value="#{var.aceptar}" styleClass="ikont-acb-esconder"   />
                 </h:panelGroup>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

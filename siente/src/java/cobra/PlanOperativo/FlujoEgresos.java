@@ -24,6 +24,7 @@ public class FlujoEgresos {
     boolean egresoProyecto;
     BigDecimal egresos[];
     BigDecimal totalEgresosFuente;
+    double contrapartida;
 
     public FlujoEgresos() {
     }
@@ -76,10 +77,36 @@ public class FlujoEgresos {
         this.totalEgresosFuente = totalEgresosFuente;
     }
 
+    public double getContrapartida() {
+        return contrapartida;
+    }
+
+    public void setContrapartida(double contrapartida) {
+        this.contrapartida = contrapartida;
+    }
+    
+    public String getDescripcionFuenteEgreso() {
+        if (!egresoProyecto) {
+            return itemFlujoEgresos.getStrdescripcion();
+        }
+        
+        return proyecto.getStrnombreobra();
+    }
+
     public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Periodoflujocaja> periodosFlujoCaja) {
         this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
         this.proyecto = proyecto;
         this.egresoProyecto = true;
+        this.generarListaEgresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Periodoflujocaja> periodosFlujoCaja) {
+        this.itemFlujoEgresos = itemFlujoEgresos;
+        this.egresoProyecto = false;
+        this.generarListaEgresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void generarListaEgresosPeriodos(List<Periodoflujocaja> periodosFlujoCaja) {
         this.egresos = new BigDecimal[periodosFlujoCaja.size()];
         int i = 0;
         
@@ -87,6 +114,20 @@ public class FlujoEgresos {
             egresos[i] = BigDecimal.valueOf(0.0);
             i++;
         }
+    }
+    
+    public void calcularTotalEgresosFuente() {
+        this.totalEgresosFuente = BigDecimal.valueOf(0.0);
+        double totalEgresos = 0;
+        int i = 0;
+
+        while (i < egresos.length) {
+            totalEgresos += egresos[i].doubleValue();
+
+            i++;
+        }
+
+        this.totalEgresosFuente = BigDecimal.valueOf(totalEgresos);
     }
     
     public void guardarFlujoEgresosProyecto() {

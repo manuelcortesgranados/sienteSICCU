@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" styleClass="ikont-acl-escondermpcronogramamsjerror"  
+                    <a4j:commandLink id="esconder_mp_cronograma_msjerror" styleClass="ikont-acl-escondermpcronogramamsjerror closemodal"  
                                      title="#{var.cerrar}" immediate="true"
                                      onclick="#{rich:component('mp_cronograma_msjerror')}.hide();
                                              return false;">
@@ -38,7 +38,7 @@
                     <h:outputText  styleClass="ikont-hot-nombre"   value=" #{file.nombre}"/>
                 </h:panelGrid>
             </a4j:repeat>
-            <rich:panel rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}">
+            <h:panelGroup layout="block" rendered="#{!Supervisor$ModificarProyecto.validadorCronogramaExcel.valido}">
                 <rich:dataTable id="tablalistaerror" rows="5" 
                                 rowClasses="background_azul,background_blanco" styleClass="ikont-rdt-tablalistaerror"  
                                 value="#{Supervisor$ModificarProyecto.validadorCronogramaExcel.mensajesExcel}"
@@ -81,7 +81,7 @@
                         </f:facet>
                     </rich:dataScroller>
                 </h:form>
-            </rich:panel>
+            </h:panelGroup>
         </h:panelGrid>
         <rich:hotKey key="esc" onkeyup="#{rich:component('mp_cronograma_msjerror')}.hide();
                                              return false;"  />

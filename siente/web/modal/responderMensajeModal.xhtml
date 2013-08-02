@@ -20,7 +20,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_mp_responder" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink id="esconder_mp_responder" styleClass="ikont-acl-cerrar closemodal"  
                                      onclick="#{rich:component('mp_responder')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />
@@ -28,7 +28,7 @@
             </h:form>
         </f:facet>
 
-        <rich:panel styleClass="ikont-rp-p"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-p"   >
             <h:form id="form_responder">
                 <h:panelGroup >
                     <a4j:commandButton id="esconder_mp_responder" 
@@ -76,6 +76,6 @@
                                        value="#{var.enviar}" render="pl_tabla_enviados" title="Enviar" />
                 </center>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

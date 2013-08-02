@@ -17,13 +17,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelUploadDocumentoContra" styleClass="ikont-a4jcl-esconderpanelUploadDocumentoContra"   
+                   <a4j:commandLink id="esconder_panelUploadDocumentoContra" styleClass="ikont-a4jcl-esconderpanelUploadDocumentoContra closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadDocumentoContrato')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-documentocontrato"    >
+        <h:panelGroup layout="block" styleClass="ikont-rp-documentocontrato"    >
             <h:form>
                 <h:panelGroup id="paneldocucontra">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -48,7 +48,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosuarc"   rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block" >
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -58,7 +58,7 @@
                                                     <h:outputText  styleClass="ikont-hot-numByteskb "   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -76,6 +76,6 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

@@ -18,13 +18,13 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_modalFactoresAtraso" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink  id="esconder_modalFactoresAtraso" styleClass="ikont-acl-cerrar closecerrar"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFactoresAtraso')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel>
+        <h:panelGroup layout="block">
             <center>
                 <rich:dataTable id="tablaFactores" 
                                 onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
@@ -53,6 +53,6 @@
                     </rich:columnGroup>
                 </rich:dataTable>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>     
 </ui:composition>

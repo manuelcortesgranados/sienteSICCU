@@ -17,13 +17,13 @@
          <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelFinalizado" styleClass="ikont-acl-cerrar"   
+                   <a4j:commandLink id="esconder_panelFinalizado" styleClass="ikont-acl-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelFinalizado')}.hide();
                                              return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel styleClass="ikont-rp-panel6"   >
+        <h:panelGroup layout="block" styleClass="ikont-rp-panel6"   >
             <h:form>
                 <h:panelGrid id="layoutFinalizado">
                     <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" />
@@ -35,6 +35,6 @@
                     </a4j:commandButton>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

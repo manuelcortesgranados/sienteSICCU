@@ -21,14 +21,14 @@
         </f:facet>
         <f:facet name="controls">
             <h:panelGroup>
-                <a4j:commandLink id="esconder_mp_cronograma_mod" styleClass="ikont-acl-escondermpcronogramamod"  
+                <a4j:commandLink id="esconder_mp_cronograma_mod" styleClass="ikont-acl-escondermpcronogramamod closemodal"  
                                  title="#{var.cerrar}" immediate="true"
                                  onclick="#{rich:component('mp_cronograma_mod')}.hide();
                                          return false;">
                 </a4j:commandLink>
             </h:panelGroup>
         </f:facet>
-        <rich:panel >
+        <h:panelGroup layout="block" >
       
                 <h:panelGroup id="panelConfirmacionGenerarCronograma">
                     <h:panelGroup styleClass="ikont-hpg-panelconfirmaciongeneralcronograma"  >
@@ -77,7 +77,7 @@
                     </h:panelGroup>
                 </h:panelGroup>
            
-        </rich:panel>
+        </h:panelGroup>
         <rich:hotKey key="esc" onkeyup="#{rich:component('mp_cronograma_mod')}.hide();
                                          return false;" />
     </rich:popupPanel>

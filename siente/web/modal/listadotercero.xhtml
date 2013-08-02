@@ -16,20 +16,20 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_mp-listado-tercero" styleClass="ikont-acl-cerrar"  
+                   <a4j:commandLink id="esconder_mp-listado-tercero" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('mp-listado-tercero')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
 
-        <rich:panel id="gpOrdenPago">
+        <h:panelGroup layout="block" id="gpOrdenPago">
 
             <h:form id="form-mp-listado-tercero">
                 <h:panelGrid >
                     <interkont:spacer height="20" />
 
                     <interkont:spacer height="10px" />
-                    <rich:panel id="pl-tabla-listado-tercero" >
+                    <h:panelGroup layout="block" id="pl-tabla-listado-tercero" >
 
                         <h:panelGrid columns="2">
                             <h:outputText  styleClass="ikont "   value="#{var.buscarpalabraclave} " />
@@ -99,10 +99,10 @@
 
                         </rich:dataTable>
                         <interkont:spacer height="20"/>
-                    </rich:panel>
+                    </h:panelGroup>
                 </h:panelGrid>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

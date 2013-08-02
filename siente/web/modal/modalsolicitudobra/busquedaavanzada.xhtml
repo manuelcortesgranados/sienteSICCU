@@ -21,7 +21,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelConfirmarSolicitud" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicitud"  
+                   <a4j:commandLink id="esconder_panelConfirmarSolicitud" styleClass="ikont-a4jcl-esconderpanelConfirmarSolicitud closemodal"  
                                      onclick="#{rich:component('panelFiltroObra')}.hide();
                                              return false;"
                                      title="#{var.cerrar}" immediate="true" />

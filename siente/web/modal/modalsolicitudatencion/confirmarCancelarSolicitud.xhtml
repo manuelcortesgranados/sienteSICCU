@@ -20,15 +20,15 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink id="esconder_panelCancelarSolicitud" styleClass="ikont"  
+                    <a4j:commandLink id="esconder_panelCancelarSolicitud" styleClass="ikont closemodal"  
                                      onclick="#{rich:component('panelCancelarSolicitud')}.hide();
-                                             return false;" value="X"
+                                             return false;" 
                                              title="#{var.cerrar}" immediate="true" />
                 </h:panelGroup>
             </h:form>
         </f:facet>
         
-        <rich:panel id="panelConfCancelarAH">
+        <h:panelGroup layout="block" id="panelConfCancelarAH">
             <h:panelGroup >
                 <h:outputText  styleClass="ikont "   value="#{var.confirmacancelarah}"/>
             </h:panelGroup>
@@ -52,6 +52,6 @@
                     </h:panelGrid>
                 </h:form>
             </center>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 </ui:composition>

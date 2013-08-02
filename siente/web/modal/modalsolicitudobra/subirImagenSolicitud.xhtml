@@ -10,15 +10,20 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="panelUploadImagenSolicitud" autosized="true" >
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="#{var.seleccionarimagen}"/>
+            </h:panelGroup>
+        </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                   <a4j:commandLink value="X" id="esconder_panelUploadImagenSolicitud" styleClass="ikont-acl-esconderpaneluploadimagensolicitud"  
+                   <a4j:commandLink id="esconder_panelUploadImagenSolicitud" styleClass="ikont-acl-esconderpaneluploadimagensolicitud"  
                                      title="#{var.cerrar}" onclick="#{rich:component('panelUploadImagenSolicitud')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="#{var.seleccionarimagen}" styleClass="ikont-rp-seleccionarimagen"   >
+        <h:panelGroup layout="block">
             <h:form>
                 <h:panelGroup id="gpImagenModalAtencion">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -37,7 +42,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-infoimagenatencionnumarchivos"   rendered="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{SolicitudObra$GestionarSolicitudObra.subirImagenSolicitud.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -47,7 +52,7 @@
                                                     <h:outputText  styleClass="ikont-hot-infoimagenatencionnumbyte"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -62,7 +67,7 @@
 
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

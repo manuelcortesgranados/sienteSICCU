@@ -18,7 +18,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp-crear-girodirecto" styleClass="ikont-acl-escondermpcreargirodirecto"  
+                    <a4j:commandLink  id="esconder_mp-crear-girodirecto" styleClass="ikont-acl-escondermpcreargirodirecto closemodal"  
                                       title="#{var.cerrar}" immediate="true"
                                       onclick="#{rich:component('mp-crear-girodirecto')}.hide();
                                               return  false;">
@@ -27,7 +27,7 @@
             </h:form>
         </f:facet>
         <h:form>
-            <rich:panel id="rpgirodirecto">
+            <h:panelGroup layout="block"  id="rpgirodirecto">
                 <center>
                     <h:panelGrid columns="2"  width="100%" >
 
@@ -112,7 +112,7 @@
 
                 </a4j:outputPanel>
 
-            </rich:panel>
+            </h:panelGroup>
 
         </h:form>
     </rich:popupPanel> 

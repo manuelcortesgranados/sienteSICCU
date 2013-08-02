@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:m="http://code.google.com/p/gmaps4jsf/">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
     <rich:popupPanel id="panelConfirmaGuardar" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -15,10 +15,17 @@
                 <h:outputText  styleClass="ikont- hot-"   value="Confirmar Guardar"/>
             </h:panelGroup>
         </f:facet>
-        
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelConfirmaGuardar')}.hide(); return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
         <h:form id="frmGuardarFin">
-        <rich:panel >
-            
+            <h:panelGroup layout="block" >
+
                 <h:panelGrid columns="1" id="layoutGuardar">
                     <interkont:spacer height="30"/>
                     <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
@@ -26,18 +33,18 @@
                     <h:outputText  styleClass="ikont-hot-hasidoanadidaconexito"   value="#{var.hasidoanadidaconexito}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}" />
 
                     <h:outputText  styleClass="ikont-hot-solicitudpry"   value="El #{var.solicitudproyecto} no pudo guardarse. Por favor revisar los datos faltantes."  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"/>
-                    
+
                     <interkont:spacer height="30"/>
                     <a4j:commandButton id="BTaceptarDocFin"  rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}"  value="#{var.aceptar}"
-                                        oncomplete="#{rich:component('panelConfirmaGuardar')}.hide();" 
+                                       oncomplete="#{rich:component('panelConfirmaGuardar')}.hide();" 
                                        />
 
                     <h:commandButton id="BTaceptarDocFin2" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
                                      action="#{Supervisor$IngresarNuevaObra.finalizarModal_action}" onclick="#{rich:component('panelConfirmaGuardar')}.hide();"  >
                     </h:commandButton>
                 </h:panelGrid>
-           
-        </rich:panel>
+
+            </h:panelGroup>
         </h:form>
     </rich:popupPanel>
 </ui:composition>

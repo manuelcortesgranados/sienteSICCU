@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink value="X" id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont-acl-cerrar"  
+                    <a4j:commandLink id="esconder_modalFormularioValidarAlimentacion" styleClass="ikont-acl-cerrar closemodal"  
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -29,7 +29,7 @@
 
         <center>
             <h:form id="frmformularioValidarAlimentacion">
-                <rich:panel id="listarchequeo"  >
+                <h:panelGroup layout="block" id="listarchequeo"  >
                     <rich:dataTable 
 
                         var="row" 
@@ -68,7 +68,7 @@
                         </rich:columnGroup>
 
                     </rich:dataTable>
-                </rich:panel>
+                </h:panelGroup>
                 <a4j:commandButton value="#{var.guardar}" action="#{Supervisor$DetalleObra.guardarListaVerificacion}" oncomplete="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();"/>
                 <a4j:commandButton value="#{var.cancelar}" onclick="#{rich:component('modalFormularioValidarAlimentacion')}.hidden();
                                              return false;"/>

@@ -19,7 +19,7 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_modalactividades" styleClass="ikont-acl-escondermodalactividades"  
+                    <a4j:commandLink  id="esconder_modalactividades" styleClass="ikont-acl-escondermodalactividades closemodal"  
                                      title="#{var.cerrar}" onclick="#{rich:component('modalactividades')}.hide();
                                              return false;"/>
                 </h:panelGroup>
@@ -27,7 +27,7 @@
         </f:facet>
         <center>
             <h:form>
-                <rich:panel >
+                <h:panelGroup layout="block">
                     <rich:dataTable id="listaractividades"
                                     
                                     var="row"
@@ -117,7 +117,7 @@
                             </rich:columnGroup>
                         </f:facet>
                     </rich:dataTable>
-                </rich:panel>
+                </h:panelGroup>
             </h:form>
         </center>
     </rich:popupPanel>

@@ -10,16 +10,21 @@
     xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <rich:popupPanel id="mp_subirexcelgiros" autosized="true">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText value="Subir Archivo Giros"/>
+            </h:panelGroup>
+        </f:facet>
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink  value="X" id="esconder_mp_subirexcelgiros" styleClass="ikont-acl-escondermpsubirexcelgiros"  
+                    <a4j:commandLink  id="esconder_mp_subirexcelgiros" styleClass="ikont-acl-escondermpsubirexcelgiros closemodal"  
                                       title="#{var.cerrar}" onclick="#{rich:component('mp_subirexcelgiros')}.hide();
                                               return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel header="Subir Archivo Giros" styleClass="ikont-"   >
+        <h:panelGroup layout="block">
             <h:form>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -43,7 +48,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-infodocumentonumarch "   rendered="#{Financiera$CargarExcel.cargadorArchivoMovimientos.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Financiera$CargarExcel.cargadorArchivoMovimientos.archivos}" var="file">
-                                        <rich:panel>
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -53,7 +58,7 @@
                                                     <h:outputText  styleClass="ikont-hot-infodocumentonumbyte"   value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -70,7 +75,7 @@
 
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>

@@ -18,14 +18,14 @@
             <h:form>
                 <h:panelGroup>
 
-                    <a4j:commandLink value="X" id="esconder_panelUploadOtroSi" styleClass="ikont-hot-cerrar"   
+                    <a4j:commandLink  id="esconder_panelUploadOtroSi" styleClass="ikont-hot-cerrar closemodal"   
                                      title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadOtroSi')}.hide();
                                              return false;"/>
 
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <rich:panel>
+        <h:panelGroup layout="block">
             <h:form id="formOtroSi">
                 <h:panelGroup id="layoutDocOtroSi">
                     <h:panelGrid columnClasses="top,top" columns="2">
@@ -50,7 +50,7 @@
                                     </f:facet>
                                     <h:outputText  styleClass="ikont-hot-nosubioarchivo" rendered="#{Supervisor$ModificarObra.subirOtroSi.numArchivos==0}" value="#{var.nosuarc}"/>
                                     <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$ModificarObra.subirOtroSi.archivos}" var="file">
-                                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                                        <h:panelGroup layout="block">
                                             <h:panelGrid columns="1">
 
                                                 <h:panelGrid columns="2">
@@ -60,7 +60,7 @@
                                                     <h:outputText  styleClass="ikont-hot-bytarchivo" value="#{file.numBytes/1024} Kb"/>
                                                 </h:panelGrid>
                                             </h:panelGrid>
-                                        </rich:panel>
+                                        </h:panelGroup>
                                     </rich:dataGrid>
                                 </rich:panel>
                                 <interkont:spacer height="3"/>
@@ -78,7 +78,7 @@
                     </h:panelGrid>
                 </h:panelGroup>
             </h:form>
-        </rich:panel>
+        </h:panelGroup>
     </rich:popupPanel>
 
 </ui:composition>
