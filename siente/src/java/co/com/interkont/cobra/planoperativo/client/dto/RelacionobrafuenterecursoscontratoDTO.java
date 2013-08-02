@@ -23,12 +23,17 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
     }	
    
     
-    public RelacionobrafuenterecursoscontratoDTO(int idrelacionobracontrato, ContratoDTO contrato, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor) {
+    public RelacionobrafuenterecursoscontratoDTO(int idrelacionobracontrato,  ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor) {
        this.idrelacionobracontrato = idrelacionobracontrato;
-       this.contrato = contrato;
        this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
        this.valor = valor;
     }
+    
+    public RelacionobrafuenterecursoscontratoDTO(int idrelacionobracontrato, BigDecimal valor) {
+       this.idrelacionobracontrato = idrelacionobracontrato;
+       this.valor = valor;
+    }
+   
     
     
 
