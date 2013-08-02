@@ -4,15 +4,13 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Monto;
-import co.com.interkont.cobra.to.Rubro;
-import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  *
  * @author desarrollo9
  */
-public class MontoDTO implements Serializable{
+public class MontoDTO implements IsSerializable{
     
      private int idmonto;
      private ContratoDTO contratodto;

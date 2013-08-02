@@ -4,8 +4,8 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Obra;
-import java.io.Serializable;
+
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * @author desarrollo9
  */
-public class ObraDTO implements Serializable {
+public class ObraDTO implements IsSerializable {
 
     private int intcodigoobra;
     private Boolean boolplanoperativo;
@@ -31,13 +31,8 @@ public class ObraDTO implements Serializable {
         this.boolplanoperativo = boolplanoperativo;
         this.objetivoses=objetivoses;
         this.obrafuenterecursosconvenioses=obrafuenterecursosconvenioses;
-    }
-    
-    public ObraDTO(Obra obra) {
-        this.intcodigoobra=obra.getIntcodigoobra();
-        this.boolplanoperativo=obra.isBoolplanoperativo();
-    }
-
+    }    
+   
     /**
      * @return the intcodigoobra
      */

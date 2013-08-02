@@ -4,9 +4,7 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Contrato;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
@@ -16,7 +14,7 @@ import java.util.Set;
  *
  * @author desarrollo9
  */
-public class ContratoDTO implements Serializable {
+public class ContratoDTO implements IsSerializable {
 
     private int intidcontrato;
     private Date datefechaini;

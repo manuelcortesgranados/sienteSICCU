@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
@@ -69,6 +70,48 @@ import java.util.List;
  * @author desarrollo9
  */
 public class PlanOperativoGantt implements IsWidget, EntryPoint {
+    /**
+     * Declaración de Objetos propios para manejo del plan operativo
+     */
+    /**
+     * Objeto contrato simple para manejo del convenio con todas sus relaciones a nivel cliente 
+     */
+    private ContratoDTO convenioDTO;
+
+    public ContratoDTO getConvenioDTO() {
+        return convenioDTO;
+    }
+
+    public void setConvenioDTO(ContratoDTO convenioDTO) {
+        this.convenioDTO = convenioDTO;
+    }
+    
+    /**
+     * Objeto actividad obra simple, replica de convenio, es la raiz del plan operativo
+     */
+    private ActividadobraDTO root;
+
+    public ActividadobraDTO getRoot() {
+        return root;
+    }
+
+    public void setRoot(ActividadobraDTO root) {
+        this.root = root;
+    }   
+    /**
+    * Servicio que permite la IOC de spring en gwt
+     */
+    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+
+    public CobraGwtServiceAbleAsync getService() {
+        return service;
+    }
+
+    public void setService(CobraGwtServiceAbleAsync service) {
+        this.service = service;
+    }
+
+     
 //     private static final int COLUMN_FORM_WIDTH = 680;
 
     public interface GanttExampleStyle extends CssResource {
@@ -78,17 +121,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         @Source({"Gantt.css"})
         GanttExampleStyle css();
-    }
-    @SuppressWarnings("unused")
-    private static final GanttExampleResources resources = GWT.create(GanttExampleResources.class);
-    private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    } 
+   
+   
     private Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     private static final ActividadobraDTOProps props = GWT.create(ActividadobraDTOProps.class);
     private static final DependenciaDTOProps depProps = GWT.create(DependenciaDTOProps.class);
-    ActividadobraDTO root;
+    
 //    private static final TaskProps props = GWT.create(TaskProps.class);
 //    private static final DependencyProps depProps = GWT.create(DependencyProps.class);
-    ListStore<ActividadobraDTO> taskStore;
+    //ListStore<ActividadobraDTO> taskStore;
     /**
      * Almacena la tarea que ha sido seleccionada en el gantt
      */
@@ -114,7 +156,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
-        //ActividadobraDTO root = GanttDummyData.getTasks();         
+        root = GanttDummyData.getTasks();        
 
 
 
@@ -379,18 +421,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
     
     public void cargar(){
-        service.getActividadObraDTO(new AsyncCallback<ActividadobraDTO>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        
-                    }
-
-                    @Override
-                    public void onSuccess(ActividadobraDTO result) {
-                        root = result;
-                        
-
-                    }
-                });
+//        service.getActividadObraDTO(new AsyncCallback<ActividadobraDTO>() {
+//                    @Override
+//                    public void onFailure(Throwable caught) {
+//                        
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(ActividadobraDTO result) {
+//                        root = result;
+//                        
+//
+//                    }
+//                });
     }
 }

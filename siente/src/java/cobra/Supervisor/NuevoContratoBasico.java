@@ -6415,27 +6415,10 @@ private Boolean boolpruea=false;
     public void setSubpantalla(int subpantalla) {
         this.subpantalla = subpantalla;
     }
-
-    public void comunicacionGWTJSF() {
-        System.out.println("comunicacionGWTJSF ");
-        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        this.contrato = sbc.getCobraGwtService().getContrato();
-       if(contrato!=null){
-        System.out.println("sbc = " + contrato.getIntidcontrato());
-       }else{
-           System.out.println("sbc no tiene datos" );
-       }
-        subpantalla = 2;
-    }
+   
     
-    public String planOperativo(){  
-        //pruebaJsfGwt();
+    public String planOperativo(){         
        return "PlanOperativo";        
     }
     
-    public void pruebaJsfGwt(){
-        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        sbc.getCobraGwtService().setContrato(contrato);
-      
-    }
 }
