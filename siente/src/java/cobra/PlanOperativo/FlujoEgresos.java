@@ -87,7 +87,7 @@ public class FlujoEgresos {
     
     public String getDescripcionFuenteEgreso() {
         if (!egresoProyecto) {
-            return itemFlujoEgresos.getStrdescriptcion();
+            return itemFlujoEgresos.getStrdescripcion();
         }
         
         return proyecto.getStrnombreobra();
@@ -97,6 +97,16 @@ public class FlujoEgresos {
         this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
         this.proyecto = proyecto;
         this.egresoProyecto = true;
+        this.generarListaEgresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Periodoflujocaja> periodosFlujoCaja) {
+        this.itemFlujoEgresos = itemFlujoEgresos;
+        this.egresoProyecto = false;
+        this.generarListaEgresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void generarListaEgresosPeriodos(List<Periodoflujocaja> periodosFlujoCaja) {
         this.egresos = new BigDecimal[periodosFlujoCaja.size()];
         int i = 0;
         

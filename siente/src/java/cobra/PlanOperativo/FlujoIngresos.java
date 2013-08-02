@@ -77,7 +77,7 @@ public class FlujoIngresos {
 
     public String getDescripcionFuenteIngreso() {
         if (!ingresoEntidad) {
-            return itemFlujoIngresos.getStrdescriptcion();
+            return itemFlujoIngresos.getStrdescripcion();
         }
 
         return entidadAportante.getStrnombrecompleto();
@@ -87,6 +87,16 @@ public class FlujoIngresos {
         this.fuenteRecursosConvenio = fuenterecursosconvenio;
         this.entidadAportante = entidadAportante;
         this.ingresoEntidad = true;
+        this.generarListaIngresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void crearEstructuraFlujoIngresosOtrosItems(Itemflujocaja itemFlujoIngresos, List<Periodoflujocaja> periodosFlujoCaja) {
+        this.itemFlujoIngresos = itemFlujoIngresos;
+        this.ingresoEntidad = false;
+        this.generarListaIngresosPeriodos(periodosFlujoCaja);
+    }
+    
+    public void generarListaIngresosPeriodos(List<Periodoflujocaja> periodosFlujoCaja) {
         this.ingresos = new BigDecimal[periodosFlujoCaja.size()];
         int i = 0;
 

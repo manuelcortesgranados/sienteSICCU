@@ -6,6 +6,7 @@ package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
+import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
@@ -22,9 +23,10 @@ import java.util.List;
  */
 public class FlujoCaja {
 
-    ExpenseReport expReport;
     List<Fuenterecursosconvenio> fuentesRecursosConvenio;
     List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras;
+    List<Itemflujocaja> itemsFlujoIngresos;
+    List<Itemflujocaja> itemsFlujoEgresos;
     List<Periodoflujocaja> periodosFlujoCaja;
     List<FlujoIngresos> flujoIngresos;
     List<FlujoEgresos> flujoEgresos;
@@ -35,24 +37,44 @@ public class FlujoCaja {
     double totalIngresos;
     double totalEgresos;
 
-    public List<Periodoflujocaja> getPeriodosFlujoCaja() {
-        return periodosFlujoCaja;
-    }
-
-    public void setPeriodosFlujoCaja(List<Periodoflujocaja> periodosFlujoCaja) {
-        this.periodosFlujoCaja = periodosFlujoCaja;
-    }
-
-    protected SessionBeanCobra getSessionBeanCobra() {
-        return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-    }
-
     public List<Fuenterecursosconvenio> getFuentesRecursosConvenio() {
         return fuentesRecursosConvenio;
     }
 
     public void setFuentesRecursosConvenio(List<Fuenterecursosconvenio> fuentesRecursosConvenio) {
         this.fuentesRecursosConvenio = fuentesRecursosConvenio;
+    }
+
+    public List<Obrafuenterecursosconvenios> getFuentesRecursosConvenioObras() {
+        return fuentesRecursosConvenioObras;
+    }
+
+    public void setFuentesRecursosConvenioObras(List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras) {
+        this.fuentesRecursosConvenioObras = fuentesRecursosConvenioObras;
+    }
+
+    public List<Itemflujocaja> getItemsFlujoIngresos() {
+        return itemsFlujoIngresos;
+    }
+
+    public void setItemsFlujoIngresos(List<Itemflujocaja> itemsFlujoIngresos) {
+        this.itemsFlujoIngresos = itemsFlujoIngresos;
+    }
+
+    public List<Itemflujocaja> getItemsFlujoEgresos() {
+        return itemsFlujoEgresos;
+    }
+
+    public void setItemsFlujoEgresos(List<Itemflujocaja> itemsFlujoEgresos) {
+        this.itemsFlujoEgresos = itemsFlujoEgresos;
+    }
+
+    public List<Periodoflujocaja> getPeriodosFlujoCaja() {
+        return periodosFlujoCaja;
+    }
+
+    public void setPeriodosFlujoCaja(List<Periodoflujocaja> periodosFlujoCaja) {
+        this.periodosFlujoCaja = periodosFlujoCaja;
     }
 
     public List<FlujoIngresos> getFlujoIngresos() {
@@ -117,6 +139,10 @@ public class FlujoCaja {
 
     public void setTotalEgresos(double totalEgresos) {
         this.totalEgresos = totalEgresos;
+    }
+
+    protected SessionBeanCobra getSessionBeanCobra() {
+        return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
 
     public List<Integer> getColumnasPeriodos() {
@@ -189,6 +215,7 @@ public class FlujoCaja {
         int codigoConvenio = 53;
 
         fuentesRecursosConvenio = getSessionBeanCobra().getCobraService().fuentesRecursosConvenio(codigoConvenio);
+        itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
 
         for (Fuenterecursosconvenio fuenteRecursosConvenio : fuentesRecursosConvenio) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
@@ -199,41 +226,50 @@ public class FlujoCaja {
 
             flujoIngresos.add(flujoIngresosEntidad);
         }
+        
+        for (Itemflujocaja itemFlujoIngresos : itemsFlujoIngresos) {
+            FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
+            
+            flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja);
+            flujoIngresosEntidad.calcularTotalIngresosFuente();
+            
+            flujoIngresos.add(flujoIngresosEntidad);
+        }
     }
-    
+
     public void iniciarTotalesIngresosPeriodo() {
         this.totalIngresosPeriodo = new double[this.periodosFlujoCaja.size()];
         this.totalIngresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
         int i = 0;
-        
+
         while (i < periodosFlujoCaja.size()) {
             this.totalIngresosPeriodo[i] = 0;
             this.totalIngresosPeriodoAcumulativo[i] = 0;
-            
+
             i++;
         }
     }
-    
+
     public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
         fuenteIngresos.calcularTotalIngresosFuente();
         this.totalIngresosPeriodo[columna] = 0;
         this.totalIngresos = 0;
-        
+
         for (FlujoIngresos fuenteIngresosRecorrer : flujoIngresos) {
             this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.ingresos[columna].doubleValue();
             this.totalIngresos += fuenteIngresosRecorrer.totalIngresosFuente.doubleValue();
         }
-        
+
         int i = 1;
         this.totalIngresosPeriodoAcumulativo[0] = this.totalIngresosPeriodo[0];
-        
+
         while (i < this.totalIngresosPeriodo.length) {
-            this.totalIngresosPeriodoAcumulativo[i] = this.totalIngresosPeriodoAcumulativo[i-1] + this.totalIngresosPeriodo[i];
-            
+            this.totalIngresosPeriodoAcumulativo[i] = this.totalIngresosPeriodoAcumulativo[i - 1] + this.totalIngresosPeriodo[i];
+
             i++;
         }
     }
-    
+
     public void crearEstructuraFlujoEgresos() {
         this.flujoEgresos = new ArrayList<FlujoEgresos>();
         this.totalEgresos = 0;
@@ -241,47 +277,48 @@ public class FlujoCaja {
         int codigoConvenio = 53;
 
         fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(codigoConvenio);
-        
+
+
 
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
             FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
             Obra proyecto = getSessionBeanCobra().getCobraService().encontrarObraPorId(fuenteRecursosConvenioObra.getObra().getIntcodigoobra());
-            
+
             flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosFlujoCaja);
             flujoEgresosProyecto.calcularTotalEgresosFuente();
 
             flujoEgresos.add(flujoEgresosProyecto);
         }
     }
-    
+
     public void iniciarTotalesEgresosPeriodo() {
         this.totalEgresosPeriodo = new double[this.periodosFlujoCaja.size()];
         this.totalEgresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
         int i = 0;
-        
+
         while (i < periodosFlujoCaja.size()) {
             this.totalEgresosPeriodo[i] = 0;
-            
+
             i++;
         }
     }
-    
+
     public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
         fuenteEgresos.calcularTotalEgresosFuente();
         this.totalEgresosPeriodo[columna] = 0;
         this.totalEgresos = 0;
-        
+
         for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
             this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.egresos[columna].doubleValue();
             this.totalEgresos += fuenteEgresosRecorrer.totalEgresosFuente.doubleValue();
         }
-        
+
         int i = 1;
         this.totalEgresosPeriodoAcumulativo[0] = this.totalEgresosPeriodo[0];
-        
+
         while (i < this.totalEgresosPeriodo.length) {
-            this.totalEgresosPeriodoAcumulativo[i] = this.totalEgresosPeriodoAcumulativo[i-1] + this.totalEgresosPeriodo[i];
-            
+            this.totalEgresosPeriodoAcumulativo[i] = this.totalEgresosPeriodoAcumulativo[i - 1] + this.totalEgresosPeriodo[i];
+
             i++;
         }
     }
