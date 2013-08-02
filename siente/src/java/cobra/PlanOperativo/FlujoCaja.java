@@ -277,8 +277,7 @@ public class FlujoCaja {
         int codigoConvenio = 53;
 
         fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(codigoConvenio);
-
-
+        itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
             FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
@@ -288,6 +287,15 @@ public class FlujoCaja {
             flujoEgresosProyecto.calcularTotalEgresosFuente();
 
             flujoEgresos.add(flujoEgresosProyecto);
+        }
+        
+        for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
+            FlujoEgresos flujoEgresosEntidad = new FlujoEgresos();
+            
+            flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja);
+            flujoEgresosEntidad.calcularTotalEgresosFuente();
+            
+            flujoEgresos.add(flujoEgresosEntidad);
         }
     }
 
