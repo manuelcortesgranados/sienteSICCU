@@ -38,8 +38,8 @@
                         <h:panelGrid columns="2"  columnClasses="panelizquierda,panelcenter">
                             <h:panelGroup >
                                 <h:panelGrid id="valores" columns="2">
-                                    <h:outputText  styleClass="ikont-hot-esteavanceposeeacta"   value="#{var.esteavanceposeeacta}"/>
-                                    <h:selectOneMenu id="cmbcontrato" value="#{Supervisor$Alimentar.subiracta}" >
+                                    <h:outputText  styleClass="ikont-hot-esteavanceposeeacta"   value="#{var.esteavanceposeeacta}" rendered="#{!var.obligaractaalimentar}"/>
+                                    <h:selectOneMenu id="cmbobligaacta" value="#{Supervisor$Alimentar.subiracta}" rendered="#{!var.obligaractaalimentar}">
                                         <f:selectItem itemValue="true" itemLabel="Si"/>
                                         <f:selectItem itemValue="false" itemLabel="No"/>
                                         <a4j:ajax event="valueChange"  render="gpSubirDocumentos" execute="@this">

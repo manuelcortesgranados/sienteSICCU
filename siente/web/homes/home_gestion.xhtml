@@ -14,24 +14,8 @@
 
     <ui:define name="head">
         <title>Cobra - Home Gestion</title>
-        <ui:include src="/includes/google_maps_key.xhtml" />
-        <script type="text/javascript">
-
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-17795889-18']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script');
-                ga.type = 'text/javascript';
-                ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0];
-                s.parentNode.insertBefore(ga, s);
-            })();
-
-        </script>
-
+        <ui:include src="/includes/google_maps_key.xhtml" />       
+        <script src="/#{var.versioncobra}/resources/js/analytics/#{var.srcanalytics}" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
 

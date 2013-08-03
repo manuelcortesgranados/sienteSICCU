@@ -107,7 +107,7 @@ public class Alimentar implements Serializable{
     List<Alimentacioncualificacion> listitemculi = new ArrayList<Alimentacioncualificacion>();
     private UIDataTable tablaEliminarItemCualita = new UIDataTable();
     private boolean editarActividades = false;
-    private boolean subiracta = false;
+    private boolean subiracta = Boolean.parseBoolean(getSessionBeanCobra().getBundle().getString("obligaractaalimentar"));;
     private int fechaescogida;
     private String pathActaPrecios = "";
     private BigDecimal valorA = BigDecimal.ZERO;
@@ -1152,6 +1152,7 @@ public class Alimentar implements Serializable{
                                 } else {
                                     //FacesUtils.addErrorMessage(bundle.getString("debeagregarunacta"));
                                     mensajefin = bundle.getString("debeagregarunacta");//"Debe agregar un acta a la alimentación";
+                                    return null;
                                 }
                             } else {
                                 estadoalimentar = 1;
