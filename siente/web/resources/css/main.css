@@ -1141,7 +1141,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     font-style:italic; 
     text-align: justify; 
     padding: 10px;
-
+    
 }
 
 .ikont-hpg-comentarios {
@@ -1332,37 +1332,4 @@ a.ikont-hcl-modificarusuario:hover {
     font-style:italic;
     color:#666;
     line-height:15px;
-}
-
-/*  estilos zoom*/
-
-.ikont-hpg-contentmenu{
-    background-color: #D8D8D8;
-    width: 850px;
-    height: 80px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #A4A4A4;
-    position: relative;
-    top: 0px;
-}
-.ikont-hpg-menu-nuevo-convenio{
-    margin: 0px auto;
-    margin-top: -10px;
-}
-
-.ikont-hpg-menu-nuevo-convenio a{
-    text-decoration:  none;
-    color: #585858;
-    font-family:"furura";
-    font-size: 0.9em;
-}
-
-.ikont-hpg-menu-nuevo-convenio a.buttonactive{
-    color: #2EA35D;
-    background-position: 0px 0px !important;
-}
-
-.ikont-hpg-menu-nuevo-convenio a.ikont-hcl-activarvistamapa{
-    background-position: 0px -46px;
 }
