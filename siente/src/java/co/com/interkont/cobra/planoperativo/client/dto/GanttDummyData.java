@@ -22,13 +22,17 @@ public class GanttDummyData {
         
         ActividadobraDTO t = new ActividadobraDTO("Project_X", dw.addDays(1).asDate(), 10,
                 30, TaskType.PARENT);
+        t.setTipoActividad(1);
         
         ActividadobraDTO t2 = new ActividadobraDTO("Planning", dw.addDays(1).asDate(), 5, 40,
                 TaskType.PARENT);
+        t2.setTipoActividad(2);
         t2.addChild(new ActividadobraDTO("Prestudy", dw.addDays(1).asDate(), 2, 100,
+                TaskType.PARENT));
+       
+        t2.addChild(new ActividadobraDTO("Fesabillity_Study", dw.addDays(3).asDate(), 1, 10,
                 TaskType.LEAF));
-//        t2.addChild(new ActividadobraDTO("Fesabillity_Study", dw.addDays(3).asDate(), 1, 10,
-//                TaskType.LEAF));
+     
 //        t2.addChild(new ActividadobraDTO("Resource_allocation", dw.addDays(4).asDate(), 2, 30,
 //                TaskType.LEAF));
 //

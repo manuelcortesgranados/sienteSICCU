@@ -233,20 +233,98 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.taskContextMenu = new Menu();
 
 
-        MenuItem crearProyectoMenuItem = new MenuItem("Modificar Proyecto");
+/**
+         * Opciones de la actividad Convenio
+         */
+        final MenuItem menuItemProyecto = new MenuItem("Crear proyecto");
+        menuItemProyecto.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+            public void onSelection(SelectionEvent<Item> event) {
+               //proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemProyecto);
 
-
-        crearProyectoMenuItem.addSelectionHandler(
-                new SelectionHandler<Item>() {
+        /**
+         * Opciones de la actividad proyecto
+         */
+        final MenuItem menuItemContrato = new MenuItem("Añadir Contrato");
+        menuItemContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
                 proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
+        config.taskContextMenu.add(menuItemContrato);
 
-        config.taskContextMenu.add(crearProyectoMenuItem);
-        
+        final MenuItem menuItemEditarPry = new MenuItem("Editar proyecto");
+        menuItemEditarPry.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+            public void onSelection(SelectionEvent<Item> event) {
+                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemEditarPry);
+
+        final MenuItem menuItemEliminarPry = new MenuItem("Eliminar proyecto");
+                menuItemEliminarPry.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+                    public void onSelection(SelectionEvent<Item> event) {
+                        proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                        crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemEliminarPry);
+
+        /**
+         * Opciones de la actividad Contrato
+         */
+        final MenuItem menuItemEditarContrato = new MenuItem("Editar Contrato");
+                menuItemEditarContrato.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+                    public void onSelection(SelectionEvent<Item> event) {
+                        proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                        crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemEditarContrato);
+
+        final MenuItem menuItemEliminarContrato = new MenuItem("Eliminar Contrato");
+                menuItemEliminarContrato.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+                    public void onSelection(SelectionEvent<Item> event) {
+                        proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                        crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemEliminarContrato);
+
+        /**
+         * Opciones generales para todas las actividades
+         */
+        final MenuItem menuItemAñadirTarea = new MenuItem("Añadir Actividad");
+                menuItemAñadirTarea.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+                    public void onSelection(SelectionEvent<Item> event) {
+                        proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+                        crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemAñadirTarea);
+
+        final MenuItem menuItemEliminarTarea = new MenuItem("Eliminar Actividad");
+                menuItemEliminarTarea.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+                    public void onSelection(SelectionEvent<Item> event) {
+                taskStore.remove(tareaSeleccionada);
+//                        proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
+//                        crearProyectoDialog.show();
+            }
+        });
+        config.taskContextMenu.add(menuItemEliminarTarea);
 
         // Enable dependency contextMenu
         config.dependencyContextMenuEnabled = true;
@@ -290,6 +368,42 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
+                
+                if (tareaSeleccionada.getTipoActividad()==1) {
+                    menuItemProyecto.setVisible(true);
+                    menuItemContrato.setVisible(false);
+                    menuItemEliminarTarea.setVisible(false);
+                    menuItemEditarPry.setVisible(false);
+                    menuItemEliminarPry.setVisible(false);
+                    menuItemEditarContrato.setVisible(false);
+                    menuItemEliminarContrato.setVisible(false);
+
+                } else if (tareaSeleccionada.getTipoActividad()==2) {
+                    menuItemEditarPry.setVisible(true);
+                    menuItemContrato.setVisible(true);
+                    menuItemProyecto.setVisible(false);
+                    menuItemEliminarTarea.setVisible(false);
+                    menuItemEliminarPry.setVisible(true);
+                    menuItemEditarContrato.setVisible(false);
+                    menuItemEliminarContrato.setVisible(false);
+                } else if (tareaSeleccionada.getTipoActividad()==3) {
+                    menuItemEditarPry.setVisible(false);
+                    menuItemContrato.setVisible(false);
+                    menuItemProyecto.setVisible(false);
+                    menuItemEliminarTarea.setVisible(false);
+                    menuItemEliminarPry.setVisible(false);
+                    menuItemEditarContrato.setVisible(true);
+                    menuItemEliminarContrato.setVisible(true);
+                } else {
+                    menuItemEliminarTarea.setVisible(true);
+                    menuItemContrato.setVisible(false);
+                    menuItemProyecto.setVisible(false);
+                    menuItemEditarPry.setVisible(false);
+                    menuItemEliminarPry.setVisible(false);
+                    menuItemEditarContrato.setVisible(false);
+                    menuItemEliminarContrato.setVisible(false);
+                    menuItemAñadirTarea.setVisible(false);
+                }
             }
         });
 
