@@ -80,16 +80,7 @@ public class ActividadobraDTO implements IsSerializable {
         this.taskType = taskType;
     }
 
-    public ActividadobraDTO(String name, Date start, int duration,
-            int percentDone, TaskType taskType, int tipoActividad) {
-        this.name = name;
-        this.startDateTime = start;
-        this.duration = duration;
-        this.percentDone = percentDone;
-        this.taskType = taskType;
-        this.tipoActividad = tipoActividad;
-    }
-
+   
     public String getId() {
         return id;
     }

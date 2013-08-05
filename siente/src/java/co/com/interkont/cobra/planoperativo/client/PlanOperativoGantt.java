@@ -24,6 +24,10 @@ import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.core.functions.CriticalPath;
+import com.gantt.client.event.DependencyContextMenuEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
@@ -52,6 +56,7 @@ import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -140,6 +145,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * Almacena la tarea que ha sido seleccionada en el gantt
      */
     private ActividadobraDTO tareaSeleccionada;
+    /**
+     * Almacena la dependencia que ha sido seleccionada en el gantt
+     */
+    private DependenciaDTO dependenciaSeleccionada;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -175,7 +184,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
 
 
-        ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
+        final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
         depStore.addAll(GanttDummyData.getDependencies());
 
         GanttConfig config = new GanttConfig();
@@ -209,21 +218,23 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.taskContextMenuEnabled = true;
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = true;
-
         
+      
+
+
         /**
-         * Ventana  Modal Confirmar Eliminar Actividad
+         * Ventana Modal Confirmar Eliminar Actividad
          */
-         final ConfirmMessageBox boxConfim = new ConfirmMessageBox("Confirmar", "Esta seguro que desea eliminar esta actividad?");
-         boxConfim.setHeight(150);
-         boxConfim.addHideHandler(new HideHandler() {
-                    @Override
-                    public void onHide(HideEvent event) {
-                        if (boxConfim.getHideButton() == boxConfim.getButtonById(PredefinedButton.YES.name())) {
-                        taskStore.remove(tareaSeleccionada);
-                        }
-                    }
-                });
+        final ConfirmMessageBox boxConfim = new ConfirmMessageBox("Confirmar", "Esta seguro que desea eliminar esta actividad?");
+        boxConfim.setHeight(150);
+        boxConfim.addHideHandler(new HideHandler() {
+            @Override
+            public void onHide(HideEvent event) {
+                if (boxConfim.getHideButton() == boxConfim.getButtonById(PredefinedButton.YES.name())) {
+                    taskStore.remove(tareaSeleccionada);
+                }
+            }
+        });
 
 
         /**
@@ -332,15 +343,27 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEliminarTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                     boxConfim.show();
+                boxConfim.show();
 
-           }
+            }
         });
         config.taskContextMenu.add(menuItemEliminarTarea);
 
-        // Enable dependency contextMenu
-        config.dependencyContextMenuEnabled = true;
-        //
+        /*Se crea el menu asociado a las dependencias**/
+        config.dependencyContextMenu = new Menu();
+
+        MenuItem menuItemEliminarDependencia = new MenuItem("Eliminar dependencia");
+        menuItemEliminarDependencia.addSelectionHandler(new SelectionHandler<Item>() {
+            @Override
+            public void onSelection(SelectionEvent<Item> event) {
+                depStore.remove(dependenciaSeleccionada);
+            }
+        });
+        config.dependencyContextMenu.add(menuItemEliminarDependencia);
+
+
+
+
         config.taskProperties = props;
         config.dependencyProperties = depProps;
 
@@ -380,7 +403,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
-               
+
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
 //                
@@ -390,7 +413,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //              if(convenioDTO.getEstadoConvenio()==1){
 //                mostrarEliminar=true;
 //                }
-                
+
                 if (tareaSeleccionada.getTipoActividad() == 1) {
                     menuItemProyecto.setVisible(true);
                     menuItemContrato.setVisible(false);
@@ -406,7 +429,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     menuItemProyecto.setVisible(false);
                     menuItemEliminarTarea.setVisible(false);
                     menuItemEliminarPry.setVisible(true);
-                   // menuItemEliminarPry.setVisible(mostrarEliminar);
+                    // menuItemEliminarPry.setVisible(mostrarEliminar);
                     menuItemEditarContrato.setVisible(false);
                     menuItemEliminarContrato.setVisible(false);
                 } else if (tareaSeleccionada.getTipoActividad() == 3) {
@@ -417,10 +440,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                     menuItemEliminarPry.setVisible(false);
                     menuItemEditarContrato.setVisible(true);
                     menuItemEliminarContrato.setVisible(true);
-                  //  menuItemEliminarContrato.setVisible(mostrarEliminar);
+                    //  menuItemEliminarContrato.setVisible(mostrarEliminar);
                 } else {
                     menuItemEliminarTarea.setVisible(true);
-                   // menuItemEliminarTarea.setVisible(mostrarEliminar);
+                    // menuItemEliminarTarea.setVisible(mostrarEliminar);
                     menuItemContrato.setVisible(false);
                     menuItemProyecto.setVisible(false);
                     menuItemEditarPry.setVisible(false);
@@ -431,6 +454,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         });
+        
+       
+        
+        /**metodo que se encarga de obtener la dependencia seleccionada cuando se activa el menu contextual*/
+            gantt.addDependencyContextMenuHandler(new DependencyContextMenuEvent.DependencyContextMenuHandler<DependenciaDTO>() {
+            @Override
+            public void onDependencyContextMenu(DependencyContextMenuEvent<DependenciaDTO> event) {
+              dependenciaSeleccionada = event.getDependency();
+            }
+        });
+            
+         
 
         // Editing
         GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
@@ -442,6 +477,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         spinner.setMaxValue(100);
         spinner.setIncrement(10);
         editing.addEditor(config.leftColumns.getColumn(3), spinner);
+        
+        
 
         gantt.getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
@@ -492,7 +529,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Button to endable/disable show CriticalPath
         final ToggleButton critical = new ToggleButton("Ruta Critica");
         critical.setValue(false);
-        critical.addSelectHandler(new SelectEvent.SelectHandler() {
+        critical.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
                 gantt.getConfig().showCriticalPath = critical.getValue();
@@ -581,6 +618,4 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    }
 //                });
     }
-    
-   
 }
