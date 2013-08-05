@@ -13,6 +13,7 @@ import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -196,7 +197,7 @@ public class FlujoCaja {
         cantidadPeriodos = (fechaFinConvenio.getTime().getTime() - fechaInicioConvenio.getTime().getTime()) / MILLSECS_PER_DAY / 30d;
 
         /* Primer elemento de la lista de periodos */
-        System.out.println("Cantidad de periodos = " + Math.ceil(cantidadPeriodos));
+
         periodoFlujoCaja.setFechainicio(fechaInicioConvenio.getTime());
         fechaPeriodo = fechaInicioConvenio;
 
@@ -208,8 +209,6 @@ public class FlujoCaja {
         periodosFlujoCaja.add(periodoFlujoCaja);
 
         iterador++;
-
-        System.out.println("Fecha inicio del primer elemento = " + periodosFlujoCaja.get(0).getFechainicio());
 
         while (iterador <= Math.ceil(cantidadPeriodos)) {
             periodoFlujoCaja = new Periodoflujocaja();
@@ -228,9 +227,6 @@ public class FlujoCaja {
 
             periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
             periodosFlujoCaja.add(periodoFlujoCaja);
-
-            System.out.println("Fecha inicio del elemento " + iterador + ": " + periodosFlujoCaja.get(iterador - 1).getFechainicio());
-            System.out.println("Fecha fin del elemento " + iterador + ": " + periodosFlujoCaja.get(iterador - 1).getFechafin());
 
             iterador++;
         }
@@ -289,7 +285,7 @@ public class FlujoCaja {
             } else {
                 this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.planMovimientosIngresosConvenio.get(columna).getValor().doubleValue();
             }
-            
+
             this.totalIngresos += fuenteIngresosRecorrer.totalIngresosFuente.doubleValue();
 
         }
@@ -347,18 +343,27 @@ public class FlujoCaja {
 
     public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
         fuenteEgresos.calcularTotalEgresosFuente(periodosFlujoCaja.size());
+        double acumuladoGMF = 0;
         this.totalEgresosPeriodo[columna] = 0;
         this.totalEgresos = 0;
 
         for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
             if (fuenteEgresosRecorrer.isEgresoProyecto()) {
                 this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
+                
+                acumuladoGMF += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
             } else {
                 this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                
+                if (fuenteEgresosRecorrer.itemFlujoEgresos.getBooltienegmf()) {
+                    acumuladoGMF += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                }
             }
-            
+
             this.totalEgresos += fuenteEgresosRecorrer.totalEgresosFuente.doubleValue();
         }
+
+        this.calcularGMF(acumuladoGMF, columna);
 
         int i = 1;
         this.totalEgresosPeriodoAcumulativo[0] = this.totalEgresosPeriodo[0];
@@ -368,5 +373,41 @@ public class FlujoCaja {
 
             i++;
         }
+    }
+    
+    /**
+     * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-.
+     * La operación se realiza sobre los valores de egresos de proyectos y otros items definidos en un periodo dado.
+     * 
+     * @param acumuladoGMF Valor acumulado de los proyectos y los items que tienen GMF en un periodo del flujo de caja.
+     * @param columna Identificador del periodo de flujo de caja que se va calcular (desde 0).
+     */
+
+    public void calcularGMF(double acumuladoGMF, int columna) {
+        double divisorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("divisorGMF"));
+        double multiplicadorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("multiplicadorGMF"));
+
+        for (FlujoEgresos flujoEgresosRecorrer : flujoEgresos) {
+            if (!flujoEgresosRecorrer.isEgresoProyecto()) {
+                if (flujoEgresosRecorrer.itemFlujoEgresos.getStrdescripcion().contains("GMF")) {
+                    double valorGMFPeriodo = acumuladoGMF / divisorGMF * multiplicadorGMF;
+                    double totalEgresosFuente = flujoEgresosRecorrer.totalEgresosFuente.doubleValue();
+                    
+                    totalEgresosFuente -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                    this.totalEgresosPeriodo[columna] -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                    this.totalEgresos -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                                        
+                    flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).setValor(BigDecimal.valueOf(valorGMFPeriodo));
+                    totalEgresosFuente += valorGMFPeriodo;
+                    this.totalEgresosPeriodo[columna] += valorGMFPeriodo;
+                    this.totalEgresos += valorGMFPeriodo;
+                    
+                    flujoEgresosRecorrer.totalEgresosFuente = BigDecimal.valueOf(totalEgresosFuente);
+                }
+
+                flujoEgresosRecorrer.calcularTotalEgresosFuente(periodosFlujoCaja.size());
+            }
+        }
+
     }
 }
