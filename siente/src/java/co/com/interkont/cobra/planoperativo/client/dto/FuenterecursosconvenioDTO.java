@@ -4,6 +4,8 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
+import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
     private int idfuenterecursosconvenio;
     private TerceroDTO tercero;
     private ContratoDTO contrato;
+    private RolentidadDTO rolentidad;
     private BigDecimal valoraportado;
     private BigDecimal otrasreservas;
     private BigDecimal reservaiva;
@@ -26,18 +29,19 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
     private Set obrafuenterecursosconvenioses = new HashSet(0);
 
     public FuenterecursosconvenioDTO() {
-    }    
+    }
+    
+    
 
-    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, TerceroDTO tercero, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte,Set obrafuenterecursosconvenioses) {
+    
+    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte) {
         this.idfuenterecursosconvenio = idfuenterecursosconvenio;
-        this.tercero = tercero;
         this.contrato = contrato;
         this.valoraportado = valoraportado;
         this.otrasreservas = otrasreservas;
         this.reservaiva = reservaiva;
         this.valorcuotagerencia = valorcuotagerencia;
         this.tipoaporte = tipoaporte;
-        this.obrafuenterecursosconvenioses=obrafuenterecursosconvenioses;
     }
     
     
@@ -52,6 +56,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
         this.tipoaporte = tipoaporte;
     }
     
+   
     
 
     /**
@@ -178,6 +183,20 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
      */
     public void setObrafuenterecursosconvenioses(Set obrafuenterecursosconvenioses) {
         this.obrafuenterecursosconvenioses = obrafuenterecursosconvenioses;
+    }
+
+    /**
+     * @return the rolentidad
+     */
+    public RolentidadDTO getRolentidad() {
+        return rolentidad;
+    }
+
+    /**
+     * @param rolentidad the rolentidad to set
+     */
+    public void setRolentidad(RolentidadDTO rolentidad) {
+        this.rolentidad = rolentidad;
     }
     
 }

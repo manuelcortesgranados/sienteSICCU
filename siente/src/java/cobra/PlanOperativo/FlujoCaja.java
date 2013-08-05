@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class FlujoCaja {
 
+    final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
     List<Fuenterecursosconvenio> fuentesRecursosConvenio;
     List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras;
     List<Itemflujocaja> itemsFlujoIngresos;
@@ -169,42 +170,69 @@ public class FlujoCaja {
         return "FlujoCaja";
     }
 
+    /**
+     * Crea los periodos del flujo de caja de acuerdo con la fecha de inicio y
+     * finalización del convenio marco.
+     *
+     * Llena la lista periodosFlujoCaja estableciendo como fecha de inicio del
+     * primer periodo la fecha de inicio del convenio marco, se incrementa
+     * mensualmente hasta generar el último periodo y establece como fecha de
+     * finalización la fecha final del convenio marco.
+     */
     public void crearPeriodosFlujoCaja() {
-        final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
+        periodosFlujoCaja = new ArrayList<Periodoflujocaja>();
+        Periodoflujocaja periodoFlujoCaja = new Periodoflujocaja();
         Calendar fechaInicioConvenio = Calendar.getInstance();
         Calendar fechaFinConvenio = Calendar.getInstance();
-        int diasEntreFechas = 0;
+        Calendar fechaPeriodo = Calendar.getInstance();
+        double cantidadPeriodos = 0;
+        int iterador = 1;
 
         Contrato contrato = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
 
         fechaInicioConvenio.setTime(contrato.getDatefechaini());
         fechaFinConvenio.setTime(contrato.getDatefechafin());
 
-        diasEntreFechas = fechaInicioConvenio.compareTo(fechaFinConvenio);
+        cantidadPeriodos = (fechaFinConvenio.getTime().getTime() - fechaInicioConvenio.getTime().getTime()) / MILLSECS_PER_DAY / 30d;
 
-        long diferencia = (fechaInicioConvenio.getTime().getTime() - fechaFinConvenio.getTime().getTime()) / MILLSECS_PER_DAY;
+        /* Primer elemento de la lista de periodos */
+        System.out.println("Cantidad de periodos = " + Math.ceil(cantidadPeriodos));
+        periodoFlujoCaja.setFechainicio(fechaInicioConvenio.getTime());
+        fechaPeriodo = fechaInicioConvenio;
 
-        System.out.println("diasEntreFechas = " + diasEntreFechas);
-        System.out.println("diferencia = " + diferencia);
+        fechaPeriodo.add(Calendar.MONTH, 1);
+        fechaPeriodo.add(Calendar.DATE, -1);
+        periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
 
-        periodosFlujoCaja = new ArrayList<Periodoflujocaja>();
-        int i = 1;
+        periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
+        periodosFlujoCaja.add(periodoFlujoCaja);
 
-        while (i <= 12) {
-            Periodoflujocaja periodoFlujoCaja = new Periodoflujocaja();
-            Calendar calendario = Calendar.getInstance();
+        iterador++;
 
+        System.out.println("Fecha inicio del primer elemento = " + periodosFlujoCaja.get(0).getFechainicio());
 
-            calendario.set(2013, 1, i);
-            periodoFlujoCaja.setFechainicio(calendario.getTime());
+        while (iterador <= Math.ceil(cantidadPeriodos)) {
+            periodoFlujoCaja = new Periodoflujocaja();
 
-            calendario.set(2013, 28, i);
-            periodoFlujoCaja.setFechafin(calendario.getTime());
-            periodoFlujoCaja.setStrdescripcion("Mes " + i);
+            fechaPeriodo.add(Calendar.DATE, 1);
+            periodoFlujoCaja.setFechainicio(fechaPeriodo.getTime());
 
+            if (iterador < Math.ceil(cantidadPeriodos)) {
+                fechaPeriodo.add(Calendar.MONTH, 1);
+                fechaPeriodo.add(Calendar.DATE, -1);
+                periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
+            } else {
+                fechaPeriodo = fechaFinConvenio;
+                periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
+            }
+
+            periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
             periodosFlujoCaja.add(periodoFlujoCaja);
 
-            i++;
+            System.out.println("Fecha inicio del elemento " + iterador + ": " + periodosFlujoCaja.get(iterador - 1).getFechainicio());
+            System.out.println("Fecha fin del elemento " + iterador + ": " + periodosFlujoCaja.get(iterador - 1).getFechafin());
+
+            iterador++;
         }
     }
 
@@ -222,17 +250,17 @@ public class FlujoCaja {
             Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
 
             flujoIngresosEntidad.crearEstructuraFlujoIngresosEntidad(fuenteRecursosConvenio, entidadAportante, periodosFlujoCaja);
-            flujoIngresosEntidad.calcularTotalIngresosFuente();
+            flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
 
             flujoIngresos.add(flujoIngresosEntidad);
         }
-        
+
         for (Itemflujocaja itemFlujoIngresos : itemsFlujoIngresos) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
-            
+
             flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja);
-            flujoIngresosEntidad.calcularTotalIngresosFuente();
-            
+            flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
+
             flujoIngresos.add(flujoIngresosEntidad);
         }
     }
@@ -251,13 +279,19 @@ public class FlujoCaja {
     }
 
     public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
-        fuenteIngresos.calcularTotalIngresosFuente();
+        fuenteIngresos.calcularTotalIngresosFuente(periodosFlujoCaja.size());
         this.totalIngresosPeriodo[columna] = 0;
         this.totalIngresos = 0;
 
         for (FlujoIngresos fuenteIngresosRecorrer : flujoIngresos) {
-            this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.ingresos[columna].doubleValue();
+            if (fuenteIngresosRecorrer.isIngresoEntidad()) {
+                this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.planMovimientosConvenioEntidad.get(columna).getValor().doubleValue();
+            } else {
+                this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.planMovimientosIngresosConvenio.get(columna).getValor().doubleValue();
+            }
+            
             this.totalIngresos += fuenteIngresosRecorrer.totalIngresosFuente.doubleValue();
+
         }
 
         int i = 1;
@@ -277,17 +311,25 @@ public class FlujoCaja {
         int codigoConvenio = 53;
 
         fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(codigoConvenio);
-
-
+        itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
             FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
             Obra proyecto = getSessionBeanCobra().getCobraService().encontrarObraPorId(fuenteRecursosConvenioObra.getObra().getIntcodigoobra());
 
             flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosFlujoCaja);
-            flujoEgresosProyecto.calcularTotalEgresosFuente();
+            flujoEgresosProyecto.calcularTotalEgresosFuente(periodosFlujoCaja.size());
 
             flujoEgresos.add(flujoEgresosProyecto);
+        }
+
+        for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
+            FlujoEgresos flujoEgresosEntidad = new FlujoEgresos();
+
+            flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja);
+            flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
+
+            flujoEgresos.add(flujoEgresosEntidad);
         }
     }
 
@@ -304,12 +346,17 @@ public class FlujoCaja {
     }
 
     public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
-        fuenteEgresos.calcularTotalEgresosFuente();
+        fuenteEgresos.calcularTotalEgresosFuente(periodosFlujoCaja.size());
         this.totalEgresosPeriodo[columna] = 0;
         this.totalEgresos = 0;
 
         for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
-            this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.egresos[columna].doubleValue();
+            if (fuenteEgresosRecorrer.isEgresoProyecto()) {
+                this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
+            } else {
+                this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+            }
+            
             this.totalEgresos += fuenteEgresosRecorrer.totalEgresosFuente.doubleValue();
         }
 

@@ -26,6 +26,7 @@ public class ActividadobraDTO implements IsSerializable {
     Date endDateTime;
     int duration;
     int percentDone;
+    
     /**
     Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre, Milestone=Hito
     */
@@ -37,18 +38,21 @@ public class ActividadobraDTO implements IsSerializable {
     private String strdescactividad;
     private Date fechaInicio;
     private Date fechaFin;
-    private Integer peso;
-    private Double duracion;
+    private Double peso;
+    private int duracion;
     private Integer estado;
     private Set dependenciasForFkActividadOrigen = new HashSet(0);
     private Set dependenciasForFkActividadDestino = new HashSet(0);
     private ContratoDTO contrato;
+    private ObraDTO obra;
 
     
     
     
     public ActividadobraDTO() {
     }
+    
+        
 
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
@@ -311,5 +315,145 @@ public class ActividadobraDTO implements IsSerializable {
 //    public void setContrato(ContratoDTO contrato) {
 //        this.contrato = contrato;
 //    }
+
+    /**
+     * @return the obra
+     */
+    public ObraDTO getObra() {
+        return obra;
+    }
+
+    /**
+     * @param obra the obra to set
+     */
+    public void setObra(ObraDTO obra) {
+        this.obra = obra;
+    }
+
+    /**
+     * @return the strdescactividad
+     */
+    public String getStrdescactividad() {
+        return strdescactividad;
+    }
+
+    /**
+     * @param strdescactividad the strdescactividad to set
+     */
+    public void setStrdescactividad(String strdescactividad) {
+        this.strdescactividad = strdescactividad;
+    }
+
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    /**
+     * @return the fechaFin
+     */
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     * @param fechaFin the fechaFin to set
+     */
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    /**
+     * @return the peso
+     */
+    public Double getPeso() {
+        return peso;
+    }
+
+    /**
+     * @param peso the peso to set
+     */
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    /**
+     * @return the duracion
+     */
+    public int getDuracion() {
+        return duracion;
+    }
+
+    /**
+     * @param duracion the duracion to set
+     */
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    /**
+     * @return the estado
+     */
+    public Integer getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(Integer estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return the dependenciasForFkActividadOrigen
+     */
+    public Set getDependenciasForFkActividadOrigen() {
+        return dependenciasForFkActividadOrigen;
+    }
+
+    /**
+     * @param dependenciasForFkActividadOrigen the dependenciasForFkActividadOrigen to set
+     */
+    public void setDependenciasForFkActividadOrigen(Set dependenciasForFkActividadOrigen) {
+        this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
+    }
+
+    /**
+     * @return the dependenciasForFkActividadDestino
+     */
+    public Set getDependenciasForFkActividadDestino() {
+        return dependenciasForFkActividadDestino;
+    }
+
+    /**
+     * @param dependenciasForFkActividadDestino the dependenciasForFkActividadDestino to set
+     */
+    public void setDependenciasForFkActividadDestino(Set dependenciasForFkActividadDestino) {
+        this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
+    }
+
+    /**
+     * @return the contrato
+     */
+    public ContratoDTO getContrato() {
+        return contrato;
+    }
+
+    /**
+     * @param contrato the contrato to set
+     */
+    public void setContrato(ContratoDTO contrato) {
+        this.contrato = contrato;
+    }
   
 }

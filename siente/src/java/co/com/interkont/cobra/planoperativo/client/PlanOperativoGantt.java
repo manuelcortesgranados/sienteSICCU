@@ -65,6 +65,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.sencha.gxt.widget.core.client.menu.Item;
+import com.sencha.gxt.widget.core.client.menu.Menu;
+import com.sencha.gxt.widget.core.client.menu.MenuItem;
+
 /**
  *
  * @author desarrollo9
@@ -228,7 +232,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.taskContextMenu = new Menu();
 
 
-        Menu crearProyectoMenuItem = new Menu();
+        MenuItem crearProyectoMenuItem = new MenuItem("Modificar Proyecto");
 
 
         crearProyectoMenuItem.addSelectionHandler(
@@ -241,6 +245,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
         config.taskContextMenu.add(crearProyectoMenuItem);
+        
 
         // Enable dependency contextMenu
         config.dependencyContextMenuEnabled = true;
@@ -279,7 +284,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
             }
         };
-
+       
         gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {

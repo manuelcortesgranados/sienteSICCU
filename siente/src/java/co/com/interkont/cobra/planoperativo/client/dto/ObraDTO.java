@@ -17,7 +17,7 @@ import java.util.Set;
 public class ObraDTO implements IsSerializable {
 
     private int intcodigoobra;
-    private Boolean boolplanoperativo;
+    private String strnombreobra;
     private Set objetivoses = new HashSet(0);
     private Set obrafuenterecursosconvenioses = new HashSet(0);
     private Set actividadobras = new LinkedHashSet(0);
@@ -26,12 +26,10 @@ public class ObraDTO implements IsSerializable {
     }
     
 
-    public ObraDTO(int intcodigoobra, Boolean boolplanoperativo, Set objetivoses, Set obrafuenterecursosconvenioses, Set actividadobras) {
+    public ObraDTO(int intcodigoobra, String strnombreobra) {
         this.intcodigoobra = intcodigoobra;
-        this.boolplanoperativo = boolplanoperativo;
-        this.objetivoses=objetivoses;
-        this.obrafuenterecursosconvenioses=obrafuenterecursosconvenioses;
-    }    
+        this.strnombreobra = strnombreobra;
+    }
    
     /**
      * @return the intcodigoobra
@@ -47,20 +45,7 @@ public class ObraDTO implements IsSerializable {
         this.intcodigoobra = intcodigoobra;
     }
 
-    /**
-     * @return the boolplanoperativo
-     */
-    public Boolean isBoolplanoperativo() {
-        return boolplanoperativo;
-    }
-
-    /**
-     * @param boolplanoperativo the boolplanoperativo to set
-     */
-    public void setBoolplanoperativo(Boolean boolplanoperativo) {
-        this.boolplanoperativo = boolplanoperativo;
-    }
-
+    
     /**
      * @return the objetivoses
      */
@@ -101,6 +86,20 @@ public class ObraDTO implements IsSerializable {
      */
     public void setActividadobras(Set actividadobras) {
         this.actividadobras = actividadobras;
+    }
+
+    /**
+     * @return the strnombreobra
+     */
+    public String getStrnombreobra() {
+        return strnombreobra;
+    }
+
+    /**
+     * @param strnombreobra the strnombreobra to set
+     */
+    public void setStrnombreobra(String strnombreobra) {
+        this.strnombreobra = strnombreobra;
     }
     
     
