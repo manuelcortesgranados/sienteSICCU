@@ -28,6 +28,7 @@ public class ContratoDTO implements IsSerializable {
     private String textobjeto;
     private TerceroDTO gerenteconvenio;
     private Set fuenterecursosconvenios = new HashSet(0);
+    private int estadoConvenio;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
     private Boolean booltipocontratoconvenio;
@@ -235,4 +236,20 @@ public class ContratoDTO implements IsSerializable {
     public void setBooltipocontratoconvenio(Boolean booltipocontratoconvenio) {
         this.booltipocontratoconvenio = booltipocontratoconvenio;
     }
+
+    /**
+     * @return the estadoConvenio
+     */
+    public int getEstadoConvenio() {
+        return estadoConvenio;
+    }
+
+    /**
+     * @param estadoConvenio the estadoConvenio to set
+     */
+    public void setEstadoConvenio(int estadoConvenio) {
+        this.estadoConvenio = estadoConvenio;
+    }
+
+   
 }
