@@ -2190,9 +2190,6 @@ public class NuevoContratoBasico implements Serializable {
      */
     /* variables para el funcionamiento del plan operativo*/
     public NuevoContratoBasico() {
-//        contrato.setBooltipocontratoconvenio(false);
-        // System.out.println("constructor nuevo contrato = ");
-        System.out.println("ingresoo al constructoor");
         llenarTipodocumentos();
         llenarPolizas();
         if (!Propiedad.getValor("conplanoperativo").equals("true")) {
@@ -3601,7 +3598,6 @@ public class NuevoContratoBasico implements Serializable {
      * @return
      */
     public String llenarTipodocumentos() {
-        System.out.println("ingresoo a tipodocumentos");
         List<Tipodocumento> listatipodocumento = getSessionBeanCobra().getCobraService().encontrarTiposDocumentos();
         tipodocumento = new SelectItem[listatipodocumento.size()];
         int i = 0;

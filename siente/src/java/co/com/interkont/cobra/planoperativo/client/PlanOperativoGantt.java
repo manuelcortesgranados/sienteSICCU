@@ -143,6 +143,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     @SuppressWarnings("unchecked")
     @Override
     public Widget asWidget() {
+        service.setLog("As widget", null);
         final Button enviar = new Button("Enviar");
 
         final DialogBox dialogBox = new DialogBox();
@@ -387,7 +388,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         configs.add(column2);
 
         ColumnConfig<ActividadobraDTO, Integer> column3 = new ColumnConfig<ActividadobraDTO, Integer>(props.duration());
-        column3.setHeader("Duraccion");
+        column3.setHeader("Duración");
         column3.setWidth(60);
         column3.setSortable(true);
         column3.setResizable(true);
@@ -403,7 +404,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
 
         ColumnModel cm = new ColumnModel(configs);
-        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Opertivo", 1,
+        cm.addHeaderGroup(0, 0, new HeaderGroupConfig("Plan Operativo", 1,
                 4));
 
         return cm;
@@ -411,8 +412,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     @Override
     public void onModuleLoad() {
+        service.setLog("Load module", null);
         cargar();
-        RootPanel.get("planoperativoclient").add(asWidget());
+        //RootPanel.get("planoperativoclient").add(asWidget());
     }
 
     private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {

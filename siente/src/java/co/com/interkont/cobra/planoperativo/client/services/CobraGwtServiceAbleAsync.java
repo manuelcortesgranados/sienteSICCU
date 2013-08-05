@@ -18,6 +18,7 @@ public interface CobraGwtServiceAbleAsync {
    void getContratoDTO(AsyncCallback<ContratoDTO> call);
     void setContratoDTO(ContratoDTO contratoDto,AsyncCallback<Void> call);
     void casteoContrato(AsyncCallback<ContratoDTO> call);
+    void setLog(String log, AsyncCallback<Void> call);
 
 //    void agregarContratoTemporal(ContratoDTO contratoDto, AsyncCallback<Void> call) throws Exception;
 //

@@ -19,6 +19,7 @@ public interface CobraGwtServiceAble extends RemoteService{
     public ContratoDTO getContratoDTO();
     public void setContratoDTO(ContratoDTO contrato);
     public ContratoDTO casteoContrato() throws Exception;    
+    public void setLog(String log) throws Exception;
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
 //    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception;
 //    public void actualizarTareaTemporal(ActividadObraDTO actividadDto)throws Exception;

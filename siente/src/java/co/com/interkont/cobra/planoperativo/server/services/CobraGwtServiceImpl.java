@@ -8,6 +8,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     @Autowired
     private CobraDaoAble cobraDao;    
     private ContratoDTO contratoDto = new ContratoDTO();
+    private final Log log = LogFactory.getLog(this.getClass());
     /*constantes para sabes a que va a convertir*/
     final int VAR_DTO = 1;
     final int VAR_TO = 2;   
@@ -59,6 +62,12 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setContratoDTO(ContratoDTO contrato) {
         this.contratoDto=contrato;
     }
+    
+    @Override
+    public void setLog(String log)
+    {
+        this.log.info(log);
+    }        
  
     
 }
