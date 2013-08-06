@@ -10,6 +10,9 @@ import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
+import co.com.interkont.cobra.to.Planificacionmovconvenio;
+import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
+import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
@@ -32,6 +35,9 @@ public class FlujoCaja {
     List<Periodoflujocaja> periodosFlujoCaja;
     List<FlujoIngresos> flujoIngresos;
     List<FlujoEgresos> flujoEgresos;
+    List<Planificacionmovconvenioentidad> planifmovimientoconvenioentidad;
+    List<Planificacionmovimientoproyecto> planifmovimientoconvenioproyecto;
+    List<Planificacionmovconvenio> planifmovimientoconvenio;
     double totalIngresosPeriodo[];
     double totalIngresosPeriodoAcumulativo[];
     double totalEgresosPeriodo[];
@@ -167,7 +173,7 @@ public class FlujoCaja {
         this.iniciarTotalesIngresosPeriodo();
         this.crearEstructuraFlujoEgresos();
         this.iniciarTotalesEgresosPeriodo();
-
+        this.pruebaPlanificacion();
         return "FlujoCaja";
     }
 
@@ -189,7 +195,7 @@ public class FlujoCaja {
         double cantidadPeriodos = 0;
         int iterador = 1;
 
-        Contrato contrato = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
+        Contrato contrato = getSessionBeanCobra().getCobraService().encontrarContratoxId(1472);
 
         fechaInicioConvenio.setTime(contrato.getDatefechaini());
         fechaFinConvenio.setTime(contrato.getDatefechafin());
@@ -235,8 +241,9 @@ public class FlujoCaja {
     public void crearEstructuraFlujoIngresos() {
         this.flujoIngresos = new ArrayList<FlujoIngresos>();
         this.totalIngresos = 0;
-
-        int codigoConvenio = 53;
+        planifmovimientoconvenioentidad = new ArrayList<Planificacionmovconvenioentidad>();
+        planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
+        int codigoConvenio = 1472;
 
         fuentesRecursosConvenio = getSessionBeanCobra().getCobraService().fuentesRecursosConvenio(codigoConvenio);
         itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
@@ -244,19 +251,33 @@ public class FlujoCaja {
         for (Fuenterecursosconvenio fuenteRecursosConvenio : fuentesRecursosConvenio) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
             Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
+            planifmovimientoconvenioentidad = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioEntidad(1);
+            if (planifmovimientoconvenioentidad.size() <= 0) {
+                flujoIngresosEntidad.crearEstructuraFlujoIngresosEntidad(fuenteRecursosConvenio, entidadAportante, periodosFlujoCaja);
+                flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
 
-            flujoIngresosEntidad.crearEstructuraFlujoIngresosEntidad(fuenteRecursosConvenio, entidadAportante, periodosFlujoCaja);
-            flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
-
+            } else {
+                flujoIngresosEntidad.setPlanMovimientosConvenioEntidad(planifmovimientoconvenioentidad);
+                flujoIngresosEntidad.setEntidadAportante(entidadAportante);
+                flujoIngresosEntidad.actualizarPlanMovimientosEntidad(periodosFlujoCaja);
+                flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
+            }
             flujoIngresos.add(flujoIngresosEntidad);
         }
 
         for (Itemflujocaja itemFlujoIngresos : itemsFlujoIngresos) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
+            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoIngresos.getIditemflujocaja(), 1472);
 
-            flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja);
-            flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
-
+            if (planifmovimientoconvenio.size() <= 0) {
+                flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja);
+                flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
+            } else {
+                flujoIngresosEntidad.setPlanMovimientosIngresosConvenio(planifmovimientoconvenio);
+                flujoIngresosEntidad.setItemFlujoIngresos(itemFlujoIngresos);                
+                flujoIngresosEntidad.actualizarPlanMovimientosEntidad(periodosFlujoCaja);                
+                flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
+            }
             flujoIngresos.add(flujoIngresosEntidad);
         }
     }
@@ -303,8 +324,9 @@ public class FlujoCaja {
     public void crearEstructuraFlujoEgresos() {
         this.flujoEgresos = new ArrayList<FlujoEgresos>();
         this.totalEgresos = 0;
-
-        int codigoConvenio = 53;
+        planifmovimientoconvenioproyecto = new ArrayList<Planificacionmovimientoproyecto>();
+        planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
+        int codigoConvenio = 1472;
 
         fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(codigoConvenio);
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
@@ -312,21 +334,36 @@ public class FlujoCaja {
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
             FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
             Obra proyecto = getSessionBeanCobra().getCobraService().encontrarObraPorId(fuenteRecursosConvenioObra.getObra().getIntcodigoobra());
-
-            flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosFlujoCaja);
-            flujoEgresosProyecto.calcularTotalEgresosFuente(periodosFlujoCaja.size());
-
+            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(54);
+            if (planifmovimientoconvenioproyecto.size() <= 0) {
+                flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosFlujoCaja);
+                flujoEgresosProyecto.calcularTotalEgresosFuente(periodosFlujoCaja.size());
+            } else {
+                flujoEgresosProyecto.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
+                flujoEgresosProyecto.setProyecto(proyecto);
+                flujoEgresosProyecto.actualizarPlanMovimientosProyecto(periodosFlujoCaja);
+                flujoEgresosProyecto.calcularTotalEgresosFuente(codigoConvenio);
+            }
             flujoEgresos.add(flujoEgresosProyecto);
         }
 
         for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
             FlujoEgresos flujoEgresosEntidad = new FlujoEgresos();
+            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoEgresos.getIditemflujocaja(), 1472);
+            if (planifmovimientoconvenio.size() <= 0) {
+                flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja);
+                flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
 
-            flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja);
-            flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
-
+            } else {
+                flujoEgresosEntidad.setPlanMovimientosEgresosConvenio(planifmovimientoconvenio);
+                flujoEgresosEntidad.setItemFlujoEgresos(itemFlujoEgresos);
+                flujoEgresosEntidad.actualizarPlanMovimientosEgresosConvenio(periodosFlujoCaja);
+                flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
+            }
             flujoEgresos.add(flujoEgresosEntidad);
         }
+
+
     }
 
     public void iniciarTotalesEgresosPeriodo() {
@@ -350,11 +387,11 @@ public class FlujoCaja {
         for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
             if (fuenteEgresosRecorrer.isEgresoProyecto()) {
                 this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
-                
+
                 acumuladoGMF += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
             } else {
                 this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
-                
+
                 if (fuenteEgresosRecorrer.itemFlujoEgresos.getBooltienegmf()) {
                     acumuladoGMF += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
                 }
@@ -374,15 +411,17 @@ public class FlujoCaja {
             i++;
         }
     }
-    
-    /**
-     * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-.
-     * La operación se realiza sobre los valores de egresos de proyectos y otros items definidos en un periodo dado.
-     * 
-     * @param acumuladoGMF Valor acumulado de los proyectos y los items que tienen GMF en un periodo del flujo de caja.
-     * @param columna Identificador del periodo de flujo de caja que se va calcular (desde 0).
-     */
 
+    /**
+     * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-. La
+     * operación se realiza sobre los valores de egresos de proyectos y otros
+     * items definidos en un periodo dado.
+     *
+     * @param acumuladoGMF Valor acumulado de los proyectos y los items que
+     * tienen GMF en un periodo del flujo de caja.
+     * @param columna Identificador del periodo de flujo de caja que se va
+     * calcular (desde 0).
+     */
     public void calcularGMF(double acumuladoGMF, int columna) {
         double divisorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("divisorGMF"));
         double multiplicadorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("multiplicadorGMF"));
@@ -392,22 +431,33 @@ public class FlujoCaja {
                 if (flujoEgresosRecorrer.itemFlujoEgresos.getStrdescripcion().contains("GMF")) {
                     double valorGMFPeriodo = acumuladoGMF / divisorGMF * multiplicadorGMF;
                     double totalEgresosFuente = flujoEgresosRecorrer.totalEgresosFuente.doubleValue();
-                    
+
                     totalEgresosFuente -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
                     this.totalEgresosPeriodo[columna] -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
                     this.totalEgresos -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
-                                        
+
                     flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).setValor(BigDecimal.valueOf(valorGMFPeriodo));
                     totalEgresosFuente += valorGMFPeriodo;
                     this.totalEgresosPeriodo[columna] += valorGMFPeriodo;
                     this.totalEgresos += valorGMFPeriodo;
-                    
+
                     flujoEgresosRecorrer.totalEgresosFuente = BigDecimal.valueOf(totalEgresosFuente);
                 }
 
                 flujoEgresosRecorrer.calcularTotalEgresosFuente(periodosFlujoCaja.size());
             }
         }
+
+    }
+
+    public void pruebaPlanificacion() {
+        System.out.println("ingreso = ");
+        planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(1, 1472);
+        System.out.println("ingreso = " + planifmovimientoconvenio.size());
+        planifmovimientoconvenioentidad = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioEntidad(1);
+        System.out.println("ingreso = " + planifmovimientoconvenioentidad.size());
+        planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(54);
+        System.out.println("ingreso = " + planifmovimientoconvenioproyecto.size());
 
     }
 }
