@@ -23,7 +23,7 @@
     <ui:define name="title">
         <h:form>  
             <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}"  immediate="true"/>
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}"  render="frmpanelgeneral" immediate="true"/>
                 <h:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.planOperativo()}"  immediate="true"/>
                 <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
                 <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
@@ -44,10 +44,9 @@
                     <h:outputText value="#{Supervisor$Contrato.infogeneralcrearconvenio}"/>
                 </center>
             </h:panelGroup>
+            
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
-                <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-db">
-                    <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
-                </h:panelGroup>
+                   <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >
@@ -273,6 +272,8 @@
         </h:form>
         <ui:include src="/modal/editarDocumentoModal.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
+        <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
+        
     </ui:define>
 
 </ui:composition>

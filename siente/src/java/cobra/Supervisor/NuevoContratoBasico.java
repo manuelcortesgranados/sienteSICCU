@@ -6036,7 +6036,7 @@ private Boolean boolpruea=false;
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
-                subpantalla = 1;
+               
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
@@ -6089,14 +6089,17 @@ private Boolean boolpruea=false;
      * 
      */
     public void guardarBorradorConvenio() {
-        Actividadobra actobra = new Actividadobra();
-        actobra.setNumvalorplanifao(new BigDecimal(BigInteger.ZERO));
-        actobra.setFloatcantplanifao(15);
-
-        List<Actividadobra> actividadobra = new ArrayList<Actividadobra>();
-        actividadobra.add(actobra);
-        contrato.setActividadobras((Set) actividadobra);
-        guardarContrato();
+        if(contrato!=null){
+            System.out.println("contrato = " + contrato.getStrnumcontrato());
+        }
+//        Actividadobra actobra = new Actividadobra();
+//        actobra.setNumvalorplanifao(new BigDecimal(BigInteger.ZERO));
+//        actobra.setFloatcantplanifao(15);
+//
+//        List<Actividadobra> actividadobra = new ArrayList<Actividadobra>();
+//        actividadobra.add(actobra);
+//        contrato.setActividadobras((Set) actividadobra);
+//        guardarContrato();
         }
 
     /*
@@ -6113,10 +6116,12 @@ private Boolean boolpruea=false;
      *      
      */
     public void adicionarFuenteRecursos() {
+        System.out.println("entre a agregar" );
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente = Boolean.TRUE;
         limpiarFuenteRecurso();
+        System.out.println(lstFuentesRecursos.size());
     }
 
     /*
@@ -6320,7 +6325,7 @@ private Boolean boolpruea=false;
      * @return the lstFuentesRecursos
      */
     public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
-        return lstFuentesRecursos;
+         return lstFuentesRecursos;
     }
 
     /**
