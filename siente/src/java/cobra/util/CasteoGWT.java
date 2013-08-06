@@ -61,7 +61,6 @@ public class CasteoGWT {
             contratoDTO.getActividadobras().add(castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO));
             Iterator ite = contratoDTO.getActividadobras().iterator();
             ActividadobraDTO actDto = (ActividadobraDTO) ite.next();
-            System.out.println("actDto hijas de la Raiz = " + actDto.getChildren().size());
         }
         return contratoDTO;
     }
@@ -75,11 +74,9 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio) {
-        System.out.println("casteando raiz = " + actividadObra.getStrdescactividad());
         ActividadobraDTO activdadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
         Set act = new HashSet(actividadObra.getActividadobras());
         castearActividadesDeListaActividadesRaizTO(activdadObra, act, convenio);
-        System.out.println("hijos de acti" + activdadObra.getChildren().size());
 
         //falta las dependencias
         return activdadObra;
@@ -96,20 +93,14 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ActividadobraDTO castearActividadobraDdoToActividadobraTO(Actividadobra actividadObra, ContratoDTO convenio) {
-        System.out.println("casteando actividad obra contrato");
         ActividadobraDTO activudadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
         if (actividadObra.getObra() != null) {
-            System.out.println("es Obra");
             activudadObra.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
-            System.out.println(activudadObra.getObra().getIntcodigoobra());
         } else if (actividadObra.getContrato() != null) {
             if (!actividadObra.getContrato().getBooltipocontratoconvenio()) {
-                System.out.println("es Contrato");
                 activudadObra.setContrato(castearContratoToContratoTO(actividadObra.getContrato(), convenio));
-                System.out.println(activudadObra.getContrato().getIntidcontrato());
             }
         }
-        System.out.println("activudadObra = " + activudadObra.getChildren());
         return activudadObra;
 
     }
@@ -126,14 +117,11 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static void castearActividadesDeListaActividadesRaizTO(ActividadobraDTO acti, Set listaActividades, ContratoDTO contrato) {
-        System.out.println("casteando recursivo " + acti.getId());
-        System.out.println("casteando recursivo " + listaActividades.size());
         if (!listaActividades.isEmpty()) {
             for (Iterator it = listaActividades.iterator(); it.hasNext();) {
                 Actividadobra activ = (Actividadobra) it.next();
                 ActividadobraDTO act = castearActividadobraDdoToActividadobraTO(activ, contrato);
                 acti.getChildren().add(act);
-                System.out.println("tamano lst=" + acti.getChildren().size());
                 Set ac = new HashSet(activ.getActividadobras());
                 castearActividadesDeListaActividadesRaizTO(act, ac, contrato);
             }
@@ -609,5 +597,5 @@ public class CasteoGWT {
             return TaskType.LEAF;
         }
         return TaskType.MILESTONE;
-    }
+    }   
 }

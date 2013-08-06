@@ -12,6 +12,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import cobra.util.CasteoGWT;
+import co.com.interkont.cobra.to.Contrato;
 
 /**
  *
@@ -69,5 +71,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         this.log.info(log);
     }        
  
-    
+    @Override
+    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
+       return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
+    }
 }
