@@ -1,76 +1,53 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">    
 
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:a4j="http://richfaces.org/a4j" 
                 template="./../facelets/template_main.xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich"
+                xmlns:interkont="http://www.interkont.com/jsf"
                 xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:c="http://java.sun.com/jsp/jstl/core">
-
-    <ui:define name="head" />
-
-    <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion.xhtml" />
-    </ui:define>
-
-    <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-    </ui:define>
-
-    <ui:define name="title">
-        <h:form>  
-            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.actualizarPanel(2)}" render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
-            </h:panelGrid>
-        </h:form>
-
-    </ui:define>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core">        
 
     <ui:define name="body">
         <h:form id="formFlujoIngresos">
-            <rich:dataTable id="dataTableIngresos" var="fuenteIngresos" value="#{PlanOperativo.flujoIngresos}">
+            <rich:dataTable id="dataTableIngresos" var="fuenteIngresos" value="#{PlanOperativo.flujoIngresos}" style="width: 90%;">
                 <rich:column>
                     <f:facet name="header">
                         <h:outputLabel value="Fuente ingresos" />
                     </f:facet>
-                    
+
                     <h:outputText value="#{fuenteIngresos.descripcionFuenteIngreso}" />
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">
                         <h:outputLabel value="Total ingresos" />
                     </f:facet>
-                    
+
                     <h:outputText id="outputTextTotalIngresosFuente" value="#{fuenteIngresos.totalIngresosFuente}">
                         <f:convertNumber currencySymbol="$ " type="currency" />
                     </h:outputText>
                 </rich:column>
-                
+
                 <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                     <rich:column>
                         <f:facet name="header">
                             <h:outputLabel value="#{PlanOperativo.periodosFlujoCaja.get(columna).strdescripcion}" />
                         </f:facet>
-                        
+
                         <rich:inplaceInput value="#{fuenteIngresos.planMovimientosConvenioEntidad.get(columna).valor}" showControls="true"
                                            rendered="#{fuenteIngresos.ingresoEntidad}">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos" />
-                            
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
+
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
-                        
+
                         <rich:inplaceInput value="#{fuenteIngresos.planMovimientosIngresosConvenio.get(columna).valor}" showControls="true"
                                            rendered="#{!fuenteIngresos.ingresoEntidad}">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos" />
-                            
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
+
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
                     </rich:column>
@@ -81,13 +58,13 @@
                         <rich:column>
                             <h:outputLabel value="Totales" />
                         </rich:column>
-                        
+
                         <rich:column>
                             <h:outputText id="outputTextTotalIngresos" value="#{PlanOperativo.totalIngresos}">                                
                                 <f:convertNumber currencySymbol="$ " type="currency" />
                             </h:outputText>
                         </rich:column>
-                        
+
                         <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                             <rich:column>
                                 <h:outputText value="#{PlanOperativo.totalIngresosPeriodo[columna]}">                                
@@ -95,11 +72,11 @@
                                 </h:outputText>
                             </rich:column>
                         </c:forEach>
-                        
+
                         <rich:column colspan="2" breakRowBefore="true">
                             <h:outputLabel value="Acumulados" />
                         </rich:column>
-                        
+
                         <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                             <rich:column>
                                 <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna]}">                                
@@ -110,11 +87,10 @@
                     </rich:columnGroup>
                 </f:facet>
             </rich:dataTable>
-        </h:form>
-
+        </h:form>        
         <h:form id="formFlujoEgresos">
-            <rich:dataTable id="dataTableEgresos" var="fuenteEgresos" value="#{PlanOperativo.flujoEgresos}">
-                <rich:column>
+            <rich:dataTable id="dataTableEgresos" var="fuenteEgresos" value="#{PlanOperativo.flujoEgresos}" style="width: 90%; overflow: auto" >
+                <rich:column >
                     <f:facet name="header">
                         <h:outputLabel value="Fuente egresos" />
                     </f:facet>
@@ -138,26 +114,33 @@
                             <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos" />
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
+
                         <rich:inplaceInput value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}" showControls="true"
-                                           rendered="#{!fuenteEgresos.egresoProyecto}">
+                                           rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}">
                             <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos" />
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
+
+                        <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}"
+                                      rendered="#{!fuenteEgresos.egresoProyecto and fuenteEgresos.itemFlujoEgresos.boolcalculado}"
+                                      style="background-color: lightgrey;">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                        </h:outputText>
                     </rich:column>
                 </c:forEach>
-                
+
                 <f:facet name="footer">
                     <rich:columnGroup>
                         <rich:column>
                             <h:outputLabel value="Totales" />
                         </rich:column>
-                        
+
                         <rich:column>
                             <h:outputText id="outputTextTotalEgresos" value="#{PlanOperativo.totalEgresos}">                                
                                 <f:convertNumber currencySymbol="$ " type="currency" />
                             </h:outputText>
                         </rich:column>
-                        
+
                         <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                             <rich:column>
                                 <h:outputText value="#{PlanOperativo.totalEgresosPeriodo[columna]}">                                
@@ -165,11 +148,11 @@
                                 </h:outputText>
                             </rich:column>
                         </c:forEach>
-                        
+
                         <rich:column colspan="2" breakRowBefore="true">
                             <h:outputLabel value="Acumulados" />
                         </rich:column>
-                        
+
                         <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                             <rich:column>
                                 <h:outputText value="#{PlanOperativo.totalEgresosPeriodoAcumulativo[columna]}">                                
@@ -180,6 +163,22 @@
                     </rich:columnGroup>
                 </f:facet>
             </rich:dataTable>
+            <rich:dataTable  id="tablaflujocajaneto"  style="width: 90%;" >
+
+                <rich:column >
+                    <f:facet name="header">
+                        <h:outputLabel value="FLUJO CAJA NETO"/>
+                    </f:facet>
+                </rich:column>
+
+                <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">                    
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna] - PlanOperativo.totalEgresosPeriodoAcumulativo[columna]} "/>
+                        </f:facet>
+                    </rich:column>         
+                </c:forEach>                
+            </rich:dataTable>     
         </h:form>
     </ui:define>
 </ui:composition>
