@@ -25,7 +25,10 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.core.functions.CriticalPath;
+import com.gantt.client.core.functions.TaskResizeTip.TaskResizeTipData;
+import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
+import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -36,7 +39,9 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.scheduler.client.core.TimeResolution;
+import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig;
+import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.WeekTimeAxisGenerator;
@@ -195,7 +200,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
-        config.resizeHandle = SchedulerConfig.ResizeHandle.BOTH;
+        config.resizeHandle = ResizeHandle.BOTH;
         // Enable dependency DnD
         config.dependencyDnDEnabled = true;
         // Only EndToStart allowed
@@ -204,7 +209,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Enable task DnD
         config.taskDnDEnabled = true;
         // Define "snap to" resolution
-        config.timeResolutionUnit = TimeResolution.Unit.WEEK;
+        config.timeResolutionUnit = Unit.DAY;
         config.timeResolutionIncrement = 1;
         // Define the DateFormat of the tooltips
         config.tipDateFormat = DateTimeFormat.getFormat("MMM d");
@@ -216,10 +221,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.columnWidth = 40;
         // Enable task contextMenu
         config.taskContextMenuEnabled = true;
+        // Enable dependency contextMenu
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = true;
+        config.showTaskLabel=false;
         
       
+        
 
 
         /**
@@ -375,9 +383,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         zoneGenerators.add(new WeekendZoneGenerator()); // Create a zone every weekend
         config.zoneGenerators = zoneGenerators;
 
-
-
-
         // Create the Gxt Scheduler
 
 
@@ -398,7 +403,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
             }
         };
-
+        
         gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
@@ -466,6 +471,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
             
          
+            
+           
+        
+       
 
         // Editing
         GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
@@ -539,23 +548,21 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         tbar.add(critical);
 
 
-
         return tbar;
     }
-
     // Creates the static columns
     @SuppressWarnings({"rawtypes", "unchecked"})
     private ColumnModel<ActividadobraDTO> createStaticColumns() {
-        List<ColumnConfig<ActividadobraDTO, ?>> configs = new ArrayList<ColumnConfig<ActividadobraDTO, ?>>();
+        List<ColumnConfig<ActividadobraDTO,?>> configs = new ArrayList<ColumnConfig<ActividadobraDTO, ?>>();
 
-        ColumnConfig<ActividadobraDTO, ?> column = new ColumnConfig<ActividadobraDTO, String>(props.name());
+        ColumnConfig<ActividadobraDTO,?> column = new ColumnConfig<ActividadobraDTO, String>(props.name());
         column.setHeader("Actividades");
         column.setWidth(160);
         column.setSortable(true);
         column.setResizable(true);
         configs.add(column);
 
-        ColumnConfig<ActividadobraDTO, Date> column2 = new ColumnConfig<ActividadobraDTO, Date>(props.startDateTime());
+        ColumnConfig<ActividadobraDTO,Date> column2 = new ColumnConfig<ActividadobraDTO, Date>(props.startDateTime());
         column2.setHeader("Inicio");
         column2.setWidth(90);
         column2.setSortable(true);
@@ -563,14 +570,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         column2.setCell(new DateCell(DateTimeFormat.getFormat("yyyy-MM-dd")));
         configs.add(column2);
 
-        ColumnConfig<ActividadobraDTO, Integer> column3 = new ColumnConfig<ActividadobraDTO, Integer>(props.duration());
+        ColumnConfig<ActividadobraDTO,Integer> column3 = new ColumnConfig<ActividadobraDTO, Integer>(props.duration());
         column3.setHeader("Duración");
         column3.setWidth(60);
         column3.setSortable(true);
         column3.setResizable(true);
         configs.add(column3);
 
-        ColumnConfig<ActividadobraDTO, Integer> column4 = new ColumnConfig<ActividadobraDTO, Integer>(props.percentDone());
+        ColumnConfig<ActividadobraDTO,Integer> column4 = new ColumnConfig<ActividadobraDTO, Integer>(props.percentDone());
         column4.setHeader("Peso");
         column4.setWidth(60);
         column4.setSortable(true);
@@ -585,6 +592,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         return cm;
     }
+    
+   
 
     @Override
     public void onModuleLoad() {
@@ -600,7 +609,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 processFolder(store, child);
             }
         }
-
     }
 
     public void cargar() {

@@ -6418,7 +6418,7 @@ private Boolean boolpruea=false;
     }
    
     
-    public String planOperativo(){         
+    public String planOperativo(){  
        return "PlanOperativo";        
     }
     
