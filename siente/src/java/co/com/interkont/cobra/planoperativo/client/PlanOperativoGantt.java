@@ -20,6 +20,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTOProps;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
@@ -162,42 +163,31 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     @Override
     public Widget asWidget() {
         service.setLog("As widget", null);
-        final Button enviar = new Button("Enviar");
-
-        final DialogBox dialogBox = new DialogBox();
-        dialogBox.setText("Remote Procedure Call");
-
-//        taskStore.setAutoCommit(true);
-
-//        for (Task base : root.getChildren()) {
-//            taskStore.add(base);
-//            if (base.hasChildren()) {
-//                processFolder(taskStore, base);
-//            }
-//        }
-
 
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
         final ActividadobraDTO project=  new ActividadobraDTO(convenioDTO.getStrnumcontrato(), convenioDTO.getDatefechaini(), 100,
                 100, GanttConfig.TaskType.PARENT);
         
-        service.obtenerActividadesObligatorias(convenioDTO.getDatefechaini(), 100,new AsyncCallback<List<ActividadobraDTO>>() {
+        service.obtenerActividadesObligatorias(convenioDTO.getDatefechaini(), 100,new AsyncCallback<ArrayList<ActividadobraDTO>>() {
 
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error al leer las actividades obligatorias", null);
+                AlertMessageBox d = new AlertMessageBox("Alerta",msg);                   
+                d.show();
             }
 
             @Override
-            public void onSuccess(List<ActividadobraDTO> result) {                
+            public void onSuccess(ArrayList<ActividadobraDTO> result) {                
                 project.setChildren(result);
             }
         });
         ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
-        list.add(project);
+        
         //root = new ActividadobraDTO(list);
-        root = GanttDummyData.getTasks();
+        //root = GanttDummyData.getTasks();
+        root= GanttDatos.getTareas(list, convenioDTO);
 
 
 
@@ -535,8 +525,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
         vc.add(createToolBar(), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
-        vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-        vc.add(enviar);
+        vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));        
         main.add(cp);
         return main;
     }
@@ -652,8 +641,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 else
                 {
                     service.setLog(msg, null);
-                    AlertMessageBox d = new AlertMessageBox("Alerta",msg);
-                   // d.addHideHandler(hideHandler);
+                    AlertMessageBox d = new AlertMessageBox("Alerta",msg);                   
                     d.show();
                 }    
             }

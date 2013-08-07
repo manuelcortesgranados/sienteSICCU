@@ -19,7 +19,6 @@ import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  *
@@ -83,10 +82,10 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     }
     
      @Override
-    public List<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception {
+    public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception {
        
         Iterator itparametricas=cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica").iterator();
-        List<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
+        ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
         while(itparametricas.hasNext())
         {
             Parametricaactividadesobligatorias par= (Parametricaactividadesobligatorias) itparametricas.next();

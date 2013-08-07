@@ -6427,6 +6427,7 @@ private Boolean boolpruea=false;
 
     
     public String planOperativo(){  
+       
         getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));       
         return "PlanOperativo";
     }

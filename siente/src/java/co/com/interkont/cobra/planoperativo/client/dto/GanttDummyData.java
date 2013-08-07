@@ -70,28 +70,28 @@ public class GanttDummyData {
 		// Create the dependencies
 		public static List<DependenciaDTO> getDependencies() {
 			List<DependenciaDTO> list = new ArrayList<DependenciaDTO>();
-			list.add(new DependenciaDTO("5", "Prestudy", "Fesabillity_Study",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("6", "Fesabillity_Study", "Resource_allocation",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("0", "Resource_allocation", "M2",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("7", "M2", "Task-1",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("1", "Task-1", "Task-2",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("2", "Task-1", "Task-3",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("8", "Task-2",
-					"Subtask-1", DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("4", "Task-3", "Subtask-1",
-					DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("3", "Subtask-1",
-					"Subtask-2", DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("9", "Subtask-2",
-					"Task-5", DependencyType.ENDtoSTART));
-			list.add(new DependenciaDTO("9", "Task-5",
-					"Project-End", DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("5", "Prestudy", "Fesabillity_Study",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("6", "Fesabillity_Study", "Resource_allocation",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("0", "Resource_allocation", "M2",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("7", "M2", "Task-1",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("1", "Task-1", "Task-2",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("2", "Task-1", "Task-3",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("8", "Task-2",
+//					"Subtask-1", DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("4", "Task-3", "Subtask-1",
+//					DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("3", "Subtask-1",
+//					"Subtask-2", DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("9", "Subtask-2",
+//					"Task-5", DependencyType.ENDtoSTART));
+//			list.add(new DependenciaDTO("9", "Task-5",
+//					"Project-End", DependencyType.ENDtoSTART));
 			return list;
 		}
 
