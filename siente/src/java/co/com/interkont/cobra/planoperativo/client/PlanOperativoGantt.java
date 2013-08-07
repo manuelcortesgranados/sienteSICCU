@@ -663,6 +663,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     public boolean validandoDatosBásicosConvenio() {
         //Validación valor contrato
+        
+        //Validación fechas obligatorias
         if(convenioDTO.getDatefechaini()==null || convenioDTO.getDatefechafin()==null)
         {
             msg="Debe diligenciar las fechas del convenio";
