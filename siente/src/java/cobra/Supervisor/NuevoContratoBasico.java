@@ -49,6 +49,7 @@ import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
 import cobra.PlanOperativo.FlujoCaja;
 import cobra.util.ArchivoWebUtil;
+import cobra.util.CasteoGWT;
 import cobra.util.RutasWebArchivos;
 import com.gantt.client.config.GanttConfig;
 import com.interkont.cobra.exception.ArchivoExistenteException;
@@ -6426,6 +6427,7 @@ private Boolean boolpruea=false;
 
     
     public String planOperativo(){  
+        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));       
         return "PlanOperativo";
     }
 

@@ -20,21 +20,21 @@
         <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
     </ui:define>
 
-    <ui:define name="title">
-        <h:form>  
-            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}"  render="frmpanelgeneral" immediate="true"/>
-                <h:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.planOperativo()}"  immediate="true"/>
-                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
-                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
-            </h:panelGrid>
-        </h:form>
-
-    </ui:define>
+    
 
     <ui:define name="body">
         <h:form id="frmpanelgeneral">
+            
+             <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0">
+                <a4j:commandLink value="#{var.datosbasicos}" action="#{Supervisor$Contrato.actualizarPanel(1)}" render="@all" execute="frmpanelgeneral:id-fechasuscripcion,frmpanelgeneral:id-datefechafin,frmpanelgeneral:id-datefechaini"/>               
+                
+                <a4j:commandLink value="#{var.planoperativo}" action="#{Supervisor$Contrato.planOperativo()}" execute="frmpanelgeneral:id-fechasuscripcion,frmpanelgeneral:id-datefechafin,frmpanelgeneral:id-datefechaini" />    
+                <a4j:commandLink value="#{var.polizas}" action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.formadepago}" action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" immediate="true"/>
+                <a4j:commandLink value="#{var.documento}" action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" immediate="true"/>
+            </h:panelGrid>      
+
+    
             <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" style="width: 500px;height:200px;" rendered="#{Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5 }">
                 <center>
                     <h:outputText value="#{var.nuevoconvenio}"/>
@@ -46,7 +46,7 @@
             </h:panelGroup>
             
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==1}" id="reg-datos-basicos" >
-                   <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/>
+                   <ui:include src="/NuevoProyecto/datosBasicosplanoperativo.xhtml"/> 
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >

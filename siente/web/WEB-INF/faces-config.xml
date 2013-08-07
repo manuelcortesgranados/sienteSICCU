@@ -448,6 +448,7 @@
          <navigation-case>
             <from-outcome>PlanOperativo</from-outcome>
             <to-view-id>/Supervisor/PlanO.xhtml</to-view-id>
+            <redirect/>            
         </navigation-case>
         
          <navigation-case>
