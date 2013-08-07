@@ -52,7 +52,7 @@
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >
                 <h:panelGrid columns="3" cellspacing="15" cellpadding="0" id="menu-plan-operativo" styleClass="ikont-hpg-menu-plan-operativo">
                     <a4j:commandLink value="#{var.planificacion}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(1)}" render="frmpanelgeneral" immediate="true"/>
-                    <a4j:commandLink value="#{var.flujocaja}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(2)}" render="frmpanelgeneral" immediate="true"/>
+                    <h:commandLink value="#{var.flujocaja}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(2)}"  immediate="true"/>
                     <a4j:commandLink value="#{var.reportes}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(3)}" render="frmpanelgeneral" immediate="true" />
                 </h:panelGrid>
                 
@@ -65,14 +65,14 @@
                 
                  <a4j:region rendered="#{Supervisor$Contrato.subpantalla==2}"  id="reg-plan-operativo-flujocaja" >
                      <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-flujocaja">
-                         flujo caja
+                        <ui:include src="/Supervisor/Flujocaja.xhtml" />
                      </h:panelGroup>
                 </a4j:region>
 
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==3}"  id="reg-plan-operativo-presupuesto">
                     <h:panelGroup layout="block" style="width:800px;height:400px;" styleClass="ikont-rp-po">
                         <center>
-                            <h:panelGrid id="rpt-planoperativo" rendered="#{Supervisor$Contrato.boolreporte}" columns="3" cellpadding="0" cellspacing="20" >
+                            <h:panelGrid id="rpt-planoperativo" columns="3" cellpadding="0" cellspacing="20" >
                                 <h:panelGrid columnClasses="panelcenter">
                                     <h:commandLink styleClass="ikont-hcl-rptconsolidado"   action="#{Supervisor$Contrato.ReportesPlanOperativo(1)}" value="Consolidado"  />
                                 </h:panelGrid>

@@ -47,6 +47,7 @@ import co.com.interkont.cobra.to.utilidades.Propiedad;
 import cobra.FiltroAvanzadoContrato;
 import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
+import cobra.PlanOperativo.FlujoCaja;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.RutasWebArchivos;
 import com.gantt.client.config.GanttConfig;
@@ -2215,7 +2216,7 @@ public class NuevoContratoBasico implements Serializable {
             llenarTipoAporte();
         }
 
-        
+
 
     }
 
@@ -2901,7 +2902,10 @@ public class NuevoContratoBasico implements Serializable {
      * @param event
      */
     public void iniciarConvenio(ActionEvent event) {//se invoca desde menu_lateral_gestion
-
+//       Iniciar los metodos para llenar la tabla de flujo caja si este tiene plan operativo
+        if (Propiedad.getValor("conplanoperativo").equals("true")) {
+            getFlujoCaja().iniciarFlujoCaja();
+        }
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
         boolcontrconsultoria = false;
@@ -2946,6 +2950,10 @@ public class NuevoContratoBasico implements Serializable {
      */
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+    }
+
+    protected FlujoCaja getFlujoCaja() {
+        return (FlujoCaja) FacesUtils.getManagedBean("PlanOperativo");
     }
 
     /**
@@ -6036,7 +6044,7 @@ private Boolean boolpruea=false;
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
                 infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
-               
+
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
@@ -6100,7 +6108,7 @@ private Boolean boolpruea=false;
 //        actividadobra.add(actobra);
 //        contrato.setActividadobras((Set) actividadobra);
 //        guardarContrato();
-        }
+    }
 
     /*
      *metodo que se encarga de guardar el convenio
@@ -6116,7 +6124,6 @@ private Boolean boolpruea=false;
      *      
      */
     public void adicionarFuenteRecursos() {
-        System.out.println("entre a agregar" );
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente = Boolean.TRUE;
@@ -6325,7 +6332,7 @@ private Boolean boolpruea=false;
      * @return the lstFuentesRecursos
      */
     public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
-         return lstFuentesRecursos;
+        return lstFuentesRecursos;
     }
 
     /**
@@ -6416,10 +6423,15 @@ private Boolean boolpruea=false;
     public void setSubpantalla(int subpantalla) {
         this.subpantalla = subpantalla;
     }
-   
+
     
     public String planOperativo(){  
-       return "PlanOperativo";        
+        return "PlanOperativo";
     }
-    
+
+    public String irApaginaconvenioplanoperativo() {
+        panelPantalla = 2;
+        subpantalla = 2;
+        return "nuevoConvenioPo";
+    }
 }
