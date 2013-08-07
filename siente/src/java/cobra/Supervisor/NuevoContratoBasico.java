@@ -6432,6 +6432,7 @@ private Boolean boolpruea=false;
     public String irApaginaconvenioplanoperativo() {
         panelPantalla = 2;
         subpantalla = 2;
+        variabletitulo = Propiedad.getValor("segundoplanoperativo");
         return "nuevoConvenioPo";
     }
 }

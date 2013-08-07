@@ -109,13 +109,13 @@
                         </f:facet>
                         <rich:inplaceInput value="#{fuenteEgresos.planMovimientosProyecto.get(columna).valor}" showControls="true"
                                            rendered="#{fuenteEgresos.egresoProyecto}">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos, tablaflujocajaneto" />
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
 
                         <rich:inplaceInput value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}" showControls="true"
                                            rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos, tablaflujocajaneto" />
                             <f:validateDoubleRange minimum="0" />
                         </rich:inplaceInput>
 
