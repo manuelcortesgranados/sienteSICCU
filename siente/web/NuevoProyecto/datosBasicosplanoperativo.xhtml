@@ -23,7 +23,7 @@
                         
                     </h:panelGroup>
                     <h:panelGroup>
-                        <rich:calendar id="id-fechasuscripcion"  defaultLabel="#{var.fechasuscripcion}"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.fechasuscripcion}" required="true">                        
+                        <rich:calendar id="id-fechasuscripcion"  defaultLabel="#{var.fechasuscripcion}"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true">                        
                             <rich:message for="id-fechasuscripcion"  />
                         </rich:calendar>
 
@@ -55,7 +55,7 @@
 
 
                     <h:panelGroup>
-                        <rich:calendar  id="id-datefechaini" datePattern="yyyy-MM-dd" direction="bottomRight" value="#{Supervisor$Contrato.contrato.datefechaini}"  >
+                        <rich:calendar  id="id-datefechaini" datePattern="yyyy-MM-dd" direction="bottomRight" value="#{Supervisor$Contrato.contrato.fechaactaini}"  >
                             <rich:placeholder value="#{var.fechaactainicio}"/>
                         </rich:calendar>
                         <br/> 
