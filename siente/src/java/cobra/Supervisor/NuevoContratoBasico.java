@@ -48,9 +48,11 @@ import cobra.FiltroAvanzadoContrato;
 import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
 import cobra.util.ArchivoWebUtil;
+import cobra.util.CasteoGWT;
 import cobra.util.RutasWebArchivos;
 import com.gantt.client.config.GanttConfig;
 import com.interkont.cobra.exception.ArchivoExistenteException;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import coral.dao.DataAccessLayerException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6419,6 +6421,17 @@ private Boolean boolpruea=false;
    
     
     public String planOperativo(){  
+        System.out.println("contrato.get = " + contrato.getDatefechaini());
+        System.out.println("contrato.fin = " + contrato.getDatefechafin());
+        
+         DateWrapper dw = new DateWrapper(new Date()).clearTime().addDays(-7);
+        contrato.setDatefechaini(dw.addDays(1).asDate());
+        contrato.setDatefechafin(dw.addDays(15).asDate());
+        contrato.setStrnombre("Prueba");
+       getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
+      
+        System.out.println("contratodto = " + getSessionBeanCobra().getCobraGwtService().getContratoDTO().getDatefechaini());
+        System.out.println("fecfin = " + contrato.getDatefechafin());
        return "PlanOperativo";        
     }
     

@@ -24,13 +24,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import com.gantt.client.core.functions.CriticalPath;
-import com.gantt.client.core.functions.TaskResizeTip.TaskResizeTipData;
-import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
-import com.gantt.client.event.TaskResizeEvent;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
@@ -38,9 +32,7 @@ import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.scheduler.client.core.TimeResolution;
 import com.scheduler.client.core.TimeResolution.Unit;
-import com.scheduler.client.core.config.SchedulerConfig;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
@@ -54,6 +46,7 @@ import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
+import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
@@ -71,8 +64,6 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.HeaderGroupConfig;
 import com.sencha.gxt.widget.core.client.grid.editing.GridInlineEditing;
-import com.sencha.gxt.widget.core.client.menu.Item;
-import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.util.ArrayList;
@@ -131,6 +122,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         this.service = service;
     }
 
+    /**
+     * Variable para mensaje de validaciones
+     */
+    private String msg = "";
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 //     private static final int COLUMN_FORM_WIDTH = 680;
     public interface GanttExampleStyle extends CssResource {
     }
@@ -176,12 +179,31 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
+        final ActividadobraDTO project=  new ActividadobraDTO(convenioDTO.getStrnumcontrato(), convenioDTO.getDatefechaini(), 100,
+                100, GanttConfig.TaskType.PARENT);
+        
+        service.obtenerActividadesObligatorias(convenioDTO.getDatefechaini(), 100,new AsyncCallback<List<ActividadobraDTO>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                service.setLog("Error al leer las actividades obligatorias", null);
+            }
+
+            @Override
+            public void onSuccess(List<ActividadobraDTO> result) {                
+                project.setChildren(result);
+            }
+        });
+        ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
+        list.add(project);
+        //root = new ActividadobraDTO(list);
         root = GanttDummyData.getTasks();
 
 
 
         for (ActividadobraDTO base : root.getChildren()) {
             taskStore.add(base);
+            service.setLog("Base: "+base.getName()+"Tiene hijos" +base.hasChildren(), null);
             if (base.hasChildren()) {
                 processFolder(taskStore, base);
             }
@@ -612,18 +634,43 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
     public void cargar() {
-//        service.getActividadObraDTO(new AsyncCallback<ActividadobraDTO>() {
-//                    @Override
-//                    public void onFailure(Throwable caught) {
-//                        
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(ActividadobraDTO result) {
-//                        root = result;
-//                        
-//
-//                    }
-//                });
+        //Cargando el convenio
+        service.getContratoDTO(new AsyncCallback<ContratoDTO>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                service.setLog("Error cargando convenio", null);
+            }
+
+            @Override
+            public void onSuccess(ContratoDTO result) {
+                convenioDTO = result;
+                if(validandoDatosBásicosConvenio())
+                {
+                    RootPanel.get().add(asWidget());
+                }
+                else
+                {
+                    service.setLog(msg, null);
+                    AlertMessageBox d = new AlertMessageBox("Alerta",msg);
+                   // d.addHideHandler(hideHandler);
+                    d.show();
+                }    
+            }
+        });
+        
+    }
+
+    public boolean validandoDatosBásicosConvenio() {
+        //Validación valor contrato
+        if(convenioDTO.getDatefechaini()==null || convenioDTO.getDatefechafin()==null)
+        {
+            msg="Debe diligenciar las fechas del convenio";
+            return false;
+        }    
+//        if (convenioDTO.getNumvlrcontrato() != null) {
+//        }
+
+        return true;
     }
 }

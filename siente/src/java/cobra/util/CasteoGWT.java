@@ -23,6 +23,7 @@ import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Objetivos;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
+import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Relacionobrafuenterecursoscontrato;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
@@ -598,4 +599,19 @@ public class CasteoGWT {
         }
         return TaskType.MILESTONE;
     }   
+     /*
+     * metodo que se encarga de convertir una  Parametricaactividadesobligatorias a ActividadobraDTO
+     * @param Parametricaactividadesobligatorias parametricaactidadobligatoria que se va a castear.     
+     * 
+     * @author Carlos Loaiza
+     */
+     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion) { 
+         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,10,TaskType.PARENT);
+         System.out.println("act = " + parametricaactidadobligatoria.getStrdescripcion());
+         //act.setName(parametricaactidadobligatoria.getStrdescripcion());
+         //act.setTaskType(tipoTask(parametricaactidadobligatoria.getTipoparametrica()));
+         ///Falta pensar los hijo main.sets
+         
+         return act;
+     }
 }

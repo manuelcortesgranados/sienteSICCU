@@ -4,9 +4,12 @@
  */
 package co.com.interkont.cobra.planoperativo.client.services;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -22,6 +25,7 @@ public interface CobraGwtServiceAble extends RemoteService{
     public void setLog(String log) throws Exception;
     //    Metodo Para obtener el contrato 
     public ContratoDTO ObtenerContratoDTO(int idcontrato) throws  Exception;
+    public List<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception;
    
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
 //    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception;

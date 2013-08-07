@@ -4,6 +4,7 @@
  */
 package co.com.interkont.cobra.planoperativo.server.services;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
@@ -14,6 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cobra.util.CasteoGWT;
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -75,4 +81,17 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
        return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
     }
+    
+     @Override
+    public List<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception {
+       
+        Iterator itparametricas=cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica").iterator();
+        List<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
+        while(itparametricas.hasNext())
+        {
+            Parametricaactividadesobligatorias par= (Parametricaactividadesobligatorias) itparametricas.next();
+            listaactobligatorias.add(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, duracion));
+        }    
+        return listaactobligatorias;
+    }    
 }
