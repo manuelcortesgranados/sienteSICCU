@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:interkont="http://www.interkont.com/jsf">
+    <h:form>
+
+        <rich:panel style="width:800px;height:400px;"
+                    xmlns:h="http://java.sun.com/jsf/html">
+            <h:panelGrid id="pgdocumentoscc"  columns="6" columnClasses=",,,,,buttonsmall">
+
+                <a4j:commandButton styleClass="ikont-acb-adjdocumento" id="adjuntarDocumentocc" value="#{var.examinar}" immediate="true" 
+                                   onclick="#{rich:component('panelUploadDocumentocc')}.show();">
+                </a4j:commandButton>
+                <h:outputText  styleClass="ikont-hot-descdocumento" id="Documentocc" value="#{var.descipcionDocumento}:"/>
+                <h:inputText id="inputDescDocument" value="#{Supervisor$Contrato.documentoobra.strnombre}" />
+                <h:outputText  styleClass="ikont-hot-tipodocumento" id="tipodocc"  value="#{var.tipoDocumento}:"/>
+                <h:selectOneMenu id="selecttipodocumentocc" value="#{Supervisor$Contrato.tipodoc}">
+                    <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>
+                </h:selectOneMenu>
+
+                <a4j:commandLink id="bt_agregar" styleClass="ikont-acl-agregar" title="#{var.agregar}"
+                                 action="#{Supervisor$Contrato.subirDocContrato}" 
+                                 render="tablaDocumentoscont,panelUploadDocumentocc,pgdocumentoscc,rdDoccontrato">
+                </a4j:commandLink>                          
+
+            </h:panelGrid>
+            <interkont:spacer height="14"/>
+            <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" >
+                <h:outputText  styleClass="ikont-nomarch" id="txt_nombrearchivocc" value=" #{file.nombre}"/>
+            </rich:dataGrid>
+            <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
+                            var="currentRow"
+                            rows="7" rowKeyVar="filaSeleccionada"
+                            value="#{Supervisor$Contrato.listadocumentos}"                                        >
+                <f:facet name="header" >
+                    <rich:columnGroup >
+                        <rich:column colspan="5">
+                            <h:outputText  styleClass="ikont-hot-docseleccion" value="#{var.docseleccionados}"/>
+                        </rich:column>
+                        <rich:column breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-tipodocuments" value="#{var.tipoDocumento}:"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-nombredoc" value="#{var.nombre}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-eliminardoc" value="#{var.eliminar}:"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-desciptdocs" value="#{currentRow.tipodocumento.strdesctipodoc}" />
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-nombredocs" value="#{currentRow.strnombre}" />
+                </rich:column>
+                <rich:column >
+                    <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
+                                       action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
+                    </a4j:commandButton>
+                </rich:column>
+                <f:facet name="footer">
+                    <rich:columnGroup>
+                        <rich:column colspan="4" breakRowBefore="true" >
+                            <rich:dataScroller id="scrolltablaDocumentos" for="tablaDocumentoscont" render="tablaDocumentoscont"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+            </rich:dataTable>
+        </rich:panel>
+    </h:form>
+</ui:composition>
