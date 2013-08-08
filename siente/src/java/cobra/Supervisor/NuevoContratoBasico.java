@@ -6093,14 +6093,64 @@ private Boolean boolpruea=false;
     }
 
     /*
-     *metodo que se encarga de guardar el convenio
-     * en estado en estructuración.
+     *metodo que se encarga de guardar el convenio en estado en estructuración.
      * 
+     * @return void
      */
     public void guardarBorradorConvenio() {
         if(contrato!=null){
             System.out.println("contrato = " + contrato.getStrnumcontrato());
         }
+
+//      Adicionando una forma de pago por defecto para que no saque error el sistema al intentar validarlo
+        contrato.setFormapago(new Formapago(1, null, true));
+
+//      Si el contrato no se ha creado que guarde en fecha de creacion si no en fechamodificacion
+        if (contrato.getDatefechacreacion() != null) {
+            contrato.setDatefechamodificacion(new Date());
+        } else {
+            contrato.setDatefechacreacion(new Date());
+        }
+
+//      Asignandole el valor del conatrato en recursos terceros
+        contrato.setNumrecursostercero(contrato.getNumvlrcontrato());
+        contrato.setNumrecursosch(new BigDecimal(BigInteger.ZERO));
+        if (contrato.getIntduraciondias() > 0) {
+            if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) >= 0 && contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) <= 0) {
+//          Asisganicion de estado de obra y de tipo contrato quemados
+                contrato.setTipoestadobra(new Tipoestadobra(1));
+                contrato.setTipocontrato(new Tipocontrato(1, null));
+
+//          Condicion si el cotrato no esta creado se le pone el id del usuario de la creacion en caso que este ya creado
+//          entonces poner el id del usuario quien modifico. 
+                if (contrato.getJsfUsuarioByIntusucreacion() != null) {
+                    contrato.setJsfUsuarioByIntusumodificacion(getSessionBeanCobra().getUsuarioObra());
+                } else {
+                    contrato.setJsfUsuarioByIntusucreacion(getSessionBeanCobra().getUsuarioObra());
+                }
+                contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
+                contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
+                contrato.setBooltipocontratoconvenio(true);
+                contrato.setBooleantienehijos(true);
+                contrato.setPeriodoevento(new Periodoevento(1));
+                contrato.setIntcantproyectos(0);
+                contrato.setNumvlrsumaproyectos(new BigDecimal(BigInteger.ZERO));
+                contrato.setEstadoconvenio(new Estadoconvenio(1));
+                contrato.setBoolplanoperativo(true);
+                contrato.setEncargofiduciario(null);
+                contrato.setModalidadcontratista(null);
+                contrato.setTercero(new Tercero(1, ""));
+                getSessionBeanCobra().getCobraService().guardarContrato(contrato);
+                FacesUtils.addInfoMessage("El convenio se ha guardado temporalmente con exito");
+            } else {
+                FacesUtils.addErrorMessage("La fecha del acta de suscripcion debe estar en el rango de la fecha inicial y final del convenio");
+            }
+        } else {
+            FacesUtils.addErrorMessage("La Fecha de Fin Debe ser mayor o igual a la fecha de inicio");
+        }
+//        VAlidacion parte logica del guardar convenio
+
+
 //        Actividadobra actobra = new Actividadobra();
 //        actobra.setNumvalorplanifao(new BigDecimal(BigInteger.ZERO));
 //        actobra.setFloatcantplanifao(15);
@@ -6160,6 +6210,10 @@ private Boolean boolpruea=false;
         int i = 0;
         for (Tercero tercero : lstentidades) {
             SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
+//            if (i == 0) {
+//                contrato.getTercero().setIntcodigo(tercero.getIntcodigo());
+//                contrato.getTercero().setStrnombrecompleto(tercero.getStrnombrecompleto());       
+//            }
             getEntidades()[i++] = itTercero;
         }
 
@@ -6424,11 +6478,11 @@ private Boolean boolpruea=false;
     public void setSubpantalla(int subpantalla) {
         this.subpantalla = subpantalla;
     }
-
     
-    public String planOperativo(){  
-       
-        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));       
+    
+ public String planOperativo(){
+
+        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
         return "PlanOperativo";
     }
 
