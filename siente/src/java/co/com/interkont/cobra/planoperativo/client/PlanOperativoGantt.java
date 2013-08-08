@@ -188,6 +188,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         //root = new ActividadobraDTO(list);
         //root = GanttDummyData.getTasks();
         root= GanttDatos.getTareas(list, convenioDTO);
+        service.setLog("Fuente Recursos:"+ convenioDTO.getFuenterecursosconvenios().size(),null);
 
 
 
@@ -271,7 +272,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //         * Formulario del Proyecto
 //         */
         final ProyectoForm proyectoForm = new ProyectoForm();
-        crearProyectoDialog.add(proyectoForm);
+//        crearProyectoDialog.add(proyectoForm);
+        
+        final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO);
+        crearProyectoDialog.add(proyectoForm1);
 
         /**
          * Personalizando el menú

@@ -20,7 +20,7 @@
                             <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />
 
                         </h:inputText>
-                        
+
                     </h:panelGroup>
                     <h:panelGroup>
                         <rich:calendar id="id-fechasuscripcion"  defaultLabel="#{var.fechasuscripcion}"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true">                        
@@ -29,22 +29,22 @@
 
                         <br/><br/>
                         <h:panelGroup>
-                        <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
-                            <rich:placeholder value="#{var.valorestimado}" />
-                            <f:validateDoubleRange minimum="0" />
-                        </h:inputText>
-                        <rich:message for="hit-valorest-convenio"/>
+                            <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
+                                <rich:placeholder value="#{var.valorestimado}" />
+                                <f:validateDoubleRange minimum="0" />
+                            </h:inputText>
+                            <rich:message for="hit-valorest-convenio"/>
                         </h:panelGroup>
 
 
                     </h:panelGroup>
-<h:panelGroup>
-                    <h:inputText id="hit-nom-convenio"  value="#{Supervisor$Contrato.contrato.strnombre}" required="true">
-                        <rich:placeholder value="#{var.nombreabreviadoconvenio}" />
+                    <h:panelGroup>
+                        <h:inputText id="hit-nom-convenio"  value="#{Supervisor$Contrato.contrato.strnombre}" required="true">
+                            <rich:placeholder value="#{var.nombreabreviadoconvenio}" />
 
-                    </h:inputText>
-    <rich:message for="hit-nom-convenio"/>
-</h:panelGroup>
+                        </h:inputText>
+                        <rich:message for="hit-nom-convenio"/>
+                    </h:panelGroup>
                     <rich:calendar id="id-datefechafin"   defaultLabel="#{var.fechafinalizacion}" datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" required="true" >                    
                         <rich:message for="id-datefechafin"  />
                     </rich:calendar>
@@ -70,18 +70,23 @@
                 <br/>
                 <h:outputLabel id="hol-fuenterecsubtitulo" value="#{var.subfuenterecursos}"/>
                 <h:panelGrid columns="2" cellpadding="10" cellspacing="20" id="hpg-fuenter-conv">
+                    <h:panelGroup>
                     <rich:select id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.tercero.intcodigo}" >
                         <f:selectItems value="#{Supervisor$Contrato.entidades}" />
-                    </rich:select>
-
+                        </rich:select>
+                        <rich:message for="rs-entidad"  />
+                    </h:panelGroup>
 
                     <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.reservaiva}" >
                         <rich:placeholder value="#{var.reservaiva}" />
                     </h:inputText>
 
-                    <rich:select id="rs-rol" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.rolentidad.idrolentidad}" >
-                        <f:selectItems value="#{Supervisor$Contrato.roles}" />
-                    </rich:select>
+                    <h:panelGroup>
+                        <rich:select id="rs-rol" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.rolentidad.idrolentidad}" >
+                            <f:selectItems value="#{Supervisor$Contrato.roles}" />
+                        </rich:select>                        
+                        <rich:message for="rs-rol"  />
+                    </h:panelGroup>
 
                     <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.otrasreservas}" >
                         <rich:placeholder value="#{var.otrasreservas}" />
@@ -96,19 +101,20 @@
                 <h:inputText id="hit-cuotagerencia-convenio" readonly="true">
                     <rich:placeholder value="#{var.cuotagerencia}" />
                 </h:inputText>
-
-                <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}">
-                    <f:selectItems value="#{Supervisor$Contrato.tipoAporte}"  />
-                </rich:select> 
-
-
-                <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}"  onkeypress="return validar(event);">
-                    <f:validateLongRange minimum="0"/>
-                    <f:validateLength maximum="26" minimum="1"/>
-                    <rich:placeholder value="cuota gerencia" />
-                </h:inputText>
-
-
+                <h:panelGroup>
+                    <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}">
+                        <f:selectItems value="#{Supervisor$Contrato.tipoAporte}"  />
+                    </rich:select> 
+                    <rich:message for="rs-tipoaporte"  />
+                </h:panelGroup>
+                <h:panelGroup>
+                    <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}"  onkeypress="return validar(event);">
+                        <f:validateLongRange minimum="0"/>
+                        <f:validateLength maximum="26" minimum="1"/>
+                        <rich:placeholder value="cuota gerencia" />
+                    </h:inputText>
+                    <rich:message for="hit-valorgerencia-convenio"  />
+                </h:panelGroup>
 
             </h:panelGrid> 
 

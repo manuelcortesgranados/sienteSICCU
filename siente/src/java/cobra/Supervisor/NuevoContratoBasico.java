@@ -2187,6 +2187,7 @@ public class NuevoContratoBasico implements Serializable {
     }
     // </editor-fold>
 
+    private List<Tercero> lstentidades = new ArrayList<Tercero>();
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -2210,6 +2211,7 @@ public class NuevoContratoBasico implements Serializable {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
             lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
+            lstentidades.clear();
             llenarEstadoConvenio();
             llenarEntidades();
             llenarRoles();
@@ -6023,7 +6025,7 @@ public class NuevoContratoBasico implements Serializable {
     public void setPanelPantalla(int panelPantalla) {
         this.panelPantalla = panelPantalla;
     }
-private Boolean boolpruea=false;
+    private Boolean boolpruea = false;
 
     public Boolean getBoolpruea() {
         return boolpruea;
@@ -6049,7 +6051,7 @@ private Boolean boolpruea=false;
                 break;
             case 2:
                 variabletitulo = Propiedad.getValor("segundoplanoperativo");
-                boolpruea=true;
+                boolpruea = true;
 //                infogeneralcrearconvenio = Propiedad.getValor("infogeneralcrearconveniodb");
                 break;
             case 3:
@@ -6072,6 +6074,7 @@ private Boolean boolpruea=false;
      * Metodo que muestra la subpantalla del plan operativo de acuerdo a la opción seleccionada
      * @void
      */
+
     public void actualizarSubpantallaPlanOperativo(int subPantalla) {
         this.setSubpantalla(subPantalla);
     }
@@ -6098,7 +6101,7 @@ private Boolean boolpruea=false;
      * 
      */
     public void guardarBorradorConvenio() {
-        if(contrato!=null){
+        if (contrato != null) {
             System.out.println("contrato = " + contrato.getStrnumcontrato());
         }
 //        Actividadobra actobra = new Actividadobra();
@@ -6125,11 +6128,25 @@ private Boolean boolpruea=false;
      *      
      */
     public void adicionarFuenteRecursos() {
+       if (fuenteRecursoConvenio.getRolentidad().getIdrolentidad() == 0) {
+            FacesUtils.addErrorMessage("frmpanelgeneral:rs-rol", "Debe seleccionar un rol");
+        }
+        if (fuenteRecursoConvenio.getTercero().getIntcodigo() == 0) {
+            FacesUtils.addErrorMessage("frmpanelgeneral:rs-entidad", "Debe seleccionar la entidad oportante");
+        }
+        if (fuenteRecursoConvenio.getTipoaporte() == null) {
+            FacesUtils.addErrorMessage("frmpanelgeneral:rs-tipoaporte", "Debe seleccionar el tipo de aporte");
+            
+        }
+        if (fuenteRecursoConvenio.getValorcuotagerencia() == null) {
+            FacesUtils.addErrorMessage("frmpanelgeneral:hit-valorgerencia-convenio", "Debe ingresar el valor de la cuota de gerencia");
+        }
+        fuenteRecursoConvenio.setTercero(lstentidades.get(fuenteRecursoConvenio.getTercero().getIntcodigo()));
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente = Boolean.TRUE;
         limpiarFuenteRecurso();
-        System.out.println(lstFuentesRecursos.size());
+       
     }
 
     /*
@@ -6154,15 +6171,14 @@ private Boolean boolpruea=false;
      *      
      */
     public void llenarEntidades() {
-        List<Tercero> lstentidades = new ArrayList<Tercero>();
         lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
         for (Tercero tercero : lstentidades) {
-            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
+            SelectItem itTercero = new SelectItem(i, tercero.getStrnombrecompleto());
             getEntidades()[i++] = itTercero;
         }
-
+        
     }
 
     /*
@@ -6304,7 +6320,7 @@ private Boolean boolpruea=false;
     }
 
     public void limpiarFuenteRecurso() {
-        fuenteRecursoConvenio.setOtrasreservas(null);
+         fuenteRecursoConvenio.setOtrasreservas(null);
         fuenteRecursoConvenio.setReservaiva(null);
         fuenteRecursoConvenio.setValorcuotagerencia(null);
         fuenteRecursoConvenio.setTipoaporte(null);
@@ -6345,6 +6361,7 @@ private Boolean boolpruea=false;
 
     /**
      * Reportes de plan operativo
+     *
      * @void
      */
     public void ReportesPlanOperativo(int reportOption) {
@@ -6425,10 +6442,10 @@ private Boolean boolpruea=false;
         this.subpantalla = subpantalla;
     }
 
-    
-    public String planOperativo(){  
-       
-        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));       
+    public String planOperativo() {
+
+        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
+        
         return "PlanOperativo";
     }
 
@@ -6437,5 +6454,19 @@ private Boolean boolpruea=false;
         subpantalla = 2;
         variabletitulo = Propiedad.getValor("segundoplanoperativo");
         return "nuevoConvenioPo";
+    }
+
+    /**
+     * @return the lstentidades
+     */
+    public List<Tercero> getLstentidades() {
+        return lstentidades;
+    }
+
+    /**
+     * @param lstentidades the lstentidades to set
+     */
+    public void setLstentidades(List<Tercero> lstentidades) {
+        this.lstentidades = lstentidades;
     }
 }
