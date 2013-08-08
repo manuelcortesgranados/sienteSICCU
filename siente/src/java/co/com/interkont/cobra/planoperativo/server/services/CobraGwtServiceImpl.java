@@ -4,12 +4,21 @@
  */
 package co.com.interkont.cobra.planoperativo.server.services;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import cobra.util.CasteoGWT;
+import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 /**
  *
@@ -21,6 +30,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     @Autowired
     private CobraDaoAble cobraDao;    
     private ContratoDTO contratoDto = new ContratoDTO();
+    private final Log log = LogFactory.getLog(this.getClass());
     /*constantes para sabes a que va a convertir*/
     final int VAR_DTO = 1;
     final int VAR_TO = 2;   
@@ -59,6 +69,28 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public void setContratoDTO(ContratoDTO contrato) {
         this.contratoDto=contrato;
     }
- 
     
+    @Override
+    public void setLog(String log)
+    {
+        this.log.info(log);
+    }        
+ 
+    @Override
+    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
+       return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
+    }
+    
+     @Override
+    public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception {
+       
+        Iterator itparametricas=cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica").iterator();
+        ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
+        while(itparametricas.hasNext())
+        {
+            Parametricaactividadesobligatorias par= (Parametricaactividadesobligatorias) itparametricas.next();
+            listaactobligatorias.add(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, duracion));
+        }    
+        return listaactobligatorias;
+    }    
 }

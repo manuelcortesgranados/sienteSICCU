@@ -18,23 +18,25 @@ import java.util.Set;
  */
 public class ActividadobraDTO implements IsSerializable {
     /*
-    Atributos con los nombres que relacion gxt en los props
-    */
+     Atributos con los nombres que relacion gxt en los props
+     */
+
     String id;
     String name;
     Date startDateTime;
     Date endDateTime;
     int duration;
     int percentDone;
-    
+    private int tipoActividad;
     /**
-    Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre, Milestone=Hito
-    */
+     * Objeto que posee enum con los tipos de tareas Leaf=Hoja, Parent= Padre,
+     * Milestone=Hito
+     */
     TaskType taskType;
     /**
-    Atributos del objeto actividadObraDto
-    */
-     private long oidactiviobra;
+     * Atributos del objeto actividadObraDto
+     */
+    private long oidactiviobra;
     private String strdescactividad;
     private Date fechaInicio;
     private Date fechaFin;
@@ -46,14 +48,8 @@ public class ActividadobraDTO implements IsSerializable {
     private ContratoDTO contrato;
     private ObraDTO obra;
 
-    
-    
-    
     public ActividadobraDTO() {
     }
-    
-        
-
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public List<ActividadobraDTO> getChildren() {
@@ -84,6 +80,7 @@ public class ActividadobraDTO implements IsSerializable {
         this.taskType = taskType;
     }
 
+   
     public String getId() {
         return id;
     }
@@ -315,7 +312,6 @@ public class ActividadobraDTO implements IsSerializable {
 //    public void setContrato(ContratoDTO contrato) {
 //        this.contrato = contrato;
 //    }
-
     /**
      * @return the obra
      */
@@ -422,7 +418,8 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     /**
-     * @param dependenciasForFkActividadOrigen the dependenciasForFkActividadOrigen to set
+     * @param dependenciasForFkActividadOrigen the
+     * dependenciasForFkActividadOrigen to set
      */
     public void setDependenciasForFkActividadOrigen(Set dependenciasForFkActividadOrigen) {
         this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
@@ -436,7 +433,8 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     /**
-     * @param dependenciasForFkActividadDestino the dependenciasForFkActividadDestino to set
+     * @param dependenciasForFkActividadDestino the
+     * dependenciasForFkActividadDestino to set
      */
     public void setDependenciasForFkActividadDestino(Set dependenciasForFkActividadDestino) {
         this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
@@ -455,5 +453,18 @@ public class ActividadobraDTO implements IsSerializable {
     public void setContrato(ContratoDTO contrato) {
         this.contrato = contrato;
     }
-  
+
+    /**
+     * @return the tipoActividad
+     */
+    public int getTipoActividad() {
+        return tipoActividad;
+    }
+
+    /**
+     * @param tipoActividad the tipoActividad to set
+     */
+    public void setTipoActividad(int tipoActividad) {
+        this.tipoActividad = tipoActividad;
+    }
 }
