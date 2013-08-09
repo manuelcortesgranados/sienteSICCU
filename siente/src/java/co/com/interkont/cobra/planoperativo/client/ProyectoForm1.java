@@ -9,12 +9,8 @@ import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.safehtml.shared.SafeHtml;
-import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
@@ -22,36 +18,20 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.XTemplates;
-import com.sencha.gxt.core.client.util.ToggleGroup;
 import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
-import com.sencha.gxt.widget.core.client.FramedPanel;
-import com.sencha.gxt.widget.core.client.TabPanel;
-import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
-import com.sencha.gxt.widget.core.client.container.MarginData;
-import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
-import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
-import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
-import com.sencha.gxt.widget.core.client.form.FormPanel;
 import com.sencha.gxt.widget.core.client.form.FormPanel.LabelAlign;
 import com.sencha.gxt.widget.core.client.form.FormPanelHelper;
-import com.sencha.gxt.widget.core.client.form.HtmlEditor;
-import com.sencha.gxt.widget.core.client.form.PropertyEditor;
-import com.sencha.gxt.widget.core.client.form.Radio;
-import com.sencha.gxt.widget.core.client.form.SimpleComboBox;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.util.Iterator;
-import java.util.Set;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
 
@@ -60,15 +40,71 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private TextField objetivos = new TextField();
     private TextField tipoAporte = new TextField();
     private TextField tipoRecurso = new TextField();
-    TextArea objetivoGeneral = new TextArea();
-    TextArea objetivoEspecifico = new TextArea();
-    ListBox lstEntidadesConvenio = new ListBox(false);
-    ComboBox<RubroDTO> comboRubros;
+    private TextArea objetivoGeneral = new TextArea();
+    private TextArea objetivoEspecifico = new TextArea();
+    private ListBox lstEntidadesConvenio = new ListBox(false);
+    private ComboBox<RubroDTO> comboRubros;
     ContratoDTO contratoDto;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     public ProyectoForm1(ContratoDTO contratoDtoP) {
         this.contratoDto = contratoDtoP;
+    }
+
+    /**
+     * @return the objetivoGeneral
+     */
+    public TextArea getObjetivoGeneral() {
+        return objetivoGeneral;
+    }
+
+    /**
+     * @param objetivoGeneral the objetivoGeneral to set
+     */
+    public void setObjetivoGeneral(TextArea objetivoGeneral) {
+        this.objetivoGeneral = objetivoGeneral;
+    }
+
+    /**
+     * @return the objetivoEspecifico
+     */
+    public TextArea getObjetivoEspecifico() {
+        return objetivoEspecifico;
+    }
+
+    /**
+     * @param objetivoEspecifico the objetivoEspecifico to set
+     */
+    public void setObjetivoEspecifico(TextArea objetivoEspecifico) {
+        this.objetivoEspecifico = objetivoEspecifico;
+    }
+
+    /**
+     * @return the lstEntidadesConvenio
+     */
+    public ListBox getLstEntidadesConvenio() {
+        return lstEntidadesConvenio;
+    }
+
+    /**
+     * @param lstEntidadesConvenio the lstEntidadesConvenio to set
+     */
+    public void setLstEntidadesConvenio(ListBox lstEntidadesConvenio) {
+        this.lstEntidadesConvenio = lstEntidadesConvenio;
+    }
+
+    /**
+     * @return the comboRubros
+     */
+    public ComboBox<RubroDTO> getComboRubros() {
+        return comboRubros;
+    }
+
+    /**
+     * @param comboRubros the comboRubros to set
+     */
+    public void setComboRubros(ComboBox<RubroDTO> comboRubros) {
+        this.comboRubros = comboRubros;
     }
 
     interface RubroProperties extends PropertyAccess<RubroDTO> {
@@ -119,35 +155,35 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
         llenarComboEntidadesConvenio();
-        lstEntidadesConvenio.setWidth("" + cw);
-        con.add(new FieldLabel(lstEntidadesConvenio, "ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
+        getLstEntidadesConvenio().setWidth("" + cw);
+        con.add(new FieldLabel(getLstEntidadesConvenio(), "ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
 
         tipoRecurso.setText("Tipo recurso");
         tipoRecurso.setAllowBlank(false);
         tipoRecurso.setWidth(cw);
         con.add(tipoRecurso, new HtmlData(".tipor"));
 
-        objetivoGeneral.setVisibleLines(15);
-        objetivoGeneral.setWidth("" + cw);
-        objetivoGeneral.setText("General");
-        con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
+        getObjetivoGeneral().setVisibleLines(15);
+        getObjetivoGeneral().setWidth("" + cw);
+        getObjetivoGeneral().setText("General");
+        con.add(new FieldLabel(getObjetivoGeneral(), "OBJETIVOS"), new HtmlData(".objetivog"));
 
-        objetivoEspecifico.setVisibleLines(15);
-        objetivoEspecifico.setWidth("" + cw);
-        objetivoEspecifico.setText("Especifico");
-        con.add(objetivoEspecifico, new HtmlData(".objetivoes"));
+        getObjetivoEspecifico().setVisibleLines(15);
+        getObjetivoEspecifico().setWidth("" + cw);
+        getObjetivoEspecifico().setText("Especifico");
+        con.add(getObjetivoEspecifico(), new HtmlData(".objetivoes"));
 
         RubroProperties props = GWT.create(RubroProperties.class);
         final ListStore<RubroDTO> rubros = new ListStore<RubroDTO>(props.idrubro());
 
         llenarListaRubros(rubros);
                 
-        comboRubros = new ComboBox<RubroDTO>(rubros, props.strdescripcion());
-        comboRubros.setEmptyText("Seleccione Rubro");
-        comboRubros.setWidth(cw);
-        comboRubros.setTypeAhead(true);
-        comboRubros.setTriggerAction(TriggerAction.ALL);
-        con.add(comboRubros, new HtmlData(".email"));
+        setComboRubros(new ComboBox<RubroDTO>(rubros, props.strdescripcion()));
+        getComboRubros().setEmptyText("Seleccione Rubro");
+        getComboRubros().setWidth(cw);
+        getComboRubros().setTypeAhead(true);
+        getComboRubros().setTriggerAction(TriggerAction.ALL);
+        con.add(getComboRubros(), new HtmlData(".email"));
 
 
 
@@ -241,7 +277,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         int posFuenteRecurso = 0;
         for (Iterator it = contratoDto.getFuenterecursosconvenios().iterator(); it.hasNext();) {
             FuenterecursosconvenioDTO fuenteRecursosDTO = (FuenterecursosconvenioDTO) it.next();
-            lstEntidadesConvenio.addItem(fuenteRecursosDTO.getTercero().getStrnombrecompleto(), "" + posFuenteRecurso);
+            getLstEntidadesConvenio().addItem(fuenteRecursosDTO.getTercero().getStrnombrecompleto(), "" + posFuenteRecurso);
             posFuenteRecurso++;
         }
     }
