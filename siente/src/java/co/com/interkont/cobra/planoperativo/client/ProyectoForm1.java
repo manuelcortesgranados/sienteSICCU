@@ -114,11 +114,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         LabelProvider<RubroDTO> strdescripcion();
     }
 
-    interface ComboBoxTemplates extends XTemplates {
-
-        @XTemplates.XTemplate("<div qtip=\"{id}\" qtitle=\"State Slogan\">{name}</div>")
-        SafeHtml rubro(int id, String name);
-    }
+   
     private static final int COLUMN_FORM_WIDTH = 500;
     private VerticalPanel vp;
 
@@ -183,7 +179,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getComboRubros().setWidth(cw);
         getComboRubros().setTypeAhead(true);
         getComboRubros().setTriggerAction(TriggerAction.ALL);
-        con.add(getComboRubros(), new HtmlData(".email"));
+        con.add(getComboRubros(), new HtmlData(".rubro"));
 
 
 
@@ -217,7 +213,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private native String getTableMarkup() /*-{
      return [ '<table width=100% cellpadding=10 cellspacing=20>',
      '<tr><td class=fn width=50%></td><td width=50%><table><tr><td class=entidad></td></tr><tr><td class=tipor></td></tr></table></td></tr>',
-     '<tr><td><table><tr><td class=objetivog></td><tr><tr><td class=objetivoes></td><tr></table></td> <td class=email></td></tr>',
+     '<tr><td><table><tr><td class=objetivog></td><tr><tr><td class=objetivoes></td><tr></table></td><td><table><tr><td class=rubro></td><td class=monto></td><td class=meta></td><td class=macro></td></tr></table></td></tr>',
      '<tr><td class=birthday></td><td class=user></td></tr>',
      '<tr><td class=editor colspan=2></td></tr>', '</table>'
  
@@ -292,6 +288,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             @Override
             public void onSuccess(List result) {
                  rubros.addAll(result);
+                  service.setLog("Cargue rubros"+rubros.size(), null);
                
             }
         });

@@ -18,7 +18,6 @@
                         <rich:message for="hit-nro-convenio" />
                         <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" style="height: 60px;" required="true" >
                             <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />
-
                         </h:inputText>
 
                     </h:panelGroup>
@@ -41,8 +40,7 @@
                     </h:panelGroup>
                     <h:panelGroup>
                         <h:inputText id="hit-nom-convenio"  value="#{Supervisor$Contrato.contrato.strnombre}" required="true">
-                            <rich:placeholder value="#{var.nombreabreviadoconvenio}" />
-
+                            <rich:placeholder  value="#{var.nombreabreviadoconvenio}" />
                         </h:inputText>
                         <rich:message for="hit-nom-convenio"/>
                     </h:panelGroup>
@@ -126,7 +124,7 @@
 
 
             <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
-                <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.adicionarFuenteRecursos}" render="hpg-fuenter-conv,hpg-fuenter-cuotag" execute="hpg-fuenter-conv,hpg-fuenter-cuotag">
+                <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.adicionarFuenteRecursos}" render="hpg-fuenter-conv,hpg-fuenter-cuotag" execute="hpg-fuenter-conv,hpg-fuenter-cuotag" >
 
                 </a4j:commandLink>
                 <a4j:commandLink value="#{var.ver}"  oncomplete="#{rich:component('ver-fuenterecursos')}.show();"   render="ver-fuenterecursos," immediate="true"/>

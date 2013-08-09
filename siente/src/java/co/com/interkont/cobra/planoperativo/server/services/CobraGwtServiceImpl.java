@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.server.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import cobra.util.CasteoGWT;
 import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
+import co.com.interkont.cobra.to.Rubro;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -97,6 +99,11 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public List obtenerRubros() throws Exception {
-        return cobraDao.consultarRubros();
+        List<Rubro> lstRubros=cobraDao.consultarRubros();
+        List<RubroDTO> lstRubrosDTO=new ArrayList<RubroDTO>(lstRubros.size());
+        for(Rubro rubro:lstRubros){
+        lstRubrosDTO.add(new RubroDTO(rubro.getIdrubro(),rubro.getStrdescripcion()));
     }
+    return lstRubrosDTO;
+}
 }

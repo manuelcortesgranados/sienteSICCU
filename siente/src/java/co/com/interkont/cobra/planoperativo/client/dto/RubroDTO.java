@@ -22,6 +22,12 @@ public class RubroDTO implements IsSerializable{
     public RubroDTO() {
     }
     
+    public RubroDTO(int idrubro, String strdescripcion) {
+        this.idrubro = idrubro;
+        this.strdescripcion = strdescripcion;
+        
+    }
+    
 
     public RubroDTO(int idrubro, String strdescripcion,Set obrafuenterecursosconvenioses,Set montos) {
         this.idrubro = idrubro;
