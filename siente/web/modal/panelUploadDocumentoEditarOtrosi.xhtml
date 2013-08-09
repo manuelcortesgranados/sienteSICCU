@@ -17,8 +17,9 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder_panelUploadDocumentoOtrosi" onclick= "#{rich:component('panelUploadDocumentoOtrosi')}.hide();"
-                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentoOtrosi closemodal"    />
+                    <a4j:commandLink  styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadDocumentoOtrosi')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>

@@ -17,14 +17,18 @@
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide(); return false;"
-                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentopoliza closemodal"    />
+                    <a4j:commandLink  styleClass="ikont-acl-cerrar closemodal"  
+                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide();
+                                             return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
         <h:panelGroup layout="block" styleClass="ikont-rp-seleccionardocumentopoliza"   >
             <h:form>
-                
+                <h:panelGroup >
+                    <a4j:commandButton id="esconder_panelUploadDocumentopoliza" onclick="#{rich:component('panelUploadDocumentopoliza')}.hide(); return false;"
+                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentopoliza closemodal"    />
+                </h:panelGroup>
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
