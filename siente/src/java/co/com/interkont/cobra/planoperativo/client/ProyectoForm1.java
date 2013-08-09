@@ -26,11 +26,17 @@ import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.ParseErrorEvent;
+import com.sencha.gxt.widget.core.client.event.ParseErrorEvent.ParseErrorHandler;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.FormPanel.LabelAlign;
 import com.sencha.gxt.widget.core.client.form.FormPanelHelper;
+import com.sencha.gxt.widget.core.client.form.NumberField;
+import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor.BigDecimalPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import com.sencha.gxt.widget.core.client.info.Info;
+import java.math.BigDecimal;
 import java.util.Iterator;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
@@ -44,6 +50,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private TextArea objetivoEspecifico = new TextArea();
     private ListBox lstEntidadesConvenio = new ListBox(false);
     private ComboBox<RubroDTO> comboRubros;
+    NumberField<BigDecimal> montoAportado;
+    TextField meta;
+    TextArea macroActividades;
     ContratoDTO contratoDto;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
@@ -113,8 +122,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         LabelProvider<RubroDTO> strdescripcion();
     }
-
-   
     private static final int COLUMN_FORM_WIDTH = 500;
     private VerticalPanel vp;
 
@@ -144,7 +151,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         int cw = (COLUMN_FORM_WIDTH / 2) - 12;
 
 
-        getNombrePry().setText("Nombre del proyecto");
+        getNombrePry().setEmptyText("Nombre del proyecto");
         getNombrePry().setAllowBlank(false);
         getNombrePry().setWidth(cw);
         con.add(new FieldLabel(nombrePry, "//INFORMACIÓN BASICA"), new HtmlData(".fn"));
@@ -152,19 +159,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         llenarComboEntidadesConvenio();
         getLstEntidadesConvenio().setWidth("" + cw);
-        con.add(new FieldLabel(getLstEntidadesConvenio(), "ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
+        con.add(new FieldLabel(getLstEntidadesConvenio(), "*ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
 
-        tipoRecurso.setText("Tipo recurso");
+        tipoRecurso.setEmptyText("Tipo recurso");
         tipoRecurso.setAllowBlank(false);
         tipoRecurso.setWidth(cw);
         con.add(tipoRecurso, new HtmlData(".tipor"));
 
-        getObjetivoGeneral().setVisibleLines(15);
+        getObjetivoGeneral().setHeight(""+100);
         getObjetivoGeneral().setWidth("" + cw);
         getObjetivoGeneral().setText("General");
         con.add(new FieldLabel(getObjetivoGeneral(), "OBJETIVOS"), new HtmlData(".objetivog"));
 
-        getObjetivoEspecifico().setVisibleLines(15);
+        getObjetivoEspecifico().setHeight(""+100);
         getObjetivoEspecifico().setWidth("" + cw);
         getObjetivoEspecifico().setText("Especifico");
         con.add(getObjetivoEspecifico(), new HtmlData(".objetivoes"));
@@ -173,7 +180,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         final ListStore<RubroDTO> rubros = new ListStore<RubroDTO>(props.idrubro());
 
         llenarListaRubros(rubros);
-                
+
         setComboRubros(new ComboBox<RubroDTO>(rubros, props.strdescripcion()));
         getComboRubros().setEmptyText("Seleccione Rubro");
         getComboRubros().setWidth(cw);
@@ -181,10 +188,27 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getComboRubros().setTriggerAction(TriggerAction.ALL);
         con.add(getComboRubros(), new HtmlData(".rubro"));
 
+        montoAportado = new NumberField(new BigDecimalPropertyEditor());
+        montoAportado.addParseErrorHandler(new ParseErrorHandler() {
+            @Override
+            public void onParseError(ParseErrorEvent event) {
+                Info.display("Error", "Ingrese un valor valido");
+            }
+        });
+        montoAportado.setAllowBlank(false);
+        montoAportado.setEmptyText("Monto aportado");
+        montoAportado.setWidth(cw);
+        con.add(montoAportado, new HtmlData(".monto"));
 
+        meta = new TextField();
+        meta.setWidth(cw);
+        meta.setAllowBlank(false);
+        con.add(new FieldLabel(meta, "*META O PRODUCTO ESPERADO"), new HtmlData(".meta"));
 
-
-
+        macroActividades = new TextArea();
+        macroActividades.setHeight(""+90);
+        macroActividades.setWidth("" + cw);
+        con.add(new FieldLabel(macroActividades, "*MACROACTIVIDADES"), new HtmlData(".macro"));
 
         // need to call after everything is constructed
         List<FieldLabel> labels = FormPanelHelper.getFieldLabels(vp);
@@ -211,9 +235,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     private native String getTableMarkup() /*-{
-     return [ '<table width=100% cellpadding=10 cellspacing=20>',
+     return [ '<table width=100% cellpadding=15 cellspacing=10>',
      '<tr><td class=fn width=50%></td><td width=50%><table><tr><td class=entidad></td></tr><tr><td class=tipor></td></tr></table></td></tr>',
-     '<tr><td><table><tr><td class=objetivog></td><tr><tr><td class=objetivoes></td><tr></table></td><td><table><tr><td class=rubro></td><td class=monto></td><td class=meta></td><td class=macro></td></tr></table></td></tr>',
+     '<tr><td><table><tr><td class=objetivog></td><tr><tr><td class=objetivoes></td><tr></table></td><td><table cellspacing=10><tr><td class=rubro></td></tr><tr><td class=monto></td></tr><tr><td class=meta></td></tr><tr><td class=macro></td></tr></table></td></tr>',
      '<tr><td class=birthday></td><td class=user></td></tr>',
      '<tr><td class=editor colspan=2></td></tr>', '</table>'
  
@@ -287,9 +311,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
             @Override
             public void onSuccess(List result) {
-                 rubros.addAll(result);
-                  service.setLog("Cargue rubros"+rubros.size(), null);
-               
+                rubros.addAll(result);
+                service.setLog("Cargue rubros" + rubros.size(), null);
+
             }
         });
 

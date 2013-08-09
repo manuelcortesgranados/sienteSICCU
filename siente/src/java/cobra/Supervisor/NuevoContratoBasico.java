@@ -2186,8 +2186,8 @@ public class NuevoContratoBasico implements Serializable {
     private void _init() throws Exception {
     }
     // </editor-fold>
-
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
+
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -2216,6 +2216,7 @@ public class NuevoContratoBasico implements Serializable {
             llenarRoles();
             llenarGerentes();
             llenarTipoAporte();
+
         }
 
 
@@ -6073,6 +6074,7 @@ public class NuevoContratoBasico implements Serializable {
      * Metodo que muestra la subpantalla del plan operativo de acuerdo a la opción seleccionada
      * @void
      */
+
     public void actualizarSubpantallaPlanOperativo(int subPantalla) {
         this.setSubpantalla(subPantalla);
     }
@@ -6100,7 +6102,7 @@ public class NuevoContratoBasico implements Serializable {
      * @return void
      */
     public void guardarBorradorConvenio() {
-        if(contrato!=null){
+        if (contrato != null) {
             System.out.println("contrato = " + contrato.getStrnumcontrato());
         }
 
@@ -6177,25 +6179,22 @@ public class NuevoContratoBasico implements Serializable {
      *      
      */
     public void adicionarFuenteRecursos() {
-       if (fuenteRecursoConvenio.getRolentidad().getIdrolentidad() == 0) {
-            FacesUtils.addErrorMessage("frmpanelgeneral:rs-rol", "Debe seleccionar un rol");
-        }
-        if (fuenteRecursoConvenio.getTercero().getIntcodigo() == 0) {
-            FacesUtils.addErrorMessage("frmpanelgeneral:rs-entidad", "Debe seleccionar la entidad oportante");
-        }
-        if (fuenteRecursoConvenio.getTipoaporte() == null) {
-            FacesUtils.addErrorMessage("frmpanelgeneral:rs-tipoaporte", "Debe seleccionar el tipo de aporte");
-            
-        }
-        if (fuenteRecursoConvenio.getValorcuotagerencia() == null) {
-            FacesUtils.addErrorMessage("frmpanelgeneral:hit-valorgerencia-convenio", "Debe ingresar el valor de la cuota de gerencia");
-        }
-        fuenteRecursoConvenio.setTercero(lstentidades.get(fuenteRecursoConvenio.getTercero().getIntcodigo()));
+        fuenteRecursoConvenio.setTercero(obtenerTerceroXcodigo(fuenteRecursoConvenio.getTercero().getIntcodigo()));
         contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente = Boolean.TRUE;
         limpiarFuenteRecurso();
-       
+
+
+    }
+
+    public Tercero obtenerTerceroXcodigo(int codigo) {
+        for (Tercero ter : lstentidades) {
+            if (ter.getIntcodigo() == codigo) {
+                return ter;
+            }
+        }
+        return null;
     }
 
     /*
@@ -6224,7 +6223,8 @@ public class NuevoContratoBasico implements Serializable {
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
         for (Tercero tercero : lstentidades) {
-            SelectItem itTercero = new SelectItem(i, tercero.getStrnombrecompleto());
+            tercero.setObtenerEntidad(i);
+            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
             getEntidades()[i++] = itTercero;
         }
 
@@ -6410,6 +6410,7 @@ public class NuevoContratoBasico implements Serializable {
 
     /**
      * Reportes de plan operativo
+     *
      * @void
      */
     public void ReportesPlanOperativo(int reportOption) {
@@ -6489,9 +6490,8 @@ public class NuevoContratoBasico implements Serializable {
     public void setSubpantalla(int subpantalla) {
         this.subpantalla = subpantalla;
     }
-    
-    
- public String planOperativo(){
+
+    public String planOperativo() {
 
         getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
         return "PlanOperativo";
