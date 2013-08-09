@@ -25,6 +25,7 @@
                     <h:panelGroup>
                         <rich:calendar id="id-fechasuscripcion"  defaultLabel="#{var.fechasuscripcion}"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true">                        
                             <rich:message for="id-fechasuscripcion"  />
+                            <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="@this" render="h-ol-duraciondias"/>
                         </rich:calendar>
 
                         <br/><br/>
