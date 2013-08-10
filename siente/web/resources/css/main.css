@@ -1336,12 +1336,12 @@ a.ikont-hcl-modificarusuario:hover {
 
 /*  estilos zoom*/
 .ikont-hpg-contentmenu{
-    background-color: #D8D8D8;
+    background-color: #F2F2F2;
     width: 850px;
     height: 80px;
     border-style: solid;
     border-width: 1px;
-    border-color: #A4A4A4;
+    border-color: #6B6B6B;
     position: relative;
     top: 0px;
 }
@@ -1350,23 +1350,55 @@ a.ikont-hcl-modificarusuario:hover {
     margin-top: -10px;
 }
 
-.ikont-hpg-menu-nuevo-convenio a{
-    text-decoration:  none;
-    color: #585858;
-    font-family:"furura";
-    font-size: 0.9em;
-}
-
-.ikont-hpg-menu-nuevo-convenio a.buttonactive{
-    color: #2EA35D;
-    background-position: 0px 0px !important;
-}
-
-.ikont-hpg-menu-nuevo-convenio a.ikont-hcl-activarvistamapa{
-    background-position: 0px -46px;
-}
-
 .ikont-hf-nuevocontratoplanoperativo{
     position: relative;
     top: 70px;
+}
+
+.img-button-ncpo{
+    background-image: url(../imgs/submenu_sprite.jpg);
+    background-repeat: no-repeat;
+    width: 90px;
+    height: 60px;
+    display: block;
+}
+
+.img-button-ncpo.ikont-acl-datosbasicos{
+    background-position: -8px -10px;
+}
+
+.img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
+    background-position: -8px -74px;
+}
+
+.img-button-ncpo.ikont-acl-documentos{
+    background-position: -374px -10px;
+}
+
+.img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
+    background-position: -374px -74px;
+}
+
+.img-button-ncpo.ikont-acl-formapago{
+    background-position: -278px -10px;
+}
+
+.img-button-ncpo.ikont-acl-formapago:hover, .ikont-acl-formapago.buttonactive{
+    background-position: -278px -74px;
+}
+
+.img-button-ncpo.ikont-acl-polizas{
+    background-position: -192px -10px;
+}
+
+.img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
+    background-position: -192px -74px;
+}
+
+.img-button-ncpo.ikont-acl-planoperativo{
+    background-position: -107px -10px;
+}
+
+.img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
+    background-position: -107px -74px;
 }
