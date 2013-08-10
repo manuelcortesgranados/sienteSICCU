@@ -6223,7 +6223,7 @@ public class NuevoContratoBasico implements Serializable {
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
         for (Tercero tercero : lstentidades) {
-            tercero.setObtenerEntidad(i);
+           // tercero.setObtenerEntidad(i);
             SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
             getEntidades()[i++] = itTercero;
         }

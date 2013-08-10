@@ -110,13 +110,13 @@ public class Login implements Serializable{
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"+
                                 getSessionBeanCobra().getBundle().getString("versioncobra")+"_Ciudadano(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
-                        getSessionBeanCobra().getCobraService().setAltomapa("350px");
+                        getSessionBeanCobra().getCobraService().setAltomapa(getSessionBeanCobra().getBundle().getString("altomapaciudadano"));
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Herramientas");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
                     } else {
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"+getSessionBeanCobra().getBundle().getString("versioncobra")+"(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
-                        getSessionBeanCobra().getCobraService().setAltomapa("450px");
+                        getSessionBeanCobra().getCobraService().setAltomapa(getSessionBeanCobra().getBundle().getString("altomapainterventor"));
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Inicio");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("headertool");
                         getSessionBeanCobra().getCobraService().setCiu(false);
