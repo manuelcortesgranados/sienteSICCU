@@ -14,8 +14,8 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
-        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
-        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon2.ico" type="image/x-icon"/>
+        <link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/imgs/favicon.ico" type="image/x-icon"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_login.css?#{var.version}" rel="stylesheet" type="text/css"/>
@@ -42,9 +42,15 @@
                 <h:commandLink value="#{var.loginfoterquees}" styleClass="ikont-a4jcl-loginfoterquees"  >
                     <rich:componentControl target="queessiente" operation="show"/>
                 </h:commandLink>
-                <h:graphicImage  styleClass="ikont-hgi-iconytpng "   url="/resources/imgs/login/icon_yt.png" width="40" height="40"   />
-                <h:graphicImage  styleClass="ikont-hgi-iconfbpng "   url="/resources/imgs/login/icon_fb.png" width="40" height="40"   />
-                <h:graphicImage  styleClass="ikont-hgi-icontwpng "   url="/resources/imgs/login/icon_tw.png" width="40" height="40"   />
+                <a target="_blank" href="#{var.btnyoutube}" >
+                    <h:graphicImage url="/resources/imgs/login/icon_yt.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                </a> 
+                <a target="_blank" href="#{var.btnfacebook}" >                
+                <h:graphicImage url="/resources/imgs/login/icon_fb.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                </a>
+                <a target="_blank" href="#{var.btntwitter}" >
+                    <h:graphicImage url="/resources/imgs/login/icon_tw.png" width="40" height="40" styleClass="footer-login-img-social"/>
+                </a>
             </h:panelGroup>
         </h:form>
 
