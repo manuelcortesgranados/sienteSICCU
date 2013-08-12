@@ -80,7 +80,7 @@
                     </rich:select>
                         <rich:message for="rs-entidad"  />
                     </h:panelGroup>
-
+                    
                     <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.reservaiva}" >
                         <rich:placeholder value="#{var.reservaiva}" />
                     </h:inputText>
@@ -128,11 +128,6 @@
 
                 </a4j:commandLink>
                 <a4j:commandLink value="#{var.ver}"  oncomplete="#{rich:component('ver-fuenterecursos')}.show();"   render="ver-fuenterecursos," immediate="true"/>
-            </h:panelGrid>
-
-            <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
-                <a4j:commandLink value="#{var.continuar}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio" />
-                <h:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}"/>
             </h:panelGrid>
 
         </center>

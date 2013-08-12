@@ -136,9 +136,12 @@
                 </h:panelGroup>
             </a4j:region>           
 
-            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">
-                <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" immediate="true" />
-                <a4j:commandLink value="#{var.guardarbo}" action="#{Supervisor$Contrato.guardarBorradorConvenio}" 
+            <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">                
+                <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" render="@form, panelConfirmaguardadoplano"
+                                 oncomplete="#{rich:component('panelConfirmaguardadoplano')}.show(); return false" 
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/> 
+                
+                <a4j:commandLink value="#{var.guardarbo}" action="#{Supervisor$Contrato.guardarBorradorConvenio(false)}" 
                                  render="@form"
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
 
@@ -148,6 +151,7 @@
         <ui:include src="/modal/editarDocumentoModal.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
+        <ui:include src="/modal/confirmarguardadoconveniopo.xhtml"/>
         <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
      <!--   <script type="text/javascript">
             var $j = jQuery.noConflict();
