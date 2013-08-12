@@ -147,10 +147,18 @@
         <script type="text/javascript">
             var $j = jQuery.noConflict();
             $j(window).scroll(function() {
-                if (window.pageYOffset >= 60) {
+                if (window.pageYOffset >= 120) {
                     $('.ikont-hpg-contentmenu:first').css("position", "fixed");
+                    $('.ikont-hpg-contentmenu:first').css("height", "40px");
+                    $('.img-button-ncpo').each(function(){
+                       $(this).addClass('scroll');
+                    });
                 } else {
-                    $('.ikont-hpg-contentmenu:first').css("position", "relative")
+                    $('.ikont-hpg-contentmenu:first').css("position", "relative");
+                    $('.ikont-hpg-contentmenu:first').css("height", "80px");
+                    $('.img-button-ncpo').each(function(){
+                       $(this).removeClass('scroll');
+                    });
                 }
             });
 

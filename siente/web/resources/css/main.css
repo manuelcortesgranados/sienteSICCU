@@ -1141,7 +1141,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     font-style:italic; 
     text-align: justify; 
     padding: 10px;
-    
+
 }
 
 .ikont-hpg-comentarios {
@@ -1401,4 +1401,18 @@ a.ikont-hcl-modificarusuario:hover {
 
 .img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
     background-position: -107px -74px;
+}
+
+.img-button-ncpo.scroll{
+    height: 25px;
+    background-position-y: -49px;
+}
+
+.img-button-ncpo.scroll:hover{
+    background-position-y: -115;
+}
+
+.img-button-ncpo.buttonactive.scroll{
+    height: 25px;
+    background-position-y: -115;
 }
