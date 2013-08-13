@@ -4,13 +4,11 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
-import co.com.interkont.cobra.to.Estadoconvenio;
-import co.com.interkont.cobra.to.Tercero;
-import co.com.interkont.cobra.to.Tipocontrato;
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -21,7 +19,8 @@ public class ContratoDTO implements IsSerializable {
 
     private int intidcontrato;
     private Date datefechaini;
-    private Date datefechafin;
+    private Date datefechafin;    
+    private Date datefechaactaini;
     private String strnumcontrato;
     private BigDecimal numvlrcontrato;
     private Date datefechacreacion;
@@ -29,29 +28,27 @@ public class ContratoDTO implements IsSerializable {
     private TerceroDTO gerenteconvenio;
     private Set fuenterecursosconvenios = new HashSet(0);
     private int estadoConvenio;
+    private int intduraciondias;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
     private Boolean booltipocontratoconvenio;
-    private Set actividadobras = new HashSet(0);
+    private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
 
     public ContratoDTO() {
     }
 
-    public ContratoDTO(Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion) {
-
+    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
+        this.intidcontrato=intidcontrato;
         this.datefechaini = datefechaini;
         this.datefechafin = datefechafin;
         this.strnumcontrato = strnumcontrato;
         this.numvlrcontrato=numvlrcontrato;
-        this.datefechacreacion = datefechacreacion;
+        this.datefechaactaini = datefechaactaini;
+        this.intduraciondias= intduraciondias;
     }
     
-     public ContratoDTO(int intidcontrato,String textobjeto,BigDecimal numvlrcontrato) {
-        this.intidcontrato=intidcontrato;
-        this.textobjeto=textobjeto;
-        this.numvlrcontrato=numvlrcontrato;
-    }
+     
 
     /**
      * @return the intidcontrato
@@ -250,6 +247,25 @@ public class ContratoDTO implements IsSerializable {
     public void setEstadoConvenio(int estadoConvenio) {
         this.estadoConvenio = estadoConvenio;
     }
+     /**
+     * @return datefechaactaini Fecha acta de inicio
+     */
+    public Date getDatefechaactaini() {
+        return datefechaactaini;
+    }
 
+    public void setDatefechaactaini(Date datefechaactaini) {
+        this.datefechaactaini = datefechaactaini;
+    }
+
+    public int getIntduraciondias() {
+        return intduraciondias;
+    }
+
+    public void setIntduraciondias(int intduraciondias) {
+        this.intduraciondias = intduraciondias;
+    }
+    
+    
    
 }

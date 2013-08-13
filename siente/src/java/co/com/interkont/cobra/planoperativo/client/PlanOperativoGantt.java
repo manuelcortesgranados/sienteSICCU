@@ -163,43 +163,17 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     @Override
     public Widget asWidget() {
         service.setLog("As widget", null);
-
+      
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
-        final ActividadobraDTO project=  new ActividadobraDTO(convenioDTO.getStrnumcontrato(), convenioDTO.getDatefechaini(), 100,
-                100, GanttConfig.TaskType.PARENT);
+        root= GanttDatos.getTareas(convenioDTO);
         
-        service.obtenerActividadesObligatorias(convenioDTO.getDatefechaini(), 100,new AsyncCallback<ArrayList<ActividadobraDTO>>() {
-
-            @Override
-            public void onFailure(Throwable caught) {
-                service.setLog("Error al leer las actividades obligatorias", null);
-                AlertMessageBox d = new AlertMessageBox("Alerta",msg);                   
-                d.show();
-            }
-
-            @Override
-            public void onSuccess(ArrayList<ActividadobraDTO> result) {                
-                project.setChildren(result);
-            }
-        });
-        ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
-        
-        //root = new ActividadobraDTO(list);
-        //root = GanttDummyData.getTasks();
-        root= GanttDatos.getTareas(list, convenioDTO);
-
-
-
         for (ActividadobraDTO base : root.getChildren()) {
-            taskStore.add(base);
-            service.setLog("Base: "+base.getName()+"Tiene hijos" +base.hasChildren(), null);
+            taskStore.add(base);            
             if (base.hasChildren()) {
                 processFolder(taskStore, base);
             }
         }
-
-
 
         final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
         depStore.addAll(GanttDummyData.getDependencies());
@@ -208,7 +182,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
         ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-        headers.add(new WeekTimeAxisGenerator("MMM d"));
+        headers.add(new WeekTimeAxisGenerator("MMM d AAAA"));
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
@@ -415,7 +389,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public ActividadobraDTO createTaskModel(String id, Date startDateTime, int duration) {
                 // return new ActividadobraDTO(id, "Nueva Actividad", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
-                return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF);
+                return new ActividadobraDTO(id, "New Task", startDateTime, duration, 0, GanttConfig.TaskType.LEAF,1);
             }
         };
         
@@ -433,7 +407,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //              if(convenioDTO.getEstadoConvenio()==1){
 //                mostrarEliminar=true;
 //                }
-
+                /**
+                 * Tipo Actividad : 1. Actividad Convenio - 2. Proyecto - 3. Contrato - 4 Actividad - 5 Etapa
+                 * 
+                 */
+                
                 if (tareaSeleccionada.getTipoActividad() == 1) {
                     menuItemProyecto.setVisible(true);
                     menuItemContrato.setVisible(false);
@@ -511,10 +489,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-        DateWrapper dw = new DateWrapper(new Date()).clearTime();
+        DateWrapper dw = new DateWrapper(convenioDTO.getDatefechaini()).clearTime();
         // Set start and end date.
-        gantt.setStartEnd(dw.addDays(-7).asDate(), dw.addMonths(1).asDate());
-
+        //gantt.setStartEnd(dw.addDays(-7).asDate(), dw.addMonths(1).asDate());
+        gantt.setStartEnd(dw.addDays(-2).asDate(), convenioDTO.getDatefechafin());
+        
         FlowLayoutContainer main = new FlowLayoutContainer();
         main.getElement().setMargins(new Margins(5));
         HTML text = new HTML("Plan Operativo");
@@ -612,8 +591,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     @Override
     public void onModuleLoad() {
         service.setLog("Load module", null);
-        cargar();
-        //RootPanel.get("planoperativoclient").add(asWidget());
+       cargar();
+        //RootPanel.get().add(asWidget());
     }
 
     private void processFolder(TreeStore<ActividadobraDTO> store, ActividadobraDTO folder) {
@@ -639,6 +618,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 convenioDTO = result;
                 if(validandoDatosBásicosConvenio())
                 {
+                    
+                    service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(),null);
+//                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
+//                    d.show();
+                    
                     RootPanel.get().add(asWidget());
                 }
                 else

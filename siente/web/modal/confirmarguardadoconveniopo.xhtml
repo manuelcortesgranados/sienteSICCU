@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:interkont="http://www.interkont.com/jsf"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <rich:popupPanel id="panelConfirmaguardadoplano" autosized="true" width="250"  headerClass="rich-panel-header">
+        <f:facet name="header" >
+            <h:panelGroup >
+                <h:outputText  styleClass="ikont-hot-panelconfirmaguardadoplano1" value="#{var.confirmarguardado}" rendered="#{Supervisor$Contrato.guardadoconexito == 1}"/>
+                <h:outputText  styleClass="ikont-hot-panelconfirmaguardadoplano" value="Error guardar" rendered="#{Supervisor$Contrato.guardadoconexito == 0}"/>
+            </h:panelGroup>
+        </f:facet>
+        <f:facet name="controls">
+            <h:form>
+                <h:panelGroup>
+                    <a4j:commandLink  id="esconder_panelConfirmaguardadoplano" styleClass="ikont-acl-esconderpanelconfirmaguardado closemodal"  
+                                      title="#{var.cerrar}" onclick="#{rich:component('panelConfirmaguardadoplano')}.hide();
+                                              return false;"/>
+                </h:panelGroup>
+            </h:form>
+        </f:facet>
+        <h:panelGroup layout="block" >         
+            <h:panelGroup  rendered="#{Supervisor$Contrato.guardadoconexito == 1}" >
+                <h:outputText  styleClass="ikont-hot-panelconfguardarplano"   value="El convenio se ha guardado con exito"
+                               />               
+            </h:panelGroup>
+            <h:panelGroup  rendered="#{Supervisor$Contrato.guardadoconexito == 0}" >
+                <h:outputText  styleClass="ikont-hot-panelconfguardarplano"   value="El convenio no se puedo guardar por lo siguiente: "
+                               />    
+                <h:panelGroup rendered="#{Supervisor$Contrato.tipomensajeerror == 0}">
+                    <br></br>
+                    <h:outputText styleClass="ikont-hot-messageerror1" value="#{var.datosbasicosvalidar}" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{Supervisor$Contrato.validardatosbasicosplano == 1}">
+                    <br></br>
+                    <h:outputText styleClass="ikont-hot-messageerror2" value="#{var.fechadesuscripcionplano}" />
+                </h:panelGroup> 
+                <h:panelGroup rendered="#{Supervisor$Contrato.validardatosbasicosplano == 2}">
+                    <br></br>
+                    <h:outputText styleClass="ikont-hot-messageerror3" value="#{var.fechadesuscripcionvalida}" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{Supervisor$Contrato.validardatosbasicosplano == 3}">
+                    <br></br>
+                    <h:outputText styleClass="ikont-hot-messageerror4" value="#{var.validarfechafin}" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{Supervisor$Contrato.tipomensajeerror == 1}">
+                    <br></br>
+                    <h:outputText styleClass="ikont-hot-messageerror5" value="#{var.numfuenterecurso}" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{Supervisor$Contrato.tipomensajeerror == 2}">
+                <br></br>
+                <h:outputText styleClass="ikont-hot-messageerror6" value="#{var.fuenterecursovlrconvenio}" />
+                <h:outputText styleClass="ikont-hot-messageerror7" value="#{Supervisor$Contrato.faltafuenteconvenio}" />
+                </h:panelGroup>s
+            </h:panelGroup>
+
+            <center>
+                <h:form>
+                    <h:panelGrid columns="2" >
+
+                        <a4j:commandButton  value="#{var.aceptar}" 
+                                            onclick="#{rich:component('panelConfirmaguardadoplano')}.hide();" />                      
+                    </h:panelGrid>
+                </h:form>
+            </center>
+        </h:panelGroup>
+    </rich:popupPanel>
+
+
+
+</ui:composition>

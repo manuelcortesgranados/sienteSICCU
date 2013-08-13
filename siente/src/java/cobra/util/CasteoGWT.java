@@ -54,14 +54,14 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
-        ContratoDTO contratoDTO = new ContratoDTO(contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnombre(), contrato.getNumvlrcontrato(), contrato.getFechaactaini());
+        ContratoDTO contratoDTO = new ContratoDTO(contrato.getIntidcontrato(),contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnumcontrato(), contrato.getNumvlrcontrato(), contrato.getFechaactaini(), contrato.getIntduraciondias());
         contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
         contratoDTO.setGerenteconvenio(castearTerceroToTerceroDTO(contrato.getGerenteconvenio()));
         if (!contrato.getActividadobras().isEmpty()) {
             Iterator it = contrato.getActividadobras().iterator();
             contratoDTO.getActividadobras().add(castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO));
-            Iterator ite = contratoDTO.getActividadobras().iterator();
-            ActividadobraDTO actDto = (ActividadobraDTO) ite.next();
+//            Iterator ite = contratoDTO.getActividadobras().iterator();
+//            ActividadobraDTO actDto = (ActividadobraDTO) ite.next();
         }
         return contratoDTO;
     }
@@ -75,7 +75,8 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio) {
-        ActividadobraDTO activdadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
+        //ActividadobraDTO activdadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
+        ActividadobraDTO activdadObra= new ActividadobraDTO();
         Set act = new HashSet(actividadObra.getActividadobras());
         castearActividadesDeListaActividadesRaizTO(activdadObra, act, convenio);
 
@@ -94,7 +95,8 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ActividadobraDTO castearActividadobraDdoToActividadobraTO(Actividadobra actividadObra, ContratoDTO convenio) {
-        ActividadobraDTO activudadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
+        //ActividadobraDTO activudadObra = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), actividadObra.getNumvalorejecutao().intValue(), tipoTask(actividadObra.getTipotareagantt()));
+        ActividadobraDTO activudadObra = new ActividadobraDTO();
         if (actividadObra.getObra() != null) {
             activudadObra.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
         } else if (actividadObra.getContrato() != null) {
@@ -210,7 +212,7 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ContratoDTO castearContratoToContratoTO(Contrato contratoD, ContratoDTO convenio) {
-        ContratoDTO contrato = new ContratoDTO(contratoD.getIntidcontrato(), contratoD.getTextobjeto(), contratoD.getNumvlrcontrato());
+        ContratoDTO contrato = new ContratoDTO(contratoD.getIntidcontrato(),contratoD.getDatefechaini(), contratoD.getDatefechafin(), contratoD.getStrnumcontrato(), contratoD.getNumvlrcontrato(), contratoD.getFechaactaini(), contratoD.getIntduraciondias());
         contrato.setTipocontrato(castearTipoContratoDTOToTipoContratoDTO(contratoD.getTipocontrato()));
         contrato.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
         return contrato;
@@ -605,9 +607,9 @@ public class CasteoGWT {
      * 
      * @author Carlos Loaiza
      */
-     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion) { 
-         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,10,TaskType.PARENT);
-         System.out.println("act = " + parametricaactidadobligatoria.getStrdescripcion());
+     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion,int peso, int tipoTask) { 
+         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,peso,tipoTask(tipoTask), parametricaactidadobligatoria.getTipoparametrica());
+         
          //act.setName(parametricaactidadobligatoria.getStrdescripcion());
          //act.setTaskType(tipoTask(parametricaactidadobligatoria.getTipoparametrica()));
          ///Falta pensar los hijo main.sets
