@@ -20,29 +20,31 @@ public class GanttDatos {
      * Método para construir toda la estructura jerárquica de las tareas del plan operativo     
      * @author Carlos Loaiza     
      * @param listaact Lista de tareas para construir el árbol    
+     * @param convenio  Objeto convenio raiz del gantt  
      * @return ActividadobraDTO Raíz de todo el plan operativo, con sus childrens seteados
      */    
-    public static ActividadobraDTO getTareas(List<ActividadobraDTO> listaact, ContratoDTO convenio) {        
+    public static ActividadobraDTO getTareas(ContratoDTO convenio) {        
         DateWrapper dw;       
         ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
         
         ///Actividad Principal - ConvenioDTO
-        dw = new DateWrapper(new Date()).clearTime().addDays(-7);
+        dw = new DateWrapper(convenio.getDatefechaini());
         
-        ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), dw.addDays(1).asDate(), 10,
-				30, GanttConfig.TaskType.PARENT);
-                t.setTipoActividad(1);                
-                list.add(t);
-        
-        
-//        for(ActividadobraDTO act: listaact)
+        ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), convenio.getDatefechaini(), convenio.getIntduraciondias(),
+				0, GanttConfig.TaskType.PARENT,1);
+                t.setTipoActividad(1);                               
+                
+               
+                
+                t.setChildren(new ArrayList<ActividadobraDTO>(convenio.getActividadobras()));
+                 list.add(t);
+//        for(ActividadobraDTO act: convenio.getActividadobras())
 //        {
-//            dw = new DateWrapper(new Date()).clearTime().addDays(-7);
-//            System.out.println("act = " + act.getName());
-//            ActividadobraDTO t = new ActividadobraDTO(act.getName(), dw.addDays(1).asDate(), 10,
+//            
+//            ActividadobraDTO t2 = new ActividadobraDTO(act.getName(), dw.addDays(1).asDate(), 10,
 //				30, GanttConfig.TaskType.PARENT);
-//                t.setTipoActividad(1);                
-//                list.add(t);
+//                t2.setTipoActividad(1);                
+//                t.addChild(t2);
 //        }    
       
         /*
@@ -94,6 +96,7 @@ public class GanttDatos {
 //		list.add(t);
          	
 	ActividadobraDTO root = new ActividadobraDTO(list);
+                
         return root;
     }
 }

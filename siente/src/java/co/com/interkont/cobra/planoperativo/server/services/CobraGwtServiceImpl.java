@@ -20,8 +20,11 @@ import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -65,6 +68,15 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public ContratoDTO getContratoDTO() {
+        if(contratoDto.getActividadobras().isEmpty())
+        {
+            try {
+                contratoDto.setActividadobras(new HashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias())));
+            } catch (Exception ex) {
+                Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    
+        
         return this.contratoDto;
     }
 
@@ -86,13 +98,24 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     
      @Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion) throws Exception {
-       
-        Iterator itparametricas=cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica").iterator();
+         List<Parametricaactividadesobligatorias> listapar= cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica");
+        Iterator itparametricas=listapar.iterator();
         ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
         while(itparametricas.hasNext())
-        {
+        {   
             Parametricaactividadesobligatorias par= (Parametricaactividadesobligatorias) itparametricas.next();
-            listaactobligatorias.add(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, duracion));
+            if(par.getParametricaactividadesobligatorias()== null)
+            {    
+                ActividadobraDTO actdto=CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, duracion, 0,1);                
+                
+                for (Parametricaactividadesobligatorias parhija : listapar) {
+                    if(parhija.getParametricaactividadesobligatorias() !=null && parhija.getParametricaactividadesobligatorias().getIdparametrica()==par.getIdparametrica())
+                    {
+                        actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecini, duracion,0,1));
+                    }
+                }    
+                listaactobligatorias.add(actdto);
+            }
         }    
         return listaactobligatorias;
     }    

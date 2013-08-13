@@ -47,10 +47,11 @@ public class ActividadobraDTO implements IsSerializable {
     private Set dependenciasForFkActividadDestino = new HashSet(0);
     private ContratoDTO contrato;
     private ObraDTO obra;
+    private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public ActividadobraDTO() {
     }
-    private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
+   
 
     public List<ActividadobraDTO> getChildren() {
         return children;
@@ -66,18 +67,19 @@ public class ActividadobraDTO implements IsSerializable {
     }
 
     public ActividadobraDTO(String name, Date start, int duration, int percentDone,
-            TaskType taskType) {
-        this(name, name, start, duration, percentDone, taskType);
+            TaskType taskType,int tipoActividad) {
+        this(name, name, start, duration, percentDone, taskType, tipoActividad);
     }
 
     public ActividadobraDTO(String id, String name, Date start, int duration,
-            int percentDone, TaskType taskType) {
+            int percentDone, TaskType taskType, int tipoActividad) {
         this.id = id;
         this.name = name;
         this.startDateTime = start;
         this.duration = duration;
         this.percentDone = percentDone;
         this.taskType = taskType;
+        this.tipoActividad= tipoActividad;
     }
 
    

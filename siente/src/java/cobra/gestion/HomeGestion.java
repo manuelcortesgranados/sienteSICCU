@@ -1646,6 +1646,8 @@ public class HomeGestion implements Serializable {
     }
 
     public String primeroListProyectos() {
+        System.out.println("filtrando = ");
+        System.out.println("palabra clave = " + filtro.getPalabraclave());
         obrasEncontradas = 0;
 
         //listaobrasusu = new ArrayList<Obra>();
