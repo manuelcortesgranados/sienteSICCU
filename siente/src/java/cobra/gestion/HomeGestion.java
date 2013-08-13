@@ -2554,8 +2554,9 @@ public class HomeGestion implements Serializable {
                 }
                 descripcion.append(" </div>");
                 descripcion.append("</p>");
-                descripcion.append("<p>");
+                
                 if (obra.getTipoestadobra().getIntestadoobra() != 0) {
+                    descripcion.append("<p>");
                     descripcion.append("<div class=\"columna\">");
                     descripcion.append("<a class=\"imgaction button1\" href=\"").append(url).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");
                     descripcion.append("</a>");
@@ -2570,8 +2571,9 @@ public class HomeGestion implements Serializable {
                     descripcion.append("<a class=\"imgaction button3\" href=\"").append(urlImages).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Fotos\" >");
                     descripcion.append("</a>");
                     descripcion.append("</div>");
+                    descripcion.append("</p>");
                 }
-                descripcion.append("</p>");
+                
                 descripcion.append("</div>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
