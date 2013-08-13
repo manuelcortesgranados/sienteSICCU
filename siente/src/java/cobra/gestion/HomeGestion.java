@@ -2475,7 +2475,7 @@ public class HomeGestion implements Serializable {
                     }
                 }
                 String imgEstado = imagenEstadoObra(obra.getTipoestadobra().getIntestadoobra());
-                String imgTipo = imagenTipoObra(obra.getTipoobra().getInttipoobra());
+                String imgTipo = imagenTipoObra(obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto());
 
                 descripcion.append("<html>");
                 descripcion.append("<body >");
@@ -2529,12 +2529,12 @@ public class HomeGestion implements Serializable {
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4\"> Tipo</span>");
-                descripcion.append("<span class=\"imgtipo \">");
+                descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
+                descripcion.append("<span class=\"imgtipo "+imgTipo+"\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4 " + imgTipo + "\">Estado </span>");
+                descripcion.append("<span class=\"textvalla4 \">Estado </span>");
                 descripcion.append("<span class=\"imgestado " + imgEstado + "\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
@@ -2599,25 +2599,19 @@ public class HomeGestion implements Serializable {
         String style = "";
         switch (img) {
             case 0:
-                style = "estado2";
+                style = "estado1";
                 break;
             case 1:
                 style = "estado2";
                 break;
             case 2:
-                style = "estado1";
-                break;
-            case 3:
-                style = "estado1";
-                break;
-            case 4:
-                style = "estado1";
+                style = "estado5";
                 break;
             case 5:
-                style = "estado1";
+                style = "estado4";
                 break;
             case 6:
-                style = "estado1";
+                style = "estado3";
                 break;
         }
         return style;
@@ -2632,187 +2626,52 @@ public class HomeGestion implements Serializable {
         String style = "";
         switch (img) {
             case 1:
-                style = "tipo1";
+                style = "tipo6";
                 break;
             case 2:
-                style = "tipo1";
+                style = "tipo4";
                 break;
             case 3:
-                style = "tipo1";
+                style = "tipo2";
                 break;
             case 4:
-                style = "tipo1";
+                style = "tipo15";
                 break;
             case 5:
-                style = "tipo1";
+                style = "tipo6";
                 break;
             case 6:
-                style = "tipo1";
+                style = "tipo10";
                 break;
             case 7:
-                style = "tipo1";
+                style = "tipo9";
                 break;
             case 8:
-                style = "tipo1";
+                style = "tipo8";
                 break;
             case 9:
-                style = "tipo1";
+                style = "tipo5";
                 break;
             case 10:
-                style = "tipo1";
+                style = "tipo3";
                 break;
             case 11:
                 style = "tipo1";
                 break;
             case 12:
-                style = "tipo1";
+                style = "tipo14";
                 break;
             case 13:
-                style = "tipo1";
+                style = "tipo12";
                 break;
             case 14:
-                style = "tipo1";
+                style = "tipo11";
                 break;
             case 15:
-                style = "tipo1";
+                style = "tipo10";
                 break;
             case 16:
-                style = "tipo1";
-                break;
-            case 17:
-                style = "tipo1";
-                break;
-            case 18:
-                style = "tipo1";
-                break;
-            case 19:
-                style = "tipo1";
-                break;
-            case 20:
-                style = "tipo1";
-                break;
-            case 21:
-                style = "tipo1";
-                break;
-            case 22:
-                style = "tipo1";
-                break;
-            case 23:
-                style = "tipo1";
-                break;
-            case 24:
-                style = "tipo1";
-                break;
-            case 25:
-                style = "tipo1";
-                break;
-            case 26:
-                style = "tipo1";
-                break;
-            case 27:
-                style = "tipo1";
-                break;
-            case 28:
-                style = "tipo1";
-                break;
-            case 29:
-                style = "tipo1";
-                break;
-            case 30:
-                style = "tipo1";
-                break;
-            case 31:
-                style = "tipo1";
-                break;
-            case 32:
-                style = "tipo1";
-                break;
-            case 33:
-                style = "tipo1";
-                break;
-            case 34:
-                style = "tipo1";
-                break;
-            case 35:
-                style = "tipo1";
-                break;
-            case 36:
-                style = "tipo1";
-                break;
-            case 37:
-                style = "tipo1";
-                break;
-            case 38:
-                style = "tipo1";
-                break;
-            case 39:
-                style = "tipo1";
-                break;
-            case 40:
-                style = "tipo1";
-                break;
-            case 41:
-                style = "tipo1";
-                break;
-            case 42:
-                style = "tipo1";
-                break;
-            case 43:
-                style = "tipo1";
-                break;
-            case 44:
-                style = "tipo1";
-                break;
-            case 45:
-                style = "tipo1";
-                break;
-            case 46:
-                style = "tipo1";
-                break;
-            case 47:
-                style = "tipo1";
-                break;
-            case 48:
-                style = "tipo1";
-                break;
-            case 49:
-                style = "tipo1";
-                break;
-            case 50:
-                style = "tipo1";
-                break;
-            case 51:
-                style = "tipo1";
-                break;
-            case 52:
-                style = "tipo1";
-                break;
-            case 53:
-                style = "tipo1";
-                break;
-            case 54:
-                style = "tipo1";
-                break;
-            case 55:
-                style = "tipo1";
-                break;
-            case 56:
-                style = "tipo1";
-                break;
-            case 57:
-                style = "tipo1";
-                break;
-            case 58:
-                style = "tipo1";
-                break;
-            case 59:
-                style = "tipo1";
-                break;
-            case 60:
-                style = "tipo1";
-                break;
-            case 61:
-                style = "tipo1";
+                style = "tipo6";
                 break;
         }
         return style;

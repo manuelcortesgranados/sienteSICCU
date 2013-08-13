@@ -1344,6 +1344,7 @@ a.ikont-hcl-modificarusuario:hover {
     border-color: #6B6B6B;
     position: relative;
     top: 0px;
+    z-index: 9999;
 }
 .ikont-hpg-menu-nuevo-convenio{
     margin: 0px auto;
@@ -1356,7 +1357,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .img-button-ncpo{
-    background-image: url(../imgs/submenu_sprite.jpg);
+    background-image: url(../imgs/submenu_sprite.png);
     background-repeat: no-repeat;
     width: 90px;
     height: 60px;
@@ -1415,4 +1416,59 @@ a.ikont-hcl-modificarusuario:hover {
 .img-button-ncpo.buttonactive.scroll{
     height: 25px;
     background-position-y: -115;
+}
+
+.img-button-plao{
+    background-image: url(../imgs/descargas_sprite.png);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0px auto;
+}
+
+.vtitle21{
+    color: #231F20;
+    font-size: 1em;
+}
+
+.vtitle22{
+    color: #808285;
+    font-size: 0.8em;
+}
+
+.vtitle23{
+    color: #257500;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+a.vtitle23:hover{
+    color: #231F20;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.img-button-plao.ikont-hcl-img-rptconsolidado{
+   background-position: 0px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptcronograma{
+   background-position: -55px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptpresupuesto{
+   background-position: -110px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptflujocaja{
+   background-position: 0px -55px;
+}
+
+.img-button-plao.ikont-hcl-img-rptplanoperativo{
+   background-position: -55px -55px;
+}
+
+.img-button-plao.ikont-hcl-img-rptplancontratacion{
+   background-position: -110px -55px;
 }
