@@ -436,6 +436,11 @@
             <from-outcome>perfilusuario</from-outcome>
             <to-view-id>/Usuario/PerfilUsuario.xhtml</to-view-id>
         </navigation-case>
+        
+         <navigation-case>
+            <from-outcome>filtronuevo</from-outcome>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
+        </navigation-case>
 
         <navigation-case>
             <from-outcome>restaurar_password</from-outcome>
