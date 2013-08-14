@@ -4,6 +4,7 @@
  */
 package cobra.PlanOperativo;
 
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
 import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
@@ -124,6 +125,7 @@ public class FlujoEgresos {
 
     public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Periodoflujocaja> periodosFlujoCaja) {
         this.planMovimientosProyecto = new ArrayList<Planificacionmovimientoproyecto>();
+        this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
         this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
         this.proyecto = proyecto;
         this.egresoProyecto = true;
@@ -132,15 +134,16 @@ public class FlujoEgresos {
             Planificacionmovimientoproyecto planMovimientoProyecto = new Planificacionmovimientoproyecto();
 
             planMovimientoProyecto.setPeriodoflujocaja(periodoFlujoCaja);
-            planMovimientoProyecto.setObra(proyecto);
-            planMovimientoProyecto.setValor(BigDecimal.valueOf(0.0));
+            planMovimientoProyecto.setObra(this.proyecto);
+            planMovimientoProyecto.setValor(BigDecimal.ZERO);
 
             planMovimientosProyecto.add(planMovimientoProyecto);
         }
     }
 
-    public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Periodoflujocaja> periodosFlujoCaja) {
+    public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.planMovimientosEgresosConvenio = new ArrayList<Planificacionmovconvenio>();
+        this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.itemFlujoEgresos = itemFlujoEgresos;
         this.egresoProyecto = false;
 
@@ -149,29 +152,32 @@ public class FlujoEgresos {
 
             planMovimientoEgreso.setPeriodoflujocaja(periodoFlujoCaja);
             planMovimientoEgreso.setItemflujocaja(itemFlujoEgresos);
-            planMovimientoEgreso.setValor(BigDecimal.valueOf(0.0));
+            planMovimientoEgreso.setContrato(convenio);
+            planMovimientoEgreso.setValor(BigDecimal.ZERO);
 
             planMovimientosEgresosConvenio.add(planMovimientoEgreso);
         }
     }
     
     public void actualizarPlanMovimientosProyecto(List<Periodoflujocaja> periodosFlujoCaja) {
+        this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
         this.egresoProyecto = true;
-        int i = 0;
+        int iterador;
 
         if (this.planMovimientosProyecto.size() < periodosFlujoCaja.size()) {
-            i = this.planMovimientosProyecto.size();
+            iterador = this.planMovimientosProyecto.size();
 
 
-            while (i < periodosFlujoCaja.size()) {
+            while (iterador < periodosFlujoCaja.size()) {
                 Planificacionmovimientoproyecto planMovimientoProyecto = new Planificacionmovimientoproyecto();
 
-                planMovimientoProyecto.setPeriodoflujocaja(periodosFlujoCaja.get(i));
-                planMovimientoProyecto.setValor(BigDecimal.valueOf(0.0));
+                planMovimientoProyecto.setPeriodoflujocaja(periodosFlujoCaja.get(iterador));
+                planMovimientoProyecto.setObra(this.proyecto);
+                planMovimientoProyecto.setValor(BigDecimal.ZERO);
 
                 this.planMovimientosProyecto.add(planMovimientoProyecto);
 
-                i++;
+                iterador++;
             }
         } else if (this.planMovimientosProyecto.size() > periodosFlujoCaja.size()) {
             Planificacionmovimientoproyecto planMovimientoProyecto;
@@ -184,23 +190,26 @@ public class FlujoEgresos {
         }
     }
     
-    public void actualizarPlanMovimientosEgresosConvenio(List<Periodoflujocaja> periodosFlujoCaja) {
+    public void actualizarPlanMovimientosEgresosConvenio(List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
+        this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.egresoProyecto = false;
-        int i = 0;
+        int iterador;
 
         if (this.planMovimientosEgresosConvenio.size() < periodosFlujoCaja.size()) {
-            i = this.planMovimientosEgresosConvenio.size();
+            iterador = this.planMovimientosEgresosConvenio.size();
 
 
-            while (i < periodosFlujoCaja.size()) {
+            while (iterador < periodosFlujoCaja.size()) {
                 Planificacionmovconvenio planMovimientoEgresoConvenio = new Planificacionmovconvenio();
 
-                planMovimientoEgresoConvenio.setPeriodoflujocaja(periodosFlujoCaja.get(i));
-                planMovimientoEgresoConvenio.setValor(BigDecimal.valueOf(0.0));
+                planMovimientoEgresoConvenio.setItemflujocaja(this.itemFlujoEgresos);
+                planMovimientoEgresoConvenio.setPeriodoflujocaja(periodosFlujoCaja.get(iterador));
+                planMovimientoEgresoConvenio.setContrato(convenio);
+                planMovimientoEgresoConvenio.setValor(BigDecimal.ZERO);
 
                 this.planMovimientosEgresosConvenio.add(planMovimientoEgresoConvenio);
 
-                i++;
+                iterador++;
             }
         } else if (this.planMovimientosEgresosConvenio.size() > periodosFlujoCaja.size()) {
             Planificacionmovconvenio planMovimientoEgresoConvenio;
@@ -214,18 +223,18 @@ public class FlujoEgresos {
     }
 
     public void calcularTotalEgresosFuente(int cantidadPeriodos) {
-        this.totalEgresosFuente = BigDecimal.valueOf(0.0);
+        this.totalEgresosFuente = BigDecimal.ZERO;
         double totalEgresos = 0;
-        int i = 0;
+        int iterador = 0;
 
-        while (i < cantidadPeriodos) {
+        while (iterador < cantidadPeriodos) {
             if (egresoProyecto) {
-                totalEgresos += planMovimientosProyecto.get(i).getValor().doubleValue();
+                totalEgresos += planMovimientosProyecto.get(iterador).getValor().doubleValue();
             } else {
-                totalEgresos += planMovimientosEgresosConvenio.get(i).getValor().doubleValue();
+                totalEgresos += planMovimientosEgresosConvenio.get(iterador).getValor().doubleValue();
             }
 
-            i++;
+            iterador++;
         }
 
         this.totalEgresosFuente = BigDecimal.valueOf(totalEgresos);
