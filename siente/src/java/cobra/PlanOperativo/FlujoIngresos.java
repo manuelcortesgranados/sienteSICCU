@@ -4,6 +4,7 @@
  */
 package cobra.PlanOperativo;
 
+import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Periodoflujocaja;
@@ -99,6 +100,7 @@ public class FlujoIngresos {
 
     public void crearEstructuraFlujoIngresosEntidad(Fuenterecursosconvenio fuenterecursosconvenio, Tercero entidadAportante, List<Periodoflujocaja> periodosFlujoCaja) {
         this.planMovimientosConvenioEntidad = new ArrayList<Planificacionmovconvenioentidad>();
+        this.movimientosConvenioEntidadEliminados = new ArrayList<Planificacionmovconvenioentidad>();
         this.fuenteRecursosConvenio = fuenterecursosconvenio;
         this.entidadAportante = entidadAportante;
         this.ingresoEntidad = true;
@@ -108,45 +110,50 @@ public class FlujoIngresos {
 
             planMovimientoEntidad.setPeriodoflujocaja(periodoFlujoCaja);
             planMovimientoEntidad.setFuenterecursosconvenio(fuenterecursosconvenio);
-            planMovimientoEntidad.setValor(BigDecimal.valueOf(0.0));
+            planMovimientoEntidad.setValor(BigDecimal.ZERO);
 
             this.planMovimientosConvenioEntidad.add(planMovimientoEntidad);
         }
     }
 
-    public void crearEstructuraFlujoIngresosOtrosItems(Itemflujocaja itemFlujoIngresos, List<Periodoflujocaja> periodosFlujoCaja) {
+    public void crearEstructuraFlujoIngresosOtrosItems(Itemflujocaja itemFlujoIngresos, List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.planMovimientosIngresosConvenio = new ArrayList<Planificacionmovconvenio>();
+        this.movimientosIngresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.itemFlujoIngresos = itemFlujoIngresos;
         this.ingresoEntidad = false;
         
         for (Periodoflujocaja periodoFlujoCaja : periodosFlujoCaja) {
             Planificacionmovconvenio planMovimientoIngreso = new Planificacionmovconvenio();
             
-            planMovimientoIngreso.setPeriodoflujocaja(periodoFlujoCaja);
             planMovimientoIngreso.setItemflujocaja(itemFlujoIngresos);
-            planMovimientoIngreso.setValor(BigDecimal.valueOf(0.0));
+            planMovimientoIngreso.setPeriodoflujocaja(periodoFlujoCaja);
+            planMovimientoIngreso.setContrato(convenio);
+            planMovimientoIngreso.setValor(BigDecimal.ZERO);
 
             this.planMovimientosIngresosConvenio.add(planMovimientoIngreso);
         }
     }
 
-    public void actualizarPlanMovimientosEntidad(List<Periodoflujocaja> periodosFlujoCaja) {
+    public void actualizarPlanMovimientosEntidad(List<Periodoflujocaja> periodosFlujoCaja, Fuenterecursosconvenio fuenteRecursosConvenio) {
+        this.movimientosConvenioEntidadEliminados = new ArrayList<Planificacionmovconvenioentidad>();
+        this.fuenteRecursosConvenio = fuenteRecursosConvenio;
         this.ingresoEntidad = true;
-        int i = 0;
+        int iterador;
 
         if (this.planMovimientosConvenioEntidad.size() < periodosFlujoCaja.size()) {
-            i = this.planMovimientosConvenioEntidad.size();
+            iterador = this.planMovimientosConvenioEntidad.size();
 
 
-            while (i < periodosFlujoCaja.size()) {
+            while (iterador < periodosFlujoCaja.size()) {
                 Planificacionmovconvenioentidad planMovimientoEntidad = new Planificacionmovconvenioentidad();
 
-                planMovimientoEntidad.setPeriodoflujocaja(periodosFlujoCaja.get(i));
-                planMovimientoEntidad.setValor(BigDecimal.valueOf(0.0));
+                planMovimientoEntidad.setFuenterecursosconvenio(fuenteRecursosConvenio);
+                planMovimientoEntidad.setPeriodoflujocaja(periodosFlujoCaja.get(iterador));
+                planMovimientoEntidad.setValor(BigDecimal.ZERO);
 
                 this.planMovimientosConvenioEntidad.add(planMovimientoEntidad);
 
-                i++;
+                iterador++;
             }
         } else if (this.planMovimientosConvenioEntidad.size() > periodosFlujoCaja.size()) {
             Planificacionmovconvenioentidad planMovimientoEntidad;
@@ -159,22 +166,25 @@ public class FlujoIngresos {
         }
     }
     
-    public void actualizarPlanMovimientosIngresosConvenio(List<Periodoflujocaja> periodosFlujoCaja) {
+    public void actualizarPlanMovimientosIngresosConvenio(List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
+        this.movimientosIngresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.ingresoEntidad = false;
-        int i = 0;
+        int iterador;
 
         if (this.planMovimientosIngresosConvenio.size() < periodosFlujoCaja.size()) {
-            i = this.planMovimientosIngresosConvenio.size();
+            iterador = this.planMovimientosIngresosConvenio.size();
 
-            while (i < periodosFlujoCaja.size()) {
+            while (iterador < periodosFlujoCaja.size()) {
                 Planificacionmovconvenio planMovimientoIngreso = new Planificacionmovconvenio();
 
-                planMovimientoIngreso.setPeriodoflujocaja(periodosFlujoCaja.get(i));
-                planMovimientoIngreso.setValor(BigDecimal.valueOf(0.0));
+                planMovimientoIngreso.setItemflujocaja(this.itemFlujoIngresos);
+                planMovimientoIngreso.setPeriodoflujocaja(periodosFlujoCaja.get(iterador));
+                planMovimientoIngreso.setContrato(convenio);
+                planMovimientoIngreso.setValor(BigDecimal.ZERO);
 
                 this.planMovimientosIngresosConvenio.add(planMovimientoIngreso);
 
-                i++;
+                iterador++;
             }
         } else if (this.planMovimientosIngresosConvenio.size() > periodosFlujoCaja.size()) {
             Planificacionmovconvenio planMovimientoIngreso;
@@ -188,23 +198,24 @@ public class FlujoIngresos {
     }
 
     public void calcularTotalIngresosFuente(int cantidadPeriodos) {
-        this.totalIngresosFuente = BigDecimal.valueOf(0.0);
+        this.totalIngresosFuente = BigDecimal.ZERO;
         double totalIngresos = 0;
-        int i = 0;
+        int iterador = 0;
 
-        while (i < cantidadPeriodos) {
+        while (iterador < cantidadPeriodos) {
             if (ingresoEntidad) {
-                totalIngresos += planMovimientosConvenioEntidad.get(i).getValor().doubleValue();
+                totalIngresos += planMovimientosConvenioEntidad.get(iterador).getValor().doubleValue();
             } else {
-                totalIngresos += planMovimientosIngresosConvenio.get(i).getValor().doubleValue();
+                totalIngresos += planMovimientosIngresosConvenio.get(iterador).getValor().doubleValue();
             }
             
-            i++;
+            iterador++;
         }
 
         this.totalIngresosFuente = BigDecimal.valueOf(totalIngresos);
     }
 
     public void guardarFlujoIngresosEntidad() {
+        
     }
 }

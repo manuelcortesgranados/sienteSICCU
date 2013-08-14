@@ -69,4 +69,19 @@
     nbproject/build-impl.xml file. 
 
     -->
+     <target name="-pre-compile">
+        <!-- Empty placeholder for easier customization. -->
+        <!-- You can override this target in the ../build.xml file. -->
+        <copy todir="${build.web.dir}/resources/imgs">
+            <fileset dir="${war.carpetaimagenes}" excludes="${build.web.excludes}"/>
+        </copy>
+         <copy todir="${build.web.dir}/resources/css">
+            <fileset dir="${war.carpetacss}" excludes="${build.web.excludes}"/>
+        </copy>
+       
+        <copy todir="${build.web.dir}/resources/js/login">
+            <fileset  dir="${war.carpetajs}" excludes="${build.web.excludes}"/>
+        </copy>
+
+    </target>
 </project>

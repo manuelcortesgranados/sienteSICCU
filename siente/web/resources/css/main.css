@@ -1141,7 +1141,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     font-style:italic; 
     text-align: justify; 
     padding: 10px;
-    
+
 }
 
 .ikont-hpg-comentarios {
@@ -1332,4 +1332,143 @@ a.ikont-hcl-modificarusuario:hover {
     font-style:italic;
     color:#666;
     line-height:15px;
+}
+
+/*  estilos zoom*/
+.ikont-hpg-contentmenu{
+    background-color: #F2F2F2;
+    width: 850px;
+    height: 80px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6B6B6B;
+    position: relative;
+    top: 0px;
+    z-index: 9999;
+}
+.ikont-hpg-menu-nuevo-convenio{
+    margin: 0px auto;
+    margin-top: -10px;
+}
+
+.ikont-hf-nuevocontratoplanoperativo{
+    position: relative;
+    top: 70px;
+}
+
+.img-button-ncpo{
+    background-image: url(../imgs/submenu_sprite.png);
+    background-repeat: no-repeat;
+    width: 90px;
+    height: 60px;
+    display: block;
+}
+
+.img-button-ncpo.ikont-acl-datosbasicos{
+    background-position: -8px -10px;
+}
+
+.img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
+    background-position: -8px -74px;
+}
+
+.img-button-ncpo.ikont-acl-documentos{
+    background-position: -374px -10px;
+}
+
+.img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
+    background-position: -374px -74px;
+}
+
+.img-button-ncpo.ikont-acl-formapago{
+    background-position: -278px -10px;
+}
+
+.img-button-ncpo.ikont-acl-formapago:hover, .ikont-acl-formapago.buttonactive{
+    background-position: -278px -74px;
+}
+
+.img-button-ncpo.ikont-acl-polizas{
+    background-position: -192px -10px;
+}
+
+.img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
+    background-position: -192px -74px;
+}
+
+.img-button-ncpo.ikont-acl-planoperativo{
+    background-position: -107px -10px;
+}
+
+.img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
+    background-position: -107px -74px;
+}
+
+.img-button-ncpo.scroll{
+    height: 25px;
+    background-position-y: -49px;
+}
+
+.img-button-ncpo.scroll:hover{
+    background-position-y: -115;
+}
+
+.img-button-ncpo.buttonactive.scroll{
+    height: 25px;
+    background-position-y: -115;
+}
+
+.img-button-plao{
+    background-image: url(../imgs/descargas_sprite.png);
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0px auto;
+}
+
+.vtitle21{
+    color: #231F20;
+    font-size: 1em;
+}
+
+.vtitle22{
+    color: #808285;
+    font-size: 0.8em;
+}
+
+.vtitle23{
+    color: #257500;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+a.vtitle23:hover{
+    color: #231F20;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.img-button-plao.ikont-hcl-img-rptconsolidado{
+   background-position: 0px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptcronograma{
+   background-position: -55px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptpresupuesto{
+   background-position: -110px 0px;
+}
+
+.img-button-plao.ikont-hcl-img-rptflujocaja{
+   background-position: 0px -55px;
+}
+
+.img-button-plao.ikont-hcl-img-rptplanoperativo{
+   background-position: -55px -55px;
+}
+
+.img-button-plao.ikont-hcl-img-rptplancontratacion{
+   background-position: -110px -55px;
 }

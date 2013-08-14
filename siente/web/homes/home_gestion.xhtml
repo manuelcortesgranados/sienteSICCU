@@ -117,7 +117,7 @@
                 </tr>
             </table>
 
-            <h:panelGrid id="vistaMapa" style="width:98%; border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+            <h:panelGrid id="vistaMapa" width="#{var.anchomapa}" style="border-radius: 10px; box-shadow: 4px 4px 7px #999;" rendered="#{HomeGestion.filtro.intvista == 1}" >
 
 
                 <m:map  latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 

@@ -16,11 +16,13 @@ import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
+import cobra.Supervisor.NuevoContratoBasico;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 /**
@@ -30,6 +32,7 @@ import java.util.Set;
 public class FlujoCaja {
 
     final long MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
+    Contrato convenio;
     List<Fuenterecursosconvenio> fuentesRecursosConvenio;
     List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras;
     List<Itemflujocaja> itemsFlujoIngresos;
@@ -46,6 +49,16 @@ public class FlujoCaja {
     double totalEgresosPeriodoAcumulativo[];
     double totalIngresos;
     double totalEgresos;
+    ResourceBundle bundle = getSessionBeanCobra().getBundle();
+    NuevoContratoBasico nuevoContratoBasico;
+
+    public Contrato getConvenio() {
+        return convenio;
+    }
+
+    public void setConvenio(Contrato convenio) {
+        this.convenio = convenio;
+    }
 
     public List<Fuenterecursosconvenio> getFuentesRecursosConvenio() {
         return fuentesRecursosConvenio;
@@ -151,6 +164,14 @@ public class FlujoCaja {
         this.totalEgresos = totalEgresos;
     }
 
+    public ResourceBundle getBundle() {
+        return bundle;
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
     protected SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
@@ -170,12 +191,18 @@ public class FlujoCaja {
     }
 
     public String iniciarFlujoCaja() {
+        this.convenio = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
+        this.nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         this.crearPeriodosFlujoCaja();
         this.crearEstructuraFlujoIngresos();
         this.iniciarTotalesIngresosPeriodo();
         this.crearEstructuraFlujoEgresos();
         this.iniciarTotalesEgresosPeriodo();
         this.refrescarValoresFlujoCaja();
+        
+        System.out.println("Convenio marco fecha inicio = " + nuevoContratoBasico.getContrato().getDatefechaini());
+        System.out.println("Convenio marco fecha fin = " + nuevoContratoBasico.getContrato().getDatefechafin());
+        
         return "FlujoCaja";
     }
 
@@ -197,10 +224,8 @@ public class FlujoCaja {
         double cantidadPeriodos = 0;
         int iterador = 1;
 
-        Contrato contrato = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
-
-        fechaInicioConvenio.setTime(contrato.getDatefechaini());
-        fechaFinConvenio.setTime(contrato.getDatefechafin());
+        fechaInicioConvenio.setTime(this.convenio.getDatefechaini());
+        fechaFinConvenio.setTime(this.convenio.getDatefechafin());
 
         /* Para hallar la cantidad de periodos:
          * 1. Se obtienen los milisegundos entre las dos fechas.
@@ -209,39 +234,45 @@ public class FlujoCaja {
          */
         cantidadPeriodos = (fechaFinConvenio.getTime().getTime() - fechaInicioConvenio.getTime().getTime()) / MILISEGUNDOS_POR_DIA / 30d;
 
-        /* Primer elemento de la lista de periodos */
+        periodosFlujoCaja = getSessionBeanCobra().getCobraService().encontrarPeriodosFlujoCajaConvenio(this.convenio.getIntidcontrato());
 
-        periodoFlujoCaja.setFechainicio(fechaInicioConvenio.getTime());
-        fechaPeriodo = fechaInicioConvenio;
+        if (periodosFlujoCaja.size() == Math.ceil(cantidadPeriodos)) {
+        } else {
 
-        fechaPeriodo.add(Calendar.MONTH, 1);
-        fechaPeriodo.add(Calendar.DATE, -1);
-        periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
+            /* Primer elemento de la lista de periodos */
 
-        periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
-        periodosFlujoCaja.add(periodoFlujoCaja);
+            periodoFlujoCaja.setFechainicio(fechaInicioConvenio.getTime());
+            fechaPeriodo = fechaInicioConvenio;
 
-        iterador++;
-
-        while (iterador <= Math.ceil(cantidadPeriodos)) {
-            periodoFlujoCaja = new Periodoflujocaja();
-
-            fechaPeriodo.add(Calendar.DATE, 1);
-            periodoFlujoCaja.setFechainicio(fechaPeriodo.getTime());
-
-            if (iterador < Math.ceil(cantidadPeriodos)) {
-                fechaPeriodo.add(Calendar.MONTH, 1);
-                fechaPeriodo.add(Calendar.DATE, -1);
-                periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-            } else {
-                fechaPeriodo = fechaFinConvenio;
-                periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-            }
+            fechaPeriodo.add(Calendar.MONTH, 1);
+            fechaPeriodo.add(Calendar.DATE, -1);
+            periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
 
             periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
             periodosFlujoCaja.add(periodoFlujoCaja);
 
             iterador++;
+
+            while (iterador <= Math.ceil(cantidadPeriodos)) {
+                periodoFlujoCaja = new Periodoflujocaja();
+
+                fechaPeriodo.add(Calendar.DATE, 1);
+                periodoFlujoCaja.setFechainicio(fechaPeriodo.getTime());
+
+                if (iterador < Math.ceil(cantidadPeriodos)) {
+                    fechaPeriodo.add(Calendar.MONTH, 1);
+                    fechaPeriodo.add(Calendar.DATE, -1);
+                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
+                } else {
+                    fechaPeriodo = fechaFinConvenio;
+                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
+                }
+
+                periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
+                periodosFlujoCaja.add(periodoFlujoCaja);
+
+                iterador++;
+            }
         }
     }
 
@@ -250,9 +281,8 @@ public class FlujoCaja {
         this.totalIngresos = 0;
         planifmovimientoconvenioentidad = new ArrayList<Planificacionmovconvenioentidad>();
         planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
-        int codigoConvenio = 53;
 
-        fuentesRecursosConvenio = getSessionBeanCobra().getCobraService().fuentesRecursosConvenio(codigoConvenio);
+        fuentesRecursosConvenio = getSessionBeanCobra().getCobraService().fuentesRecursosConvenio(this.convenio.getIntidcontrato());
         itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
 
         for (Fuenterecursosconvenio fuenteRecursosConvenio : fuentesRecursosConvenio) {
@@ -268,7 +298,7 @@ public class FlujoCaja {
             } else {
                 flujoIngresosEntidad.setPlanMovimientosConvenioEntidad(planifmovimientoconvenioentidad);
                 flujoIngresosEntidad.setEntidadAportante(entidadAportante);
-                flujoIngresosEntidad.actualizarPlanMovimientosEntidad(periodosFlujoCaja);
+                flujoIngresosEntidad.actualizarPlanMovimientosEntidad(periodosFlujoCaja, fuenteRecursosConvenio);
                 flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
             }
 
@@ -278,15 +308,15 @@ public class FlujoCaja {
         for (Itemflujocaja itemFlujoIngresos : itemsFlujoIngresos) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
 
-            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoIngresos.getIditemflujocaja(), codigoConvenio);
+            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoIngresos.getIditemflujocaja(), convenio.getIntidcontrato());
 
             if (planifmovimientoconvenio.size() <= 0) {
-                flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja);
+                flujoIngresosEntidad.crearEstructuraFlujoIngresosOtrosItems(itemFlujoIngresos, periodosFlujoCaja, convenio);
                 flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
             } else {
                 flujoIngresosEntidad.setPlanMovimientosIngresosConvenio(planifmovimientoconvenio);
                 flujoIngresosEntidad.setItemFlujoIngresos(itemFlujoIngresos);
-                flujoIngresosEntidad.actualizarPlanMovimientosIngresosConvenio(periodosFlujoCaja);
+                flujoIngresosEntidad.actualizarPlanMovimientosIngresosConvenio(periodosFlujoCaja, convenio);
                 flujoIngresosEntidad.calcularTotalIngresosFuente(periodosFlujoCaja.size());
             }
 
@@ -338,9 +368,8 @@ public class FlujoCaja {
         this.totalEgresos = 0;
         this.planifmovimientoconvenioproyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
-        int codigoConvenio = 53;
 
-        fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(codigoConvenio);
+        fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(convenio.getIntidcontrato());
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
         for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
@@ -365,16 +394,16 @@ public class FlujoCaja {
         for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
             FlujoEgresos flujoEgresosEntidad = new FlujoEgresos();
 
-            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoEgresos.getIditemflujocaja(), codigoConvenio);
+            planifmovimientoconvenio = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenio(itemFlujoEgresos.getIditemflujocaja(), convenio.getIntidcontrato());
 
             if (planifmovimientoconvenio.size() <= 0) {
-                flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja);
+                flujoEgresosEntidad.crearEstructuraFlujoEgresosOtrosItems(itemFlujoEgresos, periodosFlujoCaja, convenio);
                 flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
 
             } else {
                 flujoEgresosEntidad.setPlanMovimientosEgresosConvenio(planifmovimientoconvenio);
                 flujoEgresosEntidad.setItemFlujoEgresos(itemFlujoEgresos);
-                flujoEgresosEntidad.actualizarPlanMovimientosEgresosConvenio(periodosFlujoCaja);
+                flujoEgresosEntidad.actualizarPlanMovimientosEgresosConvenio(periodosFlujoCaja, convenio);
                 flujoEgresosEntidad.calcularTotalEgresosFuente(periodosFlujoCaja.size());
 
             }
@@ -461,8 +490,8 @@ public class FlujoCaja {
      * calcular (desde 0).
      */
     public void calcularGMF(double acumuladoGMF, int columna) {
-        double divisorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("divisorGMF"));
-        double multiplicadorGMF = Double.valueOf(getSessionBeanCobra().getCobraService().encontrarConfiguracion("multiplicadorGMF"));
+        double divisorGMF = Double.valueOf(bundle.getString("divisorGMF"));
+        double multiplicadorGMF = Double.valueOf(bundle.getString("multiplicadorGMF"));
 
         for (FlujoEgresos flujoEgresosRecorrer : flujoEgresos) {
             if (!flujoEgresosRecorrer.isEgresoProyecto()) {
@@ -486,5 +515,77 @@ public class FlujoCaja {
             }
         }
 
+    }
+
+    public boolean validarFlujoCaja() {
+        boolean cumpleRequisitos = true;
+
+        for (FlujoIngresos flujoIngresosValidar : flujoIngresos) {
+            if (flujoIngresosValidar.ingresoEntidad) {
+                if (flujoIngresosValidar.totalIngresosFuente.doubleValue() > flujoIngresosValidar.fuenteRecursosConvenio.getValoraportado().doubleValue()) {
+                    cumpleRequisitos = false;
+
+                    FacesUtils.addErrorMessage(bundle.getString("errorIngresosMayorAAportes"));
+                }
+            }
+        }
+
+        for (FlujoEgresos flujoEgresosValidar : flujoEgresos) {
+            if (flujoEgresosValidar.egresoProyecto) {
+                if (flujoEgresosValidar.totalEgresosFuente.doubleValue() > flujoEgresosValidar.getProyecto().getNumvaltotobra().doubleValue()) {
+                    cumpleRequisitos = false;
+
+                    FacesUtils.addErrorMessage(bundle.getString("errorEgresosMayorAValorProyecto"));
+                }
+            }
+        }
+
+        if (this.totalEgresos > this.totalIngresos) {
+            cumpleRequisitos = false;
+
+            FacesUtils.addErrorMessage(bundle.getString("errorTotalEgresosMayorATotalIngresos"));
+        }
+
+        return cumpleRequisitos;
+    }
+
+    public void guardarFlujoCaja() {
+        if (validarFlujoCaja()) {
+            for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
+                if (flujoIngresosGuardar.ingresoEntidad) {
+                    getSessionBeanCobra().getCobraService().guardarFlujoIngresosConvenioEntidad(flujoIngresosGuardar.planMovimientosConvenioEntidad);
+
+                    if (flujoIngresosGuardar.movimientosConvenioEntidadEliminados.size() > 0) {
+                        getSessionBeanCobra().getCobraService().borrarIngresosConvenioEntidad(flujoIngresosGuardar.movimientosConvenioEntidadEliminados);
+                    }
+                } else {
+                    getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoIngresosGuardar.planMovimientosIngresosConvenio);
+
+                    if (flujoIngresosGuardar.movimientosIngresosConvenioEliminados.size() > 0) {
+                        getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoIngresosGuardar.movimientosIngresosConvenioEliminados);
+                    }
+                }
+            }
+
+            for (FlujoEgresos flujoEgresosGuardar : flujoEgresos) {
+                if (flujoEgresosGuardar.egresoProyecto) {
+                    getSessionBeanCobra().getCobraService().guardarFlujoEgresosProyecto(flujoEgresosGuardar.planMovimientosProyecto);
+
+                    if (flujoEgresosGuardar.movimientosProyectoEliminados.size() > 0) {
+                        getSessionBeanCobra().getCobraService().borrarEgresosProyecto(flujoEgresosGuardar.movimientosProyectoEliminados);
+                    }
+                } else {
+                    getSessionBeanCobra().getCobraService().guardarFlujoConvenioOtrosConceptos(flujoEgresosGuardar.planMovimientosEgresosConvenio);
+
+                    if (flujoEgresosGuardar.movimientosEgresosConvenioEliminados.size() > 0) {
+                        getSessionBeanCobra().getCobraService().borrarMovimientosConvenio(flujoEgresosGuardar.movimientosEgresosConvenioEliminados);
+                    }
+                }
+            }
+        }
+    }
+
+    public void guardarPeriodosFlujoCaja() {
+        getSessionBeanCobra().getCobraService().guardarPeriodosFlujoCaja(this.periodosFlujoCaja);
     }
 }
