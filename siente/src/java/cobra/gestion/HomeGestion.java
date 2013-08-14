@@ -1563,7 +1563,7 @@ public class HomeGestion implements Serializable {
     }
 
     public String filtroObrasActionMapaAvanModal() {
-        System.out.println("ingresoo al sistema");
+        //System.out.println("ingresoo al sistema");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
                 filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -1703,7 +1703,7 @@ public class HomeGestion implements Serializable {
         }
         obrasEncontradas = listaobrasusu.size();
 
-        return null;
+        return "filtronuevo";
     }
 
     public String siguienteProyectos() {
