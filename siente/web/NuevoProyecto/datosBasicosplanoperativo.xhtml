@@ -24,7 +24,7 @@
                     <h:panelGroup>
                         <rich:calendar id="id-fechasuscripcion"  defaultLabel="#{var.fechasuscripcion}"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true">                        
                             <rich:message for="id-fechasuscripcion"  />
-                            <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="@this" render="h-ol-duraciondias"/>
+                            <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
                         </rich:calendar>
 
                         <br/><br/>
@@ -48,7 +48,7 @@
                     <h:panelGrid  >
                         <rich:calendar id="id-datefechafin"   defaultLabel="#{var.fechafinalizacion}" datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" required="true" >                    
                             <rich:message for="id-datefechafin"  />
-                            <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="@this" render="h-ol-duraciondias"/>
+                            <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
                         </rich:calendar>   
                         <h:outputLabel value="Plazo en dias #{Supervisor$Contrato.contrato.intduraciondias}" id="h-ol-duraciondias"/>
                     </h:panelGrid>

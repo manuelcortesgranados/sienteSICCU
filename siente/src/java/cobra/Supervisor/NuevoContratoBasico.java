@@ -6,6 +6,8 @@ package cobra.Supervisor;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.exceptions.ConvenioException;
+import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.AreaContratista;
 import co.com.interkont.cobra.to.Aseguradora;
@@ -121,11 +123,12 @@ public class NuevoContratoBasico implements Serializable {
      * Variable para sumar los valores registrados en datos basicos plan o
      */
     BigDecimal totalfuenteconvenio;
-    
-    /***
+
+    /**
+     * *
      * variable para mostrar el faltante para convenio
      */
-    BigDecimal faltafuenteconvenio ;
+    BigDecimal faltafuenteconvenio;
     /**
      * Variable para mostrar las formas de pago de un contrato
      */
@@ -835,11 +838,12 @@ public class NuevoContratoBasico implements Serializable {
      * variable para saber si el convenio tiene todas las validaciones ok
      */
     private int guardadoconexito = 0;
-    
+
     /*
      * variable para saber si el convenio tiene los datos basicos
      */
     private int validardatosbasicosplano = 0;
+
     /**
      * Variable para ver los reportes de plan operativo
      *
@@ -867,7 +871,8 @@ public class NuevoContratoBasico implements Serializable {
 
     public void setValidardatosbasicosplano(int validardatosbasicosplano) {
         this.validardatosbasicosplano = validardatosbasicosplano;
-    } 
+    }
+
     /**
      *
      */
@@ -1805,8 +1810,6 @@ public class NuevoContratoBasico implements Serializable {
     public void setFaltafuenteconvenio(BigDecimal faltafuenteconvenio) {
         this.faltafuenteconvenio = faltafuenteconvenio;
     }
-    
-    
 
     public void setEncargofiduciario(Encargofiduciario encargofiduciario) {
         this.encargofiduciario = encargofiduciario;
@@ -2293,8 +2296,6 @@ public class NuevoContratoBasico implements Serializable {
 
         }
 
-
-
     }
 
     public String instanciarPolizar() {
@@ -2615,27 +2616,7 @@ public class NuevoContratoBasico implements Serializable {
 
                 case 3://Acta unica
                     if (bundle.getString("fechaformapago").equals("true")) {
-                        if (planificacionpago.getDatefechapago() != null) {
-                            planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
-                            planificacionpago.setStrdescripcion("");
-                            planificacionpago.setBoolactivo(true);
-                            planificacionpago.setBoolrealizado(false);
-                            planificacionpago.setDateusucreacion(new Date());
-                            planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
-                            planificacionpago.setContrato(contrato);
-                            //setplani.add(planificacionpago);
-                            planificacionpago.setNumvlrporcentage(new BigDecimal(100));
-                            contrato.setPlanificacionpagos(new LinkedHashSet());
-                            contrato.getPlanificacionpagos().add(planificacionpago);
-
-                            return true;
-                        } else {
-                            if (bundle.getString("fechaformapago").equals("true")) {
-                                FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
-                                return false;
-                            }
-                        }
-                    } else {
+                    if (planificacionpago.getDatefechapago() != null) {
                         planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
                         planificacionpago.setStrdescripcion("");
                         planificacionpago.setBoolactivo(true);
@@ -2643,13 +2624,33 @@ public class NuevoContratoBasico implements Serializable {
                         planificacionpago.setDateusucreacion(new Date());
                         planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                         planificacionpago.setContrato(contrato);
-                        planificacionpago.setDatefechapago(contrato.getDatefechaini());
                         //setplani.add(planificacionpago);
                         planificacionpago.setNumvlrporcentage(new BigDecimal(100));
                         contrato.setPlanificacionpagos(new LinkedHashSet());
                         contrato.getPlanificacionpagos().add(planificacionpago);
+
                         return true;
+                    } else {
+                        if (bundle.getString("fechaformapago").equals("true")) {
+                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
+                            return false;
+                        }
                     }
+                } else {
+                    planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
+                    planificacionpago.setStrdescripcion("");
+                    planificacionpago.setBoolactivo(true);
+                    planificacionpago.setBoolrealizado(false);
+                    planificacionpago.setDateusucreacion(new Date());
+                    planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                    planificacionpago.setContrato(contrato);
+                    planificacionpago.setDatefechapago(contrato.getDatefechaini());
+                    //setplani.add(planificacionpago);
+                    planificacionpago.setNumvlrporcentage(new BigDecimal(100));
+                    contrato.setPlanificacionpagos(new LinkedHashSet());
+                    contrato.getPlanificacionpagos().add(planificacionpago);
+                    return true;
+                }
             }
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar la forma de pago.");
@@ -2893,6 +2894,7 @@ public class NuevoContratoBasico implements Serializable {
      * @return
      */
     public String fechaCambio() {
+
         //     if (seleccionopadre == 1) {//es un proyecto hijo toes valida fiobra hijo contra fipadre
         // if (contrato.getDatefechafin().before(contrpadre.getDatefechafin()) || contrato.getDatefechafin().equals(contrpadre.getDatefechafin())) {
         Calendar hoy = Calendar.getInstance();
@@ -6190,7 +6192,7 @@ public class NuevoContratoBasico implements Serializable {
 
 //      Asignandole el valor del conatrato en recursos terceros
         contrato.setNumrecursostercero(contrato.getNumvlrcontrato());
-        contrato.setNumrecursosch(new BigDecimal(BigInteger.ZERO));
+        contrato.setNumrecursosch(BigDecimal.ZERO);
         if (contrato.getIntduraciondias() > 0) {
             if (contrato.getFechaactaini() != null) {
                 if (contrato.getFechaactaini().compareTo(contrato.getDatefechaini()) >= 0 && contrato.getFechaactaini().compareTo(contrato.getDatefechafin()) <= 0) {
@@ -6207,12 +6209,12 @@ public class NuevoContratoBasico implements Serializable {
                         contrato.setJsfUsuarioByIntusucreacion(getSessionBeanCobra().getUsuarioObra());
                     }
                     contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria(1));
-                    contrato.setNumvlrsumahijos(new BigDecimal(BigInteger.ZERO));
+                    contrato.setNumvlrsumahijos(BigDecimal.ZERO);
                     contrato.setBooltipocontratoconvenio(true);
                     contrato.setBooleantienehijos(true);
                     contrato.setPeriodoevento(new Periodoevento(1));
                     contrato.setIntcantproyectos(0);
-                    contrato.setNumvlrsumaproyectos(new BigDecimal(BigInteger.ZERO));
+                    contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
                     contrato.setEstadoconvenio(new Estadoconvenio(1));
                     contrato.setPolizacontratos(new LinkedHashSet(listapolizas));
                     contrato.setBoolplanoperativo(true);
@@ -6236,8 +6238,8 @@ public class NuevoContratoBasico implements Serializable {
                 FacesUtils.addErrorMessage("fechadesuscripcionvalida");
             }
         } else {
-             validardatosbasicosplano = 3;
-            FacesUtils.addErrorMessage("validarfechafin");           
+            validardatosbasicosplano = 3;
+            FacesUtils.addErrorMessage("validarfechafin");
         }
     }
 
@@ -6253,19 +6255,19 @@ public class NuevoContratoBasico implements Serializable {
         faltafuenteconvenio = new BigDecimal(BigInteger.ZERO);
 //        Se llama el metodo de guardar borrador para que valide la información inicial
         this.guardarBorradorConvenio(true);
-        if (!lstFuentesRecursos.isEmpty()) {  
-            guardadoconexito = 1;            
+        if (!lstFuentesRecursos.isEmpty()) {
+            guardadoconexito = 1;
             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
 //            Recorriendo la lista de fuentes de recursos para sumar los valores ingresados
             for (Fuenterecursosconvenio fuenterecurso : lstFuentesRecursos) {
                 totalfuenteconvenio = totalfuenteconvenio.add(fuenterecurso.getOtrasreservas()).add(fuenterecurso.getValorcuotagerencia()).add(fuenterecurso.getReservaiva());
             }
             if (totalfuenteconvenio.compareTo(contrato.getNumvlrcontrato()) == 0) {
-                
+
                 guardadoconexito = 1;
                 getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                contrato= new Contrato();
-                
+                contrato = new Contrato();
+
             } else {
                 guardadoconexito = 0;
                 tipomensajeerror = 2;
@@ -6292,7 +6294,6 @@ public class NuevoContratoBasico implements Serializable {
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
         boolguardofuente = Boolean.TRUE;
         limpiarFuenteRecurso();
-
 
     }
 
@@ -6484,7 +6485,6 @@ public class NuevoContratoBasico implements Serializable {
         fuenteRecursoConvenio.setRolentidad(new Rolentidad());
         fuenteRecursoConvenio.setTercero(new Tercero());
 
-
     }
 
     /**
@@ -6527,50 +6527,50 @@ public class NuevoContratoBasico implements Serializable {
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
                 break;
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
-                } catch (IOException ex) {
-                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
+            } catch (IOException ex) {
+                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }
@@ -6600,9 +6600,16 @@ public class NuevoContratoBasico implements Serializable {
     }
 
     public String planOperativo() {
-
-        getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
-        return "PlanOperativo";
+        try {
+            ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(),getContrato().getDatefechaini(), getContrato().getDatefechafin());
+            ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");            
+            ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
+            getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
+            return "PlanOperativo";
+        } catch (ConvenioException e) {
+            FacesUtils.addErrorMessage(e.getMessage());
+        }
+        return null;
     }
 
     public String irApaginaconvenioplanoperativo() {

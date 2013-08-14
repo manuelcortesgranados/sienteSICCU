@@ -594,12 +594,20 @@ public class CasteoGWT {
     }
 
     public static GanttConfig.TaskType tipoTask(int tipoTarea) {
-        if (tipoTarea == 1) {
-            return TaskType.PARENT;
-        } else if (tipoTarea == 2) {
-            return TaskType.LEAF;
-        }
-        return TaskType.MILESTONE;
+        
+        switch (tipoTarea) {
+                    case 1:
+                    case 2:
+                    case 3:
+                        return TaskType.PARENT;                        
+                    case 4:                        
+                    case 5:
+                        return TaskType.LEAF;                                               
+                    case 6:
+                        return TaskType.MILESTONE;                        
+                        
+                }
+        return TaskType.LEAF;  
     }   
      /*
      * metodo que se encarga de convertir una  Parametricaactividadesobligatorias a ActividadobraDTO
@@ -607,8 +615,9 @@ public class CasteoGWT {
      * 
      * @author Carlos Loaiza
      */
-     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion,int peso, int tipoTask) { 
-         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,peso,tipoTask(tipoTask), parametricaactidadobligatoria.getTipoparametrica());
+     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion,int peso) { 
+         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,peso,tipoTask(parametricaactidadobligatoria.getTipoparametrica()), 
+                 parametricaactidadobligatoria.getTipoparametrica(),parametricaactidadobligatoria.getBoolobligatoria());
          
          //act.setName(parametricaactidadobligatoria.getStrdescripcion());
          //act.setTaskType(tipoTask(parametricaactidadobligatoria.getTipoparametrica()));

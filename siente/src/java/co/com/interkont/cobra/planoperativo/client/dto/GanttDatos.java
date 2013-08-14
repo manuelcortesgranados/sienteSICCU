@@ -31,7 +31,7 @@ public class GanttDatos {
         dw = new DateWrapper(convenio.getDatefechaini());
         
         ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), convenio.getDatefechaini(), convenio.getIntduraciondias(),
-				0, GanttConfig.TaskType.PARENT,1);
+				0, GanttConfig.TaskType.PARENT,1,false);
                 t.setTipoActividad(1);                               
                 
                
