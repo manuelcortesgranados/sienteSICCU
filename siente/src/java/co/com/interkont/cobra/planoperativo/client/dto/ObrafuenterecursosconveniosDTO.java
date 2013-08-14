@@ -32,6 +32,14 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
        this.valor = valor;
      }
 
+      public ObrafuenterecursosconveniosDTO(int tipoaporte,  BigDecimal valor,FuenterecursosconvenioDTO fuente,RubroDTO rubro) {
+        this.tipoaporte = tipoaporte;
+        this.valor = valor;
+        this.fuenterecursosconvenio=fuente;
+        this.rubro=rubro;
+        
+     }
+
     public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, RubroDTO rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
         this.idobrafuenterecursos = idobrafuenterecursos;
         this.obra = obra;

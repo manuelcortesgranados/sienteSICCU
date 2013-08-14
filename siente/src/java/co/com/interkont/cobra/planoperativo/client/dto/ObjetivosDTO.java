@@ -23,6 +23,7 @@ public class ObjetivosDTO implements IsSerializable
     }
 
 	
+	
     public ObjetivosDTO(int idobjetivo) {
         this.idobjetivo = idobjetivo;
     }
@@ -32,6 +33,18 @@ public class ObjetivosDTO implements IsSerializable
        this.tipoobjetivo = tipoobjetivo;
        this.esobjetivo = esobjetivo;
        this.obra = obra;
+    }
+   
+     public ObjetivosDTO(String descripcion, Integer tipoobjetivo, Boolean esobjetivo) {
+       this.descripcion = descripcion;
+       this.tipoobjetivo = tipoobjetivo;
+       this.esobjetivo = esobjetivo;
+     
+    }
+     public ObjetivosDTO(String descripcion,Boolean esobjetivo) {
+       this.descripcion = descripcion;
+       this.esobjetivo = esobjetivo;
+     
     }
    
     public int getIdobjetivo() {

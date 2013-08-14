@@ -122,7 +122,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void setService(CobraGwtServiceAbleAsync service) {
         this.service = service;
     }
-
     /**
      * Variable para mensaje de validaciones
      */
@@ -159,6 +158,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * Almacena la dependencia que ha sido seleccionada en el gantt
      */
     private DependenciaDTO dependenciaSeleccionada;
+    
+    GwtMensajes msj=GWT.create(GwtMensajes.class);
 
     @SuppressWarnings("unchecked")
     @Override
@@ -248,9 +249,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final ProyectoForm proyectoForm = new ProyectoForm();
 //        crearProyectoDialog.add(proyectoForm);
 
-        final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO);
-        crearProyectoDialog.add(proyectoForm1);
-
         /**
          * Personalizando el menú
          */
@@ -263,6 +261,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemProyecto.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
+                service.setLog("papa en gannt" + tareaSeleccionada.getChildren().size(),null);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO,tareaSeleccionada);
+                crearProyectoDialog.add(proyectoForm1);
+
                 //proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
@@ -373,14 +375,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-                    @Override
-                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                        //return new DependenciaDTO(1, fromTask,toTask, type);
+            @Override
+            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                //return new DependenciaDTO(1, fromTask,toTask, type);
 //                        (String.valueOf(new Date().getTime()), toTask.getOidactiviobra(),  type);
-                    }
-
-                ;
+            }
+        ;
 
         };
 
@@ -605,7 +606,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void cargar() {
         //Cargando el convenio
         service.getContratoDTO(new AsyncCallback<ContratoDTO>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error cargando convenio", null);

@@ -18,6 +18,9 @@ public interface ExampleImages extends ClientBundle {
   @Source("add16.gif")
   ImageResource add16();
 
+  @Source("agregar_proyecto.png")
+  ImageResource addbtnaddpry();
+
   @Source("add24.gif")
   ImageResource add24();
 

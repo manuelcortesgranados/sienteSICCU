@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -18,6 +19,8 @@ public class ObraDTO implements IsSerializable {
 
     private int intcodigoobra;
     private String strnombreobra;
+    private Date fechaInicio;
+    private Date fechaFin;
     private Set objetivoses = new HashSet(0);
     private Set obrafuenterecursosconvenioses = new HashSet(0);
     private Set actividadobras = new LinkedHashSet(0);
@@ -100,6 +103,34 @@ public class ObraDTO implements IsSerializable {
      */
     public void setStrnombreobra(String strnombreobra) {
         this.strnombreobra = strnombreobra;
+    }
+
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    /**
+     * @return the fechaFin
+     */
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     * @param fechaFin the fechaFin to set
+     */
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
     
     

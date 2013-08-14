@@ -20,6 +20,8 @@
     <entry-point class="co.com.interkont.cobra.planoperativo.client.PlanOperativoGantt"/>
     <source path="client"/>
     
+    <extend-property name="locale" values="es_CO" />
+    
     
    
 </module>

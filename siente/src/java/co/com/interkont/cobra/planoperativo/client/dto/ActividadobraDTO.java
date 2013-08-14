@@ -55,10 +55,22 @@ public class ActividadobraDTO implements IsSerializable {
     private ObraDTO obra;
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
+    public ActividadobraDTO(String strdescactividad,int tipoActividad) {
+        this.strdescactividad=strdescactividad;
+        this.tipoActividad=tipoActividad;
+    }
+    
+     public ActividadobraDTO(String strdescactividad,int tipoActividad,Date fechaInicio,Date fechaFin,ObraDTO obra) {
+        this.strdescactividad=strdescactividad;
+        this.tipoActividad=tipoActividad;
+        this.fechaInicio=fechaInicio;
+        this.fechaFin=fechaFin;
+        this.obra=obra;
+    }
+    
     public ActividadobraDTO() {
     }
    
-
     public List<ActividadobraDTO> getChildren() {
         return children;
     }

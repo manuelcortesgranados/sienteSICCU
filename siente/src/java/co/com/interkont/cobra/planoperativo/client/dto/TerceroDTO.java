@@ -13,7 +13,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class TerceroDTO implements IsSerializable{
     
     private int intcodigo;
-    private String strnombrecompleto;   
+    private String strnombrecompleto;  
+    private int campoTemporalFuenteRecursos;
 
     public TerceroDTO() {
     }
@@ -49,6 +50,20 @@ public class TerceroDTO implements IsSerializable{
      */
     public void setStrnombrecompleto(String strnombrecompleto) {
         this.strnombrecompleto = strnombrecompleto;
+    }
+
+    /**
+     * @return the campoTemporalFuenteRecursos
+     */
+    public int getCampoTemporalFuenteRecursos() {
+        return campoTemporalFuenteRecursos;
+    }
+
+    /**
+     * @param campoTemporalFuenteRecursos the campoTemporalFuenteRecursos to set
+     */
+    public void setCampoTemporalFuenteRecursos(int campoTemporalFuenteRecursos) {
+        this.campoTemporalFuenteRecursos = campoTemporalFuenteRecursos;
     }
     
     
