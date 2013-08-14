@@ -43,20 +43,24 @@
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
-    <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-        <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
-            <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
-        </h:panelGroup>
+    <ui:define name="menu_lateral">  
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
+                <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
+            </h:panelGroup>
 
-        <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
-            <ui:include src="/facelets/panel_conozca_inversion.xhtml"/>
+            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
+                <ui:include src="/facelets/panel_conozca_inversion.xhtml"/>
+            </h:panelGroup>
         </h:panelGroup>
-
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+        <ui:include src="/Supervisor/filtrozoom.xhtml"/>
     </ui:define>
     <ui:define name="body">
-
         <h:form id="form_gestion" prependId="false" >
             <table  border="0" cellspacing="0" cellpadding="0" class="mapsearchbar">
                 <tr>
@@ -84,19 +88,19 @@
                             <tr>
                                 <td class="text01">Vistas</td>
                                 <td><div >
-                                        <h:commandLink styleClass="ikont-hcl-activarmapabutton"   action="#{HomeGestion.activarvistamapa}" />
+                                        <h:commandLink styleClass="ikont-hcl-activarmapabutton" value="vistamapa"   action="#{HomeGestion.activarvistamapa}" />
 
                                     </div></td>
                                 <td><div >
-                                        <a4j:commandLink styleClass="ikont-acl-activarimgs"   render="form_gestion,vistaThumb" execute="@this"
+                                        <h:commandLink styleClass="ikont-acl-activarimgs" value="vista2"  
                                                          action="#{HomeGestion.filtrarObrasPorEstado}"    >
                                             <a4j:param value="2" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </div></td>
-                                <td><div ><a4j:commandLink styleClass="ikont-acl-activarlista"   render="form_gestion,vistaLista" execute="@this"
+                                <td><div ><h:commandLink styleClass="ikont-acl-activarlista"   value="vista3"
                                                            action="#{HomeGestion.filtrarObrasPorEstado}"   >
                                             <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                        </a4j:commandLink>
+                                        </h:commandLink>
                                     </div></td>
                             </tr>
                         </table></td>
