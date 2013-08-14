@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
@@ -16,8 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Determina el flujo de ingresos del flujo de caja.
  *
- * @author desarrollo2
+ * Incluye entidades según las fuentes de recursos o los items de naturaleza
+ * ingreso. Cada objeto de esta clase representa un registro de ingreso con sus
+ * distribución en los periodos del flujo de caja, que determinan la
+ * planificación de los ingresos.
+ *
+ * @author Yeison Osorio
  */
 public class FlujoIngresos {
 
@@ -90,6 +92,14 @@ public class FlujoIngresos {
         this.totalIngresosFuente = totalIngresosFuente;
     }
 
+    /**
+     * Descripción de la fuente de ingreso.
+     *
+     * Condicional que devuelve el nombre de la fuente, ya sea de la entidad o
+     * del item de naturaleza ingreso ('I').
+     *
+     * @return Nombre de la fuente de ingresos.
+     */
     public String getDescripcionFuenteIngreso() {
         if (!ingresoEntidad) {
             return itemFlujoIngresos.getStrdescripcion();
@@ -98,13 +108,25 @@ public class FlujoIngresos {
         return entidadAportante.getStrnombrecompleto();
     }
 
+    /**
+     * Crear la estructura del flujo de ingresos por entidad.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * ingresos en los periodos del flujo de caja para la entidad aportante.
+     * Este método inicializa el flujo de ingresos de la entidad al no existir
+     * alguno.
+     *
+     * @param fuenterecursosconvenio Fuente de recursos del convenio.
+     * @param entidadAportante Tercero de la entidad aportante.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     */
     public void crearEstructuraFlujoIngresosEntidad(Fuenterecursosconvenio fuenterecursosconvenio, Tercero entidadAportante, List<Periodoflujocaja> periodosFlujoCaja) {
         this.planMovimientosConvenioEntidad = new ArrayList<Planificacionmovconvenioentidad>();
         this.movimientosConvenioEntidadEliminados = new ArrayList<Planificacionmovconvenioentidad>();
         this.fuenteRecursosConvenio = fuenterecursosconvenio;
         this.entidadAportante = entidadAportante;
         this.ingresoEntidad = true;
-        
+
         for (Periodoflujocaja periodoFlujoCaja : periodosFlujoCaja) {
             Planificacionmovconvenioentidad planMovimientoEntidad = new Planificacionmovconvenioentidad();
 
@@ -116,15 +138,27 @@ public class FlujoIngresos {
         }
     }
 
+    /**
+     * Crear la estructura del flujo de ingresos por item de ingreso.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * ingresos en los periodos del flujo de caja para la entidad aportante.
+     * Este método inicializa el flujo de ingresos de la entidad al no existir
+     * alguno.
+     *
+     * @param itemFlujoIngresos Item de flujo de caja de naturaleza ingreso.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param convenio Convenio marco.
+     */
     public void crearEstructuraFlujoIngresosOtrosItems(Itemflujocaja itemFlujoIngresos, List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.planMovimientosIngresosConvenio = new ArrayList<Planificacionmovconvenio>();
         this.movimientosIngresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.itemFlujoIngresos = itemFlujoIngresos;
         this.ingresoEntidad = false;
-        
+
         for (Periodoflujocaja periodoFlujoCaja : periodosFlujoCaja) {
             Planificacionmovconvenio planMovimientoIngreso = new Planificacionmovconvenio();
-            
+
             planMovimientoIngreso.setItemflujocaja(itemFlujoIngresos);
             planMovimientoIngreso.setPeriodoflujocaja(periodoFlujoCaja);
             planMovimientoIngreso.setContrato(convenio);
@@ -134,6 +168,15 @@ public class FlujoIngresos {
         }
     }
 
+    /**
+     * Actualizar la estructura del flujo de ingresos por entidad.
+     *
+     * Con base en una lista de ingresos consultados se actualiza el flujo de
+     * ingresos por entidad.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param fuenteRecursosConvenio Fuente de recursos del convenio.
+     */
     public void actualizarPlanMovimientosEntidad(List<Periodoflujocaja> periodosFlujoCaja, Fuenterecursosconvenio fuenteRecursosConvenio) {
         this.movimientosConvenioEntidadEliminados = new ArrayList<Planificacionmovconvenioentidad>();
         this.fuenteRecursosConvenio = fuenteRecursosConvenio;
@@ -165,7 +208,16 @@ public class FlujoIngresos {
             }
         }
     }
-    
+
+    /**
+     * Actualizar el flujo de ingresos por item de ingreso.
+     *
+     * Con base en una lista de ingresos consultados se actualiza el flujo de
+     * ingresos por item de ingreso.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param convenio Convenio marco.
+     */
     public void actualizarPlanMovimientosIngresosConvenio(List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.movimientosIngresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.ingresoEntidad = false;
@@ -197,6 +249,14 @@ public class FlujoIngresos {
         }
     }
 
+    /**
+     * Calcular el total de ingresos por fuente.
+     *
+     * De acuerdo con la cantidad de periodos, se recorre la lista de ingresos
+     * por periodo en la fuente y totalizan los valores definidos.
+     *
+     * @param cantidadPeriodos Cantidad de periodos de flujo de caja.
+     */
     public void calcularTotalIngresosFuente(int cantidadPeriodos) {
         this.totalIngresosFuente = BigDecimal.ZERO;
         double totalIngresos = 0;
@@ -208,14 +268,10 @@ public class FlujoIngresos {
             } else {
                 totalIngresos += planMovimientosIngresosConvenio.get(iterador).getValor().doubleValue();
             }
-            
+
             iterador++;
         }
 
         this.totalIngresosFuente = BigDecimal.valueOf(totalIngresos);
-    }
-
-    public void guardarFlujoIngresosEntidad() {
-        
     }
 }

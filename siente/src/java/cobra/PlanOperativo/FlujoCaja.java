@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
@@ -20,14 +16,17 @@ import cobra.Supervisor.NuevoContratoBasico;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 /**
+ * Flujo de caja del plan operativo.
  *
- * @author desarrollo6
+ * Controla el comportamiento y presentación del flujo de caja del convenio
+ * marco para los elementos de flujo de ingreso y el flujo de egresos.
+ *
+ * @author Cristian Gutiérrez
+ * @author Yeison Osorio
  */
 public class FlujoCaja {
 
@@ -176,20 +175,39 @@ public class FlujoCaja {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
 
+    /**
+     * Columnas para periodos del flujo de caja.
+     *
+     * De acuerdo con el tamaño de la lista de periodos de flujo de caja se
+     * contruye una lista de enteros (desde la posición 0) que representarán los
+     * índices de los elementos de los arreglos.
+     *
+     * @return Lista de enteros que representan las columnas de los periodos.
+     */
     public List<Integer> getColumnasPeriodos() {
         List<Integer> items = new ArrayList<Integer>();
-        int i = 0;
+        int iterador = 0;
 
-        while (i < periodosFlujoCaja.size()) {
-            Integer item = i;
+        while (iterador < periodosFlujoCaja.size()) {
+            Integer item = iterador;
             items.add(item);
 
-            i++;
+            iterador++;
         }
 
         return items;
     }
 
+    /**
+     * Inicia los objetos objetos para mostrar el flujo de caja.
+     *
+     * 1. Establece el convenio marco. 2. Crear los periodos del flujo de caja
+     * con base en las fechas del convenio marco. 3. Crea la estructura para el
+     * flujo de ingresos, inicia los totales 4. Crea la estructura para el flujo
+     * de egresos, inicia los totales 5. Calcula los totales del flujo.
+     *
+     * @return Cadena con el nombre de la página del flujo.
+     */
     public String iniciarFlujoCaja() {
         this.convenio = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
         this.nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
@@ -199,10 +217,10 @@ public class FlujoCaja {
         this.crearEstructuraFlujoEgresos();
         this.iniciarTotalesEgresosPeriodo();
         this.refrescarValoresFlujoCaja();
-        
+
         System.out.println("Convenio marco fecha inicio = " + nuevoContratoBasico.getContrato().getDatefechaini());
         System.out.println("Convenio marco fecha fin = " + nuevoContratoBasico.getContrato().getDatefechafin());
-        
+
         return "FlujoCaja";
     }
 
@@ -276,6 +294,13 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Crear estructura del flujo de ingresos.
+     *
+     * De acuerdo con las fuentes de recursos definidas y los items de
+     * naturaleza ingreso ('I'), se crea la estructura de ingresos a través de
+     * una lista FlujoIngresos.
+     */
     public void crearEstructuraFlujoIngresos() {
         this.flujoIngresos = new ArrayList<FlujoIngresos>();
         this.totalIngresos = 0;
@@ -324,6 +349,11 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Inicializar los totales de ingresos para los periodos.
+     *
+     * Inicializa los totales de ingresos por periodo.
+     */
     public void iniciarTotalesIngresosPeriodo() {
         this.totalIngresosPeriodo = new double[this.periodosFlujoCaja.size()];
         this.totalIngresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
@@ -337,6 +367,16 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Refrescar totales del flujo de ingresos.
+     *
+     * Después del evento de cambiar el valor de una celda, se refrescan los
+     * totales de la fuente de ingresos a la que corresponde y los totales del
+     * flujo de ingresos.
+     *
+     * @param fuenteIngresos Fuente de ingresos a la que pertene la celda.
+     * @param columna Columna (periodo) a la que pertenece la celda.
+     */
     public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
         fuenteIngresos.calcularTotalIngresosFuente(periodosFlujoCaja.size());
         this.totalIngresosPeriodo[columna] = 0;
@@ -363,6 +403,13 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Crear la estructura del flujo de egresos.
+     *
+     * De acuerdo con los proyectos definidos para el convenio y los items de
+     * naturaleza egreso ('E'), se crea la estructura del flujo de egresos a
+     * través de una lista FlujoEgresos.
+     */
     public void crearEstructuraFlujoEgresos() {
         this.flujoEgresos = new ArrayList<FlujoEgresos>();
         this.totalEgresos = 0;
@@ -412,6 +459,11 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Inicializar los totales de egresos para los periodos.
+     *
+     * Inicializa los totales de egresos por periodo.
+     */
     public void iniciarTotalesEgresosPeriodo() {
         this.totalEgresosPeriodo = new double[this.periodosFlujoCaja.size()];
         this.totalEgresosPeriodoAcumulativo = new double[this.periodosFlujoCaja.size()];
@@ -424,6 +476,16 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Refrescar totales del flujo de egresos.
+     *
+     * Después del evento de cambiar el valor de una celda, se refrescan los
+     * totales de la fuente de egresos a la que corresponde y los totales del
+     * flujo de egresos.
+     *
+     * @param fuenteEgresos Fuente de egresos de la celda modificada.
+     * @param columna Columna (periodo) a la que pertenece la celta modificada.
+     */
     public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
         fuenteEgresos.calcularTotalEgresosFuente(periodosFlujoCaja.size());
         double acumuladoGMF = 0;
@@ -458,6 +520,12 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Refrescar valores del flujo de caja.
+     *
+     * Recorre todos los ingresos y los egresos para refrescar los totales de
+     * las fuentes.
+     */
     public void refrescarValoresFlujoCaja() {
         int iterador = 0;
 
@@ -480,8 +548,9 @@ public class FlujoCaja {
     }
 
     /**
-     * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-. La
-     * operación se realiza sobre los valores de egresos de proyectos y otros
+     * Calcula el valor para el GMF -Gravamen por Movimiento Financiero-.
+     *
+     * La operación se realiza sobre los valores de egresos de proyectos y otros
      * items definidos en un periodo dado.
      *
      * @param acumuladoGMF Valor acumulado de los proyectos y los items que
@@ -517,6 +586,17 @@ public class FlujoCaja {
 
     }
 
+    /**
+     * Validar flujo de caja.
+     *
+     * Valida que: 1. El total de ingresos distribuídos para una entidad no sea
+     * mayor al valor aportado por la entidad. 2. El total de egresos
+     * distribuídos para un proyecto no sea mayor al valor total del proyecto.
+     * 3. El valor total egresos del flujo no sea mayor al valor total de
+     * ingresos definidos.
+     *
+     * @return true si cumple con los requisitos, false si no los cumple.
+     */
     public boolean validarFlujoCaja() {
         boolean cumpleRequisitos = true;
 
@@ -549,6 +629,12 @@ public class FlujoCaja {
         return cumpleRequisitos;
     }
 
+    /**
+     * Guardar el flujo de caja.
+     *
+     * Si el la condiciones la validación se cumple (si es true), se guardan los
+     * objetos del flujo de caja.
+     */
     public void guardarFlujoCaja() {
         if (validarFlujoCaja()) {
             for (FlujoIngresos flujoIngresosGuardar : flujoIngresos) {
@@ -585,6 +671,12 @@ public class FlujoCaja {
         }
     }
 
+    /**
+     * Guardar periodos del flujo de caja.
+     *
+     * Se guardan los periodos definidos para el flujo de caja según la fecha de
+     * inicio y finalización del convenio marco.
+     */
     public void guardarPeriodosFlujoCaja() {
         getSessionBeanCobra().getCobraService().guardarPeriodosFlujoCaja(this.periodosFlujoCaja);
     }

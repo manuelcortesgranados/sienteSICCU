@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package cobra.PlanOperativo;
 
 import co.com.interkont.cobra.to.Contrato;
@@ -16,8 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Determina el flujo de egresos del flujo de caja.
  *
- * @author desarrollo2
+ * Incluye proyectos relacionados con los convenios o los items de naturaleza
+ * egreso. Cada objeto de esta clase representa un registro de egreso con sus
+ * distribución en los periodos del flujo de caja, que determinan la
+ * planificación de los egresos.
+ *
+ * @author Yeison Osorio
  */
 public class FlujoEgresos {
 
@@ -115,6 +117,14 @@ public class FlujoEgresos {
         this.contrapartida = contrapartida;
     }
 
+    /**
+     * Descripción de la fuente de egreso.
+     *
+     * Condicional que devuelve el nombre de la fuente, ya sea del proyecto o
+     * del item de naturaleza egreso ('E').
+     *
+     * @return Nombre de la fuente de egresos.
+     */
     public String getDescripcionFuenteEgreso() {
         if (!egresoProyecto) {
             return itemFlujoEgresos.getStrdescripcion();
@@ -123,6 +133,17 @@ public class FlujoEgresos {
         return proyecto.getStrnombreobra();
     }
 
+    /**
+     * Crear la estructura del flujo de ingresos por entidad.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * egresos en los periodos del flujo de caja para el proyecto asociado. Este
+     * método inicializa el flujo de egresos del proyecto al no existir alguno.
+     *
+     * @param fuenteRecursosConvenioObra Asociación proyecto fuente recursos.
+     * @param proyecto Proyecto asociado al convenio marco.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     */
     public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Periodoflujocaja> periodosFlujoCaja) {
         this.planMovimientosProyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
@@ -141,6 +162,17 @@ public class FlujoEgresos {
         }
     }
 
+    /**
+     * Crear la estructura del flujo de ingresos por entidad.
+     *
+     * Al llamar este método y referenciar los parámetros, se crea un flujo de
+     * egresos en los periodos del flujo de caja para el item definido. Este
+     * método inicializa el flujo de egresos del item al no existir alguno.
+     *
+     * @param itemFlujoEgresos Item del flujo de caja de naturaleza egreso.
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param convenio Convenio marco.
+     */
     public void crearEstructuraFlujoEgresosOtrosItems(Itemflujocaja itemFlujoEgresos, List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.planMovimientosEgresosConvenio = new ArrayList<Planificacionmovconvenio>();
         this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
@@ -158,7 +190,15 @@ public class FlujoEgresos {
             planMovimientosEgresosConvenio.add(planMovimientoEgreso);
         }
     }
-    
+
+    /**
+     * Actualizar el flujo de egresos del proyecto.
+     *
+     * Con base en una lista de egresos consultada, se actualiza el flujo de
+     * egresos del proyecto.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     */
     public void actualizarPlanMovimientosProyecto(List<Periodoflujocaja> periodosFlujoCaja) {
         this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
         this.egresoProyecto = true;
@@ -189,7 +229,16 @@ public class FlujoEgresos {
             }
         }
     }
-    
+
+    /**
+     * Actualizar el flujo de egresos por item de egreso.
+     *
+     * Con base en una lista de egresos consultados se actualiza el flujo de
+     * egresos por item de egreso.
+     *
+     * @param periodosFlujoCaja Periodos del flujo de caja.
+     * @param convenio Convenio marco.
+     */
     public void actualizarPlanMovimientosEgresosConvenio(List<Periodoflujocaja> periodosFlujoCaja, Contrato convenio) {
         this.movimientosEgresosConvenioEliminados = new ArrayList<Planificacionmovconvenio>();
         this.egresoProyecto = false;
@@ -222,6 +271,14 @@ public class FlujoEgresos {
         }
     }
 
+    /**
+     * Calcular el total de la fuente de egresos.
+     *
+     * Con base en la cantidad de periodos del flujo de caja, se recorren los
+     * egresos de la fuente para determinar el total de la misma.
+     *
+     * @param cantidadPeriodos Cantidad de periodos del flujo de caja.
+     */
     public void calcularTotalEgresosFuente(int cantidadPeriodos) {
         this.totalEgresosFuente = BigDecimal.ZERO;
         double totalEgresos = 0;
@@ -238,8 +295,5 @@ public class FlujoEgresos {
         }
 
         this.totalEgresosFuente = BigDecimal.valueOf(totalEgresos);
-    }
-
-    public void guardarFlujoEgresosProyecto() {
     }
 }
