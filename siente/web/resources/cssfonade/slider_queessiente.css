@@ -1,20 +1,3 @@
-@font-face {
-    font-family: "bebas";
-    src: url("font/BEBAS___.TTF");
-
-}
-
-@font-face {
-    font-family: "century";
-    src: url("font/Century-Gothic.ttf");
-}
-
-@font-face {
-    font-family: "futura";
-    src: url("font/futura-light-bt.ttf");
-}
-
-
 
 .modal-font{
     width: 100%;
@@ -102,7 +85,7 @@
 .modal-title{
     width: 600px;
     color: white !important;
-    font-family: "century";
+    font-family: "open";
 
 }
 
@@ -185,7 +168,7 @@ ul#slider li{
     width: 400px;
     margin-left: auto;
     margin-right: auto;
-    font-family: "century";
+    font-family: "open";
     font-weight: bold;
     font-size: 35px;
 }
@@ -194,7 +177,7 @@ ul#slider li{
     width: 400px;
     margin-left: auto;
     margin-right: auto;
-    font-family: "century";
+    font-family: "open";
     font-size: 15px;
 }
 
