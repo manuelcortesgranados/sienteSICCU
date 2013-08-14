@@ -1,23 +1,3 @@
-@font-face {
-    font-family: "bebas";
-    src: url("font/BEBAS___.TTF");
-
-}
-
-@font-face {
-    font-family: "century";
-    src: url("font/Century-Gothic.ttf");
-}
-
-@font-face {
-    font-family: "futura";
-    src: url("font/futura-light-bt.ttf");
-}
-
-@font-face {
-    font-family: "medium";
-    src: url("font/Futura.ttc");
-}
 
 .tab-login table, tr, td{
     margin: 0  !important;
@@ -33,21 +13,36 @@ body{
     background-color: black;
 }
 
-.tab-login{
-    border: solid 0px transparent !important;
-    background: transparent !important;
-}
-
-.content-tab-login{
+.ikont-hpg-gpLogPrinci{
     width: 400px !important;
     position: relative !important;
     float : right !important;
     top: 50px;
     left: -50px;
-    font-family: "century";
+    font-family: "open";
 }
-.content-tab-login .rf-tab-hdr-brd {
+
+.ikont-hpg-gpLogPrinci .rf-p, .ikont-hpg-gpLogPrinci .rf-p-b{
+    border: solid 0px transparent !important;
+    background: transparent !important;
+}
+
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-brd {
     display: none !important;
+}
+
+.ikont-hpg-gpLogPrinci .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
+    background: transparent;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom-width: 0px;
+    padding-top: 0px;
+    overflow: visible;
+    height: 25px;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 6px;
 }
 
 .content-tab-login .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
@@ -58,15 +53,11 @@ body{
     height: 30px!important;
 }
 
-.tab-pestania-inactive{
+.tab-pestania-inactive, .tab-pestania-inactive-usu{
     position: relative!important;
     bottom: -1px !important;
     width: 100px!important;  
     height: 31px!important;
-    color: #1D629F !important;
-    font-family: "medium";
-    font-size: 10px !important;
-    font-weight: inherit!important;
     text-align: center!important;
     border : transparent!important;
     -moz-border-top-left-radius: 10px!important; 
@@ -77,52 +68,20 @@ body{
     -webkit-border-top-right-radius: 10px!important; 
     border-top-left-radius: 10px!important; 
     border-top-right-radius: 10px!important; 
-    background-color: rgba(130,191,158,0.7) !important;
-    -ms-background-color: rgba(130,191,158,0.7) !important;
     cursor: pointer;
+}
+
+.tab-pestania-inactive, .tab-pestania-active {
     padding: 8px 36px !important;
 }
 
-.tab-pestania-inactive-usu{
-     position: relative!important;
-    bottom: -1px !important;
-    width: 100px!important;  
-    height: 31px!important;
-    color: #1D629F !important;
-    font-family: "medium";
-    font-size: 10px !important;
-    font-weight: inherit!important;
-    text-align: center!important;
-    border : transparent!important;
-    -moz-border-top-left-radius: 10px!important; 
-    -moz-border-top-right-radius: 10px!important; 
-    -ms-border-top-left-radius: 10px!important; 
-    -ms-border-top-right-radius: 10px!important; 
-    -webkit-border-top-left-radius: 10px!important; 
-    -webkit-border-top-right-radius: 10px!important; 
-    border-top-left-radius: 10px!important; 
-    border-top-right-radius: 10px!important; 
-    background-color: rgba(130,191,158,0.7) !important;
-    -ms-background-color: rgba(130,191,158,0.7) !important;
-    cursor: pointer;
-    padding: 8px 6px !important;
+.tab-pestania-inactive-usu, .tab-pestania-active-usu {
+    padding: 8px 10px !important;
 }
 
-.tab-pestania-inactive-usu:hover{
-    color: whitesmoke!important;
-}
-
-.tab-pestania-inactive:hover{
-    color: whitesmoke!important;
-}
-
-.tab-pestania-active{
+.tab-pestania-active, .tab-pestania-active-usu{
     width: 100px !important;  
     height: 31px !important;
-    color: white!important;
-    font-family: "medium" !important;
-    font-size: 10px !important;
-    font-weight: inherit!important;
     text-align: center !important;
     border : transparent!important;
     -moz-border-top-left-radius: 10px !important; 
@@ -133,212 +92,57 @@ body{
     -webkit-border-top-right-radius: 10px !important; 
     border-top-left-radius: 10px !important; 
     border-top-right-radius: 10px !important; 
-    background-color: rgba(0,74,56,0.7) !important;
     border : transparent!important;
-    padding: 8px 36px !important;
 }
-
-.tab-pestania-active-usu{
-    width: 100px !important;  
-    height: 31px !important;
-    color: white!important;
-    font-family: "medium" !important;
-    font-size: 10px !important;
-    font-weight: inherit!important;
-    text-align: center !important;
-    border : transparent!important;
-    -moz-border-top-left-radius: 10px !important; 
-    -moz-border-top-right-radius: 10px !important; 
-    -ms-border-top-left-radius: 10px !important; 
-    -ms-border-top-right-radius: 10px !important; 
-    -webkit-border-top-left-radius: 10px !important; 
-    -webkit-border-top-right-radius: 10px !important; 
-    border-top-left-radius: 10px !important; 
-    border-top-right-radius: 10px !important; 
-    background-color: rgba(0,74,56,0.7) !important;
-    border : transparent!important;
-    padding: 8px 6px !important;
-}
-
-.tab-login-label-contenido-line-one{
-    position: relative;
-    top: -3px;
-}
-
-.tab-login-label-contenido-line-two{
-    position: relative;
-    top: -6px;
-}
-
-.tab-login-label-contenido{
-    color: white;
-    font-size: 1.1em!important;
-    font-family: "futura"!important;
-
-}   
-
+ 
 .tab-login-label-error{
-    color: red;
-    font-size: 10px!important;
-    font-family: "century";
-    font-weight: bold;
     text-align: justify !important;
-    background-color: white;
-    /*background-image: url("../imgs/modal/msgerror.png");
-    background-repeat: no-repeat;
-    background-position: 0px;*/
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px;    
+    width: 200px;
+    margin: 0px auto;
 }   
 
-.tab-login-label-contenido-msg{
-    float: left;
-    position: relative;
-    left: 90px;
-    font-family: "futura";
-}
-
-.tab-login-label-title{
-    color: white !important;
-    font-size: 15px!important;
-    font-family: "medium"!important;
-}   
-
-.tab-login-input-text{
-    width: 175px;
-    height: 22px;    
-    color: black;
-    background-color: white;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px; 
-    border: solid 1px #1D629F;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px 5px 0px 5px;
-    font-family: "futura";
-}    
-.tab-login-input-password{
-    width: 123px;
-    height: 22px;
-    color: black;
-    background-color: white;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    border-radius: 10px; 
-    border: solid 1px #1D629F;
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px 5px 0px 5px;
-}
-
-.tab-login-input-button{
-    height: 21px !important;
+input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
+    height: 23px !important;
     width: 50px !important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century"!important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
+    border-style: solid;
+    border-width: 1px !important;
+    font-weight: bold;
 }
 
 .tab-login-input-button-register{
-    height: 21px !important;
-    color: black !important;
-    width: 50px !important;
-    font-family: "century"!important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
+    border-style: solid!important;
+    border-width: 1px!important;
     margin-left: 10px;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 20px;
-    padding-right: 20px;    
-}
-
-.tab-login-input-button-sin-login{
-    height: 21px !important;
-    color: black !important;
-    width: 50px !important;
-    text-align: center !important;
-    line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century"!important;
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F9D10D), to(#F6A502), color-stop(0.7, #F6A502))!important;
-    background: -moz-linear-gradient(top, #F9D10D, #F6A502) !important;
-    background: -ms-linear-gradient(top, rgba(249,209,13, 1) 0%, rgba(246,165,2,1) 100%)!important;
-    background: -o-linear-gradient(top, #F9D10D, #F6A502) !important;
-    border: solid 1px #F6A502 !important;
-    padding-bottom: 2px;
-    padding-top: 2px;
-    padding-left: 10px;
-    padding-right: 5px;    
-}
-
-.tab-login-input-button-sin-login:hover{
-    color: white !important;
+    padding: 3px 10px;
+    text-decoration: none;
+    position: relative;
+    top: 8px;
 }
 
 .tab-login-input-button-register:hover{
     color: white !important;
 }
 
-.tab-login-input-button-photo:hover{
+.ikont-a4jcl-logintabregistratephoto:hover{
     color: white !important;
 }
 
-.tab-login-input-button-photo{
+.ikont-a4jcl-logintabregistratephoto{
     position: relative;
-    left: 30px;
+    left: 7px;
     width: 80px !important;
     height: 21px !important;
-    color: black !important;
     width: 50px !important;
     text-align: center !important;
     line-height: inherit !important;
-    background-color: whitesmoke !important;
-    font-size: 10px !important;
-    font-family: "century";
-    -moz-border-radius: 10px !important; 
-    -ms-border-radius: 10px !important; 
-    -webkit-border-radius: 10px !important; 
-    border-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(#F2F2F2), to(#A4A4A4), color-stop(0.7, #A4A4A4))!important;
-    background: -moz-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
-    background: -ms-linear-gradient(top, rgba(242,242,242, 1) 0%, rgba(164,164,164,1) 100%)!important;
-    background: -o-linear-gradient(top, #F2F2F2, #A4A4A4) !important;
-    border: solid 1px #A4A4A4 !important;
+    border-style: solid;
+    border-width: 1px!important;
+    text-decoration: none;
+    padding: 3px 9px;
 }
 
 .tab-div{
@@ -355,12 +159,8 @@ body{
     -ms-border-bottom-left-radius: 10px !important; 
     -webkit-bottom-left-radius: 10px !important; 
     border-bottom-left-radius: 10px !important; 
-    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0,74,56,0.7)), to(rgba(29,140,79,0.7))) !important;
-    background: -moz-linear-gradient(top, rgba(0,74,56,0.7), rgba(29,140,79,0.7)) !important;
-    background: -ms-linear-gradient(top, rgba(0,74,56,0.7) 30%, rgba(29,140,79,0.7) 70%)!important;
-    background: -o-linear-gradient(top,rgba(0,74,56,0.7), rgba(29,140,79,0.7)) !important;
-    width: 350px !important;
-    height: 380px !important;
+    width: 320px !important;
+    height: 360px !important;
     margin-top: 1px !important;
     margin-left: 1px !important;
 }
@@ -372,17 +172,17 @@ body{
 
 
 
-.div-login-imgs{
+.ikont-hpg-renderedlogologin{
     position: relative;
     top: 20px;
     left: 70px;
 }
 
-.div-login-imgs img{
+.ikont-hpg-renderedlogologin img{
     margin-left: 10px;
 }
 
-.header-login{
+.ikont-hpg-loginheader{
     position : fixed;
     top : -0px;
     left:-0px;
@@ -390,51 +190,42 @@ body{
     height : 40px;
     margin: 0px;
     padding : 0px;
-    background-color : black;
     z-index : 100
 }
 
-.header-login-title{
-    color : #F2F2F2;
+.ikont-hot-loginheader{
     position: relative;
-    font-size: 16px;
     text-align: left;
     float: left;
     margin-left: 10px;
     margin-top: 10px;
-    font-family: "futura";
 }
 
-.footer-login{
+.ikont-hpg-loginfooter{
     position : fixed;
     bottom : -0px;
     left:-0px;
     width : 100%;
     height : 40px;
-    background-color : black;
     margin: 0px;
     padding: 0px;
     z-index : 100;
-    font-family: "furura";
+    font-family: "open";
 }
 
-.footer-login-title{
-    color : #BDBDBD;
+.ikont-hot-loginfotercopy{
     margin-left : 10px;
     position: relative;
-    font-size: 16px;
     top: 10px;
 }
-.footer-login-titel-link{
-    color : #BDBDBD;
+.ikont-a4jcl-loginfoterterminos, .ikont-a4cl-loginfoteracerca, .ikont-a4jcl-loginfoterquees{
     margin-left : 10px;
     position: relative;
-    font-size: 15px;
     top: 10px;
     text-decoration: none;
 }
 
-.header-login-img{   
+.ikont-hgi-iconheaderpng{   
     margin-left: 20px!important; 
     float: left !important;
     width:40px;
@@ -442,33 +233,32 @@ body{
 
 }
 
-.footer-login-img{   
+.ikont-hgi-iconfooterpng{   
     margin-left: 20px!important; 
     float: left !important;
     width:40px;
     height:40px;
 }
 
-.footer-login-img-social{
+.ikont-hgi-iconytpng, .ikont-hgi-iconfbpng, .ikont-hgi-icontwpng {
     position: relative !important; 
     float: right !important; 
     margin-right: 20px;
 }
 
-.div-login-photo-register-first{
+.ikont-hpg-imagenciudadano{
     position: relative;
     top : -12px;
-    left: 15px;
+    left: 7px;
     width: 100px;
     height: 120px;
     -moz-border-radius: 10px; 
     -ms-border-radius: 10px; 
     -webkit-border-radius: 10px; 
     border-radius: 10px; 
-    background-color: #F2F2F2;    
 }
 
-.div-login-photo-register-last{
+.ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
     width: 80px;
@@ -478,10 +268,20 @@ body{
     -webkit-border-radius: 10px; 
     -o-border-radius: 10px; 
     border-radius: 10px; 
-    background: url("../imgs/login/foto_perfil.jpg")no-repeat center center ;
+    background: url("../imgsfonade/login/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
     -o-background-size : cover;
     -moz-background-size : cover;
     -ms-background-size : cover;
+}
+
+
+.ikont-a4jcl-logintabentrarolvidocontrasenia{
+    text-decoration: none;
+    margin-left: 130px;
+}
+
+input[type="password"].ikont-hit-contrasenados, input[type="text"].ikont-hit-contrasenados{
+    width: 146px;
 }

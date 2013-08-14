@@ -1,6 +1,6 @@
 function style_background(){  
     
-    var _listImg = ["/cobrafonade/resources/imgs/login/bg.jpg","/cobrafonade/resources/imgs/login/bg2.jpg"];
+    var _listImg = ["/zoom/resources/imgs/login/bg.jpg","/zoom/resources/imgs/login/bg2.jpg"];
     var _position = 0;
     var _heigth  = 0;
     var _img = "";

@@ -1,24 +1,8 @@
 /* ---------- tipos de fuentes --------------*/
 
 @font-face {
-    font-family: "bebas";
-    src: url("font/BEBAS___.TTF");
-
-}
-
-@font-face {
-    font-family: "century";
-    src: url("font/Century-Gothic.ttf");
-}
-
-@font-face {
-    font-family: "futura";
-    src: url("font/futura-light-bt.ttf");
-}
-
-@font-face {
-    font-family: "medium";
-    src: url("font/Futura.ttc");
+    font-family: "open";
+    src: url("font/open.ttf");
 }
 
 input, select, textarea, button, keygen, isindex, legend, a {
