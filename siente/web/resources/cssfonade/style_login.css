@@ -268,7 +268,7 @@ input[type="submit"].ikont-hcb-logintabentrarbtnentrar{
     -webkit-border-radius: 10px; 
     -o-border-radius: 10px; 
     border-radius: 10px; 
-    background: url("../imgsfonade/login/foto_perfil.jpg")no-repeat center center ;
+    background: url("../imgs/login/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
     -o-background-size : cover;
