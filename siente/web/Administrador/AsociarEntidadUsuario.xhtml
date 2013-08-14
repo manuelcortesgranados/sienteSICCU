@@ -2,12 +2,12 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition  xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-        xmlns:ui="http://java.sun.com/jsf/facelets">
+                 xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                 xmlns:f="http://java.sun.com/jsf/core"
+                 xmlns:h="http://java.sun.com/jsf/html"
+                 xmlns:rich="http://richfaces.org/rich"
+                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <ui:composition template="/facelets/template_main.xhtml">
         <ui:define name="head">
@@ -20,8 +20,13 @@
             <ui:include src="/facelets/menu_gestion.xhtml"/>
         </ui:define>
         <ui:define name="menu_lateral">
-            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+            <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+            </h:panelGroup>
         </ui:define>
         <ui:define name="body">
             <h:form>
@@ -34,7 +39,7 @@
                                 <h:panelGrid columns="2">
                                     <h:outputLabel  styleClass="ikont-hol-enticonvcontrato"   id="lblEntidadconveniocontrato"  value="#{var.entidad}: "/>
                                     <rich:select defaultLabel="Ingrese Entidad"  value="#{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
-                                    <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
+                                        <f:selectItems value="#{Administrador$AdministrarEntidad.lstEntidad}" />
                                         <a4j:ajax event="change" listener="#{Administrador$AdministrarEntidad.comboEntidades}" execute="@this" />
                                     </rich:select>
                                     <!--h:selectOneMenu  value="{Administrador$AdministrarEntidad.entidadUsuario.strnombrecompleto}">
@@ -47,11 +52,11 @@
                                     <h:inputText id="txtusu_login" value="#{Administrador$AdministrarEntidad.login}" required="true" />
                                     <rich:message for="txtusu_login" styleClass="ikont-rm-txtusu_login"  />
                                 </h:panelGrid>                                    
-                               <br/>
-                               <br/>                                
-                                 <a4j:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true" />
-                                 <a4j:commandButton id="guardar_contrato" action="#{Administrador$AdministrarEntidad.asociarEntidadUsuario}" value="#{var.asociar}" render="consulconvenio,prueba,pgasociarEntidadUsuario" /> 
-                                </h:panelGrid>
+                                <br/>
+                                <br/>                                
+                                <a4j:commandButton id="btnCancelarRegistroEntidad" value="#{var.cancelar}"  action="#{Administrador$AdministrarEntidad.salirCrearEntidad}" immediate="true" />
+                                <a4j:commandButton id="guardar_contrato" action="#{Administrador$AdministrarEntidad.asociarEntidadUsuario}" value="#{var.asociar}" render="consulconvenio,prueba,pgasociarEntidadUsuario" /> 
+                            </h:panelGrid>
                         </h:panelGrid>
 
                     </center>                       

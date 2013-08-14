@@ -18,8 +18,14 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
     <ui:define name="title">
         <h:outputText  styleClass="ikont- hot-tipoContCon"   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}"/>
@@ -124,17 +130,17 @@
                         </rich:column>
                         <rich:column >
                             <h:panelGrid id="panelsubido" columns="3">
-                               <a4j:commandButton styleClass="ikont-acb-exa"   value="#{var.examinar}" immediate="true"
-                                                           oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
-                                 <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" >
-                                            <h:outputText  styleClass="ikont- hot-filenom"   value=" #{file.nombre}"/>
-                                        </rich:dataGrid>
-                               <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"
-                                                           title="#{var.agregar}" value="#{var.agregar}"
-                                                           rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos>0}"
-                                                           render="docsubir, tablaDocumentosContrato, paneldocucontra"/>
-                                 </h:panelGrid>
-                                </rich:column>
+                                <a4j:commandButton styleClass="ikont-acb-exa"   value="#{var.examinar}" immediate="true"
+                                                   oncomplete="#{rich:component('panelUploadDocumentoContrato')}.show();" render="paneldocucontra"/>
+                                <rich:dataGrid columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.subirDocumentoContrato.archivos}" var="file" >
+                                    <h:outputText  styleClass="ikont- hot-filenom"   value=" #{file.nombre}"/>
+                                </rich:dataGrid>
+                                <a4j:commandButton action="#{Supervisor$Contrato.bt_agregar_documento_action}"
+                                                   title="#{var.agregar}" value="#{var.agregar}"
+                                                   rendered="#{Supervisor$Contrato.cargadorDocumento.numArchivos>0}"
+                                                   render="docsubir, tablaDocumentosContrato, paneldocucontra"/>
+                            </h:panelGrid>
+                        </rich:column>
                     </rich:columnGroup>
                 </f:facet>
 

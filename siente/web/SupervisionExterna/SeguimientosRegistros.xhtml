@@ -25,7 +25,12 @@
     </ui:define>
 
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_supervision.xhtml" />
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_supervision.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
 
     <ui:define name="body">
@@ -35,55 +40,55 @@
             <center>
                 <h:panelGrid id="panelSeguimientos" columns="5">
                     <a4j:commandLink id="btnInfoGralRegistro" styleClass="ikont-"   value="#{var.houinfo}"
-                                     
+
                                      action="#{Supervision$Externa.mostrarDatosGenerales}"
                                      oncomplete="#{rich:component('modaldatosobrasgenerales')}.show();" 
                                      render="modaldatosobrasgenerales" />
 
                     <a4j:commandLink id="btnInformeVisita" styleClass="ikont-"   value="#{var.informeVisita}"
-                                     
+
                                      oncomplete="#{rich:component('modalinformevisita')}.show();"
                                      render="modalinformevisita" />
 
                     <a4j:commandLink id="btnInfoGralFinanciera" styleClass="ikont-"   value="#{var.infofinanciera}"
-                                     
+
                                      oncomplete="#{rich:component('modalinformacionfinanciera')}.show();"
                                      render="modalinformacionfinanciera" />
 
                     <a4j:commandLink id="btnInfoGralPolizaContrato" styleClass="ikont-"   value="#{var.polizacontrato}"
-                                     
+
                                      action="#{Supervision$Externa.mostrarPolizaSeguimiento}"
                                      oncomplete="#{rich:component('modalpolizacontratosuper')}.show();"
                                      render="modalpolizacontratosuper" />
-                    
+
                     <a4j:commandLink id="btnInfoGralImpactoSocial" styleClass="ikont-"   value="#{var.impactoSocial}"
-                                     
+
                                      oncomplete="#{rich:component('modalimpactosocial')}.show();"
                                      render="modalimpactosocial" />
 
                     <a4j:commandLink id="btnInfoGeoreferenciada" styleClass="ikont-"   value="#{var.ubicaciongeoreferenciada}"
-                                     
+
                                      oncomplete="#{rich:component('modalubicacionsupervision')}.show();"
                                      render="modalubicacionsupervision" />
 
                     <a4j:commandLink id="btnActividadesContractuales" styleClass="ikont-"   value="#{var.actividadescontractuales}"
-                                     
+
                                      action="#{Supervision$Externa.llenarlistadoActividadesSeguimientos}"
                                      oncomplete="#{rich:component('modalactividadescontractuales')}.show();"
                                      render="modalactividadescontractuales" />
 
                     <a4j:commandLink id="btnInfoInterventoria" styleClass="ikont-"   value="#{var.infointerventoria}"
-                                     
+
                                      oncomplete="#{rich:component('modalinfogeneralint')}.show();"
                                      render="modalinfogeneralint" />
 
                     <a4j:commandLink id="btnInfoFinancieraInterventoria" styleClass="ikont-"   value="#{var.infofinancierainter}"
-                                     
+
                                      oncomplete="#{rich:component('modalinformacionfinancieraInterv')}.show();"
                                      render="modalinformacionfinancieraInterv" />
 
                     <a4j:commandLink id="btnPolizasInterventoria" styleClass="ikont-"   value="#{var.polizainterventoria}"
-                                     
+
                                      action="#{Supervision$Externa.mostrarPolizaSeguimiento}"
                                      oncomplete="#{rich:component('modalpolizainterventoriasuper')}.show();"
                                      render="modalpolizainterventoriasuper" />

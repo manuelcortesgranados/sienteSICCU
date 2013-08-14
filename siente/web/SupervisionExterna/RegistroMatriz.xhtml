@@ -15,19 +15,25 @@
         <title>Registro Matriz Supervisión Externa</title>
         <h:outputScript name="script_supervisor.js" />
     </ui:define>
-    
+
     <ui:define name="title">
         <h:outputText  styleClass="ikont- "   value="Consulta de Solicitudes" />
     </ui:define>
-    
+
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
-    
+
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_supervision.xhtml" />
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_supervision.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
-    
+
     <ui:define name="body">
         <h:form>
             <center>
@@ -40,29 +46,30 @@
                             <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarInforme"
                                            inputSize="20" immediate="true" value="#{Supervision$Externa.supervisionExterna.visita.datefechainforme}">
                             </rich:calendar>
-                            
+
                             <h:outputText  styleClass="ikont- "   id="txtoutnombreinforme" value="#{var.nombreinforme}" />
                             <h:inputText id="txtinnombreinforme" value="#{Supervision$Externa.supervisionExterna.visita.strnombreinforme}" required="true" requiredMessage="Nombre Necesario" />
                             <interkont:spacer />
                             <rich:message for="txtinnombreinforme"  />    
-                            
+
                             <h:outputText  styleClass="ikont- "   id="txtoutcomentarioinforme" value="#{var.comentario}" />
                             <h:inputTextarea id="txtincomentarioinforme" rows="3" cols="25" value="#{Supervision$Externa.supervisionExterna.visita.strcomentinforme}" />
-                            
+
                             <interkont:spacer height="3" />
                         </h:panelGrid>
 
                         <h:panelGrid columns="2">
                             <a4j:commandLink id="subirRegistoMat" styleClass="ikont-"   title="#{var.subirarchivos}"
-                                             onclick="#{rich:component('panelUploadArchivoSuper')}.show(); return true;" />
+                                             onclick="#{rich:component('panelUploadArchivoSuper')}.show();
+                                                     return true;" />
                         </h:panelGrid>
                     </rich:panel>
                 </h:panelGroup>
             </center>
         </h:form>
-        
+
         <ui:include src="../SupervisionExterna/modal/SubirArchivo.xhtml" />
-        
+
         <ui:include src="../SupervisionExterna/modal/ConfirmarGuardarSupervisor.xhtml" />
     </ui:define>
 </ui:composition>

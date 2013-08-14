@@ -6,7 +6,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
-                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_proyecto.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml"
                 >
 
     <ui:define name="head">
@@ -16,23 +16,22 @@
 
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
-    </ui:define>            
+    </ui:define>  
+    
+     <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    
     <ui:define name="body">
         <h:form id="formImagenesProy" >
             <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
                 <tr>
-                    <td valign="top" class="templatetablamenulateral">
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
-                            <tr>
-                                <td  >
-                                    <h:form >
-                                        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                                        <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>                            
-                                    </h:form>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
                     <td class="templatetablacontent verticalalingtop">
                         <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
                             <tr>

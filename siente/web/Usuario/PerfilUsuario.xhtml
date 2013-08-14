@@ -5,34 +5,40 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:a4j="http://richfaces.org/a4j" 
                 xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/facelets/template_main.xhtml">
-    
-        <ui:define name="head">
-            <title>Modificar Usuario</title>
+
+    <ui:define name="head">
+        <title>Modificar Usuario</title>
         <h:outputScript name="script_supervisor.js"/>
         <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
-  </ui:define>
+    </ui:define>
 
-        <ui:define name="title">
-          <h:outputText  styleClass="ikont-hot-miperfil"   value="#{var.miperfil}"/>
-        </ui:define>
+    <ui:define name="title">
+        <h:outputText  styleClass="ikont-hot-miperfil"   value="#{var.miperfil}"/>
+    </ui:define>
 
-        <ui:define name="menu">
-           <ui:include src="/facelets/menu_gestion.xhtml"/>
-        </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
 
-        <ui:define name="menu_lateral">
-<ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-        </ui:define>
-    
-        <ui:define name="body">
-          <h:form id="formModificarUsuario">
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>          
+
+    </ui:define>
+
+    <ui:define name="body">
+        <h:form id="formModificarUsuario">
             <center>
                 <br/> 
                 <br/>
@@ -68,7 +74,7 @@
                     </h:panelGrid>
                 </h:panelGrid>
                 <rich:collapsiblePanel header="Detalle Usuario"  expanded="true" switchType="ajax">
-            <h:panelGrid columns="4" columnClasses="20%" width="75%" id="tabladetalleusuario">
+                    <h:panelGrid columns="4" columnClasses="20%" width="75%" id="tabladetalleusuario">
                         <h:outputText  styleClass="ikont-hot-tipousuario"   value="Tipo usuario"     />
                         <h:selectOneMenu styleClass="ikont-hsom-cmbtipotercero"   id="cmbtipotercero" value="#{Perfil$Usuario.usuariomod.tercero.tipotercero.intcodigotipotercero}" disabled="#{Perfil$Usuario.modificarUsuario}">
                             <f:selectItems value="#{Perfil$Usuario.tipotercerosoption}" />
@@ -104,7 +110,7 @@
 
                         <h:outputText  styleClass="ikont-hot-fechanacimiento"   value="Fecha nacimiento"/>
                         <rich:calendar  disabled="#{Perfil$Usuario.modificarUsuario}" styleClass="ikont-rc-calendarfechnacimiento"   locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechnacimiento" inputSize="10"
-                                       value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
+                                        value="#{Perfil$Usuario.usuariomod.tercero.datefechanacimiento}" />
 
                         <h:outputText  styleClass="ikont-hot-direccion"   value="Dirección"/>
                         <h:inputText value="#{Perfil$Usuario.usuariomod.tercero.strdireccionprincipal}" styleClass="ikont-hit-strdireccionprincipal"   disabled="#{Perfil$Usuario.modificarUsuario}" /> 
@@ -175,9 +181,9 @@
                             </h:panelGrid>
                         </h:panelGroup>
                     </center>
-</rich:collapsiblePanel>
-                </center>
+                </rich:collapsiblePanel>
+            </center>
         </h:form>
-             <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
-        </ui:define>    
+        <rich:jQuery selector=".stable tr:odd" query="addClass('odd-row')" />
+    </ui:define>    
 </ui:composition>

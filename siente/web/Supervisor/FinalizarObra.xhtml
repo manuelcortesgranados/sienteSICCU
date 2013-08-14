@@ -23,8 +23,13 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -36,7 +41,7 @@
                     <h:panelGrid id="panel_FinalizarPaso1"   columnClasses="aiu" styleClass="totalwidth">
                         <rich:panel header="#{var.finalizarobra}">
                             <h:outputText  styleClass="ikont-hot-panelfinalizarpaso1"   rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=1 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=4 and Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=5}"
-                                          value="#{var.solopuedefinalizaobrasactivas}" />
+                                           value="#{var.solopuedefinalizaobrasactivas}" />
                             <h:panelGroup>
                                 <center>
                                     <h:outputText  styleClass="ikont-hot-pasosparafinalizarobra"   value="#{var.pasosparafinalizarobra}" />
@@ -77,7 +82,8 @@
                                         <interkont:spacer height="10px;"/>
                                         <h:panelGrid id="layoutActaRecFin" columns="2" width="500" columnClasses="labelsDetalle">
                                             <a4j:commandButton id="btActaRecFin" value="#{var.examinar}" immediate="true"   styleClass="ikont-acb-btactarecfin"  
-                                                               onclick="#{rich:component('panelActaRecFin')}.show(); return true;" />
+                                                               onclick="#{rich:component('panelActaRecFin')}.show();
+                                                                       return true;" />
                                             <h:inputText size="40" id="txtActaRecFin" disabled="true" value="#{Supervisor$AdministrarObraNew.urlactarecfin}" />
                                             <h:outputText  styleClass="ikont-hot-fecactarecfin "    value="#{var.fechadelacta} "/>
                                             <rich:calendar locale="#{var.rcalendarlocale}" id="fecActaRecfin" value="#{Supervisor$AdministrarObraNew.obra.datefecrecfin}"/>
@@ -137,7 +143,7 @@
                                         </h:panelGroup>
                                         <a4j:commandButton id="BTaceptarFinPaso3" styleClass="ikont-acb-btaceptarfinpaso3"   value="#{var.si}" action="#{Supervisor$AdministrarObraNew.validarLiquidacion}"
                                                            render="gpErrorFin, layoutConfFin" oncomplete="#{rich:component('panelConfirmaFin')}.show(); return true;"  execute="@this">
-                                            
+
                                         </a4j:commandButton>
 
                                         <interkont:spacer height="30" width="200"/>

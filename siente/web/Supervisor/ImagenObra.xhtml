@@ -25,8 +25,14 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
     <ui:define name="menusuperior">
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}" id="gpMenusuperior">
@@ -50,7 +56,7 @@
                             <h:panelGroup id="panelTablaImagenesevolucion">
                                 <rich:dataTable id="tablaImagenesevolucion" 
                                                 sortMode="single"
-                                                
+
                                                 value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}"
                                                 var="currentRow" 
                                                 rowKeyVar="filaSeleccionada"
@@ -62,7 +68,7 @@
                                         <center>
                                             <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}" immediate="true">
                                                 <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
-                                                                />
+                                                                 />
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
                                                 <rich:jQuery selector="#Imagen img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
                                                 <rich:jQuery selector="#Imagen img" query="mouseover(function(){enlargePic(this)})"/>
@@ -118,7 +124,7 @@
                                             <h:outputText  styleClass="ikont-hot-headerestablecervalla"   value="#{var.establecervalla}"/>
                                         </f:facet>
                                         <h:selectBooleanCheckbox  styleClass="ikont-hsbc-booleanvalla"  value="#{currentRow.booleanvalla}" 
-                                                                 disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
+                                                                  disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerValla" execute="@this" immediate="true"/>
@@ -129,7 +135,7 @@
                                             <h:outputText  styleClass="ikont-hot-headerestablecerimagenactual"   value="#{var.establecerimagenactual}"/>
                                         </f:facet>
                                         <h:selectBooleanCheckbox  styleClass="ikont-hsbc-booleanactual"  value="#{currentRow.booleanactual}" 
-                                                                 disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
+                                                                  disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
                                             <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction(filaSeleccionada)}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerImagenActual" execute="@this" immediate="true"/>
@@ -156,7 +162,7 @@
                             <rich:collapsiblePanel id="singleslideimage" switchType="client" header="#{var.verimagenes}" expanded="false"  immediate="true"  >
                                 <a4j:ajax event="click" render="panelImagenes"  />
                                 <h:panelGroup rendered="#{Supervisor$AdministrarObraNew.iniima}">
-                                     <ui:include src="SliderImagenes.xhtml"/>
+                                    <ui:include src="SliderImagenes.xhtml"/>
                                 </h:panelGroup>
                             </rich:collapsiblePanel>
 
@@ -226,8 +232,8 @@
             <ui:include src="/modal/confirmarEstablecerVallaModal.xhtml"/>
             <ui:include src="/modal/confirmarEstablecerImagenActualModal.xhtml"/>
             <ui:include src="/modal/eliminarImageneolucionModal.xhtml"/>
-           <ui:include src="/modal/editarImagenEvolucionModal.xhtml"/>
-           <ui:include src="/modal/modalImagen.xhtml"/>
+            <ui:include src="/modal/editarImagenEvolucionModal.xhtml"/>
+            <ui:include src="/modal/modalImagen.xhtml"/>
 
         </body>
     </ui:define>

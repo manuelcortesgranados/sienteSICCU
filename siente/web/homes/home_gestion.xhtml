@@ -50,7 +50,6 @@
             <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnslider_dashboard and var.variconch}" id="gpSliderpanelesdash">
                 <ui:include src="/Ciudadano/Slider_paneles_dashboard.xhtml"/>
             </h:panelGroup>
-
             <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnpanel_conozca_inversion}" id="gpconozca">
                 <ui:include src="/facelets/panel_conozca_inversion.xhtml"/>
             </h:panelGroup>
@@ -58,7 +57,6 @@
         <h:panelGroup rendered="#{var.permisonuevodiseño}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
-        <ui:include src="/Supervisor/filtrozoom.xhtml"/>
     </ui:define>
     <ui:define name="body">
         <h:form id="form_gestion" prependId="false" >

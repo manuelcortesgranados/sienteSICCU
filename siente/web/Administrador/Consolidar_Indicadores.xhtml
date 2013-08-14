@@ -11,7 +11,7 @@
 
     <ui:define name="head">
         <title>Consolidado Indicadores</title>
-                <h:outputScript  name="/resources/script_supervisor.js"/>
+        <h:outputScript  name="/resources/script_supervisor.js"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -20,31 +20,36 @@
 
     <ui:define name="menu_lateral">
         <h:form>
-      <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-      </h:form>
+            <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+            </h:panelGroup>
+        </h:form>
     </ui:define>
 
     <ui:define name="body">
         <h:form>
-                    <h:panelGrid id="consolidarIndicadores"  >
-                        <h:panelGroup id="layoutConsolidarIndicadores">
-                            <center>
-                                <h:outputText  styleClass="ikont-hot-estaseguro"  value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?"  />
+            <h:panelGrid id="consolidarIndicadores"  >
+                <h:panelGroup id="layoutConsolidarIndicadores">
+                    <center>
+                        <h:outputText  styleClass="ikont-hot-estaseguro"  value="#{var.estasegurodecrearconsolidado} #{SessionBeanCobra.fechaServer}?"  />
 
-                                <h:panelGrid columns="2">
+                        <h:panelGrid columns="2">
 
-                                    <a4j:commandButton id="consolidar_si"  value="#{var.si}" action="#{GraficarIndicadores.consolidar}"
-                                                        render="PanelConsolidado">
-                                    </a4j:commandButton>
-                                    <a4j:commandButton id="consolidar_no" value="#{var.no}"  oncomplete="true" render="consolidarIndicadores"/>
-                                </h:panelGrid>
-                                <h:panelGrid id="PanelConsolidado">
-                                    <h:outputLabel  styleClass="ikont-hol-consoli"   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
-                                </h:panelGrid>
-                            </center>
-                        </h:panelGroup>
-                    </h:panelGrid>
-                </h:form>
+                            <a4j:commandButton id="consolidar_si"  value="#{var.si}" action="#{GraficarIndicadores.consolidar}"
+                                               render="PanelConsolidado">
+                            </a4j:commandButton>
+                            <a4j:commandButton id="consolidar_no" value="#{var.no}"  oncomplete="true" render="consolidarIndicadores"/>
+                        </h:panelGrid>
+                        <h:panelGrid id="PanelConsolidado">
+                            <h:outputLabel  styleClass="ikont-hol-consoli"   value="Se ha Consolidado Correctamente"  rendered="#{GraficarIndicadores.boolconsolidado}"/>
+                        </h:panelGrid>
+                    </center>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:form>
     </ui:define>
 
 </ui:composition>

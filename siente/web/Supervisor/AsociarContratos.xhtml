@@ -2,13 +2,13 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-        xmlns:m="http://code.google.com/p/gmaps4jsf/">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+                xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
     <ui:composition template="/facelets/template_main.xhtml">
         <ui:define name="head">
@@ -24,9 +24,15 @@
             <ui:include src="/facelets/menu_gestion.xhtml"/>
         </ui:define>
         <ui:define name="menu_lateral">
-            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
-            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+            <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+                <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{var.permisonuevodiseño}">
+                <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+            </h:panelGroup>
+
         </ui:define>
 
         <ui:define name="body" >
@@ -42,7 +48,7 @@
                                              action="#{Supervisor$AsociarContratos.llenarContratos}" 
                                              oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();"
                                              render="gpTotalContAso">
-                                  </a4j:commandLink>
+                            </a4j:commandLink>
 
 
 
@@ -50,7 +56,7 @@
                                              styleClass="ikont-acl-interven"  
                                              action="#{Supervisor$AsociarContratos.llenarContratosIntervento}" 
                                              render="gpTotalContAso" oncomplete="#{rich:component('mp-listado-contratos-asociar')}.show();">
-                             </a4j:commandLink>
+                            </a4j:commandLink>
 
                         </h:panelGrid>
 
@@ -77,7 +83,7 @@
                                     </rich:column>
 
                                     <rich:column id="vlcongtrhijosse"  width="150px"
-                                                  >
+                                                 >
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-valordispo"   value="Valor Disponible"/>
                                         </f:facet>

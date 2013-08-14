@@ -18,8 +18,13 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:form>
@@ -80,6 +85,6 @@
 
         </h:form>
         <ui:include src="../Ciudadano/modalCiudadano/ImagenModalCiudadano.xhtml"/>
-        
+
     </ui:define>
 </ui:composition>

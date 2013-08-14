@@ -24,8 +24,14 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
     <ui:define name="body" >
         <h:form prependId="false" >
@@ -50,7 +56,7 @@
                 </h:selectOneMenu>
 
                 <h:outputText  styleClass="ikont-hot-intidalimenta"    value="(#{Supervisor$DetalleObra.alimentacionmostrar.intidalimenta})" 
-                              rendered="#{Supervisor$DetalleObra.veralimenta}"/>
+                               rendered="#{Supervisor$DetalleObra.veralimenta}"/>
                 <center>
                     <interkont:spacer  height="20"/>
                     <rich:dataTable id="tablaavancesporperiodo"  rows="4"   var="avance"
@@ -106,10 +112,10 @@
                             <rich:panel header="#{var.imagen}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-imagen"    headerClass="font-header-panel">
                                 <h:panelGroup>
                                     <h:graphicImage  styleClass="ikont-hgi-imagenevolucioobraubicacion"   value="#{var.ipserver}/#{var.versioncobra}/#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion}"                                         
-                                                    height="120" width="160"
-                                                    rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
+                                                     height="120" width="160"
+                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion != null}"/>
                                     <h:graphicImage  styleClass="ikont-hgi-noimagen"   value="#{var.noimagen}" height="120" width="160"
-                                                    rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
+                                                     rendered="#{Supervisor$DetalleObra.alimentacionmostrar.imagenevolucionobra.strubicacion == null}"/>
                                 </h:panelGroup>
                             </rich:panel>
                             <rich:panel header="#{var.avancefisico}" bodyClass="rich-panel-grid-body" styleClass="ikont-rp-avancefisico"   headerClass="font-header-panel">
@@ -142,13 +148,13 @@
                                 <h:panelGroup>
                                     <center>
                                         <h:graphicImage  styleClass="ikont-hgi-imgSemaObra"   id="imgSemaObra"
-                                                        value="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen}"
-                                                        rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
+                                                         value="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen}"
+                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"/>
                                         <h:graphicImage  styleClass="ikont-hgi-noinfo"   value="#{var.noinfo}" height="100px"
-                                                        rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
+                                                         rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen == null}"/>
                                         <h:outputText  styleClass="ikont-hot-semaforo"   value="#{Supervisor$DetalleObra.semaforo}"
-                                                      rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"
-                                                      />
+                                                       rendered="#{Supervisor$DetalleObra.alimentacionmostrar.semaforo.strimagen != null}"
+                                                       />
                                     </center>
                                 </h:panelGroup>
                             </rich:panel>
@@ -161,7 +167,7 @@
                             <rich:panel header="#{var.observaciongeneral}" bodyClass="rich-panel-grid-body-obser" styleClass="ikont-rp-observaciongeneral"   headerClass="font-header-panel">
 
                                 <h:inputTextarea value="#{Supervisor$DetalleObra.alimentacionmostrar.textcomentario}" 
-                                                  rows="5" disabled="true"/>
+                                                 rows="5" disabled="true"/>
 
                             </rich:panel>
                         </h:panelGrid>
@@ -174,40 +180,40 @@
                             <a4j:commandLink id="btlogros" styleClass="ikont-a4jcl-btlogros"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
                                              oncomplete="#{rich:component('modalLogros')}.show();"
-                                             
+
                                              render="tablaLogrosProyecto"/>
                             <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosx" styleClass="ikont-a4jcl-btlogrosx"  
                                              action="#{Supervisor$DetalleObra.mostrarAlimentacionCualitativa}"
-                                             
+
                                              oncomplete="#{rich:component('modalDificultad')}.show();" render="modalDificultad"/>
                             <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosxx" styleClass="ikont-a4jcl-btlogrosxx"  
                                              action="#{Supervisor$DetalleObra.llenarFactoratraso}"
-                                             
+
                                              oncomplete="#{rich:component('modalFactoresAtraso')}.show();" render="tablaFactores"/>
 
                             <interkont:spacer width="5"/>
                             <a4j:commandLink id="btlogrosxxx" styleClass="ikont-a4jcl-btlogrosxxx"  
                                              action="#{Supervisor$DetalleObra.llenaractividadesAlimentacion}"
-                                             
+
                                              oncomplete="#{rich:component('modalactividades')}.show();" render="listaractividades" />
                         </h:panelGrid>
                         <h:panelGrid columns="1" id="panelVali" styleClass="ikont-hpg-panelVali"    >
                             <h:panelGrid columns="7" >
                                 <a4j:commandLink id="btlogros1" styleClass="ikont-a4jcl-btlogros1"  
-                                                 
+
                                                  oncomplete="#{rich:component('modalImpacto')}.show();" render="tablaaliperim" />
                                 <interkont:spacer width="5"/>
                                 <a4j:commandLink id="btlogrosx2" styleClass="ikont-a4jcl-btlogrosx2"  
                                                  action="#{Supervisor$DetalleObra.LlenarDocumentos}"
-                                                 
+
                                                  oncomplete="#{rich:component('modalDocumento')}.show();" render="tablaDocsAlim"/>
                                 <interkont:spacer width="5"/>
                                 <a4j:commandLink id="btlogrosx3" styleClass="ikont-a4jcl-btlogrosx3"   rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion and SessionBeanCobra.usuarioObra.renderrecurso.btnvalidaravance and 
-                                                 supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
+                                                                                                                   supervisor$DetalleObra.periodoultimo == Supervisor$DetalleObra.alimentacionmostrar.datefecha}"
                                                  action="#{Supervisor$DetalleObra.llenarmodalvalidacion}"
-                                                 
+
                                                  oncomplete="#{rich:component('modalValidarAlimentacion')}.show();" render="frmValidarAlimentacion"/>
                                 <interkont:spacer width="5"/>
                                 <a4j:commandLink id="pruebamodal" value="prueba" rendered="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro!=null}"
@@ -217,7 +223,7 @@
 
                             </h:panelGrid>
                             <h:outputText  styleClass="ikont-hot-validacionultimaalimentacion"   value="La última alimentación no ha sido validada aún por el funcionario de Colombia Humanitaria"
-                                          rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
+                                           rendered="#{Supervisor$AdministrarObraNew.obra.enalimentacion}"/>
                         </h:panelGrid>
                     </center>
 
@@ -225,7 +231,7 @@
             </rich:collapsiblePanel>
             <br/>
         </h:form>
-        
+
         <ui:include src="/modal/logrosModal.xhtml"/>
         <ui:include src="/modal/dificultadModal.xhtml"/>
         <ui:include src="/modal/factoresAtrasoModal.xhtml"/>
@@ -236,7 +242,7 @@
         <ui:include src="/modal/modalValidarAlimentacion.xhtml"/>
         <ui:include src="/modal/modalFormularioValidarAlimentacion.xhtml"/>
         <ui:include src="/modal/atencionHumanitaria/beneficiarioxperiodo.xhtml"/>
-		
+
 
     </ui:define>
 </ui:composition>

@@ -26,14 +26,19 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:form id="alimentaravance">
             <h:panelGroup id="gpPrincipalAlimentar" rendered="#{Supervisor$Alimentar.vertodoalimentar}">
                 <rich:collapsiblePanel header="#{var.definirperiodoavance}" switchType="ajax" id="gpAlimentarObra"   rendered="#{!Supervisor$Alimentar.editarActividades}">
-                  
+
                     <h:panelGrid id="gpBasicos" columns="2" >
                         <h:panelGrid columns="2"  columnClasses="panelizquierda,panelcenter">
                             <h:panelGroup >
@@ -58,7 +63,7 @@
                                     <h:panelGrid columns="2" rendered="#{var.varalimentacionxfecha}">
                                         <rich:calendar  required="true" datePattern="yyyy-MM-dd"  id="fechaalimentacion" inputSize="10" value="#{Supervisor$Alimentar.fechaAlimentacion}"
                                                         onchange="#{Supervisor$Alimentar.fechaCambio}" direction="topRight" >
-                                                  </rich:calendar>
+                                        </rich:calendar>
                                         <rich:message for="fechaalimentacion" styleClass="ikont-rm-fechaalimentacion"  />
                                     </h:panelGrid>
 
@@ -86,12 +91,12 @@
                                     </h:panelGroup>
                                     <interkont:spacer width="15"/>
                                     <h:outputText  styleClass="ikont-hot-stDesviacion"   id="stDesviacion"
-                                                  value="#{var.desviacion}"/>
+                                                   value="#{var.desviacion}"/>
                                     <h:outputText  styleClass="ikont-hot-lblDesviacion"   id="lblDesviacion"
                                                    value="#{Supervisor$Alimentar.desviacion} %"/>
                                     <interkont:spacer width="10" rendered="#{!Supervisor$Alimentar.fechavalida}"/>
                                     <h:graphicImage  styleClass="ikont-hgi-imgDesviacion"   id="imgDesviacion" rendered="#{Supervisor$Alimentar.fechavalida}"
-                                                    url="#{Supervisor$Alimentar.alimentacion.semaforo.strimagen}"/>
+                                                     url="#{Supervisor$Alimentar.alimentacion.semaforo.strimagen}"/>
                                     <interkont:spacer width="15" rendered="#{Supervisor$Alimentar.fechavalida}"/>
 
                                     <a4j:commandButton id="btIngresar" value="#{var.cuantificaractividades}" action="#{Supervisor$Alimentar.habilitarEdicionActividades}" render="gpPrincipalAlimentar"
@@ -116,7 +121,7 @@
                 </rich:collapsiblePanel>
                 <h:panelGroup id="pnActividades" rendered="#{Supervisor$Alimentar.editarActividades}">
                     <rich:collapsiblePanel header="#{var.actividadesproyecto}"  switchType="ajax" rendered="#{Supervisor$Alimentar.fechavalida}">
-                       
+
                         <h:panelGroup layout="block" id="layoutTablaMatrix" >
                             <h:panelGrid columns="2" >
                                 <rich:dataTable  id="datosgeneralesAlimentar" >
@@ -243,59 +248,59 @@
                                         </rich:column>
                                     </rich:columnGroup>
                                 </f:facet>
-                                
-                                
-                                        <rich:columnGroup >
-                                            <rich:column id="Descripcion" width="250px">
-                                                <h:panelGroup layout="block" > 
 
-                                                    <h:outputText  styleClass="ikont-hot-strdescactividad"   value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
-                                                    <h:outputText  styleClass="ikont-hot-strdescactividad1"   value="#{registros.actividadobra.strdescactividad}"   rendered="#{registros.actividadobra.boolimprevisto}"/>
 
-                                                </h:panelGroup> 
-                                            </rich:column>
-                                            <rich:column id="Unidad"  >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd1"   value="#{registros.actividadobra.strtipounidadmed}" />
-                                            </rich:column>
-                                            <rich:column id="Precio" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd2"   value="#{registros.actividadobra.numvalorplanifao}"   >
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="Cantidad2" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd3"   value="#{registros.actividadobra.floatcantplanifao}"  />
-                                            </rich:column>
-                                            <rich:column id="TotalActividad" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd4"   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" >
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="CantFaltAct" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd5"   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}"  />
-                                            </rich:column>
+                                <rich:columnGroup >
+                                    <rich:column id="Descripcion" width="250px">
+                                        <h:panelGroup layout="block" > 
 
-                                            <rich:column id="ValorEjec" >
-                                                <h:outputText  styleClass="ikont-hot-rcalimd6"   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" >
-                                                    <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="ValorFaltanAct" >                                          
-                                                <h:outputText  styleClass="ikont-hot-rcalimd7"   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}"  >                                                    <f:convertNumber type="percent"/>
-                                                </h:outputText>
-                                            </rich:column>
-                                            <rich:column id="CantidadEjec" >
-                                                <h:panelGrid styleClass="ikont-hot-rcalimd8"   cellpadding="0" cellspacing="0" columns="2" > 
-                                                    <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
-                                                        <f:validateDoubleRange minimum="0" />
-                                                    </h:inputText>
-                                                    <a4j:commandLink styleClass="ikont-acl-calcutodamatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
-                                                                     render="layoutTablaMatrix, layoutComentafactor"/>
+                                            <h:outputText  styleClass="ikont-hot-strdescactividad"   value="#{registros.actividadobra.strdescactividad}"  rendered="#{!registros.actividadobra.boolimprevisto}"/>
+                                            <h:outputText  styleClass="ikont-hot-strdescactividad1"   value="#{registros.actividadobra.strdescactividad}"   rendered="#{registros.actividadobra.boolimprevisto}"/>
 
-                                                </h:panelGrid>
-                                                <rich:message styleClass="ikont-rm-txtCantEjec"    for="txtCantEjec"/>
-                                            </rich:column>
-                                        </rich:columnGroup>
-                                
+                                        </h:panelGroup> 
+                                    </rich:column>
+                                    <rich:column id="Unidad"  >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd1"   value="#{registros.actividadobra.strtipounidadmed}" />
+                                    </rich:column>
+                                    <rich:column id="Precio" >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd2"   value="#{registros.actividadobra.numvalorplanifao}"   >
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="Cantidad2" >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd3"   value="#{registros.actividadobra.floatcantplanifao}"  />
+                                    </rich:column>
+                                    <rich:column id="TotalActividad" >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd4"   value="#{registros.actividadobra.numvalorplanifao*registros.actividadobra.floatcantplanifao}" >
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="CantFaltAct" >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd5"   id="cantFaltante" value="#{registros.actividadobra.floatcantidadejecutao+registros.floatcantejec}"  />
+                                    </rich:column>
+
+                                    <rich:column id="ValorEjec" >
+                                        <h:outputText  styleClass="ikont-hot-rcalimd6"   id="ValorEjecObra" value="#{registros.actividadobra.numvalorplanifao * registros.floatcantejec}" >
+                                            <f:convertNumber pattern="$#,###.##" maxFractionDigits="6" minFractionDigits="2"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="ValorFaltanAct" >                                          
+                                        <h:outputText  styleClass="ikont-hot-rcalimd7"   id="valorFaltante"  value="#{(registros.actividadobra.boolimprevisto) ? 0 : (registros.actividadobra.floatcantidadejecutao+registros.floatcantejec)/registros.actividadobra.floatcantplanifao}"  >                                                    <f:convertNumber type="percent"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="CantidadEjec" >
+                                        <h:panelGrid styleClass="ikont-hot-rcalimd8"   cellpadding="0" cellspacing="0" columns="2" > 
+                                            <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
+                                                <f:validateDoubleRange minimum="0" />
+                                            </h:inputText>
+                                            <a4j:commandLink styleClass="ikont-acl-calcutodamatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
+                                                             render="layoutTablaMatrix, layoutComentafactor"/>
+
+                                        </h:panelGrid>
+                                        <rich:message styleClass="ikont-rm-txtCantEjec"    for="txtCantEjec"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+
 
 
                                 <f:facet name="footer">
@@ -333,7 +338,7 @@
 
 
                             <rich:collapsiblePanel header="#{var.avancescualitativos}" id="pncual" switchType="ajax"  >
-                              
+
                                 <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle"  >
                                     <interkont:spacer width="17"/>
                                     <interkont:spacer height="14"/>
@@ -410,7 +415,7 @@
                                 </center>
                             </rich:collapsiblePanel>
                             <rich:collapsiblePanel header="#{var.impactoSocial}"  switchType="ajax">
-                               
+
                                 <h:panelGrid columns="3" columnClasses="inputsDetalle,inputsDetalle" width="60%">
                                     <interkont:spacer width="17" height="14"/>
                                     <interkont:spacer height="14"/>
@@ -450,7 +455,7 @@
                 <h:panelGrid id="layoutComentafactor" columns="2" columnClasses="top_align"  rendered="#{!Supervisor$Alimentar.editarActividades}">
 
                     <rich:collapsiblePanel header="#{var.atencion}" id="layoutFactores"  rendered="#{Supervisor$Alimentar.desviado}" switchType="ajax">
-                       
+
                         <h:outputText  styleClass="ikont-hot-factoresdeatraso"    value="#{var.factoresdeatraso}"/>
                         <h:panelGrid columns="3" columnClasses="labelsDatos,labelsDatos, labelsDatos ">
                             <h:outputText  styleClass="ikont-hot-tipodefactoratraso"    value="#{var.tipodefactoratraso}"/>
@@ -518,38 +523,40 @@
                 </h:panelGrid>
 
                 <rich:collapsiblePanel header="#{var.anadirimagen}" switchType="ajax" id="gpSubirImagen" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
-                   
+
                     <h:panelGrid id="layoutImagenDetalle" styleClass="ikont-hpg-imgdeta"   >
                         <h:graphicImage  styleClass="ikont-hgi-imgPeriodo"   id="imgPeriodo" url="#{Supervisor$Alimentar.pathImagen}" width="185" />
                         <a4j:commandButton id="btAdjuntarImagen" value="#{var.anadirimagen}"
-                                           onclick="#{rich:component('modalImagen')}.show(); return true;"
+                                           onclick="#{rich:component('modalImagen')}.show();
+                                                   return true;"
                                            styleClass="ikont-acb-adjunimg" />
                     </h:panelGrid>
                 </rich:collapsiblePanel>
                 <rich:collapsiblePanel header="#{var.anadirotrosdoc}" switchType="ajax" id="gpSubirDocumentos" expanded="#{Supervisor$Alimentar.subiracta}"  rendered="#{!Supervisor$Alimentar.editarActividades}">
-                  
+
                     <center>
                         <h:panelGrid id="layoutActa" columns="6">
                             <h:outputLabel  styleClass="ikont-hol-acta"   id="lblActa"  value="#{var.acta}:" for="txtActa">
-                                
+
                             </h:outputLabel>
                             <interkont:spacer width="42"/>
 
                             <h:inputText size="40" id="txtActa" readonly="true" value="#{Supervisor$Alimentar.urlacta}" />
                             <a4j:commandButton id="btActa" value="#{var.examinar}" immediate="true"
-                                               onclick="#{rich:component('panelActa')}.show();return true;"
+                                               onclick="#{rich:component('panelActa')}.show();
+                                                   return true;"
                                                />
                         </h:panelGrid>
                     </center>
                 </rich:collapsiblePanel>
 
                 <rich:collapsiblePanel id="pnVideo" header="#{var.houtvideo}" switchType="ajax" expanded="false"   rendered="#{!Supervisor$Alimentar.editarActividades}">
-                    
+
                     <center>
                         <h:panelGrid id="layoutVideoMemoria" columns="3">
                             <h:panelGroup>
                                 <h:outputLabel  styleClass="ikont-hol-video"   id="lblVideo"  value="#{var.video}:">
-                                    
+
                                 </h:outputLabel>
                             </h:panelGroup>
 
@@ -574,9 +581,9 @@
                                        >
                     </a4j:commandButton>
                 </h:panelGrid>
-           </h:panelGroup>
+            </h:panelGroup>
         </h:form>
-       <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
+        <ui:include src="/modal/panelConfirmaGuardarAlimentar.xhtml"/>
         <ui:include src="/modal/panelGuardadoModal.xhtml"/>
         <ui:include src="/modal/panelImagenModal.xhtml"/>
         <ui:include src="/modal/panelVideoModal.xhtml"/>

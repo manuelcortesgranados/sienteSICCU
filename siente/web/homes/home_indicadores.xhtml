@@ -15,20 +15,25 @@
         <title>Cobra - Home Indicadores</title>
         <h:outputScript name="amcharts.js" library="amcharts"/>
 
-        
+
     </ui:define>
 
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
     <ui:define name="menu_lateral">
-        <h:form >
-            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                    
-        </h:form>
-        <h:form>
-            <ui:include src="/facelets/menu_lateral_indicadores.xhtml"/>
-        </h:form>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <h:form >
+                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                    
+            </h:form>
+            <h:form>
+                <ui:include src="/facelets/menu_lateral_indicadores.xhtml"/>
+            </h:form>
 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:form id="form_indicadores">

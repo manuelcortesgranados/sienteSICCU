@@ -13,7 +13,7 @@
 
     <ui:define name="head">
         <title>Video #{var.proyecto}s</title>
-        
+
         <h:outputScript name="script_supervisor.js" />
     </ui:define>
 
@@ -21,16 +21,23 @@
         <h:outputText  styleClass="ikont-hot-vidpry "   value="#{var.videosproyectos}" />
         <h:outputText  styleClass="ikont-hot-nommedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}" />
     </ui:define>
-    
+
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
-    
+
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml" />
+
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
-    
+
     <ui:define name="body">
         <h:form prependId="false" id="form_vervideo">
             <h:inputHidden id="sourceogg" value="#{Supervisor$AdministrarObraNew.urlvideo}" />
@@ -40,7 +47,7 @@
                     <h:panelGroup id="pgvidomostra">
                         <h:outputLabel  styleClass="ikont-hol-pgvidomostra"   rendered="#{Supervisor$AdministrarObraNew.mostrarvideo}" value="#{var.notienevideo}" />
                     </h:panelGroup>
-                    
+
                     <h:panelGroup layout="block" id="idpanel" >
                         <a4j:region>
                             <rich:dataGrid value="#{Supervisor$AdministrarObraNew.listaVideoObra}"  var="videoRow" columns="#{Supervisor$AdministrarObraNew.cantidadColumnas}">

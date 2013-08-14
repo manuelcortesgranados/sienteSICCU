@@ -23,8 +23,13 @@
     </ui:define>
 
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
 
     <ui:define name="body">
@@ -95,13 +100,13 @@
                             </rich:column>
                         </rich:dataTable>
                         <interkont:spacer height="10px"  /> 
-                       
-                            <rich:column colspan="7" breakRowBefore="true">
-                                <center>
-                                    <rich:dataScroller for="tabla-listado-buscarusuario" render="tabla-listado-buscarusuario" />
-                                </center>
-                            </rich:column>
-                       
+
+                        <rich:column colspan="7" breakRowBefore="true">
+                            <center>
+                                <rich:dataScroller for="tabla-listado-buscarusuario" render="tabla-listado-buscarusuario" />
+                            </center>
+                        </rich:column>
+
                     </h:panelGrid>
                 </center>
             </h:panelGroup>

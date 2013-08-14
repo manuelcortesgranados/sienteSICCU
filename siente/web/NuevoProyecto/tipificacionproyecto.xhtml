@@ -11,7 +11,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <f:view locale="#{var.rcalendarlocale}">
-        <ui:composition template="/facelets/template_proyecto.xhtml">
+        <ui:composition template="/facelets/template_main.xhtml">
             <ui:define name="head">
                 <title>#{var.titulonuevoproyecto}</title>
                 <h:outputScript library="js" name="/resources/script_supervisor.js"/>
@@ -20,20 +20,20 @@
                 <ui:include src="/facelets/menu_gestion.xhtml"/>
             </ui:define>
 
+            <ui:define name="menu_lateral">
+                <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+                    <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+                    <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+                </h:panelGroup>
+                <h:panelGroup rendered="#{var.permisonuevodiseño}">
+                    <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+                </h:panelGroup>
+            </ui:define>
+
             <ui:define name="body">
                 <h:form id="form_datos_tipificacion" >
                     <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
                         <tr>
-                            <td valign="top" class="templatetablamenulateral">
-                                <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla1" >
-                                    <tr>
-                                        <td  >
-                                            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                                            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/>                            
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
                             <td class="templatetablacontent verticalalingtop">
                                 <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
                                     <tr>
@@ -62,7 +62,7 @@
                                                                 <rich:collapsiblePanel  header="#{var.ingresoProyecto}" switchType="client" rendered="#{var.enventoproyecto}">
 
                                                                     <h:panelGroup layout="block" id="gpTotalProyectosPadres">
-                                                                                            
+
                                                                         <h:panelGrid >                                    
                                                                             <h:panelGroup id="panel-periodo-evento">
                                                                                 <h:panelGrid columns="2" >
@@ -86,7 +86,7 @@
 
                                                                         <h:panelGroup id="gpproyectoSeleccionado" >
                                                                             <h:panelGroup layout="block" id="panel-buscarPadreProy">
-                                                                                
+
                                                                             </h:panelGroup>                                                                            
                                                                             <interkont:spacer height="10px" />
                                                                             <center>
@@ -299,7 +299,7 @@
                                 </table>
                             </td>
                         </tr>                       
-                </table>
+                    </table>
                 </h:form>
             </ui:define>
         </ui:composition>

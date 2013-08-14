@@ -25,8 +25,14 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_contrato.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
     </ui:define>
     <ui:define name="body" >
 
@@ -45,7 +51,7 @@
 
         <h:panelGrid id="planificacion_movimientos" columns="2" >
 
-            
+
             <h:panelGroup layout="block" id="gpListadoPlanificacion">
 
                 <h:panelGrid id="formaanti" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">

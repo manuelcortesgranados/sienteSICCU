@@ -2,342 +2,349 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/facelets/template_main.xhtml">
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:fn="http://java.sun.com/jsp/jstl/functions" template="/facelets/template_main.xhtml">
 
-            <ui:define name="head">
-                <title>Cobra - Supervisor</title>
-                <h:outputScript library="js" name="/resources/script_supervisor.js"/>
-                <h:outputScript library="css" name="/resources/css/Supervisor/SeguimientosAh.css"/>
-            </ui:define>
+    <ui:define name="head">
+        <title>Cobra - Supervisor</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+        <h:outputScript library="css" name="/resources/css/Supervisor/SeguimientosAh.css"/>
+    </ui:define>
 
-            <ui:define name="menu">
-                <ui:include src="/facelets/menu_gestion.xhtml"/>
-            </ui:define>
-            <ui:define name="menu_lateral">
-                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
-            </ui:define>
-            <ui:define name="title">
-                <h:outputText  styleClass="ikont-hot-seguimientoah"   value="#{var.seguimientosah}"/>
-                <h:outputText  styleClass="ikont-hot-strnomedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
-            </ui:define>
-            <ui:define name="body">
-                <h:form>
-                    <rich:dataTable styleClass="ikont-rdt-listglobalah" id="tablaSeguimientosGlobal"  sortMode="single"   var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
-                        <f:facet name="header">
-                            <rich:columnGroup>
-                                <rich:column  colspan="16" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-seguimientoglobal" value="#{var.seguimientoglobal}"/>
-                                </rich:column>
-                                <rich:column  colspan="8" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-fanatenderseg" value="#{var.familiasaatenderseg}"/>
-                                </rich:column>
-                                <rich:column  colspan="4">
-                                    <h:outputText  styleClass="ikont-hot-famatenseg" value="#{var.familiasaatendidasseg}"/>
-                                </rich:column>
-                                <rich:column  colspan="4">
-                                    <h:outputText  styleClass="ikont-hot-avancedeclarado" value="#{var.avancedeclaradoseg}"/>
-                                </rich:column>
-                                <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-numsolicitudch" value="#{var.numsolicitudch}"/>                                                
-                                </rich:column>
-                                <rich:column  >
-                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoini" value="#{var.mercyaseoiniporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-mercadoyaseo" value="#{var.mercyaseoajusporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-arriendoini" value="#{var.arriendosiniporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-arriendo" value="#{var.arriendosajusporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-albergueini" value="#{var.alberguesiniporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-albergue" value="#{var.alberguesajusporate}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-repvivienda" value="#{var.repviviendaporate}"/>                                                
-                                </rich:column>
-                                <rich:column  >
-                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida" value="#{var.mecryaseoatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-arriendoatendida" value="#{var.arriendosatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-albergueatendida" value="#{var.alberguesatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida"   value="#{var.mecryaseoatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-arriendoatendido" value="#{var.arriendosatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-albegueatendido" value="#{var.alberguesatendidas}"/>                                                
-                                </rich:column>
-                                <rich:column >
-                                    <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
-                                </rich:column>
-                            </rich:columnGroup>
-                        </f:facet>
-                        <rich:columnGroup id="cuerpo">
-                            <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                <h:outputText  styleClass="ikont-hot-numsolicituds" value="#{currentRow.numSolicitud}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-mercyaseoini" value="#{currentRow.mercAseoini}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-mercyaseoajuste" value="#{currentRow.mercAseoajuste}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-arriendoini" value="#{currentRow.arriendoIni}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-arriendojust" value="#{currentRow.arriendoAjust}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-alberguesini" value="#{currentRow.albergueIni}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-alberguesajust" value="#{currentRow.albergueAjuste}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-repvivienda" value="#{currentRow.repVivienda}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-mercadoaseo" value="#{currentRow.mercAseo}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-txtarriendo" value="#{currentRow.arriendo}" />
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-albergue" value="#{currentRow.albergue}" />
-                            </rich:column>    
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-reparacionvivienda" value="#{currentRow.reparacionVivienda}" />
-                            </rich:column>    
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
 
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-numvaldeclarado" value="#{currentRow.numvaldeclaradomeryaseo/100}" >
-                                    <f:convertNumber pattern="###.## %"/>
-                                </h:outputText>
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-numvaldecarriendo" value="#{currentRow.numvaldeclaradoarriendo/100}" >
-                                    <f:convertNumber pattern="###.## %"/>
-                                </h:outputText>
-                            </rich:column>
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-numvaldecalbergue" value="#{currentRow.numvaldeclaradoalbergues/100}" >
-                                    <f:convertNumber pattern="###.## %"/>
-                                </h:outputText>
-                            </rich:column>    
-                            <rich:column>
-                                <h:outputText  styleClass="ikont-hot-numvaldecrepvivienda" value="#{currentRow.numvaldeclaradorepvivienda/100}" >
-                                    <f:convertNumber pattern="###.## %"/>
-                                </h:outputText>
-                            </rich:column>    
-
-                        </rich:columnGroup>
-                        <f:facet name="footer">
-                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                        </f:facet>
-                    </rich:dataTable>
-
-                    <interkont:spacer height="20" />
-                    <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single"   
-                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
-                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaasishummuni)>0}">
-                        <f:facet name="header">
-                            <rich:columnGroup>
-                                <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-seguimientoahmuni" value="#{var.seguimientoahmunicipal}"/>
-                                </rich:column>
-                                <rich:column  breakRowBefore="true" styleClass="ikont-"  >
-                                    <h:outputText  styleClass="ikont-hot-numsolicitdchs" value="#{var.numsolicitudch}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-departamento" value="#{var.departamento}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-numtotbenemercyaseo" value="#{var.numtotalfambenmeryaseo}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-valrayudentreg" value="#{var.valrepayudentreg}" >
-                                        
-                                    </h:outputText>
-                                                                                                 
-                                </rich:column>
-                            </rich:columnGroup>
-                        </f:facet>
-
-
-                        <rich:column  breakRowBefore="true">                                    
-                            <h:outputText  styleClass="ikont-hot-numsolicitud" value="#{currentRow.numSolicitud}"/>                                                
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+        
+    </ui:define>
+    <ui:define name="title">
+        <h:outputText  styleClass="ikont-hot-seguimientoah"   value="#{var.seguimientosah}"/>
+        <h:outputText  styleClass="ikont-hot-strnomedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+    </ui:define>
+    <ui:define name="body">
+        <h:form>
+            <rich:dataTable styleClass="ikont-rdt-listglobalah" id="tablaSeguimientosGlobal"  sortMode="single"   var="currentRow" rows="10" value="#{Supervisor$SeguimientosAh.listaglobalah}" >
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column  colspan="16" breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-seguimientoglobal" value="#{var.seguimientoglobal}"/>
                         </rich:column>
-                        <rich:column>                                    
-                            <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
+                        <rich:column  colspan="8" breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-fanatenderseg" value="#{var.familiasaatenderseg}"/>
                         </rich:column>
-                        <rich:column>                            
-                            <h:outputText  styleClass="ikont-hot-nommunicipio" value="#{currentRow.nomMunicipio}"/>                                                
+                        <rich:column  colspan="4">
+                            <h:outputText  styleClass="ikont-hot-famatenseg" value="#{var.familiasaatendidasseg}"/>
+                        </rich:column>
+                        <rich:column  colspan="4">
+                            <h:outputText  styleClass="ikont-hot-avancedeclarado" value="#{var.avancedeclaradoseg}"/>
+                        </rich:column>
+                        <rich:column  breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-numsolicitudch" value="#{var.numsolicitudch}"/>                                                
+                        </rich:column>
+                        <rich:column  >
+                            <h:outputText  styleClass="ikont-hot-mercadoyaseoini" value="#{var.mercyaseoiniporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-mercadoyaseo" value="#{var.mercyaseoajusporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-arriendoini" value="#{var.arriendosiniporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-arriendo" value="#{var.arriendosajusporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-albergueini" value="#{var.alberguesiniporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-albergue" value="#{var.alberguesajusporate}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-repvivienda" value="#{var.repviviendaporate}"/>                                                
+                        </rich:column>
+                        <rich:column  >
+                            <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida" value="#{var.mecryaseoatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-arriendoatendida" value="#{var.arriendosatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-albergueatendida" value="#{var.alberguesatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-mercadoyaseoatendida"   value="#{var.mecryaseoatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-arriendoatendido" value="#{var.arriendosatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-albegueatendido" value="#{var.alberguesatendidas}"/>                                                
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText  styleClass="ikont-hot-repviviendaatendida" value="#{var.repviviendaatendidas}"/>                                                
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+                <rich:columnGroup id="cuerpo">
+                    <rich:column  breakRowBefore="true" styleClass="ikont-"  >
+                        <h:outputText  styleClass="ikont-hot-numsolicituds" value="#{currentRow.numSolicitud}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-mercyaseoini" value="#{currentRow.mercAseoini}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-mercyaseoajuste" value="#{currentRow.mercAseoajuste}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-arriendoini" value="#{currentRow.arriendoIni}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-arriendojust" value="#{currentRow.arriendoAjust}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-alberguesini" value="#{currentRow.albergueIni}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-alberguesajust" value="#{currentRow.albergueAjuste}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-repvivienda" value="#{currentRow.repVivienda}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-mercadoaseo" value="#{currentRow.mercAseo}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-txtarriendo" value="#{currentRow.arriendo}" />
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-albergue" value="#{currentRow.albergue}" />
+                    </rich:column>    
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-reparacionvivienda" value="#{currentRow.reparacionVivienda}" />
+                    </rich:column>    
+
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-numvaldeclarado" value="#{currentRow.numvaldeclaradomeryaseo/100}" >
+                            <f:convertNumber pattern="###.## %"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-numvaldecarriendo" value="#{currentRow.numvaldeclaradoarriendo/100}" >
+                            <f:convertNumber pattern="###.## %"/>
+                        </h:outputText>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-numvaldecalbergue" value="#{currentRow.numvaldeclaradoalbergues/100}" >
+                            <f:convertNumber pattern="###.## %"/>
+                        </h:outputText>
+                    </rich:column>    
+                    <rich:column>
+                        <h:outputText  styleClass="ikont-hot-numvaldecrepvivienda" value="#{currentRow.numvaldeclaradorepvivienda/100}" >
+                            <f:convertNumber pattern="###.## %"/>
+                        </h:outputText>
+                    </rich:column>    
+
+                </rich:columnGroup>
+                <f:facet name="footer">
+                    <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                </f:facet>
+            </rich:dataTable>
+
+            <interkont:spacer height="20" />
+            <rich:dataTable id="tablaSeguimientosAsistenciaHumMuni"  sortMode="single"   
+                            var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaasishummuni}" 
+                            rendered="#{fn:length(Supervisor$SeguimientosAh.listaasishummuni)>0}">
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column  colspan="6" breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-seguimientoahmuni" value="#{var.seguimientoahmunicipal}"/>
+                        </rich:column>
+                        <rich:column  breakRowBefore="true" styleClass="ikont-"  >
+                            <h:outputText  styleClass="ikont-hot-numsolicitdchs" value="#{var.numsolicitudch}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-codmupio" value="#{currentRow.codMupio}"/>                                                
+                            <h:outputText  styleClass="ikont-hot-departamento" value="#{var.departamento}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtotfliabene" value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
+                            <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-valtotayudaentregamerc" value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
-                                <f:convertNumber pattern="$###,###"/>
+                            <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-numtotbenemercyaseo" value="#{var.numtotalfambenmeryaseo}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-valrayudentreg" value="#{var.valrepayudentreg}" >
+
                             </h:outputText>
+
                         </rich:column>
-
-                        <f:facet name="footer">
-                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                        </f:facet>
-                    </rich:dataTable>
-
-                     <interkont:spacer height="20" />
-                    <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single"   
-                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
-                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaarriendomuni)>0}">
-                        <f:facet name="header">
-                            <rich:columnGroup>
-                                <rich:column  colspan="7" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-seguimientoarriendomuni"   value="#{var.seguimientoarriendosmunicipal}"/>
-                                </rich:column>
-                                <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-txtnumsolicitud" value="#{var.numsolicitudch}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-depto" value="#{var.departamento}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-muni" value="#{var.municipio}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-numfambenarriendo" value="#{var.numfambenarriendos}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-numfambenearriendo" value="#{var.numfambeneficiadasarriendos}" />             
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-valrayudentregarrien" value="#{var.valrepayudentregarrien}" />             
-                                </rich:column>
-                            </rich:columnGroup>
-                        </f:facet>
+                    </rich:columnGroup>
+                </f:facet>
 
 
-                        <rich:column  breakRowBefore="true">                                    
-                            <h:outputText  styleClass="ikont-hot-solicitudmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
-                        </rich:column>
-                        <rich:column>                                    
-                            <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-nommuni" value="#{currentRow.nomMuni}"/>                                                
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-codmpio" value="#{currentRow.codMpio}"/>                                                
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numfliabeneficiar" value="#{currentRow.numFamiliabeneficiar}"/>                                                
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-txtnumfliabeneficiada" value="#{currentRow.numFamiliabeneficiada}"/>                                                
-                        </rich:column>
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-valayudaentregada" value="#{currentRow.valAyudaentregada}"> 
-                                <f:convertNumber pattern="$###,###"/>
-                            </h:outputText>
-                        </rich:column>
+                <rich:column  breakRowBefore="true">                                    
+                    <h:outputText  styleClass="ikont-hot-numsolicitud" value="#{currentRow.numSolicitud}"/>                                                
+                </rich:column>
+                <rich:column>                                    
+                    <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
+                </rich:column>
+                <rich:column>                            
+                    <h:outputText  styleClass="ikont-hot-nommunicipio" value="#{currentRow.nomMunicipio}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-codmupio" value="#{currentRow.codMupio}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-numtotfliabene" value="#{currentRow.numTotfliabenemercadoaseo}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-valtotayudaentregamerc" value="#{currentRow.valTotayudaentregadmercasoaseo}"> 
+                        <f:convertNumber pattern="$###,###"/>
+                    </h:outputText>
+                </rich:column>
 
-                        <f:facet name="footer">
-                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                        </f:facet>
-                    </rich:dataTable>
+                <f:facet name="footer">
+                    <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                </f:facet>
+            </rich:dataTable>
 
-                    
-                     <interkont:spacer height="20" />
-                    <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single"   
-                                    var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
-                                    rendered="#{fn:length(Supervisor$SeguimientosAh.listaalberguesmuni)>0}">
-                        <f:facet name="header">
-                            <rich:columnGroup>
-                                <rich:column  colspan="6" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-seguimientoalbermuni" value="#{var.seguimientoalberguesmunicipal}"/>
-                                </rich:column>
-                                <rich:column  breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-numsolicitdch" value="#{var.numsolicitudch}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-txtdepto" value="#{var.departamento}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
-                                </rich:column>                                
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-unidhabaconstruir" value="#{var.unidhabaconstruir}" />                                                
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-unidhabaconstruidos" value="#{var.unidhabaconstruidos}" />             
-                                </rich:column>
-                                <rich:column>
-                                    <h:outputText  styleClass="ikont-hot-unidhabencontr" value="#{var.unidhabenconstr}" />             
-                                </rich:column>
-                            </rich:columnGroup>
-                        </f:facet>
-
-
-                        <rich:column  breakRowBefore="true">                                    
-                            <h:outputText  styleClass="ikont-hot-codigosolicmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+            <interkont:spacer height="20" />
+            <rich:dataTable id="tablaSeguimientosArriendosHumMuni"  sortMode="single"   
+                            var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaarriendomuni}" 
+                            rendered="#{fn:length(Supervisor$SeguimientosAh.listaarriendomuni)>0}">
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column  colspan="7" breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-seguimientoarriendomuni"   value="#{var.seguimientoarriendosmunicipal}"/>
                         </rich:column>
-                        <rich:column>                                    
-                            <h:outputText  styleClass="ikont-hot-strdepartamento" value="#{currentRow.strdepartamento}"/>                                                
+                        <rich:column  breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-txtnumsolicitud" value="#{var.numsolicitudch}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-txtstrmunicipio" value="#{currentRow.strmunicipio}"/>                                                
-                        </rich:column>
-                       
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-intunicontruir" value="#{currentRow.intuniConstruir}"/>                                                
+                            <h:outputText  styleClass="ikont-hot-depto" value="#{var.departamento}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-intuniconstruidas" value="#{currentRow.intuniConstruidas}"/>                                                
+                            <h:outputText  styleClass="ikont-hot-muni" value="#{var.municipio}" />                                                
                         </rich:column>
                         <rich:column>
-                            <h:outputText  styleClass="ikont-hot-intuniprocontruccion" value="#{currentRow.intuniProConstruccion}"/>
+                            <h:outputText  styleClass="ikont-hot-codigodaneah" value="#{var.codigodaneah}" />                                                
                         </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-numfambenarriendo" value="#{var.numfambenarriendos}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-numfambenearriendo" value="#{var.numfambeneficiadasarriendos}" />             
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-valrayudentregarrien" value="#{var.valrepayudentregarrien}" />             
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
 
-                        <f:facet name="footer">
-                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                        </f:facet>
-                    </rich:dataTable>
-                    
-                </h:form>
-            </ui:define>       
+
+                <rich:column  breakRowBefore="true">                                    
+                    <h:outputText  styleClass="ikont-hot-solicitudmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                </rich:column>
+                <rich:column>                                    
+                    <h:outputText  styleClass="ikont-hot-nomdep" value="#{currentRow.nomDep}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-nommuni" value="#{currentRow.nomMuni}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-codmpio" value="#{currentRow.codMpio}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-numfliabeneficiar" value="#{currentRow.numFamiliabeneficiar}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-txtnumfliabeneficiada" value="#{currentRow.numFamiliabeneficiada}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-valayudaentregada" value="#{currentRow.valAyudaentregada}"> 
+                        <f:convertNumber pattern="$###,###"/>
+                    </h:outputText>
+                </rich:column>
+
+                <f:facet name="footer">
+                    <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                </f:facet>
+            </rich:dataTable>
+
+
+            <interkont:spacer height="20" />
+            <rich:dataTable id="tablaSeguimientosAlberguesHumMuni"  sortMode="single"   
+                            var="currentRow" rows="20" value="#{Supervisor$SeguimientosAh.listaalberguesmuni}" 
+                            rendered="#{fn:length(Supervisor$SeguimientosAh.listaalberguesmuni)>0}">
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column  colspan="6" breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-seguimientoalbermuni" value="#{var.seguimientoalberguesmunicipal}"/>
+                        </rich:column>
+                        <rich:column  breakRowBefore="true">
+                            <h:outputText  styleClass="ikont-hot-numsolicitdch" value="#{var.numsolicitudch}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-txtdepto" value="#{var.departamento}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-municipio" value="#{var.municipio}" />                                                
+                        </rich:column>                                
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-unidhabaconstruir" value="#{var.unidhabaconstruir}" />                                                
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-unidhabaconstruidos" value="#{var.unidhabaconstruidos}" />             
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText  styleClass="ikont-hot-unidhabencontr" value="#{var.unidhabenconstr}" />             
+                        </rich:column>
+                    </rich:columnGroup>
+                </f:facet>
+
+
+                <rich:column  breakRowBefore="true">                                    
+                    <h:outputText  styleClass="ikont-hot-codigosolicmaestro" value="#{Supervisor$AdministrarObraNew.obra.solicitudmaestro.oidcodigosolicitudmaestro}"/>                                                
+                </rich:column>
+                <rich:column>                                    
+                    <h:outputText  styleClass="ikont-hot-strdepartamento" value="#{currentRow.strdepartamento}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-txtstrmunicipio" value="#{currentRow.strmunicipio}"/>                                                
+                </rich:column>
+
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-intunicontruir" value="#{currentRow.intuniConstruir}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-intuniconstruidas" value="#{currentRow.intuniConstruidas}"/>                                                
+                </rich:column>
+                <rich:column>
+                    <h:outputText  styleClass="ikont-hot-intuniprocontruccion" value="#{currentRow.intuniProConstruccion}"/>
+                </rich:column>
+
+                <f:facet name="footer">
+                    <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                </f:facet>
+            </rich:dataTable>
+
+        </h:form>
+    </ui:define>       
 </ui:composition>

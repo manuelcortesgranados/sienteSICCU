@@ -21,9 +21,14 @@
     </ui:define>
 
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_administrar.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
 
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml" />
     </ui:define>
 
     <ui:define name="head">
@@ -100,7 +105,7 @@
                                         <interkont:spacer width="10" />
 
                                         <h:commandButton id="btn_cancelar_suspension" value="#{var.cancelar}" 
-                                                          action="#{Supervisor$SuspenderObra.cancelarSuspension}"
+                                                         action="#{Supervisor$SuspenderObra.cancelarSuspension}"
                                                          onclick="#{rich:component('panelCargando')}.show();
                                                            return true;">
                                             <a4j:ajax oncomplete="true" render="layoutConfSuspension" onbeforesubmit="#{rich:component('panelCargando')}.hide();" />

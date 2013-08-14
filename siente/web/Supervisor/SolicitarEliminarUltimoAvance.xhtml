@@ -2,64 +2,71 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">   
+                xmlns:a4j="http://richfaces.org/a4j" xmlns:interkont="http://www.interkont.com/jsf"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">   
 
-        <ui:define name="head">
-            <title>Eliminar Último Avance #{var.textoobra3}</title>
-            <h:outputScript library="js" name="/resources/script_supervisor.js"/>
-            <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
-            <h:outputScript library="css" name="/resources/css/Supervisor/SolicitarEliminarUltimoAvance.css"/>
-        </ui:define>
+    <ui:define name="head">
+        <title>Eliminar Último Avance #{var.textoobra3}</title>
+        <h:outputScript library="js" name="/resources/script_supervisor.js"/>
+        <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
+        <h:outputScript library="css" name="/resources/css/Supervisor/SolicitarEliminarUltimoAvance.css"/>
+    </ui:define>
 
-        <ui:define name="title">
-            <h:outputText  styleClass="ikont-hot-eliminaravance" value="Eliminar Último Avance #{var.textoobra3}"/>
-            <h:outputText  styleClass="ikont-hot-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
-        </ui:define>
-        <ui:define name="menu">
-            <ui:include src="/facelets/menu_gestion.xhtml"/>
-        </ui:define>
-        <ui:define name="menu_lateral">
+    <ui:define name="title">
+        <h:outputText  styleClass="ikont-hot-eliminaravance" value="Eliminar Último Avance #{var.textoobra3}"/>
+        <h:outputText  styleClass="ikont-hot-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+    </ui:define>
+    <ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
+    </ui:define>
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
             <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
-        </ui:define>
-        <ui:define name="body">
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+
+    </ui:define>
+    <ui:define name="body">
 
 
-            <center>
-                <h:panelGroup id="eliminarultavance">
-                    <interkont:spacer  height="120"/>
-                    <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" styleClass="marcocambioestado">
-                        <h:outputText  styleClass="ikont-hot-ultimoavance vtitle02" value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}"/>
-                        <interkont:spacer  height="15" />                            
-                        <h:outputText  styleClass="ikont-hot-ultimoavancereportado vtitle03" value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función."/>
-                        <interkont:spacer  height="20" />
-                        <h:panelGrid columnClasses="panelcenter"  styleClass="centerelement">
-                            <h:form  id="form_validareliavance">
-                                <a4j:commandLink value="Eliminar último avance #{var.textoobra3}"
-                                                 styleClass="ikont-acl-deleteultimoavance" onclick="#{rich:component('confirmarEliminarAvance')}.show();return true;">
-                                </a4j:commandLink>  
-                            </h:form>
-                        </h:panelGrid>
-                        <interkont:spacer  height="20" />
-                        <h:panelGroup>
-                             <h:graphicImage  styleClass="ikont-hgi-imgalerta" height="60px" width="60px" url="/resources/imgs/alerta.png" />
-                            <h:outputText  styleClass="ikont-hot-alertavisoavance vtitle03"  
-                                           value="Recuerde que este procedimiento borrará el último reporte de avance y  
-                                           los documentos asociados a él." />
-              
-                        </h:panelGroup>
-                <interkont:spacer  height="20" />
-                        
-                    </h:panelGrid>                        
+        <center>
+            <h:panelGroup id="eliminarultavance">
+                <interkont:spacer  height="120"/>
+                <h:panelGrid cellspacing="10" cellpadding="10" columnClasses="panelcenter" styleClass="marcocambioestado">
+                    <h:outputText  styleClass="ikont-hot-ultimoavance vtitle02" value="ELIMINAR ÚLTIMO AVANCE #{var.textobra8}"/>
+                    <interkont:spacer  height="15" />                            
+                    <h:outputText  styleClass="ikont-hot-ultimoavancereportado vtitle03" value="Si usted desea eliminar el último avance reportado de #{var.textobra6} haga uso de esta función."/>
+                    <interkont:spacer  height="20" />
+                    <h:panelGrid columnClasses="panelcenter"  styleClass="centerelement">
+                        <h:form  id="form_validareliavance">
+                            <a4j:commandLink value="Eliminar último avance #{var.textoobra3}"
+                                             styleClass="ikont-acl-deleteultimoavance" onclick="#{rich:component('confirmarEliminarAvance')}.show();
+                                                     return true;">
+                            </a4j:commandLink>  
+                        </h:form>
+                    </h:panelGrid>
+                    <interkont:spacer  height="20" />
+                    <h:panelGroup>
+                        <h:graphicImage  styleClass="ikont-hgi-imgalerta" height="60px" width="60px" url="/resources/imgs/alerta.png" />
+                        <h:outputText  styleClass="ikont-hot-alertavisoavance vtitle03"  
+                                       value="Recuerde que este procedimiento borrará el último reporte de avance y  
+                                       los documentos asociados a él." />
 
-                </h:panelGroup>
-            </center>
+                    </h:panelGroup>
+                    <interkont:spacer  height="20" />
+
+                </h:panelGrid>                        
+
+            </h:panelGroup>
+        </center>
 
 
-            <ui:include src="/modal/ConfirmarEliminarAvance.xhtml"/>
-        </ui:define>
-    </ui:composition>
+        <ui:include src="/modal/ConfirmarEliminarAvance.xhtml"/>
+    </ui:define>
+</ui:composition>

@@ -28,9 +28,14 @@
     </ui:define>
 
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml" />
+            <ui:include src="/facelets/menu_lateral_contrato.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
 
-        <ui:include src="/facelets/menu_lateral_contrato.xhtml" />
     </ui:define>
 
     <ui:define name="body">
@@ -556,14 +561,14 @@
                                         </a4j:commandLink>
                                     </rich:column>
                                 </rich:dataTable>
-                                
+
                                 <a4j:commandButton id="commandButtonNuevaPoliza" value="Nueva póliza"
                                                    rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_insertarpoliza}"
                                                    action="#{Supervisor$Contrato.instanciarPolizar}"
                                                    oncomplete="#{rich:component('mp_nueva_poliza')}.show();"
                                                    render="gpPolizaSelec">
-                                    
-                                     <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
+
+                                    <a4j:param assignTo="#{Supervisor$Contrato.boolcrearpoliza}" value="false" />
                                 </a4j:commandButton>
                             </h:panelGroup>
                         </center>
@@ -846,7 +851,7 @@
 
                                     <rich:dataTable id="tablagirodirecto"
                                                     sortMode="single"
-                                                    
+
                                                     value="#{Supervisor$Contrato.listaGirodirecto}"
                                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"

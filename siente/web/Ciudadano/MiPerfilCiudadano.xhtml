@@ -10,7 +10,7 @@
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
     xmlns:m="http://code.google.com/p/gmaps4jsf/"  
     template="/facelets/template_main.xhtml">
-    
+
     <ui:define name="head">
         <title>Cambio Contraseña</title>
         <h:outputScript name="script_supervisor.js" />
@@ -23,19 +23,24 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <script language="JavaScript">
-            function maximaLongitud(texto,maxlong)
+            function maximaLongitud(texto, maxlong)
             {
                 var out_value;
 
                 if (texto.value.length > maxlong)
                 {
                     in_value = texto.value;
-                    out_value = in_value.substring(0,maxlong);
+                    out_value = in_value.substring(0, maxlong);
                     texto.value = out_value;
                     return false;
                 }
@@ -45,7 +50,7 @@
             function borrar_campo3()
             {
                 if (document.getElementById("frmcomentariomuro:iacomentario3").value == "Escriba Su Comentario")
-                    document.getElementById("frmcomentariomuro:iacomentario3").value ="";
+                    document.getElementById("frmcomentariomuro:iacomentario3").value = "";
             }
         </script>
         <h:form>
@@ -84,7 +89,7 @@
                     <interkont:spacer height="5"/>
                     <h:outputText  styleClass="ikont-hot-celular vtitle19"   id="lblcelular"  value="#{var.celular}" />
                     <h:outputLabel  styleClass="ikont-hol-strtelefono1 vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" />
-                  
+
                 </h:panelGrid>
                 <h:panelGrid  >
                     <h:panelGrid columns="2" styleClass="ikont-hpg-boolotrousuario bcg-tb-per-ciu"    rendered="#{Ciudadano$PerfilCiudadano.boolotrousuario}" >
@@ -147,7 +152,7 @@
                         <h:outputLabel  styleClass="ikont-hol-verimagagenes vtitle14"   value="Ver imágenes"  />
                     </h:panelGrid>
                 </h:panelGroup>
-              
+
             </h:panelGrid>
         </h:form>
         <div id="header_content">
@@ -164,7 +169,7 @@
                         <h:panelGrid columns="1"   >
                             <a4j:status id="idstatuscomentario3"/>
                             <h:outputText  styleClass="ikont-hot-contarmensaje vtitle12"   id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" />
-                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this,400)"
+                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this, 400)"
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo3(this);" >
                                 <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje3" status="idstatuscomentario3" />
                             </h:inputTextarea>
@@ -198,7 +203,7 @@
                                         </h:panelGroup>
                                         <h:panelGrid  >
                                             <h:outputLabel  styleClass="ikont-hol-stropinion"    id="idcomentario1" value="#{rowcomentario.stropinion}"
-                                                             />
+                                                            />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
