@@ -16,10 +16,7 @@
 }
 
 input.rf-sel-inp {
-    background-color: '#{richSkin.controlBackgroundColor}';
-    background-image: url("#{resource['org.richfaces.images:inputBackgroundImage.png']}");
-    background-position: 1px 1px;
-    background-repeat: no-repeat;
+    background-color: '#{richSkin.backgrouninput}';
     border: 0px;
     margin: 0px;
     padding: 0px;
@@ -36,13 +33,10 @@ input.rf-sel-inp {
 }
 
 .rf-sel-btn {
-    background-image: "url(#{resource['org.richfaces.images:autocompleteButtonGradient.png']})";
-    background-repeat: repeat-x;
-    background-position: top left;
-    background-color: '#{richSkin.headerBackgroundColor}';
-    border-left-width: 1px;
+    background-color: '#{richSkin.backgrouninput}';
+    border-left-width: 0px;
     border-left-style: solid;
-    border-left-color: '#{richSkin.panelBorderColor}';
+    border-left-color: transparent;
     display: inline-block;
     vertical-align: top;
 }
@@ -50,7 +44,7 @@ input.rf-sel-inp {
 .rf-sel-btn-arrow {
     background-position: center;
     background-repeat: no-repeat;
-    background-image: "url(#{resource['org.richfaces.images:comboDownButton.png']})";
+    background-image: url("#{resource['imgs:dd_menu.png']}");
     cursor: pointer;
     width: 15px;
     height: 23px;

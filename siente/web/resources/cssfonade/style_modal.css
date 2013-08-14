@@ -1,13 +1,4 @@
 /*********** modal dialog***************/
-@font-face {
-    font-family: "bebas";
-    src: url("/cobrafonade/resources/css/font/BEBAS___.TTF");
-
-}
-@font-face {
-    font-family: "century";
-    src: url("/cobrafonade/resources/css/font/Century-Gothic.ttf");
-}
 
 .style-modal-dialog{
 
@@ -99,7 +90,7 @@
     width: 100%;
     height: 80px;
     color: white;
-    font-family: "century";
+    font-family: "open";
 
 }
 
@@ -166,7 +157,7 @@
     width: 100%;
     height: 350px;
     color: white;
-    font-family: "century";
+    font-family: "open";
 }
 
 .serch-advanced-footer label{
@@ -227,7 +218,7 @@
     width: 100px;
     background-color: whitesmoke;
     font-size: 80%;
-    font-family: "century";
+    font-family: "open";
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -336,7 +327,7 @@
 .modal-title{
     width: 600px;
     color: white !important;
-    font-family: "century";
+    font-family: "open";
     font-size: 16px;
 
 }

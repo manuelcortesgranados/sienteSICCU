@@ -114,8 +114,8 @@ input[type="text"], input[type="password"], select {
 	color: '#{richSkin.generalTextColor}';
 	background-repeat: repeat-x;
 	background-position: top left;
-	background-color: #ffffff;
-        background-image: "url(#{resource['org.richfaces.images:inputBackgroundImage.png']})";
+	background-color: '#{richSkin.backgrouninput}';
+        background-image: none;
         width:'#{richSkin.widthInputText}';
 	height: '#{richSkin.heightInputText}';
         padding-left:3px;
@@ -130,8 +130,8 @@ textarea{
 	color: '#{richSkin.generalTextColor}';
 	background-repeat: repeat-x;
 	background-position: top left;
-	background-color: #ffffff;
-        background-image: "url(#{resource['org.richfaces.images:inputBackgroundImage.png']})";
+	background-color: '#{richSkin.backgrouninput}';
+        background-image: none;
         width:'#{richSkin.widthInputText}';
 	height: 50px;
         padding-left:3px;
