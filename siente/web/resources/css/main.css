@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "open";
+    src: url("font/open.ttf");
+}
+
 .totalwidth{
     width: 100%;
 }
@@ -28,20 +33,19 @@
 }
 
 a.closemodal{
-    float: left;
-    height: 20px;
-    width: 20px; /* for validator */
+    float: right;
+    height: 25px;
+    width: 25px;
     display: block;
     background-repeat: no-repeat;
     margin-right: 0px;
-    background-image:url(../imgs/modal/btn_cerrar.png);
-    background-size: 16px;
-    margin-top: 5px;
+    background-image: url(../imgs/modal/modal_btn_sombra.png);
+    background-position: -210px -15px;
+    position: absolute;
+    top: -20px;
+    left: 8px;
 }
 
-a.closemodal:hover{
-    background-size: 20px;
-}
 
 .ikont-hcl-navegarNuevaObra1{
     background-image:url(../imgs/Cobra_bt44.png);
@@ -389,31 +393,6 @@ a.closemodal:hover{
     width : 225px
 }
 
-#header_content .ubicacion {
-    background: url(../imgs/bt_ubicacion.png) no-repeat;
-    width:auto;
-    height:25px;
-    margin:5px 0 6px 5px;
-}
-#header_content .preg {
-    background:url(../imgs/bt_preguntas.png) no-repeat;
-    width:auto;
-    height:25px;
-    margin:5px 0 6px 5px;
-}
-
-#header_content .imagenes {
-    background: url(../imgs/bt_imagenes.png) no-repeat;
-    width:auto;
-    height:25px;
-    margin:5px 0 6px 5px;
-}
-#header_content .star {
-    background:url(../imgs/star_g.png) no-repeat;
-    width:auto;
-    height:25px;
-    margin:5px 0 6px 5px;
-}
 
 .ikont-acl-activarlista{
     background-image:url(../imgs/bt_vista_lista.png);
@@ -1368,12 +1347,30 @@ a.ikont-hcl-modificarusuario:hover {
     background-position: -8px -10px;
 }
 
+.img-button-ncpo.ikont-acl-datosbasicos.scroll{
+    height: 25px;
+    background-position: -8px -50px;
+}
+
+.img-button-ncpo.ikont-acl-datosbasicos.scroll:hover, .img-button-ncpo.ikont-acl-datosbasicos.buttonactive.scroll{
+    background-position: -8px -115px;
+}
+
 .img-button-ncpo.ikont-acl-datosbasicos:hover, .ikont-acl-datosbasicos.buttonactive{
     background-position: -8px -74px;
 }
 
 .img-button-ncpo.ikont-acl-documentos{
     background-position: -374px -10px;
+}
+
+.img-button-ncpo.ikont-acl-documentos.scroll{
+    height: 25px;
+    background-position: -374px -50px;
+}
+
+.img-button-ncpo.ikont-acl-documentos.scroll:hover, .img-button-ncpo.ikont-acl-documentos.buttonactive.scroll{
+    background-position: -374px -115px;
 }
 
 .img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
@@ -1384,12 +1381,30 @@ a.ikont-hcl-modificarusuario:hover {
     background-position: -278px -10px;
 }
 
+.img-button-ncpo.ikont-acl-formapago.scroll{
+    height: 25px;
+    background-position: -278px -50px;
+}
+
+.img-button-ncpo.ikont-acl-formapago.scroll:hover, .img-button-ncpo.ikont-acl-formapago.buttonactive.scroll{
+    background-position: -278px -115px;
+}
+
 .img-button-ncpo.ikont-acl-formapago:hover, .ikont-acl-formapago.buttonactive{
     background-position: -278px -74px;
 }
 
 .img-button-ncpo.ikont-acl-polizas{
     background-position: -192px -10px;
+}
+
+.img-button-ncpo.ikont-acl-polizas.scroll{
+    height: 25px;
+    background-position: -192px -50px;
+}
+
+.img-button-ncpo.ikont-acl-polizas.scroll:hover, .img-button-ncpo.ikont-acl-polizas.buttonactive.scroll{
+    background-position: -192px -115px;
 }
 
 .img-button-ncpo.ikont-acl-polizas:hover, .ikont-acl-polizas.buttonactive{
@@ -1400,23 +1415,19 @@ a.ikont-hcl-modificarusuario:hover {
     background-position: -107px -10px;
 }
 
+.img-button-ncpo.ikont-acl-planoperativo.scroll{
+    height: 25px;
+    background-position: -192px -50px;
+}
+
+.img-button-ncpo.ikont-acl-planoperativo.scroll:hover, .img-button-ncpo.ikont-acl-planoperativo.buttonactive.scroll{
+    background-position: -192px -115px;
+}
+
 .img-button-ncpo.ikont-acl-planoperativo:hover, .ikont-acl-planoperativo.buttonactive{
     background-position: -107px -74px;
 }
 
-.img-button-ncpo.scroll{
-    height: 25px;
-    background-position-y: -49px;
-}
-
-.img-button-ncpo.scroll:hover{
-    background-position-y: -115;
-}
-
-.img-button-ncpo.buttonactive.scroll{
-    height: 25px;
-    background-position-y: -115;
-}
 
 .img-button-plao{
     background-image: url(../imgs/descargas_sprite.png);
@@ -1450,25 +1461,149 @@ a.vtitle23:hover{
 }
 
 .img-button-plao.ikont-hcl-img-rptconsolidado{
-   background-position: 0px 0px;
+    background-position: 0px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptcronograma{
-   background-position: -55px 0px;
+    background-position: -55px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptpresupuesto{
-   background-position: -110px 0px;
+    background-position: -110px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptflujocaja{
-   background-position: 0px -55px;
+    background-position: 0px -55px;
 }
 
 .img-button-plao.ikont-hcl-img-rptplanoperativo{
-   background-position: -55px -55px;
+    background-position: -55px -55px;
 }
 
 .img-button-plao.ikont-hcl-img-rptplancontratacion{
-   background-position: -110px -55px;
+    background-position: -110px -55px;
+}
+
+.templatetablamenulateral{
+    width : 268px;
+    height: 100%;
+}
+
+.form_menu_lateral_desplegable{
+    width : 0px;
+    height: 0%;
+}
+
+.templatetablacontent{
+    width: 760px;
+}
+.templatetablafooter{
+    width: 100%;
+    height: 80px;
+}
+.form_menu_despelgable{
+    width: 0%;
+    height : 0px;}
+
+
+.zoomicon{
+    background-image: url(../imgs/zoomlogo.png);
+    width: 235px;
+    height:127px;
+    background-repeat:no-repeat;
+    background-position: 40px 30px;
+    top: 10%;
+    left: 5%;
+}
+.topbar_encabezado_1{
+    width:100%;
+    height: 3px;
+    background-color: #0092BC;
+}
+.topbar_encabezado_2{
+    width:25px;
+    height: 129px;
+    background-size: 25px 129px;
+}
+.topbar_encabezado_3{
+    width:430px; 
+    height: 127px; 
+    position:absolute;
+    background-position:0px 0px;
+    top: 7%;
+    right: 45%;
+    font-size: 1.5em;
+}
+.topbar_encabezado_4{
+    width:120px; height: 127px; 
+    position:absolute;
+    float: left;
+    top: 8%;
+    right: 5%;
+    background-position:0px 0px;
+}
+/*.panelzoom{
+    left:232px;
+    width:750px;
+    position:absolute;
+    top:20%;
+    border-collapse:separate;
+    border-spacing:0.25em;
+}*/
+#filtro_space{
+    height:10px;
+    width:218px;
+}
+#filtro_item {
+    height:24px;
+    width:218px;
+
+}
+input[type="text"], input[type="password"], select{
+    font-size: 11px;
+    border-color: white;
+    width: 320px;
+    height: 33px;
+    border-radius: 1px;
+    background-color: #F2F2F2;
+    background-image: none;
+}
+.ikont-acb-btn_filtro_estatico{
+    background-image: url(../imgs/buscar_btn.png);
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 33px;
+    display: block;
+    background-position: 0px 0px;
+}
+
+.ikont-acb-btn_filtro_estatico:hover{
+    background-image: url(../imgs/buscar_btn.png);
+    background-repeat: no-repeat;
+    width: 75px;
+    height: 33px;
+    display: block;
+    background-position: 0px -36px;
+}
+
+.ikont-acb-btn_ingreso_nuevo{
+    background-image: url(../imgs/ingresar_btn.png);
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 33px;
+    display: block;
+    background-position: 0px 0px;
+}
+
+.ikont-acb-btn_ingreso_nuevo:hover{
+    background-image: url(../imgs/ingresar_btn.png);
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 33px;
+    display: block;
+    background-position: 1px -34px;
+}
+
+.ikont-hpg-acionescontratos{
+    margin: 25px auto 0px auto;
 }

@@ -163,33 +163,9 @@
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
         <ui:include src="/modal/confirmarguardadoconveniopo.xhtml"/>
+        <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
         <script type="text/javascript">
-          /*  window.onscroll = mvscroll;
-            function mvscroll(){
-                 if (window.pageYOffset >= 120) {
-                     var _menu = document.getElementsByClassName('ikont-hpg-contentmenu')[0];
-                    _menu.className = "ikont-hpg-contentmenu menuscroll";
-                    var _buttonmenu = document.getElementsByClassName('img-button-ncpo');
-                    var _lenbutton = _buttonmenu.length - 1;
-                    console.log(_lenbutton)
-                  /*  for(var i = 0; i = _lenbutton; i++){
-                        var _class = _buttonmenu[i].className+" scroll";
-                        _buttonmenu[i].className = _class;
-                    }
-                } else {
-                    var _menu = document.getElementsByClassName('ikont-hpg-contentmenu')[0];
-                    _menu.className = "ikont-hpg-contentmenu";
-                    var _buttonmenu = document.getElementsByClassName('img-button-ncpo');
-                    var _lenbutton = _buttonmenu.length - 1;
-                    for(var i = 0; i = _lenbutton; i++){
-                        var _class = _buttonmenu[i].className;
-                        _class = _class.replace("scroll","");
-                        _buttonmenu[i].className = _class;
-                    }
-                }
-            }
-            
-            var $j = jQuery.noConflict();
+           var $j = jQuery.noConflict();
             $j(window).scroll(function() {
                 if (window.pageYOffset >= 120) {
                     $('.ikont-hpg-contentmenu:first').css("position", "fixed");
@@ -204,7 +180,7 @@
                         $(this).removeClass('scroll');
                     });
                 }
-            });*/
+            });
 
         </script>
     </ui:define>
