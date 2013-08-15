@@ -15,7 +15,7 @@
 .totalwidth.tipificacionpro a{
     text-decoration: none;
     margin: 0px;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: open;
     color: #000;
 }
 
@@ -833,7 +833,7 @@ a.ikont-acl-interven:hover {
 }
 
 .vtitle02 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:20px;
     font-style:italic;
     font-weight:bold;
@@ -842,7 +842,7 @@ a.ikont-acl-interven:hover {
 }
 
 .vtitle03 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:15px;
     font-style:italic;
     color:#004670;
@@ -1077,7 +1077,7 @@ a.ikont-hcl-imgTacometro:hover {
 }
 
 .vtitle09 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:9px;
     font-style:italic;
     color:#999;
@@ -1150,12 +1150,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
 }
 
 .vtitle12 {
-    font-family:Verdana, Geneva, sans-serif;
-    font-size:9px;
-    font-style:italic;
-    color:#F90;
-    line-height:9px;
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:9px;
     font-style:italic;
     color:#F90;
@@ -1205,7 +1200,7 @@ a.ikont-acl-agregarcomentario:hover {
 }
 
 .vtitle13 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:15px;
     font-style:italic;
     color:#FFF;
@@ -1219,7 +1214,7 @@ a.ikont-acl-agregarcomentario:hover {
 }
 
 .vtitle14{
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:13px;
     font-style:italic;
     color:#FF9;
@@ -1228,7 +1223,7 @@ a.ikont-acl-agregarcomentario:hover {
 }
 
 .vtitle15 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:30px;
     font-style:italic;
     font-weight:bold;
@@ -1261,7 +1256,7 @@ a.ikont-acl-space2:hover {
 }
 
 .vtitle17 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:18px;
     font-style:italic;
     color:#004670;
@@ -1269,7 +1264,7 @@ a.ikont-acl-space2:hover {
 }
 
 .vtitle18 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:13px;
     font-style:italic;
     color:#666;
@@ -1297,7 +1292,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .vtitle19 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:14px;
     font-style:italic;
     color:#004670;
@@ -1306,7 +1301,7 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .vtitle20 {
-    font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:14px;
     font-style:italic;
     color:#666;
