@@ -1027,7 +1027,7 @@ public class Reporte implements ILifeCycleAware, Serializable {
     }
 
     @Override
-    public void prender() {
+    public void prerender() {
         vista = 0;
         vistaicom = 0;
         consolida = 1;

@@ -15,9 +15,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import cobra.util.CasteoGWT;
-import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
+import cobra.SessionBeanCobra;
+import cobra.Supervisor.FacesUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -49,21 +51,21 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         this.cobraDao = cobraDao;
     }
 
-    @Override
-    public ContratoDTO casteoContrato() throws Exception {
+//    @Override
+//    public ContratoDTO casteoContrato() throws Exception {
+//
+//        //    ContratoDTO contratodto = new ContratoDTO(contrato);
+////        Set<Fuenterecursosconvenio> fuenterecursos= contrato.getFuenterecursosconvenios();
+////        Set<FuenterecursosconvenioDTO> fuenterecursosdto= new HashSet<FuenterecursosconvenioDTO>();
+////        if(fuenterecursos!=null){
+////            fuenterecursosdto = CobraUtil.convertirSet(fuenterecursos,"FuenterecursosconvenioDTO",  "Fuenterecursosconvenio", VAR_DTO, contratodto, "contrato");
+////        }
+////            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
+//        return null;
+//    }
 
-        //    ContratoDTO contratodto = new ContratoDTO(contrato);
-//        Set<Fuenterecursosconvenio> fuenterecursos= contrato.getFuenterecursosconvenios();
-//        Set<FuenterecursosconvenioDTO> fuenterecursosdto= new HashSet<FuenterecursosconvenioDTO>();
-//        if(fuenterecursos!=null){
-//            fuenterecursosdto = CobraUtil.convertirSet(fuenterecursos,"FuenterecursosconvenioDTO",  "Fuenterecursosconvenio", VAR_DTO, contratodto, "contrato");
-//        }
-//            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
-        return null;
-    }
-
     @Override
-    public ContratoDTO getContratoDTO() {
+    public ContratoDTO obtenerContratoDTO() {
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
                 contratoDto.setActividadobras(new HashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini())));
@@ -75,20 +77,31 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return this.contratoDto;
     }
 
-    @Override
-    public void setContratoDTO(ContratoDTO contrato) {
+    @Override    
+    public Boolean setContratoDto(ContratoDTO contrato) {
+        
+        
+        System.out.println("contrato = " + contrato);
         this.contratoDto = contrato;
+        return true;
     }
+    
+    @Override
+    public ContratoDTO getContratoDto() {
+        return contratoDto;
+    }
+    
+    
 
     @Override
     public void setLog(String log) {
         this.log.info(log);
     }
 
-    @Override
-    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
-        return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
-    }
+//    @Override
+//    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
+//        return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
+//    }
 
     @Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini) throws Exception {
@@ -126,4 +139,5 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         }
         return lstRubrosDTO;
     }
+
 }

@@ -6,6 +6,6 @@
 package cobra.Supervisor;
 
 public interface ILifeCycleAware {
-  public void prender();
+  public void prerender();
   
 }    

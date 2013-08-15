@@ -95,7 +95,7 @@ import javax.swing.text.StyledEditorKit;
  * @author carlosalbertoloaizaguerrero
  * @author Leonardo Montes
  */
-public class NuevoContratoBasico implements Serializable {
+public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -2265,6 +2265,16 @@ public class NuevoContratoBasico implements Serializable {
     // </editor-fold>
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
+    
+     @Override
+    public void prerender() {
+         if(getSessionBeanCobra().isCargarcontrato())
+         {
+             //contrato = CasteoGWT.castearContratoDtoToContratoTO(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+            contrato.setFechaactaini(new Date());
+             getSessionBeanCobra().setCargarcontrato(false);
+         }    
+    }
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -2985,7 +2995,7 @@ public class NuevoContratoBasico implements Serializable {
     public void iniciarConvenio(ActionEvent event) {//se invoca desde menu_lateral_gestion
 //       Iniciar los metodos para llenar la tabla de flujo caja si este tiene plan operativo
         if (Propiedad.getValor("conplanoperativo").equals("true")) {
-            getFlujoCaja().iniciarFlujoCaja();
+            String x=getFlujoCaja().iniciarFlujoCaja();
         }
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
@@ -6603,8 +6613,9 @@ public class NuevoContratoBasico implements Serializable {
         try {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(),getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");            
-            ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
-            getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
+            //ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
+
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
@@ -6618,4 +6629,6 @@ public class NuevoContratoBasico implements Serializable {
         variabletitulo = Propiedad.getValor("segundoplanoperativo");
         return "nuevoConvenioPo";
     }
+
+   
 }

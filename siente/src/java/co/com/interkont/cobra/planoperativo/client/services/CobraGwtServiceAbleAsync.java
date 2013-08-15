@@ -18,15 +18,17 @@ import java.util.List;
  */
 public interface CobraGwtServiceAbleAsync {
 
-    void getContratoDTO(AsyncCallback<ContratoDTO> call);
+    void obtenerContratoDTO(AsyncCallback<ContratoDTO> call);
 
-    void setContratoDTO(ContratoDTO contratoDto, AsyncCallback<Void> call);
+    void setContratoDto(ContratoDTO contratoDto, AsyncCallback<Boolean> call);
+    
+    void getContratoDto(AsyncCallback<ContratoDTO> call);
 
-    void casteoContrato(AsyncCallback<ContratoDTO> call);
+    //void casteoContrato(AsyncCallback<ContratoDTO> call);
 
     void setLog(String log, AsyncCallback<Void> call);
 
-    void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
+    //void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
     
     void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 

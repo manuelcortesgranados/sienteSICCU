@@ -30,9 +30,8 @@ import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -60,7 +59,6 @@ import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.SpinnerField;
-import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.HeaderGroupConfig;
@@ -158,8 +156,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * Almacena la dependencia que ha sido seleccionada en el gantt
      */
     private DependenciaDTO dependenciaSeleccionada;
-    
-    GwtMensajes msj=GWT.create(GwtMensajes.class);
+
+    GwtMensajes msj = GWT.create(GwtMensajes.class);
 
     @SuppressWarnings("unchecked")
     @Override
@@ -261,8 +259,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemProyecto.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                service.setLog("papa en gannt" + tareaSeleccionada.getChildren().size(),null);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO,tareaSeleccionada);
+                service.setLog("papa en gannt" + tareaSeleccionada.getChildren().size(), null);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO, tareaSeleccionada);
                 crearProyectoDialog.add(proyectoForm1);
 
                 //proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
@@ -375,13 +373,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-            @Override
-            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                //return new DependenciaDTO(1, fromTask,toTask, type);
+                    @Override
+                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                        //return new DependenciaDTO(1, fromTask,toTask, type);
 //                        (String.valueOf(new Date().getTime()), toTask.getOidactiviobra(),  type);
-            }
-        ;
+                    }
+                ;
 
         };
 
@@ -525,6 +523,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         cascade.addSelectHandler(new SelectEvent.SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
+//                PopupPanel popup = new PopupPanel(true);
+//                HTML html = new HTML("<A HREF=" + "\"http://bignosebird.com/index.shtml\"" + ">click</A>");
+//                popup.add(html);
+//                popup.addPopupListener(new PopupListener() {
+//                    public void onPopupClosed(PopupPanel arg0,
+//                            boolean arg1) {
+//                    }
+//                });
+//                popup.show();
+//                popup.center();
                 gantt.getConfig().cascadeChanges = cascade.getValue();
                 gantt.reconfigure(false);
             }
@@ -537,8 +545,30 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         critical.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
-                gantt.getConfig().showCriticalPath = critical.getValue();
-                gantt.reconfigure(true);
+                convenioDTO.setDatefechaactaini(new Date());
+                service.setContratoDto(convenioDTO, new AsyncCallback<Boolean>() {
+
+                    @Override
+                    public void onFailure(Throwable caught) {
+                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+
+                    @Override
+                    public void onSuccess(Boolean result) {
+                          Window.open("/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml", "_parent", "menubar=si,"
+                        + "location=false,"
+                        + "resizable=no,"
+                        + "scrollbars=si,"
+                        + "status=no,"
+                        + "dependent=true");
+                    }
+                });
+//               
+                
+
+                //RootPanel.get.redirect("http://www.matuk.com");
+                //gantt.getConfig().showCriticalPath = critical.getValue();
+                //gantt.reconfigure(true);
             }
         });
         tbar.add(critical);
@@ -604,8 +634,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
     public void cargar() {
-        //Cargando el convenio
-        service.getContratoDTO(new AsyncCallback<ContratoDTO>() {
+        //Cargando el convenio        
+        service.obtenerContratoDTO(new AsyncCallback<ContratoDTO>() {
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error cargando convenio", null);
@@ -620,7 +650,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
 
-                    RootPanel.get().add(asWidget());
+                    RootPanel.get().add(asWidget());                    
                 } else {
                     service.setLog(msg, null);
                     AlertMessageBox d = new AlertMessageBox("Alerta", msg);

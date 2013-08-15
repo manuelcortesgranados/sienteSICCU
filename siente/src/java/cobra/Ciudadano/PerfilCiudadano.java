@@ -391,9 +391,9 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     }
 
     @Override
-    public void prender() {
+    public void prerender() {
         if (getAdministrarObraNew().activocomentarios) {
-            getAdministrarObraNew().prender();
+            getAdministrarObraNew().prerender();
         }
     }
 

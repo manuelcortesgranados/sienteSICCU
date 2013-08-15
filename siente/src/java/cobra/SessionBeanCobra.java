@@ -94,8 +94,18 @@ public class SessionBeanCobra implements Serializable {
     private boolean ciudadano = true;
     private int obraseguida = 0;
     private CobraGwtServiceAble cobraGwtService;
-    
-    
+/**
+ * Variable para el manejo del cargue de contrato en la comunicacion entre gwt y jsf
+ */    
+    private boolean cargarcontrato=false;
+
+    public boolean isCargarcontrato() {
+        return cargarcontrato;
+    }
+
+    public void setCargarcontrato(boolean cargarcontrato) {
+        this.cargarcontrato = cargarcontrato;
+    }
 
     public int getObraseguida() {
         return obraseguida;

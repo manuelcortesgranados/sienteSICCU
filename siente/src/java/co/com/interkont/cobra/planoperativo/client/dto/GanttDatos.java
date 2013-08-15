@@ -37,7 +37,7 @@ public class GanttDatos {
                
                 
                 t.setChildren(new ArrayList<ActividadobraDTO>(convenio.getActividadobras()));
-                 list.add(t);
+                list.add(t);
 //        for(ActividadobraDTO act: convenio.getActividadobras())
 //        {
 //            

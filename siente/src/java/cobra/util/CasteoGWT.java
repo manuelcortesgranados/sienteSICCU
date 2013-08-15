@@ -342,12 +342,12 @@ public class CasteoGWT {
      * 
      * @author Dgarcia
      **/
-    public static Contrato castearContratoToContratoTO(ContratoDTO contratoDTO) {
+    public static Contrato castearContratoDtoToContratoTO(ContratoDTO contratoDTO) {
         Contrato convenio = new Contrato(contratoDTO.getDatefechaini(), contratoDTO.getDatefechafin(), contratoDTO.getStrnumcontrato(), contratoDTO.getNumvlrcontrato(), contratoDTO.getDatefechacreacion());
-        convenio.setGerenteconvenio(castearTerceroDTOToTercero(contratoDTO.getGerenteconvenio()));
-        convenio.setFuenterecursosconvenios(castearSetFuenteRecursosConvenioTo(contratoDTO.getFuenterecursosconvenios(), convenio));
-        Iterator it = contratoDTO.getActividadobras().iterator();
-        convenio.getActividadobras().add(castearActividadObraDTORaiz((ActividadobraDTO) it.next(), convenio));
+        //convenio.setGerenteconvenio(castearTerceroDTOToTercero(contratoDTO.getGerenteconvenio()));
+        //convenio.setFuenterecursosconvenios(castearSetFuenteRecursosConvenioTo(contratoDTO.getFuenterecursosconvenios(), convenio));
+        //Iterator it = contratoDTO.getActividadobras().iterator();
+        //convenio.getActividadobras().add(castearActividadObraDTORaiz((ActividadobraDTO) it.next(), convenio));
 
         return convenio;
     }
