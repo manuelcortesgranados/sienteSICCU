@@ -67,6 +67,16 @@ public class ActividadobraDTO implements IsSerializable {
         this.fechaFin=fechaFin;
         this.obra=obra;
     }
+     
+     public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType) {
+        this.id = id;
+        this.name = name;
+        this.startDateTime = start;
+        this.duration = duration;
+        this.percentDone = percentDone;
+        this.taskType = taskType;
+    }
     
     public ActividadobraDTO() {
     }
@@ -100,6 +110,26 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
     }
+    
+     public ActividadobraDTO(String name, Date start, int duration, int percentDone,
+            TaskType taskType,int tipoActividad, boolean boolobligatoria,ObraDTO obra) {
+        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,obra);
+    }
+
+    
+     public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria,ObraDTO obraDto) {
+        this.id = id;
+        this.name = name;
+        this.startDateTime = start;
+        this.duration = duration;
+        this.percentDone = percentDone;
+        this.taskType = taskType;
+        this.tipoActividad= tipoActividad;
+        this.boolobligatoria = boolobligatoria;
+        this.obra=obraDto;
+    }
+
 
    
     public String getId() {

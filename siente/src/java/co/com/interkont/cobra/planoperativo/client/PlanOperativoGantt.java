@@ -156,7 +156,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * Almacena la dependencia que ha sido seleccionada en el gantt
      */
     private DependenciaDTO dependenciaSeleccionada;
-
     GwtMensajes msj = GWT.create(GwtMensajes.class);
 
     @SuppressWarnings("unchecked")
@@ -244,7 +243,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //        /**
 //         * Formulario del Proyecto
 //         */
-        final ProyectoForm proyectoForm = new ProyectoForm();
+        final ContratoForm proyectoForm = new ContratoForm();
 //        crearProyectoDialog.add(proyectoForm);
 
         /**
@@ -259,11 +258,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemProyecto.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                service.setLog("papa en gannt" + tareaSeleccionada.getChildren().size(), null);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO, tareaSeleccionada);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO);
                 crearProyectoDialog.add(proyectoForm1);
-
-                //proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
@@ -373,13 +369,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-                    @Override
-                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                        //return new DependenciaDTO(1, fromTask,toTask, type);
+            @Override
+            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                //return new DependenciaDTO(1, fromTask,toTask, type);
 //                        (String.valueOf(new Date().getTime()), toTask.getOidactiviobra(),  type);
-                    }
-                ;
+            }
+        ;
 
         };
 
@@ -547,7 +543,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onSelect(SelectEvent event) {
                 convenioDTO.setDatefechaactaini(new Date());
                 service.setContratoDto(convenioDTO, new AsyncCallback<Boolean>() {
-
                     @Override
                     public void onFailure(Throwable caught) {
                         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -555,16 +550,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                     @Override
                     public void onSuccess(Boolean result) {
-                          Window.open("/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml", "_parent", "menubar=si,"
-                        + "location=false,"
-                        + "resizable=no,"
-                        + "scrollbars=si,"
-                        + "status=no,"
-                        + "dependent=true");
+                        Window.open("/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml", "_parent", "menubar=si,"
+                                + "location=false,"
+                                + "resizable=no,"
+                                + "scrollbars=si,"
+                                + "status=no,"
+                                + "dependent=true");
                     }
                 });
 //               
-                
+
 
                 //RootPanel.get.redirect("http://www.matuk.com");
                 //gantt.getConfig().showCriticalPath = critical.getValue();
@@ -650,7 +645,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
 
-                    RootPanel.get().add(asWidget());                    
+                    RootPanel.get().add(asWidget());
                 } else {
                     service.setLog(msg, null);
                     AlertMessageBox d = new AlertMessageBox("Alerta", msg);

@@ -18,6 +18,8 @@ public class ObjetivosDTO implements IsSerializable
      private Integer tipoobjetivo;
      private Boolean esobjetivo;
      private ObraDTO obra;
+     private String strtipoObj;
+     private int posicion;
 
     public ObjetivosDTO() {
     }
@@ -81,6 +83,34 @@ public class ObjetivosDTO implements IsSerializable
     
     public void setobra(ObraDTO obra) {
         this.obra = obra;
+    }
+
+    /**
+     * @return the strtipoObj
+     */
+    public String getStrtipoObj() {
+        return strtipoObj;
+    }
+
+    /**
+     * @param strtipoObj the strtipoObj to set
+     */
+    public void setStrtipoObj(String strtipoObj) {
+        this.strtipoObj = strtipoObj;
+    }
+
+    /**
+     * @return the posicion
+     */
+    public int getPosicion() {
+        return posicion;
+    }
+
+    /**
+     * @param posicion the posicion to set
+     */
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 
 
