@@ -1,10 +1,5 @@
 /* ---------- tipos de fuentes --------------*/
 
-@font-face {
-    font-family: "open";
-    src: url("font/open.ttf");
-}
-
 input, select, textarea, button, keygen, isindex, legend, a {
 	font-size: '#{richSkin.generalSizeFont}';
 	font-family: '#{richSkin.generalFamilyFont}';
