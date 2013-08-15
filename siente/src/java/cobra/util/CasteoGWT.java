@@ -14,8 +14,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.Task;
 import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
@@ -30,12 +28,9 @@ import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -56,7 +51,7 @@ public class CasteoGWT {
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
         ContratoDTO contratoDTO = new ContratoDTO(contrato.getIntidcontrato(),contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnumcontrato(), contrato.getNumvlrcontrato(), contrato.getFechaactaini(), contrato.getIntduraciondias());
         contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
-        contratoDTO.setGerenteconvenio(castearTerceroToTerceroDTO(contrato.getGerenteconvenio()));
+        
         if (!contrato.getActividadobras().isEmpty()) {
             Iterator it = contrato.getActividadobras().iterator();
             contratoDTO.getActividadobras().add(castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO));

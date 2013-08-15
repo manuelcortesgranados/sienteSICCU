@@ -24,17 +24,17 @@ public class ContratoDTO implements IsSerializable {
     private String strnumcontrato;
     private BigDecimal numvlrcontrato;
     private Date datefechacreacion;
-    private String textobjeto;
-    private TerceroDTO gerenteconvenio;
-    private Set fuenterecursosconvenios = new HashSet(0);
+    private String textobjeto;       
     private int estadoConvenio;
     private int intduraciondias;
+    private Boolean booltipocontratoconvenio;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
-    private Boolean booltipocontratoconvenio;
+    
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
-
+    private Set fuenterecursosconvenios = new HashSet(0);
+    
     public ContratoDTO() {
     }
 
@@ -190,21 +190,7 @@ public class ContratoDTO implements IsSerializable {
     public void setTextobjeto(String textobjeto) {
         this.textobjeto = textobjeto;
     }
-
-    /**
-     * @return the gerenteconvenio
-     */
-    public TerceroDTO getGerenteconvenio() {
-        return gerenteconvenio;
-    }
-
-    /**
-     * @param gerenteconvenio the gerenteconvenio to set
-     */
-    public void setGerenteconvenio(TerceroDTO gerenteconvenio) {
-        this.gerenteconvenio = gerenteconvenio;
-    }
-
+    
     
     /**
      * @return the tipocontrato
