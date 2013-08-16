@@ -2994,9 +2994,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void iniciarConvenio(ActionEvent event) {//se invoca desde menu_lateral_gestion
 //       Iniciar los metodos para llenar la tabla de flujo caja si este tiene plan operativo
-        if (Propiedad.getValor("conplanoperativo").equals("true")) {
-            String x=getFlujoCaja().iniciarFlujoCaja();
-        }
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
         boolcontrconsultoria = false;
@@ -6338,7 +6335,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *      
      */
     public void llenarEntidades() {
-        List<Tercero> lstentidades = new ArrayList<Tercero>();
         lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
@@ -6616,6 +6612,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             //ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
 
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
+            
+            getFlujoCaja().iniciarFlujoCaja();
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());

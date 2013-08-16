@@ -32,7 +32,7 @@
                 <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                     <rich:column>
                         <f:facet name="header">
-                            <h:outputLabel value="#{PlanOperativo.periodosFlujoCaja.get(columna).strdescripcion}" />
+                            <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                         </f:facet>
 
                         <rich:inplaceInput value="#{fuenteIngresos.planMovimientosConvenioEntidad.get(columna).valor}" showControls="true"
@@ -105,7 +105,7 @@
                 <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                     <rich:column>
                         <f:facet name="header">
-                            <h:outputLabel value="#{PlanOperativo.periodosFlujoCaja.get(columna).strdescripcion}" />
+                            <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                         </f:facet>
                         <rich:inplaceInput value="#{fuenteEgresos.planMovimientosProyecto.get(columna).valor}" showControls="true"
                                            rendered="#{fuenteEgresos.egresoProyecto}">

@@ -225,6 +225,7 @@
                 <value>co/com/interkont/cobra/to/Planificacionmovconvenioentidad.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Planificacionmovimientoproyecto.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Relacionobrafuenterecursoscontrato.hbm.xml</value>
+                <value>co/com/interkont/cobra/to/Relacioncontratoperiodoflujocaja.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Rolentidad.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Rubro.hbm.xml</value>
                 <value>co/com/interkont/cobra/to/Dependencia.hbm.xml</value>
