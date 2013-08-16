@@ -486,7 +486,7 @@ input[type="submit"].ikont-acl-btnfiltrociudadano:hover{
 
 .ikont-hpg-invporregion, .ikont-hpg-invporregion1 {    
     height:50px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#FFF;
     text-align:center;
     line-height:50px;
@@ -588,20 +588,20 @@ a.pdf {
 }
 
 .ikont-hcl-reporteselect{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     font-weight: bold;
     color:black;
     background-color:#C6D3E1;
 }
 
 .ikont-hcl-reporteselectdi{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#006496;
 }
 
 .ikont-hcl-reportes_administrativos{
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#006496;
     -moz-box-shadow: 0.1em 0.1em 0.1em #006496;
@@ -618,7 +618,7 @@ a.pdf {
 
 .ikont-hot-reportes, .ikont-hot-Indicadores{
     color:#275F85; 
-    font-family:Arial, Helvetica, sans-serif; 
+    font-family:open; 
     text-align:center; 
     background:url(../imgs/line.png) bottom no-repeat;
     width: 100%;
@@ -687,26 +687,26 @@ a.pdf {
 }
 
 #navIndicadores ul li a.ikont-hcl-menuConsolidados {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#006496;
 }
 
 #navIndicadores ul li a.ikont-hcl-menuAvanceAh {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#CDB80D;
     vertical-align:middle;
 }
 
 #navIndicadores ul li a.ikont-hcl-menuAvanceObras {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#F1AC04;
 }
 
 #navIndicadores ul li a.ikont-hcl-menuAvanceConvenios {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     color:#fff;
     background-color:#EF6703;
 }
@@ -799,7 +799,7 @@ a.ikont-acl-asocontrato, a.ikont-hcl-asociarcontrato {
     background-repeat: no-repeat;
     background-image: url(../imgs/bt_asociarcontrato.png);
     background-position: 0px 20px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     font-size:13px;
     font-weight:bold;
     font-style:italic;
@@ -819,7 +819,7 @@ a.ikont-acl-interven {
     background-repeat: no-repeat;
     background-image: url(../imgs/bt_interventoria.png);
     background-position: 0px 20px;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     font-size:13px;
     font-weight:bold;
     font-style:italic;
@@ -863,7 +863,7 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModifica
     -moz-border-radius: 8px;
     border-radius: 8px;
     border: #FFF 2px solid;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     font-size:14px;
     color:#fff;
     text-align:center;
@@ -1052,7 +1052,7 @@ a.ikont-acl-cambioprecios:hover {
 }
 
 .vtitle11 {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:open;
     font-size:13px;
     line-height:15px;
     color:#095285;
@@ -1088,7 +1088,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     background: #FFF;
     border: #999 2px solid; 
     color: #003; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-family: open; 
     font-size: 13px; 
     line-height:13px; 
     color:#003; 
@@ -1104,7 +1104,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     background: #FFF;
     border: #999 2px solid; 
     color: #003; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-family:  open; 
     font-size: 13px; 
     line-height:13px; 
     color:#003; 
@@ -1128,7 +1128,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     -moz-box-shadow: 0.1em 0.1em 0.1em #51819E; 
     -webkit-box-shadow: 0.1em 0.1em 0.3em #51819E; 
     color: #003; 
-    font-family: Verdana, Arial, Helvetica, sans-serif; 
+    font-family:open; 
     font-size: 11px; 
     line-height:12px;
     color:#666; 
@@ -1186,7 +1186,7 @@ a.ikont-acl-agregarcomentario:hover {
     width:100%;
     height: 30px;
     color: #000033;
-    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-family: open;
     font-size: 18px;
     font-style: italic;
     font-weight: 400;
