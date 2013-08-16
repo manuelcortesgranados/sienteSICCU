@@ -28,6 +28,7 @@ import co.com.interkont.cobra.to.Modalidadcontratista;
 import co.com.interkont.cobra.to.Modificacioncontrato;
 import co.com.interkont.cobra.to.Movimientocontrato;
 import co.com.interkont.cobra.to.Obra;
+import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Ordendepago;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Planificacionpago;
@@ -832,6 +833,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
+    private List<Obra> listaProyectosCovenio;
     private int reportoption;
     private int subpantalla;
     /**
@@ -2301,6 +2303,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         } else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
             lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+            listaProyectosCovenio = new ArrayList<Obra>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
             llenarEntidades();
@@ -3339,6 +3342,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         listapolizas.clear();
         listaPolizacontratos.clear();
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+        listaProyectosCovenio = new ArrayList<Obra>();
 
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
@@ -6501,6 +6505,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
         this.lstFuentesRecursos = lstFuentesRecursos;
     }
+
+    public List<Obra> getListaProyectosCovenio() {
+        return listaProyectosCovenio;
+    }
+
+    public void setListaProyectosCovenio(List<Obra> listaProyectosCovenio) {
+        this.listaProyectosCovenio = listaProyectosCovenio;
+    }
+    
+    
 
     /**
      * Reportes de plan operativo
