@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public class RubroDTO implements IsSerializable{
 
-     private int idrubro;
+     private String idrubro;
      private String strdescripcion;
      private Set obrafuenterecursosconvenioses = new HashSet(0);
      private Set montos = new HashSet(0);
@@ -22,25 +22,25 @@ public class RubroDTO implements IsSerializable{
     public RubroDTO() {
     }
     
-    public RubroDTO(int idrubro, String strdescripcion) {
+    public RubroDTO(String idrubro, String strdescripcion) {
         this.idrubro = idrubro;
         this.strdescripcion = strdescripcion;
         
     }
     
 
-    public RubroDTO(int idrubro, String strdescripcion,Set obrafuenterecursosconvenioses,Set montos) {
+    public RubroDTO(String idrubro, String strdescripcion,Set obrafuenterecursosconvenioses,Set montos) {
         this.idrubro = idrubro;
         this.strdescripcion = strdescripcion;
         this.montos=montos;
         this.obrafuenterecursosconvenioses=obrafuenterecursosconvenioses;
     }
 
-    public int getIdrubro() {
+    public String getIdrubro() {
         return idrubro;
     }
 
-    public void setIdrubro(int idrubro) {
+    public void setIdrubro(String idrubro) {
         this.idrubro = idrubro;
     }
 

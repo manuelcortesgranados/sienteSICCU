@@ -10,9 +10,10 @@
 >
 <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
                 <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
-                    <h:panelGroup layout="block" >                      
+                    <h:panelGroup layout="block" >                     
  
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(1)}"  styleClass="ikont-acl-datosbasicos img-button-ncpo buttonactive"/>
+                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(1)}"  styleClass="ikont-acl-datosbasicos img-button-ncpo buttonactive" render="frmpanelgeneral"
+                                         execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
                     </h:panelGroup>
                     <h:panelGroup layout="block" >
                         <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
@@ -21,11 +22,7 @@
                     <h:panelGroup layout="block" >
                         <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" styleClass="ikont-acl-polizas img-button-ncpo"
                                          execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>                        
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" >
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" styleClass="ikont-acl-formapago img-button-ncpo"
-                                          execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
-                    </h:panelGroup>
+                    </h:panelGroup>                    
                     <h:panelGroup layout="block" >
                         <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" styleClass="ikont-acl-documentos img-button-ncpo"
                                          execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>

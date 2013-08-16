@@ -5,7 +5,6 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.exceptions.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 import co.com.interkont.cobra.to.Actividadobra;
@@ -28,7 +27,6 @@ import co.com.interkont.cobra.to.Modalidadcontratista;
 import co.com.interkont.cobra.to.Modificacioncontrato;
 import co.com.interkont.cobra.to.Movimientocontrato;
 import co.com.interkont.cobra.to.Obra;
-import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Ordendepago;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Planificacionpago;
@@ -54,7 +52,6 @@ import cobra.PlanOperativo.FlujoCaja;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.CasteoGWT;
 import cobra.util.RutasWebArchivos;
-import com.gantt.client.config.GanttConfig;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import coral.dao.DataAccessLayerException;
 import java.io.FileNotFoundException;
@@ -67,12 +64,10 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -81,7 +76,6 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
-import javax.swing.text.StyledEditorKit;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
@@ -6603,7 +6597,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         try {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(),getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");            
-            //ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
+            ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
 
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
             
