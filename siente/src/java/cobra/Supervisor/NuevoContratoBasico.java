@@ -2270,9 +2270,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void prerender() {
          if(getSessionBeanCobra().isCargarcontrato())
          {
-             //contrato = CasteoGWT.castearContratoDtoToContratoTO(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-            contrato.setFechaactaini(new Date());
-             getSessionBeanCobra().setCargarcontrato(false);
+            
+            actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());            
+            
+            actualizarPanel(2);
+            actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
+            getSessionBeanCobra().setCargarcontrato(false);
+             
          }    
     }
     /**
@@ -3307,45 +3311,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         buscarproyecto = "";
         contrato = new Contrato();
-//        contrato.setContrato(new Contrato());
-//
-//        if (contrpadre != null) {
-//            contrpadre.setContrato(new Contrato());
-//            contrpadre.setDatefechafin(new Date());
-//            contrpadre.setDatefechaini(new Date());
-//        }
-
-        contrato.setTercero(new Tercero());
-
-        ////Inicializando variables del formulario
-//        contrato.setIntidcontrato(0);
-//        contrato.setStrnombre(null);
-//        contrato.setStrnumcontrato(null);
+        contrato.setTercero(new Tercero());       
         contrato.setEncargofiduciario(new Encargofiduciario());
         contrato.getEncargofiduciario().setIntnumencargofiduciario(0);
-//        contrato.setDatefechaini(null);
-//        contrato.setDatefechafin(null);
-//        contrato.setIntduraciondias(null);
-//        contrato.setTextobjeto(null);
-//        contrato.setContratista(new Contratista());
         contrato.setNumrecursospropios(BigDecimal.ZERO);
         contrato.setNumrecursosch(BigDecimal.ZERO);
         contrato.setNumrecursostercero(BigDecimal.ZERO);
         contrato.setNumvlrcontrato(BigDecimal.ZERO);
         contrato.setFormapago(new Formapago());
-//        contrato.setDocumentoobras(new HashSet());
+        contrato.setEstadoconvenio(new Estadoconvenio(1));
         contrato.setBooleantienehijos(false);
-
         polizacontrato = new Polizacontrato();
         documentoobra = new Documentoobra();
         encargofiduciario = new Encargofiduciario();
-        planificacionpago = new Planificacionpago();
-
-        //contrato.setEncargofiduciario(new Encargofiduciario());
-        //contrato.setFormapago(new Formapago());
-//        contrato.setPlanificacionpagos(new HashSet());
-//        contrato.setPolizacontratos(new HashSet());
-        // contrato.setDocumentoobras(new HashSet());
+        planificacionpago = new Planificacionpago();     
         contrato.setPeriodoevento(new Periodoevento());
         contrato.getPeriodoevento().setEvento(new Evento());
         contrato.setModalidadcontratista(new Modalidadcontratista());
@@ -3359,6 +3338,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         listaContratosPadre.clear();
         listapolizas.clear();
         listaPolizacontratos.clear();
+        lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
 
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
@@ -6628,5 +6608,23 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return "nuevoConvenioPo";
     }
 
-   
+    /*
+     * metodo que se encarga de actualizar el contrato con los datos provenientes del plan operativo
+     * @param ContratoDto Objeto convenio utilizado en GWT.     
+     * 
+     * @author Carlos Loaiza
+     */
+    public void actualizarContratodatosGwt(ContratoDTO contratodto)
+    {
+        contrato.setDatefechaini(contratodto.getDatefechaini());
+        contrato.setDatefechafin(contratodto.getDatefechafin());
+        contrato.setFechaactaini(contratodto.getDatefechaactaini());
+        contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
+        contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
+        contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
+        contrato.setTextobjeto(contratodto.getTextobjeto());
+        contrato.setIntduraciondias(contratodto.getIntduraciondias());        
+        
+        
+    }   
 }

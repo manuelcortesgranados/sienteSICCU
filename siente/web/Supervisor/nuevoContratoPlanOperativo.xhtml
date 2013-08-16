@@ -22,31 +22,7 @@
 
     <ui:define name="body">
         <h:form id="frmpanelgeneral" styleClass="ikont-hf-nuevocontratoplanoperativo">
-            <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
-                <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
-                    <h:panelGroup layout="block" >                       
- 
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(1)}"  styleClass="ikont-acl-datosbasicos img-button-ncpo buttonactive"/>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" >
-                        <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
-                                          execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" >
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(3)}"  render="frmpanelgeneral" styleClass="ikont-acl-polizas img-button-ncpo"
-                                         execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>                        
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" >
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(4)}" render="frmpanelgeneral" styleClass="ikont-acl-formapago img-button-ncpo"
-                                          execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" >
-                        <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel(5)}" render="frmpanelgeneral" styleClass="ikont-acl-documentos img-button-ncpo"
-                                         execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio"/>
-
-                    </h:panelGroup>
-                </h:panelGrid>
-            </h:panelGroup>
+             <ui:include src="/facelets/menu_superior_administrar.xhtml"/>
             <h:panelGroup  styleClass="ikont-hpg-infogeneral"  id="hpg-infogeneral" style="width: 500px;height:200px;" rendered="#{Supervisor$Contrato.panelPantalla==1 or Supervisor$Contrato.panelPantalla==2 or Supervisor$Contrato.panelPantalla==3 or Supervisor$Contrato.panelPantalla==4 or Supervisor$Contrato.panelPantalla==5 }">
                 <center>
                     <h:outputText value="#{var.nuevoconvenio}"/>
@@ -65,17 +41,11 @@
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==2}" id="reg-plan-operativo"  >
                 <h:panelGrid columns="3" cellspacing="15" cellpadding="0" id="menu-plan-operativo" styleClass="ikont-hpg-menu-plan-operativo">
-                    <a4j:commandLink value="#{var.planificacion}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(1)}" render="frmpanelgeneral" immediate="true"/>
+                    <a4j:commandLink value="#{var.planificacion}" action="#{Supervisor$Contrato.planOperativo()}" render="frmpanelgeneral" immediate="true"/>
                     <h:commandLink value="#{var.flujocaja}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(2)}"  immediate="true"/>
                     <a4j:commandLink value="#{var.reportes}" action="#{Supervisor$Contrato.actualizarSubpantallaPlanOperativo(3)}" render="frmpanelgeneral" immediate="true" />
                 </h:panelGrid>
-
-                <a4j:region rendered="#{Supervisor$Contrato.subpantalla==1}"  id="reg-plan-operativo-planificacion" >
-                    <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-planificacion">
-                        planoperativo
-
-                    </h:panelGroup>
-                </a4j:region>
+                
 
                 <a4j:region rendered="#{Supervisor$Contrato.subpantalla==2}"  id="reg-plan-operativo-flujocaja" >
                     <h:panelGroup layout="block" style="width: 900px;" styleClass="ikont-rp-flujocaja">
@@ -164,26 +134,7 @@
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>
         <ui:include src="/modal/confirmarguardadoconveniopo.xhtml"/>
-        <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
-        <script type="text/javascript">
-           var $j = jQuery.noConflict();
-            $j(window).scroll(function() {
-                if (window.pageYOffset >= 120) {
-                    $('.ikont-hpg-contentmenu:first').css("position", "fixed");
-                    $('.ikont-hpg-contentmenu:first').css("height", "35px");
-                    $('.img-button-ncpo').each(function() {
-                        $(this).addClass('scroll');
-                    });
-                } else {
-                    $('.ikont-hpg-contentmenu:first').css("position", "relative");
-                    $('.ikont-hpg-contentmenu:first').css("height", "80px");
-                    $('.img-button-ncpo').each(function() {
-                        $(this).removeClass('scroll');
-                    });
-                }
-            });
-
-        </script>
+       
     </ui:define>
 
 </ui:composition>

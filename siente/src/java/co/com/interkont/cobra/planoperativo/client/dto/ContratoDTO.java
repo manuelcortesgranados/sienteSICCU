@@ -38,16 +38,34 @@ public class ContratoDTO implements IsSerializable {
     public ContratoDTO() {
     }
 
-    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
-        this.intidcontrato=intidcontrato;
+    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion, String textobjeto, int estadoConvenio, int intduraciondias, Boolean booltipocontratoconvenio, TipocontratoDTO tipocontrato) {
+        this.intidcontrato = intidcontrato;
         this.datefechaini = datefechaini;
         this.datefechafin = datefechafin;
-        this.strnumcontrato = strnumcontrato;
-        this.numvlrcontrato=numvlrcontrato;
         this.datefechaactaini = datefechaactaini;
-        this.intduraciondias= intduraciondias;
+        this.strnumcontrato = strnumcontrato;
+        this.numvlrcontrato = numvlrcontrato;
+        this.datefechacreacion = datefechacreacion;
+        this.textobjeto = textobjeto;
+        this.estadoConvenio = estadoConvenio;
+        this.intduraciondias = intduraciondias;
+        this.booltipocontratoconvenio = booltipocontratoconvenio;
+        this.tipocontrato = tipocontrato;
     }
     
+    
+    
+//    
+//    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
+//        this.intidcontrato=intidcontrato;
+//        this.datefechaini = datefechaini;
+//        this.datefechafin = datefechafin;
+//        this.strnumcontrato = strnumcontrato;
+//        this.numvlrcontrato=numvlrcontrato;
+//        this.datefechaactaini = datefechaactaini;
+//        this.intduraciondias= intduraciondias;
+//    }
+//    
      
 
     /**
