@@ -26,12 +26,15 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.event.DependencyContextMenuEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -161,7 +164,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     @SuppressWarnings("unchecked")
     @Override
     public Widget asWidget() {
-        service.setLog("As widget", null);
+        //service.setLog("As widget", null);
 
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
@@ -369,13 +372,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-            @Override
-            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                //return new DependenciaDTO(1, fromTask,toTask, type);
+                    @Override
+                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                        //return new DependenciaDTO(1, fromTask,toTask, type);
 //                        (String.valueOf(new Date().getTime()), toTask.getOidactiviobra(),  type);
-            }
-        ;
+                    }
+                ;
 
         };
 
@@ -503,34 +506,28 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
-        vc.add(createToolBar(), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
+        vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
+        
+        main.add(new ToolBarSuperior(service));
         main.add(cp);
+
         return main;
     }
 
     // Create ToolBar
-    private ToolBar createToolBar() {
+    private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
         ToolBar tbar = new ToolBar();
 
         // Button to endable/disable cascadeChanges
         final ToggleButton cascade = new ToggleButton("Cambiar a Cascada");
-        cascade.setValue(true);
+        cascade.setValue(false);
         cascade.addSelectHandler(new SelectEvent.SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
-//                PopupPanel popup = new PopupPanel(true);
-//                HTML html = new HTML("<A HREF=" + "\"http://bignosebird.com/index.shtml\"" + ">click</A>");
-//                popup.add(html);
-//                popup.addPopupListener(new PopupListener() {
-//                    public void onPopupClosed(PopupPanel arg0,
-//                            boolean arg1) {
-//                    }
-//                });
-//                popup.show();
-//                popup.center();
-                gantt.getConfig().cascadeChanges = cascade.getValue();
-                gantt.reconfigure(false);
+                convenioDTO= GanttDatos.estructurarDatosConvenio(convenioDTO, tareas, service);
+//                gantt.getConfig().cascadeChanges = cascade.getValue();
+//                gantt.reconfigure(false);
             }
         });
         tbar.add(cascade);
@@ -541,29 +538,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         critical.addSelectHandler(new SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
-                convenioDTO.setDatefechaactaini(new Date());
-                service.setContratoDto(convenioDTO, new AsyncCallback<Boolean>() {
-                    @Override
-                    public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    }
-
-                    @Override
-                    public void onSuccess(Boolean result) {
-                        Window.open("/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml", "_parent", "menubar=si,"
-                                + "location=false,"
-                                + "resizable=no,"
-                                + "scrollbars=si,"
-                                + "status=no,"
-                                + "dependent=true");
-                    }
-                });
-//               
-
-
-                //RootPanel.get.redirect("http://www.matuk.com");
-                //gantt.getConfig().showCriticalPath = critical.getValue();
-                //gantt.reconfigure(true);
+                gantt.getConfig().showCriticalPath = critical.getValue();
+                gantt.reconfigure(true);
             }
         });
         tbar.add(critical);
@@ -640,8 +616,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onSuccess(ContratoDTO result) {
                 convenioDTO = result;
                 if (validandoDatosBasicosConvenio()) {
-
-                    service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
+                   // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
 

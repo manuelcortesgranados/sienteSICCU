@@ -34,27 +34,11 @@
             <ui:insert name="menu"/>
         </h:form>
         <table  align="center" border="0" cellpadding="0" >
+            
             <tr >
               
                 <td  valign="top">
-                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
-                   
-                        <tr>
-                            <td valign="top" height="35">
-                                <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
-                                    <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
-                                        <tr>
-                                            <td>
-                                                <a4j:outputPanel id="panelBody">
-                                                    <ui:insert name="body"/>                                                                                                       
-                                                </a4j:outputPanel>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </h:panelGrid>
-                            </td>
-                        </tr>
-                    </table>
+                    <ui:insert name="body"/>
                 </td>
             </tr>
         </table>

@@ -38,8 +38,7 @@ public class AppPhaseListener implements PhaseListener {
             String viewId = pe.getFacesContext().getViewRoot().getViewId();
 
             if (viewId.endsWith(".xhtml")) {
-                String ManagedBeanName = this.getFileName(viewId);
-                System.out.println("ManagedBeanName = " + ManagedBeanName);
+                String ManagedBeanName = this.getFileName(viewId);               
                 
                 
                 if (ManagedBeanName != null) {

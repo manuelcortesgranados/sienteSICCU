@@ -33,6 +33,9 @@ public interface CobraGwtServiceAbleAsync {
     void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 
     void obtenerRubros(AsyncCallback<List> call);
+    
+    void setNavegacion(int navegacion, AsyncCallback<Boolean> call);
+     void getNavegacion(AsyncCallback<Integer> call);
     //    void agregarContratoTemporal(ContratoDTO contratoDto, AsyncCallback<Void> call) throws Exception;
 //
 //    void agregarTareaTemporal(ActividadObraDTO actividadDto, AsyncCallback<Void> call) throws Exception;
