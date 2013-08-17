@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  *
  * @author desarrollo9
@@ -21,28 +20,20 @@ public interface CobraGwtServiceAbleAsync {
     void obtenerContratoDTO(AsyncCallback<ContratoDTO> call);
 
     void setContratoDto(ContratoDTO contratoDto, AsyncCallback<Boolean> call);
-    
+
     void getContratoDto(AsyncCallback<ContratoDTO> call);
 
     //void casteoContrato(AsyncCallback<ContratoDTO> call);
-
     void setLog(String log, AsyncCallback<Void> call);
 
     //void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
-    
     void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 
     void obtenerRubros(AsyncCallback<List> call);
-    
+
+    void obtenerTiposContrato(AsyncCallback<List> call);
+
     void setNavegacion(int navegacion, AsyncCallback<Boolean> call);
-     void getNavegacion(AsyncCallback<Integer> call);
-    //    void agregarContratoTemporal(ContratoDTO contratoDto, AsyncCallback<Void> call) throws Exception;
-//
-//    void agregarTareaTemporal(ActividadObraDTO actividadDto, AsyncCallback<Void> call) throws Exception;
-//
-//    void actualizarTareaTemporal(ActividadObraDTO actividadDto, AsyncCallback<Void> call) throws Exception;
-//
-//    void agregarDependencia(DependenciaDTO dependenciaDto, AsyncCallback<Void> call) throws Exception;
-//
-//    void eliminarDependencia(DependenciaDTO dependenciaDto, AsyncCallback<Void> call) throws Exception;
+
+    void getNavegacion(AsyncCallback<Integer> call);
 }

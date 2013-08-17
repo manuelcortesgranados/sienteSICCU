@@ -18,6 +18,7 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      private ContratoDTO contrato;
      private ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios;
      private BigDecimal valor;
+     private int tipoaporte;
 
     public RelacionobrafuenterecursoscontratoDTO() {
     }	
@@ -31,6 +32,12 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
     
     public RelacionobrafuenterecursoscontratoDTO(int idrelacionobracontrato, BigDecimal valor) {
        this.idrelacionobracontrato = idrelacionobracontrato;
+       this.valor = valor;
+    }
+    
+     public RelacionobrafuenterecursoscontratoDTO( ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor,int tipor) {
+       this.tipoaporte=tipor;
+       this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
        this.valor = valor;
     }
    
@@ -91,6 +98,20 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      */
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the tipoaporte
+     */
+    public int getTipoaporte() {
+        return tipoaporte;
+    }
+
+    /**
+     * @param tipoaporte the tipoaporte to set
+     */
+    public void setTipoaporte(int tipoaporte) {
+        this.tipoaporte = tipoaporte;
     }
     
     

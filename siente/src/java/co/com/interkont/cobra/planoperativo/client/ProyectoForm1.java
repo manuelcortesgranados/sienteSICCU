@@ -117,6 +117,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         modalPry = di;
         proyectoDTO = new ObraDTO();
         this.contratoDto = contratoDtoP;
+        contratoDto.setValorDisponible(contratoDto.getNumvlrcontrato());
     }
 
     /**
@@ -230,8 +231,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void setFechaFin(DateField fechaFin) {
         this.fechaFin = fechaFin;
     }
-
-   
     EntidadProperties propse = GWT.create(EntidadProperties.class);
     final ListStore<TerceroDTO> entidades = new ListStore<TerceroDTO>(propse.intcodigo());
     RubroProperties props = GWT.create(RubroProperties.class);
@@ -442,8 +441,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 }
                 if (proyectoDTO.getFechaInicio() != null) {
                     if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
-                         varErrorres = true;
-                        msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString()+"\n";
+                        varErrorres = true;
+                        msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "\n";
                     }
                 } else {
                     varErrorres = true;
@@ -451,8 +450,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 }
                 if (proyectoDTO.getFechaFin() != null) {
                     if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
-                       varErrorres = true;
-                        msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString()+"\n";
+                        varErrorres = true;
+                        msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "\n";
                     }
                 }
 
@@ -460,8 +459,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     modalPry.hide();
                     crearActividadPry();
                 } else {
-                     AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
-                     d.show();
+                    AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
+                    d.show();
                 }
 
             }
@@ -571,7 +570,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     public void crearActividadPry() {
         ActividadobraDTO tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
-                0, GanttConfig.TaskType.PARENT, 2, false,proyectoDTO);
+                0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
@@ -599,24 +598,29 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-        if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorcuotagerencia()) > 0) {
-            return "El monto ingresado supera el valor de la fuente de recursos";
-        } else {
-            if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
-                BigDecimal sumaValorAportado = BigDecimal.ZERO;
-                for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
-                    ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
-                    sumaValorAportado = sumaValorAportado.add(obrc.getValor());
-                }
-                sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());
-                if (sumaValorAportado.compareTo(contratoDto.getNumvlrcontrato()) > 0) {
-                    return "Monto no registrado, la suma de los montos aportados supera el valor del convenio";
+        if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
+            if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorcuotagerencia()) > 0) {
+                return "El monto ingresado supera el valor de la fuente de recursos";
+            } else {
+                if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
+                    BigDecimal sumaValorAportado = BigDecimal.ZERO;
+                    for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
+                        ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
+                        sumaValorAportado = sumaValorAportado.add(obrc.getValor());
+                    }
+                    sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());
+                    if (sumaValorAportado.compareTo(contratoDto.getNumvlrcontrato()) > 0) {
+                        return "Monto no registrado, la suma de los montos aportados supera el valor del convenio";
+                    }
                 }
             }
+            proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
+//            contratoDto.setValorDisponible(contratoDto.getValorDisponible().subtract(obraFuenteDto.getValor()));
+//            proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
+            return "El monto ha sido guardado";
         }
-        proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
-        return "El monto ha sido guardado";
+        return "El convenio seleccionado no cuenta con valor disponible";
+        }
 
-    }
-
+    
 }

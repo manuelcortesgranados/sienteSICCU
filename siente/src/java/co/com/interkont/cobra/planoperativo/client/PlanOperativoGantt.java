@@ -268,6 +268,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
         config.taskContextMenu.add(menuItemProyecto);
 
+        final Dialog crearContratoDialog = new Dialog();
+        crearContratoDialog.setHideOnButtonClick(true);
+        crearContratoDialog.setPredefinedButtons();
+        crearContratoDialog.setModal(true);
+        crearContratoDialog.setAnimCollapse(true);
         /**
          * Opciones de la actividad proyecto
          */
@@ -275,8 +280,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
-                crearProyectoDialog.show();
+               ContratoForm contratoForm=new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog,props);
+               crearContratoDialog.add(contratoForm);
+               crearContratoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemContrato);
@@ -285,7 +291,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarPry.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
@@ -307,7 +312,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
@@ -329,8 +333,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemAñadirTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
-                crearProyectoDialog.show();
+               crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemAñadirTarea);

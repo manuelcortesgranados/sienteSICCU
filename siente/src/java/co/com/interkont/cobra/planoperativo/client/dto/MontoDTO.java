@@ -5,6 +5,7 @@
 package co.com.interkont.cobra.planoperativo.client.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.math.BigDecimal;
 
 /**
  *
@@ -15,15 +16,21 @@ public class MontoDTO implements IsSerializable{
      private int idmonto;
      private ContratoDTO contratodto;
      private RubroDTO rubrodto;
-     private int valor;
+     private BigDecimal valor;
      private int vigencia;
 
     public MontoDTO() {
     }
 
-    public MontoDTO(int idmonto, ContratoDTO contratodto, RubroDTO rubro, int valor, int vigencia) {
+    public MontoDTO(int idmonto, ContratoDTO contratodto, RubroDTO rubro, BigDecimal valor, int vigencia) {
         this.idmonto = idmonto;
         this.contratodto = contratodto;
+        this.rubrodto = rubro;
+        this.valor = valor;
+        this.vigencia = vigencia;
+    }
+    
+     public MontoDTO( RubroDTO rubro, BigDecimal valor, int vigencia) {
         this.rubrodto = rubro;
         this.valor = valor;
         this.vigencia = vigencia;
@@ -71,14 +78,14 @@ public class MontoDTO implements IsSerializable{
     /**
      * @return the valor
      */
-    public int getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
     /**
      * @param valor the valor to set
      */
-    public void setValor(int valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

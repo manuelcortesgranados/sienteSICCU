@@ -115,6 +115,11 @@ public class ActividadobraDTO implements IsSerializable {
             TaskType taskType,int tipoActividad, boolean boolobligatoria,ObraDTO obra) {
         this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,obra);
     }
+     
+      public ActividadobraDTO(String name, Date start, int duration, int percentDone,
+            TaskType taskType,int tipoActividad, boolean boolobligatoria,ContratoDTO contrato) {
+        this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,contrato);
+    }
 
     
      public ActividadobraDTO(String id, String name, Date start, int duration,
@@ -129,6 +134,20 @@ public class ActividadobraDTO implements IsSerializable {
         this.boolobligatoria = boolobligatoria;
         this.obra=obraDto;
     }
+     
+       public ActividadobraDTO(String id, String name, Date start, int duration,
+            int percentDone, TaskType taskType, int tipoActividad, boolean boolobligatoria,ContratoDTO contratoDto) {
+        this.id = id;
+        this.name = name;
+        this.startDateTime = start;
+        this.duration = duration;
+        this.percentDone = percentDone;
+        this.taskType = taskType;
+        this.tipoActividad= tipoActividad;
+        this.boolobligatoria = boolobligatoria;
+        this.contrato=contratoDto;
+    }
+
 
 
    

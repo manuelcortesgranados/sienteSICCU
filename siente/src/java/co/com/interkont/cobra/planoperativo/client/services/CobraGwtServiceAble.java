@@ -30,6 +30,7 @@ public interface CobraGwtServiceAble extends RemoteService{
     //public ContratoDTO ObtenerContratoDTO(int idcontrato) throws  Exception;
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini) throws Exception;
     public List obtenerRubros() throws  Exception;
+    public List obtenerTiposContrato() throws  Exception;
     public Boolean setNavegacion(int navegacion);
     public int getNavegacion();
     

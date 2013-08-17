@@ -30,10 +30,13 @@ public class ContratoDTO implements IsSerializable {
     private Boolean booltipocontratoconvenio;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
+    private String nombreAbreviado;
+    private BigDecimal valorDisponible;
     
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
     private Set fuenterecursosconvenios = new HashSet(0);
+    private Set montos = new HashSet(0);
     
     public ContratoDTO() {
     }
@@ -269,7 +272,49 @@ public class ContratoDTO implements IsSerializable {
     public void setIntduraciondias(int intduraciondias) {
         this.intduraciondias = intduraciondias;
     }
-    
+
+    /**
+     * @return the montos
+     */
+    public Set getMontos() {
+        return montos;
+    }
+
+    /**
+     * @param montos the montos to set
+     */
+    public void setMontos(Set montos) {
+        this.montos = montos;
+    }
+
+    /**
+     * @return the nombreAbreviado
+     */
+    public String getNombreAbreviado() {
+        return nombreAbreviado;
+    }
+
+    /**
+     * @param nombreAbreviado the nombreAbreviado to set
+     */
+    public void setNombreAbreviado(String nombreAbreviado) {
+        this.nombreAbreviado = nombreAbreviado;
+    }
+
+    /**
+     * @return the valorDisponible
+     */
+    public BigDecimal getValorDisponible() {
+        return valorDisponible;
+    }
+
+    /**
+     * @param valorDisponible the valorDisponible to set
+     */
+    public void setValorDisponible(BigDecimal valorDisponible) {
+        this.valorDisponible = valorDisponible;
+    }
+
     
    
 }
