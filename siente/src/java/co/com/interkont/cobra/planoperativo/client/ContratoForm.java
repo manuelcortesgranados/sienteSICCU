@@ -329,7 +329,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 //                    msg.show();
 //                } 
 //                
-                
+
                 contrato.getRelacionobrafuenterecursoscontratos().add(rofr);
                 service.setLog("" + contrato.getRelacionobrafuenterecursoscontratos().size(), null);
             }
@@ -339,8 +339,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         PushButton btnVerFuente = new PushButton(new Image(ExampleImages.INSTANCE.addbtnVerMas()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-               
-              }
+            }
         });
         con.add(btnVerFuente, new HtmlData(".verf"));
 
@@ -353,8 +352,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
 //                    AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
 //                    d.show();
 //                } else {
-                    modalContrato.hide();
-                    crearTareaContrato();
+                modalContrato.hide();
+                crearTareaContrato();
 //                }
             }
         });
@@ -494,6 +493,26 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), actividadObraPadre.getDuration(), 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcionActa);
 
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 5, true);
+        lstHijos.add(precontractual);
+
+        List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
+        ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 4, true);
+        lstHijosPrecontra.add(revTecnica);
+        ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.LEAF, 4, true);
+        lstHijosPrecontra.add(elaboPliegos);
+        ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.LEAF, 4, true);
+        lstHijosPrecontra.add(evaPropuestas);
+        ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.LEAF, 4, true);
+        lstHijosPrecontra.add(elaContrato);
+
+        ActividadobraDTO contractua = new ActividadobraDTO("Contractual", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 5, true);
+        lstHijos.add(contractua);
+
+        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 5, true);
+        lstHijos.add(Liquidaciones);
+
+
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, actividadObraContrato);
@@ -505,6 +524,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
         propes.taskType().setValue(actividadObraContrato, GanttConfig.TaskType.PARENT);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraContrato);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraContrato, true);  //tareaSeleccionada.addChild(tareaNueva);
+
+        gantt.getGanttPanel().getContainer().getTreeStore().add(precontractual, lstHijosPrecontra);
+        propes.taskType().setValue(precontractual, GanttConfig.TaskType.PARENT);
+        gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
+        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
 
 
 
@@ -530,7 +554,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 msgValidacion += "*La fecha de suscripcion del acta no puede ser inferior a la fecha de suscripcion del proyecto";
             }
         }
-       
+
         if (contrato.getMontos().isEmpty()) {
             hayError = true;
             msgValidacion += "*El contrato debe de tener por lo menos un monto asociado a el proyecto";
@@ -542,8 +566,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         return hayError;
 
     }
-    
-    public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente){
+
+    public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
         if (relacionFuente.getValor().compareTo(actividadObraPadre.getObra().getValorDisponible()) < 0) {
             if (relacionFuente.getValor().compareTo(relacionFuente.getObrafuenterecursosconvenios().getValor()) > 0) {
                 return "El valor ingresado supera el valor de la fuente de recursos que aporta esta entidad";
@@ -565,8 +589,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
             return "La fuente ha sido guardado";
         }
         return "El proyecto seleccionado no cuenta con valor disponible";
-        }
-    
-    
+    }
     // </editor-fold>
 }
