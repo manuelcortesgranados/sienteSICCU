@@ -76,7 +76,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     ComboBox<TerceroDTO> lstTerceros;
     ComboBox<Integer> lstVigencia;
     ComboBox<TipocontratoDTO> lstTipoContrato;
-    ComboBox<EnumFormaPago> lstFormaPago;
+//    ComboBox<EnumFormaPago> lstFormaPago;
     NumberField<BigDecimal> valorFuente;
     NumberField porcentajeFuente;
     NumberField valorRubro;
@@ -92,10 +92,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
     protected final ListStore<RubroDTO> rubros = new ListStore<RubroDTO>(props.idrubro());
     VigenciaProperties propsv = GWT.create(VigenciaProperties.class);
     protected final ListStore<Integer> vigencias = new ListStore<Integer>(propsv.vigencia());
-    FormaPagoProperties propsforma = GWT.create(FormaPagoProperties.class);
-    protected final ListStore<EnumFormaPago> formasPago = new ListStore<EnumFormaPago>(propsforma.numFormaPago());
-    TipoContratoProperties propstipoContrato = GWT.create(TipoContratoProperties.class);
-    protected final ListStore<TipocontratoDTO> tiposContrato = new ListStore<TipocontratoDTO>(propstipoContrato.inttipocontrato());
+//    FormaPagoProperties propsforma = GWT.create(FormaPagoProperties.class);
+  //  protected final ListStore<EnumFormaPago> formasPago = new ListStore<EnumFormaPago>(propsforma.numFormaPago());
+    //TipoContratoProperties propstipoContrato = GWT.create(TipoContratoProperties.class);
+    //protected final ListStore<TipocontratoDTO> tiposContrato = new ListStore<TipocontratoDTO>(propstipoContrato.inttipocontrato());
     // </editor-fold>
     protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     protected GwtMensajes msj = GWT.create(GwtMensajes.class);
@@ -181,8 +181,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         valorContrato.setWidth(cw);
         con.add(valorContrato, new HtmlData(".valor"));
 
-        llenarListaTipoContrato(tiposContrato);
-        lstTipoContrato = new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato());
+//        llenarListaTipoContrato(tiposContrato);
+    //    lstTipoContrato = new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato());
         lstTipoContrato.setEmptyText("Tipo contratacion");
         lstTipoContrato.setWidth(cw);
         lstTipoContrato.setAllowBlank(false);
@@ -455,11 +455,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     }
 
-    public void llenarFormasPago(final ListStore<EnumFormaPago> formasPago) {
-        for (int i = 0; i < EnumFormaPago.values().length; i++) {
-            formasPago.add(EnumFormaPago.values()[i]);
-        }
-    }
+//    public void llenarFormasPago(final ListStore<EnumFormaPago> formasPago) {
+////        for (int i = 0; i < EnumFormaPago.values().length; i++) {
+////            formasPago.add(EnumFormaPago.values()[i]);
+////        }
+//    }
 
     public ObrafuenterecursosconveniosDTO buscarFuenteDto(int posicion) {
         int i = 0;

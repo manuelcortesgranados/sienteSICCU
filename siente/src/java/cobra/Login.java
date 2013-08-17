@@ -113,6 +113,7 @@ public class Login implements Serializable{
                         getSessionBeanCobra().getCobraService().setAltomapa(getSessionBeanCobra().getBundle().getString("altomapaciudadano"));
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Herramientas");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
+                        getSessionBeanCobra().setLogueado(true);
                     } else {
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"+getSessionBeanCobra().getBundle().getString("versioncobra")+"(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
@@ -120,6 +121,7 @@ public class Login implements Serializable{
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Inicio");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("headertool");
                         getSessionBeanCobra().getCobraService().setCiu(false);
+                        getSessionBeanCobra().setLogueado(true);
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {

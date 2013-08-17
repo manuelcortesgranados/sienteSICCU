@@ -45,7 +45,7 @@
         <!--h:loadScript src="resource://jquery.js"/-->
 
 
-        <rich:toolbar rendered="false">
+        <rich:toolbar >
             <rich:toolbarGroup id="tbgmenugestion">
                 <h:commandLink styleClass="ikont-hcl-siente"  />
             </rich:toolbarGroup>
@@ -673,8 +673,8 @@
             </center>
         </div>
     </div>
-    <div class="ikont-div-scroll-menu">
-        <h:panelGrid onmouseover="mostrarMenuAnimado();
+    <div class="ikont-div-scroll-menu" >
+        <h:panelGrid rendered="#{var.permisonuevodiseño}" onmouseover="mostrarMenuAnimado(); 
                             return  false;" styleClass="ikont-panel-spacing-menu" columns="3">
             <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}"/>   
@@ -748,6 +748,7 @@
 
         </h:panelGroup>
     </div>
+    <!--
     <script type="text/javascript">
                         var j = jQuery.noConflict();
                         j(document).ready(inicializar());
@@ -792,6 +793,7 @@
                         }
                        
     </script>
+    -->
     <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
     <ui:include src="/Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
     <ui:include src="/modal/modalRecordarContra.xhtml"/>

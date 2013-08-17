@@ -153,13 +153,14 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
   @Override
     public List obtenerTiposContrato() throws Exception {
-        List<Tipocontrato> lstTipoContrato = cobraDao.obtenerTipoContrato();
-        List<TipocontratoDTO> lstTipoContratoDto = new ArrayList<TipocontratoDTO>(lstTipoContrato.size());
-        for (Tipocontrato tc : lstTipoContrato) {
-            lstTipoContratoDto.add(new TipocontratoDTO(tc.getInttipocontrato(), tc.getStrdesctipocontrato()));
-        }
+//        //List<Tipocontrato> lstTipoContrato = cobraDao.obtenerTipoContrato();
+//        List<TipocontratoDTO> lstTipoContratoDto = new ArrayList<TipocontratoDTO>(lstTipoContrato.size());
+//        for (Tipocontrato tc : lstTipoContrato) {
+//            lstTipoContratoDto.add(new TipocontratoDTO(tc.getInttipocontrato(), tc.getStrdesctipocontrato()));
+//        }
 
-        return lstTipoContratoDto;
+        //return lstTipoContratoDto;
+      return null;
     }
     
 

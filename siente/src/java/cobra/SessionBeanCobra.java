@@ -13,6 +13,7 @@ import co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Documentoobra;
+import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Modulo;
@@ -94,22 +95,32 @@ public class SessionBeanCobra implements Serializable {
     private boolean ciudadano = true;
     private int obraseguida = 0;
     private CobraGwtServiceAble cobraGwtService;
-    private boolean iniciamapa=true;
+    private boolean iniciamapa = true;
+    private boolean logueado=false;
+
+    public boolean isLogueado() {
+        return logueado;
+    }
+
+    public void setLogueado(boolean logueado) {
+        this.logueado = logueado;
+    }
+    
+    
 
     public boolean isIniciamapa() {
         return iniciamapa;
     }
 
     public void setIniciamapa(boolean iniciamapa) {
-        this.iniciamapa = Boolean.parseBoolean(bundle.getString("iniciamapa"));
+        this.iniciamapa = Boolean.parseBoolean(bundle.getString("iniciaenmapa"));
     }
-    
-    
-    
-/**
- * Variable para el manejo del cargue de contrato en la comunicacion entre gwt y jsf
- */    
-    private boolean cargarcontrato=false;
+
+    /**
+     * Variable para el manejo del cargue de contrato en la comunicacion entre
+     * gwt y jsf
+     */
+    private boolean cargarcontrato = false;
 
     public boolean isCargarcontrato() {
         return cargarcontrato;
@@ -426,12 +437,11 @@ public class SessionBeanCobra implements Serializable {
      */
     public SessionBeanCobra() {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
+        System.out.println("constructor ");
     }
 
     public void llenadodatos() {
-        //setNombreUsuario(getUsuarioObra().getStrnombre() + " " + getUsuarioObra().getStrapellidos());
 
-        //System.out.println(utilDate);
         long lnMilisegundos = utilDate.getTime();
         java.sql.Date sqlDate = new java.sql.Date(lnMilisegundos);
         String dat = "" + sqlDate;
@@ -478,8 +488,8 @@ public class SessionBeanCobra implements Serializable {
         getCobraService().getLog().info("cerrarSesion(" + getUsuarioService().getUsuarioObra().getUsuLogin() + ", " + new Date() + ");");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         //getSessionMap().clear();
-        ExternalContext ctx =
-                FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext ctx
+                = FacesContext.getCurrentInstance().getExternalContext();
         ((HttpSession) ctx.getSession(false)).invalidate();
 
         return "cerrarSession";
@@ -517,9 +527,11 @@ public class SessionBeanCobra implements Serializable {
     }
 
     public void cargarpermisosmodulo(int modulo) {
-        Modulorecurso modulorecurso = new Modulorecurso();
-        getUsuarioService().getUsuarioObra().setRenderrecurso(modulorecurso.validarrecurso(modulo));
 
+        if (getUsuarioService().getUsuarioObra() != null) {            
+            Modulorecurso modulorecurso = new Modulorecurso();
+            getUsuarioService().getUsuarioObra().setRenderrecurso(modulorecurso.validarrecurso(modulo));
+        }
     }
 
     public void errorCapturado() {
@@ -553,7 +565,6 @@ public class SessionBeanCobra implements Serializable {
                         System.out.println("imagen = " + img.getStrubicacion());
                     } else {
 
-
                         System.out.println("Si esta = " + img.getIntidimagen());
 
                     }
@@ -563,7 +574,6 @@ public class SessionBeanCobra implements Serializable {
 
             } else {
                 System.out.println("imagen sin ruta = " + img.getIntidimagen());
-
 
             }
         }
@@ -632,7 +642,6 @@ public class SessionBeanCobra implements Serializable {
             if (doc.getStrubicacion() != null) {
 
                 //if (!img.getStrubicacion().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-/._(%20)]+", " ").equals(img.getStrubicacion())) {
-
                 path = theApplicationsServletContext.getRealPath(doc.getStrubicacion());
                 String pathconespacios = path.replaceAll("%20", " ");
 
@@ -641,7 +650,6 @@ public class SessionBeanCobra implements Serializable {
                     if (imagendoc.getTotalSpace() == 0) {
                         System.out.println("No Esta = " + doc.getOididdoc());
                         System.out.println("Documento= " + doc.getStrubicacion());
-
 
                     } else {
                         // System.out.println("Si esta = " + img.getIntidimagen());
@@ -653,7 +661,6 @@ public class SessionBeanCobra implements Serializable {
                 //}
             } else {
                 System.out.println("Documento sin ruta = " + doc.getOididdoc());
-
 
             }
         }
@@ -753,7 +760,6 @@ public class SessionBeanCobra implements Serializable {
             }
             i++;
 
-
         }
 
         System.out.println("final ");
@@ -815,7 +821,6 @@ public class SessionBeanCobra implements Serializable {
                     }
                     while (i < listaact.size()) {
                         Relacionactividadobraperiodo relacion = new Relacionactividadobraperiodo();
-
 
                         if (!band) {
                             relacion.setFloatcantplanif(0);
@@ -891,7 +896,6 @@ public class SessionBeanCobra implements Serializable {
                 fecha.setTime(obranueva.getDatefeciniobra());
                 while (i < division) {
 
-
                     Periodo pe = new Periodo();
                     pe.setDatefeciniperiodo(fecha.getTime());
                     fecha.add(Calendar.DATE, +(obranueva.getPeriodomedida().getIntnrodiasperiomedida() - 1));
@@ -900,7 +904,6 @@ public class SessionBeanCobra implements Serializable {
                     } else {
                         pe.setDatefecfinperiodo(fecha.getTime());
                     }
-
 
                     pe.setNumvaltotplanif(BigDecimal.ZERO);
                     pe.setObra(obranueva);
@@ -913,9 +916,6 @@ public class SessionBeanCobra implements Serializable {
                 getCobraService().guardarObra(obranueva, getUsuarioService().getUsuarioObra(), -1);
                 j++;
             }
-
-
-
 
         }
         System.out.println("final " + j);
@@ -1052,9 +1052,9 @@ public class SessionBeanCobra implements Serializable {
                 if (res == true) {
                     System.out.println(bundle.getString("errortresrecordarcontrasenia"));
                     FacesUtils.addErrorMessage(bundle.getString("errortresrecordarcontrasenia"));
-                    } else {
+                } else {
                     System.out.println(bundle.getString("errorcuatrorecordarcontrasenia"));
-                     FacesUtils.addErrorMessage(bundle.getString("errorcuatrorecordarcontrasenia"));
+                    FacesUtils.addErrorMessage(bundle.getString("errorcuatrorecordarcontrasenia"));
                 }
             } else {
                 System.out.println(bundle.getString("errordosrecordarcontrasenia"));
@@ -1062,19 +1062,15 @@ public class SessionBeanCobra implements Serializable {
             }
         } else {
             System.out.println(bundle.getString("errorunorecordarcontrasenia"));
-             FacesUtils.addErrorMessage(bundle.getString("errorunorecordarcontrasenia"));
+            FacesUtils.addErrorMessage(bundle.getString("errorunorecordarcontrasenia"));
         }
-        
+
     }
 
     public String prueba() {
         //        System.out.println("id view = " + fc.getViewRoot().getViewId());
         //        System.out.println("this = " + fc.getViewRoot().getId());
         //        System.out.println("Num hijos"+fc.getViewRoot().getChildCount());
-
-
-
-
 
         Iterator lista = FacesContext.getCurrentInstance().getViewRoot().getFacetsAndChildren();
 
@@ -1095,8 +1091,6 @@ public class SessionBeanCobra implements Serializable {
 //
 //
 //            }
-
-
             recorrerListaComponentes(objeto.getFacetsAndChildren());
         }
     }
@@ -1113,8 +1107,8 @@ public class SessionBeanCobra implements Serializable {
         obraseguida = getCiudadanoservice().numeroobrasseguidas(getUsuarioService().getUsuarioObra().getUsuId());
 
     }
-    
-    public String nombreModulo(Modulo modulo){
+
+    public String nombreModulo(Modulo modulo) {
         return modulo.getStrmodNmbre();
     }
 
@@ -1131,13 +1125,33 @@ public class SessionBeanCobra implements Serializable {
     public void setCobraGwtService(CobraGwtServiceAble cobraGwtService) {
         this.cobraGwtService = cobraGwtService;
     }
-    
-    public void logueardesdemapa()
-    {
-        Login bean=(Login) FacesUtils.getManagedBean("login");
+
+    public void logueardesdemapa() {
+        Login bean = (Login) FacesUtils.getManagedBean("login");
         System.out.println("entre a loguear desde m = ");
         bean.usuarioSinRegistro();
+
+    }
+
+    /**
+     * Método para iniciar aplicativo desde el mapa
+     */
+    public  void iniciarDesdeMapa() {         
+            getUsuarioService().setUsuarioObra(new JsfUsuario());
+            getUsuarioObra().setUsuLogin("ciudadano");
+            getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
+            setMensajelogueo("");
+            setTipologueo(getUsuarioService().
+                    encontrarUsuario(getUsuarioObra()));
+            getUsuarioService().getLog().info("Auntentico_en_"
+                    + getBundle().getString("versioncobra") + "_Ciudadano(" + getUsuarioObra().getUsuLogin()
+                    + ", " + new Date() + ", home ");
+            getCobraService().setAltomapa(getBundle().getString("altomapaciudadano"));
+            getCobraService().setHeaderNombre("Herramientas");
+            getCobraService().setHeaderStyle("titletool");
+            setLogueado(true);
         
-    }        
-    
+
+    }
+
 }

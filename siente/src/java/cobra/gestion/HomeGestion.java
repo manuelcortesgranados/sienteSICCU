@@ -10,6 +10,8 @@ import co.com.interkont.cobra.to.Contratista;
 import co.com.interkont.cobra.to.ControlPanel;
 import co.com.interkont.cobra.to.Evento;
 import co.com.interkont.cobra.to.Fase;
+import co.com.interkont.cobra.to.Grupo;
+import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.JsfUsuarioGrupo;
 import co.com.interkont.cobra.to.Localidad;
 import co.com.interkont.cobra.to.Lugarobra;
@@ -35,6 +37,7 @@ import cobra.Supervisor.AdministrarObraNew;
 import cobra.Supervisor.DetalleObra;
 import cobra.Supervisor.EntidadConvenio;
 import cobra.Supervisor.FacesUtils;
+import cobra.Supervisor.ILifeCycleAware;
 import cobra.Supervisor.IngresarNuevaObra;
 import cobra.Supervisor.TerceroEntidadLista;
 import java.io.IOException;
@@ -43,6 +46,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -59,7 +63,7 @@ import org.richfaces.component.UIDataTable;
  *
  * @author desarrollo5
  */
-public class HomeGestion implements Serializable {
+public class HomeGestion implements Serializable, ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -86,11 +90,11 @@ public class HomeGestion implements Serializable {
     /**
      * Listados de grupos al que pertenece el usuario
      */
-    private List<JsfUsuarioGrupo> jsfUsuarioGrupos = new ArrayList<JsfUsuarioGrupo>();
+    //private List<JsfUsuarioGrupo> jsfUsuarioGrupos = new ArrayList<JsfUsuarioGrupo>();
     /**
      * Verdadero si el usuario ha ingresado al sistema sin registrarse
      */
-    private boolean usuarioSinRegistro = true;
+    //private boolean usuarioSinRegistro = true;
 
     /**
      * Get the value of datos_mapa
@@ -101,13 +105,13 @@ public class HomeGestion implements Serializable {
         return lslocalidad;
     }
 
-    public List<JsfUsuarioGrupo> getJsfUsuarioGrupos() {
-        return jsfUsuarioGrupos;
-    }
-
-    public void setJsfUsuarioGrupos(List<JsfUsuarioGrupo> jsfUsuarioGrupos) {
-        this.jsfUsuarioGrupos = jsfUsuarioGrupos;
-    }
+//    public List<JsfUsuarioGrupo> getJsfUsuarioGrupos() {
+//        return jsfUsuarioGrupos;
+//    }
+//
+//    public void setJsfUsuarioGrupos(List<JsfUsuarioGrupo> jsfUsuarioGrupos) {
+//        this.jsfUsuarioGrupos = jsfUsuarioGrupos;
+//    }
 
     public void setLslocalidad(List<Localidad> lslocalidad) {
         this.lslocalidad = lslocalidad;
@@ -141,13 +145,13 @@ public class HomeGestion implements Serializable {
         return UbicacionObra;
     }
 
-    public boolean isUsuarioSinRegistro() {
-        return usuarioSinRegistro;
-    }
-
-    public void setUsuarioSinRegistro(boolean usuarioSinRegistro) {
-        this.usuarioSinRegistro = usuarioSinRegistro;
-    }
+//    public boolean isUsuarioSinRegistro() {
+//        return usuarioSinRegistro;
+//    }
+//
+//    public void setUsuarioSinRegistro(boolean usuarioSinRegistro) {
+//        this.usuarioSinRegistro = usuarioSinRegistro;
+//    }
 
     public void setUbicacionObra(SelectItem[] UbicacionObra) {
         this.UbicacionObra = UbicacionObra;
@@ -636,7 +640,7 @@ public class HomeGestion implements Serializable {
 
     }
 
-    public void iniciarHome() {
+    public final void iniciarHome() {
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
@@ -651,21 +655,24 @@ public class HomeGestion implements Serializable {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
+         if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
+            iniciarSlider();
+         }
         //getPerfilControl().encontrarEtiqueta();
         //Debería utilizarse solo en ciudadano
-        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().btnslider_imagenes_ciudadano) {
-            iniciarSlider();
-        }
-        ////******************
-        jsfUsuarioGrupos = getSessionBeanCobra().getUsuarioService().encontrarGruposxUsuarioxenModulo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 6);
-        Iterator<JsfUsuarioGrupo> itJsfUsuarioGrupos = jsfUsuarioGrupos.iterator();
-
-        while (itJsfUsuarioGrupos.hasNext()) {
-            JsfUsuarioGrupo jsfUsuarioGrupo = itJsfUsuarioGrupos.next();
-            if (jsfUsuarioGrupo.getGrupo().getGruGid() == 22) {
-                usuarioSinRegistro = true;
-            }
-        }
+//        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
+//            iniciarSlider();
+//
+//            jsfUsuarioGrupos = getSessionBeanCobra().getUsuarioService().encontrarGruposxUsuarioxenModulo(getSessionBeanCobra().getUsuarioObra().getUsuId(), 6);
+//            Iterator<JsfUsuarioGrupo> itJsfUsuarioGrupos = jsfUsuarioGrupos.iterator();
+//
+//            while (itJsfUsuarioGrupos.hasNext()) {
+//                JsfUsuarioGrupo jsfUsuarioGrupo = itJsfUsuarioGrupos.next();
+//                if (jsfUsuarioGrupo.getGrupo().getGruGid() == 22) {
+//                    usuarioSinRegistro = true;
+//                }
+//            }
+//        }
 
     }
 
@@ -681,7 +688,6 @@ public class HomeGestion implements Serializable {
     }
 
     public HomeGestion() {
-
         if (getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre() != null) {
             iniciarHome();
         } else {
@@ -747,7 +753,6 @@ public class HomeGestion implements Serializable {
         List<Zonaespecifica> listaZonaespecificas = getSessionBeanCobra().getCobraService().encontrarZonasEspecificas();
         List<Region> listaRegiones = getSessionBeanCobra().getCobraService().encontrarRegion();
 
-
         if (listaFases != null) {
             llenarComboFases(listaFases);
         }
@@ -759,7 +764,6 @@ public class HomeGestion implements Serializable {
         }
         getSessionBeanCobra().llenarPeriodoEvento();
         cargarSubtiposProyecto();
-
 
     }
 
@@ -817,7 +821,6 @@ public class HomeGestion implements Serializable {
             //for (Iterator i = ObrasUsuario.iterator(); i.hasNext();) {
             while (i < listaobrasusu.size()) {
 
-
                 //ObraMapa obra = (ObraMapa) i.next();
                 //Obra obra = listaobrasusu.get(i);
                 VistaObraMapa obra = listaobrasusu.get(i);
@@ -854,7 +857,6 @@ public class HomeGestion implements Serializable {
                 //                    //"<img src=\"/Cobra" + obra.getStrimagenobra() + "\" width=\"160\" height=\"130\" align=\"middle\">"+
                 //                    "</td></tr><tr><td><br></td><td><br>" +
                 //                    "</td></tr>";
-
                 StringBuilder descripcion = new StringBuilder();
                 String version = bundle.getString("versioncobra");
                 String host = bundle.getString("ipserver");//"74.207.234.207";
@@ -1265,7 +1267,6 @@ public class HomeGestion implements Serializable {
             Tipoestadobra tip = (Tipoestadobra) i.next();
             SelectItem opt = new SelectItem(tip.getIntestadoobra(), tip.getStrdesctipoestado());
 
-
             if (!filtro.isIsciu()) {
 
                 tiposEstadoObra[j] = opt;
@@ -1277,7 +1278,6 @@ public class HomeGestion implements Serializable {
                 }
 
             }
-
 
         }
 
@@ -1328,7 +1328,6 @@ public class HomeGestion implements Serializable {
             filtro.setIntcodigoentidad(0);
             j = 1;
         }
-
 
         for (Iterator i = listTercerosUsuario.iterator(); i.hasNext();) {
             Tercero relent = (Tercero) i.next();
@@ -1405,7 +1404,6 @@ public class HomeGestion implements Serializable {
         cargarMapa();
         filtro = new FiltroObra();
 
-
         return null;
     }
 
@@ -1424,7 +1422,7 @@ public class HomeGestion implements Serializable {
         return fechafin;
     }
 
-    protected SessionBeanCobra getSessionBeanCobra() {
+    protected final SessionBeanCobra getSessionBeanCobra() {
         return (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
     }
 
@@ -1646,8 +1644,6 @@ public class HomeGestion implements Serializable {
     }
 
     public String primeroListProyectos() {
-        System.out.println("filtrando = ");
-        System.out.println("palabra clave = " + filtro.getPalabraclave());
         obrasEncontradas = 0;
 
         //listaobrasusu = new ArrayList<Obra>();
@@ -1657,25 +1653,25 @@ public class HomeGestion implements Serializable {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    filtro.setFactorpagina(100);
-                    //filtro.setIntestadoobra(1);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapaCiudadano();
-                    }
+                filtro.setFactorpagina(100);
+                //filtro.setIntestadoobra(1);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
                 } else {
-                    filtro.setFactorpagina(100);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapa();
-                    }
+                    cargarMapaCiudadano();
                 }
+            } else {
+                filtro.setFactorpagina(100);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
+                } else {
+                    cargarMapa();
+                }
+            }
                 break;
             case 2:
                 filtro.setFactorpagina(9);
@@ -1688,7 +1684,6 @@ public class HomeGestion implements Serializable {
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
         }
-
 
         totalfilas = getSessionBeanCobra().getCobraService().encontrarNumeroObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
 
@@ -1722,23 +1717,23 @@ public class HomeGestion implements Serializable {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    // filtro.setIntestadoobra(1);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapaCiudadano();
-                    }
+                // filtro.setIntestadoobra(1);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
                 } else {
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapa();
-                    }
+                    cargarMapaCiudadano();
                 }
+            } else {
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
+                } else {
+                    cargarMapa();
+                }
+            }
                 break;
             case 2:
             case 3:
@@ -1747,9 +1742,7 @@ public class HomeGestion implements Serializable {
                 break;
         }
 
-
         totalfilas = getSessionBeanCobra().getCobraService().encontrarNumeroObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro);
-
 
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
@@ -1782,24 +1775,24 @@ public class HomeGestion implements Serializable {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    //filtro.setIntestadoobra(1);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapaCiudadano();
-                    }
+                //filtro.setIntestadoobra(1);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
                 } else {
-                    //filtro.setIntestadoobra(1);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapa();
-                    }
+                    cargarMapaCiudadano();
                 }
+            } else {
+                //filtro.setIntestadoobra(1);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
+                } else {
+                    cargarMapa();
+                }
+            }
                 break;
             case 2:
             case 3:
@@ -1807,7 +1800,6 @@ public class HomeGestion implements Serializable {
                 listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
                 break;
         }
-
 
         if (totalfilas <= filtro.getFactorpagina()) {
             totalpaginas = 1;
@@ -1837,23 +1829,23 @@ public class HomeGestion implements Serializable {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                    // filtro.setIntestadoobra(1);
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapaCiudadano();
-                    }
+                // filtro.setIntestadoobra(1);
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
                 } else {
-                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                    if (bundle.getString("nuevomapa").equals("true")) {
-                        cargarVallaFonade();
-                    } else {
-                        cargarMapa();
-                    }
+                    cargarMapaCiudadano();
                 }
+            } else {
+                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                if (bundle.getString("nuevomapa").equals("true")) {
+                    cargarVallaFonade();
+                } else {
+                    cargarMapa();
+                }
+            }
                 break;
             case 2:
             case 3:
@@ -1910,7 +1902,6 @@ public class HomeGestion implements Serializable {
                 int totalnov = getSessionBeanCobra().getCobraService().NumtotalNovedades();
                 listaNovedades = getSessionBeanCobra().getCobraService().obtenerUltimasNovedades(totalnov - cantidad, totalnov);
 
-
             }
             //onNovedades = true;
         }
@@ -1948,7 +1939,6 @@ public class HomeGestion implements Serializable {
             listarecientes.add(acti);
 
         }
-
 
         return null;
     }
@@ -2052,7 +2042,6 @@ public class HomeGestion implements Serializable {
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
                 marker.setJsVariable("marker_" + (contador++));
 
-
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
@@ -2076,8 +2065,6 @@ public class HomeGestion implements Serializable {
                 Double asi_va = Double.parseDouble(porcentaje.setScale(2, RoundingMode.HALF_UP).toString());
                 //asi_va = (asi_va * 70) / 100;
                 Double deberia_ir = 0.0;
-
-
 
                 int asi_va_text = (int) Math.floor(asi_va);
                 int deberia_ir_text = 0;
@@ -2111,7 +2098,6 @@ public class HomeGestion implements Serializable {
                     }
                     table_seguidores += "</table>";
                 }
-
 
                 contratistas = (getSessionBeanCobra().getCobraService().obtenerContratistaporobra(obra.getIntcodigoobra()));
                 String list_contratistas = "";
@@ -2392,7 +2378,6 @@ public class HomeGestion implements Serializable {
                 marker.setLongitude(obra.getFloatlongitud().doubleValue() + "");
                 marker.setJsVariable("marker_" + (contador++));
 
-
                 marker.setIcon("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + obra.obtenerPin());
 
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
@@ -2532,7 +2517,7 @@ public class HomeGestion implements Serializable {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
                 descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
-                descripcion.append("<span class=\"imgtipo "+imgTipo+"\">");
+                descripcion.append("<span class=\"imgtipo " + imgTipo + "\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
@@ -2554,7 +2539,7 @@ public class HomeGestion implements Serializable {
                 }
                 descripcion.append(" </div>");
                 descripcion.append("</p>");
-                
+
                 if (obra.getTipoestadobra().getIntestadoobra() != 0) {
                     descripcion.append("<p>");
                     descripcion.append("<div class=\"columna\">");
@@ -2573,7 +2558,7 @@ public class HomeGestion implements Serializable {
                     descripcion.append("</div>");
                     descripcion.append("</p>");
                 }
-                
+
                 descripcion.append("</div>");
                 descripcion.append("</div>");
                 descripcion.append("</div>");
@@ -2692,5 +2677,10 @@ public class HomeGestion implements Serializable {
         filtrog.setLog(1);
         getSessionBeanCobra().getCiudadanoservice().setListaSliderGeneral(getSessionBeanCobra().getCobraService().obtenerUltimasImagenesObrasAlimentadas(filtrog));
 
+    }    
+
+    @Override
+    public void prerender() {
+        
     }
 }

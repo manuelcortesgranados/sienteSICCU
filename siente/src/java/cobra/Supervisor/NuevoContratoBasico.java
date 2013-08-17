@@ -2261,20 +2261,19 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // </editor-fold>
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
-    
-     @Override
+    @Override
     public void prerender() {
-         if(getSessionBeanCobra().isCargarcontrato())
-         {
-            
-            actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());            
-            
+        if (getSessionBeanCobra().isCargarcontrato()) {
+
+            actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
+
             actualizarPanel(2);
             actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
             getSessionBeanCobra().setCargarcontrato(false);
-             
-         }    
+
+        }
     }
+
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -3308,7 +3307,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         buscarproyecto = "";
         contrato = new Contrato();
-        contrato.setTercero(new Tercero());       
+        contrato.setTercero(new Tercero());
         contrato.setEncargofiduciario(new Encargofiduciario());
         contrato.getEncargofiduciario().setIntnumencargofiduciario(0);
         contrato.setNumrecursospropios(BigDecimal.ZERO);
@@ -3321,7 +3320,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         polizacontrato = new Polizacontrato();
         documentoobra = new Documentoobra();
         encargofiduciario = new Encargofiduciario();
-        planificacionpago = new Planificacionpago();     
+        planificacionpago = new Planificacionpago();
         contrato.setPeriodoevento(new Periodoevento());
         contrato.getPeriodoevento().setEvento(new Evento());
         contrato.setModalidadcontratista(new Modalidadcontratista());
@@ -6507,8 +6506,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setListaProyectosCovenio(List<Obra> listaProyectosCovenio) {
         this.listaProyectosCovenio = listaProyectosCovenio;
     }
-    
-    
 
     /**
      * Reportes de plan operativo
@@ -6595,12 +6592,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String planOperativo() {
         try {
-            ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(),getContrato().getDatefechaini(), getContrato().getDatefechafin());
-            ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");            
+            ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
+            ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
 
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
-            
+
             getFlujoCaja().iniciarFlujoCaja();
             return "PlanOperativo";
         } catch (ConvenioException e) {
@@ -6622,8 +6619,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      * @author Carlos Loaiza
      */
-    public void actualizarContratodatosGwt(ContratoDTO contratodto)
-    {
+    public void actualizarContratodatosGwt(ContratoDTO contratodto) {
         contrato.setDatefechaini(contratodto.getDatefechaini());
         contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
@@ -6631,8 +6627,40 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
         contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
         contrato.setTextobjeto(contratodto.getTextobjeto());
-        contrato.setIntduraciondias(contratodto.getIntduraciondias());        
-        
-        
-    }   
+        contrato.setIntduraciondias(contratodto.getIntduraciondias());
+
+    }
+
+    public void calcularValorGerencia() {
+        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
+
+        switch (getFuenteRecursoConvenio().getTipoaporte()) {
+            case 1://porcentual
+                try {
+                if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
+                    getFuenteRecursoConvenio().setPorcentajecuotagerencia(
+                            getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
+                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + getFuenteRecursoConvenio().getPorcentajecuotagerencia());
+                } else {
+                    FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("validarporcentajefuente"));
+                }
+            } catch (ArithmeticException a) {
+                getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ 0.0000");
+            }
+                break;
+            case 2://Valor
+                try {
+                if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
+                    getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
+                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia(getFuenteRecursoConvenio().getPorcentajecuotagerencia() + " %");
+                } else {
+                    FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("validarvalorfuente"));
+                }
+            } catch (ArithmeticException a) {
+                getFuenteRecursoConvenio().setStrporcentajecuotagerencia("0.0000 %");
+            }
+                break;
+        }
+
+    }
 }

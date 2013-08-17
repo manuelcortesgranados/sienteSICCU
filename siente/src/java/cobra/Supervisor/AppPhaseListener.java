@@ -31,16 +31,13 @@ public class AppPhaseListener implements PhaseListener {
 
     public void beforePhase(PhaseEvent pe) {
         FacesContext facesContext = pe.getFacesContext();
-
-        // SessionBeanCobra beanone = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
+        
         if (pe.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 
-            String viewId = pe.getFacesContext().getViewRoot().getViewId();
-
+            String viewId = pe.getFacesContext().getViewRoot().getViewId();            
             if (viewId.endsWith(".xhtml")) {
-                String ManagedBeanName = this.getFileName(viewId);               
-                
-                
+                String ManagedBeanName = this.getFileName(viewId);
+
                 if (ManagedBeanName != null) {
                     if ( //ManagedBeanName.compareTo("administrarObraNew") == 0 || 
                             ManagedBeanName.compareTo("detalleObra") == 0
@@ -58,7 +55,6 @@ public class AppPhaseListener implements PhaseListener {
                         }
 
                         ManagedBeanName = "Supervisor$AdministrarObraNew";
-
                         SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
                         bean.cargarpermisosmodulo(6);
 
@@ -80,7 +76,12 @@ public class AppPhaseListener implements PhaseListener {
                     if (ManagedBeanName.compareTo("home_gestion") == 0) {
 
                         SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
+
+                        if (bean.isIniciamapa() && !bean.isLogueado()) {
+                            bean.iniciarDesdeMapa();
+                        }
                         bean.cargarpermisosmodulo(6);
+
                     }
                     if (ManagedBeanName.compareTo("homeAtencionHumanitaria") == 0) {
 
@@ -96,12 +97,10 @@ public class AppPhaseListener implements PhaseListener {
                     if (ManagedBeanName.compareTo("nuevoContratoPlanOperativo") == 0) {
                         ManagedBeanName = "Supervisor$Contrato";
                     }
-                    if(ManagedBeanName.compareTo("planO") == 0)
-                    {
-                         SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
-                         bean.setCargarcontrato(true);
+                    if (ManagedBeanName.compareTo("planO") == 0) {
+                        SessionBeanCobra bean = (SessionBeanCobra) facesContext.getApplication().evaluateExpressionGet(facesContext, "#{SessionBeanCobra}", SessionBeanCobra.class);
+                        bean.setCargarcontrato(true);
                     }
-                    
 
                 }
 
@@ -111,9 +110,7 @@ public class AppPhaseListener implements PhaseListener {
                     ILifeCycleAware lifeCycleAwareBean = (ILifeCycleAware) object;
                     lifeCycleAwareBean.prerender();
                 }
-
             }
-
         }
 
     }

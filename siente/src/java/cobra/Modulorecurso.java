@@ -74,6 +74,7 @@ public class Modulorecurso implements Serializable {
                         break;
                     
                     case SEGUIMIENTO_SOLICITUDES_APROBADAS:
+                        
                         if (temprecusro.getRecNmbre().equals("nuevo_proyecto")) {
                             renderrecurso.setBtnproyecto(false);
                         }
