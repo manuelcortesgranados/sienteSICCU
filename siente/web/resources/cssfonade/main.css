@@ -1455,27 +1455,27 @@ a.vtitle23:hover{
 }
 
 .img-button-plao.ikont-hcl-img-rptconsolidado{
-   background-position: 0px 0px;
+    background-position: 0px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptcronograma{
-   background-position: -55px 0px;
+    background-position: -55px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptpresupuesto{
-   background-position: -110px 0px;
+    background-position: -110px 0px;
 }
 
 .img-button-plao.ikont-hcl-img-rptflujocaja{
-   background-position: 0px -55px;
+    background-position: 0px -55px;
 }
 
 .img-button-plao.ikont-hcl-img-rptplanoperativo{
-   background-position: -55px -55px;
+    background-position: -55px -55px;
 }
 
 .img-button-plao.ikont-hcl-img-rptplancontratacion{
-   background-position: -110px -55px;
+    background-position: -110px -55px;
 }
 
 .templatetablamenulateral{
@@ -1597,4 +1597,228 @@ input[type="text"], input[type="password"], select{
     height: 33px;
     display: block;
     background-position: 1px -34px;
+}
+
+.ikont-div-mostrar-ingreso {
+    height:40px; width:100%;
+    background-color: #006496;
+    bottom:500px;
+    position:absolute;
+}
+
+.ikont-div-ingreso-usuario{
+    background-color:white;
+    width:100%; height:0px;
+    position: absolute;
+    left: 18px;
+    right: 0px;
+    overflow: hidden;
+    top: 129px;
+    z-index: 4;
+
+}
+.ikont-panel-registo-inicio{
+    left:120px; 
+    width:750px;
+    position:absolute;
+    top:1px;
+    border-spacing: 56px;
+}
+.ikont-outtext-titulo{
+    color: #21992F;
+    font-size: 22px;
+}
+.ikont-outtext-subtitulo{
+    color: #A6A6A6;
+    font-size: 14px;
+}
+
+.ikont-panel-registro{
+    border-spacing: 12px;
+}
+.ikont-hr-separador{
+    background-color: #9C9A9A;
+    height: 1px;
+    width: 395px;
+}
+.ikont-hr-separador-menu{
+    background-color: silver;
+    height: 1px;
+    width: 135px;
+    position: relative;
+    left: 40px;
+    top: -4px;
+}
+.ikont-div-cerrar-panel{
+    height:40px; 
+    width:100%;
+    background-color: #257500;
+    bottom: 0px; position: absolute;
+}
+.ikont-imagenciudadano{
+    height: 30%;
+    padding-top: 20px;
+}
+.ikont-panel-sesion{
+    bottom: 145px;
+    position: relative;
+}
+
+.ikont-link-fb{
+    background-image: url(../imgs/facebook_btn.png);
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 33px;
+    display: block;
+    background-position: 0px 4px;
+
+}
+
+.ikont-hpg-imagenciudadano{
+    position: relative;
+    top : -12px;
+    left: 7px;
+    width: 100px;
+    height: 120px;
+    -moz-border-radius: 10px; 
+    -ms-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    border-radius: 10px; 
+}
+
+.ikont-hpg-pgfotografia{
+    position: relative;
+    top: 10px;
+    width: 80px;
+    height: 100px;
+    -moz-border-radius: 10px; 
+    -ms-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    -o-border-radius: 10px; 
+    border-radius: 10px; 
+    background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
+    background-size : cover;
+    -webkit-background-size : cover;
+    -o-background-size : cover;
+    -moz-background-size : cover;
+    -ms-background-size : cover;
+}
+
+.ikont-div-menu-principal {
+    background-color:white;
+    width:0px; height:100%;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    overflow: hidden;
+    top: 130px;
+    z-index:8;
+    -webkit-box-shadow: 7px 8px 16px #A8A6A4;
+}
+.ikont-bt-cerrar-login1{
+    font-size: 30px; 
+    font-family:italic; 
+    color:#808080;
+    height: 40px;
+    font-size: 24px;
+}
+.ikont-cerrar-panel2{
+    float: left;
+    right:10%;
+    position: absolute;
+}
+.ikont-bt-cerrar-login2{
+    height:40px;
+    font-size: 20px; 
+    font-family:italic; 
+    color:#808080;
+}
+.ikont-menu-inicio-zoom{
+    background-image: url(../imgs/icons_menu_pr.png);
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 34px;
+    display: block;
+    background-size: 34px 332px; 
+    cursor: pointer;
+}
+.ikont-div-menu-zoom{
+    background-position: 0px -3px;
+}
+.ikont-panel-spacing-menu{
+    border-spacing: 4px;
+}
+.ikont-label-estructura-menu{   
+    position: relative;
+    cursor: pointer;
+    vertical-align:middle;
+    background-position: 2px 8px; 
+    font-size: 18px; 
+    color: #37444c;
+}
+.ikont-label-menu{ 
+    width: 120px; 
+    line-height: 26px;
+    color: #1C8F14;    
+}
+.ikont-label-menu1{
+    line-height:11px; 
+    color: #1C8F14;
+}
+.ikont-label-menu-item { 
+    font-size: 15px; 
+    width: 120px; 
+    line-height: 26px;
+    color: #37444c;
+}
+.ikont-label-menu-buscar-proyecto { 
+    font-size: 12px; 
+    width: 120px; 
+    color: #808080;
+    font-style: italic;
+    line-height: 26px;
+}
+.ikont-label-menu-estr-sub-titulo{ 
+    font-size: 16px; 
+    width: 120px; 
+    color: #808080;
+    line-height: 26px;
+}
+.ikont-div-menu-zoom-inicio{
+    background-position: 0px -52px;
+}
+.ikont-div-menu-zoom-crear-proyecto{
+    background-position: 0px -96px;
+}
+.ikont-div-menu-zoom-reportes{
+    background-position: 0px -142px;
+}
+.ikont-div-menu-zoom-convenios{
+    background-position: 0px -194px;
+}
+.ikont-div-menu-zoom-contratos{
+    background-position: 0px -246px;
+}
+.ikont-div-menu-zoom-ayuda{
+    background-position: 0px -294px;
+}
+.ikont-espacio-sub-menu{
+    position: relative;
+    left: 40px;
+    top: -10px;
+}
+.kont-contenedor-menu{
+    left:30px;
+    height:40px;width:260px;
+    position:absolute;
+    top:20px;
+}
+
+.ikont-hr-separador-inicial{
+    background-color: #C0C0C0;
+    height: 1px;
+    width: 100%;
+}
+.ikont-place-holder{
+    color: #257500;
 }

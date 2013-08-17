@@ -67,12 +67,12 @@
                                 </h:panelGroup>
                                 <interkont:spacer height="3"/>
                                 <a4j:commandButton id="borrarDatos_Imagen" action="#{Ciudadano$PerfilCiudadano.borrarImagenCorreo}"
-                                                   render="pgfotografia, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
+                                                   render="pgfotografia,pgfotografianueva, info, upload" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}" value="#{var.boarcsub}"
                                                    styleClass="ikont-acl-borrardatosimagen"     />
                                 <a4j:commandButton action="#{Ciudadano$PerfilCiudadano.guardarImagenTemporal}" id="BTaceptarImagen"
                                                    value="#{var.aceptar}" oncomplete="#{rich:component('modalImagenCorreo')}.hide();
                                              return false;" rendered="#{Ciudadano$PerfilCiudadano.cargadorFoto.numArchivos>0}"
-                                                   render="pgfotografia"
+                                                   render="pgfotografia,pgfotografianueva"
                                                    />
                             </center>
                         </h:panelGroup>

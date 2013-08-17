@@ -49,6 +49,10 @@ public class Usuario implements Serializable {
      * registrado
      */
     private SelectItem[] deptosusuariooption;
+    /* Variable para  listar los departamentos
+     */
+    private SelectItem[] localidadusuario;
+    /**
     /**
      * Variable para mostrar un selectitem con los municipios
      */
@@ -270,7 +274,13 @@ public class Usuario implements Serializable {
     public void setDeptosusuariooption(SelectItem[] deptosusuariooption) {
         this.deptosusuariooption = deptosusuariooption;
     }
+ public SelectItem[] getLocalidadusuario() {
+        return localidadusuario;
+    }
 
+    public void setLocalidadusuario(SelectItem[] localidadusuario) {
+        this.localidadusuario = localidadusuario;
+    }
     public SelectItem[] getEstadocivilsoption() {
         return estadocivilsoption;
     }
@@ -354,6 +364,7 @@ public class Usuario implements Serializable {
         llenarGeneros();
         llenarEstadoCivil();
         llenarTiposIdentificacion();
+         llenarlocalidadusuario();
 
     }
 
@@ -535,6 +546,18 @@ public class Usuario implements Serializable {
         for (Localidad depto : listaDeptos) {
             SelectItem dep = new SelectItem(depto.getStrcodigolocalidad(), depto.getStrdepartamento());
             deptosusuariooption[i++] = dep;
+        }
+    }
+     
+     public void llenarlocalidadusuario() {
+        List<Localidad> listaDeptos = getSessionBeanCobra().getCobraService().encontrarDepartamentos();
+       localidadusuario = new SelectItem[listaDeptos.size()];
+
+        int i = 0;
+
+        for (Localidad depto : listaDeptos) {
+            SelectItem dep = new SelectItem(depto.getStrcodigolocalidad(), depto.getStrdepartamento());
+            localidadusuario[i++] = dep;
         }
     }
     /**
