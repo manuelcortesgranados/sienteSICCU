@@ -8,7 +8,6 @@
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
-
     <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
         <div class="topbar"><div > <h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
             <div id="iconosientw" class="sienteicon">
@@ -748,16 +747,16 @@
 
         </h:panelGroup>
     </div>
-    <!--
+
+
     <script type="text/javascript">
-                        var j = jQuery.noConflict();
-                        j(document).ready(inicializar());
+                        j = jQuery;
+                        jQuery(document).ready(inicializar());
 
                         function  inicializar() {
 // esconderIngreso();
                             var divMenuPrincipal = j('.ikont-div-menu-principal');
                             divMenuPrincipal.mouseleave(esconderMenuAnimado);
-
                         }
 
                         function esconderIngreso() {
@@ -772,7 +771,6 @@
                         function esconderIngresoAnimado() {
                             var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
                             divIngresoUsuario.stop().animate({height: '0px'});
-
                         }
 //Menu
                         function mostrarMenuAnimado() {
@@ -791,9 +789,9 @@
                             var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
                             cbMostrarMenu.show();
                         }
-                       
+
     </script>
-    -->
+
     <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
     <ui:include src="/Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
     <ui:include src="/modal/modalRecordarContra.xhtml"/>
