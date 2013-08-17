@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 
 import com.google.gwt.user.client.rpc.IsSerializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -24,6 +25,8 @@ public class ObraDTO implements IsSerializable {
     private Set objetivoses = new HashSet(0);
     private Set obrafuenterecursosconvenioses = new HashSet(0);
     private Set actividadobras = new LinkedHashSet(0);
+    private BigDecimal valorDisponible;
+    private BigDecimal valor;
 
     public ObraDTO() {
     }
@@ -131,6 +134,34 @@ public class ObraDTO implements IsSerializable {
      */
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
+    }
+
+    /**
+     * @return the valorDisponible
+     */
+    public BigDecimal getValorDisponible() {
+        return valorDisponible;
+    }
+
+    /**
+     * @param valorDisponible the valorDisponible to set
+     */
+    public void setValorDisponible(BigDecimal valorDisponible) {
+        this.valorDisponible = valorDisponible;
+    }
+
+    /**
+     * @return the valor
+     */
+    public BigDecimal getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
     
     

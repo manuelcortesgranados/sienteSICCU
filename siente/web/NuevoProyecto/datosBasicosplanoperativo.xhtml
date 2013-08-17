@@ -76,19 +76,19 @@
                 <h:panelGrid columns="2" cellpadding="10" cellspacing="20" id="hpg-fuenter-conv">
                     <h:panelGroup>
                         <rich:select id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.tercero.intcodigo}" required="true">
-                        <f:selectItems value="#{Supervisor$Contrato.entidades}" />
-                    </rich:select>
+                            <f:selectItems value="#{Supervisor$Contrato.entidades}" />
+                        </rich:select>
                         <rich:message for="rs-entidad"  />
                     </h:panelGroup>
-                    
+
                     <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.reservaiva}" >
                         <rich:placeholder value="#{var.reservaiva}" />
                     </h:inputText>
 
                     <h:panelGroup>
                         <rich:select id="rs-roles" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.fuenteRecursoConvenio.rolentidad.idrolentidad}" required="true" requiredMessage="Ingresar el rol" >
-                        <f:selectItems value="#{Supervisor$Contrato.roles}" />
-                    </rich:select>
+                            <f:selectItems value="#{Supervisor$Contrato.roles}" />
+                        </rich:select>
                         <rich:message for="rs-roles"  />
                     </h:panelGroup>
 
@@ -98,33 +98,45 @@
 
 
                 </h:panelGrid>
+
+                <h:panelGrid id="hpg-fuenter-valoraportado" columns="1" cellspacing="5" >
+                    <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valoraportado}" required="true" >
+                        <rich:placeholder value="#{var.valoraportado}" />
+                        <f:validateDoubleRange minimum="0"/>
+                        <f:validateLength maximum="26" minimum="1"/>
+                    </h:inputText>
+                    <rich:message for="hit-valoraportado-convenio"  />
+                </h:panelGrid>
+                <h:panelGrid id="hpg-fuenter-cuotag" columns="4" cellspacing="5" >
+                    <h:panelGroup>
+                        <h:inputText id="hit-cuotagerencia-convenio" required="true" disabled="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte==2}" >
+                            <rich:placeholder value="#{var.cuotagerencia}" />
+                            <f:validateDoubleRange minimum="0"  />
+                            <f:validateLength maximum="26" minimum="1" />
+                        </h:inputText>
+                        <rich:message for="hit-cuotagerencia-convenio"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}" required="true">
+                            <f:selectItems value="#{Supervisor$Contrato.tipoAporte}"  />
+                            <a4j:ajax event="selectitem" execute="hit-cuotagerencia-convenio, hit-valorgerencia-convenio, hit-valoraportado-convenio"/>
+                        </rich:select> 
+                        <rich:message for="rs-tipoaporte"  />
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:inputText id="hit-valorgerencia-convenio" disabled="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte==1}"
+                                     value="#{Supervisor$Contrato.fuenteRecursoConvenio.porcentajecuotagerencia}"  onkeypress="return validar(event);" required="true">
+                            <f:validateDoubleRange minimum="0" maximum="100"/>
+                            <f:validateLength maximum="9" minimum="1"/>
+                            <rich:placeholder value="Cuota Gerencia" />
+                        </h:inputText>
+                        <rich:message for="hit-valorgerencia-convenio"  />
+                    </h:panelGroup>
+                </h:panelGrid> 
+
             </a4j:region>
-
-            <h:panelGrid id="hpg-fuenter-cuotag" columns="4" cellspacing="5" >
-
-                <h:inputText id="hit-cuotagerencia-convenio" readonly="true">
-                    <rich:placeholder value="#{var.cuotagerencia}" />
-                </h:inputText>
-                <h:panelGroup>
-                    <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.fuenteRecursoConvenio.tipoaporte}" required="true">
-                    <f:selectItems value="#{Supervisor$Contrato.tipoAporte}"  />
-                </rich:select> 
-                    <rich:message for="rs-tipoaporte"  />
-                </h:panelGroup>
-                <h:panelGroup>
-                    <h:inputText id="hit-valorgerencia-convenio" value="#{Supervisor$Contrato.fuenteRecursoConvenio.valorcuotagerencia}"  onkeypress="return validar(event);" required="true">
-                    <f:validateLongRange minimum="0"/>
-                    <f:validateLength maximum="26" minimum="1"/>
-                    <rich:placeholder value="cuota gerencia" />
-                </h:inputText>
-                    <rich:message for="hit-valorgerencia-convenio"  />
-                </h:panelGroup>
-
-            </h:panelGrid> 
-
-
             <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
-                <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.adicionarFuenteRecursos}" render="hpg-fuenter-conv,hpg-fuenter-cuotag" execute="hpg-fuenter-conv,hpg-fuenter-cuotag" >
+                <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.adicionarFuenteRecursos}" render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado" execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado" >
 
                 </a4j:commandLink>
                 <a4j:commandLink value="#{var.ver}"  oncomplete="#{rich:component('ver-fuenterecursos')}.show();"   render="ver-fuenterecursos," immediate="true"/>

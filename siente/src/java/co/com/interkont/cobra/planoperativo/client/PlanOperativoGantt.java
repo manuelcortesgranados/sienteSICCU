@@ -26,13 +26,15 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.event.DependencyContextMenuEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -60,7 +62,6 @@ import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.SpinnerField;
-import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.HeaderGroupConfig;
@@ -158,13 +159,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * Almacena la dependencia que ha sido seleccionada en el gantt
      */
     private DependenciaDTO dependenciaSeleccionada;
-    
-    GwtMensajes msj=GWT.create(GwtMensajes.class);
+    GwtMensajes msj = GWT.create(GwtMensajes.class);
 
     @SuppressWarnings("unchecked")
     @Override
     public Widget asWidget() {
-        service.setLog("As widget", null);
+        //service.setLog("As widget", null);
 
         final TreeStore<ActividadobraDTO> taskStore = new TreeStore<ActividadobraDTO>(props.key());
         taskStore.setAutoCommit(true);
@@ -246,7 +246,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //        /**
 //         * Formulario del Proyecto
 //         */
-        final ProyectoForm proyectoForm = new ProyectoForm();
+        final ContratoForm proyectoForm = new ContratoForm();
 //        crearProyectoDialog.add(proyectoForm);
 
         /**
@@ -261,16 +261,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemProyecto.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                service.setLog("papa en gannt" + tareaSeleccionada.getChildren().size(),null);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(convenioDTO,tareaSeleccionada);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO);
                 crearProyectoDialog.add(proyectoForm1);
-
-                //proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemProyecto);
 
+        final Dialog crearContratoDialog = new Dialog();
+        crearContratoDialog.setHideOnButtonClick(true);
+        crearContratoDialog.setPredefinedButtons();
+        crearContratoDialog.setModal(true);
+        crearContratoDialog.setAnimCollapse(true);
         /**
          * Opciones de la actividad proyecto
          */
@@ -278,8 +280,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
-                crearProyectoDialog.show();
+               ContratoForm contratoForm=new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog,props);
+               crearContratoDialog.add(contratoForm);
+               crearContratoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemContrato);
@@ -288,7 +291,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarPry.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
@@ -310,7 +312,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
                 crearProyectoDialog.show();
             }
         });
@@ -332,8 +333,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemAñadirTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                proyectoForm.getNombreProyectoTextField().setText(tareaSeleccionada.getName());
-                crearProyectoDialog.show();
+               crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemAñadirTarea);
@@ -375,13 +375,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-            @Override
-            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                //return new DependenciaDTO(1, fromTask,toTask, type);
+                    @Override
+                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                        //return new DependenciaDTO(1, fromTask,toTask, type);
 //                        (String.valueOf(new Date().getTime()), toTask.getOidactiviobra(),  type);
-            }
-        ;
+                    }
+                ;
 
         };
 
@@ -509,24 +509,28 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
-        vc.add(createToolBar(), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
+        vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
+        
+        main.add(new ToolBarSuperior(service));
         main.add(cp);
+
         return main;
     }
 
     // Create ToolBar
-    private ToolBar createToolBar() {
+    private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
         ToolBar tbar = new ToolBar();
 
         // Button to endable/disable cascadeChanges
         final ToggleButton cascade = new ToggleButton("Cambiar a Cascada");
-        cascade.setValue(true);
+        cascade.setValue(false);
         cascade.addSelectHandler(new SelectEvent.SelectHandler() {
             @Override
             public void onSelect(SelectEvent event) {
-                gantt.getConfig().cascadeChanges = cascade.getValue();
-                gantt.reconfigure(false);
+                convenioDTO= GanttDatos.estructurarDatosConvenio(convenioDTO, tareas, service);
+//                gantt.getConfig().cascadeChanges = cascade.getValue();
+//                gantt.reconfigure(false);
             }
         });
         tbar.add(cascade);
@@ -604,8 +608,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     }
 
     public void cargar() {
-        //Cargando el convenio
-        service.getContratoDTO(new AsyncCallback<ContratoDTO>() {
+        //Cargando el convenio        
+        service.obtenerContratoDTO(new AsyncCallback<ContratoDTO>() {
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error cargando convenio", null);
@@ -615,8 +619,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onSuccess(ContratoDTO result) {
                 convenioDTO = result;
                 if (validandoDatosBasicosConvenio()) {
-
-                    service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
+                   // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
 

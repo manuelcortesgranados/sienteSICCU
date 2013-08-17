@@ -916,7 +916,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * to allocate resources that will be required for rendering this page.</p>
      */
     @Override
-    public void prender() {
+    public void prerender() {
 
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 

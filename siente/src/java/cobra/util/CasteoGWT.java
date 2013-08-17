@@ -14,8 +14,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.Task;
 import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
@@ -31,11 +29,9 @@ import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -54,11 +50,15 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
-        ContratoDTO contratoDTO = new ContratoDTO(contrato.getIntidcontrato(),contrato.getDatefechaini(), contrato.getDatefechafin(), contrato.getStrnumcontrato(), contrato.getNumvlrcontrato(), contrato.getFechaactaini(), contrato.getIntduraciondias());
-        contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
-        contratoDTO.setGerenteconvenio(castearTerceroToTerceroDTO(contrato.getGerenteconvenio()));
-        if (!contrato.getActividadobras().isEmpty()) {
-            Iterator it = contrato.getActividadobras().iterator();
+        ContratoDTO contratoDTO = new ContratoDTO(contrato.getIntidcontrato(), contrato.getDatefechaini(), contrato.getDatefechafin(), 
+                contrato.getFechaactaini(), contrato.getStrnumcontrato(),contrato.getNumvlrcontrato(), contrato.getDatefechacreacion(),
+                contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(),contrato.getIntduraciondias(),
+                contrato.getBooltipocontratoconvenio(), castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
+                
+                contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
+        
+                 if (!contrato.getActividadobras().isEmpty()) {
+                        Iterator it = contrato.getActividadobras().iterator();
             contratoDTO.getActividadobras().add(castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO));
 //            Iterator ite = contratoDTO.getActividadobras().iterator();
 //            ActividadobraDTO actDto = (ActividadobraDTO) ite.next();
@@ -211,11 +211,14 @@ public class CasteoGWT {
      * 
      * @author Dgarcia
      **/
-    public static ContratoDTO castearContratoToContratoTO(Contrato contratoD, ContratoDTO convenio) {
-        ContratoDTO contrato = new ContratoDTO(contratoD.getIntidcontrato(),contratoD.getDatefechaini(), contratoD.getDatefechafin(), contratoD.getStrnumcontrato(), contratoD.getNumvlrcontrato(), contratoD.getFechaactaini(), contratoD.getIntduraciondias());
-        contrato.setTipocontrato(castearTipoContratoDTOToTipoContratoDTO(contratoD.getTipocontrato()));
-        contrato.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
-        return contrato;
+    public static ContratoDTO castearContratoToContratoTO(Contrato contrato, ContratoDTO convenio) {
+        ContratoDTO contratodto = new ContratoDTO(contrato.getIntidcontrato(), contrato.getDatefechaini(), contrato.getDatefechafin(), 
+                contrato.getFechaactaini(), contrato.getStrnumcontrato(),contrato.getNumvlrcontrato(), contrato.getDatefechacreacion(),
+                contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(),contrato.getIntduraciondias(),
+                contrato.getBooltipocontratoconvenio(), castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
+                
+        contratodto.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
+        return contratodto;
     }
 
     /*
@@ -334,23 +337,23 @@ public class CasteoGWT {
         return fuenteRecursoDto;
     }
 
-    /*metodos relacionados con el casteo de ContratoDTO a Contrato*/
-    /*
-     * metodo que se encarga de convertir una contratoDTO a contrato
-     * junto con todas las relaciones que el trae(Gerente convenio,lista de fuente recursos)
-     * @param ContratoDTO contratoDTO el cual va a castear.
-     * 
-     * @author Dgarcia
-     **/
-    public static Contrato castearContratoToContratoTO(ContratoDTO contratoDTO) {
-        Contrato convenio = new Contrato(contratoDTO.getDatefechaini(), contratoDTO.getDatefechafin(), contratoDTO.getStrnumcontrato(), contratoDTO.getNumvlrcontrato(), contratoDTO.getDatefechacreacion());
-        convenio.setGerenteconvenio(castearTerceroDTOToTercero(contratoDTO.getGerenteconvenio()));
-        convenio.setFuenterecursosconvenios(castearSetFuenteRecursosConvenioTo(contratoDTO.getFuenterecursosconvenios(), convenio));
-        Iterator it = contratoDTO.getActividadobras().iterator();
-        convenio.getActividadobras().add(castearActividadObraDTORaiz((ActividadobraDTO) it.next(), convenio));
-
-        return convenio;
-    }
+//    /*metodos relacionados con el casteo de ContratoDTO a Contrato*/
+//    /*
+//     * metodo que se encarga de convertir una contratoDTO a contrato
+//     * junto con todas las relaciones que el trae(Gerente convenio,lista de fuente recursos)
+//     * @param ContratoDTO contratoDTO el cual va a castear.
+//     * 
+//     * @author Dgarcia
+//     **/
+//    public static Contrato castearContratoDtoToContratoTO(ContratoDTO contratoDTO) {
+//        Contrato convenio = new Contrato(contratoDTO.getDatefechaini(), contratoDTO.getDatefechafin(), contratoDTO.getStrnumcontrato(), contratoDTO.getNumvlrcontrato(), contratoDTO.getDatefechacreacion());
+//        //convenio.setGerenteconvenio(castearTerceroDTOToTercero(contratoDTO.getGerenteconvenio()));
+//        //convenio.setFuenterecursosconvenios(castearSetFuenteRecursosConvenioTo(contratoDTO.getFuenterecursosconvenios(), convenio));
+//        //Iterator it = contratoDTO.getActividadobras().iterator();
+//        //convenio.getActividadobras().add(castearActividadObraDTORaiz((ActividadobraDTO) it.next(), convenio));
+//
+//        return convenio;
+//    }
 
     /*
      * metodo que se encarga de convertir una FuenterecursosconvenioDTO a Fuenterecursosconvenio
@@ -625,4 +628,22 @@ public class CasteoGWT {
          
          return act;
      }
+     
+      /*
+     * metodo que se encarga de actualizar el contrato con los datos provenientes del plan operativo
+     * @param ContratoDto Objeto convenio utilizado en GWT.     
+     * 
+     * @author Carlos Loaiza
+     */
+//     public static void castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion,int peso) { 
+//         ActividadobraDTO act= new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion,peso,tipoTask(parametricaactidadobligatoria.getTipoparametrica()), 
+//                 parametricaactidadobligatoria.getTipoparametrica(),parametricaactidadobligatoria.getBoolobligatoria());
+//         
+//         //act.setName(parametricaactidadobligatoria.getStrdescripcion());
+//         //act.setTaskType(tipoTask(parametricaactidadobligatoria.getTipoparametrica()));
+//         ///Falta pensar los hijo main.sets
+//         
+//         return act;
+//     }
+     
 }

@@ -1604,7 +1604,8 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         }
     }
 
-    public void prender() {
+    @Override
+    public void prerender() {
         try {
             id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
             if (id != null) {

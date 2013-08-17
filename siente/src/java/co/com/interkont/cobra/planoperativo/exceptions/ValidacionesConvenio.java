@@ -60,7 +60,7 @@ public class ValidacionesConvenio {
    public static void validarTamanoLista(List lista, String nombrelista) {
             if(lista.isEmpty())
             {
-                //throw new ConvenioException("Debe diligenciar "+nombrelista);  
+                throw new ConvenioException("Debe diligenciar la "+nombrelista);  
             }    
         
     }

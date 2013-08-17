@@ -14,7 +14,7 @@
     <ui:define name="head" />
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-consultarentidadesnacionales"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Entidades Nacionales" />
+        <h:outputText  styleClass="ikont-hot-consultarentidadesnacionales"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon}"/><h:outputText value=" Entidades Nacionales" rendered="#{var.varconsulcontratoconvenio}" />
     </ui:define>
 
     <ui:define name="menu">
@@ -117,7 +117,7 @@
 
                             <rich:columnGroup>
                                 <rich:column colspan="10">
-                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{var.conveniosporcontratante}" />
+                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{var.conveniosporcontratante}" rendered="#{var.varconsulcontratoconvenio}"/>
                                 </rich:column>
                             </rich:columnGroup>
 

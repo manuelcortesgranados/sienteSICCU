@@ -66,7 +66,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
     }
     
     @Override
-    public void prender() {
+    public void prerender() {
         id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
         if (id != null ) {
             if (getObra() != null && id != null) {

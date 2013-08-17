@@ -5,7 +5,6 @@
 package cobra.Supervisor;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.exceptions.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
 import co.com.interkont.cobra.to.Actividadobra;
@@ -53,7 +52,6 @@ import cobra.PlanOperativo.FlujoCaja;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.CasteoGWT;
 import cobra.util.RutasWebArchivos;
-import com.gantt.client.config.GanttConfig;
 import com.interkont.cobra.exception.ArchivoExistenteException;
 import coral.dao.DataAccessLayerException;
 import java.io.FileNotFoundException;
@@ -66,12 +64,10 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
@@ -80,7 +76,6 @@ import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
-import javax.swing.text.StyledEditorKit;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page. This class
@@ -95,7 +90,7 @@ import javax.swing.text.StyledEditorKit;
  * @author carlosalbertoloaizaguerrero
  * @author Leonardo Montes
  */
-public class NuevoContratoBasico implements Serializable {
+public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
@@ -832,6 +827,7 @@ public class NuevoContratoBasico implements Serializable {
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
+    private List<Obra> listaProyectosCovenio;
     private int reportoption;
     private int subpantalla;
     /**
@@ -2265,6 +2261,20 @@ public class NuevoContratoBasico implements Serializable {
     // </editor-fold>
     private List<Tercero> lstentidades = new ArrayList<Tercero>();
 
+    
+     @Override
+    public void prerender() {
+         if(getSessionBeanCobra().isCargarcontrato())
+         {
+            
+            actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());            
+            
+            actualizarPanel(2);
+            actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
+            getSessionBeanCobra().setCargarcontrato(false);
+             
+         }    
+    }
     /**
      * <p>Construct a new Page bean instance.</p>
      */
@@ -2287,6 +2297,7 @@ public class NuevoContratoBasico implements Serializable {
         } else {
             fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
             lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+            listaProyectosCovenio = new ArrayList<Obra>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
             llenarEntidades();
@@ -2984,9 +2995,6 @@ public class NuevoContratoBasico implements Serializable {
      */
     public void iniciarConvenio(ActionEvent event) {//se invoca desde menu_lateral_gestion
 //       Iniciar los metodos para llenar la tabla de flujo caja si este tiene plan operativo
-        if (Propiedad.getValor("conplanoperativo").equals("true")) {
-            getFlujoCaja().iniciarFlujoCaja();
-        }
         booltipocontratoconvenio = true;
         tipoContCon = "Convenio";
         boolcontrconsultoria = false;
@@ -3300,45 +3308,20 @@ public class NuevoContratoBasico implements Serializable {
         }
         buscarproyecto = "";
         contrato = new Contrato();
-//        contrato.setContrato(new Contrato());
-//
-//        if (contrpadre != null) {
-//            contrpadre.setContrato(new Contrato());
-//            contrpadre.setDatefechafin(new Date());
-//            contrpadre.setDatefechaini(new Date());
-//        }
-
-        contrato.setTercero(new Tercero());
-
-        ////Inicializando variables del formulario
-//        contrato.setIntidcontrato(0);
-//        contrato.setStrnombre(null);
-//        contrato.setStrnumcontrato(null);
+        contrato.setTercero(new Tercero());       
         contrato.setEncargofiduciario(new Encargofiduciario());
         contrato.getEncargofiduciario().setIntnumencargofiduciario(0);
-//        contrato.setDatefechaini(null);
-//        contrato.setDatefechafin(null);
-//        contrato.setIntduraciondias(null);
-//        contrato.setTextobjeto(null);
-//        contrato.setContratista(new Contratista());
         contrato.setNumrecursospropios(BigDecimal.ZERO);
         contrato.setNumrecursosch(BigDecimal.ZERO);
         contrato.setNumrecursostercero(BigDecimal.ZERO);
         contrato.setNumvlrcontrato(BigDecimal.ZERO);
         contrato.setFormapago(new Formapago());
-//        contrato.setDocumentoobras(new HashSet());
+        contrato.setEstadoconvenio(new Estadoconvenio(1));
         contrato.setBooleantienehijos(false);
-
         polizacontrato = new Polizacontrato();
         documentoobra = new Documentoobra();
         encargofiduciario = new Encargofiduciario();
-        planificacionpago = new Planificacionpago();
-
-        //contrato.setEncargofiduciario(new Encargofiduciario());
-        //contrato.setFormapago(new Formapago());
-//        contrato.setPlanificacionpagos(new HashSet());
-//        contrato.setPolizacontratos(new HashSet());
-        // contrato.setDocumentoobras(new HashSet());
+        planificacionpago = new Planificacionpago();     
         contrato.setPeriodoevento(new Periodoevento());
         contrato.getPeriodoevento().setEvento(new Evento());
         contrato.setModalidadcontratista(new Modalidadcontratista());
@@ -3352,6 +3335,8 @@ public class NuevoContratoBasico implements Serializable {
         listaContratosPadre.clear();
         listapolizas.clear();
         listaPolizacontratos.clear();
+        lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+        listaProyectosCovenio = new ArrayList<Obra>();
 
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
@@ -6328,7 +6313,6 @@ public class NuevoContratoBasico implements Serializable {
      *      
      */
     public void llenarEntidades() {
-        List<Tercero> lstentidades = new ArrayList<Tercero>();
         lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
         setEntidades(new SelectItem[lstentidades.size()]);
         int i = 0;
@@ -6516,6 +6500,16 @@ public class NuevoContratoBasico implements Serializable {
         this.lstFuentesRecursos = lstFuentesRecursos;
     }
 
+    public List<Obra> getListaProyectosCovenio() {
+        return listaProyectosCovenio;
+    }
+
+    public void setListaProyectosCovenio(List<Obra> listaProyectosCovenio) {
+        this.listaProyectosCovenio = listaProyectosCovenio;
+    }
+    
+    
+
     /**
      * Reportes de plan operativo
      *
@@ -6604,7 +6598,10 @@ public class NuevoContratoBasico implements Serializable {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(),getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");            
             ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
-            getSessionBeanCobra().getCobraGwtService().setContratoDTO(CasteoGWT.castearContratoToContratoDTO(contrato));
+
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
+            
+            getFlujoCaja().iniciarFlujoCaja();
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
@@ -6618,4 +6615,24 @@ public class NuevoContratoBasico implements Serializable {
         variabletitulo = Propiedad.getValor("segundoplanoperativo");
         return "nuevoConvenioPo";
     }
+
+    /*
+     * metodo que se encarga de actualizar el contrato con los datos provenientes del plan operativo
+     * @param ContratoDto Objeto convenio utilizado en GWT.     
+     * 
+     * @author Carlos Loaiza
+     */
+    public void actualizarContratodatosGwt(ContratoDTO contratodto)
+    {
+        contrato.setDatefechaini(contratodto.getDatefechaini());
+        contrato.setDatefechafin(contratodto.getDatefechafin());
+        contrato.setFechaactaini(contratodto.getDatefechaactaini());
+        contrato.setStrnumcontrato(contratodto.getStrnumcontrato());
+        contrato.setNumvlrcontrato(contratodto.getNumvlrcontrato());
+        contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
+        contrato.setTextobjeto(contratodto.getTextobjeto());
+        contrato.setIntduraciondias(contratodto.getIntduraciondias());        
+        
+        
+    }   
 }

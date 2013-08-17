@@ -1,10 +1,5 @@
 /* ---------- tipos de fuentes --------------*/
 
-@font-face {
-    font-family: "open";
-    src: url("font/open.ttf");
-}
-
 input, select, textarea, button, keygen, isindex, legend, a {
 	font-size: '#{richSkin.generalSizeFont}';
 	font-family: '#{richSkin.generalFamilyFont}';
@@ -78,31 +73,21 @@ input, select, textarea, button, keygen, isindex {
 	color: '#{richSkin.generalTextColor}';
 }
 button, input[type="reset"], input[type="submit"], input[type="button"] {
-	border-color: '#{richSkin.borderColor}';
-        border-width: '#{richSkin.borderWeight}';
-        border-style: '#{richSkin.borderStyle}';
 	font-size: '#{richSkin.generalSizeFont}';
 	font-family: '#{richSkin.generalFamilyFont}';
         font-weight: '#{richSkin.headerWeightFont}';
-	color: '#{richSkin.headerTextColor}';
-	background-repeat: repeat-x;
-	background-position: top left;
+	color: '#{richSkin.colorTextButton}';
 	background-color: '#{richSkin.headerBackgroundColor}';
-        background-image: "url(#{resource['org.richfaces.images:buttonBackgroundImage.png']})";
         padding: 5px 10px;
-	border-radius:'#{richSkin.borderRadius}';
+	border-radius:'#{richSkin.borderRadiusButton}';
+        margin-right: '#{richSkin.marginRightButton}';
 }
 button:hover, input[type="reset"]:hover, input[type="submit"]:hover, input[type="button"]:hover {
-	background-position: bottom left;
-	background-repeat: repeat-x;
-        background-image: "url(#{resource['org.richfaces.images:buttonHoverBackgroundImage.png']})";
+	background-color: '#{richSkin.backgraudButtonHover}';
 }
 button[disabled], input[type="reset"][disabled], input[type="submit"][disabled], input[type="button"][disabled] {
 	color: #cccccc;
-	border-color: '#{richSkin.headerBackgroundColor}';
-	background-color: '#{richSkin.headerGradientColor}';
-        background-image: "url(#{resource['org.richfaces.images:buttonHoverBackgroundImage.png']})";
-	background-position: top left;
+	background-color: '#{richSkin.backgraudButtonHover}';
 }
 input[type="text"], input[type="password"], select {
 	border-color: '#{richSkin.borderColor}';
@@ -132,9 +117,10 @@ textarea{
 	background-position: top left;
 	background-color: '#{richSkin.backgrouninput}';
         background-image: none;
-        width:'#{richSkin.widthInputText}';
+        width:'#{richSkin.widthInputText}!important';
 	height: 50px;
         padding-left:3px;
+        resize: none;
 }
 textarea[disabled], input[type="text"][disabled], input[type="password"][disabled], select[disabled] {
 	color: '#{richSkin.headerBackgroundColor}';
@@ -195,14 +181,17 @@ textarea[disabled], input[type="text"][disabled], input[type="password"][disable
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: 18px;
     font-weight:400;
-    font-style:italic;
-    text-indent: 30px;
-    line-height: 25px;
-    text-align: left;
+    
+}
+
+#header_content .ubicacion > span {
     border-bottom-style: solid;
-    border-bottom-width: thin;
+    border-bottom-width: 1px;
     border-bottom-color: '#{richSkin.tituloUbicacionBorderBottom}';
-    background-position:center left;
+}
+
+#header_content .ubicacion {
+    text-align: center;
 }
 
 .templatetablamenulateral{

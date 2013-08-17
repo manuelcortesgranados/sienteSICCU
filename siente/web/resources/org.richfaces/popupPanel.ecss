@@ -17,9 +17,9 @@
     height: 100%;
     top: 0px;
     left: 0px;
-    background-color: #000000;
-    opacity: 0.5;
-    filter: 'alpha(opacity=50)';
+    background-color: #FFF;
+    opacity: 0.7;
+    filter: 'alpha(opacity=70)';
 }
 
 .rf-pp-shdw {
@@ -36,14 +36,16 @@
 
 .rf-pp-cntr {
     background: transparent;
+    box-shadow: 0px 0px 50px #000;
+    -webkit-box-shadow: 0px 0px 50px #000;
+    -moz-box-shadow: 0px 0px 50px #000;
+    -o-box-shadow: 0px 0px 50px #000;
+    -ms-box-shadow: 0px 0px 50px #000;
     z-index: 100;
 }
 
 .rf-pp-hdr {
-    background: "url(#{resource['org.richfaces.images:gradientA.png']})";
-    background-position: top left;
-    background-repeat: repeat-x;
-    background-color : '#{richSkin.headerBackgroundColor}';
+    background-color : '#{richSkin.popuppanelheaderBackgroundColor}';
     position: relative;
     padding-left: 10px;
     cursor: move;
@@ -63,11 +65,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: '#{richSkin.headerWeightFont}';
-    color: '#{richSkin.headerTextColor}';
+    color: '#{richSkin.popuppanelheaderTextColor}';
     font-family: '#{richSkin.headerFamilyFont}';
-    font-size: '#{richSkin.headerSizeFont}';
-    padding: 2px;
-    padding-left: 10px;
+    font-size: '#{richSkin.popuppanelheaderSizeFont}';
+    text-align: center;
+    background: "url(#{resource['imgs.valla:modal_btn_sombra.png']})";
+    background-position: top left;
+    background-repeat: repeat-x;
+
 }
 
 .rf-pp-hdr-cntrls {
@@ -87,10 +92,6 @@
     font-size: 22px;
     color:'#{richSkin.headerTextColor}';
     text-decoration: none;
-}
-
-.rf-pp-hdr-cntrls  a:hover {
-    text-shadow: '2px 2px 2px #{richSkin.headerTextColor}';
 }
 
 .rf-pp-cnt-scrlr {

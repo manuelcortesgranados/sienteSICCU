@@ -8,14 +8,10 @@
 }
 
 .rf-ac-itm-hdr {
-    border-color: '#{richSkin.borderColor}';
-    border-width: '#{richSkin.borderWeight}';
-    border-style: '#{richSkin.borderStyle}';
     border-radius: '#{richSkin.borderRadius}';
-    background-image: "url(#{resource['org.richfaces.images:gradientA.png']})";
     background-repeat: repeat-x;
     background-position: top left;
-    background-color: '#{richSkin.headerBackgroundColor}';
+    background-color: '#{richSkin.fondoparaacordiones}';
     position: relative;
     padding: 8px 10px 7px 10px;
     font-weight: '#{richSkin.headerWeightFont}';
@@ -23,9 +19,11 @@
     font-family: '#{richSkin.headerFamilyFont}';
     font-size: '#{richSkin.headerSizeFont}';
     cursor: pointer;
+    border-bottom: 1px dashed #58595B;
     /* gain layout trigger for IE7 */
     min-height: 0px;
     width : 100%;
+
 }
 
 .rf-ac-itm-cnt {
@@ -83,11 +81,11 @@
 }
 
 .rf-ac-itm-lbl-act {
-    color: '#{richSkin.headerTextColor}';
+    color: '#{richSkin.acordionefuentecolor}';
 }
 
 .rf-ac-itm-lbl-inact {
-    color: '#{richSkin.headerTextColor}';
+    color: '#{richSkin.acordionefuentecolor}';
 }
 
 .rf-ac-itm-hdr-act .rf-ac-itm-ico-act {

@@ -24,30 +24,51 @@ public class ContratoDTO implements IsSerializable {
     private String strnumcontrato;
     private BigDecimal numvlrcontrato;
     private Date datefechacreacion;
-    private String textobjeto;
-    private TerceroDTO gerenteconvenio;
-    private Set fuenterecursosconvenios = new HashSet(0);
+    private String textobjeto;       
     private int estadoConvenio;
     private int intduraciondias;
+    private Boolean booltipocontratoconvenio;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
-    private Boolean booltipocontratoconvenio;
+    private String nombreAbreviado;
+    private BigDecimal valorDisponible;
+    
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
-
+    private Set fuenterecursosconvenios = new HashSet(0);
+    private Set montos = new HashSet(0);
+    
     public ContratoDTO() {
     }
 
-    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
-        this.intidcontrato=intidcontrato;
+    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion, String textobjeto, int estadoConvenio, int intduraciondias, Boolean booltipocontratoconvenio, TipocontratoDTO tipocontrato) {
+        this.intidcontrato = intidcontrato;
         this.datefechaini = datefechaini;
         this.datefechafin = datefechafin;
-        this.strnumcontrato = strnumcontrato;
-        this.numvlrcontrato=numvlrcontrato;
         this.datefechaactaini = datefechaactaini;
-        this.intduraciondias= intduraciondias;
+        this.strnumcontrato = strnumcontrato;
+        this.numvlrcontrato = numvlrcontrato;
+        this.datefechacreacion = datefechacreacion;
+        this.textobjeto = textobjeto;
+        this.estadoConvenio = estadoConvenio;
+        this.intduraciondias = intduraciondias;
+        this.booltipocontratoconvenio = booltipocontratoconvenio;
+        this.tipocontrato = tipocontrato;
     }
     
+    
+    
+//    
+//    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
+//        this.intidcontrato=intidcontrato;
+//        this.datefechaini = datefechaini;
+//        this.datefechafin = datefechafin;
+//        this.strnumcontrato = strnumcontrato;
+//        this.numvlrcontrato=numvlrcontrato;
+//        this.datefechaactaini = datefechaactaini;
+//        this.intduraciondias= intduraciondias;
+//    }
+//    
      
 
     /**
@@ -190,21 +211,7 @@ public class ContratoDTO implements IsSerializable {
     public void setTextobjeto(String textobjeto) {
         this.textobjeto = textobjeto;
     }
-
-    /**
-     * @return the gerenteconvenio
-     */
-    public TerceroDTO getGerenteconvenio() {
-        return gerenteconvenio;
-    }
-
-    /**
-     * @param gerenteconvenio the gerenteconvenio to set
-     */
-    public void setGerenteconvenio(TerceroDTO gerenteconvenio) {
-        this.gerenteconvenio = gerenteconvenio;
-    }
-
+    
     
     /**
      * @return the tipocontrato
@@ -265,7 +272,49 @@ public class ContratoDTO implements IsSerializable {
     public void setIntduraciondias(int intduraciondias) {
         this.intduraciondias = intduraciondias;
     }
-    
+
+    /**
+     * @return the montos
+     */
+    public Set getMontos() {
+        return montos;
+    }
+
+    /**
+     * @param montos the montos to set
+     */
+    public void setMontos(Set montos) {
+        this.montos = montos;
+    }
+
+    /**
+     * @return the nombreAbreviado
+     */
+    public String getNombreAbreviado() {
+        return nombreAbreviado;
+    }
+
+    /**
+     * @param nombreAbreviado the nombreAbreviado to set
+     */
+    public void setNombreAbreviado(String nombreAbreviado) {
+        this.nombreAbreviado = nombreAbreviado;
+    }
+
+    /**
+     * @return the valorDisponible
+     */
+    public BigDecimal getValorDisponible() {
+        return valorDisponible;
+    }
+
+    /**
+     * @param valorDisponible the valorDisponible to set
+     */
+    public void setValorDisponible(BigDecimal valorDisponible) {
+        this.valorDisponible = valorDisponible;
+    }
+
     
    
 }

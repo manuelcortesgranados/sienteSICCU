@@ -47,7 +47,7 @@ input.rf-sel-inp {
     background-image: url("#{resource['imgs:dd_menu.png']}");
     cursor: pointer;
     width: 15px;
-    height: 23px;
+    height: '#{richSkin.heightInputText}';
     display: inline-block;
 }
 
@@ -68,9 +68,9 @@ input.rf-sel-inp {
 }
 
 .rf-sel-lst-dcrtn {
-    border-width: 1px;
+    border-width: 0px;
     border-style: solid;
-    border-color: '#{richSkin.panelBorderColor}';
+    border-color: transparent;
     padding: 0px;
     background-color: '#{richSkin.tableBackgroundColor}';
 }
@@ -94,6 +94,7 @@ input.rf-sel-inp {
     border-width: 1px;
     border-style: dotted;
     border-color: '#{richSkin.generalTextColor}';
+    color : '#{richSkin.headerTextColor}';
 }
 
 .rf-sel-shdw {
@@ -102,8 +103,8 @@ input.rf-sel-inp {
     position: absolute;
     float: left;
     padding: 6px 6px 6px 6px;
-    top: -6px;
-    left: -7px;
+    top: -4px;
+    left: -3px;
 }
 
 .rf-sel-shdw-t {

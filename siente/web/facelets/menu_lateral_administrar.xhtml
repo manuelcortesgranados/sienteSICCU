@@ -8,8 +8,6 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
 >
-
-
     <rich:panel header="Administrar Proyecto" id="menuAdministrar" rendered="#{!SessionBeanCobra.cobraService.ciu}" >
         <h:panelGrid columns="3" cellpadding="0" cellspacing="0" >
             <h:panelGrid styleClass="ikont-hpg-btndetalle"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
@@ -85,7 +83,7 @@
                 <a4j:commandLink styleClass="ikont-acl-eliminaravance text-button-panel"   value="Eliminar último avance" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"
                                  render="panelBody"/>
             </h:panelGrid>
-            <h:panelGrid styleClass="ikont-hpg-revisioninformacion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null or SessionBeanCobra.usuarioObra.renderrecurso.btn_habilitar_validacion }">
+            <h:panelGrid styleClass="ikont-hpg-revisioninformacion"   cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsolicitarValInf and Supervisor$AdministrarObraNew.obra.solicitud_obra !=null}">
 
                 <a4j:commandLink  styleClass="ikont-acl-revisioninformacion img-button-panel"    execute="@this" immediate="true"
                                 onclick="document.location.href='#{var.reportehistorialvalidaciones}#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';" />                                    

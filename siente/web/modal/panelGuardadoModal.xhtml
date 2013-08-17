@@ -26,11 +26,13 @@
         </f:facet>
         <h:panelGroup layout="block" styleClass="ikont-rp-guardado"   >
             <h:form>
-                <h:panelGrid id="layoutGuardado">
-                    <h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" />
-                    <h:outputText  styleClass="ikont-hot-strnombreobra"   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"/>
-                    <h:outputText  styleClass="ikont-hot-hasidoalimentadaexitosa"   value="#{var.hasidoalimentadaexitosa}" />
-                </h:panelGrid>
+                <center><h:outputText  styleClass="ikont-hot-laobra"   value="#{var.laobra}" /></center>
+                <center><h:outputText  styleClass="ikont-hot-strnombreobra"   value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}"/></center>
+                <center><h:outputText  styleClass="ikont-hot-hasidoalimentadaexitosa"   value="#{var.hasidoalimentadaexitosa}" /></center>
+                    
+                    
+                    
+             
                 <center>
                     <a4j:commandButton id="BTaceptarGuardado" value="#{var.aceptar}" action="#{Supervisor$Alimentar.iraDetalle}"
                                        oncomplete="#{rich:component('panelGuardadoAlimentar')}.hide(); return true;"

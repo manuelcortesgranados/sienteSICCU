@@ -94,8 +94,30 @@ public class SessionBeanCobra implements Serializable {
     private boolean ciudadano = true;
     private int obraseguida = 0;
     private CobraGwtServiceAble cobraGwtService;
+    private boolean iniciamapa=true;
+
+    public boolean isIniciamapa() {
+        return iniciamapa;
+    }
+
+    public void setIniciamapa(boolean iniciamapa) {
+        this.iniciamapa = Boolean.parseBoolean(bundle.getString("iniciamapa"));
+    }
     
     
+    
+/**
+ * Variable para el manejo del cargue de contrato en la comunicacion entre gwt y jsf
+ */    
+    private boolean cargarcontrato=false;
+
+    public boolean isCargarcontrato() {
+        return cargarcontrato;
+    }
+
+    public void setCargarcontrato(boolean cargarcontrato) {
+        this.cargarcontrato = cargarcontrato;
+    }
 
     public int getObraseguida() {
         return obraseguida;
@@ -1109,4 +1131,13 @@ public class SessionBeanCobra implements Serializable {
     public void setCobraGwtService(CobraGwtServiceAble cobraGwtService) {
         this.cobraGwtService = cobraGwtService;
     }
+    
+    public void logueardesdemapa()
+    {
+        Login bean=(Login) FacesUtils.getManagedBean("login");
+        System.out.println("entre a loguear desde m = ");
+        bean.usuarioSinRegistro();
+        
+    }        
+    
 }

@@ -1,28 +1,21 @@
 .rf-cp {
-    background-color: '#{richSkin.generalBackgroundColor}';
-    color: '#{richSkin.panelBorderColor}';
+    background-color: '#{richSkin.fondoheaderscontenidoscolapsibles}';
+    color: '#{richSkin.colofuentecontenidoscolapsibles}';
     padding: 1px;
 }
 
 .rf-cp-hdr {
     cursor: pointer;
-    background-color: '#{richSkin.headerBackgroundColor}';
-    border-top-left-radius: '#{richSkin.borderRadius}';
-    border-top-right-radius: '#{richSkin.borderRadius}';
+    background-color: '#{richSkin.colorfondoheaders}';
     font-size: '#{richSkin.headerSizeFont}';
-    color: '#{richSkin.headerTextColor}';
+    color: '#{richSkin.colorletraheaders}';
     font-weight: '#{richSkin.headerWeightFont}';
     font-family: '#{richSkin.headerFamilyFont}';
     padding: 2px;
-    border-color: '#{richSkin.borderColor}';
-    border-width: '#{richSkin.borderWeight}';
-    border-style: '#{richSkin.borderStyle}';
-    border-bottom-color: transparent;
-    border-bottom-width: '#{richSkin.borderWeight}';
-    border-bottom-style: 0px;
     background-position: top left;
     background-repeat: repeat-x;
-    background-image: "url(#{resource['org.richfaces.images:gradientA.png']})";
+    background-image: none;
+    border-bottom: 1px dashed #58595B;
 }
 
 .rf-cp-hdr-exp {
@@ -69,7 +62,7 @@
 }
 
 .rf-cp-lbl {
-    color : '#{richSkin.headerTextColor}';
+    color : '#{richSkin.colofuentecontenidoscolapsibles}';
 }
 
 .rf-cp-lbl-colps {

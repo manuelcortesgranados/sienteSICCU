@@ -21,14 +21,19 @@ import java.util.List;
 @RemoteServiceRelativePath("springGwtServices/cobraGwtServiceAble")
 public interface CobraGwtServiceAble extends RemoteService{    
     
-    public ContratoDTO getContratoDTO();
-    public void setContratoDTO(ContratoDTO contrato);
-    public ContratoDTO casteoContrato() throws Exception;    
+    public ContratoDTO obtenerContratoDTO();
+    public Boolean setContratoDto(ContratoDTO contrato);
+    public ContratoDTO getContratoDto();
+    //public ContratoDTO casteoContrato() throws Exception;    
     public void setLog(String log) throws Exception;
     //    Metodo Para obtener el contrato 
-    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws  Exception;
+    //public ContratoDTO ObtenerContratoDTO(int idcontrato) throws  Exception;
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini) throws Exception;
     public List obtenerRubros() throws  Exception;
+    public List obtenerTiposContrato() throws  Exception;
+    public Boolean setNavegacion(int navegacion);
+    public int getNavegacion();
+    
 //    public void agregarContratoTemporal(ContratoDTO contratoDto)throws Exception;
 //    public void agregarTareaTemporal(ActividadObraDTO actividadDto) throws Exception;
 //    public void actualizarTareaTemporal(ActividadObraDTO actividadDto)throws Exception;
