@@ -7,7 +7,7 @@
                     xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-    <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="false" width="350" 
+    <rich:popupPanel height="200" id="panelConfirmaGuardar" resizeable="true" width="350" 
                      headerClass="rich-panel-header" >
         <f:facet name="header" >
             <h:panelGroup >
@@ -38,21 +38,22 @@
                                              return false;">
                             </a4j:commandButton>
                         </center>
-                        <h:panelGrid columns="2">
+                        <center>
+                            <h:panelGrid columns="2">
 
-                            <a4j:commandButton value="#{var.si}" id="BTaceptar" action="#{Supervisor$Alimentar.finalizarModal_action}" 
-                                               oncomplete="#{rich:component('panelGuardadoAlimentar')}.show();#{rich:component('panelConfirmaGuardar')}.hide()"
-                                               execute="@this" immediate="true" rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
+                                <a4j:commandButton value="#{var.si}" id="BTaceptar" action="#{Supervisor$Alimentar.finalizarModal_action}" 
+                                                   oncomplete="#{rich:component('panelGuardadoAlimentar')}.show();#{rich:component('panelConfirmaGuardar')}.hide()"
+                                                   execute="@this" immediate="true" rendered="#{Supervisor$Alimentar.estadoalimentar==1}">
 
-                            </a4j:commandButton>                           
+                                </a4j:commandButton>                           
 
-                            <a4j:commandButton id="BTcancelar" value="#{var.no}"
-                                               rendered="#{Supervisor$Alimentar.estadoalimentar==1}" >
-                                <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.hide();"/>
-                            </a4j:commandButton>
-                        </h:panelGrid>
+                                <a4j:commandButton id="BTcancelar" value="#{var.no}"
+                                                   rendered="#{Supervisor$Alimentar.estadoalimentar==1}" >
+                                    <a4j:ajax oncomplete="true" onbeforesubmit="#{rich:component('panelConfirmaGuardar')}.hide();"/>
+                                </a4j:commandButton>
+                            </h:panelGrid>
 
-
+                        </center>
                     </h:panelGrid>
                 </center>
             </h:panelGroup>
