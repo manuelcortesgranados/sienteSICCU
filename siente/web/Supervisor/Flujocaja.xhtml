@@ -114,6 +114,17 @@
                     </h:outputText>
                 </center>
             </rich:column>
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Contrapartidas" />
+                </f:facet>
+                <center>
+                    <h:outputText id="hotcontrapartida" value="#{fuenteEgresos.contrapartida}" style="width: 30%; text-align: right;">
+                        <f:convertNumber currencySymbol="$ " type="currency" />
+                    </h:outputText>
+                </center>
+            </rich:column>
+            
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                 <rich:column>                    
                     <f:facet name="header">                        
