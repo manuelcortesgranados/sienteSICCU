@@ -38,13 +38,14 @@
                     <center>
                         <h:inputText value="#{fuenteIngresos.planMovimientosConvenioEntidad.get(columna).valor}" 
                                      rendered="#{fuenteIngresos.ingresoEntidad}" style="width: 30%; text-align: right">
-                            <f:validateLongRange minimum="0" maximum="99" />
+                            <f:validateDoubleRange minimum="0" />
                             <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
                         </h:inputText>  
                     </center>
                     <center>
                         <h:inputText value="#{fuenteIngresos.planMovimientosIngresosConvenio.get(columna).valor}" style="width: 30%; text-align: right"
                                      rendered="#{!fuenteIngresos.ingresoEntidad}">
+                             <f:validateDoubleRange minimum="0" />
                             <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
                         </h:inputText>
                     </center>
@@ -126,6 +127,17 @@
                     </h:outputText>
                 </center>
             </rich:column>
+            <rich:column>
+                <f:facet name="header">
+                    <h:outputLabel value="Contrapartidas" />
+                </f:facet>
+                <center>
+                    <h:inputText id="hotcontrapartida" value="#{fuenteEgresos.contrapartida}" style="width: 30%; text-align: right;" rendered="#{fuenteEgresos.egresoProyecto}">
+                        <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:inputText>
+                </center>
+            </rich:column>
+            
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                 <rich:column>                    
                     <f:facet name="header">                        
