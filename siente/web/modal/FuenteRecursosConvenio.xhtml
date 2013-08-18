@@ -28,7 +28,61 @@
         </f:facet>
         <h:form>
             <center>
-                
+                <rich:dataTable id="fuenteRecurso"
+                                var="fuente"
+                                value="#{Supervisor$Contrato.lstFuentesRecursos}"
+                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                                sortMode="single"
+                                style="text-align:center;"
+                                rowKeyVar="filaSeleccionada"
+                                >                                      
+                    <f:facet name="header">
+                        <rich:columnGroup>
+                            <rich:column colspan="7" id="titulo">
+                                <h:outputText value="#{var.fuenterecurso} "/>
+                            </rich:column>
+                            <rich:column width="200px" breakRowBefore="true">
+                                <h:outputText value="#{var.entidad}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.rol}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.reservaiva}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.otrasreservas}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.cuotagerencia}"/>
+                            </rich:column>
+                            <rich:column width="200px">
+                                <h:outputText value="#{var.eliminar}"/>
+                            </rich:column>
+                        </rich:columnGroup>      
+                    </f:facet>
+                    <rich:columnGroup id="cuepofuente">
+                        <rich:column width="200px" breakRowBefore="true">
+                            <h:outputText value="#{fuente.tercero.intcodigo}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{fuente.rolentidad.idrolentidad}"/>
+                        </rich:column>
+                        <rich:column>
+                            <h:outputText value="#{fuente.reservaiva}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText value="#{fuente.otrasreservas}"/>
+                        </rich:column>
+                        <rich:column >
+                            <h:outputText value="#{fuente.valorcuotagerencia}"/>
+                        </rich:column>
+                        <rich:column>
+                            <a4j:commandLink   value="#{var.eliminar}" id="bt_eliminarfuente" action="#{Supervisor$Contrato.eliminarFuenteRecursos(filaSeleccionada)}"/>
+                        </rich:column>
+                    </rich:columnGroup>
+                </rich:dataTable>
             </center>
 
         </h:form>

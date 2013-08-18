@@ -807,10 +807,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     private boolean habilitarBtnGuardarCancelarContrato = false;
     /*
-     * variables para realizar la carga de las entidades 
-     */
-    private SelectItem[] entidades;
-    /*
      * variables para realizar la carga de los gerentes de convenio
      */
     private SelectItem[] gerentesDeConvenio;
@@ -830,6 +826,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setRecursosconvenio(RecursosConvenio recursosconvenio) {
         this.recursosconvenio = recursosconvenio;
     }   
+
+    public List<Tercero> getLstentidades() {
+        return lstentidades;
+    }
+
+    public void setLstentidades(List<Tercero> lstentidades) {
+        this.lstentidades = lstentidades;
+    }
+    
+    
     
     /*
      * variables para realizar la carga del tipo de aporte
@@ -2279,6 +2285,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             actualizarPanel(2);
             actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
+            if(getSubpantalla()==2)
+            {
+                getFlujoCaja().iniciarFlujoCaja();
+            }    
             getSessionBeanCobra().setCargarcontrato(false);
 
         }
@@ -6292,12 +6302,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void llenarEntidades() {
         lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
-        setEntidades(new SelectItem[lstentidades.size()]);
-        int i = 0;
-        for (Tercero tercero : lstentidades) {
-            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
-            getEntidades()[i++] = itTercero;
-        }
+//        setEntidades(new SelectItem[lstentidades.size()]);
+//        int i = 0;
+//        for (Tercero tercero : lstentidades) {
+//            SelectItem itTercero = new SelectItem(tercero.getIntcodigo(), tercero.getStrnombrecompleto());
+//            getEntidades()[i++] = itTercero;
+//        }
 
     }
 
@@ -6331,21 +6341,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getGerentesDeConvenio()[i++] = itGerenteConvenio;
         }
 
-    }
-
-    /**
-     * @return the entidades
-     */
-    public SelectItem[] getEntidades() {
-        return entidades;
-    }
-
-    /**
-     * @param entidades the entidades to set
-     */
-    public void setEntidades(SelectItem[] entidades) {
-        this.entidades = entidades;
-    }
+    }  
 
     /**
      * @return the gerentesDeConvenio
@@ -6501,7 +6497,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
-
+            contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
 
             getFlujoCaja().iniciarFlujoCaja();

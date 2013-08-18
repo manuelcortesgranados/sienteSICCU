@@ -74,67 +74,70 @@
 
                 <h:outputLabel id="hol-fuenterectitulo" value="#{var.fuenterecurso}"/>
                 <br/>
-                <h:outputLabel id="hol-fuenterecsubtitulo" value="#{var.subfuenterecursos}"/>
-                <h:panelGrid columns="2" cellpadding="10" cellspacing="20" id="hpg-fuenter-conv">
-                    <h:panelGroup>
-                        <rich:select id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo}" required="true">
-                            <f:selectItems value="#{Supervisor$Contrato.entidades}" />
-                        </rich:select>
-                        <rich:message for="rs-entidad"  />
-                    </h:panelGroup>
+                <h:outputLabel id="hol-fuenterecsubtitulo" value="#{var.subfuenterecursos}"/>               
+                
+            </a4j:region>
+            <rich:collapsiblePanel switchType="client" header="#{var.adicionarfuenterecurso}">
+                    <h:panelGrid columns="2" cellpadding="10" cellspacing="20" id="hpg-fuenter-conv">
+                        <h:panelGroup>
+                            <rich:select    id="rs-entidad" defaultLabel="#{var.entidad}" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo}" required="true">                                
+                                <f:selectItems  value="#{Supervisor$Contrato.lstentidades}" var="ent" itemValue="#{ent.intcodigo}" itemLabel="#{ent.strnombrecompleto}" />
+                            </rich:select>
+                            <rich:message for="rs-entidad"  />
+                        </h:panelGroup>
 
-                    <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.reservaiva}" >
-                        <rich:placeholder value="#{var.reservaiva}" />
-                    </h:inputText>
+                        <h:inputText id="hit-reservaiva-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.reservaiva}" >
+                            <rich:placeholder value="#{var.reservaiva}" />
+                        </h:inputText>
 
-                    <h:panelGroup>
-                        <rich:select id="rs-roles" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.rolentidad.idrolentidad}" required="true" requiredMessage="Ingresar el rol" >
-                            <f:selectItems value="#{Supervisor$Contrato.roles}" />
-                        </rich:select>
-                        <rich:message for="rs-roles"  />
-                    </h:panelGroup>
+                        <h:panelGroup>
+                            <rich:select id="rs-roles" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.rolentidad.idrolentidad}" required="true" requiredMessage="Ingresar el rol" >
+                                <f:selectItems value="#{Supervisor$Contrato.roles}" />
+                            </rich:select>
+                            <rich:message for="rs-roles"  />
+                        </h:panelGroup>
 
-                    <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.otrasreservas}" >
-                        <rich:placeholder value="#{var.otrasreservas}" />
-                    </h:inputText>
+                        <h:inputText id="hit-otrasreservas-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.otrasreservas}" >
+                            <rich:placeholder value="#{var.otrasreservas}" />
+                        </h:inputText>
 
 
-                </h:panelGrid>
+                    </h:panelGrid>
 
-                <h:panelGrid id="hpg-fuenter-valoraportado" columns="1" cellspacing="5" >
-                    <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" >
-                        <rich:placeholder value="#{var.valoraportado}" />
-                        <f:validateDoubleRange minimum="0"/>
-                        <f:validateLength maximum="26" minimum="1"/>
-                        <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia(SessionBeanCobra.bundle)}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
-                    </h:inputText>
-                    <rich:message for="hit-valoraportado-convenio"  />
-                </h:panelGrid>
-                <h:panelGrid id="hpg-fuenter-cuotag" columns="4" cellspacing="5" >
-                    <h:panelGroup>
-                        <h:inputText id="hit-cuotagerencia-convenio"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valorcuotagerencia}" required="true"  >
-                            <rich:placeholder value="#{var.cuotagerencia}" />
-                            <f:validateDoubleRange  minimum="0"  />                            
-                            <f:validateLength maximum="26" minimum="1" />
+                    <h:panelGrid id="hpg-fuenter-valoraportado" columns="1" cellspacing="5" >
+                        <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" >
+                            <rich:placeholder value="#{var.valoraportado}" />
+                            <f:validateDoubleRange minimum="0"/>
+                            <f:validateLength maximum="26" minimum="1"/>
                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia(SessionBeanCobra.bundle)}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
                         </h:inputText>
-                        <rich:message for="hit-cuotagerencia-convenio"  />
-                    </h:panelGroup>
-                    <h:panelGroup>
-                        <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tipoaporte}" required="true">
-                            <f:selectItems value="#{Supervisor$Contrato.recursosconvenio.tipoAporte}"  />
-                            <a4j:ajax event="selectitem"  listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia(SessionBeanCobra.bundle)}" execute="hpg-fuenter-cuotag,hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor,hpg-fuenter-cuotag" />
-                        </rich:select> 
-                        <rich:message for="rs-tipoaporte"  />
-                    </h:panelGroup>
-                    <h:panelGroup id="hpg-valor">
-                        <h:inputText id="hit-valorgerencia-convenio" disabled="true"
-                                     value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.strporcentajecuotagerencia}"  required="true">                            
-                            <rich:placeholder value="#{var.cuotagerencia}" />                            
-                        </h:inputText>
-                        <rich:message for="hit-valorgerencia-convenio"  />
-                    </h:panelGroup>
-                </h:panelGrid> 
+                        <rich:message for="hit-valoraportado-convenio"  />
+                    </h:panelGrid>
+                    <h:panelGrid id="hpg-fuenter-cuotag" columns="4" cellspacing="5" >
+                        <h:panelGroup>
+                            <h:inputText id="hit-cuotagerencia-convenio"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valorcuotagerencia}" required="true"  >
+                                <rich:placeholder value="#{var.cuotagerencia}" />
+                                <f:validateDoubleRange  minimum="0"  />                            
+                                <f:validateLength maximum="26" minimum="1" />
+                                <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia(SessionBeanCobra.bundle)}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
+                            </h:inputText>
+                            <rich:message for="hit-cuotagerencia-convenio"  />
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <rich:select id="rs-tipoaporte" defaultLabel="#{var.tipoaporte}"  value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tipoaporte}" required="true">
+                                <f:selectItems value="#{Supervisor$Contrato.recursosconvenio.tipoAporte}"  />
+                                <a4j:ajax event="selectitem"  listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia(SessionBeanCobra.bundle)}" execute="hpg-fuenter-cuotag,hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor,hpg-fuenter-cuotag" />
+                            </rich:select> 
+                            <rich:message for="rs-tipoaporte"  />
+                        </h:panelGroup>
+                        <h:panelGroup id="hpg-valor">
+                            <h:inputText id="hit-valorgerencia-convenio" disabled="true"
+                                         value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.strporcentajecuotagerencia}"  required="true">                            
+                                <rich:placeholder value="#{var.cuotagerencia}" />                            
+                            </h:inputText>
+                            <rich:message for="hit-valorgerencia-convenio"  />
+                        </h:panelGroup>
+                    </h:panelGrid> 
                 <rich:messages id="messagesDatoBasPlanOpe" globalOnly="true"
                                styleClass="ikont-rm-messages"   ajaxRendered="true"
                                >
@@ -151,78 +154,84 @@
                         <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
                     </f:facet>
                 </rich:messages>
-            </a4j:region>
-             <rich:dataTable id="rdt-fuenteRecurso"
-                                var="fuente"
-                                value="#{Supervisor$Contrato.recursosconvenio.lstFuentesRecursos}"
-                                onrowmouseover="this.style.backgroundColor='#B4DDEC'"
-                                onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                                sortMode="single" rows="1"
-                                style="text-align:center;"
-                                rowKeyVar="filaSeleccionada"
-                                >                                      
-                    <f:facet name="header">
-                        <rich:columnGroup>
-                            <rich:column colspan="7" id="titulo">
-                                <h:outputText value="#{var.fuenterecurso} "/>
-                            </rich:column>
-                            <rich:column width="200px" breakRowBefore="true">
-                                <h:outputText value="#{var.entidad}"/>
-                            </rich:column>
-                            <rich:column width="200px">
-                                <h:outputText value="#{var.rol}"/>
-                            </rich:column>
-                            <rich:column width="200px">
-                                <h:outputText value="#{var.reservaiva}"/>
-                            </rich:column>
-                            <rich:column width="200px">
-                                <h:outputText value="#{var.otrasreservas}"/>
-                            </rich:column>
-                            <rich:column width="200px">
-                                <h:outputText value="#{var.cuotagerencia}"/>
-                            </rich:column>
-                            <rich:column width="200px">
-                                <h:outputText value="#{var.eliminar}"/>
-                            </rich:column>
-                        </rich:columnGroup>      
-                    </f:facet>
-                    <rich:columnGroup id="cuepofuente">
+                    <h:panelGrid cellspacing="10" cellpadding="10">
+                        <a4j:commandButton value="#{var.adicionar}" action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos(Supervisor$Contrato.obtenerTerceroXcodigo(Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo))}" 
+                                         render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso" 
+                                         execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso"/>
+                                                
+                    </h:panelGrid>        
+                </rich:collapsiblePanel>
+            <rich:dataTable id="rdt-fuenteRecurso"
+                            var="fuente"
+                            value="#{Supervisor$Contrato.recursosconvenio.lstFuentesRecursos}"
+                            onrowmouseover="this.style.backgroundColor='#B4DDEC'"
+                            onrowmouseout="this.style.backgroundColor='#FFFFFF'"
+                            sortMode="single" rows="1"
+                            style="text-align:center;"
+                            rowKeyVar="filaSeleccionada"
+                            >                                      
+                <f:facet name="header">
+                    <rich:columnGroup>
+                        <rich:column colspan="7" id="titulo">
+                            <h:outputText value="#{var.fuenterecurso} "/>
+                        </rich:column>
                         <rich:column width="200px" breakRowBefore="true">
-                            <h:outputText value="#{fuente.tercero.strnombrecompleto}"/>
+                            <h:outputText value="#{var.entidad}"/>
                         </rich:column>
-                        <rich:column>
-                            <h:outputText value="#{fuente.rolentidad.idrolentidad}"/>
+                        <rich:column width="200px">
+                            <h:outputText value="#{var.rol}"/>
                         </rich:column>
-                        <rich:column>
-                            <h:outputText value="#{fuente.reservaiva}"/>
+                        <rich:column width="200px">
+                            <h:outputText value="#{var.reservaiva}"/>
                         </rich:column>
-                        <rich:column >
-                            <h:outputText value="#{fuente.otrasreservas}"/>
+                        <rich:column width="200px">
+                            <h:outputText value="#{var.otrasreservas}"/>
                         </rich:column>
-                        <rich:column >
-                            <h:outputText value="#{fuente.valorcuotagerencia}"/>
+                        <rich:column width="200px">
+                            <h:outputText value="#{var.cuotagerencia}"/>
                         </rich:column>
-                        <rich:column>
-                            <a4j:commandLink   value="#{var.eliminar}" id="bt_eliminarfuente"  render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"
-                                               action="#{Supervisor$Contrato.recursosconvenio.eliminarFuenteRecursos(filaSeleccionada)}"
-                                               />
+                        <rich:column width="200px">
+                            <h:outputText value="#{var.eliminar}"/>
                         </rich:column>
+                    </rich:columnGroup>      
+                </f:facet>
+                <rich:columnGroup id="cuerpofuente">
+                    <rich:column width="200px" breakRowBefore="true">
+                        <h:outputText value="#{fuente.tercero.strnombrecompleto}"/>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText value="#{fuente.rolentidad.idrolentidad}"/>
+                    </rich:column>
+                    <rich:column>
+                        <h:outputText value="#{fuente.reservaiva}"/>
+                    </rich:column>
+                    <rich:column >
+                        <h:outputText value="#{fuente.otrasreservas}"/>
+                    </rich:column>
+                    <rich:column >
+                        <h:outputText value="#{fuente.valorcuotagerencia}"/>
+                    </rich:column>
+                    <rich:column>
+                        <a4j:commandLink   value="#{var.eliminar}" id="bt_eliminarfuente"  render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"
+                                           action="#{Supervisor$Contrato.recursosconvenio.eliminarFuenteRecursos(filaSeleccionada)}"
+                                           />
+                    </rich:column>
+                </rich:columnGroup>
+                <f:facet name="footer">
+                    <rich:columnGroup id="headerFuente">
+                        <rich:column colspan="4">
+                            <h:outputText value="Total:"/>
+                        </rich:column>
+                        <rich:column colspan="2">
+                            <h:outputText value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}"/>
+                        </rich:column>
+                        <rich:column breakRowBefore="true" colspan="6">
+                    <rich:dataScroller for="rdt-fuenteRecurso" stepControls="auto" render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"/>
+                    </rich:column>
                     </rich:columnGroup>
-                 <f:facet name="footer">
-                     <rich:dataScroller for="rdt-fuenteRecurso" stepControls="auto" render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"/>
-                 </f:facet>
-                </rich:dataTable>            
-            
-            <h:panelGrid columns="2" cellspacing="10" cellpadding="10">
-                <a4j:commandLink value="#{var.adicionar}" action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos(Supervisor$Contrato.obtenerTerceroXcodigo(Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo))}" 
-                                 render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso" 
-                                 execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso" >
-
-                </a4j:commandLink>
-                <a4j:commandLink value="#{var.ver}"  oncomplete="#{rich:component('ver-fuenterecursos')}.show();"   render="ver-fuenterecursos," immediate="true"/>
-            </h:panelGrid>            
-           
-            <interkont:spacer />
+                </f:facet>
+            </rich:dataTable>                       
+            <br/>            
         </center>
 
     </h:panelGroup>

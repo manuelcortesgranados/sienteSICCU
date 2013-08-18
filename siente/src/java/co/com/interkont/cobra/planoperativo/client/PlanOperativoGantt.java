@@ -622,6 +622,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                    // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
+                    service.setLog("Size fuentes"+convenioDTO.getFuenterecursosconvenios().size(), null);
 
                     RootPanel.get().add(asWidget());
                 } else {

@@ -233,6 +233,7 @@ public class FlujoCaja implements Serializable{
      * @return Cadena con el nombre de la página del flujo.
      */
     public void iniciarFlujoCaja() {
+        System.out.println("iniciar flujo = ");
         nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         convenio = nuevoContratoBasico.getContrato();
 

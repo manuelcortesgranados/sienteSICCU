@@ -10,8 +10,8 @@ import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.Supervisor.FacesUtils;
-import cobra.service.CobraServiceAble;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,11 +26,13 @@ public class RecursosConvenio implements Serializable{
     private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
     private SelectItem[] tipoAporte;
+    private BigDecimal sumafuentes;
     
 
     public RecursosConvenio(Contrato contrato) {
         fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+        sumafuentes= BigDecimal.ZERO;
         llenarTipoAporte();
     }
     
@@ -117,9 +119,9 @@ public class RecursosConvenio implements Serializable{
         fuenteRecursoConvenio.setTercero(tercero);
         //contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
         lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
-        boolguardofuente = Boolean.TRUE;
+        sumafuentes=sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
         limpiarFuenteRecurso();
-
+        
     }
     
      public void calcularValorGerencia(ResourceBundle bundle) {
@@ -162,5 +164,14 @@ public class RecursosConvenio implements Serializable{
     public void llenarTipoAporte() {
         setTipoAporte(new SelectItem[]{new SelectItem(1, "Porcentual"), new SelectItem(2, "Valor")});
     }
+
+    public BigDecimal getSumafuentes() {
+        return sumafuentes;
+    }
+
+    public void setSumafuentes(BigDecimal sumafuentes) {
+        this.sumafuentes = sumafuentes;
+    }   
+    
     
 }
