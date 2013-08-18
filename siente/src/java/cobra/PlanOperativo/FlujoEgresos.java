@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class FlujoEgresos {
 
-    Obrafuenterecursosconvenios fuenteRecursosConvenioObra;
     Obra proyecto;
     Itemflujocaja itemFlujoEgresos;
     boolean egresoProyecto;
@@ -36,14 +35,6 @@ public class FlujoEgresos {
     double contrapartida;
 
     public FlujoEgresos() {
-    }
-
-    public Obrafuenterecursosconvenios getFuenteRecursosConvenioObra() {
-        return fuenteRecursosConvenioObra;
-    }
-
-    public void setFuenteRecursosConvenioObra(Obrafuenterecursosconvenios fuenteRecursosConvenioObra) {
-        this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
     }
 
     public Obra getProyecto() {
@@ -141,14 +132,12 @@ public class FlujoEgresos {
      * egresos en los periodos del flujo de caja para el proyecto asociado. Este
      * método inicializa el flujo de egresos del proyecto al no existir alguno.
      *
-     * @param fuenteRecursosConvenioObra Asociación proyecto fuente recursos.
      * @param proyecto Proyecto asociado al convenio marco.
      * @param periodosFlujoCaja Periodos del flujo de caja.
      */
-    public void crearEstructuraFlujoEgresosProyecto(Obrafuenterecursosconvenios fuenteRecursosConvenioObra, Obra proyecto, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
+    public void crearEstructuraFlujoEgresosProyecto(Obra proyecto, List<Relacioncontratoperiodoflujocaja> periodosConvenio) {
         this.planMovimientosProyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.movimientosProyectoEliminados = new ArrayList<Planificacionmovimientoproyecto>();
-        this.fuenteRecursosConvenioObra = fuenteRecursosConvenioObra;
         this.proyecto = proyecto;
         this.egresoProyecto = true;
 
@@ -226,7 +215,9 @@ public class FlujoEgresos {
             while (periodosConvenio.size() < planMovimientosProyecto.size()) {
                 planMovimientoProyecto = planMovimientosProyecto.remove(periodosConvenio.size());
 
-                movimientosProyectoEliminados.add(planMovimientoProyecto);
+                if (planMovimientoProyecto.getIdplanificacionmovpry() > 0) {
+                    movimientosProyectoEliminados.add(planMovimientoProyecto);
+                }
             }
         }
     }
@@ -267,7 +258,9 @@ public class FlujoEgresos {
             while (periodosConvenio.size() < planMovimientosEgresosConvenio.size()) {
                 planMovimientoEgresoConvenio = planMovimientosEgresosConvenio.remove(periodosConvenio.size());
 
-                movimientosEgresosConvenioEliminados.add(planMovimientoEgresoConvenio);
+                if (planMovimientoEgresoConvenio.getIdplanificacionmovimientoconv() > 0) {
+                    movimientosEgresosConvenioEliminados.add(planMovimientoEgresoConvenio);
+                }
             }
         }
     }

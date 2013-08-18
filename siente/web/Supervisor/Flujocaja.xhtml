@@ -25,7 +25,7 @@
                 </f:facet>
                 <center>
                     <h:outputText id="hotrecursoentidad" value="#{fuenteIngresos.fuenteRecursosConvenio.valoraportado}" style="width: 30%; text-align: right">
-                        <f:convertNumber currencySymbol="$ " type="currency" />
+                        <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
                 </center>
             </rich:column>
@@ -56,20 +56,20 @@
                 </f:facet>
                 <center>
                     <h:outputText id="outputTextTotalIngresosFuente" value="#{fuenteIngresos.totalIngresosFuente}" style="width: 30%; text-align: right">
-                        <f:convertNumber currencySymbol="$ " type="currency" />
+                        <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
                 </center>
             </rich:column>
 
             <f:facet name="footer">
                 <rich:columnGroup>
-                    <rich:column>
+                    <rich:column colspan="2">
                         <h:outputLabel value="Totales" />
                     </rich:column>                   
                     <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                         <rich:column>
                             <h:outputText value="#{PlanOperativo.totalIngresosPeriodo[columna]}">                                
-                                <f:convertNumber currencySymbol="$ " type="currency" />
+                                <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
                         </rich:column>
                     </c:forEach>
@@ -81,13 +81,13 @@
                     <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                         <rich:column>
                             <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna]}">                                
-                                <f:convertNumber currencySymbol="$ " type="currency" />
+                                <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
                         </rich:column>                            
                     </c:forEach>
                     <rich:column>
                         <h:outputText id="outputTextTotalIngresos" value="#{PlanOperativo.totalIngresos}">                                
-                            <f:convertNumber currencySymbol="$ " type="currency" />
+                            <f:convertNumber currencySymbol="$" type="currency" />
                         </h:outputText>
                     </rich:column>
                 </rich:columnGroup>
@@ -98,7 +98,7 @@
     </h:form>        
     <h:form id="formFlujoEgresos">
         <rich:dataTable id="dataTableEgresos" var="fuenteEgresos" value="#{PlanOperativo.flujoEgresos}" style="width: 90%; overflow: auto" >
-            <rich:column >
+            <rich:column>
                 <f:facet name="header">
                     <h:outputLabel value="Fuente egresos" />
                 </f:facet>
@@ -106,11 +106,23 @@
             </rich:column>
             <rich:column>
                 <f:facet name="header">
+                    <h:outputLabel value="Contrapartidas" />
+                </f:facet>
+                <center>
+                    <h:inputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
+                                 rendered="#{fuenteEgresos.egresoProyecto}"
+                                 style="width: 30%; text-align: right;">
+                        <f:validateDoubleRange minimum="0" />
+                    </h:inputText>
+                </center>
+            </rich:column>
+            <rich:column>
+                <f:facet name="header">
                     <h:outputLabel value="Recursos por Proyecto" />
                 </f:facet>
                 <center>
-                    <h:outputText id="hotRecursoproyecto" value="#{fuenteEgresos.fuenteRecursosConvenioObra.valor}" style="width: 30%; text-align: right;">
-                        <f:convertNumber currencySymbol="$ " type="currency" />
+                    <h:outputText id="hotRecursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}" style="width: 30%; text-align: right;">
+                        <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
                 </center>
             </rich:column>
@@ -147,38 +159,38 @@
                 </f:facet>
                 <center>
                     <h:outputText id="outputTextTotalEgresosFuente" value="#{fuenteEgresos.totalEgresosFuente}" style="width: 30%; text-align: right;">
-                        <f:convertNumber currencySymbol="$ " type="currency" />
+                        <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
                 </center>
             </rich:column>
             <f:facet name="footer">
                 <rich:columnGroup>
-                    <rich:column>
+                    <rich:column colspan="3">
                         <h:outputLabel value="Totales" />
                     </rich:column>                   
 
                     <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                         <rich:column>
                             <h:outputText value="#{PlanOperativo.totalEgresosPeriodo[columna]}">                                
-                                <f:convertNumber currencySymbol="$ " type="currency" />
+                                <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
                         </rich:column>
                     </c:forEach>
 
-                    <rich:column colspan="2" breakRowBefore="true">
+                    <rich:column colspan="3" breakRowBefore="true">
                         <h:outputLabel value="Acumulados" />
                     </rich:column>
 
                     <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                         <rich:column>
                             <h:outputText value="#{PlanOperativo.totalEgresosPeriodoAcumulativo[columna]}">                                
-                                <f:convertNumber currencySymbol="$ " type="currency" />
+                                <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
                         </rich:column>
                     </c:forEach>
                     <rich:column>
                         <h:outputText id="outputTextTotalEgresos" value="#{PlanOperativo.totalEgresos}">                                
-                            <f:convertNumber currencySymbol="$ " type="currency" />
+                            <f:convertNumber currencySymbol="$" type="currency" />
                         </h:outputText>
                     </rich:column>
                 </rich:columnGroup>
@@ -190,11 +202,17 @@
                 <f:facet name="header">
                     <h:outputLabel value="FLUJO CAJA NETO"/>
                 </f:facet>
+                <f:facet name="footer">
+                    <h:outputLabel value="Flujo de caja del convenio"/>
+                </f:facet>
             </rich:column>
 
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">                    
                 <rich:column>
                     <f:facet name="header">
+                        <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}"  style="width: 30px; text-align: right" />
+                    </f:facet>
+                    <f:facet name="footer">
                         <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna] - PlanOperativo.totalEgresosPeriodoAcumulativo[columna]}">
                             <f:convertNumber currencySymbol="$" type="currency" />
                         </h:outputText>

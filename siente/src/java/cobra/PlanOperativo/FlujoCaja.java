@@ -4,7 +4,6 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Itemflujocaja;
 import co.com.interkont.cobra.to.Obra;
-import co.com.interkont.cobra.to.Obrafuenterecursosconvenios;
 import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
@@ -33,8 +32,9 @@ public class FlujoCaja {
 
     final long MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
     Contrato convenio;
+    boolean flujoCajaIniciado = false;
     List<Fuenterecursosconvenio> fuentesRecursosConvenio;
-    List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras;
+    List<Obra> proyectosConvenio;
     List<Itemflujocaja> itemsFlujoIngresos;
     List<Itemflujocaja> itemsFlujoEgresos;
     List<Relacioncontratoperiodoflujocaja> periodosConvenio;
@@ -61,6 +61,14 @@ public class FlujoCaja {
         this.convenio = convenio;
     }
 
+    public boolean isFlujoCajaIniciado() {
+        return flujoCajaIniciado;
+    }
+
+    public void setFlujoCajaIniciado(boolean flujoCajaIniciado) {
+        this.flujoCajaIniciado = flujoCajaIniciado;
+    }
+
     public List<Fuenterecursosconvenio> getFuentesRecursosConvenio() {
         return fuentesRecursosConvenio;
     }
@@ -69,12 +77,12 @@ public class FlujoCaja {
         this.fuentesRecursosConvenio = fuentesRecursosConvenio;
     }
 
-    public List<Obrafuenterecursosconvenios> getFuentesRecursosConvenioObras() {
-        return fuentesRecursosConvenioObras;
+    public List<Obra> getProyectosConvenio() {
+        return proyectosConvenio;
     }
 
-    public void setFuentesRecursosConvenioObras(List<Obrafuenterecursosconvenios> fuentesRecursosConvenioObras) {
-        this.fuentesRecursosConvenioObras = fuentesRecursosConvenioObras;
+    public void setProyectosConvenio(List<Obra> proyectosConvenio) {
+        this.proyectosConvenio = proyectosConvenio;
     }
 
     public List<Itemflujocaja> getItemsFlujoIngresos() {
@@ -223,20 +231,22 @@ public class FlujoCaja {
      *
      * @return Cadena con el nombre de la página del flujo.
      */
-    public String iniciarFlujoCaja() {
-        this.nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        this.convenio = nuevoContratoBasico.getContrato();
-        this.crearPeriodosFlujoCaja();
-        this.crearEstructuraFlujoIngresos();
-        this.iniciarTotalesIngresosPeriodo();
-        this.crearEstructuraFlujoEgresos();
-        this.iniciarTotalesEgresosPeriodo();
-        this.refrescarValoresFlujoCaja();
+    public void iniciarFlujoCaja() {
+        nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        convenio = nuevoContratoBasico.getContrato();
 
-        System.out.println("Convenio marco fecha inicio = " + nuevoContratoBasico.getContrato().getDatefechaini());
-        System.out.println("Convenio marco fecha fin = " + nuevoContratoBasico.getContrato().getDatefechafin());
+        if (!flujoCajaIniciado) {
+            flujoIngresos = new ArrayList<FlujoIngresos>();
+            flujoEgresos = new ArrayList<FlujoEgresos>();
+        }
+        crearPeriodosFlujoCaja();
+        crearEstructuraFlujoIngresos();
+        iniciarTotalesIngresosPeriodo();
+        crearEstructuraFlujoEgresos();
+        iniciarTotalesEgresosPeriodo();
+        refrescarValoresFlujoCaja();
 
-        return "FlujoCaja";
+        flujoCajaIniciado = true;
     }
 
     /**
@@ -268,7 +278,7 @@ public class FlujoCaja {
          * 3. Se divide entre 30d (30 de tipo double) para que la cantidad de meses quede con decimales.
          */
         cantidadPeriodos = (fechaFinConvenio.getTime().getTime() - fechaInicioConvenio.getTime().getTime()) / MILISEGUNDOS_POR_DIA / 30d;
-        
+
         periodosConvenio = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenio(convenio.getIntidcontrato());
 
         if (periodosConvenio.isEmpty()) {
@@ -282,7 +292,7 @@ public class FlujoCaja {
             periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
             periodoConvenio.setContrato(convenio);
             periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-            
+
             periodosConvenio.add(periodoConvenio);
 
             iterador++;
@@ -306,7 +316,7 @@ public class FlujoCaja {
                 periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
                 periodoConvenio.setContrato(convenio);
                 periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-                
+
                 periodosConvenio.add(periodoConvenio);
 
                 iterador++;
@@ -336,7 +346,7 @@ public class FlujoCaja {
                 periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
                 periodoConvenio.setContrato(convenio);
                 periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-                
+
                 periodosConvenio.add(periodoConvenio);
 
                 iterador++;
@@ -349,7 +359,7 @@ public class FlujoCaja {
                 periodosConvenioEliminados.add(periodoConvenio);
             }
         }
-        
+
         actualizarPeriodosFlujoCaja(periodosConvenio.size());
     }
 
@@ -405,13 +415,11 @@ public class FlujoCaja {
         planifmovimientoconvenioentidad = new ArrayList<Planificacionmovconvenioentidad>();
         planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
 
-        fuentesRecursosConvenio = nuevoContratoBasico.getLstFuentesRecursos();
-        
         itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
 
-        for (Fuenterecursosconvenio fuenteRecursosConvenio : fuentesRecursosConvenio) {
+        for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getLstFuentesRecursos()) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
-            
+
             Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
 
             planifmovimientoconvenioentidad = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioEntidad(fuenteRecursosConvenio.getIdfuenterecursosconvenio());
@@ -516,26 +524,24 @@ public class FlujoCaja {
         this.planifmovimientoconvenioproyecto = new ArrayList<Planificacionmovimientoproyecto>();
         this.planifmovimientoconvenio = new ArrayList<Planificacionmovconvenio>();
 
-        fuentesRecursosConvenioObras = getSessionBeanCobra().getCobraService().fuentesRecursosConvenioObras(convenio.getIntidcontrato());
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
-        for (Obrafuenterecursosconvenios fuenteRecursosConvenioObra : fuentesRecursosConvenioObras) {
-            FlujoEgresos flujoEgresosProyecto = new FlujoEgresos();
-            Obra proyecto = getSessionBeanCobra().getCobraService().encontrarObraPorId(fuenteRecursosConvenioObra.getObra().getIntcodigoobra());
+        for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosCovenio()) {
+                FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
 
-            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyecto.getIntcodigoobra());
+            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
 
             if (planifmovimientoconvenioproyecto.isEmpty()) {
-                flujoEgresosProyecto.crearEstructuraFlujoEgresosProyecto(fuenteRecursosConvenioObra, proyecto, periodosConvenio);
-                flujoEgresosProyecto.calcularTotalEgresosFuente(periodosConvenio.size());
+                itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio, periodosConvenio);
+                itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             } else {
-                flujoEgresosProyecto.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
-                flujoEgresosProyecto.setProyecto(proyecto);
-                flujoEgresosProyecto.actualizarPlanMovimientosProyecto(periodosConvenio);
-                flujoEgresosProyecto.calcularTotalEgresosFuente(periodosConvenio.size());
+                itemFlujoEgresos.setPlanMovimientosProyecto(planifmovimientoconvenioproyecto);
+                itemFlujoEgresos.setProyecto(proyectoConvenio);
+                itemFlujoEgresos.actualizarPlanMovimientosProyecto(periodosConvenio);
+                itemFlujoEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
             }
 
-            flujoEgresos.add(flujoEgresosProyecto);
+            flujoEgresos.add(itemFlujoEgresos);
         }
 
         for (Itemflujocaja itemFlujoEgresos : itemsFlujoEgresos) {
