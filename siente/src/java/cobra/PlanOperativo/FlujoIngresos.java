@@ -8,6 +8,7 @@ import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovconvenioentidad;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
 import co.com.interkont.cobra.to.Tercero;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  *
  * @author Yeison Osorio
  */
-public class FlujoIngresos {
+public class FlujoIngresos implements Serializable{
 
     Fuenterecursosconvenio fuenteRecursosConvenio;
     Tercero entidadAportante;

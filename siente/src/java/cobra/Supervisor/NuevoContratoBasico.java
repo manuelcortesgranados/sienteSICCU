@@ -49,6 +49,7 @@ import cobra.FiltroAvanzadoContrato;
 import cobra.SessionBeanCobra;
 import cobra.CargadorArchivosWeb;
 import cobra.PlanOperativo.FlujoCaja;
+import cobra.PlanOperativo.RecursosConvenio;
 import cobra.util.ArchivoWebUtil;
 import cobra.util.CasteoGWT;
 import cobra.util.RutasWebArchivos;
@@ -817,16 +818,25 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * variables para realizar la carga de los roles 
      */
     private SelectItem[] roles;
+    /**
+     * Clase para manejar la lógica de fuentes de recursos
+     */
+    private RecursosConvenio recursosconvenio;
+
+    public RecursosConvenio getRecursosconvenio() {
+        return recursosconvenio;
+    }
+
+    public void setRecursosconvenio(RecursosConvenio recursosconvenio) {
+        this.recursosconvenio = recursosconvenio;
+    }   
+    
     /*
      * variables para realizar la carga del tipo de aporte
-     */
-    private SelectItem[] tipoAporte;
+     */    
     private String variabletitulo;
     private String infogeneralcrearconvenio;
-    private int panelPantalla;
-    private Fuenterecursosconvenio fuenteRecursoConvenio;
-    private boolean boolguardofuente;
-    private List<Fuenterecursosconvenio> lstFuentesRecursos;
+    private int panelPantalla;   
     private List<Obra> listaProyectosCovenio;
     private int reportoption;
     private int subpantalla;
@@ -2294,15 +2304,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 llenarModalidadContratista();
             }
         } else {
-            fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
-            lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+            setRecursosconvenio(new RecursosConvenio(getContrato()));
             listaProyectosCovenio = new ArrayList<Obra>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
             llenarEntidades();
             llenarRoles();
             llenarGerentes();
-            llenarTipoAporte();
+            
 
         }
 
@@ -3333,8 +3342,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         lisplanifiactapar.clear();
         listaContratosPadre.clear();
         listapolizas.clear();
-        listaPolizacontratos.clear();
-        lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
+        listaPolizacontratos.clear();        
         listaProyectosCovenio = new ArrayList<Obra>();
 
         lisplanifiactapar.clear();
@@ -3358,6 +3366,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
+        setRecursosconvenio(new RecursosConvenio(getContrato()));
+        actualizarPanel(1);
 
     }
 
@@ -6239,11 +6249,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         faltafuenteconvenio = new BigDecimal(BigInteger.ZERO);
 //        Se llama el metodo de guardar borrador para que valide la información inicial
         this.guardarBorradorConvenio(true);
-        if (!lstFuentesRecursos.isEmpty()) {
+        if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
             guardadoconexito = 1;
             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
 //            Recorriendo la lista de fuentes de recursos para sumar los valores ingresados
-            for (Fuenterecursosconvenio fuenterecurso : lstFuentesRecursos) {
+            for (Fuenterecursosconvenio fuenterecurso : recursosconvenio.getLstFuentesRecursos()) {
                 totalfuenteconvenio = totalfuenteconvenio.add(fuenterecurso.getOtrasreservas()).add(fuenterecurso.getValorcuotagerencia()).add(fuenterecurso.getReservaiva());
             }
             if (totalfuenteconvenio.compareTo(contrato.getNumvlrcontrato()) == 0) {
@@ -6265,21 +6275,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage("numfuenterecurso");
         }
 
-    }
-
-    /*
-     *metodo que se encarga de adicionar una fuente de recurso a la
-     * fuente de recursos del convenio.
-     *      
-     */
-    public void adicionarFuenteRecursos() {
-        fuenteRecursoConvenio.setTercero(obtenerTerceroXcodigo(fuenteRecursoConvenio.getTercero().getIntcodigo()));
-        contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
-        lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
-        boolguardofuente = Boolean.TRUE;
-        limpiarFuenteRecurso();
-
-    }
+    }   
 
     public Tercero obtenerTerceroXcodigo(int codigo) {
         for (Tercero ter : lstentidades) {
@@ -6288,24 +6284,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         return null;
-    }
-
-    /*
-     *metodo que se encarga de eliminar una fuente de recurso a las
-     * fuente de recursos del convenio.
-     *      
-     */
-    public void eliminarFuenteRecursos(int filaFuenteRecursoEliminar) {
-        int contador = 0;
-        for (Iterator i = contrato.getFuenterecursosconvenios().iterator(); i.hasNext();) {
-            if (contador == filaFuenteRecursoEliminar) {
-                Fuenterecursosconvenio fuenteRecursosEliminar = (Fuenterecursosconvenio) i.next();
-                contrato.getFuenterecursosconvenios().remove(fuenteRecursosEliminar);
-            } else {
-                contador++;
-            }
-        }
-    }
+    }    
 
     /*
      *metodo que  carga las entidades de fonade en la lista de seleccion
@@ -6336,18 +6315,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getRoles()[i++] = itRolEntidad;
         }
 
-    }
+    }    
 
     /*
-     *metodo que  carga los tipos de aportes en la lista de seleccion
-     *      
-     */
-    public void llenarTipoAporte() {
-        setTipoAporte(new SelectItem[]{new SelectItem(1, "Porcentual"), new SelectItem(2, "Valor")});
-    }
-
-    /*
-     *metodo que  carga los tipos de aportes en la lista de seleccion
+     *metodo que  carga los gerentes en la lista de seleccion
      *      
      */
     public void llenarGerentes() {
@@ -6403,20 +6374,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setRoles(SelectItem[] roles) {
         this.roles = roles;
     }
-
-    /**
-     * @return the tipoAporte
-     */
-    public SelectItem[] getTipoAporte() {
-        return tipoAporte;
-    }
-
-    /**
-     * @param tipoAporte the tipoAporte to set
-     */
-    public void setTipoAporte(SelectItem[] tipoAporte) {
-        this.tipoAporte = tipoAporte;
-    }
+  
 
     /**
      * @return the variabletitulo
@@ -6430,21 +6388,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setVariabletitulo(String variabletitulo) {
         this.variabletitulo = variabletitulo;
-    }
-
-    /**
-     * @return the fuenteRecursoConvenio
-     */
-    public Fuenterecursosconvenio getFuenteRecursoConvenio() {
-        return fuenteRecursoConvenio;
-    }
-
-    /**
-     * @param fuenteRecursoConvenio the fuenteRecursoConvenio to set
-     */
-    public void setFuenteRecursoConvenio(Fuenterecursosconvenio fuenteRecursoConvenio) {
-        this.fuenteRecursoConvenio = fuenteRecursoConvenio;
-    }
+    }    
 
     /**
      * @return the infogeneralcrearconvenio
@@ -6460,45 +6404,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.infogeneralcrearconvenio = infogeneralcrearconvenio;
     }
 
-    public void limpiarFuenteRecurso() {
-        fuenteRecursoConvenio.setOtrasreservas(null);
-        fuenteRecursoConvenio.setReservaiva(null);
-        fuenteRecursoConvenio.setValorcuotagerencia(null);
-        fuenteRecursoConvenio.setTipoaporte(null);
-        fuenteRecursoConvenio.setRolentidad(new Rolentidad());
-        fuenteRecursoConvenio.setTercero(new Tercero());
-
-    }
-
-    /**
-     * @return the boolguardofuente
-     */
-    public boolean isBoolguardofuente() {
-        System.out.println("this = " + boolguardofuente);
-        return boolguardofuente;
-    }
-
-    /**
-     * @param boolguardofuente the boolguardofuente to set
-     */
-    public void setBoolguardofuente(boolean boolguardofuente) {
-        this.boolguardofuente = boolguardofuente;
-    }
-
-    /**
-     * @return the lstFuentesRecursos
-     */
-    public List<Fuenterecursosconvenio> getLstFuentesRecursos() {
-        return lstFuentesRecursos;
-    }
-
-    /**
-     * @param lstFuentesRecursos the lstFuentesRecursos to set
-     */
-    public void setLstFuentesRecursos(List<Fuenterecursosconvenio> lstFuentesRecursos) {
-        this.lstFuentesRecursos = lstFuentesRecursos;
-    }
-
+   
     public List<Obra> getListaProyectosCovenio() {
         return listaProyectosCovenio;
     }
@@ -6594,7 +6500,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         try {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
-            ValidacionesConvenio.validarTamanoLista(lstFuentesRecursos, "Fuente de Recursos");
+            ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
 
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
 
@@ -6629,38 +6535,5 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
-    }
-
-    public void calcularValorGerencia() {
-        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
-
-        switch (getFuenteRecursoConvenio().getTipoaporte()) {
-            case 1://porcentual
-                try {
-                if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
-                    getFuenteRecursoConvenio().setPorcentajecuotagerencia(
-                            getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
-                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + getFuenteRecursoConvenio().getPorcentajecuotagerencia());
-                } else {
-                    FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("validarporcentajefuente"));
-                }
-            } catch (ArithmeticException a) {
-                getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ 0.0000");
-            }
-                break;
-            case 2://Valor
-                try {
-                if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
-                    getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
-                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia(getFuenteRecursoConvenio().getPorcentajecuotagerencia() + " %");
-                } else {
-                    FacesUtils.addErrorMessage(getSessionBeanCobra().getBundle().getString("validarvalorfuente"));
-                }
-            } catch (ArithmeticException a) {
-                getFuenteRecursoConvenio().setStrporcentajecuotagerencia("0.0000 %");
-            }
-                break;
-        }
-
-    }
+    }   
 }

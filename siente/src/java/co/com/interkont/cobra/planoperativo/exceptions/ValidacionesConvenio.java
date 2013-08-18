@@ -44,7 +44,7 @@ public class ValidacionesConvenio {
        validarFechasConvenio(fechaini, fechafin);
        if(fechaactaini == null )
         {
-           throw new ConvenioException("Debe Ingresar las fecha del acta de inicio");     
+           throw new ConvenioException("Debe Ingresar la fecha del acta de inicio");     
         }
         
         if (fechaactaini.compareTo(fechaini) < 0) {

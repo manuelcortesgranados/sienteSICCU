@@ -8,6 +8,7 @@ import co.com.interkont.cobra.to.Periodoflujocaja;
 import co.com.interkont.cobra.to.Planificacionmovconvenio;
 import co.com.interkont.cobra.to.Planificacionmovimientoproyecto;
 import co.com.interkont.cobra.to.Relacioncontratoperiodoflujocaja;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.List;
  *
  * @author Yeison Osorio
  */
-public class FlujoEgresos {
+public class FlujoEgresos implements Serializable{
 
     Obra proyecto;
     Itemflujocaja itemFlujoEgresos;

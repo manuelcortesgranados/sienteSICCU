@@ -13,6 +13,7 @@ import co.com.interkont.cobra.to.Tercero;
 import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
 import cobra.Supervisor.NuevoContratoBasico;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,7 +29,7 @@ import java.util.ResourceBundle;
  * @author Cristian Gutiérrez
  * @author Yeison Osorio
  */
-public class FlujoCaja {
+public class FlujoCaja implements Serializable{
 
     final long MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
     Contrato convenio;
@@ -417,7 +418,7 @@ public class FlujoCaja {
 
         itemsFlujoIngresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("I");
 
-        for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getLstFuentesRecursos()) {
+        for (Fuenterecursosconvenio fuenteRecursosConvenio : nuevoContratoBasico.getRecursosconvenio().getLstFuentesRecursos()) {
             FlujoIngresos flujoIngresosEntidad = new FlujoIngresos();
 
             Tercero entidadAportante = getSessionBeanCobra().getCobraService().encontrarTerceroPorId(fuenteRecursosConvenio.getTercero().getIntcodigo());
