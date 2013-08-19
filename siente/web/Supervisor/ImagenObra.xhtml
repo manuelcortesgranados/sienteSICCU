@@ -18,7 +18,7 @@
         <h:outputScript  name="script_supervisor.js"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-imagenesproyecto"    value="#{var.imagenesproyecto}"/>            
+        <h:outputText rendered="#{!var.permisonuevodiseño}"  styleClass="ikont-hot-imagenesproyecto"    value="#{var.imagenesproyecto}"/>            
         <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
@@ -38,6 +38,9 @@
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}" id="gpMenusuperior">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
         </h:panelGroup>
+    </ui:define>
+    <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+        <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="body">
         <body >

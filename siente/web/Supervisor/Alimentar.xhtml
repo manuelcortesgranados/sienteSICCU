@@ -20,7 +20,7 @@
         <h:outputText  styleClass="ikont-hot-reportaravance"   value="Reportar avance"/>
 
         <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
-
+ <ui:include rendered="#{var.permisonuevodiseño}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>

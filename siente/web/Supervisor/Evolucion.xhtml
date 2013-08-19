@@ -33,6 +33,9 @@
         </h:panelGroup>
 
     </ui:define>
+   <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+        <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+    </ui:define>
     <ui:define name="body" >
         <h:form prependId="false" >
             <interkont:spacer height="35" />

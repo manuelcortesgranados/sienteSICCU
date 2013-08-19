@@ -75,7 +75,8 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-houtdetalle"   value="#{var.houtdetalle}"/>
+        <!--<h:outputText  styleClass="ikont-hot-houtdetalle"   value="#{var.houtdetalle}"/>-->
+
         <h:outputText  styleClass="ikont-hot-intcodobra"    value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"/>
         <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
@@ -100,6 +101,7 @@
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
         </h:panelGroup>
+        <ui:include rendered="#{var.permisonuevodiseño}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
 
     <ui:define name="body">

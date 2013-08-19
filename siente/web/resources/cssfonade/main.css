@@ -383,10 +383,12 @@ a.closemodal{
 
 .templatecontentinfo{
     width: 100%;
+    height: 700px;
 }
 
 .templatetablacontent{
     width: 85%;
+
 }
 
 .templatetablamenulateral .rf-p-b {
@@ -976,19 +978,20 @@ a.evo02:hover {
     text-align: left;
     width: 100%;
     font-size: 1em;
+    line-height: 30px;
 }
 
 .TituloModificarProyecto {
-    color: #FF9900;
+    color: #257500;
     font-family: Verdana,Geneva,sans-serif;
     font-size: 1.5em;
     font-style: italic;
     font-weight: bold;
-    line-height: 20px;
+    line-height: 48px;
 }
 
 .NoFileModificar {
-    color: #FF9900;
+    color: #257500;
     font-family: Verdana,Geneva,sans-serif;
     font-size: 9px;
     font-style: italic;
@@ -1764,7 +1767,7 @@ input[type="text"], input[type="password"], select{
 .ikont-label-menu1{
     line-height:11px; 
     color: #1C8F14;
-}
+} 
 .ikont-label-menu-item { 
     font-size: 15px; 
     width: 120px; 
@@ -1821,4 +1824,212 @@ input[type="text"], input[type="password"], select{
 }
 .ikont-place-holder{
     color: #257500;
+}
+
+.ikont-hpg-menu-nuevo-proyecto{ 
+    margin-top: -4px;
+    margin-left: 23px;
+}
+.ikont-hpg-menu-contenido-nuevo-proyecto{
+    background-color: #F2F2F2;
+    width: 100%;
+    height: 70px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6B6B6B;
+    position: relative;
+    top: 0px;
+    z-index: 1;
+}
+
+.ikont-img-posicion-menu-proyecto{
+    background-image: url(../imgs/submenu_sprite_proyecto.jpg);
+    background-repeat: no-repeat;
+    width: 90px;
+    height: 136px;
+    display: block;
+}
+.ikont-posicion-detalle-proyecto{
+    background-position: 6px -24px;
+}
+.ikont-posicion-detalle-proyecto.scroll{
+    background-position: 6px -82px;
+}
+.ikont-posicion-detalle-proyecto{
+    height: 61px;
+    background-position: 5px -85px;
+}
+
+.ikont-posicion-detalle-proyecto:hover, .ikont-posicion-detalle-proyecto.buttonactive.scroll{
+    background-position: 26px -82px;
+}
+.ikont-posicion-avance-proyecto{
+    background-position: -85px -24px;
+}
+.ikont-posicion-avance-proyecto{
+    height: 61px;
+    background-position: -85px -26px;
+}
+.ikont-posicion-avance-proyecto.scroll{
+    background-position: -85px -82px;
+}
+.ikont-posicion-avance-proyecto:hover, .scroll.buttonactive{
+    background-position: -85px -90px;
+}
+.ikont-posicion-modificar-proyecto{
+    background-position: -173px -24px;
+}
+.ikont-posicion-modificar-proyecto{
+    height: 61px;
+    background-position: -173px -26px;
+}
+.ikont-posicion-modificar-proyecto.scroll{
+    background-position: -173px -82px;
+}
+.ikont-posicion-modificar-proyecto:hover, .scroll.buttonactive{
+    background-position: -173px -90px;
+}
+.ikont-posicion-evolucion-proyecto{
+    background-position: -245px -24px;
+}
+.ikont-posicion-evolucion-proyecto{
+    height: 61px;
+    background-position: -245px -29px;
+}
+.ikont-posicion-evolucion-proyecto.scroll{
+    background-position: -245px -82px;
+}
+.ikont-posicion-evolucion-proyecto:hover, .scroll.buttonactive{
+    background-position: -245px -92px;
+}
+.ikont-posicion-imagenes-proyecto{
+    width: 85px;
+    background-position: -321px -24px;
+}
+.ikont-posicion-imagenes-proyecto{
+    width: 85px;
+    height: 61px;
+    background-position: -321px -29px;
+}
+.ikont-posicion-imagenes-proyecto.scroll{
+    width: 85px;
+    background-position: -321px -82px;
+}
+.ikont-posicion-imagenes-proyecto:hover, .scroll.buttonactive{
+    width: 85px;
+    background-position: -321px -92px;
+}
+.ikont-posicion-finalizar-proyecto{
+    width: 85px;
+    background-position: -381px -24px;
+}
+.ikont-posicion-finalizar-proyecto{
+    width: 85px;
+    height: 61px;
+    background-position: -382px -29px;
+}
+.ikont-posicion-finalizar-proyecto.scroll{
+    width: 85px;
+    background-position: -382px -82px;
+}
+.ikont-posicion-finalizar-proyecto:hover, .scroll.buttonactive{
+    width: 85px;
+    background-position: -382px -92px;
+}
+.ikont-posicion-contratos-proyecto{
+    width: 110px;
+    background-position: -469px -24px;
+}
+.ikont-posicion-contratos-proyecto{
+    width: 110px;
+    height: 61px;
+    background-position: -469px -29px;
+}
+.ikont-posicion-contratos-proyecto.scroll{
+    width: 110px;
+    background-position: -469px -82px;
+}
+.ikont-posicion-contratos-proyecto:hover, .scroll.buttonactive{
+    width: 110px;
+    background-position: -469px -92px;
+}
+.ikont-posicion-estado-proyecto{
+    width: 110px;
+    background-position: -584px -24px;
+}
+.ikont-posicion-estado-proyecto{
+    width: 110px;
+    height: 61px;
+    background-position: -584px -29px;
+}
+.ikont-posicion-estado-proyecto.scroll{
+    width: 110px;
+    background-position: -584px -82px;
+}
+.ikont-posicion-estado-proyecto:hover, .scroll.buttonactive{
+    width: 110px;
+    background-position: -584px -92px;
+}
+
+/*.ikont-posicion-eliminar-avance-proyecto{
+     background-position: -694px -23px;
+     width: 110px;
+}
+.ikont-posicion-eliminar-avance-proyecto:hover{
+     background-position: -694px -82px;
+     width: 110px;
+}*/
+.ikont-posicion-eliminar-avance-proyecto{
+    width: 110px;
+    background-position: -694px -24px;
+}
+.ikont-posicion-eliminar-avance-proyecto{
+    width: 110px;
+    height: 61px;
+    background-position: -694px -29px;
+}
+.ikont-posicion-eliminar-avance-proyecto.scroll{
+    width: 110px;
+    background-position: -694px -82px;
+}
+.ikont-posicion-eliminar-avance-proyecto:hover, .scroll.buttonactive{
+    width: 110px;
+    background-position: -694px -92px;
+}
+.ikont-hr-separador-usuario{
+    background-color: #C0C0C0;
+    height: 1px;
+    width: 162px;
+    position: relative;
+    left: 34px;
+    top: -4px;
+}
+
+.ikont-style-actividades-recientes{
+    color: green;
+}
+.ikont-hr-separador-inicio-registo{
+    background-color: silver;
+    height: 452px;
+    width: 4px;
+}
+.ikont-hpg-panelmodiinicial{
+    left: 312px;
+    position: relative;
+}
+.ikont-panel-modificarobra{
+    width: 800px;
+    position: relative;
+    left: 78px;
+    top: 55px;
+}
+.ikont-hpg-varpaso1{
+    height: 642px;
+}
+.ikont-hpg-accionespaso1{
+    line-height: 8;
+}
+.ikont-hit-strrazonmodif{
+    height: 20%;
+    width: 99% !important;
 }

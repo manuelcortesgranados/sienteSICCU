@@ -16,7 +16,7 @@
             <h:outputScript name="script_supervisor.js"/>
         </ui:define>
         <ui:define name="title">
-            <h:outputText  styleClass="ikont-hot-asocontrato"   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
+            <h:outputText rendered="#{!var.permisonuevodiseño}"  styleClass="ikont-hot-asocontrato"   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
         </ui:define>
 
 
@@ -33,6 +33,9 @@
                 <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
             </h:panelGroup>
 
+        </ui:define>
+        <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+            <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
         </ui:define>
 
         <ui:define name="body" >

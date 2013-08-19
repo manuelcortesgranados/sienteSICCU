@@ -9,7 +9,7 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
     <br/>
-    <h:panelGroup rendered="#{var.permisonuevodiseño and SessionBeanCobra.usuarioObra.usuLogin != var.ciudadanosinregistro}" >
+    <h:panelGroup rendered="#{var.permisonuevodiseño and SessionBeanCobra.usuarioObra.usuId==45 }" >
         <hr  class="ikont-hr-separador-usuario" />
         <h:panelGrid rendered="true" columns="2">
             <rich:column>
@@ -21,8 +21,8 @@
                 </rich:column>  
                 <rich:column colspan="1">
                     <center >
-                        <rich:column>
-                            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="Mi Perfil"  immediate="true"/>
+                        <rich:column> 
+                            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="Mi Perfil" action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}"  immediate="true"/>
                             <h:outputLabel styleClass="ikont-label-menu-estr-sub-titulo" value="         |         "/>
                             <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_usu" immediate="true"/>
                         </rich:column>

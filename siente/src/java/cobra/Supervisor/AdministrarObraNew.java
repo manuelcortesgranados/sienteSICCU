@@ -1652,7 +1652,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             }
         }
         
-        if (!listaContratoInterventoria.isEmpty()) {
+        if (listaContratoInterventoria != null && !listaContratoInterventoria.isEmpty()) {
             i=0;
             while (i < listaContratoInterventoria.size()) {
                 listdoccontratointerv = getSessionBeanCobra().getCobraService().obtenerDocumentosxContrato(listaContratoInterventoria.get(i).getContrato());
