@@ -62,6 +62,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>Inicio.xhtml</welcome-file>
+        <welcome-file>homes/home_gestion.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>

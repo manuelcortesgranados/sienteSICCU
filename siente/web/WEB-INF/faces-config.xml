@@ -539,7 +539,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>cerrarSession</from-outcome>
-            <to-view-id>/Inicio.xhtml</to-view-id>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>cambiocontra</from-outcome>
@@ -688,7 +688,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>volver</from-outcome>
-            <to-view-id>/Inicio.xhtml</to-view-id>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>consultarContratoConvenio</from-outcome>
@@ -851,10 +851,10 @@
 
     <!-- Inicio de Reglas de Navegacion generales para Cobra -->
     <navigation-rule>
-        <from-view-id>/Inicio.xhtml</from-view-id>
+        <from-view-id>/homes/home_gestion.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>fallo</from-outcome>
-            <to-view-id>/Inicio.xhtml</to-view-id>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>gestion</from-outcome>
@@ -882,7 +882,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>volver</from-outcome>
-            <to-view-id>/Inicio.xhtml</to-view-id>
+            <to-view-id>/homes/home_gestion.xhtmll</to-view-id>
         </navigation-case>
     </navigation-rule>
 

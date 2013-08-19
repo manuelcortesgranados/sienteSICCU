@@ -8,33 +8,65 @@
     xmlns:a4j="http://richfaces.org/a4j" 
     xmlns:interkont="http://www.interkont.com/jsf"
     >
+    <br/>
+    <h:panelGroup rendered="#{var.permisonuevodiseño and SessionBeanCobra.usuarioObra.usuId!=45}" >
+        <hr  class="ikont-hr-separador-usuario" />
+        <h:panelGrid rendered="true" columns="2">
+            <rich:column>
+                <h:graphicImage style="color: #999; border: 2px solid grey;-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 90px;width:67px; height: 67px; float: left;"  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
+            </rich:column>
+            <h:panelGroup>
+                <rich:column >
+                    <h:outputText  styleClass="ikont-label-menu-estr-sub-titulo" id="label_login_usuario" value="#{SessionBeanCobra.usuarioObra.usuLogin} "/>
+                </rich:column>  
+                <rich:column colspan="1">
+                    <center >
+                        <rich:column>
+                            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="Mi Perfil"  immediate="true"/>
+                            <h:outputLabel styleClass="ikont-label-menu-estr-sub-titulo" value="         |         "/>
+                            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_usu" immediate="true"/>
+                        </rich:column>
 
-
+                    </center>
+                </rich:column>
+            </h:panelGroup>
+        </h:panelGrid>
+        <br/>
+        <hr  class="ikont-hr-separador-usuario" />
+        <br/>
+        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo ikont-espacio-sub-menu" value="-#{var.necesitasAyuda}"  immediate="true"
+                       onclick="document.location.href = '#{var.linksoporte}';"/>
+        <br/>
+        <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo ikont-espacio-sub-menu" value="-#{var.contactenos}" immediate="true"
+                       onclick="document.location.href = '#{var.linksoporte}';"/>
+        <br/>
+        <br/>
+    </h:panelGroup>
+        <br/>
+        <br/>
     <interkont:spacer  height="10"/>
-
-    <rich:panel headerClass="ikont-rp-sliderich"  bodyClass="ikont-rp-sliderichcontentbluenovedades" header="Actividad Reciente" id="NovedadesZoom"  >
-
+    <h:panelGroup>
+        <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu ikont-espacio-sub-menu" value="Actividad Reciente"/>    
         <a4j:repeat value="#{HomeGestion.listarecientes}" var="item" >
-            <h:panelGrid  columns="2"  styleClass="ikont-hpg-contentnovedad">
+            <h:panelGrid  columns="2">
 
 
                 <h:graphicImage  styleClass="ikont-hgi-strrutaimg"   value="#{item.strrutaimg}"/>
 
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
-                        <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
-                        <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra"  
-                                          onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
-                        <a4j:commandLink  type="submit" value="#{item.nombreobra}" styleClass="ikont-hcl-nombreobra1"  
-                                          onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
-                        <h:outputText  styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
-                        <interkont:spacer height="3"/>
-                        <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
+                    <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
+                    <a4j:commandLink style="color: green;" type="submit" value="#{item.nombreobra}"  
+                                      onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                    <a4j:commandLink style="color: green;"  type="submit" value="#{item.nombreobra}"  
+                                      onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
+                    <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
+                    <interkont:spacer height="3"/>
+                    <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
                 </h:panelGroup>
             </h:panelGrid>
         </a4j:repeat>
 
-    </rich:panel>
-
+    </h:panelGroup>
 
 
 </ui:composition>

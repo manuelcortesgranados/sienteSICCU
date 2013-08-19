@@ -19,28 +19,7 @@
                 </h:panelGroup>
             </div>
         </div>
-        <h:panelGroup rendered="true" style="float: left; left: 30px; top:100px; position:absolute; ">
-            <h:panelGrid rendered="false" columns="2">
-                <rich:column>
-                    <h:outputText  style="font-size: 24px;color: #999" id="label_login_usuario" value="#{SessionBeanCobra.usuarioObra.usuLogin} "/>
-                </rich:column>  
-                <rich:column>
-                    <h:graphicImage style="color: #999; border: 2px solid grey;-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 90px;width:67px; height: 67px; float: left;"  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
-                </rich:column>
-                <rich:column colspan="1">
-                    <center >
-                        <rich:column>
-                            <h:commandLink style="font-size: 24px;" value="Mi Perfil    |   " rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmuro_comentarios}"
-                                           action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}" immediate="true"/>
-                        </rich:column>
-                        <rich:column>
-                            <h:commandLink style="font-size: 24px;" value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_usu" immediate="true"
-                                           styleClass="ikont-hcl-salir"  /> 
-                        </rich:column>
-                    </center>
-                </rich:column>
-            </h:panelGrid>
-        </h:panelGroup>
+
         <!--h:loadScript src="resource://jquery.js"/-->
 
 
@@ -536,17 +515,21 @@
             </h:panelGrid>
         </div> 
         <div class="topbar_encabezado_4">
-            <h:commandLink type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();
+            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.usuId!=45}">
+              <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
+            </h:panelGroup>
+            <h:commandLink rendered="#{SessionBeanCobra.usuarioObra.usuId==45}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();
                             return false;"/>
         </div> 
 
     </h:panelGroup>
+
     <div id="ingreso-usuario" class="ikont-div-ingreso-usuario">
         <hr class="ikont-hr-separador-inicial" />
         <div  class="ikont-cerrar-panel2">
             <center>
 
-                <h:commandLink  styleClass="ikont-bt-cerrar-login2" value="X"  onclick="esconderIngresoAnimado();
+                <h:commandLink  immediate="true" styleClass="ikont-bt-cerrar-login2" value="X"  onclick="esconderIngresoAnimado();
                             return  false;"/>
             </center>
         </div>
@@ -673,7 +656,7 @@
         </div>
     </div>
     <div class="ikont-div-scroll-menu" >
-        <h:panelGrid rendered="#{var.permisonuevodiseño}" onmouseover="mostrarMenuAnimado(); 
+        <h:panelGrid rendered="#{var.permisonuevodiseño}" onmouseover="mostrarMenuAnimado();
                             return  false;" styleClass="ikont-panel-spacing-menu" columns="3">
             <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}"/>   
@@ -735,7 +718,7 @@
                     <h:outputLabel styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuAyuda}"/>
                 </h:panelGrid>
                 <h:panelGroup styleClass="ikont-espacio-sub-menu">
-                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuSoporteLinea}"  onclick="document.location.href = '#{var.linksoporte}';" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnsoporte}"/>
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuSoporteLinea}"  onclick="document.location.href = '#{var.linksoporte}';"/>
                     <br/>
                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuTutorial}"  immediate="true"
                                    onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
