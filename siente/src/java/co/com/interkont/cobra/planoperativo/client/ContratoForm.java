@@ -76,14 +76,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
     ComboBox<TerceroDTO> lstTerceros;
     ComboBox<Integer> lstVigencia;
     ComboBox<TipocontratoDTO> lstTipoContrato;
-//    ComboBox<EnumFormaPago> lstFormaPago;
+    //ComboBox<EnumFormaPago> lstFormaPago;
     NumberField<BigDecimal> valorFuente;
     NumberField porcentajeFuente;
     NumberField valorRubro;
     ListBox lstVigen;
     ListBox lstFormaP;
-    private static final int COLUMN_FORM_WIDTH = 686;
-    private static final int COLUMN_FORM_HEIGHT = 576;
+//    private static final int COLUMN_FORM_WIDTH = 686;
+//    private static final int COLUMN_FORM_HEIGHT = 576;
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="Variables  para el cargue de los informacion en los combobox">
     EntidadProperties propse = GWT.create(EntidadProperties.class);
@@ -92,10 +92,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
     protected final ListStore<RubroDTO> rubros = new ListStore<RubroDTO>(props.idrubro());
     VigenciaProperties propsv = GWT.create(VigenciaProperties.class);
     protected final ListStore<Integer> vigencias = new ListStore<Integer>(propsv.vigencia());
-//    FormaPagoProperties propsforma = GWT.create(FormaPagoProperties.class);
+    //FormaPagoProperties propsforma = GWT.create(FormaPagoProperties.class);
   //  protected final ListStore<EnumFormaPago> formasPago = new ListStore<EnumFormaPago>(propsforma.numFormaPago());
-    //TipoContratoProperties propstipoContrato = GWT.create(TipoContratoProperties.class);
-    //protected final ListStore<TipocontratoDTO> tiposContrato = new ListStore<TipocontratoDTO>(propstipoContrato.inttipocontrato());
+ TipoContratoProperties propstipoContrato = GWT.create(TipoContratoProperties.class);
+    protected final ListStore<TipocontratoDTO> tiposContrato = new ListStore<TipocontratoDTO>(propstipoContrato.inttipocontrato());
     // </editor-fold>
     protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     protected GwtMensajes msj = GWT.create(GwtMensajes.class);
@@ -136,7 +136,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         if (vp == null) {
             vp = new VerticalPanel();
             vp.setSpacing(70);
-            vp.setWidth("" + COLUMN_FORM_WIDTH);
+            //vp.setWidth("" + COLUMN_FORM_WIDTH);
             vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
             crearFormulario();
@@ -181,8 +181,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         valorContrato.setWidth(cw);
         con.add(valorContrato, new HtmlData(".valor"));
 
-//        llenarListaTipoContrato(tiposContrato);
-    //    lstTipoContrato = new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato());
+        llenarListaTipoContrato(tiposContrato);
+        lstTipoContrato = new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato());
         lstTipoContrato.setEmptyText("Tipo contratacion");
         lstTipoContrato.setWidth(cw);
         lstTipoContrato.setAllowBlank(false);

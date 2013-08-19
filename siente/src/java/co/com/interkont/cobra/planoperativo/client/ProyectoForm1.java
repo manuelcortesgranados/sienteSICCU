@@ -86,8 +86,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private TextArea macroActividades;
     private DateField fechaInicio;
     private DateField fechaFin;
-    private static final int COLUMN_FORM_WIDTH = 686;
-    private static final int COLUMN_FORM_HEIGHT = 576;
+//    private static final int COLUMN_FORM_WIDTH = 686;
+//    private static final int COLUMN_FORM_HEIGHT = 100;
     private VerticalPanel vp;
     /*Convenio principal el cual tiene las fuentes de los recursos y 
      * la informacion necesaria
@@ -240,9 +240,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public Widget asWidget() {
         if (vp == null) {
             vp = new VerticalPanel();
-            vp.setSpacing(70);
-            vp.setWidth("" + COLUMN_FORM_WIDTH);
-            vp.setHeight("" + COLUMN_FORM_HEIGHT);
+            vp.setSpacing(10);
+//            vp.setWidth("" + COLUMN_FORM_WIDTH);
+//            vp.setHeight("" + COLUMN_FORM_HEIGHT);
             vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
             createColumnForm();
@@ -597,9 +597,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.macroActividades.setText("");
     }
 
-    public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
+    public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {        
         if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
-            if (obraFuenteDto.getValor().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValorcuotagerencia()) > 0) {
+            if (obraFuenteDto.getValor().compareTo(montoAportado.getValue()) > 0) {
                 return "El monto ingresado supera el valor de la fuente de recursos";
             } else {
                 if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {

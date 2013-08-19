@@ -280,7 +280,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-               ContratoForm contratoForm=new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog,props);
+               final ContratoForm contratoForm=new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog,props);
                crearContratoDialog.add(contratoForm);
                crearContratoDialog.show();
             }
