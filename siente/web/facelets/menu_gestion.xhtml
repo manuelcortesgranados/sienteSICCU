@@ -515,10 +515,10 @@
             </h:panelGrid>
         </div> 
         <div class="topbar_encabezado_4">
-            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.usuId!=45}">
+            <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.usuLogin != var.ciudadanosinregistro}">
               <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
             </h:panelGroup>
-            <h:commandLink rendered="#{SessionBeanCobra.usuarioObra.usuId==45}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();
+            <h:commandLink rendered="#{SessionBeanCobra.usuarioObra.usuLogin == var.ciudadanosinregistro}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();
                             return false;"/>
         </div> 
 
@@ -656,7 +656,7 @@
         </div>
     </div>
     <div class="ikont-div-scroll-menu" >
-        <h:panelGrid rendered="#{var.permisonuevodiseño}" onmouseover="mostrarMenuAnimado();
+        <h:panelGrid rendered="#{var.permisonuevodiseño }" onmouseover="mostrarMenuAnimado();
                             return  false;" styleClass="ikont-panel-spacing-menu" columns="3">
             <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}"/>   
