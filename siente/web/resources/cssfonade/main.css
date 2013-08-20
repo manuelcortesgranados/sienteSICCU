@@ -542,22 +542,24 @@ input[type="submit"].ikont-acl-btnfiltrociudadano:hover{
 
 a.butonreport{
     float: left;
-    height: 163px;
-    width: 150px; /* for validator */
+    height: 80px;
+    width: 90px; /* for validator */
     display: block;
     background-repeat: no-repeat;
     margin-right: 0px;
-    background-position: 0px 20px;
+    background-image: url(../imgs/proyecto/sprite_reportes.png);
 }
 
-a.excel {
-    background-image: url(../imgs/bt_file_excel.png);
+a.butonreport.zoom-excel {
+    background-position: -90px 0px;
 }
-a.excel:hover, a.word:hover, a.pdf:hover {
-    background-position: 0px -144px;
+
+a.butonreport.zoom-excel:hover {
+    background-position: -90px -75px;
 }
-a.word {
-    background-image: url(../imgs/bt_file_word.png);
+
+a.butonreport.zoom-word {
+    background-position: -180px 0px;
 }
 
 a.pdf {
@@ -972,7 +974,7 @@ a.evo02:hover {
 
 .TextoTipificacionModificacion {
     color: #999999;
-    font-family: Verdana,Geneva,sans-serif;
+    font-family: open;
     font-style: italic;
     text-align: left;
     width: 100%;
@@ -982,7 +984,7 @@ a.evo02:hover {
 
 .TituloModificarProyecto {
     color: #257500;
-    font-family: Verdana,Geneva,sans-serif;
+    font-family: open;
     font-size: 1.5em;
     font-style: italic;
     font-weight: bold;
@@ -991,7 +993,7 @@ a.evo02:hover {
 
 .NoFileModificar {
     color: #257500;
-    font-family: Verdana,Geneva,sans-serif;
+    font-family: open;
     font-size: 9px;
     font-style: italic;
     line-height: 9px;
@@ -1719,7 +1721,8 @@ input[type="text"], input[type="password"], select{
 }
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
-    font-family:italic; 
+    font-family:open; 
+    font-style: italic; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -1732,7 +1735,8 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login2{
     height:40px;
     font-size: 20px; 
-    font-family:italic; 
+    font-family:open; 
+    font-style: italic; 
     color:#808080;
 }
 .ikont-menu-inicio-zoom{
@@ -2031,4 +2035,292 @@ input[type="text"], input[type="password"], select{
 .ikont-hit-strrazonmodif{
     height: 20%;
     width: 99% !important;
+}
+
+
+.ikont-hpg-acionescontratos{
+    margin: 25px auto 0px auto;
+}
+
+.rf-pp-hdr{
+    background-repeat: no-repeat;
+    background-image: url(../imgs/modal/modal_btn_sombra.png);
+    background-position: center 25px;
+}
+
+
+/* detalle obra*/
+
+.ikont-hot-zoom-strnombremedio{
+    color: #257500;
+    text-decoration: none;
+    font-family: open;
+    font-size: 18px;
+    font-weight: 400;
+    float: none;
+    
+}
+
+.ikont-hot-strDireccionProyectoOut{
+    color: #257500!important;
+    text-decoration: none;
+    font-family: open;
+    font-size: 18px;
+    font-weight: 400;
+    float: none;
+    
+}
+
+.ikont-hot-zoom-intcodobra{
+    float: none;
+    font-size: 0.7em;
+    font-family: open;
+    font-style: italic;
+}
+
+.collapsible-text-none .rf-cp-lbl{
+    display: none;
+}
+
+.ikont-hot-zoom-numvobra{
+    font-size: 2.3em;
+}
+
+.ikont-hot-soliobra, .ikont-hot-numvaltotobra{
+    font-size: 1.3em;
+}
+
+.dtsemafomoro{
+    background-image: url("../imgs/proyecto/semaforo.png");
+    background-repeat: no-repeat;
+    width: 185px;
+    height: 60px;
+    display: block !important;
+    margin-top: -18px;
+    color: #FFF;
+    font-family: open;
+    font-size: 1em;
+    line-height: 55px;
+    letter-spacing: 0px;
+}
+
+.dtsemafomoro.ikont-hcl-VERDE{
+    background-position: 0px 0px;
+    text-indent: 12px;
+}
+
+.dtsemafomoro.ikont-hcl-AMARILLO{
+    background-position: 0px -60px;
+    text-indent: 74px;
+}
+
+.dtsemafomoro.ikont-hcl-ROJO{
+    background-position: 0px -120px;
+    text-indent: 134px;
+}
+
+.lineavance{
+    background-image: url("../imgs/proyecto/deberia_ir.png");
+    background-repeat: no-repeat;
+    width: 185px;
+    height: 20px;
+    display: block !important;
+    background-size: 180px 38px;
+    background-position: 0px 0px;
+}
+
+.puntoavance{
+    background-image: url("../imgs/proyecto/deberia_ir.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    display: block !important;
+    background-size: 180px 38px;
+    background-position: 0px -20px;
+    position: relative;
+    top: -18.5px;
+    left: -14px;
+}
+
+.ikont-hcl-deberiair{
+    font-family: open;
+    font-size: 2.8em;
+    text-decoration: none;
+    color: #58595B;
+    position: relative;
+    top: -10px;
+}
+
+.ikont-hcl-deberiair:hover{
+    color: #58595B;
+}
+
+.ikont-hpg-deberia_ir{
+    position: relative;
+    top: -10px;
+}
+
+.img-detalle-proyecto{
+    background-image: url("../imgs/proyecto/detalle_sprite.png");
+    background-repeat: no-repeat;
+    display: block !important;
+}
+
+.ikont-hcl-imgduracion{
+    width: 50px;
+    height: 60px;
+    background-position: 0px -50px;
+    margin: 0px auto;
+}
+
+.ikont-hcl-imgimpactosocial{
+    width: 50px;
+    height: 60px;
+    background-position: -50px -50px;
+    margin: 0px auto;
+}
+
+.ikont-hcl-imgestadoproyecto{
+    width: 60px;
+    height: 60px;
+    margin: 0px auto;
+}
+
+.ikont-hcl-imgestadoproyecto.estado1{
+    background-position: 0px -105px;
+}
+
+.ikont-hcl-imgestadoproyecto.estado2{
+    background-position: -55px -105px;
+}
+
+.ikont-hcl-imgestadoproyecto.estado3{
+    background-position: -110px -105px;
+}
+
+.ikont-hcl-imgestadoproyecto.estado4{
+    background-position: -165px -105px;
+}
+
+.ikont-hcl-imgestadoproyecto.estado5{
+    background-position: -220px -105px;
+}
+
+.ikont-hcl-imgtipoproyecto{
+    width: 50px;
+    height: 60px;
+    margin: 0px auto;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo1{
+    background-position: 0px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo2{
+    background-position: -50px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo3{
+    background-position: -100px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo4{
+    background-position: -150px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo5{
+    background-position: -50px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo6{
+    background-position: -200px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo7{
+    background-position: -250px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo8{
+    background-position: -300px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo9{
+    background-position: -350px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo10{
+    background-position: -400px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo11{
+    background-position: -450px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo12{
+    background-position: -500px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo13{
+    background-position: -550px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo14{
+    background-position: -600px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo12{
+    background-position: -650px -180px;
+}
+
+
+.ikont-hpg-griddetaob, .ikont-hpg-pg_impactosocial, .ikont-hgi-imgestobra, .ikont-hpg-tipo_obra{
+    text-align: center;
+    width: 200px;
+}
+
+.content-info-contrato{
+    width: 250px;
+    height: 100px;
+    overflow: hidden;
+    border: solid 1px #58595B;
+    border-radius: 2px;
+    margin: 0px 5px 4px;
+}
+
+.content-info-contrato span{
+    font-family: open;
+    font-size: 0.8em;
+    color: #58595B;
+}
+
+.ikont-hcl-zoom-contrante{
+    width: 38px;
+    height: 37px;
+    background-position: 0px 0px;
+}
+
+.ikont-hcl-zoom-supervosor{
+    width: 38px;
+    height: 37px;
+    background-position: -38px 0px;
+}
+
+.ikont-hcl-zoom-nocontrato{
+    width: 38px;
+    height: 37px;
+    background-position: -74px 0px;
+}
+
+.ikont-hcl-zoom-contratista{
+    width: 39px;
+    height: 37px;
+    background-position: -113px 0px;
+}
+
+.ikont-hot-zoom-numvobra{
+    font-size: 3em;
+}
+
+.ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
+    font-size: 1.3em;
 }

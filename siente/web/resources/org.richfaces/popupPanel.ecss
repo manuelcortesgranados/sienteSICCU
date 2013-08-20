@@ -50,14 +50,7 @@
     padding-left: 10px;
     cursor: move;
     padding: 8px;
-    border-top-left-radius: '#{richSkin.borderRadius}';
-    border-top-right-radius: '#{richSkin.borderRadius}';
-    border-color: '#{richSkin.borderColor}';
-    border-width: '#{richSkin.borderWeight}';
-    border-style: '#{richSkin.borderStyle}';
-    border-bottom-color: transparent;
-    border-bottom-width: '#{richSkin.borderWeight}';
-    border-bottom-style: 0px;
+    
 }
 
 .rf-pp-hdr-cnt {
@@ -69,10 +62,6 @@
     font-family: '#{richSkin.headerFamilyFont}';
     font-size: '#{richSkin.popuppanelheaderSizeFont}';
     text-align: center;
-    background: "url(#{resource['imgs.valla:modal_btn_sombra.png']})";
-    background-position: top left;
-    background-repeat: repeat-x;
-
 }
 
 .rf-pp-hdr-cntrls {

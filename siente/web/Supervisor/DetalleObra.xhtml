@@ -71,14 +71,14 @@
         <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css"/>
         <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css"/>
         <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css"/>
+        <link href="/#{var.versioncobra}/resources/reloj/css/flipclock.css" rel="stylesheet" type="text/css" />
 
     </ui:define>
 
     <ui:define name="title">
-        <!--<h:outputText  styleClass="ikont-hot-houtdetalle"   value="#{var.houtdetalle}"/>-->
-
-        <h:outputText  styleClass="ikont-hot-intcodobra"    value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"/>
-        <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText  styleClass="ikont-hot-houtdetalle" rendered="#{!var.nuevomapa}"  value="#{var.houtdetalle}"/>
+        <h:outputText  styleClass="ikont-hot-intcodobra"  rendered="#{!var.nuevomapa}"  value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"/>
+        <h:outputText  styleClass="ikont-hot-strnombremedio"  rendered="#{!var.nuevomapa}"  value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
 
 
@@ -114,7 +114,7 @@
                 <h:inputHidden id="finfecha" value="#{Supervisor$DetalleObra.finentrega}" />
 
             </h:form>
-            <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu}">
+            <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu and !var.nuevomapa}}">
                 <h:form prependId="false" >
                     <h:inputHidden id="estaen" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
                 </h:form>
@@ -1037,7 +1037,7 @@
 
             </h:panelGroup>
 
-            <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+            <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.nuevomapa}">
 
                 <h:panelGrid  id="gpPrincipalInfCiudad" >
                     <h:form prependId="false">
@@ -1398,6 +1398,279 @@
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>
+            
+            <h:panelGroup rendered="#{var.nuevomapa}" styleClass="ikont-hpg-zoom-detalleobra">
+                <h:form prependId="false" >
+                    <h:inputHidden id="estaen" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
+                </h:form>
+                <interkont:spacer height="10"/>
+                <h:form>
+                    <h:panelGrid  id="gpPrincipalInfCiudad" >
+                        <h:form prependId="false">
+                            <h:panelGroup layout="block">
+                                <center>
+                                    <h:outputText  styleClass="ikont-hot-zoom-intcodobra" value="(#{Supervisor$AdministrarObraNew.obra.intcodigoobra})"/>
+                                    <br/>
+                                    <h:outputText  styleClass="ikont-hot-zoom-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+                                    <br/>
+                                    <h:outputLabel  styleClass="ikont-hol-strDireccionProyectoOut"   value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                    <br/>
+                                    <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_seguirproyecto}">
+                                        <h:commandButton  styleClass="ikont-hcb-seguirspry"   value="#{var.seguirproyectociu}" rendered="#{!Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.registrarSeguirobra}">
+                                        </h:commandButton>
+                                        <h:commandButton  styleClass="ikont-hcb-sinseguirpry"   value="#{var.dejardeseguirproyecto}" rendered="#{Supervisor$DetalleObra.seguidorporobra}" action="#{Supervisor$DetalleObra.eliminarSeguirobra}">
+                                        </h:commandButton>
+                                    </h:panelGroup>
+                                </center>
+                            </h:panelGroup>
+                            <rich:collapsiblePanel switchType="client" header="Como va el proyecto" expanded="true" >
+                                <h:panelGrid columns="3">
+                                    <h:outputLabel>Tiempo para la entrega</h:outputLabel>
+                                    <h:outputLabel>Estado</h:outputLabel>
+                                    <h:outputLabel>Deberia ir en</h:outputLabel>
+                                    <div class="your-clock"></div>
+                                    <h:panelGrid  >
+                                        <h:outputText styleClass="ikont-hcl-#{Supervisor$DetalleObra.semaforo} ikont-hot-semaforo dtsemafomoro" value="#{Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                            <f:convertNumber pattern="###.## %"/>
+                                        </h:outputText>
+                                        <h:commandLink styleClass="ikont-hcl- lineavance"/>
+                                        <h:commandLink id="line-semaforo" styleClass="ikont-hcl-line-semaforo puntoavance"/>
+                                    </h:panelGrid>
+                                    <h:panelGrid  >
+                                        <h:outputText styleClass="ikont-hcl-deberiair ikont-hot-deberia" value="#{Supervisor$DetalleObra.obraMapa.deberiaestar/100}">
+                                            <f:convertNumber pattern="###.## %"/>
+                                        </h:outputText>
+                                        <h:panelGroup layout="block" styleClass="ikont-hpg-deberia_ir">
+                                            <h:commandLink styleClass="ikont-hcl- lineavance"/>
+                                            <h:commandLink id="line-deberia" styleClass="ikont-hcl-line-deberia puntoavance" />
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                    
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="client" header="Informacion" expanded="true" >
+                                <h:panelGrid id="pg_valores_financieros"  columns="2"  >
+                                    <h:panelGrid  >
+                                        <h:outputLabel  styleClass="ikont- hot-textobra9" >Valor global del proyecto</h:outputLabel>
+                                        <h:panelGrid  styleClass="ikont-hpg-griddetaob4"   >
+                                            <h:outputText  styleClass="ikont-hot-zoom-numvobra"   value="#{Supervisor$AdministrarObraNew.obra.solicitud_obra.doublevaloraprobado}">
+                                                <f:convertNumber pattern="$###,###" />
+                                            </h:outputText>
+                                            <h:panelGrid columns="2" >
+                                                <h:panelGrid >
+                                                    <h:outputLabel  styleClass="ikont- hot-textobra9" >Valor del proyecto</h:outputLabel>
+                                                    <h:outputText  styleClass="ikont-hot-zoom-soliobra" value="#{Supervisor$AdministrarObraNew.obra.numvaltotobra}">
+                                                        <f:convertNumber pattern="$###,###"/>
+                                                    </h:outputText>
+                                                </h:panelGrid>
+                                                <h:commandButton id="ver_objeto" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
+                                                    <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                                  verticalOffset="5"  styleClass="ikont-rtt-tool3"   >
+                                                    </rich:tooltip>
+                                                </h:commandButton>
+                                                <h:panelGrid>
+                                                    <h:outputLabel  styleClass="ikont-hot-textobra9" >Valor de la interventoria</h:outputLabel>
+                                                    <h:outputText  styleClass="ikont-hot-zoom-numvaltotobra"    value="#{Supervisor$DetalleObra.valorinterventoria}">
+                                                        <f:convertNumber pattern="$###,###"/>
+                                                    </h:outputText>
+                                                </h:panelGrid>
+                                                <h:commandButton  styleClass="ikont- hot-otNumContratos"   id="otNumContratos"   value="#{var.verinfciu}" >
+                                                    <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                                  verticalOffset="5"  styleClass="ikont-rtt-tool2"   >
+                                                        <a4j:repeat id="rpNumContratos" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
+                                                            <h:outputText  styleClass="ikont- hot-lstcontrobra"   value="- #{relacionContrato.contrato.strnumcontrato}"></h:outputText><br/>
+                                                        </a4j:repeat>
+                                                    </rich:tooltip>
+                                                </h:commandButton> 
+                                                <h:outputLabel  styleClass="ikont-hot-textobra9" >Otros contratos asociados</h:outputLabel>
+                                                <h:commandButton value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
+                                                    <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                                  verticalOffset="5"  styleClass="ikont-rtt-tool3"   >
+                                                    </rich:tooltip>
+                                                </h:commandButton>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2" >
+                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-contrante img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-contraticiu"   value="#{var.contratistaciu}:"   rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" />
+                                                    <h:outputText  styleClass="ikont- hot-nbre"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
+                                                    <h:outputText  styleClass="ikont- hot-otContratistas"   id="otContratistas"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
+                                                        <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
+                                                                      verticalOffset="5"  styleClass="ikont-rtt-tool"   >
+                                                            <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
+                                                                <h:outputText  styleClass="ikont- hot-nbre1"   value="- #{relacionContrato.contrato.contratista.strnombre}"></h:outputText> <br/>
+                                                            </a4j:repeat>
+                                                        </rich:tooltip>
+                                                    </h:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-contrataneciu"   value="#{var.contrataneciu}:" ></h:outputText>
+                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" ></h:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-nocontrato img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{var.supervisorciu}:"  rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"  ></h:outputText>
+                                                    <h:outputText  styleClass="ikont- hot-strinterventor"  value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup  styleClass="content-info-contrato" layout="block" >
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-ncontratociu"   value="#{var.ncontratociu}:" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" ></h:outputText>
+                                                    <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>                                                   
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="client" header="Images y Evolucion" expanded="true" >
+                                <h:panelGrid columns="2">
+                                    <h:panelGrid    >
+                                        <h:panelGrid   rowClasses="alignverticaldetalle" columns="2">
+                                            <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
+                                            <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
+                                                <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
+                return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
+                                                <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
+
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                        <h:panelGrid columns="2"  columnClasses="panelcenter">
+                                            <h:panelGrid styleClass="ikont-hpg-griddetaob2"    columnClasses="panelcenter">
+                                                <h:graphicImage  styleClass="ikont-hgi-imganterior "    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenAnterior}" />
+                                                <h:outputText  styleClass="ikont- hot-antes"   value="Antes"   ></h:outputText>
+
+                                            </h:panelGrid>
+
+                                            <h:panelGrid styleClass="ikont-hpg-griddetaob3"    columnClasses="panelcenter">
+                                                <h:graphicImage  styleClass="ikont-hgi-imgactual"    width="169" height="130" value="#{Supervisor$DetalleObra.strimagenActual}"/>
+                                                <h:outputText  styleClass="ikont- hot-ahora"   value="Ahora"  ></h:outputText>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2"  columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2" >
+                                        <h:panelGrid  >
+
+                                            <div id="sideline"><label class="textlittle2">Conosca la evolucion</label></div>
+                                            <h:panelGrid columnClasses="panelderecha" >
+                                                <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
+
+                                                <div id="graficoEvolucionProyecto" >
+                                                </div>
+                                            </h:panelGrid>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="client" header="Datos relevantes" expanded="true" >
+                                <h:panelGrid columns="4">
+                                    <h:panelGrid   styleClass="ikont-hpg-griddetaob"   >
+                                        <h:commandLink styleClass="ikont-hcl-imgduracion img-detalle-proyecto"/>
+                                        <h:outputLabel>Duración</h:outputLabel>
+                                    </h:panelGrid>
+                                    <h:panelGrid styleClass="ikont-hpg-pg_impactosocial"   >
+                                        <h:commandLink styleClass="ikont-hcl-imgimpactosocial img-detalle-proyecto"/>
+                                        <h:outputLabel>Impacto social</h:outputLabel>
+                                    </h:panelGrid>
+                                    <h:panelGrid  styleClass="ikont-hgi-imgestobra">
+                                        <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado1"/>
+                                        <h:outputLabel>estado</h:outputLabel>
+                                    </h:panelGrid>
+                                    <h:panelGrid   styleClass="ikont-hpg-tipo_obra"   >
+                                        <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo1"/>
+                                        <h:outputLabel>tipo</h:outputLabel>
+                                    </h:panelGrid>
+                                    <h:panelGrid   styleClass="ikont-hpg-griddetaob"   >
+                                        <interkont:spacer height="15" />
+                                        <h:outputText  styleClass="ikont- hot-intplazoo"     value="#{Supervisor$AdministrarObraNew.obra.intplazoobra}  #{var.diasciu}" ></h:outputText>
+
+                                        <h:panelGrid columns="2" styleClass="panelcenter">
+                                            <h:outputText  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputText>
+                                            <h:outputText  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
+                                                <f:convertDateTime pattern="yyyy-MMM-dd" />
+                                            </h:outputText>
+                                            <h:outputText  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputText>
+                                            <h:outputText  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
+                                                <f:convertDateTime pattern="yyyy-MMM-dd"/>
+                                            </h:outputText>
+                                        </h:panelGrid>
+
+                                    </h:panelGrid>    
+                                    <h:panelGrid styleClass="ikont-hpg-pg_impactosocial"   >
+                                        <h:panelGrid columns="2"  >
+                                            <h:outputLabel  styleClass="ikont- hot-personasbeneficiadas"   value="#{var.personasbeneficiadas}"   ></h:outputLabel>
+                                            <h:outputText  styleClass="ikont-hol-numhabbeneficiados"     value="#{Supervisor$AdministrarObraNew.obra.numhabbeneficiados}"></h:outputText>
+                                            <h:outputLabel  styleClass="ikont- hot-empleosdirectos"   value="#{var.empleosdirectos}:"  ></h:outputLabel>
+                                            <h:outputText  styleClass="ikont-hol-numempdirectos"    value="#{Supervisor$AdministrarObraNew.obra.numempdirectos}"></h:outputText>
+                                            <h:outputLabel  styleClass="ikont- hot-empleosindirectos"   value="#{var.empleosindirectos}:"  ></h:outputLabel>
+                                            <h:outputText  styleClass="ikont-hol-numempindirectos"    value="#{Supervisor$AdministrarObraNew.obra.numempindirectos}" ></h:outputText>
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                    <h:panelGrid  styleClass="ikont-hgi-imgestobra">
+                                        <h:outputText  styleClass="ikont- hot-estobra"   value="#{Supervisor$AdministrarObraNew.obra.estadoObra}"  ></h:outputText>
+                                    </h:panelGrid>
+                                    <h:panelGrid   styleClass="ikont-hpg-tipo_obra"   >
+                                        <h:panelGrid columns="2"  >
+                                            <h:outputText  styleClass="ikont-hol-clspry "     value="#{var.claseProyecto}" />
+                                            <h:outputLabel  styleClass="ikont-hol-strdescclaseobra"     value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                                            <h:outputText  styleClass="ikont-hol-tipoPry"    value="#{var.tipoProyecto}"    />
+                                            <h:outputLabel  styleClass="ikont-hol-tipprynom"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  />
+                                            <h:outputText  styleClass="ikont-hol-subtipo "     value="Subtipo:"     />
+                                            <h:outputLabel  styleClass="ikont-hol-strdesctipoobra"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </h:panelGrid>
+
+
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="client" header="Donde esta ubicado el proyecto" expanded="true" >
+                                <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
+                                    <h:panelGrid  columnClasses="textalingright">
+                                        <h:outputLabel  styleClass="ikont-hot-strDireccionProyectoOut"   id="strDireccionProyectoOut"    value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                        <interkont:spacer width="20"/>
+                                        <h:outputText  styleClass="ikont-hol-strDireccionProyecto"   id="strDireccionProyecto" value="#{var.label_direccion}" />
+                                        <interkont:spacer width="20"/>
+                                        <h:outputText  styleClass="ikont-hol-strZona"   id="strZona" value="#{var.zona}"   />
+                                        <interkont:spacer width="20"/>
+                                        <h:outputLabel  styleClass="ikont-hol-strZonaOut"   id="strZonaOut"  value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}"/>
+
+
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="1" id="mapastatic">
+                                        <h:graphicImage  styleClass="ikont-hgi-ubicacionmapa"   value="#{Supervisor$AdministrarObraNew.ubicacionmapa}"
+                                                         width="350" height="193" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+                            <rich:collapsiblePanel  switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">
+                                <h:panelGrid columns="3" styleClass="panelcenter">
+                                    <h:commandLink id="pdf" onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-pdf"  target="_blank"  />
+                                    <h:commandLink id="excel" onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-excel" target="_blank" />
+                                    <h:commandLink id="word" onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-word" target="_blank" />
+                                </h:panelGrid>
+                            </rich:collapsiblePanel>
+
+                        </h:form>
+
+                    </h:panelGrid>
+                </h:form>
+            </h:panelGroup>
             <h:panelGroup id="modalesDetalle">
                 <ui:include src="/modal/verPolizasModal.xhtml"/>
                 <ui:include src="/modal/objetoObra.xhtml"/>
@@ -1411,20 +1684,42 @@
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/reloj.js"/>
 
         </body>
-        <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider_ciu.js" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider_ciu.css" rel="stylesheet" type="text/css" />
-        <script  language="javascript"></script>
+        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
+        <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/libs/prefixfree.min.js" type="text/javascript"></script>
+        <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/flipclock.min.js" type="text/javascript"></script>
         <script type="text/javascript">
                                         var $jpanel = jQuery.noConflict();
                                         $jpanel(document).ready(function() {
-                                            var $i = jQuery.noConflict();
-                                            $i('#slider3').slider3({
-                                                speed: 1800
-
+                                            var clock = $jpanel('.your-clock').FlipClock({
+                                                autoStart: true,
+                                                countdown: true,
+                                                clockFace: 'DailyCounter'
                                             });
 
+                                            //clock.setTime( #{Supervisor$DetalleObra.finentrega});
+                                            clock.setTime(3600000);
+                                            clock.start();
+                                            var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
+                                            _porst.replace(' ', '');
+                                            var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
+                                            _pordb.replace(' ', '');
+                                            document.getElementsByClassName('ikont-hcl-line-semaforo')[0].style.marginLeft = _porst.toString();
+                                            document.getElementsByClassName('ikont-hcl-line-deberia')[0].style.marginLeft = _pordb.toString();
                                         });
+
+        </script>
+        <script type="text/javascript">
+            var $jpanel = jQuery.noConflict();
+            $jpanel(document).ready(function() {
+                var $i = jQuery.noConflict();
+                $i('#slider3').slider3({
+                    speed: 1800
+
+                });
+
+            });
 
         </script>
     </ui:define>

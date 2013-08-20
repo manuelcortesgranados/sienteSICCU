@@ -19,6 +19,7 @@ hr {
 
 .panelcenter {
     text-align: center;
+    margin: 0px auto;
 }
 
 .panelfontsize{
@@ -37,6 +38,10 @@ hr {
 
 .verticalalingtop{
     vertical-align: top;
+}
+
+.textalingright{
+    text-align: right;
 }
 
 .tituloValor{
