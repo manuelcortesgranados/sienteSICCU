@@ -384,14 +384,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
      * metodo que se encarga de llenar el combo rubros 
      */
     public void llenarListaRubros(final ListStore<RubroDTO> rubros) {
-        service.obtenerRubros(new AsyncCallback<List>() {
+        service.obtenerRubros("12",new AsyncCallback<List<RubroDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error al cargar los rubros", null);
             }
 
             @Override
-            public void onSuccess(List result) {
+            public void onSuccess(List<RubroDTO> result) {
                 rubros.addAll(result);
                 service.setLog("Cargue rubros" + rubros.size(), null);
 

@@ -7,7 +7,6 @@ package co.com.interkont.cobra.planoperativo.server.services;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
-import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -18,9 +17,6 @@ import org.springframework.stereotype.Service;
 import cobra.util.CasteoGWT;
 import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
-import co.com.interkont.cobra.to.Tipocontrato;
-import cobra.SessionBeanCobra;
-import cobra.Supervisor.FacesUtils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -78,10 +73,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     }
 
     @Override    
-    public Boolean setContratoDto(ContratoDTO contrato) {
+    public Boolean setContratoDto(ContratoDTO contrato) {       
         
-        
-        System.out.println("contrato = " + contrato);
         this.contratoDto = contrato;
         return true;
     }
@@ -111,7 +104,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         while (itparametricas.hasNext()) {
             Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();
             if (par.getParametricaactividadesobligatorias() == null) {
-                ActividadobraDTO actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, duracion, 0);
+                ActividadobraDTO actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
 
                 for (Parametricaactividadesobligatorias parhija : listapar) {
                     if (parhija.getParametricaactividadesobligatorias() != null && parhija.getParametricaactividadesobligatorias().getIdparametrica() == par.getIdparametrica()) {
@@ -120,7 +113,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                         if (parhija.getIdparametrica() == 4) {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
                         } else {
-                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecini, duracion, 0));
+                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecini, 1, 0));
                         }
                     }
                 }
@@ -131,8 +124,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     }
 
     @Override
-    public List obtenerRubros() throws Exception {
-        List<Rubro> lstRubros = cobraDao.consultarRubros();
+    public List<RubroDTO> obtenerRubros(String categoria) throws Exception {
+        List<Rubro> lstRubros = cobraDao.encontrarPorcadenailikeinicial(Rubro.class,"idrubro",categoria);
         List<RubroDTO> lstRubrosDTO = new ArrayList<RubroDTO>(lstRubros.size());
         for (Rubro rubro : lstRubros) {
             lstRubrosDTO.add(new RubroDTO(rubro.getIdrubro(), rubro.getStrdescripcion()));
@@ -161,6 +154,17 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
         //return lstTipoContratoDto;
       return null;
+    }
+
+    @Override
+    public List<RubroDTO> obtenerCategoriasRubros() throws Exception {
+        List<Rubro> lstRubros = cobraDao.obtenerCategoriasRubros();
+       
+        List<RubroDTO> lstRubrosDTO = new ArrayList<RubroDTO>();
+        for (Rubro rubro : lstRubros) {
+            lstRubrosDTO.add(new RubroDTO(rubro.getIdrubro(), rubro.getStrdescripcion()));
+        }
+        return lstRubrosDTO;
     }
     
 

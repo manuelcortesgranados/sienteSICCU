@@ -6,7 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import java.util.ArrayList;
@@ -29,7 +29,8 @@ public interface CobraGwtServiceAble extends RemoteService{
     //    Metodo Para obtener el contrato 
     //public ContratoDTO ObtenerContratoDTO(int idcontrato) throws  Exception;
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini) throws Exception;
-    public List obtenerRubros() throws  Exception;
+    public List<RubroDTO> obtenerRubros(String categoria) throws  Exception;
+    public List<RubroDTO> obtenerCategoriasRubros() throws  Exception;
     public List obtenerTiposContrato() throws  Exception;
     public Boolean setNavegacion(int navegacion);
     public int getNavegacion();

@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.services;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +30,9 @@ public interface CobraGwtServiceAbleAsync {
     //void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
     void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 
-    void obtenerRubros(AsyncCallback<List> call);
+    void obtenerRubros(String categoria,AsyncCallback<List<RubroDTO>> call);
+    
+    void obtenerCategoriasRubros(AsyncCallback<List<RubroDTO>> call);
 
     void obtenerTiposContrato(AsyncCallback<List> call);
 

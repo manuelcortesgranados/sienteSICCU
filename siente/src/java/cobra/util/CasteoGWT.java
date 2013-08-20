@@ -53,7 +53,7 @@ public class CasteoGWT {
         ContratoDTO contratoDTO = new ContratoDTO(contrato.getIntidcontrato(), contrato.getDatefechaini(), contrato.getDatefechafin(), 
                 contrato.getFechaactaini(), contrato.getStrnumcontrato(),contrato.getNumvlrcontrato(), contrato.getDatefechacreacion(),
                 contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(),contrato.getIntduraciondias(),
-                contrato.getBooltipocontratoconvenio(), castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
+                castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()), contrato.getStrnombrecorto());
                 
                 contratoDTO.setFuenterecursosconvenios(castearSetFuenteRecursosConvenio(contrato.getFuenterecursosconvenios(), contratoDTO));
         
@@ -215,7 +215,7 @@ public class CasteoGWT {
         ContratoDTO contratodto = new ContratoDTO(contrato.getIntidcontrato(), contrato.getDatefechaini(), contrato.getDatefechafin(), 
                 contrato.getFechaactaini(), contrato.getStrnumcontrato(),contrato.getNumvlrcontrato(), contrato.getDatefechacreacion(),
                 contrato.getTextobjeto(), contrato.getEstadoconvenio().getIdestadoconvenio(),contrato.getIntduraciondias(),
-                contrato.getBooltipocontratoconvenio(), castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()));
+                castearTipoContratoDTOToTipoContratoDTO(contrato.getTipocontrato()), contrato.getStrnombrecorto());
                 
         contratodto.setRelacionobrafuenterecursoscontratos(castearSetObraRelacionobrafuenterecursoscontratoTO(contrato.getRelacionobrafuenterecursoscontratos(), convenio));
         return contratodto;
@@ -426,9 +426,9 @@ public class CasteoGWT {
         if (actividadObraDto.getObra() != null) {
             actividadObra.setObra(castearObraDdtToObra(actividadObraDto.getObra(), convenio));
         } else if (actividadObraDto.getContrato() != null) {
-            if (!actividadObraDto.getContrato().getBooltipocontratoconvenio()) {
+            
                 actividadObra.setContrato(castearContratoDTOToContrato(actividadObraDto.getContrato(), convenio));
-            }
+            
         }
         return actividadObra;
 

@@ -75,6 +75,7 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
+import java.util.Calendar;
 
 /**
  *
@@ -213,7 +214,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = true;
         config.showTaskLabel = false;
-
+        config.mouseWheelZoomEnabled= true;
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -365,7 +366,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyProperties = depProps;
 
         // Cascade Changes
-        config.cascadeChanges = true;
+        config.cascadeChanges = false;
 
         // Add zones to weekends
         ArrayList<ZoneGeneratorInt> zoneGenerators = new ArrayList<ZoneGeneratorInt>();
@@ -520,21 +521,22 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
     // Create ToolBar
     private ToolBar createToolBar(final TreeStore<ActividadobraDTO> tareas) {
+//        ToggleButton permensual = new ToggleButton("Mensual");      
+//        ToggleButton persemestral= new ToggleButton("6 meses");      
+//        ToggleButton peranual = new ToggleButton("Anual");      
         ToolBar tbar = new ToolBar();
 
         // Button to endable/disable cascadeChanges
         final ToggleButton cascade = new ToggleButton("Cambiar a Cascada");
-        cascade.setValue(false);
+        cascade.setValue(true);
         cascade.addSelectHandler(new SelectEvent.SelectHandler() {
             @Override
-            public void onSelect(SelectEvent event) {
-                convenioDTO= GanttDatos.estructurarDatosConvenio(convenioDTO, tareas, service);
-//                gantt.getConfig().cascadeChanges = cascade.getValue();
-//                gantt.reconfigure(false);
+            public void onSelect(SelectEvent event) {              
+                gantt.getConfig().cascadeChanges = cascade.getValue();
+                gantt.reconfigure(false);
             }
         });
-        tbar.add(cascade);
-
+        
         // Button to endable/disable show CriticalPath
         final ToggleButton critical = new ToggleButton("Ruta Critica");
         critical.setValue(false);
@@ -545,7 +547,39 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
+        
+//         permensual.addSelectHandler(new SelectEvent.SelectHandler() {
+//            @Override
+//            public void onSelect(SelectEvent event) {              
+//                gantt.getConfig().timeResolutionUnit=Unit.MONTH;                
+//                gantt.reconfigure(true);
+//               
+//            }
+//        });
+//        persemestral.addSelectHandler(new SelectEvent.SelectHandler() {
+//            @Override
+//            public void onSelect(SelectEvent event) {              
+//                gantt.getConfig().timeResolutionUnit=Unit.QUATER;
+//               
+//                gantt.reconfigure(true);
+//               
+//
+//            }
+//        });
+//        peranual.addSelectHandler(new SelectEvent.SelectHandler() {
+//            @Override
+//            public void onSelect(SelectEvent event) {              
+//                gantt.getConfig().timeResolutionUnit=Unit.MONTH;
+//                
+//                gantt.reconfigure(true);
+//                
+//            }
+//        }); 
+         tbar.add(cascade);
         tbar.add(critical);
+//        tbar.add(permensual);
+//        tbar.add(persemestral);
+//        tbar.add(peranual);
 
         return tbar;
     }
@@ -622,7 +656,30 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                    // service.setLog("listado actividades = " + convenioDTO.getActividadobras().size(), null);
 //                    AlertMessageBox d = new AlertMessageBox("Alerta","Cargando de nuevo");                   
 //                    d.show();
+                    
+//                    DateWrapper dw;
+//                    dw = new DateWrapper(convenioDTO.getDatefechaini());
+//                    
+//                    while(dw.asDate().compareTo(convenioDTO.getDatefechafin())<=0)
+//                    {
+//                        dw=dw.addDays(30);
+//                       service.setLog("dw = " + dw.asDate(),null);
+//                    }    
+                    
                     service.setLog("Size fuentes"+convenioDTO.getFuenterecursosconvenios().size(), null);
+                    service.setLog("Idcontrato"+convenioDTO.getIntidcontrato(), null);
+                    service.setLog("Nombre abreviado"+convenioDTO.getNombreAbreviado(), null);
+                    service.setLog("Numero contrato"+convenioDTO.getStrnumcontrato(), null);
+                    service.setLog("Objeto contrato"+convenioDTO.getTextobjeto(), null);                    
+                    service.setLog("Fecha ini"+convenioDTO.getDatefechaactaini(), null);
+                    service.setLog("Fecha fin"+convenioDTO.getDatefechafin(), null);
+                    service.setLog("Estado convenio"+convenioDTO.getEstadoConvenio(), null);
+                    service.setLog("Numero días"+convenioDTO.getIntduraciondias(), null);
+                    service.setLog("Montos"+convenioDTO.getMontos().size(), null);
+                    service.setLog("Valor contrato"+convenioDTO.getNumvlrcontrato(), null);
+                    service.setLog("Relacion obra fuente recursos"+convenioDTO.getRelacionobrafuenterecursoscontratos().size(), null);
+                    service.setLog("Tipo contrato"+convenioDTO.getTipocontrato().getInttipocontrato(), null);
+                    service.setLog("Valor disponible"+convenioDTO.getValorDisponible(), null);
 
                     RootPanel.get().add(asWidget());
                 } else {

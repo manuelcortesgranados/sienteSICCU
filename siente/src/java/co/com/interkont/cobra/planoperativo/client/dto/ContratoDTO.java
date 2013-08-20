@@ -26,8 +26,7 @@ public class ContratoDTO implements IsSerializable {
     private Date datefechacreacion;
     private String textobjeto;       
     private int estadoConvenio;
-    private int intduraciondias;
-    private Boolean booltipocontratoconvenio;
+    private int intduraciondias;    
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
     private String nombreAbreviado;
@@ -41,7 +40,7 @@ public class ContratoDTO implements IsSerializable {
     public ContratoDTO() {
     }
 
-    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion, String textobjeto, int estadoConvenio, int intduraciondias, Boolean booltipocontratoconvenio, TipocontratoDTO tipocontrato) {
+    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, Date datefechaactaini, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechacreacion, String textobjeto, int estadoConvenio, int intduraciondias, TipocontratoDTO tipocontrato, String strnombrecorto) {
         this.intidcontrato = intidcontrato;
         this.datefechaini = datefechaini;
         this.datefechafin = datefechafin;
@@ -51,9 +50,9 @@ public class ContratoDTO implements IsSerializable {
         this.datefechacreacion = datefechacreacion;
         this.textobjeto = textobjeto;
         this.estadoConvenio = estadoConvenio;
-        this.intduraciondias = intduraciondias;
-        this.booltipocontratoconvenio = booltipocontratoconvenio;
+        this.intduraciondias = intduraciondias;        
         this.tipocontrato = tipocontrato;
+        this.nombreAbreviado= strnombrecorto;
     }
     
     
@@ -227,21 +226,7 @@ public class ContratoDTO implements IsSerializable {
         this.tipocontrato = tipocontrato;
     }
 
-    /**
-     * @return the booltipocontratoconvenio
-     */
-    public Boolean getBooltipocontratoconvenio() {
-        return booltipocontratoconvenio;
-    }
-
-    /**
-     * @param booltipocontratoconvenio the booltipocontratoconvenio to set
-     */
-    public void setBooltipocontratoconvenio(Boolean booltipocontratoconvenio) {
-        this.booltipocontratoconvenio = booltipocontratoconvenio;
-    }
-
-    /**
+       /**
      * @return the estadoConvenio
      */
     public int getEstadoConvenio() {

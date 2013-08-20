@@ -810,10 +810,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * variables para realizar la carga de los gerentes de convenio
      */
     private SelectItem[] gerentesDeConvenio;
-    /*
-     * variables para realizar la carga de los roles 
-     */
-    private SelectItem[] roles;
+    
     /**
      * Clase para manejar la lógica de fuentes de recursos
      */
@@ -825,7 +822,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setRecursosconvenio(RecursosConvenio recursosconvenio) {
         this.recursosconvenio = recursosconvenio;
-    }   
+    }      
+    
+    
+    
 
     public List<Tercero> getLstentidades() {
         return lstentidades;
@@ -2314,12 +2314,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 llenarModalidadContratista();
             }
         } else {
-            setRecursosconvenio(new RecursosConvenio(getContrato()));
+            setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
             listaProyectosCovenio = new ArrayList<Obra>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
-            llenarEntidades();
-            llenarRoles();
+            llenarEntidades();            
             llenarGerentes();
             
 
@@ -3332,7 +3331,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setNumrecursospropios(BigDecimal.ZERO);
         contrato.setNumrecursosch(BigDecimal.ZERO);
         contrato.setNumrecursostercero(BigDecimal.ZERO);
-        contrato.setNumvlrcontrato(BigDecimal.ZERO);
+        contrato.setNumvlrcontrato(BigDecimal.ZERO);        
         contrato.setFormapago(new Formapago());
         contrato.setEstadoconvenio(new Estadoconvenio(1));
         contrato.setBooleantienehijos(false);
@@ -3347,6 +3346,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria());
         contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
         contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
+        
         // contrato.setTercero(new Tercero());
 
         lisplanifiactapar.clear();
@@ -3376,7 +3376,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         instanciarPolizar();
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
-        setRecursosconvenio(new RecursosConvenio(getContrato()));
+        setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
         actualizarPanel(1);
 
     }
@@ -3930,7 +3930,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolpolizas = false;
         boolproyectos = false;
         boolgiros = false;
-        boolmodifca = false;
+        boolmodifca = false;       
         if (contrato.getBooltipocontratoconvenio()) {
             tipoContCon = "Convenio";
             booltipocontratoconvenio = true;
@@ -6309,23 +6309,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            getEntidades()[i++] = itTercero;
 //        }
 
-    }
-
-    /*
-     *metodo que  carga los roles de las entidades en la lista de seleccion
-     *      
-     */
-    public void llenarRoles() {
-        List<Rolentidad> lstRoles = new ArrayList<Rolentidad>();
-        lstRoles = getSessionBeanCobra().getCobraService().encontrarRolesEntidad();
-        setRoles(new SelectItem[lstRoles.size()]);
-        int i = 0;
-        for (Rolentidad rolEntidad : lstRoles) {
-            SelectItem itRolEntidad = new SelectItem(rolEntidad.getIdrolentidad(), rolEntidad.getStrnombre());
-            getRoles()[i++] = itRolEntidad;
-        }
-
-    }    
+    }  
 
     /*
      *metodo que  carga los gerentes en la lista de seleccion
@@ -6356,21 +6340,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setGerentesDeConvenio(SelectItem[] gerentesDeConvenio) {
         this.gerentesDeConvenio = gerentesDeConvenio;
     }
-
-    /**
-     * @return the roles
-     */
-    public SelectItem[] getRoles() {
-        return roles;
-    }
-
-    /**
-     * @param roles the roles to set
-     */
-    public void setRoles(SelectItem[] roles) {
-        this.roles = roles;
-    }
-  
 
     /**
      * @return the variabletitulo
@@ -6500,7 +6469,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
 
-            getFlujoCaja().iniciarFlujoCaja();
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());

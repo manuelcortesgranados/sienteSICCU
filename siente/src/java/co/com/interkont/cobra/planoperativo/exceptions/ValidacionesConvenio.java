@@ -65,6 +65,16 @@ public class ValidacionesConvenio {
         
     }
    
+   public static void validarDistribucionFuenteRecursos(BigDecimal valorcontrato, BigDecimal sumafuentes)
+   {
+       if(valorcontrato.compareTo(sumafuentes)<0)
+       {
+           throw new ConvenioException("Las fuentes de recursos, superan el valor del contrato ");  
+       }    
+   }
+   
+   
+   
    
     
     

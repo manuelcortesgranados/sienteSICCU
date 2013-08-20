@@ -29,12 +29,13 @@ public class GanttDatos {
      * childrens seteados
      */
     public static ActividadobraDTO getTareas(ContratoDTO convenio) {
-        DateWrapper dw;
+       
         ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
 
         ///Actividad Principal - ConvenioDTO
-        dw = new DateWrapper(convenio.getDatefechaini());
-
+         //DateWrapper dw;
+        //dw = new DateWrapper(convenio.getDatefechaini());
+        
         ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), convenio.getDatefechaini(), convenio.getIntduraciondias(),
                 0, GanttConfig.TaskType.PARENT, 1, false);
         t.setTipoActividad(1);

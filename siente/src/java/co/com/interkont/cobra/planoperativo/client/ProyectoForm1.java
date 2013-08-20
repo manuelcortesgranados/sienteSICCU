@@ -13,14 +13,14 @@ import co.com.interkont.cobra.planoperativo.client.dto.TerceroDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import co.com.interkont.cobra.to.Tercero;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig;
-import com.gantt.client.core.GanttPanel;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -39,10 +39,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
-import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.data.shared.ModelKeyProvider;
-import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MessageBox;
@@ -57,19 +54,12 @@ import com.sencha.gxt.widget.core.client.form.FormPanel.LabelAlign;
 import com.sencha.gxt.widget.core.client.form.FormPanelHelper;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor.BigDecimalPropertyEditor;
-import com.sencha.gxt.widget.core.client.form.PropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
-import com.sencha.gxt.widget.core.client.form.Validator;
 import com.sencha.gxt.widget.core.client.form.validator.MaxLengthValidator;
 import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Set;
-import java.util.logging.Handler;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
 
@@ -77,10 +67,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private TextField nombrePry;
     private TextField tipoRecurso;
     private TextArea objetivoGeneral;
-    private TextArea objetivoEspecifico;
+    //private TextArea objetivoEspecifico;
+
     private ComboBox<TerceroDTO> lstEntidadesConvenio;
-    private ComboBox<RubroDTO> comboRubros;
-    ListBox lstTipoAporte;
+
+    private ListBox comboCatRubros = new ListBox();
+    //private ComboBox<RubroDTO> comboCatRubros;
+    private ListBox comboRubros = new ListBox();
+    //private ComboBox<RubroDTO> comboRubros;
+    //ListBox lstTipoAporte;
     private NumberField<BigDecimal> montoAportado;
     private TextField meta;
     private TextArea macroActividades;
@@ -93,6 +88,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      * la informacion necesaria
      */
     ContratoDTO contratoDto;
+    /**
+     * Flextabla para objetivos específico
+     */
+    private StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1);
+
     ObraDTO proyectoDTO;
     TerceroDTO terceroDto;
     RubroDTO rubroDto;
@@ -133,35 +133,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void setObjetivoGeneral(TextArea objetivoGeneral) {
         this.objetivoGeneral = objetivoGeneral;
     }
-
-    /**
-     * @return the objetivoEspecifico
-     */
-    public TextArea getObjetivoEspecifico() {
-        return objetivoEspecifico;
-    }
-
-    /**
-     * @param objetivoEspecifico the objetivoEspecifico to set
-     */
-    public void setObjetivoEspecifico(TextArea objetivoEspecifico) {
-        this.objetivoEspecifico = objetivoEspecifico;
-    }
-
-    /**
-     * @return the comboRubros
-     */
-    public ComboBox<RubroDTO> getComboRubros() {
-        return comboRubros;
-    }
-
-    /**
-     * @param comboRubros the comboRubros to set
-     */
-    public void setComboRubros(ComboBox<RubroDTO> comboRubros) {
-        this.comboRubros = comboRubros;
-    }
-
+   
     /**
      * @return the montoAportado
      */
@@ -235,6 +207,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     final ListStore<TerceroDTO> entidades = new ListStore<TerceroDTO>(propse.intcodigo());
     RubroProperties props = GWT.create(RubroProperties.class);
     final ListStore<RubroDTO> rubros = new ListStore<RubroDTO>(props.idrubro());
+    final ListStore<RubroDTO> catrubros = new ListStore<RubroDTO>(props.idrubro());
 
     @Override
     public Widget asWidget() {
@@ -270,7 +243,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getNombrePry().setAllowBlank(false);
         getNombrePry().addValidator(new MaxLengthValidator(250));
         getNombrePry().setAutoValidate(true);
-        con.add(new FieldLabel(nombrePry, "//INFORMACIÓN BASICA"), new HtmlData(".fn"));
+        con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
         fechaInicio = new DateField();
         fechaInicio.setWidth(cw);
@@ -283,7 +256,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
         con.add(fechaFin, new HtmlData(".fechafin"));
-
 
         llenarComboEntidadesConvenio(entidades);
 
@@ -303,7 +275,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         });
         con.add(new FieldLabel(lstEntidadesConvenio, "*ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
 
-
         tipoRecurso = new TextField();
         tipoRecurso.setEmptyText("Tipo recurso");
         tipoRecurso.setAllowBlank(false);
@@ -314,38 +285,47 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getObjetivoGeneral().setHeight("" + 100);
         getObjetivoGeneral().setWidth("" + (cw - 10));
         getObjetivoGeneral().setText("General");
-        con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
-
-        objetivoEspecifico = new TextArea();
-        getObjetivoEspecifico().setHeight("" + 100);
-        getObjetivoEspecifico().setWidth("" + (cw - 10));
-        getObjetivoEspecifico().setText("Especifico");
-        con.add(getObjetivoEspecifico(), new HtmlData(".objetivoes"));
-
-
-        llenarListaRubros(rubros);
-
-        setComboRubros(new ComboBox<RubroDTO>(rubros, props.strdescripcion()));
-        getComboRubros().setEmptyText("Seleccione Rubro");
-        getComboRubros().setWidth(cw);
-        getComboRubros().setTypeAhead(true);
-        getComboRubros().setTriggerAction(TriggerAction.ALL);
-        getComboRubros().setAllowBlank(false);
-        comboRubros.addSelectionHandler(new SelectionHandler<RubroDTO>() {
+        getObjetivoGeneral().addClickHandler(new ClickHandler() {
             @Override
-            public void onSelection(SelectionEvent<RubroDTO> event) {
-                rubroDto = event.getSelectedItem();
+            public void onClick(ClickEvent event) {
+                if (getObjetivoGeneral().getText().compareTo("General") == 0) {
+                    getObjetivoGeneral().setText("");
+                }
 
             }
         });
+        getObjetivoGeneral().addBlurHandler(new BlurHandler() {
+
+            @Override
+            public void onBlur(BlurEvent event) {
+                if (getObjetivoGeneral().getText().compareTo("") == 0) {
+                    getObjetivoGeneral().setText("General");
+                }
+            }
+        });
+        con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
+
+        con.add(new FieldLabel(objetivosTable.obtenerTablaScrooll("200px", "60px"), "OBJETIVOS ESPECÍFICOS"), new HtmlData(".objetivoes"));
+        
+
+        con.add(getComboCatRubros(), new HtmlData(".catrubro"));
         con.add(getComboRubros(), new HtmlData(".rubro"));
+        this.llenarCategorias();
+        getComboCatRubros().setSelectedIndex(0);
+        getComboCatRubros().addChangeHandler(new ChangeHandler() {
 
+            @Override
+            public void onChange(ChangeEvent event) {
+                llenarRubroslista(comboCatRubros.getValue(comboCatRubros.getSelectedIndex()));
+            }
+        });
 
+        llenarRubroslista("123102");
         setMontoAportado((NumberField<BigDecimal>) new NumberField(new BigDecimalPropertyEditor()));
         getMontoAportado().addParseErrorHandler(new ParseErrorHandler() {
             @Override
             public void onParseError(ParseErrorEvent event) {
-                Info.display("Error", "Ingrese un valor valido");
+                Info.display("Error", "Ingrese un valor válido");
             }
         });
         getMontoAportado().setAllowBlank(false);
@@ -363,25 +343,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getMacroActividades().setWidth("" + cw);
         con.add(new FieldLabel(getMacroActividades(), "*MACROACTIVIDADES"), new HtmlData(".macro"));
 
-
-        PushButton btnAdicionarObjetivos = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                if (!objetivoGeneral.getText().equals("General")) {
-                    ObjetivosDTO objetivosGeneral = new ObjetivosDTO(objetivoGeneral.getText(), 1, true);
-                    proyectoDTO.getObjetivoses().add(objetivosGeneral);
-                }
-                if (!objetivoEspecifico.getText().equals("Especifico")) {
-                    ObjetivosDTO objetivosEspecifico = new ObjetivosDTO(objetivoGeneral.getText(), 2, true);
-                    proyectoDTO.getObjetivoses().add(objetivosEspecifico);
-                }
-                limpiarObjetivos();
-            }
-        });
-        btnAdicionarObjetivos.setWidth("" + 20);
-        con.add(btnAdicionarObjetivos, new HtmlData(".addobj"));
-
-
+        
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -401,7 +363,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         btnAdicionarMonto.setWidth("" + 20);
         con.add(btnAdicionarMonto, new HtmlData(".btnaddmonto"));
 
-
         PushButton btnAdicionarMeta = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -413,12 +374,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         btnAdicionarMeta.setWidth("" + 20);
         con.add(btnAdicionarMeta, new HtmlData(".btnaddmeta"));
 
-
         PushButton btnAdicionarMacro = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 ActividadobraDTO actividadobradto = new ActividadobraDTO(macroActividades.getText(), 7);
-
 
                 proyectoDTO.getActividadobras().add(actividadobradto);
                 limpiarMacroActi();
@@ -426,7 +385,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         });
         btnAdicionarMacro.setWidth("" + 20);
         con.add(btnAdicionarMacro, new HtmlData(".btnaddmacro"));
-
 
         Button btnAdicionarPry = new Button("Añadir Proyecto", new ClickHandler() {
             @Override
@@ -488,8 +446,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      return ['<table width=100% cellpadding=0 cellspacing=10>',
      '<tr><td class=fn width=50%></td><td width=50% class=entidad></td></tr>',
      '<tr><td class=lblobjetivos width=50%</td><td width=50% class=tipor></td></tr>',
-     '<tr><td class=objetivog></td><td><table cellpadding=0><tr><td class=rubro></td></tr><tr height=10></tr><tr><td class=monto></td><td class=btnaddmonto></td></tr><tr height=5></tr><tr><td class=meta></td><td class=btnaddmeta></td></tr></table></td><tr>',
-     '<tr><td><table cellpadding=0><tr><td class=objetivoes></td><td class=addobj></td></tr></table></td><td><table cellpadding=0 cellspacing=0><tr><td class=macro></td><td class=btnaddmacro></td></tr></table></td>',
+     '<tr><td class=objetivog></td><td><table cellpadding=0><tr><td class=catrubro></td></tr><tr><td class=rubro></td></tr><tr height=10></tr><tr><td class=monto></td><td class=btnaddmonto></td></tr><tr height=5></tr><tr><td class=meta></td><td class=btnaddmeta></td></tr></table></td><tr>',
+     '<tr><td><table cellpadding=0><tr><td class=lblobjetivoses width=50%</td></tr><tr><td class=objetivoes></td></tr></table></td><td><table cellpadding=0 cellspacing=0><tr><td class=macro></td><td class=btnaddmacro></td></tr></table></td>',
      '<tr><td class=fechainicio></td><td class=fechafin></td></tr>',
      '</table>'
      ].join("");
@@ -516,27 +474,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
     }
 
-    /*
-     * metodo que se encarga de llenar el combo rubros 
-     */
-    public void llenarListaRubros(final ListStore<RubroDTO> rubros) {
-        service.obtenerRubros(new AsyncCallback<List>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                service.setLog("Error al cargar los rubros", null);
-            }
-
-            @Override
-            public void onSuccess(List result) {
-                rubros.addAll(result);
-                service.setLog("Cargue rubros" + rubros.size(), null);
-
-            }
-        });
-
-    }
-
-    /*
+     /*
      * metodo que se encarga de buscar la fuente de recursos 
      * que se encuentra en detereminada posicion.
      */
@@ -581,14 +519,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     public void limpiarObjetivos() {
-        this.objetivoEspecifico.setText("");
+        //this.objetivoEspecifico.setText("");
         this.objetivoGeneral.setText("");
     }
 
     public void limpiarMontos() {
-        entidades.clear();
-        llenarComboEntidadesConvenio(entidades);
-        llenarListaRubros(rubros);
+        //entidades.clear();
+        //llenarComboEntidadesConvenio(entidades);
+        //llenarListaRubros(rubros);
         this.tipoRecurso.setText("");
         this.montoAportado.setText("");
     }
@@ -597,7 +535,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.macroActividades.setText("");
     }
 
-    public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {        
+    public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
         if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
             if (obraFuenteDto.getValor().compareTo(montoAportado.getValue()) > 0) {
                 return "El monto ingresado supera el valor de la fuente de recursos";
@@ -620,7 +558,60 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             return "El monto ha sido guardado";
         }
         return "El convenio seleccionado no cuenta con valor disponible";
-        }
+    }
 
-    
+    private void llenarCategorias() {
+        service.obtenerCategoriasRubros(new AsyncCallback<List<RubroDTO>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                service.setLog("Error al cargar las categorías de los rubros" + caught.getMessage() + "" + caught.getCause(), null);
+            }
+
+            @Override
+            public void onSuccess(List<RubroDTO> result) {
+                for (RubroDTO rb : result) {
+                    comboCatRubros.addItem(rb.getStrdescripcion(), rb.getIdrubro());
+                }
+            }
+        });
+    }
+
+    private void llenarRubroslista(String cod) {
+        //Limpiamos el combo de la escuela
+
+        this.comboRubros.clear();
+        service.obtenerRubros(cod, new AsyncCallback<List<RubroDTO>>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void onSuccess(List<RubroDTO> result) {
+                for (RubroDTO rb : result) {
+                    comboRubros.addItem(rb.getStrdescripcion(), rb.getIdrubro());
+                }
+            }
+        });
+
+    }
+
+    public ListBox getComboCatRubros() {
+        return comboCatRubros;
+    }
+
+    public void setComboCatRubros(ListBox comboCatRubros) {
+        this.comboCatRubros = comboCatRubros;
+    }
+
+    public ListBox getComboRubros() {
+        return comboRubros;
+    }
+
+    public void setComboRubros(ListBox comboRubros) {
+        this.comboRubros = comboRubros;
+    }
+
 }

@@ -22,7 +22,7 @@ public  class ToolBarSuperior extends ToolBar {
     final Button planificacion = new Button("Planificación");       
     final Button flujodecaja = new Button("Flujo de Caja");        
     final Button reportes = new Button("Reportes");   
-    final Button datosbasicos = new Button("Datos Básicos");  
+    final Button datosbasicos = new Button("Datos Básicos");      
     
     public ToolBarSuperior(final CobraGwtServiceAbleAsync service) {
         planificacion.setEnabled(false);
@@ -80,9 +80,13 @@ public  class ToolBarSuperior extends ToolBar {
 
             }
         });
-        add(planificacion);
+       
+         add(planificacion);
         add(flujodecaja);
         add(reportes);
+        
+        
+        
     }
     
      public String retornarNuevoContrato() {

@@ -10,6 +10,7 @@ import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import cobra.Supervisor.FacesUtils;
+import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,31 +20,47 @@ import javax.faces.model.SelectItem;
 
 /**
  *
- * @author  Carlos Loaiza
+ * @author Carlos Loaiza
  */
-public class RecursosConvenio implements Serializable{
+public class RecursosConvenio implements Serializable {
+
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente;
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
+    /**
+     * Lista para el manejo de roles
+     *
+     * @return
+     *
+     */
+    private List<Rolentidad> lstRoles = new ArrayList<Rolentidad>();
     
-
-    public RecursosConvenio(Contrato contrato) {
+    public List<Rolentidad> getLstRoles() {
+        return lstRoles;
+    }
+    
+    public void setLstRoles(List<Rolentidad> lstRoles) {
+        this.lstRoles = lstRoles;
+    }
+    
+    public RecursosConvenio(Contrato contrato, CobraServiceAble cobraService) {
         fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
-        sumafuentes= BigDecimal.ZERO;
+        sumafuentes = BigDecimal.ZERO;
         llenarTipoAporte();
+        llenarRoles(cobraService);
     }
     
-     public void limpiarFuenteRecurso() {
-        fuenteRecursoConvenio= new Fuenterecursosconvenio();        
+    public void limpiarFuenteRecurso() {
+        fuenteRecursoConvenio = new Fuenterecursosconvenio();        
         fuenteRecursoConvenio.setRolentidad(new Rolentidad());
         fuenteRecursoConvenio.setTercero(new Tercero());
-
+        
     }
-    
-      /**
+
+    /**
      * @return the tipoAporte
      */
     public SelectItem[] getTipoAporte() {
@@ -99,7 +116,7 @@ public class RecursosConvenio implements Serializable{
     public void setFuenteRecursoConvenio(Fuenterecursosconvenio fuenteRecursoConvenio) {
         this.fuenteRecursoConvenio = fuenteRecursoConvenio;
     }
-    
+
     /*
      *metodo que se encarga de eliminar una fuente de recurso a las
      * fuente de recursos del convenio.
@@ -109,24 +126,28 @@ public class RecursosConvenio implements Serializable{
         
         lstFuentesRecursos.remove(filaFuenteRecursoEliminar);
     }
-    
-     /*
+
+    /*
      *metodo que se encarga de adicionar una fuente de recurso a la
      * fuente de recursos del convenio.
      *      
      */
-    public void adicionarFuenteRecursos(Tercero tercero) {
-        fuenteRecursoConvenio.setTercero(tercero);
-        //contrato.getFuenterecursosconvenios().add(getFuenteRecursoConvenio().clone());
-        lstFuentesRecursos.add((Fuenterecursosconvenio) getFuenteRecursoConvenio().clone());
-        sumafuentes=sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
-        limpiarFuenteRecurso();
-        
+    public void adicionarFuenteRecursos(Tercero tercero) {        
+        if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
+                .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {            
+            fuenteRecursoConvenio.setTercero(tercero);
+            fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));            
+            lstFuentesRecursos.add(fuenteRecursoConvenio);
+            sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
+            limpiarFuenteRecurso();
+        } else {
+            FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
+        }        
     }
     
-     public void calcularValorGerencia(ResourceBundle bundle) {
+    public void calcularValorGerencia(ResourceBundle bundle) {
         getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
-
+        
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {
@@ -154,24 +175,41 @@ public class RecursosConvenio implements Serializable{
             }
                 break;
         }
-
+        
     }
-     
-     /*
+
+    /*
      *metodo que  carga los tipos de aportes en la lista de seleccion
      *      
      */
     public void llenarTipoAporte() {
         setTipoAporte(new SelectItem[]{new SelectItem(1, "Porcentual"), new SelectItem(2, "Valor")});
     }
-
+    
     public BigDecimal getSumafuentes() {
         return sumafuentes;
     }
-
+    
     public void setSumafuentes(BigDecimal sumafuentes) {
         this.sumafuentes = sumafuentes;
-    }   
+    }
+
+    /*
+     *metodo que  carga los roles de las entidades en la lista de seleccion
+     *      
+     */
+    public void llenarRoles(CobraServiceAble cobraService) {        
+        lstRoles = cobraService.encontrarRolesEntidad();        
+        
+    }    
     
+    public Rolentidad obtenerRolXcodigo(int intcodigo) {
+        for (Rolentidad rol : lstRoles) {
+            if (rol.getIdrolentidad() == intcodigo) {
+                return rol;
+            }
+        }
+        return null;
+    }    
     
 }

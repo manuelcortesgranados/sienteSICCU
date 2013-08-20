@@ -17,7 +17,8 @@
                     <h:panelGroup>
                         <rich:message for="hit-nro-convenio" />
                         <h:inputText id="hit-nro-convenio" value="#{Supervisor$Contrato.contrato.strnumcontrato}" title="#{var.numero} #{var.del} #{var.convenio}" style="height: 60px;" required="true" >
-                            <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />                             
+                            <rich:placeholder value="#{var.numero} #{var.del} #{var.convenio}" />
+                            <f:validateLength maximum="255"/>
                         </h:inputText>                        
                     </h:panelGroup>
                     <h:panelGroup>
@@ -32,6 +33,7 @@
                             <h:inputText id="hit-valorest-convenio" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
                                 <rich:placeholder value="#{var.valorestimado}" />
                                 <f:validateDoubleRange minimum="0" />
+                                <f:validateLength maximum="26"/>
                             </h:inputText>
                             <rich:message for="hit-valorest-convenio"/>
                         </h:panelGroup>
@@ -41,6 +43,7 @@
                     <h:panelGroup>
                         <h:inputText id="hit-nom-convenio"  value="#{Supervisor$Contrato.contrato.strnombre}" required="true">
                             <rich:placeholder  value="#{var.nombreabreviadoconvenio}" />
+                            <f:validateLength maximum="255"/>
                         </h:inputText>
                         <rich:message for="hit-nom-convenio"/>
                     </h:panelGroup>
@@ -92,7 +95,7 @@
 
                         <h:panelGroup>
                             <rich:select id="rs-roles" defaultLabel="#{var.rol}" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.rolentidad.idrolentidad}" required="true" requiredMessage="Ingresar el rol" >
-                                <f:selectItems value="#{Supervisor$Contrato.roles}" />
+                                <f:selectItems value="#{Supervisor$Contrato.recursosconvenio.lstRoles}" var="rol" itemValue="#{rol.idrolentidad}" itemLabel="#{rol.strnombre}" />
                             </rich:select>
                             <rich:message for="rs-roles"  />
                         </h:panelGroup>
@@ -155,7 +158,8 @@
                     </f:facet>
                 </rich:messages>
                     <h:panelGrid cellspacing="10" cellpadding="10">
-                        <a4j:commandButton value="#{var.adicionar}" action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos(Supervisor$Contrato.obtenerTerceroXcodigo(Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo))}" 
+                        <a4j:commandButton value="#{var.adicionar}" 
+                                           action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos(Supervisor$Contrato.obtenerTerceroXcodigo(Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.tercero.intcodigo))}" 
                                          render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso" 
                                          execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado, rdt-fuenteRecurso"/>
                                                 
@@ -187,10 +191,13 @@
                         <rich:column width="200px">
                             <h:outputText value="#{var.otrasreservas}"/>
                         </rich:column>
-                        <rich:column width="200px">
+                        <rich:column width="100px">
                             <h:outputText value="#{var.cuotagerencia}"/>
                         </rich:column>
-                        <rich:column width="200px">
+                        <rich:column width="100px">
+                            <h:outputText value="#{var.valoraportado}"/>
+                        </rich:column>
+                        <rich:column width="100px">
                             <h:outputText value="#{var.eliminar}"/>
                         </rich:column>
                     </rich:columnGroup>      
@@ -200,17 +207,28 @@
                         <h:outputText value="#{fuente.tercero.strnombrecompleto}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{fuente.rolentidad.idrolentidad}"/>
+                        <h:outputText value="#{fuente.rolentidad.strnombre}"/>
                     </rich:column>
                     <rich:column>
-                        <h:outputText value="#{fuente.reservaiva}"/>
+                        <h:outputText value="#{fuente.reservaiva}">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
                     </rich:column>
                     <rich:column >
-                        <h:outputText value="#{fuente.otrasreservas}"/>
+                        <h:outputText value="#{fuente.otrasreservas}">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
                     </rich:column>
                     <rich:column >
-                        <h:outputText value="#{fuente.valorcuotagerencia}"/>
+                        <h:outputText value="#{fuente.valorcuotagerencia}">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
                     </rich:column>
+                    <rich:column >
+                        <h:outputText value="#{fuente.valoraportado}">
+                            <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
+                        </rich:column>
                     <rich:column>
                         <a4j:commandLink   value="#{var.eliminar}" id="bt_eliminarfuente"  render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"
                                            action="#{Supervisor$Contrato.recursosconvenio.eliminarFuenteRecursos(filaSeleccionada)}"
@@ -223,7 +241,9 @@
                             <h:outputText value="Total:"/>
                         </rich:column>
                         <rich:column colspan="2">
-                            <h:outputText value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}"/>
+                            <h:outputText value="#{Supervisor$Contrato.recursosconvenio.sumafuentes}">
+                                <f:convertNumber currencySymbol="$" type="currency" />
+                    </h:outputText>
                         </rich:column>
                         <rich:column breakRowBefore="true" colspan="6">
                     <rich:dataScroller for="rdt-fuenteRecurso" stepControls="auto" render="rdt-fuenteRecurso" execute="rdt-fuenteRecurso"/>
