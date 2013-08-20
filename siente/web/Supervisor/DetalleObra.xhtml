@@ -1496,7 +1496,36 @@
                                             <h:panelGrid columns="2" columnClasses="verticalalingtop">
                                                 <h:commandLink styleClass="ikont-hcl-zoom-contrante img-detalle-proyecto"/>
                                                 <h:panelGroup layout="block">
-                                                    <h:outputText  styleClass="ikont- hot-contraticiu"   value="#{var.contratistaciu}:"   rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" />
+                                                    <h:outputText  styleClass="ikont- hot-contrataneciu"   value="#{var.contrataneciu}" ></h:outputText><br/>
+                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" ></h:outputText>
+                                                </h:panelGroup>
+
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-nocontrato img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{var.supervisorciu}"    ></h:outputText><br/>
+                                                    <h:outputText  styleClass="ikont- hot-strinterventor"  value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+
+                                        <h:panelGroup  styleClass="content-info-contrato" layout="block" >
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-ncontratociu"   value="#{var.ncontratociu}:" ></h:outputText><br/>
+                                                    <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>                                                   
+                                                </h:panelGroup>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
+                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
+                                                <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto"/>
+                                                <h:panelGroup layout="block">
+                                                    <h:outputText  styleClass="ikont- hot-contraticiu"   value="#{var.contratistaciu}"   /><br/>
                                                     <h:outputText  styleClass="ikont- hot-nbre"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
                                                     <h:outputText  styleClass="ikont- hot-otContratistas"   id="otContratistas"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
                                                         <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
@@ -1509,33 +1538,7 @@
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                         </h:panelGroup>
-                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
-                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                                <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto"/>
-                                                <h:panelGroup layout="block">
-                                                    <h:outputText  styleClass="ikont- hot-contrataneciu"   value="#{var.contrataneciu}:" ></h:outputText>
-                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{Supervisor$AdministrarObraNew.obra.tercero.strnombrecompleto}" ></h:outputText>
-                                                </h:panelGroup>
-                                            </h:panelGrid>
-                                        </h:panelGroup>
-                                        <h:panelGroup layout="block" styleClass="content-info-contrato">
-                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                                <h:commandLink styleClass="ikont-hcl-zoom-nocontrato img-detalle-proyecto"/>
-                                                <h:panelGroup layout="block">
-                                                    <h:outputText  styleClass="ikont- hot-supervisorciu"   value="#{var.supervisorciu}:"  rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"  ></h:outputText>
-                                                    <h:outputText  styleClass="ikont- hot-strinterventor"  value="#{Supervisor$AdministrarObraNew.obra.strinterventor}" rendered="#{Supervisor$AdministrarObraNew.obra.strinterventor!='' and Supervisor$AdministrarObraNew.obra.strinterventor!= null}"></h:outputText>
-                                                </h:panelGroup>
-                                            </h:panelGrid>
-                                        </h:panelGroup>
-                                        <h:panelGroup  styleClass="content-info-contrato" layout="block" >
-                                            <h:panelGrid columns="2" columnClasses="verticalalingtop">
-                                                <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto"/>
-                                                <h:panelGroup layout="block">
-                                                    <h:outputText  styleClass="ikont- hot-ncontratociu"   value="#{var.ncontratociu}:" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>=1}" ></h:outputText>
-                                                    <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>                                                   
-                                                </h:panelGroup>
-                                            </h:panelGrid>
-                                        </h:panelGroup>
+
                                     </h:panelGrid>
                                 </h:panelGrid>
                             </rich:collapsiblePanel>
@@ -1600,14 +1603,14 @@
                                         <h:outputText  styleClass="ikont- hot-intplazoo"     value="#{Supervisor$AdministrarObraNew.obra.intplazoobra}  #{var.diasciu}" ></h:outputText>
 
                                         <h:panelGrid columns="2" styleClass="panelcenter">
-                                            <h:outputText  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputText>
-                                            <h:outputText  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
+                                            <h:outputLabel  styleClass="ikont- hot-desde"   value="Desde:"  ></h:outputLabel>
+                                            <h:outputLabel  styleClass="ikont- hot-fecinob" value="#{Supervisor$AdministrarObraNew.obra.datefeciniobra}">
                                                 <f:convertDateTime pattern="yyyy-MMM-dd" />
-                                            </h:outputText>
-                                            <h:outputText  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputText>
-                                            <h:outputText  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
+                                            </h:outputLabel>
+                                            <h:outputLabel  styleClass="ikont- hot-hasta"   value="Hasta:"  ></h:outputLabel>
+                                            <h:outputLabel  styleClass="ikont- hot-fecfiob"    value="#{Supervisor$AdministrarObraNew.obra.datefecfinobra}">
                                                 <f:convertDateTime pattern="yyyy-MMM-dd"/>
-                                            </h:outputText>
+                                            </h:outputLabel>
                                         </h:panelGrid>
 
                                     </h:panelGrid>    
@@ -1626,12 +1629,12 @@
                                     </h:panelGrid>
                                     <h:panelGrid   styleClass="ikont-hpg-tipo_obra"   >
                                         <h:panelGrid columns="2"  >
-                                            <h:outputText  styleClass="ikont-hol-clspry "     value="#{var.claseProyecto}" />
-                                            <h:outputLabel  styleClass="ikont-hol-strdescclaseobra"     value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
-                                            <h:outputText  styleClass="ikont-hol-tipoPry"    value="#{var.tipoProyecto}"    />
-                                            <h:outputLabel  styleClass="ikont-hol-tipprynom"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  />
-                                            <h:outputText  styleClass="ikont-hol-subtipo "     value="Subtipo:"     />
-                                            <h:outputLabel  styleClass="ikont-hol-strdesctipoobra"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
+                                            <h:outputLabel  styleClass="ikont-hol-clspry "     value="#{var.claseProyecto}" />
+                                            <h:outputText  styleClass="ikont-hol-strdescclaseobra"     value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
+                                            <h:outputLabel  styleClass="ikont-hol-tipoPry"    value="#{var.tipoProyecto}"    />
+                                            <h:outputText  styleClass="ikont-hol-tipprynom"   value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}"  />
+                                            <h:outputLabel  styleClass="ikont-hol-subtipo "     value="Subtipo:"     />
+                                            <h:outputText  styleClass="ikont-hol-strdesctipoobra"    value="#{Supervisor$AdministrarObraNew.obra.tipoobra.strdesctipoobra}" />
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
