@@ -42,7 +42,10 @@
                                 <label>
                                     <h:inputText id="txtPalabraClave" styleClass="ikont-hit-txtPalabraClave"  
                                                  onclick="this.value = '';"
-                                                 value="#{Supervisor$Contrato.filtrocontrato.palabraClave}" />                                        
+                                                 value="#{Supervisor$Contrato.filtrocontrato.palabraClave}"
+                                                 onfocus="clearText(this);"
+                                                 onblur="clearText(this);"
+                                                 />                                        
 
                                     <a4j:commandButton id="filtrar" value="#{var.buscar}" execute="@this, txtPalabraClave"
                                                        action="#{Supervisor$Contrato.buscarContrato}"
@@ -66,17 +69,16 @@
                 <h:panelGroup id="panel-filtro-novedades">
                     <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >
                         <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
-
-                        <h:selectOneMenu 
-                            value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}"
-                            label="Ingrese una entidad" >
+                        <rich:select selectFirst="false" enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
+                        
                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
 
-                            <a4j:ajax event="valueChange"
+                            <a4j:ajax event="change"
                                       listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                       render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
-                                      execute="@this" />
-                        </h:selectOneMenu>                                                             
+                                      execute="@this" >
+                            </a4j:ajax>
+                           </rich:select>                                                            
                     </h:panelGrid>
 
                     <h:panelGrid columns="2" rendered="#{var.boolestadoconvenio}">
