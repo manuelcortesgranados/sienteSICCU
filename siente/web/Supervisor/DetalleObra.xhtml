@@ -1398,14 +1398,14 @@
                     </h:form>
                 </h:panelGrid>
             </h:panelGroup>
-            
+
             <h:panelGroup rendered="#{var.nuevomapa}" styleClass="ikont-hpg-zoom-detalleobra">
                 <h:form prependId="false" >
-                    <h:inputHidden id="estaen" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
+                    <h:inputHidden id="estaen-zoom" value="#{(Supervisor$AdministrarObraNew.obra.numvalejecobra/Supervisor$AdministrarObraNew.obra.numvaltotobra)*100}"/>
                 </h:form>
                 <interkont:spacer height="10"/>
                 <h:form>
-                    <h:panelGrid  id="gpPrincipalInfCiudad" >
+                    <h:panelGrid  id="gpPrincipalInfCiudad-zoom" >
                         <h:form prependId="false">
                             <h:panelGroup layout="block">
                                 <center>
@@ -1445,7 +1445,7 @@
                                             <h:commandLink id="line-deberia" styleClass="ikont-hcl-line-deberia puntoavance" />
                                         </h:panelGroup>
                                     </h:panelGrid>
-                                    
+
                                 </h:panelGrid>
                             </rich:collapsiblePanel>
                             <rich:collapsiblePanel  switchType="client" header="Informacion" expanded="true" >
@@ -1463,7 +1463,7 @@
                                                         <f:convertNumber pattern="$###,###"/>
                                                     </h:outputText>
                                                 </h:panelGrid>
-                                                <h:commandButton id="ver_objeto" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
+                                                <h:commandButton id="ver_objeto_zoom" value="#{var.verinfciu}" styleClass="ikont-hcb-ver_objeto">
                                                     <rich:tooltip value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}"   followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                   verticalOffset="5"  styleClass="ikont-rtt-tool3"   >
                                                     </rich:tooltip>
@@ -1543,10 +1543,10 @@
                                 <h:panelGrid columns="2">
                                     <h:panelGrid    >
                                         <h:panelGrid   rowClasses="alignverticaldetalle" columns="2">
-                                            <div id="sideline"><label class="textlittle2">ANTES Y AHORA </label></div>
+                                            <h:outputLabel></h:outputLabel>
                                             <h:panelGrid  columnClasses="panelderecha" columns="2" width="5" >
                                                 <a4j:commandLink styleClass="ikont-acl-omvermas"   onclick=" #{rich:component('modalImagenvermas')}.show();
-                return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
+                                            return  true;"  action="#{Supervisor$DetalleObra.imagenEvolucion}"  ></a4j:commandLink>
                                                 <h:commandLink styleClass="ikont-"   action="#{Supervisor$AdministrarObraNew.iniciarVideos}" rendered="false"  ></h:commandLink>
 
                                             </h:panelGrid>
@@ -1566,8 +1566,7 @@
                                     </h:panelGrid>
                                     <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2"  columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2" >
                                         <h:panelGrid  >
-
-                                            <div id="sideline"><label class="textlittle2">Conosca la evolucion</label></div>
+                                            <h:outputLabel>Conosca la evolucion</h:outputLabel>
                                             <h:panelGrid columnClasses="panelderecha" >
                                                 <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
 
@@ -1642,13 +1641,13 @@
                             <rich:collapsiblePanel  switchType="client" header="Donde esta ubicado el proyecto" expanded="true" >
                                 <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
                                     <h:panelGrid  columnClasses="textalingright">
-                                        <h:outputLabel  styleClass="ikont-hot-strDireccionProyectoOut"   id="strDireccionProyectoOut"    value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                        <h:outputLabel  styleClass="ikont-hot-strDireccionProyectoOut"    value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
                                         <interkont:spacer width="20"/>
-                                        <h:outputText  styleClass="ikont-hol-strDireccionProyecto"   id="strDireccionProyecto" value="#{var.label_direccion}" />
+                                        <h:outputText  styleClass="ikont-hol-strDireccionProyecto"    value="#{var.label_direccion}" />
                                         <interkont:spacer width="20"/>
-                                        <h:outputText  styleClass="ikont-hol-strZona"   id="strZona" value="#{var.zona}"   />
+                                        <h:outputText  styleClass="ikont-hol-strZona"    value="#{var.zona}"   />
                                         <interkont:spacer width="20"/>
-                                        <h:outputLabel  styleClass="ikont-hol-strZonaOut"   id="strZonaOut"  value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}"/>
+                                        <h:outputLabel  styleClass="ikont-hol-strZonaOut"    value="#{Supervisor$AdministrarObraNew.obra.lugarobra.strdesclugarobra}"/>
 
 
                                     </h:panelGrid>
@@ -1660,9 +1659,9 @@
                             </rich:collapsiblePanel>
                             <rich:collapsiblePanel  switchType="client" header="Reportes" expanded="true" rendered="#{!SessionBeanCobra.cobraService.ciu}">
                                 <h:panelGrid columns="3" styleClass="panelcenter">
-                                    <h:commandLink id="pdf" onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-pdf"  target="_blank"  />
-                                    <h:commandLink id="excel" onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-excel" target="_blank" />
-                                    <h:commandLink id="word" onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-word" target="_blank" />
+                                    <h:commandLink  onclick="document.location.href = '#{var.birtpdfdetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-pdf"  target="_blank"  />
+                                    <h:commandLink  onclick="document.location.href = '#{var.birtexceldetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-excel" target="_blank" />
+                                    <h:commandLink  onclick="document.location.href = '#{var.birtworddetalle}' + '#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"  styleClass="butonreport zoom-word" target="_blank" />
                                 </h:panelGrid>
                             </rich:collapsiblePanel>
 
@@ -1697,9 +1696,21 @@
                                                 countdown: true,
                                                 clockFace: 'DailyCounter'
                                             });
+                                            var timefalta = document.getElementById("finfecha").value;
+                                            var futuro = new Date(timefalta);
 
-                                            //clock.setTime( #{Supervisor$DetalleObra.finentrega});
-                                            clock.setTime(3600000);
+                                            var ahora = new Date();
+                                            var faltan = futuro - ahora;
+                                            if (faltan > 0) {
+                                                var segundos = Math.round(faltan / 1000);
+                                                var minutos = Math.floor(segundos / 60);
+                                                var minutos_s = minutos % 60;
+                                                minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
+                                            }
+                                            else {
+                                                var minutos_s = 00;
+                                            }
+                                            clock.setTime(minutos_s);
                                             clock.start();
                                             var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
                                             _porst.replace(' ', '');

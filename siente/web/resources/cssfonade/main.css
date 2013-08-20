@@ -562,8 +562,16 @@ a.butonreport.zoom-word {
     background-position: -180px 0px;
 }
 
-a.pdf {
-    background-image: url(../imgs/bt_file_pdf.png);
+a.butonreport.zoom-word:hover{
+    background-position: -180px -75px;
+}
+
+a.butonreport.zoom-pdf {
+    background-position: 0px 0px;
+}
+
+a.butonreport.zoom-pdf:hover {
+    background-position: 0px -75px;
 }
 
 #ikont-div-reportes ul li a {
@@ -2065,7 +2073,7 @@ input[type="text"], input[type="password"], select{
     color: #257500!important;
     text-decoration: none;
     font-family: open;
-    font-size: 18px;
+    font-size: 1.3em!important;
     font-weight: 400;
     float: none;
     
@@ -2323,4 +2331,10 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
     font-size: 1.3em;
+}
+
+.ikont-hpg-zoom-detalleobra label{
+    font-family: open;
+    font-size: 0.8em;
+    color: #58595B;
 }
