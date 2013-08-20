@@ -35,6 +35,8 @@ public class ObraDTO implements IsSerializable {
     public ObraDTO(int intcodigoobra, String strnombreobra) {
         this.intcodigoobra = intcodigoobra;
         this.strnombreobra = strnombreobra;
+        this.valor=BigDecimal.ZERO;
+        this.valorDisponible=BigDecimal.ZERO;
     }
    
     /**

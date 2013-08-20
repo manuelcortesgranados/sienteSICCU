@@ -7,6 +7,7 @@ package co.com.interkont.cobra.planoperativo.server.services;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import cobra.dao.CobraDaoAble;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import cobra.util.CasteoGWT;
 import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
+import co.com.interkont.cobra.to.Tipocontrato;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -146,14 +148,14 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
   @Override
     public List obtenerTiposContrato() throws Exception {
-//        //List<Tipocontrato> lstTipoContrato = cobraDao.obtenerTipoContrato();
-//        List<TipocontratoDTO> lstTipoContratoDto = new ArrayList<TipocontratoDTO>(lstTipoContrato.size());
-//        for (Tipocontrato tc : lstTipoContrato) {
-//            lstTipoContratoDto.add(new TipocontratoDTO(tc.getInttipocontrato(), tc.getStrdesctipocontrato()));
-//        }
+        List<Tipocontrato> lstTipoContrato = cobraDao.obtenerTipoContrato();
+        List<TipocontratoDTO> lstTipoContratoDto = new ArrayList<TipocontratoDTO>(lstTipoContrato.size());
+        for (Tipocontrato tc : lstTipoContrato) {
+            lstTipoContratoDto.add(new TipocontratoDTO(tc.getInttipocontrato(), tc.getStrdesctipocontrato()));
+        }
 
-        //return lstTipoContratoDto;
-      return null;
+        return lstTipoContratoDto;
+     
     }
 
     @Override

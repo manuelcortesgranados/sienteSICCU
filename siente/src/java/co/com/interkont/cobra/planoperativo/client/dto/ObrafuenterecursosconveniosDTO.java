@@ -15,10 +15,11 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private int idobrafuenterecursos;
     private ObraDTO obra;
     private FuenterecursosconvenioDTO fuenterecursosconvenio;
-    private RubroDTO rubro;
+    private String rubro;
     private int tipoaporte;
     private int vigencia;
     private BigDecimal valor;
+    private BigDecimal valorDisponible;
     private String descripcionaporte;
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
 
@@ -32,15 +33,16 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
        this.valor = valor;
      }
 
-      public ObrafuenterecursosconveniosDTO(int tipoaporte,  BigDecimal valor,FuenterecursosconvenioDTO fuente,RubroDTO rubro) {
+      public ObrafuenterecursosconveniosDTO(int tipoaporte,  BigDecimal valor,FuenterecursosconvenioDTO fuente,String rubro) {
         this.tipoaporte = tipoaporte;
         this.valor = valor;
         this.fuenterecursosconvenio=fuente;
         this.rubro=rubro;
+        this.valorDisponible=valor;
         
      }
 
-    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, RubroDTO rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
+    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, String rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
         this.idobrafuenterecursos = idobrafuenterecursos;
         this.obra = obra;
         this.fuenterecursosconvenio = fuenterecursosconvenio;
@@ -100,14 +102,14 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     /**
      * @return the rubro
      */
-    public RubroDTO getRubro() {
+    public String getRubro() {
         return rubro;
     }
 
     /**
      * @param rubro the rubro to set
      */
-    public void setRubro(RubroDTO rubro) {
+    public void setRubro(String rubro) {
         this.rubro = rubro;
     }
 
@@ -179,6 +181,20 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
      */
     public void setRelacionobrafuenterecursoscontratos(Set relacionobrafuenterecursoscontratos) {
         this.relacionobrafuenterecursoscontratos = relacionobrafuenterecursoscontratos;
+    }
+
+    /**
+     * @return the valorDisponible
+     */
+    public BigDecimal getValorDisponible() {
+        return valorDisponible;
+    }
+
+    /**
+     * @param valorDisponible the valorDisponible to set
+     */
+    public void setValorDisponible(BigDecimal valorDisponible) {
+        this.valorDisponible = valorDisponible;
     }
     
     

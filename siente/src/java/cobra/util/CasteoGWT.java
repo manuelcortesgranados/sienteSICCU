@@ -331,7 +331,7 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static FuenterecursosconvenioDTO castearFuenteRecursosConvenio(Fuenterecursosconvenio fuenteRecurso, ContratoDTO contratoDto) {
-        FuenterecursosconvenioDTO fuenteRecursoDto = new FuenterecursosconvenioDTO(fuenteRecurso.getIdfuenterecursosconvenio(), contratoDto, fuenteRecurso.getValoraportado(), fuenteRecurso.getOtrasreservas(), fuenteRecurso.getReservaiva(), fuenteRecurso.getValorcuotagerencia(), fuenteRecurso.getTipoaporte());
+        FuenterecursosconvenioDTO fuenteRecursoDto = new FuenterecursosconvenioDTO(fuenteRecurso.getIdfuenterecursosconvenio(), contratoDto, fuenteRecurso.getValoraportado(), fuenteRecurso.getOtrasreservas(), fuenteRecurso.getReservaiva(), fuenteRecurso.getValorcuotagerencia(), fuenteRecurso.getTipoaporte(),fuenteRecurso.getValorDisponible());
         fuenteRecursoDto.setTercero(castearTerceroToTerceroDTO(fuenteRecurso.getTercero()));
         fuenteRecursoDto.setRolentidad(castearRolentidadToRolentidadDTO(fuenteRecurso.getRolentidad(), fuenteRecursoDto));
         return fuenteRecursoDto;

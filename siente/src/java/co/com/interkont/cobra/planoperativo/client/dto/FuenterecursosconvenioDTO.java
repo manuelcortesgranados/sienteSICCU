@@ -27,6 +27,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
     private BigDecimal valorcuotagerencia;
     private Integer tipoaporte;
     private Set obrafuenterecursosconvenioses = new HashSet(0);
+    private BigDecimal valorDisponible;
 
     public FuenterecursosconvenioDTO() {
     }
@@ -34,7 +35,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
     
 
     
-    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte) {
+    public FuenterecursosconvenioDTO(int idfuenterecursosconvenio, ContratoDTO contrato, BigDecimal valoraportado, BigDecimal otrasreservas, BigDecimal reservaiva, BigDecimal valorcuotagerencia, Integer tipoaporte,BigDecimal valorDisponible) {
         this.idfuenterecursosconvenio = idfuenterecursosconvenio;
         this.contrato = contrato;
         this.valoraportado = valoraportado;
@@ -42,6 +43,7 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
         this.reservaiva = reservaiva;
         this.valorcuotagerencia = valorcuotagerencia;
         this.tipoaporte = tipoaporte;
+        this.valorDisponible=valorDisponible;
     }
     
     
@@ -197,6 +199,20 @@ public class FuenterecursosconvenioDTO implements IsSerializable {
      */
     public void setRolentidad(RolentidadDTO rolentidad) {
         this.rolentidad = rolentidad;
+    }
+
+    /**
+     * @return the valorDisponible
+     */
+    public BigDecimal getValorDisponible() {
+        return valorDisponible;
+    }
+
+    /**
+     * @param valorDisponible the valorDisponible to set
+     */
+    public void setValorDisponible(BigDecimal valorDisponible) {
+        this.valorDisponible = valorDisponible;
     }
     
 }

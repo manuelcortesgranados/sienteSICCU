@@ -59,6 +59,7 @@ import com.sencha.gxt.widget.core.client.form.validator.MaxLengthValidator;
 import com.sencha.gxt.widget.core.client.info.Info;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
@@ -68,9 +69,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private TextField tipoRecurso;
     private TextArea objetivoGeneral;
     //private TextArea objetivoEspecifico;
-
     private ComboBox<TerceroDTO> lstEntidadesConvenio;
-
     private ListBox comboCatRubros = new ListBox();
     //private ComboBox<RubroDTO> comboCatRubros;
     private ListBox comboRubros = new ListBox();
@@ -88,11 +87,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      * la informacion necesaria
      */
     ContratoDTO contratoDto;
+    List<RubroDTO> lstRubrosDto;
     /**
      * Flextabla para objetivos específico
      */
     private StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1);
-
     ObraDTO proyectoDTO;
     TerceroDTO terceroDto;
     RubroDTO rubroDto;
@@ -117,7 +116,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         modalPry = di;
         proyectoDTO = new ObraDTO();
         this.contratoDto = contratoDtoP;
+        lstRubrosDto = new ArrayList<RubroDTO>();
         contratoDto.setValorDisponible(contratoDto.getNumvlrcontrato());
+        service.setLog("convenio dis" + contratoDto.getValorDisponible(), null);
     }
 
     /**
@@ -133,7 +134,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void setObjetivoGeneral(TextArea objetivoGeneral) {
         this.objetivoGeneral = objetivoGeneral;
     }
-   
+
     /**
      * @return the montoAportado
      */
@@ -295,7 +296,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         });
         getObjetivoGeneral().addBlurHandler(new BlurHandler() {
-
             @Override
             public void onBlur(BlurEvent event) {
                 if (getObjetivoGeneral().getText().compareTo("") == 0) {
@@ -306,14 +306,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
 
         con.add(new FieldLabel(objetivosTable.obtenerTablaScrooll("200px", "60px"), "OBJETIVOS ESPECÍFICOS"), new HtmlData(".objetivoes"));
-        
+
 
         con.add(getComboCatRubros(), new HtmlData(".catrubro"));
         con.add(getComboRubros(), new HtmlData(".rubro"));
         this.llenarCategorias();
         getComboCatRubros().setSelectedIndex(0);
         getComboCatRubros().addChangeHandler(new ChangeHandler() {
-
             @Override
             public void onChange(ChangeEvent event) {
                 llenarRubroslista(comboCatRubros.getValue(comboCatRubros.getSelectedIndex()));
@@ -321,6 +320,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         });
 
         llenarRubroslista("123102");
+
         setMontoAportado((NumberField<BigDecimal>) new NumberField(new BigDecimalPropertyEditor()));
         getMontoAportado().addParseErrorHandler(new ParseErrorHandler() {
             @Override
@@ -343,11 +343,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getMacroActividades().setWidth("" + cw);
         con.add(new FieldLabel(getMacroActividades(), "*MACROACTIVIDADES"), new HtmlData(".macro"));
 
-        
+
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ObrafuenterecursosconveniosDTO obraFuenteDto = new ObrafuenterecursosconveniosDTO(1, montoAportado.getValue(), fuenteRecursosConveDTO, rubroDto);
+                ObrafuenterecursosconveniosDTO obraFuenteDto = new ObrafuenterecursosconveniosDTO(1, montoAportado.getValue(), fuenteRecursosConveDTO, "rubrop");
+                service.setLog("fuente R" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
                 String validacionDevuelta = validarMontosAportados(obraFuenteDto);
                 if (!validacionDevuelta.equals("El monto ha sido guardado")) {
                     AlertMessageBox d = new AlertMessageBox("Error", validacionDevuelta);
@@ -395,12 +396,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 String msgerrores = "";
                 if (proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
                     varErrorres = true;
-                    msgerrores += "El proyecto debe de tener por lo menos un monto asociado \n";
+                    msgerrores += "El proyecto debe de tener por lo menos un monto asociado" + "<br/>";
                 }
                 if (proyectoDTO.getFechaInicio() != null) {
                     if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
                         varErrorres = true;
-                        msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "\n";
+                        msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
                     }
                 } else {
                     varErrorres = true;
@@ -409,7 +410,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 if (proyectoDTO.getFechaFin() != null) {
                     if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                         varErrorres = true;
-                        msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "\n";
+                        msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
                     }
                 }
 
@@ -474,7 +475,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
     }
 
-     /*
+    /*
      * metodo que se encarga de buscar la fuente de recursos 
      * que se encuentra en detereminada posicion.
      */
@@ -504,6 +505,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         proyectoDTO.setStrnombreobra(nombrePry.getValue());
         proyectoDTO.setFechaInicio(fechaInicio.getValue());
         proyectoDTO.setFechaFin(fechaFin.getValue());
+        if (proyectoDTO.getValor() != null) {
+            if (proyectoDTO.getValorDisponible() == null) {
+                proyectoDTO.setValorDisponible(BigDecimal.ZERO);
+
+            }
+            proyectoDTO.setValorDisponible(proyectoDTO.getValorDisponible().add(proyectoDTO.getValor()));
+        }
     }
 
     public void crearActividadPry() {
@@ -537,7 +545,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
         if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
-            if (obraFuenteDto.getValor().compareTo(montoAportado.getValue()) > 0) {
+            if (montoAportado.getValue().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValoraportado()) > 0) {
                 return "El monto ingresado supera el valor de la fuente de recursos";
             } else {
                 if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
@@ -553,16 +561,25 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 }
             }
             proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
-//            contratoDto.setValorDisponible(contratoDto.getValorDisponible().subtract(obraFuenteDto.getValor()));
-//            proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
+            modificarValorDisponible(obraFuenteDto);
             return "El monto ha sido guardado";
         }
         return "El convenio seleccionado no cuenta con valor disponible";
     }
 
+    public void modificarValorDisponible(ObrafuenterecursosconveniosDTO obraFuenteDto) {
+        if (proyectoDTO.getValor() == null) {
+            proyectoDTO.setValor(BigDecimal.ZERO);
+        }
+        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
+        service.setLog("" + proyectoDTO.getValor(), null);
+        obraFuenteDto.getFuenterecursosconvenio().setValorDisponible(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuenteDto.getValor()));
+        contratoDto.setValorDisponible(contratoDto.getValorDisponible().subtract(obraFuenteDto.getValor()));
+
+    }
+
     private void llenarCategorias() {
         service.obtenerCategoriasRubros(new AsyncCallback<List<RubroDTO>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error al cargar las categorías de los rubros" + caught.getMessage() + "" + caught.getCause(), null);
@@ -582,7 +599,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         this.comboRubros.clear();
         service.obtenerRubros(cod, new AsyncCallback<List<RubroDTO>>() {
-
             @Override
             public void onFailure(Throwable caught) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -613,5 +629,4 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void setComboRubros(ListBox comboRubros) {
         this.comboRubros = comboRubros;
     }
-
 }

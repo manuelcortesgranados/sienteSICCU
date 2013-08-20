@@ -69,16 +69,14 @@
                 <h:panelGroup id="panel-filtro-novedades">
                     <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >
                         <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
-                        <rich:select selectFirst="false" enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
-                        
+                        <rich:select  enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
-
                             <a4j:ajax event="change"
                                       listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                       render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                       execute="@this" >
                             </a4j:ajax>
-                           </rich:select>                                                            
+                        </rich:select>                                                            
                     </h:panelGrid>
 
                     <h:panelGrid columns="2" rendered="#{var.boolestadoconvenio}">
