@@ -331,6 +331,7 @@
                                                     value="#{Supervisor$ModificarProyecto.listadocumentosmodi}" rows="5" 
                                                     rowClasses="stable"
                                                     rowKeyVar="filaSeleccionada" 
+                                                    binding="#{Supervisor$ModificarProyecto.tablaDocumentosModificacion}"
                                                     >
                                         <f:facet name="header">
                                             <rich:columnGroup>
@@ -378,13 +379,13 @@
                                             </rich:column>
                                             <rich:column>
 
-                                                <h:commandLink id="boton_ver_doc_modi" action="#{Supervisor$ModificarProyecto.btDescargarDocumentoAction(filaSeleccionada)}" immediate="true"  >
+                                                <h:commandLink id="boton_ver_doc_modi" action="#{Supervisor$ModificarProyecto.btDescargarDocumentoAction}" immediate="true"  >
                                                     <h:graphicImage  styleClass="ikont-hgi-bnver"    value="/resources/imgs/bt_ver.png"/>
                                                 </h:commandLink>
 
                                             </rich:column>
                                             <rich:column >
-                                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction(filaSeleccionada)}" render="panelTablaDocumentosModificacion" execute="@this">
+                                                <a4j:commandLink action="#{Supervisor$ModificarProyecto.btEliminarDocumentoAction}" render="panelTablaDocumentosModificacion" execute="@this">
                                                     <h:graphicImage  styleClass="ikont-hgi-bteliminar"    value="/resources/imgs/bt_eliminar.png"/>
                                                 </a4j:commandLink>
                                             </rich:column>

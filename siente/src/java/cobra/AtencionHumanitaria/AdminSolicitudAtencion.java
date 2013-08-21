@@ -1645,12 +1645,12 @@ public class AdminSolicitudAtencion  implements Serializable{
      * @return devuelve la regla de navegacion de crear solicitud si puede modificar, si no retorna la regla de navegación de
      * el home.
      */
-    public String identificados_Modif(int filaSeleccionada) {
+    public String identificados_Modif() {
 
         limpiarSolicitud();
 
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Solicitudmaestro solicitud = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+        //SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
 
         getAtencionHumanitaria().setSolicitudmaestro(solicitud);
         deshformulario = false;
@@ -2084,9 +2084,9 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return No retorna ningun valor
      */
-    public String SolicitudAeliminar(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        solicitudaborrar = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+    public String SolicitudAeliminar() {
+        //SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        solicitudaborrar = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
         return null;
     }
 
@@ -2754,11 +2754,11 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return la regla de navegacion que direcciona a la pagina de consultar atencion
      */
-    public String consultarSolicitud(int filaSeleccionada) {
+    public String consultarSolicitud() {
         deshformulario = true;
         mostrar = true;
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Solicitudmaestro solicitud = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+        //SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
 
         getAtencionHumanitaria().setSolicitudmaestro(solicitud);
 
@@ -2905,10 +2905,10 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return No retorna valor alguno
      */
-    public String llenarProyectosxSolicitud(int filaSeleccionada) {
+    public String llenarProyectosxSolicitud() {
 
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Solicitudmaestro solicitud_mestro = (Solicitudmaestro) sessionBeanCobra.getAtencionhumanitariaService().getSolicitudMaestro().get(filaSeleccionada);
+        //SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Solicitudmaestro solicitud_mestro = (Solicitudmaestro) tablaSolicitudMaestro.getRowData();
 
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getCobraService().encontrarSoliProyecto(solicitud_mestro.getOidcodigosolicitudmaestro()));
         if (getSessionBeanCobra().getSolicitudService().getListaproyectoasoci().size() > 0) {
