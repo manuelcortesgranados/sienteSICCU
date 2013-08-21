@@ -1517,7 +1517,7 @@
                                                 <h:commandLink styleClass="ikont-hcl-zoom-contratista img-detalle-proyecto"/>
                                                 <h:panelGroup layout="block">
                                                     <h:outputText  styleClass="ikont- hot-ncontratociu"   value="#{var.ncontratociu}:" ></h:outputText><br/>
-                                                    <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>                                                   
+                                                    <h:outputText  styleClass="ikont- hot-strnumcontrato"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.strnumcontrato}" />                                                   
                                                 </h:panelGroup>
                                             </h:panelGrid>
                                         </h:panelGroup>
@@ -1526,8 +1526,8 @@
                                                 <h:commandLink styleClass="ikont-hcl-zoom-supervosor img-detalle-proyecto"/>
                                                 <h:panelGroup layout="block">
                                                     <h:outputText  styleClass="ikont- hot-contraticiu"   value="#{var.contratistaciu}"   /><br/>
-                                                    <h:outputText  styleClass="ikont- hot-nbre"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" rendered="#{Supervisor$AdministrarObraNew.numContratosObra==1}"/>
-                                                    <h:outputText  styleClass="ikont- hot-otContratistas"   id="otContratistas"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" rendered="#{Supervisor$AdministrarObraNew.numContratosObra>1}">
+                                                    <h:outputText  styleClass="ikont- hot-nbre"    value="#{Supervisor$AdministrarObraNew.primerContratoObra.contratista.strnombre}" />
+                                                    <h:outputText  styleClass="ikont- hot-otContratistas"   id="otContratistas"   value="#{Supervisor$AdministrarObraNew.numContratosObra} Contratistas" >
                                                         <rich:tooltip followMouse="true" direction="bottomRight" horizontalOffset="5"
                                                                       verticalOffset="5"  styleClass="ikont-rtt-tool"   >
                                                             <a4j:repeat id="rpContratistas" value="#{Supervisor$AdministrarObraNew.listaContratoObra}" var="relacionContrato">
@@ -1591,11 +1591,11 @@
                                         <h:outputLabel>Impacto social</h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid  styleClass="ikont-hgi-imgestobra">
-                                        <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado1"/>
+                                        <h:commandLink styleClass="ikont-hcl-imgestadoproyecto img-detalle-proyecto estado#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra}"/>
                                         <h:outputLabel>estado</h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid   styleClass="ikont-hpg-tipo_obra"   >
-                                        <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo1"/>
+                                        <h:commandLink styleClass="ikont-hcl-imgtipoproyecto img-detalle-proyecto tipo#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.intidtipoproyecto} "/>
                                         <h:outputLabel>tipo</h:outputLabel>
                                     </h:panelGrid>
                                     <h:panelGrid   styleClass="ikont-hpg-griddetaob"   >
@@ -1625,7 +1625,7 @@
                                         </h:panelGrid>
                                     </h:panelGrid>
                                     <h:panelGrid  styleClass="ikont-hgi-imgestobra">
-                                        <h:outputText  styleClass="ikont- hot-estobra"   value="#{Supervisor$AdministrarObraNew.obra.estadoObra}"  ></h:outputText>
+                                        <h:outputText  styleClass="ikont- hot-estobra "   value="#{Supervisor$AdministrarObraNew.obra.estadoObra}"  ></h:outputText>
                                     </h:panelGrid>
                                     <h:panelGrid   styleClass="ikont-hpg-tipo_obra"   >
                                         <h:panelGrid columns="2"  >
@@ -1644,9 +1644,11 @@
                             <rich:collapsiblePanel  switchType="client" header="Donde esta ubicado el proyecto" expanded="true" >
                                 <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
                                     <h:panelGrid  columnClasses="textalingright">
-                                        <h:outputLabel  styleClass="ikont-hot-strDireccionProyectoOut"    value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
+                                        <h:outputLabel  styleClass="ikont-hot-strDireccionProyectoOut"   />
                                         <interkont:spacer width="20"/>
                                         <h:outputText  styleClass="ikont-hol-strDireccionProyecto"    value="#{var.label_direccion}" />
+                                        <interkont:spacer width="20"/>
+                                        <h:outputLabel  styleClass="ikont-hol-strZonaOut"   value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
                                         <interkont:spacer width="20"/>
                                         <h:outputText  styleClass="ikont-hol-strZona"    value="#{var.zona}"   />
                                         <interkont:spacer width="20"/>
@@ -1716,11 +1718,16 @@
                                             clock.setTime(minutos_s);
                                             clock.start();
                                             var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
-                                            _porst.replace(' ', '');
+                                            _porst = _porst.replace(' %', '');
+                                            _porst = parseInt(_porst) - 2;
                                             var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
-                                            _pordb.replace(' ', '');
-                                            document.getElementsByClassName('ikont-hcl-line-semaforo')[0].style.marginLeft = _porst.toString();
-                                            document.getElementsByClassName('ikont-hcl-line-deberia')[0].style.marginLeft = _pordb.toString();
+                                            _pordb = _pordb.replace(' %', '');
+                                            _pordb = parseInt(_pordb) - 2;
+                                            var _linese = document.getElementsByClassName('ikont-hcl-line-semaforo')[0];
+                                            var _linedb = document.getElementsByClassName('ikont-hcl-line-deberia')[0];
+                                            _linese.setAttribute("style", "margin-left : " + _porst+"%");
+                                            _linedb.setAttribute("style", "margin-left : " + _pordb+"%");
+
                                         });
 
         </script>
