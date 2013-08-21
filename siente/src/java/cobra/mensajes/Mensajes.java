@@ -238,25 +238,26 @@ public class Mensajes implements Serializable{
         }
     }
 
-    public String bt_verrecibidos_action(int filaSeleccionada) {
+    public String bt_verrecibidos_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Mensajes mensaje = (Mensajes) FacesUtils.getManagedBean("Mensajes");
-        
-        
-        this.mensajeRecibidoVer = mensaje.getListaMensajesRecibidos().get(filaSeleccionada);
-        
+//        Mensajes mensaje = (Mensajes) FacesUtils.getManagedBean("Mensajes");
+//        
+//        
+//        this.mensajeRecibidoVer = mensaje.getListaMensajesRecibidos().get(filaSeleccionada);
+        this.mensajeRecibidoVer = (Mensaje) tablaMensajesRecibidos.getRowData();
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpSession session = (HttpSession) context.getSession(true);
         session.setAttribute("mensajeRecibidoVer", this.mensajeRecibidoVer);
         return null;
     }
 
-    public String bt_verenviados_action(int filaSeleccionada) {
+    public String bt_verenviados_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.             
-       Mensajes mensaje = (Mensajes) FacesUtils.getManagedBean("Mensajes");
-       this.mensajeEnviadoVer = mensaje.getListaMensajesEnviados().get(filaSeleccionada);
+//       Mensajes mensaje = (Mensajes) FacesUtils.getManagedBean("Mensajes");
+//       this.mensajeEnviadoVer = mensaje.getListaMensajesEnviados().get(filaSeleccionada);
+        this.mensajeEnviadoVer = (Mensaje) tablaMensajesEnviados.getRowData();
         return null;
     }
 

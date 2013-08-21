@@ -55,6 +55,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellReference;
+import org.richfaces.component.UIDataTable;
 
 /**
  * <p>Fragment bean that corresponds to a similarly named JSP page
@@ -106,6 +107,17 @@ public class ModificarObra implements Serializable {
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
     private List<Polizacontrato> listapolizas = new ArrayList<Polizacontrato>();
     private Polizacontrato polizaeditar = new Polizacontrato();
+     private UIDataTable tablapolizas = new UIDataTable();
+
+    public UIDataTable getTablapolizas() {
+        return tablapolizas;
+    }
+
+    public void setTablapolizas(UIDataTable tablapolizas) {
+        this.tablapolizas = tablapolizas;
+    }
+     
+     
 
     public boolean isCmbconvenio() {
         return cmbconvenio;
@@ -2358,8 +2370,9 @@ public class ModificarObra implements Serializable {
      * acción en la tabla
      * @return
      */
-    public String elegirPolizaEditar(int filaSeleccionada) {
-        polizaeditar = listapolizas.get(filaSeleccionada);
+    public String elegirPolizaEditar() {
+         polizaeditar = (Polizacontrato) tablapolizas.getRowData();
+//        polizaeditar = listapolizas.get(filaSeleccionada);
         return null;
     }
 

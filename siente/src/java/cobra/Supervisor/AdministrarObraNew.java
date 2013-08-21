@@ -1326,11 +1326,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return null;
     }
 
-    public String bt_editar_documento_action(int filaSeleccionada) {
+    public String bt_editar_documento_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.documentoobraEd = ad.getListaDocumentosobra().get(filaSeleccionada);
+//        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//        this.documentoobraEd = ad.getListaDocumentosobra().get(filaSeleccionada);
+        this.documentoobraEd = (Documentoobra) tablaDocumentos.getRowData();
         return null;
     }
 
@@ -1352,11 +1353,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return null;
     }
 
-    public String bt_eliminar_documento_action(int filaSeleccionada) {
+    public String bt_eliminar_documento_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.documentoobraEl = ad.getListaDocumentosobra().get(filaSeleccionada);
+//        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//        this.documentoobraEl = ad.getListaDocumentosobra().get(filaSeleccionada);
+        this.documentoobraEl = (Documentoobra) tablaDocumentos.getRowData();
         bt_aceptar_eliminar_documento_action();
         return null;
     }
@@ -1442,12 +1444,13 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         }
     }
 
-    public String bt_download_imagenevolucion_action(int filaSeleccionada) {
+    public String bt_download_imagenevolucion_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        Imagenevolucionobra doc = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+//        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//        Imagenevolucionobra doc = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         // this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
+        Imagenevolucionobra doc = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + doc.getStrubicacion());
 
@@ -1459,9 +1462,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return "Download";
     }
 
-    public String bt_editar_imagenevolucion_action(int filaSeleccionada) {
-        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.imagenevolucionobraEd = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+    public String bt_editar_imagenevolucion_action() {
+        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+//        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//        this.imagenevolucionobraEd = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
         return null;
     }
 
@@ -1474,8 +1478,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * acción en la tabla
      * @return null
      */
-    public String btEstablecerVallaAction(int filaSeleccionada) {
-        this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
+    public String btEstablecerVallaAction() {
+        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+//        this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
         return null;
     }
 
@@ -1500,8 +1505,9 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
      * acción en la tabla
      * @return null
      */
-    public String btEstablecerImagenActualAction(int filaSeleccionada) {
-        this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
+    public String btEstablecerImagenActualAction() {
+        this.imagenevolucionobraEd = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+        //this.imagenevolucionobraEd = listaImagenesevolucionobra.get(filaSeleccionada);
         return null;
     }
 
@@ -1523,11 +1529,12 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
         return null;
     }
 
-    public String bt_eliminar_imagenevolucion_action(int filaSeleccionada) {
+    public String bt_eliminar_imagenevolucion_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        this.imagenevolucionobraEl = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+//        AdministrarObraNew adminObra = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
+//        this.imagenevolucionobraEl = adminObra.getListaImagenesevolucionobra().get(filaSeleccionada);
+        this.imagenevolucionobraEl = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
         listaImagenesevolucionobra.remove(this.imagenevolucionobraEl);
         getSessionBeanCobra().getCobraService().borrarImagen(this.imagenevolucionobraEl);
         return null;
