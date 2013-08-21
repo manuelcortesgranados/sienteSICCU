@@ -39,14 +39,18 @@
                         <h:inputText value="#{fuenteIngresos.planMovimientosConvenioEntidad.get(columna).valor}" 
                                      rendered="#{fuenteIngresos.ingresoEntidad}" style="width: 30%; text-align: right">
                             <f:validateDoubleRange minimum="0" />
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
+                            <a4j:param assignTo="#{PlanOperativo.fuenteIngresosActualizar}" value="fuenteIngresos" />
+                            <a4j:param assignTo="#{PlanOperativo.columna}" value="columna" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="dataTableIngresos, tablaflujocajaneto" />
                         </h:inputText>  
                     </center>
                     <center>
                         <h:inputText value="#{fuenteIngresos.planMovimientosIngresosConvenio.get(columna).valor}" style="width: 30%; text-align: right"
                                      rendered="#{!fuenteIngresos.ingresoEntidad}">
-                             <f:validateDoubleRange minimum="0" />
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos(fuenteIngresos, columna)}" render="dataTableIngresos, tablaflujocajaneto" />
+                            <f:validateDoubleRange minimum="0" />
+                            <a4j:param assignTo="#{PlanOperativo.fuenteIngresosActualizar}" value="fuenteIngresos" />
+                            <a4j:param assignTo="#{PlanOperativo.columna}" value="columna" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="dataTableIngresos, tablaflujocajaneto" />
                         </h:inputText>
                     </center>
                 </rich:column>
@@ -137,7 +141,7 @@
                     </h:inputText>
                 </center>
             </rich:column>
-            
+
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
                 <rich:column>                    
                     <f:facet name="header">                        
@@ -147,13 +151,17 @@
                     <h:inputText value="#{fuenteEgresos.planMovimientosProyecto.get(columna).valor}"
                                  rendered="#{fuenteEgresos.egresoProyecto}" style="width: 5%">
                         <f:validateDoubleRange minimum="0" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos, tablaflujocajaneto" />
+                        <a4j:param assignTo="#{PlanOperativo.fuenteEgresosActualizar}" value="fuenteEgresos" />
+                        <a4j:param assignTo="#{PlanOperativo.columna}" value="columna" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="dataTableEgresos, tablaflujocajaneto" />
 
                     </h:inputText>
                     <center>
                         <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}" style="width: 30%; text-align: right;"
                                      rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}">
-                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos(fuenteEgresos, columna)}" render="dataTableEgresos, tablaflujocajaneto" />
+                            <a4j:param assignTo="#{PlanOperativo.fuenteEgresosActualizar}" value="fuenteEgresos" />
+                             <a4j:param assignTo="#{PlanOperativo.columna}" value="columna" />
+                            <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="dataTableEgresos, tablaflujocajaneto" />
                             <f:validateDoubleRange minimum="0" />
                         </h:inputText>
 
