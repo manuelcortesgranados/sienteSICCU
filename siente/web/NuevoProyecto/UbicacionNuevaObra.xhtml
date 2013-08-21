@@ -144,7 +144,8 @@
                                                                     </h:panelGrid>
                                                                     <h:panelGroup id="layoutLugar" >
                                                                         <rich:dataTable id="datamarkers" 
-                                                                                        rows="4"                                                                 
+                                                                                        rows="4" 
+                                                                                        binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
                                                                                         rowKeyVar="filaSeleccionada"
                                                                                         var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
                                                                             <rich:column id="co1">
@@ -177,7 +178,7 @@
                                                                                 <f:facet name="header">
                                                                                     <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}" />
                                                                                 </f:facet>
-                                                                                <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker(filaSeleccionada)}" immediate="true"/>
+                                                                                <h:commandLink value="#{var.eliminar}" action="#{Supervisor$IngresarNuevaObra.eliminarMarker}" immediate="true"/>
                                                                             </rich:column>
                                                                             <f:facet name="footer">
                                                                                 <rich:dataScroller id="dsmar" for="datamarkers"/>

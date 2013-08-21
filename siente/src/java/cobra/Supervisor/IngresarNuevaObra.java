@@ -3749,8 +3749,9 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String agregarContrato(int filaSeleccionada) {
-        Contrato contselec = listacontratos.get(filaSeleccionada);
+    public String agregarContrato() {
+        Contrato contselec = (Contrato) tablacontratos.getRowData();
+//        Contrato contselec = listacontratos.get(filaSeleccionada);
         relacioncontrato = new Relacioncontratoobra();
         relacioncontrato.setContrato(contselec);
         relacioncontrato.setObra(obranueva);
@@ -4589,9 +4590,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String eliminarMarker(int filaSeleccionada) {
+    public String eliminarMarker() {
+        Marcador marEli = (Marcador) tablaMarkereli.getRowData();
         IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
-        Marcador marEli = ign.getMarli().get(filaSeleccionada);
+//        Marcador marEli = ign.getMarli().get(filaSeleccionada);
         marli.remove(marEli);
         listamarcadores.remove(marEli);
         if (listamarcadores.isEmpty()) {
