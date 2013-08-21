@@ -12,7 +12,7 @@
     <rich:popupPanel id="mp-seleccionar-formatoreporte" moveable="true" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
             <h:panelGroup >
-                <h:outputText  styleClass="ikont-hot-mpseleccionarformatoreporte"   value="Titulo"/>
+                <h:outputText  styleClass="ikont-hot-mpseleccionarformatoreporte"   value="#{var.formatoreporte}"/>
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
@@ -26,24 +26,19 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:form target="_blank">
-            <h:panelGroup layout="block"  id="rpseleccionarformatoreporte">                
-                Generar reporte en:
-                <h:panelGrid columns="3"  >
-                    <h:panelGrid>
-                        <h:commandLink id="pdfReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoPDF}" styleClass="butonreport pdf" type="submit" value="reporte PDF"/>                            
-                    </h:panelGrid>
-                    <h:panelGrid>
-                        <h:commandLink id="excelReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoXLS}" styleClass="butonreport pdf" type="submit" value="reporte XLS"/>                            
-                    </h:panelGrid>
-                    <h:panelGrid rendered="#{Supervisor$Contrato.tipoReporteVarTmp==2}">
-                        <h:commandLink id="mppReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoMPP}" styleClass="butonreport pdf" type="submit" value="reporte Mpp"/>
-                    </h:panelGrid>
-
+        <h:panelGroup layout="block"  id="rpseleccionarformatoreporte">  
+            Generar reporte en:
+            <h:panelGrid columns="3"  >
+                <h:panelGrid>
+                    <h:commandLink id="pdfReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoPDF}" styleClass="butonreport pdf" type="submit" target="_blank" value="PDF"/>                            
                 </h:panelGrid>
-
-            </h:panelGroup>
-
-        </h:form>
+                <h:panelGrid>
+                    <h:commandLink id="excelReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoXLS}" styleClass="butonreport pdf" type="submit" target="_blank" value="Excel"/>                            
+                </h:panelGrid>
+                <h:panelGrid rendered="#{Supervisor$Contrato.tipoReporteVarTmp==2}">
+                    <h:commandLink id="mppReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoMPP}" styleClass="butonreport pdf" type="submit" target="_blank" value="MPP"/>
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:panelGroup>
     </rich:popupPanel> 
 </ui:composition>

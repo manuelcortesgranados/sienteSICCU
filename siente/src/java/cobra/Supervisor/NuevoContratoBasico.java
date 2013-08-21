@@ -6519,7 +6519,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramampp") + contrato.getIntidcontrato());
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
