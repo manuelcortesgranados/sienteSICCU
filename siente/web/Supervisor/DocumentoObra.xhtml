@@ -58,6 +58,7 @@
                                     sortMode="single"                                             
                                     value="#{Supervisor$AdministrarObraNew.listaDocumentosobra}" 
                                     var="currentRow" 
+                                    binding="#{Supervisor$AdministrarObraNew.tablaDocumentos}"
                                     rowKeyVar="filaSeleccionada"
                                     rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02" 
                                     binding="#{Supervisor$AdministrarObraNew.tablaDocumentos}">
@@ -96,7 +97,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont- hot-btndetpry"    value="#{var.editar}"/>
                             </f:facet>
-                            <a4j:commandLink id="bt_editardoc" action="#{Supervisor$AdministrarObraNew.bt_editar_documento_action(filaSeleccionada)}"
+                            <a4j:commandLink id="bt_editardoc" action="#{Supervisor$AdministrarObraNew.bt_editar_documento_action}"
                                              oncomplete="#{rich:component('mp_editar')}.show();" title="#{var.editar}" render="pg_editar_documento" >
                                 <h:graphicImage  styleClass="ikont-hgi-bt_editar"    width="25" height="25" value="/resources/imgs/bt_editar.png"/>
                             </a4j:commandLink>
@@ -105,7 +106,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont- hot-del1"    value="#{var.eliminar}"/>
                             </f:facet>
-                            <a4j:commandLink id="bt_eliminardoc" action="#{Supervisor$AdministrarObraNew.bt_eliminar_documento_action(filaSeleccionada)}"
+                            <a4j:commandLink id="bt_eliminardoc" action="#{Supervisor$AdministrarObraNew.bt_eliminar_documento_action}"
                                              rendered="#{!currentRow.tipodocumento.obligatorio and currentRow.contrato==null}"
                                              title="#{var.eliminar}"  immediate="true" render="docsubir, tablaDocumentos" execute="@this">
                                 <h:graphicImage  styleClass="ikont-hgi-btdel"    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>

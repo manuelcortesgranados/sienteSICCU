@@ -526,8 +526,7 @@ public class ModificarContrato implements Serializable {
     /**
      * Elimina la póliza seleccionada
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
      * @return
      */
     public String eliminarPoliza() {

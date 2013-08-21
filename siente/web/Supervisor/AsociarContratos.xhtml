@@ -68,6 +68,7 @@
                                 <rich:dataTable id="datacontratosaso"  rows="10"   var="contrarow"
                                                 value="#{Supervisor$AsociarContratos.listacontratosobra}"
                                                 rowKeyVar="filaSeleccionada"
+                                                binding="#{Supervisor$AsociarContratos.tablacontratos}"
                                                 rendered="#{fn:length(Supervisor$AsociarContratos.listacontratosobra)>0}">
                                     <rich:column id="cocontr1" width="100px">
                                         <f:facet name="header">
@@ -117,7 +118,7 @@
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-desaso"   value="Desasociar"/>
                                         </f:facet>
-                                        <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria(filaSeleccionada)}"
+                                        <a4j:commandButton value="Desasociar" action="#{Supervisor$AsociarContratos.desasociarContratoInterventoria}"
                                                            render="datacontratosaso,pgcontrat1aso">
 
                                         </a4j:commandButton>

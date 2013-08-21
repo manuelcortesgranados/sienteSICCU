@@ -33,6 +33,7 @@
                     <rich:dataTable id="tabla-listado-numencargo"
                                     rows="5"
                                     var ="currentRow"
+                                    binding="#{Supervisor$Contrato.tablaEncargofiduciario}"
                                     rowKeyVar="filaSeleccionada"
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
@@ -82,7 +83,7 @@
                                 </h:outputText>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton styleClass="ikont-acb-selecencargofidu" value="#{var.seleccionar}" action="#{Supervisor$Contrato.encargoFiduSelec(filaSeleccionada)}"
+                                <a4j:commandButton styleClass="ikont-acb-selecencargofidu" value="#{var.seleccionar}" action="#{Supervisor$Contrato.encargoFiduSelec}"
                                                    render="gpencargoseleecionado" execute="@this"
                                                    oncomplete="#{rich:component('mp-listado-numencargo')}.hide();" >
                                 </a4j:commandButton>

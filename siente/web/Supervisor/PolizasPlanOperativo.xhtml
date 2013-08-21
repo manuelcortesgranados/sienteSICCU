@@ -49,6 +49,7 @@
                     <rich:dataTable id="dtPolizas"
                                     rows="4"  
                                     value="#{Supervisor$Contrato.listapolizas}"
+                                    binding="#{Supervisor$Contrato.tablaPolizasbin}"
                                     var="registro" rowKeyVar="filaSeleccionada">
                         <rich:column id="tc-strTipoPoliza" width="100px">
                             <f:facet name="header">
@@ -85,7 +86,7 @@
                                 <h:outputText  styleClass="ikont-hot-eliminars"   value="#{var.eliminar}" />
                             </f:facet>
                             <a4j:commandButton styleClass="ikont-acb-elipoliza" id="eliminarpol" value="#{var.eliminar}" render="pgpolis" execute="@this"
-                                               action="#{Supervisor$Contrato.eliminarPoliza(filaSeleccionada)}">
+                                               action="#{Supervisor$Contrato.eliminarPoliza}">
                             </a4j:commandButton>
                         </rich:column>
                         <f:facet name="footer">
