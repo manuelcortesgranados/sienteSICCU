@@ -123,7 +123,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
      * Procesa la petición para descargar el reporte del seguimiento
      * @return
      */
-    public String seguimientoreport(int filaSeleccionada ) {
+    public String seguimientoreport() {
         Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
 //       SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
 //       Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
