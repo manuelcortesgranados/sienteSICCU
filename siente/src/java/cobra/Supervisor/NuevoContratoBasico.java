@@ -2270,7 +2270,39 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setVerultimoscontratoContratista(boolean verultimoscontratoContratista) {
         this.verultimoscontratoContratista = verultimoscontratoContratista;
     }
+    
+    
+    /**
+     * Binding creado para acceder al registro seleccionado en la tabla de
+     * contratos según el contratista
+     */
+    private UIDataTable tablacontratoconveniocontratista = new UIDataTable();
 
+    public UIDataTable getTablacontratoconveniocontratista() {
+        return tablacontratoconveniocontratista;
+    }
+
+    public void setTablacontratoconveniocontratista(UIDataTable tablacontratoconveniocontratista) {
+        this.tablacontratoconveniocontratista = tablacontratoconveniocontratista;
+    }
+   
+
+    
+     /**
+     * Binding creado para acceder a los datos de las filas de la tabla creada
+     */
+    private UIDataTable tablaPolizasbin = new UIDataTable();
+
+    public UIDataTable getTablaPolizasbin() {
+        return tablaPolizasbin;
+    }
+
+    public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
+        this.tablaPolizasbin = tablaPolizasbin;
+    }
+
+  
+    
     /**
      * <p>Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
@@ -3179,13 +3211,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Elimina la poliza seleccionada de la lista en el detalle del contrato.
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
+     * 
      * @return
      */
-    public String eliminarPolizaNueva(int filaSeleccionada) {
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Polizacontrato polizacontratoEliminada = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+    public String eliminarPolizaNueva() {
+        Polizacontrato polizacontratoEliminada = (Polizacontrato) tablaPolizasbin.getRowData();
 
         listapolizas.remove(polizacontratoEliminada);
 
@@ -3847,9 +3878,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * contrato hijo.
      */
     public String detalleContrHijo(int filaSeleccionada) {
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Contrato contratoHijo = nuevoContratoBasico.getListaContrConvHijo().get(filaSeleccionada);
-
+        Contrato contratoHijo = (Contrato) tablaSubconvenios.getRowData();
         cargarContrato(contratoHijo);
 
         return "consultarContrato";
@@ -3861,9 +3890,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @return consultarContrato Refresca la página para mostrar los detalles de
      * subconvenio.
      */
-    public String detalleConvenioHijo(int filaSeleccionada) {
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Contrato contratoConvenioHijo = nuevoContratoBasico.getListaSubconvenios().get(filaSeleccionada);
+    public String detalleConvenioHijo() {
+        
+        Contrato contratoConvenioHijo = (Contrato) tablaSubconvenios.getRowData();
 
         cargarContrato(contratoConvenioHijo);
 
@@ -3971,10 +4000,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     }
 
-    public String bt_download_documento_action_modulo() {
+    public String bt_download_documento_action_modulo(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
+        Documentoobra doc = getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
@@ -4171,7 +4200,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String editarContratistas(int filaSeleccionada) {
         boolcrearcontratista = false;
         booleditando = true;
-        contratista = (Contratista) tablacontratistas.getRowData();
+        contratista = listaContratista.get(filaSeleccionada);
         cambiarPersona();
 
         return null;
@@ -4180,13 +4209,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Habilita la información de la poliza a modificar y la lista
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
+     * 
      * @return
      */
-    public String editarPoliza(int filaSeleccionada) {
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        polizacontrato = nuevoContratoBasico.getListaPolizacontratos().get(filaSeleccionada);
+    public String editarPoliza() {
+        //limpiarContrato();
+        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
+      
 
         boolcrearpoliza = true;
 
@@ -5703,15 +5733,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Se elige el giro directo que se quiere editar
      *
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
      * @return null
      */
-    public String editarGirodirecto(int filaSeleccionada) {
+    public String editarGirodirecto() {
         booleditargirodirecto = true;
 
-        NuevoContratoBasico nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        movimientocontrato = nuevoContratoBasico.getListaGirodirecto().get(filaSeleccionada);
+        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
 
         return null;
     }
@@ -5719,14 +5747,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Eliminar el giro directo previamente seleccionado
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param
      * @return
      */
-    public String eliminarGirodirecto(int filaSeleccionada) {
-        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-
-        movimientocontrato = nuevoContraBasicoSeleccionado.getListaGirodirecto().get(filaSeleccionada);
+    public String eliminarGirodirecto() {
+        movimientocontrato = (Movimientocontrato) tablaGirodirecto.getRowData();
         listaGirodirecto.remove(movimientocontrato);
         if (movimientocontrato.getIntidnumero() != 0) {
             getSessionBeanCobra().getCobraService().borrarMovimientocontrato(movimientocontrato);
@@ -5865,8 +5890,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * eliminar el documento seleccionado
      */
-    public void bt_eliminar_documento_action() {
-        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
+    public void bt_eliminar_documento_action(int filaSeleccionada) {
+        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        Documentoobra doc = sbc.getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
         getSessionBeanCobra().getCobraService().borrarDocumento(doc);
         getSessionBeanCobra().getCobraService().getListaDocumentosContrato().remove(doc);
     }
@@ -6514,7 +6540,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void reportesPlanOperativoMPP() {
 
         switch (tipoReporteVarTmp) {
-
+       
             case 2:
                 /*Reporte Cronograma*/
                 try {
@@ -6522,7 +6548,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                break;
+                break;            
         }
 
     }
