@@ -1726,7 +1726,7 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return No devuelve ningún valor
      */
-    public String eliminarItem(int filaSeleccionada) {
+    public String eliminarItem() {
         Solicituddetalle solicituddetalle = (Solicituddetalle) tablaProductos.getRowData();
 
         //Solicituddetalle solicituddetalle = getAtencionHumanitaria().getListadosolicitudDetalle().get(filaSeleccionada);

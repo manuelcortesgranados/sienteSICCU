@@ -893,7 +893,7 @@ public class DetalleObra implements Serializable{
 //
 //        return null;
 //    }
-    public String bt_downloadAlimen_action(int filaSeleccionada) {
+    public String bt_downloadAlimen_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
          Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();

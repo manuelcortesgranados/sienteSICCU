@@ -452,13 +452,11 @@ public class Usuario implements Serializable {
      * Este metodo es utilizado para cargar toda la informacion del usuario.
      * @return Retorna La informacion del usuario.
      */
-    public String irperfilUsuario(int filaSeleccionada) {
+    public String irperfilUsuario() {
         modificarUsuario = true;
         deshabilitarBotonModificar = true;
         habilitarBotonGuardar = false;
-        Usuario usuario =(Usuario) FacesUtils.getManagedBean("Perfil$Usuario");
-        usuario.getListausuarios().get(filaSeleccionada);       
-        usuariomod = usuario.getListausuarios().get(filaSeleccionada);
+        usuariomod = (JsfUsuario) tablabuscarusuarios.getRowData();
         if (usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad().length() > 3) {
             coddeptoselec = usuariomod.getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad().substring(0, 5);
         } else {

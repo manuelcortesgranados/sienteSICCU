@@ -127,6 +127,9 @@ public class GestionarSolicitudObra  implements Serializable{
     private UIDataTable tablaSolicitudes = new UIDataTable();
     private UIDataTable tablaSolicitudesObra = new UIDataTable();
     private FiltroObra filtro = new FiltroObra();
+    private UIDataTable tablaImagenessolicitud = new UIDataTable();
+    private UIDataTable tablaDocumentos = new UIDataTable();
+    
 
     public UIDataTable getTablaSolicitudes() {
         return tablaSolicitudes;
@@ -1525,11 +1528,9 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return null
      */
-    public String eliminarImagenLista(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Imagensolicitud imagensolicitud = sessionBeanCobra.getSolicitudService().getImagensolicituds().get(filaSeleccionada);
-        sessionBeanCobra.getSolicitudService().setImagensolicitud(imagensolicitud);
-        getSessionBeanCobra().getSolicitudService().getImagensolicituds().remove(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
+    public String eliminarImagenLista() {
+        getSessionBeanCobra().getSolicitudService().setImagensolicitud((Imagensolicitud) getTablaImagenessolicitud().getRowData());
+         getSessionBeanCobra().getSolicitudService().getImagensolicituds().remove(getSessionBeanCobra().getSolicitudService().getImagensolicitud());
         return null;
     }
 
@@ -1539,10 +1540,8 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return null
      */
-    public String eliminarDocumentoLista(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Documentosolicitud documentosolicitud = sessionBeanCobra.getSolicitudService().getDocumentosolicituds().get(filaSeleccionada);
-        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud(documentosolicitud);
+    public String eliminarDocumentoLista() {
+        getSessionBeanCobra().getSolicitudService().setDocumentosolicitud((Documentosolicitud) getTablaDocumentos().getRowData());
         getSessionBeanCobra().getSolicitudService().getDocumentosolicituds().remove(getSessionBeanCobra().getSolicitudService().getDocumentosolicitud());
         return null;
     }
@@ -1844,10 +1843,9 @@ public class GestionarSolicitudObra  implements Serializable{
         return null;
     }
 
-    public String verProyectosSoli(int filaSeleccionada) throws Exception {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Obra obra = sessionBeanCobra.getSolicitudService().getListaproyectoasoci().get(filaSeleccionada);
-
+    public String verProyectosSoli() throws Exception {
+       Obra obra = (Obra) tablaProyectosAso.getRowData();
+       
         if (obra.getTipoestadobra().getIntestadoobra() == 1) {
             getAdministrarObraNew().setObra(obra);
             return "verproyectocomple";
@@ -1868,5 +1866,33 @@ public class GestionarSolicitudObra  implements Serializable{
     public void movimientosFinancierosSolicitud(int codsolicitud) {
         getSessionBeanCobra().getSolicitudService().setListamovimientosolobra(getSessionBeanCobra().getSolicitudService().encontrarmovimientossolicitudobra(codsolicitud));
 
+    }
+
+    /**
+     * @return the tablaImagenessolicitud
+     */
+    public UIDataTable getTablaImagenessolicitud() {
+        return tablaImagenessolicitud;
+    }
+
+    /**
+     * @param tablaImagenessolicitud the tablaImagenessolicitud to set
+     */
+    public void setTablaImagenessolicitud(UIDataTable tablaImagenessolicitud) {
+        this.tablaImagenessolicitud = tablaImagenessolicitud;
+    }
+
+    /**
+     * @return the tablaDocumentos
+     */
+    public UIDataTable getTablaDocumentos() {
+        return tablaDocumentos;
+    }
+
+    /**
+     * @param tablaDocumentos the tablaDocumentos to set
+     */
+    public void setTablaDocumentos(UIDataTable tablaDocumentos) {
+        this.tablaDocumentos = tablaDocumentos;
     }
 }

@@ -56,6 +56,7 @@ public class ModificarContrato implements Serializable {
     StringBuilder renderVar = new StringBuilder("strcontrcontrato");
     public boolean habilitarBtnModificarValor = true;
     public boolean habilitarBtnGuardarCancelarValor = false;
+    private UIDataTable tablaPolizasbin = new UIDataTable();
 
     public boolean isHabilitarBtnGuardarCancelarValor() {
         return habilitarBtnGuardarCancelarValor;
@@ -515,11 +516,10 @@ public class ModificarContrato implements Serializable {
      * acción en la tabla
      * @return
      */
-    public String seleccionareditarPoliza(int filaSeleccionada) {
-        Polizacontrato polizacontrato = getNuevoContratoBasico().getListaPolizacontratos().get(filaSeleccionada);
-        getNuevoContratoBasico().setPolizacontrato(polizacontrato);
+    public String seleccionareditarPoliza() {
+        getNuevoContratoBasico().setPolizacontrato((Polizacontrato) getTablaPolizasbin().getRowData());
         getNuevoContratoBasico().setTipointpoli(getNuevoContratoBasico().getPolizacontrato().getTipopoliza().getInttipopoliza());
-        getNuevoContratoBasico().setIndicepolizamodificar(getNuevoContratoBasico().getListaPolizacontratos().indexOf(polizacontrato));
+        getNuevoContratoBasico().setIndicepolizamodificar(getNuevoContratoBasico().getListaPolizacontratos().indexOf(tablaPolizasbin.getRowIndex()));
         return null;
     }
 
@@ -530,8 +530,8 @@ public class ModificarContrato implements Serializable {
      * acción en la tabla
      * @return
      */
-    public String eliminarPoliza(int filaSeleccionada) {
-        Polizacontrato poleli = getNuevoContratoBasico().getListaPolizacontratos().get(filaSeleccionada);
+    public String eliminarPoliza() {
+        Polizacontrato poleli = (Polizacontrato) tablaPolizasbin.getRowData();
         getNuevoContratoBasico().getListaPolizacontratos().remove(poleli);
         return null;
     }
@@ -804,10 +804,9 @@ public class ModificarContrato implements Serializable {
         return "consultarContrato";
     }
 
-    public String llenarDocumentosModifContrato(int filaSeleccionada) {
-        NuevoContratoBasico contratobasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Modificacioncontrato modi = (Modificacioncontrato) binditablamodi.getRowData();
-        listadocuModifContrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxModificacionContrato(modi);
+    public String llenarDocumentosModifContrato() {
+       Modificacioncontrato modi = (Modificacioncontrato) binditablamodi.getRowData();
+       listadocuModifContrato = getSessionBeanCobra().getCobraService().obtenerDocumentosxModificacionContrato(modi);
         return null;
     }
 
@@ -820,7 +819,7 @@ public class ModificarContrato implements Serializable {
      */
     public String bt_download_documento_action() {
         Documentoobra doc = (Documentoobra) tabladocuModiContrato.getRowData();
-       
+
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
 
         try {
@@ -884,5 +883,19 @@ public class ModificarContrato implements Serializable {
     public void cancelarModificacionValor() {
         habilitarBtnGuardarCancelarValor = false;
         habilitarBtnModificarValor = true;
+    }
+
+    /**
+     * @return the tablaPolizasbin
+     */
+    public UIDataTable getTablaPolizasbin() {
+        return tablaPolizasbin;
+    }
+
+    /**
+     * @param tablaPolizasbin the tablaPolizasbin to set
+     */
+    public void setTablaPolizasbin(UIDataTable tablaPolizasbin) {
+        this.tablaPolizasbin = tablaPolizasbin;
     }
 }
