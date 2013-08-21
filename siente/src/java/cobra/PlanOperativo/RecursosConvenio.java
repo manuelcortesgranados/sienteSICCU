@@ -9,7 +9,9 @@ import co.com.interkont.cobra.to.Contrato;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
+import cobra.SessionBeanCobra;
 import cobra.Supervisor.FacesUtils;
+import cobra.Supervisor.NuevoContratoBasico;
 import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.faces.model.SelectItem;
+import javax.mail.Session;
+import org.richfaces.component.UIDataTable;
 
 /**
  *
@@ -29,6 +33,7 @@ public class RecursosConvenio implements Serializable {
     private List<Fuenterecursosconvenio> lstFuentesRecursos;
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
+    private UIDataTable tableFuente = new UIDataTable();
     /**
      * Lista para el manejo de roles
      *
@@ -122,9 +127,9 @@ public class RecursosConvenio implements Serializable {
      * fuente de recursos del convenio.
      *      
      */
-    public void eliminarFuenteRecursos(int filaFuenteRecursoEliminar) {
-
-        lstFuentesRecursos.remove(filaFuenteRecursoEliminar);
+    public void eliminarFuenteRecursos() {
+        Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
+        lstFuentesRecursos.remove(f);
     }
 
     /*
@@ -132,13 +137,15 @@ public class RecursosConvenio implements Serializable {
      * fuente de recursos del convenio.
      *      
      */
-    public void adicionarFuenteRecursos(Tercero tercero) {
+    public void adicionarFuenteRecursos() {
+        NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
         if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                 .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
             fuenteRecursoConvenio.setTercero(tercero);
             fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
             fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
-            System.out.println("fuente R v = " +  fuenteRecursoConvenio.getValorDisponible());
+            System.out.println("fuente R v = " + fuenteRecursoConvenio.getValorDisponible());
             lstFuentesRecursos.add(fuenteRecursoConvenio);
             sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
             limpiarFuenteRecurso();
@@ -147,7 +154,9 @@ public class RecursosConvenio implements Serializable {
         }
     }
 
-    public void calcularValorGerencia(ResourceBundle bundle) {
+    public void calcularValorGerencia() {
+        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+        ResourceBundle bundle = sbc.getBundle();
         getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
 
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
@@ -212,5 +221,19 @@ public class RecursosConvenio implements Serializable {
             }
         }
         return null;
+    }
+
+    /**
+     * @return the tableFuente
+     */
+    public UIDataTable getTableFuente() {
+        return tableFuente;
+    }
+
+    /**
+     * @param tableFuente the tableFuente to set
+     */
+    public void setTableFuente(UIDataTable tableFuente) {
+        this.tableFuente = tableFuente;
     }
 }
