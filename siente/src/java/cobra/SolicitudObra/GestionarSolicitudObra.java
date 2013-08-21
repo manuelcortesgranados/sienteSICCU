@@ -124,19 +124,27 @@ public class GestionarSolicitudObra  implements Serializable{
     private String mensaje;
     private int tipodoc;
     private boolean regsolobra;
-    private HtmlDataTable tablaSolicitudes = new HtmlDataTable();
-    private HtmlDataTable tablaSolicitudesObra = new HtmlDataTable();
+    private UIDataTable tablaSolicitudes = new UIDataTable();
+    private UIDataTable tablaSolicitudesObra = new UIDataTable();
     private FiltroObra filtro = new FiltroObra();
 
-    public HtmlDataTable getTablaSolicitudesObra() {
+    public UIDataTable getTablaSolicitudes() {
+        return tablaSolicitudes;
+    }
+
+    public void setTablaSolicitudes(UIDataTable tablaSolicitudes) {
+        this.tablaSolicitudes = tablaSolicitudes;
+    }
+
+    public UIDataTable getTablaSolicitudesObra() {
         return tablaSolicitudesObra;
     }
 
-    public void setTablaSolicitudesObra(HtmlDataTable tablaSolicitudesObra) {
+    public void setTablaSolicitudesObra(UIDataTable tablaSolicitudesObra) {
         this.tablaSolicitudesObra = tablaSolicitudesObra;
     }
-    
-    
+
+
 
     public FiltroObra getFiltro() {
         return filtro;
@@ -488,13 +496,6 @@ public class GestionarSolicitudObra  implements Serializable{
 
     public void setUrgencia(SelectItem[] urgencia) {
         this.urgencia = urgencia;
-    }
-    public HtmlDataTable getTablaSolicitudes() {
-        return tablaSolicitudes;
-    }
-
-    public void setTablaSolicitudes(HtmlDataTable tablaSolicitudes) {
-        this.tablaSolicitudes = tablaSolicitudes;
     }
 
     public long getValueestadosolich() {
@@ -1068,7 +1069,7 @@ public class GestionarSolicitudObra  implements Serializable{
     /**
      * Consulta la información detallada de una solicitud
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
+     * @param SSeleccionada Corresponde a la fila de la que proviene la
      * acción en la tabla
      * @return
      */
