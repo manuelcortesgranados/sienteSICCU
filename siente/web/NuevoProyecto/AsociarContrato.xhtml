@@ -132,7 +132,8 @@
                                                                 <center>
                                                                     <rich:dataTable id="datacontratos"  rows="4" 
                                                                                     var="contrarow" rowKeyVar="filaSeleccionada"
-                                                                                    value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
+                                                                                    value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}"
+                                                                                    binding="#{Supervisor$IngresarNuevaObra.tablalistacontratos}">
                                                                         <rich:column id="cocontr1" width="100px">
                                                                             <f:facet name="header">
                                                                                 <h:outputText  styleClass="ikont-rc-cocontr1"   value="Número contrato" />
@@ -173,7 +174,7 @@
                                                                             <f:facet name="header">
                                                                                 <h:outputText  styleClass="ikont-rc-desasociar"   value="Desasociar"/>
                                                                             </f:facet>
-                                                                            <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato(filaSeleccionada)}"
+                                                                            <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato}"
                                                                                                render="datacontratos,pgcontrat1">
                                                                             </a4j:commandButton>
                                                                         </rich:column>

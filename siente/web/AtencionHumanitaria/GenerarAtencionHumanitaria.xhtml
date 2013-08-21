@@ -211,7 +211,8 @@
                     <h:panelGroup>
 
                         <rich:dataTable id="tablaProductosSeleccionados"  sortMode="single" var="_Detalle" rowKeyVar="filaSeleccionada" 
-                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}">
+                                        value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadosolicitudDetalle}"
+                                        binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaProductos}">
                             <f:facet name="header">
                                 <rich:columnGroup>
                                     <rich:column colspan="7">
@@ -267,7 +268,7 @@
                                 <a4j:commandButton  title="#{var.eliminar}"  styleClass="ikont-acb-elim"  
                                                     value="#{var.eliminar}"
                                                     render="tablaProductosSeleccionados, gpvalortotalmaestroAten, gpCombos"
-                                                    action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem(filaSeleccionada)}"/>
+                                                    action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarItem}"/>
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:columnGroup>

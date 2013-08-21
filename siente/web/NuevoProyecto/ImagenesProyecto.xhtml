@@ -114,6 +114,7 @@
                                                                                 value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
                                                                                 var="currentRow"                                                    
                                                                                 rowKeyVar="filaSeleccionada"
+                                                                                binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}"
                                                                                 rows="3" >
                                                                     <f:facet name="header">
                                                                         <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
@@ -144,7 +145,7 @@
                                                                             <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                                                         </f:facet>
                                                                         <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
-                                                                                           action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista(filaSeleccionada)}"/>
+                                                                                           action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
                                                                     </rich:column>
                                                                     <f:facet name="footer">
                                                                         <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>

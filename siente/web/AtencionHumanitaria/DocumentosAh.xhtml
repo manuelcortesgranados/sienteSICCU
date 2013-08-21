@@ -61,6 +61,7 @@
 
 
                     <rich:dataTable id="tablaDocumentos"  sortMode="single" var="currentRow" 
+                                    binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaDocumentos}"
                                     rowKeyVar="filaSeleccionada"  rows="7"
                                     value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadocumentosolicitud}">
                         <f:facet name="header" >
@@ -96,7 +97,7 @@
                         <rich:column rendered="#{!AtencionHumanitaria$AdminSolicitudAtencion.deshformulario}">
                             <a4j:commandButton id="eliminardoc" value="#{var.eliminar}" styleClass="ikont-acb-eliminar"  
                                                render="tablaDocumentos"
-                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarDocumentoLista(filaSeleccionada)}">
+                                               action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarDocumentoLista}">
                             </a4j:commandButton>
                         </rich:column>
 
