@@ -370,10 +370,10 @@ public class FiduFinanciera implements Serializable{
         return null;
     }
 
-    public String seleccionarEncargo( int filaSeleccionada ) {
-        
-        Encargofiduciario encargo = (Encargofiduciario) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
-        listaencargofiducario.get(filaSeleccionada);
+    public String seleccionarEncargo() {
+        Encargofiduciario encargo = (Encargofiduciario) tablaEncargoListado.getRowData();
+//        Encargofiduciario encargo = (Encargofiduciario) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
+//       listaencargofiducario.get(filaSeleccionada);
         Tercero ter = new Tercero();
         ter.setIntcodigo(encargo.getTercero().getIntcodigo());
         getFinancieraService().getOrdendepago().setTercero(ter);
@@ -396,11 +396,12 @@ public class FiduFinanciera implements Serializable{
         return null;
     }
 
-    public String seleccionarTerceroOP(int filaSeleccionada) {
-        FiduFinanciera fiduFinanciera = (FiduFinanciera) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
-        Tercero tercero = fiduFinanciera.getFinancieraService().getListaTercero().get(filaSeleccionada);
+    public String seleccionarTerceroOP() {
+        Tercero ter = (Tercero) tablaTerceroListado.getRowData();
+//        FiduFinanciera fiduFinanciera = (FiduFinanciera) FacesUtils.getManagedBean("Financiera$FiduFinanciera");
+//        Tercero tercero = fiduFinanciera.getFinancieraService().getListaTercero().get(filaSeleccionada);
         
-        getFinancieraService().getOrdendepago().setTercero(tercero);
+        getFinancieraService().getOrdendepago().setTercero(ter);
 
         return null;
     }
