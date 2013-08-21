@@ -1153,5 +1153,93 @@ public class SessionBeanCobra implements Serializable {
         
 
     }
+    
+    
+    /*
+     * imagenEstadoObra
+     * metodo que retorna la clase que contiene la imagen del estado de la obra en la valla del mapa
+     * @return : retorna un string con el nombre de la clase de css para la imagen 
+     */
+    public String imagenEstadoObra(Integer img) {
+        String style = "";
+        switch (img) {
+            case 0:
+                style = "estado1";
+                break;
+            case 1:
+                style = "estado2";
+                break;
+            case 2:
+                style = "estado5";
+                break;
+            case 5:
+                style = "estado4";
+                break;
+            case 6:
+                style = "estado3";
+                break;
+        }
+        return style;
+    }
+    /*
+     * imagenEstadoObra
+     * metodo que retorna la clase que contiene la imagen del tipo de la obra en la valla del mapa
+     * @return : retorna un string con el nombre de la clase de css para la imagen 
+     */
+
+    public String imagenTipoObra(Integer img) {
+        String style = "";
+        switch (img) {
+            case 1:
+                style = "tipo6";
+                break;
+            case 2:
+                style = "tipo4";
+                break;
+            case 3:
+                style = "tipo2";
+                break;
+            case 4:
+                style = "tipo15";
+                break;
+            case 5:
+                style = "tipo6";
+                break;
+            case 6:
+                style = "tipo10";
+                break;
+            case 7:
+                style = "tipo9";
+                break;
+            case 8:
+                style = "tipo8";
+                break;
+            case 9:
+                style = "tipo5";
+                break;
+            case 10:
+                style = "tipo3";
+                break;
+            case 11:
+                style = "tipo1";
+                break;
+            case 12:
+                style = "tipo14";
+                break;
+            case 13:
+                style = "tipo12";
+                break;
+            case 14:
+                style = "tipo11";
+                break;
+            case 15:
+                style = "tipo10";
+                break;
+            case 16:
+                style = "tipo6";
+                break;
+        }
+        return style;
+    }
 
 }

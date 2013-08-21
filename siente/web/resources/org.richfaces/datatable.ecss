@@ -66,8 +66,6 @@
 
 .rf-dt-shdr-c {
     background-color: '#{richSkin.tableHeaderBackgroundColor}';
-    background-image: "url(#{resource['org.richfaces.images:colHdrGrad.png']})";
-    background-position: top left;
     color: '#{richSkin.tableHeaderTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';
