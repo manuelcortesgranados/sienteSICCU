@@ -9,7 +9,7 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
     <br/>
-    <h:panelGroup rendered="#{var.permisonuevodiseño and SessionBeanCobra.usuarioObra.usuLogin != var.ciudadanosinregistro}" >
+    <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}" >
         <hr  class="ikont-hr-separador-usuario" />
         <h:panelGrid rendered="true" columns="2">
             <rich:column>

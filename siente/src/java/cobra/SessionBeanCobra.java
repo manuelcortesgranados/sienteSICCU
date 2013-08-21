@@ -97,7 +97,25 @@ public class SessionBeanCobra implements Serializable {
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
     private boolean logueado=false;
+    private boolean logueadodesdemapa = false;
 
+    public boolean isLogueadodesdemapa() {
+        JsfUsuario usuario;
+        String usu_login = "ciudadano";
+        usuario = getUsuarioService().encontrarPorNombreusuario(usu_login);
+   if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
+          return true;
+        }
+      else {
+         return false;
+      }
+       
+    }
+
+    public void setLogueadodesdemapa(boolean logueadodesdemapa) {
+        this.logueadodesdemapa = logueadodesdemapa;
+    }
+    
     public boolean isLogueado() {
         return logueado;
     }
@@ -437,7 +455,6 @@ public class SessionBeanCobra implements Serializable {
      */
     public SessionBeanCobra() {
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
-        System.out.println("constructor ");
     }
 
     public void llenadodatos() {
@@ -1132,6 +1149,9 @@ public class SessionBeanCobra implements Serializable {
         bean.usuarioSinRegistro();
 
     }
+        public void limpirarUsuario(){
+        getUsuarioService().setUsuarioObra(new JsfUsuario());
+    }
 
     /**
      * Método para iniciar aplicativo desde el mapa
@@ -1150,10 +1170,7 @@ public class SessionBeanCobra implements Serializable {
             getCobraService().setHeaderNombre("Herramientas");
             getCobraService().setHeaderStyle("titletool");
             setLogueado(true);
-        
-
     }
-    
     
     /*
      * imagenEstadoObra
@@ -1241,5 +1258,15 @@ public class SessionBeanCobra implements Serializable {
         }
         return style;
     }
+    
+    public void destruirsession(){
+       FacesContext faces = FacesContext.getCurrentInstance();
+       ExternalContext external = faces.getExternalContext();
+       Object session = external.getSession(false);
+       HttpSession htpSession = (HttpSession) session;
+       htpSession.invalidate();
+        
+    }
+    
 
 }
