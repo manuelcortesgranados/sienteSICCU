@@ -29,7 +29,7 @@
                 <h:panelGroup layout="block" >
                     <rich:dataTable id="tablaDocsAlim"  
                                     sortMode="single" 
-
+                                    binding="#{Supervisor$DetalleObra.tablaDocsAlimentacion}"
                                     value="#{Supervisor$DetalleObra.listaDocsAlimentacion}"
                                     var="currentRow"
                                     rowKeyVar="filaSeleccioanda">
@@ -50,7 +50,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-tcveraliver"   value="#{var.Ver}"/>
                             </f:facet>
-                            <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action(filaSeleccionada)}" id="bt_downloadAli">
+                            <h:commandLink  action="#{Supervisor$DetalleObra.bt_downloadAlimen_action}" id="bt_downloadAli">
                                 <h:graphicImage  styleClass="ikont-hgi-btdownloadali"    value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>

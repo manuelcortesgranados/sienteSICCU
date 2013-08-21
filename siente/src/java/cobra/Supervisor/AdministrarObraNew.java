@@ -1307,11 +1307,10 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
 
     }
 
-    public String bt_download_documento_action(int filaSeleccionada) {
+    public String bt_download_documento_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        AdministrarObraNew ad = (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
-        Documentoobra doc = ad.getListaDocumentosobra().get(filaSeleccionada);
+        Documentoobra doc = (Documentoobra) tablaDocumentos.getRowData();
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());

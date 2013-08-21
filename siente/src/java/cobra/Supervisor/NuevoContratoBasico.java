@@ -3971,10 +3971,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     }
 
-    public String bt_download_documento_action_modulo(int filaSeleccionada) {
+    public String bt_download_documento_action_modulo() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        Documentoobra doc = getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
+        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
@@ -4171,7 +4171,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String editarContratistas(int filaSeleccionada) {
         boolcrearcontratista = false;
         booleditando = true;
-        contratista = listaContratista.get(filaSeleccionada);
+        contratista = (Contratista) tablacontratistas.getRowData();
         cambiarPersona();
 
         return null;
@@ -5865,9 +5865,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * eliminar el documento seleccionado
      */
-    public void bt_eliminar_documento_action(int filaSeleccionada) {
-        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Documentoobra doc = sbc.getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
+    public void bt_eliminar_documento_action() {
+        Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
         getSessionBeanCobra().getCobraService().borrarDocumento(doc);
         getSessionBeanCobra().getCobraService().getListaDocumentosContrato().remove(doc);
     }
@@ -6515,7 +6514,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void reportesPlanOperativoMPP() {
 
         switch (tipoReporteVarTmp) {
-       
+
             case 2:
                 /*Reporte Cronograma*/
                 try {
@@ -6523,7 +6522,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                break;            
+                break;
         }
 
     }

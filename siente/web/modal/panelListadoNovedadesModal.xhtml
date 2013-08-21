@@ -36,7 +36,7 @@
                     <interkont:spacer height="10px" />
                     <h:panelGroup layout="block" id="pl-tabla-listado-novedades" >
                         <rich:dataTable id="tabla-listado-novedades"
-                                        
+                                        binding="#{Supervisor$HomeSupervisor.tablaNovedadesListado}"
                                         value="#{Supervisor$HomeSupervisor.listaTotalNovedades}" 
                                         var="currentRow" rows="7" sortMode="single"
                                         rowKeyVar="filaSeleccionada"
@@ -65,7 +65,7 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-ver"   value="#{var.Ver}"/>
                                 </f:facet>
-                                <a4j:commandButton action="#{Supervisor$HomeSupervisor.bt_verObra_action(filaSeleccionada)}" id="bt-ver-obra-listado" title="#{var.verobra}"
+                                <a4j:commandButton action="#{Supervisor$HomeSupervisor.bt_verObra_action}" id="bt-ver-obra-listado" title="#{var.verobra}"
                                                    styleClass="ikont-a4jcb-btverobralistado"    />
                             </rich:column>
                             <f:facet name="footer">

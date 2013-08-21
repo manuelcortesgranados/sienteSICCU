@@ -49,6 +49,7 @@ import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 
 /**
@@ -770,6 +771,12 @@ public class DetalleObra implements Serializable{
     }
     // </editor-fold>
 
+    private HtmlDataTable tablalistaavances = new HtmlDataTable();
+    
+    public HtmlDataTable getTablalistaavances() {
+        return tablalistaavances;
+    }
+    private int filaSeleccionada;
     public DetalleObra() {
 //        if (getSessionBeanCobra().getCobraService().isVerproy()) {
 //            getAdministrarObraNew().setObra(getSessionBeanCobra().getCobraService().getProyectoSoli());
@@ -813,7 +820,7 @@ public class DetalleObra implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String encontraralimentacion(int filaSeleccionada) {
+    public String encontraralimentacion() {
 
         if (periodoevo.getIntidperiodo() == -1) {
             alimentacionmostrar = new Alimentacion();
@@ -821,7 +828,8 @@ public class DetalleObra implements Serializable{
 
             // alimentacionmostrar = getSessionBeanCobra().getCobraService().encontrarAlimentacionxPeriodo(periodoevo.getIntidperiodo(), getAdministrarObraNew().getObra().getIntcodigoobra());
 
-            alimentacionmostrar = listaAlimenta.get(filaSeleccionada);
+            alimentacionmostrar = (Alimentacion) tablalistaavances.getRowData();
+           
             if (getAlimentacionmostrar() != null && getAlimentacionmostrar().getSemaforo().getStrimagen().equals(bundle.getString("semafo_verde"))) {
                 semaforo = "VERDE";
             }
@@ -888,10 +896,10 @@ public class DetalleObra implements Serializable{
     public String bt_downloadAlimen_action(int filaSeleccionada) {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        DetalleObra doc= (DetalleObra) FacesUtils.getManagedBean("Supervisor$DetalleObra");
-        doc.getListaDocsAlimentacion().get(filaSeleccionada);      
+         Documentoobra doc = (Documentoobra) tablaDocsAlimentacion.getRowData();
+       
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getListaDocsAlimentacion().get(filaSeleccionada).getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1737,6 +1745,20 @@ public class DetalleObra implements Serializable{
     public String cargaImagenActual() {
         boolimg = true;
         return null;
+    }
+
+    /**
+     * @return the filaSeleccionada
+     */
+    public int getFilaSeleccionada() {
+        return filaSeleccionada;
+    }
+
+    /**
+     * @param filaSeleccionada the filaSeleccionada to set
+     */
+    public void setFilaSeleccionada(int filaSeleccionada) {
+        this.filaSeleccionada = filaSeleccionada;
     }
     
 }

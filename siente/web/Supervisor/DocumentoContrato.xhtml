@@ -46,7 +46,9 @@
                                     var="currentRow" 
                                     rowKeyVar="filaSeleccionada"
                                     rows="7"
-                                    rowClasses="cabezo_tabla01, cabezo_tabla02" >
+                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                     binding="#{Supervisor$Contrato.tablaDocumentosContrato}"
+                                      >
                         <rich:column width="320px">
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont- hot-houtnomdocu"   value="#{var.houtnomdocu} "/>
@@ -71,7 +73,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont- hot-ver"   value="#{var.Ver}"/>
                             </f:facet>
-                            <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo(filaSeleccionada)}"  immediate="true">
+                            <h:commandLink action="#{Supervisor$Contrato.bt_download_documento_action_modulo}"  immediate="true">
                                 <h:graphicImage  styleClass="ikont-hgi-bt_ver"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
@@ -79,7 +81,7 @@
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont- hot-del"    value="#{var.eliminar}"/>
                             </f:facet>
-                            <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action(filaSeleccionada)}"
+                            <a4j:commandLink action="#{Supervisor$Contrato.bt_eliminar_documento_action}"
                                              rendered="#{!currentRow.tipodocumento.obligatorio}" execute="@this"
                                              title="#{var.eliminar}"  immediate="true" render="tablaDocumentosContrato">
                                 <h:graphicImage  styleClass="ikont-hgi-bt-del"    width="25" height="25" value="/resources/imgs/bt_eliminar.png"/>
