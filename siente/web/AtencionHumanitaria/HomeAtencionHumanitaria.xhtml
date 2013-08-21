@@ -46,6 +46,7 @@
 
                 <rich:panel header="#{var.solicitudatenciohum}">
                     <rich:dataTable id="tablaAtencionHumanitaria"
+                                    binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaSolicitudMaestro}"
                                     value="#{SessionBeanCobra.atencionhumanitariaService.solicitudMaestro}"
                                     var="currentRow" rows="10"  rowKeyVar="filaSeleccionada">
                         <f:facet name="header">
@@ -114,21 +115,21 @@
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 
-                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.consultarSolicitud(filaSeleccionada)}" >
+                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.consultarSolicitud}" >
                                 <h:graphicImage  styleClass="ikont-hgi-btver"  value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.editar}" 
                                               rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneditar_solicitud_ah}"
-                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.identificados_Modif(filaSeleccionada)}"
+                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.identificados_Modif}"
                                               render="DatosBasicosSolicitud">
                                 <h:graphicImage  styleClass="ikont-hgi-bteditar" value="/resources/imgs/bt_editar.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column rendered="#{currentRow.subestadosolicitudch.intoidsubestadosolicitud==4}" >
                             <a4j:commandButton  title="#{var.eliminar}" 
-                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.SolicitudAeliminar(filaSeleccionada)}"
+                                                action="#{AtencionHumanitaria$AdminSolicitudAtencion.SolicitudAeliminar}"
                                                 oncomplete="#{rich:component('panelConfirmaborrado')}.show();"
                                                 styleClass="ikont-acb-eliminar" execute="@this"
                                                 />
@@ -137,7 +138,7 @@
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.ver} Proyecto" 
-                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProyectosxSolicitud(filaSeleccionada)}"
+                                              action="#{AtencionHumanitaria$AdminSolicitudAtencion.llenarProyectosxSolicitud}"
                                               oncomplete="#{rich:component('modaltablaproyectoah')}.show();" execute="@this">
                                 <h:graphicImage  styleClass="ikont-acl-btconsult" value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
