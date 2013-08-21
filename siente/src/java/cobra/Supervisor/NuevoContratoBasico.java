@@ -31,7 +31,6 @@ import co.com.interkont.cobra.to.Ordendepago;
 import co.com.interkont.cobra.to.Periodoevento;
 import co.com.interkont.cobra.to.Planificacionpago;
 import co.com.interkont.cobra.to.Polizacontrato;
-import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import co.com.interkont.cobra.to.Tipocontratoconsultoria;
@@ -119,7 +118,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Variable para sumar los valores registrados en datos basicos plan o
      */
     BigDecimal totalfuenteconvenio;
-
     /**
      * *
      * variable para mostrar el faltante para convenio
@@ -810,7 +808,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * variables para realizar la carga de los gerentes de convenio
      */
     private SelectItem[] gerentesDeConvenio;
-    
     /**
      * Clase para manejar la lógica de fuentes de recursos
      */
@@ -822,10 +819,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setRecursosconvenio(RecursosConvenio recursosconvenio) {
         this.recursosconvenio = recursosconvenio;
-    }      
-    
-    
-    
+    }
+    /**
+     * Variable temporal para almacenar el tipo de reporte de plan operativo a
+     * ejecutar.
+     */
+    private int tipoReporteVarTmp;
+
+    public int getTipoReporteVarTmp() {
+        return tipoReporteVarTmp;
+    }
+
+    public void setTipoReporteVarTmp(int tipoReporteVarTmp) {
+        this.tipoReporteVarTmp = tipoReporteVarTmp;
+    }
 
     public List<Tercero> getLstentidades() {
         return lstentidades;
@@ -834,15 +841,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setLstentidades(List<Tercero> lstentidades) {
         this.lstentidades = lstentidades;
     }
-    
-    
-    
     /*
      * variables para realizar la carga del tipo de aporte
-     */    
+     */
     private String variabletitulo;
     private String infogeneralcrearconvenio;
-    private int panelPantalla;   
+    private int panelPantalla;
     private List<Obra> listaProyectosCovenio;
     private int reportoption;
     private int subpantalla;
@@ -2285,10 +2289,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             actualizarPanel(2);
             actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
-            if(getSubpantalla()==2)
-            {
+            if (getSubpantalla() == 2) {
                 getFlujoCaja().iniciarFlujoCaja();
-            }    
+            }
             getSessionBeanCobra().setCargarcontrato(false);
 
         }
@@ -2318,9 +2321,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             listaProyectosCovenio = new ArrayList<Obra>();
             variabletitulo = Propiedad.getValor("primerodatosbasicos");
             llenarEstadoConvenio();
-            llenarEntidades();            
+            llenarEntidades();
             llenarGerentes();
-            
+
 
         }
 
@@ -2644,7 +2647,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
                 case 3://Acta unica
                     if (bundle.getString("fechaformapago").equals("true")) {
-                    if (planificacionpago.getDatefechapago() != null) {
+                        if (planificacionpago.getDatefechapago() != null) {
+                            planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
+                            planificacionpago.setStrdescripcion("");
+                            planificacionpago.setBoolactivo(true);
+                            planificacionpago.setBoolrealizado(false);
+                            planificacionpago.setDateusucreacion(new Date());
+                            planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
+                            planificacionpago.setContrato(contrato);
+                            //setplani.add(planificacionpago);
+                            planificacionpago.setNumvlrporcentage(new BigDecimal(100));
+                            contrato.setPlanificacionpagos(new LinkedHashSet());
+                            contrato.getPlanificacionpagos().add(planificacionpago);
+
+                            return true;
+                        } else {
+                            if (bundle.getString("fechaformapago").equals("true")) {
+                                FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
+                                return false;
+                            }
+                        }
+                    } else {
                         planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
                         planificacionpago.setStrdescripcion("");
                         planificacionpago.setBoolactivo(true);
@@ -2652,33 +2675,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         planificacionpago.setDateusucreacion(new Date());
                         planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
                         planificacionpago.setContrato(contrato);
+                        planificacionpago.setDatefechapago(contrato.getDatefechaini());
                         //setplani.add(planificacionpago);
                         planificacionpago.setNumvlrporcentage(new BigDecimal(100));
                         contrato.setPlanificacionpagos(new LinkedHashSet());
                         contrato.getPlanificacionpagos().add(planificacionpago);
-
                         return true;
-                    } else {
-                        if (bundle.getString("fechaformapago").equals("true")) {
-                            FacesUtils.addErrorMessage("Debe establecer una fecha para el pago del acta única.");
-                            return false;
-                        }
                     }
-                } else {
-                    planificacionpago.setNumvlrpago(contrato.getNumvlrcontrato());
-                    planificacionpago.setStrdescripcion("");
-                    planificacionpago.setBoolactivo(true);
-                    planificacionpago.setBoolrealizado(false);
-                    planificacionpago.setDateusucreacion(new Date());
-                    planificacionpago.setIntusucreacion(getSessionBeanCobra().getUsuarioObra().getUsuId());
-                    planificacionpago.setContrato(contrato);
-                    planificacionpago.setDatefechapago(contrato.getDatefechaini());
-                    //setplani.add(planificacionpago);
-                    planificacionpago.setNumvlrporcentage(new BigDecimal(100));
-                    contrato.setPlanificacionpagos(new LinkedHashSet());
-                    contrato.getPlanificacionpagos().add(planificacionpago);
-                    return true;
-                }
             }
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar la forma de pago.");
@@ -3331,7 +3334,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setNumrecursospropios(BigDecimal.ZERO);
         contrato.setNumrecursosch(BigDecimal.ZERO);
         contrato.setNumrecursostercero(BigDecimal.ZERO);
-        contrato.setNumvlrcontrato(BigDecimal.ZERO);        
+        contrato.setNumvlrcontrato(BigDecimal.ZERO);
         contrato.setFormapago(new Formapago());
         contrato.setEstadoconvenio(new Estadoconvenio(1));
         contrato.setBooleantienehijos(false);
@@ -3346,13 +3349,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTipocontratoconsultoria(new Tipocontratoconsultoria());
         contrato.setTipocontrato(new Tipocontrato(1, "Obra", true));
         contrato.setNumvlrsumaproyectos(BigDecimal.ZERO);
-        
+
         // contrato.setTercero(new Tercero());
 
         lisplanifiactapar.clear();
         listaContratosPadre.clear();
         listapolizas.clear();
-        listaPolizacontratos.clear();        
+        listaPolizacontratos.clear();
         listaProyectosCovenio = new ArrayList<Obra>();
 
         lisplanifiactapar.clear();
@@ -3930,7 +3933,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         boolpolizas = false;
         boolproyectos = false;
         boolgiros = false;
-        boolmodifca = false;       
+        boolmodifca = false;
         if (contrato.getBooltipocontratoconvenio()) {
             tipoContCon = "Convenio";
             booltipocontratoconvenio = true;
@@ -6285,7 +6288,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addErrorMessage("numfuenterecurso");
         }
 
-    }   
+    }
 
     public Tercero obtenerTerceroXcodigo(int codigo) {
         for (Tercero ter : lstentidades) {
@@ -6294,7 +6297,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         return null;
-    }    
+    }
 
     /*
      *metodo que  carga las entidades de fonade en la lista de seleccion
@@ -6309,7 +6312,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 //            getEntidades()[i++] = itTercero;
 //        }
 
-    }  
+    }
 
     /*
      *metodo que  carga los gerentes en la lista de seleccion
@@ -6325,7 +6328,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             getGerentesDeConvenio()[i++] = itGerenteConvenio;
         }
 
-    }  
+    }
 
     /**
      * @return the gerentesDeConvenio
@@ -6353,7 +6356,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public void setVariabletitulo(String variabletitulo) {
         this.variabletitulo = variabletitulo;
-    }    
+    }
 
     /**
      * @return the infogeneralcrearconvenio
@@ -6369,7 +6372,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.infogeneralcrearconvenio = infogeneralcrearconvenio;
     }
 
-   
     public List<Obra> getListaProyectosCovenio() {
         return listaProyectosCovenio;
     }
@@ -6379,60 +6381,149 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     /**
-     * Reportes de plan operativo
+     * Obtener variable para identificar tipo de reporte.
      *
      * @void
      */
-    public void ReportesPlanOperativo(int reportOption) {
-        this.reportoption = reportOption;
-        switch (reportoption) {
+    public void obtenerVariableReportePlanOperativo() {
+    }
+
+    /**
+     * Reportes de plan operativo para el formato en PDF
+     *
+     * @void
+     */
+    public void reportesPlanOperativoPDF() {
+
+        System.out.println("Debug - reportesPlanOperativoPDF");
+        switch (tipoReporteVarTmp) {
             case 1:
                 /*Reporte Consolidado*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadopdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 2:
                 /*Reporte Cronograma*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 3:
                 /*Reporte Presupuesto*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestopdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 4:
                 /*Reporte Flujo de caja*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajapdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 5:
                 /*Reporte Plan operativo*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativopdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             case 6:
                 /*Reporte Plan de contratación*/
                 try {
-                FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
-            } catch (IOException ex) {
-                Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionpdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+
+    }
+
+    /**
+     * Reportes de plan operativo para el formato en PDF
+     *
+     * @void
+     */
+    public void reportesPlanOperativoXLS() {
+
+        switch (tipoReporteVarTmp) {
+            case 1:
+                /*Reporte Consolidado*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoconsolidadoxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 2:
+                /*Reporte Cronograma*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramaxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 3:
+                /*Reporte Presupuesto*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativopresupuestoxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 4:
+                /*Reporte Flujo de caja*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoflujocajaxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 5:
+                /*Reporte Plan operativo*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoseccionplanoperativoxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;
+            case 6:
+                /*Reporte Plan de contratación*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativoplancontratacionxls") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+
+    }
+
+    /**
+     * Reportes de plan operativo para el formato en MPP
+     *
+     * @void
+     */
+    public void reportesPlanOperativoMPP() {
+
+        switch (tipoReporteVarTmp) {
+       
+            case 2:
+                /*Reporte Cronograma*/
+                try {
+                    FacesContext.getCurrentInstance().getExternalContext().redirect(bundle.getString("reporteplanoperativocronogramapdf") + contrato.getIntidcontrato());
+                } catch (IOException ex) {
+                    Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                break;            
         }
 
     }
@@ -6499,5 +6590,5 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
-    }   
+    }
 }
