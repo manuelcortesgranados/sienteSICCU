@@ -46,6 +46,7 @@
                                         onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                         sortMode="single"
                                         value="#{Financiera$FiduFinanciera.financieraService.listaencargo}"
+                                        binding="#{Financiera$FiduFinanciera.tablaEncargoListado}"
                                         >
                             <f:facet name="header">
                                 <rich:columnGroup>
@@ -88,7 +89,7 @@
                                     </h:outputText>
                                 </rich:column>
                                 <rich:column >
-                                    <a4j:commandButton styleClass="ikont-acb-seleccionencargo" id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo(filaSeleccionada)}"
+                                    <a4j:commandButton styleClass="ikont-acb-seleccionencargo" id="bt_seleccionarencargo" action="#{Financiera$FiduFinanciera.seleccionarEncargo}"
                                                        title="#{var.agregar}" render="encargoorden" value="Seleccionar"
                                                        onclick="#{rich:component('mp-listado-encargo')}.hide();" >
                                     </a4j:commandButton>

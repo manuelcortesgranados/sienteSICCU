@@ -34,7 +34,8 @@
                                 value="#{SessionBeanCobra.solicitudService.listaproyectoasoci}"
                                 onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                 rowKeyVar="filaSeleccionada"
-                                var="currentRow" >
+                                var="currentRow" 
+                                binding="#{SolicitudObra$GestionarSolicitudObra.tablaProyectosAso}">
                     <f:facet name="header">
                         <rich:columnGroup>
                             <rich:column  breakRowBefore="true">
@@ -78,7 +79,7 @@
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink value="X"  title="#{var.ver} #{var.proyecto}" 
-                                             action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli(filaSeleccionada)}"
+                                             action="#{SolicitudObra$GestionarSolicitudObra.verProyectosSoli}"
                                              oncomplete="#{rich:component('modaltablaproyectos')}.show();">
                                 <h:graphicImage  styleClass="ikont-hgi-bt_ver"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>

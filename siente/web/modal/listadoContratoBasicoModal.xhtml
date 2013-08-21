@@ -51,6 +51,7 @@
 
                         <rich:dataTable id="tabla-listado-contratospad" rendered="#{!empty Supervisor$Contrato.listacontratos and Supervisor$Contrato.contrato.tercero.intcodigo!=0}"
                                         rowKeyVar="filaSeleccionada"
+                                        binding="#{Supervisor$Contrato.tablacontrapadrebindin}"
                                         value="#{Supervisor$Contrato.listacontratos}"
                                         sortMode="single"  var="currentRow"  rows="6"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
@@ -114,7 +115,7 @@
                                 </rich:column>
 
                                 <rich:column>
-                                    <a4j:commandButton styleClass="ikont-acb-seleccionar" value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelec(filaSeleccionada)}"
+                                    <a4j:commandButton styleClass="ikont-acb-seleccionar" value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelec}"
                                                        render="rpconpasel,tpDatosBasicos" execute="@this"
                                                        oncomplete="#{rich:component('mp-listado-contratos')}.hide();" />
                                 </rich:column>
@@ -149,6 +150,7 @@
                         <rich:dataTable id="tabla-listado-contratospadContratista" rendered="#{!empty Supervisor$Contrato.listacontratoscontratista and Supervisor$Contrato.contrato.tercero.intcodigo!=0}"
                                         rowKeyVar="filaSeleccionada"
                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
+                                        binding="#{Supervisor$Contrato.tablacontrapadrebindinContratista}"
                                         sortMode="single"  var="currentRow"  rows="6"
                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
 
@@ -212,7 +214,7 @@
                                 </rich:column>
 
                                 <rich:column>
-                                    <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelecContratista(filaSeleccionada)}"
+                                    <a4j:commandButton value="Seleccionar" action="#{Supervisor$Contrato.contratoPadreSelecContratista}"
                                                        render="rpconpasel,tpDatosBasicos" execute="@this"
                                                        oncomplete="#{rich:component('mp-listado-contratos')}.hide();" />
                                 </rich:column>

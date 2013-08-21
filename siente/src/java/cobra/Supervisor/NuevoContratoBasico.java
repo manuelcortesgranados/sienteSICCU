@@ -4214,9 +4214,10 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
      *
      * @return
      */
-    public String seleccionarContratistas(int filaSeleccinada) {
-        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
+    public String seleccionarContratistas() {
+//        NuevoContratoBasico nb = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+//        contrato.setContratista(nb.getListaContratista().get(filaSeleccinada));
+        contrato.setContratista((Contratista) tablacontratistas.getRowData());
         return null;
     }
 

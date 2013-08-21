@@ -88,7 +88,7 @@
                                 <h:outputText  styleClass="ikont "   value="#{Contratista.strapellido2}"/>
                             </rich:column>-->
                             <rich:column >
-                                <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas(filaSeleccionada)}"
+                                <a4j:commandButton styleClass="ikont-acb-seleccionarcontratista" value="Seleccionar" action="#{Supervisor$Contrato.seleccionarContratistas}"
                                                    render="gpcontratistaseleccionado, @form" execute="gpcontratistaseleccionado, @this" immediate="true"
                                                    oncomplete="#{rich:component('mp-listado-contratistas')}.hide()"/>                                
                             </rich:column>                            
