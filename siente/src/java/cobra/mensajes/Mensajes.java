@@ -252,11 +252,10 @@ public class Mensajes implements Serializable{
         return null;
     }
 
-    public String bt_verenviados_action(int filaSeleccionada) {
+    public String bt_verenviados_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.             
-       Mensajes mensaje = (Mensajes) FacesUtils.getManagedBean("Mensajes");
-       this.mensajeEnviadoVer = mensaje.getListaMensajesEnviados().get(filaSeleccionada);
+       this.mensajeEnviadoVer = (Mensaje) tablaMensajesEnviados.getRowData();
         return null;
     }
 

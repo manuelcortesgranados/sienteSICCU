@@ -38,7 +38,8 @@
                                         value="#{Mensajes.listaMensajesEnviados}"
                                         var="currentRow"  
                                         rows="10"
-                                        rowKeyVar="filaSeleccionada">
+                                        rowKeyVar="filaSeleccionada"
+                                        binding="#{Mensajes.tablaMensajesEnviados}">
                             <rich:column filterExpression="#{Mensajes.filtrarMensajesEnviados}" sortBy="#{currentRow.datefecmensaje}" width="300px"
                                          >
                                 <f:facet name="header">
@@ -66,7 +67,7 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-pltablaenviadosver"   value="#{var.Ver}"/>
                                 </f:facet>
-                                <a4j:commandLink action="#{Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
+                                <a4j:commandLink action="#{Mensajes.bt_verenviados_action}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show();" title="#{var.Ver}"
                                                  immediate="true" render="pg_camposVerEnviados,mp_ver_enviados" execute="@this,pg_camposVerEnviados,mp_ver_enviados">
                                     <h:graphicImage  styleClass="ikont-hgi-btver"    value="/resources/imgs/bt_ver.png"/>
                                 </a4j:commandLink>
