@@ -621,8 +621,7 @@ public class HomeSupervisor implements Serializable {
     /**
      * Carga una obra dada una libra de novedades.
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param
      * @return null
      */
     public String bt_verObra_action() {

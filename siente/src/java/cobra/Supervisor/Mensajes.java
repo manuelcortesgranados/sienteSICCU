@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import org.richfaces.component.UIDataTable;
 
 /**
  * <p>Page bean that corresponds to a similarly named JSP page.  This
@@ -58,6 +59,24 @@ public class Mensajes  implements Serializable{
     private SelectItem[] selectItemUsuarios;
     private Mensaje mensajeNuevo = new Mensaje();
     ResourceBundle bundle= getSessionBeanCobra().getBundle();
+    private UIDataTable tablaMensajesRecibidos = new UIDataTable();
+    private UIDataTable tablaMensajesEnviados = new UIDataTable();
+
+    public UIDataTable getTablaMensajesEnviados() {
+        return tablaMensajesEnviados;
+    }
+
+    public void setTablaMensajesEnviados(UIDataTable tablaMensajesEnviados) {
+        this.tablaMensajesEnviados = tablaMensajesEnviados;
+    }
+
+    public UIDataTable getTablaMensajesRecibidos() {
+        return tablaMensajesRecibidos;
+    }
+
+    public void setTablaMensajesRecibidos(UIDataTable tablaMensajesRecibidos) {
+        this.tablaMensajesRecibidos = tablaMensajesRecibidos;
+    }    
     
     public List<JsfUsuario> getListaUsuarios() {
         return listaUsuarios;
@@ -240,24 +259,26 @@ public class Mensajes  implements Serializable{
     /**
      * Me permite ver un mensaje recibido
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
      * @return
      */
-    public String bt_verrecibidos_action(int filaSeleccionada) {
-        this.mensajeRecibidoVer = listaMensajesRecibidos.get(filaSeleccionada);
+    public String bt_verrecibidos_action() {
+       // this.mensajeRecibidoVer = listaMensajesRecibidos.get(filaSeleccionada);
+        this.mensajeRecibidoVer = (Mensaje) tablaMensajesRecibidos.getRowData();
         return null;
     }
 
     /**
      * Me permite ver un mensaje enviado
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
+     * @param 
      * @return
      */
-    public String bt_verenviados_action(int filaSeleccionada) {
-        this.mensajeEnviadoVer = listaMensajesEnviados.get(filaSeleccionada);
+    public String bt_verenviados_action() {
+        
+        ///this.mensajeEnviadoVer = listaMensajesEnviados.get(filaSeleccionada);
+        
+        this.mensajeEnviadoVer = (Mensaje) tablaMensajesEnviados.getRowData();
         return null;
     }
     

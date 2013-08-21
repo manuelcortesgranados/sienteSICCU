@@ -1680,9 +1680,10 @@ public class Alimentar implements Serializable{
     /**
      * Obtener la lista de seguidores, con el parametro obra y limitante
      */
-    public void eliminaractividad(int filaSeleccionada) {
+    public void eliminaractividad() {
        // Supervisor$Alimentar.listactividadobra
-        listactividadobra.remove(filaSeleccionada);
+        Actividadobra activi = (Actividadobra) tablaitemnoprevistos.getRowData();
+        listactividadobra.remove(activi);
     }
 
     /**
