@@ -3799,9 +3799,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String desasociarContrato(int filaSeleccionada) {
-        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
-        Relacioncontratoobra contselec = ign.getListacontratosobra().get(filaSeleccionada);
+    public String desasociarContrato() {
+         Relacioncontratoobra contselec = (Relacioncontratoobra) tablalistacontratos.getRowData();
+//        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+//        Relacioncontratoobra contselec = ign.getListacontratosobra().get(filaSeleccionada);
         listacontratosobra.remove(contselec);
         if (listacontratosobra.size() == 0) {
             validacion.setContratos(false);
@@ -4364,9 +4365,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String eliminarImagenLista(int filaSeleccionada) {
-        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
-        Imagenevolucionobra imgborrar = ign.getListaImagenesevolucionobra().get(filaSeleccionada);
+    public String eliminarImagenLista() {
+        Imagenevolucionobra imgborrar = (Imagenevolucionobra) tablaImagenesevolucion.getRowData();
+//        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+//        Imagenevolucionobra imgborrar = ign.getListaImagenesevolucionobra().get(filaSeleccionada);
         if (imgborrar.getTipoimagen().getIntidtipoimagen() == 1) {
             img = false;
         } else if (imgborrar.getTipoimagen().getIntidtipoimagen() == 5) {

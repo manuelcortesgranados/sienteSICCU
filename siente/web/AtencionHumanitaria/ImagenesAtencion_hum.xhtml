@@ -56,6 +56,7 @@
                     <h:panelGroup>
                         <rich:dataTable id="tablaImagenes" var="currentRow" rowKeyVar="filaSeleccionada"
                                         value="#{AtencionHumanitaria$AdminSolicitudAtencion.atencionHumanitaria.listadoimagensolicitud}"
+                                        binding="#{AtencionHumanitaria$AdminSolicitudAtencion.tablaImagenesatencion}"
                                          rows="3" >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-imgselect" value="#{var.imgseleccionadas}"/>
@@ -86,7 +87,7 @@
                                 </f:facet>
                                 <a4j:commandButton id="eliminar" value="#{var.eliminar}" styleClass="ikont-"  
                                                     render="tablaImagenes"
-                                                   action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarImagenLista(filaSeleccionada)}"/>
+                                                   action="#{AtencionHumanitaria$AdminSolicitudAtencion.eliminarImagenLista}"/>
                             </rich:column>
                             <f:facet name="footer">
                                 <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>

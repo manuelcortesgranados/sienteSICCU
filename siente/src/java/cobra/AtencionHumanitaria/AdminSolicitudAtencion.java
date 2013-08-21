@@ -1727,8 +1727,9 @@ public class AdminSolicitudAtencion  implements Serializable{
      * @return No devuelve ningún valor
      */
     public String eliminarItem(int filaSeleccionada) {
+        Solicituddetalle solicituddetalle = (Solicituddetalle) tablaProductos.getRowData();
 
-        Solicituddetalle solicituddetalle = getAtencionHumanitaria().getListadosolicitudDetalle().get(filaSeleccionada);
+        //Solicituddetalle solicituddetalle = getAtencionHumanitaria().getListadosolicitudDetalle().get(filaSeleccionada);
 
         getAtencionHumanitaria().getListadosolicitudDetalle().remove(solicituddetalle);
         getAtencionHumanitaria().borrarItem(solicituddetalle);
@@ -2121,10 +2122,11 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return No devuelve ningun valor
      */
-    public String eliminarImagenLista(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Imagensolicitud imagensolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadoimagensolicitud().get(filaSeleccionada);
-        getAtencionHumanitaria().setImagen(imagensolicitud);
+    public String eliminarImagenLista() {
+        getAtencionHumanitaria().setImagen((Imagensolicitud) tablaImagenesatencion.getRowData());
+//      SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//      Imagensolicitud imagensolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadoimagensolicitud().get(filaSeleccionada);
+//        getAtencionHumanitaria().setImagen(imagensolicitud);
         getAtencionHumanitaria().getListadoimagensolicitud().remove(getSessionBeanCobra().getAtencionhumanitariaService().getImagen());
         return null;
     }
@@ -2135,10 +2137,11 @@ public class AdminSolicitudAtencion  implements Serializable{
      * acción en la tabla
      * @return No retorna ningun valor
      */
-    public String eliminarDocumentoLista(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Documentosolicitud documentosolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadocumentosolicitud().get(filaSeleccionada);
-        getAtencionHumanitaria().setDocumento(documentosolicitud);
+    public String eliminarDocumentoLista() {
+         getAtencionHumanitaria().setDocumento((Documentosolicitud) tablaDocumentos.getRowData());
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        Documentosolicitud documentosolicitud = sessionBeanCobra.getAtencionhumanitariaService().getListadocumentosolicitud().get(filaSeleccionada);
+        //getAtencionHumanitaria().setDocumento(documentosolicitud);
         getAtencionHumanitaria().getListadocumentosolicitud().remove(getSessionBeanCobra().getAtencionhumanitariaService().getDocumento());
         return null;
     }
