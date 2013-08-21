@@ -19,7 +19,7 @@
                             onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                             sortMode="single"
                             value="#{SessionBeanCobra.cobraService.listaseguimientos}"
-                            
+                            binding="#{SupervisionExterna$ListadoSeguimientos.tablaSeguimientos}"
                             styleClass="ikont-rdt-listaseguimientos" >
                 <f:facet name="header">
                     <rich:columnGroup>
@@ -56,14 +56,14 @@
                         </h:outputText>
                     </rich:column>
                     <rich:column>
-                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul(filaSeleccionada)}"
+                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoconsul}"
                                        immediate="true">
                             <h:graphicImage  styleClass="ikont-hgi-seguimientoconsul"    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>
 
                     </rich:column>
                     <rich:column> 
-                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport(filaSeleccionada)}" target="_blank" >
+                        <h:commandLink action="#{SupervisionExterna$ListadoSeguimientos.seguimientoreport}" target="_blank" >
                             <h:graphicImage  styleClass="ikont-hgi-seguimientoreport"    value="/resources/imgs/bt_ver.png"/>
                         </h:commandLink>                              
                     </rich:column>
