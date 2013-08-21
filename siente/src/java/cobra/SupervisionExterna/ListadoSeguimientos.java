@@ -110,10 +110,11 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
      * seguimiento seleccionado
      * @return
      */
-    public String seguimientoconsul(int filaSeleccionada) {
-        System.out.println("entre seguimiento");
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
+    public String seguimientoconsul() {
+         Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
+        //System.out.println("entre seguimiento");
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
         getAdminSupervisionExterna().setObjetoSeguimiento(segui);
         return "consuldetaseguimi";
     }
@@ -123,6 +124,7 @@ public class ListadoSeguimientos  implements ILifeCycleAware, Serializable {
      * @return
      */
     public String seguimientoreport(int filaSeleccionada ) {
+        Seguimiento segui = (Seguimiento) tablaSeguimientos.getRowData();
 //       SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
 //       Seguimiento segui = sessionBeanCobra.getCobraService().getListaseguimientos().get(filaSeleccionada);
 //        

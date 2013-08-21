@@ -759,6 +759,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Objeto para acceder a los atributos de modalidadcontratista
      */
     private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
+    
+    private boolean guardarborradorconvenio=false;
+
+    public boolean isGuardarborradorconvenio() {
+        return guardarborradorconvenio;
+    }
+
+    public void setGuardarborradorconvenio(boolean guardarborradorconvenio) {
+        this.guardarborradorconvenio = guardarborradorconvenio;
+    }
+    
+    
 
     public Modalidadcontratista getModalidadcontratista() {
         return modalidadcontratista;
@@ -2270,8 +2282,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setVerultimoscontratoContratista(boolean verultimoscontratoContratista) {
         this.verultimoscontratoContratista = verultimoscontratoContratista;
     }
-    
-    
     /**
      * Binding creado para acceder al registro seleccionado en la tabla de
      * contratos según el contratista
@@ -2285,10 +2295,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setTablacontratoconveniocontratista(UIDataTable tablacontratoconveniocontratista) {
         this.tablacontratoconveniocontratista = tablacontratoconveniocontratista;
     }
-   
-
-    
-     /**
+    /**
      * Binding creado para acceder a los datos de las filas de la tabla creada
      */
     private UIDataTable tablaPolizasbin = new UIDataTable();
@@ -2301,8 +2308,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tablaPolizasbin = tablaPolizasbin;
     }
 
-  
-    
     /**
      * <p>Automatically managed component initialization.
      * <strong>WARNING:</strong> This method is automatically generated, so any
@@ -2318,9 +2323,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (getSessionBeanCobra().isCargarcontrato()) {
 
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-
-            actualizarPanel(2);
-            actualizarSubpantallaPlanOperativo(getSessionBeanCobra().getCobraGwtService().getNavegacion());
+            panelPantalla = 2;
+            actualizarPanel();
+            subpantalla=getSessionBeanCobra().getCobraGwtService().getNavegacion();
+            actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
                 getFlujoCaja().iniciarFlujoCaja();
             }
@@ -3211,8 +3217,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Elimina la poliza seleccionada de la lista en el detalle del contrato.
      *
-     * @param 
-     * 
+     * @param
+     *
      * @return
      */
     public String eliminarPolizaNueva() {
@@ -3411,7 +3417,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         listaModificarContrato.clear();
         listaContrConvHijo.clear();
         setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-        actualizarPanel(1);
+        panelPantalla = 1;
+        actualizarPanel();
 
     }
 
@@ -3891,7 +3898,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * subconvenio.
      */
     public String detalleConvenioHijo() {
-        
+
         Contrato contratoConvenioHijo = (Contrato) tablaSubconvenios.getRowData();
 
         cargarContrato(contratoConvenioHijo);
@@ -3983,16 +3990,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return null;
     }
 
-    public String bt_download_documento_action(int filaSeleccionada) {
+    public String bt_download_documento_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-
-        NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        doc.getListadocuContrato().get(filaSeleccionada);
-        getSessionBeanCobra().setUrlAbri(doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
+Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
+//        NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
+       // doc.getListadocuContrato().get(filaSeleccionada);
+        getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getListadocuContrato().get(filaSeleccionada).getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -4209,14 +4216,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Habilita la información de la poliza a modificar y la lista
      *
-     * @param 
-     * 
+     * @param
+     *
      * @return
      */
     public String editarPoliza() {
         //limpiarContrato();
         Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
-      
+
 
         boolcrearpoliza = true;
 
@@ -5733,7 +5740,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Se elige el giro directo que se quiere editar
      *
      *
-     * @param 
+     * @param
      * @return null
      */
     public String editarGirodirecto() {
@@ -6149,10 +6156,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * metodo que se encarga de actualizar el panel actual de la pantalla
      * @param panelPantalla int
      */
-    public void actualizarPanel(int panelPantalla) {
+    public void actualizarPanel() {
 //       variable para esconder los botones que llaman a los reportes
         boolreporte = false;
-        this.panelPantalla = panelPantalla;
+        //this.panelPantalla = panelPantalla;
         switch (panelPantalla) {
             case 1:
                 variabletitulo = Propiedad.getValor("primerodatosbasicos");
@@ -6185,8 +6192,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @void
      */
 
-    public void actualizarSubpantallaPlanOperativo(int subPantalla) {
-        this.setSubpantalla(subPantalla);
+    public void actualizarSubpantallaPlanOperativo() {
+        this.subpantalla =subpantalla;
     }
 
     /**
@@ -6210,7 +6217,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * 
      * @return void
      */
-    public void guardarBorradorConvenio(Boolean formaguradarconvpo) {
+    public void guardarBorradorConvenio() {
         validardatosbasicosplano = 0;
 //      Adicionando una forma de pago por defecto para que no saque error el sistema al intentar validarlo
         contrato.setFormapago(new Formapago(1, null, true));
@@ -6252,7 +6259,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     contrato.setBoolplanoperativo(true);
                     contrato.setEncargofiduciario(null);
                     contrato.setModalidadcontratista(null);
-                    if (formaguradarconvpo != true) {
+                    if (guardarborradorconvenio != true) {
                         if (!listadocumentos.isEmpty()) {
                             validadcionGuardarContrato();
                         } else {
@@ -6285,8 +6292,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         tipomensajeerror = 0;
         totalfuenteconvenio = new BigDecimal(BigInteger.ZERO);
         faltafuenteconvenio = new BigDecimal(BigInteger.ZERO);
+        guardarborradorconvenio=true;
 //        Se llama el metodo de guardar borrador para que valide la información inicial
-        this.guardarBorradorConvenio(true);
+        this.guardarBorradorConvenio();
         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
             guardadoconexito = 1;
             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
@@ -6540,7 +6548,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void reportesPlanOperativoMPP() {
 
         switch (tipoReporteVarTmp) {
-       
+
             case 2:
                 /*Reporte Cronograma*/
                 try {
@@ -6548,7 +6556,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 } catch (IOException ex) {
                     Logger.getLogger(Contrato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                break;            
+                break;
         }
 
     }
