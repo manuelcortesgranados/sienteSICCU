@@ -55,6 +55,7 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
@@ -123,7 +124,19 @@ public class GestionarSolicitudObra  implements Serializable{
     private String mensaje;
     private int tipodoc;
     private boolean regsolobra;
+    private HtmlDataTable tablaSolicitudes = new HtmlDataTable();
+    private HtmlDataTable tablaSolicitudesObra = new HtmlDataTable();
     private FiltroObra filtro = new FiltroObra();
+
+    public HtmlDataTable getTablaSolicitudesObra() {
+        return tablaSolicitudesObra;
+    }
+
+    public void setTablaSolicitudesObra(HtmlDataTable tablaSolicitudesObra) {
+        this.tablaSolicitudesObra = tablaSolicitudesObra;
+    }
+    
+    
 
     public FiltroObra getFiltro() {
         return filtro;
@@ -475,6 +488,13 @@ public class GestionarSolicitudObra  implements Serializable{
 
     public void setUrgencia(SelectItem[] urgencia) {
         this.urgencia = urgencia;
+    }
+    public HtmlDataTable getTablaSolicitudes() {
+        return tablaSolicitudes;
+    }
+
+    public void setTablaSolicitudes(HtmlDataTable tablaSolicitudes) {
+        this.tablaSolicitudes = tablaSolicitudes;
     }
 
     public long getValueestadosolich() {
@@ -1052,10 +1072,11 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String consultarSolicitud(int filaSeleccionada) {
+    public String consultarSolicitud() {
         consul = true;
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
+        SolicitudObrachTemp solicitud_obratemp = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(new ArrayList<Documentosolicitud>());
         getSessionBeanCobra().getSolicitudService().setImagensolicituds(new ArrayList<Imagensolicitud>());
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(getSessionBeanCobra().getSolicitudService().encontrarDocumentxSoliTemp(solicitud_obratemp));
@@ -1076,10 +1097,11 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String editarSolicitud(int filaSeleccionada) {
+    public String editarSolicitud() {
         consul = false;
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
+        SolicitudObrachTemp solicitud_obratemp = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrachTemp solicitud_obratemp = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(new ArrayList<Documentosolicitud>());
         getSessionBeanCobra().getSolicitudService().setImagensolicituds(new ArrayList<Imagensolicitud>());
         getSessionBeanCobra().getSolicitudService().setDocumentosolicituds(getSessionBeanCobra().getSolicitudService().encontrarDocumentxSoliTemp(solicitud_obratemp));
@@ -1096,9 +1118,10 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String consultarSolicitudDirector(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
+    public String consultarSolicitudDirector() {
+        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setSolicitudObrachD(solicitud_obra);
 
         if (solicitud_obra.getSubestadosolicitudch().getEstadosolicitudch().getOidestadosolicitud() == 1) {
@@ -1121,9 +1144,10 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String asociarProyectoaSolicitud(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
+    public String asociarProyectoaSolicitud() {
+        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
 
         if (solicitud_obra.getObras().size() == 0) {
             getSessionBeanCobra().getCobraService().getProyectoSoli().setStrnombreobra(solicitud_obra.getStrnombresolicitud());
@@ -1659,9 +1683,10 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String eliminarsolicitud(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
+    public String eliminarsolicitud() {
+         SolicitudObrachTemp solicitud_obra = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setSolicitudObrach(solicitud_obra);
         return null;
     }
@@ -1795,9 +1820,10 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String llenarProyectosxSolicitud(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
+    public String llenarProyectosxSolicitud() {
+        SolicitudObrach solicitud_obra = (SolicitudObrach) tablaSolicitudesObra.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrach solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachs().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getSolicitudService().encontrarProyectosxSolicitud(solicitud_obra.getIntserial()));
         return null;
     }
@@ -1809,9 +1835,10 @@ public class GestionarSolicitudObra  implements Serializable{
      * acción en la tabla
      * @return
      */
-    public String llenarProyectosxSolicitudTemp(int filaSeleccionada) {
-        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
-        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
+    public String llenarProyectosxSolicitudTemp() {
+        SolicitudObrachTemp solicitud_obra = (SolicitudObrachTemp) tablaSolicitudes.getRowData();
+//        SessionBeanCobra sessionBeanCobra = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
+//        SolicitudObrachTemp solicitud_obra = sessionBeanCobra.getSolicitudService().getSolicitudObrachTemps().get(filaSeleccionada);
         getSessionBeanCobra().getSolicitudService().setListaproyectoasoci(getSessionBeanCobra().getSolicitudService().encontrarProyectosxSolicitud(solicitud_obra.getIntserial()));
         return null;
     }

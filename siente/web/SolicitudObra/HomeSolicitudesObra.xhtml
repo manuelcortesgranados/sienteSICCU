@@ -56,6 +56,7 @@
                     <rich:dataTable rendered="#{!SessionBeanCobra.solicitudService.tablasver}"
                                     id="tablaSolicitudObraTemp"
                                     rows="5"
+                                    binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudes}"
                                     var ="currentRowTemp"
                                     rowKeyVar="filaSeleccionada"
                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
@@ -131,18 +132,18 @@
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
                             <a4j:commandButton  title="#{var.buscarProyecto}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud}"
                                                 styleClass="ikont-a4jcb-buscarProyecto"   value="#{var.consultar}"/>
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 6||
                                                  SolicitudObra$GestionarSolicitudObra.valuegrupo == 5}">
-                            <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud(filaSeleccionada)}"
+                            <a4j:commandButton  action="#{SolicitudObra$GestionarSolicitudObra.editarSolicitud}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud != 1}"
                                                 styleClass="ikont-a4jcb-editarsolicitud"   />
                         </rich:column>
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.aprobar}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud(filaSeleccionada)}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitud}"
                                                 rendered="#{currentRowTemp.estadosolicitudch.oidestadosolicitud == 1 and
                                                 currentRowTemp.boolaprobado != false}"
                                                 styleClass="ikont-a4jcb-aprobar"   />
@@ -150,13 +151,13 @@
                         <rich:column rendered="#{SolicitudObra$GestionarSolicitudObra.valuegrupo == 7}">
                             <a4j:commandButton  title="#{var.modificarobra}"
                                                 rendered="#{currentRowTemp.boolnuevo}"
-                                                action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud(filaSeleccionada)}"
+                                                action="#{SolicitudObra$GestionarSolicitudObra.eliminarsolicitud}"
                                                 oncomplete="#{rich:component('panelEliminarSolicitud')}.show();"
                                                 styleClass="ikont-a4jcb-modificarobra"  />
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}" 
-                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp(filaSeleccionada)}"
+                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitudTemp}"
                                               render="modaltablaproyectos, tablaproyectos"
                                               rendered="#{currentRowTemp.boolaprobado}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" 
@@ -185,6 +186,7 @@
                         var ="currentRowObra"
                         rowKeyVar="filaSeleccionada"
                         onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
+                        binding="#{SolicitudObra$GestionarSolicitudObra.tablaSolicitudesObra}"
                         onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                         sortMode="single"
                         value="#{SessionBeanCobra.solicitudService.solicitudObrachs}"
@@ -254,20 +256,20 @@
                         <!--
                         <rich:column>
                             <a4j:commandLink  title="#{var.buscarProyecto}" 
-                                              action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector(filaSeleccionada)}" >
+                                              action="#{SolicitudObra$GestionarSolicitudObra.consultarSolicitudDirector}" >
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         -->
                         <rich:column>
                             <a4j:commandLink  title="#{var.asociarproyecto}"  execute="@this"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud(filaSeleccionada)}">
+                                              action="#{SolicitudObra$GestionarSolicitudObra.asociarProyectoaSolicitud}">
                                 <h:graphicImage  styleClass="ikont-hgi-btcontratopng"    value="/resources/imgs/bt_contrato.png"/>
                             </a4j:commandLink>
                         </rich:column>
                         <rich:column>
                             <a4j:commandLink  title="#{var.consultar} #{var.solicitudproyecto}"  execute="@this"
-                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud(filaSeleccionada)}"
+                                              action="#{SolicitudObra$GestionarSolicitudObra.llenarProyectosxSolicitud}"
                                               oncomplete="#{rich:component('modaltablaproyectos')}.show();" render="modaltablaproyectos, tablaproyectos" >
                                 <h:graphicImage  styleClass="ikont-hgi-btconsultarpng"    value="/resources/imgs/bt_consultar.png"/>
                             </a4j:commandLink>
