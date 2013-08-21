@@ -499,6 +499,7 @@
 
                             <h:panelGroup id="polizasContrato">
                                 <rich:dataTable id="tablaPolizasContrato" sortMode="single" 
+                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"
                                                 rowKeyVar="filaSeleccionada" var="localRow"
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
@@ -539,7 +540,7 @@
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkEditarPoliza" title="#{var.editar}"
-                                                         action="#{Supervisor$Contrato.editarPoliza(filaSeleccionada)}"
+                                                         action="#{Supervisor$Contrato.editarPoliza}"
                                                          render="gpPolizaSelec, notienepoliza"
                                                          oncomplete="#{rich:component('mp_nueva_poliza')}.show();">
 
@@ -554,7 +555,7 @@
                                         </f:facet>
 
                                         <a4j:commandLink id="commandLinkEliminarPoliza" title="#{var.eliminar}"
-                                                         action="#{Supervisor$Contrato.eliminarPolizaNueva(filaSeleccionada)}"
+                                                         action="#{Supervisor$Contrato.eliminarPolizaNueva}"
                                                          immediate="true" render="polizasContrato, notienepoliza">
 
                                             <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_eliminar.png" />
@@ -675,6 +676,7 @@
                             <h:panelGroup id="pgtablaSubconvenios">
                                 <rich:dataTable id="tablaSubconvenios" sortMode="single" 
                                                 value="#{Supervisor$Contrato.listaSubconvenios}" rows="5"
+                                                binding="#{Supervisor$Contrato.tablaSubconvenios}" 
                                                 rendered="#{Supervisor$Contrato.listaSubconvenios.size()>0}"
                                                 var="row" rowKeyVar="filaSeleccionada">
                                     <rich:column id="id_num">
@@ -722,7 +724,7 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.consultar}" />
                                         </f:facet>
 
-                                        <a4j:commandLink id="commandLinkVerSubconvenio" action="#{Supervisor$Contrato.detalleConvenioHijo(filaSeleccionada)}"
+                                        <a4j:commandLink id="commandLinkVerSubconvenio" action="#{Supervisor$Contrato.detalleConvenioHijo}"
                                                          render="pgcontratoconvenio" immediate="true" >
                                             <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
                                         </a4j:commandLink>
@@ -755,6 +757,7 @@
                             <h:panelGroup id="pgtablaContratoHijo">
                                 <rich:dataTable id="tablacontratohijo" sortMode="single" 
                                                 value="#{Supervisor$Contrato.listaContrConvHijo}" rows="8"
+                                                binding="#{Supervisor$Contrato.tablacontconvhijo}"
                                                 rowKeyVar="filaSeleccionada"
                                                 rendered="#{Supervisor$Contrato.listaContrConvHijo.size()>0}"
                                                 var="row">
@@ -805,7 +808,7 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.consultar}" />
                                         </f:facet>
 
-                                        <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo(filaSeleccionada)}"
+                                        <a4j:commandLink id="commandLinkVerContratoHijo" action="#{Supervisor$Contrato.detalleContrHijo}"
                                                          render="pgcontratoconvenio, pgtablaContratoHijo"
                                                          immediate="true" >
                                             <h:graphicImage  styleClass="ikont- "    value="/resources/imgs/bt_ver.png" />
@@ -851,7 +854,7 @@
 
                                     <rich:dataTable id="tablagirodirecto"
                                                     sortMode="single"
-
+                                                    binding="#{Supervisor$Contrato.tablaGirodirecto}"
                                                     value="#{Supervisor$Contrato.listaGirodirecto}"
                                                     onrowmouseout="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"
                                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
@@ -917,14 +920,14 @@
 
                                         <rich:column>
                                             <a4j:commandButton value="#{var.editar}" 
-                                                               action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}"
+                                                               action="#{Supervisor$Contrato.editarGirodirecto}"
                                                                render="rpgirodirecto" immediate="true"
                                                                oncomplete="#{rich:component('mp-crear-girodirecto')}.show();" />
                                         </rich:column>
 
                                         <rich:column>
                                             <a4j:commandButton value="#{var.eliminar}" immediate="true" 
-                                                               action="#{Supervisor$Contrato.eliminarGirodirecto(filaSeleccionada)}"
+                                                               action="#{Supervisor$Contrato.eliminarGirodirecto}"
                                                                render="pngirodirecto" />
                                         </rich:column>
 
@@ -1021,7 +1024,7 @@
                                     </f:facet>
 
                                     <a4j:commandLink id="btAdjuntarImagenmodi" 
-                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato(filaSeleccionada)}"
+                                                     action="#{Supervisor$ModificarContrato.llenarDocumentosModifContrato}"
                                                      oncomplete="#{rich:component('panelModiContratoDoc')}.show();"
                                                      render="tabladocumentomodi">
 
