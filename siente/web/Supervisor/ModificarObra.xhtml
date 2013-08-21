@@ -129,7 +129,8 @@
                                         </h:panelGrid>
                                         <h:panelGroup id="tablaPolizas" >
                                             <rich:dataTable id="dtPolizas"  rows="6" 
-                                                            rowKeyVar="filaSeleccionada" var="registro"  value="#{Supervisor$ModificarObra.listapolizas}">
+                                                            rowKeyVar="filaSeleccionada" var="registro"  value="#{Supervisor$ModificarObra.listapolizas}"
+                                                            binding="#{Supervisor$ModificarObra.tablapolizas}">
                                                 <rich:column id="tc-strTipoPoliza"  styleClass="ikont-rc-tcstrtipopoliza">
                                                     <f:facet name="header">
                                                         <h:outputText  styleClass="ikont-hot-tipopolizacontrato"   value="#{var.tipoPolizaContrato}" />
@@ -158,7 +159,7 @@
                                                 </rich:column>
                                                 <rich:column id="tc-streliminarPoliza"  styleClass="ikont-rc-tcstrstreliminarpoliza">
                                                     <f:facet name="header"/>
-                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar(filaSeleccionada)}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$ModificarObra.elegirPolizaEditar}" immediate="true" disabled="#{Supervisor$ModificarObra.tipificacionValida}"
                                                                        oncomplete="#{rich:component('panelPolizaContrato')}.show(); return true;"   render="gpPolizaContratoModal"/>
                                                 </rich:column>
                                                 <f:facet name="footer">

@@ -77,7 +77,7 @@
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-tcverrecibidosver"   value="#{var.Ver}"/>
                                             </f:facet>
-                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verrecibidos_action(filaSeleccionada)}" id="bt-ver-recibidos" oncomplete="#{rich:component('mp_ver')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVer"
+                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verrecibidos_action}" id="bt-ver-recibidos" oncomplete="#{rich:component('mp_ver')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVer"
                                                                styleClass="ikont-acb-btverrecibidos"    />
                                         </rich:column>
                                         <f:facet name="footer">
@@ -126,7 +126,7 @@
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-tablamensajesenviadosver"   value="#{var.Ver}"/>
                                             </f:facet>
-                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verenviados_action(filaSeleccionada)}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVerEnviados"
+                                            <a4j:commandButton action="#{Supervisor$Mensajes.bt_verenviados_action}" id="bt-ver-enviados" oncomplete="#{rich:component('mp_ver_enviados')}.show(); return true;" title="#{var.Ver}"  immediate="true" render="pg_camposVerEnviados"
                                                                styleClass="ikont-acb-btverenviados"    />
                                         </rich:column>
                                         <f:facet name="footer">

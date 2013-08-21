@@ -108,7 +108,8 @@
                                     value="#{Supervisor$Contrato.listacontratos}"
                                     rendered="#{Supervisor$Contrato.listacontratos.size()>0}"
                                     sortMode="single" var="currentRow"  rows="6"
-                                    rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                    binding="#{Supervisor$Contrato.tablacontratoconvenio}">
                         <f:facet name="header">
 
                             <rich:column colspan="10">
@@ -210,13 +211,13 @@
                         </rich:column>
 
                         <rich:column width="120px">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContrato(filaSeleccionada)}">
+                            <h:commandLink  action="#{Supervisor$Contrato.detalleContrato}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
                             </h:commandLink>
                         </rich:column>
 
                         <rich:column width="120px" id="contconvpadre" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
+                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre}" rendered="#{currentRow.contrato!=null}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
                             </h:commandLink>
                         </rich:column>
@@ -258,6 +259,7 @@
                                     rowKeyVar="filaSeleccionada"
                                     value="#{Supervisor$Contrato.listacontratoscontratista}"
                                     rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
+                                    binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
                                     sortMode="single" var="currentRow"  rows="6"
                                     rowClasses="cabezo_tabla01, cabezo_tabla02">
                         <f:facet name="header">
@@ -360,13 +362,13 @@
                         </rich:column>
 
                         <rich:column width="120px">
-                            <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista(filaSeleccionada)}">
+                            <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
                             </h:commandLink>
                         </rich:column>
 
                         <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista(filaSeleccionada)}" rendered="#{currentRow.contrato!=null}">
+                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista}" rendered="#{currentRow.contrato!=null}">
                                 <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
                             </h:commandLink>
                         </rich:column>
