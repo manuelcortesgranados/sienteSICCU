@@ -26,7 +26,15 @@
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGroup layout="block"  id="rpseleccionarformatoreporte">  
+        <h:panelGroup layout="block"  id="rpmostrarerror" rendered="#{Supervisor$Contrato.contrato.intidcontrato==0}">  
+            <h:graphicImage  styleClass="ikont-hgi-rpmostrarerror" url="/resources/imgs/alerta.png" />
+            <h:panelGroup>
+                <center>
+                    <h:outputText  styleClass="ikont-hot-rpmostrarerror"  value="No se puede generar reportes porque los datos no han sido guardados" />
+                </center>
+            </h:panelGroup>
+        </h:panelGroup>
+        <h:panelGroup layout="block"  id="rpseleccionarformatoreporte" rendered="#{Supervisor$Contrato.contrato.intidcontrato!=0}">  
             Generar reporte en:
             <h:panelGrid columns="3"  >
                 <h:panelGrid>
