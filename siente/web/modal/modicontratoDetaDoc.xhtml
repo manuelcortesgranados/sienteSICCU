@@ -34,7 +34,9 @@
                                         sortMode="single"                                          
                                         value="#{Supervisor$ModificarContrato.listadocuModifContrato}"
                                         var="currentRow"
-                                        rowKeyVar="filaSeleccionada">
+                                        rowKeyVar="filaSeleccionada"
+                                        binding="#{Supervisor$ModificarContrato.tabladocuModiContrato}"
+                                        >
                             <rich:column id="strnombremodi"  width="120px">
                                 <f:facet name="header">
 
@@ -56,7 +58,7 @@
                                     <h:outputText  styleClass="ikont-hot-ver"   value="#{var.Ver}"/>
                                 </f:facet>
                                 <h:commandButton value="Ver" id="boton" immediate="true"
-                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action(filaSeleccionada)}" />
+                                                 action="#{Supervisor$ModificarContrato.bt_download_documento_action}" />
                             </rich:column>
 
 

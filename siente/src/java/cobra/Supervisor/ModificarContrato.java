@@ -819,14 +819,13 @@ public class ModificarContrato implements Serializable {
      * acción en la tabla
      * @return null
      */
-    public String bt_download_documento_action(int filaSeleccionada) {
-        ModificarContrato modificarContrato = (ModificarContrato) FacesUtils.getManagedBean("Supervisor$ModificarContrato");
-        Documentoobra documentoObra = modificarContrato.getListadocuModifContrato().get(filaSeleccionada);
-
-        getSessionBeanCobra().setUrlAbri(documentoObra.getStrubicacion());
+    public String bt_download_documento_action() {
+        Documentoobra doc = (Documentoobra) tabladocuModiContrato.getRowData();
+       
+        getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
 
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + documentoObra.getStrubicacion());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/" + getSessionBeanCobra().getBundle().getString("versioncobra") + "/" + doc.getStrubicacion());
         } catch (IOException ex) {
             Logger.getLogger(Modificacioncontrato.class.getName()).log(Level.SEVERE, null, ex);
         }

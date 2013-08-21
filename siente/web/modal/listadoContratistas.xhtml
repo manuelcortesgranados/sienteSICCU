@@ -45,6 +45,7 @@
                                     onrowmouseout="this.style.backgroundColor='#FFFFFF'"
                                     sortMode="single"
                                     value="#{Supervisor$Contrato.listaContratista}"
+                                    binding="#{Supervisor$Contrato.tablacontratistas}"                                    
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
@@ -92,7 +93,7 @@
                                                    oncomplete="#{rich:component('mp-listado-contratistas')}.hide()"/>                                
                             </rich:column>                            
                             <rich:column>
-                                <a4j:commandButton styleClass="ikont-acb-editar" value="Editar" action="#{Supervisor$Contrato.editarContratistas (filaSeleccionada)}" render="mp-crear-contratista"
+                                <a4j:commandButton styleClass="ikont-acb-editar" value="Editar" action="#{Supervisor$Contrato.editarContratistas}" render="mp-crear-contratista"
                                                    oncomplete="#{rich:component('mp-crear-contratista')}.show();" execute="@this" immediate="true">                                    
                                 </a4j:commandButton>
                             </rich:column>

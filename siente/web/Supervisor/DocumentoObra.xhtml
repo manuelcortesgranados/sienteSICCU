@@ -59,7 +59,8 @@
                                     value="#{Supervisor$AdministrarObraNew.listaDocumentosobra}" 
                                     var="currentRow" 
                                     rowKeyVar="filaSeleccionada"
-                                    rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02" >
+                                    rows="7" rowClasses="cabezo_tabla01, cabezo_tabla02" 
+                                    binding="#{Supervisor$AdministrarObraNew.tablaDocumentos}">
 
                         <rich:column sortBy="#{currentRow.strnombre}" width="320px">
                             <f:facet name="header">
@@ -87,7 +88,7 @@
                                 <h:outputText  styleClass="ikont- hot-ver1"   value="#{var.Ver}"/>
                             </f:facet>                                    
 
-                            <h:commandLink id="boton_" action="#{Supervisor$AdministrarObraNew.bt_download_documento_action(filaSeleccionada)}"  immediate="true">
+                            <h:commandLink id="boton_" action="#{Supervisor$AdministrarObraNew.bt_download_documento_action}"  immediate="true">
                                 <h:graphicImage  styleClass="ikont-hgi-bt_ver1"    width="25" height="25" value="/resources/imgs/bt_ver.png"/>
                             </h:commandLink>
                         </rich:column>
