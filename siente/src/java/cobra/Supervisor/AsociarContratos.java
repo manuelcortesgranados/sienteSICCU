@@ -442,7 +442,7 @@ public class AsociarContratos implements Serializable{
         return "asociarcontratos";
     }
 
-    public String agregarContratoInterventoria(int filaSeleccionada) {
+    public String agregarContratoInterventoria() {
         //AsociarContratos asociarContratos = (AsociarContratos) FacesUtils.getManagedBean("Supervisor$AsociarContratos");
         //Contrato contselec = asociarContratos.getListacontratos().get(filaSeleccionada);
         Contrato contselec = (Contrato) tablacontratosasoc.getRowData();

@@ -213,7 +213,7 @@
                                         <h:inputText id="innumrecursospropios"
                                                      value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursospropios}"
                                                      size="20"  maxlength="20"
-                                                     onkeypress="return validar(event)">
+                                                     onkeypress="return validar(event);">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
                                             <f:convertNumber  maxFractionDigits="2" minFractionDigits="2" type="number" />
                                         </h:inputText>
@@ -221,7 +221,7 @@
                                         <h:inputText id="innumrecursosch" rendered="#{var.varrecurosoch}"
                                                      value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursosch}"
                                                      size="20"  maxlength="20"
-                                                     onkeypress="return validar(event)">
+                                                     onkeypress="return validar(event);">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
                                             <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
                                         </h:inputText>
@@ -229,7 +229,7 @@
                                         <h:inputText id="innumrecursoster"
                                                      value="#{Supervisor$ModificarContrato.modificarcontrato.numnuevorecursostercero}"
                                                      size="20"  maxlength="20"
-                                                     onkeypress="return validar(event)">
+                                                     onkeypress="return validar(event);">
                                             <a4j:ajax event="change" render="pgnumvlrtotal" listener="#{Supervisor$ModificarContrato.calcularValorNuevoContrato}" execute="@this"/>
                                             <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"/>
                                         </h:inputText>
@@ -307,7 +307,9 @@
                                     <h:panelGroup id="pgpoliza">
                                         <rich:dataTable id="tblaPolizasModi" sortMode="single"  var="localRow"                                                           
                                                         value="#{Supervisor$Contrato.listaPolizacontratos}"
-                                                        rowKeyVar="filaSeleccionada">
+                                                        rowKeyVar="filaSeleccionada"
+                                                        binding="#{Supervisor$Contrato.tablaPolizasbin}"                                                        
+                                                        >
                                             <rich:column id="tc-strTipoPolizaModi" styleClass="ikont-rc-tcstrTipoPolizaModi" >
                                                 <f:facet name="header">
                                                     <h:outputText  styleClass="ikont-hot-tcstrTipoPolizaModi"   value="#{var.tipoPolizaContrato}"/>
@@ -341,7 +343,7 @@
                                                     <h:outputText  styleClass="ikont-hot-otxtEditar"   value="#{var.editar}" />
                                                 </f:facet>
                                                 <a4j:commandButton id="btnPolizas" value="#{var.editar}" oncomplete="#{rich:component('mp-editar-polizas')}.show();" execute="@this"
-                                                                   action="#{Supervisor$ModificarContrato.seleccionareditarPoliza(filaSeleccionada)}" render="rpPolizas">
+                                                                   action="#{Supervisor$ModificarContrato.seleccionareditarPoliza}" render="rpPolizas">
                                                 </a4j:commandButton>
 
                                             </rich:column>
@@ -350,7 +352,7 @@
                                                     <h:outputText  styleClass="ikont-hot-streliminarPolizaModi"   value="#{var.eliminar}" />
                                                 </f:facet>
                                                 <a4j:commandButton id="eliminarpolModi" value="#{var.eliminar}" render="pgpoliza" execute="@this"
-                                                                   action="#{Supervisor$ModificarContrato.eliminarPoliza(filaSeleccionada)}">
+                                                                   action="#{Supervisor$ModificarContrato.eliminarPoliza}">
                                                 </a4j:commandButton>
                                             </rich:column>
 
@@ -446,6 +448,7 @@
                                                         rowKeyVar="filaSeleccionada"
                                                         sortMode="single"
                                                         value="#{SessionBeanCobra.cobraService.listaPlanificacionpagos}"
+                                                        binding="#{Supervisor$Contrato.tablaGirodirecto}" 
                                                         >
                                             <f:facet name="header">
                                                 <rich:columnGroup>
@@ -481,7 +484,7 @@
                                                     </h:outputText>
                                                 </rich:column>
                                                 <rich:column >
-                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto(filaSeleccionada)}" render="mp-crear-girodirecto"
+                                                    <a4j:commandButton value="#{var.editar}" action="#{Supervisor$Contrato.editarGirodirecto}" render="mp-crear-girodirecto"
                                                                        oncomplete="#{rich:component('mp-crear-girodirecto')}.show();">
                                                     </a4j:commandButton>
                                                 </rich:column>

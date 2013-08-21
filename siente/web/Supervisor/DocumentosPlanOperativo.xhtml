@@ -34,7 +34,8 @@
             <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
                             var="currentRow"
                             rows="7" rowKeyVar="filaSeleccionada"
-                            value="#{Supervisor$Contrato.listadocumentos}"                                        >
+                            value="#{Supervisor$Contrato.listadocumentos}" 
+                            binding="#{Supervisor$Contrato.tablaDocumentos}" >
                 <f:facet name="header" >
                     <rich:columnGroup >
                         <rich:column colspan="5">
@@ -59,7 +60,7 @@
                 </rich:column>
                 <rich:column >
                     <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
-                                       action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
+                                       action="#{Supervisor$Contrato.eliminardocu}">
                     </a4j:commandButton>
                 </rich:column>
                 <f:facet name="footer">

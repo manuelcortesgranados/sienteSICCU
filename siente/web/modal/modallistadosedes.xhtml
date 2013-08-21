@@ -62,6 +62,7 @@
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{Supervisor$EntidadConvenio.listasedeseducativas}"
+                                    binding="#{Supervisor$EntidadConvenio.tablasedes}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
@@ -99,7 +100,7 @@
                                 <h:outputText  styleClass="ikont-hot-columd4"   value="#{sede.strnombre}"/>
                             </rich:column>
                             <rich:column width="200px">
-                                <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede(filaSeleccionada)}"
+                                <a4j:commandButton id="bt_seleccionarsedes" action="#{Supervisor$IngresarNuevaObra.seleccionarSede}"
                                                    title="#{var.agregar}" render="gpEducacion" value="Seleccionar"
                                                    onclick="#{rich:component('mp-listado-sedeseducativas')}.hide();
                                              return false;" />

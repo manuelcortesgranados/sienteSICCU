@@ -109,7 +109,8 @@
                             </f:facet>
                             <center>
                                 <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}" rowKeyVar="filaSeleccionada"
-                                                sortMode="single"  var="currentRow"  rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                                sortMode="single"  var="currentRow"  rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02" 
+                                                binding="#{Supervisor$Contrato.tablacontrapadrebindin}">
                                     <rich:column  breakRowBefore="true">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumerocc" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
@@ -177,7 +178,7 @@
                                     <rich:column id="Eliminar" width="50px" >
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-eliminarcontconvbasic" value="#{var.eliminar}"/>                                            </f:facet>
-                                        <a4j:commandButton styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele(filaSeleccionada)}"
+                                        <a4j:commandButton styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
                                                            render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar"/>
                                     </rich:column>
                                 </rich:dataTable>
@@ -449,7 +450,9 @@
                             <rich:dataTable id="dtPolizas" rendered="#{fn:length(Supervisor$Contrato.listapolizas)>=1}" 
                                             rows="4"  
                                             value="#{Supervisor$Contrato.listapolizas}"
-                                            var="registro" rowKeyVar="filaSeleccionada">
+                                            var="registro" rowKeyVar="filaSeleccionada"
+                                            binding="#{Supervisor$Contrato.tablaPolizasbin}"
+                                            >
                                 <rich:column id="tc-strTipoPoliza" width="100px">
                                     <f:facet name="header">
                                         <h:outputText  styleClass="ikont-hot-policont" value="#{var.tipoPolizaContrato}:" />
@@ -485,7 +488,7 @@
                                         <h:outputText  styleClass="ikont-hot-eliminars"   value="#{var.eliminar}" />
                                     </f:facet>
                                     <a4j:commandButton styleClass="ikont-acb-elipoliza" id="eliminarpol" value="#{var.eliminar}" render="pgpolis" execute="@this"
-                                                       action="#{Supervisor$Contrato.eliminarPoliza(filaSeleccionada)}">
+                                                       action="#{Supervisor$Contrato.eliminarPoliza}">
                                     </a4j:commandButton>
                                 </rich:column>
                                 <f:facet name="footer">
@@ -520,7 +523,9 @@
                     <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
                                     var="currentRow"
                                     rows="7" rowKeyVar="filaSeleccionada"
-                                    value="#{Supervisor$Contrato.listadocumentos}">
+                                    value="#{Supervisor$Contrato.listadocumentos}"
+                                    binding="#{Supervisor$Contrato.tablaDocumentos}"
+                                    >
                         <f:facet name="header" >
                             <rich:columnGroup >
                                 <rich:column colspan="5">
@@ -545,7 +550,7 @@
                         </rich:column>
                         <rich:column >
                             <a4j:commandButton styleClass="ikont-acb-eliminardocs" id="eliminardoc" value="#{var.eliminar}" render="tablaDocumentoscont" execute="@this"
-                                               action="#{Supervisor$Contrato.eliminardocu(filaSeleccionada)}">
+                                               action="#{Supervisor$Contrato.eliminardocu}">
                             </a4j:commandButton>
                         </rich:column>
                         <f:facet name="footer">

@@ -44,7 +44,9 @@
                     <interkont:spacer height="10px" />
                     <h:panelGroup layout="block" id="pl-tabla-listado-proyectosPadres"  >
                         <rich:dataTable id="tabla-listado-proyectosPadres" sortMode="single"  value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}" var="currentRow" 
-                                        rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                        rowKeyVar="filaSeleccionada" rows="3" rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                        binding="#{Supervisor$IngresarNuevaObra.tablaObrasPadres}"
+                                        >
                             <rich:column filterExpression="#{Supervisor$IngresarNuevaObra.filtrarObrasPadres}" id="numeroobra"  >
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-numero" value="#{var.numero}"/>
@@ -61,7 +63,7 @@
                                 <f:facet name="header">
                                     <h:outputText  styleClass="ikont-hot-seleccionarobrasup" value="#{var.seleccionar}"/>
                                 </f:facet>
-                                <a4j:commandButton styleClass="ikont-acb-seleccionarobrasup" value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
+                                <a4j:commandButton styleClass="ikont-acb-seleccionarobrasup" value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"
                                                    oncomplete="#{rich:component('mp-listado-proyectosPadres')}.hide();" >
                                 </a4j:commandButton>

@@ -59,7 +59,7 @@
                             <h:panelGroup id="panelTablaImagenesevolucion">
                                 <rich:dataTable id="tablaImagenesevolucion" 
                                                 sortMode="single"
-
+                                                binding="#{Supervisor$AdministrarObraNew.tablaImagenesevolucion}"  
                                                 value="#{Supervisor$AdministrarObraNew.listaImagenesevolucionobra}"
                                                 var="currentRow" 
                                                 rowKeyVar="filaSeleccionada"
@@ -69,7 +69,7 @@
                                             <h:outputText  styleClass="ikont-hot-imagenes"   value="#{var.imagenes}"/>
                                         </f:facet>
                                         <center>
-                                            <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}" immediate="true">
+                                            <h:commandLink  action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}" immediate="true">
                                                 <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{var.ipserver}/#{var.versioncobra}#{currentRow.strubicacion}"
                                                                  />
                                                 <rich:jQuery selector="#Imagen img" query="addClass('pic-normal')"/>
@@ -106,7 +106,7 @@
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-verheader"   value="#{var.Ver}"/>
                                         </f:facet>
-                                        <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action(filaSeleccionada)}"
+                                        <h:commandLink action="#{Supervisor$AdministrarObraNew.bt_download_imagenevolucion_action}"
                                                        immediate="true">
                                             <h:graphicImage  styleClass="ikont-hgi-btver"    value="/resources/imgs/bt_ver.png"/>
                                         </h:commandLink>
@@ -115,7 +115,7 @@
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headereditar"   value="#{var.editar}"/>
                                         </f:facet>
-                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action(filaSeleccionada)}"
+                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_editar_imagenevolucion_action}"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" execute="@this"
                                                          oncomplete="#{rich:component('mp_editar_imagenevolucion')}.show(); return true;"
                                                          title="#{var.editar}" render="pg_campos_editar_imagenevolucion"  immediate="true">
@@ -128,7 +128,7 @@
                                         </f:facet>
                                         <h:selectBooleanCheckbox  styleClass="ikont-hsbc-booleanvalla"  value="#{currentRow.booleanvalla}" 
                                                                   disabled="#{currentRow.booleanvalla and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
-                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction(filaSeleccionada)}" event="change"
+                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerVallaAction}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerVallaModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerValla" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
@@ -139,7 +139,7 @@
                                         </f:facet>
                                         <h:selectBooleanCheckbox  styleClass="ikont-hsbc-booleanactual"  value="#{currentRow.booleanactual}" 
                                                                   disabled="#{currentRow.booleanactual and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}">
-                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction(filaSeleccionada)}" event="change"
+                                            <a4j:ajax listener="#{Supervisor$AdministrarObraNew.btEstablecerImagenActualAction}" event="change"
                                                       oncomplete="#{rich:component('mp_confirmarEstablecerImagenActualModal')}.show(); return true;"
                                                       render="panelGridConfEstablecerImagenActual" execute="@this" immediate="true"/>
                                         </h:selectBooleanCheckbox>
@@ -148,7 +148,7 @@
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-headereliminar"   value="#{var.eliminar}"/>
                                         </f:facet>
-                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action(filaSeleccionada)}" execute="@this"
+                                        <a4j:commandLink action="#{Supervisor$AdministrarObraNew.bt_eliminar_imagenevolucion_action}" execute="@this"
                                                          render="tablaImagenesevolucion"
                                                          rendered="#{!currentRow.tipoimagen.boolobligatorio and SessionBeanCobra.usuarioObra.renderrecurso.pnlsubirimagen}" title="#{var.eliminar}"  immediate="true">
                                             <h:graphicImage  styleClass="ikont-hgi-bteliminar"    value="/resources/imgs/bt_eliminar.png"/>

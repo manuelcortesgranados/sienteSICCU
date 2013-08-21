@@ -73,8 +73,7 @@
                         value="#{Supervisor$Alimentar.listactividadobra}"
                         var="itemsprevis"
                         rowKeyVar="filaSeleccionada"
-                         >
-
+                        binding="#{Supervisor$Alimentar.tablaitemnoprevistos}">
                         <f:facet name="header">
                             <rich:columnGroup>
                                 <rich:column colspan="5">
@@ -115,7 +114,7 @@
                                 </h:outputText>
                             </rich:column>
                             <rich:column>
-                                <a4j:commandButton value="#{var.eliminar}" action="#{Supervisor$Alimentar.eliminaractividad(filaSeleccionada)}"
+                                <a4j:commandButton value="#{var.eliminar}" action="#{Supervisor$Alimentar.eliminaractividad}"
                                                    render="tablaitemprevistos"/>
                             </rich:column>
                         </rich:columnGroup>

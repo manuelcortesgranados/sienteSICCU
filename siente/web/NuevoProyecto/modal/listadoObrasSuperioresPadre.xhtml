@@ -50,6 +50,7 @@
                                     onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                                     sortMode="single"
                                     value="#{Supervisor$IngresarNuevaObra.listaProyectosPadre}"
+                                    binding="#{Supervisor$IngresarNuevaObra.tablaImagenessolicitud}"
                                     >
                         <f:facet name="header">
                             <rich:columnGroup>
@@ -100,7 +101,7 @@
                                 <h:outputText  styleClass="ikont-hot-strnombrecrot"   value="#{ObraPadre.strnombrecrot}"/>
                             </rich:column>
                             <rich:column >
-                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre(filaSeleccionada)}"
+                                <a4j:commandButton value="Seleccionar" action="#{Supervisor$IngresarNuevaObra.seleccionarProyectoPadre}"
                                                    render="gpproyectoSeleccionado, mp-proyectosPadres"
                                                    oncomplete="#{rich:component('mp-listado-proyectosPadresPadre')}.hide();" >
                                     <a4j:ajax event="complete"  oncomplete="#{rich:component('mp-listado-proyectosPadresPadre')}.hide();" render="gpproyectoSeleccionado"/>
