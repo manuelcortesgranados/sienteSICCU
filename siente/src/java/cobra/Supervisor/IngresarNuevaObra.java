@@ -204,6 +204,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
     private UIDataTable tablatipoobra = new UIDataTable();
     private UIDataTable tablaImagenesevolucion = new UIDataTable();
     private UIDataTable tablalistacontratos = new UIDataTable();
+    private UIDataTable tablaObrasPadres = new UIDataTable();
     // </editor-fold>
     /**
      * Variables Int.
@@ -1492,6 +1493,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         this.geocode = geocode;
     }
 
+    public UIDataTable getTablaObrasPadres() {
+        return tablaObrasPadres;
+    }
+
+    public void setTablaObrasPadres(UIDataTable tablaObrasPadres) {
+        this.tablaObrasPadres = tablaObrasPadres;
+    }
+    
     public String habilitarNuevo() {
         verNuevo = true;
         address = "";
@@ -3696,12 +3705,10 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * Se utiliza para indicar que el proyecto en creación pertenece a un
      * proyecto Padre o Mayor
      *
-     * @param filaSeleccionada Corresponde a la fila de la que proviene la
-     * acción en la tabla
      * @return null
      */
-    public String seleccionarProyectoPadre(int filaSeleccionada) {
-        obrapadre = listaProyectosPadre.get(filaSeleccionada);
+    public String seleccionarProyectoPadre() {
+        obrapadre = (Obra) tablaObrasPadres.getRowData();
         obranueva.setObra(obrapadre);
         verObrasPadres = true;
         return null;
@@ -4594,7 +4601,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      */
     public String eliminarMarker() {
         Marcador marEli = (Marcador) tablaMarkereli.getRowData();
-        IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
+        //IngresarNuevaObra ign = (IngresarNuevaObra) FacesUtils.getManagedBean("Supervisor$IngresarNuevaObra");
 //        Marcador marEli = ign.getMarli().get(filaSeleccionada);
         marli.remove(marEli);
         listamarcadores.remove(marEli);
@@ -5085,12 +5092,14 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      *
      * @return null
      */
-    public String seleccionruta(int filaSeleccionada) {
+    public String seleccionruta() {
         try {
             marli = new ArrayList<Marcador>();
-            EntidadConvenio rutaseleccion = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
-            Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);
-            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(ruta.getStrcodigotramo()));
+            //EntidadConvenio rutaseleccion = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
+            //Ruta ruta = rutaseleccion.getListaruta().get(filaSeleccionada);
+            Ruta rutaseleccion = (Ruta) getEntidadConvenio().getTablarutas().getRowData();
+            getObranueva().setRuta(rutaseleccion);
+            getEntidadConvenio().setListapuntosruta(getSessionBeanCobra().getCobraService().encontrarPuntosReferenciaxRuta(rutaseleccion.getStrcodigotramo()));
 
             Marcador marc = new Marcador();
             int i = 0;
@@ -5136,15 +5145,15 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * educacion debido a que se selecciona la sede donde se va a ejecutar el
      * Proyecto.
      *
-     * @param filaSeleccionada identificador de la fila seleccionada.
      * @return null
      */
-    public String seleccionarSede(int filaSeleccionada) {
-        EntidadConvenio entidadConvenio = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
-        Sedeeducativa sede = entidadConvenio.getListasedeseducativas().get(filaSeleccionada);
+    public String seleccionarSede() {
+        //EntidadConvenio entidadConvenio = (EntidadConvenio) FacesUtils.getManagedBean("Supervisor$EntidadConvenio");
+        //Sedeeducativa sede = entidadConvenio.getListasedeseducativas().get(filaSeleccionada);
 
         listamarcadores = new ArrayList<Marcador>();
         marli = new ArrayList<Marcador>();
+        Sedeeducativa sede = (Sedeeducativa) getEntidadConvenio().getTablasedes().getRowData();
         obranueva.setSedeeducativa(sede);
         Marcador marc = new Marcador();
         marc.setTipo(0);
