@@ -74,10 +74,10 @@
                     <center>
                         <h:panelGrid columns="3">
                             <interkont:spacer width="50"/>
-                            <a4j:commandButton id="btnModificar" value="#{var.modificar}"  styleClass="ikont-acl-modificarciudadno"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}" render="pgmiperfil">
-                            </a4j:commandButton>
-                            <a4j:commandButton id="btncancelar"  value="#{var.cancelar}" styleClass="ikont-acl-btncancelarciudadano"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
-                            </a4j:commandButton>
+                            <a4j:commandLink id="btnModificar"   styleClass="ikont-acl-modificarciudadno"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}" render="pgmiperfil">
+                            </a4j:commandLink>
+                            <a4j:commandLink id="btncancelar"   styleClass="ikont-acl-btncancelarciudadano"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
+                            </a4j:commandLink>
                         </h:panelGrid>
                     </center>
                 </h:panelGrid>
