@@ -2067,7 +2067,7 @@ input[type="text"], input[type="password"], select{
     font-size: 18px;
     font-weight: 400;
     float: none;
-    
+
 }
 
 .ikont-hot-strDireccionProyectoOut{
@@ -2077,7 +2077,7 @@ input[type="text"], input[type="password"], select{
     font-size: 1.3em!important;
     font-weight: 400;
     float: none;
-    
+
 }
 
 .ikont-hot-zoom-intcodobra{
@@ -2344,3 +2344,44 @@ input[type="text"], input[type="password"], select{
     font-size: 0.8em;
     color: #58595B;
 }
+
+.ikont-acl-btadjuntarimagen{
+    background-image: url("../imgs/p_examinar.png");
+    background-repeat: no-repeat;
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+}
+
+.ikont-acl-btadjuntarimagen:hover {
+    background-position: 0px -25px;
+}
+
+.ikont-acl-modificarciudadno{
+    background-image:url(../imgs/p_guardar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-modificarciudadno:hover {
+    background-position: 0px -25px;
+}
+.ikont-acl-btncancelarciudadano{
+    background-image:url(../imgs/p_cancelar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-btncancelarciudadano:hover {
+    background-position: 0px -25px;
+}
+
+  
