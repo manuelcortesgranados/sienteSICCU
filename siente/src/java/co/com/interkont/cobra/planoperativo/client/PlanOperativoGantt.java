@@ -314,7 +314,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                crearProyectoDialog.show();
+                ContratoForm contratoFormEditar=new ContratoForm(tareaSeleccionada,gantt,crearContratoDialog);
+                ContratoDTO contratoEditar=tareaSeleccionada.getContrato();
+                contratoFormEditar.getObjetoContrato().setValue(contratoEditar.getTextobjeto());
+                contratoFormEditar.getNombreAbre().setValue(contratoEditar.getNombreAbreviado());
+                contratoFormEditar.getFechaSuscripcionActaInicio().setValue(contratoEditar.getDatefechaactaini());
+                contratoFormEditar.getFechaSuscripcionContrato().setValue(contratoEditar.getDatefechaini());
+                
+//                crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemEditarContrato);
@@ -705,5 +712,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //        if (convenioDTO.getNumvlrcontrato() != null) {
 //        }
         return true;
+    }
+    
+    public void cargarDatosEditarContrato(){
+    ContratoDTO contrato=tareaSeleccionada.getContrato();
+   
     }
 }

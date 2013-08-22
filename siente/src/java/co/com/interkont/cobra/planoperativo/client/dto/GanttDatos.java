@@ -41,10 +41,7 @@ public class GanttDatos {
         t.setTipoActividad(1);
         
         t.setChildren(new ArrayList<ActividadobraDTO>(convenio.getActividadobras()));
-        ActividadobraDTO t1 = new ActividadobraDTO("probandooo", convenio.getDatefechaini(), convenio.getIntduraciondias(),
-                0, GanttConfig.TaskType.PARENT, 2, false);
-        
-        t.getChildren().add(t1);
+       
         list.add(t);
         ActividadobraDTO root = new ActividadobraDTO(list);
         
