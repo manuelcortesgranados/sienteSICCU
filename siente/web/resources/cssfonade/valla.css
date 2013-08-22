@@ -154,31 +154,31 @@
 }
 
 .imgtipo.tipo1{
-    background-position: 0px 0px;
-}
-
-.imgtipo.tipo2{
-    background-position: -40px 0px;
-}
-
-.imgtipo.tipo3{
-    background-position: -80px 0px;
-}
-
-.imgtipo.tipo4{
-    background-position: -120px 0px;
-}
-
-.imgtipo.tipo5{
-    background-position: -160px 0px;
-}
-
-.imgtipo.tipo6{
     background-position: 0px -40px;
 }
 
+.imgtipo.tipo2{
+    background-position: -120px 0px;
+}
+
+.imgtipo.tipo3{
+    background-position: -40px 0px;
+}
+
+.imgtipo.tipo4{
+    background-position: -160px -80px;
+}
+
+.imgtipo.tipo5{
+    background-position: 0px -40px;
+}
+
+.imgtipo.tipo6{
+    background-position: 0px -80px;
+}
+
 .imgtipo.tipo7{
-    background-position: -40px -40px;
+    background-position: -120px -40px;
 }
 
 .imgtipo.tipo8{
@@ -186,39 +186,35 @@
 }
 
 .imgtipo.tipo9{
-    background-position: -120px -40px;
-}
-
-.imgtipo.tipo9{
-    background-position: -160px -40px;
+    background-position: -160px 0px;
 }
 
 .imgtipo.tipo10{
-    background-position: 0px -80px;
+    background-position: -80px 0px;
 }
 
 .imgtipo.tipo11{
-    background-position: -40px -80px;
+    background-position: 0px 0px;
 }
 
 .imgtipo.tipo12{
-    background-position: -80px -80px;
+    background-position: -160px -80px;
 }
 
 .imgtipo.tipo13{
-    background-position: -120px -80px;
+    background-position: -80px -80px;
 }
 
 .imgtipo.tipo14{
-    background-position: -160px -80px;
+    background-position: -40px -80px;
 }
 
 .imgtipo.tipo15{
-    background-position: -160px -80px;
+    background-position: 0px -80px;
 }
 
 .imgtipo.tipo16{
-    background-position: -160px -80px;
+    background-position: 0px -40px;
 }
 
 .imgestado{
@@ -233,25 +229,26 @@
     margin-right: auto;
 }
 
-.imgestado.estado1{
+.imgestado.estado0{
     background-position: 0px 0px;
 }
 
-.imgestado.estado2{
+.imgestado.estado1{
     background-position: -35px 0px;
 }
 
-.imgestado.estado3{
-    background-position: -70px 0px;
-}
-
-.imgestado.estado4{
-    background-position: 0px -35px;
+.imgestado.estado2{
+    background-position: -35px -35px;
 }
 
 .imgestado.estado5{
-    background-position: -35px -35px;
+    background-position: 0px -35px;
 }
+
+.imgestado.estado6{
+    background-position: -70px 0px;
+}
+
 
 .imgaction{
     background-image: url("../imgs/valla/btns_sprite.png");
