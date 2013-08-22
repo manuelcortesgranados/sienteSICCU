@@ -518,11 +518,24 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         ActividadobraDTO tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                 0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
 
-        /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
-        propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
-        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
-        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
+        if (actividadObraPadre.getTipoActividad() == 1) {
+            for(ActividadobraDTO act: actividadObraPadre.getChildren()){
+              if(act.getName().equals("Ejecución del Convenio")){
+              enlazaractividadesHijas(act, tareaNueva);
+              }
+            }
+           
+        } else {
+            enlazaractividadesHijas(actividadObraPadre, tareaNueva);
+        }
+
+    }
+
+    public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
+        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadPadre, actividadHija);
+        propes.taskType().setValue(actividadPadre, GanttConfig.TaskType.PARENT);
+        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
+        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
     }
 
