@@ -113,8 +113,8 @@
                                                 binding="#{Supervisor$Contrato.tablacontrapadrebindin}">
                                     <rich:column  breakRowBefore="true">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumerocc" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
-                                            <h:outputText  styleClass="ikont-hot-numconvbasico" id="txtnumeroc" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
+                                            <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumeroccncb" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
+                                            <h:outputText  styleClass="ikont-hot-numconvbasico" id="txtnumerocncb" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
                                         </f:facet>
                                         <h:outputText  styleClass="ikont-hot-strnumcontratobasic" value="#{currentRow.strnumcontrato}"/>
                                     </rich:column>
