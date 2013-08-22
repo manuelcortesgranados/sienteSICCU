@@ -2195,24 +2195,24 @@ input[type="text"], input[type="password"], select{
     margin: 0px auto;
 }
 
-.ikont-hcl-imgestadoproyecto.estado1{
+.ikont-hcl-imgestadoproyecto.estado0{
     background-position: 0px -105px;
 }
 
-.ikont-hcl-imgestadoproyecto.estado2{
+.ikont-hcl-imgestadoproyecto.estado1{
     background-position: -55px -105px;
 }
 
-.ikont-hcl-imgestadoproyecto.estado3{
-    background-position: -110px -105px;
-}
-
-.ikont-hcl-imgestadoproyecto.estado4{
-    background-position: -165px -105px;
+.ikont-hcl-imgestadoproyecto.estado2{
+    background-position: -220px -105px;
 }
 
 .ikont-hcl-imgestadoproyecto.estado5{
-    background-position: -220px -105px;
+    background-position: -165px -105px;
+}
+
+.ikont-hcl-imgestadoproyecto.estado6{
+    background-position: -110px -105px;
 }
 
 .ikont-hcl-imgtipoproyecto{
@@ -2221,12 +2221,13 @@ input[type="text"], input[type="password"], select{
     margin: 0px auto;
 }
 
+
 .ikont-hcl-imgtipoproyecto.tipo1{
-    background-position: 0px -180px;
+    background-position: -300px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo2{
-    background-position: -50px -180px;
+    background-position: -150px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo3{
@@ -2234,39 +2235,40 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hcl-imgtipoproyecto.tipo4{
-    background-position: -150px -180px;
+    background-position: -700px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo5{
-    background-position: -50px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo6{
-    background-position: -200px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo7{
     background-position: -250px -180px;
 }
 
-.ikont-hcl-imgtipoproyecto.tipo8{
-    background-position: -300px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo9{
-    background-position: -350px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo10{
-    background-position: -400px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo11{
+.ikont-hcl-imgtipoproyecto.tipo6{
     background-position: -450px -180px;
 }
 
+.ikont-hcl-imgtipoproyecto.tipo7{
+    background-position: -400px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo8{
+    background-position: -350px -180px;
+}
+
+
+.ikont-hcl-imgtipoproyecto.tipo9{
+    background-position: -200px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo10{
+    background-position: -100px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo11{
+    background-position: -0px -180px;
+}
+
 .ikont-hcl-imgtipoproyecto.tipo12{
-    background-position: -500px -180px;
+    background-position: -650px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo13{
@@ -2274,13 +2276,16 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hcl-imgtipoproyecto.tipo14{
-    background-position: -600px -180px;
+    background-position: -500px -180px;
 }
 
-.ikont-hcl-imgtipoproyecto.tipo12{
-    background-position: -650px -180px;
+.ikont-hcl-imgtipoproyecto.tipo15{
+    background-position: -450px -180px;
 }
 
+.ikont-hcl-imgtipoproyecto.tipo16{
+    background-position: -250px -180px;
+}
 
 .ikont-hpg-griddetaob, .ikont-hpg-pg_impactosocial, .ikont-hgi-imgestobra, .ikont-hpg-tipo_obra{
     text-align: center;

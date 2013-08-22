@@ -2461,9 +2461,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                         stylesemaforo = "semaforoverde";
                     }
                 }
-                
-                String imgEstado = getSessionBeanCobra().imagenEstadoObra(obra.getTipoestadobra().getIntestadoobra());
-                String imgTipo = getSessionBeanCobra().imagenTipoObra(obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto());
 
                 descripcion.append("<html>");
                 descripcion.append("<body >");
@@ -2518,12 +2515,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
                 descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
-                descripcion.append("<span class=\"imgtipo " + imgTipo + "\">");
+                descripcion.append("<span class=\"imgtipo tipo" + obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto() + "\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
                 descripcion.append("<span class=\"textvalla4 \">Estado </span>");
-                descripcion.append("<span class=\"imgestado " + imgEstado + "\">");
+                descripcion.append("<span class=\"imgestado estado" + obra.getTipoestadobra().getIntestadoobra() + "\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");

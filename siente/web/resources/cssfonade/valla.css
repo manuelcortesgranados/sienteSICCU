@@ -213,6 +213,14 @@
     background-position: -160px -80px;
 }
 
+.imgtipo.tipo15{
+    background-position: -160px -80px;
+}
+
+.imgtipo.tipo16{
+    background-position: -160px -80px;
+}
+
 .imgestado{
     background-image: url("../imgs/valla/estado_sprite.png");
     background-repeat: no-repeat;
