@@ -10,7 +10,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets" template="/facelets/template_main.xhtml">
 
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-reiniciarobra" value="#{var.reiniciarlaobra}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseño}" styleClass="ikont-hot-reiniciarobra" value="#{var.reiniciarlaobra}"/>
         <h:outputText  styleClass="ikont-hot-nombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
 
@@ -31,9 +31,13 @@
         <h:outputScript library="js" name="/resources/script_supervisor.js"/>
         <h:outputScript library="css" name="/resources/css/Supervisor/ReiniciarObra.css"/>
     </ui:define>
+    <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+        <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+    </ui:define>  
 
     <ui:define name="body">
         <h:form>
+            <center>
             <h:panelGrid id="panelReiniciarObra"  >
                 <h:panelGroup id="layoutReiniciarObra">
                     <h:outputText  styleClass="ikont-hot-txtreiniciars" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}" value="#{var.solosepuedereiniciar}"/>
@@ -84,9 +88,8 @@
                     </rich:panel>
                 </h:panelGroup>
             </h:panelGrid>
+                </center>
         </h:form>
-        <ui:include src="/modal/panelConfirmarReinicioModal.xhtml"/>
         <ui:include src="/modal/panelUploadActaReinicioModal.xhtml"/>
-
     </ui:define>
 </ui:composition>

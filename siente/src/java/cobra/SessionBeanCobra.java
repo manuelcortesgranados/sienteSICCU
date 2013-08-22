@@ -1149,8 +1149,10 @@ public class SessionBeanCobra implements Serializable {
         bean.usuarioSinRegistro();
 
     }
-        public void limpirarUsuario(){
-        getUsuarioService().setUsuarioObra(new JsfUsuario());
+      public void limpirarUsuario() {
+        getCiudadanoservice().limpiarOpinionCiudadano();
+        getUsuarioObra().setUsuLogin(null);
+
     }
 
     /**

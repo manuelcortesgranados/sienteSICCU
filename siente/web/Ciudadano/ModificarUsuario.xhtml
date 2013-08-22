@@ -71,18 +71,17 @@
                     <h:inputText  size="25" maxlength="250" id="txtcuentaFacebook" styleClass="ikont-hit-txtcuentafacebook"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strfacebook}"/>
                     <h:outputText  styleClass="ikont-hot-lblcuentatwiteer"   id="lblcuentaTwitter"  value="#{var.cuentaTwitter}" />
                     <h:inputText  size="25" maxlength="250" id="txtcuentaTwitter" styleClass="ikont-hit-txtcuentatwitter"   value="#{SessionBeanCobra.ciudadanoservice.ciudadano.tercero.strtwiter}"/>
-                    <h:panelGrid columns="3">
-                        <interkont:spacer width="50"/>
-                        <a4j:commandLink id="btnModificar"  styleClass="ikont-acl-modificarciudadno"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}" render="pgmiperfil">
-                        </a4j:commandLink>
-                        <a4j:commandLink id="btncancelar"  styleClass="ikont-acl-btncancelarciudadano"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
-                        </a4j:commandLink>
-                    </h:panelGrid>
+                    <center>
+                        <h:panelGrid columns="3">
+                            <interkont:spacer width="50"/>
+                            <a4j:commandButton id="btnModificar" value="#{var.modificar}"  styleClass="ikont-acl-modificarciudadno"   action="#{Ciudadano$PerfilCiudadano.ModificarCiudadano}" render="pgmiperfil">
+                            </a4j:commandButton>
+                            <a4j:commandButton id="btncancelar"  value="#{var.cancelar}" styleClass="ikont-acl-btncancelarciudadano"   action="#{Ciudadano$PerfilCiudadano.iniperfiUsu}">
+                            </a4j:commandButton>
+                        </h:panelGrid>
+                    </center>
                 </h:panelGrid>
-
             </h:panelGrid>
-
-
         </h:form>
         <ui:include src="../Ciudadano/modalCiudadano/ImagenModalCiudadano.xhtml"/>
 

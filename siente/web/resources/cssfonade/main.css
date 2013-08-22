@@ -328,6 +328,8 @@ a.closemodal{
     background-image: url(../imgs/bt_miperfil.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
+     color: #008000;
+    font-size: 24px;
 }
 
 .ikont-hot-ayuda{
@@ -368,7 +370,7 @@ a.closemodal{
 }
 
 .ikont-a-ch{
-    width: 130px;
+    width: 320px;
     height:60px;
     float:right;
     position:relative;
@@ -865,7 +867,7 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModifica
     background: #ff9735;
     background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
-    background: -webkit-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -webkit-linear-gradient(top,  #257500 48%,#257500 50%);
     background: -o-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
     background: -ms-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
     background: linear-gradient(top,  #ff9735 48%,#f8763c 50%);
@@ -1109,7 +1111,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     text-align: justify; 
     -webkit-border-radius: 4px; 
     border-radius: 4px;
-    width: 100%;
+    width: 100%  !important;
     height: 90px;
 }
 .ikont-hpg-cargarusuario {
@@ -1279,7 +1281,7 @@ a.ikont-acl-space2:hover {
     font-family:open;
     font-size:13px;
     font-style:italic;
-    color:#666;
+    color:#000;
 }
 
 .ikont-hgi-strfoto{
@@ -1730,7 +1732,6 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
-    font-style: italic; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -2384,4 +2385,22 @@ input[type="text"], input[type="password"], select{
     background-position: 0px -25px;
 }
 
-  
+/*css de modificar proyecto*/
+.ikont-mp-cronograma-mod{
+    position: fixed;
+    z-index: 100;
+    left: 366px;
+    top: 60px;
+    width: 631px;
+}
+
+.ikont-hpg-mpcronogramamod{
+    color: #257500;
+}
+
+/*
+css usuario modificacion
+*/
+.ikont-hot-editarmiperfil{
+    color: #1C8F14;
+}

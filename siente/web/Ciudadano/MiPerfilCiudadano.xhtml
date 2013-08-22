@@ -62,31 +62,20 @@
                     <interkont:spacer width="30"/>
                 </h:panelGrid>
 
-                <h:panelGrid columns="2" styleClass="ikont-hpg-falsoboolotrousuario bcg-tb-per-ciu"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
+                <h:panelGrid columns="2" styleClass="ikont-hpg-falsoboolotrousuario bcg-tb-per-ciu" cellspacing="9"    rendered="#{!Ciudadano$PerfilCiudadano.boolotrousuario}">
 
                     <h:outputText  styleClass="ikont-hot-correo vtitle19"   id="lblcorreoelectronico"  value="#{var.correo}" />
                     <h:outputLabel  styleClass="ikont-hol-stremail vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.stremail}" />
-                    <interkont:spacer height="5" />
-                    <interkont:spacer height="5" />
                     <h:outputText  styleClass="ikont-hot-idioma vtitle19"   id="lblidioma"  value="#{var.idioma}"/>
                     <h:outputLabel  styleClass="ikont-hol-espaniol vtitle20"     value="Español" />
-                    <interkont:spacer height="5"/>
-                    <interkont:spacer height="5"/>
                     <h:outputText  styleClass="ikont-hot-cedula vtitle19"   id="lblcedula"  value="#{var.cedula}"/>
                     <h:outputLabel  styleClass="ikont-hol-intcedula vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.intcedula}"/>
-                    <interkont:spacer height="5"/>
-                    <interkont:spacer height="5"/>
                     <h:outputText  styleClass="ikont-hot-fechadenacimiento vtitle19"   id="lblfechanac"  value="#{var.fechadeNacimiento}" />
                     <h:outputLabel  styleClass="ikont-hol-datefechanacimiento vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.datefechanacimiento}">
                         <f:convertDateTime dateStyle="long"/>
                     </h:outputLabel>
-                    <interkont:spacer height="5"/>
-                    <interkont:spacer height="5"/>
                     <h:outputText  styleClass="ikont-hot-ubicacionciudadano vtitle19"   id="lblubicacion"  value="#{var.ubicacionciudadano}" />
                     <h:outputLabel  styleClass="ikont-hol-departamentociudadano vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}" />
-
-                    <interkont:spacer height="5"/>
-                    <interkont:spacer height="5"/>
                     <h:outputText  styleClass="ikont-hot-celular vtitle19"   id="lblcelular"  value="#{var.celular}" />
                     <h:outputLabel  styleClass="ikont-hol-strtelefono1 vtitle20"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strtelefono1}" />
 
@@ -201,7 +190,7 @@
                                                 <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
                                             </h:outputText>
                                         </h:panelGroup>
-                                        <h:panelGrid  >
+                                        <h:panelGrid>
                                             <h:outputLabel  styleClass="ikont-hol-stropinion"    id="idcomentario1" value="#{rowcomentario.stropinion}"
                                                             />
                                         </h:panelGrid>

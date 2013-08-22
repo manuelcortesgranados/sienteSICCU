@@ -33,6 +33,9 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
+           <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+        <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+    </ui:define>
     <ui:define name="body">
         <h:form id="form_modificar">
 
@@ -327,7 +330,7 @@
 
 
                                 <h:panelGroup id="panelTablaDocumentosModificacion">
-                                    <rich:dataTable id="tablaDocumentosModificacion" var="currentRow" styleClass="ikont-rdt-tabladocumentosmodificacion"   
+                                    <rich:dataTable id="tablaDocumentosModificacion1" var="currentRow" styleClass="ikont-rdt-tabladocumentosmodificacion"   
                                                     value="#{Supervisor$ModificarProyecto.listadocumentosmodi}" rows="5" 
                                                     rowClasses="stable"
                                                     rowKeyVar="filaSeleccionada" 
@@ -394,7 +397,7 @@
                                         <f:facet name="footer">
                                             <rich:columnGroup>
                                                 <rich:column colspan="6" breakRowBefore="true" >
-                                                    <rich:dataScroller id="scrolltablaDocumentosModificacion" for="tablaDocumentosModificacion" render="tablaDocumentosModificacion"/>
+                                                    <rich:dataScroller id="scrolltablaDocumentosModificacion1" for="tablaDocumentosModificacion1" render="tablaDocumentosModificacion1"/>
                                                 </rich:column>
                                             </rich:columnGroup>
                                         </f:facet>
@@ -507,17 +510,11 @@
                     </h:panelGroup>
                 </h:panelGroup>
             </h:panelGrid>
-
-
-
-
-
         </h:form>
         <ui:include id="generarCronogramaView" src="/ModificarProyecto/modal/panelCronogramaModalModif.xhtml"/>
         <ui:include id="subirCronogramaView" src="/ModificarProyecto/modal/panelSubirCronogramaModal.xhtml"/>
         <ui:include id="mensajesCronogramaView" src="/ModificarProyecto/modal/panelCronogramaMensajeError.xhtml"/>
         <ui:include id="subirDocumentoView" src="/ModificarProyecto/modal/panelUploadDocumentoModificacion.xhtml"/>
-
     </ui:define>
 
 </ui:composition>
