@@ -9,7 +9,7 @@
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf"
     xmlns:c="http://java.sun.com/jsp/jstl/core">
-    <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+    <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
         <div class="topbar"><div > <h:outputText  styleClass="ikont-hot-tituloprincipalmenugestion"   value="#{var.tituloprincipalmenugestion}"></h:outputText></div>
             <div id="iconosientw" class="sienteicon">
                 <h:panelGroup>
@@ -500,7 +500,7 @@
 
 
     <!--aqui empieza el encabezado de Zoom-->   
-    <h:panelGroup  rendered="#{var.permisonuevodiseño}">
+    <h:panelGroup  rendered="#{var.permisonuevodiseno}">
         <div class="topbar_encabezado_1"></div>
         <div class="topbar_encabezado_2">
             <div id="iconozoom" class="zoomicon"></div> 
@@ -653,7 +653,7 @@
         </div>
     </div>
     <div class="ikont-div-scroll-menu" >
-        <h:panelGrid rendered="#{var.permisonuevodiseño }" onmouseover="mostrarMenuAnimado();
+        <h:panelGrid rendered="#{var.permisonuevodiseno }" onmouseover="mostrarMenuAnimado();
                             return  false;" styleClass="ikont-panel-spacing-menu" columns="3">
             <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}"/>   
