@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -29,7 +30,7 @@ import java.util.ResourceBundle;
  * @author Cristian Gutiérrez
  * @author Yeison Osorio
  */
-public class FlujoCaja implements Serializable{
+public class FlujoCaja implements Serializable {
 
     final long MILISEGUNDOS_POR_DIA = 24 * 60 * 60 * 1000;
     Contrato convenio;
@@ -53,9 +54,6 @@ public class FlujoCaja implements Serializable{
     double totalEgresos;
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
     NuevoContratoBasico nuevoContratoBasico;
-    FlujoIngresos fuenteIngresosActualizar;
-    FlujoEgresos fuenteEgresosActualizar;
-    int columna;
 
     public Contrato getConvenio() {
         return convenio;
@@ -183,30 +181,6 @@ public class FlujoCaja implements Serializable{
 
     public void setTotalEgresos(double totalEgresos) {
         this.totalEgresos = totalEgresos;
-    }
-
-    public FlujoIngresos getFuenteIngresosActualizar() {
-        return fuenteIngresosActualizar;
-    }
-
-    public void setFuenteIngresosActualizar(FlujoIngresos fuenteIngresosActualizar) {
-        this.fuenteIngresosActualizar = fuenteIngresosActualizar;
-    }
-
-    public FlujoEgresos getFuenteEgresosActualizar() {
-        return fuenteEgresosActualizar;
-    }
-
-    public void setFuenteEgresosActualizar(FlujoEgresos fuenteEgresosActualizar) {
-        this.fuenteEgresosActualizar = fuenteEgresosActualizar;
-    }
-
-    public int getColumna() {
-        return columna;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
     }
 
     public ResourceBundle getBundle() {
@@ -514,8 +488,8 @@ public class FlujoCaja implements Serializable{
      * @param fuenteIngresos Fuente de ingresos a la que pertene la celda.
      * @param columna Columna (periodo) a la que pertenece la celda.
      */
-    public void refrescarTotalesIngresos() {
-        fuenteIngresosActualizar.calcularTotalIngresosFuente(periodosConvenio.size());
+    public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
+        fuenteIngresos.calcularTotalIngresosFuente(periodosConvenio.size());
         this.totalIngresosPeriodo[columna] = 0;
         this.totalIngresos = 0;
 
@@ -556,7 +530,7 @@ public class FlujoCaja implements Serializable{
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
         for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosCovenio()) {
-                FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
+            FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
 
             planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
 
@@ -621,8 +595,8 @@ public class FlujoCaja implements Serializable{
      * @param fuenteEgresos Fuente de egresos de la celda modificada.
      * @param columna Columna (periodo) a la que pertenece la celta modificada.
      */
-    public void refrescarTotalesEgresos() {
-        fuenteEgresosActualizar.calcularTotalEgresosFuente(periodosConvenio.size());
+    public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
+        fuenteEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
         double acumuladoGMF = 0;
         this.totalEgresosPeriodo[columna] = 0;
         this.totalEgresos = 0;
@@ -666,9 +640,7 @@ public class FlujoCaja implements Serializable{
 
         for (FlujoIngresos flujoIngresosRefrescar : this.flujoIngresos) {
             while (iterador < periodosConvenio.size()) {
-                fuenteIngresosActualizar = flujoIngresosRefrescar;
-                columna = iterador;
-                this.refrescarTotalesIngresos();
+                refrescarTotalesIngresos(flujoIngresosRefrescar, iterador);
 
                 iterador++;
             }
@@ -677,9 +649,7 @@ public class FlujoCaja implements Serializable{
         iterador = 0;
         for (FlujoEgresos flujoEgresosRefrescar : this.flujoEgresos) {
             while (iterador < periodosConvenio.size()) {
-                fuenteEgresosActualizar = flujoEgresosRefrescar;
-                columna = iterador;
-                this.refrescarTotalesEgresos();
+                refrescarTotalesEgresos(flujoEgresosRefrescar, iterador);
 
                 iterador++;
             }
