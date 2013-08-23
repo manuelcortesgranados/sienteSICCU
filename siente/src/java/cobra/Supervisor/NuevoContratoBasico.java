@@ -2864,8 +2864,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
-
-        limpiarContrato();
+        if ( guardarborradorconvenio == true) {
+            limpiarContrato();
+        }
     }
 
     /**
@@ -3199,7 +3200,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             polizacontrato = new Polizacontrato();
             polizacontrato.setTipopoliza(new Tipopoliza());
             polizacontrato.setAseguradora(new Aseguradora());
-            polizacontrato.setContrato(new Contrato());
+            polizacontrato.setContrato(new Contrato());                           
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
         }
@@ -6286,8 +6287,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                         } else {
                             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
                             FacesUtils.addInfoMessage("losdatossehanguardado");
-                        }
-                        contrato = new Contrato();
+                        }                       
                     }
                 } else {
                     validardatosbasicosplano = 1;

@@ -39,8 +39,8 @@
 
                     <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle"  rendered="#{Supervisor$Contrato.verEliminar==0}">
                         <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.agregarPoliza}" render="gpPolizaSelec,pgpolis,rsgtpoliz,dtPolizas"
-                                           styleClass="ikont-acb-addpoliza">
-                            <a4j:ajax event="click" render="pgpolis" immediate="true"/>
+                                           styleClass="ikont-acb-addpoliza" execute="@this" >
+                            <a4j:ajax event="click" render="pgpolis,  gpPolizaSelec" immediate="true"/>
                         </a4j:commandButton>
                     </h:panelGrid>
                 </h:panelGrid>
