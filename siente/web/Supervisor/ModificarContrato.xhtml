@@ -36,6 +36,9 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
+      <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
+        <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
+    </ui:define>
     <ui:define name="body">
 
         <rich:panel id="modificar">
@@ -309,13 +312,13 @@
                                                         value="#{Supervisor$Contrato.listaPolizacontratos}"
                                                         binding="#{Supervisor$ModificarContrato.tablaPolizasbin}"
                                                         rowKeyVar="filaSeleccionada">
-                                            <rich:column id="tc-strTipoPolizaModi" styleClass="ikont-rc-tcstrTipoPolizaModi" >
+                                            <rich:column id="tc-strTipoPolizaModi1" styleClass="ikont-rc-tcstrTipoPolizaModi" >
                                                 <f:facet name="header">
                                                     <h:outputText  styleClass="ikont-hot-tcstrTipoPolizaModi"   value="#{var.tipoPolizaContrato}"/>
                                                 </f:facet>
-                                                <h:outputText  styleClass="ikont-hot-otxtTipoPolizaModi"   id="otxt-TipoPolizaModi"  value="#{localRow.tipopoliza.strdesctipopoliza}" />
+                                                <h:outputText  styleClass="ikont-hot-otxtTipoPolizaModi"   id="otxt-TipoPolizaModi1"  value="#{localRow.tipopoliza.strdesctipopoliza}" />
                                             </rich:column>
-                                            <rich:column id="tc-strnumPolizaModi" styleClass="ikont-rc-tcstrnumPolizaModi" >
+                                            <rich:column id="tc-strnumPolizaModi1" styleClass="ikont-rc-tcstrnumPolizaModi" >
                                                 <f:facet name="header">
                                                     <h:outputText  styleClass="ikont-hot-strnumPolizaModinumPolizaContrato"   value="#{var.numPolizaContrato}" />
                                                 </f:facet>
