@@ -681,12 +681,10 @@
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-crear-proyecto"/>
                 <h:commandLink action="#{Supervisor$IngresarNuevaObra.crearProyecto}"  immediate="true" styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuCrearProyecto}"/>    
             </h:panelGrid>
-            <hr class="ikont-hr-separador-menu " rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and var.varnproyecto}"/>
-            <h:panelGrid columns="2" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}">
+            <h:panelGrid columns="2" rendered="false">
                 <h:commandLink action="reportes" immediate="true" styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-reportes"/>
                 <h:commandLink action="reportes" immediate="true" styleClass="ikont-label-estructura-menu ikont-label-menu-item" value="#{var.menuReportes}"/>
             </h:panelGrid>
-            <hr class="ikont-hr-separador-menu " rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreportes}"/>
             <h:panelGroup rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_convenios}"> 
                 <h:panelGrid columns="2">
                     <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom-convenios"/> 
