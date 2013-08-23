@@ -16,23 +16,23 @@
     </ui:define>
 
     <ui:define name="title">
-        <h:outputText rendered="#{!var.permisonuevodiseño}"  styleClass="ikont-hot-eliminaravance" value="Eliminar Último Avance #{var.textoobra3}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-eliminaravance" value="Eliminar Último Avance #{var.textoobra3}"/>
         <h:outputText  styleClass="ikont-hot-strnombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
         </h:panelGroup>
-        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
 
     </ui:define>
-    <ui:define  rendered="#{var.permisonuevodiseño}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
         <ui:include  src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="body">

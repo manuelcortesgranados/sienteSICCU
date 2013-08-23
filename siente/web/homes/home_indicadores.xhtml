@@ -22,7 +22,7 @@
         <ui:include src="/facelets/menu_gestion.xhtml" />
     </ui:define>
     <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <h:form >
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>                    
             </h:form>
@@ -31,7 +31,7 @@
             </h:form>
 
         </h:panelGroup>
-        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>

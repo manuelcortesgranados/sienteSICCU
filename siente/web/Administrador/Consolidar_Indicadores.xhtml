@@ -20,10 +20,10 @@
 
     <ui:define name="menu_lateral">
         <h:form>
-            <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
                 <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             </h:panelGroup>
-            <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <h:panelGroup rendered="#{var.permisonuevodiseno}">
                 <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
             </h:panelGroup>
         </h:form>
