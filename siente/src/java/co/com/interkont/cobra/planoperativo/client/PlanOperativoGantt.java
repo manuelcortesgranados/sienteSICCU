@@ -335,6 +335,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
         config.taskContextMenu.add(menuItemEliminarContrato);
 
+       final Dialog crearActividadDialog = new Dialog();
+        crearContratoDialog.setHideOnButtonClick(true);
+       
+        crearContratoDialog.setModal(true);
+        crearContratoDialog.setAnimCollapse(true);
+        
         /**
          * Opciones generales para todas las actividades
          */
@@ -342,7 +348,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemAñadirTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                crearProyectoDialog.show();
+                final ActividadForm actividadForm = new ActividadForm();
+                crearActividadDialog.add(actividadForm);
+               crearActividadDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemAñadirTarea);

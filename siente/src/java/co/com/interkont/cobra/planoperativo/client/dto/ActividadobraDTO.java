@@ -545,6 +545,6 @@ public class ActividadobraDTO implements IsSerializable {
     public void setBoolobligatoria(boolean boolobligatoria) {
         this.boolobligatoria = boolobligatoria;
     }
-    
+
     
 }
