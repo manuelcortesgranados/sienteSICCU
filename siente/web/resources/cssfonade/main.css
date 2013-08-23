@@ -2524,3 +2524,229 @@ css usuario modificacion
 .ikont-posicion-nuevo-proyecto-proestructuracion{
     background-position: -18px -11px;
 }
+
+
+.tab-pestania-active, tab-pestania-active-tres{
+    width: 100px !important;  
+    height: 290px !important;
+    color: white!important;
+    font-family: "medium" !important;
+    font-size: 10px !important;
+    font-weight: inherit!important;
+    text-align: center !important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px !important; 
+    -moz-border-top-right-radius: 10px !important; 
+    -ms-border-top-left-radius: 10px !important; 
+    -ms-border-top-right-radius: 10px !important; 
+    -webkit-border-top-left-radius: 10px !important; 
+    -webkit-border-top-right-radius: 10px !important; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    background-color: rgba(0,74,56,0.7) !important;
+    border : transparent!important;
+    padding: 8px 6px !important;
+}
+.tab-pestania-active, tab-pestania-inactive-tres{
+    padding: 8px 36px !important;
+}
+.tab-pestania-inactive, .tab-pestania-inactive-usu{
+    position: relative!important;
+    bottom: -1px !important;
+    width: 100px!important;  
+    height: 31px!important;
+    text-align: center!important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px!important; 
+    -moz-border-top-right-radius: 10px!important; 
+    -ms-border-top-left-radius: 10px!important; 
+    -ms-border-top-right-radius: 10px!important; 
+    -webkit-border-top-left-radius: 10px!important; 
+    -webkit-border-top-right-radius: 10px!important; 
+    border-top-left-radius: 10px!important; 
+    border-top-right-radius: 10px!important; 
+    cursor: pointer;
+}
+
+.tab-pestania-inactive, .tab-pestania-active {
+    padding: 8px 36px !important;
+}
+
+.tab-pestania-inactive-usu, .tab-pestania-active-usu-nuevo {
+    padding: 8px 10px !important;
+}
+
+.tab-pestania-active, .tab-pestania-active-usu-nuevo{
+    width: 100px !important;  
+    height: 31px !important;
+    text-align: center !important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px !important; 
+    -moz-border-top-right-radius: 10px !important; 
+    -ms-border-top-left-radius: 10px !important; 
+    -ms-border-top-right-radius: 10px !important; 
+    -webkit-border-top-left-radius: 10px !important; 
+    -webkit-border-top-right-radius: 10px !important; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    border : transparent!important;
+}
+#ikont-rp-OpinionCiu1{
+    background-color: green;
+    width:900px;
+    height: 500px;
+}
+
+.ikont-rp-OpinionCiu{
+    width:750px;
+    height: 500px;
+    alignment-adjust: central;
+}
+.tabPanelFiltroZoom{
+    width: 263px; 
+    position: absolute;
+    top: -122px; 
+    height: 231px;
+    background: #ffffff
+       
+}
+.panel_filtro_zoom{
+    height: 320px;
+}
+.rf-tab-cnt{
+   border: 1px solid #BDBDBD !important;
+   border-radius: 17px !important;
+}
+.rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
+background: none !important;
+background-color: transparent !important ;
+border-color:transparent !important ;
+border-style: solid;
+border-width: 1px;
+border-bottom-width: 0px;
+padding-top: 2px;
+overflow: hidden;
+height: 25px;
+white-space: nowrap;
+position: relative;
+}
+
+.rf-tab-hdr-act.rf-tab-hdr-top {
+padding: 0px 5px 3px 5px !important;
+border-bottom: 0px !important;
+font-weight: bold !important;
+vertical-align: top !important;
+background-image: none !important;
+background-position: top !important;
+background-repeat: repeat-x !important;
+background-color: transparent !important;
+cursor: default !important;
+}
+.rf-tab-hdr {
+white-space: nowrap !important;
+border: 0px solid !important;
+cursor: pointer !important;
+background-position: top;
+background-repeat: none !important;
+background-color:  transparent !important;
+color:  #0092BC !important ;
+}
+.rf-tab-hdr-inact.rf-tab-hdr-top {
+vertical-align: top !important;
+padding: 0px 5px 3px 5px !important;
+background-image: none !important;
+}
+*.rf-tab-lbl {
+white-space: nowrap !important;
+font-family: open !important;
+font-size: 16px !important;
+}
+.rf-tab-hdr-brd {
+border: 0px solid !important;
+border-top: 0px !important;
+height: 10px!important;
+font-style: normal!important;
+background-color: #0092BC !important;
+background: none !important;
+}
+.boton1{
+border-color:#0092BC !important;
+border-width: 1px !important;
+background-color: white !important;
+background-image: none !important;
+color: #0092BC !important;
+font-size: 14px  !important;
+}
+.input_filtro{
+    width: 234px !important;
+    height: 34px !important;
+}
+
+.inputbienvenidahomezoom{
+    width: 735px; 
+    font-size: 1.8em; 
+    color: #0092BC; 
+    font-family:bold; 
+    padding: 100px;
+}
+
+.inputbienvenidahomezoomtexto{
+    font-size: 1.05em; 
+    color: #808080;
+}
+.inputtitulohomezoomtexto{
+    width: 735px; 
+    font-size: 1.2em; 
+    color: #0092BC; 
+    padding: 100px;
+}
+.inputtextshomezoom{
+    width: 735px; 
+    font-size: 2.5em; 
+    color: #808080; 
+    padding: 100px; 
+}
+.inputlinkhomezoom:link{
+    font-size: 0.5em; 
+    color: #808080; 
+    padding: 10px;
+}
+.inputlinkhomezoom:hover{
+    font-size: 0.5em; 
+    color:  #0092BC !important; 
+    padding: 10px;
+}
+.inputlinkhomezoom:active{
+    font-size: 0.5em; 
+    color:  #0092BC !important; 
+    padding: 10px;
+}
+.panelzoomhome1{
+    position: relative !important; 
+    background-position: bottom;
+    width: 920px;
+}
+.panelzoomhome2{
+    alignment-adjust: central
+}
+.inputlinkhomevermas{
+    font-size: 0.5em; 
+    color: #0092BC !important; 
+    padding: 10px;
+}
+#header_content {
+    float: right;
+    width:100%;
+    height: 0px;
+    color: #808080;
+    text-decoration: none;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight:400;
+    font-style:italic;
+    text-indent: 30px;
+    line-height: 25px;
+    text-align: left;
+    border-bottom: #C1D1E7 thin solid;
+    background-position:center left;
+}

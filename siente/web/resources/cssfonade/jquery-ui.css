@@ -290,20 +290,20 @@ button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padd
  * http://docs.jquery.com/UI/Slider#theming
  */
 .ui-slider { position: relative; text-align: left; }
-.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
-.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 0; width: 5px; height: 5px; cursor: default; }
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .1em; display: block; border: 0; background-position: 0 0; }
 
-.ui-slider-horizontal { height: .8em; }
-.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+.ui-slider-horizontal { height: .0em; }
+.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; color: black;}
 .ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
 .ui-slider-horizontal .ui-slider-range-min { left: 0; }
 .ui-slider-horizontal .ui-slider-range-max { right: 0; }
 
 .ui-slider-vertical { width: .8em; height: 100px; }
-.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-handle { left: -.2em; margin-left: 0; margin-bottom: -.2em; }
 .ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
 .ui-slider-vertical .ui-slider-range-min { bottom: 0; }
-.ui-slider-vertical .ui-slider-range-max { top: 0; }/*
+.ui-slider-vertical .ui-slider-range-max { top: 0; } /*
  * jQuery UI Tabs 1.8.12
  *
  * Copyright 2011, AUTHORS.txt (http://jqueryui.com/about)
@@ -358,19 +358,18 @@ button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padd
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #FFF/*{borderColorDefault}*/; background:#004670/*{bgColorDefault}*/ /*{bgImgUrlDefault}*/ 50%/*{bgDefaultXPos}*/ 50%/*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/;
-	background-image:url(../imgs/bt_tooltip.png); background-position:left; background-repeat:no-repeat; height:30px; line-height:30px; font-size:15px; font-style:italic;
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #FFF/*{borderColorDefault}*/; background:#0092BC/*{bgColorDefault}*/ /*{bgImgUrlDefault}*/ 50%/*{bgDefaultXPos}*/ 50%/*{bgDefaultYPos}*/ repeat-x/*{bgDefaultRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #555555/*{fcDefault}*/;
+	/*background-image:url(../imgs/bt_tooltip1.png); background-position:left; background-repeat:no-repeat; height:30px; line-height:30px; font-size:15px; font-style:italic;*/
 }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited {
 	color: #FFF/*{fcDefault}*/;
 	text-decoration: none;
 }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background: #51819E/*{bgColorHover}*//*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcHover}*/; background-image:url(../imgs/bt_tooltip.png); background-position:left; background-repeat:no-repeat; height:30px; line-height:30px;  font-size:15px; font-style:italic; font-weight:bold;}
-.ui-state-hover a, .ui-state-hover a:hover { color: #FFF/*{fcHover}*/; text-decoration: none; }
-.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background: #CCC/*{bgColorActive}*/ /*{bgImgUrlActive}*/ 50%/*{bgActiveXPos}*/ 50%/*{bgActiveYPos}*/ repeat-x/*{bgActiveRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcActive}*/; background-image:url(../imgs/bt_tooltip.png); background-position:left; background-repeat:no-repeat; height:30px; line-height:30px;  font-size:15px; font-style:italic; font-weight:bold;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background: #0092BC/*{bgColorHover}*//*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcHover}*/; background-position:left; background-repeat:no-repeat; height:5px; line-height:30px;  font-size:5px; font-style:italic; font-weight:bold;}
+.ui-state-hover a, .ui-state-hover a:hover { color: black/*{fcHover}*/; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background: #0092BC/*{bgColorActive}*/ /*{bgImgUrlActive}*/ 50%/*{bgActiveXPos}*/ 50%/*{bgActiveYPos}*/ repeat-x/*{bgActiveRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcActive}*/;  background-position:left; background-repeat:no-repeat; height:5px; line-height:30px;  font-size:5px; font-style:italic; font-weight:bold;}
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #069/*{fcActive}*/;}
 .ui-widget :active { outline: none; }
-
 /* Interaction Cues
 ----------------------------------*/
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #fcefa1/*{borderColorHighlight}*/; background: #fbf9ee/*{bgColorHighlight}*/ url(../imgs/ui-bg_glass_55_fbf9ee_1x400.png) 50%/*{bgHighlightXPos}*/ 50%/*{bgHighlightYPos}*/ repeat-x/*{bgHighlightRepeat}*//*{bgHighlightRepeat}*/; color: #363636/*{fcHighlight}*/; }

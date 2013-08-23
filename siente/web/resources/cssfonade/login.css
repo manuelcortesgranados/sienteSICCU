@@ -187,3 +187,27 @@ body {
 .social > a.fb { background: url(../imgs/social_fb.png) no-repeat; background-position:0px -42px; } .social > a.fb:hover { background-position:0px 0px; }
 .social > a.tw { background: url(../imgs/social_tw.png) no-repeat; background-position:0px -42px; } .social > a.tw:hover { background-position:0px 0px; }
 .social > a.yt { background: url(../imgs/social_yt.png) no-repeat; background-position:0px -42px; } .social > a.yt:hover { background-position:0px 0px; }
+.tab-pestania-active, tab-pestania-active-tres{
+    width: 100px !important;  
+    height: 31px !important;
+    color: white!important;
+    font-family: "medium" !important;
+    font-size: 10px !important;
+    font-weight: inherit!important;
+    text-align: center !important;
+    border : transparent!important;
+    -moz-border-top-left-radius: 10px !important; 
+    -moz-border-top-right-radius: 10px !important; 
+    -ms-border-top-left-radius: 10px !important; 
+    -ms-border-top-right-radius: 10px !important; 
+    -webkit-border-top-left-radius: 10px !important; 
+    -webkit-border-top-right-radius: 10px !important; 
+    border-top-left-radius: 10px !important; 
+    border-top-right-radius: 10px !important; 
+    background-color: rgba(0,74,56,0.7) !important;
+    border : transparent!important;
+    padding: 8px 6px !important;
+}
+.tab-pestania-active, tab-pestania-inactive-tres{
+    padding: 8px 36px !important;
+}

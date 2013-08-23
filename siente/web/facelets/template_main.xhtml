@@ -8,7 +8,7 @@
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"  
     xmlns:interkont="http://www.interkont.com/jsf">
-    
+
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>#{var.titulogeneral}</title>
@@ -20,7 +20,7 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style_modal.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/theme.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/style.css" rel="stylesheet" type="text/css"/>            
-      <ui:insert name="head"/>
+        <ui:insert name="head"/>
         <style type="text/css">
             body,td,th {
                 margin: 0px;
@@ -34,6 +34,7 @@
         <h:form id="form_menu">
             <ui:insert name="menu"/>
         </h:form>
+        
         <table  align="center" border="0" cellpadding="0" >
             <tr >
                 <td valign="top" class="templatetablamenulateral">
@@ -52,10 +53,10 @@
                         <tr>
                             <td>
 
-                                <div id="header_content">
-                                    <div class="ubicacion">
-                                        <ui:insert name="title"/>
-                                    </div>
+                                <!--div id="header_content"-->
+                                <div class="ubicacion">
+                                    <ui:insert name="title"/>
+                                    <!--/div-->
                                 </div>
 
                             </td>

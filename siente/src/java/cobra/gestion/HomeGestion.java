@@ -28,6 +28,7 @@ import co.com.interkont.cobra.to.Tipoproyecto;
 import co.com.interkont.cobra.to.Zonaespecifica;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import co.com.interkont.cobra.vista.VistaSeguidoresObra;
+import co.com.interkont.cobra.vista.vistahomezoom;
 import cobra.DatosGeneralesPerfilControl;
 import cobra.FiltroGerencial;
 import cobra.FiltroObra;
@@ -242,6 +243,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private String datosmapa = "";
     private String scriptmapa = "";
     private String mensaje = "";
+    private boolean mostrartotalproyectos = false;
+    private boolean mostrarvalortotalproyectos = true;
+    private boolean mostrartotalconvenios = false;
+    private int panelmostrarvaloreszoom;
+    private BigDecimal valortotalproyectoszoom = BigDecimal.ONE;
+    private BigDecimal proyectovalormayor = BigDecimal.ONE;
+    private long numeroproyectoszoom = 0;
+    private long numeroconvenioszoom = 0;
+    private List<vistahomezoom> listavistahomezoom = new ArrayList<vistahomezoom>();
     //CONTRATISTAS
     private List<Contratista> contratistas = new ArrayList<Contratista>();
 
@@ -593,6 +603,77 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         return (AdministrarObraNew) FacesUtils.getManagedBean("Supervisor$AdministrarObraNew");
     }
 
+    public boolean isMostrartotalproyectos() {
+        return mostrartotalproyectos;
+    }
+
+    public void setMostrartotalproyectos(boolean mostrartotalproyectos) {
+        this.mostrartotalproyectos = mostrartotalproyectos;
+    }
+
+    public boolean isMostrarvalortotalproyectos() {
+        return mostrarvalortotalproyectos;
+    }
+
+    public void setMostrarvalortotalproyectos(boolean mostrarvalortotalproyectos) {
+        this.mostrarvalortotalproyectos = mostrarvalortotalproyectos;
+    }
+
+    public boolean isMostrartotalconvenios() {
+        return mostrartotalconvenios;
+    }
+
+    public void setMostrartotalconvenios(boolean mostrartotalconvenios) {
+        this.mostrartotalconvenios = mostrartotalconvenios;
+    }
+
+    public int getPanelmostrarvaloreszoom() {
+        return panelmostrarvaloreszoom;
+    }
+
+    public void setPanelmostrarvaloreszoom(int panelmostrarvaloreszoom) {
+        this.panelmostrarvaloreszoom = panelmostrarvaloreszoom;
+    }
+
+    public BigDecimal getValortotalproyectoszoom() {
+        return valortotalproyectoszoom;
+    }
+
+    public void setValortotalproyectoszoom(BigDecimal valortotalproyectoszoom) {
+        this.valortotalproyectoszoom = valortotalproyectoszoom;
+    }
+
+    public BigDecimal getProyectovalormayor() {
+        return proyectovalormayor;
+    }
+
+    public void setProyectovalormayor(BigDecimal proyectovalormayor) {
+        this.proyectovalormayor = proyectovalormayor;
+    }
+
+    public long getNumeroproyectoszoom() {
+        return numeroproyectoszoom;
+    }
+
+    public void setNumeroproyectoszoom(long numeroproyectoszoom) {
+        this.numeroproyectoszoom = numeroproyectoszoom;
+    }
+
+    public long getNumeroconvenioszoom() {
+        return numeroconvenioszoom;
+    }
+
+    public void setNumeroconvenioszoom(long numeroconvenioszoom) {
+        this.numeroconvenioszoom = numeroconvenioszoom;
+    }
+
+    public List<vistahomezoom> getListavistahomezoom() {
+        return listavistahomezoom;
+    }
+
+    public void setListavistahomezoom(List<vistahomezoom> listavistahomezoom) {
+        this.listavistahomezoom = listavistahomezoom;
+    }
     public void iniciarfiltro() {
 
         /**
@@ -641,11 +722,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
+        mostrarCantidadProyectos();
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
         filtro.setIntvista(1);
-        filtro.setIntestadoobra(-1);
+        filtro.setIntestadoobra(1);
         filtro.setIntcodfase(-1);
         filtro.setTipointervencion(-1);
         filtro.setBoolobraterminada(false);
@@ -2594,5 +2676,39 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     @Override
     public void prerender() {
         
+    }
+    public void mostrarCantidadProyectos() {
+        listavistahomezoom = getSessionBeanCobra().getCobraService().encontrarvistahomezoom();
+        for (vistahomezoom selectItem : listavistahomezoom) {
+            valortotalproyectoszoom = selectItem.getTotalvalorobras();
+            numeroproyectoszoom = selectItem.getCantidadobras();
+            numeroconvenioszoom = selectItem.getCantidadconvenios();
+            proyectovalormayor = selectItem.getObramayorvalor();
+            
+        }
+        
+    }
+
+    public void mostrarVariableProyecto() { 
+        
+        if (panelmostrarvaloreszoom == 1) {
+            System.out.println("numeroproyectoszoom " + numeroproyectoszoom);
+            setMostrartotalproyectos(true);
+            setMostrarvalortotalproyectos(false);
+            setMostrartotalconvenios(false);
+        }
+        if (panelmostrarvaloreszoom == 2) {
+            System.out.println("valortotalproyectoszoom" + valortotalproyectoszoom);
+            setMostrarvalortotalproyectos(true);
+            setMostrartotalproyectos(false);
+            setMostrartotalconvenios(false);
+        }
+        if (panelmostrarvaloreszoom == 3) {
+            System.out.println("numeroconvenioszoom " + numeroconvenioszoom);
+            setMostrartotalconvenios(true);
+            setMostrartotalproyectos(false);
+            setMostrarvalortotalproyectos(false);
+        }
+        System.out.println("proyectovalormayor " + proyectovalormayor);
     }
 }
