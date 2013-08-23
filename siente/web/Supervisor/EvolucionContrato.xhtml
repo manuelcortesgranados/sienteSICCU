@@ -17,9 +17,6 @@
     </ui:define>
     <ui:define name="title">
         <h:outputText  styleClass="ikont-hot-evolucioncontrato"   value="#{var.evolucioncontrato}"/>
-
-
-
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -33,6 +30,9 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
 
+    </ui:define>
+    <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
+        <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
     </ui:define>
     <ui:define name="body" >
 
