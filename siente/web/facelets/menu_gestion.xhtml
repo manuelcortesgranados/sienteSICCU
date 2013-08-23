@@ -514,10 +514,9 @@
         </div> 
         <div class="topbar_encabezado_4">
             <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}">
-                <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
+              <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
             </h:panelGroup>
-            <h:commandLink rendered="#{SessionBeanCobra.logueadodesdemapa}" action="#{SessionBeanCobra.limpirarUsuario}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();
-                            return false;"/>
+            <a4j:commandLink rendered="#{SessionBeanCobra.logueadodesdemapa}" action="#{SessionBeanCobra.limpirarUsuario}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();"  execute="@this" immediate="true" render="ikont-hpg-ingresarusu"/>
         </div> 
 
     </h:panelGroup>
@@ -537,8 +536,8 @@
                     <center>                   
                         <h:outputText styleClass="ikont-outtext-titulo" value="#{var.iniciarsesion}"    />
                     </center>
-                    <h:panelGrid columns="2" styleClass="ikont-panel-registro" >
-                        <h:inputText id="usuarionuevo" styleClass="ikont-hit-usuLogin"  value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}">
+                    <h:panelGrid columns="2" styleClass="ikont-panel-registro"  id="ikont-hpg-ingresarusu">
+                        <h:inputText id="usuarionuevo" styleClass="ikont-hit-usuLogin" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuLogin}">
                             <rich:placeholder styleClass="" value="Usuario" />
                         </h:inputText>
                         <h:inputSecret id="contrasenanuevo"  styleClass="inputText_registro" required="true" maxlength="20" value="#{SessionBeanCobra.usuarioService.usuarioObra.usuPasswd}">
@@ -727,52 +726,47 @@
 
         </h:panelGroup>
     </div>
-<!-- <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-$(window).unload( function () {javascript:window.close(); } );
-    </script>-->
-    <script type="text/javascript">
-        j = jQuery;
-        jQuery(document).ready(inicializar());
-        function  inicializar() {
+                        j = jQuery;
+                        jQuery(document).ready(inicializar());
+                        function  inicializar() {
 // esconderIngreso();
-            var divMenuPrincipal = j('.ikont-div-menu-principal');
-            divMenuPrincipal.mouseleave(esconderMenuAnimado);
-        }
+                            var divMenuPrincipal = j('.ikont-div-menu-principal');
+                            divMenuPrincipal.mouseleave(esconderMenuAnimado);
+                        }
 
-        function esconderIngreso() {
-            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-            divIngresoUsuario.hide();
-        }
+                        function esconderIngreso() {
+                            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                            divIngresoUsuario.hide();
+                        }
 
-        function mostrarIngresoAnimado() {
-            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-            divIngresoUsuario.stop().animate({height: '550px'});
-        }
-        function esconderIngresoAnimado() {
-            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
-            divIngresoUsuario.stop().animate({height: '0px'});
-        }
+                        function mostrarIngresoAnimado() {
+                            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                            divIngresoUsuario.stop().animate({height: '550px'});
+                        }
+                        function esconderIngresoAnimado() {
+                            var divIngresoUsuario = j('.ikont-div-ingreso-usuario');
+                            divIngresoUsuario.stop().animate({height: '0px'});
+                        }
 //Menu
-        function mostrarMenuAnimado() {
-            var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
-            cbMostrarMenu.hide();
-            var divIngresoUsuario = j('.ikont-div-menu-principal');
-            divIngresoUsuario.stop().animate({width: '268px'});
-        }
-        function esconderMenuAnimado() {
-            var divIngresoUsuario = j('.ikont-div-menu-principal');
-            divIngresoUsuario.stop().animate({width: '0px'});
-            mostrarCbMostrarMenu();
-        }
+                        function mostrarMenuAnimado() {
+                            var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
+                            cbMostrarMenu.hide();
+                            var divIngresoUsuario = j('.ikont-div-menu-principal');
+                            divIngresoUsuario.stop().animate({width: '268px'});
+                        }
+                        function esconderMenuAnimado() {
+                            var divIngresoUsuario = j('.ikont-div-menu-principal');
+                            divIngresoUsuario.stop().animate({width: '0px'});
+                            mostrarCbMostrarMenu();
+                        }
 
-        function mostrarCbMostrarMenu() {
-            var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
-            cbMostrarMenu.show();
-        }
+                        function mostrarCbMostrarMenu() {
+                            var cbMostrarMenu = j('.ikont-cb-mostrar-menu');
+                            cbMostrarMenu.show();
+                        }
 
     </script>
-
     <ui:include src="/Ciudadano/modalCiudadano/ImagenCiudadano.xhtml"/>
     <ui:include src="/Ciudadano/modalCiudadano/ConfirmarCiudadano.xhtml"/>
     <ui:include src="/modal/modalRecordarContra.xhtml"/>

@@ -9,6 +9,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.MontoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RubroDTO;
@@ -26,6 +27,8 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -65,13 +68,13 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     // <editor-fold defaultstate="collapsed" desc="Elementos visuales">
     private VerticalPanel vp;
-    private TextArea objetoContrato;
-    private NumberField<BigDecimal> valorContrato;
+    private TextArea objetoContrato = new TextArea();
+    private NumberField<BigDecimal> valorContrato = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
     private NumberField<BigDecimal> valorRubros;
     private NumberField<BigDecimal> valorFuenteRecurso;
-    private TextField nombreAbre;
-    private DateField fechaSuscripcionContrato;
-    private DateField fechaSuscripcionActaInicio;
+    private TextField nombreAbre = new TextField();
+    private DateField fechaSuscripcionContrato = new DateField();
+    private DateField fechaSuscripcionActaInicio = new DateField();
     private ListBox comboCatRubros = new ListBox();
     //private ComboBox<RubroDTO> comboCatRubros;
     private ListBox comboRubros = new ListBox();
@@ -81,8 +84,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
     //ComboBox<EnumFormaPago> lstFormaPago;
     private NumberField<BigDecimal> valorFuente;
     private NumberField porcentajeFuente;
-    private ListBox lstVigen;
-    private ListBox lstFormaP;
+    private ListBox lstVigen = new ListBox(false);
+    private ListBox lstFormaP = new ListBox(false);
     private static final int COLUMN_FORM_WIDTH = 686;
 //    private static final int COLUMN_FORM_HEIGHT = 576;
     // </editor-fold>
@@ -121,7 +124,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
     ActividadobraDTOProps propes;
     List<RubroDTO> lstRubrosDto;
     BigDecimal valorAuxiliar;
-    ActividadobraDTO actividadObraEditar;
+    private ActividadobraDTO actividadObraEditar;
+    boolean editar = false;
 
     public ContratoForm() {
     }
@@ -137,11 +141,24 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     }
 
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di) {
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ActividadobraDTO actividadObraPadre) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
         this.contrato = actividadobraContratoEditar.getContrato();
+        this.actividadObraPadre = actividadObraPadre;
+        this.editar = true;
+        lstRubrosDto = new ArrayList<RubroDTO>();
+        CargarFormularioEditar();
+    }
+
+    private void CargarFormularioEditar() {
+        service.setLog("contra" + contrato.getTextobjeto(), null);
+        this.objetoContrato.setText(contrato.getTextobjeto());
+        this.nombreAbre.setText(contrato.getNombreAbreviado());
+        this.fechaSuscripcionActaInicio.setValue(contrato.getDatefechaactaini());
+        this.fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
+        this.valorContrato.setValue(contrato.getNumvlrcontrato());
     }
 
     @Override
@@ -181,15 +198,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
         Label tFuentes = new Label("*FUENTES DE RECURSOS");
         con.add(tFuentes, new HtmlData(".tfuente"));
 
-        setObjetoContrato(new TextArea());
+
         getObjetoContrato().setWidth("" + cw);
         getObjetoContrato().setHeight("" + 80);
-        getObjetoContrato().setText("Objeto");
         con.add(getObjetoContrato(), new HtmlData(".objetoC"));
 
-        setValorContrato((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
         getValorContrato().setWidth(cw);
-        getValorContrato().setEmptyText("Valor estimado");
         getValorContrato().setWidth(cw);
 
         getValorContrato().addBlurHandler(new BlurEvent.BlurHandler() {
@@ -209,7 +223,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         llenarListaTipoContrato(tiposContrato);
         setLstTipoContrato(new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato()));
-        getLstTipoContrato().setEmptyText("Tipo contratacion");
         getLstTipoContrato().setWidth(cw);
         getLstTipoContrato().setTypeAhead(true);
         getLstTipoContrato().setTriggerAction(TriggerAction.ALL);
@@ -220,24 +233,32 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
         con.add(getLstTipoContrato(), new HtmlData(".tipocontrato"));
+//
+//        if (actividadObraEditar != null) {
+//            lstTipoContrato.select(actividadObraEditar.getContrato().getTipocontrato());
+//        }
 
-        setNombreAbre(new TextField());
-        getNombreAbre().setEmptyText("Nombre Abreviado");
         getNombreAbre().setWidth(cw);
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
 
 
-        setFechaSuscripcionContrato(new DateField());
         getFechaSuscripcionContrato().setWidth(cw);
-        getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
+        fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
+            @Override
+            public void onKeyDown(KeyDownEvent event) {
+                if (fechaSuscripcionActaInicio.getValue() != null) {
+                    if (fechaSuscripcionContrato.getValue().compareTo(fechaSuscripcionActaInicio.getValue()) > 0) {
+                        AlertMessageBox d = new AlertMessageBox("Error", "La fecha de suscripcion no puede ser mayor a la fecha del acta de inicio");
+                        d.show();
+                    }
+                }
+             }
+        });
         con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
 
-        setFechaSuscripcionActaInicio(new DateField());
         getFechaSuscripcionActaInicio().setWidth(cw);
-        getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
         con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
 
-        setLstVigen(new ListBox(false));
         getLstVigen().setWidth("" + cw);
         llenarV();
         getLstVigen().addChangeHandler(new ChangeHandler() {
@@ -256,6 +277,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         con.add(getComboRubros(), new HtmlData(".rubrosub"));
         this.llenarCategorias();
         getComboCatRubros().setSelectedIndex(0);
+        llenarRubroslista("123102");
         getComboCatRubros().addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
@@ -270,7 +292,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
 
-        llenarRubroslista("123102");
 
 
         setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
@@ -326,7 +347,6 @@ public class ContratoForm implements IsWidget, EntryPoint {
         });
         con.add(getLstTerceros(), new HtmlData(".entidad"));
 
-        setLstFormaP(new ListBox(false));
         getLstFormaP().setWidth("" + cw);
         llenarFormaPa();
         getLstFormaP().addChangeHandler(new ChangeHandler() {
@@ -400,7 +420,23 @@ public class ContratoForm implements IsWidget, EntryPoint {
 //        con.add(btnVerFuente, new HtmlData(".verf"));
 //
 //
-        Button btnAdicionarContrato = new Button("Añadir Contrato", new ClickHandler() {
+        String nombreBotonPrincipal = "";
+
+        if (!editar) {
+            nombreBotonPrincipal = "Añadir Contrato";
+            getObjetoContrato().setText("Objeto");
+            getValorContrato().setEmptyText("Valor estimado");
+            getLstTipoContrato().setEmptyText("Tipo contratacion");
+            getNombreAbre().setEmptyText("Nombre Abreviado");
+            getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
+            getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
+
+        } else {
+            nombreBotonPrincipal = "Editar Contrato";
+            lstTipoContrato.setValue(contrato.getTipocontrato());
+        }
+
+        Button btnAdicionarContrato = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 CrearContrato();
@@ -416,6 +452,24 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         btnAdicionarContrato.setWidth("" + 150);
         con.add(btnAdicionarContrato);
+
+
+    }
+
+    public void editarContrato() {
+        if (!contrato.getTextobjeto().equals(objetoContrato.getText())) {
+            contrato.setTextobjeto(objetoContrato.getText());
+        }
+        if (!contrato.getNombreAbreviado().equals(nombreAbre.getText())) {
+            contrato.setNombreAbreviado(nombreAbre.getText());
+            actividadObraEditar.setName(contrato.getNombreAbreviado());
+        }
+        if (contrato.getNumvlrcontrato().compareTo(valorContrato.getValue()) != 0) {
+            contrato.setNumvlrcontrato(valorContrato.getValue());
+        }
+        if(contrato.getDatefechaini().compareTo(fechaSuscripcionContrato.getValue())!=0){
+        
+        }
 
     }
 
@@ -538,7 +592,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), actividadObraPadre.getDuration(), 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcionActa);
 
-        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", contrato.getDatefechaini(),1, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(precontractual);
 
         List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
@@ -606,8 +660,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
             hayError = true;
             msgValidacion += "*por favor ingrese el objeto del contrato" + "<br/>";
         }
-        service.setLog(contrato.getNombreAbreviado(),null);
-        if (contrato.getNombreAbreviado().equals("")) {
+
+        if (nombreAbre.getValue() == null) {
             hayError = true;
             msgValidacion += "*por favor ingrese nombre abreviado del contrato" + "<br/>";
         }
@@ -685,19 +739,23 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     private void llenarRubroslista(String cod) {
         //Limpiamos el combo de la escuela
-
+        service.setLog("e1", null);
         this.getComboRubros().clear();
+        service.setLog("e2", null);
         service.obtenerRubros(cod, new AsyncCallback<List<RubroDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                service.setLog("error obteniendo los rubros", null);
             }
 
             @Override
             public void onSuccess(List<RubroDTO> result) {
+                service.setLog("accca" + result.size(), null);
                 lstRubrosDto.clear();
                 lstRubrosDto = result;
+                service.setLog("entro rubro" + result.size(), null);
                 for (RubroDTO rb : result) {
+                    service.setLog("entre llenarComborubro", null);
                     getComboRubros().addItem(rb.getStrdescripcion(), rb.getIdrubro());
                 }
             }

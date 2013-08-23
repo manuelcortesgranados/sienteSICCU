@@ -7,19 +7,29 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:interkont="http://www.interkont.com/jsf">
-
-    <ui:define name="head">       
-    </ui:define>
-
-    <ui:define name="menu">
-        <ui:include src="/facelets/menu_gestion.xhtml" />
+<ui:define name="menu">
+        <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
 
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
-    </ui:define>   
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="./../facelets/menu_lateral_administrar.xhtml"/>  
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
 
+   <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+            <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="./../facelets/menu_lateral_administrar.xhtml"/>  
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
     <ui:define name="body">
         <h:form id="frmpanelgeneral" styleClass="ikont-hf-nuevocontratoplanoperativo">
             <ui:include src="/facelets/menu_superior_administrar.xhtml"/>
@@ -202,9 +212,7 @@
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
         <!--<ui:include src="/modal/FuenteRecursosConvenio.xhtml"/>-->
         <ui:include src="/modal/confirmarguardadoconveniopo.xhtml"/>
-        
-
-
+ 
     </ui:define>
 
 </ui:composition>
