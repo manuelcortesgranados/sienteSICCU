@@ -26,7 +26,9 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-    
+    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
+        <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+    </ui:define>
     <ui:define name="body">
         <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
             <tr>
