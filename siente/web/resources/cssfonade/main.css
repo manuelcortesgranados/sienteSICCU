@@ -374,7 +374,7 @@ a.closemodal{
     height:60px;
     float:right;
     position:relative;
-    background-image: url(../imgs/Siente_Logo_ch.png);
+    background-image: url(../imgs/cobra_Logo_ch.png);
     background-repeat:no-repeat;
     background-position: 0px 0px;
 }
@@ -2853,3 +2853,13 @@ font-size: 14px  !important;
     width: 105px;
     background-position: -896px -96px;
 }
+/*
+Css para la pagina de consultar convenio
+
+.ikont-table-consultar-convenio{
+    background-color: #F2F2F2;
+    font-size: 13px;
+}
+.ikont-hpg-consulconvenio{
+font-size: 14px;
+}*/
