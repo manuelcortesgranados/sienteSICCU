@@ -759,9 +759,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Objeto para acceder a los atributos de modalidadcontratista
      */
     private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
-    
-    private boolean guardarborradorconvenio=false;
-    
+    private boolean guardarborradorconvenio = false;
     private UIDataTable tablaDocumentos = new UIDataTable();
 
     public UIDataTable getTablaDocumentos() {
@@ -770,8 +768,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public void setTablaDocumentos(UIDataTable tablaDocumentos) {
         this.tablaDocumentos = tablaDocumentos;
-    } 
-    
+    }
 
     public boolean isGuardarborradorconvenio() {
         return guardarborradorconvenio;
@@ -780,8 +777,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void setGuardarborradorconvenio(boolean guardarborradorconvenio) {
         this.guardarborradorconvenio = guardarborradorconvenio;
     }
-    
-    
 
     public Modalidadcontratista getModalidadcontratista() {
         return modalidadcontratista;
@@ -2336,7 +2331,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
             panelPantalla = 2;
             actualizarPanel();
-            subpantalla=getSessionBeanCobra().getCobraGwtService().getNavegacion();
+            subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
                 getFlujoCaja().iniciarFlujoCaja();
@@ -2419,6 +2414,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
             List<Tercero> lis = getSessionBeanCobra().getUsuarioService().encontrarEntidadesxtercero(getSessionBeanCobra().getUsuarioObra(), 6, booltipocontratoconvenio);
             TerceroOption = new SelectItem[lis.size()];
+            System.out.println("lis.size()" + lis.size());
             int i = 0;
             SelectItem itemTercero = new SelectItem();
             for (Tercero ter : lis) {
@@ -2463,6 +2459,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             listacontratos = new ArrayList<Contrato>();
             listacontratoscontratista = new ArrayList<Contrato>();
         }
+        contrato.getTercero().setStrnombrecompleto("");
     }
 
     /**
@@ -3213,7 +3210,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Elimina la poliza seleccionada de la lista.
      *
-     * @param 
+     * @param
      * @return
      */
     public String eliminarPoliza() {
@@ -3438,7 +3435,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Elimina el contrato padre seleccionado.
      *
-     * @param 
+     * @param
      */
     public void eliminarItemPadreSele() {
         //contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
@@ -3727,7 +3724,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Eliminar el documento seleccionado
      *
-     * @param 
+     * @param
      * @return
      */
     public String eliminardocu() {
@@ -3868,7 +3865,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         //Contrato contratotabla = nuevoContraBasicoSeleccionado.getListacontratos().get(filaSeleccionada);
         //boolconthijo = false;
         ///Revisar este método se totea pero no siempre
-        
+
         Contrato contratotabla = (Contrato) tablacontratoconvenio.getRowData();
         cargarContrato(contratotabla);
 //        setContrato(contratotabla);
@@ -3880,13 +3877,13 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Seleccionar el contrato según contratista, desde la tabla detalle
      *
-     * @param 
+     * @param
      * @return
      */
     public String detalleContratoContratista() {
 //        NuevoContratoBasico nuevoContraBasicoSeleccionado = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
 //        Contrato contratotabla = (Contrato) nuevoContraBasicoSeleccionado.getListacontratoscontratista().get(filaSeleccionada);
-        
+
         Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
         cargarContrato(contratotabla);
         return "consultarContrato";
@@ -3948,7 +3945,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Seleccionar el contrato desde la tabla detalle contratopadre según el
      * contratista
      *
-     * @param 
+     * @param
      * @return
      */
     public String detalleContratoPadreContratista() {
@@ -4011,9 +4008,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String bt_download_documento_action() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
+        Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
 //        NuevoContratoBasico doc = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-       // doc.getListadocuContrato().get(filaSeleccionada);
+        // doc.getListadocuContrato().get(filaSeleccionada);
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         try {
@@ -4028,9 +4025,9 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
     public String bt_download_documento_action_modulo() {
         // TODO: Process the action. Return value is a navigation
         // case name where null will return to the same page.
-        
+
         //Documentoobra doc = getSessionBeanCobra().getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
-        
+
         Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
         getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
         //this.getSessionBeanCobra().setUrlAbri(doc.getStrubicacion());
@@ -4245,8 +4242,7 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
      */
     public String editarPoliza() {
         //limpiarContrato();
-        Contrato contratotabla = (Contrato) tablacontratoconveniocontratista.getRowData();
-
+        polizacontrato = (Polizacontrato) tablaPolizasbin.getRowData();
 
         boolcrearpoliza = true;
 
@@ -5923,7 +5919,7 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
     public void bt_eliminar_documento_action() {
 //        SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
 //        Documentoobra doc = sbc.getCobraService().getListaDocumentosContrato().get(filaSeleccionada);
-        
+
         Documentoobra doc = (Documentoobra) tablaDocumentosContrato.getRowData();
         getSessionBeanCobra().getCobraService().borrarDocumento(doc);
         getSessionBeanCobra().getCobraService().getListaDocumentosContrato().remove(doc);
@@ -6218,7 +6214,7 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
      */
 
     public void actualizarSubpantallaPlanOperativo() {
-        this.subpantalla =subpantalla;
+        this.subpantalla = subpantalla;
     }
 
     /**
@@ -6317,7 +6313,7 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
         tipomensajeerror = 0;
         totalfuenteconvenio = new BigDecimal(BigInteger.ZERO);
         faltafuenteconvenio = new BigDecimal(BigInteger.ZERO);
-        guardarborradorconvenio=true;
+        guardarborradorconvenio = true;
 //        Se llama el metodo de guardar borrador para que valide la información inicial
         this.guardarBorradorConvenio();
         if (!recursosconvenio.getLstFuentesRecursos().isEmpty()) {
@@ -6648,5 +6644,9 @@ Documentoobra doc = (Documentoobra) tabladocuContrato.getRowData();
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
 
+    }
+
+    public void limpiarEntidad() {
+        contrato.getTercero().setStrnombrecompleto("");
     }
 }

@@ -499,8 +499,7 @@
 
                             <h:panelGroup id="polizasContrato">
                                 <rich:dataTable id="tablaPolizasContrato" sortMode="single" 
-                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"
-                                                rowKeyVar="filaSeleccionada" var="localRow"
+                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"                                                
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">

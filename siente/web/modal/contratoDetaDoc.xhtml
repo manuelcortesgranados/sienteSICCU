@@ -32,10 +32,9 @@
                     <h:panelGrid styleClass="ikont-hpg-fcontrato" >
                         <rich:dataTable id="tabladocumento"  
                                         sortMode="single" 
-
                                         value="#{Supervisor$Contrato.listadocuContrato}"
                                         var="currentRow"
-                                        rowKeyVar="filaSeleccionada">
+                                        binding ="#{Supervisor$Contrato.tabladocuContrato}">
                             <rich:column id="strnombreimg"  styleClass="ikont-rc-strnombreimg">
                                 <f:facet name="header">
 

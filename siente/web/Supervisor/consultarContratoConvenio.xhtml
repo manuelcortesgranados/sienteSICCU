@@ -29,7 +29,7 @@
         <h:panelGroup rendered="#{var.permisonuevodiseño}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>  
-    </ui:define>
+    </ui:define>   
 
     <ui:define name="body">
         <h:form>
@@ -69,13 +69,13 @@
                 <h:panelGroup id="panel-filtro-novedades">
                     <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >
                         <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
-                        <rich:select  enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
-                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
+                        <rich:select  id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
+                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />  
                             <a4j:ajax event="change"
                                       listener="#{Supervisor$Contrato.comboEntidadesContrato}"
-                                      render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
+                                      render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                       execute="@this" >
-                            </a4j:ajax>
+                            </a4j:ajax>                           
                         </rich:select>                                                            
                     </h:panelGrid>
 
