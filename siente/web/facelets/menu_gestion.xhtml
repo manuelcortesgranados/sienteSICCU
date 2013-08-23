@@ -557,8 +557,8 @@
                                              onclick="#{rich:component('ajaxLoadingModalBox')}.show();
                             return true;"
                                              /> 
-                            <h:outputLabel value="o"/>
-                            <h:commandLink type="button" id="linkfb" styleClass="ikont-link-fb"/>
+                            <h:outputLabel rendered="false" value="o"/>
+                            <h:commandLink rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
 
                             <h:panelGroup layout="block"  styleClass="tab-login-label-error">
                                 <rich:message for="usuarionuevo" />
@@ -635,8 +635,8 @@
                                                        action="#{Ciudadano$PerfilCiudadano.MostrarMensaje}" render="pgguardarCiudadano"  execute="@form"
                                                        oncomplete="#{rich:component('confirmarCiudadano')}.show();">
                                     </a4j:commandButton> 
-                                    <h:outputLabel value="o" />
-                                    <h:commandLink type="button" id="linkfb" styleClass="ikont-link-fb"/>
+                                    <h:outputLabel rendered="false" value="o" />
+                                    <h:commandLink  rendered="false" type="button" id="linkfb" styleClass="ikont-link-fb"/>
                                 </h:panelGrid>
                             </center>
                         </a4j:region>
