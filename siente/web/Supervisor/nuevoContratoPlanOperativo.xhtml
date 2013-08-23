@@ -10,17 +10,6 @@
 <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
-
-    <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
-            <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
-            <ui:include src="./../facelets/menu_lateral_administrar.xhtml"/>  
-        </h:panelGroup>
-        <h:panelGroup rendered="#{var.permisonuevodiseno}">
-            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-        </h:panelGroup>
-    </ui:define>
-
    <ui:define name="menu_lateral">
         <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <ui:include src="./../facelets/menu_lateral_gestion.xhtml"/>
