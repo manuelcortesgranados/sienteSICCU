@@ -112,7 +112,7 @@
                                                                 </rich:panel>
                                                             </h:panelGrid>
                                                             <h:panelGroup>
-                                                                <rich:dataTable id="tablaImagenes"
+                                                                <rich:dataTable styleClass="ikont-table-img-datosbasicos" id="tablaImagenes"
                                                                                 value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
                                                                                 var="currentRow"                                                    
                                                                                 rowKeyVar="filaSeleccionada"
@@ -121,7 +121,7 @@
                                                                     <f:facet name="header">
                                                                         <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
                                                                     </f:facet>
-                                                                    <rich:column breakRowBefore="true"  width="100px">
+                                                                    <rich:column  breakRowBefore="true"  width="100px">
                                                                         <f:facet name="header" >
                                                                             <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
                                                                         </f:facet>
@@ -136,10 +136,10 @@
                                                                     </rich:column>
                                                                     <rich:column  id="Imagen">
                                                                         <f:facet name="header" >
-                                                                            <h:outputText  styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
+                                                                            <h:outputText   styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
                                                                         </f:facet>
 
-                                                                        <h:graphicImage  styleClass="ikont-hgi-strubicacion"   value="#{currentRow.strubicacion}"   />
+                                                                        <h:graphicImage  styleClass="ikont-hot-imagen"   value="#{currentRow.strubicacion}"   />
                                                                     </rich:column>
 
                                                                     <rich:column  width="60px">

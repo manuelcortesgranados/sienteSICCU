@@ -2426,7 +2426,7 @@ css usuario modificacion
     background-position: -18px -11px;
 }
 .ikont-posicion-nuevo-proyecto-admconvenio{
-     height: 61px;
+    height: 61px;
     background-position: -18px -13px;
 }
 .ikont-posicion-nuevo-proyecto-admconvenio.scroll{
@@ -2439,7 +2439,7 @@ css usuario modificacion
     background-position:-129px -11px;
 }
 .ikont-posicion-nuevo-detalle-admconvenio{
-     height: 61px;
+    height: 61px;
     background-position:-129px -13px;
 }
 .ikont-posicion-nuevo-detalle-admconvenio.scroll{
@@ -2452,7 +2452,7 @@ css usuario modificacion
     background-position:-235px -11px;
 }
 .ikont-posicion-nuevo-documentos-admconvenio{
-     height: 61px;
+    height: 61px;
     background-position:-235px -13px;
 }
 .ikont-posicion-nuevo-documentos-admconvenio.scroll{
@@ -2467,7 +2467,7 @@ css usuario modificacion
 }
 .ikont-posicion-nuevo-modificacion-admconvenio{
     width: 112px;
-     height: 61px;
+    height: 61px;
     background-position: -341px -13px;
 }
 .ikont-posicion-nuevo-modificacion-admconvenio.scroll{
@@ -2482,7 +2482,7 @@ css usuario modificacion
     background-position:-470px -11px;
 }
 .ikont-posicion-nuevo-evolucion-admconvenio{
-     height: 61px;
+    height: 61px;
     background-position:-470px -13px;
 }
 .ikont-posicion-nuevo-evolucion-admconvenio.scroll{
@@ -2573,74 +2573,74 @@ css usuario modificacion
     top: -122px; 
     height: 231px;
     background: #ffffff
-       
+
 }
 .panel_filtro_zoom{
     height: 320px;
 }
 .rf-tab-cnt{
-   border: 1px solid #BDBDBD !important;
-   border-radius: 17px !important;
+    border: 1px solid #BDBDBD !important;
+    border-radius: 17px !important;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
-background: none !important;
-background-color: transparent !important ;
-border-color:transparent !important ;
-border-style: solid;
-border-width: 1px;
-border-bottom-width: 0px;
-padding-top: 2px;
-overflow: hidden;
-height: 25px;
-white-space: nowrap;
-position: relative;
+    background: none !important;
+    background-color: transparent !important ;
+    border-color:transparent !important ;
+    border-style: solid;
+    border-width: 1px;
+    border-bottom-width: 0px;
+    padding-top: 2px;
+    overflow: hidden;
+    height: 25px;
+    white-space: nowrap;
+    position: relative;
 }
 
 .rf-tab-hdr-act.rf-tab-hdr-top {
-padding: 0px 5px 3px 5px !important;
-border-bottom: 0px !important;
-font-weight: bold !important;
-vertical-align: top !important;
-background-image: none !important;
-background-position: top !important;
-background-repeat: repeat-x !important;
-background-color: transparent !important;
-cursor: default !important;
+    padding: 0px 5px 3px 5px !important;
+    border-bottom: 0px !important;
+    font-weight: bold !important;
+    vertical-align: top !important;
+    background-image: none !important;
+    background-position: top !important;
+    background-repeat: repeat-x !important;
+    background-color: transparent !important;
+    cursor: default !important;
 }
 .rf-tab-hdr {
-white-space: nowrap !important;
-border: 0px solid !important;
-cursor: pointer !important;
-background-position: top;
-background-repeat: none !important;
-background-color:  transparent !important;
-color:  #0092BC !important ;
+    white-space: nowrap !important;
+    border: 0px solid !important;
+    cursor: pointer !important;
+    background-position: top;
+    background-repeat: none !important;
+    background-color:  transparent !important;
+    color:  #0092BC !important ;
 }
 .rf-tab-hdr-inact.rf-tab-hdr-top {
-vertical-align: top !important;
-padding: 0px 5px 3px 5px !important;
-background-image: none !important;
+    vertical-align: top !important;
+    padding: 0px 5px 3px 5px !important;
+    background-image: none !important;
 }
 *.rf-tab-lbl {
-white-space: nowrap !important;
-font-family: open !important;
-font-size: 16px !important;
+    white-space: nowrap !important;
+    font-family: open !important;
+    font-size: 16px !important;
 }
 .rf-tab-hdr-brd {
-border: 0px solid !important;
-border-top: 0px !important;
-height: 10px!important;
-font-style: normal!important;
-background-color: #0092BC !important;
-background: none !important;
+    border: 0px solid !important;
+    border-top: 0px !important;
+    height: 10px!important;
+    font-style: normal!important;
+    background-color: #0092BC !important;
+    background: none !important;
 }
 .boton1{
-border-color:#0092BC !important;
-border-width: 1px !important;
-background-color: white !important;
-background-image: none !important;
-color: #0092BC !important;
-font-size: 14px  !important;
+    border-color:#0092BC !important;
+    border-width: 1px !important;
+    background-color: white !important;
+    background-image: none !important;
+    color: #0092BC !important;
+    font-size: 14px  !important;
 }
 .input_filtro{
     width: 234px !important;
@@ -2859,7 +2859,7 @@ font-size: 14px  !important;
 }
 
 .ikont-acl-calculaMatrix{
-     width: 40px;
+    width: 40px;
     background-image:url(../imgs/Cobra_bt58.png);
     background-position: 0px 0px;
     margin-top: 5px;
@@ -2884,4 +2884,31 @@ font-size: 14px  !important;
 .ikont-colum-superior-consulta{
     color: #FFF;
     background-color: #1C8F14;
+}
+/*Detalle proyecto en ejecucion incompleta*/
+.ikont-textarea-datosbasicos{
+    width: 126% !important;
+}
+.input-spinner-datosbasicos{
+    background-color: #F2F2F2;
+}
+.ikont-colum-datosbasicos{
+    color: #FFF;
+    background-color: #1C8F14;
+}
+.ikont-table-lugar-datosbasicos{
+    background-color: #F2F2F2;
+    width: 100%;
+}
+.ikont-hot-imagen{
+    width: 150px;
+    height: 101px;
+}
+.ikont-table-img-datosbasicos{
+    background-color: #F2F2F2;
+width: 100%;
+}
+.ikont-img-seleccionada{
+    background-color: #1C8F14;
+color: #FFF;
 }
