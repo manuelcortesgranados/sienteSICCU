@@ -2848,17 +2848,6 @@ font-size: 14px  !important;
     width: 105px;
     background-position: -896px -96px;
 }
-/*
-Css para la pagina de consultar convenio
-
-.ikont-table-consultar-convenio{
-    background-color: #F2F2F2;
-    font-size: 13px;
-}
-.ikont-hpg-consulconvenio{
-font-size: 14px;
-}*/
-
 .ikont-acl-calcutodamatrix{
     width: 20px;
     background-image:url(../imgs/Cobra_btactualizar.png);
@@ -2881,4 +2870,18 @@ font-size: 14px;
 }
 .ikont-rp-imagenprincipal-body{
     height: 341px;
+}
+
+/*Css para la pagina de consultar convenio*/
+
+.ikont-tabla-entidad-contratista{
+    background-color: #F2F2F2;
+    font-size: 13px;
+}
+.ikont-hpg-consulconvenio{
+    font-size: 14px;
+}
+.ikont-colum-superior-consulta{
+    color: #FFF;
+    background-color: #1C8F14;
 }
