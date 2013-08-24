@@ -403,31 +403,28 @@
                     clockFace: 'DailyCounter'
                 });
                 var timefalta = document.getElementById("finfecha").value;
-                var futuro = new Date(timefalta);
+                var futuro = new Date(timefalta).getTime();
 
-                var ahora = new Date();
+                var ahora = new Date().getTime();
                 var faltan = futuro - ahora;
                 if (faltan > 0) {
                     var segundos = Math.round(faltan / 1000);
-                    var minutos = Math.floor(segundos / 60);
-                    var minutos_s = minutos % 60;
-                    minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
                 }
                 else {
-                    var minutos_s = 00;
+                    var segundos = 00;
                 }
-                clock.setTime(minutos_s);
+                clock.setTime(segundos);
                 clock.start();
                 var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
                 _porst = _porst.replace(' %', '');
-                _porst = parseInt(_porst) - 2;
+                _porst = (parseInt(_porst) - 2) * 1.8;
                 var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
                 _pordb = _pordb.replace(' %', '');
-                _pordb = parseInt(_pordb) - 2;
+                _pordb = (parseInt(_pordb) - 2) * 1.8;
                 var _linese = document.getElementsByClassName('ikont-hcl-line-semaforo')[0];
                 var _linedb = document.getElementsByClassName('ikont-hcl-line-deberia')[0];
-                _linese.setAttribute("style", "margin-left : " + _porst + "%");
-                _linedb.setAttribute("style", "margin-left : " + _pordb + "%");
+                _linese.setAttribute("style", "margin-left : " + _porst + "px");
+                _linedb.setAttribute("style", "margin-left : " + _pordb + "px");
 
             });
 
