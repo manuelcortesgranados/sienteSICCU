@@ -514,7 +514,7 @@
         </div> 
         <div class="topbar_encabezado_4">
             <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}">
-              <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
+                <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
             </h:panelGroup>
             <a4j:commandLink rendered="#{SessionBeanCobra.logueadodesdemapa}" action="#{SessionBeanCobra.limpirarUsuario}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();"  execute="@this" immediate="true" render="ikont-hpg-ingresarusu"/>
         </div> 
@@ -652,16 +652,17 @@
             </center>
         </div>
     </div>
+    <div id="header_content"/>
+    <div id="espacio"/>
     <div class="ikont-div-scroll-menu" >
-        <h:panelGrid rendered="#{var.permisonuevodiseno }" onmouseover="mostrarMenuAnimado();
-                            return  false;" styleClass="ikont-panel-spacing-menu" columns="3">
+        <h:panelGrid rendered="#{var.permisonuevodiseno }" styleClass="ikont-panel-spacing-menu" columns="3">
             <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}"/>   
             <h:outputLabel styleClass="ikont-label-menu" value="  >>" />  
         </h:panelGrid>
         <h:panelGroup rendered="#{var.permisonuevodiseno}" style="top:">
-                <div id="header_content"/>
-            </h:panelGroup>
+
+        </h:panelGroup>
     </div>
     <div id="menuprincipal" class="ikont-div-menu-principal">              
         <h:panelGroup styleClass="kont-contenedor-menu">
