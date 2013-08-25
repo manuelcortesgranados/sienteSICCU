@@ -6,6 +6,7 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.user.client.rpc.IsSerializable;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -109,6 +110,9 @@ public class ActividadobraDTO implements IsSerializable {
         this.taskType = taskType;
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
+        DateWrapper dw= new DateWrapper(start).clearTime();
+        this.endDateTime= dw.addDays(duration).asDate();
+        
     }
     
      public ActividadobraDTO(String name, Date start, int duration, int percentDone,
@@ -133,6 +137,8 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra=obraDto;
+         DateWrapper dw= new DateWrapper(start).clearTime();
+        this.endDateTime= dw.addDays(duration).asDate();
     }
      
        public ActividadobraDTO(String id, String name, Date start, int duration,
@@ -146,6 +152,8 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.contrato=contratoDto;
+         DateWrapper dw= new DateWrapper(start).clearTime();
+        this.endDateTime= dw.addDays(duration).asDate();
     }
 
 
@@ -410,33 +418,33 @@ public class ActividadobraDTO implements IsSerializable {
         this.strdescactividad = strdescactividad;
     }
 
-    /**
-     * @return the fechaInicio
-     */
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    /**
-     * @param fechaInicio the fechaInicio to set
-     */
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    /**
-     * @return the fechaFin
-     */
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-
-    /**
-     * @param fechaFin the fechaFin to set
-     */
-    public void setFechaFin(Date fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+//    /**
+//     * @return the fechaInicio
+//     */
+//    public Date getFechaInicio() {
+//        return fechaInicio;
+//    }
+//
+//    /**
+//     * @param fechaInicio the fechaInicio to set
+//     */
+//    public void setFechaInicio(Date fechaInicio) {
+//        this.fechaInicio = fechaInicio;
+//    }
+//
+//    /**
+//     * @return the fechaFin
+//     */
+//    public Date getFechaFin() {
+//        return fechaFin;
+//    }
+//
+//    /**
+//     * @param fechaFin the fechaFin to set
+//     */
+//    public void setFechaFin(Date fechaFin) {
+//        this.fechaFin = fechaFin;
+//    }
 
     /**
      * @return the peso
@@ -546,5 +554,18 @@ public class ActividadobraDTO implements IsSerializable {
         this.boolobligatoria = boolobligatoria;
     }
 
+     public int calcularDuracion() {
+        if (this.getStartDateTime() != null && this.getEndDateTime() != null) {
+
+            long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
+            if (this.getStartDateTime().compareTo(this.getEndDateTime()) != 0) {
+                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                return ((int) dias);
+            } else {
+                return 1;
+            }
+        }  
+        return 0;
+    }
     
 }

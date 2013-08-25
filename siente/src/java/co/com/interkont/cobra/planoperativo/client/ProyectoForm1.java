@@ -91,7 +91,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     /**
      * Flextabla para objetivos específico
      */
-    private StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1);
+    private StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1, "Objetivos Específicos", "Por favor ingrese la descripción del objetivo:");
     ObraDTO proyectoDTO;
     TerceroDTO terceroDto;
     RubroDTO rubroDto;
@@ -99,7 +99,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     ActividadobraDTO actividadObraPadre;
     Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     Dialog modalPry;
-    ActividadobraDTOProps propes;
+    ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);   
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
 
@@ -244,19 +244,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getNombrePry().setAllowBlank(false);
         getNombrePry().addValidator(new MaxLengthValidator(250));
         getNombrePry().setAutoValidate(true);
-        con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
+        con.add(new FieldLabel(nombrePry, "Nombre del proyecto:"), new HtmlData(".fn"));
 
         fechaInicio = new DateField();
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
         fechaInicio.setAllowBlank(true);
         fechaInicio.setAutoValidate(true);
-        con.add(fechaInicio, new HtmlData(".fechainicio"));
+        con.add(new FieldLabel(fechaInicio, "Fecha de inicio:"), new HtmlData(".fechainicio"));
 
         fechaFin = new DateField();
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
-        con.add(fechaFin, new HtmlData(".fechafin"));
+        con.add(new FieldLabel(fechaFin, "Fecha de finalización:"), new HtmlData(".fechafin"));
 
         llenarComboEntidadesConvenio(entidades);
 
@@ -307,7 +307,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         con.add(new FieldLabel(objetivosTable.obtenerTablaScrooll("200px", "60px"), "OBJETIVOS ESPECÍFICOS"), new HtmlData(".objetivoes"));
 
-
         con.add(getComboCatRubros(), new HtmlData(".catrubro"));
         con.add(getComboRubros(), new HtmlData(".rubro"));
         this.llenarCategorias();
@@ -342,7 +341,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getMacroActividades().setHeight("" + 90);
         getMacroActividades().setWidth("" + cw);
         con.add(new FieldLabel(getMacroActividades(), "*MACROACTIVIDADES"), new HtmlData(".macro"));
-
 
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
@@ -495,8 +493,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public int calcularDuracion() {
         if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
             long diferencia = proyectoDTO.getFechaFin().getTime() - proyectoDTO.getFechaInicio().getTime();
-            double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            return ((int) dias);
+            if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) == 0) {
+                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                return ((int) dias);
+            } else {
+                return 1;
+            }
         }
         return actividadObraPadre.getDuration();
     }
@@ -519,12 +521,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
 
         if (actividadObraPadre.getTipoActividad() == 1) {
-            for(ActividadobraDTO act: actividadObraPadre.getChildren()){
-              if(act.getName().equals("Ejecución del Convenio")){
-              enlazaractividadesHijas(act, tareaNueva);
-              }
+            for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
+                if (act.getName().equals("Ejecución del Convenio")) {
+                    enlazaractividadesHijas(act, tareaNueva);
+                }
             }
-           
+
         } else {
             enlazaractividadesHijas(actividadObraPadre, tareaNueva);
         }

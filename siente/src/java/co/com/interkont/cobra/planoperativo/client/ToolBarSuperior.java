@@ -5,13 +5,18 @@
  */
 package co.com.interkont.cobra.planoperativo.client;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.toolbar.ToolBar;
+import java.util.List;
 
 /**
  *
@@ -24,8 +29,9 @@ public  class ToolBarSuperior extends ToolBar {
     final Button reportes = new Button("Reportes");   
     final Button datosbasicos = new Button("Datos Básicos");      
     
-    public ToolBarSuperior(final CobraGwtServiceAbleAsync service) {
+    public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio) {
         planificacion.setEnabled(false);
+        
         
         flujodecaja.addClickHandler(new ClickHandler() {
             @Override
@@ -66,6 +72,8 @@ public  class ToolBarSuperior extends ToolBar {
          datosbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                GanttDatos.estructurarDatosConvenio(convenio, taskStore, service);
+                
                 service.setNavegacion(1, new AsyncCallback<Boolean>() {
                     @Override
                     public void onFailure(Throwable caught) {
@@ -80,10 +88,11 @@ public  class ToolBarSuperior extends ToolBar {
 
             }
         });
-       
-         add(planificacion);
+       add(datosbasicos);
+        add(planificacion);
         add(flujodecaja);
         add(reportes);
+        
         
         
         

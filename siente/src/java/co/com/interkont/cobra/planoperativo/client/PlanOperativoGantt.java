@@ -26,15 +26,11 @@ import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImage
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.event.DependencyContextMenuEvent;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -75,7 +71,6 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
-import java.util.Calendar;
 
 /**
  *
@@ -214,7 +209,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = true;
         config.showTaskLabel = false;
-        config.mouseWheelZoomEnabled = true;
+        config.mouseWheelZoomEnabled = false;
+//        /** 
+//         * 
+//         */
+//        config.clickCreateEnabled=true;
+//        
+//        config.dragCreateEnabled=false;
+        
+      
+        
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -242,12 +246,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         crearProyectoDialog.setPredefinedButtons();
         crearProyectoDialog.setModal(true);
         crearProyectoDialog.setAnimCollapse(true);
+        crearProyectoDialog.setResize(true);
 //        FormPanel gt= new FormPanel
 
 //        /**
 //         * Formulario del Proyecto
 //         */
-        final ContratoForm proyectoForm = new ContratoForm();
+       // final ContratoForm proyectoForm = new ContratoForm();
 //        crearProyectoDialog.add(proyectoForm);
 
         /**
@@ -264,27 +269,24 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onSelection(SelectionEvent<Item> event) {
                 final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO);
                 crearProyectoDialog.add(proyectoForm1);
+                crearProyectoDialog.clearSizeCache();
                 crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemProyecto);
-
-        final Dialog crearContratoDialog = new Dialog();
-        crearContratoDialog.setHideOnButtonClick(true);
-        crearContratoDialog.setPredefinedButtons();
-        crearContratoDialog.setModal(true);
-        crearContratoDialog.setAnimCollapse(true);
+        
         /**
          * Opciones de la actividad proyecto
          */
         final MenuItem menuItemContrato = new MenuItem("Añadir Contrato");
         menuItemContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
-            public void onSelection(SelectionEvent<Item> event) {
-                service.setLog("entre" + tareaSeleccionada.getName(), null);
-                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, props);
-                crearContratoDialog.add(contratoForm);
-                crearContratoDialog.show();
+            public void onSelection(SelectionEvent<Item> event) {                
+                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, gantt, crearProyectoDialog, props);
+                crearProyectoDialog.add(contratoForm);
+                crearProyectoDialog.clearSizeCache();
+                crearProyectoDialog.show();
+                
             }
         });
         config.taskContextMenu.add(menuItemContrato);
@@ -313,11 +315,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         final MenuItem menuItemEditarContrato = new MenuItem("Editar Contrato");
         menuItemEditarContrato.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
-            public void onSelection(SelectionEvent<Item> event) {
-                service.setLog("entre editar Contrato", null);
-                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog,taskStore.getParent(tareaSeleccionada));
-                crearContratoDialog.add(contratoFormEditar);
-                crearContratoDialog.show();
+            public void onSelection(SelectionEvent<Item> event) {               
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearProyectoDialog,taskStore.getParent(tareaSeleccionada));
+                crearProyectoDialog.add(contratoFormEditar);
+                crearProyectoDialog.clearSizeCache();
+                crearProyectoDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemEditarContrato);
@@ -348,12 +350,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         config.taskContextMenu.add(menuItemAnadirHito);
-
-       final Dialog crearActividadDialog = new Dialog();
-        crearContratoDialog.setHideOnButtonClick(true);
        
-        crearContratoDialog.setModal(true);
-        crearContratoDialog.setAnimCollapse(true);
+       final Dialog crearActividadDialog = new Dialog();
+        crearActividadDialog.setHideOnButtonClick(true);
+        crearActividadDialog.setPredefinedButtons();
+        crearActividadDialog.setModal(true);
+        crearActividadDialog.setBlinkModal(true);
+        crearActividadDialog.setAnimCollapse(true);
         
         /**
          * Opciones generales para todas las actividades
@@ -362,9 +365,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemAñadirTarea.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-                final ActividadForm actividadForm = new ActividadForm();
-                crearActividadDialog.add(actividadForm);
-               crearActividadDialog.show();
+                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada,gantt,crearProyectoDialog,convenioDTO);
+                crearActividadDialog.add(actividadForm);               
+                crearActividadDialog.show();
+               
             }
         });
         config.taskContextMenu.add(menuItemAñadirTarea);
@@ -421,7 +425,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         gantt.addTaskContextMenuHandler(new TaskContextMenuEvent.TaskContextMenuHandler<ActividadobraDTO>() {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
-                tareaSeleccionada = event.getTask();
+                tareaSeleccionada = event.getTask();                
+                
 
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
@@ -562,16 +567,16 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         main.add(text);
         ContentPanel cp = new ContentPanel();
         cp.setHeadingText("Plan Operativo");
-        cp.getHeader().setIcon(ExampleImages.INSTANCE.table());
-        cp.setPixelSize(1000, 460);
+        cp.getHeader().setIcon(ExampleImages.INSTANCE.table());       
+        cp.setPixelSize(1000, 460);        
         cp.getElement().setMargins(new Margins(5));
 
         VerticalLayoutContainer vc = new VerticalLayoutContainer();
         cp.setWidget(vc);
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
-        vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-
-        main.add(new ToolBarSuperior(service));
+        vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));        
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(),convenioDTO));        
+        main.setPagePosition(200, 0);
         main.add(cp);
 
         return main;
@@ -582,6 +587,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //        ToggleButton permensual = new ToggleButton("Mensual");      
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
 //        ToggleButton peranual = new ToggleButton("Anual");      
+        
+        
         ToolBar tbar = new ToolBar();
 
         // Button to endable/disable cascadeChanges
@@ -596,7 +603,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         });
 
         // Button to endable/disable show CriticalPath
-        final ToggleButton critical = new ToggleButton("Ruta Critica");
+        final ToggleButton critical = new ToggleButton("Ruta Crítica");
         critical.setValue(false);
         critical.addSelectHandler(new SelectHandler() {
             @Override
@@ -605,6 +612,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
+        
+        
 
 //         permensual.addSelectHandler(new SelectEvent.SelectHandler() {
 //            @Override

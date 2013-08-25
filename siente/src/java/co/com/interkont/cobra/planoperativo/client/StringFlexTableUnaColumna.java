@@ -28,35 +28,25 @@ import java.util.List;
  * @author Carlos Loaiza
  */
 public class StringFlexTableUnaColumna extends FlexTable {
-
+    private String titulodialogo;
+    private String mensajedialogo;
     FlexCellFormatter cellFormatter = this.getFlexCellFormatter();
     PushButton btnAdicionar = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
         @Override
         public void onClick(ClickEvent event) {
-            final MultiLinePromptMessageBox box = new MultiLinePromptMessageBox("Objetivos Específicos", "Por favor ingrese la descripción del objetivo:");
+            final MultiLinePromptMessageBox box = new MultiLinePromptMessageBox(titulodialogo, mensajedialogo);
 
             box.addHideHandler(new HideEvent.HideHandler() {
                 @Override
                 public void onHide(HideEvent event) {
                     Dialog btn = (Dialog) event.getSource();
                     if (btn.getHideButton().getText().compareTo("OK") == 0 && box.getValue() != null && box.getValue().compareTo("") != 0) {
-                        //String v = Format.ellipse(box.getValue(), 80);
-                        //String msg = Format.substitute("{0}", new Params(v));
+                        
                         addRow(box.getValue());
                     }
                 }
             });
-            box.show();
-
-//                if (!objetivoGeneral.getText().equals("General")) {
-//                    ObjetivosDTO objetivosGeneral = new ObjetivosDTO(objetivoGeneral.getText(), 1, true);
-//                    proyectoDTO.getObjetivoses().add(objetivosGeneral);
-//                }
-//                if (!objetivoEspecifico.getText().equals("Especifico")) {
-//                    ObjetivosDTO objetivosEspecifico = new ObjetivosDTO(objetivoGeneral.getText(), 2, true);
-//                    proyectoDTO.getObjetivoses().add(objetivosEspecifico);
-//                }
-//                limpiarObjetivos();
+            box.show();               
         }
     });
 
@@ -68,11 +58,14 @@ public class StringFlexTableUnaColumna extends FlexTable {
         }
     });
 
-    public StringFlexTableUnaColumna(String width, int cellspacing, int cellpadding) {
+    public StringFlexTableUnaColumna(String width, int cellspacing, int cellpadding, String titulodialogo, String mensajedialogo) {
         this.addStyleName("flexTable");
         this.setWidth(width); //"32em"
         this.setCellSpacing(cellspacing);
         this.setCellPadding(cellpadding);
+        this.titulodialogo=titulodialogo;
+        this.mensajedialogo=mensajedialogo;
+        
         btnAdicionar.setWidth("" + 20);
         btnRemover.setWidth("" + 20);
 
