@@ -345,7 +345,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ObrafuenterecursosconveniosDTO obraFuenteDto = new ObrafuenterecursosconveniosDTO(1, montoAportado.getValue(), fuenteRecursosConveDTO, "rubrop");
+                ObrafuenterecursosconveniosDTO obraFuenteDto = new ObrafuenterecursosconveniosDTO(1, montoAportado.getValue(), fuenteRecursosConveDTO, "rubrop");                
                 service.setLog("fuente R" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
                 String validacionDevuelta = validarMontosAportados(obraFuenteDto);
                 if (!validacionDevuelta.equals("El monto ha sido guardado")) {

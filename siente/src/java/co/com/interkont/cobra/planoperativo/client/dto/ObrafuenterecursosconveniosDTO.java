@@ -1,7 +1,6 @@
 package co.com.interkont.cobra.planoperativo.client.dto;
 // Generated Jul 12, 2013 4:10:17 PM by Hibernate Tools 3.2.1.GA
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -25,13 +24,13 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
 
     public ObrafuenterecursosconveniosDTO() {
     }
-     public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
-       this.idobrafuenterecursos = idobrafuenterecursos;
-       this.obra = obra;
-       this.tipoaporte = tipoaporte;
-       this.vigencia = vigencia;
-       this.valor = valor;
-     }
+    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
+        this.idobrafuenterecursos = idobrafuenterecursos;
+        this.obra = obra;
+        this.tipoaporte = tipoaporte;
+        this.vigencia = vigencia;
+        this.valor = valor;
+    }
 
       public ObrafuenterecursosconveniosDTO(int tipoaporte,  BigDecimal valor,FuenterecursosconvenioDTO fuente,String rubro) {
         this.tipoaporte = tipoaporte;
@@ -39,8 +38,8 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         this.fuenterecursosconvenio=fuente;
         this.rubro=rubro;
         this.valorDisponible=valor;
-        
-     }
+
+        }
 
     public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, String rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
         this.idobrafuenterecursos = idobrafuenterecursos;
@@ -54,8 +53,6 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         this.relacionobrafuenterecursoscontratos = relacionobrafuenterecursoscontratos;
 
     }
-    
-    
 
     /**
      * @return the idobrafuenterecursos
@@ -196,6 +193,6 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     public void setValorDisponible(BigDecimal valorDisponible) {
         this.valorDisponible = valorDisponible;
     }
-    
-    
-}
+
+
+    }

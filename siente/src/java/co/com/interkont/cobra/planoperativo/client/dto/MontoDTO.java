@@ -18,6 +18,8 @@ public class MontoDTO implements IsSerializable{
      private RubroDTO rubrodto;
      private BigDecimal valor;
      private int vigencia;
+     private String descripcionRubro;
+     private String eliminar;
 
     public MontoDTO() {
     }
@@ -30,10 +32,13 @@ public class MontoDTO implements IsSerializable{
         this.vigencia = vigencia;
     }
     
-     public MontoDTO( RubroDTO rubro, BigDecimal valor, int vigencia) {
+     public MontoDTO( RubroDTO rubro, BigDecimal valor, int vigencia,int id,String descripcionRubro) {
         this.rubrodto = rubro;
         this.valor = valor;
         this.vigencia = vigencia;
+        this.idmonto=id;
+        this.descripcionRubro=descripcionRubro;
+        this.eliminar="Eliminar";
     }
      
    
@@ -101,6 +106,34 @@ public class MontoDTO implements IsSerializable{
      */
     public void setVigencia(int vigencia) {
         this.vigencia = vigencia;
+    }
+
+    /**
+     * @return the descripcionRubro
+     */
+    public String getDescripcionRubro() {
+        return descripcionRubro;
+    }
+
+    /**
+     * @param descripcionRubro the descripcionRubro to set
+     */
+    public void setDescripcionRubro(String descripcionRubro) {
+        this.descripcionRubro = descripcionRubro;
+    }
+
+    /**
+     * @return the Eliminar
+     */
+    public String getEliminar() {
+        return eliminar;
+    }
+
+    /**
+     * @param Eliminar the Eliminar to set
+     */
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
     }
        
        
