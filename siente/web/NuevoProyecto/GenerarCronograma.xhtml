@@ -81,7 +81,7 @@
                                                                 <h:panelGrid columns="1" >
                                                                     <h:outputLabel  styleClass="ikont-hol-importarcronograma"   value="#{var.importeelcronograma}"/>
                                                                     <interkont:spacer width="40"/>
-                                                                    <a4j:commandButton styleClass="ikont-hcb-examinar"    value="#{var.examinar}"  id="subircronograma"
+                                                                    <a4j:commandButton style="width: 17px;x"     value="#{var.examinar}"  id="subircronograma"
                                                                                        onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
                                                                 </h:panelGrid>
 
@@ -194,6 +194,7 @@
                                                             </center>
                                                         </rich:collapsiblePanel>
                                                         <h:panelGroup >
+                                                            <center>
                                                             <h:commandButton id="btVolverGenCron"  value="#{var.volver}" immediate="true"
                                                                              action="datosubicaciondelaObra" />
                                                             <a4j:commandButton execute="@this" value="#{var.continuar}" immediate="true" 
@@ -202,6 +203,7 @@
                                                             <h:commandButton id="btCancelarGenerar"  value="#{var.cancelar}" immediate="true"
                                                                              action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
                                                             </h:commandButton>
+                                                            </center>
                                                             <a4j:outputPanel id="panelErrorGen">
                                                                 <rich:messages id="messagesGen" globalOnly="true"
                                                                                styleClass="ikont-rm-messagesGen"   ajaxRendered="true"

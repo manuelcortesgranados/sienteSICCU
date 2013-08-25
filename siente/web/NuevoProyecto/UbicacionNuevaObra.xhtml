@@ -146,10 +146,10 @@
                                                                     </h:panelGrid>
                                                                     <h:panelGroup  id="layoutLugar" >
                                                                         <rich:dataTable styleClass="ikont-table-lugar-datosbasicos"  id="datamarkers" 
-                                                                                         rows="4" 
-                                                                                         binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
-                                                                                         rowKeyVar="filaSeleccionada"
-                                                                                         var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
+                                                                                        rows="4" 
+                                                                                        binding="#{Supervisor$IngresarNuevaObra.tablaMarkereli}"
+                                                                                        rowKeyVar="filaSeleccionada"
+                                                                                        var="lalo" value="#{Supervisor$IngresarNuevaObra.marli}" >
                                                                             <rich:column id="co1">
                                                                                 <f:facet name="header">
                                                                                     <h:outputText  styleClass="ikont-hot-co1longitud"   value="#{var.longitud}" />
@@ -450,13 +450,14 @@
                                                                 </h:panelGroup >
                                                             </rich:collapsiblePanel>
                                                             <h:panelGroup >
-                                                                <h:commandButton id="btVolverDatosBas"  value="#{var.volver}" immediate="true"
-                                                                                 action="datosbasicosnuevoproyecto" />
-                                                                <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" />
-                                                                <h:commandButton id="btCancelarUbica"  value="#{var.cancelar}" immediate="true"
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                                </h:commandButton>
-
+                                                                <center>
+                                                                    <h:commandButton id="btVolverDatosBas"  value="#{var.volver}" immediate="true"
+                                                                                     action="datosbasicosnuevoproyecto" />
+                                                                    <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" />
+                                                                    <h:commandButton id="btCancelarUbica"  value="#{var.cancelar}" immediate="true"
+                                                                                     action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                                                    </h:commandButton>
+                                                                </center>
                                                                 <a4j:outputPanel id="panelErrorUb">
                                                                     <rich:messages id="messagesUb" globalOnly="true"
                                                                                    styleClass="ikont-rm-messagesUb"   ajaxRendered="true"

@@ -102,6 +102,7 @@
 
                                                                     </h:panelGroup>
                                                                     <h:panelGroup styleClass="ikont-hpg-volveragenerarFin"  >
+                                                                        <center>
                                                                         <a4j:commandButton id="btVolveragenerarFin"  value="#{var.volver}" immediate="true"
                                                                                            action="datosAsociarContrato" />
                                                                         <h:commandButton id="btCancelarNuevaObraFin"  value="#{var.cancelar}"
@@ -121,10 +122,9 @@
                                                                                              action="#{Supervisor$IngresarNuevaObra.cancelar_action}"   >
 
                                                                             </h:commandButton>
-
-
-
+                                                                           
                                                                         </h:panelGroup>
+                                                                         </center>
                                                                     </h:panelGroup>
                                                                 </h:panelGrid>
                                                                 <a4j:outputPanel id="panelErrorFin">

@@ -96,26 +96,26 @@ public class SessionBeanCobra implements Serializable {
     private int obraseguida = 0;
     private CobraGwtServiceAble cobraGwtService;
     private boolean iniciamapa = true;
-    private boolean logueado=false;
+    private boolean logueado = false;
     private boolean logueadodesdemapa = false;
 
     public boolean isLogueadodesdemapa() {
         JsfUsuario usuario;
         String usu_login = "ciudadano";
         usuario = getUsuarioService().encontrarPorNombreusuario(usu_login);
-   if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
-          return true;
+        getCiudadanoservice().setUsuariomostrar(getUsuarioObra());
+        if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
+            return true;
+        } else {
+            return false;
         }
-      else {
-         return false;
-      }
-       
+
     }
 
     public void setLogueadodesdemapa(boolean logueadodesdemapa) {
         this.logueadodesdemapa = logueadodesdemapa;
     }
-    
+
     public boolean isLogueado() {
         return logueado;
     }
@@ -123,8 +123,6 @@ public class SessionBeanCobra implements Serializable {
     public void setLogueado(boolean logueado) {
         this.logueado = logueado;
     }
-    
-    
 
     public boolean isIniciamapa() {
         return iniciamapa;
@@ -133,7 +131,6 @@ public class SessionBeanCobra implements Serializable {
     public void setIniciamapa(boolean iniciamapa) {
         this.iniciamapa = Boolean.parseBoolean(bundle.getString("iniciaenmapa"));
     }
-
     /**
      * Variable para el manejo del cargue de contrato en la comunicacion entre
      * gwt y jsf
@@ -505,8 +502,7 @@ public class SessionBeanCobra implements Serializable {
         getCobraService().getLog().info("cerrarSesion(" + getUsuarioService().getUsuarioObra().getUsuLogin() + ", " + new Date() + ");");
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
         //getSessionMap().clear();
-        ExternalContext ctx
-                = FacesContext.getCurrentInstance().getExternalContext();
+        ExternalContext ctx = FacesContext.getCurrentInstance().getExternalContext();
         ((HttpSession) ctx.getSession(false)).invalidate();
 
         return "cerrarSession";
@@ -545,7 +541,7 @@ public class SessionBeanCobra implements Serializable {
 
     public void cargarpermisosmodulo(int modulo) {
 
-        if (getUsuarioService().getUsuarioObra() != null) {            
+        if (getUsuarioService().getUsuarioObra() != null) {
             Modulorecurso modulorecurso = new Modulorecurso();
             getUsuarioService().getUsuarioObra().setRenderrecurso(modulorecurso.validarrecurso(modulo));
         }
@@ -1149,7 +1145,8 @@ public class SessionBeanCobra implements Serializable {
         bean.usuarioSinRegistro();
 
     }
-      public void limpirarUsuario() {
+
+    public void limpirarUsuario() {
         getCiudadanoservice().limpiarOpinionCiudadano();
         getUsuarioObra().setUsuLogin(null);
 
@@ -1158,30 +1155,28 @@ public class SessionBeanCobra implements Serializable {
     /**
      * Método para iniciar aplicativo desde el mapa
      */
-    public  void iniciarDesdeMapa() {         
-            getUsuarioService().setUsuarioObra(new JsfUsuario());
-            getUsuarioObra().setUsuLogin("ciudadano");
-            getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
-            setMensajelogueo("");
-            setTipologueo(getUsuarioService().
-                    encontrarUsuario(getUsuarioObra()));
-            getUsuarioService().getLog().info("Auntentico_en_"
-                    + getBundle().getString("versioncobra") + "_Ciudadano(" + getUsuarioObra().getUsuLogin()
-                    + ", " + new Date() + ", home ");
-            getCobraService().setAltomapa(getBundle().getString("altomapaciudadano"));
-            getCobraService().setHeaderNombre("Herramientas");
-            getCobraService().setHeaderStyle("titletool");
-            setLogueado(true);
+    public void iniciarDesdeMapa() {
+        getUsuarioService().setUsuarioObra(new JsfUsuario());
+        getUsuarioObra().setUsuLogin("ciudadano");
+        getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
+        setMensajelogueo("");
+        setTipologueo(getUsuarioService().
+                encontrarUsuario(getUsuarioObra()));
+        getUsuarioService().getLog().info("Auntentico_en_"
+                + getBundle().getString("versioncobra") + "_Ciudadano(" + getUsuarioObra().getUsuLogin()
+                + ", " + new Date() + ", home ");
+        getCobraService().setAltomapa(getBundle().getString("altomapaciudadano"));
+        getCobraService().setHeaderNombre("Herramientas");
+        getCobraService().setHeaderStyle("titletool");
+        setLogueado(true);
     }
-    
-    public void destruirsession(){
-       FacesContext faces = FacesContext.getCurrentInstance();
-       ExternalContext external = faces.getExternalContext();
-       Object session = external.getSession(false);
-       HttpSession htpSession = (HttpSession) session;
-       htpSession.invalidate();
-        
-    }
-    
 
+    public void destruirsession() {
+        FacesContext faces = FacesContext.getCurrentInstance();
+        ExternalContext external = faces.getExternalContext();
+        Object session = external.getSession(false);
+        HttpSession htpSession = (HttpSession) session;
+        htpSession.invalidate();
+
+    }
 }

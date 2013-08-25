@@ -56,7 +56,7 @@
         <h:form>
             <h:panelGrid columns="3"   id="pgmiperfil">
                 <h:panelGrid    columnClasses="panelcenter" styleClass="ikont-hpg-fotociuda bcg-tb-per-ciu">
-                    <h:graphicImage  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}siente#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
+                    <h:graphicImage  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />
                     <h:outputLabel  styleClass="ikont-hol-strnombrecompleto vtitle17"    value="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strnombrecompleto}"/>
                     <h:outputLabel  styleClass="ikont-hol-departamento vtitle18"    value="#{SessionBeanCobra.ciudadanoservice.municipio}, #{SessionBeanCobra.ciudadanoservice.departamento}"/>
                     <interkont:spacer width="30"/>

@@ -27,7 +27,7 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-<ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
         <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
     </ui:define>
     <ui:define name="body" >
@@ -184,19 +184,20 @@
                                                                 </center>
                                                             </h:panelGrid>
                                                             <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
+                                                                <center>
+                                                                    <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                                                                       action="datosGenerarImagenes" />
 
-                                                                <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
-                                                                                   action="datosGenerarImagenes" />
+                                                                    <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
+                                                                                     action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"
+                                                                                     >
 
-                                                                <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
-                                                                                 action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"
-                                                                                 >
+                                                                    </h:commandButton>
 
-                                                                </h:commandButton>
-
-                                                                <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
-                                                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                                </h:commandButton>
+                                                                    <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                                                                     action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                                                    </h:commandButton>
+                                                                </center>     
                                                             </h:panelGroup>
                                                             <a4j:outputPanel id="panelErrorAsoCont">
                                                                 <rich:messages id="messagesAsoCon" globalOnly="true"

@@ -17,8 +17,8 @@
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>  
-    
-     <ui:define name="menu_lateral">
+
+    <ui:define name="menu_lateral">
         <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
@@ -156,16 +156,17 @@
 
 
                                                             </h:panelGroup>
+                                                            <center>
+                                                                <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                                                                 action="datosgenerarCrono" />
+                                                                <h:commandButton   value="#{var.continuar}"
+                                                                                   action="#{Supervisor$IngresarNuevaObra.pasoAsociarContrato}">
+                                                                </h:commandButton>
 
-                                                            <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
-                                                                             action="datosgenerarCrono" />
-                                                            <h:commandButton   value="#{var.continuar}"
-                                                                               action="#{Supervisor$IngresarNuevaObra.pasoAsociarContrato}">
-                                                            </h:commandButton>
-
-                                                            <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
-                                                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                            </h:commandButton>
+                                                                <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                                                </h:commandButton>
+                                                            </center>
                                                             <a4j:outputPanel id="panelErrorImag">
                                                                 <rich:messages id="messagesImag" globalOnly="true"
                                                                                styleClass="ikont-rm-messagesImag"   ajaxRendered="true"

@@ -7,6 +7,7 @@ package cobra;
 
 import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.JsfUsuario;
+import cobra.Ciudadano.PerfilCiudadano;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +33,7 @@ public class Login implements Serializable{
      * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code inserted
      * here is subject to being replaced.</p>
-     */  
+     */
 
     private void _init() throws Exception {
     }
@@ -42,7 +43,7 @@ public class Login implements Serializable{
      * <p>Construct a new Page bean instance.</p>
      */
     public Login() {
-        
+       
         
     }
 
@@ -79,12 +80,12 @@ public class Login implements Serializable{
 
     }
 
-    public String verificarUsuario() {     
+    public String verificarUsuario() {
         try {
             getSessionBeanCobra().setMensajelogueo("");
-            
 
-           
+
+
             getSessionBeanCobra().setTipologueo(getSessionBeanCobra().getUsuarioService().
                     encontrarUsuario(getSessionBeanCobra().getUsuarioObra()));
 
@@ -141,12 +142,12 @@ public class Login implements Serializable{
 
     public String usuarioSinRegistro() {
         getSessionBeanCobra().getUsuarioService().setUsuarioObra(new JsfUsuario());
-        
+
         getSessionBeanCobra().getUsuarioObra().setUsuLogin("ciudadano");
-       
-        getSessionBeanCobra().getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));       
-        
-        
+
+        getSessionBeanCobra().getUsuarioObra().setUsuPasswd(ResourceBundle.getBundle("key").getString("key2"));
+
+
         return enviar_action();
     }
 }
