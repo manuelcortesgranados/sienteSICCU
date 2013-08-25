@@ -56,9 +56,9 @@
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
                     <a4j:commandLink style="color: green;" type="submit" value="#{item.nombreobra}"  
-                                      onclick="document.location.href = '../NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                                      onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
                     <a4j:commandLink style="color: green;"  type="submit" value="#{item.nombreobra}"  
-                                      onclick="document.location.href = '../Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>
+                                      onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>                 
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
                     <interkont:spacer height="3"/>
                     <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
