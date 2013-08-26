@@ -2597,13 +2597,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
                 descripcion.append("<span class=\"textvalla4 \"> Tipo</span>");
-                descripcion.append("<span class=\"imgtipo tipo" + obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto() + "\">");
-                descripcion.append("</span>");
+                descripcion.append("<a class=\"imgtipo tipo" + obra.getTipoobra().getTipoproyecto().getIntidtipoproyecto() + "\" value=\"" + obra.getTipoobra().getTipoproyecto().getStrnombre() + "\">");
+                descripcion.append("</a>");
                 descripcion.append("</div>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
                 descripcion.append("<span class=\"textvalla4 \">Estado </span>");
-                descripcion.append("<span class=\"imgestado estado" + obra.getTipoestadobra().getIntestadoobra() + "\">");
-                descripcion.append("</span>");
+                descripcion.append("<a class=\"imgestado estado" + obra.getTipoestadobra().getIntestadoobra() + "\" value=\"" + obra.getTipoestadobra().getStrdesctipoestado() + "\">");
+                descripcion.append("</a>");
                 descripcion.append("</div>");
                 descripcion.append("</p>");
                 descripcion.append("</div>");
