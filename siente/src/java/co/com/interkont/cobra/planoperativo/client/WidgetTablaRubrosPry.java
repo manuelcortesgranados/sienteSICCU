@@ -72,9 +72,9 @@ public class WidgetTablaRubrosPry implements IsWidget {
     /**
      * @return the store
      */
-    public WidgetTablaRubrosPry(ObraDTO obraDto,ActividadobraDTO actividadObraPadre) {
+    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre) {
         this.obraDto = obraDto;
-        this.actividadObraPadre=actividadObraPadre;
+        this.actividadObraPadre = actividadObraPadre;
     }
 
     public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
@@ -102,9 +102,9 @@ public class WidgetTablaRubrosPry implements IsWidget {
         ValueProvider<ObrafuenterecursosconveniosDTO, String> nombreEntidad();
 
         ValueProvider<ObrafuenterecursosconveniosDTO, String> eliminar();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, String> descripcionaporte();
-        
+
         ValueProvider<ObrafuenterecursosconveniosDTO, Integer> vigencia();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
@@ -124,7 +124,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
 
         ColumnConfig<ObrafuenterecursosconveniosDTO, String> tipoAporte = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.descripcionaporte(), 75, "Tipo aporte");
         tipoAporte.setColumnTextStyle(textStyles);
-        
+
         ColumnConfig<ObrafuenterecursosconveniosDTO, Integer> vigencia = new ColumnConfig<ObrafuenterecursosconveniosDTO, Integer>(properties.vigencia(), 55, "Vigencia");
         vigencia.setColumnTextStyle(textStyles);
 
@@ -141,9 +141,9 @@ public class WidgetTablaRubrosPry implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                actividadObraPadre.getObra().setValor(actividadObraPadre.getObra().getValor().subtract(store.get(row).getValor()));
-                actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValor());
-                actividadObraPadre.getObra().getObrafuenterecursosconvenioses().remove(store.get(row));
+                obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
+                obraDto.setValorDisponible(obraDto.getValor());
+                obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                 getStore().remove(store.get(row));
 
             }
@@ -181,6 +181,4 @@ public class WidgetTablaRubrosPry implements IsWidget {
 
         return cp;
     }
-
-
 }
