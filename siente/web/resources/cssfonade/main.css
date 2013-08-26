@@ -2945,3 +2945,219 @@ color: #FFF;
     color:#999;
     line-height:9px;
 }
+
+// Css creados para ciudadano cambiar....
+
+.ikont-acl-seleccionqueja {
+    background-image:url(../imgs/p_quejese.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-seleccionqueja:hover {
+    background-position: 0px -25px;
+}
+
+
+.ikont-acl-seleccionopine {
+    background-image:url(../imgs/p_opine.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-seleccionopine:hover {
+    background-position: 0px -25px;
+}
+
+
+
+.ikont-acl-seleccionfelicite {
+    background-image:url(../imgs/p_felicite.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-seleccionfelicite:hover {
+    background-position: 0px -25px;
+}
+
+
+.ikont-hcl-intidtipoopinion3 {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_felicitar.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-intidtipoopinion3:hover {
+    background-position: 0px -85px;
+}
+.ikont-hcl-intidtipoopinion2 {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_opinar.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-intidtipoopinion2:hover {
+    background-position: 0px -85px;
+}
+
+.ikont-hcl-intidtipoopinion1 {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_quejarse.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-intidtipoopinion1:hover {
+    background-position: 0px -85px;
+}
+
+
+
+
+.ikont-acl-btimg {
+    background-image:url(../imgs/p_examinar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+
+}
+.ikont-acl-btimg:hover {
+    background-position: 0px -25px;
+}
+
+.ikont-acl-btnacta {
+    background-image:url(../imgs/p_examinar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+
+}
+.ikont-acl-btnacta:hover {
+    background-position: 0px -25px;
+}
+
+.ikont-acl-cancelarComentario{
+    background-image:url(../imgs/p_cancelar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-cancelarComentario:hover {
+    background-position: 0px -25px;
+}
+
+
+
+.ikont-acl-guardarComentarioOpinion {
+    background-image:url(../imgs/bt_publicar.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-acl-guardarComentarioOpinion:hover {
+    background-position: 0px -25px;
+}
+
+
+.ikont-hcl-llenarlistaFelicitacion {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_felicitar.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-llenarlistaFelicitacion:hover {
+    background-position: 0px -85px;
+}
+.ikont-hcl-llenarlistaOpinion {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_opinar.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-llenarlistaOpinion:hover {
+    background-position: 0px -85px;
+}
+
+.ikont-hcl-queja {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_quejarse.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-queja:hover {
+    background-position: 0px -85px;
+}
+
+.ikont-hcl-llenarlistaTodos {
+    width: 80px;
+    height:85px;
+    background-image:url(../imgs/p_todos.png);
+    background-position: 0px 0px;
+    display: block;
+}
+.ikont-hcl-llenarlistaTodos:hover {
+    background-position: 0px -85px;
+}
+
+
+.ikont-hcl-abririmagen{
+    background-image:url(../imgs/p_imagen.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-hcl-abririmagen:hover {
+    background-position: 0px -25px;
+}
+.ikont-hcl-strvideo{
+    background-image:url(../imgs/p_video.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-hcl-strvideo:hover {
+    background-position: 0px -25px;
+}
+.ikont-hcl-abrirdocumento{
+    background-image:url(../imgs/p_documento.png);
+    width:85px;
+    height:25px;
+    display:block;
+    margin:3px;
+    background-position: 0px 0px;
+    float:right;
+}
+.ikont-hcl-abrirdocumento:hover {
+    background-position: 0px -25px;
+}
