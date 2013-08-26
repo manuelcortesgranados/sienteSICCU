@@ -2469,6 +2469,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      */
     public boolean comboEntidadesContratoguardar() {
         if (getContrato().getTercero().getStrnombrecompleto() != null) {
+            if (getContrato().getTercero().getStrnombrecompleto().toUpperCase().compareTo("TODOS") == 0) {
+                System.out.println("ingresa a la condicion");
+                getContrato().getTercero().setIntcodigo(-1);
+                return true;
+            }
             Iterator ite = temp.iterator();
             int idtercero = 0;
             while (ite.hasNext()) {
@@ -2864,7 +2869,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
         FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
-        if ( guardarborradorconvenio == true) {
+        if (guardarborradorconvenio == true) {
             limpiarContrato();
         }
     }
@@ -3200,7 +3205,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             polizacontrato = new Polizacontrato();
             polizacontrato.setTipopoliza(new Tipopoliza());
             polizacontrato.setAseguradora(new Aseguradora());
-            polizacontrato.setContrato(new Contrato());                           
+            polizacontrato.setContrato(new Contrato());
         } else {
             FacesUtils.addErrorMessage("Debe diligenciar los datos requeridos para la póliza.");
         }
@@ -6286,20 +6291,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             validadcionGuardarContrato();
                         } else {
                             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                            FacesUtils.addInfoMessage("losdatossehanguardado");
-                        }                       
+                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+                        }
                     }
                 } else {
                     validardatosbasicosplano = 1;
-                    FacesUtils.addErrorMessage("fechadesuscripcionplano");
+                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
                 }
             } else {
                 validardatosbasicosplano = 2;
-                FacesUtils.addErrorMessage("fechadesuscripcionvalida");
+                FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionvalida"));
             }
         } else {
             validardatosbasicosplano = 3;
-            FacesUtils.addErrorMessage("validarfechafin");
+            FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
         }
     }
 
