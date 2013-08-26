@@ -6,7 +6,6 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import com.gantt.client.config.GanttConfig.TaskType;
 import com.google.gwt.user.client.rpc.IsSerializable;
-import com.sencha.gxt.core.client.util.DateWrapper;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -54,11 +53,14 @@ public class ActividadobraDTO implements IsSerializable {
     private Set dependenciasForFkActividadDestino = new HashSet(0);
     private ContratoDTO contrato;
     private ObraDTO obra;
+    private String eliminar;
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
-    public ActividadobraDTO(String strdescactividad,int tipoActividad) {
+    public ActividadobraDTO(String strdescactividad,int tipoActividad,int id) {
         this.strdescactividad=strdescactividad;
         this.tipoActividad=tipoActividad;
+        this.id=""+id;
+        this.eliminar="Eliminar";
     }
     
      public ActividadobraDTO(String strdescactividad,int tipoActividad,Date fechaInicio,Date fechaFin,ObraDTO obra) {
@@ -110,9 +112,6 @@ public class ActividadobraDTO implements IsSerializable {
         this.taskType = taskType;
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
-        DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
-        
     }
     
      public ActividadobraDTO(String name, Date start, int duration, int percentDone,
@@ -137,8 +136,6 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra=obraDto;
-         DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
     }
      
        public ActividadobraDTO(String id, String name, Date start, int duration,
@@ -152,8 +149,6 @@ public class ActividadobraDTO implements IsSerializable {
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.contrato=contratoDto;
-         DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
     }
 
 
@@ -223,173 +218,19 @@ public class ActividadobraDTO implements IsSerializable {
         return !children.isEmpty();
     }
 
-//
-//    
-//    public ActividadobraDTO(long oidactiviobra, String strdescactividad, Date fechaInicio, Date fechaFin, Integer peso, Double duracion, Integer estado, ContratoDTO contrato, Set dependenciasForFkActividadOrigen, Set dependenciasForFkActividadDestino) {
-//        this.oidactiviobra = oidactiviobra;
-//        this.strdescactividad = strdescactividad;
-//        this.fechaInicio = fechaInicio;
-//        this.fechaFin = fechaFin;
-//        this.peso = peso;
-//        this.duracion = duracion;
-//        this.estado = estado;
-//        this.contrato = contrato;
-//        this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
-//        this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
-//    }
-//    
-//     public ActividadobraDTO(long oidactiviobra, String strdescactividad, Date fechaInicio, Date fechaFin, Integer peso, Double duracion, Integer estado, ContratoDTO contrato) {
-//        this.oidactiviobra = oidactiviobra;
-//        this.strdescactividad = strdescactividad;
-//        this.fechaInicio = fechaInicio;
-//        this.fechaFin = fechaFin;
-//        this.peso = peso;
-//        this.duracion = duracion;
-//        this.estado = estado;
-//        this.contrato = contrato;
-//         }
-//
-//   
-//
-//    /**
-//     * @return the oidactiviobra
-//     */
-//    public long getOidactiviobra() {
-//        return oidactiviobra;
-//    }
-//
-//    /**
-//     * @param oidactiviobra the oidactiviobra to set
-//     */
-//    public void setOidactiviobra(long oidactiviobra) {
-//        this.oidactiviobra = oidactiviobra;
-//    }
-//
-//    /**
-//     * @return the strdescactividad
-//     */
-//    public String getStrdescactividad() {
-//        return strdescactividad;
-//    }
-//
-//    /**
-//     * @param strdescactividad the strdescactividad to set
-//     */
-//    public void setStrdescactividad(String strdescactividad) {
-//        this.strdescactividad = strdescactividad;
-//    }
-//    /**
-//     * @return the fechaInicio
-//     */
-//    public Date getFechaInicio() {
-//        return fechaInicio;
-//    }
-//
-//    /**
-//     * @param fechaInicio the fechaInicio to set
-//     */
-//    public void setFechaInicio(Date fechaInicio) {
-//        this.fechaInicio = fechaInicio;
-//    }
-//
-//    /**
-//     * @return the fechaFin
-//     */
-//    public Date getFechaFin() {
-//        return fechaFin;
-//    }
-//
-//    /**
-//     * @param fechaFin the fechaFin to set
-//     */
-//    public void setFechaFin(Date fechaFin) {
-//        this.fechaFin = fechaFin;
-//    }
-//
-//    /**
-//     * @return the peso
-//     */
-//    public Integer getPeso() {
-//        return peso;
-//    }
-//
-//    /**
-//     * @param peso the peso to set
-//     */
-//    public void setPeso(Integer peso) {
-//        this.peso = peso;
-//    }
-//
-//    /**
-//     * @return the duracion
-//     */
-//    public Double getDuracion() {
-//        return duracion;
-//    }
-//
-//    /**
-//     * @param duracion the duracion to set
-//     */
-//    public void setDuracion(Double duracion) {
-//        this.duracion = duracion;
-//    }
-//
-//    /**
-//     * @return the estado
-//     */
-//    public Integer getEstado() {
-//        return estado;
-//    }
-//
-//    /**
-//     * @param estado the estado to set
-//     */
-//    public void setEstado(Integer estado) {
-//        this.estado = estado;
-//    }
-//
-//    /**
-//     * @return the dependenciasForFkActividadOrigen
-//     */
-//    public Set getDependenciasForFkActividadOrigen() {
-//        return dependenciasForFkActividadOrigen;
-//    }
-//    /**
-//     * @param dependenciasForFkActividadOrigen the
-//     * dependenciasForFkActividadOrigen to set
-//     */
-//    public void setDependenciasForFkActividadOrigen(Set dependenciasForFkActividadOrigen) {
-//        this.dependenciasForFkActividadOrigen = dependenciasForFkActividadOrigen;
-//    }
-//
-//    /**
-//     * @return the dependenciasForFkActividadDestino
-//     */
-//    public Set getDependenciasForFkActividadDestino() {
-//        return dependenciasForFkActividadDestino;
-//    }
-//
-//    /**
-//     * @param dependenciasForFkActividadDestino the
-//     * dependenciasForFkActividadDestino to set
-//     */
-//    public void setDependenciasForFkActividadDestino(Set dependenciasForFkActividadDestino) {
-//        this.dependenciasForFkActividadDestino = dependenciasForFkActividadDestino;
-//    }
-//
-//    /**
-//     * @return the contrato
-//     */
-//    public ContratoDTO getContrato() {
-//        return contrato;
-//    }
-//
-//    /**
-//     * @param contrato the contrato to set
-//     */
-//    public void setContrato(ContratoDTO contrato) {
-//        this.contrato = contrato;
-//    }
+ public int calcularDuracion() {
+        if (this.getStartDateTime() != null && this.getEndDateTime() != null) {
+
+            long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
+            if (this.getStartDateTime().compareTo(this.getEndDateTime()) != 0) {
+                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                return ((int) dias);
+            } else {
+                return 1;
+            }
+        }  
+        return 0;
+    }
     /**
      * @return the obra
      */
@@ -418,33 +259,33 @@ public class ActividadobraDTO implements IsSerializable {
         this.strdescactividad = strdescactividad;
     }
 
-//    /**
-//     * @return the fechaInicio
-//     */
-//    public Date getFechaInicio() {
-//        return fechaInicio;
-//    }
-//
-//    /**
-//     * @param fechaInicio the fechaInicio to set
-//     */
-//    public void setFechaInicio(Date fechaInicio) {
-//        this.fechaInicio = fechaInicio;
-//    }
-//
-//    /**
-//     * @return the fechaFin
-//     */
-//    public Date getFechaFin() {
-//        return fechaFin;
-//    }
-//
-//    /**
-//     * @param fechaFin the fechaFin to set
-//     */
-//    public void setFechaFin(Date fechaFin) {
-//        this.fechaFin = fechaFin;
-//    }
+    /**
+     * @return the fechaInicio
+     */
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    /**
+     * @param fechaInicio the fechaInicio to set
+     */
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    /**
+     * @return the fechaFin
+     */
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    /**
+     * @param fechaFin the fechaFin to set
+     */
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
 
     /**
      * @return the peso
@@ -554,18 +395,19 @@ public class ActividadobraDTO implements IsSerializable {
         this.boolobligatoria = boolobligatoria;
     }
 
-     public int calcularDuracion() {
-        if (this.getStartDateTime() != null && this.getEndDateTime() != null) {
-
-            long diferencia = this.getEndDateTime().getTime() - this.getStartDateTime().getTime();
-            if (this.getStartDateTime().compareTo(this.getEndDateTime()) != 0) {
-                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-                return ((int) dias);
-            } else {
-                return 1;
-            }
-        }  
-        return 0;
+    /**
+     * @return the eliminar
+     */
+    public String getEliminar() {
+        return eliminar;
     }
+
+    /**
+     * @param eliminar the eliminar to set
+     */
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
+    }
+
     
 }

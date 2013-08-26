@@ -2585,7 +2585,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("</p>");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna vallacontentinfo\">");
-                descripcion.append("<span class=\"textvalla4\">Estado</span>");
+                descripcion.append("<span class=\"textvalla4\">Semáforo</span>");
                 descripcion.append("<span class=\"imgsemaforo " + stylesemaforo + "\">");
                 descripcion.append("</span>");
                 descripcion.append("</div>");
