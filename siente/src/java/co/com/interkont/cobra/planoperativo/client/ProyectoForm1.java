@@ -43,6 +43,7 @@ import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MessageBox;
+import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.ParseErrorEvent;
@@ -88,10 +89,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      */
     ContratoDTO contratoDto;
     List<RubroDTO> lstRubrosDto;
-    /**
-     * Flextabla para objetivos específico
-     */
-    private StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1, "Objetivos Específicos", "Por favor ingrese la descripción del objetivo:");
+    int idTemp;
+    int idTempObj;
+    int idTempMacroActividades;
     ObraDTO proyectoDTO;
     TerceroDTO terceroDto;
     RubroDTO rubroDto;
@@ -99,7 +99,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     ActividadobraDTO actividadObraPadre;
     Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     Dialog modalPry;
-    ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);   
+    ActividadobraDTOProps propes;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
 
@@ -108,6 +108,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         proyectoDTO = new ObraDTO();
         this.actividadObraPadre = actividadobrapadre;
         service.setLog("tarea Seleccionada=" + actividadobrapadre.getStartDateTime(), null);
+        idTemp = 0;
+        idTempObj = 0;
+        idTempMacroActividades = 0;
     }
 
     public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ContratoDTO contratoDtoP) {
@@ -119,6 +122,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         lstRubrosDto = new ArrayList<RubroDTO>();
         contratoDto.setValorDisponible(contratoDto.getNumvlrcontrato());
         service.setLog("convenio dis" + contratoDto.getValorDisponible(), null);
+        idTemp = 0;
     }
 
     /**
@@ -244,147 +248,153 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         getNombrePry().setAllowBlank(false);
         getNombrePry().addValidator(new MaxLengthValidator(250));
         getNombrePry().setAutoValidate(true);
-        con.add(new FieldLabel(nombrePry, "Nombre del proyecto:"), new HtmlData(".fn"));
+        con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
         fechaInicio = new DateField();
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
         fechaInicio.setAllowBlank(true);
         fechaInicio.setAutoValidate(true);
-        con.add(new FieldLabel(fechaInicio, "Fecha de inicio:"), new HtmlData(".fechainicio"));
+        con.add(fechaInicio, new HtmlData(".fechainicio"));
 
         fechaFin = new DateField();
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
-        con.add(new FieldLabel(fechaFin, "Fecha de finalización:"), new HtmlData(".fechafin"));
+        con.add(fechaFin, new HtmlData(".fechafin"));
+//
+//        objetivoGeneral = new TextArea();
+//        getObjetivoGeneral().setHeight("" + 100);
+//        getObjetivoGeneral().setWidth("" + (cw - 10));
+//        getObjetivoGeneral().setText("General");
+//        getObjetivoGeneral().addClickHandler(new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//                if (getObjetivoGeneral().getText().compareTo("General") == 0) {
+//                    getObjetivoGeneral().setText("");
+//                }
+//
+//            }
+//        });
+//        getObjetivoGeneral().addBlurHandler(new BlurHandler() {
+//            @Override
+//            public void onBlur(BlurEvent event) {
+//                if (getObjetivoGeneral().getText().compareTo("") == 0) {
+//                    getObjetivoGeneral().setText("General");
+//                }
+//            }
+//        });
+//        con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
 
-        llenarComboEntidadesConvenio(entidades);
 
-        lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
-        lstEntidadesConvenio.setEmptyText("Entidad");
-        lstEntidadesConvenio.setWidth(cw);
-        lstEntidadesConvenio.setAllowBlank(false);
-        lstEntidadesConvenio.setTypeAhead(true);
-        lstEntidadesConvenio.setTriggerAction(TriggerAction.ALL);
-        lstEntidadesConvenio.addSelectionHandler(new SelectionHandler<TerceroDTO>() {
-            @Override
-            public void onSelection(SelectionEvent<TerceroDTO> event) {
-                terceroDto = event.getSelectedItem();
-                fuenteRecursosConveDTO = buscarFuenteDto(terceroDto.getCampoTemporalFuenteRecursos());
-                service.setLog("selec ter" + fuenteRecursosConveDTO.getTercero().getStrnombrecompleto(), null);
-            }
-        });
-        con.add(new FieldLabel(lstEntidadesConvenio, "*ANADIR ROLES Y ENTIDADES"), new HtmlData(".entidad"));
+//        setMeta(new TextField());
+//        getMeta().setWidth(cw);
+//        getMeta().setAllowBlank(false);
+//        con.add(new FieldLabel(getMeta(), "*META O PRODUCTO ESPERADO"), new HtmlData(".meta"));
+//
+//        setMacroActividades(new TextArea());
+//        getMacroActividades().setHeight("" + 90);
+//        getMacroActividades().setWidth("" + cw);
+//        con.add(new FieldLabel(getMacroActividades(), "*MACROACTIVIDADES"), new HtmlData(".macro"));
 
-        tipoRecurso = new TextField();
-        tipoRecurso.setEmptyText("Tipo recurso");
-        tipoRecurso.setAllowBlank(false);
-        tipoRecurso.setWidth(cw);
-        con.add(tipoRecurso, new HtmlData(".tipor"));
+        final Dialog adicionarRubros = new Dialog();
+        adicionarRubros.setHideOnButtonClick(true);
+        adicionarRubros.setPredefinedButtons();
+        adicionarRubros.setModal(true);
+        adicionarRubros.setAnimCollapse(true);
+        adicionarRubros.setResizable(false);
+        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
+        con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
-        objetivoGeneral = new TextArea();
-        getObjetivoGeneral().setHeight("" + 100);
-        getObjetivoGeneral().setWidth("" + (cw - 10));
-        getObjetivoGeneral().setText("General");
-        getObjetivoGeneral().addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                if (getObjetivoGeneral().getText().compareTo("General") == 0) {
-                    getObjetivoGeneral().setText("");
-                }
-
-            }
-        });
-        getObjetivoGeneral().addBlurHandler(new BlurHandler() {
-            @Override
-            public void onBlur(BlurEvent event) {
-                if (getObjetivoGeneral().getText().compareTo("") == 0) {
-                    getObjetivoGeneral().setText("General");
-                }
-            }
-        });
-        con.add(new FieldLabel(objetivoGeneral, "OBJETIVOS"), new HtmlData(".objetivog"));
-
-        con.add(new FieldLabel(objetivosTable.obtenerTablaScrooll("200px", "60px"), "OBJETIVOS ESPECÍFICOS"), new HtmlData(".objetivoes"));
-
-        con.add(getComboCatRubros(), new HtmlData(".catrubro"));
-        con.add(getComboRubros(), new HtmlData(".rubro"));
-        this.llenarCategorias();
-        getComboCatRubros().setSelectedIndex(0);
-        getComboCatRubros().addChangeHandler(new ChangeHandler() {
-            @Override
-            public void onChange(ChangeEvent event) {
-                llenarRubroslista(comboCatRubros.getValue(comboCatRubros.getSelectedIndex()));
-            }
-        });
-
-        llenarRubroslista("123102");
-
-        setMontoAportado((NumberField<BigDecimal>) new NumberField(new BigDecimalPropertyEditor()));
-        getMontoAportado().addParseErrorHandler(new ParseErrorHandler() {
-            @Override
-            public void onParseError(ParseErrorEvent event) {
-                Info.display("Error", "Ingrese un valor válido");
-            }
-        });
-        getMontoAportado().setAllowBlank(false);
-        getMontoAportado().setEmptyText("Monto aportado");
-        getMontoAportado().setWidth(cw);
-        con.add(getMontoAportado(), new HtmlData(".monto"));
-
-        setMeta(new TextField());
-        getMeta().setWidth(cw);
-        getMeta().setAllowBlank(false);
-        con.add(new FieldLabel(getMeta(), "*META O PRODUCTO ESPERADO"), new HtmlData(".meta"));
-
-        setMacroActividades(new TextArea());
-        getMacroActividades().setHeight("" + 90);
-        getMacroActividades().setWidth("" + cw);
-        con.add(new FieldLabel(getMacroActividades(), "*MACROACTIVIDADES"), new HtmlData(".macro"));
 
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ObrafuenterecursosconveniosDTO obraFuenteDto = new ObrafuenterecursosconveniosDTO(1, montoAportado.getValue(), fuenteRecursosConveDTO, "rubrop");                
-                service.setLog("fuente R" + obraFuenteDto.getFuenterecursosconvenio().getValorDisponible(), null);
-                String validacionDevuelta = validarMontosAportados(obraFuenteDto);
-                if (!validacionDevuelta.equals("El monto ha sido guardado")) {
-                    AlertMessageBox d = new AlertMessageBox("Error", validacionDevuelta);
-                    d.show();
-                } else {
-                    MessageBox msg = new MessageBox("Confirmación", validacionDevuelta);
-                    msg.setModal(true);
-                    msg.show();
-                }
-                limpiarMontos();
+                ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros);
+                adicionarRubros.add(modalProyecto.asWidget());
+                adicionarRubros.show();
             }
         });
         btnAdicionarMonto.setWidth("" + 20);
         con.add(btnAdicionarMonto, new HtmlData(".btnaddmonto"));
 
-        PushButton btnAdicionarMeta = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+
+        final WidgetTablaObjetivos tblObjetivosg = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "General", "*OBJETIVOS GENERALES", true);
+        con.add(tblObjetivosg.asWidget(), new HtmlData(".tblobjge"));
+
+        // StringFlexTableUnaColumna objetivosTable = new StringFlexTableUnaColumna("12em", 1, 1,tblObjetivos,proyectoDTO);
+
+        PushButton btnAdicionarObjge = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ObjetivosDTO metaDTO = new ObjetivosDTO(meta.getText(), false);
-                proyectoDTO.getObjetivoses().add(metaDTO);
-                meta.setText("");
+                WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(tblObjetivosg, proyectoDTO, "Objetivos Generales", "Por favor ingrese la descripción del objetivo:", 1, true, idTempObj);
+                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
+                modal.show();
             }
         });
-        btnAdicionarMeta.setWidth("" + 20);
-        con.add(btnAdicionarMeta, new HtmlData(".btnaddmeta"));
+        con.add(btnAdicionarObjge, new HtmlData(".objetivoge"));
+
+        final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
+        con.add(tblObjetivos.asWidget(), new HtmlData(".tblobjes"));
+
+        PushButton btnAdicionarObje = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(tblObjetivos, proyectoDTO, "Objetivos Especificos", "Por favor ingrese la descripción del objetivo:", 2, true, idTempObj);
+                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
+                modal.show();
+            }
+        });
+        con.add(btnAdicionarObje, new HtmlData(".objetivoes"));
+
+        final WidgetTablaObjetivos tblMetas = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Metas", "*META O PRODUCTO ESPERADO", false);
+        con.add(tblMetas.asWidget(), new HtmlData(".tblmetas"));
+
+        PushButton btnAdicionarMetas = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                WidgetAddObjetivos modalAddMetas = new WidgetAddObjetivos(tblMetas, proyectoDTO, "Metas o producto", "Por favor ingrese la meta o porducto", false, idTempObj);
+                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddMetas.asWidget();
+                modal.show();
+            }
+        });
+        con.add(btnAdicionarMetas, new HtmlData(".metas"));
+
+        final WidgetTablaMacro tblMacroActividades = new WidgetTablaMacro(proyectoDTO, actividadObraPadre);
+        con.add(tblMacroActividades.asWidget(), new HtmlData(".tblmacro"));
 
         PushButton btnAdicionarMacro = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ActividadobraDTO actividadobradto = new ActividadobraDTO(macroActividades.getText(), 7);
-
-                proyectoDTO.getActividadobras().add(actividadobradto);
-                limpiarMacroActi();
+                WidgetAddObjetivos modalAddMacro = new WidgetAddObjetivos(tblMacroActividades, proyectoDTO, "MacroActividades", "Por favor ingrese la macro actividad", false, idTempMacroActividades, true);
+                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddMacro.asWidget();
+                modal.show();
             }
         });
-        btnAdicionarMacro.setWidth("" + 20);
-        con.add(btnAdicionarMacro, new HtmlData(".btnaddmacro"));
+        con.add(btnAdicionarMacro, new HtmlData(".macro"));
 
+//        PushButton btnAdicionarMeta = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//                ObjetivosDTO metaDTO = new ObjetivosDTO(meta.getText(), false);
+//                proyectoDTO.getObjetivoses().add(metaDTO);
+//                meta.setText("");
+//            }
+//        });
+//        btnAdicionarMeta.setWidth("" + 20);
+//        con.add(btnAdicionarMeta, new HtmlData(".btnaddmeta"));
+//
+//        PushButton btnAdicionarMacro = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//                ActividadobraDTO actividadobradto = new ActividadobraDTO(macroActividades.getText(), 7);
+//
+//                proyectoDTO.getActividadobras().add(actividadobradto);
+//                limpiarMacroActi();
+//            }
+//        });
+//        btnAdicionarMacro.setWidth("" + 20);
+//        con.add(btnAdicionarMacro, new HtmlData(".btnaddmacro"));
+//
         Button btnAdicionarPry = new Button("Añadir Proyecto", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -443,11 +453,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     private native String getTableMarkup() /*-{
      return ['<table width=100% cellpadding=0 cellspacing=10>',
-     '<tr><td class=fn width=50%></td><td width=50% class=entidad></td></tr>',
-     '<tr><td class=lblobjetivos width=50%</td><td width=50% class=tipor></td></tr>',
-     '<tr><td class=objetivog></td><td><table cellpadding=0><tr><td class=catrubro></td></tr><tr><td class=rubro></td></tr><tr height=10></tr><tr><td class=monto></td><td class=btnaddmonto></td></tr><tr height=5></tr><tr><td class=meta></td><td class=btnaddmeta></td></tr></table></td><tr>',
-     '<tr><td><table cellpadding=0><tr><td class=lblobjetivoses width=50%</td></tr><tr><td class=objetivoes></td></tr></table></td><td><table cellpadding=0 cellspacing=0><tr><td class=macro></td><td class=btnaddmacro></td></tr></table></td>',
-     '<tr><td class=fechainicio></td><td class=fechafin></td></tr>',
+     '<tr><td class=fn width=50%></td><td class=fechainicio></td></tr>',
+     '<tr><td class=fechafin></td></tr>',
+     '<tr><td class=tblroles colspan=2></td><td></td></tr>',
+     '<tr><td class=btnaddmonto></td><tr>',
+     '<tr><td class=tblobjge></td><td class=tblmetas></td></tr>',
+     '<tr><td class=objetivoge></td><td class=metas></td><tr>',
+     '<tr><td class=tblobjes></td><td class=tblmacro></td></tr>',
+     '<tr><td class=objetivoes></td><td class=macro></td><tr>',
      '</table>'
      ].join("");
      }-*/;
@@ -493,12 +506,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public int calcularDuracion() {
         if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
             long diferencia = proyectoDTO.getFechaFin().getTime() - proyectoDTO.getFechaInicio().getTime();
-            if (proyectoDTO.getFechaFin().compareTo(proyectoDTO.getFechaInicio()) == 0) {
-                double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-                return ((int) dias);
-            } else {
-                return 1;
-            }
+            double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            return ((int) dias);
         }
         return actividadObraPadre.getDuration();
     }
@@ -546,87 +555,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.objetivoGeneral.setText("");
     }
 
-    public void limpiarMontos() {
-        //entidades.clear();
-        //llenarComboEntidadesConvenio(entidades);
-        //llenarListaRubros(rubros);
-        this.tipoRecurso.setText("");
-        this.montoAportado.setText("");
-    }
-
     public void limpiarMacroActi() {
         this.macroActividades.setText("");
-    }
-
-    public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-        if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
-            if (montoAportado.getValue().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValoraportado()) > 0) {
-                return "El monto ingresado supera el valor de la fuente de recursos";
-            } else {
-                if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
-                    BigDecimal sumaValorAportado = BigDecimal.ZERO;
-                    for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
-                        ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
-                        sumaValorAportado = sumaValorAportado.add(obrc.getValor());
-                    }
-                    sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());
-                    if (sumaValorAportado.compareTo(contratoDto.getNumvlrcontrato()) > 0) {
-                        return "Monto no registrado, la suma de los montos aportados supera el valor del convenio";
-                    }
-                }
-            }
-            proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
-            modificarValorDisponible(obraFuenteDto);
-            return "El monto ha sido guardado";
-        }
-        return "El convenio seleccionado no cuenta con valor disponible";
-    }
-
-    public void modificarValorDisponible(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-        if (proyectoDTO.getValor() == null) {
-            proyectoDTO.setValor(BigDecimal.ZERO);
-        }
-        proyectoDTO.setValor(proyectoDTO.getValor().add(obraFuenteDto.getValor()));
-        service.setLog("" + proyectoDTO.getValor(), null);
-        obraFuenteDto.getFuenterecursosconvenio().setValorDisponible(obraFuenteDto.getFuenterecursosconvenio().getValorDisponible().subtract(obraFuenteDto.getValor()));
-        contratoDto.setValorDisponible(contratoDto.getValorDisponible().subtract(obraFuenteDto.getValor()));
-
-    }
-
-    private void llenarCategorias() {
-        service.obtenerCategoriasRubros(new AsyncCallback<List<RubroDTO>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                service.setLog("Error al cargar las categorías de los rubros" + caught.getMessage() + "" + caught.getCause(), null);
-            }
-
-            @Override
-            public void onSuccess(List<RubroDTO> result) {
-                for (RubroDTO rb : result) {
-                    comboCatRubros.addItem(rb.getStrdescripcion(), rb.getIdrubro());
-                }
-            }
-        });
-    }
-
-    private void llenarRubroslista(String cod) {
-        //Limpiamos el combo de la escuela
-
-        this.comboRubros.clear();
-        service.obtenerRubros(cod, new AsyncCallback<List<RubroDTO>>() {
-            @Override
-            public void onFailure(Throwable caught) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void onSuccess(List<RubroDTO> result) {
-                for (RubroDTO rb : result) {
-                    comboRubros.addItem(rb.getStrdescripcion(), rb.getIdrubro());
-                }
-            }
-        });
-
     }
 
     public ListBox getComboCatRubros() {

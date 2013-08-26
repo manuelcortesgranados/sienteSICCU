@@ -19,7 +19,9 @@ public class ObjetivosDTO implements IsSerializable
      private Boolean esobjetivo;
      private ObraDTO obra;
      private String strtipoObj;
-     private int posicion;
+     private String eliminar;
+     
+    
 
     public ObjetivosDTO() {
     }
@@ -37,10 +39,17 @@ public class ObjetivosDTO implements IsSerializable
        this.obra = obra;
     }
    
-     public ObjetivosDTO(String descripcion, Integer tipoobjetivo, Boolean esobjetivo) {
+     public ObjetivosDTO(String descripcion, Integer tipoobjetivo, Boolean esobjetivo,int idTemp) {
        this.descripcion = descripcion;
        this.tipoobjetivo = tipoobjetivo;
        this.esobjetivo = esobjetivo;
+       this.idobjetivo=idTemp;
+       if(tipoobjetivo==1){
+       strtipoObj="General";
+       }else{
+       strtipoObj="Especifico";
+       }
+       this.eliminar="Eliminar";
      
     }
      public ObjetivosDTO(String descripcion,Boolean esobjetivo) {
@@ -100,19 +109,20 @@ public class ObjetivosDTO implements IsSerializable
     }
 
     /**
-     * @return the posicion
+     * @return the eliminar
      */
-    public int getPosicion() {
-        return posicion;
+    public String getEliminar() {
+        return eliminar;
     }
 
     /**
-     * @param posicion the posicion to set
+     * @param eliminar the eliminar to set
      */
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
     }
 
+  
 
     
 }
