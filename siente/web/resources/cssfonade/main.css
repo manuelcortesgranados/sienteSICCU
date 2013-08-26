@@ -2373,7 +2373,7 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 
-/*.ikont-acl-btadjuntarimagen{
+.ikont-acl-btadjuntarimagen{
     background-image: url("../imgs/p_examinar.png");
     background-repeat: no-repeat;
     width:85px;
@@ -2410,7 +2410,7 @@ input[type="text"], input[type="password"], select{
 }
 .ikont-acl-btncancelarciudadano:hover {
     background-position: 0px -25px;
-}*/
+}
 
 /*css de modificar proyecto*/
 /*.ikont-mp-cronograma-mod{
