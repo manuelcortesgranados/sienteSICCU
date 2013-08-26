@@ -9,7 +9,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/facelets/template_main.xhtml">
+                template="/facelets/template_main.xhtml">    
 
     <ui:define name="head" />
 
@@ -29,9 +29,9 @@
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>  
-    </ui:define>   
+    </ui:define>      
 
-    <ui:define name="body">
+    <ui:define name="body">        
         <h:form>
 
             <table  border="0" cellspacing="0" cellpadding="0" class="totalwidth">
@@ -68,7 +68,7 @@
                 <br/>
                 <br/>
                 <h:panelGrid  cellspacing="12" columns="2"  id="panel-filtro-novedades">
-                       <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
+                    <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
                     <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >        
                         <rich:select  id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >
                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />  
@@ -77,9 +77,14 @@
                                       render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                       execute="@this" >
                             </a4j:ajax>                           
-                        </rich:select>                                                            
+                        </rich:select>  
+                        <rich:tooltip mode="ajax" layout="block">
+                            <h:panelGrid columns="1">
+                                <h:outputText style="height: 12px; font-size: 12px;" value="Escriba la entidad que quiere buscar" />
+                            </h:panelGrid>
+                        </rich:tooltip>
                     </h:panelGrid>
-                        <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
+                    <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
                     <h:panelGrid columns="2" rendered="#{var.boolestadoconvenio}">
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}"
                                          >
@@ -256,12 +261,12 @@
                 <!-- Listado de convenios según la entidad del contratista -->
                 <h:panelGroup id="pl-tabla-listado-contratoconvenio-contratista"  >
                     <rich:dataTable  styleClass="ikont-tabla-entidad-contratista"  id="tabla-listado-contratoconvenio-contratista"
-                                    rowKeyVar="filaSeleccionada"
-                                    value="#{Supervisor$Contrato.listacontratoscontratista}"
-                                    rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
-                                    binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
-                                    sortMode="single" var="currentRow"  rows="6"
-                                    rowClasses="cabezo_tabla01, cabezo_tabla02">
+                                     rowKeyVar="filaSeleccionada"
+                                     value="#{Supervisor$Contrato.listacontratoscontratista}"
+                                     rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
+                                     binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
+                                     sortMode="single" var="currentRow"  rows="6"
+                                     rowClasses="cabezo_tabla01, cabezo_tabla02">
                         <f:facet id="ikont-colum-superior-consulta" name="header">
 
                             <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">

@@ -357,6 +357,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         crearActividadDialog.setModal(true);
         crearActividadDialog.setBlinkModal(true);
         crearActividadDialog.setAnimCollapse(true);
+        crearActividadDialog.setResizable(false);
         
         /**
          * Opciones generales para todas las actividades

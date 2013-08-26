@@ -1318,15 +1318,11 @@ a.ikont-hcl-modificarusuario:hover {
 /*  estilos zoom*/
 .ikont-hpg-contentmenu{
     background-color: #F2F2F2;
-    /*width: 850px;*/
-    width: 100%;
-    height: 80px;
-/*    border-style: solid;
-    border-width: 1px;
-    border-color: #6B6B6B;*/
+    width: 900px;
+    height: 70px;
     position: relative;
     top: 0px;
-    z-index: 9999;
+    z-index: 0;
 }
 .ikont-hpg-menu-nuevo-convenio{
     margin: 0px auto;
@@ -1339,12 +1335,13 @@ a.ikont-hcl-modificarusuario:hover {
     width: 90px;
     height: 60px;
     display: block;
+    margin-top: -10px;
 }
 
 
 .ikont-hf-nuevocontratoplanoperativo{
     position: relative;
-    top: 70px;
+    top: -52px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos{
@@ -1698,13 +1695,10 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
-    width: 80px;
-    height: 100px;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    -o-border-radius: 10px; 
-    border-radius: 10px; 
+    width: 90px;
+    height: 90px;
+    -ms-border-radius: 90px; 
+    border-radius: 90px; 
     background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
@@ -2194,32 +2188,25 @@ input[type="text"], input[type="password"], select{
     margin: 0px auto;
 }
 
-/*.ikont-hcl-imgestadoproyecto.estado0{
+.ikont-hcl-imgestadoproyecto.estado0{
     background-position: 0px -105px;
-}*/
+}
 
 .ikont-hcl-imgestadoproyecto.estado1{
-    background-position: 0px -105px;
-/*    background-position: -55px -105px;*/
+    background-position: -55px -105px;
 }
 
 .ikont-hcl-imgestadoproyecto.estado2{
-    background-position: -55px -105px;
-/*    background-position: -220px -105px;*/
-}
-
-.ikont-hcl-imgestadoproyecto.estado4{
-    background-position: -165px -105px;
+    background-position: -220px -105px;
 }
 
 .ikont-hcl-imgestadoproyecto.estado5{
-    background-position: -220px -105px;
-/*    background-position: -165px -105px;*/
+    background-position: -165px -105px;
 }
 
-/*.ikont-hcl-imgestadoproyecto.estado6{
+.ikont-hcl-imgestadoproyecto.estado6{
     background-position: -110px -105px;
-}*/
+}
 
 .ikont-hcl-imgtipoproyecto{
     width: 50px;
@@ -2227,15 +2214,12 @@ input[type="text"], input[type="password"], select{
     margin: 0px auto;
 }
 
-
 .ikont-hcl-imgtipoproyecto.tipo1{
-/*    background-position: -300px -180px;*/
-    background-position: 0px -180px;
+    background-position: -300px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo2{
-/*    background-position: -150px -180px;*/
-     background-position: -50px -180px;
+    background-position: -150px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo3{
@@ -2243,50 +2227,40 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hcl-imgtipoproyecto.tipo4{
-     background-position: -150px -180px;
-/*    background-position: -700px -180px;*/
+    background-position: -700px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo5{
-     background-position: -50px -180px;
-    /*background-position: -250px -180px;*/
-}
-
-.ikont-hcl-imgtipoproyecto.tipo6{
-    /*background-position: -450px -180px;*/
-    background-position: -200px -180px;
-}
-
-.ikont-hcl-imgtipoproyecto.tipo7{
-    /*background-position: -400px -180px;*/
     background-position: -250px -180px;
 }
 
+.ikont-hcl-imgtipoproyecto.tipo6{
+    background-position: -450px -180px;
+}
+
+.ikont-hcl-imgtipoproyecto.tipo7{
+    background-position: -400px -180px;
+}
+
 .ikont-hcl-imgtipoproyecto.tipo8{
-    /*background-position: -350px -180px;*/
-    background-position: -300px -180px;
+    background-position: -350px -180px;
 }
 
 
 .ikont-hcl-imgtipoproyecto.tipo9{
-    background-position: -350px -180px;
-    /*background-position: -200px -180px;*/
+    background-position: -200px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo10{
-    /*background-position: -100px -180px;*/
-    background-position: -400px -180px;
+    background-position: -100px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo11{
-    background-position: -450px -180px;
-    /*background-position: -0px -180px;*/
+    background-position: -0px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo12{
-    background-position: -500px -180px;
-/*     background-position: -650px -180px;*/
-    /*background-position: -650px -180px;*/
+    background-position: -650px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo13{
@@ -2294,8 +2268,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hcl-imgtipoproyecto.tipo14{
-     background-position: -600px -180px;
-    /*background-position: -500px -180px;*/
+    background-position: -500px -180px;
 }
 
 .ikont-hcl-imgtipoproyecto.tipo15{
@@ -2404,7 +2377,7 @@ input[type="text"], input[type="password"], select{
 }
 
 /*css de modificar proyecto*/
-/*.ikont-mp-cronograma-mod{
+.ikont-mp-cronograma-mod{
     position: fixed;
     z-index: 100;
     left: 366px;
@@ -2414,12 +2387,12 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hpg-mpcronogramamod{
     color: #257500;
-}*/
+}
 
 /*
 css usuario modificacion
 */
-/*.ikont-hot-editarmiperfil{
+.ikont-hot-editarmiperfil{
     color: #1C8F14;
 }
 Css Para el nuevo menu administrar convenio
@@ -2534,7 +2507,7 @@ Css Para el nuevo menu administrar convenio
     background-color: rgba(0,74,56,0.7) !important;
     border : transparent!important;
     padding: 8px 6px !important;
-}*/
+}
 .tab-pestania-active, tab-pestania-inactive-tres{
     padding: 8px 36px !important;
 }
@@ -2934,6 +2907,14 @@ width: 100%;
 .ikont-img-seleccionada{
     background-color: #1C8F14;
 color: #FFF;
+}
+.ikont-hgi-pathImaCiu{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    border-width: 0px;
+    border-style: none;
+    border-color: transparent;
 }
 .ikont-hita-comentSem2{
     height: 150px;

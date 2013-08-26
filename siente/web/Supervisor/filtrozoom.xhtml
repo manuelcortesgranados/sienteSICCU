@@ -18,13 +18,12 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
     </h:head>
 
-    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="client" id="tab_login"  activeItem="tab_dos">
-        <rich:tab header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px"
-                  >
-            <h:panelGrid columns="1" style="" styleClass="panel_filtro_zoom">
+    <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
+        <rich:tab header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px" >
+            <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText size="35"  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclave}"
                              onclick="this.value = ''"  styleClass="input_filtro">
-                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText> 
+                    <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
                 <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro">
 
@@ -71,12 +70,12 @@
 
                     </h:panelGrid>
                     <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}" rendered="false">
-                                    <f:selectItem itemLabel="Todos" itemValue="-1"/>
-                                    <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
-                                      <a4j:ajax event="change" render="porcentajefil, avancefil"/>
-                                </h:selectOneMenu>
-                  
-                    
+                        <f:selectItem itemLabel="Todos" itemValue="-1"/>
+                        <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
+                        <a4j:ajax event="change" render="porcentajefil, avancefil"/>
+                    </h:selectOneMenu>
+
+
                     <div id="slider-range"></div>
                     <br/>
 
@@ -101,13 +100,13 @@
                     </script>
 
                     <h:inputText id="avance"  styleClass="input_filtro"  disabled="true"/>  
-                    
+
                     <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                     <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
 
                     <div id="slider-range-avance"></div>
 
-                     
+
 
                 </h:panelGrid>
             </h:panelGrid>
@@ -150,39 +149,38 @@
                 </h:panelGroup>
             </h:panelGrid>
             <center>
-               <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
+                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo2"  value="#{var.buscar}"
                                  styleClass="boton1"             /></center>
         </rich:tab>
 
-        <rich:tab header="#{var.filtroquien}"  id="tab_tres" name="tab_tres">
-            <h:panelGrid  styleClass="panel_filtro_zoom"> 
-                <h:panelGroup>
-                    <h:inputText  id="txtPalabraClave1"  value="#{HomeGestion.filtro.strentidad}"
-                                  onclick="this.value = ''"   styleClass="input_filtro" >
-                        <rich:placeholder value="Cliente" /></h:inputText> <br/><br/>
+        <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
+            <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
+                <h:inputText id="txtPalabraClave1" value="#{HomeGestion.filtro.strentidad}"
+                             onclick="this.value = '';" size="35" styleClass="input_filtro">
+                    <rich:placeholder id="placeHolderCliente" value="Cliente" />
+                </h:inputText>
 
-                    <h:inputText   id="txtPalabraClave2" value="#{HomeGestion.filtro.strcontratista}"
-                                   onclick="this.value = ''"   styleClass="input_filtro">
-                        <rich:placeholder value="Contratista" /></h:inputText> <br/> <br/>
+                <h:inputText id="txtPalabraClave2" value="#{HomeGestion.filtro.strcontratista}"
+                             onclick="this.value = '';" size="35" styleClass="input_filtro">
+                    <rich:placeholder id="placeHolderContratista" value="Contratista" />
+                </h:inputText>
 
-                    <h:inputText size="35"  id="txtPalabraClave3"
-                                 onclick="this.value = ''"   styleClass="input_filtro" >
-                        <rich:placeholder value="Interventor" /></h:inputText> <br/><br/>
+                <h:inputText id="txtPalabraClave3" size="35"
+                             onclick="this.value = '';" styleClass="input_filtro" >
+                    <rich:placeholder id="placeHolderInterventor" value="Interventor" />
+                </h:inputText>
 
-                    <h:inputText size="35"  id="txtPalabraClave4"
-                                 onclick="this.value = ''"  styleClass="input_filtro" >
-                        <rich:placeholder value="Gerente de Convenio" /></h:inputText> <br/><br/>
-                </h:panelGroup> 
+                <h:inputText id="txtPalabraClave4" size="35"
+                             onclick="this.value = '';" styleClass="input_filtro" >
+                    <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
+                </h:inputText>
             </h:panelGrid>
+
             <center>
-                <h:commandButton type="submit" action="#{HomeGestion.filtroObrasActionMapaAvanModal}" id="filtrar_nuevo3"  value="#{var.buscar}"
-                                 styleClass="boton1"             /></center>
+                <h:commandButton id="filtrar_nuevo3" type="submit" value="#{var.buscar}"
+                                 action="#{HomeGestion.filtroObrasActionMapaAvanModal}"
+                                 styleClass="boton1" />
+            </center>
         </rich:tab>
-
-
-
-
-
     </rich:tabPanel>
-
 </ui:composition>

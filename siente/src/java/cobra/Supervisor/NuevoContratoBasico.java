@@ -6286,20 +6286,20 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                             validadcionGuardarContrato();
                         } else {
                             getSessionBeanCobra().getCobraService().guardarContrato(contrato);
-                            FacesUtils.addInfoMessage("losdatossehanguardado");
+                            FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
                         }                       
                     }
                 } else {
                     validardatosbasicosplano = 1;
-                    FacesUtils.addErrorMessage("fechadesuscripcionplano");
+                    FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionplano"));
                 }
             } else {
                 validardatosbasicosplano = 2;
-                FacesUtils.addErrorMessage("fechadesuscripcionvalida");
+                FacesUtils.addErrorMessage(bundle.getString("fechadesuscripcionvalida"));
             }
         } else {
             validardatosbasicosplano = 3;
-            FacesUtils.addErrorMessage("validarfechafin");
+            FacesUtils.addErrorMessage(bundle.getString("validarfechafin"));
         }
     }
 
