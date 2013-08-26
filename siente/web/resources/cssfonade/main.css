@@ -2346,7 +2346,7 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 
-/*.ikont-acl-btadjuntarimagen{
+.ikont-acl-btadjuntarimagen{
     background-image: url("../imgs/p_examinar.png");
     background-repeat: no-repeat;
     width:85px;
@@ -2383,10 +2383,10 @@ input[type="text"], input[type="password"], select{
 }
 .ikont-acl-btncancelarciudadano:hover {
     background-position: 0px -25px;
-}*/
+}
 
 /*css de modificar proyecto*/
-/*.ikont-mp-cronograma-mod{
+.ikont-mp-cronograma-mod{
     position: fixed;
     z-index: 100;
     left: 366px;
@@ -2396,12 +2396,12 @@ input[type="text"], input[type="password"], select{
 
 .ikont-hpg-mpcronogramamod{
     color: #257500;
-}*/
+}
 
 /*
 css usuario modificacion
 */
-/*.ikont-hot-editarmiperfil{
+.ikont-hot-editarmiperfil{
     color: #1C8F14;
 }
 Css Para el nuevo menu administrar convenio
@@ -2516,7 +2516,7 @@ Css Para el nuevo menu administrar convenio
     background-color: rgba(0,74,56,0.7) !important;
     border : transparent!important;
     padding: 8px 6px !important;
-}*/
+}
 .tab-pestania-active, tab-pestania-inactive-tres{
     padding: 8px 36px !important;
 }
