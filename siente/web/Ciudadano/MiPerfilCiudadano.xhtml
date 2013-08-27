@@ -158,7 +158,7 @@
                         <h:panelGrid columns="1"  width="100%" >
                             <a4j:status id="idstatuscomentario3"/>                            
                             <h:outputText style="float:right;" styleClass="ikont-hot-contarmensaje vtitle12"   id="idcontarmensaje3" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" />
-                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this, 400)"
+                            <h:inputTextarea id="iacomentario3" styleClass="ikont-hit-stropinion"   rows="5" cols="120" onkeydown="return maximaLongitud(this, 400);"
                                              value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo3(this);" >
                                 <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje3" status="idstatuscomentario3" />
                             </h:inputTextarea>
@@ -198,8 +198,10 @@
                                 </h:panelGrid>
                             </h:panelGrid>
                         </a4j:repeat>
+                    </h:panelGrid> 
+                    <h:panelGrid columnClasses="panelcenter" width="100%">
+                        <rich:dataScroller for="rpmuro"   render="pgmuro"  />
                     </h:panelGrid>
-                    <rich:dataScroller for="rpmuro"  style="alignment-baseline: central"  render="pgmuro"  />
                 </h:panelGrid>
 
 

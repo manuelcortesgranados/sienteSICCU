@@ -49,7 +49,6 @@ import co.com.interkont.cobra.to.Validacionalimentacion;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.SupervisionExterna.AdminSupervisionExterna;
 import java.io.Serializable;
-import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 
 /**
@@ -771,11 +770,17 @@ public class DetalleObra implements Serializable{
     }
     // </editor-fold>
 
-    private HtmlDataTable tablalistaavances = new HtmlDataTable();
-    
-    public HtmlDataTable getTablalistaavances() {
+    private UIDataTable tablalistaavances = new UIDataTable();
+
+    public UIDataTable getTablalistaavances() {
         return tablalistaavances;
     }
+
+    public void setTablalistaavances(UIDataTable tablalistaavances) {
+        this.tablalistaavances = tablalistaavances;
+    }    
+    
+  
     private int filaSeleccionada;
     public DetalleObra() {
 //        if (getSessionBeanCobra().getCobraService().isVerproy()) {
