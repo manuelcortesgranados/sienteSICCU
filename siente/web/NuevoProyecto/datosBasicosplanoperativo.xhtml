@@ -30,10 +30,7 @@
                             <rich:tooltip  value="#{var.fechasuscripcion}"/>
                         </rich:calendar>
                         </h:panelGrid>
-
-                        <br/><br/>
-
-                        <h:panelGrid  >
+                       <h:panelGrid  >
                             <h:outputText value="Fecha finalización:"/>
                             <rich:calendar id="id-datefechafin"   defaultLabel="#{var.fechafinalizacion}" datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" required="true" >                    
                                 <rich:message for="id-datefechafin"  />
@@ -194,7 +191,7 @@
                             value="#{Supervisor$Contrato.recursosconvenio.lstFuentesRecursos}"
                             onrowmouseover="this.style.backgroundColor='#B4DDEC'"
                             onrowmouseout="this.style.backgroundColor='#FFFFFF'"
-                            sortMode="single" rows="1"
+                            sortMode="single" rows="5"
                             style="text-align:center;"
                             rowKeyVar="filaSeleccionada"
                             binding="#{Supervisor$Contrato.recursosconvenio.tableFuente}"

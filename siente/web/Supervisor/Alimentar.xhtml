@@ -20,7 +20,7 @@
         <h:outputText  styleClass="ikont-hot-reportaravance"   value="Reportar avance"/>
 
         <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
- <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
+        <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -35,16 +35,16 @@
         </h:panelGroup>
     </ui:define>
     <ui:define name="body">
-        
-        
+
+
         <h:form id="alimentaravance">
             <h:panelGroup id="gpPrincipalAlimentar" rendered="#{Supervisor$Alimentar.vertodoalimentar}">
                 <rich:collapsiblePanel header="#{var.definirperiodoavance}" switchType="ajax" id="gpAlimentarObra"   rendered="#{!Supervisor$Alimentar.editarActividades}">
 
                     <h:panelGrid id="gpBasicos" columns="2" >
-                        <h:panelGrid columns="2"  columnClasses="panelizquierda,panelcenter">
+                        <h:panelGrid columns="2"  columnClasses="panelizquierda verticalalingtop,panelcenter" >
                             <h:panelGroup >
-                                <h:panelGrid id="valores" columns="2">
+                                <h:panelGrid id="valores" columns="2" >
                                     <h:outputText  styleClass="ikont-hot-esteavanceposeeacta"   value="#{var.esteavanceposeeacta}" rendered="#{!var.obligaractaalimentar}"/>
                                     <h:selectOneMenu id="cmbobligaacta" value="#{Supervisor$Alimentar.subiracta}" rendered="#{!var.obligaractaalimentar}">
                                         <f:selectItem itemValue="true" itemLabel="Si"/>
@@ -109,9 +109,17 @@
 
                             <rich:panel header="#{var.comentarioobra}"   >
                                 <center>
-                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" >
+                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" rendered="#{var.alimentartext1}" >
 
                                         <h:inputTextarea cols="60" id="comentSem"  rows="8" styleClass="ikont-hita-comentSem"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
+                                        <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
+
+                                    </h:panelGrid>
+                                </center>
+                                <center>
+                                    <h:panelGrid id="layoutComentario2" columns="1" columnClasses="panelcenter" rendered="#{var.alimentartext}">
+
+                                        <h:inputTextarea cols="60" id="comentSem2" style=""  rows="8" styleClass="ikont-hita-comentSem2"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
                                         <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>
 
                                     </h:panelGrid>
@@ -295,8 +303,8 @@
                                             <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
                                                 <f:validateDoubleRange minimum="0" />
                                             </h:inputText>
-                                                <a4j:commandLink styleClass="ikont-acl-calcutodamatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
-                                                                 render="layoutTablaMatrix, layoutComentafactor" value="Actualizar"/>
+                                            <a4j:commandLink styleClass="ikont-acl-calcutodamatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
+                                                             render="layoutTablaMatrix, layoutComentafactor" value="Actualizar"/>
 
                                         </h:panelGrid>
                                         <rich:message styleClass="ikont-rm-txtCantEjec"    for="txtCantEjec"/>

@@ -45,23 +45,29 @@ import java.util.List;
  */
 public class ModalAddMontos implements IsWidget {
 
-    private ListBox lstVigen = new ListBox(false);
-    private VerticalPanel vp;
-    int vigencia;
+    /*elementos para crear la pagina visualmente*/
+    protected ListBox lstVigen = new ListBox(false);
+    protected VerticalPanel vp;
     private ListBox comboCatRubros = new ListBox();
     private ListBox comboRubros = new ListBox();
-    List<RubroDTO> lstRubrosDto;
-    RubroDTO rubro;
-    ContratoDTO contrato;
-    private NumberField<BigDecimal> valorRubros;
-    private NumberField<BigDecimal> valorContrato;
-    BigDecimal valorAuxiliar;
-    ActividadobraDTO actividadObraPadre;
-    protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
-    List<MontoDTO> lstMontos;
-    WidgetTablaMontos widTblMontos;
-    Dialog modalActual;
-    int idTemp;
+    protected List<RubroDTO> lstRubrosDto;
+    protected NumberField<BigDecimal> valorRubros;
+    protected NumberField<BigDecimal> valorContrato;
+    protected WidgetTablaMontos widTblMontos;
+    
+    /*elementos para cargar los datos ingresados por el usuario*/
+    protected RubroDTO rubro;
+    protected ContratoDTO contrato;
+    protected int vigencia;
+    protected BigDecimal valorAuxiliar;
+    protected ActividadobraDTO actividadObraPadre;
+    protected List<MontoDTO> lstMontos;
+   
+    protected Dialog modalActual;
+    protected int idTemp;
+    
+     protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    
 
     public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, BigDecimal valorAuxiliar, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Dialog modalActual, int idTemp) {
         lstRubrosDto = new ArrayList<RubroDTO>();
@@ -211,7 +217,7 @@ public class ModalAddMontos implements IsWidget {
                 lstRubrosDto.clear();
                 lstRubrosDto = result;
                 for (RubroDTO rb : result) {
-                     getComboRubros().addItem(rb.getStrdescripcion(), rb.getIdrubro());
+                    getComboRubros().addItem(rb.getStrdescripcion(), rb.getIdrubro());
                 }
             }
         });

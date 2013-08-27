@@ -2,6 +2,7 @@ package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
@@ -64,74 +65,66 @@ import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import java.math.BigDecimal;
 
-public class WidgetTablaRubrosPry implements IsWidget {
+public class WidgetTablaObjetivos implements IsWidget {
 
     protected ObraDTO obraDto;
     protected ActividadobraDTO actividadObraPadre;
+    protected String emptyText;
+    protected String nombreTbl;
+    protected boolean esObjetivo;
+    protected boolean esAct;
 
     /**
      * @return the store
      */
-    public WidgetTablaRubrosPry(ObraDTO obraDto, ActividadobraDTO actividadObraPadre) {
+    public WidgetTablaObjetivos(ObraDTO obraDto, ActividadobraDTO actividadObraPadre, String emptyText, String nombreTbl, boolean esObjetivo) {
         this.obraDto = obraDto;
         this.actividadObraPadre = actividadObraPadre;
+        this.emptyText = emptyText;
+        this.nombreTbl = nombreTbl;
+        this.esObjetivo = esObjetivo;
     }
 
-    public ListStore<ObrafuenterecursosconveniosDTO> getStore() {
+    public ListStore<ObjetivosDTO> getStore() {
         return store;
     }
 
     /**
      * @param store the store to set
      */
-    public void setStore(ListStore<ObrafuenterecursosconveniosDTO> store) {
+    public void setStore(ListStore<ObjetivosDTO> store) {
         this.store = store;
     }
 
-    interface PlaceProperties extends PropertyAccess<ObrafuenterecursosconveniosDTO> {
+    interface PlaceProperties extends PropertyAccess<ObjetivosDTO> {
 
-        @Path("idobrafuenterecursos")
-        ModelKeyProvider<ObrafuenterecursosconveniosDTO> key();
+        @Path("idobjetivo")
+        ModelKeyProvider<ObjetivosDTO> key();
 
-        ValueProvider<ObrafuenterecursosconveniosDTO, Integer> idobrafuenterecursos();
+        ValueProvider<ObjetivosDTO, Integer> idobjetivo();
 
-        ValueProvider<ObrafuenterecursosconveniosDTO, BigDecimal> valor();
+        ValueProvider<ObjetivosDTO, String> descripcion();
 
-        ValueProvider<ObrafuenterecursosconveniosDTO, String> rubro();
+        ValueProvider<ObjetivosDTO, String> strtipoObj();
 
-        ValueProvider<ObrafuenterecursosconveniosDTO, String> nombreEntidad();
-
-        ValueProvider<ObrafuenterecursosconveniosDTO, String> eliminar();
-
-        ValueProvider<ObrafuenterecursosconveniosDTO, String> descripcionaporte();
-
-        ValueProvider<ObrafuenterecursosconveniosDTO, Integer> vigencia();
+        ValueProvider<ObjetivosDTO, String> eliminar();
     }
     private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
-    private ListStore<ObrafuenterecursosconveniosDTO> store;
+    private ListStore<ObjetivosDTO> store;
 
     @Override
     public Widget asWidget() {
 
         SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
 
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> nameColumn = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.nombreEntidad(), 120, "Entidad");
+        ColumnConfig<ObjetivosDTO, String> nameColumn = new ColumnConfig<ObjetivosDTO, String>(properties.descripcion(), 157, "Descripción");
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
+        nameColumn.setResizable(false);
         nameColumn.setColumnTextStyle(textStyles);
 
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> rubro = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.rubro(), 100, "Rubro");
-        rubro.setColumnTextStyle(textStyles);
 
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> tipoAporte = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.descripcionaporte(), 75, "Tipo aporte");
-        tipoAporte.setColumnTextStyle(textStyles);
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, Integer> vigencia = new ColumnConfig<ObrafuenterecursosconveniosDTO, Integer>(properties.vigencia(), 55, "Vigencia");
-        vigencia.setColumnTextStyle(textStyles);
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, BigDecimal> valor = new ColumnConfig<ObrafuenterecursosconveniosDTO, BigDecimal>(properties.valor(), 85, "Valor");
-        tipoAporte.setColumnTextStyle(textStyles);
-
-        ColumnConfig<ObrafuenterecursosconveniosDTO, String> eliminar = new ColumnConfig<ObrafuenterecursosconveniosDTO, String>(properties.eliminar(), 50, "Eliminar");
+        ColumnConfig<ObjetivosDTO, String> eliminar = new ColumnConfig<ObjetivosDTO, String>(properties.eliminar(), 55, "Eliminar");
+        eliminar.setResizable(false);
         nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
         nameColumn.setColumnTextStyle(textStyles);
 
@@ -141,42 +134,37 @@ public class WidgetTablaRubrosPry implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
-                obraDto.setValorDisponible(obraDto.getValor());
-                obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
+                obraDto.getObjetivoses().remove(store.get(row));
                 getStore().remove(store.get(row));
 
             }
         });
         eliminar.setCell(button);
 
-        List<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>> l = new ArrayList<ColumnConfig<ObrafuenterecursosconveniosDTO, ?>>();
+        List<ColumnConfig<ObjetivosDTO, ?>> l = new ArrayList<ColumnConfig<ObjetivosDTO, ?>>();
         l.add(nameColumn);
-        l.add(rubro);
-        l.add(tipoAporte);
-        l.add(valor);
-        l.add(vigencia);
         l.add(eliminar);
 
-        ColumnModel<ObrafuenterecursosconveniosDTO> cm = new ColumnModel<ObrafuenterecursosconveniosDTO>(l);
-        setStore(new ListStore<ObrafuenterecursosconveniosDTO>(properties.key()));
+        ColumnModel<ObjetivosDTO> cm = new ColumnModel<ObjetivosDTO>(l);
+        setStore(new ListStore<ObjetivosDTO>(properties.key()));
 
-        List<ObrafuenterecursosconveniosDTO> plants = new ArrayList<ObrafuenterecursosconveniosDTO>(obraDto.getObrafuenterecursosconvenioses());
+        List<ObjetivosDTO> plants = new ArrayList<ObjetivosDTO>(obraDto.getObjetivoses());
         getStore().addAll(plants);
 
-        final Grid<ObrafuenterecursosconveniosDTO> grid = new Grid<ObrafuenterecursosconveniosDTO>(getStore(), cm);
+        final Grid<ObjetivosDTO> grid = new Grid<ObjetivosDTO>(getStore(), cm);
         grid.setBorders(true);
         grid.getView().setAutoExpandColumn(nameColumn);
         grid.getView().setTrackMouseOver(false);
-        grid.getView().setEmptyText("Por favor ingrese los roles y enidades");
+        grid.getView().setEmptyText(emptyText);
         grid.getView().setColumnLines(true);
 
         FramedPanel cp = new FramedPanel();
-        cp.setHeadingText("*ANADIR ROLES Y ENTIDADES:");
+        cp.setHeadingText(nombreTbl);
         cp.setWidget(grid);
         cp.setCollapsible(true);
+        cp.setExpanded(false);
         cp.setAnimCollapse(true);
-        cp.setPixelSize(500, 150);
+        cp.setPixelSize(215, 150);
         cp.addStyleName("margin-10");
 
         return cp;
