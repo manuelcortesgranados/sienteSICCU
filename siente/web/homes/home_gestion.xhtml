@@ -40,8 +40,17 @@
         </h:panelGroup>
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-        </h:panelGroup>
-    </ui:define>
+        </h:panelGroup> 
+         <center>
+            <table><tr><td>
+                        <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.activarvistamapa}" />
+                    </td><td width="20px"></td> <td>
+                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.filtrarObrasPorEstado}"   >
+                            <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
+                        </h:commandLink>
+                    </td></tr></table>
+        </center>
+    </ui:define>   
     <ui:define name="body">      
         <h:form id="form_gestion" prependId="false" >
             <table  border="0" cellspacing="0" cellpadding="0">
@@ -82,13 +91,13 @@
                                     <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo" execute="prueba2,panelinfo" id="boton1" value="#{var.titulocantidadzoom}" action="#{HomeGestion.mostrarVariableProyecto}">
                                         <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="1" />
                                     </a4j:commandLink>
-                                        
+
                                     <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo" execute="prueba2,panelinfo" id="boton2" value="#{var.tituloinversionzoom}" action="#{HomeGestion.mostrarVariableProyecto}">
                                         <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="2" />
                                     </a4j:commandLink>
 
                                     <a4j:commandLink styleClass="inputlinkhomezoom" render="panelinfo" execute="prueba3,panelinfo" id="boton3" value="#{var.tituloconvenioszoom}" action="#{HomeGestion.mostrarVariableProyecto}">
-                                          <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="3" />
+                                        <a4j:param assignTo="#{HomeGestion.panelmostrarvaloreszoom}" value="3" />
                                     </a4j:commandLink>
                                 </rich:column> </center>
                         </h:panelGroup>
@@ -298,7 +307,7 @@
         </h:form>
 
 
-       
+
         <f:subview id="murocomentarios"  >
             <ui:include src="/Ciudadano/Muro_Comentarios.xhtml"/>
         </f:subview>

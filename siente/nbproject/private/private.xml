@@ -12,7 +12,20 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/desarrollo8/desarrollogit/siente/siente/web/Supervisor/Alimentar.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/NuevoProyecto/modal/panelConfirmaGuardar.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/ModificarProyecto/modal/panelCronogramaMensajeError.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/src/java/co/com/interkont/cobra/planoperativo/client/dto/ActividadobraDTO.java</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/eliminarImageneolucionModal.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/eliminarImageneolucionModalNuevaObra.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/eliminarDocumentoModal.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/src/java/cobra/Supervisor/AdministrarObraNew.java</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/NuevoProyecto/modal/modalRelacionContrato.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/modalRelacionContratointerventoria.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/src/java/co/com/interkont/cobra/planoperativo/client/ActividadForm.java</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/src/java/co/com/interkont/cobra/planoperativo/client/PlanOperativoGantt.java</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/nbproject/private/private.properties</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/modal/editarpolizaContratoModal.xhtml</file>
+            <file>file:/home/desarrollo2/NetBeansProjects/desarrollogit/siente/siente/web/Cobra/Download.xhtml</file>
         </group>
     </open-files>
 </project-private>

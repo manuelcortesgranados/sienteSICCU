@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -41,6 +42,8 @@ public class FlujoCaja implements Serializable {
     List<Itemflujocaja> itemsFlujoEgresos;
     List<Relacioncontratoperiodoflujocaja> periodosConvenio;
     List<Relacioncontratoperiodoflujocaja> periodosConvenioEliminados;
+    Calendar fechaInicioConvenio;
+    Calendar fechaFinConvenio;
     List<FlujoIngresos> flujoIngresos;
     List<FlujoEgresos> flujoEgresos;
     List<Planificacionmovconvenioentidad> planifmovimientoconvenioentidad;
@@ -117,6 +120,22 @@ public class FlujoCaja implements Serializable {
 
     public void setPeriodosConvenioEliminados(List<Relacioncontratoperiodoflujocaja> periodosConvenioEliminados) {
         this.periodosConvenioEliminados = periodosConvenioEliminados;
+    }
+
+    public Calendar getFechaInicioConvenio() {
+        return fechaInicioConvenio;
+    }
+
+    public void setFechaInicioConvenio(Calendar fechaInicioConvenio) {
+        this.fechaInicioConvenio = fechaInicioConvenio;
+    }
+
+    public Calendar getFechaFinConvenio() {
+        return fechaFinConvenio;
+    }
+
+    public void setFechaFinConvenio(Calendar fechaFinConvenio) {
+        this.fechaFinConvenio = fechaFinConvenio;
     }
 
     public List<FlujoIngresos> getFlujoIngresos() {
@@ -242,12 +261,14 @@ public class FlujoCaja implements Serializable {
             flujoIngresos = new ArrayList<FlujoIngresos>();
             flujoEgresos = new ArrayList<FlujoEgresos>();
         }
-        crearPeriodosFlujoCaja();
+        //crearPeriodosFlujoCaja();
+        generarPeriodosFlujoCaja();
         crearEstructuraFlujoIngresos();
         iniciarTotalesIngresosPeriodo();
         crearEstructuraFlujoEgresos();
         iniciarTotalesEgresosPeriodo();
         refrescarValoresFlujoCaja();
+        generarPeriodosFlujoCaja();
 
         flujoCajaIniciado = true;
     }
@@ -794,5 +815,123 @@ public class FlujoCaja implements Serializable {
         if (!periodosConvenioEliminados.isEmpty()) {
             getSessionBeanCobra().getCobraService().borrarPeriodosConvenio(periodosConvenioEliminados);
         }
+    }
+
+    public void generarPeriodosFlujoCaja() {
+        periodosConvenio = new ArrayList<Relacioncontratoperiodoflujocaja>();
+        Relacioncontratoperiodoflujocaja periodoConvenio;
+        Periodoflujocaja periodo;
+        Calendar fechaPeriodos = GregorianCalendar.getInstance();
+        fechaInicioConvenio = Calendar.getInstance();
+        fechaFinConvenio = Calendar.getInstance();
+
+        fechaInicioConvenio.setTime(convenio.getDatefechaini());
+        fechaFinConvenio.setTime(convenio.getDatefechafin());
+
+        periodosConvenio = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenio(convenio.getIntidcontrato());
+
+        if (periodosConvenio.isEmpty()) {
+            fechaPeriodos.setTime(convenio.getDatefechaini());
+
+            while (fechaPeriodos.compareTo(fechaFinConvenio) < 0) {
+                periodoConvenio = new Relacioncontratoperiodoflujocaja();
+                periodo = new Periodoflujocaja();
+
+                periodoConvenio.setPeriodoflujocaja(periodo);
+
+                periodosConvenio.add(definirPeriodoConvenio(periodoConvenio, fechaPeriodos));
+
+                fechaPeriodos.add(Calendar.MONTH, 1);
+                fechaPeriodos = obtenerFechaDiaDelMes(fechaPeriodos, true);
+            }
+        } else if (periodosConvenio.size() < mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio)) {
+            fechaPeriodos.setTime(convenio.getDatefechaini());
+            fechaPeriodos = actualizarPeriodosConvenio(fechaPeriodos);
+
+            while (fechaPeriodos.compareTo(fechaFinConvenio) <= 0) {
+                periodoConvenio = new Relacioncontratoperiodoflujocaja();
+                periodo = new Periodoflujocaja();
+
+                periodoConvenio.setPeriodoflujocaja(periodo);
+                periodosConvenio.add(definirPeriodoConvenio(periodoConvenio, fechaPeriodos));
+            }
+        } else if (periodosConvenio.size() > mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio)) {
+            int meses = mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio);
+            fechaPeriodos.setTime(convenio.getDatefechaini());
+
+            while (periodosConvenio.size() > meses) {
+                periodoConvenio = periodosConvenio.remove(periodosConvenio.size() - 1);
+                periodosConvenioEliminados.add(periodoConvenio);
+            }
+
+            actualizarPeriodosConvenio(fechaPeriodos);
+        } else {
+            actualizarPeriodosConvenio(fechaPeriodos);
+        }
+    }
+
+    private Relacioncontratoperiodoflujocaja definirPeriodoConvenio(Relacioncontratoperiodoflujocaja periodoConvenio, Calendar fechaPeriodos) {
+        if (fechaPeriodos.compareTo(fechaInicioConvenio) <= 0) {
+            periodoConvenio.getPeriodoflujocaja().setFechainicio(convenio.getDatefechaini());
+        } else {
+            periodoConvenio.getPeriodoflujocaja().setFechainicio(fechaPeriodos.getTime());
+        }
+
+        fechaPeriodos = obtenerFechaDiaDelMes(fechaPeriodos, false);
+
+        if (fechaPeriodos.compareTo(fechaFinConvenio) < 0) {
+            periodoConvenio.getPeriodoflujocaja().setFechafin(fechaPeriodos.getTime());
+        } else {
+            periodoConvenio.getPeriodoflujocaja().setFechafin(convenio.getDatefechafin());
+        }
+
+        periodoConvenio.getPeriodoflujocaja().setStrdescripcion(etiquetarPeriodo(fechaPeriodos));
+
+        return periodoConvenio;
+    }
+
+    private Calendar actualizarPeriodosConvenio(Calendar fechaPeriodos) {
+        for (Relacioncontratoperiodoflujocaja periodoConvenioActualizar : periodosConvenio) {
+            definirPeriodoConvenio(periodoConvenioActualizar, fechaPeriodos);
+
+            fechaPeriodos.add(Calendar.MONTH, 1);
+            fechaPeriodos = obtenerFechaDiaDelMes(fechaPeriodos, true);
+        }
+
+        return fechaPeriodos;
+    }
+
+    private Calendar obtenerFechaDiaDelMes(Calendar fechaReferencia, boolean primerDia) {
+        Calendar fecha = Calendar.getInstance();
+        int dia;
+
+        if (primerDia) {
+            dia = fechaReferencia.getActualMinimum(Calendar.DAY_OF_MONTH);
+        } else {
+            dia = fechaReferencia.getActualMaximum(Calendar.DAY_OF_MONTH);
+        }
+
+        fecha.set(fechaReferencia.get(Calendar.YEAR),
+                fechaReferencia.get(Calendar.MONTH),
+                dia);
+
+        return fecha;
+    }
+
+    private String etiquetarPeriodo(Calendar fechaReferencia) {
+        String etiquetaPeriodo;
+
+        etiquetaPeriodo = (fechaReferencia.get(Calendar.MONTH) + 1) + " / " + fechaReferencia.get(Calendar.YEAR);
+
+        return etiquetaPeriodo;
+    }
+
+    private int mesesEntreFechas(Calendar fechaInicial, Calendar fechaFinal) {
+        int meses;
+
+        meses = ((fechaFinal.get(Calendar.YEAR) * 12) + (fechaFinal.get(Calendar.MONTH) + 1))
+                - ((fechaInicial.get(Calendar.YEAR) * 12) + (fechaInicial.get(Calendar.MONTH) + 1));
+
+        return meses;
     }
 }

@@ -20,17 +20,20 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.widget.core.client.Dialog;
-import com.sencha.gxt.widget.core.client.FramedPanel;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
-import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.form.DateField;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import com.sencha.gxt.widget.core.client.form.validator.EmptyValidator;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
+import java.util.Date;
 
 /**
  *
@@ -40,19 +43,20 @@ public class ActividadForm implements IsWidget, EntryPoint {
 
     // <editor-fold defaultstate="collapsed" desc="Elementos visuales">
     private VerticalPanel vp;
-    private TextField descripcionActividad;
+    private TextArea descripcionActividad;
     private DateField fechainicioActividad;
     private DateField fechafinActividad;
     private TextField peso;
-    private static final int COLUMN_FORM_WIDTH = 100;
-    Dialog modalPry;
+    //private static final int COLUMN_FORM_WIDTH = 100;
+    Dialog modalAct;
     // </editor-fold>
     ActividadobraDTO actividadObraPadre;
     ActividadobraDTO actividacreada;
     Gantt<ActividadobraDTO, DependenciaDTO> gantt;
-    ActividadobraDTOProps propes;
+    ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);
+    ;
     ContratoDTO contratoDto;
-    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+    private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
 
     public VerticalPanel getVp() {
@@ -63,11 +67,11 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.vp = vp;
     }
 
-    public TextField getDescripcionActividad() {
+    public TextArea getDescripcionActividad() {
         return descripcionActividad;
     }
 
-    public void setDescripcionActividad(TextField descripcionActividad) {
+    public void setDescripcionActividad(TextArea descripcionActividad) {
         this.descripcionActividad = descripcionActividad;
     }
 
@@ -111,47 +115,40 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public ActividadForm()
-    {}
-    
-    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ContratoDTO contratoDtoP) {
+    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog dialog, ContratoDTO contratoDtoP) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
-        modalPry = di;
+        modalAct = dialog;
         this.contratoDto = contratoDtoP;
-        contratoDto.setValorDisponible(contratoDto.getNumvlrcontrato());
-        service.setLog("convenio dis" + contratoDto.getValorDisponible(), null);
-    }
-
-    public ActividadForm(ActividadobraDTO actividadobrapadre, ContratoDTO contratoDtoP) {
-        this.actividadObraPadre = actividadobrapadre;
-        this.contratoDto = contratoDtoP;
-        service.setLog("tarea Seleccionada=" + actividadobrapadre.getStartDateTime(), null);
+        actividacreada = new ActividadobraDTO();
     }
 
     private void crearFormulario() {
-        getVp().add(new Label("Añadir contrato"));
+        getVp().add(new Label("Añadir actividad macro"));
 
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         getVp().add(con);
 
-
         int cw = 200;
 
-        setDescripcionActividad(new TextField());
-        getDescripcionActividad().setEmptyText("Nombre de la Actividad");
-        getDescripcionActividad().setWidth(cw);
-        con.add(getDescripcionActividad(), new HtmlData(".descrip"));
+        setDescripcionActividad(new TextArea());
+        getDescripcionActividad().setHeight("50px");
+        getDescripcionActividad().setWidth("200px");
+        con.add(new FieldLabel(getDescripcionActividad(), "Descripción:"), new HtmlData(".descrip"));
 
         setFechainicioActividad(new DateField());
         getFechainicioActividad().setWidth(cw);
         getFechainicioActividad().setEmptyText("Fecha de Inicio");
-        con.add(getFechainicioActividad(), new HtmlData(".fechaini"));
+        getFechainicioActividad().addValidator(new EmptyValidator<Date>());
+        getFechainicioActividad().setAutoValidate(true);
+        con.add(new FieldLabel(getFechainicioActividad(), "Fecha de Inicio:"), new HtmlData(".fechaini"));
 
         setFechafinActividad(new DateField());
         getFechafinActividad().setWidth(cw);
-        getFechafinActividad().setEmptyText("Fecha de Inicio");
-        con.add(getFechafinActividad(), new HtmlData(".fechafin"));
+        getFechafinActividad().setEmptyText("Fecha de Finalización");
+        getFechafinActividad().addValidator(new EmptyValidator<Date>());
+        getFechafinActividad().setAutoValidate(true);
+        con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización:"), new HtmlData(".fechafin"));
 
 //        setPeso(new TextField());
 //        getPeso().setEmptyText("Peso");
@@ -161,48 +158,45 @@ public class ActividadForm implements IsWidget, EntryPoint {
         Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                cargarDatosActividad();
-                boolean varErrorres = false;
-                String msgerrores = "";
-                if (actividacreada.getStrdescactividad().isEmpty()) {
-                    varErrorres = true;
-                    msgerrores += "Debe Ingresar una descripción" + "<br/>";
-                }
-                if (actividacreada.getFechaInicio() != null) {
-                    if (actividacreada.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
-                        varErrorres = true;
-                        msgerrores += "*La fecha de inicio de la actividad no puede ser inferior a la fecha de suscripcion del convenio " + actividadObraPadre.getFechaInicio().toString() + "<br/>";
-                    }
-                } else {
-                    varErrorres = true;
-                    msgerrores += "*La fecha de inicio no puede estar vacia";
-                }
-                if (actividacreada.getFechaFin() != null) {
-                    if (actividacreada.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
-                        varErrorres = true;
-                        msgerrores += "*La fecha de fin de la actividad no puede ser superior a la fecha de finalizacion del convenio" + actividadObraPadre.getFechaFin().toString() + "<br/>";
-                    }
-                }
+                AlertMessageBox d;
+                if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
+                    if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
 
-                if (!varErrorres) {
-                    crearActividad();
+                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
+                            if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
+                                modalAct.hide();
+                                crearActividad();
+                            } else {
+                                d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
+                                        + obtenerFecha(actividadObraPadre.getEndDateTime()));
+                                d.show();
+
+                            }
+                        } else {
+                            d = new AlertMessageBox("Error", "La fecha de inicio de la actividad no puede ser inferior a "
+                                    + obtenerFecha(actividadObraPadre.getStartDateTime()));
+                            d.show();
+                        }
+
+                    } else {
+                        d = new AlertMessageBox("Error", "Debe diligenciar las fechas para la actividad");
+                        d.show();
+                    }
+
                 } else {
-                    AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
+                    d = new AlertMessageBox("Error", "Debe Ingresar una descripción para la actividad");
                     d.show();
                 }
-
             }
         });
 
-        btnAdicionarActividad.setWidth("" + 150);
+        btnAdicionarActividad.setWidth("150px");
         con.add(btnAdicionarActividad);
-
-
-
 
     }
 
     @Override
+
     public Widget asWidget() {
         if (getVp() == null) {
             setVp(new VerticalPanel());
@@ -225,35 +219,35 @@ public class ActividadForm implements IsWidget, EntryPoint {
      return ['<table width=100% cellpadding=0 cellspacing=10>',     
      '<tr><td class=descrip width=50%></td></tr>',
      '<tr><td class=peso></td></tr>',
-     '</tr><td class=fechafin ></td></tr>',
-     '</tr><td class=fechaini></td></tr>',
+     '</tr><td class=fechaini ></td></tr>',
+     '</tr><td class=fechafin></td></tr>',
      '</table>'
      ].join("");
      }-*/;
 
     public void cargarDatosActividad() {
         actividacreada.setStrdescactividad(getDescripcionActividad().getValue());
-        actividacreada.setFechaInicio(getFechainicioActividad().getCurrentValue());
-        actividacreada.setFechaFin(getFechafinActividad().getCurrentValue());
+        actividacreada.setStartDateTime(getFechainicioActividad().getValue());
+        actividacreada.setEndDateTime(getFechafinActividad().getValue());
         //actividacreada.setPeso(getPeso();
-    }
 
-    public int calcularDuracion() {
-        if (actividacreada.getFechaInicio() != null && actividacreada.getFechaFin() != null) {
-            long diferencia = actividacreada.getFechaFin().getTime() - actividacreada.getFechaInicio().getTime();
-            double dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            return ((int) dias);
-        }
-        return actividadObraPadre.getDuration();
     }
+   
 
     public void crearActividad() {
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getStrdescactividad(), actividacreada.getFechaInicio(), calcularDuracion(), 0, GanttConfig.TaskType.LEAF, 4, false);
+        cargarDatosActividad();
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getStrdescactividad(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, GanttConfig.TaskType.LEAF, 4, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
         propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
+    }
+
+    public String obtenerFecha(Date fecha) {
+        DateWrapper dw = new DateWrapper(fecha).clearTime();
+
+        return String.valueOf(dw.getFullYear()) + "-" + String.valueOf(dw.getMonth() + 1) + "-" + String.valueOf(dw.getDate());
     }
 }

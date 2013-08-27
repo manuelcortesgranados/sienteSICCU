@@ -61,7 +61,10 @@ public class GanttDatos {
         ContratoDTO convenio = contratodto;
         
         List<ActividadobraDTO> lista = taskStore.getAll();
+        
+        service.setLog("task = " + taskStore.getRootItems().size(),null);
         for (ActividadobraDTO act : lista) {
+            
             service.setLog("act: " + act.getStrdescactividad() + " desc: " + act.getName() + " fechaini: " + act.startDateTime + " act hijas: " + act.getChildren().size(), null);
         }        
         return convenio;

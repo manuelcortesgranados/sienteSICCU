@@ -19,6 +19,9 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      private ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios;
      private BigDecimal valor;
      private int tipoaporte;
+     private String nombreEntidad;
+     private String nombreTipo;
+     private String eliminar;
 
     public RelacionobrafuenterecursoscontratoDTO() {
     }	
@@ -35,10 +38,14 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
        this.valor = valor;
     }
     
-     public RelacionobrafuenterecursoscontratoDTO( ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor,int tipor) {
+     public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios, BigDecimal valor,int tipor,String nombreEntidad,String nombreTipo) {
        this.tipoaporte=tipor;
        this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
        this.valor = valor;
+       this.idrelacionobracontrato=id;
+       this.nombreEntidad=nombreEntidad;
+       this.nombreTipo=nombreTipo;
+       this.eliminar="Eliminar";
     }
    
     
@@ -112,6 +119,49 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
      */
     public void setTipoaporte(int tipoaporte) {
         this.tipoaporte = tipoaporte;
+    }
+
+    /**
+     * @return the nombreEntidad
+     */
+    public String getNombreEntidad() {
+        return nombreEntidad;
+    }
+
+    /**
+     * @param nombreEntidad the nombreEntidad to set
+     */
+    public void setNombreEntidad(String nombreEntidad) {
+        this.nombreEntidad = nombreEntidad;
+    }
+
+    /**
+     * @return the nombreTipo
+     */
+    public String getNombreTipo() {
+        return nombreTipo;
+    }
+
+    /**
+     * @param nombreTipo the nombreTipo to set
+     */
+    public void setNombreTipo(String nombreTipo) {
+        this.nombreTipo = nombreTipo;
+    }
+
+   
+    /**
+     * @return the eliminar
+     */
+    public String getEliminar() {
+        return eliminar;
+    }
+
+    /**
+     * @param eliminar the eliminar to set
+     */
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
     }
     
     

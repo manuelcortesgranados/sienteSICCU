@@ -30,10 +30,7 @@
                             <rich:tooltip  value="#{var.fechasuscripcion}"/>
                         </rich:calendar>
                         </h:panelGrid>
-
-                        <br/><br/>
-
-                        <h:panelGrid  >
+                       <h:panelGrid  >
                             <h:outputText value="Fecha finalización:"/>
                             <rich:calendar id="id-datefechafin"   defaultLabel="#{var.fechafinalizacion}" datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechafin}" required="true" >                    
                                 <rich:message for="id-datefechafin"  />

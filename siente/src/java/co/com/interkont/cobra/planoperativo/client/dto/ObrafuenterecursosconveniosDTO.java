@@ -1,10 +1,8 @@
 package co.com.interkont.cobra.planoperativo.client.dto;
 // Generated Jul 12, 2013 4:10:17 PM by Hibernate Tools 3.2.1.GA
 
-
 import com.google.gwt.user.client.rpc.IsSerializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -16,31 +14,108 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private ObraDTO obra;
     private FuenterecursosconvenioDTO fuenterecursosconvenio;
     private String rubro;
+    /*si tipoaporte es 0 es dinero si es 1 es especie*/
     private int tipoaporte;
     private int vigencia;
     private BigDecimal valor;
     private BigDecimal valorDisponible;
+    private BigDecimal pagodirecto;
+    private BigDecimal otrospagos;
+    /*si forma de ingreso es 0 es valor si es 1 es porcentaje*/
+    private int formaingreso;
+    private BigDecimal porcentaje;
+    /*valores necesarios para cargar la tabla de obra fuente recursos*/
+    private String nombreEntidad;
+    private String eliminar;
     private String descripcionaporte;
-    private Set relacionobrafuenterecursoscontratos = new HashSet(0);
 
     public ObrafuenterecursosconveniosDTO() {
     }
-     public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
-       this.idobrafuenterecursos = idobrafuenterecursos;
-       this.obra = obra;
-       this.tipoaporte = tipoaporte;
-       this.vigencia = vigencia;
-       this.valor = valor;
-     }
 
-      public ObrafuenterecursosconveniosDTO(int tipoaporte,  BigDecimal valor,FuenterecursosconvenioDTO fuente,String rubro) {
+    public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, int tipoaporte, int vigencia, BigDecimal valor) {
+        this.idobrafuenterecursos = idobrafuenterecursos;
+        this.obra = obra;
+        this.tipoaporte = tipoaporte;
+        this.vigencia = vigencia;
+        this.valor = valor;
+    }
+
+    public ObrafuenterecursosconveniosDTO(int tipoaporte, BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id) {
         this.tipoaporte = tipoaporte;
         this.valor = valor;
-        this.fuenterecursosconvenio=fuente;
-        this.rubro=rubro;
-        this.valorDisponible=valor;
-        
-     }
+        this.fuenterecursosconvenio = fuente;
+        this.rubro = rubro;
+        this.valorDisponible = valor;
+        this.idobrafuenterecursos = id;
+        if (tipoaporte == 1) {
+            descripcionaporte = "Dinero";
+        } else {
+            descripcionaporte = "Especie";
+        }
+        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
+        this.eliminar = "Eliminar";
+    }
+
+    public ObrafuenterecursosconveniosDTO(BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia, int tipoAporte, int formaPago) {
+        System.out.println("en constructor 1" );
+        this.tipoaporte = 0;
+        System.out.println("en constructor 2" );
+        this.valor = valor;
+         System.out.println("en constructor3" );
+        this.fuenterecursosconvenio = fuente;
+         System.out.println("en constructor4" );
+        this.rubro = rubro;
+         System.out.println("en constructor5" );
+        this.valorDisponible = valor;
+         System.out.println("en constructor6" );
+        this.idobrafuenterecursos = id;
+         System.out.println("en constructor7" );
+        this.vigencia = vigencia;
+         System.out.println("en constructor8" );
+        this.tipoaporte = tipoAporte;
+         System.out.println("en constructor9" );
+        this.formaingreso = formaPago;
+        if (tipoaporte == 0) {
+            descripcionaporte = "Dinero";
+        } else {
+            descripcionaporte = "Especie";
+        }
+         System.out.println("en constructor" );
+        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
+        this.eliminar = "Eliminar";
+    }
+
+    public ObrafuenterecursosconveniosDTO(BigDecimal valor, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia, BigDecimal porcentaje, int tipoAporte, int formaPago) {
+        this.tipoaporte = 0;
+        this.valor = valor;
+        this.fuenterecursosconvenio = fuente;
+        this.rubro = rubro;
+        this.valorDisponible = valor;
+        this.idobrafuenterecursos = id;
+        this.vigencia = vigencia;
+        this.tipoaporte = tipoAporte;
+        this.formaingreso = formaPago;
+        if (tipoaporte == 0) {
+            descripcionaporte = "Dinero";
+        } else {
+            descripcionaporte = "Especie";
+        }
+        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
+        this.eliminar = "Eliminar";
+        this.porcentaje = porcentaje;
+    }
+
+    public ObrafuenterecursosconveniosDTO(String descripcionAporte, FuenterecursosconvenioDTO fuente, String rubro, int id, int vigencia) {
+        this.tipoaporte = 0;
+        this.fuenterecursosconvenio = fuente;
+        this.rubro = rubro;
+        this.valorDisponible = valor;
+        this.idobrafuenterecursos = id;
+        this.vigencia = vigencia;
+        this.tipoaporte=1;
+        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
+        this.eliminar = "Eliminar";
+    }
 
     public ObrafuenterecursosconveniosDTO(int idobrafuenterecursos, ObraDTO obra, FuenterecursosconvenioDTO fuenterecursosconvenio, String rubro, int tipoaporte, int vigencia, BigDecimal valor, String descripcionaporte, Set relacionobrafuenterecursoscontratos) {
         this.idobrafuenterecursos = idobrafuenterecursos;
@@ -51,11 +126,8 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         this.vigencia = vigencia;
         this.valor = valor;
         this.descripcionaporte = descripcionaporte;
-        this.relacionobrafuenterecursoscontratos = relacionobrafuenterecursoscontratos;
 
     }
-    
-    
 
     /**
      * @return the idobrafuenterecursos
@@ -170,20 +242,6 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     }
 
     /**
-     * @return the relacionobrafuenterecursoscontratos
-     */
-    public Set getRelacionobrafuenterecursoscontratos() {
-        return relacionobrafuenterecursoscontratos;
-    }
-
-    /**
-     * @param relacionobrafuenterecursoscontratos the relacionobrafuenterecursoscontratos to set
-     */
-    public void setRelacionobrafuenterecursoscontratos(Set relacionobrafuenterecursoscontratos) {
-        this.relacionobrafuenterecursoscontratos = relacionobrafuenterecursoscontratos;
-    }
-
-    /**
      * @return the valorDisponible
      */
     public BigDecimal getValorDisponible() {
@@ -196,6 +254,88 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     public void setValorDisponible(BigDecimal valorDisponible) {
         this.valorDisponible = valorDisponible;
     }
-    
-    
+
+    /**
+     * @return the nombreEntidad
+     */
+    public String getNombreEntidad() {
+        return nombreEntidad;
+    }
+
+    /**
+     * @param nombreEntidad the nombreEntidad to set
+     */
+    public void setNombreEntidad(String nombreEntidad) {
+        this.nombreEntidad = nombreEntidad;
+    }
+
+    /**
+     * @return the eliminar
+     */
+    public String getEliminar() {
+        return eliminar;
+    }
+
+    /**
+     * @param eliminar the eliminar to set
+     */
+    public void setEliminar(String eliminar) {
+        this.eliminar = eliminar;
+    }
+
+    /**
+     * @return the pagodirecto
+     */
+    public BigDecimal getPagodirecto() {
+        return pagodirecto;
+    }
+
+    /**
+     * @param pagodirecto the pagodirecto to set
+     */
+    public void setPagodirecto(BigDecimal pagodirecto) {
+        this.pagodirecto = pagodirecto;
+    }
+
+    /**
+     * @return the otrospagos
+     */
+    public BigDecimal getOtrospagos() {
+        return otrospagos;
+    }
+
+    /**
+     * @param otrospagos the otrospagos to set
+     */
+    public void setOtrospagos(BigDecimal otrospagos) {
+        this.otrospagos = otrospagos;
+    }
+
+    /**
+     * @return the formaingreso
+     */
+    public int getFormaingreso() {
+        return formaingreso;
+    }
+
+    /**
+     * @param formaingreso the formaingreso to set
+     */
+    public void setFormaingreso(int formaingreso) {
+        this.formaingreso = formaingreso;
+    }
+
+    /**
+     * @return the porcentaje
+     */
+    public BigDecimal getPorcentaje() {
+        return porcentaje;
+    }
+
+    /**
+     * @param porcentaje the porcentaje to set
+     */
+    public void setPorcentaje(BigDecimal porcentaje) {
+        this.porcentaje = porcentaje;
+    }
 }
