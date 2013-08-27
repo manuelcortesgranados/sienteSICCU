@@ -19,21 +19,21 @@
     </h:head>
 
     <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
-        <rich:tab header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px" >
+        <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px; width: 250px;" > 
+            <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
-                <h:inputText size="35"  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclave}"
+                <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclave}"
                              onclick="this.value = ''"  styleClass="input_filtro">
                     <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
-                <h:selectOneMenu  id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro">
-
-                    <f:selectItems value="#{HomeGestion.tiposProyectos}" />
+                <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
+                    <f:selectItems value="#{HomeGestion.tiposProyectos}"/>
                     <a4j:ajax event="change" listener="#{HomeGestion.cargarSubtiposProyecto}" execute="@this"
                               render="subtiposProyecto"/>
                 </h:selectOneMenu>
 
                 <h:panelGroup id="subtiposProyecto"  styleClass="input_filtro" >
-                    <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro">
+                    <h:selectOneMenu   id="subtipoProyecto" value="#{HomeGestion.filtro.intsubtipoproyecto}"  styleClass="input_filtro_select">
                         <f:selectItems value="#{HomeGestion.subTiposProyecto}" />
                     </h:selectOneMenu>
                 </h:panelGroup>
@@ -57,17 +57,16 @@
 
                                          }
                                      });
-                                     $("#amount").val("Valor: $ " + $("#slider-range").slider("values", 0) +
+                                     $("#amount").val("VALOR: $ " + $("#slider-range").slider("values", 0) +
                                              " a $ " + $("#slider-range").slider("values", 1));
                                  });
 
                     </script>
 
-                    <h:panelGrid columns="1">
-                        <h:inputText id="amount"  styleClass="input_filtro" disabled="true"/>  
+                    <h:panelGrid>           
+                        <h:inputText id="amount"  styleClass="input_filtro_2" disabled="true"/>  
                         <h:inputHidden id="numero1"   value="#{HomeGestion.filtro.cuantiaini}"  /> 
                         <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"  /> 
-
                     </h:panelGrid>
                     <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}" rendered="false">
                         <f:selectItem itemLabel="Todos" itemValue="-1"/>
@@ -99,7 +98,7 @@
                         });
                     </script>
 
-                    <h:inputText id="avance"  styleClass="input_filtro"  disabled="true"/>  
+                    <h:inputText id="avance"   styleClass="input_filtro_2" style="font-size: 15px;" /> 
 
                     <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                     <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
@@ -116,10 +115,11 @@
             </center>
         </rich:tab>
         <rich:tab 
-            header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >                      
+            header="#{var.filtrodonde}"  id="tab_uno" name="tab_uno"   >  
+            <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"  >
                 <h:panelGroup>
-                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro">
+                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">
                         <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                         <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
                         <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
@@ -127,14 +127,14 @@
 
                     <h:panelGrid id="tipoorigen" columns="1" columnClasses="panelcenter" >
                         <h:panelGrid id="filtrozonaes" columns="1" rendered="#{HomeGestion.inttipoorigen == 0}" >
-                            <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}"  styleClass="input_filtro">
+                            <h:selectOneMenu id="zona" value="#{HomeGestion.filtro.intregionespecifica}" rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}"  styleClass="input_filtro_select">
                                 <f:selectItem itemValue="0" itemLabel="#{var.todos}"/>
                                 <f:selectItems value="#{HomeGestion.zonaespe}"/>
                                 <a4j:ajax event="change" execute="@this" render="filtrozonaes"/>
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
-                            <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro"
+                            <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="iinput_filtro_select"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                 <f:selectItems value="#{HomeGestion.departamentos}"/>
                                 <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
@@ -154,6 +154,7 @@
         </rich:tab>
 
         <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
+            <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
                 <h:inputText id="txtPalabraClave1" value="#{HomeGestion.filtro.strentidad}"
                              onclick="this.value = '';" size="35" styleClass="input_filtro">
