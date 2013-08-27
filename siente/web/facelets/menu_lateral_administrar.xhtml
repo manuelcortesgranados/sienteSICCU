@@ -187,7 +187,7 @@
     <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
         <ui:include src="/facelets/Informacion_general_Participacion.xhtml" />
     </h:panelGroup>
-    <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
+    <h:panelGroup rendered="#{!SessionBeanCobra.cobraService.ciu}">
         <ui:include src="/Ciudadano/Slider_informacion_general_ciud.xhtml"/>
     </h:panelGroup>
 </ui:composition>
