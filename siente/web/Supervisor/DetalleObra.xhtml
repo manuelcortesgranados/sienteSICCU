@@ -67,6 +67,9 @@
         <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/reloj/css/flipclock.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            localStorage.setItem('accionDetalleProyecto', "ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto");
+        </script>
     </ui:define>
 
     <ui:define name="title">
@@ -97,8 +100,7 @@
     </ui:define>
 
     <ui:define name="body">
-        <body onload="cargarDetalle();
-                mostrarReloj();">
+        <body onload="cargarDetalle()">
             <h:form prependId="false">
                 <a4j:jsFunction id="iniDetalle" name="cargarDetalle">
                     <a4j:ajax event="complete" oncomplete="showModal()" rendered="#{SessionBeanCobra.vermensajeinterventor and Supervisor$AdministrarObraNew.obra.solicitud_obra!=null and !SessionBeanCobra.cobraService.ciu and var.varmodalsupervisor}" />
@@ -276,11 +278,12 @@
                                 <h:panelGrid id="pg_ubicacion_evolucion" rowClasses="alignverticaldetalle" columns="2" columnClasses="pg_ubicacion_evolucioncol1,pg_ubicacion_evolucioncol2">
                                     <h:panelGrid  >
                                         <h:outputLabel>Conozca la evolución</h:outputLabel>
-                                        <h:panelGrid columnClasses="panelderecha">
-                                            <h:outputText styleClass="ikont- hot-scriptGrafico1" value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false" />
+                                        <h:panelGrid columns="2" >
+                                            <h:outputText  styleClass="ikont- hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
-                                            <div id="graficoEvolucionProyecto">
+                                            <div id="graficoAvanceFisico" >
                                             </div>
+
                                         </h:panelGrid>
                                     </h:panelGrid>
                                 </h:panelGrid>
@@ -430,15 +433,7 @@
 
         </script>
         <script type="text/javascript">
-            var $jpanel = jQuery.noConflict();
-            $jpanel(document).ready(function() {
-                var $i = jQuery.noConflict();
-                $i('#slider3').slider3({
-                    speed: 1800
 
-                });
-
-            });
 
         </script>
     </ui:define>

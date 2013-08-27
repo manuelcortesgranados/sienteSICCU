@@ -1345,7 +1345,7 @@ a.ikont-hcl-modificarusuario:hover {
 
 .ikont-hf-nuevodetalleobrazoom{
     position: relative;
-    top: -52px;
+    top: -62px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos{
@@ -1835,176 +1835,219 @@ input[type="text"], input[type="password"], select{
     color: #257500;
 }
 
-.ikont-hpg-menu-nuevo-proyecto{ 
-    margin-top: -4px;
-    margin-left: 23px;
-}
 .ikont-hpg-menu-contenido-nuevo-proyecto{
     background-color: #F2F2F2;
-    width: 900px;
-    height: 70px;
+    width: 850px;
+    height: 140px;
     border-style: solid;
     border-width: 0px;
     border-color: #6B6B6B;
     position: relative;
-    top: -58px;
-    z-index: 1;
+    top: 0px;
+    z-index: 5;
 }
 
 .ikont-img-posicion-menu-proyecto{
-    background-image: url(../imgs/submenu_sprite_proyecto.jpg);
+    background-image: url(../imgs/submenu_sprite_proyectos.png);
     background-repeat: no-repeat;
     width: 90px;
-    height: 136px;
+    height: 60px;
     display: block;
 }
+
 .ikont-posicion-detalle-proyecto{
-    background-position: 6px -24px;
-}
-.ikont-posicion-detalle-proyecto.scroll{
-    background-position: 6px -82px;
-}
-.ikont-posicion-detalle-proyecto{
-    height: 61px;
-    background-position: 5px -85px;
+    background-position: 7px -24px;
 }
 
-.ikont-posicion-detalle-proyecto:hover, .ikont-posicion-detalle-proyecto.buttonactive.scroll{
-    background-position: 26px -82px;
+.ikont-posicion-detalle-proyecto.scroll{
+    background-position: 7px -58px;
+    height: 25px;
 }
+
+.ikont-posicion-detalle-proyecto.scroll:hover, .ikont-posicion-detalle-proyecto.buttonactive.scroll{
+    background-position: 7px -115px;
+}
+
+.ikont-posicion-detalle-proyecto:hover, .ikont-posicion-detalle-proyecto.buttonactive{
+    background-position: 7px -82px;
+}
+
 .ikont-posicion-avance-proyecto{
     background-position: -85px -24px;
 }
-.ikont-posicion-avance-proyecto{
-    height: 61px;
-    background-position: -85px -26px;
-}
+
 .ikont-posicion-avance-proyecto.scroll{
+    background-position: -85px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-avance-proyecto.scroll:hover, .ikont-posicion-avance-proyecto.buttonactive.scroll{
+    background-position: -85px -115px;
+}
+
+.ikont-posicion-avance-proyecto:hover, .ikont-posicion-avance-proyecto.buttonactive{
     background-position: -85px -82px;
 }
-.ikont-posicion-avance-proyecto:hover, .scroll.buttonactive{
-    background-position: -85px -90px;
-}
+
 .ikont-posicion-modificar-proyecto{
     background-position: -173px -24px;
 }
-.ikont-posicion-modificar-proyecto{
-    height: 61px;
-    background-position: -173px -26px;
-}
+
 .ikont-posicion-modificar-proyecto.scroll{
+    background-position: -173px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-modificar-proyecto.scroll:hover, .ikont-posicion-modificar-proyecto.buttonactive.scroll{
+    background-position: -173px -115px;
+}
+
+.ikont-posicion-modificar-proyecto:hover, .ikont-posicion-modificar-proyecto.buttonactive{
     background-position: -173px -82px;
 }
-.ikont-posicion-modificar-proyecto:hover, .scroll.buttonactive{
-    background-position: -173px -90px;
-}
+
 .ikont-posicion-evolucion-proyecto{
     background-position: -245px -24px;
 }
-.ikont-posicion-evolucion-proyecto{
-    height: 61px;
-    background-position: -245px -29px;
-}
+
 .ikont-posicion-evolucion-proyecto.scroll{
-    background-position: -245px -82px;
-}
-.ikont-posicion-evolucion-proyecto:hover, .scroll.buttonactive{
-    background-position: -245px -92px;
-}
-.ikont-posicion-imagenes-proyecto{
-    width: 85px;
-    background-position: -321px -24px;
-}
-.ikont-posicion-imagenes-proyecto{
-    width: 85px;
-    height: 61px;
-    background-position: -321px -29px;
-}
-.ikont-posicion-imagenes-proyecto.scroll{
-    width: 85px;
-    background-position: -321px -82px;
-}
-.ikont-posicion-imagenes-proyecto:hover, .scroll.buttonactive{
-    width: 85px;
-    background-position: -321px -92px;
-}
-.ikont-posicion-finalizar-proyecto{
-    width: 85px;
-    background-position: -381px -24px;
-}
-.ikont-posicion-finalizar-proyecto{
-    width: 85px;
-    height: 61px;
-    background-position: -382px -29px;
-}
-.ikont-posicion-finalizar-proyecto.scroll{
-    width: 85px;
-    background-position: -382px -82px;
-}
-.ikont-posicion-finalizar-proyecto:hover, .scroll.buttonactive{
-    width: 85px;
-    background-position: -382px -92px;
-}
-.ikont-posicion-contratos-proyecto{
-    width: 110px;
-    background-position: -469px -24px;
-}
-.ikont-posicion-contratos-proyecto{
-    width: 110px;
-    height: 61px;
-    background-position: -469px -29px;
-}
-.ikont-posicion-contratos-proyecto.scroll{
-    width: 110px;
-    background-position: -469px -82px;
-}
-.ikont-posicion-contratos-proyecto:hover, .scroll.buttonactive{
-    width: 110px;
-    background-position: -469px -92px;
-}
-.ikont-posicion-estado-proyecto{
-    width: 110px;
-    background-position: -584px -24px;
-}
-.ikont-posicion-estado-proyecto{
-    width: 110px;
-    height: 61px;
-    background-position: -584px -29px;
-}
-.ikont-posicion-estado-proyecto.scroll{
-    width: 110px;
-    background-position: -584px -82px;
-}
-.ikont-posicion-estado-proyecto:hover, .scroll.buttonactive{
-    width: 110px;
-    background-position: -584px -92px;
+    background-position: -245px -58px;
+    height: 25px;
 }
 
-/*.ikont-posicion-eliminar-avance-proyecto{
-     background-position: -694px -23px;
-     width: 110px;
+.ikont-posicion-evolucion-proyecto.scroll:hover, .ikont-posicion-evolucion-proyecto.buttonactive.scroll{
+    background-position: -245px -115px;
 }
-.ikont-posicion-eliminar-avance-proyecto:hover{
-     background-position: -694px -82px;
-     width: 110px;
-}*/
-.ikont-posicion-eliminar-avance-proyecto{
+
+.ikont-posicion-evolucion-proyecto:hover, .ikont-posicion-evolucion-proyecto.buttonactive{
+    background-position: -245px -82px;
+}
+
+.ikont-posicion-imagenes-proyecto{
+    background-position: -321px -24px;
+    width: 80px;
+}
+
+.ikont-posicion-imagenes-proyecto.scroll{
+    background-position: -321px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-imagenes-proyecto.scroll:hover, .ikont-posicion-imagenes-proyecto.buttonactive.scroll{
+    background-position: -321px -115px;
+}
+
+.ikont-posicion-imagenes-proyecto:hover, .ikont-posicion-imagenes-proyecto.buttonactive{
+    background-position: -321px -82px;
+}
+
+.ikont-posicion-finalizar-proyecto{
+    background-position: -385px -24px;
+    width: 80px;
+}
+
+.ikont-posicion-finalizar-proyecto.scroll{
+    background-position: -385px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-finalizar-proyecto.scroll:hover, .ikont-posicion-finalizar-proyecto.buttonactive.scroll{
+    background-position: -385px -115px;
+}
+
+.ikont-posicion-finalizar-proyecto:hover, .ikont-posicion-finalizar-proyecto.buttonactive{
+    background-position: -385px -82px;
+}
+
+.ikont-posicion-contratos-proyecto{
+    background-position: -469px -24px;
     width: 110px;
-    background-position: -694px -24px;
 }
-.ikont-posicion-eliminar-avance-proyecto{
+
+.ikont-posicion-contratos-proyecto.scroll{
+    background-position: -469px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-contratos-proyecto.scroll:hover, .ikont-posicion-contratos-proyecto.buttonactive.scroll{
+    background-position: -469px -115px;
+}
+
+.ikont-posicion-contratos-proyecto:hover, .ikont-posicion-contratos-proyecto.buttonactive{
+    background-position: -469px -82px;
+}
+
+.ikont-posicion-estado-proyecto{
+    background-position: -584px -24px;
     width: 110px;
-    height: 61px;
-    background-position: -694px -29px;
 }
+
+.ikont-posicion-estado-proyecto.scroll{
+    background-position: -584px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-estado-proyecto.scroll:hover, .ikont-posicion-estado-proyecto.buttonactive.scroll{
+    background-position: -584px -115px;
+}
+
+.ikont-posicion-estado-proyecto:hover, .ikont-posicion-estado-proyecto.buttonactive{
+    background-position: -584px -82px;
+}
+
+.ikont-posicion-eliminar-avance-proyecto{
+    background-position: -692px -24px;
+    width: 120px;
+}
+
 .ikont-posicion-eliminar-avance-proyecto.scroll{
-    width: 110px;
-    background-position: -694px -82px;
+    background-position: -692px -58px;
+    height: 25px;
 }
-.ikont-posicion-eliminar-avance-proyecto:hover, .scroll.buttonactive{
-    width: 110px;
-    background-position: -694px -92px;
+
+.ikont-posicion-eliminar-avance-proyecto.scroll:hover, .ikont-posicion-eliminar-avance-proyecto.buttonactive.scroll{
+    background-position: -692px -115px;
 }
+
+.ikont-posicion-eliminar-avance-proyecto:hover, .ikont-posicion-eliminar-avance-proyecto.buttonactive{
+    background-position: -692px -82px;
+}
+
+.ikont-posicion-documentos-proyecto{
+    background-position: -820px -24px;
+}
+
+.ikont-posicion-documentos-proyecto.scroll{
+    background-position: -820px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-documentos-proyecto.scroll:hover, .ikont-posicion-documentos-proyecto.buttonactive.scroll{
+    background-position: -820px -115px;
+}
+
+.ikont-posicion-documentos-proyecto:hover, .ikont-posicion-documentos-proyecto.buttonactive{
+    background-position: -820px -82px;
+}
+
+.ikont-posicion-participacion-ciudadana-proyecto{
+    background-position: -920px -25px;
+    width: 120px;
+}
+
+.ikont-posicion-participacion-ciudadana-proyecto.scroll{
+    background-position: -920px -58px;
+    height: 25px;
+}
+
+.ikont-posicion-participacion-ciudadana-proyecto.scroll:hover, .ikont-posicion-participacion-ciudadana-proyecto.buttonactive.scroll{
+    background-position: -920px -115px;
+}
+
+.ikont-posicion-participacion-ciudadana-proyecto:hover, .ikont-posicion-participacion-ciudadana-proyecto.buttonactive{
+    background-position: -920px -82px;
+}
+
 .ikont-hr-separador-usuario{
     background-color: #C0C0C0;
     height: 1px;
@@ -2428,7 +2471,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-proyecto-admconvenio.scroll{
     background-position: -13px -110px;
 }
-.ikont-posicion-nuevo-proyecto-admconvenio:hover, .buttonactive.scroll{
+.ikont-posicion-nuevo-proyecto-admconvenio:hover, .ikont-posicion-nuevo-proyecto-admconvenio.buttonactive.scroll{
     background-position: -17px -114px;
 }
 .ikont-posicion-nuevo-detalle-admconvenio{
@@ -2454,7 +2497,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-documentos-admconvenio.scroll{
     background-position:-236px -110px;
 }
-.ikont-posicion-nuevo-documentos-admconvenio:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-documentos-admconvenio:hover, .ikont-posicion-nuevo-documentos-admconvenio.scroll.buttonactive{
     background-position:-236px -114px;
 }
 .ikont-posicion-nuevo-modificacion-admconvenio{
@@ -2470,7 +2513,7 @@ Css Para el nuevo menu administrar convenio
     width: 112px;
     background-position: -345px -110px;
 }
-.ikont-posicion-nuevo-modificacion-admconvenio:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-modificacion-admconvenio:hover, .ikont-posicion-nuevo-modificacion-admconvenio.scroll.buttonactive{
     width: 112px;
     background-position: -340px -114px;
 }
@@ -2484,7 +2527,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-evolucion-admconvenio.scroll{
     background-position:-461px -110px;
 }
-.ikont-posicion-nuevo-evolucion-admconvenio:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-evolucion-admconvenio:hover, .ikont-posicion-nuevo-evolucion-admconvenio.scroll.buttonactive{
     background-position:-470px -114px;
 }
 .tab-pestania-active, tab-pestania-active-tres{
@@ -2745,7 +2788,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-tipificacion-proestructuracion.scroll{
     background-position: -18px -93px;
 }
-.ikont-posicion-nuevo-tipificacion-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-tipificacion-proestructuracion:hover, .ikont-posicion-nuevo-tipificacion-proestructuracion.scroll.buttonactive{
     background-position: -18px -96px;
 }
 .ikont-posicion-nuevo-dbasicos-proestructuracion{
@@ -2757,7 +2800,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-dbasicos-proestructuracion.scroll{
     background-position: -118px -93px;
 }
-.ikont-posicion-nuevo-dbasicos-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-dbasicos-proestructuracion:hover, .ikont-posicion-nuevo-dbasicos-proestructuracion.scroll.buttonactive{
     background-position: -118px -96px;
 }
 .ikont-posicion-nuevo-ubicar-proestructuracion{
@@ -2772,7 +2815,7 @@ Css Para el nuevo menu administrar convenio
     width: 95px;
     background-position: -247px -93px;
 }
-.ikont-posicion-nuevo-ubicar-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-ubicar-proestructuracion:hover, .ikont-posicion-nuevo-ubicar-proestructuracion.scroll.buttonactive{
     width: 95px;
     background-position: -247px -96px;
 }
@@ -2785,7 +2828,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-cronograma-proestructuracion.scroll{
     background-position: -386px -93px;
 }
-.ikont-posicion-nuevo-cronograma-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-cronograma-proestructuracion:hover, .ikont-posicion-nuevo-cronograma-proestructuracion.scroll.buttonactive{
     background-position: -386px -96px;
 }
 .ikont-posicion-nuevo-fotos-proestructuracion{
@@ -2797,7 +2840,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-fotos-proestructuracion.scroll{
     background-position:-510px -93px;
 }
-.ikont-posicion-nuevo-fotos-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-fotos-proestructuracion:hover, .ikont-posicion-nuevo-fotos-proestructuracion.scroll.buttonactive{
     background-position:-510px -96px;
 }
 .ikont-posicion-nuevo-contrato-proestructuracion{
@@ -2809,7 +2852,7 @@ Css Para el nuevo menu administrar convenio
 .ikont-posicion-nuevo-contrato-proestructuracion.scroll{
     background-position:-619px -93px;
 }
-.ikont-posicion-nuevo-contrato-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-contrato-proestructuracion:hover, .ikont-posicion-nuevo-contrato-proestructuracion.scroll.buttonactive{
     background-position:-619px -96px;
 }
 .ikont-posicion-nuevo-borrador-proestructuracion{
@@ -2824,7 +2867,7 @@ Css Para el nuevo menu administrar convenio
     width: 105px;
     background-position: -754px -93px;
 }
-.ikont-posicion-nuevo-borrador-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-borrador-proestructuracion:hover, .ikont-posicion-nuevo-borrador-proestructuracion.scroll.buttonactive{
     width: 105px;
     background-position: -754px -96px;
 }
@@ -2840,7 +2883,7 @@ Css Para el nuevo menu administrar convenio
     width: 105px;
     background-position: -896px -93px;
 }
-.ikont-posicion-nuevo-finalizar-proestructuracion:hover, .scroll.buttonactive{
+.ikont-posicion-nuevo-finalizar-proestructuracion:hover, .ikont-posicion-nuevo-finalizar-proestructuracion.scroll.buttonactive{
     width: 105px;
     background-position: -896px -96px;
 }
@@ -2945,8 +2988,6 @@ color: #FFF;
     color:#999;
     line-height:9px;
 }
-
-// Css creados para ciudadano cambiar....
 
 .ikont-acl-seleccionqueja {
     background-image:url(../imgs/p_quejese.png);

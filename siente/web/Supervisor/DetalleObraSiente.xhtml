@@ -1691,49 +1691,9 @@
             <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/reloj.js"/>
 
         </body>
+        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider_ciu.js" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider_ciu.css" rel="stylesheet" type="text/css" />
-        <script src="/#{var.versioncobra}/resources/reloj/js/jquery.js" type="text/javascript"></script>
-        <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/libs/prefixfree.min.js" type="text/javascript"></script>
-        <script src="/#{var.versioncobra}/resources/reloj/js/flipclock/flipclock.min.js" type="text/javascript"></script>
-        <script type="text/javascript">
-                                        var $jpanel = jQuery.noConflict();
-                                        $jpanel(document).ready(function() {
-                                            var clock = $jpanel('.your-clock').FlipClock({
-                                                autoStart: true,
-                                                countdown: true,
-                                                clockFace: 'DailyCounter'
-                                            });
-                                            var timefalta = document.getElementById("finfecha").value;
-                                            var futuro = new Date(timefalta);
-
-                                            var ahora = new Date();
-                                            var faltan = futuro - ahora;
-                                            if (faltan > 0) {
-                                                var segundos = Math.round(faltan / 1000);
-                                                var minutos = Math.floor(segundos / 60);
-                                                var minutos_s = minutos % 60;
-                                                minutos_s = (!(minutos_s > 9)) ? '0' + minutos_s : minutos_s;
-                                            }
-                                            else {
-                                                var minutos_s = 00;
-                                            }
-                                            clock.setTime(minutos_s);
-                                            clock.start();
-                                            var _porst = document.getElementsByClassName('ikont-hot-semaforo')[0].innerHTML;
-                                            _porst = _porst.replace(' %', '');
-                                            _porst = parseInt(_porst) - 2;
-                                            var _pordb = document.getElementsByClassName('ikont-hot-deberia')[0].innerHTML;
-                                            _pordb = _pordb.replace(' %', '');
-                                            _pordb = parseInt(_pordb) - 2;
-                                            var _linese = document.getElementsByClassName('ikont-hcl-line-semaforo')[0];
-                                            var _linedb = document.getElementsByClassName('ikont-hcl-line-deberia')[0];
-                                            _linese.setAttribute("style", "margin-left : " + _porst + "%");
-                                            _linedb.setAttribute("style", "margin-left : " + _pordb + "%");
-
-                                        });
-
-        </script>
         <script type="text/javascript">
             var $jpanel = jQuery.noConflict();
             $jpanel(document).ready(function() {
