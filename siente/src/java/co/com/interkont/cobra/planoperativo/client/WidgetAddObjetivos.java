@@ -28,6 +28,7 @@ public class WidgetAddObjetivos implements IsWidget {
     protected boolean esObjetivo;
     protected boolean esActividad;
     protected int idTemp;
+    
 
     @Override
     public Widget asWidget() {
@@ -42,6 +43,7 @@ public class WidgetAddObjetivos implements IsWidget {
         this.tipoObjetivo = tipoObjetivo;
         this.esObjetivo = esObjetivo;
         this.idTemp = idTemp;
+       
     }
 
     public WidgetAddObjetivos(WidgetTablaObjetivos tblObjetivos, ObraDTO proyecto, String titulodialogo, String mensajedialogo, boolean esObjetivo, int idTemp) {

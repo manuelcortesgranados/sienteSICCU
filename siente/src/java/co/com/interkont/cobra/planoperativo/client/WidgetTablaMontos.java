@@ -127,6 +127,7 @@ public class WidgetTablaMontos implements IsWidget {
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
+        cp.setExpanded(false);
         cp.setPixelSize(500, 150);
         cp.addStyleName("margin-10");
 

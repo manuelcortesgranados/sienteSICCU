@@ -28,10 +28,12 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.widget.core.client.Dialog;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.BlurEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
@@ -58,7 +60,7 @@ public class ModalRubrosProyecto implements IsWidget {
     protected TextField rubro;
     protected NumberField<BigDecimal> montoAportado;
     protected ListBox lstVigen;
-    private Dialog modalActual;
+    private Window modalActual;
     EntidadProperties propse = GWT.create(EntidadProperties.class);
     protected final ListStore<TerceroDTO> entidades;
     protected TerceroDTO terceroDto;
@@ -70,10 +72,11 @@ public class ModalRubrosProyecto implements IsWidget {
     protected ObraDTO proyectoDTO;
     protected FuenterecursosconvenioDTO fuenteRecursosConveDTO;
     protected int idTemp;
+   protected int idTempObraRecurso;
     protected WidgetTablaRubrosPry tblrubros;
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
-    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Dialog modalActual, WidgetTablaRubrosPry tblrubros) {
+    public ModalRubrosProyecto(ContratoDTO contratoDto, ObraDTO proyectoDTO, int idTemp, Window modalActual, WidgetTablaRubrosPry tblrubros,int idTempObraRecurso) {
         entidades = new ListStore<TerceroDTO>(propse.intcodigo());
         lstEntidadesConvenio = new ComboBox<TerceroDTO>(entidades, propse.strnombrecompleto());
         campoTipoRecurso = new TextField();
@@ -94,6 +97,7 @@ public class ModalRubrosProyecto implements IsWidget {
         this.idTemp = idTemp;
         this.modalActual = modalActual;
         this.tblrubros = tblrubros;
+        this.idTempObraRecurso=idTempObraRecurso;
 
     }
 
@@ -117,7 +121,6 @@ public class ModalRubrosProyecto implements IsWidget {
         llenarComboEntidadesConvenio(entidades);
         lstEntidadesConvenio.setEmptyText("Entidad");
         lstEntidadesConvenio.setWidth(cw);
-        lstEntidadesConvenio.setAllowBlank(false);
         lstEntidadesConvenio.setTypeAhead(true);
         lstEntidadesConvenio.setTriggerAction(ComboBoxCell.TriggerAction.ALL);
         lstEntidadesConvenio.addSelectionHandler(new SelectionHandler<TerceroDTO>() {
@@ -132,6 +135,18 @@ public class ModalRubrosProyecto implements IsWidget {
 
         montoAportado.setEmptyText("Monto aportado");
         montoAportado.setWidth(cw);
+        montoAportado.addBlurHandler(new BlurEvent.BlurHandler() {
+            @Override
+            public void onBlur(BlurEvent event) {
+               if(formaPago==1){
+               if(montoAportado.getValue().compareTo(new BigDecimal(100))>0){
+               AlertMessageBox d = new AlertMessageBox("Error", "el porcentaje ingresado no puede superar el 100%");
+               d.show();
+               montoAportado.clear();
+               }
+               }
+            }
+        });
 
         con.add(montoAportado, new AbstractHtmlLayoutContainer.HtmlData(".monto"));
 
@@ -201,28 +216,31 @@ public class ModalRubrosProyecto implements IsWidget {
                     String requeridos = validarRequeridos();
                     if (formaPago == 0) {
                         if (requeridos.equals("")) {
-                            obraFuenteDto = new ObrafuenterecursosconveniosDTO(montoAportado.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, tipoAporte, formaPago);
+                            obraFuenteDto = new ObrafuenterecursosconveniosDTO(montoAportado.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, tipoAporte, formaPago,idTempObraRecurso);
                             validacionDevuelta = validarMontosAportados(obraFuenteDto);
-                        }else{
-                            validacionDevuelta=requeridos;
+                         } else {
+                            validacionDevuelta = requeridos;
                         }
                     } else {
                         if (requeridos.equals("")) {
                             obraFuenteDto = new ObrafuenterecursosconveniosDTO(calcularValor(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia, montoAportado.getValue(), tipoAporte, formaPago);
                             validacionDevuelta = validarMontosAportados(obraFuenteDto);
-                        }else{
-                        validacionDevuelta=requeridos;
+                        } else {
+                            validacionDevuelta = requeridos;
                         }
                     }
                 } else {
                     validacionDevuelta = validarEspecieAportada();
                     if (validacionDevuelta.equals("El monto ha sido guardado")) {
-                        obraFuenteDto = new ObrafuenterecursosconveniosDTO(campoTipoRecurso.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia);
+                        obraFuenteDto = new ObrafuenterecursosconveniosDTO(campoTipoRecurso.getValue(), fuenteRecursosConveDTO, rubro.getValue(), idTemp, vigencia,idTempObraRecurso);
                         proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
+                        idTempObraRecurso++;
                         idTemp++;
                     }
                 }
                 if (!validacionDevuelta.equals("El monto ha sido guardado")) {
+                    montoAportado.setEmptyText("Monto aportado");
+                    campoTipoRecurso.setEmptyText("descripción aporte");
                     AlertMessageBox d = new AlertMessageBox("Error", validacionDevuelta);
                     d.show();
                 } else {
@@ -285,18 +303,17 @@ public class ModalRubrosProyecto implements IsWidget {
     }
 
     public String validarMontosAportados(ObrafuenterecursosconveniosDTO obraFuenteDto) {
-        service.setLog("entre validar 1,1,2", null);
-        if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
-            service.setLog("entre validar 1, 2", null);
+       if (obraFuenteDto.getValor().compareTo(contratoDto.getValorDisponible()) < 0) {
             if (montoAportado.getValue().compareTo(obraFuenteDto.getFuenterecursosconvenio().getValoraportado()) > 0) {
-                service.setLog("entre validar 2", null);
                 return "El monto ingresado supera el valor de la fuente de recursos";
             } else {
                 if (!proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
                     BigDecimal sumaValorAportado = BigDecimal.ZERO;
                     for (Object obr : proyectoDTO.getObrafuenterecursosconvenioses()) {
                         ObrafuenterecursosconveniosDTO obrc = (ObrafuenterecursosconveniosDTO) obr;
+                        if(obrc.getTipoaporte()==0){
                         sumaValorAportado = sumaValorAportado.add(obrc.getValor());
+                        }
                     }
                     sumaValorAportado = sumaValorAportado.add(obraFuenteDto.getValor());
                     if (sumaValorAportado.compareTo(contratoDto.getNumvlrcontrato()) > 0) {
@@ -306,6 +323,7 @@ public class ModalRubrosProyecto implements IsWidget {
             }
             proyectoDTO.getObrafuenterecursosconvenioses().add(obraFuenteDto);
             idTemp++;
+            idTempObraRecurso++;
             modificarValorDisponible(obraFuenteDto);
             return "El monto ha sido guardado";
         }

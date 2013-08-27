@@ -73,9 +73,9 @@ public class WidgetTablaFuenteR implements IsWidget {
     /**
      * @return the store
      */
-    public WidgetTablaFuenteR(ContratoDTO contrato,ActividadobraDTO actividadObraPadre) {
+    public WidgetTablaFuenteR(ContratoDTO contrato, ActividadobraDTO actividadObraPadre) {
         this.contrato = contrato;
-        this.actividadObraPadre=actividadObraPadre;
+        this.actividadObraPadre = actividadObraPadre;
     }
 
     public ListStore<RelacionobrafuenterecursoscontratoDTO> getStore() {
@@ -133,7 +133,7 @@ public class WidgetTablaFuenteR implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
-                buscarFuenteDto(store.get(row).getObrafuenterecursosconvenios(),store.get(row).getValor());
+                buscarFuenteDto(store.get(row).getObrafuenterecursosconvenios(), store.get(row).getValor());
                 contrato.getRelacionobrafuenterecursoscontratos().remove(store.get(row));
                 getStore().remove(store.get(row));
 
@@ -166,6 +166,7 @@ public class WidgetTablaFuenteR implements IsWidget {
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
         cp.setPixelSize(500, 150);
+        cp.setExpanded(false);
         cp.addStyleName("margin-10");
 
         return cp;

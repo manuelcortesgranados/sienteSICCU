@@ -47,6 +47,15 @@ public class RelacionobrafuenterecursoscontratoDTO  implements IsSerializable {
        this.nombreTipo=nombreTipo;
        this.eliminar="Eliminar";
     }
+     
+      public RelacionobrafuenterecursoscontratoDTO(int id, ObrafuenterecursosconveniosDTO obrafuenterecursosconvenios,int tipor,String nombreEntidad,String nombreTipo) {
+       this.tipoaporte=tipor;
+       this.obrafuenterecursosconvenios = obrafuenterecursosconvenios;
+       this.idrelacionobracontrato=id;
+       this.nombreEntidad=nombreEntidad;
+       this.nombreTipo=nombreTipo;
+       this.eliminar="Eliminar";
+    }
    
     
     

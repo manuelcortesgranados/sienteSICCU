@@ -14,6 +14,7 @@ public class TerceroDTO implements IsSerializable{
     
     private int intcodigo;
     private String strnombrecompleto;  
+   
     private int campoTemporalFuenteRecursos;
 
     public TerceroDTO() {
@@ -65,8 +66,6 @@ public class TerceroDTO implements IsSerializable{
     public void setCampoTemporalFuenteRecursos(int campoTemporalFuenteRecursos) {
         this.campoTemporalFuenteRecursos = campoTemporalFuenteRecursos;
     }
-    
-    
-    
-    
+
+   
 }

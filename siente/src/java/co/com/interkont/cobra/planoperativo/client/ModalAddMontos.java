@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.interkont.cobra.dto.ActividadObraDTO;
 import com.sencha.gxt.widget.core.client.Dialog;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
@@ -54,7 +55,6 @@ public class ModalAddMontos implements IsWidget {
     protected NumberField<BigDecimal> valorRubros;
     protected NumberField<BigDecimal> valorContrato;
     protected WidgetTablaMontos widTblMontos;
-    
     /*elementos para cargar los datos ingresados por el usuario*/
     protected RubroDTO rubro;
     protected ContratoDTO contrato;
@@ -62,14 +62,11 @@ public class ModalAddMontos implements IsWidget {
     protected BigDecimal valorAuxiliar;
     protected ActividadobraDTO actividadObraPadre;
     protected List<MontoDTO> lstMontos;
-   
-    protected Dialog modalActual;
+    protected Window modalActual;
     protected int idTemp;
-    
-     protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
-    
+    protected CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
-    public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, BigDecimal valorAuxiliar, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Dialog modalActual, int idTemp) {
+    public ModalAddMontos(ContratoDTO contrato, NumberField<BigDecimal> valorContrato, BigDecimal valorAuxiliar, ActividadobraDTO actividadObraPadre, WidgetTablaMontos widTblMontos, Window modalActual, int idTemp) {
         lstRubrosDto = new ArrayList<RubroDTO>();
         lstMontos = new ArrayList<MontoDTO>(contrato.getMontos());
         this.contrato = contrato;
@@ -79,16 +76,18 @@ public class ModalAddMontos implements IsWidget {
         this.widTblMontos = widTblMontos;
         this.modalActual = modalActual;
         this.idTemp = idTemp;
+       
     }
 
     @Override
     public Widget asWidget() {
-        vp = new VerticalPanel();
-        vp.setSpacing(10);
-        vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
-        vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
-        crearModalMontos();
-
+        if (vp == null) {
+            vp = new VerticalPanel();
+            vp.setSpacing(10);
+            vp.setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
+            vp.setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
+            crearModalMontos();
+        }
         return vp;
     }
 
@@ -101,6 +100,7 @@ public class ModalAddMontos implements IsWidget {
         vp.add(con);
         lstVigen.setWidth(cw);
         llenarV();
+        vigencia=Integer.parseInt(lstVigen.getItemText(0));
         lstVigen.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {

@@ -6,6 +6,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig;
 import java.util.List;
@@ -23,6 +25,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Dialog;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
@@ -38,6 +41,7 @@ import com.sencha.gxt.widget.core.client.form.validator.MaxLengthValidator;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
 import java.util.Iterator;
+import sun.print.resources.serviceui;
 
 public class ProyectoForm1 implements IsWidget, EntryPoint {
 
@@ -61,14 +65,17 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      */
     protected ActividadobraDTO actividadObraPadre;
     protected Gantt<ActividadobraDTO, DependenciaDTO> gantt;
-    protected Dialog modalPry;
+    //protected Dialog modalPry;
+    protected Window modalPry;
     GwtMensajes msj = GWT.create(GwtMensajes.class);
+    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     /*
      * id temporal de objeto, actividad macro, y obra fuente recurso
      */
     protected int idTemp;
     protected int idTempObj;
     protected int idTempMacroActividades;
+    protected int idobraRecursos;
 
     public ProyectoForm1(ContratoDTO contratoDtoP, ActividadobraDTO actividadobrapadre) {
         this.contratoDto = contratoDtoP;
@@ -77,9 +84,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTemp = 0;
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
+        this.idobraRecursos=0;
     }
 
-    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ContratoDTO contratoDtoP) {
+    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         this.modalPry = di;
@@ -89,6 +97,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTemp = 0;
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
+        this.idobraRecursos=0;
+
 
         /*se instancian todos los elementos de la pantalla*/
         nombrePry = new TextField();
@@ -127,36 +137,28 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         getNombrePry().setEmptyText("Nombre del proyecto");
         getNombrePry().setWidth(cw);
-        getNombrePry().setAllowBlank(false);
-        getNombrePry().addValidator(new MaxLengthValidator(250));
         getNombrePry().setAutoValidate(true);
         con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
 
 
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
-        fechaInicio.setAllowBlank(true);
-        fechaInicio.setAutoValidate(true);
         con.add(fechaInicio, new HtmlData(".fechainicio"));
 
 
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
         con.add(fechaFin, new HtmlData(".fechafin"));
-        
+
         pagodirecto.setWidth(cw);
         pagodirecto.setEmptyText("Pago directo");
         con.add(pagodirecto, new HtmlData(".pagodirecto"));
-        
+
         otrospagos.setWidth(cw);
         otrospagos.setEmptyText("Otros pagos");
         con.add(otrospagos, new HtmlData(".otrospagos"));
 
-        final Dialog adicionarRubros = new Dialog();
-        adicionarRubros.setHideOnButtonClick(true);
-        adicionarRubros.setPredefinedButtons();
-        adicionarRubros.setModal(true);
-        adicionarRubros.setAnimCollapse(true);
+     
         final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
@@ -164,7 +166,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros);
+                Window adicionarRubros = new Window();
+                adicionarRubros.setBlinkModal(true);
+                adicionarRubros.setModal(true);
+                ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros,idobraRecursos);
                 adicionarRubros.add(modalProyecto.asWidget());
                 adicionarRubros.show();
             }
@@ -232,9 +237,18 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 cargarDatosProyectoDTO();
                 boolean varErrorres = false;
                 String msgerrores = "";
+                if (nombrePry.getValue() == null) {
+                    varErrorres = true;
+                    msgerrores += "*Por favor ingrese el nombre del proyecto" + "<br/>";
+                }
                 if (proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
                     varErrorres = true;
-                    msgerrores += "El proyecto debe de tener por lo menos un monto asociado" + "<br/>";
+                    msgerrores += "*El proyecto debe de tener por lo menos un monto asociado" + "<br/>";
+                } else {
+                    if (proyectoDTO.getValor() == null) {
+                        varErrorres = true;
+                        msgerrores += "*Ingrese por lo menos un monto de tipo recurso dinero" + "<br/>";
+                    }
                 }
                 if (proyectoDTO.getFechaInicio() != null) {
                     if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
@@ -243,13 +257,25 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
                 } else {
                     varErrorres = true;
-                    msgerrores += "*La fecha de inicio del proyecto no puede estar vacia";
+                    msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
                 }
                 if (proyectoDTO.getFechaFin() != null) {
                     if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
                         varErrorres = true;
                         msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
                     }
+                }
+                if (tblObjetivos.getStore().size() == 0) {
+                    varErrorres = true;
+                    msgerrores += "*Ingrese  un objetivo general" + "<br/>";
+                }
+                if (tblObjetivos.getStore().size() == 0) {
+                    varErrorres = true;
+                    msgerrores += "*Ingrese  un objetivo especifico" + "<br/>";
+                }
+                if (tblMetas.getStore().size() == 0) {
+                    varErrorres = true;
+                    msgerrores += "*Ingrese  una meta" + "<br/>";
                 }
 
                 if (!varErrorres) {
@@ -307,6 +333,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         proyectoDTO.setStrnombreobra(nombrePry.getValue());
         proyectoDTO.setFechaInicio(fechaInicio.getValue());
         proyectoDTO.setFechaFin(fechaFin.getValue());
+        proyectoDTO.setOtrospagos(otrospagos.getValue());
+        proyectoDTO.setPagodirecto(pagodirecto.getValue());
         if (proyectoDTO.getValor() != null) {
             if (proyectoDTO.getValorDisponible() == null) {
                 proyectoDTO.setValorDisponible(BigDecimal.ZERO);

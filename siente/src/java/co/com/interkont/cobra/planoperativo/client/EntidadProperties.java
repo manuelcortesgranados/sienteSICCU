@@ -18,4 +18,6 @@ import com.sencha.gxt.data.shared.PropertyAccess;
         ModelKeyProvider<TerceroDTO> intcodigo();
 
         LabelProvider<TerceroDTO> strnombrecompleto();
+        
+        
     }

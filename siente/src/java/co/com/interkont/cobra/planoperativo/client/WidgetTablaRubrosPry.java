@@ -141,8 +141,10 @@ public class WidgetTablaRubrosPry implements IsWidget {
             public void onSelect(SelectEvent event) {
                 Context c = event.getContext();
                 int row = c.getIndex();
+                if(store.get(row).getTipoaporte()==0){
                 obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                 obraDto.setValorDisponible(obraDto.getValor());
+                }
                 obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                 getStore().remove(store.get(row));
 
@@ -176,6 +178,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
+        cp.setExpanded(false);
         cp.setPixelSize(500, 150);
         cp.addStyleName("margin-10");
 

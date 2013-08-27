@@ -27,6 +27,8 @@ public class ObraDTO implements IsSerializable {
     private Set actividadobras = new LinkedHashSet(0);
     private BigDecimal valorDisponible;
     private BigDecimal valor;
+     private BigDecimal pagodirecto;
+    private BigDecimal otrospagos;
 
     public ObraDTO() {
     }
@@ -164,6 +166,34 @@ public class ObraDTO implements IsSerializable {
      */
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the pagodirecto
+     */
+    public BigDecimal getPagodirecto() {
+        return pagodirecto;
+    }
+
+    /**
+     * @param pagodirecto the pagodirecto to set
+     */
+    public void setPagodirecto(BigDecimal pagodirecto) {
+        this.pagodirecto = pagodirecto;
+    }
+
+    /**
+     * @return the otrospagos
+     */
+    public BigDecimal getOtrospagos() {
+        return otrospagos;
+    }
+
+    /**
+     * @param otrospagos the otrospagos to set
+     */
+    public void setOtrospagos(BigDecimal otrospagos) {
+        this.otrospagos = otrospagos;
     }
     
     

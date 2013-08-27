@@ -44,7 +44,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.data.shared.ListStore;
-import com.sencha.gxt.widget.core.client.Dialog;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
@@ -105,7 +105,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     /*gantt que contiene todas las actividades*/
     protected Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     /*modal que contiene este formulario*/
-    protected Dialog modalContrato;
+    protected Window modalContrato;
     int vigencia;
     TerceroDTO terceroDto;
     ObrafuenterecursosconveniosDTO obraFrDto;
@@ -125,7 +125,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public ContratoForm() {
     }
     
-    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ActividadobraDTOProps propes) {
+    public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalContrato = di;
@@ -137,7 +137,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         idtempRubros = 0;
     }
     
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog di, ActividadobraDTO actividadObraPadre) {
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
@@ -160,7 +160,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public Widget asWidget() {
         if (getVp() == null) {
             setVp(new VerticalPanel());
-            getVp().setSpacing(30);
+            getVp().setSpacing(10);
             getVp().setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             getVp().setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
             crearFormulario();
@@ -246,12 +246,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
         
         
-        final Dialog adicionarMontos = new Dialog();
-        adicionarMontos.setHideOnButtonClick(true);
-        adicionarMontos.setPredefinedButtons();
-        adicionarMontos.setModal(true);
-        adicionarMontos.setAnimCollapse(true);
-        adicionarMontos.setResizable(false);
+        
         final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
         
@@ -259,6 +254,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
         PushButton btnAdicionarRubros = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                Window adicionarMontos = new Window();
+                adicionarMontos.setBlinkModal(true);
+                adicionarMontos.setModal(true);
                 ModalAddMontos modalMontos = new ModalAddMontos(contrato, valorContrato, valorAuxiliar, actividadObraPadre, tblMontos, adicionarMontos, idtempRubros);
                 adicionarMontos.add(modalMontos);
                 adicionarMontos.show();
@@ -269,15 +267,13 @@ public class ContratoForm implements IsWidget, EntryPoint {
         
         final WidgetTablaFuenteR cel = new WidgetTablaFuenteR(contrato, actividadObraPadre);
         con.add(cel.asWidget(), new HtmlData(".tblfuen"));
-        
-        final Dialog adicionarFuentes = new Dialog();
-        adicionarFuentes.setHideOnButtonClick(true);
-        adicionarFuentes.setPredefinedButtons();
-        adicionarFuentes.setModal(true);
-        adicionarFuentes.setAnimCollapse(true);
+       
         PushButton btnVerFuente = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                Window adicionarFuentes = new Window();
+                adicionarFuentes.setBlinkModal(true);
+                adicionarFuentes.setModal(true);
                 ModalAddFuentes mo = new ModalAddFuentes(actividadObraPadre, contrato, cel, adicionarFuentes, idtempRelacionRecursos);
                 adicionarFuentes.add(mo);
                 adicionarFuentes.show();

@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.widget.core.client.Dialog;
+import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
@@ -48,13 +49,12 @@ public class ActividadForm implements IsWidget, EntryPoint {
     private DateField fechafinActividad;
     private TextField peso;
     //private static final int COLUMN_FORM_WIDTH = 100;
-    Dialog modalAct;
+    Window modalAct;
     // </editor-fold>
     ActividadobraDTO actividadObraPadre;
     ActividadobraDTO actividacreada;
     Gantt<ActividadobraDTO, DependenciaDTO> gantt;
     ActividadobraDTOProps propes = GWT.create(ActividadobraDTOProps.class);
-    ;
     ContratoDTO contratoDto;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
@@ -115,7 +115,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Dialog dialog, ContratoDTO contratoDtoP) {
+    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
