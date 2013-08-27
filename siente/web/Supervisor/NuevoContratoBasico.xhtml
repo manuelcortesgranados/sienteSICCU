@@ -38,15 +38,22 @@
             <rich:panel id="pgcontrato" header="Datos Basicos #{Supervisor$Contrato.tipoContCon}" styleClass="ikont-rp-datbasicos">
                 <center>
                     <h:panelGrid  columns="2" >
+                        
+                        
                         <h:outputText  styleClass="ikont-hot-eventcontrato" value="#{var.escogerEventocontrato}" rendered="#{!var.aplicaContralorias}"/>
                         <h:selectOneMenu id="cmbEventoProyecto"  value="#{Supervisor$Contrato.contrato.periodoevento.evento.intidevento}" immediate="true" rendered="#{!var.aplicaContralorias}" >
                             <f:selectItems value="#{Supervisor$Contrato.eventoItem}" />
-                        </h:selectOneMenu>                                                 
+                        </h:selectOneMenu>   
+                        
+                        
                         <h:outputText  styleClass="ikont-hot-periodocontrato" rendered="#{!var.aplicaContralorias}" value="#{var.escogerPeriodocontrato} "/>
                         <h:outputText  styleClass="ikont-hot-periodocontratocontra" rendered="#{var.aplicaContralorias}"  value="#{var.escogerEventocontrato} "/>
                         <h:selectOneMenu styleClass="ikont-hsom-periodoevento"  id="cmbPeriodoProyecto" value="#{Supervisor$Contrato.contrato.periodoevento.intidperiodoevento}" immediate="true">
                             <f:selectItems value="#{Supervisor$Contrato.periodoEventoItem}" />
                         </h:selectOneMenu>
+                        
+                        
+                        
                         <h:outputText  styleClass="ikont-hot-escogerperiodocont" rendered="#{var.aplicaContralorias}" value="#{var.escogerPeriodocontrato} "/>
                         <h:selectOneMenu styleClass="ikont-hsom-modalidadcontra" id="cmbModalidadContratista" rendered="#{var.aplicaContralorias}"  value="#{Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista}" immediate="true">
                             <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
@@ -506,6 +513,8 @@
                         </a4j:commandButton>
                         <h:outputText  styleClass="ikont-hot-descdocumento" id="Documentocc" value="#{var.descipcionDocumento}:"/>
                         <h:inputText id="inputDescDocument" value="#{Supervisor$Contrato.documentoobra.strnombre}" />
+                        
+                        
                         <h:outputText  styleClass="ikont-hot-tipodocumento" id="tipodocc"  value="#{var.tipoDocumento}:"/>
                         <h:selectOneMenu id="selecttipodocumentocc" value="#{Supervisor$Contrato.tipodoc}">
                             <f:selectItems value="#{Supervisor$Contrato.tipodocumento}"/>

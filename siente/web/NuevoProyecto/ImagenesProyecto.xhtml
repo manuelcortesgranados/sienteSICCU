@@ -60,7 +60,7 @@
                                                             <h:outputText  styleClass="ikont-hot-subalasimagenesantes"   value="#{var.subalasimagenesantes}"/>
                                                             <h:panelGrid columns="2" styleClass="totalwidth">
 
-                                                                <rich:panel id="imagenanterior" header="#{var.imagenanterior}" bodyClass="ikont-rp-imagenanterior-body"  >
+                                                                <rich:panel styleClass="ikont-rp-imagenprincipal-body" id="imagenanterior" header="#{var.imagenanterior}" bodyClass="ikont-rp-imagenanterior-body"  >
                                                                     <center>
                                                                         <h:panelGrid id="layoutImagen"  columnClasses="aiu">
                                                                             <center>
@@ -111,6 +111,7 @@
                                                                     </center>
                                                                 </rich:panel>
                                                             </h:panelGrid>
+                                                            <br/>
                                                             <h:panelGroup>
                                                                 <rich:dataTable styleClass="ikont-table-img-datosbasicos" id="tablaImagenes"
                                                                                 value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"

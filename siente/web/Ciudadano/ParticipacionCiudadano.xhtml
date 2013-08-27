@@ -37,12 +37,17 @@
 
         </script>
     </ui:define>
-    <ui:define name="menu">
+ <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
     <ui:define name="menu_lateral">
-        <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-        <ui:include src="/facelets/menu_lateral_administrar.xhtml"/>
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_novedades.xhtml"/>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
     </ui:define>
     <ui:define name="menusuperior">
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu}">
@@ -51,7 +56,7 @@
     </ui:define>
     <ui:define name="body">
         <h:panelGrid columns="1"  id="pgPrincipalComentario">
-            <h:panelGrid columns="2" >
+            <h:panelGrid columns="2" rendered="#{!var.permisonuevodiseno}" >
                 <h:panelGrid>
                     <h:outputText  styleClass="ikont-hot-strnombrecompleto"   value="#{SessionBeanCobra.usuarioObra.tercero.strnombrecompleto}"/>
                     <h:outputText  styleClass="ikont-hot-municipiodepartamento"   value="#{SessionBeanCobra.ciudadanoservice.municipio} #{SessionBeanCobra.ciudadanoservice.departamento}" />

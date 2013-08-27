@@ -328,8 +328,8 @@ a.closemodal{
     background-image: url(../imgs/bt_miperfil.png);
     background-position: 3% 50%;
     background-repeat:no-repeat;
-/*    color: #008000;
-    font-size: 24px;*/
+    color: #008000;
+    font-size: 24px;
 }
 
 .ikont-hot-ayuda{
@@ -370,11 +370,11 @@ a.closemodal{
 }
 
 .ikont-a-ch{
-    width: 130px;
+    width: 258px;
     height:60px;
     float:right;
     position:relative;
-    background-image: url(../imgs/Siente_Logo_ch.png);
+    background-image: url(../imgs/cobra_Logo_ch.png);
     background-repeat:no-repeat;
     background-position: 0px 0px;
 }
@@ -867,8 +867,7 @@ a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModifica
     background: #ff9735;
     background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
-/*    background: -webkit-linear-gradient(top,  #257500 48%,#257500 50%);*/
-    background: -webkit-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
+    background: -webkit-linear-gradient(top,  #257500 48%,#257500 50%);
     background: -o-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
     background: -ms-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
     background: linear-gradient(top,  #ff9735 48%,#f8763c 50%);
@@ -1100,7 +1099,20 @@ a.ikont-hcl-imgTacometro:hover {
 }
 
 textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
- background: #FFF; border: #999 2px solid; color: #003; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; line-height:13px; color:#003; font-weight:400; font-style:italic; text-align: justify; -webkit-border-radius: 4px; border-radius: 4px;
+    background: #FFF;
+    border: #999 2px solid; 
+    color: #003; 
+    font-family: open; 
+    font-size: 13px; 
+    line-height:13px; 
+    color:#003; 
+    font-weight:400; 
+    font-style:italic; 
+    text-align: justify; 
+    -webkit-border-radius: 4px; 
+    border-radius: 4px;
+    width: 100%  !important;
+    height: 90px;
 }
 .ikont-hpg-cargarusuario {
     background: #FFF;
@@ -1118,8 +1130,8 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
 }
 
 .ikont-hot-idcomentario{
-/*    color:#666; 
-    font-style:italic; */
+    color:#666; 
+    font-style:italic;
     text-align: justify; 
     padding: 10px;
 
@@ -1152,15 +1164,11 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
 }
 
 .vtitle12 {
-     font-family:Verdana, Geneva, sans-serif;
+    font-family:open;
     font-size:9px;
     font-style:italic;
     color:#F90;
-    line-height:9px;
-    font-family:Verdana, Geneva, sans-serif;
-    font-size:9px;
-    font-style:italic;
-    color:#F90;
+    line-height:9px;    
 }
 
 a.ikont-acl-agregarcomentario {
@@ -1273,8 +1281,7 @@ a.ikont-acl-space2:hover {
     font-family:open;
     font-size:13px;
     font-style:italic;
-/*    color:#000;*/
-    color:#666;
+    color:#000;
 }
 
 .ikont-hgi-strfoto{
@@ -1318,15 +1325,23 @@ a.ikont-hcl-modificarusuario:hover {
 /*  estilos zoom*/
 .ikont-hpg-contentmenu{
     background-color: #F2F2F2;
-    width: 900px;
-    height: 70px;
+     width: 850px;
+    height: 80px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #6B6B6B;
     position: relative;
     top: 0px;
-    z-index: 0;
+    z-index: 9999;
 }
 .ikont-hpg-menu-nuevo-convenio{
     margin: 0px auto;
     margin-top: -10px;
+}
+
+.ikont-hf-nuevocontratoplanoperativo{
+    position: relative;
+    top: 70px;
 }
 
 .img-button-ncpo{
@@ -1512,17 +1527,17 @@ a.vtitle23:hover{
 
 
 .zoomicon{
-    background-image: url(../imgs/zoomlogo.png);
-    width: 235px;
+     background-image: url(../imgs/zoomlogo.png);
+    width: 250px;
     height:127px;
     background-repeat:no-repeat;
-    background-position: 30px 20px;
+    background-position: 40px 30px;
     top: 10%;
     left: 5%;
 }
 .topbar_encabezado_1{
     width:100%;
-    height: 3px;
+    height: 12px;
     background-color: #257500;
 }
 .topbar_encabezado_2{
@@ -1699,10 +1714,13 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
-    width: 90px;
-    height: 90px;
-    -ms-border-radius: 90px; 
-    border-radius: 90px; 
+    width: 80px;
+    height: 100px;
+    -moz-border-radius: 10px; 
+    -ms-border-radius: 10px; 
+    -webkit-border-radius: 10px; 
+    -o-border-radius: 10px; 
+    border-radius: 10px; 
     background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
@@ -1725,7 +1743,6 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
-    font-style: italic; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -1756,9 +1773,9 @@ input[type="text"], input[type="password"], select{
     background-position: 0px -3px;
 }
 .ikont-panel-spacing-menu{
-    border-spacing: 4px;
-    margin-top:  3px;
-    margin-left: 30px;
+     border-spacing: 4px;
+    margin-left: 40px;
+    margin-top: 7px;
 }
 .ikont-label-estructura-menu{   
     position: relative;
@@ -2438,7 +2455,7 @@ css usuario modificacion
 .ikont-hot-editarmiperfil{
     color: #1C8F14;
 }
-Css Para el nuevo menu administrar convenio
+/*Css Para el nuevo menu administrar convenio*/
 .ikont-hpg-menu-contenido-administrar-convenio{
     background-color: #F2F2F2;
     width: 100%;
@@ -2687,21 +2704,21 @@ Css Para el nuevo menu administrar convenio
 }
 
 .inputbienvenidahomezoom{
-    width: 735px; 
-    font-size: 1.8em; 
-    color: #0092BC; 
-    font-family:bold; 
+     width: 735px; 
+    font-size: 1.5em; 
+    color: #257500; 
+    font-family: open; 
     padding: 100px;
 }
 
 .inputbienvenidahomezoomtexto{
-    font-size: 1.05em; 
-    color: #808080;
+    font-size: 15px; 
+    color: #58595B;
 }
 .inputtitulohomezoomtexto{
-    width: 735px; 
+     width: 735px; 
     font-size: 1.2em; 
-    color: #0092BC; 
+    color: #257500; 
     padding: 100px;
 }
 .inputtextshomezoom{
@@ -2711,8 +2728,8 @@ Css Para el nuevo menu administrar convenio
     padding: 100px; 
 }
 .inputlinkhomezoom:link{
-    font-size: 0.5em; 
-    color: #808080; 
+     font-size: 12px; 
+    color: #58595B; 
     padding: 10px;
 }
 .inputlinkhomezoom:hover{
@@ -2945,11 +2962,11 @@ Css Para el nuevo menu administrar convenio
 }
 .ikont-table-img-datosbasicos{
     background-color: #F2F2F2;
-width: 100%;
+    width: 100%;
 }
 .ikont-img-seleccionada{
     background-color: #1C8F14;
-color: #FFF;
+    color: #FFF;
 }
 .ikont-hgi-pathImaCiu{
     width: 100%;
@@ -2961,7 +2978,7 @@ color: #FFF;
 }
 .ikont-hita-comentSem2{
     height: 150px;
-    
+
 }
 .ikont-hpg-cargarusuarioperfil{
     background: #FFF; border: #999 2px solid; color: #003; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 13px; line-height:13px; color:#003; font-weight:400; font-style:italic; text-align: justify; -webkit-border-radius: 4px; border-radius: 4px;
@@ -2982,12 +2999,14 @@ color: #FFF;
     line-height:15px;
 }
 .ikont-hot-datefechaopinion{
-     font-family:Verdana, Geneva, sans-serif;
+    font-family:Verdana, Geneva, sans-serif;
     font-size:9px;
     font-style:italic;
     color:#999;
     line-height:9px;
 }
+
+/* Css creados para ciudadano cambiar....*/
 
 .ikont-acl-seleccionqueja {
     background-image:url(../imgs/p_quejese.png);
@@ -3201,4 +3220,19 @@ color: #FFF;
 }
 .ikont-hcl-abrirdocumento:hover {
     background-position: 0px -25px;
+}
+
+.ikont-btn-cerrar-flecha-session{
+    background-image: url(../imgs/flecha_home1_1.png);
+    background-repeat: no-repeat;
+    width:600px;
+    height: 33px;
+    display: block;
+    background-position: 0px 0px;
+}
+
+.ikont-loader-zoom{
+    background-color: #F2F2F2;
+    border-radius: 33px;
+    position: fixed;
 }
