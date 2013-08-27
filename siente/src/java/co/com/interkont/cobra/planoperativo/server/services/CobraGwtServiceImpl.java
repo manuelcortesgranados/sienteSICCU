@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,7 +66,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     public ContratoDTO obtenerContratoDTO() {
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
-                contratoDto.setActividadobras(new HashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini())));
+                contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini())));
             } catch (Exception ex) {
                 Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -103,8 +104,8 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         List<Parametricaactividadesobligatorias> listapar = cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica");
         Iterator itparametricas = listapar.iterator();
         ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
-        while (itparametricas.hasNext()) {
-            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();
+        while (itparametricas.hasNext()) {            
+            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();            
             if (par.getParametricaactividadesobligatorias() == null) {
                 ActividadobraDTO actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
 
