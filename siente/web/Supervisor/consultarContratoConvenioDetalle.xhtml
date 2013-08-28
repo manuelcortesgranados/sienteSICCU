@@ -496,13 +496,14 @@
 
                         <center>
                             <h:panelGroup id="notienepoliza">
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}" />
+                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}"/>
                             </h:panelGroup>
 
                             <h:panelGroup id="polizasContrato">
                                 <rich:dataTable id="tablaPolizasContrato" sortMode="single" 
-                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"                                                
-                                                value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
+                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"   
+                                                 var="localRow"
+                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont- "   value="#{var.tipoPolizaContrato}" />
@@ -513,7 +514,7 @@
 
                                     <rich:column id="tc-strnumPolizaContrato1" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.numPolizaContrato}" />
+                                            <h:outputText  styleClass="ikont- "   value="#{var.numPolizaContrato}"/>
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
@@ -521,7 +522,7 @@
 
                                     <rich:column id="tc-strVencimientoPolizaContr" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} #{var.vencimientoPoliza}" />
+                                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} #{var.vencimientoPoliza}"  />
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
@@ -532,10 +533,10 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.entidadPoliza}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
+                                        <h:outputText  styleClass="ikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}"/>
                                     </rich:column>
 
-                                    <rich:column id="tc-streditarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarpoliza}">
+                                    <rich:column id="tc-streditarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarpoliza}" >
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont- "   value="#{var.editar}" />
                                         </f:facet>
