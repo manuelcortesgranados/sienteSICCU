@@ -25,7 +25,7 @@
             </h:form>
         </f:facet>
         <h:form>
-            <h:panelGrid id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
+            <h:panelGrid id="gpPolizaSelec" cellspacing="8" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
                 <h:outputLabel  styleClass="ikont-hol-lblTipoPoliza"   id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
@@ -52,7 +52,8 @@
                 <h:selectOneMenu id="comboentidadPoliza" value="#{Supervisor$Contrato.polizacontrato.aseguradora.intnumnitentidad}">
                     <f:selectItems value="#{Supervisor$Contrato.companias}"/>
                 </h:selectOneMenu>
-
+               
+                    <center>
                 <a4j:commandButton value="#{var.agregar}" id="agregar_poliza"  action="#{Supervisor$Contrato.boolPoliza}" 
                                    rendered="#{Supervisor$Contrato.boolcrearpoliza==false}" 
                                    render="polizasContrato, gpPolizaSelec, notienepoliza"> 
@@ -62,6 +63,7 @@
                                    rendered="#{Supervisor$Contrato.boolcrearpoliza==true}" 
                                    oncomplete="#{rich:component('mp_nueva_poliza')}.hide()" render="polizasContrato">
                 </a4j:commandButton>
+                    </center>
             </h:panelGrid>
         </h:form>
     </rich:popupPanel>   

@@ -31,11 +31,11 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
 
-    <ui:define name="menu_lateral">
-        <h:panelGroup  rendered="#{!var.permisonuevodiseño}">
+    <ui:define  name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
         </h:panelGroup>
-        <h:panelGroup rendered="#{var.permisonuevodiseño}">
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
 
@@ -139,17 +139,17 @@
 
             <rich:accordion  width="98%" rendered="#{var.varpreguntacobra}"  >
                 <rich:accordionItem
-                    header="Qué es COBRA?" >
+                    header="#{var.queEsCobra}" >
                     Es una solución WEB 2.0 Interactiva y Visual, cuyo objetivo es facilitar y potenciar la preparación, programación, contratación, seguimiento y control en línea y tiempo real de todos #{var.textoobra}s de obra civil que se ejecutan en un territorio.
                 </rich:accordionItem>
 
                 <rich:accordionItem
-                    header="Cómo funciona COBRA?" >
+                    header="#{var.comofuncionaCobra}" >
                     Para funcionar COBRA se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear #{var.textoobra} que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los #{var.textoobra5}s que se ejecutan.
                 </rich:accordionItem>
 
                 <rich:accordionItem
-                    header="Cualquier persona puede participar en COBRA?" >
+                    header="#{var.cualquierPersonapuedeparticipar}" >
                     SÍ. COBRA además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a #{var.textoobra} en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de #{var.textoobra}, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre #{var.textoobra}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
                 </rich:accordionItem>
             </rich:accordion>

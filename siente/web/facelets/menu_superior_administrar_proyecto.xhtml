@@ -41,20 +41,14 @@
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-estado-proyecto"    action="cambiarestado"/>             
                 </h:panelGrid>
                 <h:panelGrid    cellpadding="0" cellspacing="0" >
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto"    />      
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"  />      
                 </h:panelGrid>
                 <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-documentos-proyecto"    action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"/>      
                 </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" >
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-participacion-ciudadana-proyecto"   />      
-                </h:panelGrid>
-
                 <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.cobraService.ciu}">
-                    <h:commandLink styleClass="buttonblue2_active anchorLink" immediate="true"  value="comentarios"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-participacion-ciudadana-proyecto" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
                 </h:panelGrid>
-
-
             </h:panelGrid>
         </h:panelGroup>
     </h:form>

@@ -68,7 +68,7 @@
                         <rich:panel id="valor" header="#{var.valor}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel">
                             <interkont:spacer height="50" />
 
-                            <h:panelGrid columns="1"  columnClasses="column-grid-detail">
+                            <h:panelGrid columns="1" style="height: 120px;"  columnClasses="column-grid-detail">
                                 <h:panelGroup>
                                     <h:panelGrid columns="1">
                                         <h:outputText  styleClass="ikont- "   id="vlrcc" value="#{Supervisor$Contrato.contrato.numvlrcontrato}">
@@ -150,14 +150,15 @@
                 <rich:collapsiblePanel id="simpleToggleContrato" switchType="client" expanded="true"
                                        header="#{var.datoscontrato} #{Supervisor$Contrato.tipoContCon}">
                     <center>
-                        <h:panelGrid columns="1" >
+                        <h:panelGrid style="width:100%;border-spacing: 7px;" columns="1" >
                             <h:form>
-                                <h:panelGrid id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
+                                <h:panelGrid cellspacing="5" id="detacontrato" columns="3" columnClasses="panelderecha, panelizquierda, panelizquierda">
                                     <h:outputLabel  styleClass="ikont- "   id="pertenece" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
 
                                     <interkont:spacer width="20" />
 
                                     <h:panelGroup id="form_editarNumeroContrato">
+                                        <h:outputText  styleClass="ikont- "   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                         <h:panelGroup id="txthabilitarNumero" rendered="#{Supervisor$Contrato.habilitarModificarNumero}">
                                             <a4j:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificarNumero"
                                                              action="#{Supervisor$Contrato.habilitarBotonModificarNumero}"
@@ -166,7 +167,6 @@
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </a4j:commandLink>
 
-                                            <h:outputText  styleClass="ikont- "   id="txtNumero"   value="#{Supervisor$Contrato.contrato.strnumcontrato}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificarNumero" rendered="#{Supervisor$Contrato.habilitarGuardarNumeroContrato}">
@@ -196,14 +196,13 @@
 
                                     <h:panelGroup id="form_editar" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.panel_editarObjetoContrato}">
                                         <h:panelGroup id="txthabilitarObjeto" rendered="#{Supervisor$Contrato.habilitarmodificar}">
+                                            <h:outputText   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                             <h:commandLink rendered="#{Supervisor$Contrato.habilitarmodificar}" id="bt_modificar"
                                                            title="#{var.editar}">
                                                 <a4j:ajax event="click" render="form_editar" listener="#{Supervisor$Contrato.habilitarBotonModificar}" execute="txthabilitarModificar, txthabilitarObjeto" />
 
                                                 <h:graphicImage  styleClass="ikont- "    width="25" height="25" value="/resources/imgs/bt_editar.png" />
                                             </h:commandLink>
-
-                                            <h:outputText   id="txtObjeto" styleClass="ikont-"   value="#{Supervisor$Contrato.contrato.textobjeto}" />
                                         </h:panelGroup>
 
                                         <h:panelGroup id="txthabilitarModificar" rendered="#{Supervisor$Contrato.modificartxt}">
@@ -319,15 +318,15 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:panelGrid>
+                                    <h:panelGrid rendered="false">
                                         <rich:inplaceSelect id="inplaceSelect" showControls="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}"
                                                             value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}">
                                             <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />
                                             <a4j:ajax event="change" listener="#{Supervisor$Contrato.actualizarEntidadContrato}" />
                                         </rich:inplaceSelect>
 
-                                        <h:outputLabel    id="entiodadcontratantevalue" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarEntidadContrato}" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
                                     </h:panelGrid>
+                                        <h:outputLabel    id="entiodadcontratantevalue" styleClass="ikont-"   rendered="true" value="#{Supervisor$Contrato.contrato.tercero.strnombre}" />
 
                                     <h:outputLabel  styleClass="ikont- "   id="costos" value="#{var.valortotal}:" />
 
@@ -496,12 +495,13 @@
 
                         <center>
                             <h:panelGroup id="notienepoliza">
-                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}" />
+                                <h:outputLabel  styleClass="ikont- "   rendered="#{Supervisor$Contrato.listaPolizacontratos.size()==0}" value="#{var.notienepolizas}"/>
                             </h:panelGroup>
 
                             <h:panelGroup id="polizasContrato">
                                 <rich:dataTable id="tablaPolizasContrato" sortMode="single" 
-                                                 binding="#{Supervisor$Contrato.tablaPolizasbin}"                                                
+                                                binding="#{Supervisor$Contrato.tablaPolizasbin}"   
+                                                var="localRow"
                                                 value="#{Supervisor$Contrato.listaPolizacontratos}" rendered="#{Supervisor$Contrato.listaPolizacontratos.size()>0}">
                                     <rich:column id="tc-strTipoPolizaContr" width="100px">
                                         <f:facet name="header">
@@ -513,7 +513,7 @@
 
                                     <rich:column id="tc-strnumPolizaContrato1" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.numPolizaContrato}" />
+                                            <h:outputText  styleClass="ikont- "   value="#{var.numPolizaContrato}"/>
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="otxt-strnumPolizaContrato1" value="#{localRow.strnumpoliza}" />
@@ -521,7 +521,7 @@
 
                                     <rich:column id="tc-strVencimientoPolizaContr" width="100px">
                                         <f:facet name="header">
-                                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} #{var.vencimientoPoliza}" />
+                                            <h:outputText  styleClass="ikont- "   value="#{var.fecha} #{var.vencimientoPoliza}"  />
                                         </f:facet>
 
                                         <h:outputText  styleClass="ikont- "   id="otxt-strVencimientoPoliza1" value="#{localRow.datefechavecimiento}" />
@@ -532,10 +532,10 @@
                                             <h:outputText  styleClass="ikont- "   value="#{var.entidadPoliza}" />
                                         </f:facet>
 
-                                        <h:outputText  styleClass="ikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}" />
+                                        <h:outputText  styleClass="ikont- "   id="otxt-strEntidad" value="#{localRow.aseguradora.strnombreentidad}"/>
                                     </rich:column>
 
-                                    <rich:column id="tc-streditarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarpoliza}">
+                                    <rich:column id="tc-streditarpoliza" width="100px" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarpoliza}" >
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont- "   value="#{var.editar}" />
                                         </f:facet>

@@ -549,7 +549,7 @@ a.butonreport{
     display: block;
     background-repeat: no-repeat;
     margin-right: 0px;
-    background-image: url(../imgs/proyecto/sprite_reportes.png);
+    background-image: url(../imgs/proyecto/reportes_sprite.png);
 }
 
 a.butonreport.zoom-excel {
@@ -574,6 +574,14 @@ a.butonreport.zoom-pdf {
 
 a.butonreport.zoom-pdf:hover {
     background-position: 0px -75px;
+}
+
+a.butonreport.zoom-mpp {
+    background-position: -270px 0px;
+}
+
+a.butonreport.zoom-mpp:hover {
+    background-position: -270px -75px;
 }
 
 #ikont-div-reportes ul li a {
@@ -1325,23 +1333,15 @@ a.ikont-hcl-modificarusuario:hover {
 /*  estilos zoom*/
 .ikont-hpg-contentmenu{
     background-color: #F2F2F2;
-     width: 850px;
-    height: 80px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #6B6B6B;
+    width: 900px;
+    height: 70px;
     position: relative;
     top: 0px;
-    z-index: 9999;
+    z-index:5;
 }
 .ikont-hpg-menu-nuevo-convenio{
     margin: 0px auto;
     margin-top: -10px;
-}
-
-.ikont-hf-nuevocontratoplanoperativo{
-    position: relative;
-    top: 70px;
 }
 
 .img-button-ncpo{
@@ -1714,13 +1714,10 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
-    width: 80px;
-    height: 100px;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    -o-border-radius: 10px; 
-    border-radius: 10px; 
+    width: 90px;
+    height: 90px;
+    -ms-border-radius: 90px; 
+    border-radius: 90px; 
     background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
@@ -1743,6 +1740,7 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
+    font-style: italic; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -2632,11 +2630,12 @@ css usuario modificacion
 
 }
 .panel_filtro_zoom{
-    height: 320px;
+    height: 279px;
 }
 .rf-tab-cnt{
-    border: 1px solid #BDBDBD !important;
+    border: 1px solid rgb(204, 201, 201) !important;
     border-radius: 17px !important;
+    height: 153%;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
     background: none !important;
@@ -2647,9 +2646,10 @@ css usuario modificacion
     border-bottom-width: 0px;
     padding-top: 2px;
     overflow: hidden;
-    height: 25px;
+    height: 11%;
     white-space: nowrap;
     position: relative;
+    top: -3%;
 }
 
 .rf-tab-hdr-act.rf-tab-hdr-top {
@@ -2670,7 +2670,7 @@ css usuario modificacion
     background-position: top;
     background-repeat: none !important;
     background-color:  transparent !important;
-    color:  #0092BC !important ;
+    color:  #257500 !important ;
 }
 .rf-tab-hdr-inact.rf-tab-hdr-top {
     vertical-align: top !important;
@@ -2689,6 +2689,7 @@ css usuario modificacion
     font-style: normal!important;
     background-color: #0092BC !important;
     background: none !important;
+    width: 243px !important;
 }
 .boton1{
     border-color:#0092BC !important;
@@ -2728,18 +2729,18 @@ css usuario modificacion
     padding: 100px; 
 }
 .inputlinkhomezoom:link{
-     font-size: 12px; 
+     font-size: 0.5em; 
     color: #58595B; 
     padding: 10px;
 }
 .inputlinkhomezoom:hover{
     font-size: 0.5em; 
-    color:  #0092BC !important; 
+    color:  #257500 !important; 
     padding: 10px;
 }
 .inputlinkhomezoom:active{
     font-size: 0.5em; 
-    color:  #0092BC !important; 
+    color:  #257500 !important; 
     padding: 10px;
 }
 .panelzoomhome1{
@@ -2752,7 +2753,7 @@ css usuario modificacion
 }
 .inputlinkhomevermas{
     font-size: 0.5em; 
-    color: #0092BC !important; 
+    color: #257500 !important; 
     padding: 10px;
 }
 #header_content {
@@ -3235,4 +3236,55 @@ css usuario modificacion
     background-color: #F2F2F2;
     border-radius: 33px;
     position: fixed;
+}
+
+.ikont-div-asi-va{
+    width: 150px;
+    height: 180px;
+    text-align: left;
+}
+
+.ikont-rpp-modal-box{
+    background: transparent!important;
+    box-shadow: 0px 0px 0px transparent!important;
+}
+.imagen_punta2{
+    position: relative;
+    left: 68px;
+    top: -31px;
+    width: 50px;
+}
+.imagen_punta3{
+    position: relative;
+    left: 139px;
+    top: -31px;
+    width: 50px;
+}
+.rf-tab-hdr-tabline-vis rf-tab-hdr-tabline-top{
+    top: -9px;
+}
+.input_filtro_select{
+    width: 234px !important;
+    height: 34px !important;  
+    background-color: rgb(253, 253, 253)!important;
+    background-image: none !important;
+    border-color: black!important;
+    border: 1px!important;
+}
+.input_filtro_2{
+    width: 234px !important;
+    height: 34px !important;
+    background-color: rgb(255, 255, 255) !important; 
+    border-width: 1px !important;
+    color: rgb(79, 82, 77)!important;
+    cursor: default !important;
+    border-color: rgb(255, 253, 253)!important;
+}
+
+
+.ikont-colum-superior-fuente-recurso{
+    color: #FFF;
+    background-color: #1C8F14;
+    font-size: 0.8em;
+    padding: 2px 5px;
 }

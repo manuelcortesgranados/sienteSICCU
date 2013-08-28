@@ -9,41 +9,12 @@
                    xmlns:h="http://java.sun.com/jsf/html"
                    xmlns:rich="http://richfaces.org/rich">
     <ui:define name="head">
-        <style type="text/css">
-            #sideline {
-                text-align: center;
-                position:relative;
-                font-family: Verdana, Geneva, sans-serif;
-                background-image: url("/cobrafonade/resources/imgs/lineCiudadano.png");
-                background-position-y: -8px;
-            }
-
-            label.textlittle2 {
-                background-color: white;
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-            #sideline.span {
-                display: inline-block;    
-            }
-            line:before,
-            line:after {
-                border-top: 1px solid #E3E3E3;
-                display: block;
-                height: 1px;
-                content: " ";
-                width: 23%;
-                position: absolute;
-                left: 0;
-                top: 0.5em;
-            }
-            line:after {
-                right: 0;  
-                left: auto; 
-            }                    
-        </style>
-
+        <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css" />
+        <link href="/#{var.versioncobra}/resources/reloj/css/flipclock.css" rel="stylesheet" type="text/css" />
         <h:outputScript name="script_supervisor.js" />
         <h:outputScript name="coda-slider.1.1.1.pack.js" library="js" />
         <h:outputScript name="resources/js/jquery-easing-1.3.pack.js" library="js" />
@@ -60,13 +31,6 @@
         <h:outputScript name="slider.min_imagnes.js" library="js" />
         <h:outputScript name="sliderman.1.3.6.js" library="js" />
         <h:outputScript name="amcharts.js" library="../amcharts" />
-
-        <link href="/#{var.versioncobra}/resources/css/reloj.css" rel="stylesheet" type="text/css" />
-        <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="/#{var.versioncobra}/resources/css/sliderman.css" rel="stylesheet" type="text/css" />
-        <link href="/#{var.versioncobra}/resources/css/style_modal.css" rel="stylesheet" type="text/css" />
-        <link href="/#{var.versioncobra}/resources/css/slider_imagenes.css" rel="stylesheet" type="text/css" />
-        <link href="/#{var.versioncobra}/resources/reloj/css/flipclock.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript">
             localStorage.setItem('accionDetalleProyecto', "ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto");
         </script>
@@ -279,9 +243,9 @@
                                     <h:panelGrid  >
                                         <h:outputLabel>Conozca la evolución</h:outputLabel>
                                         <h:panelGrid columns="2" >
-                                            <h:outputText  styleClass="ikont- hot-scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
+                                            <h:outputText  styleClass="scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
 
-                                            <div id="graficoAvanceFisico" >
+                                            <div id="graficoAvanceFisico"  class="ikont-div-asi-va">
                                             </div>
 
                                         </h:panelGrid>
@@ -338,7 +302,7 @@
                                 </h:panelGrid>
                                 <h:panelGrid styleClass="ikont-hpg-tipo_obra">
                                     <h:panelGrid columns="2" >
-                                        <h:outputLabel styleClass="ikont-hol-clspry " value="#{var.claseProyecto}" />
+                                        <h:outputLabel styleClass="ikont-hol-clspry " value="Sector : " />
                                         <h:outputText styleClass="ikont-hol-strdescclaseobra" value="#{Supervisor$AdministrarObraNew.obra.claseobra.strdescclaseobra}" />
                                         <h:outputLabel styleClass="ikont-hol-tipoPry" value="#{var.tipoProyecto}" />
                                         <h:outputText styleClass="ikont-hol-tipprynom" value="#{Supervisor$AdministrarObraNew.obra.tipoobra.tipoproyecto.strnombre}" />
@@ -352,7 +316,7 @@
                         <rich:collapsiblePanel switchType="client" header="Dónde está ubicado el proyecto" expanded="true">
                             <h:panelGrid columns="2" columnClasses="verticalalingtop" styleClass="panelcenter">
                                 <h:panelGrid  columnClasses="textalingright">
-                                    <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" />
+                                    <h:outputLabel styleClass="ikont-hot-strDireccionProyectoOut" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}"/>
                                     <interkont:spacer width="20" />
                                     <h:outputText styleClass="ikont-hol-strDireccionProyecto" value="#{var.label_direccion}" />
                                     <interkont:spacer width="20" />

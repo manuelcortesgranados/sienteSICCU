@@ -64,4 +64,9 @@
     <welcome-file-list>
         <welcome-file>homes/home_gestion.xhtml</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/Errores.xhtml</location>
+    </error-page>
 </web-app>
