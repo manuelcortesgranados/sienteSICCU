@@ -505,6 +505,7 @@
         <div class="topbar_encabezado_2">
             <div id="iconozoom" class="zoomicon"></div> 
         </div>
+        <br/>
         <div id="nuevobuscador" class="topbar_encabezado_3">
             <h:panelGrid columns="6" style=""> 
                 <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palabraclave2"    value="#{HomeGestion.filtro.palabraclave}"> <!--obrafiltrar.strnombreobra-->
@@ -513,10 +514,9 @@
             </h:panelGrid>
         </div> 
         <div class="topbar_encabezado_4">
-            <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}">
+            <h:panelGroup>
                 <a  target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
             </h:panelGroup>
-            <a4j:commandLink rendered="#{SessionBeanCobra.logueadodesdemapa}" action="#{SessionBeanCobra.limpirarUsuario}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();"  execute="@this" immediate="true" render="ikont-hpg-ingresarusu"/>
         </div> 
 
     </h:panelGroup>
@@ -654,14 +654,24 @@
     </div>
     <div id="header_content"/>
     <div id="espacio"/>
+     <br/>
+    <br/>
+
+
     <div class="ikont-div-scroll-menu" >
         <h:panelGrid rendered="#{var.permisonuevodiseno}" onmouseover="mostrarMenuAnimado();
                             return  false;" styleClass="ikont-panel-spacing-menu" columns="3">        
-            <h:commandLink styleClass="ikont-menu-inicio-zoom ikont-div-menu-zoom"/>
-            <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuNuevo}" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>  
+            <h:commandLink styleClass="ikont-menu-inicio-zoom_1 ikont-div-menu-zoom"/>
+            <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="INICIO" rendered="#{!SessionBeanCobra.cobraService.ciu}"/>  
             <h:outputLabel  styleClass="ikont-label-estructura-menu  ikont-label-menu"  value="#{var.menuProyecto}" rendered="#{SessionBeanCobra.cobraService.ciu}"/> 
-            <h:outputLabel styleClass="ikont-label-menu" value="  >>" />  
+            <h:graphicImage styleClass="imagen_flecha_inicio" value="/resources/imgs/flecha_roja_inicio.png" />
         </h:panelGrid>
+        <div id="header_content"  style="width: 152px !important; bottom: 50px;float: none;position: relative;top: 13;left: 46;" /> 
+        <div style="top: 35px; left: 43px; position: relative;">
+            <a4j:commandLink rendered="#{SessionBeanCobra.logueadodesdemapa}" action="#{SessionBeanCobra.limpirarUsuario}" type="button" id="Ingresar" styleClass="ikont-acb-btn_ingreso_nuevo" onclick="mostrarIngresoAnimado();"  execute="@this" immediate="true" render="ikont-hpg-ingresarusu"/>
+        </div>
+        <br/>
+        <br/>
         <h:panelGroup rendered="#{var.permisonuevodiseno}" style="top:">
 
         </h:panelGroup>

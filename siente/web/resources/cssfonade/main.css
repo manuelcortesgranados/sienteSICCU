@@ -1580,7 +1580,7 @@ a.vtitle23:hover{
 
 }
 input[type="text"], input[type="password"], select{
-    font-size: 11px;
+    font-size: 17px;
     border-color: white;
     width: 320px;
     height: 33px;
@@ -1609,7 +1609,7 @@ input[type="text"], input[type="password"], select{
 .ikont-acb-btn_ingreso_nuevo{
     background-image: url(../imgs/ingresar_btn.png);
     background-repeat: no-repeat;
-    width: 120px;
+        width: 126px;
     height: 33px;
     display: block;
     background-position: 0px 0px;
@@ -1618,10 +1618,10 @@ input[type="text"], input[type="password"], select{
 .ikont-acb-btn_ingreso_nuevo:hover{
     background-image: url(../imgs/ingresar_btn.png);
     background-repeat: no-repeat;
-    width: 120px;
+    width: 126px;
     height: 33px;
     display: block;
-    background-position: 1px -34px;
+    background-position: 0px -30px;
 }
 
 .ikont-div-mostrar-ingreso {
@@ -2692,11 +2692,11 @@ css usuario modificacion
     width: 243px !important;
 }
 .boton1{
-    border-color:#0092BC !important;
+    border-color:#257500 !important;
     border-width: 1px !important;
     background-color: white !important;
     background-image: none !important;
-    color: #0092BC !important;
+    color: #257500 !important;
     font-size: 14px  !important;
 }
 .input_filtro{
@@ -3268,8 +3268,12 @@ css usuario modificacion
     height: 34px !important;  
     background-color: rgb(253, 253, 253)!important;
     background-image: none !important;
-    border-color: black!important;
-    border: 1px!important;
+    border-color: #C0C0C0 !important;
+    border-top: 11px !important;
+    border: solid !important;
+    border-right: 1px !important;
+    border-left: 1px !important;
+    font-size: 17px !important;
 }
 .input_filtro_2{
     width: 234px !important;
@@ -3287,4 +3291,42 @@ css usuario modificacion
     background-color: #1C8F14;
     font-size: 0.8em;
     padding: 2px 5px;
+}
+.ikont-hit-palabraclave2{
+    border-color: #F2F2F2 !important;
+    border-width: 0px !important;
+    border-style: solid !important;
+    border-radius: 0px !important;
+    font-size: 17px !important;
+    font-family: open !important;
+    color: #58595B !important;
+    background-repeat: repeat-x !important;
+    background-position: initial !important;
+    background-color: #F2F2F2 !important;
+    background-image: none !important;
+    width: 265px !important;
+    height: 34px !important;
+    padding-left: 3px !important;
+}
+.ikont-menu-inicio-zoom_1{
+    background-image: url(../imgs/icono_home_inicio.png);
+    background-repeat: no-repeat;
+    width: 31px;
+    height: 30px;
+    display: block;
+    background-size: 30px;
+    cursor: pointer;
+}
+.imagen_flecha_inicio{
+    position: relative;
+    left: -4px;
+    top: -2px;
+    width: 30px;
+}
+
+.imagen_punta1{
+    position: relative;
+    left: 1px;
+    top: -31px;
+    width: 50px;
 }
