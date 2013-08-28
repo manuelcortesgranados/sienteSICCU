@@ -2622,10 +2622,10 @@ css usuario modificacion
 
 }
 .panel_filtro_zoom{
-    height: 320px;
+    height: 279px;
 }
 .rf-tab-cnt{
-    border: 1px solid #BDBDBD !important;
+    border: 1px solid rgb(204, 201, 201) !important;
     border-radius: 17px !important;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
@@ -2675,7 +2675,7 @@ css usuario modificacion
 .rf-tab-hdr-brd {
     border: 0px solid !important;
     border-top: 0px !important;
-    height: 10px!important;
+    height: 22px!important;
     font-style: normal!important;
     background-color: #0092BC !important;
     background: none !important;
@@ -3225,4 +3225,44 @@ css usuario modificacion
     background-color: #F2F2F2;
     border-radius: 33px;
     position: fixed;
+}
+
+
+.imagen_punta1{
+    position: relative;
+    left: 1px;
+    top: -31px;
+    width: 50px;
+}
+.imagen_punta2{
+    position: relative;
+    left: 68px;
+    top: -31px;
+    width: 50px;
+}
+.imagen_punta3{
+    position: relative;
+    left: 139px;
+    top: -31px;
+    width: 50px;
+}
+.rf-tab-hdr-tabline-vis rf-tab-hdr-tabline-top{
+    top: -9px;
+}
+.input_filtro_select{
+    width: 234px !important;
+    height: 34px !important;  
+    background-color: rgb(253, 253, 253)!important;
+    background-image: none !important;
+    border-color: black!important;
+    border: 1px!important;
+}
+.input_filtro_2{
+    width: 234px !important;
+    height: 34px !important;
+    background-color: rgb(255, 255, 255) !important; 
+    border-width: 1px !important;
+    color: rgb(79, 82, 77)!important;
+    cursor: default !important;
+    border-color: rgb(255, 253, 253)!important;
 }
