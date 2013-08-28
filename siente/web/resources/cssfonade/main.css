@@ -2627,6 +2627,7 @@ css usuario modificacion
 .rf-tab-cnt{
     border: 1px solid rgb(204, 201, 201) !important;
     border-radius: 17px !important;
+    height: 153%;
 }
 .rf-tab-hdr-tabline-vis.rf-tab-hdr-tabline-top {
     background: none !important;
@@ -2637,9 +2638,10 @@ css usuario modificacion
     border-bottom-width: 0px;
     padding-top: 2px;
     overflow: hidden;
-    height: 25px;
+    height: 11%;
     white-space: nowrap;
     position: relative;
+    top: -3%;
 }
 
 .rf-tab-hdr-act.rf-tab-hdr-top {
@@ -2660,7 +2662,7 @@ css usuario modificacion
     background-position: top;
     background-repeat: none !important;
     background-color:  transparent !important;
-    color:  #0092BC !important ;
+    color:  #257500 !important ;
 }
 .rf-tab-hdr-inact.rf-tab-hdr-top {
     vertical-align: top !important;
@@ -2675,10 +2677,11 @@ css usuario modificacion
 .rf-tab-hdr-brd {
     border: 0px solid !important;
     border-top: 0px !important;
-    height: 22px!important;
+    height: 10px!important;
     font-style: normal!important;
     background-color: #0092BC !important;
     background: none !important;
+    width: 243px !important;
 }
 .boton1{
     border-color:#0092BC !important;
@@ -2718,18 +2721,18 @@ css usuario modificacion
     padding: 100px; 
 }
 .inputlinkhomezoom:link{
-     font-size: 12px; 
+     font-size: 0.5em; 
     color: #58595B; 
     padding: 10px;
 }
 .inputlinkhomezoom:hover{
     font-size: 0.5em; 
-    color:  #0092BC !important; 
+    color:  #257500 !important; 
     padding: 10px;
 }
 .inputlinkhomezoom:active{
     font-size: 0.5em; 
-    color:  #0092BC !important; 
+    color:  #257500 !important; 
     padding: 10px;
 }
 .panelzoomhome1{
@@ -2742,7 +2745,7 @@ css usuario modificacion
 }
 .inputlinkhomevermas{
     font-size: 0.5em; 
-    color: #0092BC !important; 
+    color: #257500 !important; 
     padding: 10px;
 }
 #header_content {
