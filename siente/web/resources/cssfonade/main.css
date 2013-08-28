@@ -3245,7 +3245,8 @@ css usuario modificacion
 }
 
 .ikont-rpp-modal-box{
-    
+    background: transparent!important;
+    box-shadow: 0px 0px 0px transparent!important;
 }
 .imagen_punta2{
     position: relative;
@@ -3279,3 +3280,4 @@ css usuario modificacion
     cursor: default !important;
     border-color: rgb(255, 253, 253)!important;
 }
+
