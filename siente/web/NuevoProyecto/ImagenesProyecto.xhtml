@@ -113,49 +113,57 @@
                                                             </h:panelGrid>
                                                             <br/>
                                                             <h:panelGroup>
-                                                                <rich:dataTable styleClass="ikont-table-img-datosbasicos" id="tablaImagenes"
-                                                                                value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
-                                                                                var="currentRow"                                                    
-                                                                                rowKeyVar="filaSeleccionada"
-                                                                                binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}"
-                                                                                rows="3" >
-                                                                    <f:facet name="header">
-                                                                        <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
-                                                                    </f:facet>
-                                                                    <rich:column  breakRowBefore="true"  width="100px">
-                                                                        <f:facet name="header" >
-                                                                            <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
-                                                                        </f:facet>
-                                                                        <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
-                                                                    </rich:column>
-
-                                                                    <rich:column  >
-                                                                        <f:facet name="header" >
-                                                                            <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
-                                                                        </f:facet>
-                                                                        <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
-                                                                    </rich:column>
-                                                                    <rich:column  id="Imagen">
-                                                                        <f:facet name="header" >
-                                                                            <h:outputText   styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
-                                                                        </f:facet>
-
-                                                                        <h:graphicImage  styleClass="ikont-hot-imagen"   value="#{currentRow.strubicacion}"   />
-                                                                    </rich:column>
-
-                                                                    <rich:column  width="60px">
+                                                                    <rich:dataTable>
                                                                         <f:facet name="header">
-                                                                            <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
+                                                                            <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
                                                                         </f:facet>
-                                                                        <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
-                                                                                           action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
-                                                                    </rich:column>
-                                                                    <f:facet name="footer">
-                                                                        <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
-                                                                    </f:facet>
-                                                                </rich:dataTable>
+                                                                        <rich:column  breakRowBefore="true"  width="100px">
+                                                                            <f:facet name="header" >
+                                                                                <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
+                                                                            </f:facet>
+                                                                        </rich:column>
+                                                                        <rich:column  >
+                                                                            <f:facet name="header" >
+                                                                                <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
+                                                                            </f:facet>
+                                                                        </rich:column>
+                                                                        <rich:column  id="Imagen">
+                                                                            <f:facet name="header" >
+                                                                                <h:outputText   styleClass="ikont-hot-imagen"   value="#{var.imagen}"/>
+                                                                            </f:facet>
+                                                                        </rich:column>
 
+                                                                        <rich:column  width="60px">
+                                                                            <f:facet name="header">
+                                                                                <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
+                                                                            </f:facet>
+                                                                        </rich:column>
+                                                                    </rich:dataTable>
+                                                                    <rich:dataTable styleClass="ikont-table-img-datosbasicos" id="tablaImagenes"
+                                                                                    value="#{Supervisor$IngresarNuevaObra.listaImagenesevolucionobra}"
+                                                                                    var="currentRow"                                                    
+                                                                                    rowKeyVar="filaSeleccionada"
+                                                                                    binding="#{Supervisor$IngresarNuevaObra.tablaImagenesevolucion}"
+                                                                                    rows="3" >
+                                                                        <rich:column  breakRowBefore="true"  >
+                                                                            <h:outputText  styleClass="ikont-hot-strdesctipoimagen"   value="#{currentRow.tipoimagen.strdesctipoimagen}"/>
+                                                                        </rich:column>
 
+                                                                        <rich:column  >
+                                                                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.strnombre}"/>
+                                                                        </rich:column>
+                                                                        <rich:column  id="Imagen">
+                                                                            <h:graphicImage  styleClass="ikont-hot-imagen"   value="#{currentRow.strubicacion}"   />
+                                                                        </rich:column>
+
+                                                                        <rich:column  width="60px">
+                                                                            <a4j:commandButton id="eliminar" value="#{var.eliminar}"  render="tablaImagenes, layoutImagen,imagenanterior,imagenprincipal"
+                                                                                               action="#{Supervisor$IngresarNuevaObra.eliminarImagenLista}"/>
+                                                                        </rich:column>
+                                                                        <f:facet name="footer">
+                                                                            <rich:dataScroller renderIfSinglePage="false"></rich:dataScroller>
+                                                                        </f:facet>
+                                                                    </rich:dataTable>
                                                             </h:panelGroup>
                                                             <center>
                                                                 <h:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
