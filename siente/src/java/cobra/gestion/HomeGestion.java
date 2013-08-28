@@ -68,7 +68,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.
+     * <p>
+     * Automatically managed component initialization.
      * <strong>WARNING:</strong>
      * This method is automatically generated, so any user-specified code
      * inserted here is subject to being replaced.</p>
@@ -88,6 +89,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private SelectItem[] TipoObraUsuario;
     private HashMap<Integer, Double> porcentajes = new HashMap<Integer, Double>();
     private List<Localidad> lslocalidad = new ArrayList<Localidad>();
+
     /**
      * Listados de grupos al que pertenece el usuario
      */
@@ -96,7 +98,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * Verdadero si el usuario ha ingresado al sistema sin registrarse
      */
     //private boolean usuarioSinRegistro = true;
-
     /**
      * Get the value of datos_mapa
      *
@@ -113,7 +114,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //    public void setJsfUsuarioGrupos(List<JsfUsuarioGrupo> jsfUsuarioGrupos) {
 //        this.jsfUsuarioGrupos = jsfUsuarioGrupos;
 //    }
-
     public void setLslocalidad(List<Localidad> lslocalidad) {
         this.lslocalidad = lslocalidad;
     }
@@ -153,7 +153,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //    public void setUsuarioSinRegistro(boolean usuarioSinRegistro) {
 //        this.usuarioSinRegistro = usuarioSinRegistro;
 //    }
-
     public void setUbicacionObra(SelectItem[] UbicacionObra) {
         this.UbicacionObra = UbicacionObra;
     }
@@ -674,6 +673,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setListavistahomezoom(List<vistahomezoom> listavistahomezoom) {
         this.listavistahomezoom = listavistahomezoom;
     }
+
     public void iniciarfiltro() {
 
         /**
@@ -722,12 +722,20 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public final void iniciarHome() {
+        // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
+
+        if (filtro.isIsciu()) {
+            filtro.setIntestadoobra(1);
+        } else if (getSessionBeanCobra().getUsuarioObra().getUsuLogin().compareTo("ciudadano") != 0) {
+            filtro.setIntestadoobra(-1);
+        } else {
+            filtro.setIntestadoobra(1);
+        }
         mostrarCantidadProyectos();
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
         filtro.setIntvista(1);
-        filtro.setIntestadoobra(1);
         filtro.setIntcodfase(-1);
         filtro.setTipointervencion(-1);
         filtro.setBoolobraterminada(false);
@@ -737,9 +745,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
-         if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
+        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
             iniciarSlider();
-         }
+        }
         //getPerfilControl().encontrarEtiqueta();
         //Debería utilizarse solo en ciudadano
 //        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
@@ -755,7 +763,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 //                }
 //            }
 //        }
-
     }
 
     public void configurarzonalocali() {
@@ -770,6 +777,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public HomeGestion() {
+        System.out.println("Debug -HomeGestion ");
         if (getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre() != null) {
             iniciarHome();
         } else {
@@ -861,32 +869,35 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     /**
-     * <p>Callback method that is called after the component tree has been
+     * <p>
+     * Callback method that is called after the component tree has been
      * restored, but before any event processing takes place. This method will
      * <strong>only</strong> be called on a postback request that is processing
      * a form submit. Customize this method to allocate resources that will be
      * required in your event handlers.</p>
      */
     /**
-     * <p>This method is called when the session containing it is about to be
+     * <p>
+     * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the
-     * <code>activate()</code> method will be called to indicate that the
-     * transfer is complete.</p>
+     * instance, after which the <code>activate()</code> method will be called
+     * to indicate that the transfer is complete.</p>
      *
-     * <p>You may customize this method to release references to session data or
+     * <p>
+     * You may customize this method to release references to session data or
      * resources that can not be serialized with the session itself.</p>
      */
     public void passivate() {
     }
 
     /**
-     * <p>This method is called when the session containing it was
-     * reactivated.</p>
+     * <p>
+     * This method is called when the session containing it was reactivated.</p>
      *
-     * <p>You may customize this method to reacquire references to session data
-     * or resources that could not be serialized with the session itself.</p>
+     * <p>
+     * You may customize this method to reacquire references to session data or
+     * resources that could not be serialized with the session itself.</p>
      */
     public void activate() {
     }
@@ -1735,25 +1746,25 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                filtro.setFactorpagina(100);
-                //filtro.setIntestadoobra(1);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
+                    filtro.setFactorpagina(100);
+                    //filtro.setIntestadoobra(1);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapaCiudadano();
+                    }
                 } else {
-                    cargarMapaCiudadano();
+                    filtro.setFactorpagina(100);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapa();
+                    }
                 }
-            } else {
-                filtro.setFactorpagina(100);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
-                } else {
-                    cargarMapa();
-                }
-            }
                 break;
             case 2:
                 filtro.setFactorpagina(9);
@@ -1799,23 +1810,23 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                // filtro.setIntestadoobra(1);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
+                    // filtro.setIntestadoobra(1);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapaCiudadano();
+                    }
                 } else {
-                    cargarMapaCiudadano();
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapa();
+                    }
                 }
-            } else {
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
-                } else {
-                    cargarMapa();
-                }
-            }
                 break;
             case 2:
             case 3:
@@ -1857,24 +1868,24 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                //filtro.setIntestadoobra(1);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
+                    //filtro.setIntestadoobra(1);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapaCiudadano();
+                    }
                 } else {
-                    cargarMapaCiudadano();
+                    //filtro.setIntestadoobra(1);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapa();
+                    }
                 }
-            } else {
-                //filtro.setIntestadoobra(1);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
-                } else {
-                    cargarMapa();
-                }
-            }
                 break;
             case 2:
             case 3:
@@ -1911,23 +1922,23 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         switch (filtro.getIntvista()) {
             case 1:
                 if (getSessionBeanCobra().getCobraService().isCiu()) {
-                // filtro.setIntestadoobra(1);
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
+                    // filtro.setIntestadoobra(1);
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapaCiudadano();
+                    }
                 } else {
-                    cargarMapaCiudadano();
+                    //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
+                    if (bundle.getString("nuevomapa").equals("true")) {
+                        cargarVallaFonade();
+                    } else {
+                        cargarMapa();
+                    }
                 }
-            } else {
-                //listaobrasusu = new ArrayList<Obra>(getSessionBeanCobra().getCobraService().encontrarObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                listaobrasusu = new ArrayList<VistaObraMapa>(getSessionBeanCobra().getCobraService().encontrarVistaObrasJsfUsuario(getSessionBeanCobra().getUsuarioObra(), filtro));
-                if (bundle.getString("nuevomapa").equals("true")) {
-                    cargarVallaFonade();
-                } else {
-                    cargarMapa();
-                }
-            }
                 break;
             case 2:
             case 3:
@@ -2659,7 +2670,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         }
     }
 
-
     /**
      * Método para abrir el slider de Ciudadano, invocando un método que trae
      * las últimas imágenes alimentadas
@@ -2671,12 +2681,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         filtrog.setLog(1);
         getSessionBeanCobra().getCiudadanoservice().setListaSliderGeneral(getSessionBeanCobra().getCobraService().obtenerUltimasImagenesObrasAlimentadas(filtrog));
 
-    }    
+    }
 
     @Override
     public void prerender() {
-        
+
     }
+
     public void mostrarCantidadProyectos() {
         listavistahomezoom = getSessionBeanCobra().getCobraService().encontrarvistahomezoom();
         for (vistahomezoom selectItem : listavistahomezoom) {
@@ -2684,31 +2695,27 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             numeroproyectoszoom = selectItem.getCantidadobras();
             numeroconvenioszoom = selectItem.getCantidadconvenios();
             proyectovalormayor = selectItem.getObramayorvalor();
-            
+
         }
-        
+
     }
 
-    public void mostrarVariableProyecto() { 
-        
+    public void mostrarVariableProyecto() {
+
         if (panelmostrarvaloreszoom == 1) {
-            System.out.println("numeroproyectoszoom " + numeroproyectoszoom);
             setMostrartotalproyectos(true);
             setMostrarvalortotalproyectos(false);
             setMostrartotalconvenios(false);
         }
         if (panelmostrarvaloreszoom == 2) {
-            System.out.println("valortotalproyectoszoom" + valortotalproyectoszoom);
             setMostrarvalortotalproyectos(true);
             setMostrartotalproyectos(false);
             setMostrartotalconvenios(false);
         }
         if (panelmostrarvaloreszoom == 3) {
-            System.out.println("numeroconvenioszoom " + numeroconvenioszoom);
             setMostrartotalconvenios(true);
             setMostrartotalproyectos(false);
             setMostrarvalortotalproyectos(false);
         }
-        System.out.println("proyectovalormayor " + proyectovalormayor);
     }
 }

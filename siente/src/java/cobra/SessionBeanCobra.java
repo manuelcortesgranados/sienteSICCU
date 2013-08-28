@@ -9,11 +9,9 @@ import atencionHumanitaria.service.AtencionHumanitariaServiceAble;
 import chsolicitud.dao.service.SolicitudServiceAble;
 import ciudadano.service.CiudadanoServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
-import co.com.interkont.cobra.planoperativo.server.services.CobraGwtServiceImpl;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Alimentacion;
 import co.com.interkont.cobra.to.Documentoobra;
-import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.Imagenevolucionobra;
 import co.com.interkont.cobra.to.JsfUsuario;
 import co.com.interkont.cobra.to.Modulo;
@@ -26,6 +24,7 @@ import co.com.interkont.cobra.to.RestaurarPassword;
 import co.com.interkont.cobra.to.Tipoestadobra;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.Supervisor.FacesUtils;
+import cobra.gestion.HomeGestion;
 import cobra.reportes.ReporteUsuariosXls;
 import cobra.service.CobraServiceAble;
 import cobra.service.IndicadorServiceAble;
@@ -107,10 +106,17 @@ public class SessionBeanCobra implements Serializable {
         if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
             return true;
         } else {
+           getHomeGestion().iniciarHome();
             return false;
         }
 
+    } 
+    
+    public HomeGestion getHomeGestion (){
+    return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
+    
     }
+    
 
     public void setLogueadodesdemapa(boolean logueadodesdemapa) {
         this.logueadodesdemapa = logueadodesdemapa;
@@ -451,6 +457,7 @@ public class SessionBeanCobra implements Serializable {
      * <p>Construct a new session data bean instance.</p>
      */
     public SessionBeanCobra() {
+        System.out.println("Debug - SessionBeanCobra");
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
