@@ -308,7 +308,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada));
+               ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada),props);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
             }

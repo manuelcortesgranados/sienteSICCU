@@ -1,6 +1,7 @@
 package co.com.interkont.cobra.planoperativo.client;
 
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
@@ -76,6 +77,22 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected int idTempObj;
     protected int idTempMacroActividades;
     protected int idobraRecursos;
+    boolean editar = false;
+    /*
+     *Elementos para la hora de editar
+     */
+    protected ActividadobraDTO actividadobraProyectoEditar;
+    protected ActividadobraDTOProps propes;
+
+//     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
+    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
+        this.actividadobraProyectoEditar = actividadobraProyectoEditar;
+        this.gantt = gantt;
+        this.modalPry = di;
+        this.proyectoDTO = actividadobraProyectoEditar.getObra();
+        this.actividadObraPadre = actividadObraPadre;
+        this.propes = propes;
+    }
 
     public ProyectoForm1(ContratoDTO contratoDtoP, ActividadobraDTO actividadobrapadre) {
         this.contratoDto = contratoDtoP;
@@ -84,7 +101,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTemp = 0;
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
-        this.idobraRecursos=0;
+        this.idobraRecursos = 0;
     }
 
     public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP) {
@@ -97,7 +114,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTemp = 0;
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
-        this.idobraRecursos=0;
+        this.idobraRecursos = 0;
 
 
         /*se instancian todos los elementos de la pantalla*/
@@ -158,7 +175,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         otrospagos.setEmptyText("Otros pagos");
         con.add(otrospagos, new HtmlData(".otrospagos"));
 
-     
+
         final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
@@ -169,7 +186,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 Window adicionarRubros = new Window();
                 adicionarRubros.setBlinkModal(true);
                 adicionarRubros.setModal(true);
-                ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros,idobraRecursos);
+                ModalRubrosProyecto modalProyecto = new ModalRubrosProyecto(contratoDto, proyectoDTO, idTemp, adicionarRubros, tblRubros, idobraRecursos);
                 adicionarRubros.add(modalProyecto.asWidget());
                 adicionarRubros.show();
             }
@@ -370,6 +387,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      *
      */
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
+        actividadPadre.getChildren().add(actividadHija);
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadPadre, actividadHija);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);

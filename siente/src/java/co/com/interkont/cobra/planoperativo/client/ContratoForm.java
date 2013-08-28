@@ -121,10 +121,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
     boolean editar = false;
     private int idtempRelacionRecursos;
     private int idtempRubros;
-    
+    boolean fechaSusError;
+    boolean fechaActaError;
+
     public ContratoForm() {
     }
-    
+
     public ContratoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTOProps propes) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
@@ -136,8 +138,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
         idtempRelacionRecursos = 0;
         idtempRubros = 0;
     }
-    
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre) {
+
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
@@ -145,9 +147,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.actividadObraPadre = actividadObraPadre;
         this.editar = true;
         lstRubrosDto = new ArrayList<RubroDTO>();
+        this.propes = propes;
         CargarFormularioEditar();
     }
-    
+
     private void CargarFormularioEditar() {
         this.objetoContrato.setText(contrato.getTextobjeto());
         this.nombreAbre.setText(contrato.getNombreAbreviado());
@@ -155,7 +158,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
         this.valorContrato.setValue(contrato.getNumvlrcontrato());
     }
-    
+
     @Override
     public Widget asWidget() {
         if (getVp() == null) {
@@ -164,17 +167,19 @@ public class ContratoForm implements IsWidget, EntryPoint {
             getVp().setHorizontalAlignment(VerticalPanel.ALIGN_CENTER);
             getVp().setVerticalAlignment(VerticalPanel.ALIGN_MIDDLE);
             crearFormulario();
+        }else if(editar){
+       lstTipoContrato.setValue(contrato.getTipocontrato());
         }
         return getVp();
     }
-    
+
     @Override
     public void onModuleLoad() {
-        
+
         RootPanel.get().add(asWidget());
-        
+
     }
-    
+
     private void crearFormulario() {
         if (!editar) {
             getVp().add(new Label("Añadir contrato"));
@@ -183,19 +188,19 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         getVp().add(con);
-        
+
         int cw = 238;
-        
+
         Label tObj = new Label("*OBJETIVOS");
         con.add(tObj, new HtmlData(".tobj"));
-        
+
         getObjetoContrato().setWidth("" + cw);
         getObjetoContrato().setHeight("" + 80);
         con.add(getObjetoContrato(), new HtmlData(".objetoC"));
-        
+
         getValorContrato().setWidth(cw);
         getValorContrato().setWidth(cw);
-        
+
         getValorContrato().addBlurHandler(new BlurEvent.BlurHandler() {
             @Override
             public void onBlur(BlurEvent event) {
@@ -203,14 +208,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     AlertMessageBox d = new AlertMessageBox("Error", "La suma de los rubros supera el valor del contrato modificado");
                     d.show();
                     getValorContrato().setValue(valorAuxiliar);
-                    
+
                 }
             }
         });
         con.add(getValorContrato(), new HtmlData(".valor"));
-        
-        
-        
+
+
+
         llenarListaTipoContrato(tiposContrato);
         setLstTipoContrato(new ComboBox<TipocontratoDTO>(tiposContrato, propstipoContrato.strdesctipocontrato()));
         getLstTipoContrato().setWidth(cw);
@@ -223,11 +228,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
         con.add(getLstTipoContrato(), new HtmlData(".tipocontrato"));
-        
+
         getNombreAbre().setWidth(cw);
         con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
-        
-        
+
+
         getFechaSuscripcionContrato().setWidth(cw);
         fechaSuscripcionContrato.addKeyDownHandler(new KeyDownHandler() {
             @Override
@@ -241,16 +246,16 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
         con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
-        
+
         getFechaSuscripcionActaInicio().setWidth(cw);
         con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
-        
-        
-        
+
+
+
         final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato);
         con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
-        
-        
+
+
         PushButton btnAdicionarRubros = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -264,10 +269,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
         con.add(btnAdicionarRubros, new HtmlData(".addr"));
-        
+
         final WidgetTablaFuenteR cel = new WidgetTablaFuenteR(contrato, actividadObraPadre);
         con.add(cel.asWidget(), new HtmlData(".tblfuen"));
-       
+
         PushButton btnVerFuente = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -280,10 +285,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
         con.add(btnVerFuente, new HtmlData(".verf"));
-        
-        
+
+
         String nombreBotonPrincipal = "";
-        
+
         if (!editar) {
             nombreBotonPrincipal = "Añadir Contrato";
             getObjetoContrato().setText("Objeto");
@@ -292,12 +297,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
             getNombreAbre().setEmptyText("Nombre Abreviado");
             getFechaSuscripcionContrato().setEmptyText("Fecha de suscripcion");
             getFechaSuscripcionActaInicio().setEmptyText("Fecha de suscripcion acta inicio");
-            
+
         } else {
             nombreBotonPrincipal = "Editar Contrato";
             lstTipoContrato.setValue(contrato.getTipocontrato());
         }
-        
+
         Button btnAdicionarContrato = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -311,50 +316,91 @@ public class ContratoForm implements IsWidget, EntryPoint {
                         crearTareaContrato();
                     }
                 } else {
-                    modalContrato.hide();
                     editarContrato();
+                    boolean error = false;
+                    if (fechaActaError) {
+                        error = true;
+                        msgValidacion += "*La fecha de acta de inicio no puede ser menor que la fecha del proyecto" + "<br/>";
+                    }
+                    if (fechaSusError) {
+                        error = true;
+                        msgValidacion += "*La fecha de suscripción no puede ser menor que la fecha del proyecto" + "<br/>";
+                    }
+                    if (!error) {
+                        actividadObraEditar.setContrato(contrato);
+                        modalContrato.hide();
+                        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraEditar);
+                        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraEditar, true);  //tareaSeleccionada.addChild(tareaNueva);
+                        gantt.getGanttPanel().getContainer().refresh();
+                        modalContrato.hide();
+                    }else{
+                        AlertMessageBox d = new AlertMessageBox("Error", msgValidacion);
+                        d.show();
+                    }
+
                 }
             }
         });
-        
+
         btnAdicionarContrato.setWidth("" + 150);
         con.add(btnAdicionarContrato);
-        
-        
+
+
     }
-    
+
+    public boolean validarCambiofechaSuscripcionContrato() {
+        service.setLog("entre en validar fSuc", null);
+        if (contrato.getDatefechaini().compareTo(fechaSuscripcionContrato.getValue()) != 0) {
+            service.setLog("entre en validar fSuc 2", null);
+            if (fechaSuscripcionContrato.getValue().compareTo(actividadObraPadre.getObra().getFechaInicio()) >= 0) {
+                contrato.setDatefechaini(fechaSuscripcionContrato.getValue());
+                propes.startDateTime().setValue(actividadObraEditar, fechaSuscripcionContrato.getValue());
+                propes.startDateTime().setValue(actividadObraEditar.getChildren().get(0), fechaSuscripcionContrato.getValue());
+                actividadObraEditar.getChildren().get(0).setStartDateTime(fechaSuscripcionContrato.getValue());
+            } else {
+               fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public boolean validarCambiofechaActaContrato() {
+        if (contrato.getDatefechaactaini().compareTo(fechaSuscripcionActaInicio.getValue()) != 0) {
+            if (fechaSuscripcionActaInicio.getValue().compareTo(actividadObraPadre.getObra().getFechaInicio()) >= 0) {
+                contrato.setDatefechaactaini(fechaSuscripcionActaInicio.getValue());
+                propes.startDateTime().setValue(actividadObraEditar.getChildren().get(1), fechaSuscripcionActaInicio.getValue());
+            } else {
+                fechaSuscripcionActaInicio.setValue(contrato.getDatefechaactaini());
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public void editarContrato() {
         if (!contrato.getTextobjeto().equals(objetoContrato.getText())) {
             contrato.setTextobjeto(objetoContrato.getText());
         }
         if (!contrato.getNombreAbreviado().equals(nombreAbre.getText())) {
             contrato.setNombreAbreviado(nombreAbre.getText());
-            actividadObraEditar.setName(contrato.getNombreAbreviado());
+            propes.name().setValue(actividadObraEditar, contrato.getNombreAbreviado());
         }
         if (contrato.getNumvlrcontrato().compareTo(valorContrato.getValue()) != 0) {
             contrato.setNumvlrcontrato(valorContrato.getValue());
         }
-        if (contrato.getDatefechaini().compareTo(fechaSuscripcionContrato.getValue()) != 0) {
-            actividadObraEditar.getChildren().get(0).setStartDateTime(fechaSuscripcionContrato.getValue());
-        }
-        if (contrato.getDatefechaactaini().compareTo(fechaSuscripcionActaInicio.getValue()) != 0) {
-            actividadObraEditar.getChildren().get(1).setStartDateTime(fechaSuscripcionActaInicio.getValue());
-        }
+        fechaSusError = validarCambiofechaSuscripcionContrato();
+        fechaActaError = validarCambiofechaActaContrato();
         if (contrato.getTipocontrato() != tipocontrato) {
             contrato.setTipocontrato(tipocontrato);
         }
-        actividadObraEditar.setContrato(contrato);
-        
-        modalContrato.hide();
-        
-        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraEditar);
-        ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraEditar, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        
-        
-        
+
+
     }
-    
+
     private native String getTableMarkup() /*-{
      return [ '<table width=100% cellpadding=0 cellspacing=10>',
      '<tr><td class=tobj></td></tr>',
@@ -379,17 +425,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
             public void onFailure(Throwable caught) {
                 service.setLog("Error al cargar los rubros", null);
             }
-            
+
             @Override
             public void onSuccess(List<RubroDTO> result) {
                 rubros.addAll(result);
                 service.setLog("Cargue rubros" + rubros.size(), null);
-                
+
             }
         });
-        
+
     }
-    
+
     public void llenarFuenteRecursosContrato(final ListStore<TerceroDTO> entidades) {
         int i = 0;
         for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
@@ -400,20 +446,20 @@ public class ContratoForm implements IsWidget, EntryPoint {
             i++;
         }
     }
-    
+
     public void llenarV() {
         Date ahora = new Date();
         service.setLog("AHORA" + ahora.getYear(), null);
 //        int año = Calendar.getInstance().getTime().getYear();
         int año = 2013;
-        
+
         getLstVigen().addItem("" + año);
         for (int i = 0; i < 14; i++) {
             año = año + 1;
             getLstVigen().addItem("" + año);
         }
     }
-    
+
     public void llenarFormaPa() {
         getLstFormaP().addItem("Valor", "1");
         getLstFormaP().addItem("Porcentaje", "2");
@@ -428,17 +474,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
             public void onFailure(Throwable caught) {
                 service.setLog("Error al cargar los tipos de contrato", null);
             }
-            
+
             @Override
             public void onSuccess(List result) {
                 tiposContrato.addAll(result);
                 service.setLog("Cargue tipos Contrato" + tiposContrato.size(), null);
-                
+
             }
         });
-        
+
     }
-    
+
     public ObrafuenterecursosconveniosDTO buscarFuenteDto(int posicion) {
         int i = 0;
         for (Iterator it = actividadObraPadre.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
@@ -451,7 +497,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         return null;
     }
-    
+
     public void CrearContrato() {
         contrato.setTextobjeto(getObjetoContrato().getText());
         contrato.setNombreAbreviado(getNombreAbre().getValue());
@@ -461,20 +507,20 @@ public class ContratoForm implements IsWidget, EntryPoint {
         contrato.setNumvlrcontrato(getValorContrato().getValue());
         contrato.setValorDisponible(getValorContrato().getValue());
     }
-    
+
     public void crearTareaContrato() {
         actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
         ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 3, false, contrato);
-        
+
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), actividadObraPadre.getDuration(), 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcion);//el pade de esta es actividadObraContrato
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), actividadObraPadre.getDuration(), 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcionActa);
-        
+
         ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(precontractual);
-        
+
         List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 4, true);
         lstHijosPrecontra.add(revTecnica);
@@ -484,14 +530,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
         lstHijosPrecontra.add(evaPropuestas);
         ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", contrato.getDatefechaini(), 1, 0, TaskType.LEAF, 4, true);
         lstHijosPrecontra.add(elaContrato);
-        
+
         ActividadobraDTO contractua = new ActividadobraDTO("Contractual", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(contractua);
-        
+
         ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(Liquidaciones);
 
-
+        actividadObraContrato.setChildren(lstHijos);
+        precontractual.setChildren(lstHijosPrecontra);
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, actividadObraContrato);
@@ -509,10 +556,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
         gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        
-        
+        service.setLog("hijos creando acti" + actividadObraContrato.getChildren().size(), null);
+
     }
-    
+
     public boolean validaciones() {
         boolean hayError = false;
         msgValidacion = new String();
@@ -520,7 +567,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             hayError = true;
             msgValidacion += "*por favor ingrese la fecha de suscripcion" + "<br/>";
         } else {
-            
+
             if (contrato.getDatefechaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
                 hayError = true;
                 msgValidacion += "*La fecha de inicio no puede ser inferior a la fecha de suscripcion del proyecto" + "<br/>";
@@ -530,7 +577,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             hayError = true;
             msgValidacion += "*por favor ingrese la fecha de suscripcion del acta de inicio" + "<br/>";
         } else {
-            
+
             if (contrato.getDatefechaactaini().compareTo(actividadObraPadre.getObra().getFechaInicio()) < 0) {
                 hayError = true;
                 msgValidacion += "*La fecha de suscripcion del acta no puede ser inferior a la fecha de inicio del proyecto" + "<br/>";
@@ -540,17 +587,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
             hayError = true;
             msgValidacion += "*por favor ingrese el objeto del contrato" + "<br/>";
         }
-        
+
         if (nombreAbre.getValue() == null) {
             hayError = true;
             msgValidacion += "*por favor ingrese nombre abreviado del contrato" + "<br/>";
         }
-        
+
         if (contrato.getTipocontrato() == null) {
             hayError = true;
             msgValidacion += "*por favor seleccione un tipo de contrato" + "<br/>";
         }
-        
+
         if (contrato.getMontos().isEmpty()) {
             hayError = true;
             msgValidacion += "*El contrato debe de tener por lo menos un monto asociado" + "<br/>";
@@ -566,9 +613,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         }
         return hayError;
-        
+
     }
-    
+
     public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
         service.setLog("entre 1" + actividadObraPadre.getObra().getValorDisponible(), null);
         if (relacionFuente.getValor().compareTo(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible()) >= 0) {
@@ -591,23 +638,23 @@ public class ContratoForm implements IsWidget, EntryPoint {
             modificarValorDisponible(relacionFuente);
             return "La fuente ha sido guardada";
         }
-        
+
     }
-    
+
     public void modificarValorDisponible(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
         service.setLog("entre 4", null);
 //        actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(relacionFuente.getValor()));
         relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
         service.setLog("entre 5", null);
     }
-    
+
     private void llenarCategorias() {
         service.obtenerCategoriasRubros(new AsyncCallback<List<RubroDTO>>() {
             @Override
             public void onFailure(Throwable caught) {
                 service.setLog("Error al cargar las categorías de los rubros" + caught.getMessage() + "" + caught.getCause(), null);
             }
-            
+
             @Override
             public void onSuccess(List<RubroDTO> result) {
                 for (RubroDTO rb : result) {
@@ -616,7 +663,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             }
         });
     }
-    
+
     private void llenarRubroslista(String cod) {
         //Limpiamos el combo de la escuela
         service.setLog("e1", null);
@@ -627,7 +674,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
             public void onFailure(Throwable caught) {
                 service.setLog("error obteniendo los rubros", null);
             }
-            
+
             @Override
             public void onSuccess(List<RubroDTO> result) {
                 service.setLog("accca" + result.size(), null);
@@ -640,9 +687,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 }
             }
         });
-        
+
     }
-    
+
     public String validaRubros(MontoDTO montoDto) {
         String msgVal = "";
         if (getValorContrato().getValue() == null) {
@@ -679,10 +726,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             service.setLog("entre 3", null);
             msgVal += "El rubro se registró correctamente";
         }
-        
+
         return msgVal;
     }
-    
+
     public BigDecimal sumarRubros() {
         BigDecimal sumMontos = BigDecimal.ZERO;
         for (Iterator it = contrato.getMontos().iterator(); it.hasNext();) {
@@ -691,15 +738,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
         return sumMontos;
     }
-    
+
     public void limpiarMontos() {
         this.llenarCategorias();
         llenarRubroslista("123102");
         this.getValorRubros().clear();
         this.getValorRubros().setEmptyText("Valor");
-        
+
     }
-    
+
     public void limpiarFuentes() {
         this.getValorFuenteRecurso().clear();
         this.getValorFuenteRecurso().setEmptyText("Valor");
