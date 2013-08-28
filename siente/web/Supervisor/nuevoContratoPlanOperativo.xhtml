@@ -164,7 +164,7 @@
             </a4j:region> 
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==3}" id="reg-polizas">
-                <h:panelGroup layout="block" style="width:800px;height:400px;">                   
+                <h:panelGroup layout="block" style="width:800px;">                   
                     <ui:include src="/Supervisor/PolizasPlanOperativo.xhtml" />                        
                 </h:panelGroup>
             </a4j:region>  
@@ -177,11 +177,11 @@
             </a4j:region>
 
             <a4j:region rendered="#{Supervisor$Contrato.panelPantalla==5}" id="reg-documentos">
-                <h:panelGroup layout="block" style="width:800px;height:400px;">
+                <h:panelGroup layout="block" style="width:900px">
                     <ui:include src="/Supervisor/DocumentosPlanOperativo.xhtml"/>                    
                 </h:panelGroup>
-            </a4j:region>    
-
+            </a4j:region> 
+            
             <h:panelGrid styleClass="ikont-hpg-botones" columns="3" cellspacing="15" cellpadding="0">                
                 <a4j:commandLink value="#{var.finalizar}" action="#{Supervisor$Contrato.finalizarGuardado}" render="@form, panelConfirmaguardadoplano"
                                  oncomplete="#{rich:component('panelConfirmaguardadoplano')}.show(); return false" 
