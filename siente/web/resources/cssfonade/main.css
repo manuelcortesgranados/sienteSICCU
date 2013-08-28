@@ -549,7 +549,7 @@ a.butonreport{
     display: block;
     background-repeat: no-repeat;
     margin-right: 0px;
-    background-image: url(../imgs/proyecto/sprite_reportes.png);
+    background-image: url(../imgs/proyecto/reportes_sprite.png);
 }
 
 a.butonreport.zoom-excel {
@@ -574,6 +574,14 @@ a.butonreport.zoom-pdf {
 
 a.butonreport.zoom-pdf:hover {
     background-position: 0px -75px;
+}
+
+a.butonreport.zoom-mpp {
+    background-position: -270px 0px;
+}
+
+a.butonreport.zoom-mpp:hover {
+    background-position: -270px -75px;
 }
 
 #ikont-div-reportes ul li a {
@@ -3230,12 +3238,14 @@ css usuario modificacion
     position: fixed;
 }
 
+.ikont-div-asi-va{
+    width: 150px;
+    height: 180px;
+    text-align: left;
+}
 
-.imagen_punta1{
-    position: relative;
-    left: 1px;
-    top: -31px;
-    width: 50px;
+.ikont-rpp-modal-box{
+    
 }
 .imagen_punta2{
     position: relative;
