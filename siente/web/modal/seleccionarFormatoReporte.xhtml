@@ -38,13 +38,13 @@
             Generar reporte en:
             <h:panelGrid columns="3"  >
                 <h:panelGrid>
-                    <h:commandLink id="pdfReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoPDF}" styleClass="butonreport pdf" type="submit" target="_blank" value="PDF"/>                            
+                    <h:commandLink id="pdfReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoPDF}" styleClass="butonreport zoom-pdf" type="submit" target="_blank" />                            
                 </h:panelGrid>
                 <h:panelGrid>
-                    <h:commandLink id="excelReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoXLS}" styleClass="butonreport pdf" type="submit" target="_blank" value="Excel"/>                            
+                    <h:commandLink id="excelReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoXLS}" styleClass="butonreport zoom-excel" type="submit" target="_blank" />                            
                 </h:panelGrid>
                 <h:panelGrid rendered="#{Supervisor$Contrato.tipoReporteVarTmp==2}">
-                    <h:commandLink id="mppReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoMPP}" styleClass="butonreport pdf" type="submit" target="_blank" value="MPP"/>
+                    <h:commandLink id="mppReportePlanOperativo" action="#{Supervisor$Contrato.reportesPlanOperativoMPP}" styleClass="butonreport zoom-mpp" type="submit" target="_blank" />
                 </h:panelGrid>
             </h:panelGrid>
         </h:panelGroup>
