@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -179,14 +180,16 @@ public class RecursosConvenio implements Serializable {
         SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         ResourceBundle bundle = sbc.getBundle();
         getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
-
+       
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {
                     if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
                         getFuenteRecursoConvenio().setPorcentajecuotagerencia(
                                 getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
-                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + getFuenteRecursoConvenio().getPorcentajecuotagerencia());
+                        BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
+                        DecimalFormat valorConDecimal = new DecimalFormat("0.00");                        
+                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + valorConDecimal.format(valorConverPorcentajeGerencia));
                     } else {
                         FacesUtils.addErrorMessage(bundle.getString("validarporcentajefuente"));
                     }
