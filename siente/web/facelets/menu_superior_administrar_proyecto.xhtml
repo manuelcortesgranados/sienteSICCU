@@ -41,7 +41,7 @@
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-estado-proyecto"    action="cambiarestado"/>             
                 </h:panelGrid>
                 <h:panelGrid    cellpadding="0" cellspacing="0" >
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto"    />      
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"  />      
                 </h:panelGrid>
                 <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-documentos-proyecto"    action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"/>      
