@@ -61,22 +61,22 @@ public class GanttDatos {
         //ContratoDTO convenio = contratodto;
         
         List<ActividadobraDTO> lista = taskStore.getAll();
-        
-        service.setLog("task = " + taskStore.getRootItems().size(),null);
         int i=0;
         for (ActividadobraDTO act : lista) {
             if(i==0)
             {
                 convenio.setDatefechaini(act.getStartDateTime());
                 convenio.setDatefechafin(act.endDateTime);
-                convenio.setIntduraciondias(act.duration);
-                
-            }    
-            service.setLog("act: " + act.getStrdescactividad() + " desc: " + act.getName() + " fechaini: " + act.startDateTime + " act hijas: " + act.getChildren().size(), null);
+                convenio.setIntduraciondias(act.duration);                
+            }
+            else
+            {
+                convenio.getActividadobras().clear();
+                convenio.getActividadobras().add(act);
+            }                
             i++;
         }   
-         service.setLog("convenio. = " + convenio.getStrnumcontrato(),null);
-         service.setLog("conveniofueu"+convenio.getFuenterecursosconvenios().size(), null);
+         
         return convenio;
     }    
 }

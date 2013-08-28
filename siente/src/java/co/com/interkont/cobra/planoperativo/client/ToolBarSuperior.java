@@ -22,16 +22,15 @@ import java.util.List;
  *
  * @author Carlos Loaiza
  */
-public  class ToolBarSuperior extends ToolBar {
+public class ToolBarSuperior extends ToolBar {
     
-    final Button planificacion = new Button("Planificación");       
-    final Button flujodecaja = new Button("Flujo de Caja");        
-    final Button reportes = new Button("Reportes");   
-    final Button datosbasicos = new Button("Datos Básicos");      
+    final Button planificacion = new Button("Planificación");    
+    final Button flujodecaja = new Button("Flujo de Caja");    
+    final Button reportes = new Button("Reportes");    
+    final Button datosbasicos = new Button("Datos Básicos");    
     
     public ToolBarSuperior(final CobraGwtServiceAbleAsync service, final TreeStore<ActividadobraDTO> taskStore, final ContratoDTO convenio) {
         planificacion.setEnabled(false);
-        
         
         flujodecaja.addClickHandler(new ClickHandler() {
             @Override
@@ -41,16 +40,15 @@ public  class ToolBarSuperior extends ToolBar {
                     public void onFailure(Throwable caught) {
                         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-
+                    
                     @Override
                     public void onSuccess(Boolean result) {
-                        Window.open(retornarNuevoContrato(),"_parent",retornarConfiguracionPagina());
+                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
                     }
                 });
-
+                
             }
         });
-           
         
         reportes.addClickHandler(new ClickHandler() {
             @Override
@@ -60,55 +58,58 @@ public  class ToolBarSuperior extends ToolBar {
                     public void onFailure(Throwable caught) {
                         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-
+                    
                     @Override
                     public void onSuccess(Boolean result) {
-                        Window.open(retornarNuevoContrato(),"_parent",retornarConfiguracionPagina());
+                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
                     }
                 });
-
+                
             }
         });
-         datosbasicos.addClickHandler(new ClickHandler() {
+        datosbasicos.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                GanttDatos.estructurarDatosConvenio(convenio, taskStore, service);
-                
-                service.setNavegacion(1, new AsyncCallback<Boolean>() {
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
+                    
                     @Override
                     public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        service.setLog("Problema al transferir el objeto a JSF", null);
                     }
-
+                    
                     @Override
                     public void onSuccess(Boolean result) {
-                        Window.open(retornarNuevoContrato(),"_parent",retornarConfiguracionPagina());
+                        service.setNavegacion(1, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+                            
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                            }
+                        });
                     }
                 });
-
+                
             }
         });
-       add(datosbasicos);
+        add(datosbasicos);
         add(planificacion);
         add(flujodecaja);
         add(reportes);
         
-        
-        
-        
     }
     
-     public String retornarNuevoContrato() {
-
+    public String retornarNuevoContrato() {
+        
         return "/zoom/Supervisor/nuevoContratoPlanOperativo.xhtml";
-                  
-    } 
+        
+    }    
     
-    public String retornarConfiguracionPagina()
-    {
+    public String retornarConfiguracionPagina() {
         return "menubar=si, location=false, resizable=no, scrollbars=si, status=no, dependent=true";
-    } 
-    
-    
+    }    
     
 }
