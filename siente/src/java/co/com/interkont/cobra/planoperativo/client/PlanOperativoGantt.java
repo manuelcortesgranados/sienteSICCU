@@ -529,7 +529,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         SpinnerField<Integer> spinner = new SpinnerField<Integer>(new NumberPropertyEditor.IntegerPropertyEditor());
         spinner.setMinValue(0);
         spinner.setMaxValue(100);
-        spinner.setIncrement(10);
+        spinner.setIncrement(1);
         editing.addEditor(config.leftColumns.getColumn(3), spinner);
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
             @Override
