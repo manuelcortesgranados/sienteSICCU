@@ -15,6 +15,8 @@ import cobra.Supervisor.NuevoContratoBasico;
 import cobra.service.CobraServiceAble;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -130,7 +132,13 @@ public class RecursosConvenio implements Serializable {
     public void eliminarFuenteRecursos() {
         Fuenterecursosconvenio f = (Fuenterecursosconvenio) tableFuente.getRowData();
         lstFuentesRecursos.remove(f);
+        sumafuentes = sumafuentes.subtract(f.getValoraportado());
+        if (lstFuentesRecursos.isEmpty()) {
+            sumafuentes = BigDecimal.ZERO;
+        }
     }
+
+    
 
     /*
      *metodo que se encarga de adicionar una fuente de recurso a la
@@ -146,6 +154,7 @@ public class RecursosConvenio implements Serializable {
             fuenteRecursoConvenio.setRolentidad(obtenerRolXcodigo(this.getFuenteRecursoConvenio().getRolentidad().getIdrolentidad()));
             fuenteRecursoConvenio.setValorDisponible(fuenteRecursoConvenio.getValoraportado());
             System.out.println("fuente R v = " + fuenteRecursoConvenio.getValorDisponible());
+            calcularCuotaGerencia();
             lstFuentesRecursos.add(fuenteRecursoConvenio);
             sumafuentes = sumafuentes.add(fuenteRecursoConvenio.getValoraportado());
             limpiarFuenteRecurso();
@@ -153,7 +162,19 @@ public class RecursosConvenio implements Serializable {
             FacesUtils.addErrorMessage("El valor de la suma de las reservas y la cuota de gerencia no puede superar el Valor Global Aportado.");
         }
     }
-
+    
+    public void calcularCuotaGerencia(){
+        BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
+        switch (getFuenteRecursoConvenio().getTipoaporte()) {
+                    case 1://porcentual                                                      
+                         fuenteRecursoConvenio.setValorcuotagerencia(valorConverPorcentajeGerencia);
+                         break;
+                     case 2://valor
+                         fuenteRecursoConvenio.setValorcuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia());
+                         break;                    
+                 }
+    }
+    
     public void calcularValorGerencia() {
         SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         ResourceBundle bundle = sbc.getBundle();
