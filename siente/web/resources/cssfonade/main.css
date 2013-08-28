@@ -3281,3 +3281,10 @@ css usuario modificacion
     border-color: rgb(255, 253, 253)!important;
 }
 
+
+.ikont-colum-superior-fuente-recurso{
+    color: #FFF;
+    background-color: #1C8F14;
+    font-size: 0.8em;
+    padding: 2px 5px;
+}
