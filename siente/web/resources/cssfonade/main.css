@@ -1325,23 +1325,15 @@ a.ikont-hcl-modificarusuario:hover {
 /*  estilos zoom*/
 .ikont-hpg-contentmenu{
     background-color: #F2F2F2;
-     width: 850px;
-    height: 80px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #6B6B6B;
+    width: 900px;
+    height: 70px;
     position: relative;
     top: 0px;
-    z-index: 9999;
+    z-index:5;
 }
 .ikont-hpg-menu-nuevo-convenio{
     margin: 0px auto;
     margin-top: -10px;
-}
-
-.ikont-hf-nuevocontratoplanoperativo{
-    position: relative;
-    top: 70px;
 }
 
 .img-button-ncpo{
@@ -1714,13 +1706,10 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-pgfotografia{
     position: relative;
     top: 10px;
-    width: 80px;
-    height: 100px;
-    -moz-border-radius: 10px; 
-    -ms-border-radius: 10px; 
-    -webkit-border-radius: 10px; 
-    -o-border-radius: 10px; 
-    border-radius: 10px; 
+    width: 90px;
+    height: 90px;
+    -ms-border-radius: 90px; 
+    border-radius: 90px; 
     background: url("../imgs/foto_perfil.jpg")no-repeat center center ;
     background-size : cover;
     -webkit-background-size : cover;
@@ -1743,6 +1732,7 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
+    font-style: italic; 
     color:#808080;
     height: 40px;
     font-size: 24px;
