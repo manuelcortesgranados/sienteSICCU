@@ -37,7 +37,7 @@
         </h:panelGroup>
 
     </ui:define>
-    <ui:define  rendered="#{var.permisonuevodiseño and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
+    <ui:define  rendered="#{var.permisonuevodiseno and Supervisor$Contrato.tipoContCon == 'Convenio'}" name="menusuperior">
         <ui:include src="/facelets/menu_superior_administrar_convenio.xhtml"/>
     </ui:define>
     <ui:define name="body">
@@ -52,10 +52,10 @@
                                  columnClasses="column-grid-panel,column-grid-panel,column-grid-panel,column-grid-panel">
                         <rich:panel id="tipo" header="#{var.tipo}" bodyClass="rich-panel-grid-body" styleClass="ikont-"   headerClass="font-header-panel" 
                                     rendered="#{!Supervisor$Contrato.contrato.booltipocontratoconvenio}">
-                            <h:panelGrid columns="1" >
+                            <h:panelGrid style="height: 120px;" columns="1" >
                                 <interkont:spacer height="30" />
 
-                                <h:panelGroup>
+                                <h:panelGroup >
                                     <center>
                                         <h:outputText  styleClass="ikont- "   id="tipocontrato" value="#{Supervisor$Contrato.contrato.tipocontrato.strdesctipocontrato}"  />
                                     </center>

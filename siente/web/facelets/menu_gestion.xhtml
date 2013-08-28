@@ -708,8 +708,8 @@
                 </h:panelGrid> 
                 <h:panelGroup styleClass="ikont-espacio-sub-menu"> 
                     <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.menuNuevocontrato}" actionListener="#{Supervisor$Contrato.iniciarContrato}" action="nuevoContrato"  immediate="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btncontratos}"/>
-                    <br/>
-                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo"  value="-#{var.menuConsultarContrato}" action="#{Supervisor$Contrato.iniciarDetaConvenio}" immediate="true"/>   
+                    <br/> 
+                    <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo"  value="-#{var.menuConsultarContrato}" action="#{Supervisor$Contrato.iniciarDetaContrato}" immediate="true"/>   
                 </h:panelGroup>
             </h:panelGroup>
             <hr class="ikont-hr-separador-menu "  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnver_contratos}"/>

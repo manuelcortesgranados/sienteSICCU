@@ -85,8 +85,8 @@
                             </h:panelGrid>
                         </rich:tooltip>
                     </h:panelGrid>
-                    <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
-                    <h:panelGrid columns="2" rendered="#{var.boolestadoconvenio}">
+                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
+                    <h:panelGrid  columns="2" rendered="#{var.boolestadoconvenio and Supervisor$Contrato.tipoContCon == 'Convenio'}">
                         <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}"
                                          >
                             <f:selectItems value="#{Supervisor$Contrato.estadoConvenioOption}" />     
