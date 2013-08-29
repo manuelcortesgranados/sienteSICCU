@@ -881,8 +881,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
      * This method is called when the session containing it is about to be
      * passivated. Typically, this occurs in a distributed servlet container
      * when the session is about to be transferred to a different container
-     * instance, after which the <code>activate()</code> method will be called
-     * to indicate that the transfer is complete.</p>
+     * instance, after which the
+     * <code>activate()</code> method will be called to indicate that the
+     * transfer is complete.</p>
      *
      * <p>
      * You may customize this method to release references to session data or
@@ -2476,6 +2477,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 NumberFormat money = NumberFormat.getCurrencyInstance(new Locale("es", "CO", "Traditional_WIN"));
 
                 String url = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DetalleObra.xhtml";
+                String urlnuevo = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/NuevoProyecto/datosBasicos.xhtml";
                 //String urlDocumento = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/DocumentoObra.xhtml";
                 String urlImages = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Supervisor/ImagenObra.xhtml";
                 String urlComentario = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() + "/Ciudadano/ParticipacionCiudadano.xhtml";
@@ -2657,6 +2659,12 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     descripcion.append("</a>");
                     descripcion.append("</div>");
                     descripcion.append("</p>");
+                } else if (obra.getTipoestadobra().getIntestadoobra() == 0) {
+                    descripcion.append("<p>");
+                    descripcion.append("<div class=\"columna\">");
+                    descripcion.append("<a class=\"imgaction button1\" href=\"").append(urlnuevo).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");
+                    descripcion.append("</a>");
+                    descripcion.append("</div>");
                 }
 
                 descripcion.append("</div>");
@@ -2694,7 +2702,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     @Override
     public void prerender() {
-
     }
 
     public void mostrarCantidadProyectos() {
