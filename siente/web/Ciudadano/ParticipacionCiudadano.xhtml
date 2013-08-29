@@ -105,23 +105,22 @@
             <h:panelGrid columns="2" rowClasses="rowtop"  >
                 <h:form id="frmparticiapcioncomentario">
                     <h:panelGrid columns="2">
-                        <h:panelGrid columns="1">
+                        <h:panelGrid columns="1" styleClass="ikont-table-aling-pasos">
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 1" />
                             <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.aseguresedeelegir}" />
                         </h:panelGrid>
-                        <h:panelGroup>
-                            <a4j:commandLink  styleClass="ikont-acl-seleccionqueja"  action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
-                            <a4j:commandLink  styleClass="ikont-acl-seleccionopine"  action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
+                        <h:panelGroup layout="block" styleClass="ikont-hpg-selecione-opinion">
                             <a4j:commandLink  styleClass="ikont-acl-seleccionfelicite" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
+                            <a4j:commandLink  styleClass="ikont-acl-seleccionopine"  action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
+                            <a4j:commandLink  styleClass="ikont-acl-seleccionqueja"  action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
                         </h:panelGroup>
-                        <a4j:region id="idregion_par">
-                            <h:panelGrid columns="2"  columnClasses="panelu, panelj" cellspacing="0" cellpadding="0" >
-                                <h:panelGrid id="panelopinion_par"  columns="1" styleClass="ikont-hpg-panelopinion_par"   cellpadding="0" cellspacing="0">
-                                    <h:outputText  styleClass="ikont-hot-nombretitulo" value="#{Ciudadano$PerfilCiudadano.nombretitulo}"></h:outputText>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion3" value="3" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}"></h:commandLink>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion2" value="2" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 2}"></h:commandLink>
-                                    <h:commandLink styleClass="ikont-hcl-intidtipoopinion1" value="1" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 1}"></h:commandLink>
-                                </h:panelGrid>
+                        <h:panelGrid columns="1" styleClass="ikont-table-aling-pasos">
+                            <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 2" />
+                            <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.ingresesu}. #{var.nota}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" styleClass="ikont-hpg-selecione-opinion">
+                            <a4j:commandLink  styleClass="ikont-acl-line-coment-ciudadano" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
+                            <a4j:region id="idregion_par">
                                 <h:panelGroup>
                                     <a4j:status id="idstatuscomentario2"/>
                                     <h:outputText  styleClass="ikont-hot-idcontarmensaje2"   id="idcontarmensaje2" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
@@ -130,11 +129,11 @@
                                         <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje2" status="idstatuscomentario2" />
                                     </h:inputTextarea>
                                 </h:panelGroup>
-                            </h:panelGrid>
-                        </a4j:region>
-                        <h:outputText  styleClass="ikont-hot-ingresesu" value="#{var.ingresesu}" ></h:outputText>
-                        <h:outputText  styleClass="ikont-hot-nota" value="#{var.nota}"></h:outputText><br/><br/>
-                        <h:outputText  styleClass="ikont-hot-paso2" value="#{var.paso} 2" />
+                            </a4j:region>
+                        </h:panelGrid>
+
+
+                        <h:outputText  styleClass="ikont-hot-paso2" value="#{var.paso} 3" />
                         <h:outputText  styleClass="ikont-hot-contenido" value="#{var.contenido}" />
                         <h:panelGrid  >
                             <h:panelGrid id="layoutImaCiu_par" columns="3"  columnClasses="panelizquierda,panelderecha">

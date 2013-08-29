@@ -3011,45 +3011,40 @@ css usuario modificacion
 /* Css creados para ciudadano cambiar....*/
 
 .ikont-acl-seleccionqueja {
-    background-image:url(../imgs/p_quejese.png);
-    width:85px;
-    height:25px;
-    display:block;
-    margin:3px;
-    background-position: 0px 0px;
-    float:right;
+    background-image: url(../imgs/tema_sprite.png);
+    width: 130px;
+    height: 105px;
+    display: block;
+    background-position: -300px 0px;
+    float: left;
 }
 .ikont-acl-seleccionqueja:hover {
-    background-position: 0px -25px;
+    background-position: -300px -321px;
 }
 
 
 .ikont-acl-seleccionopine {
-    background-image:url(../imgs/p_opine.png);
-    width:85px;
-    height:25px;
+    background-image:url(../imgs/tema_sprite.png);
+    width:130px;
+    height:105px;
     display:block;
-    margin:3px;
-    background-position: 0px 0px;
-    float:right;
+    background-position: -172px 0px;
+    float:left;
 }
 .ikont-acl-seleccionopine:hover {
-    background-position: 0px -25px;
+    background-position: -172px -214px;
 }
-
-
 
 .ikont-acl-seleccionfelicite {
-    background-image:url(../imgs/p_felicite.png);
-    width:85px;
-    height:25px;
-    display:block;
-    margin:3px;
-    background-position: 0px 0px;
-    float:right;
+    background-image: url(../imgs/tema_sprite.png);
+    width: 175px;
+    height: 105px;
+    display: block;
+    background-position: -0px 0px;
+    float: left;
 }
 .ikont-acl-seleccionfelicite:hover {
-    background-position: 0px -25px;
+    background-position: 0px -107px;
 }
 
 
@@ -3435,7 +3430,42 @@ css usuario modificacion
 }
 
 .ikont-hot-text-paso-participacion{
+    color: #5E5E5E;
+    font-family: open;
+    font-size: 0.8em;
+}
+
+.ikont-table-aling-pasos{
+    width: 200px;
+    text-align: right;
+}
+
+.ikont-hpg-selecione-opinion{
+    width: 600px;
+    float: left;
+}
+
+
+.ikont-hit-iacomentario2{
+    width: 370px!important;
+    height: 120px;
+    background: #FFF;
+    border: 1px solid #257500 !important;
+    margin-left: -35px;
+}
+
+.ikont-hot-idcontarmensaje2{
+    font-size: 0.8em;
     color: #257500;
     font-family: open;
-    font-weight: bolder;
+    margin-left: 60%;
+}
+
+.ikont-acl-line-coment-ciudadano{
+    background-image: url(../imgs/tema_sprite.png);
+    width: 75px;
+    height: 105px;
+    display: block;
+    background-position: -0px 0px;
+    float: left;
 }
