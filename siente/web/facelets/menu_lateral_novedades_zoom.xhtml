@@ -12,10 +12,13 @@
     <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}" >
         <hr  class="ikont-hr-separador-usuario" />
         <h:panelGrid rendered="true" columns="2">
-            <rich:column>
-                <h:graphicImage style="color: #999; border: 2px solid grey;-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 90px;width:67px; height: 67px; float: left;"  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
-                                <!--<h:graphicImage  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"  />-->
+            <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto!=null}">
+                <h:graphicImage style="-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 90px;width:90px; height: 90px; float: left; "  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
             </rich:column>
+            <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto==null}" >
+                <h:panelGroup styleClass="ikont-hpg-pgfotografia"   layout="block" id="pgfotografianueva">
+                </h:panelGroup>           
+            </rich:column> 
             <h:panelGroup>
                 <rich:column >
                     <h:outputText  styleClass="ikont-label-menu-estr-sub-titulo" id="label_login_usuario" value="#{SessionBeanCobra.usuarioObra.usuLogin} "/>
@@ -36,15 +39,15 @@
         <hr  class="ikont-hr-separador-usuario" />
         <br/>
         <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo ikont-espacio-sub-menu" value="-#{var.necesitasAyuda}"  immediate="true"
-                                   onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
+                       onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
         <br/>
         <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo ikont-espacio-sub-menu" value="-#{var.contactenos}" immediate="true"
-                      onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
+                       onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
         <br/>
         <br/>
     </h:panelGroup>
-        <br/>
-        <br/>
+    <br/>
+    <br/>
     <interkont:spacer  height="10"/>
     <h:panelGroup>
         <h:outputLabel styleClass="ikont-label-estructura-menu  ikont-label-menu ikont-espacio-sub-menu" value="Actividad Reciente"/>    
@@ -57,9 +60,9 @@
                 <h:panelGroup layout="block" styleClass="ikont-hpg-contentnovedad">
                     <h:outputText  styleClass="ikont-hot-textoinicial "   value="#{item.textoinicial}"/>
                     <a4j:commandLink style="color: green;" type="submit" value="#{item.nombreobra}"  
-                                      onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
+                                     onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/NuevoProyecto/datosBasicos.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra==0}"/>
                     <a4j:commandLink style="color: green;"  type="submit" value="#{item.nombreobra}"  
-                                      onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>                 
+                                     onclick="document.location.href = '#{facesContext.externalContext.requestContextPath}/Supervisor/DetalleObra.xhtml?id=#{item.codObra}';" rendered="#{item.intestadoobra!=0}"/>                 
                     <h:outputText   styleClass="ikont-hot-textofinal"   value=" #{item.textofinal}"/>
                     <interkont:spacer height="3"/>
                     <h:graphicImage  styleClass="ikont-hgi-textofinal"   value="/resources/imgs/line.png"   />
