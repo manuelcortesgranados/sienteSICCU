@@ -807,7 +807,8 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
      */
     public String regresar() {
         limpiarCiudadano();
-        return "volver";
+        
+        return null;
     }
 
     public void guardarcambioimagen() {

@@ -8,59 +8,66 @@
     xmlns:rich="http://richfaces.org/rich"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-    xmlns:m="http://code.google.com/p/gmaps4jsf/"  
-    >
+    xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
-    <rich:popupPanel  id="confirmarCiudadano" autosized="true" resizeable="false"  width="700" 
-                       styleClass="ikont-rpp-confirmarciudadano"  >
+    <rich:popupPanel id="confirmarCiudadano" autosized="true" resizeable="false"  width="700" 
+                      styleClass="ikont-rpp-confirmarciudadano">
         <f:facet name="header" >           
-            <h:panelGroup >
-                <h:outputText  styleClass="ikont-hot-confirmarciudadano"    value="Ciudadano"/>
+            <h:panelGroup>
+                <h:outputText styleClass="ikont-hot-confirmarciudadano" value="Ciudadano"/>
             </h:panelGroup>
-            <h:panelGroup >
+            
+            <h:panelGroup>
                 <h:panelGrid columns="2">
-                    <h:graphicImage  styleClass="ikont-hgi-imagotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png"  />
-                    <h:outputText  styleClass="ikont-hot-ciudadano"    value="Ciudadano" />
+                    <h:graphicImage  styleClass="ikont-hgi-imagotipo_siente"   url="/resources/imgs/modal/imagotipo_siente.png" />
+                    <h:outputText  styleClass="ikont-hot-ciudadano" value="Ciudadano" />
                 </h:panelGrid>
             </h:panelGroup>
-        </f:facet>       
+        </f:facet>
+        
         <f:facet name="controls">
             <h:form>
                 <h:panelGroup>
-                    <a4j:commandLink   styleClass="confirmarCiudadano closemodal"  
-                                     title="#{var.cerrar}" immediate="true" onclick="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
+                    <a4j:commandLink styleClass="confirmarCiudadano closemodal" title="#{var.cerrar}" immediate="true"
+                                     rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                     action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
+                                     oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
+                    
+                    <a4j:commandLink styleClass="confirmarCiudadano closemodal" title="#{var.cerrar}" immediate="true"
+                                     rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                     action="#{Ciudadano$PerfilCiudadano.regresar}" render="panel-grup-crear, gpLogPrinci"
+                                     oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;"/>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:panelGroup layout="block" styleClass="ikont-rp-confirmarciudadano"   >
+        
+        <h:panelGroup layout="block" styleClass="ikont-rp-confirmarciudadano">
             <h:form>
                 <h:panelGroup layout="block" styleClass="ikont-rp-pgguardarciudadano"   >
                     <center>                    
                         <h:panelGrid id="pgguardarCiudadano"  columnClasses="panelcenter" >
-
                             <h:panelGroup>
                                 <center>
-                                    <h:outputText  styleClass="ikont-hot-mensaje "   value="#{SessionBeanCobra.ciudadanoservice.mensaje}" />
+                                    <h:outputText styleClass="ikont-hot-mensaje " value="#{SessionBeanCobra.ciudadanoservice.mensaje}" />
                                 </center>
                             </h:panelGroup>
+                            
                             <h:panelGroup>
-                                <interkont:spacer width="120"/>
+                                <interkont:spacer width="120" />
+                                <a4j:commandButton id="BTaceptar" value="#{var.aceptar}"
+                                                   rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                                   render="panel-grup-crear, gpLogPrinci" action="#{Ciudadano$PerfilCiudadano.regresar}"
+                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false;" />
 
-
-                                <a4j:commandButton id="BTaceptar" value="#{var.aceptar}" rendered="#{SessionBeanCobra.ciudadanoservice.boolmensajeguardar}" render="panel-grup-crear" action="#{Ciudadano$PerfilCiudadano.regresar}">
-                                    <a4j:ajax event="complete" onbeforesubmit="#{rich:component('confirmarCiudadano')}.hide(); return false;" render="panel-grup-crear"/>
-                                </a4j:commandButton>
-
-                                <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}" rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
+                                <a4j:commandButton id="BTaceptarvalidar" value="#{var.aceptar}"
+                                                   rendered="#{!SessionBeanCobra.ciudadanoservice.boolmensajeguardar}"
                                                    action="#{Ciudadano$PerfilCiudadano.reiniciarMensaje}"
-                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide();"/>
-
+                                                   oncomplete="#{rich:component('confirmarCiudadano')}.hide(); return false" />
                             </h:panelGroup>
                         </h:panelGrid>
                     </center>
                 </h:panelGroup>
             </h:form>
         </h:panelGroup>
-
     </rich:popupPanel>
 </ui:composition>
