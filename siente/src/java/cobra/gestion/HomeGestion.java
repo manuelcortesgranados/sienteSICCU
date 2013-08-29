@@ -2503,7 +2503,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                         if (contratistas.size() == 1) {
                             if (contratistas.get(0).getStrnombre().length() > 25) {
                                 list_contratistas += "<label class=\"tool\">";
-                                list_contratistas += "Ver contratistas";
+                                list_contratistas += contratistas.get(0).getStrnombre().substring(0, 22);
+                                list_contratistas += "...";
                                 list_contratistas += "<div>";
                                 list_contratistas += "<p>";
                                 list_contratistas += contratistas.get(0).getStrnombre();
@@ -2534,7 +2535,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
                 if (obra.getTercero().getStrnombrecompleto().length() > 25) {
                     list_contratante += "<label class=\"tool\">";
-                    list_contratante += "Ver contratante";
+                    list_contratante += obra.getTercero().getStrnombrecompleto().substring(0, 22);
+                    list_contratante += "...";
                     list_contratante += "<div>";
                     list_contratante += "<p>";
                     list_contratante += obra.getTercero().getStrnombrecompleto();
@@ -2576,6 +2578,13 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                 descripcion.append("<div class=\"tabla content-left\">");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla2\"> VALOR GLOBAL DEL PROYECTO?</div>");
+                descripcion.append("<div class=\"columna \"> <label class=\"textvalla7 tool\">OBJETO");
+                descripcion.append("<div>");
+                descripcion.append("<p>");
+                descripcion.append(obra.getStrobjetoobra().replaceAll("[^a-zA-Z0-9á-úÁ-Ú\\-,.;$%:]+", " "));
+                descripcion.append("</p>");
+                descripcion.append("</div>");
+                descripcion.append("</label></div>");
                 descripcion.append("</p>");
                 descripcion.append("<p>");
                 descripcion.append("<div class=\"columna textvalla5\">");

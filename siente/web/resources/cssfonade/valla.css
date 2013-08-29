@@ -83,6 +83,13 @@
     font-family: "open";
 }
 
+.textvalla7{
+    color: #257500;
+    font-weight: bolder!important;
+    font-family: open!important;
+    margin-left: 20px;    
+}
+
 .content-left{
     width: 310px!important;
     float: left;
