@@ -59,12 +59,12 @@
                                       });
                                       $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
                                               " a $ " + $("#slider-range").slider("values", 1));
-                                  });
+});
 
                     </script>
 
                     <h:panelGrid>           
-                        <h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>  
+                        <h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>
                         <h:inputHidden id="numero1"   value="#{HomeGestion.filtro.cuantiaini}"  /> 
                         <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"  /> 
                     </h:panelGrid>
@@ -88,7 +88,7 @@
                             });
                             $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
                                     "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
-                        });
+                        });    
                     </script>
 
                     <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
