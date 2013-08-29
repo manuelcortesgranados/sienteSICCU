@@ -3144,48 +3144,54 @@ css usuario modificacion
 
 
 .ikont-hcl-llenarlistaFelicitacion {
-    width: 80px;
+    width: 90px;
     height:85px;
-    background-image:url(../imgs/p_felicitar.png);
-    background-position: 0px 0px;
+    background-image:url(../imgs/caras_sprite.png);
+    background-position: -5px 0px;
     display: block;
+    margin: 0px auto;
 }
-.ikont-hcl-llenarlistaFelicitacion:hover {
-    background-position: 0px -85px;
+.ikont-hcl-llenarlistaFelicitacion:hover{
+    background-position: -5px -90px;
 }
 .ikont-hcl-llenarlistaOpinion {
-    width: 80px;
+    width: 90px;
     height:85px;
-    background-image:url(../imgs/p_opinar.png);
-    background-position: 0px 0px;
+    background-image:url(../imgs/caras_sprite.png);
+    background-position: -100px 0px;
     display: block;
+    margin: 0px auto;
 }
-.ikont-hcl-llenarlistaOpinion:hover {
-    background-position: 0px -85px;
+
+.ikont-hcl-llenarlistaOpinion:hover{
+    background-position: -100px -90px;
 }
 
 .ikont-hcl-queja {
-    width: 80px;
+    width: 90px;
     height:85px;
-    background-image:url(../imgs/p_quejarse.png);
-    background-position: 0px 0px;
+    background-image:url(../imgs/caras_sprite.png);
+    background-position: -195px 0px;
     display: block;
+    margin: 0px auto;
 }
+
 .ikont-hcl-queja:hover {
-    background-position: 0px -85px;
+    background-position: -195px -90px;
 }
 
 .ikont-hcl-llenarlistaTodos {
-    width: 80px;
+    width: 90px;
     height:85px;
-    background-image:url(../imgs/p_todos.png);
-    background-position: 0px 0px;
+    background-image:url(../imgs/caras_sprite.png);
+    background-position: -290px 0px;
     display: block;
-}
-.ikont-hcl-llenarlistaTodos:hover {
-    background-position: 0px -85px;
+    margin: 0px auto;
 }
 
+.ikont-hcl-llenarlistaTodos:hover {
+    background-position: -290px -90px;
+}
 
 .ikont-hcl-abririmagen{
     background-image:url(../imgs/p_imagen.png);
@@ -3380,4 +3386,56 @@ css usuario modificacion
 .panel_valor{
     width: 200px; 
     size: 2px;
+}
+
+
+.ikont-div-headercontent-participacion{
+    border: 0px none transparent;
+    font-style: inherit;
+    text-align: center;
+    color: #257500;
+}
+
+.ikont-hot-value-participacion{
+    color: #257500;
+    font-size: 2em;
+    font-family: open;
+}
+
+.ikont-hot-text-participacion{
+    color: #257500;
+    font-size: 0.8em;
+    font-family: open;
+}
+
+.ikont-hot-textver-participacion{
+    color: #257500;
+    font-size: 0.7em;
+    font-family: open;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ikont-ppg-separator{
+    width: 100%;
+    height: 20px;
+}
+
+.ikont-hot-contentseparator{
+    width: 200px;
+    height: 10px;
+    border-bottom: solid 1px #C0C0C0;
+    margin: 0px auto;
+}
+
+.ikont-hot-paso-participacion{
+    color: #257500;
+    font-family: open;
+    font-weight: bolder;
+}
+
+.ikont-hot-text-paso-participacion{
+    color: #257500;
+    font-family: open;
+    font-weight: bolder;
 }
