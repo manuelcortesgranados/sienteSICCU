@@ -2075,7 +2075,7 @@ input[type="text"], input[type="password"], select{
     position: relative;
     left: 34px;
     top: -87px;
-    
+
 }
 
 .ikont-style-actividades-recientes{
@@ -3480,16 +3480,16 @@ css usuario modificacion
 .ikont-img-posicion-actividad-reciente{
     background-image: url(../imgs/icons_subpanel_actividad_reciente.png);
     background-repeat: no-repeat;
-   width: 38px;
+    width: 38px;
     height: 34px;
     display: block;
 }
 
 .ikont-posicion-ayuda{
-  background-position: 1px -5px;  
+    background-position: 1px -5px;  
 }
 .ikont-posicion-contactenos{
-  background-position: 1px -33px;  
+    background-position: 1px -33px;  
 }
 .kont_ayuda{
     position: relative;
@@ -3498,4 +3498,32 @@ css usuario modificacion
 .kont_contactenos{
     position: relative;
     top: -66px;
+}
+
+.ikont-po-img-posicion-borrador-finalizar{
+    background-image: url(../imgs/btn_borrador_finalizar.png);
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 34px;
+    display: block;
+}
+
+.ikont-po-img-borrador{
+    background-position: -35px 1px; 
+}
+.ikont-po-img-finalizar{
+    background-position: 1px 1px;
+
+}
+.ikont-po-img-borrador:hover{
+    background-position: -35px -27px;   
+
+}
+.ikont-po-img-finalizar:hover{
+    background-position: 1px -27px;    
+}
+
+.ikont-hpg-botones{
+    right: 124px;
+    position: absolute;    
 }
