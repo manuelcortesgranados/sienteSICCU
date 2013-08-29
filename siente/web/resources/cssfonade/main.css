@@ -3476,3 +3476,17 @@ css usuario modificacion
     background-position: -0px 0px;
     float: left;
 }
+.ikont-img-posicion-actividad-reciente{
+    background-image: url(../imgs/icons_subpanel_actividad_reciente.png);
+    background-repeat: no-repeat;
+   width: 38px;
+    height: 34px;
+    display: block;
+}
+
+.ikont-posicion-ayuda{
+  background-position: 1px -5px;  
+}
+.ikont-posicion-contactenos{
+  background-position: 1px -33px;  
+}
