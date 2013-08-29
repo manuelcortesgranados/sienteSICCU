@@ -367,6 +367,7 @@ a.closemodal{
     background-repeat:no-repeat;
     background-position: 0px 0px;    
     margin-right: 5px;
+    top: -8px;
 }
 
 .ikont-a-ch{
@@ -377,6 +378,7 @@ a.closemodal{
     background-image: url(../imgs/cobra_Logo_ch.png);
     background-repeat:no-repeat;
     background-position: 0px 0px;
+    top: -8px;
 }
 
 .templatetablafooter{
@@ -1775,6 +1777,8 @@ input[type="text"], input[type="password"], select{
     border-spacing: 4px;
     margin-left: 40px;
     margin-top: 7px;
+    position: relative !important;
+    top: -69px!important;
 }
 .ikont-label-estructura-menu{   
     position: relative;
@@ -3342,14 +3346,17 @@ css usuario modificacion
 .input_filtro_cliente{
     position: relative !important; 
     top: -25px !important;
+    font-size: 17px!important;
 }
 .input_filtro_contratista{
     position: relative !important; 
     top: -50px !important;
+    font-size: 17px!important;
 }
 .input_filtro_interventor{
     position: relative !important; 
     top: -75px !important;
+    font-size: 17px!important;
 }
 .input_filtro_gerente{
     position: relative !important; 
