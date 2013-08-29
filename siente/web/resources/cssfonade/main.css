@@ -1736,6 +1736,7 @@ input[type="text"], input[type="password"], select{
     top: 130px;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
+    box-shadow: 5px 2px 5px #999;
 }
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
