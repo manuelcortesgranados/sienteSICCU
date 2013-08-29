@@ -38,7 +38,7 @@
                     </h:selectOneMenu>
                 </h:panelGroup>
 
-                <h:panelGrid columns="1" style="width: 200px; size: 2px;" >
+                <h:panelGrid columns="1" styleClass="panel_valor" >
                     <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
 
                     <script type="text/javascript">
@@ -68,14 +68,7 @@
                         <h:inputHidden id="numero1"   value="#{HomeGestion.filtro.cuantiaini}"  /> 
                         <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"  /> 
                     </h:panelGrid>
-                    <h:selectOneMenu  id="estadoObra" value="#{HomeGestion.filtro.intestadoobra}" rendered="false">
-                        <f:selectItem itemLabel="Todos" itemValue="-1"/>
-                        <f:selectItems value="#{HomeGestion.tiposEstadoObra}"/>
-                        <a4j:ajax event="change" render="porcentajefil, avancefil"/>
-                    </h:selectOneMenu>
-
-
-                    <div id="slider-range"></div>
+                    <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
                     <br/>
 
                     <script>
@@ -98,12 +91,12 @@
                         });
                     </script>
 
-                    <h:inputText id="avance"   styleClass="input_filtro_2" style="font-size: 19px !important;" disabled="true"/> 
+                    <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
 
                     <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
                     <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
 
-                    <div id="slider-range-avance"></div>
+                    <div id="slider-range-avance" style="position: relative !important; top: -16px !important;"></div>
 
 
 
@@ -119,7 +112,7 @@
             <h:graphicImage styleClass="imagen_punta2" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"  >
                 <h:panelGroup>
-                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">                       
+                    <h:selectOneMenu value="#{HomeGestion.inttipoorigen}" rendered="false" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="input_filtro_select">                       
                         <f:selectItem itemValue="0" itemLabel="#{var.zonaespec}"/>
                         <f:selectItem itemValue="1" itemLabel="#{var.localidades}"/>
                         <a4j:ajax event="change" execute="@this" listener="#{HomeGestion.configurarzonalocali}" render="tipoorigen"/>
@@ -134,13 +127,14 @@
                             </h:selectOneMenu>
                         </h:panelGrid>
                         <h:panelGrid id="filtrodeptos"  columns="1" rendered="#{HomeGestion.inttipoorigen == 1}" >
-                            <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="iinput_filtro_select"
+                            <h:selectOneMenu  id="depto" value="#{HomeGestion.filtro.strcoddepto}" disabled="#{var.habilitarDepartamentoEjecutaraProyecto}"  styleClass="combos_ubicacion"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen == 4}">
                                 <f:selectItems value="#{HomeGestion.departamentos}"/>
                                 <a4j:ajax event="change" listener="#{HomeGestion.cargarMunicipios}" execute="@this"
                                           render="municipios"/>
                             </h:selectOneMenu>
-                            <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="input_filtro"
+                            <div style="width: 20px;height:10px;"></div>
+                            <h:selectOneMenu  id="municipios" value="#{HomeGestion.filtro.strmunicipio}"  styleClass="combos_ubicacion"
                                               rendered="#{HomeGestion.tipoOrigenUsuario.intidtipoorigen != 1}">
                                 <f:selectItems value="#{HomeGestion.municipios}" />
                             </h:selectOneMenu>
@@ -156,23 +150,22 @@
         <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
             <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
-                <h:inputText id="txtPalabraClave1" value="#{HomeGestion.filtro.strentidad}"
-                             onclick="this.value = '';" size="35" styleClass="input_filtro">
+                <h:inputText id="txtPalabraClave1" value="#{HomeGestion.filtro.strentidad}" 
+                             onclick="this.value = '';" size="35" styleClass="input_filtro input_filtro_cliente">
                     <rich:placeholder id="placeHolderCliente" value="Cliente" />
                 </h:inputText>
-
                 <h:inputText id="txtPalabraClave2" value="#{HomeGestion.filtro.strcontratista}"
-                             onclick="this.value = '';" size="35" styleClass="input_filtro">
+                             onclick="this.value = '';" size="35" styleClass="input_filtro input_filtro_contratista" >
                     <rich:placeholder id="placeHolderContratista" value="Contratista" />
                 </h:inputText>
 
                 <h:inputText id="txtPalabraClave3" size="35"
-                             onclick="this.value = '';" styleClass="input_filtro" >
+                             onclick="this.value = '';" styleClass="input_filtro input_filtro_interventor"  >
                     <rich:placeholder id="placeHolderInterventor" value="Interventor" />
                 </h:inputText>
 
                 <h:inputText id="txtPalabraClave4" size="35"
-                             onclick="this.value = '';" styleClass="input_filtro" >
+                             onclick="this.value = '';" styleClass="input_filtro input_filtro_gerente" >
                     <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
                 </h:inputText>
             </h:panelGrid>

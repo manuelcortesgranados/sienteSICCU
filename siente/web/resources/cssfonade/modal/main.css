@@ -750,7 +750,11 @@ input.buscador_button {
     border-bottom: #C1D1E7 thin solid;
     background-position:center left;
 }
-
+.header_content_inicio{
+    width: 300px !important; 
+    bottom: 50px; 
+    float: none;
+}
 #header_content .ubicacion {
     background: url(../imgs/bt_ubicacion.png) no-repeat;
     width:auto;

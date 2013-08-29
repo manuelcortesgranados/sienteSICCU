@@ -53,7 +53,7 @@
     </ui:define>   
     <ui:define name="body">      
         <h:form id="form_gestion" prependId="false" >
-            <table  border="0" cellspacing="0" cellpadding="0">
+            <table>
                 <tr>
                     <td>
                         <blink>
@@ -63,7 +63,7 @@
                 </tr>
             </table>
 
-            <center><h:panelGrid styleClass="panelzoomhome1" width="920px">
+            <center><h:panelGrid styleClass="panelzoomhome1">
                     <br/><br/>
                     <rich:column>
                         <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.bienvenidazoom}"/></center><br/>      
@@ -73,7 +73,7 @@
                     </rich:column> 
                    <br/> 
                 </h:panelGrid></center>
-            <center><div id="header_content"  style="width: 300px !important; bottom: 50px; float: none;" /> </center>
+            <center><div id="header_content header_content_inicio"/> </center>
             <br/>
             <center><h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom}"/>     
                 <h:panelGrid>
@@ -105,7 +105,7 @@
                     </rich:column>
                 </h:panelGrid> </center>
             <h:panelGroup><center>
-                    <h:graphicImage width="600px" style=" position:  relative;" value="/resources/imgs/flecha_home1.png"/>
+                    <h:graphicImage styleClass="imagen_flecha_home1" value="/resources/imgs/flecha_home1.png"/>
                 </center></h:panelGroup>
 
             <center><a4j:commandLink styleClass="inputlinkhomevermas" id="vermas" value="Ver mas"/></center>

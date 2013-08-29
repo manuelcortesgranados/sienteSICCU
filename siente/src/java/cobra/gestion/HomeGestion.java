@@ -723,7 +723,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public final void iniciarHome() {
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
-
+         setInttipoorigen(1);
         if (filtro.isIsciu()) {
             filtro.setIntestadoobra(1);
         } else if (getSessionBeanCobra().getUsuarioObra().getUsuLogin().compareTo("ciudadano") != 0) {
@@ -806,6 +806,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public void iniciarFiltroAvanzado() {
         //filtro.setPalabraClave(new String());
+        List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+        llenarComboMunicipio(listaMunicipios);
         List<Tipoestadobra> listaEstadosObras = getSessionBeanCobra().getCobraService().encontrarEstadosObras();
 
         if (listaEstadosObras != null) {
@@ -828,7 +830,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             String codigoLocalidad = getSessionBeanCobra().getUsuarioObra().getTercero().getLocalidadByStrcodigolocalidad().getStrcodigolocalidad();
             depto = getSessionBeanCobra().getCobraService().encontrarLocalidadPorId(codigoLocalidad);
             filtro.setStrcoddepto(depto.getStrcodigolocalidad());
-            List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
+            //List<Localidad> listaMunicipios = getSessionBeanCobra().getCobraService().encontrarMunicipios(depto.getStrcodigolocalidad());
             llenarComboMunicipio(listaMunicipios);
         }
 
@@ -1065,7 +1067,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void llenarComboMunicipio(List listaMunicipios) {
         SelectItem[] TempMunicipios = new SelectItem[listaMunicipios.size() + 1];
 
-        TempMunicipios[0] = new SelectItem(0, bundle.getString("todas"));
+        TempMunicipios[0] = new SelectItem(0, "Municipio");
 
         int j = 1, k = 1;
         for (Iterator i = listaMunicipios.iterator(); i.hasNext();) {
@@ -1079,7 +1081,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
         }
         municipios = new SelectItem[j];
-        municipios[0] = new SelectItem(0, bundle.getString("todas"));
+        municipios[0] = new SelectItem(0, "Municipio");
         while (k < j) {
             municipios[k] = TempMunicipios[k];
             k++;
@@ -1112,7 +1114,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void llenarComboDeptos(List deptos) {
         SelectItem[] TempDeptos = new SelectItem[deptos.size() + 1];
 
-        TempDeptos[0] = new SelectItem(0, bundle.getString("todas"));
+        TempDeptos[0] = new SelectItem(0, "Departamento");
 
         int j = 1, k = 1;
         for (Iterator i = deptos.iterator(); i.hasNext();) {
@@ -1126,7 +1128,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
         }
         departamentos = new SelectItem[j];
-        departamentos[0] = new SelectItem(0, bundle.getString("todas"));
+        departamentos[0] = new SelectItem(0, "Departamento");
         while (k < j) {
             departamentos[k] = TempDeptos[k];
             k++;
@@ -1273,7 +1275,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         tiposProyectos = new SelectItem[listTiposProyectos.size() + 1];
 
         int j = 0;
-        SelectItem opt = new SelectItem(0, "Todos");
+        SelectItem opt = new SelectItem(0, "Tipos de Proyecto");
         tiposProyectos[j] = opt;
         j++;
         for (Iterator i = listTiposProyectos.iterator(); i.hasNext();) {
@@ -1290,7 +1292,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void llenarComboSubTiposProyecto(List listSubTiposProyectos) {
         SelectItem[] TempSubTipoProyecto = new SelectItem[listSubTiposProyectos.size() + 1];
 
-        TempSubTipoProyecto[0] = new SelectItem(0, bundle.getString("todos"));
+        TempSubTipoProyecto[0] = new SelectItem(0, "Subtipos de Proyecto");
 
         int j = 1, k = 1;
         for (Iterator i = listSubTiposProyectos.iterator(); i.hasNext();) {
@@ -1304,7 +1306,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             }
         }
         subTiposProyecto = new SelectItem[j];
-        subTiposProyecto[0] = new SelectItem(0, bundle.getString("todos"));
+        subTiposProyecto[0] = new SelectItem(0, "Subtipos de Proyecto");
         while (k < j) {
             subTiposProyecto[k] = TempSubTipoProyecto[k];
             k++;
