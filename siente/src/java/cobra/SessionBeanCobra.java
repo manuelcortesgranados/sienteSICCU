@@ -106,12 +106,11 @@ public class SessionBeanCobra implements Serializable {
         if (getUsuarioService().getUsuarioObra().getUsuId() == usuario.getUsuId()) {
             return true;
         } else {
-           getHomeGestion().iniciarHome();
             return false;
         }
 
     } 
-    
+   
     public HomeGestion getHomeGestion (){
     return (HomeGestion) FacesUtils.getManagedBean("HomeGestion");
     

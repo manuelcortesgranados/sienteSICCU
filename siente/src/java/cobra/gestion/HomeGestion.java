@@ -2661,7 +2661,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
                     descripcion.append("</a>");
                     descripcion.append("</div>");
                     descripcion.append("</p>");
-                } else if (obra.getTipoestadobra().getIntestadoobra() == 0) {
+                } else if (obra.getTipoestadobra().getIntestadoobra() == 0 && !filtro.isIsciu()) {
                     descripcion.append("<p>");
                     descripcion.append("<div class=\"columna\">");
                     descripcion.append("<a class=\"imgaction button1\" href=\"").append(urlnuevo).append("?id=").append(obra.getIntcodigoobra()).append("\" value=\"Información\" >");

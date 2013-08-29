@@ -18,23 +18,22 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * <p>Page bean that corresponds to a similarly named JSP page.  This
- * class contains component definitions (and initialization code) for
- * all components that you have defined on this page, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>Page bean that corresponds to a similarly named JSP page. This class
+ * contains component definitions (and initialization code) for all components
+ * that you have defined on this page, as well as lifecycle methods and event
+ * handlers where you may add behavior to respond to incoming events.</p>
  *
  * @author Christian
  */
-public class Login implements Serializable{
+public class Login implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     /**
-     * <p>Automatically managed component initialization.  <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
+     * <p>Automatically managed component initialization.
+     * <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
      */
-
     private void _init() throws Exception {
     }
 
@@ -43,11 +42,8 @@ public class Login implements Serializable{
      * <p>Construct a new Page bean instance.</p>
      */
     public Login() {
-       
-        
     }
 
-    
     /**
      * <p>Return a reference to the scoped data bean.</p>
      *
@@ -105,24 +101,30 @@ public class Login implements Serializable{
                         respuesta = getSessionBeanCobra().getModulos().get(0).getStraction();
                     } else {
                         respuesta = "home";
+                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        System.out.println("ingreso al home");
                     }
 
                     if (verificarGrupo(getSessionBeanCobra().getUsuarioObra())) {
-                        getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"+
-                                getSessionBeanCobra().getBundle().getString("versioncobra")+"_Ciudadano(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
+                        getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"
+                                + getSessionBeanCobra().getBundle().getString("versioncobra") + "_Ciudadano(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
                         getSessionBeanCobra().getCobraService().setAltomapa(getSessionBeanCobra().getBundle().getString("altomapaciudadano"));
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Herramientas");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
                         getSessionBeanCobra().setLogueado(true);
+                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        System.out.println("ingreso al ciudadano");
                     } else {
-                        getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_"+getSessionBeanCobra().getBundle().getString("versioncobra")+"(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
+                        getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_" + getSessionBeanCobra().getBundle().getString("versioncobra") + "(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
                         getSessionBeanCobra().getCobraService().setAltomapa(getSessionBeanCobra().getBundle().getString("altomapainterventor"));
                         getSessionBeanCobra().getCobraService().setHeaderNombre("Inicio");
                         getSessionBeanCobra().getCobraService().setHeaderStyle("headertool");
                         getSessionBeanCobra().getCobraService().setCiu(false);
                         getSessionBeanCobra().setLogueado(true);
+                        getSessionBeanCobra().getHomeGestion().iniciarHome();
+                        System.out.println("ingreso como usuario");
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {
@@ -151,4 +153,3 @@ public class Login implements Serializable{
         return enviar_action();
     }
 }
-
