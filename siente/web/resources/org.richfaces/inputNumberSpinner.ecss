@@ -27,14 +27,10 @@
     display: inline-block;
     font-size: 1px;
     white-space: nowrap;
-    padding-left: 3px;
 }
 
 input.rf-insp-inp[type="text"] {
-    background-color: '#{richSkin.controlBackgroundColor}';
-    background-image: url("#{resource['org.richfaces.images:inputBackgroundImage.png']}");
-    background-position: 1px 1px;
-    background-repeat: no-repeat;
+    background-color: '#{richSkin.backgrouninput}';
     border: 0px;
     color: '#{richSkin.generalTextColor}';
     font-family: '#{richSkin.generalFamilyFont}';
@@ -42,16 +38,11 @@ input.rf-insp-inp[type="text"] {
     margin: 0px;
     padding: 0px;
     vertical-align: top;
+    width: '#{richSkin.widthInputTextNumberSpinner}';
 }
 
 .rf-insp-btns {
     background-color: '#{richSkin.headerBackgroundColor}';
-    background-image: "url(#{resource['org.richfaces.images:buttonBackgroundImage.png']})";
-    background-position: top left;
-    background-repeat: repeat-x;
-    border-left-width: 1px;
-    border-left-style: solid;
-    border-left-color: '#{richSkin.panelBorderColor}';
     display: inline-block;
     vertical-align: top;
 }
@@ -60,7 +51,7 @@ input.rf-insp-inp[type="text"] {
     background-position: 50% 40%;
     background-repeat: no-repeat;
     display: block;
-    height: 12px;
+    height: '#{richSkin.heightControlNumberSpinner}';
     width: 15px;
 }
 
