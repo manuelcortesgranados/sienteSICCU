@@ -39,18 +39,20 @@
             </h:panelGroup>
         </h:panelGroup>
         <h:panelGroup rendered="#{var.permisonuevodiseno}">
-           
+
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-            
+
         </h:panelGroup> 
-         <center>
-            <table><tr><td>
-                        <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.activarvistamapa}" />
-                    </td><td width="20px"></td> <td>
-                        <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.filtrarObrasPorEstado}"   >
-                            <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
-                        </h:commandLink>
-                    </td></tr></table>
+        <center>
+            <h:panelGroup rendered="false">
+                <table><tr><td>
+                            <h:commandLink styleClass="ikont-hcl-activarmapabutton" action="#{HomeGestion.activarvistamapa}" />
+                        </td><td width="20px"></td> <td>
+                            <h:commandLink styleClass="ikont-acl-activarlista" action="#{HomeGestion.filtrarObrasPorEstado}"   >
+                                <a4j:param value="3" assignTo="#{HomeGestion.filtro.intvista}"/>
+                            </h:commandLink>
+                        </td></tr></table>
+            </h:panelGroup>
         </center>
     </ui:define>   
     <ui:define name="body">      
@@ -73,7 +75,7 @@
                     <rich:column>
                         <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.bienvenidazoomtexto}"/></center> 
                     </rich:column> 
-                   <br/> 
+                    <br/> 
                 </h:panelGrid></center>
             <center><div id="header_content header_content_inicio"/> </center>
             <br/>

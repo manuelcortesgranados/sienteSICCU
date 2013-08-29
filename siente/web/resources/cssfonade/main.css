@@ -2074,7 +2074,8 @@ input[type="text"], input[type="password"], select{
     width: 162px;
     position: relative;
     left: 34px;
-    top: -4px;
+    top: -87px;
+    
 }
 
 .ikont-style-actividades-recientes{
@@ -3317,7 +3318,7 @@ css usuario modificacion
     background-position: initial !important;
     background-color: #F2F2F2 !important;
     background-image: none !important;
-    width: 265px !important;
+    width: 300px !important;
     height: 34px !important;
     padding-left: 3px !important;
 }
@@ -3489,4 +3490,12 @@ css usuario modificacion
 }
 .ikont-posicion-contactenos{
   background-position: 1px -33px;  
+}
+.kont_ayuda{
+    position: relative;
+    top: -79px;
+}
+.kont_contactenos{
+    position: relative;
+    top: -66px;
 }

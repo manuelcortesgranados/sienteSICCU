@@ -13,7 +13,7 @@
 
     <h:panelGroup rendered="#{!SessionBeanCobra.logueadodesdemapa}" >
         <hr  class="ikont-hr-separador-usuario" />
-        <h:panelGrid rendered="true" columns="2">
+        <h:panelGrid rendered="true" columns="2"  style="position: relative; top: -78px;">
             <rich:column rendered="#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto!=null}">
                 <h:graphicImage style="-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 90px;width:90px; height: 90px; float: left; "  styleClass="ikont-hgi-strfoto " url="#{var.ipserver}#{var.versioncobra}#{SessionBeanCobra.ciudadanoservice.usuariomostrar.tercero.strfoto}"/>           
             </rich:column>
@@ -42,14 +42,14 @@
        
         <h:panelGrid columns="2">
             
-            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda"   immediate="true"
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-ayuda kont_ayuda"   immediate="true"
                            onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
-            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo " value="-#{var.necesitasAyuda}"  immediate="true"
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo kont_ayuda" value="-#{var.necesitasAyuda}"  immediate="true"
                            onclick="window.open(document.location.href = '#{facesContext.externalContext.requestContextPath}/ayuda/manual.xhtml', '_blank');"/>
            
-            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos" immediate="true"
+            <h:commandLink styleClass="ikont-img-posicion-actividad-reciente ikont-posicion-contactenos kont_contactenos" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
-            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo" value="-#{var.contactenos}" immediate="true"
+            <h:commandLink styleClass="ikont-label-menu-estr-sub-titulo kont_contactenos" value="-#{var.contactenos}" immediate="true"
                            onclick="window.open(document.location.href = '#{var.linksoporte}', '_blank');" />
             <br/>
             <br/>
