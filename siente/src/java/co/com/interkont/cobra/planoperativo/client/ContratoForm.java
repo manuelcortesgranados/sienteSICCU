@@ -125,6 +125,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     private int idtempRubros;
     boolean fechaSusError;
     boolean fechaActaError;
+    Date fechaContrato;
 
     public ContratoForm() {
     }
@@ -148,6 +149,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.contrato = actividadobraContratoEditar.getContrato();
         this.actividadObraPadre = actividadObraPadre;
         this.editar = true;
+        fechaContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
         CargarFormularioEditar();
@@ -360,9 +362,11 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     propes.startDateTime().setValue(actividadObraEditar.getChildren().get(0), fechaSuscripcionContrato.getValue());
                     actividadObraEditar.getChildren().get(0).setStartDateTime(fechaSuscripcionContrato.getValue());
                     modificarFechaFinConDuracion(actividadObraEditar.getChildren().get(0), actividadObraEditar.getChildren().get(0).getStartDateTime());
-                
-                
-                    
+
+                    service.setLog("en contrato carpeta", null);
+                    odifi(actividadObraEditar.getChildren().get(2));
+                    service.setLog("despues de carpeta", null);
+
                 }
             } else {
                 fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
@@ -374,23 +378,49 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void modificarFechaFinConDuracion(ActividadobraDTO actividad, Date fechaInicial) {
+        service.setLog("en calc duracion tre", null);
         Date fechaSuscripcionCopi = CalendarUtil.copyDate(actividad.getStartDateTime());
         actividad.setEndDateTime(fechaSuscripcionCopi);
         CalendarUtil.addDaysToDate(actividad.getEndDateTime(), actividad.getDuration());
     }
-    
-    
-    public void calcularDiferenciaFechas(Date fechaContratoAnterior,Date fechaContratoActual,ActividadobraDTO actividadModificar){
-        if(fechaContratoActual.compareTo(fechaContratoAnterior)>0){
-         int duracionCambio=CalendarUtil.getDaysBetween(fechaContratoAnterior, fechaContratoActual);
-         CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
-         modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
-        }else{
-         int duracionCambio=CalendarUtil.getDaysBetween(fechaContratoActual,fechaContratoAnterior);
-         CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
-         modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
+
+//    public void calcularDiferenciaFechas(Date fechaContratoAnterior, Date fechaContratoActual, ActividadobraDTO actividadModificar) {
+//        if (fechaContratoActual.compareTo(fechaContratoAnterior) > 0) {
+//            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoAnterior, fechaContratoActual);
+//            service.setLog("en calc duracion" + duracionCambio, null);
+//            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
+//            service.setLog("en calc duracion fecha ini" + actividadModificar.getStartDateTime(), null);
+//            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
+//        } else {
+//            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoActual, fechaContratoAnterior);
+//            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
+//            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
+//        }
+//    }
+    public void odifi(ActividadobraDTO act) {
+        if (!act.getChildren().isEmpty()) {
+            for (ActividadobraDTO actiHija : act.getChildren()) {
+                /*verifico el sentido en que tengo que hacer el movimiento de las
+                 * actividades si necesito aumentar la fecha de inicio o disminuirla*/
+                if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
+                    int duracion = CalendarUtil.getDaysBetween(fechaContrato, actiHija.getStartDateTime());
+                    Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                    CalendarUtil.addDaysToDate(fechaI, duracion);
+                    
+                    Date asigFin=CalendarUtil.copyDate(fechaI);
+                    actiHija.setEndDateTime(asigFin);
+                    
+                    propes.startDateTime().setValue(actiHija, fechaI);
+                  
+                    Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+                    CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
+                    propes.endDateTime().setValue(actiHija, dateFin);
+                }
+            }
         }
-       }
+
+
+    }
 
     public boolean validarCambiofechaActaContrato() {
         if (contrato.getDatefechaactaini().compareTo(fechaSuscripcionActaInicio.getValue()) != 0) {
@@ -537,7 +567,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     public void crearTareaContrato() {
         actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
-        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), contrato.getDatefechaini(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 3, false, contrato);
+        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 3, false, contrato);
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
@@ -545,23 +575,23 @@ public class ContratoForm implements IsWidget, EntryPoint {
         ActividadobraDTO hitoFechaSuscripcionActa = new ActividadobraDTO("Suscripcion acta de inicio", fechaSuscripcionActaInicio.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
         lstHijos.add(hitoFechaSuscripcionActa);
 
-        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO precontractual = new ActividadobraDTO("Precontractual", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(precontractual);
 
         List<ActividadobraDTO> lstHijosPrecontra = new ArrayList<ActividadobraDTO>();
-        ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 4, true);
+        ActividadobraDTO revTecnica = new ActividadobraDTO("Revisión técnica de documentos", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 4, true);
         lstHijosPrecontra.add(revTecnica);
-        ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", contrato.getDatefechaini(), 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO elaboPliegos = new ActividadobraDTO("Elaboración de pliegos de condiciones", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.LEAF, 4, true);
         lstHijosPrecontra.add(elaboPliegos);
-        ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", contrato.getDatefechaini(), 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO evaPropuestas = new ActividadobraDTO("Evaluación de propuestas", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.LEAF, 4, true);
         lstHijosPrecontra.add(evaPropuestas);
-        ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", contrato.getDatefechaini(), 1, 0, TaskType.LEAF, 4, true);
+        ActividadobraDTO elaContrato = new ActividadobraDTO("Elaboración de contratos", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.LEAF, 4, true);
         lstHijosPrecontra.add(elaContrato);
 
-        ActividadobraDTO contractua = new ActividadobraDTO("Contractual", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO contractua = new ActividadobraDTO("Contractual", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(contractua);
 
-        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", contrato.getDatefechaini(), 1, 0, TaskType.PARENT, 5, true);
+        ActividadobraDTO Liquidaciones = new ActividadobraDTO("Liquidaciones", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.PARENT, 5, true);
         lstHijos.add(Liquidaciones);
 
         actividadObraContrato.setChildren(lstHijos);

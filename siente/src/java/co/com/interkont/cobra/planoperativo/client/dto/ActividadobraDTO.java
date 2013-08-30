@@ -84,6 +84,12 @@ public class ActividadobraDTO implements IsSerializable {
     
     public ActividadobraDTO() {
     }
+    
+    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
+        this.startDateTime=fechaInicio;
+        this.endDateTime=fechaFin;
+        this.duration=duracion;
+    }
    
     public List<ActividadobraDTO> getChildren() {
         return children;

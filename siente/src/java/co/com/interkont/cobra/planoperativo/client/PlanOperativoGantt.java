@@ -32,6 +32,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
@@ -52,11 +53,13 @@ import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.event.BeforeStartEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.event.StartEditEvent;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -74,6 +77,7 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
+import java.util.Calendar;
 
 /**
  *
@@ -89,6 +93,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
      * a nivel cliente
      */
     private ContratoDTO convenioDTO;
+    ActividadobraDTO actividadAnterior;
 
     public ContratoDTO getConvenioDTO() {
         return convenioDTO;
@@ -214,7 +219,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = false;
         config.mouseWheelZoomEnabled = false;
 
-        config.useEndDate = true;
+        //config.useEndDate = true;
         config.timeResolutionIncrement = 1;
         config.timeAxisDoubleClickZoomEnabled = true;
 
@@ -308,7 +313,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-               ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada),props);
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
             }
@@ -531,14 +536,64 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         spinner.setMaxValue(100);
         spinner.setIncrement(1);
         editing.addEditor(config.leftColumns.getColumn(3), spinner);
+
+        editing.addBeforeStartEditHandler(new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
+            @Override
+            public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
+                ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                actividadAnterior =new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration()) ;
+            }
+        });
+
+       
+        
+
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
             @Override
             public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
                 ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                 ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                gantt.getGanttPanel().getContainer().refresh();
-                service.setLog("aca en modi" + ac.getName(), null);
+
+                /*verifico si el dato a modificar es a fecha de inicio de la actividad*/
+                if (event.getEditCell().getCol() == 1) {
+                    /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
+                    if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
+                        props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                        gantt.getGanttPanel().getContainer().refresh();
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                        alerta.show();                        
+                        } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                        props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                        gantt.getGanttPanel().getContainer().refresh();
+
+                    }
+                }
+                /*verifico si el dato a modificar es a fecha de fin de la actividad*/
+                if (event.getEditCell().getCol() == 2) {
+                    /*se verifia si la fecha fin  es mayor que la fecha de inicio en este caso seria un error*/
+                    if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
+                        props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                        gantt.getGanttPanel().getContainer().refresh();
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
+                        alerta.show();                        
+                      } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
+                        props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                        gantt.getGanttPanel().getContainer().refresh();
+
+                    }
+                }
+
+                /*verifico si el dato a modificar es la duracion de la actividad y modifico la fecha fin*/
+                if (event.getEditCell().getCol() == 3) {
+                    if(actividadAnterior.getDuration()<ac.getDuration()){
+                    Date fechaCopia=CalendarUtil.copyDate(ac.getStartDateTime());
+                    ac.setEndDateTime(fechaCopia);
+                    CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
+                    }else{
+                    ac.getEndDateTime().setDate(ac.getEndDateTime().getDate()-((actividadAnterior.getDuration()-ac.getDuration()))+1);
+                    }
+                }
+
             }
         });
 

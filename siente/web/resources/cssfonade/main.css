@@ -1743,7 +1743,7 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
-    font-style: italic; 
+    font-style: normal; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -2462,94 +2462,100 @@ css usuario modificacion
 /*Css Para el nuevo menu administrar convenio*/
 .ikont-hpg-menu-contenido-administrar-convenio{
     background-color: #F2F2F2;
-    width: 100%;
-    height: 75px;
+    width: 900px;
+    height: 70px;
     border-style: solid;
     border-width: 0px;
     border-color: #6B6B6B;
     position: relative;
-    top: -37px;
+    top: 0px;
     z-index: 1;
 }
+
+.ikont-hf-menusuperior-convenio{
+    position: relative;
+    top: -57px;
+}
+
 .ikont-hpg-menu-administrar-convenio{ 
-    margin-top: -4px;
-    margin-left: 218px;
+    margin: 0px auto;
 }
 .ikont-img-posicion-administrar-convenio{
     background-image: url(../imgs/submenu_sprite_convenio.png);
     background-repeat: no-repeat;
     width: 100px;
-    height: 57px;
+    height: 60px;
     display: block;
 }
 .ikont-posicion-nuevo-proyecto-admconvenio{
-    background-position: -18px -11px;
+    background-position: -18px -10px;
 }
-.ikont-posicion-nuevo-proyecto-admconvenio{
-    height: 61px;
-    background-position: -18px -13px;
-}
+
 .ikont-posicion-nuevo-proyecto-admconvenio.scroll{
-    background-position: -13px -110px;
+    background-position: -17px -43px;
 }
-.ikont-posicion-nuevo-proyecto-admconvenio:hover, .ikont-posicion-nuevo-proyecto-admconvenio.buttonactive.scroll{
-    background-position: -17px -114px;
+.ikont-posicion-nuevo-proyecto-admconvenio.scroll:hover, .ikont-posicion-nuevo-proyecto-admconvenio.buttonactive.scroll{
+    background-position: -17px -139px;
 }
+.ikont-posicion-nuevo-proyecto-admconvenio:hover, .ikont-posicion-nuevo-proyecto-admconvenio.buttonactive{
+    background-position: -17px -110px;
+}
+
 .ikont-posicion-nuevo-detalle-admconvenio{
-    background-position:-129px -11px;
-}
-.ikont-posicion-nuevo-detalle-admconvenio{
-    height: 61px;
-    background-position:-129px -13px;
+    background-position:-128px -10px;
 }
 .ikont-posicion-nuevo-detalle-admconvenio.scroll{
+    background-position:-128px -43px;
+}
+.ikont-posicion-nuevo-detalle-admconvenio.scroll:hover, .ikont-posicion-nuevo-detalle-admconvenio.buttonactive.scroll{
+    background-position:-128px -139px;
+}
+.ikont-posicion-nuevo-detalle-admconvenio:hover, .ikont-posicion-nuevo-detalle-admconvenio.buttonactive{
     background-position:-128px -110px;
 }
-.ikont-posicion-nuevo-detalle-admconvenio:hover, .ikont-posicion-nuevo-detalle-admconvenio.buttonactive.scroll{
-    background-position:-128px -114px;
-}
+
 .ikont-posicion-nuevo-documentos-admconvenio{
-    background-position:-235px -11px;
-}
-.ikont-posicion-nuevo-documentos-admconvenio{
-    height: 61px;
-    background-position:-235px -13px;
+    background-position:-236px -10px;
 }
 .ikont-posicion-nuevo-documentos-admconvenio.scroll{
+    background-position:-236px -44px;
+}
+.ikont-posicion-nuevo-documentos-admconvenio.scroll:hover, .ikont-posicion-nuevo-documentos-admconvenio.scroll.buttonactive{
+    background-position:-236px -139px;
+}
+.ikont-posicion-nuevo-documentos-admconvenio:hover, .ikont-posicion-nuevo-documentos-admconvenio.buttonactive{
     background-position:-236px -110px;
 }
-.ikont-posicion-nuevo-documentos-admconvenio:hover, .ikont-posicion-nuevo-documentos-admconvenio.scroll.buttonactive{
-    background-position:-236px -114px;
-}
 .ikont-posicion-nuevo-modificacion-admconvenio{
     width: 112px;
-    background-position: -341px -11px;
+    background-position: -341px -10px;
 }
-.ikont-posicion-nuevo-modificacion-admconvenio{
-    width: 112px;
-    height: 61px;
-    background-position: -341px -13px;
-}
+
 .ikont-posicion-nuevo-modificacion-admconvenio.scroll{
-    width: 112px;
-    background-position: -345px -110px;
+    background-position: -341px -44px;
 }
-.ikont-posicion-nuevo-modificacion-admconvenio:hover, .ikont-posicion-nuevo-modificacion-admconvenio.scroll.buttonactive{
-    width: 112px;
-    background-position: -340px -114px;
+
+.ikont-posicion-nuevo-modificacion-admconvenio.scroll:hover, .ikont-posicion-nuevo-modificacion-admconvenio.scroll.buttonactive{
+    background-position: -341px -139px;
+}
+
+.ikont-posicion-nuevo-modificacion-admconvenio:hover, .ikont-posicion-nuevo-modificacion-admconvenio.buttonactive{
+    background-position: -341px -110px;
 }
 .ikont-posicion-nuevo-evolucion-admconvenio{
-    background-position:-470px -11px;
+    background-position:-470px -10px;
 }
-.ikont-posicion-nuevo-evolucion-admconvenio{
-    height: 61px;
-    background-position:-470px -13px;
-}
+
 .ikont-posicion-nuevo-evolucion-admconvenio.scroll{
-    background-position:-461px -110px;
+    background-position:-470px -43px;
 }
-.ikont-posicion-nuevo-evolucion-admconvenio:hover, .ikont-posicion-nuevo-evolucion-admconvenio.scroll.buttonactive{
-    background-position:-470px -114px;
+
+.ikont-posicion-nuevo-evolucion-admconvenio.scroll:hover, .ikont-posicion-nuevo-evolucion-admconvenio.scroll.buttonactive{
+    background-position:-470px -139px;
+}
+
+.ikont-posicion-nuevo-evolucion-admconvenio:hover, .ikont-posicion-nuevo-evolucion-admconvenio.buttonactive{
+    background-position:-470px -110px;
 }
 .tab-pestania-active, tab-pestania-active-tres{
     width: 100px !important;  
@@ -2913,24 +2919,40 @@ css usuario modificacion
 }
 .ikont-acl-calcutodamatrix{
     width: 20px;
+    height: 20px;
     background-image:url(../imgs/Cobra_btactualizar.png);
     background-position: 0px 0px;
     margin-top: 5px;
     margin-right: 17px;
     margin-bottom: 0px;
     margin-left: 17px;    
+    display: block;
+}
+
+.ikont-acl-calcutodamatrix:hover{
+    background-position: 0px -21px;
 }
 
 .ikont-acl-calculaMatrix{
     width: 40px;
+    height: 40px;
     background-image:url(../imgs/Cobra_bt58.png);
     background-position: 0px 0px;
     margin-top: 5px;
     margin-right: 17px;
     margin-bottom: 0px;
     margin-left: 17px;
-
+    display: block;
 }
+
+.ikont-acl-calculaMatrix{ 
+    background-position: 0px -50px;
+}
+
+.ikont-hit-calcutodamatrix{
+    width: 80px;
+}
+
 .ikont-rp-imagenprincipal-body{
     height: 341px;
 }
@@ -2946,7 +2968,7 @@ css usuario modificacion
 }
 .ikont-colum-superior-consulta{
     color: #FFF;
-    background-color: #1C8F14;
+    background-color: #257500;
 }
 /*Detalle proyecto en ejecucion incompleta*/
 .ikont-textarea-datosbasicos{
@@ -3584,4 +3606,11 @@ css usuario modificacion
 
 .ikont-acl-seleccionefoto3:hover{
     background-position: -300px -751px;
+}
+
+.ikont-acb-publicar-coment{
+    margin-left: 150%;
+}
+a:hover {
+color: #008000;
 }

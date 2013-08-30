@@ -202,6 +202,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * Binding creado para acceder a los datos de las filas de la tabla creada
      */
     private UIDataTable tablacontrapadrebindin = new UIDataTable();
+    private UIDataTable tablacontrapadrebindin2 = new UIDataTable();
     /**
      * Binding asociado a la lista de convenios por contratista en la modal de
      * convenios de nuevo contrato
@@ -2058,6 +2059,15 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.tablacontrapadrebindinContratista = tablacontrapadrebindinContratista;
     }
 
+    public UIDataTable getTablacontrapadrebindin2() {
+        return tablacontrapadrebindin2;
+    }
+
+    public void setTablacontrapadrebindin2(UIDataTable tablacontrapadrebindin2) {
+        this.tablacontrapadrebindin2 = tablacontrapadrebindin2;
+    }
+    
+
     public SelectItem[] getPeriodoEventoItem() {
         return periodoEventoItem;
     }
@@ -3460,7 +3470,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @param
      */
     public void eliminarItemPadreSele() {
-        //contrpadre = (Contrato) tablacontrapadrebindin.getRowData();
+        contrpadre = (Contrato) tablacontrapadrebindin2.getRowData();
         contrpadre = null;
         varmostrarcontrpa = 0;
         //preguntacontrato = 0;

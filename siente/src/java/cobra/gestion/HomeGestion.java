@@ -724,7 +724,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public final void iniciarHome() {
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
          setInttipoorigen(1);
-        if (filtro.isIsciu()) {
+         
+        if (getSessionBeanCobra().getCobraService().isCiu()) {
             filtro.setIntestadoobra(1);
         } else if (getSessionBeanCobra().getUsuarioObra().getUsuLogin().compareTo("ciudadano") != 0) {
             filtro.setIntestadoobra(-1);
@@ -777,7 +778,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public HomeGestion() {
-        System.out.println("Debug -HomeGestion ");
         if (getSessionBeanCobra().getUsuarioObra().getTercero().getStrnombre() != null) {
             iniciarHome();
         } else {
