@@ -70,20 +70,17 @@
                 <h:panelGrid  cellspacing="12" columns="2"  id="panel-filtro-novedades">
                     <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
                     <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >        
-                        <rich:select  id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="Ingrese una entidad"  value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >                           
+                        <rich:select onclick="this.value = '';" id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" 
+                                     value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >                           
                             <f:selectItem itemLabel="TODOS" itemValue="TODOS"/>
-                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />                              
+                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />   
                             <a4j:ajax event="change"
                                       listener="#{Supervisor$Contrato.comboEntidadesContrato}"
                                       render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
                                       execute="@this" >
-                            </a4j:ajax>  
-                        </rich:select>  
-                        <rich:tooltip mode="ajax" layout="block">
-                            <h:panelGrid columns="1">
-                                <h:outputText style="height: 12px; font-size: 12px;" value="Escriba la entidad que quiere buscar" />
-                            </h:panelGrid>
-                        </rich:tooltip>
+                            </a4j:ajax>                               
+                        </rich:select>                           
+                       
                     </h:panelGrid>
                     <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
                     <h:panelGrid  columns="2" rendered="#{var.boolestadoconvenio and Supervisor$Contrato.tipoContCon == 'Convenio'}">

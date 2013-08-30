@@ -2481,7 +2481,6 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             listacontratos = new ArrayList<Contrato>();
             listacontratoscontratista = new ArrayList<Contrato>();
         }
-        contrato.getTercero().setStrnombrecompleto("");
     }
 
     /**
