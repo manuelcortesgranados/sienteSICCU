@@ -149,7 +149,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.contrato = actividadobraContratoEditar.getContrato();
         this.actividadObraPadre = actividadObraPadre;
         this.editar = true;
-        fechaContrato =CalendarUtil.copyDate(contrato.getDatefechaini());
+        fechaContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
         CargarFormularioEditar();
@@ -363,7 +363,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
                     actividadObraEditar.getChildren().get(0).setStartDateTime(fechaSuscripcionContrato.getValue());
                     modificarFechaFinConDuracion(actividadObraEditar.getChildren().get(0), actividadObraEditar.getChildren().get(0).getStartDateTime());
 
-
+                    service.setLog("en contrato carpeta", null);
+                    odifi(actividadObraEditar.getChildren().get(2));
+                    service.setLog("despues de carpeta", null);
 
                 }
             } else {
@@ -382,30 +384,42 @@ public class ContratoForm implements IsWidget, EntryPoint {
         CalendarUtil.addDaysToDate(actividad.getEndDateTime(), actividad.getDuration());
     }
 
-    public void calcularDiferenciaFechas(Date fechaContratoAnterior, Date fechaContratoActual, ActividadobraDTO actividadModificar) {
-        if (fechaContratoActual.compareTo(fechaContratoAnterior) > 0) {
-            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoAnterior, fechaContratoActual);
-            service.setLog("en calc duracion" + duracionCambio, null);
-            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
-            service.setLog("en calc duracion fecha ini" + actividadModificar.getStartDateTime(), null);
-            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
-        } else {
-            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoActual, fechaContratoAnterior);
-            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
-            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
-        }
-    }
-
+//    public void calcularDiferenciaFechas(Date fechaContratoAnterior, Date fechaContratoActual, ActividadobraDTO actividadModificar) {
+//        if (fechaContratoActual.compareTo(fechaContratoAnterior) > 0) {
+//            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoAnterior, fechaContratoActual);
+//            service.setLog("en calc duracion" + duracionCambio, null);
+//            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
+//            service.setLog("en calc duracion fecha ini" + actividadModificar.getStartDateTime(), null);
+//            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
+//        } else {
+//            int duracionCambio = CalendarUtil.getDaysBetween(fechaContratoActual, fechaContratoAnterior);
+//            CalendarUtil.addDaysToDate(actividadModificar.getStartDateTime(), duracionCambio);
+//            modificarFechaFinConDuracion(actividadModificar, actividadModificar.getStartDateTime());
+//        }
+//    }
     public void odifi(ActividadobraDTO act) {
         if (!act.getChildren().isEmpty()) {
-           for(ActividadobraDTO actiHija:act.getChildren()){
-               /*verifico el sentido en que tengo que hacer el movimiento de las
-                * actividades si necesito aumentar la fecha de inicio o disminuirla*/
-            if(fechaSuscripcionContrato.getValue().compareTo(fechaContrato)>0){
-              
+            for (ActividadobraDTO actiHija : act.getChildren()) {
+                /*verifico el sentido en que tengo que hacer el movimiento de las
+                 * actividades si necesito aumentar la fecha de inicio o disminuirla*/
+                if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
+                    int duracion = CalendarUtil.getDaysBetween(fechaContrato, actiHija.getStartDateTime());
+                    Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                    CalendarUtil.addDaysToDate(fechaI, duracion);
+                    
+                    Date asigFin=CalendarUtil.copyDate(fechaI);
+                    actiHija.setEndDateTime(asigFin);
+                    
+                    propes.startDateTime().setValue(actiHija, fechaI);
+                  
+                    Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+                    CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
+                    propes.endDateTime().setValue(actiHija, dateFin);
+                }
             }
-           }
         }
+
+
     }
 
     public boolean validarCambiofechaActaContrato() {

@@ -541,22 +541,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
                 ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                actividadAnterior = store.get(event.getEditCell().getRow());
-                service.setLog("antes end" + actividadAnterior.getEndDateTime(), null);
-                service.setLog("antes start" + actividadAnterior.getEndDateTime(), null);
-
+                actividadAnterior =new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration()) ;
             }
         });
 
-        editing.addStartEditHandler(new StartEditEvent.StartEditHandler<ActividadobraDTO>() {
-            @Override
-            public void onStartEdit(StartEditEvent<ActividadobraDTO> event) {
-                ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                ActividadobraDTO ar = store.get(event.getEditCell().getRow());
-                service.setLog("antes end 2" + ar.getEndDateTime(), null);
-                service.setLog("antes start 2" + ar.getEndDateTime(), null);
-            }
-        });
+       
+        
 
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
             @Override
@@ -568,11 +558,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (event.getEditCell().getCol() == 1) {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
                     if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
-                        alerta.show();
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-                    } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                        alerta.show();                        
+                        } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -582,12 +572,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (event.getEditCell().getCol() == 2) {
                     /*se verifia si la fecha fin  es mayor que la fecha de inicio en este caso seria un error*/
                     if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
-                        alerta.show();
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-
-                    } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
+                        alerta.show();                        
+                      } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -596,8 +585,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 /*verifico si el dato a modificar es la duracion de la actividad y modifico la fecha fin*/
                 if (event.getEditCell().getCol() == 3) {
+                    if(actividadAnterior.getDuration()<ac.getDuration()){
+                    Date fechaCopia=CalendarUtil.copyDate(ac.getStartDateTime());
+                    ac.setEndDateTime(fechaCopia);
                     CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
-
+                    }else{
+                    ac.getEndDateTime().setDate(ac.getEndDateTime().getDate()-((actividadAnterior.getDuration()-ac.getDuration()))+1);
+                    }
                 }
 
             }
