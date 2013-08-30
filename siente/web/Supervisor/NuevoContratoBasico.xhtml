@@ -109,6 +109,7 @@
                 </center>
                 <rich:collapsiblePanel styleClass="ikont-rcp-datosbasicos" id="tpDatosBasicos" header="1. #{var.datosbasicos}" expanded="true" switchType="client" immediate="true" >
                     <h:panelGroup id="gpContSelec">
+                        <center>
                         <h:panelGrid id="rpconpasel" rendered="#{Supervisor$Contrato.varmostrarcontrpa==1}" >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-contpadre" value="#{var.contrato} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
@@ -117,7 +118,7 @@
                             <center>
                                 <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}" rowKeyVar="filaSeleccionada"
                                                 sortMode="single"  var="currentRow"  rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02" 
-                                                binding="#{Supervisor$Contrato.tablacontrapadrebindin}">
+                                                binding="#{Supervisor$Contrato.tablacontrapadrebindin2}">
                                     <rich:column  breakRowBefore="true">
                                         <f:facet name="header">
                                             <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumeroccncb" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
@@ -191,6 +192,7 @@
                                 </rich:dataTable>
                             </center>
                         </h:panelGrid>
+                        </center>
                     </h:panelGroup>
                     <center>
                         <h:panelGrid id="pndatosbasicos">

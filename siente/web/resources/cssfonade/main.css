@@ -1743,7 +1743,7 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
     font-family:open; 
-    font-style: italic; 
+    font-style: normal; 
     color:#808080;
     height: 40px;
     font-size: 24px;
@@ -3588,4 +3588,7 @@ css usuario modificacion
 
 .ikont-acb-publicar-coment{
     margin-left: 150%;
+}
+a:hover {
+color: #008000;
 }
