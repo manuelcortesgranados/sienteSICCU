@@ -107,7 +107,7 @@
 }
 
 .rf-dt-ftr-c {
-    color: '#{richSkin.headerTextColor}';
+    color: '#{richSkin.generalTextColor}';
     background-color: tranparent;
     font-family: '#{richSkin.generalFamilyFont}';
     font-size: '#{richSkin.generalSizeFont}';

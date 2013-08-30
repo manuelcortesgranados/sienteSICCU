@@ -196,7 +196,7 @@
                                 </rich:dataTable>
                                 <h:panelGrid styleClass="ikont-hpg-gridalim1"   cellpadding="0" cellspacing="0" >
                                     <a4j:commandLink styleClass="ikont-acl-calculaMatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}" 
-                                                     render="layoutTablaMatrix, layoutComentafactor" value="actualizar"/>
+                                                     render="layoutTablaMatrix, layoutComentafactor" />
                                 </h:panelGrid>
                             </h:panelGrid>
 
@@ -300,11 +300,11 @@
                                     </rich:column>
                                     <rich:column id="CantidadEjec" >
                                         <h:panelGrid styleClass="ikont-hot-rcalimd8"   cellpadding="0" cellspacing="0" columns="2" > 
-                                            <h:inputText size="13" id="txtCantEjec" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
+                                            <h:inputText size="13" id="txtCantEjec" styleClass="ikont-hit-calcutodamatrix" value="#{registros.floatcantejec}" disabled="#{!Supervisor$Alimentar.editarActividades}">
                                                 <f:validateDoubleRange minimum="0" />
                                             </h:inputText>
                                             <a4j:commandLink styleClass="ikont-acl-calcutodamatrix"    action="#{Supervisor$Alimentar.calcularTodaMatrix}"  
-                                                             render="layoutTablaMatrix, layoutComentafactor" value="Actualizar"/>
+                                                             render="layoutTablaMatrix, layoutComentafactor" />
 
                                         </h:panelGrid>
                                         <rich:message styleClass="ikont-rm-txtCantEjec"    for="txtCantEjec"/>
