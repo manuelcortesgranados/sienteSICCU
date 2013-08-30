@@ -1548,14 +1548,15 @@ a.vtitle23:hover{
     background-size: 25px 129px;
 }
 .topbar_encabezado_3{
-    width:430px; 
-    height: 127px; 
-    position:absolute;
-    background-position:0px 0px;
-    top: 7%;
-    right: 45%;
+    width: 430px;
+    height: 15px;
+    position: relative;
+    background-position: 0px 0px;
+    top: -96px;
+    right: -29%;
     font-size: 1.5em;
 }
+
 .topbar_encabezado_4{
     width:120px; height: 127px; 
     position:absolute;
