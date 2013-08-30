@@ -5,6 +5,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
@@ -80,6 +81,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected int idTempMacroActividades;
     protected int idobraRecursos;
     boolean editar = false;
+    protected int posObjGeneral;
     /*
      *Elementos para la hora de editar
      */
@@ -93,17 +95,17 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.modalPry = di;
         this.proyectoDTO = actividadobraProyectoEditar.getObra();
         this.actividadObraPadre = actividadObraPadre;
-        this.contratoDto=actividadObraPadre.getContrato();
+        this.contratoDto = actividadObraPadre.getContrato();
         this.propes = propes;
         this.idTemp = 0;
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
         this.idobraRecursos = 0;
-        this.editar=true;
+        this.editar = true;
         instanciarElementosPantalla();
         cargarFormularioEditar();
     }
-    
+
     public ProyectoForm1(ContratoDTO contratoDtoP, ActividadobraDTO actividadobrapadre) {
         this.contratoDto = contratoDtoP;
         this.proyectoDTO = new ObraDTO();
@@ -113,7 +115,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTempMacroActividades = 0;
         this.idobraRecursos = 0;
     }
-    
+
     public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
@@ -127,16 +129,29 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
         instanciarElementosPantalla();
     }
-                
-    
+
     private void cargarFormularioEditar() {
         this.nombrePry.setText(null);
         this.fechaInicio.setValue(null);
         this.fechaFin.setValue(null);
         this.pagodirecto.setValue(BigDecimal.ZERO);
         this.otrospagos.setValue(BigDecimal.ZERO);
+        cargarObjetivoGeneral();
     }
-    
+
+    public void cargarObjetivoGeneral() {
+        posObjGeneral = 0;
+        boolean encontro = false;
+        for (Iterator it = proyectoDTO.getObjetivoses().iterator(); it.hasNext() && !encontro;) {
+            ObjetivosDTO obj = (ObjetivosDTO) it.next();
+            if (obj.getTipoobjetivo() == 1) {
+                txtObjeG.setValue(obj.getDescripcion());
+                encontro = true;
+            }
+            posObjGeneral++;
+        }
+    }
+
     private void instanciarElementosPantalla() {
         /*se instancian todos los elementos de la pantalla*/
         nombrePry = new TextField();
@@ -144,10 +159,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         fechaFin = new DateField();
         pagodirecto = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
         otrospagos = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
-        txtObjeG=new TextArea();
+        txtObjeG = new TextArea();
         txtObjeG.setEmptyText("Objetivo General");
     }
-    
+
     @Override
     public Widget asWidget() {
         if (vp == null) {
@@ -159,57 +174,57 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
         return vp;
     }
-    
+
     @Override
     public void onModuleLoad() {
         RootPanel.get().add(asWidget());
     }
-    
+
     private void createColumnForm() {
         String tituloPantalla;
-        if(!editar){
-        tituloPantalla="Editar Proyecto";
-        }else{
-        tituloPantalla="Planificacion de proyectos";
+        if (!editar) {
+            tituloPantalla = "Editar Proyecto";
+        } else {
+            tituloPantalla = "Planificacion de proyectos";
         }
-                
+
         vp.add(new Label(tituloPantalla));
-        
-        
+
+
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         vp.add(con);
-        
+
         int cw = 238;
-        
-        
+
+
         getNombrePry().setEmptyText("Nombre del proyecto");
         getNombrePry().setWidth(cw);
         getNombrePry().setAutoValidate(true);
         con.add(new FieldLabel(nombrePry, "INFORMACIÓN BASICA"), new HtmlData(".fn"));
-        
-        
+
+
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
         con.add(fechaInicio, new HtmlData(".fechainicio"));
-        
-        
+
+
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
         con.add(fechaFin, new HtmlData(".fechafin"));
-        
+
         pagodirecto.setWidth(cw);
         pagodirecto.setEmptyText("Pago directo");
         con.add(pagodirecto, new HtmlData(".pagodirecto"));
-        
+
         otrospagos.setWidth(cw);
         otrospagos.setEmptyText("Otros pagos");
         con.add(otrospagos, new HtmlData(".otrospagos"));
-        
-        
+
+
         final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
-        
-        
+
+
         PushButton btnAdicionarMonto = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -223,11 +238,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         });
         btnAdicionarMonto.setWidth("" + 20);
         con.add(btnAdicionarMonto, new HtmlData(".btnaddmonto"));
-        
-        
+
+
         txtObjeG.setWidth(cw);
         con.add(txtObjeG, new HtmlData(".tblobjge"));
-        
+
 //        final WidgetTablaObjetivos tblObjetivosg = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "General", "*OBJETIVOS GENERALES", true);
 //        con.add(tblObjetivosg.asWidget(), new HtmlData(".tblobjge"));
 //        
@@ -240,10 +255,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 //            }
 //        });
 //        con.add(btnAdicionarObjge, new HtmlData(".objetivoge"));
-        
+
         final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
         con.add(tblObjetivos.asWidget(), new HtmlData(".tblobjes"));
-        
+
         PushButton btnAdicionarObje = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -253,10 +268,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         });
         con.add(btnAdicionarObje, new HtmlData(".objetivoes"));
-        
+
         final WidgetTablaObjetivos tblMetas = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Metas", "*META O PRODUCTO ESPERADO", false);
         con.add(tblMetas.asWidget(), new HtmlData(".tblmetas"));
-        
+
         PushButton btnAdicionarMetas = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -266,10 +281,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         });
         con.add(btnAdicionarMetas, new HtmlData(".metas"));
-        
+
         final WidgetTablaMacro tblMacroActividades = new WidgetTablaMacro(proyectoDTO, actividadObraPadre);
         con.add(tblMacroActividades.asWidget(), new HtmlData(".tblmacro"));
-        
+
         PushButton btnAdicionarMacro = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -279,11 +294,19 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         });
         con.add(btnAdicionarMacro, new HtmlData(".macro"));
-        
+        String nombreBotonPrincipal = "";
+        if(!editar){
+        nombreBotonPrincipal="Añadir Proyecto";
+        }else{
+         nombreBotonPrincipal="Editar Proyecto";
+        }
+
         Button btnAdicionarPry = new Button("Añadir Proyecto", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
+                if(!editar){
                 /*Se carga el proyectoDTO */
+
                 cargarDatosProyectoDTO();
                 boolean varErrorres = false;
                 String msgerrores = "";
@@ -327,7 +350,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     varErrorres = true;
                     msgerrores += "*Ingrese  una meta" + "<br/>";
                 }
-                
+
                 if (!varErrorres) {
                     modalPry.hide();
                     crearActividadPry();
@@ -335,10 +358,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
                     d.show();
                 }
-                
+
+            }else{
+                }
             }
         });
-        
+
         btnAdicionarPry.setWidth("" + 150);
         con.add(btnAdicionarPry);
 
@@ -347,7 +372,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         for (FieldLabel lbl : labels) {
             lbl.setLabelAlign(LabelAlign.TOP);
         }
-        
+
     }
 
     /*
@@ -365,7 +390,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
         return null;
     }
-    
+
     public int calcularDuracion() {
         if (proyectoDTO.getFechaInicio() != null && proyectoDTO.getFechaFin() != null) {
             long diferencia = proyectoDTO.getFechaFin().getTime() - proyectoDTO.getFechaInicio().getTime();
@@ -388,7 +413,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (proyectoDTO.getValor() != null) {
             if (proyectoDTO.getValorDisponible() == null) {
                 proyectoDTO.setValorDisponible(BigDecimal.ZERO);
-                
+
             }
             proyectoDTO.setValorDisponible(proyectoDTO.getValorDisponible().add(proyectoDTO.getValor()));
         }
@@ -401,18 +426,18 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     public void crearActividadPry() {
         ActividadobraDTO tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                 0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-        
+
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
                     enlazaractividadesHijas(act, tareaNueva);
                 }
             }
-            
+
         } else {
             enlazaractividadesHijas(actividadObraPadre, tareaNueva);
         }
-        
+
     }
 
     /*
@@ -426,7 +451,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
     }
-    
+
     private native String getTableMarkup() /*-{
      return ['<table width=100% cellpadding=0 cellspacing=10>',
      '<tr><td class=fn width=50%></td><td class=fechainicio></td></tr>',
