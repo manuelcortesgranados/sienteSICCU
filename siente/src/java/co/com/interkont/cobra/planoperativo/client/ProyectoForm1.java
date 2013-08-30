@@ -37,6 +37,7 @@ import com.sencha.gxt.widget.core.client.form.FormPanel.LabelAlign;
 import com.sencha.gxt.widget.core.client.form.FormPanelHelper;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
+import com.sencha.gxt.widget.core.client.form.TextArea;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.form.validator.MaxLengthValidator;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
@@ -53,6 +54,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private NumberField<BigDecimal> pagodirecto;
     private NumberField<BigDecimal> otrospagos;
     private VerticalPanel vp;
+    TextArea txtObjeG;
     /*Convenio principal el cual tiene las fuentes de los recursos y 
      * la informacion necesaria
      */
@@ -142,6 +144,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         fechaFin = new DateField();
         pagodirecto = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
         otrospagos = (NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor());
+        txtObjeG=new TextArea();
+        txtObjeG.setEmptyText("Objetivo General");
     }
     
     @Override
@@ -221,18 +225,21 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         con.add(btnAdicionarMonto, new HtmlData(".btnaddmonto"));
         
         
-        final WidgetTablaObjetivos tblObjetivosg = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "General", "*OBJETIVOS GENERALES", true);
-        con.add(tblObjetivosg.asWidget(), new HtmlData(".tblobjge"));
+        txtObjeG.setWidth(cw);
+        con.add(txtObjeG, new HtmlData(".tblobjge"));
         
-        PushButton btnAdicionarObjge = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(tblObjetivosg, proyectoDTO, "Objetivos Generales", "Por favor ingrese la descripción del objetivo:", 1, true, idTempObj);
-                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
-                modal.show();
-            }
-        });
-        con.add(btnAdicionarObjge, new HtmlData(".objetivoge"));
+//        final WidgetTablaObjetivos tblObjetivosg = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "General", "*OBJETIVOS GENERALES", true);
+//        con.add(tblObjetivosg.asWidget(), new HtmlData(".tblobjge"));
+//        
+//        PushButton btnAdicionarObjge = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
+//            @Override
+//            public void onClick(ClickEvent event) {
+//                WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(txtObjeG, proyectoDTO, "Objetivo General", "Por favor ingrese la descripción del objetivo:", 1, true, idTempObj);
+//                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
+//                modal.show();
+//            }
+//        });
+//        con.add(btnAdicionarObjge, new HtmlData(".objetivoge"));
         
         final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
         con.add(tblObjetivos.asWidget(), new HtmlData(".tblobjes"));

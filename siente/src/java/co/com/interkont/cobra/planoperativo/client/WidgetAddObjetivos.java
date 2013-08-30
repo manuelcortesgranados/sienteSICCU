@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.box.MultiLinePromptMessageBox;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
+import com.sencha.gxt.widget.core.client.form.TextArea;
 
 /**
  *
@@ -20,6 +21,7 @@ import com.sencha.gxt.widget.core.client.event.HideEvent;
 public class WidgetAddObjetivos implements IsWidget {
 
     protected WidgetTablaObjetivos tblObjetivos;
+    protected TextArea txtObjG;
     protected WidgetTablaMacro tblMacro;
     protected ObraDTO proyecto;
     protected String titulodialogo;
@@ -37,6 +39,17 @@ public class WidgetAddObjetivos implements IsWidget {
 
     public WidgetAddObjetivos(WidgetTablaObjetivos tblObjetivos, ObraDTO proyecto, String titulodialogo, String mensajedialogo, int tipoObjetivo, boolean esObjetivo, int idTemp) {
         this.tblObjetivos = tblObjetivos;
+        this.proyecto = proyecto;
+        this.titulodialogo = titulodialogo;
+        this.mensajedialogo = mensajedialogo;
+        this.tipoObjetivo = tipoObjetivo;
+        this.esObjetivo = esObjetivo;
+        this.idTemp = idTemp;
+       
+    }
+    
+     public WidgetAddObjetivos(TextArea tblObjetivos, ObraDTO proyecto, String titulodialogo, String mensajedialogo, int tipoObjetivo, boolean esObjetivo, int idTemp) {
+        this.txtObjG = tblObjetivos;
         this.proyecto = proyecto;
         this.titulodialogo = titulodialogo;
         this.mensajedialogo = mensajedialogo;
@@ -76,7 +89,11 @@ public class WidgetAddObjetivos implements IsWidget {
                         ObjetivosDTO objetivos = new ObjetivosDTO(box.getValue(), tipoObjetivo, esObjetivo, idTemp);
                         idTemp++;
                         proyecto.getObjetivoses().add(objetivos);
+                        if(objetivos.getTipoobjetivo()!=1){
                         tblObjetivos.getStore().add(objetivos);
+                        }else{
+                        txtObjG.setValue(objetivos.getDescripcion());
+                        }
                     }else{
                         ActividadobraDTO actividad=new ActividadobraDTO(box.getValue(), 7,idTemp);
                         idTemp++;
