@@ -46,13 +46,13 @@
                         <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                     </f:facet>
 
-                    <h:inputText value="#{fuenteIngresos.planMovimientosConvenioEntidad.get(columna).valor}" 
+                    <h:inputText value="${fuenteIngresos.planMovimientosConvenioEntidad[columna].valor}" 
                                  rendered="#{fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
-                    <h:inputText value="#{fuenteIngresos.planMovimientosIngresosConvenio.get(columna).valor}"
+                    <h:inputText value="${fuenteIngresos.planMovimientosIngresosConvenio[columna].valor}"
                                  rendered="#{!fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
@@ -93,10 +93,11 @@
             </rich:column>
         </rich:extendedDataTable>
     </h:form>
+
     <br />
     <h:form id="formFlujoEgresos">
         <rich:extendedDataTable id="extendedDataTableEgresos" value="#{PlanOperativo.flujoEgresos}" var="fuenteEgresos"
-                                frozenColumns="3" style="width: 100%;" >
+                                frozenColumns="3" style="width: 100%;">
             <rich:column width="200px">
                 <f:facet name="header">
                     <h:outputLabel value="Fuente egresos" />
@@ -144,7 +145,7 @@
                         <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                     </f:facet>                   
 
-                    <h:inputText value="#{fuenteEgresos.planMovimientosProyecto.get(columna).valor}"
+                    <h:inputText value="#{fuenteEgresos.planMovimientosProyecto.get[columna].valor}" 
                                  rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
@@ -197,9 +198,10 @@
                 </f:facet>
             </rich:column>
         </rich:extendedDataTable>
+
         <br />
-        <rich:extendedDataTable  id="extendedDataTableFlujoNeto"
-                                 frozenColumns="1" style="width: 100%;">
+        <rich:extendedDataTable id="extendedDataTableFlujoNeto"
+                                frozenColumns="1" style="width: 100%;">
             <rich:column width="400px">
                 <f:facet name="header">
                     <h:outputLabel value="Flujo de Caja Neto"/>
@@ -225,8 +227,8 @@
                             </h:outputText>
                         </h:panelGrid>
                     </f:facet>
-                </rich:column>         
-            </c:forEach>                
-        </rich:extendedDataTable>     
+                </rich:column>
+            </c:forEach>
+        </rich:extendedDataTable>
     </h:form>
 </ui:composition>
