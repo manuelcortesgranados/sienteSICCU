@@ -1357,12 +1357,12 @@ a.ikont-hcl-modificarusuario:hover {
 
 .ikont-hf-nuevocontratoplanoperativo{
     position: relative;
-    top: -52px;
+    top: -25px;
 }
 
 .ikont-hf-nuevodetalleobrazoom{
     position: relative;
-    top: -62px;
+    top: -35px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos{
@@ -3302,7 +3302,7 @@ css usuario modificacion
 
 .ikont-colum-superior-fuente-recurso{
     color: #FFF;
-    background-color: #1C8F14;
+    background-color: #257500;
     font-size: 0.8em;
     padding: 2px 5px;
 }
@@ -3441,6 +3441,7 @@ css usuario modificacion
     color: #5E5E5E;
     font-family: open;
     font-size: 0.8em;
+    font-style: italic;
 }
 
 .ikont-table-aling-pasos{
@@ -3537,4 +3538,50 @@ css usuario modificacion
 
 .ikont-hpg-private-coment{
     margin-top: 25px;
+}
+
+.ikont-hot-text-private-coment{
+    color: #5E5E5E;
+    font-family: open;
+    font-size: 0.8em;
+}
+
+
+.ikont-acl-seleccionefoto1{
+    background-image: url(../imgs/tema_sprite.png);
+    width: 175px;
+    height: 105px;
+    display: block;
+    background-position: -0px -430px;
+    float: left;
+}
+
+.ikont-acl-seleccionefoto1:hover{
+    background-position: -0px -537px;
+}
+
+.ikont-acl-seleccionefoto2{
+    background-image: url(../imgs/tema_sprite.png);
+    width: 130px;
+    height: 105px;
+    display: block;
+    background-position: -175px -430px;
+    float: left;
+}
+
+.ikont-acl-seleccionefoto2:hover{
+    background-position: -175px -643.52px;
+}
+
+.ikont-acl-seleccionefoto3{
+    background-image: url(../imgs/tema_sprite.png);
+    width: 130px;
+    height: 105px;
+    display: block;
+    background-position: -300px -430px;
+    float: left;
+}
+
+.ikont-acl-seleccionefoto3:hover{
+    background-position: -300px -751px;
 }
