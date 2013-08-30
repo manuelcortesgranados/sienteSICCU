@@ -7,7 +7,6 @@ package cobra;
 
 import co.com.interkont.cobra.to.Grupo;
 import co.com.interkont.cobra.to.JsfUsuario;
-import cobra.Ciudadano.PerfilCiudadano;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,7 +101,6 @@ public class Login implements Serializable {
                     } else {
                         respuesta = "home";
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
-                        System.out.println("ingreso al home");
                     }
 
                     if (verificarGrupo(getSessionBeanCobra().getUsuarioObra())) {
@@ -114,7 +112,6 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setHeaderStyle("titletool");
                         getSessionBeanCobra().setLogueado(true);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
-                        System.out.println("ingreso al ciudadano");
                     } else {
                         getSessionBeanCobra().getUsuarioService().getLog().info("Auntentico_en_" + getSessionBeanCobra().getBundle().getString("versioncobra") + "(" + getSessionBeanCobra().getUsuarioObra().getUsuLogin()
                                 + ", " + new Date() + ", " + respuesta + ")");
@@ -124,7 +121,6 @@ public class Login implements Serializable {
                         getSessionBeanCobra().getCobraService().setCiu(false);
                         getSessionBeanCobra().setLogueado(true);
                         getSessionBeanCobra().getHomeGestion().iniciarHome();
-                        System.out.println("ingreso como usuario");
                     }
 
                     if (getSessionBeanCobra().getTipologueo().getTipoerror() == 2) {
