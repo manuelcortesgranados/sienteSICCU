@@ -3527,3 +3527,14 @@ css usuario modificacion
     right: 124px;
     position: absolute;    
 }
+
+.ikont-hot-desea{
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #257500;
+    font-family: open;
+}
+
+.ikont-hpg-private-coment{
+    margin-top: 25px;
+}

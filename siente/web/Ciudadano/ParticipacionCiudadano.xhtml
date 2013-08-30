@@ -119,7 +119,7 @@
                             <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.ingresesu}. #{var.nota}" />
                         </h:panelGrid>
                         <h:panelGrid columns="2" styleClass="ikont-hpg-selecione-opinion">
-                            <a4j:commandLink  styleClass="ikont-acl-line-coment-ciudadano" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
+                            <h:commandLink  styleClass="ikont-acl-line-coment-ciudadano" ></h:commandLink>
                             <a4j:region id="idregion_par">
                                 <h:panelGroup>
                                     <a4j:status id="idstatuscomentario2"/>
@@ -131,10 +131,12 @@
                                 </h:panelGroup>
                             </a4j:region>
                         </h:panelGrid>
+                        <h:panelGrid columns="1" styleClass="ikont-table-aling-pasos">
+                            <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 3" />
+                            <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.contenido}" />
+                        </h:panelGrid>
 
 
-                        <h:outputText  styleClass="ikont-hot-paso2" value="#{var.paso} 3" />
-                        <h:outputText  styleClass="ikont-hot-contenido" value="#{var.contenido}" />
                         <h:panelGrid  >
                             <h:panelGrid id="layoutImaCiu_par" columns="3"  columnClasses="panelizquierda,panelderecha">
                                 <h:inputText size="20"  id="txtfotografia" styleClass="ikont-hit-txtfotografia"   readonly="true" value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.strfotoopinion}"  />
@@ -152,19 +154,25 @@
                                                  styleClass="ikont-acl-btnacta"  />
                             </h:panelGrid>
                         </h:panelGrid>
-                        <br/><br/>
-                        <h:outputText  styleClass="ikont-hot-paso3"      value="#{var.paso} 3" />
-                        <h:outputText  styleClass="ikont-hot-privacidad"     value="#{var.privacidad}" />
-                        <h:outputText  styleClass="ikont-hot-desea"    value="#{var.desea}" />
-                        <h:selectOneRadio id="boolcomentario"   value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolcomentariooculto}"  >
-                            <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
-                            <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
-                        </h:selectOneRadio><br/><br/>
-                        <h:outputText  styleClass="ikont-hot"     value="#{var.desea2}" />
-                        <h:selectOneRadio id="boolidentidad" styleClass="ikont-hsor-boolidentidad"    value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolidentidadoculta}"  >
-                            <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
-                            <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
-                        </h:selectOneRadio>
+                        <h:panelGrid  styleClass="ikont-table-aling-pasos">
+                            <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 4" />
+                            <h:outputText  styleClass="ikont-hot-text-paso-participacion"     value="#{var.privacidad}" />
+                        </h:panelGrid>
+                        <h:panelGroup layout="block">
+                            <h:commandLink  styleClass="ikont-acl-line-coment-ciudadano" ></h:commandLink>
+                            <h:panelGrid columns="2"  styleClass="ikont-hpg-private-coment">
+                                <h:outputText  styleClass="ikont-hot-desea"    value="#{var.desea}" />
+                                <h:selectOneRadio id="boolcomentario"   value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolcomentariooculto}"  >
+                                    <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
+                                    <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
+                                </h:selectOneRadio>
+                                <h:outputText  styleClass="ikont-hot-desea"     value="#{var.desea2}" />
+                                <h:selectOneRadio id="boolidentidad" styleClass="ikont-hsor-boolidentidad"    value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.boolidentidadoculta}"  >
+                                    <f:selectItem itemLabel="#{var.publica}" itemValue="false"  />
+                                    <f:selectItem itemLabel="#{var.privada}" itemValue="true" />
+                                </h:selectOneRadio>
+                            </h:panelGrid>
+                        </h:panelGroup>
                         <h:panelGrid   columnClasses="panelderecha">
                             <h:panelGroup>
                                 <a4j:commandLink styleClass="ikont-acl-cancelarComentario"  action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"></a4j:commandLink>
