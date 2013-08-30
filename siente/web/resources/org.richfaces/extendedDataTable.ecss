@@ -130,7 +130,7 @@ div.rf-edt-ftr-cnt {
 
 .rf-edt-c,.rf-edt-hdr-c,.rf-edt-ftr-c,.rf-edt-flt-c {
     overflow-x: hidden;
-    border-right: '#{richSkin.tableBorderWidth} solid #{richSkin.tableHeaderBackgroundColor}';
+    border-right: '#{richSkin.tableBorderWidth} solid #{richSkin.colorTextButton}';
 }
 
 .rf-edt-c {
@@ -144,7 +144,7 @@ div.rf-edt-ftr-cnt {
 }
 
 .rf-edt-c-cnt {
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .rf-edt-c-cnt,.rf-edt-hdr-c-cnt,.rf-edt-ftr-c-cnt,.rf-edt-tbl-hdr,.rf-edt-tbl-ftr {

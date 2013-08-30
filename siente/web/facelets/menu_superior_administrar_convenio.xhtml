@@ -8,7 +8,7 @@
     xmlns:a4j="http://richfaces.org/a4j" 
 
     >
-    <h:form>
+    <h:form styleClass="ikont-hf-menusuperior-convenio">
         <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-administrar-convenio">
             <h:panelGrid styleClass="ikont-hpg-menu-administrar-convenio"   columns="9"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
                 <h:panelGrid    cellpadding="0" cellspacing="0"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnproyecto and Supervisor$Contrato.contrato !=null 
@@ -34,9 +34,9 @@
         <script type="text/javascript">
            var $j = jQuery.noConflict();
             $j(window).scroll(function() {
-                if (window.pageYOffset >= 220) {
+                if (window.pageYOffset >= 180) {
                     $('.ikont-hpg-menu-contenido-administrar-convenio:first').css("position", "fixed");
-                    $('.ikont-hpg-menu-contenido-administrar-convenio:first').css("height", "70px");
+                    $('.ikont-hpg-menu-contenido-administrar-convenio:first').css("height", "35px");
                     $('.ikont-img-posicion-administrar-convenio').each(function() {
                         $(this).addClass('scroll');
                     });
