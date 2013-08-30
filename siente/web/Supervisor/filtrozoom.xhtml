@@ -17,13 +17,12 @@
         <link href="#{facesContext.externalContext.requestContextPath}/resources/cssfonade/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
         <link href="#{facesContext.externalContext.requestContextPath}/resources/css/jquery-ui.css?#{var.version}" rel="stylesheet" type="text/css"/>
     </h:head>
-
     <rich:tabPanel  styleClass="tabPanelFiltroZoom" switchType="ajax" id="tab_login" activeItem="tab_dos">
         <rich:tab  header="#{var.filtroque}" id="tab_dos" name="tab_dos" style="border: 2px;width: 265px;" > 
             <h:graphicImage styleClass="imagen_punta1" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom">
                 <h:inputText  id="txtPalabraClave_filtro_nuevo"  value="#{HomeGestion.filtro.palabraclave}"
-                              onclick="this.value = ''"  styleClass="input_filtro">
+                              onclick="this.value = ''"  styleClass="input_filtro" style="font-size: 17px;">
                     <rich:placeholder id="Ingresa_palabra" value="Ingresa palabra clave" /></h:inputText>
 
                 <h:selectOneMenu  style="" id="tipoProyecto" value="#{HomeGestion.filtro.inttipoproyecto}"  styleClass="input_filtro_select" >
@@ -59,7 +58,7 @@
                                       });
                                       $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
                                               " a $ " + $("#slider-range").slider("values", 1));
-});
+                                  });
 
                     </script>
 
@@ -88,7 +87,7 @@
                             });
                             $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
                                     "%  a  " + $("#slider-range-avance").slider("values", 1) + "%");
-                        });    
+                        });
                     </script>
 
                     <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
@@ -152,14 +151,14 @@
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
                 <h:inputText id="txtPalabraClave1" value="#{HomeGestion.filtro.strentidad}" 
                              onclick="this.value = '';" size="35" styleClass="input_filtro input_filtro_cliente">
-                    <rich:placeholder id="placeHolderCliente" value="Cliente" />
+                   <rich:placeholder id="placeHolderCliente" value="Cliente" />
                 </h:inputText>
                 <h:inputText id="txtPalabraClave2" value="#{HomeGestion.filtro.strcontratista}"
                              onclick="this.value = '';" size="35" styleClass="input_filtro input_filtro_contratista" >
                     <rich:placeholder id="placeHolderContratista" value="Contratista" />
                 </h:inputText>
 
-                <h:inputText id="txtPalabraClave3" size="35"
+                <h:inputText id="txtPalabraClave3" size="35"  value="#{HomeGestion.filtro.strinterventor}"
                              onclick="this.value = '';" styleClass="input_filtro input_filtro_interventor"  >
                     <rich:placeholder id="placeHolderInterventor" value="Interventor" />
                 </h:inputText>
