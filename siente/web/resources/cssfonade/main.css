@@ -1160,7 +1160,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     text-align: justify; 
     -webkit-border-radius: 8px; 
     border-radius: 8px;
-    width: 100%;
+    width:316% !important;
 }
 
 .ikont-hot-idcomentario{

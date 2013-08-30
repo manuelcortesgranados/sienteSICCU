@@ -49,7 +49,7 @@
                 <interkont:spacer height="10"/>
                 <h:panelGrid columns="1" >
                     <a4j:region id="idregion">
-                        <h:panelGrid  id="txtcomentario1" columns="1"  >
+                        <h:panelGrid  cellspacing="10" id="txtcomentario1" columns="1"  >
                             <a4j:status id="idstatuscomentario" />
 
                             <h:outputText id="idcontarmensaje" value="#{Ciudadano$PerfilCiudadano.contarmensaje}"
@@ -76,7 +76,7 @@
                             <h:panelGrid columns="3">
                                 <h:panelGrid styleClass="ikont-hpg-cargarusuario">
                                     <a4j:commandLink action="#{Ciudadano$PerfilCiudadano.cargarUsuario}" type="submit" >
-                                        <h:graphicImage url="#{var.ipserver}siente#{rowcomentario.jsfUsuario.tercero.strfoto}"
+                                        <h:graphicImage url="#{var.ipserver}#{var.versioncobra}#{rowcomentario.jsfUsuario.tercero.strfoto}"
                                                         styleClass="ikont-hgi-strfoto"/>
                                     </a4j:commandLink>
 
