@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -256,6 +255,7 @@ public class FlujoCaja implements Serializable {
         System.out.println("iniciar flujo = ");
         nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         convenio = nuevoContratoBasico.getContrato();
+        //convenio = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
 
         if (!flujoCajaIniciado) {
             flujoIngresos = new ArrayList<FlujoIngresos>();
@@ -287,8 +287,8 @@ public class FlujoCaja implements Serializable {
         periodosConvenioEliminados = new ArrayList<Relacioncontratoperiodoflujocaja>();
         Periodoflujocaja periodoFlujoCaja = new Periodoflujocaja();
         Relacioncontratoperiodoflujocaja periodoConvenio = new Relacioncontratoperiodoflujocaja();
-        Calendar fechaInicioConvenio = Calendar.getInstance();
-        Calendar fechaFinConvenio = Calendar.getInstance();
+        fechaInicioConvenio = Calendar.getInstance();
+        fechaFinConvenio = Calendar.getInstance();
         Calendar fechaPeriodo = Calendar.getInstance();
         double cantidadPeriodos;
         int iterador = 1;
@@ -819,6 +819,7 @@ public class FlujoCaja implements Serializable {
 
     public void generarPeriodosFlujoCaja() {
         periodosConvenio = new ArrayList<Relacioncontratoperiodoflujocaja>();
+        periodosConvenioEliminados = new ArrayList<Relacioncontratoperiodoflujocaja>();
         Relacioncontratoperiodoflujocaja periodoConvenio;
         Periodoflujocaja periodo;
         Calendar fechaPeriodos = GregorianCalendar.getInstance();
@@ -838,7 +839,7 @@ public class FlujoCaja implements Serializable {
                 periodo = new Periodoflujocaja();
 
                 periodoConvenio.setPeriodoflujocaja(periodo);
-
+                periodoConvenio.setContrato(convenio);
                 periodosConvenio.add(definirPeriodoConvenio(periodoConvenio, fechaPeriodos));
 
                 fechaPeriodos.add(Calendar.MONTH, 1);
@@ -853,7 +854,11 @@ public class FlujoCaja implements Serializable {
                 periodo = new Periodoflujocaja();
 
                 periodoConvenio.setPeriodoflujocaja(periodo);
+                periodoConvenio.setContrato(convenio);
                 periodosConvenio.add(definirPeriodoConvenio(periodoConvenio, fechaPeriodos));
+                
+                fechaPeriodos.add(Calendar.MONTH, 1);
+                fechaPeriodos = obtenerFechaDiaDelMes(fechaPeriodos, true);
             }
         } else if (periodosConvenio.size() > mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio)) {
             int meses = mesesEntreFechas(fechaInicioConvenio, fechaFinConvenio);
@@ -866,6 +871,8 @@ public class FlujoCaja implements Serializable {
 
             actualizarPeriodosConvenio(fechaPeriodos);
         } else {
+            fechaPeriodos.setTime(convenio.getDatefechaini());
+            
             actualizarPeriodosConvenio(fechaPeriodos);
         }
     }
@@ -886,7 +893,7 @@ public class FlujoCaja implements Serializable {
         }
 
         periodoConvenio.getPeriodoflujocaja().setStrdescripcion(etiquetarPeriodo(fechaPeriodos));
-
+        
         return periodoConvenio;
     }
 
@@ -932,6 +939,12 @@ public class FlujoCaja implements Serializable {
         meses = ((fechaFinal.get(Calendar.YEAR) * 12) + (fechaFinal.get(Calendar.MONTH) + 1))
                 - ((fechaInicial.get(Calendar.YEAR) * 12) + (fechaInicial.get(Calendar.MONTH) + 1));
 
-        return meses;
+        return (meses + 1);
+    }
+    
+    private void imprimirPeriodo(Periodoflujocaja periodo) {
+        System.out.println("Periodo: " + periodo.getStrdescripcion());
+        System.out.println("Fecha inicio: " + periodo.getFechainicio());
+        System.out.println("Fecha fin: " + periodo.getFechafin());
     }
 }
