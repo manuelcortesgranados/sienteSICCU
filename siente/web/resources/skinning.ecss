@@ -36,6 +36,10 @@ hr {
     margin: 5px;
 }
 
+.textjustify{
+    text-align: justify;
+}
+
 .verticalalingtop{
     vertical-align: top;
 }
@@ -86,6 +90,7 @@ button, input[type="reset"], input[type="submit"], input[type="button"] {
         padding: 5px 10px;
 	border-radius:'#{richSkin.borderRadiusButton}';
         margin-right: '#{richSkin.marginRightButton}';
+        cursor : pointer;
 }
 button:hover, input[type="reset"]:hover, input[type="submit"]:hover, input[type="button"]:hover {
 	background-color: '#{richSkin.backgraudButtonHover}';
