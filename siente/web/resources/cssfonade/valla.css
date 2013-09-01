@@ -161,7 +161,7 @@
 }
 
 .imgtipo.tipo1{
-    background-position: 0px -40px;
+    background-position: -40px -40px;
 }
 
 .imgtipo.tipo2{
@@ -181,7 +181,7 @@
 }
 
 .imgtipo.tipo6{
-    background-position: 0px -80px;
+    background-position: -160px -40px;
 }
 
 .imgtipo.tipo7{
@@ -205,19 +205,19 @@
 }
 
 .imgtipo.tipo12{
-    background-position: -160px -80px;
+    background-position: -120px -80px;
 }
 
 .imgtipo.tipo13{
-    background-position: -80px -80px;
+    background-position: -80px -40px;
 }
 
 .imgtipo.tipo14{
-    background-position: -40px -80px;
+    background-position: -0px -80px;
 }
 
 .imgtipo.tipo15{
-    background-position: 0px -80px;
+    background-position: -160px -40px;
 }
 
 .imgtipo.tipo16{
