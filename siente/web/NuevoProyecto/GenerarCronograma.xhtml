@@ -81,9 +81,10 @@
                                                             <center>
                                                                 <h:panelGrid columns="1" >
                                                                     <h:outputLabel  styleClass="ikont-hol-importarcronograma"   value="#{var.importeelcronograma}"/>
-                                                                    <interkont:spacer width="40"/>
-                                                                    <a4j:commandButton style="width: 17px;x"     value="#{var.examinar}"  id="subircronograma"
+                                                                    <center>
+                                                                    <a4j:commandButton    value="#{var.examinar}"  id="subircronograma"
                                                                                        onclick="#{rich:component('mp_subircronograma')}.show();" render="uploadCrono"/>
+                                                                    </center>
                                                                 </h:panelGrid>
 
                                                                 <h:panelGroup id="layoutDoc" >

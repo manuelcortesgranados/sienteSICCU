@@ -28,7 +28,7 @@ public interface CobraGwtServiceAbleAsync {
     void setLog(String log, AsyncCallback<Void> call);
 
     //void ObtenerContratoDTO(int idcontrato, AsyncCallback<ContratoDTO> call);
-    void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, AsyncCallback<ArrayList<ActividadobraDTO>> call);
+    void obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin, AsyncCallback<ArrayList<ActividadobraDTO>> call);
 
     void obtenerRubros(String categoria,AsyncCallback<List<RubroDTO>> call);
     

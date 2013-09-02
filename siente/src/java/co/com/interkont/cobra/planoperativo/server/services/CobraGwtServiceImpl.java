@@ -39,7 +39,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
     private CobraDaoAble cobraDao;
     private ContratoDTO contratoDto = new ContratoDTO();
     private final Log log = LogFactory.getLog(this.getClass());
-    private int navegacion=1;
+    private int navegacion = 1;
 
     public CobraDaoAble getCobraDao() {
         return cobraDao;
@@ -61,12 +61,11 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 ////            contratoDto.setRelacionobrafuenterecursoscontratos(fuenterecursosdto);
 //        return null;
 //    }
-
     @Override
     public ContratoDTO obtenerContratoDTO() {
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
-                contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini())));
+                contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
             } catch (Exception ex) {
                 Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -75,19 +74,17 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return this.contratoDto;
     }
 
-    @Override    
-    public Boolean setContratoDto(ContratoDTO contrato) {       
-        
+    @Override
+    public Boolean setContratoDto(ContratoDTO contrato) {
+
         this.contratoDto = contrato;
         return true;
     }
-    
+
     @Override
     public ContratoDTO getContratoDto() {
         return contratoDto;
     }
-    
-    
 
     @Override
     public void setLog(String log) {
@@ -98,23 +95,28 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 //    public ContratoDTO ObtenerContratoDTO(int idcontrato) throws Exception {
 //        return CasteoGWT.castearContratoToContratoDTO((Contrato) cobraDao.encontrarPorId(Contrato.class, idcontrato));
 //    }
-
     @Override
-    public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini) throws Exception {
+    public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin) throws Exception {
         List<Parametricaactividadesobligatorias> listapar = cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica");
         Iterator itparametricas = listapar.iterator();
         ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
-        while (itparametricas.hasNext()) {            
-            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();            
+        while (itparametricas.hasNext()) {
+            Parametricaactividadesobligatorias par = (Parametricaactividadesobligatorias) itparametricas.next();
             if (par.getParametricaactividadesobligatorias() == null) {
-                ActividadobraDTO actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
-
+                ActividadobraDTO actdto = null;
+                if (par.getIdparametrica() == 3) {
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fechafin, 1, 0);
+                } else {
+                    actdto = CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(par, fecini, 1, 0);
+                }
                 for (Parametricaactividadesobligatorias parhija : listapar) {
+
                     if (parhija.getParametricaactividadesobligatorias() != null && parhija.getParametricaactividadesobligatorias().getIdparametrica() == par.getIdparametrica()) {
                         //Coloca 1 dia para Acta de Inicio de convenio
-
                         if (parhija.getIdparametrica() == 4) {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecactaini, 1, 0));
+                        } else if (parhija.getIdparametrica() == 7) {
+                            actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fechafin, 1, 0));
                         } else {
                             actdto.addChild(CasteoGWT.castearParametricaactividadesobligatoriasToActividadobraDTO(parhija, fecini, 1, 0));
                         }
@@ -128,7 +130,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Override
     public List<RubroDTO> obtenerRubros(String categoria) throws Exception {
-        List<Rubro> lstRubros = cobraDao.encontrarPorcadenailikeinicial(Rubro.class,"idrubro",categoria);
+        List<Rubro> lstRubros = cobraDao.encontrarPorcadenailikeinicial(Rubro.class, "idrubro", categoria);
         List<RubroDTO> lstRubrosDTO = new ArrayList<RubroDTO>(lstRubros.size());
         for (Rubro rubro : lstRubros) {
             lstRubrosDTO.add(new RubroDTO(rubro.getIdrubro(), rubro.getStrdescripcion()));
@@ -147,7 +149,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         return true;
     }
 
-  @Override
+    @Override
     public List obtenerTiposContrato() throws Exception {
         List<Tipocontrato> lstTipoContrato = cobraDao.obtenerTipoContrato();
         List<TipocontratoDTO> lstTipoContratoDto = new ArrayList<TipocontratoDTO>(lstTipoContrato.size());
@@ -156,19 +158,18 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
         }
 
         return lstTipoContratoDto;
-     
+
     }
 
     @Override
     public List<RubroDTO> obtenerCategoriasRubros() throws Exception {
         List<Rubro> lstRubros = cobraDao.obtenerCategoriasRubros();
-       
+
         List<RubroDTO> lstRubrosDTO = new ArrayList<RubroDTO>();
         for (Rubro rubro : lstRubros) {
             lstRubrosDTO.add(new RubroDTO(rubro.getIdrubro(), rubro.getStrdescripcion()));
         }
         return lstRubrosDTO;
     }
-    
 
 }
