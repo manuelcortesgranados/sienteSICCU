@@ -3624,23 +3624,35 @@ a:hover {
     width: 32px;
     height: 32px;
     display: block;
-    background-image: url(../imgs/footer/tw.png);
+    background-image: url(../imgs/footer/footer_social_icons.png);
+    background-position: -31px 0px;
+    background-repeat: no-repeat;
     float: left;
+}
+
+.ikont-hcl-footer-tw:hover{
+    background-position: -93px 0px;
 }
 
 .ikont-hcl-footer-fc{
     width: 32px;
     height: 32px;
     display: block;
-    background-image: url(../imgs/footer/fc.png);
+    background-image: url(../imgs/footer/footer_social_icons.png);
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
     float: left;
 }
-.ikont-hcl-footer-fc-like{
-    width: 24px;
-    height: 24px;
-    display: block;
-    background-image: url(../imgs/footer/like.png);
-    margin: 0px auto;
+
+.ikont-hcl-footer-fc:hover{
+    background-position: -62px 0px;
+}
+
+.ikont-hcl-footer-sellos{
+    background-image: url(../imgs/footer/sellos.png);
+    background-repeat: no-repeat;
+    width: 262px;
+    height: 92px;
 }
 
 .ikont-hcl-footer-firma{
@@ -3654,7 +3666,6 @@ a:hover {
 .ikont-hot-text-footer{
     font-family: open;
     font-size: 0.8em;
-    text-align: justify;
     color: #58595B;
 }
 
@@ -3686,4 +3697,28 @@ a:hover {
 .ikont-hpg-infogeneral{
     left: -9%;
     position: relative;    
+}
+
+
+.ikont-hot-conectate-zoom{
+    color: #257500;
+    font-family: open;
+    font-size: 1.2em;
+}
+
+.ikont-hot-derechos-reser{
+    color: #257500;
+    font-family: open;
+    font-size: 0.8em;
+}
+
+.ikont-hot-terminos-condiciones{
+    color: #58595B;
+    font-family: open;
+    font-size: 0.8em;
+    font-style: italic;
+}
+
+ikont-hot-terminos-condiciones2{
+    color: #0C9!important;
 }
