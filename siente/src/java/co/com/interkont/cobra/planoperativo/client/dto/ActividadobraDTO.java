@@ -45,10 +45,10 @@ public class ActividadobraDTO implements IsSerializable {
     
     private long oidactiviobra;
     private String strdescactividad;
-    private Date fechaInicio;
-    private Date fechaFin;
+//    private Date fechaInicio;
+//    private Date fechaFin;
     private Double peso;
-    private int duracion;
+//    private int duracion;
     private Integer estado;
     private Set dependenciasForFkActividadOrigen = new HashSet(0);
     private Set dependenciasForFkActividadDestino = new HashSet(0);
@@ -64,13 +64,13 @@ public class ActividadobraDTO implements IsSerializable {
         this.eliminar="Eliminar";
     }
     
-     public ActividadobraDTO(String strdescactividad,int tipoActividad,Date fechaInicio,Date fechaFin,ObraDTO obra) {
-        this.strdescactividad=strdescactividad;
-        this.tipoActividad=tipoActividad;
-        this.fechaInicio=fechaInicio;
-        this.fechaFin=fechaFin;
-        this.obra=obra;
-    }
+//     public ActividadobraDTO(String strdescactividad,int tipoActividad,Date fechaInicio,Date fechaFin,ObraDTO obra) {
+//        this.strdescactividad=strdescactividad;
+//        this.tipoActividad=tipoActividad;
+//        this.fechaInicio=fechaInicio;
+//        this.fechaFin=fechaFin;
+//        this.obra=obra;
+//    }
      
      public ActividadobraDTO(String id, String name, Date start, int duration,
             int percentDone, TaskType taskType) {
@@ -90,6 +90,12 @@ public class ActividadobraDTO implements IsSerializable {
         this.endDateTime=fechaFin;
         this.duration=duracion;
     }
+    
+//    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
+//        this.startDateTime=fechaInicio;
+//        this.endDateTime=fechaFin;
+//        this.duration=duracion;
+//    }
    
     public List<ActividadobraDTO> getChildren() {
         return children;
@@ -315,19 +321,19 @@ public class ActividadobraDTO implements IsSerializable {
         this.peso = peso;
     }
 
-    /**
-     * @return the duracion
-     */
-    public int getDuracion() {
-        return duracion;
-    }
-
-    /**
-     * @param duracion the duracion to set
-     */
-    public void setDuracion(int duracion) {
-        this.duracion = duracion;
-    }
+//    /**
+//     * @return the duracion
+//     */
+//    public int getDuracion() {
+//        return duracion;
+//    }
+//
+//    /**
+//     * @param duracion the duracion to set
+//     */
+//    public void setDuracion(int duracion) {
+//        this.duracion = duracion;
+//    }
 
     /**
      * @return the estado

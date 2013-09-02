@@ -602,9 +602,10 @@ public class CasteoGWT {
                     case 1:
                     case 2:
                     case 3:
+                         case 5:
+                         case 8:
                         return TaskType.PARENT;                        
-                    case 4:                        
-                    case 5:
+                    case 4: 
                         return TaskType.LEAF;                                               
                     case 6:
                         return TaskType.MILESTONE;                        

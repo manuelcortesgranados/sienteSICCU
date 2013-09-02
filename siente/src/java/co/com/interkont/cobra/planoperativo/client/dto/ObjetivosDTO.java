@@ -52,6 +52,14 @@ public class ObjetivosDTO implements IsSerializable
        this.eliminar="Eliminar";
      
     }
+     
+     public ObjetivosDTO(String descripcion) {
+       this.descripcion = descripcion;
+       this.tipoobjetivo = 1;
+       this.esobjetivo = true;
+       
+     
+    }
      public ObjetivosDTO(String descripcion,Boolean esobjetivo) {
        this.descripcion = descripcion;
        this.esobjetivo = esobjetivo;
