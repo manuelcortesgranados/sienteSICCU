@@ -25,14 +25,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import com.gantt.client.event.BeforeTaskDnDEvent;
-import com.gantt.client.event.BeforeTaskResizeEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
-import com.gantt.client.event.TaskClickEvent;
 import com.gantt.client.event.TaskResizeEvent;
-import com.gantt.client.event.TaskResizeStartEvent;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
@@ -41,8 +35,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
-import com.scheduler.client.core.event.BeforeDragCreateEvent;
-import com.scheduler.client.core.event.BeforeTimeSpanChangeEvent;
 import com.scheduler.client.core.timeaxis.TimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.DayTimeAxisGenerator;
 import com.scheduler.client.core.timeaxis.preconfig.WeekTimeAxisGenerator;
@@ -61,12 +53,10 @@ import com.sencha.gxt.widget.core.client.box.ConfirmMessageBox;
 import com.sencha.gxt.widget.core.client.button.ToggleButton;
 import com.sencha.gxt.widget.core.client.container.FlowLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
-import com.sencha.gxt.widget.core.client.event.BeforeShowContextMenuEvent;
 import com.sencha.gxt.widget.core.client.event.BeforeStartEditEvent;
 import com.sencha.gxt.widget.core.client.event.CompleteEditEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
-import com.sencha.gxt.widget.core.client.event.MoveEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.event.StartEditEvent;
@@ -198,7 +188,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
         ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-        headers.add(new WeekTimeAxisGenerator("MMM d"));
+        headers.add(new WeekTimeAxisGenerator("MMM d AAAA"));
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
@@ -220,17 +210,19 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Defines if the timeAxis columns should be autosized to fit.
         config.fitColumns = false;
         // Define column width
-        config.columnWidth = 40;
+        config.columnWidth = 60;
         // Enable task contextMenu
         config.taskContextMenuEnabled = true;
         // Enable dependency contextMenu
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = false;
-        config.showTaskLabel = true;
-       
+        config.showTaskLabel = false;
         config.mouseWheelZoomEnabled = false;
 
-        //config.useEndDate = true;        
+        //config.useEndDate = true;
+        config.timeResolutionIncrement = 1;
+        config.timeAxisDoubleClickZoomEnabled = true;
+
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -249,6 +241,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         });
+
 
         /**
          * Personalizando el menú
@@ -271,6 +264,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
         config.taskContextMenu.add(menuItemProyecto);
+
+
 
         /**
          * Opciones de la actividad proyecto
@@ -364,6 +359,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
+
             }
         });
         config.taskContextMenu.add(menuItemAñadirTarea);
@@ -403,10 +399,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Create the Gxt Scheduler
         gantt = new Gantt<ActividadobraDTO, DependenciaDTO>(taskStore, depStore,
                 config) {
-                    @Override
-                    public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                        return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
-                    };
+            @Override
+            public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+            }
+        ;
+
         };      
        
         
@@ -414,6 +412,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             @Override
             public void onTaskContextMenu(TaskContextMenuEvent<ActividadobraDTO> event) {
                 tareaSeleccionada = event.getTask();
+
 
 //                variable para definir si se muestran o no no las opciones de eliminar
 //                boolean mostrarEliminar=false;
@@ -525,6 +524,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
+
         // Editing
         final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
         //editing.addEditor(config.leftColumns.getColumn(0), new TextField());
@@ -540,26 +540,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         editing.addBeforeStartEditHandler(new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
             @Override
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
-                if (event.getEditCell().getRow() != 0) {
-                    ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                    actividadAnterior = store.get(event.getEditCell().getRow());                   
-                } else {
-                    AlertMessageBox alerta = new AlertMessageBox("Error", "No debe modificar los datos del convenio marco.");
-                    alerta.show();
-                }
-
-            }
-        });
-
-        editing.addStartEditHandler(new StartEditEvent.StartEditHandler<ActividadobraDTO>() {
-            @Override
-            public void onStartEdit(StartEditEvent<ActividadobraDTO> event) {
                 ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                ActividadobraDTO ar = store.get(event.getEditCell().getRow());
-//                service.setLog("antes end 2" + ar.getEndDateTime(), null);
-//                service.setLog("antes start 2" + ar.getEndDateTime(), null);
+                actividadAnterior =new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration()) ;
             }
         });
+
+       
+        
 
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
             @Override
@@ -571,11 +558,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (event.getEditCell().getCol() == 1) {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
                     if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
-                        alerta.show();
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-                    } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                        alerta.show();                        
+                        } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -585,12 +572,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 if (event.getEditCell().getCol() == 2) {
                     /*se verifia si la fecha fin  es mayor que la fecha de inicio en este caso seria un error*/
                     if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
-                        alerta.show();
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-
-                    } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
+                        alerta.show();                        
+                      } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -599,60 +585,18 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 /*verifico si el dato a modificar es la duracion de la actividad y modifico la fecha fin*/
                 if (event.getEditCell().getCol() == 3) {
+                    if(actividadAnterior.getDuration()<ac.getDuration()){
+                    Date fechaCopia=CalendarUtil.copyDate(ac.getStartDateTime());
+                    ac.setEndDateTime(fechaCopia);
                     CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
+                    }else{
+                    ac.getEndDateTime().setDate(ac.getEndDateTime().getDate()-((actividadAnterior.getDuration()-ac.getDuration()))+1);
+                    }
                 }
-            }
-        });
-        ///Capturar movimiento del gantt 
-        gantt.getGanttPanel().getContainer().addBeforeShowContextMenuHandler(new BeforeShowContextMenuEvent.BeforeShowContextMenuHandler() {
 
-            @Override
-            public void onBeforeShowContextMenu(BeforeShowContextMenuEvent event) {                
-                service.setLog("antes de mostrar menu", null);
             }
         });
-        
-        gantt.addTaskClickHandler(new TaskClickEvent.TaskClickHandler<ActividadobraDTO>() {
 
-            @Override
-            public void onTaskClick(TaskClickEvent<ActividadobraDTO> event) {
-                service.setLog("click en tarea", null);
-                
-            }
-        });
-        //////
-       gantt.addBeforeTaskResizeHandler(new BeforeTaskResizeEvent.BeforeTaskResizeHandler<ActividadobraDTO>() {
-
-            @Override
-            public void onBeforeTaskResize(BeforeTaskResizeEvent<ActividadobraDTO> event) {
-              actividadAnterior=event.getEventModel();               
-            }
-        });
-       
-       
-       
-        gantt.addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {            
-            @Override
-            public void onTaskResize(TaskResizeEvent<ActividadobraDTO> event) {
-                ActividadobraDTO ac=event.getEventModel();                
-                props.endDateTime().setValue(ac, ac.getEndDateTime());
-                gantt.getGanttPanel().getContainer().refresh();                
-                service.setLog("ac."+ac.getEndDateTime(), null);     
-                
-            }
-        });
-        
-        
-       
-//        gantt.getGanttPanel().addMoveHandler(new MoveEvent.MoveHandler() {
-//
-//            @Override
-//            public void onMove(MoveEvent event) {     
-//                
-//                service.setLog("Movi el gantt"+event.getSource().getId(), null);
-//                
-//            }
-//        });
 
         gantt.getLeftGrid().addViewReadyHandler(new ViewReadyEvent.ViewReadyHandler() {
             @Override
@@ -661,10 +605,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-        DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
+        DateWrapper dw = new DateWrapper(convenioDTO.getDatefechaini()).clearTime();
         // Set start and end date.
-        //gantt.setStartEnd(dw.addDays(-2).asDate(), dw.addMonths(1).asDate());
-        gantt.setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+        //gantt.setStartEnd(dw.addDays(-7).asDate(), dw.addMonths(1).asDate());
+        gantt.setStartEnd(dw.addDays(-2).asDate(), convenioDTO.getDatefechafin());
 
         FlowLayoutContainer main = new FlowLayoutContainer();
         main.getElement().setMargins(new Margins(5));
@@ -696,6 +640,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //        ToggleButton persemestral= new ToggleButton("6 meses");      
 //        ToggleButton peranual = new ToggleButton("Anual");      
 
+
         ToolBar tbar = new ToolBar();
 
         // Button to endable/disable cascadeChanges
@@ -719,6 +664,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
+
+
 
 //         permensual.addSelectHandler(new SelectEvent.SelectHandler() {
 //            @Override
@@ -845,6 +792,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                        dw=dw.addDays(30);
 //                       service.setLog("dw = " + dw.asDate(),null);
 //                    }    
+
 //                    service.setLog("Size fuentes" + convenioDTO.getFuenterecursosconvenios().size(), null);
 //                    service.setLog("Idcontrato" + convenioDTO.getIntidcontrato(), null);
 //                    service.setLog("Nombre abreviado" + convenioDTO.getNombreAbreviado(), null);
@@ -859,6 +807,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //                    service.setLog("Relacion obra fuente recursos" + convenioDTO.getRelacionobrafuenterecursoscontratos().size(), null);
 //                    service.setLog("Tipo contrato" + convenioDTO.getTipocontrato().getInttipocontrato(), null);
 //                    service.setLog("Valor disponible" + convenioDTO.getValorDisponible(), null);
+
                     RootPanel.get().add(asWidget());
                 } else {
                     service.setLog(msg, null);
@@ -887,13 +836,5 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void cargarDatosEditarContrato() {
         ContratoDTO contrato = tareaSeleccionada.getContrato();
 
-    }
-
-    public void redimensionarAreaGantt(ActividadobraDTO raiz) {
-        DateWrapper dw = new DateWrapper(raiz.getStartDateTime()).clearTime();
-        gantt.setStartEnd(new DateWrapper(raiz.getEndDateTime()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
-
-        gantt.syncSize();
-        service.setLog("redimensione el gantt" + raiz.getEndDateTime(), null);
     }
 }
