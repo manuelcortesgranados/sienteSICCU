@@ -56,7 +56,7 @@
         </center>
     </ui:define>   
     <ui:define name="body">      
-        <h:form id="form_gestion" prependId="false" >
+        <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;">
             <table>
                 <tr>
                     <td>
@@ -67,15 +67,19 @@
                 </tr>
             </table>
 
-            <center><h:panelGrid styleClass="panelzoomhome1">
-                    <rich:column>
-                        <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.bienvenidazoom}"/></center><br/>      
-                    </rich:column>
-                    <rich:column>
-                        <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.bienvenidazoomtexto}"/></center> 
-                    </rich:column> 
-                    <br/> 
-                </h:panelGrid></center>
+            <center>
+                <rich:collapsiblePanel header="X" switchType="client" >
+                    <h:panelGrid  styleClass="panelzoomhome1">
+                        <rich:column>
+                            <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.bienvenidazoom}"/></center><br/>      
+                        </rich:column>
+                        <rich:column>
+                            <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.bienvenidazoomtexto}"/></center> 
+                        </rich:column> 
+                        <br/> 
+                    </h:panelGrid>
+                </rich:collapsiblePanel>
+            </center>
             <center><div id="header_content header_content_inicio"/> </center>
             <br/>
             <center><h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom}"/>     
@@ -113,15 +117,15 @@
 
             <center><a4j:commandLink styleClass="inputlinkhomevermas" id="vermas" value="Ver mas" rendered="false"/></center>
 
-            <br/><br/>
+            <br/><br/> <br/><br/>
             <center><table align="center">
-                    <tr><td style="width: 275px; position:relative; top: -20px;"  rowspan="3" >  <div style="position: absolute; bottom: 268px;">
+                    <tr><td style="width: 275px; position:relative; top: -20px;"  rowspan="3" >  <div style="position: relative; bottom: 93px;">
 
 
                                 <ui:include src="/Supervisor/filtrozoom.xhtml"/>
 
                             </div>
-                        </td><tr><td align="right">
+                        </td><tr><td align="right" style="position: relative; top:-36px;right: -7px;">
                                 <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
                                 <h:outputText  styleClass="ikont-hot-terminado"   value="#{var.terminado} " rendered="#{HomeGestion.filtro.boolobraterminada}"/>
                                 <!--h:outputText  styleClass="ikont-hot-encolombia"   value="#{var.encolombia} " rendered="#{HomeGestion.filtro.tipointervencion==-1}"/-->
@@ -134,7 +138,7 @@
                                 <h:outputText  styleClass="ikont-hot-filtrointvisita"   value="" rendered="#{HomeGestion.filtro.intvista==1}" />
                             </td></tr><td>
                             <h:panelGroup style="border: 2px; border-color: black;">
-                                <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style=" box-shadow: 2px 2px 7px #999; padding: 9px;" rendered="#{HomeGestion.filtro.intvista == 1}" >
+                                <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style=" box-shadow: 2px 2px 7px #999; padding: 9px;position: relative;top: -18px;right: -11px; " rendered="#{HomeGestion.filtro.intvista == 1}" >
 
 
                                     <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
