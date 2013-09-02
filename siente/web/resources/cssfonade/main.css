@@ -3653,6 +3653,8 @@ a:hover {
     background-repeat: no-repeat;
     width: 262px;
     height: 92px;
+    display: block;
+    margin: 10px auto;
 }
 
 .ikont-hcl-footer-firma{
@@ -3719,6 +3721,6 @@ a:hover {
     font-style: italic;
 }
 
-ikont-hot-terminos-condiciones2{
+.ikont-hot-terminos-condiciones2{
     color: #0C9!important;
 }
