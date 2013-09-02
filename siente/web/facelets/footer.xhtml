@@ -14,25 +14,25 @@
         <h:panelGroup layout="block" styleClass="ikont-hpg-content-footer">
             <h:panelGrid columns="1" styleClass="panelcenter" columnClasses="panelcenter,panelcenter,panelcenter,panelcenter,panelcenter,panelcenter">
                 <h:panelGroup layout="block" styleClass="panelcenter">
-                    <h:outputText value="Conectate con ZOOM" styleClass="ikont-hot-conectate-zoom"></h:outputText>
+                    <h:outputText value="Conectate con #{var.nombreclientesistema}" styleClass="ikont-hot-conectate-zoom"></h:outputText>
                 </h:panelGroup>
                 <h:panelGrid columns="2" styleClass="panelcenter">
                     <h:commandLink styleClass="ikont-hcl-footer-fc"/>
                     <h:commandLink styleClass="ikont-hcl-footer-tw"/>
                 </h:panelGrid>
-                <h:panelGroup layout="block" styleClass="panelcenter">
-                    <h:outputText value="ZOOM es la herramienta de FONADE para realizar control en tiempo real" styleClass="ikont-hot-text-footer"></h:outputText><br/>
-                    <h:outputText value="sobre los proyectos que día a día realizamos en el país" styleClass="ikont-hot-text-footer"></h:outputText>
+                <h:panelGroup layout="block" styleClass="panelcenter " >
+                    <h:outputText value="#{var.footertextozoomlineauno}" styleClass="ikont-hot-text-footer"></h:outputText><br/>
+                    <h:outputText value="#{var.footertextozoomlineados}" styleClass="ikont-hot-text-footer"></h:outputText>
                 </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
                     <h:outputText value="*" styleClass="ikont-hot-terminos-condiciones2 ikont-hot-terminos-condiciones"></h:outputText>
-                    <h:outputText value="Terminos y condiciones" styleClass="ikont-hot-terminos-condiciones"></h:outputText>
+                    <h:outputText value="#{var.loginfoterterminos}" styleClass="ikont-hot-terminos-condiciones"></h:outputText>
                 </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
                     <h:commandLink styleClass="ikont-hcl-footer-sellos"/>
                 </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
-                    <h:outputText value="ZOOM " styleClass="ikont-hot-derechos-reser"></h:outputText>
+                    <h:outputText value="#{var.nombreclientesistema}" styleClass="ikont-hot-derechos-reser"></h:outputText>
                     <b><h:outputText value=" 2013 " styleClass="ikont-hot-derechos-reser"></h:outputText></b>
                     <h:outputText value=" Todos los derechos reservados" styleClass="ikont-hot-derechos-reser"></h:outputText>
                 </h:panelGroup>
