@@ -182,9 +182,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private void createColumnForm() {
         String tituloPantalla;
         if (!editar) {
-            tituloPantalla = "Editar Proyecto";
+            tituloPantalla ="Planificacion de proyectos";
         } else {
-            tituloPantalla = "Planificacion de proyectos";
+            tituloPantalla ="Editar Proyecto";
         }
 
         vp.add(new Label(tituloPantalla));
@@ -288,7 +288,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
          nombreBotonPrincipal="Editar Proyecto";
         }
 
-        Button btnAdicionarPry = new Button("Añadir Proyecto", new ClickHandler() {
+        Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 if(!editar){
@@ -349,6 +349,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 }
 
             }else{
+                    
                 }
             }
         });
@@ -362,6 +363,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             lbl.setLabelAlign(LabelAlign.TOP);
         }
 
+    }
+    
+    
+    public void editarProyecto(){
+    if(!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())){}
     }
 
     /*

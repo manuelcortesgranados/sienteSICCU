@@ -46,6 +46,7 @@ import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.cell.core.client.form.ComboBoxCell.TriggerAction;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.ListStore;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer.HtmlData;
@@ -126,6 +127,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
     boolean fechaSusError;
     boolean fechaActaError;
     Date fechaContrato;
+    TreeStore<ActividadobraDTO> taskStore;
 
     public ContratoForm() {
     }
@@ -142,7 +144,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         idtempRubros = 0;
     }
 
-    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
+    public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraEditar = actividadobraContratoEditar;
         this.gantt = gantt;
         modalContrato = di;
@@ -153,6 +155,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         service.setLog("instanciando" + fechaContrato, null);
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
+        this.taskStore = taskStore;
         CargarFormularioEditar();
     }
 
@@ -353,12 +356,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     public boolean validarCambiofechaSuscripcionContrato() {
         if (contrato.getDatefechaini().compareTo(fechaSuscripcionContrato.getValue()) != 0) {
-            if (fechaSuscripcionContrato.getValue().compareTo(actividadObraPadre.getObra().getFechaInicio()) >= 0) {
+            if (fechaSuscripcionContrato.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
+                service.setLog("es mayor al padre", null);
                 contrato.setDatefechaini(fechaSuscripcionContrato.getValue());
                 odifi(actividadObraEditar);
-                //fechaContrato=fechaSuscripcionContrato.getValue();
+
 
             } else {
+                service.setLog("es menor al padre", null);
                 fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
                 return true;
             }
@@ -384,12 +389,14 @@ public class ContratoForm implements IsWidget, EntryPoint {
         if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
 
             int duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
-           
+
             Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
             CalendarUtil.addDaysToDate(fechaI, duracion);
 
             Date asigFin = CalendarUtil.copyDate(fechaI);
             actiHija.setEndDateTime(asigFin);
+
+            ActividadobraDTO actObra = taskStore.getParent(actiHija);
 
             propes.startDateTime().setValue(actiHija, fechaI);
 
@@ -397,6 +404,18 @@ public class ContratoForm implements IsWidget, EntryPoint {
             Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
             CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
             propes.endDateTime().setValue(actiHija, dateFin);
+
+
+            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
+                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
+                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                actiHija.setEndDateTime(copiaFechaI);
+                actiHija.setDuration(duraNueva);
+                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
+                propes.endDateTime().setValue(actiHija, copiaFechaI);
+                propes.duration().setValue(actiHija, duraNueva);
+
+            }
 
             if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 contrato.setDatefechaactaini(actiHija.getStartDateTime());
@@ -412,12 +431,26 @@ public class ContratoForm implements IsWidget, EntryPoint {
             Date asigFin = CalendarUtil.copyDate(fechaI);
             actiHija.setEndDateTime(asigFin);
 
+            ActividadobraDTO actObra = taskStore.getParent(actiHija);
+
             propes.startDateTime().setValue(actiHija, fechaI);
 
 
             Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
             dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
             propes.endDateTime().setValue(actiHija, dateFin);
+
+            if (actObra.getEndDateTime().compareTo(actiHija.getEndDateTime()) < 0) {
+                int duraNueva = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), actObra.getEndDateTime());
+                service.setLog(msgValidacion, null);
+                Date copiaFechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+                actiHija.setEndDateTime(copiaFechaI);
+                actiHija.setDuration(duraNueva);
+                CalendarUtil.addDaysToDate(copiaFechaI, duraNueva);
+                propes.endDateTime().setValue(actiHija, copiaFechaI);
+                propes.duration().setValue(actiHija, duraNueva);
+
+            }
 
             if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 contrato.setDatefechaactaini(actiHija.getStartDateTime());
@@ -432,6 +465,10 @@ public class ContratoForm implements IsWidget, EntryPoint {
             if (fechaSuscripcionActaInicio.getValue().compareTo(actividadObraPadre.getObra().getFechaInicio()) >= 0) {
                 contrato.setDatefechaactaini(fechaSuscripcionActaInicio.getValue());
                 propes.startDateTime().setValue(actividadObraEditar.getChildren().get(1), fechaSuscripcionActaInicio.getValue());
+                Date copia = CalendarUtil.copyDate(fechaSuscripcionActaInicio.getValue());
+                CalendarUtil.addDaysToDate(copia, 1);
+                propes.endDateTime().setValue(actividadObraEditar.getChildren().get(1), copia);
+
             } else {
                 fechaSuscripcionActaInicio.setValue(contrato.getDatefechaactaini());
                 return true;
@@ -447,7 +484,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         }
 
         fechaSusError = validarCambiofechaSuscripcionContrato();
-        //fechaActaError = validarCambiofechaActaContrato();
+        // fechaActaError = validarCambiofechaActaContrato();
         if (!contrato.getNombreAbreviado().equals(nombreAbre.getText())) {
             contrato.setNombreAbreviado(nombreAbre.getText());
             propes.name().setValue(actividadObraEditar, contrato.getNombreAbreviado());

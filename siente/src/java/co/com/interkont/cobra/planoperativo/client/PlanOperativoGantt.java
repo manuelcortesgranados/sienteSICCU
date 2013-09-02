@@ -287,7 +287,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemEditarPry.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
-//                crearProyectoDialog.show();
+                final Window editarProyDialog = new Window();
+                editarProyDialog.setBlinkModal(true);
+                editarProyDialog.setModal(true);
+                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, gantt, editarProyDialog, taskStore.getParent(tareaSeleccionada), props);
+                editarProyDialog.add(proyectoForm);
+                editarProyDialog.show();
+
             }
         });
         config.taskContextMenu.add(menuItemEditarPry);
@@ -311,7 +317,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props);
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props,taskStore);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
             }
@@ -387,7 +393,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyProperties = depProps;
 
         // Cascade Changes
-        config.cascadeChanges = true;
+        config.cascadeChanges = false;
 
         // Add zones to weekends
         ArrayList<ZoneGeneratorInt> zoneGenerators = new ArrayList<ZoneGeneratorInt>();
@@ -538,9 +544,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         editing.addBeforeStartEditHandler(new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
             @Override
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
-               if (event.getEditCell().getRow() != 0) {
+                if (event.getEditCell().getRow() != 0) {
                     ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                    actividadAnterior = store.get(event.getEditCell().getRow());                   
+                    actividadAnterior = store.get(event.getEditCell().getRow());
                 } else {
                     AlertMessageBox alerta = new AlertMessageBox("Error", "No debe modificar los datos del convenio marco.");
                     alerta.show();
@@ -548,8 +554,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-       
-        
+
+
 
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
             @Override
@@ -564,8 +570,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
                         AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
-                        alerta.show();                        
-                        } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                        alerta.show();
+                    } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -578,8 +584,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
                         AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
-                        alerta.show();                        
-                      } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
+                        alerta.show();
+                    } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
 
@@ -588,12 +594,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
                 /*verifico si el dato a modificar es la duracion de la actividad y modifico la fecha fin*/
                 if (event.getEditCell().getCol() == 3) {
-                    if(actividadAnterior.getDuration()<ac.getDuration()){
-                    Date fechaCopia=CalendarUtil.copyDate(ac.getStartDateTime());
-                    ac.setEndDateTime(fechaCopia);
-                    CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
-                    }else{
-                    ac.getEndDateTime().setDate(ac.getEndDateTime().getDate()-((actividadAnterior.getDuration()-ac.getDuration()))+1);
+                    if (actividadAnterior.getDuration() < ac.getDuration()) {
+                        Date fechaCopia = CalendarUtil.copyDate(ac.getStartDateTime());
+                        ac.setEndDateTime(fechaCopia);
+                        CalendarUtil.addDaysToDate(ac.getEndDateTime(), ac.getDuration() - 1);
+                    } else {
+                        ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
                     }
                 }
 
@@ -608,7 +614,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
+        DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
         // Set start and end date.
         //gantt.setStartEnd(dw.addDays(-2).asDate(), dw.addMonths(1).asDate());
         gantt.setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
