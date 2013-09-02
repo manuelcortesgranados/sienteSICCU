@@ -3541,7 +3541,8 @@ css usuario modificacion
 
 .ikont-hpg-botones{
     right: 124px;
-    position: absolute;    
+    position: inherit;
+    left: 762;
 }
 
 .ikont-hot-desea{
@@ -3672,12 +3673,12 @@ a:hover {
 }
 
 .ikont-hr-separador-convenio{
-   width: 12%;
-   background-color: #C0C0C0;  
-   height: 1px;
+    width: 12%;
+    background-color: #C0C0C0;  
+    height: 1px;
 }
 .ikont-hpg-infogeneral{
-    left: -119px;
+    left: -9%;
     position: relative;    
 }
 
