@@ -188,7 +188,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // ColumnModel for left static columns
         config.leftColumns = createStaticColumns();
         ArrayList<TimeAxisGenerator> headers = new ArrayList<TimeAxisGenerator>();
-        headers.add(new WeekTimeAxisGenerator("MMM d AAAA"));
+        headers.add(new WeekTimeAxisGenerator("MMM d"));
         headers.add(new DayTimeAxisGenerator("EEE"));
         config.timeHeaderConfig = headers;
         // Enable task resize
@@ -216,12 +216,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         // Enable dependency contextMenu
         config.dependencyContextMenuEnabled = true;
         config.eventContextMenuEnabled = false;
-        config.showTaskLabel = false;
+        config.showTaskLabel = true;
         config.mouseWheelZoomEnabled = false;
 
-        //config.useEndDate = true;
-        config.timeResolutionIncrement = 1;
-        config.timeAxisDoubleClickZoomEnabled = true;
+        //config.useEndDate = true;        
 
         /**
          * Ventana Modal Confirmar Eliminar Actividad
@@ -540,8 +538,13 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         editing.addBeforeStartEditHandler(new BeforeStartEditEvent.BeforeStartEditHandler<ActividadobraDTO>() {
             @Override
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
-                ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                actividadAnterior =new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration()) ;
+               if (event.getEditCell().getRow() != 0) {
+                    ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
+                    actividadAnterior = store.get(event.getEditCell().getRow());                   
+                } else {
+                    AlertMessageBox alerta = new AlertMessageBox("Error", "No debe modificar los datos del convenio marco.");
+                    alerta.show();
+                }
             }
         });
 
@@ -605,10 +608,11 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             }
         });
 
-        DateWrapper dw = new DateWrapper(convenioDTO.getDatefechaini()).clearTime();
+         DateWrapper dw = new DateWrapper(convenioDTO.getDatefechafin()).clearTime();
         // Set start and end date.
-        //gantt.setStartEnd(dw.addDays(-7).asDate(), dw.addMonths(1).asDate());
-        gantt.setStartEnd(dw.addDays(-2).asDate(), convenioDTO.getDatefechafin());
+        //gantt.setStartEnd(dw.addDays(-2).asDate(), dw.addMonths(1).asDate());
+        gantt.setStartEnd(new DateWrapper(convenioDTO.getDatefechaini()).clearTime().addDays(-2).asDate(), dw.addDays(2).asDate());
+
 
         FlowLayoutContainer main = new FlowLayoutContainer();
         main.getElement().setMargins(new Margins(5));
