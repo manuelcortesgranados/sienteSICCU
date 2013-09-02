@@ -150,6 +150,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
         this.actividadObraPadre = actividadObraPadre;
         this.editar = true;
         fechaContrato = CalendarUtil.copyDate(contrato.getDatefechaini());
+        service.setLog("instanciando" + fechaContrato, null);
         lstRubrosDto = new ArrayList<RubroDTO>();
         this.propes = propes;
         CargarFormularioEditar();
@@ -353,9 +354,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
     public boolean validarCambiofechaSuscripcionContrato() {
         if (contrato.getDatefechaini().compareTo(fechaSuscripcionContrato.getValue()) != 0) {
             if (fechaSuscripcionContrato.getValue().compareTo(actividadObraPadre.getObra().getFechaInicio()) >= 0) {
-
                 contrato.setDatefechaini(fechaSuscripcionContrato.getValue());
                 odifi(actividadObraEditar);
+                //fechaContrato=fechaSuscripcionContrato.getValue();
 
             } else {
                 fechaSuscripcionContrato.setValue(contrato.getDatefechaini());
@@ -367,8 +368,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void odifi(ActividadobraDTO act) {
-         m(act);
-        
+        m(act);
+
         if (!act.getChildren().isEmpty()) {
             for (ActividadobraDTO actiHija : act.getChildren()) {
                 odifi(actiHija);
@@ -377,57 +378,52 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void m(ActividadobraDTO actiHija) {
-        service.setLog("entre con hijos" + actiHija.getName(), null);
 
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
         if (fechaSuscripcionContrato.getValue().compareTo(fechaContrato) > 0) {
-            int duracion = CalendarUtil.getDaysBetween(fechaContrato, actiHija.getStartDateTime());
-            if (duracion == 0) {
-                duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
-            }
+
+            int duracion = CalendarUtil.getDaysBetween(fechaContrato, fechaSuscripcionContrato.getValue());
+           
             Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
             CalendarUtil.addDaysToDate(fechaI, duracion);
-            
+
             Date asigFin = CalendarUtil.copyDate(fechaI);
             actiHija.setEndDateTime(asigFin);
 
             propes.startDateTime().setValue(actiHija, fechaI);
 
-           
+
             Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
             CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
             propes.endDateTime().setValue(actiHija, dateFin);
-            
-             if(actiHija.getName().equals("Suscripcion acta de inicio")){
+
+            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 contrato.setDatefechaactaini(actiHija.getStartDateTime());
-                service.setLog("wwwwwwwwwwwwwwwwwwwwwww"+contrato.getDatefechaactaini(), null);
-             
-         }
-        } else {
-            int duracion = CalendarUtil.getDaysBetween(actiHija.getStartDateTime(), fechaContrato);
-            if (duracion == 0) {
-                duracion = CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaContrato);
+
             }
+        } else {
+
+            int duracion = CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), fechaContrato);
+
             Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
             fechaI.setDate(fechaI.getDate() - duracion);
-            
+
             Date asigFin = CalendarUtil.copyDate(fechaI);
             actiHija.setEndDateTime(asigFin);
 
             propes.startDateTime().setValue(actiHija, fechaI);
 
-            
+
             Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
-            dateFin.setDate(dateFin.getDate() - actiHija.getDuration());
+            dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
             propes.endDateTime().setValue(actiHija, dateFin);
-            
-             if(actiHija.getName().equals("Suscripcion acta de inicio")){
+
+            if (actiHija.getName().equals("Suscripcion acta de inicio")) {
                 contrato.setDatefechaactaini(actiHija.getStartDateTime());
-                service.setLog("qqqqqqqqqqqqqqqqq"+contrato.getDatefechaactaini(), null);
-             
-         }
-            
+
+            }
+
         }
     }
 
@@ -449,9 +445,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
         if (!contrato.getTextobjeto().equals(objetoContrato.getText())) {
             contrato.setTextobjeto(objetoContrato.getText());
         }
-        fechaActaError = validarCambiofechaActaContrato();
-        fechaSusError = validarCambiofechaSuscripcionContrato();
 
+        fechaSusError = validarCambiofechaSuscripcionContrato();
+        //fechaActaError = validarCambiofechaActaContrato();
         if (!contrato.getNombreAbreviado().equals(nombreAbre.getText())) {
             contrato.setNombreAbreviado(nombreAbre.getText());
             propes.name().setValue(actividadObraEditar, contrato.getNombreAbreviado());

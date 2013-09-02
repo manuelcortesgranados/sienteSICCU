@@ -88,7 +88,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected ActividadobraDTO actividadobraProyectoEditar;
     protected ActividadobraDTOProps propes;
 
-//     public ContratoForm(ActividadobraDTO actividadobraContratoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
     public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
         this.gantt = gantt;
@@ -131,11 +130,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     private void cargarFormularioEditar() {
-        this.nombrePry.setText(null);
-        this.fechaInicio.setValue(null);
-        this.fechaFin.setValue(null);
-        this.pagodirecto.setValue(BigDecimal.ZERO);
-        this.otrospagos.setValue(BigDecimal.ZERO);
+        this.nombrePry.setText(proyectoDTO.getStrnombreobra());
+        this.fechaInicio.setValue(proyectoDTO.getFechaInicio());
+        this.fechaFin.setValue(proyectoDTO.getFechaFin());
+        this.pagodirecto.setValue(proyectoDTO.getPagodirecto());
+        this.otrospagos.setValue(proyectoDTO.getOtrospagos());
         cargarObjetivoGeneral();
     }
 
@@ -243,18 +242,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         txtObjeG.setWidth(cw);
         con.add(txtObjeG, new HtmlData(".tblobjge"));
 
-//        final WidgetTablaObjetivos tblObjetivosg = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "General", "*OBJETIVOS GENERALES", true);
-//        con.add(tblObjetivosg.asWidget(), new HtmlData(".tblobjge"));
-//        
-//        PushButton btnAdicionarObjge = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
-//            @Override
-//            public void onClick(ClickEvent event) {
-//                WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(txtObjeG, proyectoDTO, "Objetivo General", "Por favor ingrese la descripción del objetivo:", 1, true, idTempObj);
-//                MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
-//                modal.show();
-//            }
-//        });
-//        con.add(btnAdicionarObjge, new HtmlData(".objetivoge"));
 
         final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
         con.add(tblObjetivos.asWidget(), new HtmlData(".tblobjes"));
@@ -338,9 +325,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
                     }
                 }
-                if (tblObjetivos.getStore().size() == 0) {
+                if (txtObjeG.getValue() == null) {
                     varErrorres = true;
                     msgerrores += "*Ingrese  un objetivo general" + "<br/>";
+                }else{
+                  proyectoDTO.getObjetivoses().add(new ObjetivosDTO(txtObjeG.getValue()));
                 }
                 if (tblObjetivos.getStore().size() == 0) {
                     varErrorres = true;
