@@ -109,7 +109,7 @@
 
                             <rich:panel header="#{var.comentarioobra}"   >
                                 <center>
-                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" rendered="#{var.alimentartext1}" >
+                                    <h:panelGrid id="layoutComentario" columns="1" columnClasses="panelcenter" rendered="#{!var.alimentartext}" >
 
                                         <h:inputTextarea cols="60" id="comentSem"  rows="8" styleClass="ikont-hita-comentSem"   value="#{Supervisor$Alimentar.alimentacion.textcomentario}" />
                                         <rich:tooltip value="#{var.ingresecomentariosdelaobra}" target="comentSem"  followMouse="true"  horizontalOffset="5" verticalOffset="5" layout="block"/>

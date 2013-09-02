@@ -59,7 +59,7 @@
                     </h:inputText>
 
                     <f:facet name="footer">
-                        <h:panelGrid columns="1">
+                        <h:panelGrid columns="1" style="text-align: right;">
                             <h:outputText value="#{PlanOperativo.totalIngresosPeriodo[columna]}">                                
                                 <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
@@ -103,7 +103,7 @@
                     <h:outputLabel value="Fuente egresos" />
                 </f:facet>
 
-                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" />
+                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" style="text-align: justify;" />
 
                 <f:facet name="footer">
                     <h:panelGrid columns="1">
@@ -151,21 +151,21 @@
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
-                    <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}"
+                    <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
                                  rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}"
                                  style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
-                    <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio.get(columna).valor}" 
+                    <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}" 
                                   rendered="#{!fuenteEgresos.egresoProyecto and fuenteEgresos.itemFlujoEgresos.boolcalculado}"
                                   style="text-align: right; width: 100%; background-color: lightgrey;">
                         <f:convertNumber currencySymbol="$" type="currency" />
                     </h:outputText>
 
                     <f:facet name="footer">
-                        <h:panelGrid columns="1">
+                        <h:panelGrid columns="1" style="text-align: right;">
                             <h:outputText value="#{PlanOperativo.totalEgresosPeriodo[columna]}">                                
                                 <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>

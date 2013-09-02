@@ -10,31 +10,40 @@
     xmlns:interkont="http://www.interkont.com/jsf"
     >
 
-    <rich:toolbar>
-        <rich:toolbarGroup>
-            <h:commandLink styleClass="ikont-hcl-siente" ></h:commandLink>
-        </rich:toolbarGroup>
+    <h:form styleClass="ikont-hp-footer">
+        <h:panelGroup layout="block" styleClass="ikont-hpg-content-footer">
+            <h:panelGrid columns="1" styleClass="panelcenter" columnClasses="panelcenter,panelcenter,panelcenter,panelcenter,panelcenter,panelcenter">
+                <h:panelGrid columns="2" styleClass="panelcenter">
+                    <h:commandLink styleClass="ikont-hcl-footer-tw"/>
+                    <h:commandLink styleClass="ikont-hcl-footer-fc"/>
+                </h:panelGrid>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:commandLink styleClass="ikont-hcl-footer-fc-like"/>
+                </h:panelGroup>
+                <h:panelGrid styleClass="ikont-hpg-footer-info" columns="3" >
+                    <h:outputText value="#{var.houtques}" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                    <h:outputText value="VISIÓN" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                    <h:outputText value="MISIÓN" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
+                    </h:outputText>
+                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
+                    </h:outputText>
+                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
+                    </h:outputText>
+                </h:panelGrid>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:outputText value="ZOOM " styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                    <b><h:outputText value=" 2013 " styleClass="ikont-div-headercontent-participacion"></h:outputText></b>
+                    <h:outputText value=" Todos los derechos reservados" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:outputText value="Powered by" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:commandLink styleClass="ikont-hcl-footer-firma"/>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:panelGroup>
+    </h:form>
 
-        <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-footer-menumiddle1"  />
-        </rich:toolbarGroup>
-        <rich:toolbarGroup>
-            <h:commandLink value="Salir" action="#{SessionBeanCobra.cerrarSession_action}" id="btn_cerrar_sesion_down"
-                                styleClass="ikont-hcl-salir"  />
-        </rich:toolbarGroup>
-
-        <rich:toolbarGroup location="right" rendered="#{var.variconch}">
-            <a target="_blank" href="#{var.linkcliente2}" class="ikont-a-republica"></a>
-        </rich:toolbarGroup>
-
-        <rich:toolbarGroup location="right">
-            <a target="_blank" href="#{var.linkcliente}" class="ikont-a-ch"></a>
-        </rich:toolbarGroup>
-
-        <rich:toolbarGroup>
-            <h:graphicImage value="/resources/imgs/menu_middle.png"  styleClass="ikont-hgi-footer-menumiddle2"  />
-        </rich:toolbarGroup>
-
-    </rich:toolbar>  
-    <br />
 </ui:composition>

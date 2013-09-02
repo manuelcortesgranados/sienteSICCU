@@ -10,7 +10,7 @@
     >
     <h:form styleClass="ikont-hf-nuevodetalleobrazoom">
         <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proyecto">
-            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="8"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
+            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="11"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
                 <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
                 </h:panelGrid>
@@ -59,9 +59,9 @@
         $jq(document).ready(function() {
             var _numChil = $('.ikont-img-posicion-menu-proyecto').length;
             if (_numChil > 8) {
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "140px");
+                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "79px");
             }else{
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "70px");
+                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "37px");
             }
             $('.ikont-img-posicion-menu-proyecto').each(function() {
                 $(this).removeClass('scroll');
@@ -86,7 +86,7 @@
             if (window.pageYOffset > 208) {
                 $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("position", "fixed");
                 if (_numChil > 8) {
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "70px");
+                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "36px");
                 }else{
                     $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "35px");
                 }
@@ -96,9 +96,9 @@
             } else {
                 $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("position", "relative");
                 if (_numChil > 8) {
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "140px");
-                }else{
                     $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "70px");
+                }else{
+                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "35px");
                 }
                 $('.ikont-img-posicion-menu-proyecto').each(function() {
                     $(this).removeClass('scroll');
