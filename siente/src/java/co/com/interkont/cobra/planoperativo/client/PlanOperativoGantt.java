@@ -546,7 +546,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
                 if (event.getEditCell().getRow() != 0) {
                     ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                    actividadAnterior = store.get(event.getEditCell().getRow());
+                    actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration());
                 } else {
                     AlertMessageBox alerta = new AlertMessageBox("Error", "No debe modificar los datos del convenio marco.");
                     alerta.show();
@@ -562,7 +562,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
                 ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                 ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-
+                
                 /*verifico si el dato a modificar es a fecha de inicio de la actividad*/
                 if (event.getEditCell().getCol() == 1) {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
@@ -573,6 +573,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
                                 alerta.show();
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                
                                 gantt.getGanttPanel().getContainer().refresh();
                             } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                                 props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
