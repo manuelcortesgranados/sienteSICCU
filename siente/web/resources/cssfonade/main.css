@@ -1632,10 +1632,10 @@ input[type="text"], input[type="password"], select{
     background-color:white;
     width:100%; height:0px;
     position: absolute;
-    left: 18px;
+    left: 4px;
     right: 0px;
     overflow: hidden;
-    top: 129px;
+    top: 155px;
     z-index: 4;
 
 }
@@ -1658,10 +1658,16 @@ input[type="text"], input[type="password"], select{
 .ikont-panel-registro{
     border-spacing: 12px;
 }
+.ikont-hpanel-img-registro{
+    left: 111px;
+    position: relative;
+}
 .ikont-hr-separador{
-    background-color: #9C9A9A;
+    background-color: #C0C0C0;
     height: 1px;
-    width: 395px;
+    left: 16px;
+    width: 181%;
+    position: relative;
 }
 .ikont-hr-separador-menu{
     background-color: silver;
@@ -1699,7 +1705,7 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-imagenciudadano{
     position: relative;
     top : -12px;
-    left: 7px;
+    left: -5px;
     width: 100px;
     height: 120px;
     -moz-border-radius: 10px; 
@@ -1752,8 +1758,8 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login2{
     height:40px;
     font-size: 20px; 
-    font-family:open; 
-    font-style: italic; 
+    font-family:monospace; 
+    font-style: normal; 
     color:#808080;
 }
 .ikont-menu-inicio-zoom{
@@ -3682,3 +3688,4 @@ a:hover {
     position: relative;    
 }
 
+.ikont-hpanel-
