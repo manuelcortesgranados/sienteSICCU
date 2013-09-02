@@ -3655,3 +3655,29 @@ a:hover {
     width: 600px;
 }
 
+.ikont-title-1-convenio{
+    font-size: 22px;
+    color: #008000;
+    font-style: inherit;
+    font-weight: 900;
+}
+
+.ikont-title2-convenio{
+    font-size: 19px;
+    color: #008000;
+}
+
+.ikont-title-3-convenio{
+    font-size: 15px;
+}
+
+.ikont-hr-separador-convenio{
+   width: 12%;
+   background-color: #C0C0C0;  
+   height: 1px;
+}
+.ikont-hpg-infogeneral{
+    left: -119px;
+    position: relative;    
+}
+
