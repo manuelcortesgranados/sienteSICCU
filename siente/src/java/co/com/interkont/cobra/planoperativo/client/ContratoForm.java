@@ -610,7 +610,7 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     public void crearTareaContrato() {
         actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(contrato.getNumvlrcontrato()));
-        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(), actividadObraPadre.getDuration(), 0, TaskType.PARENT, 3, false, contrato);
+        ActividadobraDTO actividadObraContrato = new ActividadobraDTO(contrato.getNombreAbreviado(), fechaSuscripcionContrato.getValue(),CalendarUtil.getDaysBetween(fechaSuscripcionContrato.getValue(), actividadObraPadre.getEndDateTime()), 0, TaskType.PARENT, 3, false, contrato);
 
         List<ActividadobraDTO> lstHijos = new ArrayList<ActividadobraDTO>();
         ActividadobraDTO hitoFechaSuscripcion = new ActividadobraDTO("Suscripcion del contrato", fechaSuscripcionContrato.getValue(), 1, 0, TaskType.MILESTONE, 6, true);
@@ -742,10 +742,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
     }
 
     public void modificarValorDisponible(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
-        service.setLog("entre 4", null);
-//        actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(relacionFuente.getValor()));
-        relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
-        service.setLog("entre 5", null);
+           relacionFuente.getObrafuenterecursosconvenios().setValorDisponible(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible().subtract(relacionFuente.getValor()));
+     
     }
 
     private void llenarCategorias() {
