@@ -219,7 +219,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.showTaskLabel = true;
         config.mouseWheelZoomEnabled = false;
 
-        //config.useEndDate = true;        
+        config.useEndDate = false;
 
         /**
          * Ventana Modal Confirmar Eliminar Actividad
@@ -317,7 +317,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props,taskStore);
+                ContratoForm contratoFormEditar = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
                 crearContratoDialog.add(contratoFormEditar);
                 crearContratoDialog.show();
             }
@@ -566,25 +566,42 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 /*verifico si el dato a modificar es a fecha de inicio de la actividad*/
                 if (event.getEditCell().getCol() == 1) {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
-                    if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
+                    ActividadobraDTO actiPadre = taskStore.getParent(ac);
+                    if (actiPadre != null) {
+                        if (ac.getStartDateTime().compareTo(actiPadre.getStartDateTime()) >= 0 && ac.getStartDateTime().compareTo(actiPadre.getEndDateTime()) < 0) {
+                            if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) > 0) {
+                                AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
+                                alerta.show();
+                                props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                                gantt.getGanttPanel().getContainer().refresh();
+                            } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
+                                props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
+                                gantt.getGanttPanel().getContainer().refresh();
+                            }
+                        } else {
+                            AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser menor que la fecha de inicio, ni superior a la fecha de fin");
+                            alerta.show();
+                            props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
+                            gantt.getGanttPanel().getContainer().refresh();
+                           
+                        }
+                    } else {
+                        AlertMessageBox alerta = new AlertMessageBox("Error", "El convenio no se puede modificar, por favor dirijase a datos basicos");
+                        alerta.show();
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-                        AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
-                        alerta.show();
-                    } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
-                        props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
-                        gantt.getGanttPanel().getContainer().refresh();
-
+                        
                     }
                 }
                 /*verifico si el dato a modificar es a fecha de fin de la actividad*/
                 if (event.getEditCell().getCol() == 2) {
                     /*se verifia si la fecha fin  es mayor que la fecha de inicio en este caso seria un error*/
                     if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) < 0) {
-                        props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
-                        gantt.getGanttPanel().getContainer().refresh();
                         AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de fin no puede ser mayor que la fecha de inicio");
                         alerta.show();
+                        props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
+                        gantt.getGanttPanel().getContainer().refresh();
+                        
                     } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();

@@ -182,9 +182,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     private void createColumnForm() {
         String tituloPantalla;
         if (!editar) {
-            tituloPantalla ="Planificacion de proyectos";
+            tituloPantalla = "Planificacion de proyectos";
         } else {
-            tituloPantalla ="Editar Proyecto";
+            tituloPantalla = "Editar Proyecto";
         }
 
         vp.add(new Label(tituloPantalla));
@@ -282,74 +282,73 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         });
         con.add(btnAdicionarMacro, new HtmlData(".macro"));
         String nombreBotonPrincipal = "";
-        if(!editar){
-        nombreBotonPrincipal="Añadir Proyecto";
-        }else{
-         nombreBotonPrincipal="Editar Proyecto";
+        if (!editar) {
+            nombreBotonPrincipal = "Añadir Proyecto";
+        } else {
+            nombreBotonPrincipal = "Editar Proyecto";
         }
 
         Button btnAdicionarPry = new Button(nombreBotonPrincipal, new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                if(!editar){
-                /*Se carga el proyectoDTO */
+                if (!editar) {
+                    /*Se carga el proyectoDTO */
 
-                cargarDatosProyectoDTO();
-                boolean varErrorres = false;
-                String msgerrores = "";
-                if (nombrePry.getValue() == null) {
-                    varErrorres = true;
-                    msgerrores += "*Por favor ingrese el nombre del proyecto" + "<br/>";
-                }
-                if (proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
-                    varErrorres = true;
-                    msgerrores += "*El proyecto debe de tener por lo menos un monto asociado" + "<br/>";
-                } else {
-                    if (proyectoDTO.getValor() == null) {
+                    cargarDatosProyectoDTO();
+                    boolean varErrorres = false;
+                    String msgerrores = "";
+                    if (nombrePry.getValue() == null) {
                         varErrorres = true;
-                        msgerrores += "*Ingrese por lo menos un monto de tipo recurso dinero" + "<br/>";
+                        msgerrores += "*Por favor ingrese el nombre del proyecto" + "<br/>";
                     }
-                }
-                if (proyectoDTO.getFechaInicio() != null) {
-                    if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
+                    if (proyectoDTO.getObrafuenterecursosconvenioses().isEmpty()) {
                         varErrorres = true;
-                        msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
+                        msgerrores += "*El proyecto debe de tener por lo menos un monto asociado" + "<br/>";
+                    } else {
+                        if (proyectoDTO.getValor() == null) {
+                            varErrorres = true;
+                            msgerrores += "*Ingrese por lo menos un monto de tipo recurso dinero" + "<br/>";
+                        }
                     }
-                } else {
-                    varErrorres = true;
-                    msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
-                }
-                if (proyectoDTO.getFechaFin() != null) {
-                    if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
+                    if (proyectoDTO.getFechaInicio() != null) {
+                        if (proyectoDTO.getFechaInicio().compareTo(contratoDto.getDatefechaini()) < 0) {
+                            varErrorres = true;
+                            msgerrores += "*La fecha de inicio del proyecto no puede ser inferior a la fecha de suscripcion del convenio " + contratoDto.getDatefechaini().toString() + "<br/>";
+                        }
+                    } else {
                         varErrorres = true;
-                        msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
+                        msgerrores += "*La fecha de inicio del proyecto no puede estar vacia" + "<br/>";
                     }
-                }
-                if (txtObjeG.getValue() == null) {
-                    varErrorres = true;
-                    msgerrores += "*Ingrese  un objetivo general" + "<br/>";
-                }else{
-                  proyectoDTO.getObjetivoses().add(new ObjetivosDTO(txtObjeG.getValue()));
-                }
-                if (tblObjetivos.getStore().size() == 0) {
-                    varErrorres = true;
-                    msgerrores += "*Ingrese  un objetivo especifico" + "<br/>";
-                }
-                if (tblMetas.getStore().size() == 0) {
-                    varErrorres = true;
-                    msgerrores += "*Ingrese  una meta" + "<br/>";
-                }
+                    if (proyectoDTO.getFechaFin() != null) {
+                        if (proyectoDTO.getFechaFin().compareTo(contratoDto.getDatefechafin()) > 0) {
+                            varErrorres = true;
+                            msgerrores += "*La fecha de fin del proyecto no puede ser superior a la fecha de finalizacion del convenio" + contratoDto.getDatefechaini().toString() + "<br/>";
+                        }
+                    }
+                    if (txtObjeG.getValue() == null) {
+                        varErrorres = true;
+                        msgerrores += "*Ingrese  un objetivo general" + "<br/>";
+                    } else {
+                        proyectoDTO.getObjetivoses().add(new ObjetivosDTO(txtObjeG.getValue()));
+                    }
+                    if (tblObjetivos.getStore().size() == 0) {
+                        varErrorres = true;
+                        msgerrores += "*Ingrese  un objetivo especifico" + "<br/>";
+                    }
+                    if (tblMetas.getStore().size() == 0) {
+                        varErrorres = true;
+                        msgerrores += "*Ingrese  una meta" + "<br/>";
+                    }
 
-                if (!varErrorres) {
-                    modalPry.hide();
-                    crearActividadPry();
-                } else {
-                    AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
-                    d.show();
-                }
+                    if (!varErrorres) {
+                        modalPry.hide();
+                        crearActividadPry();
+                    } else {
+                        AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
+                        d.show();
+                    }
 
-            }else{
-                    
+                } else {
                 }
             }
         });
@@ -364,10 +363,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
 
     }
-    
-    
-    public void editarProyecto(){
-    if(!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())){}
+
+    public void editarProyecto() {
+        if (!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())) {
+        }
     }
 
     /*
@@ -419,9 +418,14 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      *
      */
     public void crearActividadPry() {
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
-                0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
-
+        ActividadobraDTO tareaNueva = null;
+        if (fechaFin.getValue() == null) {
+            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
+                    0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+        } else {
+            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(),proyectoDTO.getFechaFin(),
+                    0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+        }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
