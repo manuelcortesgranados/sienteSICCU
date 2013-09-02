@@ -1908,7 +1908,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         address = "Bogotá";
         tiproyectoselec = 0;
         subtiposelec = 0;
-        tiahselect = 0;
+        tiahselect = 0;       
         img = false;
         imgppal = false;
         marli = new ArrayList<Marcador>();
@@ -1928,6 +1928,12 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
         valortotalobra = BigDecimal.ZERO;
         tiposelec = 0;
         chequiarFase(0);
+        if(getSessionBeanCobra().getBundle().getString("aplicafonade").equals("true")){  
+        tiahselect = 2;    
+        obtenerFaseSeleccionada(1);
+        }
+        
+        
         return "nuevoProyecto";
 
     }
@@ -4780,7 +4786,7 @@ public class IngresarNuevaObra implements ILifeCycleAware, Serializable {
      * @return Retorna Regla de navegacion "datosbasicosnuevoproyecto" de lo
      * contrario null
      */
-    public String pasarDatosBasicos() {
+    public String pasarDatosBasicos() {      
         if (validarTipificacion()) {
             return "datosbasicosnuevoproyecto";
         } else {
