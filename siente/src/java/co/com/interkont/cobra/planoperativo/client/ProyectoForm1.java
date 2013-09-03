@@ -204,20 +204,23 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
-        con.add(fechaInicio, new HtmlData(".fechainicio"));
+        con.add(new FieldLabel(fechaInicio, "Fecha inicio"), new HtmlData(".fechainicio"));
+       // con.add(fechaInicio, new HtmlData(".fechainicio"));
 
 
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
-        con.add(fechaFin, new HtmlData(".fechafin"));
-
+        con.add(new FieldLabel(fechaFin, "Fecha fin"), new HtmlData(".fechafin"));
+        
         pagodirecto.setWidth(cw);
         pagodirecto.setEmptyText("Pago directo");
-        con.add(pagodirecto, new HtmlData(".pagodirecto"));
+        con.add(new FieldLabel(pagodirecto, "Pago directo"), new HtmlData(".pagodirecto"));
+        //con.add(pagodirecto, new HtmlData(".pagodirecto"));
 
         otrospagos.setWidth(cw);
         otrospagos.setEmptyText("Otros pagos");
-        con.add(otrospagos, new HtmlData(".otrospagos"));
+        con.add(new FieldLabel(otrospagos, "Otros pagos"), new HtmlData(".otrospagos"));
+        //con.add(otrospagos, new HtmlData(".otrospagos"));
 
 
         final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
@@ -240,7 +243,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
         txtObjeG.setWidth(cw);
-        con.add(txtObjeG, new HtmlData(".tblobjge"));
+        con.add(new FieldLabel(txtObjeG, "Objetivo General"), new HtmlData(".tblobjge"));
+       //con.add(txtObjeG, new HtmlData(".tblobjge"));
 
 
         final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
