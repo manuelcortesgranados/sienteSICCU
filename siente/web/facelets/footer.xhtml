@@ -13,28 +13,28 @@
     <h:form styleClass="ikont-hp-footer">
         <h:panelGroup layout="block" styleClass="ikont-hpg-content-footer">
             <h:panelGrid columns="1" styleClass="panelcenter" columnClasses="panelcenter,panelcenter,panelcenter,panelcenter,panelcenter,panelcenter">
-                <h:panelGrid columns="2" styleClass="panelcenter">
-                    <h:commandLink styleClass="ikont-hcl-footer-tw"/>
-                    <h:commandLink styleClass="ikont-hcl-footer-fc"/>
-                </h:panelGrid>
                 <h:panelGroup layout="block" styleClass="panelcenter">
-                    <h:commandLink styleClass="ikont-hcl-footer-fc-like"/>
+                    <h:outputText value="Conectate con #{var.nombreclientesistema}" styleClass="ikont-hot-conectate-zoom"></h:outputText>
                 </h:panelGroup>
-                <h:panelGrid styleClass="ikont-hpg-footer-info" columns="3" >
-                    <h:outputText value="#{var.houtques}" styleClass="ikont-div-headercontent-participacion"></h:outputText>
-                    <h:outputText value="VISIÓN" styleClass="ikont-div-headercontent-participacion"></h:outputText>
-                    <h:outputText value="MISIÓN" styleClass="ikont-div-headercontent-participacion"></h:outputText>
-                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
-                    </h:outputText>
-                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
-                    </h:outputText>
-                    <h:outputText styleClass="ikont-hot-text-footer" value="Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el seguimiento y el control sobre los recursos y proyectos a través de los cuales el país se recupera.">
-                    </h:outputText>
+                <h:panelGrid columns="2" styleClass="panelcenter">
+                    <h:commandLink styleClass="ikont-hcl-footer-fc"/>
+                    <h:commandLink styleClass="ikont-hcl-footer-tw"/>
                 </h:panelGrid>
+                <h:panelGroup layout="block" styleClass="panelcenter " >
+                    <h:outputText value="#{var.footertextozoomlineauno}" styleClass="ikont-hot-text-footer"></h:outputText><br/>
+                    <h:outputText value="#{var.footertextozoomlineados}" styleClass="ikont-hot-text-footer"></h:outputText>
+                </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
-                    <h:outputText value="ZOOM " styleClass="ikont-div-headercontent-participacion"></h:outputText>
-                    <b><h:outputText value=" 2013 " styleClass="ikont-div-headercontent-participacion"></h:outputText></b>
-                    <h:outputText value=" Todos los derechos reservados" styleClass="ikont-div-headercontent-participacion"></h:outputText>
+                    <h:outputText value="*" styleClass="ikont-hot-terminos-condiciones2 ikont-hot-terminos-condiciones"></h:outputText>
+                    <h:outputText value="#{var.loginfoterterminos}" styleClass="ikont-hot-terminos-condiciones"></h:outputText>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:commandLink styleClass="ikont-hcl-footer-sellos"/>
+                </h:panelGroup>
+                <h:panelGroup layout="block" styleClass="panelcenter">
+                    <h:outputText value="#{var.nombreclientesistema}" styleClass="ikont-hot-derechos-reser"></h:outputText>
+                    <b><h:outputText value=" 2013 " styleClass="ikont-hot-derechos-reser"></h:outputText></b>
+                    <h:outputText value=" Todos los derechos reservados" styleClass="ikont-hot-derechos-reser"></h:outputText>
                 </h:panelGroup>
                 <h:panelGroup layout="block" styleClass="panelcenter">
                     <h:outputText value="Powered by" styleClass="ikont-div-headercontent-participacion"></h:outputText>

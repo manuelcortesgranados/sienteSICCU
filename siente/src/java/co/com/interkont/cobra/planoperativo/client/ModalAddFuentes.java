@@ -161,7 +161,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         valorFuenteRecurso.addBlurHandler(new BlurEvent.BlurHandler() {
             @Override
             public void onBlur(BlurEvent event) {
-                if (formaPago == 1) {
+                if (formaPago == 2) {
                     if (valorFuenteRecurso.getValue().compareTo(new BigDecimal("100")) > 0) {
                         valorFuenteRecurso.setValue(BigDecimal.ZERO);
                         AlertMessageBox d = new AlertMessageBox("Error", "El porcentaje ingresado no puede superar el 100%");
@@ -178,7 +178,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
                 RelacionobrafuenterecursoscontratoDTO rofr;
                 String validacionDevuelta = "";
                 if (obraFrDto.getTipoaporte() == 0) {
-                    if (formaPago == 1) {
+                    if (formaPago == 2) {
                         BigDecimal valorP = obraFrDto.getValor().multiply(valorFuenteRecurso.getValue()).divide(new BigDecimal(100));
                         rofr = new RelacionobrafuenterecursoscontratoDTO(idTemp, obraFrDto, valorP, formaPago, obraFrDto.getFuenterecursosconvenio().getTercero().getStrnombrecompleto(), "Porcentaje");
                         idTemp = idTemp++;
@@ -221,7 +221,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
     }
 
     public String validarFuenteRecurso(RelacionobrafuenterecursoscontratoDTO relacionFuente) {
-        if (relacionFuente.getValor().compareTo(relacionFuente.getObrafuenterecursosconvenios().getValorDisponible()) >= 0) {
+        if (relacionFuente.getValor().compareTo(obraFrDto.getValorDisponible()) >= 0) {
             return "El valor ingresado supera el valor disponible de la fuente de recursos que aporta esta entidad" + "<br/>";
         } else {
             if (!contrato.getRelacionobrafuenterecursoscontratos().isEmpty()) {
