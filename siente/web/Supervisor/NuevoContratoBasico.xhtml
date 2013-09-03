@@ -39,25 +39,25 @@
                 <center>
                     <h:panelGrid  columns="2" rendered="#{var.nuevocontratoperiodoevento}">
 
-                        
+
                         <h:outputText  styleClass="ikont-hot-eventcontrato" value="#{var.escogerEventocontrato}" rendered="#{!var.aplicaContralorias}"/>
-                            <h:selectOneMenu id="cmbEventoProyecto"  value="#{Supervisor$Contrato.contrato.periodoevento.evento.intidevento}" immediate="true" rendered="#{!var.aplicaContralorias}" >
-                                <f:selectItems value="#{Supervisor$Contrato.eventoItem}" />
-                            </h:selectOneMenu>                                                 
-                        
-                        
+                        <h:selectOneMenu id="cmbEventoProyecto"  value="#{Supervisor$Contrato.contrato.periodoevento.evento.intidevento}" immediate="true" rendered="#{!var.aplicaContralorias}" >
+                            <f:selectItems value="#{Supervisor$Contrato.eventoItem}" />
+                        </h:selectOneMenu>                                                 
+
+
                         <h:outputText  styleClass="ikont-hot-periodocontrato" rendered="#{!var.aplicaContralorias}" value="#{var.escogerPeriodocontrato} "/>
                         <h:outputText  styleClass="ikont-hot-periodocontratocontra" rendered="#{var.aplicaContralorias}"  value="#{var.escogerEventocontrato} "/>
                         <h:selectOneMenu styleClass="ikont-hsom-periodoevento"  id="cmbPeriodoProyecto" value="#{Supervisor$Contrato.contrato.periodoevento.intidperiodoevento}" immediate="true">
-                                <f:selectItems value="#{Supervisor$Contrato.periodoEventoItem}" />
-                            </h:selectOneMenu>
-                        
-                        
-                        
+                            <f:selectItems value="#{Supervisor$Contrato.periodoEventoItem}" />
+                        </h:selectOneMenu>
+
+
+
                         <h:outputText  styleClass="ikont-hot-escogerperiodocont" rendered="#{var.aplicaContralorias}" value="#{var.escogerPeriodocontrato} "/>
                         <h:selectOneMenu styleClass="ikont-hsom-modalidadcontra" id="cmbModalidadContratista" rendered="#{var.aplicaContralorias}"  value="#{Supervisor$Contrato.contrato.modalidadcontratista.intidmodalidadcontratista}" immediate="true">
-                                <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
-                            </h:selectOneMenu>
+                            <f:selectItems value="#{Supervisor$Contrato.modalidadContratista}" />
+                        </h:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid columns="2"  >
                         <h:outputLabel  styleClass="ikont-hol-boolcontconv"   value="El  Contrato incluye otros  Contratos?" rendered="#{!Supervisor$Contrato.booltipocontratoconvenio}"/>
@@ -110,88 +110,88 @@
                 <rich:collapsiblePanel styleClass="ikont-rcp-datosbasicos" id="tpDatosBasicos" header="1. #{var.datosbasicos}" expanded="true" switchType="client" immediate="true" >
                     <h:panelGroup id="gpContSelec">
                         <center>
-                        <h:panelGrid id="rpconpasel" rendered="#{Supervisor$Contrato.varmostrarcontrpa==1}" >
-                            <f:facet name="header">
-                                <h:outputText  styleClass="ikont-hot-contpadre" value="#{var.contrato} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
-                                <h:outputText  styleClass="ikont-hot-convpader" value="#{var.convenio} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
-                            </f:facet>
-                            <center>
-                                <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}" rowKeyVar="filaSeleccionada"
-                                                sortMode="single"  var="currentRow"  rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02" 
-                                                binding="#{Supervisor$Contrato.tablacontrapadrebindin2}">
-                                    <rich:column  breakRowBefore="true">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumeroccncb" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
-                                            <h:outputText  styleClass="ikont-hot-numconvbasico" id="txtnumerocncb" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
-                                        </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-strnumcontratobasic" value="#{currentRow.strnumcontrato}"/>
-                                    </rich:column>
+                            <h:panelGrid id="rpconpasel" rendered="#{Supervisor$Contrato.varmostrarcontrpa==1}" >
+                                <f:facet name="header">
+                                    <h:outputText  styleClass="ikont-hot-contpadre" value="#{var.contrato} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
+                                    <h:outputText  styleClass="ikont-hot-convpader" value="#{var.convenio} Padre" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
+                                </f:facet>
+                                <center>
+                                    <rich:dataTable id="tabla-listado-contratospad"  value="#{Supervisor$Contrato.contrpadre}" rowKeyVar="filaSeleccionada"
+                                                    sortMode="single"  var="currentRow"  rows="6" rowClasses="cabezo_tabla01, cabezo_tabla02" 
+                                                    binding="#{Supervisor$Contrato.tablacontrapadrebindin2}">
+                                        <rich:column  breakRowBefore="true">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-numcontbasico" id="txtnumeroccncb" value="#{var.numero} #{var.contrato}" rendered="#{Supervisor$Contrato.preguntacontrato==1}"/>
+                                                <h:outputText  styleClass="ikont-hot-numconvbasico" id="txtnumerocncb" value="#{var.numero} #{var.convenio}" rendered="#{Supervisor$Contrato.preguntacontrato==2}"/>
+                                            </f:facet>
+                                            <h:outputText  styleClass="ikont-hot-strnumcontratobasic" value="#{currentRow.strnumcontrato}"/>
+                                        </rich:column>
 
-                                    <rich:column id="nombrecontratopase" >
-                                        <f:facet name="header">
-                                            <h:outputText styleClass="ikont-hot-nombrecontbasictxt" value="#{var.nombre}"/>
-                                        </f:facet>
-                                        <h:inputTextarea styleClass="ikont-hit-nombrecontbasic" id="otxt_strnombreobra-conrpasele" value="#{currentRow.strnombre}"  disabled="true" cols="30" rows="2"/>
-                                    </rich:column>
-                                    <rich:column  id="datefechainic"  width="60px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-fechainicontconvbasico" value="#{var.fechadeinicio}"/>
-                                        </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-datefecinicontconvbasico" id="iddatefechainic" value="#{currentRow.datefechaini}"/>
-                                    </rich:column>
-                                    <rich:column  id="datefechafin"  width="60px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-fechfincontconvbasico" value="#{var.fechadefinalizacion}"/>
-                                        </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-datefecfincontconvbasico" id="iddatefechafin" value="#{currentRow.datefechafin}"/>
-                                    </rich:column>
-                                    <rich:column  id="valor"  width="60px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-valorcontconvbasico" value="#{var.valor}"/>
-                                        </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-numvlrcontconvbasico" id="idvalor" value="#{currentRow.numvlrcontrato}">
-                                            <f:convertNumber pattern="$###,###"/>
-                                        </h:outputText>
-                                    </rich:column>
-                                    <rich:column id="vlcongtrhijossele"  width="60px">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-vlrdisponible"   value="Valor Disponible"/>
-                                        </f:facet>
-                                        <h:outputText  styleClass="ikont-hot-numsumproyectocontconv" id="vlcondissele" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}">
-                                            <f:convertNumber pattern="$###,###"/>
-                                        </h:outputText>
-                                    </rich:column>
-
-                                    <rich:column id="vlcongtrrecursos"  width="150px" rendered="false">
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-recursoscontconvbasico" value="Recursos"/>
-                                        </f:facet>
-                                        <h:panelGrid >
-                                            <h:outputText  styleClass="ikont-hot-recursospropiocontconvbasico" value="Recursos Propios (Entidad Contratante)"/>
-                                            <h:outputText  styleClass="ikont-hot-numrecursopropiocontconvbasic" id="vlcondisrecprosele" value="#{currentRow.numrecursospropios}">
+                                        <rich:column id="nombrecontratopase" >
+                                            <f:facet name="header">
+                                                <h:outputText styleClass="ikont-hot-nombrecontbasictxt" value="#{var.nombre}"/>
+                                            </f:facet>
+                                            <h:inputTextarea styleClass="ikont-hit-nombrecontbasic" id="otxt_strnombreobra-conrpasele" value="#{currentRow.strnombre}"  disabled="true" cols="30" rows="2"/>
+                                        </rich:column>
+                                        <rich:column  id="datefechainic"  width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-fechainicontconvbasico" value="#{var.fechadeinicio}"/>
+                                            </f:facet>
+                                            <h:outputText  styleClass="ikont-hot-datefecinicontconvbasico" id="iddatefechainic" value="#{currentRow.datefechaini}"/>
+                                        </rich:column>
+                                        <rich:column  id="datefechafin"  width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-fechfincontconvbasico" value="#{var.fechadefinalizacion}"/>
+                                            </f:facet>
+                                            <h:outputText  styleClass="ikont-hot-datefecfincontconvbasico" id="iddatefechafin" value="#{currentRow.datefechafin}"/>
+                                        </rich:column>
+                                        <rich:column  id="valor"  width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-valorcontconvbasico" value="#{var.valor}"/>
+                                            </f:facet>
+                                            <h:outputText  styleClass="ikont-hot-numvlrcontconvbasico" id="idvalor" value="#{currentRow.numvlrcontrato}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
-                                            <h:outputText  styleClass="ikont-hot-recursosch" value="Recursos C H"/>
-                                            <h:outputText  styleClass="ikont-hot-numrecursochcontconvbasic" id="vlcondisrecurchsele" value="#{currentRow.numrecursosch}">
+                                        </rich:column>
+                                        <rich:column id="vlcongtrhijossele"  width="60px">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-vlrdisponible"   value="Valor Disponible"/>
+                                            </f:facet>
+                                            <h:outputText  styleClass="ikont-hot-numsumproyectocontconv" id="vlcondissele" value="#{currentRow.numvlrcontrato-currentRow.numvlrsumahijos-currentRow.numvlrsumaproyectos}">
                                                 <f:convertNumber pattern="$###,###"/>
                                             </h:outputText>
-                                            <h:outputText  styleClass="ikont-hot-recursotercero" value="Recursos  Tercero"/>
-                                            <h:outputText  styleClass="ikont-hot-numrecursotercontconvbasic" id="vlconditercerossele" value="#{currentRow.numrecursostercero}">
-                                                <f:convertNumber pattern="$###,###"/>
-                                            </h:outputText>
-                                        </h:panelGrid>
-                                    </rich:column>
+                                        </rich:column>
+
+                                        <rich:column id="vlcongtrrecursos"  width="150px" rendered="false">
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-recursoscontconvbasico" value="Recursos"/>
+                                            </f:facet>
+                                            <h:panelGrid >
+                                                <h:outputText  styleClass="ikont-hot-recursospropiocontconvbasico" value="Recursos Propios (Entidad Contratante)"/>
+                                                <h:outputText  styleClass="ikont-hot-numrecursopropiocontconvbasic" id="vlcondisrecprosele" value="#{currentRow.numrecursospropios}">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-recursosch" value="Recursos C H"/>
+                                                <h:outputText  styleClass="ikont-hot-numrecursochcontconvbasic" id="vlcondisrecurchsele" value="#{currentRow.numrecursosch}">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                                <h:outputText  styleClass="ikont-hot-recursotercero" value="Recursos  Tercero"/>
+                                                <h:outputText  styleClass="ikont-hot-numrecursotercontconvbasic" id="vlconditercerossele" value="#{currentRow.numrecursostercero}">
+                                                    <f:convertNumber pattern="$###,###"/>
+                                                </h:outputText>
+                                            </h:panelGrid>
+                                        </rich:column>
 
 
-                                    <rich:column id="Eliminar" width="50px" >
-                                        <f:facet name="header">
-                                            <h:outputText  styleClass="ikont-hot-eliminarcontconvbasic" value="#{var.eliminar}"/>                                            </f:facet>
-                                        <a4j:commandButton styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
-                                                           render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar"/>
-                                    </rich:column>
-                                </rich:dataTable>
-                            </center>
-                        </h:panelGrid>
+                                        <rich:column id="Eliminar" width="50px" >
+                                            <f:facet name="header">
+                                                <h:outputText  styleClass="ikont-hot-eliminarcontconvbasic" value="#{var.eliminar}"/>                                            </f:facet>
+                                            <a4j:commandButton styleClass="ikont-acb-eliminarseleccontconvbasic" action="#{Supervisor$Contrato.eliminarItemPadreSele}"
+                                                               render="gpContSelec,cmbEntContra" execute="@this, gpContSelec,cmbEntContra" value="Eliminar"/>
+                                        </rich:column>
+                                    </rich:dataTable>
+                                </center>
+                            </h:panelGrid>
                         </center>
                     </h:panelGroup>
                     <center>
@@ -372,10 +372,13 @@
                                     <h:outputText  styleClass="ikont-hot-vlranticipo" value="Valor Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}" />
                                     <h:outputText  styleClass="ikont-hot-vlranti" id = "vlranti" value = "#{Supervisor$Contrato.valorpagoanticipo}" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1}">
                                         <f:convertNumber pattern="$ ###,###,###"/>
-                                    </h:outputText>                                   
+                                    </h:outputText>
+
+
                                     <h:outputText  styleClass="ikont-hot-fecanticipo" value="Fecha Anticipo:" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"/>
+
                                     <rich:calendar  datePattern="yyyy-MM-dd" direction="topRight" id="fecpagoantic" rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 and var.fechaformapago}"
-                                                    inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"  />
+                                                    inputSize="10" value="#{Supervisor$Contrato.fechapagoanticipo}"   />
 
                                     <h:outputText  styleClass="ikont-hot-numactparc" id="lbnumactasparciales"  value="Número de Actas Parciales: " rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 || var.fechaformapago and  Supervisor$Contrato.contrato.formapago.intidformapago==2 }"/>
                                     <rich:inputNumberSpinner id="innumactasparciales"  minValue="0" maxValue="100" rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==1 ||var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==2}"
@@ -575,7 +578,7 @@
                 </rich:collapsiblePanel>
                 <h:panelGrid columns="2" styleClass="ikont-hpg-acionescontratos">
                     <a4j:commandButton styleClass="ikont-acb-guardarcontratos" id="guardar_contrato"  action="#{Supervisor$Contrato.guardarContrato}" value="#{var.guardar}"
-                                       render="pgcontrato,gpValContrato" execute="@this">
+                                       render="pgcontrato,gpValContrato" execute="@form">
 
                     </a4j:commandButton>
                     <h:commandButton styleClass="ikont-acb-cancelarcontrato" id="btCancelar"  value="#{var.cancelar}" immediate="true"
