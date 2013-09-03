@@ -155,7 +155,7 @@ public abstract class GraficoEvolucionProyecto {
         ConjuntoDatosGrafico conjuntoDatosEjecucionActual = new ConjuntoDatosGrafico();
         conjuntoDatosEjecucionActual.setCodigo("ejeactual");
         conjuntoDatosEjecucionActual.setEtiqueta(Propiedad.getValor("graevuproyejec"));
-        conjuntoDatosEjecucionActual.getEstilo().setColorSerie("#3ba7e5");
+        conjuntoDatosEjecucionActual.getEstilo().setColorSerie("#257500");
         
         boolean esPrimerPeriodo = true;
         for (Periodo periodoObra : periodosActuales) {

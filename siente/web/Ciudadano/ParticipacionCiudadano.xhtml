@@ -109,10 +109,13 @@
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 1" />
                             <h:outputText  styleClass="ikont-hot-text-paso-participacion" value="#{var.aseguresedeelegir}" />
                         </h:panelGrid>
-                        <h:panelGroup layout="block" styleClass="ikont-hpg-selecione-opinion">
-                            <a4j:commandLink  styleClass="ikont-acl-seleccionfelicite" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" ></a4j:commandLink>
-                            <a4j:commandLink  styleClass="ikont-acl-seleccionopine"  action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  ></a4j:commandLink>
-                            <a4j:commandLink  styleClass="ikont-acl-seleccionqueja"  action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" ></a4j:commandLink>
+                        <h:panelGroup id="panelopinion_par" layout="block" styleClass="ikont-hpg-selecione-opinion">
+                            <a4j:commandLink  styleClass="ikont-acl-seleccionfelicite" action="#{Ciudadano$PerfilCiudadano.seleccionFelicite}" render="panelopinion_par" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion != 3}"></a4j:commandLink>
+                            <h:commandLink styleClass="ikont-acl-seleccionfelicite seleccionfelicite-buttonactive" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}" ></h:commandLink>
+                            <a4j:commandLink  styleClass="ikont-acl-seleccionopine"  action="#{Ciudadano$PerfilCiudadano.seleccionopine}" render="panelopinion_par"  rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion != 2}"></a4j:commandLink>
+                            <h:commandLink styleClass="ikont-acl-seleccionopine seleccionopine-buttonactive" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 2}"></h:commandLink>
+                            <a4j:commandLink  styleClass="ikont-acl-seleccionqueja"  action="#{Ciudadano$PerfilCiudadano.seleccionQueja}" render="panelopinion_par" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion != 1}"></a4j:commandLink>
+                            <h:commandLink styleClass="ikont-acl-seleccionqueja seleccionqueja-buttonactive" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 1}"></h:commandLink>
                         </h:panelGroup>
                         <h:panelGrid columns="1" styleClass="ikont-table-aling-pasos">
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 2" />

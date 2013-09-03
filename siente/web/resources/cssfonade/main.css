@@ -857,16 +857,18 @@ a.ikont-acl-interven:hover {
 
 .vtitle02 {
     font-family:open;
-    font-size:1em;
+    font-size:20px;
+    font-style:italic;
     font-weight:bold;
-    color:#257500;
+    color:#F90;
     line-height:20px;
 }
 
 .vtitle03 {
     font-family:open;
-    font-size:0.8em;
-    color:#58595B;
+    font-size:15px;
+    font-style:italic;
+    color:#004670;
     line-height:15px;
     padding-bottom: 10px;
 }
@@ -1158,7 +1160,7 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
     text-align: justify; 
     -webkit-border-radius: 8px; 
     border-radius: 8px;
-    width:316% !important;
+    width: 100%;
 }
 
 .ikont-hot-idcomentario{
@@ -1174,8 +1176,9 @@ textarea.ikont-hit-iacomentario, textarea.ikont-hit-stropinion {
 .vtitle12 {
     font-family:open;
     font-size:9px;
-    color:#257500;
-    line-height:9px;    
+    font-style:italic;
+    color:#F90;
+    line-height:9px;     
 }
 
 a.ikont-acl-agregarcomentario {
@@ -1245,9 +1248,10 @@ a.ikont-acl-agregarcomentario:hover {
 
 .vtitle15 {
     font-family:open;
-    font-size:1em;
+    font-size:30px;
+    font-style:italic;
     font-weight:bold;
-    color:#257500;
+    color:#F90;
     line-height:20px;
 }
 
@@ -1277,8 +1281,9 @@ a.ikont-acl-space2:hover {
 
 .vtitle17 {
     font-family:open;
-    font-size:0.8em;
-    color:#58595B;
+    font-size:18px;
+    font-style:italic;
+    color:#004670;
     line-height:20px;
 }
 
@@ -1312,8 +1317,9 @@ a.ikont-hcl-modificarusuario:hover {
 
 .vtitle19 {
     font-family:open;
-    font-size:0.8em;
-    color:#58595B;
+    font-size:14px;
+    font-style:italic;
+    color:#004670;
     line-height:15px;
 
 }
@@ -1542,12 +1548,12 @@ a.vtitle23:hover{
     background-size: 25px 129px;
 }
 .topbar_encabezado_3{
-    width: 430px;
-    height: 15px;
-    position: relative;
-    background-position: 0px 0px;
-    top: -96px;
-    right: -29%;
+    width:381px; 
+    height: 36px; 
+    position:absolute;
+    background-position:0px 0px;
+    top: 7%;
+    right: 45%;
     font-size: 1.5em;
 }
 
@@ -1555,7 +1561,7 @@ a.vtitle23:hover{
     width:120px; height: 127px; 
     position:absolute;
     float: left;
-    top: 8%;
+    top: 12%;
     right: 5%;
     background-position:0px 0px;
 }
@@ -1635,7 +1641,7 @@ input[type="text"], input[type="password"], select{
     left: 4px;
     right: 0px;
     overflow: hidden;
-    top: 155px;
+    top: 139px;
     z-index: 4;
 
 }
@@ -1678,7 +1684,7 @@ input[type="text"], input[type="password"], select{
     top: -4px;
 }
 .ikont-div-cerrar-panel{
-    height:20px; 
+    height:40px;  
     width:100%;
     background-color: #257500;
     bottom: 0px; position: absolute;
@@ -1736,7 +1742,7 @@ input[type="text"], input[type="password"], select{
     left: 0px;
     right: 0px;
     overflow: hidden;
-    top: 130px;
+    top: 137px;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
@@ -1758,8 +1764,7 @@ input[type="text"], input[type="password"], select{
 .ikont-bt-cerrar-login2{
     height:40px;
     font-size: 20px; 
-    font-family:monospace; 
-    font-style: normal; 
+    font-family:Verdana, Arial, Helvetica, sans-serif;
     color:#808080;
 }
 .ikont-menu-inicio-zoom{
@@ -1772,7 +1777,7 @@ input[type="text"], input[type="password"], select{
     cursor: pointer;
 }
 .ikont-div-menu-zoom{
-    background-position: 0px 0px;
+    background-position: 0px -3px;
 }
 .ikont-panel-spacing-menu{
     border-spacing: 4px;
@@ -1812,7 +1817,7 @@ input[type="text"], input[type="password"], select{
     line-height: 26px;
 }
 .ikont-label-menu-estr-sub-titulo{ 
-    font-size: 0.8em; 
+    font-size: 16px; 
     width: 120px; 
     color: #808080;
     line-height: 26px;
@@ -1865,7 +1870,7 @@ input[type="text"], input[type="password"], select{
     border-color: #6B6B6B;
     position: relative;
     top: 0px;
-    z-index: 2;
+    z-index: 5;
 }
 
 .ikont-img-posicion-menu-proyecto{
@@ -2075,7 +2080,7 @@ input[type="text"], input[type="password"], select{
     width: 162px;
     position: relative;
     left: 34px;
-    top: -87px;
+    top: -71px;
 
 }
 
@@ -2742,17 +2747,17 @@ css usuario modificacion
     padding: 100px; 
 }
 .inputlinkhomezoom:link{
-    font-size: 0.8em; 
+    font-size: 0.5em; 
     color: #58595B; 
     padding: 10px;
 }
 .inputlinkhomezoom:hover{
-    font-size: 0.8em; 
+    font-size: 0.5em;
     color:  #257500 !important; 
     padding: 10px;
 }
 .inputlinkhomezoom:active{
-    font-size: 0.7em; 
+    font-size: 0.5em;  
     color:  #257500 !important; 
     padding: 10px;
 }
@@ -2760,12 +2765,13 @@ css usuario modificacion
     position: relative !important; 
     background-position: bottom;
     width: 920px;
+    margin-top: -60px;
 }
 .panelzoomhome2{
     alignment-adjust: central
 }
 .inputlinkhomevermas{
-    font-size: 0.8em; 
+    font-size: 0.5em; 
     color: #257500 !important; 
     padding: 10px;
 }
@@ -3022,13 +3028,14 @@ css usuario modificacion
     background: #f6f7f9;  -moz-box-shadow: 0.1em 0.1em 0.1em #51819E; -webkit-box-shadow: 0.1em 0.1em 0.3em #51819E; color: #003; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; line-height:12px; color:#666; font-style:italic; text-align: justify; -webkit-border-radius: 8px; border-radius: 8px;
 }
 .ikont-hot-strnombrecompleto{
-    font-family:open;
-    font-size:0.8em;
-    color:#58595B;
+    font-family:Verdana, Geneva, sans-serif;
+    font-size:15px;
+    font-style:italic;
+    color:#004670;
     line-height:15px;
 }
 .ikont-hot-datefechaopinion{
-    font-family:open;
+    font-family:Verdana, Geneva, sans-serif;
     font-size:9px;
     font-style:italic;
     color:#999;
@@ -3045,7 +3052,7 @@ css usuario modificacion
     background-position: -300px 0px;
     float: left;
 }
-.ikont-acl-seleccionqueja:hover {
+.ikont-acl-seleccionqueja:hover, .ikont-acl-seleccionqueja.seleccionqueja-buttonactive {
     background-position: -300px -321px;
 }
 
@@ -3058,7 +3065,7 @@ css usuario modificacion
     background-position: -172px 0px;
     float:left;
 }
-.ikont-acl-seleccionopine:hover {
+.ikont-acl-seleccionopine:hover, .ikont-acl-seleccionopine.seleccionopine-buttonactive {
     background-position: -172px -214px;
 }
 
@@ -3070,7 +3077,7 @@ css usuario modificacion
     background-position: -0px 0px;
     float: left;
 }
-.ikont-acl-seleccionfelicite:hover {
+.ikont-acl-seleccionfelicite:hover, .ikont-acl-seleccionfelicite.seleccionfelicite-buttonactive {
     background-position: 0px -107px;
 }
 
@@ -3448,6 +3455,7 @@ css usuario modificacion
 
 .ikont-hot-contentseparator{
     width: 200px;
+    height: 10px;
     border-bottom: solid 1px #C0C0C0;
     margin: 0px auto;
 }
