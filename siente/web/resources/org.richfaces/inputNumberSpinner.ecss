@@ -42,7 +42,7 @@ input.rf-insp-inp[type="text"] {
 }
 
 .rf-insp-btns {
-    background-color: '#{richSkin.headerBackgroundColor}';
+    background-color: '#{richSkin.backgrouninput}';
     display: inline-block;
     vertical-align: top;
 }
