@@ -130,6 +130,8 @@ public class ActividadobraDTO implements IsSerializable {
         
     }
     
+    
+    
      public ActividadobraDTO(String name, Date start, int duration, int percentDone,
             TaskType taskType,int tipoActividad, boolean boolobligatoria,ObraDTO obra) {
         this(name, name, start, duration, percentDone, taskType, tipoActividad, boolobligatoria,obra);
