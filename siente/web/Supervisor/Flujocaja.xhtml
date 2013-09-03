@@ -141,7 +141,7 @@
                                  rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
@@ -149,7 +149,7 @@
                                  style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
                         
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos()}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}" 
