@@ -42,7 +42,7 @@ input.rf-insp-inp[type="text"] {
 }
 
 .rf-insp-btns {
-    background-color: '#{richSkin.headerBackgroundColor}';
+    background-color: '#{richSkin.backgrouninput}';
     display: inline-block;
     vertical-align: top;
 }
@@ -56,11 +56,11 @@ input.rf-insp-inp[type="text"] {
 }
 
 .rf-insp-dec {
-    background-image: url("#{resource['org.richfaces.images:spinnerArrowBottom.png']}");
+    background-image: url("#{resource['org.richfaces:spinnerArrowBottom.png']}");
 }
 
 .rf-insp-inc {
-    background-image: url("#{resource['org.richfaces.images:spinnerArrowTop.png']}");
+    background-image: url("#{resource['org.richfaces:spinnerArrowTop.png']}");
 }
 
 .rf-insp-dec-dis {

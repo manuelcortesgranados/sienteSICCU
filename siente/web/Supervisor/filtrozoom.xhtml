@@ -39,14 +39,16 @@
 
                 <h:panelGrid columns="1" styleClass="panel_valor" >
                     <h:inputHidden id="valormayor" value="#{HomeGestion.proyectovalormayor}" />
-
+                    <h:inputHidden id="numo" value="#{HomeGestion.numo}" />
+                    <h:inputHidden id="numero1"  value="#{HomeGestion.filtro.cuantiaini}"/>
+                    <h:inputHidden id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"/>                   
                     <script type="text/javascript">
                                   $(function() {
                                       $("#slider-range").slider({
                                           range: true,
-                                          min: 0,
+                                          min: document.getElementById("numo").value,
                                           max: document.getElementById("valormayor").value,
-                                          values: [0, document.getElementById("valormayor").value],
+                                          values: [document.getElementById("numero1").value, document.getElementById("numero2").value],
                                           slide: function(event, ui) {
                                               var numero1 = ui.values[ 0 ];
                                               var numero2 = ui.values[ 1 ];
@@ -64,28 +66,26 @@
 
                     <h:panelGrid>           
                         <h:inputText id="amount"  styleClass="input_filtro_2" style="font-size: 12px !important;" disabled="true"/>
-                        <h:outputText id="numero1"   value="#{HomeGestion.filtro.cuantiaini}"  >
-                            <f:convertNumber pattern="$#,###.00"/></h:outputText>
-                        <h:outputText  id="numero2"   value="#{HomeGestion.filtro.cuantiafin}"  >
-                            <f:convertNumber pattern="$#,###.00"/>
-                        </h:outputText>
                     </h:panelGrid>
                     <div id="slider-range" style="position: relative !important; top: -20px !important;"></div>
                     <br/>
-
+                    <h:inputHidden id="cero" value="#{HomeGestion.cero}" />
+                    <h:inputHidden id="cien" value="#{HomeGestion.cien}" />
+                    <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
+                    <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
                     <script>
                         $(function() {
                             $("#slider-range-avance").slider({
                                 range: true,
-                                min: 0,
-                                max: 100,
-                                values: [0, 100],
+                                min: document.getElementById("ava1").value,
+                                max: document.getElementById("ava2").value,
+                                values: [document.getElementById("ava1").value, document.getElementById("ava2").value],
                                 slide: function(event, ui) {
                                     var avance1 = ui.values[ 0 ];
                                     var avance2 = ui.values[ 1 ];
                                     $("#ava1").val(avance1);
                                     $("#ava2").val(avance2);
-                                    $("#avance").val("Avance " + ui.values[ 0 ] + "% a " + ui.values[ 1 ] + "%");
+                                     $("#avance").val("Avance " + avance1 + "% a " + avance2 + "%");
                                 }
                             });
                             $("#avance").val("Avance  " + $("#slider-range-avance").slider("values", 0) +
@@ -95,8 +95,6 @@
 
                     <h:inputText id="avance"   styleClass="input_filtro_2" disabled="true"/> 
 
-                    <h:inputHidden id="ava1" value="#{HomeGestion.filtro.avance1}" />
-                    <h:inputHidden id="ava2" value="#{HomeGestion.filtro.avance2}" />
 
                     <div id="slider-range-avance" style="position: relative !important; top: -16px !important;"></div>
 
@@ -166,7 +164,7 @@
                     <rich:placeholder id="placeHolderInterventor" value="Interventor" />
                 </h:inputText>
 
-                <h:inputText id="txtPalabraClave4" size="35"
+                <h:inputText id="txtPalabraClave4" size="35" value="#{HomeGestion.filtro.strgerenteconvenio}"
                              onclick="this.value = '';" styleClass="input_filtro input_filtro_gerente" >
                     <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
                 </h:inputText>

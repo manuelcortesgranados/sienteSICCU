@@ -456,7 +456,6 @@ public class SessionBeanCobra implements Serializable {
      * <p>Construct a new session data bean instance.</p>
      */
     public SessionBeanCobra() {
-        System.out.println("Debug - SessionBeanCobra");
         verregistrarse = Boolean.parseBoolean(bundle.getString("varmodalsupervisor"));
     }
 
