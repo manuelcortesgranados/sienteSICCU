@@ -243,18 +243,10 @@
                                 <h:panelGrid id="pg_ubicacion_evolucion"  columns="1" >
                                     <h:outputLabel>Conozca la evolución</h:outputLabel>
                                     <h:panelGroup layout="block" styleClass="panelcenter">
-                                        <h:outputText  styleClass="scriptGraf"   value="#{Supervisor$GraficoAvanceFisico.grafico.scriptGrafico}" escape="false" />
-                                        <!-- esta declaracion css, se hace para poder visualizar el grafico -->
-                                        <style>
-                                            #graficoAvanceFisico >  div{
-                                                overflow: visible !important;
-                                            }
-                                        </style>
+                                        <h:outputText  styleClass="ikont- hot-scriptGrafico1"   value="#{Supervisor$GraficoEvolucionProyectoCiudadano.grafico.scriptGrafico}" escape="false"/>
                                         <!-- al div que va a contener el grafico debe tener los valores de width y heigth en su atriburo style -->
-                                        <div id="graficoAvanceFisico" style="width:150px;
-                                             height: 180px; 
-                                             text-align: left;">
-                                            </div>
+                                        <div id="graficoEvolucionProyecto" style="width: 550px; height: 300px; text-align: left; ">
+                                        </div>
                                     </h:panelGroup>
                                 </h:panelGrid>
                             </h:panelGrid>
