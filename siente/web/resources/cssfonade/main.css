@@ -1870,7 +1870,7 @@ input[type="text"], input[type="password"], select{
     border-color: #6B6B6B;
     position: relative;
     top: 0px;
-    z-index: 2;
+    z-index: 5;
 }
 
 .ikont-img-posicion-menu-proyecto{
