@@ -29,12 +29,6 @@
                 return true;
             }
 
-            function borrar_campo()
-            {
-                if (document.getElementById("frmparticiapcioncomentario:iacomentario2").value == "Escriba Su Comentario")
-                    document.getElementById("frmparticiapcioncomentario:iacomentario2").value = "";
-            }
-
         </script>
     </ui:define>
     <ui:define name="menu">
@@ -128,7 +122,8 @@
                                     <a4j:status id="idstatuscomentario2"/>
                                     <h:outputText  styleClass="ikont-hot-idcontarmensaje2"   id="idcontarmensaje2" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
                                     <h:inputTextarea  id="iacomentario2" styleClass="ikont-hit-iacomentario2"   rows="5" cols="40" onkeydown="return maximaLongitud(this, 400)"  
-                                                      value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo(this);" >
+                                                      value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}"  >
+                                        <rich:placeholder value="Escriba Su Comentario..." />
                                         <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensaje2" status="idstatuscomentario2" />
                                     </h:inputTextarea>
                                 </h:panelGroup>
