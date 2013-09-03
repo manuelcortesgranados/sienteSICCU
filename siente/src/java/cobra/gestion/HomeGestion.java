@@ -250,6 +250,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private BigDecimal proyectovalormayor = BigDecimal.ONE;
     private long numeroproyectoszoom = 0;
     private long numeroconvenioszoom = 0;
+    private BigDecimal numo;
+    private int cero = 0;
+    private int cien = 100;
     private List<vistahomezoom> listavistahomezoom = new ArrayList<vistahomezoom>();
     //CONTRATISTAS
     private List<Contratista> contratistas = new ArrayList<Contratista>();
@@ -674,6 +677,25 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.listavistahomezoom = listavistahomezoom;
     }
 
+    public int getCero() {
+        System.out.println("cero " + cero);
+        return cero;
+    }
+
+    public void setCero(int cero) {
+        this.cero = cero;
+    }
+
+    public int getCien() {
+        System.out.println("cien " + cien);
+        return cien;
+    }
+
+    public void setCien(int cien) {
+        this.cien = cien;
+    }
+    
+
     public void iniciarfiltro() {
 
         /**
@@ -723,8 +745,8 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public final void iniciarHome() {
         // Se valida si es ciudadano para limitar el numero de proyectos que pueden ver por roles. 
-         setInttipoorigen(1);
-         
+        setInttipoorigen(1);
+
         if (getSessionBeanCobra().getCobraService().isCiu()) {
             filtro.setIntestadoobra(1);
         } else if (getSessionBeanCobra().getUsuarioObra().getUsuLogin().compareTo("ciudadano") != 0) {
@@ -1653,8 +1675,17 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         this.subTiposProyecto = subTiposProyecto;
     }
 
+    public BigDecimal getNumo() {
+        return numo;
+    }
+
+    public void setNumo(BigDecimal numo) {
+        this.numo = numo;
+    }
+    
+
     public String filtroObrasActionMapaAvanModal() {
-        //System.out.println("ingresoo al sistema");
+        System.out.println("ingresoo al sistema");
         if (filtro.getStrentidad() == null || filtro.getStrentidad().compareTo("") == 0) {
             if (listTercerosUsuario.size() == 1) {
                 filtro.setIntcodigoentidad(listTercerosUsuario.get(0).getIntcodigo());
@@ -1741,7 +1772,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
 
     public String primeroListProyectos() {
         obrasEncontradas = 0;
-
+        System.out.println("entor 2");
         //listaobrasusu = new ArrayList<Obra>();
         listaobrasusu = new ArrayList<VistaObraMapa>();
         filtro.setIntpagini(0);
