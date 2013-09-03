@@ -3052,7 +3052,7 @@ css usuario modificacion
     background-position: -300px 0px;
     float: left;
 }
-.ikont-acl-seleccionqueja:hover {
+.ikont-acl-seleccionqueja:hover, .ikont-acl-seleccionqueja.seleccionqueja-buttonactive {
     background-position: -300px -321px;
 }
 
@@ -3065,7 +3065,7 @@ css usuario modificacion
     background-position: -172px 0px;
     float:left;
 }
-.ikont-acl-seleccionopine:hover {
+.ikont-acl-seleccionopine:hover, .ikont-acl-seleccionopine.seleccionopine-buttonactive {
     background-position: -172px -214px;
 }
 
@@ -3077,7 +3077,7 @@ css usuario modificacion
     background-position: -0px 0px;
     float: left;
 }
-.ikont-acl-seleccionfelicite:hover {
+.ikont-acl-seleccionfelicite:hover, .ikont-acl-seleccionfelicite.seleccionfelicite-buttonactive {
     background-position: 0px -107px;
 }
 
