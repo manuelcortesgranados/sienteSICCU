@@ -340,6 +340,12 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         menuItemAnadirHito.addSelectionHandler(new SelectionHandler<Item>() {
             @Override
             public void onSelection(SelectionEvent<Item> event) {
+                final Window crearActDialog = new Window();
+                crearActDialog.setBlinkModal(true);
+                crearActDialog.setModal(true);
+                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE,6);
+                crearActDialog.add(actividadForm);
+                crearActDialog.show();
             }
         });
         config.taskContextMenu.add(menuItemAnadirHito);
@@ -354,7 +360,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO);
+                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF,4);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
 

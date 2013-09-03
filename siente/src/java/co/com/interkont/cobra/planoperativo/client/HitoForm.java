@@ -41,13 +41,12 @@ import java.util.Date;
  *
  * @author desarrollo9
  */
-public class ActividadForm implements IsWidget, EntryPoint {
+public class HitoForm implements IsWidget, EntryPoint {
 
     // <editor-fold defaultstate="collapsed" desc="Elementos visuales">
     private VerticalPanel vp;
     private TextArea descripcionActividad;
     private DateField fechainicioActividad;
-    private DateField fechafinActividad;
     private TextField peso;
     private TaskType tipo;
     private int tipoactividad;
@@ -86,14 +85,6 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.fechainicioActividad = fechainicioActividad;
     }
 
-    public DateField getFechafinActividad() {
-        return fechafinActividad;
-    }
-
-    public void setFechafinActividad(DateField fechafinActividad) {
-        this.fechafinActividad = fechafinActividad;
-    }
-
     public ActividadobraDTO getActividadObraPadre() {
         return actividadObraPadre;
     }
@@ -118,7 +109,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad) {
+    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -130,7 +121,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
 
     private void crearFormulario() {
 
-        getVp().add(new Label("Añadir actividad macro"));
+        getVp().add(new Label("Añadir hito"));
 
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
         getVp().add(con);
@@ -147,50 +138,39 @@ public class ActividadForm implements IsWidget, EntryPoint {
         getFechainicioActividad().addValidator(new EmptyValidator<Date>());
         getFechainicioActividad().setAutoValidate(true);
 
-        getFechainicioActividad().setEmptyText("Fecha de Inicio");
-        con.add(new FieldLabel(getFechainicioActividad(), "Fecha de Inicio:"), new HtmlData(".fechaini"));
-        setFechafinActividad(new DateField());
-        getFechafinActividad().setWidth(cw);
-        getFechafinActividad().setEmptyText("Fecha de Finalización");
-        getFechafinActividad().addValidator(new EmptyValidator<Date>());
-        getFechafinActividad().setAutoValidate(true);
-        con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización:"), new HtmlData(".fechafin"));
+        getFechainicioActividad().setEmptyText("Fecha");
+        con.add(new FieldLabel(getFechainicioActividad(), "Fecha:"), new HtmlData(".fechaini"));
 
 //        setPeso(new TextField());
 //        getPeso().setEmptyText("Peso");
 //        getPeso().setWidth(cw);
 //        con.add(getPeso(),new HtmlData(".peso") );
 // 
-          Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
+    
+        Button btnAdicionarActividad = new Button("Añadir Hito", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                AlertMessageBox d;               
+                AlertMessageBox d;
+                
                 if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
-                    if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
+                    if (getFechainicioActividad().getValue() != null ) {
 
-                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
-                            if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
+                        if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {                            
                                 modalAct.hide();
-                                crearActividad();
-                            } else {
-                                d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
-                                        + obtenerFecha(actividadObraPadre.getEndDateTime()));
-                                d.show();
-
-                            }
+                                crearActividad();                            
                         } else {
-                            d = new AlertMessageBox("Error", "La fecha de inicio de la actividad no puede ser inferior a "
+                            d = new AlertMessageBox("Error", "La fecha de inicio no puede ser inferior a "
                                     + obtenerFecha(actividadObraPadre.getStartDateTime()));
                             d.show();
                         }
 
                     } else {
-                        d = new AlertMessageBox("Error", "Debe diligenciar las fechas para la actividad");
+                        d = new AlertMessageBox("Error", "Debe diligenciar la fecha ");
                         d.show();
                     }
 
                 } else {
-                    d = new AlertMessageBox("Error", "Debe Ingresar una descripción para la actividad");
+                    d = new AlertMessageBox("Error", "Debe ingresar una descripción");
                     d.show();
                 }
             }
@@ -234,7 +214,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     public void cargarDatosActividad() {
         actividacreada.setStrdescactividad(getDescripcionActividad().getValue());
         actividacreada.setStartDateTime(getFechainicioActividad().getValue());
-        actividacreada.setEndDateTime(getFechafinActividad().getValue());
+        actividacreada.setEndDateTime(getFechainicioActividad().getValue());
         //actividacreada.setPeso(getPeso();
 
     }
