@@ -145,9 +145,7 @@
                             <a4j:commandLink id="btnacta" onclick="#{rich:component('panelDocCiu')}.show();
                 return true;"
                                              styleClass="ikont-acl-seleccionefoto2"  />
-                            <a4j:commandLink id="btnimg3" onclick="#{rich:component('panelDocCiu')}.show();
-                return true;"
-                                             styleClass="ikont-acl-seleccionefoto3"  />
+                            
                         </h:panelGroup>
                         <h:panelGrid  styleClass="ikont-table-aling-pasos">
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 4" />
@@ -169,8 +167,8 @@
                             </h:panelGrid>
                         </h:panelGroup>
                         <h:panelGroup layout="block">
-                            <a4j:commandButton value="Publicar" styleClass="ikont-acb-publicar-coment" action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';"> </a4j:commandButton>
-                            <!--     <a4j:commandLink styleClass="ikont-acl-cancelarComentario"  ></a4j:commandLink> -->
+                            <a4j:commandButton value="Publicar" styleClass="ikont-acb-publicar-coment"  action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
+                                </a4j:commandButton>
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:form>
