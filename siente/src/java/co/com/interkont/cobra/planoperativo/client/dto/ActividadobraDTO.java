@@ -44,7 +44,7 @@ public class ActividadobraDTO implements IsSerializable {
     
     
     private long oidactiviobra;
-    private String strdescactividad;
+    //private String strdescactividad;
 //    private Date fechaInicio;
 //    private Date fechaFin;
     private Double peso;
@@ -57,8 +57,18 @@ public class ActividadobraDTO implements IsSerializable {
     private String eliminar;
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
+    public long getOidactiviobra() {
+        return oidactiviobra;
+    }
+
+    public void setOidactiviobra(long oidactiviobra) {
+        this.oidactiviobra = oidactiviobra;
+    }
+    
+    
+
     public ActividadobraDTO(String strdescactividad,int tipoActividad,int id) {
-        this.strdescactividad=strdescactividad;
+        this.name=strdescactividad;
         this.tipoActividad=tipoActividad;
         this.id=""+id;
         this.eliminar="Eliminar";
@@ -90,7 +100,7 @@ public class ActividadobraDTO implements IsSerializable {
         this.endDateTime=fechaFin;
         this.duration=duracion;
     }
-    
+//    
 //    public ActividadobraDTO(Date fechaInicio,Date fechaFin,int duracion) {
 //        this.startDateTime=fechaInicio;
 //        this.endDateTime=fechaFin;
@@ -290,16 +300,16 @@ public class ActividadobraDTO implements IsSerializable {
     /**
      * @return the strdescactividad
      */
-    public String getStrdescactividad() {
-        return strdescactividad;
-    }
-
-    /**
-     * @param strdescactividad the strdescactividad to set
-     */
-    public void setStrdescactividad(String strdescactividad) {
-        this.strdescactividad = strdescactividad;
-    }
+//    public String getStrdescactividad() {
+//        return strdescactividad;
+//    }
+//
+//    /**
+//     * @param strdescactividad the strdescactividad to set
+//     */
+//    public void setStrdescactividad(String strdescactividad) {
+//        this.strdescactividad = strdescactividad;
+//    }
 
 //    /**
 //     * @return the fechaInicio

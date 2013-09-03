@@ -4,6 +4,7 @@
  */
 package cobra.Supervisor;
 
+import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.exceptions.ConvenioException;
 import co.com.interkont.cobra.planoperativo.exceptions.ValidacionesConvenio;
@@ -2348,9 +2349,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (getSessionBeanCobra().isCargarcontrato()) {
 
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
-            panelPantalla = 2;
+            panelPantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarPanel();
-            subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
+            subpantalla =getSessionBeanCobra().getCobraGwtService().getNavegacion() ;
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
                 getFlujoCaja().iniciarFlujoCaja();
@@ -6664,6 +6665,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      * @author Carlos Loaiza
      */
     public void actualizarContratodatosGwt(ContratoDTO contratodto) {
+        /**
+         * Datos Generales
+         */
         contrato.setDatefechaini(contratodto.getDatefechaini());
         contrato.setDatefechafin(contratodto.getDatefechafin());
         contrato.setFechaactaini(contratodto.getDatefechaactaini());
@@ -6672,6 +6676,22 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
+        
+        contrato.getActividadobras().clear();
+        if (!contratodto.getActividadobras().isEmpty()) {
+        Iterator it = contratodto.getActividadobras().iterator();
+        while(it.hasNext())
+        {
+            ActividadobraDTO act= (ActividadobraDTO) it.next();
+            contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato,null));
+        }    
+        
+//        contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra((ActividadobraDTO) it.next(), contrato));        
+//         System.out.println("sisas = " );
+//                System.out.println("contratodto. = " + contratodto.getActividadobras().size());
+//                
+        }
+//        
 
     }
 

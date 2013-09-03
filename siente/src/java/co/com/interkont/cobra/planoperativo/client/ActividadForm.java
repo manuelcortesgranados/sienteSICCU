@@ -232,7 +232,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
      }-*/;
 
     public void cargarDatosActividad() {
-        actividacreada.setStrdescactividad(getDescripcionActividad().getValue());
+        actividacreada.setName(getDescripcionActividad().getValue());
         actividacreada.setStartDateTime(getFechainicioActividad().getValue());
         actividacreada.setEndDateTime(getFechafinActividad().getValue());
         //actividacreada.setPeso(getPeso();
@@ -241,13 +241,15 @@ public class ActividadForm implements IsWidget, EntryPoint {
 
     public void crearActividad() {
         cargarDatosActividad();
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getStrdescactividad(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
+        //gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,tareaNueva);
+        actividadObraPadre.addChild(tareaNueva);
+        //gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
-        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
+        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);        
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-
+        
     }
 
     public String obtenerFecha(Date fecha) {

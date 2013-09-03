@@ -399,7 +399,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         config.dependencyProperties = depProps;
 
         // Cascade Changes
-        config.cascadeChanges = false;
+        config.cascadeChanges = true;
 
         // Add zones to weekends
         ArrayList<ZoneGeneratorInt> zoneGenerators = new ArrayList<ZoneGeneratorInt>();

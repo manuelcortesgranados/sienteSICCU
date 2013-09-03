@@ -7,10 +7,12 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.config.GanttConfig;
+import com.gantt.client.config.GanttConfig.TaskType;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.util.ArrayList;
 import java.util.List;
+import sun.print.resources.serviceui;
 
 /**
  * Clase para manejar los datos que componen el Gantt del Plan Operativo
@@ -30,20 +32,22 @@ public class GanttDatos {
      */
     public static ActividadobraDTO getTareas(ContratoDTO convenio) {
         
-        ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
-
-        ///Actividad Principal - ConvenioDTO
-        //DateWrapper dw;
-        //dw = new DateWrapper(convenio.getDatefechaini());
+        ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>(convenio.getActividadobras());
         
-        ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), convenio.getDatefechaini(), convenio.getIntduraciondias(),
-                0, GanttConfig.TaskType.PARENT, 1, false);
-        t.setTipoActividad(1);
+//        ///Actividad Principal - ConvenioDTO
+//        //DateWrapper dw;
+//        //dw = new DateWrapper(convenio.getDatefechaini());
+//        
+//        ActividadobraDTO t = new ActividadobraDTO(convenio.getStrnumcontrato(), convenio.getDatefechaini(), convenio.getIntduraciondias(),
+//                0, GanttConfig.TaskType.PARENT, 1, false);
+//        t.setTipoActividad(1);
+//        
+//        t.setChildren(new ArrayList<ActividadobraDTO>(convenio.getActividadobras()));
+//        
+//        list.add(t);
+        //list.get(0).addChild(new ActividadobraDTO("M2", list.get(0).getStartDateTime(), 0,0, TaskType.MILESTONE,5,true));
         
-        t.setChildren(new ArrayList<ActividadobraDTO>(convenio.getActividadobras()));
-       
-        list.add(t);
-        ActividadobraDTO root = new ActividadobraDTO(list);
+        ActividadobraDTO root = new ActividadobraDTO(list);        
         
         return root;
     }
@@ -60,23 +64,14 @@ public class GanttDatos {
     public static ContratoDTO estructurarDatosConvenio(final ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore, CobraGwtServiceAbleAsync service) {
         //ContratoDTO convenio = contratodto;
         
-        List<ActividadobraDTO> lista = taskStore.getAll();
-        int i=0;
-        for (ActividadobraDTO act : lista) {
-            if(i==0)
-            {
-                convenio.setDatefechaini(act.getStartDateTime());
-                convenio.setDatefechafin(act.endDateTime);
-                convenio.setIntduraciondias(act.duration);                
-            }
-            else
-            {
-                convenio.getActividadobras().clear();
-                convenio.getActividadobras().add(act);
-            }                
-            i++;
-        }   
-         
+        List<ActividadobraDTO> lista = taskStore.getAll();       
+        convenio.setDatefechaini(lista.get(0).getStartDateTime());
+        convenio.setDatefechafin(lista.get(0).endDateTime);
+                convenio.setIntduraciondias(lista.get(0).duration); 
+        convenio.getActividadobras().clear();         
+        
+        convenio.getActividadobras().add(lista.get(0));
+       
         return convenio;
     }    
 }

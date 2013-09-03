@@ -19,6 +19,7 @@ import cobra.util.CasteoGWT;
 import co.com.interkont.cobra.to.Parametricaactividadesobligatorias;
 import co.com.interkont.cobra.to.Rubro;
 import co.com.interkont.cobra.to.Tipocontrato;
+import com.gantt.client.config.GanttConfig;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -97,6 +98,12 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 //    }
     @Override
     public ArrayList<ActividadobraDTO> obtenerActividadesObligatorias(Date fecini, int duracion, Date fecactaini, Date fechafin) throws Exception {
+         
+        ActividadobraDTO t = new ActividadobraDTO(contratoDto.getStrnumcontrato(), contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(),
+                0, GanttConfig.TaskType.PARENT, 1, false);
+        t.setTipoActividad(1);       
+               
+        
         List<Parametricaactividadesobligatorias> listapar = cobraDao.encontrarTodoOrdenadoporcampo(Parametricaactividadesobligatorias.class, "idparametrica");
         Iterator itparametricas = listapar.iterator();
         ArrayList<ActividadobraDTO> listaactobligatorias = new ArrayList<ActividadobraDTO>();
@@ -125,7 +132,12 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 listaactobligatorias.add(actdto);
             }
         }
-        return listaactobligatorias;
+        
+        t.setChildren(new ArrayList<ActividadobraDTO>(listaactobligatorias));
+       ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>();
+        list.add(t);
+        
+        return list;
     }
 
     @Override

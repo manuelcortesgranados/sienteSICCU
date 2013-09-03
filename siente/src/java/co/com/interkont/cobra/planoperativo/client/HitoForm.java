@@ -212,7 +212,7 @@ public class HitoForm implements IsWidget, EntryPoint {
      }-*/;
 
     public void cargarDatosActividad() {
-        actividacreada.setStrdescactividad(getDescripcionActividad().getValue());
+        actividacreada.setName(getDescripcionActividad().getValue());
         actividacreada.setStartDateTime(getFechainicioActividad().getValue());
         actividacreada.setEndDateTime(getFechainicioActividad().getValue());
         //actividacreada.setPeso(getPeso();
@@ -221,7 +221,7 @@ public class HitoForm implements IsWidget, EntryPoint {
 
     public void crearActividad() {
         cargarDatosActividad();
-        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getStrdescactividad(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
+        ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
         gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
         propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
