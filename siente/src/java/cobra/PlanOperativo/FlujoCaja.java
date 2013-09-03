@@ -52,6 +52,7 @@ public class FlujoCaja implements Serializable {
     double totalIngresosPeriodoAcumulativo[];
     double totalEgresosPeriodo[];
     double totalEgresosPeriodoAcumulativo[];
+    double acumuladoGMF[];
     double totalIngresos;
     double totalEgresos;
     ResourceBundle bundle = getSessionBeanCobra().getBundle();
@@ -252,178 +253,23 @@ public class FlujoCaja implements Serializable {
      * @return Cadena con el nombre de la página del flujo.
      */
     public void iniciarFlujoCaja() {
-        System.out.println("iniciar flujo = ");
         nuevoContratoBasico = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
         convenio = nuevoContratoBasico.getContrato();
-        //convenio = getSessionBeanCobra().getCobraService().encontrarContratoxId(53);
 
         if (!flujoCajaIniciado) {
             flujoIngresos = new ArrayList<FlujoIngresos>();
             flujoEgresos = new ArrayList<FlujoEgresos>();
         }
-        //crearPeriodosFlujoCaja();
         generarPeriodosFlujoCaja();
         crearEstructuraFlujoIngresos();
         iniciarTotalesIngresosPeriodo();
         crearEstructuraFlujoEgresos();
         iniciarTotalesEgresosPeriodo();
-        refrescarValoresFlujoCaja();
+        refrescarTotalesIngresos();
+        refrescarTotalesEgresos();
         generarPeriodosFlujoCaja();
 
         flujoCajaIniciado = true;
-    }
-
-    /**
-     * Crea los periodos del flujo de caja de acuerdo con la fecha de inicio y
-     * finalización del convenio marco.
-     *
-     * Llena la lista periodosFlujoCaja estableciendo como fecha de inicio del
-     * primer periodo la fecha de inicio del convenio marco, se incrementa
-     * mensualmente hasta generar el último periodo y establece como fecha de
-     * finalización la fecha final del convenio marco.
-     */
-    public void crearPeriodosFlujoCaja() {
-        periodosConvenio = new ArrayList<Relacioncontratoperiodoflujocaja>();
-        periodosConvenioEliminados = new ArrayList<Relacioncontratoperiodoflujocaja>();
-        Periodoflujocaja periodoFlujoCaja = new Periodoflujocaja();
-        Relacioncontratoperiodoflujocaja periodoConvenio = new Relacioncontratoperiodoflujocaja();
-        fechaInicioConvenio = Calendar.getInstance();
-        fechaFinConvenio = Calendar.getInstance();
-        Calendar fechaPeriodo = Calendar.getInstance();
-        double cantidadPeriodos;
-        int iterador = 1;
-
-        fechaInicioConvenio.setTime(this.convenio.getDatefechaini());
-        fechaFinConvenio.setTime(this.convenio.getDatefechafin());
-
-        /* Para hallar la cantidad de periodos:
-         * 1. Se obtienen los milisegundos entre las dos fechas.
-         * 2. Se divide entre los milisegundos que tiene un día (definidos en MILISEGUNDOS_POR_DIA).
-         * 3. Se divide entre 30d (30 de tipo double) para que la cantidad de meses quede con decimales.
-         */
-        cantidadPeriodos = (fechaFinConvenio.getTime().getTime() - fechaInicioConvenio.getTime().getTime()) / MILISEGUNDOS_POR_DIA / 30d;
-
-        periodosConvenio = getSessionBeanCobra().getCobraService().encontrarPeriodosConvenio(convenio.getIntidcontrato());
-
-        if (periodosConvenio.isEmpty()) {
-            /* Primer elemento de la lista de periodos */
-
-            periodoFlujoCaja.setFechainicio(fechaInicioConvenio.getTime());
-            fechaPeriodo = fechaInicioConvenio;
-            fechaPeriodo.add(Calendar.MONTH, 1);
-            fechaPeriodo.add(Calendar.DATE, -1);
-            periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-            periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
-            periodoConvenio.setContrato(convenio);
-            periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-
-            periodosConvenio.add(periodoConvenio);
-
-            iterador++;
-
-            while (iterador <= Math.ceil(cantidadPeriodos)) {
-                periodoFlujoCaja = new Periodoflujocaja();
-                periodoConvenio = new Relacioncontratoperiodoflujocaja();
-
-                fechaPeriodo.add(Calendar.DATE, 1);
-                periodoFlujoCaja.setFechainicio(fechaPeriodo.getTime());
-
-                if (iterador < Math.ceil(cantidadPeriodos)) {
-                    fechaPeriodo.add(Calendar.MONTH, 1);
-                    fechaPeriodo.add(Calendar.DATE, -1);
-                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-                } else {
-                    fechaPeriodo = fechaFinConvenio;
-                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-                }
-
-                periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
-                periodoConvenio.setContrato(convenio);
-                periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-
-                periodosConvenio.add(periodoConvenio);
-
-                iterador++;
-            }
-        } else if (periodosConvenio.size() < Math.ceil(cantidadPeriodos)) {
-            iterador = periodosConvenio.size();
-            fechaPeriodo.setTime(periodosConvenio.get(iterador - 1).getPeriodoflujocaja().getFechafin());
-
-            iterador++;
-
-            while (iterador <= Math.ceil(cantidadPeriodos)) {
-                periodoFlujoCaja = new Periodoflujocaja();
-                periodoConvenio = new Relacioncontratoperiodoflujocaja();
-
-                fechaPeriodo.add(Calendar.DATE, 1);
-                periodoFlujoCaja.setFechainicio(fechaPeriodo.getTime());
-
-                if (iterador < Math.ceil(cantidadPeriodos)) {
-                    fechaPeriodo.add(Calendar.MONTH, 1);
-                    fechaPeriodo.add(Calendar.DATE, -1);
-                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-                } else {
-                    fechaPeriodo = fechaFinConvenio;
-                    periodoFlujoCaja.setFechafin(fechaPeriodo.getTime());
-                }
-
-                periodoFlujoCaja.setStrdescripcion("Mes " + iterador);
-                periodoConvenio.setContrato(convenio);
-                periodoConvenio.setPeriodoflujocaja(periodoFlujoCaja);
-
-                periodosConvenio.add(periodoConvenio);
-
-                iterador++;
-            }
-        } else if (periodosConvenio.size() > Math.ceil(cantidadPeriodos)) {
-
-            while (periodosConvenio.size() > Math.ceil(cantidadPeriodos)) {
-                periodoConvenio = periodosConvenio.remove(periodosConvenio.size() - 1);
-
-                periodosConvenioEliminados.add(periodoConvenio);
-            }
-        }
-
-        actualizarPeriodosFlujoCaja(periodosConvenio.size());
-    }
-
-    private void actualizarPeriodosFlujoCaja(int cantidadPeriodos) {
-        if ((periodosConvenio.get(0).getPeriodoflujocaja().getFechainicio() != convenio.getDatefechaini())
-                || (periodosConvenio.get(cantidadPeriodos - 1).getPeriodoflujocaja().getFechafin() != convenio.getDatefechafin())) {
-
-            Calendar fechaPeriodo = Calendar.getInstance();
-            fechaPeriodo.setTime(convenio.getDatefechaini());
-
-            int iterador = 1;
-
-            /* Primer elemento de la lista de periodos */
-
-            periodosConvenio.get(0).getPeriodoflujocaja().setFechainicio(convenio.getDatefechaini());
-
-            fechaPeriodo.add(Calendar.MONTH, 1);
-            fechaPeriodo.add(Calendar.DATE, -1);
-            periodosConvenio.get(0).getPeriodoflujocaja().setFechafin(fechaPeriodo.getTime());
-
-            periodosConvenio.get(0).getPeriodoflujocaja().setStrdescripcion("Mes " + iterador);
-
-            while (iterador < cantidadPeriodos) {
-                fechaPeriodo.add(Calendar.DATE, 1);
-                periodosConvenio.get(iterador).getPeriodoflujocaja().setFechainicio(fechaPeriodo.getTime());
-
-                if (iterador < (cantidadPeriodos - 1)) {
-                    fechaPeriodo.add(Calendar.MONTH, 1);
-                    fechaPeriodo.add(Calendar.DATE, -1);
-
-                    periodosConvenio.get(iterador).getPeriodoflujocaja().setFechafin(fechaPeriodo.getTime());
-                } else {
-                    periodosConvenio.get(iterador).getPeriodoflujocaja().setFechafin(convenio.getDatefechafin());
-                }
-
-                periodosConvenio.get(iterador).getPeriodoflujocaja().setStrdescripcion("Mes " + (iterador + 1));
-
-                iterador++;
-            }
-        }
     }
 
     /**
@@ -489,13 +335,13 @@ public class FlujoCaja implements Serializable {
     public void iniciarTotalesIngresosPeriodo() {
         this.totalIngresosPeriodo = new double[periodosConvenio.size()];
         this.totalIngresosPeriodoAcumulativo = new double[periodosConvenio.size()];
-        int i = 0;
+        int iterador = 0;
 
-        while (i < periodosConvenio.size()) {
-            this.totalIngresosPeriodo[i] = 0;
-            this.totalIngresosPeriodoAcumulativo[i] = 0;
+        while (iterador < periodosConvenio.size()) {
+            this.totalIngresosPeriodo[iterador] = 0;
+            this.totalIngresosPeriodoAcumulativo[iterador] = 0;
 
-            i++;
+            iterador++;
         }
     }
 
@@ -503,35 +349,37 @@ public class FlujoCaja implements Serializable {
      * Refrescar totales del flujo de ingresos.
      *
      * Después del evento de cambiar el valor de una celda, se refrescan los
-     * totales de la fuente de ingresos a la que corresponde y los totales del
-     * flujo de ingresos.
-     *
-     * @param fuenteIngresos Fuente de ingresos a la que pertene la celda.
-     * @param columna Columna (periodo) a la que pertenece la celda.
+     * totales del flujo de ingresos y sus fuentes.
      */
-    public void refrescarTotalesIngresos(FlujoIngresos fuenteIngresos, int columna) {
-        fuenteIngresos.calcularTotalIngresosFuente(periodosConvenio.size());
-        this.totalIngresosPeriodo[columna] = 0;
-        this.totalIngresos = 0;
+    public void refrescarTotalesIngresos() {
+        int iterador;
 
-        for (FlujoIngresos fuenteIngresosRecorrer : flujoIngresos) {
-            if (fuenteIngresosRecorrer.isIngresoEntidad()) {
-                this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.planMovimientosConvenioEntidad.get(columna).getValor().doubleValue();
-            } else {
-                this.totalIngresosPeriodo[columna] += fuenteIngresosRecorrer.planMovimientosIngresosConvenio.get(columna).getValor().doubleValue();
+        iniciarTotalesIngresosPeriodo();
+        totalIngresos = 0;
+
+        for (FlujoIngresos flujoIngresosRefrescar : flujoIngresos) {
+            flujoIngresosRefrescar.calcularTotalIngresosFuente(periodosConvenio.size());
+            totalIngresos += flujoIngresosRefrescar.getTotalIngresosFuente().doubleValue();
+
+            iterador = 0;
+            while (iterador < periodosConvenio.size()) {
+                if (flujoIngresosRefrescar.isIngresoEntidad()) {
+                    totalIngresosPeriodo[iterador] += flujoIngresosRefrescar.getPlanMovimientosConvenioEntidad().get(iterador).getValor().doubleValue();
+                } else {
+                    totalIngresosPeriodo[iterador] += flujoIngresosRefrescar.getPlanMovimientosIngresosConvenio().get(iterador).getValor().doubleValue();
+                }
+
+                iterador++;
             }
-
-            this.totalIngresos += fuenteIngresosRecorrer.totalIngresosFuente.doubleValue();
-
         }
 
-        int i = 1;
-        this.totalIngresosPeriodoAcumulativo[0] = this.totalIngresosPeriodo[0];
+        totalIngresosPeriodoAcumulativo[0] += totalIngresosPeriodo[0];
+        iterador = 1;
 
-        while (i < this.totalIngresosPeriodo.length) {
-            this.totalIngresosPeriodoAcumulativo[i] = this.totalIngresosPeriodoAcumulativo[i - 1] + this.totalIngresosPeriodo[i];
+        while (iterador < periodosConvenio.size()) {
+            totalIngresosPeriodoAcumulativo[iterador] += (totalIngresosPeriodoAcumulativo[iterador - 1] + totalIngresosPeriodo[iterador]);
 
-            i++;
+            iterador++;
         }
     }
 
@@ -595,86 +443,63 @@ public class FlujoCaja implements Serializable {
      * Inicializa los totales de egresos por periodo.
      */
     public void iniciarTotalesEgresosPeriodo() {
-        this.totalEgresosPeriodo = new double[periodosConvenio.size()];
-        this.totalEgresosPeriodoAcumulativo = new double[periodosConvenio.size()];
-        int i = 0;
+        totalEgresosPeriodo = new double[periodosConvenio.size()];
+        totalEgresosPeriodoAcumulativo = new double[periodosConvenio.size()];
+        acumuladoGMF = new double[periodosConvenio.size()];
 
-        while (i < periodosConvenio.size()) {
-            this.totalEgresosPeriodo[i] = 0;
+        int iterador = 0;
 
-            i++;
+        while (iterador < periodosConvenio.size()) {
+            totalEgresosPeriodo[iterador] = 0;
+            acumuladoGMF[iterador] = 0;
+
+            iterador++;
         }
     }
 
     /**
      * Refrescar totales del flujo de egresos.
      *
-     * Después del evento de cambiar el valor de una celda, se refrescan los
-     * totales de la fuente de egresos a la que corresponde y los totales del
-     * flujo de egresos.
-     *
-     * @param fuenteEgresos Fuente de egresos de la celda modificada.
-     * @param columna Columna (periodo) a la que pertenece la celta modificada.
+     * Después del evento de cambiar el valor de una celda, se refresca el flujo
+     * de egresos.
      */
-    public void refrescarTotalesEgresos(FlujoEgresos fuenteEgresos, int columna) {
-        fuenteEgresos.calcularTotalEgresosFuente(periodosConvenio.size());
-        double acumuladoGMF = 0;
-        this.totalEgresosPeriodo[columna] = 0;
-        this.totalEgresos = 0;
+    public void refrescarTotalesEgresos() {
+        int iterador;
+        iniciarTotalesEgresosPeriodo();
+        totalEgresos = 0;
 
-        for (FlujoEgresos fuenteEgresosRecorrer : flujoEgresos) {
-            if (fuenteEgresosRecorrer.isEgresoProyecto()) {
-                this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
+        for (FlujoEgresos flujoEgresosRefrescar : flujoEgresos) {
+            flujoEgresosRefrescar.calcularTotalEgresosFuente(periodosConvenio.size());
+            totalEgresos += flujoEgresosRefrescar.getTotalEgresosFuente().doubleValue();
 
-                acumuladoGMF += fuenteEgresosRecorrer.planMovimientosProyecto.get(columna).getValor().doubleValue();
-            } else {
-                this.totalEgresosPeriodo[columna] += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+            iterador = 0;
+            while (iterador < periodosConvenio.size()) {
+                if (flujoEgresosRefrescar.isEgresoProyecto()) {
+                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
+                    acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosProyecto().get(iterador).getValor().doubleValue();
+                } else {
+                    totalEgresosPeriodo[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
 
-                if (fuenteEgresosRecorrer.itemFlujoEgresos.getBooltienegmf()) {
-                    acumuladoGMF += fuenteEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                    if (flujoEgresosRefrescar.getItemFlujoEgresos().getBooltienegmf()) {
+                        acumuladoGMF[iterador] += flujoEgresosRefrescar.getPlanMovimientosEgresosConvenio().get(iterador).getValor().doubleValue();
+                    }
                 }
-            }
-
-            this.totalEgresos += fuenteEgresosRecorrer.totalEgresosFuente.doubleValue();
-        }
-
-        this.calcularGMF(acumuladoGMF, columna);
-
-        int i = 1;
-        this.totalEgresosPeriodoAcumulativo[0] = this.totalEgresosPeriodo[0];
-
-        while (i < this.totalEgresosPeriodo.length) {
-            this.totalEgresosPeriodoAcumulativo[i] = this.totalEgresosPeriodoAcumulativo[i - 1] + this.totalEgresosPeriodo[i];
-
-            i++;
-        }
-    }
-
-    /**
-     * Refrescar valores del flujo de caja.
-     *
-     * Recorre todos los ingresos y los egresos para refrescar los totales de
-     * las fuentes.
-     */
-    public void refrescarValoresFlujoCaja() {
-        int iterador = 0;
-
-        for (FlujoIngresos flujoIngresosRefrescar : this.flujoIngresos) {
-            while (iterador < periodosConvenio.size()) {
-                refrescarTotalesIngresos(flujoIngresosRefrescar, iterador);
 
                 iterador++;
             }
         }
 
-        iterador = 0;
-        for (FlujoEgresos flujoEgresosRefrescar : this.flujoEgresos) {
-            while (iterador < periodosConvenio.size()) {
-                refrescarTotalesEgresos(flujoEgresosRefrescar, iterador);
+        calcularGMF();
 
-                iterador++;
-            }
+        totalEgresosPeriodoAcumulativo[0] += totalEgresosPeriodo[0];
+        iterador = 1;
+
+        while (iterador < periodosConvenio.size()) {
+            totalEgresosPeriodoAcumulativo[iterador] += (totalEgresosPeriodoAcumulativo[iterador - 1] + totalEgresosPeriodo[iterador]);
+
+            iterador++;
         }
+
     }
 
     /**
@@ -682,32 +507,29 @@ public class FlujoCaja implements Serializable {
      *
      * La operación se realiza sobre los valores de egresos de proyectos y otros
      * items definidos en un periodo dado.
-     *
-     * @param acumuladoGMF Valor acumulado de los proyectos y los items que
-     * tienen GMF en un periodo del flujo de caja.
-     * @param columna Identificador del periodo de flujo de caja que se va
-     * calcular (desde 0).
      */
-    public void calcularGMF(double acumuladoGMF, int columna) {
+    public void calcularGMF() {
         double divisorGMF = Double.valueOf(bundle.getString("divisorGMF"));
         double multiplicadorGMF = Double.valueOf(bundle.getString("multiplicadorGMF"));
+        int iterador;
 
         for (FlujoEgresos flujoEgresosRecorrer : flujoEgresos) {
             if (!flujoEgresosRecorrer.isEgresoProyecto()) {
                 if (flujoEgresosRecorrer.itemFlujoEgresos.getStrdescripcion().contains("GMF")) {
-                    double valorGMFPeriodo = acumuladoGMF / divisorGMF * multiplicadorGMF;
-                    double totalEgresosFuente = flujoEgresosRecorrer.totalEgresosFuente.doubleValue();
+                    iterador = 0;
 
-                    totalEgresosFuente -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
-                    this.totalEgresosPeriodo[columna] -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
-                    this.totalEgresos -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).getValor().doubleValue();
+                    while (iterador < periodosConvenio.size()) {
+                        double valorGMFPeriodo = acumuladoGMF[iterador] / divisorGMF * multiplicadorGMF;
 
-                    flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(columna).setValor(BigDecimal.valueOf(valorGMFPeriodo));
-                    totalEgresosFuente += valorGMFPeriodo;
-                    this.totalEgresosPeriodo[columna] += valorGMFPeriodo;
-                    this.totalEgresos += valorGMFPeriodo;
+                        totalEgresosPeriodo[iterador] -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(iterador).getValor().doubleValue();
+                        totalEgresos -= flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(iterador).getValor().doubleValue();
 
-                    flujoEgresosRecorrer.totalEgresosFuente = BigDecimal.valueOf(totalEgresosFuente);
+                        flujoEgresosRecorrer.planMovimientosEgresosConvenio.get(iterador).setValor(BigDecimal.valueOf(valorGMFPeriodo));
+                        totalEgresosPeriodo[iterador] += valorGMFPeriodo;
+                        totalEgresos += valorGMFPeriodo;
+
+                        iterador++;
+                    }
                 }
 
                 flujoEgresosRecorrer.calcularTotalEgresosFuente(periodosConvenio.size());
@@ -817,6 +639,15 @@ public class FlujoCaja implements Serializable {
         }
     }
 
+    /**
+     * Genera los periodos del flujo de caja de acuerdo con la fecha de inicio y
+     * finalización del convenio marco.
+     *
+     * Llena la lista periodosConvenio estableciendo como fecha de inicio del
+     * primer periodo la fecha de inicio del convenio marco, se incrementa
+     * mensualmente hasta generar el último periodo y establece como fecha de
+     * finalización la fecha final del convenio marco.
+     */
     public void generarPeriodosFlujoCaja() {
         periodosConvenio = new ArrayList<Relacioncontratoperiodoflujocaja>();
         periodosConvenioEliminados = new ArrayList<Relacioncontratoperiodoflujocaja>();
@@ -856,7 +687,7 @@ public class FlujoCaja implements Serializable {
                 periodoConvenio.setPeriodoflujocaja(periodo);
                 periodoConvenio.setContrato(convenio);
                 periodosConvenio.add(definirPeriodoConvenio(periodoConvenio, fechaPeriodos));
-                
+
                 fechaPeriodos.add(Calendar.MONTH, 1);
                 fechaPeriodos = obtenerFechaDiaDelMes(fechaPeriodos, true);
             }
@@ -872,7 +703,7 @@ public class FlujoCaja implements Serializable {
             actualizarPeriodosConvenio(fechaPeriodos);
         } else {
             fechaPeriodos.setTime(convenio.getDatefechaini());
-            
+
             actualizarPeriodosConvenio(fechaPeriodos);
         }
     }
@@ -893,10 +724,18 @@ public class FlujoCaja implements Serializable {
         }
 
         periodoConvenio.getPeriodoflujocaja().setStrdescripcion(etiquetarPeriodo(fechaPeriodos));
-        
+
         return periodoConvenio;
     }
 
+    /**
+     * Actualizar los periodos establecidos del flujo de caja. Recorre los
+     * periodos del flujo de caja del convenio establecidos y los actualiza a
+     * partir de una fecha de inicio recibida.
+     *
+     * @param fechaPeriodos fecha de inicio de la actualización.
+     * @return Fecha tipo Calendar del último periodo actualizado.
+     */
     private Calendar actualizarPeriodosConvenio(Calendar fechaPeriodos) {
         for (Relacioncontratoperiodoflujocaja periodoConvenioActualizar : periodosConvenio) {
             definirPeriodoConvenio(periodoConvenioActualizar, fechaPeriodos);
@@ -908,6 +747,15 @@ public class FlujoCaja implements Serializable {
         return fechaPeriodos;
     }
 
+    /**
+     * Obtener primer o último día del mes. De acuerdo con una fecha de
+     * referencia.
+     *
+     * @param fechaReferencia Fecha de referencia para calcular el día.
+     * @param primerDia Si es true devuelve el primer día del mes de la fecha de
+     * referencia. Si es false devuelve el último día del mes.
+     * @return Fecha del día del mes de acuerdo con lo solicitado.
+     */
     private Calendar obtenerFechaDiaDelMes(Calendar fechaReferencia, boolean primerDia) {
         Calendar fecha = Calendar.getInstance();
         int dia;
@@ -925,6 +773,14 @@ public class FlujoCaja implements Serializable {
         return fecha;
     }
 
+    /**
+     * Etiquetar periodo del flujo de caja del convenio. Este método devuelve
+     * una cadena que representa la descripción del periodo, de acuerdo con la
+     * fecha a la que pertenece.
+     *
+     * @param fechaReferencia Fecha a la que pertenece el periodo.
+     * @return Etiqueta con descripción del periodo de flujo de caja.
+     */
     private String etiquetarPeriodo(Calendar fechaReferencia) {
         String etiquetaPeriodo;
 
@@ -933,6 +789,17 @@ public class FlujoCaja implements Serializable {
         return etiquetaPeriodo;
     }
 
+    /**
+     * Calcular el total de meses para periodos de flujo que hay entre dos
+     * fechas. Devuelve la diferencias (mas uno) que hay entre las dos fechas.
+     * Por ejemplo, si las fechas están dentro del mismo mes devuelve 1, si está
+     * en dos mese consecutivos devuelve 2 y así sucesivamente para saber
+     * cuántos periodos se deben generar, recorrer o actualizar.
+     *
+     * @param fechaInicial Fecha inicial para la diferencia.
+     * @param fechaFinal Fecha final para la diferencia.
+     * @return Entero con la cantidad de meses para generar periodos.
+     */
     private int mesesEntreFechas(Calendar fechaInicial, Calendar fechaFinal) {
         int meses;
 
@@ -940,11 +807,5 @@ public class FlujoCaja implements Serializable {
                 - ((fechaInicial.get(Calendar.YEAR) * 12) + (fechaInicial.get(Calendar.MONTH) + 1));
 
         return (meses + 1);
-    }
-    
-    private void imprimirPeriodo(Periodoflujocaja periodo) {
-        System.out.println("Periodo: " + periodo.getStrdescripcion());
-        System.out.println("Fecha inicio: " + periodo.getFechainicio());
-        System.out.println("Fecha fin: " + periodo.getFechafin());
     }
 }

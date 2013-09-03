@@ -10,7 +10,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:c="http://java.sun.com/jsp/jstl/core">        
 
-    <h:form id="formFlujoIngresos">
+    <h:form id="formFlujoCaja">
         <rich:extendedDataTable id="extendedDataTableIngresos" value="#{PlanOperativo.flujoIngresos}"
                                 var="fuenteIngresos" frozenColumns="2" style="width: 100%;">
             <rich:column width="300px">
@@ -28,16 +28,14 @@
                 </f:facet>
             </rich:column> 
 
-            <rich:column width="100px">
+            <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Total (Inicial)" />
                 </f:facet>
 
-                <center>
-                    <h:outputText id="hotrecursoentidad" value="#{fuenteIngresos.fuenteRecursosConvenio.valoraportado}" style="width: 30%; text-align: right">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
-                </center>
+                <h:outputText id="hotrecursoentidad" value="#{fuenteIngresos.fuenteRecursosConvenio.valoraportado}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
             </rich:column>
 
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
@@ -49,17 +47,19 @@
                     <h:inputText value="${fuenteIngresos.planMovimientosConvenioEntidad[columna].valor}" 
                                  rendered="#{fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
+                        
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="${fuenteIngresos.planMovimientosIngresosConvenio[columna].valor}"
                                  rendered="#{!fuenteIngresos.ingresoEntidad}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
+                        
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesIngresos}" render="extendedDataTableIngresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <f:facet name="footer">
-                        <h:panelGrid columns="1" style="text-align: right;">
+                        <h:panelGrid columns="1" style="text-align: right; width: 100%;">
                             <h:outputText value="#{PlanOperativo.totalIngresosPeriodo[columna]}">                                
                                 <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
@@ -72,19 +72,17 @@
                 </rich:column>
             </c:forEach>
 
-            <rich:column>
+            <rich:column style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Total ingresos" />
                 </f:facet>
 
-                <center>
-                    <h:outputText id="outputTextTotalIngresosFuente" value="#{fuenteIngresos.totalIngresosFuente}" style="width: 30%; text-align: right">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
-                </center>
+                <h:outputText id="outputTextTotalIngresosFuente" value="#{fuenteIngresos.totalIngresosFuente}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
 
                 <f:facet name="footer">
-                    <h:panelGrid columns="1">
+                    <h:panelGrid columns="1" style="text-align: right; width: 100%; font-weight: bold;">
                         <h:outputText value="#{PlanOperativo.totalIngresos}">                                
                             <f:convertNumber currencySymbol="$" type="currency" />
                         </h:outputText>
@@ -92,10 +90,8 @@
                 </f:facet>
             </rich:column>
         </rich:extendedDataTable>
-    </h:form>
 
-    <br />
-    <h:form id="formFlujoEgresos">
+        <br />
         <rich:extendedDataTable id="extendedDataTableEgresos" value="#{PlanOperativo.flujoEgresos}" var="fuenteEgresos"
                                 frozenColumns="3" style="width: 100%;">
             <rich:column width="200px">
@@ -103,7 +99,7 @@
                     <h:outputLabel value="Fuente egresos" />
                 </f:facet>
 
-                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" style="text-align: justify;" />
+                <h:outputText value="#{fuenteEgresos.descripcionFuenteEgreso}" />
 
                 <f:facet name="footer">
                     <h:panelGrid columns="1">
@@ -118,44 +114,42 @@
                     <h:outputLabel value="Contrapartidas" />
                 </f:facet>
 
-                <center>
-                    <h:inputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
-                                 rendered="#{fuenteEgresos.egresoProyecto}"
-                                 style="width: 30%; text-align: right;">
-                        <f:validateDoubleRange minimum="0" />
-                    </h:inputText>
-                </center>
+                <h:inputText id="hotContrapartidas" value="#{fuenteEgresos.contrapartida}"
+                             rendered="#{fuenteEgresos.egresoProyecto}"
+                             style="text-align: right; width: 100%">
+                    <f:validateDoubleRange minimum="0" />
+                </h:inputText>
             </rich:column>
 
-            <rich:column width="100px">
+            <rich:column width="100px" style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Valor total del proyecto" />
                 </f:facet>
 
-                <center>
-                    <h:outputText id="hotRecursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}" style="width: 30%; text-align: right;">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
-                </center>
+                <h:outputText id="hotRecursoproyecto" value="#{fuenteEgresos.proyecto.numvaltotobra}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
             </rich:column>
 
             <c:forEach items="#{PlanOperativo.columnasPeriodos}" var="columna">
-                <rich:column>                    
+                <rich:column style="text-align: right;">                    
                     <f:facet name="header">                        
                         <h:outputLabel value="#{PlanOperativo.periodosConvenio.get(columna).periodoflujocaja.strdescripcion}" />
                     </f:facet>                   
 
-                    <h:inputText value="#{fuenteEgresos.planMovimientosProyecto.get[columna].valor}" 
+                    <h:inputText value="#{fuenteEgresos.planMovimientosProyecto[columna].valor}" 
                                  rendered="#{fuenteEgresos.egresoProyecto}" style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:inputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}"
                                  rendered="#{!fuenteEgresos.egresoProyecto and !fuenteEgresos.itemFlujoEgresos.boolcalculado}"
                                  style="text-align: right; width: 100%;">
                         <f:validateDoubleRange minimum="0" />
-                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarValoresFlujoCaja}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
+                        
+                        <a4j:ajax event="change" listener="#{PlanOperativo.refrescarTotalesEgresos}" render="extendedDataTableEgresos, extendedDataTableFlujoNeto" />
                     </h:inputText>
 
                     <h:outputText value="#{fuenteEgresos.planMovimientosEgresosConvenio[columna].valor}" 
@@ -165,7 +159,7 @@
                     </h:outputText>
 
                     <f:facet name="footer">
-                        <h:panelGrid columns="1" style="text-align: right;">
+                        <h:panelGrid columns="1" style="text-align: right; width: 100%;">
                             <h:outputText value="#{PlanOperativo.totalEgresosPeriodo[columna]}">                                
                                 <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
@@ -178,19 +172,17 @@
                 </rich:column>
             </c:forEach>
 
-            <rich:column>
+            <rich:column style="text-align: right; font-weight: bold;">
                 <f:facet name="header">
                     <h:outputLabel value="Total egresos" />
                 </f:facet>
 
-                <center>
-                    <h:outputText id="outputTextTotalEgresosFuente" value="#{fuenteEgresos.totalEgresosFuente}" style="width: 30%; text-align: right;">
-                        <f:convertNumber currencySymbol="$" type="currency" />
-                    </h:outputText>
-                </center>
+                <h:outputText id="outputTextTotalEgresosFuente" value="#{fuenteEgresos.totalEgresosFuente}">
+                    <f:convertNumber currencySymbol="$" type="currency" />
+                </h:outputText>
 
                 <f:facet name="footer">
-                    <h:panelGrid columns="1">
+                    <h:panelGrid columns="1" style="text-align: right; width: 100%; font-weight: bold;">
                         <h:outputText id="outputTextTotalEgresos" value="#{PlanOperativo.totalEgresos}">                                
                             <f:convertNumber currencySymbol="$" type="currency" />
                         </h:outputText>
@@ -221,7 +213,7 @@
                     </f:facet>
 
                     <f:facet name="footer">
-                        <h:panelGrid columns="1">
+                        <h:panelGrid columns="1" style="text-align: center; width: 100%;">
                             <h:outputText value="#{PlanOperativo.totalIngresosPeriodoAcumulativo[columna] - PlanOperativo.totalEgresosPeriodoAcumulativo[columna]}">
                                 <f:convertNumber currencySymbol="$" type="currency" />
                             </h:outputText>
