@@ -1585,8 +1585,8 @@ a.vtitle23:hover{
 input[type="text"], input[type="password"], select{
     font-size: 17px;
     border-color: white;
-    width: 320px;
-    height: 25px;
+    width: 307px;
+    height: 33px;
     border-radius: 1px;
     background-color: #F2F2F2;
     background-image: none;
@@ -3801,4 +3801,139 @@ a:hover {
 .ikont-position-div-perfil-usuario{
     position: relative;
     top: -64px;
+}
+.hol_info_convenio_zoom{
+    left: -74px !important;
+    font-weight: bold !important;
+    position: relative !important;
+    color: grey !important;
+    font-size: 16px !important;
+}
+.hol_fuente_recursos_zoom{
+    left: -69px !important;
+    font-weight: bold !important;
+    position: relative !important;
+    color: grey !important;
+    font-size: 16px !important;
+}
+.hot_n_convenio{
+    position: relative;
+    right: 12px;
+    top: -3px;
+}
+.panel_numero_convenio{
+    position: relative;
+    right: -48px;
+}
+.input_num_convenio{
+    font-style: italic;
+    font-size: 12px!important;
+}
+.panel_nom_abreviado{
+    position: relative;
+    right: -70px;
+    top: -3px;
+}
+.panel_val_estimado{
+    position: relative;
+    right: -98px;
+    top: -3px;
+}
+.panel_obj_convenio{
+    position: relative;
+    right: -59px;
+    top: -3px;
+}
+.panel_ger_convenio{
+    position: relative;
+    right: -46px;
+    top: -3px;
+}
+.panel_fec_suscripcion{
+    position: relative;
+    right: -66px;
+    top: -3px;
+}
+.panel_fec_final{
+    position: relative;
+    right: -68px;
+    top: -3px;
+}
+.panel_fec_inicio{
+    position: relative;
+    right: -60px;
+    top: -3px;
+}
+.panel_ent_convenio{
+    position: relative;
+    right: -119px;
+    top: -3px;
+}
+.panel_val_aportado{
+    position: relative;
+    right: 7px;
+    top: -21px;
+}
+.panel_res_iva{
+    position: relative;
+    right: -19px;
+    top: -3px;
+}
+.panel_rol_desem{
+    position: relative;
+    right: -40px;
+    top: -11px;
+}
+.panel_cuo_gerencia{
+    position: relative;
+    right: -100px;
+    top: -24px;
+}
+.panel_val_porcentaje{
+    position: relative;
+    right: -140px;
+    top: -13px;
+}
+.panel_otr_reserva{
+    position: relative;
+    right: -28px;
+    top: 6px;
+}
+.label_texto_convenio{
+    color: rgb(66, 64, 64)!important;
+}
+.input_nom_abreviado{
+    position: relative;
+    right: 12px;
+    top: -7px;
+}
+.input_val_estimado{
+    position: relative;
+    right: 12px;
+    top: -7px;
+}
+.input_obj_convenio{
+    position: relative;
+    right: 12px;
+    top: -31px;
+}
+.input_ger_convenio{
+    position: relative;
+    right: 12px;
+    top: -10px;
+}
+.input_fec_convenio{
+    position: relative;
+    right: 12px;
+    top: -6px;
+}
+.input_asterisco_convenio{
+    position: relative;
+    top: -4px;
+    right: 12px;
+}
+.input_var_convenio{
+    position: relative;
+    top: -7px;
+    right: 12px;
 }
