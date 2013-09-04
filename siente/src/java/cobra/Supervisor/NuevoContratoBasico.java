@@ -2343,9 +2343,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             actualizarContratodatosGwt(getSessionBeanCobra().getCobraGwtService().getContratoDto());
             panelPantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarPanel();
-            subpantalla =getSessionBeanCobra().getCobraGwtService().getNavegacion() ;
+            subpantalla = getSessionBeanCobra().getCobraGwtService().getNavegacion();
             actualizarSubpantallaPlanOperativo();
             if (getSubpantalla() == 2) {
+
                 getFlujoCaja().iniciarFlujoCaja();
             }
             getSessionBeanCobra().setCargarcontrato(false);
@@ -6665,26 +6666,42 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.setDatefechacreacion(contratodto.getDatefechacreacion());
         contrato.setTextobjeto(contratodto.getTextobjeto());
         contrato.setIntduraciondias(contratodto.getIntduraciondias());
-        
+
         contrato.getActividadobras().clear();
         if (!contratodto.getActividadobras().isEmpty()) {
-        Iterator it = contratodto.getActividadobras().iterator();
-        while(it.hasNext())
-        {
-            ActividadobraDTO act= (ActividadobraDTO) it.next();
-            contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato,null));
-        }    
-        
-//        contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra((ActividadobraDTO) it.next(), contrato));        
-//         System.out.println("sisas = " );
-//                System.out.println("contratodto. = " + contratodto.getActividadobras().size());
-//                
+            Iterator it = contratodto.getActividadobras().iterator();
+            while (it.hasNext()) {
+                ActividadobraDTO act = (ActividadobraDTO) it.next();
+                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null));
+                
+                //Extrae los proyectos de la actividad
+                listaProyectosCovenio= extraerProyectosActividad(act);
+            }
+            System.out.println("lista = " + listaProyectosCovenio.size());
         }
-//        
-
     }
 
     public void limpiarEntidad() {
         contrato.getTercero().setStrnombrecompleto("");
-    }
+    }    
+    
+    public List<Obra> extraerProyectosActividad(ActividadobraDTO act)
+    {
+        Iterator it= act.getChildren().iterator();
+        List<Obra> lista= new ArrayList<Obra>();
+        while(it.hasNext())
+        {
+            ActividadobraDTO actdto= (ActividadobraDTO) it.next();
+            if(actdto.getObra()!=null)
+            {
+                lista.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));
+            }    
+            if(actdto.hasChildren())
+            {
+                lista.addAll(extraerProyectosActividad(actdto));
+            }   
+        }   
+        return lista;
+    }        
+     
 }

@@ -171,7 +171,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
                         if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
                             if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
                                 modalAct.hide();
-                                crearActividad();
+                                crearActividad();                                
                             } else {
                                 d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
                                         + obtenerFecha(actividadObraPadre.getEndDateTime()));
@@ -243,10 +243,10 @@ public class ActividadForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        //gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,tareaNueva);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
         //gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
-        propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
+        //propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);        
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
         

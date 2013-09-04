@@ -377,7 +377,7 @@ public class CasteoGWT {
     public static Fuenterecursosconvenio castearFuenteRecursosConvenioTO(FuenterecursosconvenioDTO fuenteRecursoDto, Contrato convenio) {
         Fuenterecursosconvenio fuenteRecurso = new Fuenterecursosconvenio(fuenteRecursoDto.getIdfuenterecursosconvenio(), convenio, fuenteRecursoDto.getValoraportado(), fuenteRecursoDto.getOtrasreservas(), fuenteRecursoDto.getReservaiva(), fuenteRecursoDto.getValorcuotagerencia(), fuenteRecursoDto.getTipoaporte());
         fuenteRecurso.setTercero(castearTerceroDTOToTercero(fuenteRecursoDto.getTercero()));
-        fuenteRecurso.setRolentidad(castearRolentidadDTOToRolentidad(fuenteRecursoDto.getRolentidad(), fuenteRecurso));
+        //fuenteRecurso.setRolentidad(castearRolentidadDTOToRolentidad(fuenteRecursoDto.getRolentidad(), fuenteRecurso));
         return fuenteRecurso;
     }
 
@@ -452,8 +452,6 @@ public class CasteoGWT {
         while (it.hasNext()) {
             ActividadobraDTO acti = (ActividadobraDTO) it.next();
             Actividadobra actobra=castearActividadobraDdoToActividadobra(acti, convenio, actividadObra);
-            System.out.println("actobra = " + actobra.getStrdescactividad());
-            
             lista.add(actobra);
         }
         actividadObra.setActividadobras(lista);
@@ -664,4 +662,6 @@ public class CasteoGWT {
         return act;
     }
 
+    
+    
 }
