@@ -2614,12 +2614,12 @@ css usuario modificacion
 }
 #ikont-rp-OpinionCiu1{
     background-color: green;
-    width:900px;
+    width:517px;
     height: 500px;
 }
 
 .ikont-rp-OpinionCiu{
-    width:750px;
+    width:517px;
     height: 500px;
     alignment-adjust: central;
 }
@@ -3494,8 +3494,8 @@ css usuario modificacion
 .ikont-img-posicion-actividad-reciente{
     background-image: url(../imgs/icons_subpanel_actividad_reciente.png);
     background-repeat: no-repeat;
-    width: 38px;
-    height: 34px;
+    width: 30px;
+    height:30px;
     display: block;
 }
 
@@ -3503,15 +3503,11 @@ css usuario modificacion
     background-position: 1px -5px;  
 }
 .ikont-posicion-contactenos{
-    background-position: 1px -33px;  
+    background-position: 1px -37px;  
 }
-.kont_ayuda{
+.ikont-panel-ayuda{
     position: relative;
-    top: -79px;
-}
-.kont_contactenos{
-    position: relative;
-    top: -66px;
+    top: -68px;
 }
 
 .ikont-po-img-posicion-borrador-finalizar{
@@ -3748,4 +3744,61 @@ a:hover {
 
 .ikont-po-tb{
     background-color: #ffffff !important;
+}
+.ikont-txt-opinion-proyecto{
+    font-weight: 600;
+}
+.ikont-hr-oponion-separador{
+    background-color: #C0C0C0;
+    height: 1px;
+    width: 83%;
+    position: relative;
+    left: 34px;
+    top: -1px;
+    box-shadow: -18px 4px 16px #999;
+}
+.ikont-table-opinion{
+    width: 89%;
+    height: 24px;
+    left: 38px;
+    position: relative;
+}
+.ikont-table-inf-opinion{
+    width: 89%;
+    height: 24px;
+    left: -14px;
+    position: relative;
+}
+.ikont-img-opinion-comentario{
+    color: #999;
+    width: 400px;
+    height: 201px;
+}
+.ikont-img-opinion-ciudadano{
+    -webkit-border-radius: 90px;
+    -moz-border-radius: 90px;
+    border-radius: 90px;
+    width:50px; 
+    height: 50px;
+    float: left;
+}
+.ikont-txt-titulo-opinion{
+    color: #008000;
+    font-weight: 900;
+    font-size: 25px;
+}
+.ikont-date-opinion-fecha{
+    font: bold 90% serif; 
+}
+.ikont-img-perfil-usuario{
+    -webkit-border-radius: 90px;
+    -moz-border-radius: 90px;
+    border-radius: 90px;
+    width:50px;
+    height: 50px; 
+    float: left; 
+}
+.ikont-position-div-perfil-usuario{
+    position: relative;
+    top: -64px;
 }

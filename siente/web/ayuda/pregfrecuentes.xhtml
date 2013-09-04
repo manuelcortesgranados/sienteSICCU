@@ -45,18 +45,18 @@
         <h:form>                    
             <rich:accordion  width="98%" rendered="#{var.varpreguntasiente}" >
                 <rich:accordionItem 
-                    header="Qué es SIENTE?" >
-                    Siente es el Sistema de Información Estratégico Para la Nación y el Territorio creado por Colombia Humanitaria para ejercer de manera colectiva y transparente la planeación, el  seguimiento y el control sobre los  recursos y #{var.solicitudproyecto}s a través de los cuales el país se recupera.
+                    header="Qué es #{var.nombreclientesistema}?" >
+                    #{var.nombreclientesistema} es el Sistema de Información Estratégico Para la Nación y el Territorio creado por #{var.nombreclientesistemaplural} para ejercer de manera colectiva y transparente la planeación, el  seguimiento y el control sobre los  recursos y #{var.solicitudproyecto}s a través de los cuales el país se recupera.
                 </rich:accordionItem>
 
                 <rich:accordionItem 
-                    header="Cómo funciona SIENTE?">
-                    Para funcionar SIENTE se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear los #{var.solicitudproyecto}s que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los distintos #{var.solicitudproyecto}s que se ejecutan.
+                    header="Cómo funciona #{var.nombreclientesistema}?">
+                    Para funcionar #{var.nombreclientesistema} se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con #{var.nombreclientesistema} los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear los #{var.solicitudproyecto}s que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a #{var.nombreclientesistema} y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los distintos #{var.solicitudproyecto}s que se ejecutan.
                 </rich:accordionItem>
 
                 <rich:accordionItem
-                    header="Cualquier persona puede participar en SIENTE?">
-                    SÍ. SIENTE además de ser una herramienta de planeación y control, está pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a los #{var.solicitudproyecto}s en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de los #{var.solicitudproyecto}s, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre los #{var.solicitudproyecto}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
+                    header="Cualquier persona puede participar en #{var.nombreclientesistema}?">
+                    SÍ. #{var.nombreclientesistema} además de ser una herramienta de planeación y control, está pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a los #{var.solicitudproyecto}s en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de los #{var.solicitudproyecto}s, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre los #{var.solicitudproyecto}s. Con #{var.nombreclientesistema} los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
                 </rich:accordionItem>
 
                 <rich:accordionItem
@@ -86,7 +86,7 @@
 
                 <rich:accordionItem
                     header="Cómo se diligencia el cronograma o programación del #{var.solicitudproyecto}?">
-                    Una vez se descarga el formato de cronograma generado por Siente, se deben diligenciar las actividades a desarrollar en el #{var.textoobra2} con su correspondiente unidad de medida, cantidad y valor unitario, el valor final se calcula automáticamente mediante una formula y esta no debe ser modificada. Posterior a esto se deben diligenciar en los periodos generados a la derecha de la hoja de calculo, las cantidades de actividad programadas para ejecutar en cada uno de los periodos (siempre la sumatoria de la cantidad programada en los periodos debe ser igual a la cantidad total estipulada para la actividad). Recomendaciones generales:
+                    Una vez se descarga el formato de cronograma generado por ZOOM, se deben diligenciar las actividades a desarrollar en el #{var.textoobra2} con su correspondiente unidad de medida, cantidad y valor unitario, el valor final se calcula automáticamente mediante una formula y esta no debe ser modificada. Posterior a esto se deben diligenciar en los periodos generados a la derecha de la hoja de calculo, las cantidades de actividad programadas para ejecutar en cada uno de los periodos (siempre la sumatoria de la cantidad programada en los periodos debe ser igual a la cantidad total estipulada para la actividad). Recomendaciones generales:
                     <br/>- Nunca adicionar columnas o filas al formato.
                     <br/>- Nunca incorporar informacion adicional a la que el formato solicita.
                     <br/>- Nunca hacer uso de las celdas que se encuentran alrededor o por fuera de la información solicitada.
@@ -117,8 +117,8 @@
                 </rich:accordionItem>
 
                 <rich:accordionItem
-                    header="Cuál es la diferencia entre contrato y #{var.solicitudproyecto} en Siente?">
-                    En siente existe una diferenciación entre el contrato de obra y #{var.textoobra2} como tal, esto se hace para permitir que un solo contrato pueda incluir multiples #{var.solicitudproyecto}s. El contrato se crea diligenciando la información contractual, #{var.textoobra2} incluye además otro tipo de información como fotografías, georeferenciación y cronograma #{var.texto3} entre otros. Los contratos y #{var.textoobra}s se diligencian de forma separada y posteriormente se asocian. Una vez asociados, el seguimiento de avance se realizará sobre el ¨#{var.solicitudproyecto}¨.
+                    header="Cuál es la diferencia entre contrato y #{var.solicitudproyecto} en #{var.nombreclientesistema}?">
+                    En #{var.nombreclientesistema} existe una diferenciación entre el contrato de obra y #{var.textoobra2} como tal, esto se hace para permitir que un solo contrato pueda incluir multiples #{var.solicitudproyecto}s. El contrato se crea diligenciando la información contractual, #{var.textoobra2} incluye además otro tipo de información como fotografías, georeferenciación y cronograma #{var.texto3} entre otros. Los contratos y #{var.textoobra}s se diligencian de forma separada y posteriormente se asocian. Una vez asociados, el seguimiento de avance se realizará sobre el ¨#{var.solicitudproyecto}¨.
                 </rich:accordionItem>
 
                 <rich:accordionItem
@@ -133,7 +133,7 @@
 
                 <rich:accordionItem
                     header="Cómo se pide una validación de información?">
-                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado “Solicitar validar información” allí hay dos botones uno es “Solicitar revisión de reporte de avance de Obra” al darle a esta opción se le enviará un correo al interventor y al Funcionario de Colombia Humanitaria encargado de validar dicha información. Al hacer uso de esta opción se debe estar seguro de cumplir con todos los requisitos que exige Colombia Humanitaria a través de sus diferentes circulares.
+                    En el menú administrar #{var.solicitudproyecto} hay un botón llamado “Solicitar validar información” allí hay dos botones uno es “Solicitar revisión de reporte de avance de Obra” al darle a esta opción se le enviará un correo al interventor y al Funcionario de a #{var.nombreclientesistemaplural} encargado de validar dicha información. Al hacer uso de esta opción se debe estar seguro de cumplir con todos los requisitos que exige #{var.nombreclientesistemaplural} a través de sus diferentes circulares.
                 </rich:accordionItem>
             </rich:accordion>
 
@@ -145,12 +145,12 @@
 
                 <rich:accordionItem
                     header="#{var.comofuncionaCobra}" >
-                    Para funcionar COBRA se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con Siente los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear #{var.textoobra} que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a Colombia Humanitaria y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los #{var.textoobra5}s que se ejecutan.
+                    Para funcionar #{var.nombreclientesistema} se basa en la interacción en línea de los distintos PERFILES encargados de alimentar el sistema. Con #{var.nombreclientesistema} los gobernadores o alcaldes reportan las solicitudes de recursos que necesitan para atender las necesidades de sus regiones, una vez aprobadas las solicitudes, estos deben crear #{var.textoobra} que darán cuenta de las metas y responsables necesarios para que las mismas puedan llevarse a cabo. Una vez creado, aprobado y subido a la nube cada #{var.solicitudproyecto}. los funcionarios deberán alimentar periódicamente el sistema permitiéndole a #{var.nombreclientesistemaplural} y a todos los colombianos conocer de primera mano a través de indicadores, reportes, y alarmas la evolución de los #{var.textoobra5}s que se ejecutan.
                 </rich:accordionItem>
 
                 <rich:accordionItem
                     header="#{var.cualquierPersonapuedeparticipar}" >
-                    SÍ. COBRA además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a #{var.textoobra} en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de #{var.textoobra}, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre #{var.textoobra}s. Con Siente los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
+                    SÍ. #{var.nombreclientesistema} además de ser una herramienta de planeación y control, esta pensado para que la ciudadanía pueda vigilar de cerca todo lo que sucede con los recursos destinados a #{var.textoobra} en las distintas regiones, teniendo la posibilidad de acceder a todos y cada uno de #{var.textoobra}, conocer las fotografías de los mismos, y opinar a través de foros o mensajes directos sobre #{var.textoobra}s. Con #{var.nombreclientesistema} los ciudadanos también podrán denunciar o subir información y contenido que consideren relevante ayudando con ello a la sana vigilancia sobre #{var.textoobra}s que se ejecutan.
                 </rich:accordionItem>
             </rich:accordion>
         </h:form>
