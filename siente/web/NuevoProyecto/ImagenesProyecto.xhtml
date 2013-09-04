@@ -40,7 +40,7 @@
                                 <td>
                                     <div id="header_content">
                                         <div class="ubicacion">
-                                            <h:outputText  styleClass="ikont-hot-imagenesproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
+                                            <h:outputText  rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-imagenesproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.imagenesproyecto}"/>
                                         </div>
                                     </div>
 
@@ -114,15 +114,15 @@
                                                             <br/>
                                                             <h:panelGroup>
                                                                     <rich:dataTable>
-                                                                        <f:facet name="header">
+                                                                        <f:facet id="img_seleccionada" name="header">
                                                                             <h:outputText  styleClass="ikont-hot-imgseleccionadas"   value="#{var.imgseleccionadas}"/>
                                                                         </f:facet>
-                                                                        <rich:column  breakRowBefore="true"  width="100px">
-                                                                            <f:facet name="header" >
+                                                                        <rich:column id="img_tipo"  breakRowBefore="true"  width="100px">
+                                                                            <f:facet id="" name="header" >
                                                                                 <h:outputText  styleClass="ikont-hot-tipo"   value="#{var.tipo}"/>
                                                                             </f:facet>
                                                                         </rich:column>
-                                                                        <rich:column  >
+                                                                        <rich:column id="img_nombre" >
                                                                             <f:facet name="header" >
                                                                                 <h:outputText  styleClass="ikont-hot-nombreah"   value="#{var.nombreah}"/>
                                                                             </f:facet>
@@ -133,7 +133,7 @@
                                                                             </f:facet>
                                                                         </rich:column>
 
-                                                                        <rich:column  width="60px">
+                                                                        <rich:column id="img_eliminar"  width="60px">
                                                                             <f:facet name="header">
                                                                                 <h:outputText  styleClass="ikont-hot-eliminar"   value="#{var.eliminar}"/>
                                                                             </f:facet>

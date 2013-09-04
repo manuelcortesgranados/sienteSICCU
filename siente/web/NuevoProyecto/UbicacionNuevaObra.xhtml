@@ -37,7 +37,7 @@
                             <td>
                                 <div id="header_content">
                                     <div class="ubicacion">
-                                        <h:outputText  styleClass="ikont- hot-"   value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre} - #{var.ubicacionproyectocolo}"/>
+                                        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont- hot-"   value="#{var.ingresarnuevoproyecto} - #{var.ubicacionnewobre} - #{var.ubicacionproyectocolo}"/>
                                     </div>
                                 </div>
 
@@ -158,12 +158,12 @@
                                                                             </rich:column>
                                                                             <rich:column id="co3">       
                                                                                 <f:facet name="header">
-                                                                                    <h:outputText  styleClass="ikont-hot-direccion"   value="Direccion" />
+                                                                                    <h:outputText  styleClass="ikont-hot-direccion"   value="#{var.direccion}" />
                                                                                 </f:facet>
                                                                             </rich:column>
                                                                             <rich:column id="co5">
                                                                                 <f:facet name="header">
-                                                                                    <h:outputText  styleClass="ikont-hot-Tipo"   value="Tipo" />
+                                                                                    <h:outputText  styleClass="ikont-hot-Tipo"   value="#{var.tipo}" />
                                                                                 </f:facet>
                                                                                 <h:outputText  styleClass="ikont-hot-primario "    value="Primario" rendered="#{lalo.tipo==0}"/>
                                                                             </rich:column>

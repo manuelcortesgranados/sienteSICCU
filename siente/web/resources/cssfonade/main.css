@@ -2952,6 +2952,7 @@ css usuario modificacion
 .ikont-tabla-entidad-contratista{
     background-color: #F2F2F2;
     font-size: 13px;
+    text-align: center;
 }
 .ikont-hpg-consulconvenio{
     font-size: 14px;
@@ -2974,6 +2975,7 @@ css usuario modificacion
 .ikont-table-lugar-datosbasicos{
     background-color: #F2F2F2;
     width: 100%;
+    text-align: center;
 }
 .ikont-hot-imagen{
     width: 150px;
@@ -2982,6 +2984,7 @@ css usuario modificacion
 .ikont-table-img-datosbasicos{
     background-color: #F2F2F2;
     width: 100%;
+    text-align: center;
 }
 .ikont-img-seleccionada{
     background-color: #1C8F14;
