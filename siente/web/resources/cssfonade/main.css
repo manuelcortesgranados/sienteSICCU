@@ -1862,15 +1862,90 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto{
-    background-color: #F2F2F2;
+    background-color: transparent;
     width: 100%;
-    height: 79px;
+    height: 60px;
     border-style: solid;
     border-width: 0px;
     border-color: #6B6B6B;
     position: relative;
     top: 0px;
     z-index: 5;
+}
+
+.ikont-menu-principal{
+    display: none;
+    width: 250px;
+    position: relative;
+    top: -48px;
+}
+
+.ikont-hcl-menu-logozoom{
+    background-image: url(../imgs/footer/inicio_menu_float.png);
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 60px;
+    display: block;
+    background-size: 150px 60px;
+}
+
+.ikont-hcl-menu-icon-inicio{
+    background-image: url(../imgs/footer/inicio_menu_float.png);
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.ikont-hcl-menu-rigth-inicio{
+    background-image: url(../imgs/footer/inicio_menu_float.png);
+    background-position: -25px 0px;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.ikont-hpg-content-menuinicio{
+    margin-left: 0px;
+    margin-top: 16px;
+}
+
+.ikont-hcl-menu-inicio, .ikont-hcl-menu-inicio:hover{
+    color: #FFF;
+    font-family: open;
+    font-size: 1.5em;
+}
+
+.scrollactive .ikont-menu-principal{
+    display: block;
+}
+
+.ikont-hpg-menu-contenido-nuevo-proyecto.scrollactive{
+    height: 60px;
+    position: fixed;
+    left: 0px;
+    background-color: #257500;
+    -moz-transform: scaleY(1);-moz-transition: all 0.5s;
+    -webkit-transform: scaleY(1);-webkit-transition: all 0.5s ;
+    -o-transform: scaleY(1);-o-transition: all 0.5s;
+    -ms-transform: scaleY(1);-ms-transition: all 0.5s;
+    transform: scaleY(1);transition: all 0.5s;
+}
+
+.ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text{
+    color: #FFF;
+    font-family: open;
+    font-size: 0.9em;
+    display: none;
+    position: relative;
+    top: -48px;
+}
+
+.ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
+    color: #9CFF00;
+    font-weight: bold;
 }
 
 .ikont-img-posicion-menu-proyecto{
@@ -1881,17 +1956,16 @@ input[type="text"], input[type="password"], select{
     display: block;
 }
 
+.ikont-img-posicion-menu-proyecto.scrollmenudetalle{
+    background-size: 0px 0px;
+}
+
+.ikont-img-posicion-menu-proyecto.scrollmenudetalle.ikont-menu-detalle-text{
+    display: block;
+}
+
 .ikont-posicion-detalle-proyecto{
     background-position: 7px -24px;
-}
-
-.ikont-posicion-detalle-proyecto.scroll{
-    background-position: 7px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-detalle-proyecto.scroll:hover, .ikont-posicion-detalle-proyecto.buttonactive.scroll{
-    background-position: 7px -115px;
 }
 
 .ikont-posicion-detalle-proyecto:hover, .ikont-posicion-detalle-proyecto.buttonactive{
@@ -1902,15 +1976,6 @@ input[type="text"], input[type="password"], select{
     background-position: -85px -24px;
 }
 
-.ikont-posicion-avance-proyecto.scroll{
-    background-position: -85px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-avance-proyecto.scroll:hover, .ikont-posicion-avance-proyecto.buttonactive.scroll{
-    background-position: -85px -115px;
-}
-
 .ikont-posicion-avance-proyecto:hover, .ikont-posicion-avance-proyecto.buttonactive{
     background-position: -85px -82px;
 }
@@ -1919,30 +1984,12 @@ input[type="text"], input[type="password"], select{
     background-position: -173px -24px;
 }
 
-.ikont-posicion-modificar-proyecto.scroll{
-    background-position: -173px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-modificar-proyecto.scroll:hover, .ikont-posicion-modificar-proyecto.buttonactive.scroll{
-    background-position: -173px -115px;
-}
-
 .ikont-posicion-modificar-proyecto:hover, .ikont-posicion-modificar-proyecto.buttonactive{
     background-position: -173px -82px;
 }
 
 .ikont-posicion-evolucion-proyecto{
     background-position: -245px -24px;
-}
-
-.ikont-posicion-evolucion-proyecto.scroll{
-    background-position: -245px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-evolucion-proyecto.scroll:hover, .ikont-posicion-evolucion-proyecto.buttonactive.scroll{
-    background-position: -245px -115px;
 }
 
 .ikont-posicion-evolucion-proyecto:hover, .ikont-posicion-evolucion-proyecto.buttonactive{
@@ -1954,15 +2001,6 @@ input[type="text"], input[type="password"], select{
     width: 80px;
 }
 
-.ikont-posicion-imagenes-proyecto.scroll{
-    background-position: -321px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-imagenes-proyecto.scroll:hover, .ikont-posicion-imagenes-proyecto.buttonactive.scroll{
-    background-position: -321px -115px;
-}
-
 .ikont-posicion-imagenes-proyecto:hover, .ikont-posicion-imagenes-proyecto.buttonactive{
     background-position: -321px -82px;
 }
@@ -1970,15 +2008,6 @@ input[type="text"], input[type="password"], select{
 .ikont-posicion-finalizar-proyecto{
     background-position: -385px -24px;
     width: 80px;
-}
-
-.ikont-posicion-finalizar-proyecto.scroll{
-    background-position: -385px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-finalizar-proyecto.scroll:hover, .ikont-posicion-finalizar-proyecto.buttonactive.scroll{
-    background-position: -385px -115px;
 }
 
 .ikont-posicion-finalizar-proyecto:hover, .ikont-posicion-finalizar-proyecto.buttonactive{
@@ -1990,15 +2019,6 @@ input[type="text"], input[type="password"], select{
     width: 110px;
 }
 
-.ikont-posicion-contratos-proyecto.scroll{
-    background-position: -469px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-contratos-proyecto.scroll:hover, .ikont-posicion-contratos-proyecto.buttonactive.scroll{
-    background-position: -469px -115px;
-}
-
 .ikont-posicion-contratos-proyecto:hover, .ikont-posicion-contratos-proyecto.buttonactive{
     background-position: -469px -82px;
 }
@@ -2006,15 +2026,6 @@ input[type="text"], input[type="password"], select{
 .ikont-posicion-estado-proyecto{
     background-position: -584px -24px;
     width: 110px;
-}
-
-.ikont-posicion-estado-proyecto.scroll{
-    background-position: -584px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-estado-proyecto.scroll:hover, .ikont-posicion-estado-proyecto.buttonactive.scroll{
-    background-position: -584px -115px;
 }
 
 .ikont-posicion-estado-proyecto:hover, .ikont-posicion-estado-proyecto.buttonactive{
@@ -2026,30 +2037,12 @@ input[type="text"], input[type="password"], select{
     width: 120px;
 }
 
-.ikont-posicion-eliminar-avance-proyecto.scroll{
-    background-position: -692px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-eliminar-avance-proyecto.scroll:hover, .ikont-posicion-eliminar-avance-proyecto.buttonactive.scroll{
-    background-position: -692px -115px;
-}
-
 .ikont-posicion-eliminar-avance-proyecto:hover, .ikont-posicion-eliminar-avance-proyecto.buttonactive{
     background-position: -692px -82px;
 }
 
 .ikont-posicion-documentos-proyecto{
     background-position: -820px -24px;
-}
-
-.ikont-posicion-documentos-proyecto.scroll{
-    background-position: -820px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-documentos-proyecto.scroll:hover, .ikont-posicion-documentos-proyecto.buttonactive.scroll{
-    background-position: -820px -115px;
 }
 
 .ikont-posicion-documentos-proyecto:hover, .ikont-posicion-documentos-proyecto.buttonactive{
@@ -2059,15 +2052,6 @@ input[type="text"], input[type="password"], select{
 .ikont-posicion-participacion-ciudadana-proyecto{
     background-position: -920px -25px;
     width: 120px;
-}
-
-.ikont-posicion-participacion-ciudadana-proyecto.scroll{
-    background-position: -920px -58px;
-    height: 25px;
-}
-
-.ikont-posicion-participacion-ciudadana-proyecto.scroll:hover, .ikont-posicion-participacion-ciudadana-proyecto.buttonactive.scroll{
-    background-position: -920px -115px;
 }
 
 .ikont-posicion-participacion-ciudadana-proyecto:hover, .ikont-posicion-participacion-ciudadana-proyecto.buttonactive{
@@ -2630,12 +2614,12 @@ css usuario modificacion
 }
 #ikont-rp-OpinionCiu1{
     background-color: green;
-    width:517px;;
+    width:900px;
     height: 500px;
 }
 
 .ikont-rp-OpinionCiu{
-    width:517px;;
+    width:750px;
     height: 500px;
     alignment-adjust: central;
 }
@@ -3510,8 +3494,8 @@ css usuario modificacion
 .ikont-img-posicion-actividad-reciente{
     background-image: url(../imgs/icons_subpanel_actividad_reciente.png);
     background-repeat: no-repeat;
-    width: 30px;
-    height:30px;
+    width: 38px;
+    height: 34px;
     display: block;
 }
 
@@ -3519,11 +3503,15 @@ css usuario modificacion
     background-position: 1px -5px;  
 }
 .ikont-posicion-contactenos{
-    background-position: 1px -37px;  
+    background-position: 1px -33px;  
 }
-.ikont-panel-ayuda{
+.kont_ayuda{
     position: relative;
-    top: -68px;
+    top: -79px;
+}
+.kont_contactenos{
+    position: relative;
+    top: -66px;
 }
 
 .ikont-po-img-posicion-borrador-finalizar{
@@ -3760,66 +3748,4 @@ a:hover {
 
 .ikont-po-tb{
     background-color: #ffffff !important;
-}
-.ikont-txt-opinion-proyecto{
-    font-weight: 600;
-}
-.ikont-hr-oponion-separador{
-    background-color: #C0C0C0;
-    height: 1px;
-    width: 83%;
-    position: relative;
-    left: 34px;
-    top: -1px;
-    box-shadow: -18px 4px 16px #999;
-}
-
-
-.ikont-table-opinion{
-    width: 89%;
-    height: 24px;
-    left: 38px;
-    position: relative;
-}
-.ikont-table-inf-opinion{
-    width: 89%;
-    height: 24px;
-    left: -14px;
-    position: relative;
-}
-.ikont-img-opinion-comentario{
-    color: #999;
-    width: 400px;
-    height: 201px;
-}
-
-.ikont-img-opinion-ciudadano{
-    -webkit-border-radius: 90px;
-    -moz-border-radius: 90px;
-    border-radius: 90px;
-    width:50px; 
-    height: 50px;
-    float: left;
-}
-
-.ikont-txt-titulo-opinion{
-    color: #008000;
-    font-weight: 900;
-    font-size: 25px;
-}
-
-.ikont-date-opinion-fecha{
-    font: bold 90% serif; 
-}
-.ikont-img-perfil-usuario{
-    -webkit-border-radius: 90px;
-    -moz-border-radius: 90px;
-    border-radius: 90px;
-    width:50px;
-    height: 50px; 
-    float: left; 
-}
-.ikont-position-div-perfil-usuario{
-    position: relative;
-    top: -64px;
 }

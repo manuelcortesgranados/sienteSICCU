@@ -11,44 +11,68 @@
     <h:form styleClass="ikont-hf-nuevodetalleobrazoom">
         <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proyecto">
             <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="11"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro==null and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-avance-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
+                    <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
+                    <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
+                        <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
+                        <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
+                        <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
+                    </h:panelGrid>
+                </h:panelGrid>  
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndetalle}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-detalle-proyecto" action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Detalle"  action="#{Supervisor$AdministrarObraNew.iniciardeta}" immediate="true" />
+                </h:panelGroup>  
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro==null and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-avance-proyecto" title="Reportar avanace"  action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
                                    immediate="true"/>              
-                </h:panelGrid>
-                <h:panelGrid  cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-modificar-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 120px;" value="Reportar avanace"  action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                                   immediate="true"/>              
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-modificar-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarModif}"
                                    immediate="true" />  
-                </h:panelGrid>   
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnevolucion and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-evolucion-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Modificar" action="#{Supervisor$AdministrarObraNew.iniciarModif}"
+                                   immediate="true" />  
+                </h:panelGroup>   
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnevolucion and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-evolucion-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
                                    immediate="true" />
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnimagenes}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-imagenes-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
-                </h:panelGrid>
-                <h:panelGrid  cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfinalizar}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-finalizar-proyecto"   action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text"  value="Evolucion"  action="#{Supervisor$AdministrarObraNew.iniciarEvolucion}"
                                    immediate="true" />
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnasociar_consultoria}" >
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-contratos-proyecto"   action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnimagenes}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-imagenes-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Galeria" action="#{Supervisor$AdministrarObraNew.iniciarImagenes}" immediate="true" />
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnfinalizar}"> 
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-finalizar-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                                   immediate="true" />
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Finalizar" action="#{Supervisor$AdministrarObraNew.iniciarFinalizar}"
+                                   immediate="true" />
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnasociar_consultoria}" >
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-contratos-proyecto" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
                                    immediate="true"/>
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-estado-proyecto"    action="cambiarestado"/>             
-                </h:panelGrid>
-               <h:panelGrid    cellpadding="0" cellspacing="0" >
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndocumentos}">
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-documentos-proyecto"    action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"/>      
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.cobraService.ciu}">
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Asociar contratos" style="width: 120px;" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                                   immediate="true"/>
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-estado-proyecto"  action="cambiarestado"/>             
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text"  value="Cambiar estado" style="width: 120px;" action="cambiarestado"/>             
+                </h:panelGroup>
+                <h:panelGroup  layout="block" >
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto  ikont-menu-detalle-text" style="width: 120px;" value="Eliminar ult.avance" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndocumentos}">
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-documentos-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"/>      
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Documentos"   action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"/>      
+                </h:panelGroup>
+                <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.cobraService.ciu}">
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-participacion-ciudadana-proyecto" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
-                </h:panelGrid>
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 120px;" value="Participación ciudadana" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
+                </h:panelGroup>
             </h:panelGrid>
         </h:panelGroup>
     </h:form>
@@ -57,51 +81,41 @@
         var $j = jQuery.noConflict();
         var $jq = jQuery.noConflict();
         $jq(document).ready(function() {
-            var _numChil = $('.ikont-img-posicion-menu-proyecto').length;
-            if (_numChil > 8) {
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "79px");
-            }else{
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "66px");
-            }
+
             $('.ikont-img-posicion-menu-proyecto').each(function() {
-                $(this).removeClass('scroll');
+                $(this).removeClass('scrollmenudetalle');
                 $(this).removeClass('buttonactive');
             });
-            $('.ikont-img-posicion-menu-proyecto').each(function() {
+            $('.ikont-img-posicion-menu-proyecto:nth-child(odd)').each(function() {
                 $(this).bind({
-                    click : function(){
-                        $(this).removeClass('scroll');
+                    click: function() {
+                        $(this).removeClass('scrollmenudetalle');
                         localStorage.setItem('accionDetalleProyecto', $(this).attr('class'));
                     }
                 });
-                if($(this).hasClass(localStorage.getItem('accionDetalleProyecto'))){
-                    $(this).addClass('buttonactive');
-                }else{
-                    $(this).removeClass('buttonactive');
+                if ($(this).hasClass(localStorage.getItem('accionDetalleProyecto'))) {
+                    $(this).parent().find('a').each(function() {
+                        $(this).addClass('buttonactive');
+                        console.log($(this));
+                    });
+                    console.log($(this).parent());
+                } else {
+                    $(this).parent().find('a').each(function() {
+                        $(this).removeClass('buttonactive');
+                    });
                 }
             });
         });
         $j(window).scroll(function() {
-            var _numChil = $('.ikont-img-posicion-menu-proyecto').length;
-            if (window.pageYOffset > 208) {
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("position", "fixed");
-                if (_numChil > 8) {
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "36px");
-                }else{
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "35px");
-                }
+            if (window.pageYOffset > 175) {
+                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').addClass('scrollactive');
                 $('.ikont-img-posicion-menu-proyecto').each(function() {
-                    $(this).addClass('scroll');
+                    $(this).addClass('scrollmenudetalle');
                 });
             } else {
-                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("position", "relative");
-                if (_numChil > 8) {
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "70px");
-                }else{
-                    $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').css("height", "61px");
-                }
+                $('.ikont-hpg-menu-contenido-nuevo-proyecto:first').removeClass('scrollactive');
                 $('.ikont-img-posicion-menu-proyecto').each(function() {
-                    $(this).removeClass('scroll');
+                    $(this).removeClass('scrollmenudetalle');
                 });
             }
         });
