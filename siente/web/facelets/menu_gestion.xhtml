@@ -501,20 +501,20 @@
 
     <!--aqui empieza el encabezado de Zoom-->   
     <h:panelGroup>
-        <div class="topbar_encabezado_1" style="width: 100%"></div>
+        <div class="topbar_encabezado_1"></div>
         <div class="topbar_encabezado_2">
             <h:panelGrid>
                 <rich:column>
-                    <div id="iconozoom2" class="zoomicon"></div>
+                    <div id="iconozoom" class="zoomicon"></div> 
                 </rich:column>
                 <rich:column>
-                    <div id="nuevobuscador2" class="topbar_encabezado_3">
+                    <div id="nuevobuscador" class="topbar_encabezado_3">
                         <h:panelGrid columns="6" style=""> 
-                            <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palabraclave2"    value="#{HomeGestion.filtro.palabraclave}"> <!--obrafiltrar.strnombreobra-->
+                            <h:inputText id="txtPalabraClave" styleClass="ikont-hit-palabraclave2"    value="#{HomeGestion.filtro.palabraclave}">
                                 <rich:placeholder value="¿Qué proyecto estás buscando?" /></h:inputText> 
                             <h:commandLink  type="button" styleClass="ikont-acb-btn_filtro_estatico"   action="#{HomeGestion.primeroListProyectos}" id="filtrar"/>
                         </h:panelGrid>
-                    </div> 
+                    </div>
                 </rich:column>
                 <rich:column>
                     <h:panelGroup>
@@ -524,7 +524,7 @@
             </h:panelGrid>
         </div>
     </h:panelGroup>
-
+ <br/>
     <hr class="ikont-hr-separador-inicial" style="position: relative;top: -15px;" />
 
 

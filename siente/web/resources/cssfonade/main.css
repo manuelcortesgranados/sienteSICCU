@@ -1555,6 +1555,7 @@ a.vtitle23:hover{
     top:-90px;
     right: -342px;
     font-size: 1.5em;
+    z-index: 20!important;
 }
 .topbar_encabezado_4{
     width:120px; height: 127px; 
