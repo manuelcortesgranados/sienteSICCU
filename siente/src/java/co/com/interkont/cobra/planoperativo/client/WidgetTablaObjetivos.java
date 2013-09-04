@@ -64,6 +64,7 @@ import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
 import com.sencha.gxt.widget.core.client.grid.ColumnModel;
 import com.sencha.gxt.widget.core.client.grid.Grid;
 import java.math.BigDecimal;
+import java.util.Iterator;
 
 public class WidgetTablaObjetivos implements IsWidget {
 
@@ -148,7 +149,7 @@ public class WidgetTablaObjetivos implements IsWidget {
         ColumnModel<ObjetivosDTO> cm = new ColumnModel<ObjetivosDTO>(l);
         setStore(new ListStore<ObjetivosDTO>(properties.key()));
 
-        List<ObjetivosDTO> plants = new ArrayList<ObjetivosDTO>(obraDto.getObjetivoses());
+        List<ObjetivosDTO> plants = new ArrayList<ObjetivosDTO>(cargarInformacionEspecificos());
         getStore().addAll(plants);
 
         final Grid<ObjetivosDTO> grid = new Grid<ObjetivosDTO>(getStore(), cm);
@@ -168,5 +169,26 @@ public class WidgetTablaObjetivos implements IsWidget {
         cp.addStyleName("margin-10");
 
         return cp;
+    }
+
+    public List cargarInformacionEspecificos() {
+        List<ObjetivosDTO> lst = new ArrayList<ObjetivosDTO>();
+        if (esObjetivo) {
+            for (Iterator it = obraDto.getObjetivoses().iterator(); it.hasNext();) {
+                ObjetivosDTO obj = (ObjetivosDTO) it.next();
+                if (obj.getEsobjetivo()) {
+                    lst.add(obj);
+                }
+            }
+        } else {
+            for (Iterator it = obraDto.getObjetivoses().iterator(); it.hasNext();) {
+                ObjetivosDTO obj = (ObjetivosDTO) it.next();
+                if (!obj.getEsobjetivo()) {
+                    lst.add(obj);
+                }
+            }
+
+        }
+        return lst;
     }
 }

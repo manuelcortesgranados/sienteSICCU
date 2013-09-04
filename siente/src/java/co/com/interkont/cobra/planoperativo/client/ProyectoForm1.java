@@ -26,6 +26,8 @@ import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -43,6 +45,7 @@ import com.sencha.gxt.widget.core.client.form.TextField;
 import com.sencha.gxt.widget.core.client.form.validator.MaxLengthValidator;
 import com.sencha.gxt.widget.core.client.treegrid.TreeGrid;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Iterator;
 import sun.print.resources.serviceui;
 
@@ -82,13 +85,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected int idobraRecursos;
     boolean editar = false;
     protected int posObjGeneral;
+    protected Date fechaProyecto;
     /*
      *Elementos para la hora de editar
      */
     protected ActividadobraDTO actividadobraProyectoEditar;
     protected ActividadobraDTOProps propes;
+    protected TreeStore<ActividadobraDTO> taskStore;
 
-    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes) {
+    public ProyectoForm1(ActividadobraDTO actividadobraProyectoEditar, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ActividadobraDTO actividadObraPadre, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadobraProyectoEditar = actividadobraProyectoEditar;
         this.gantt = gantt;
         this.modalPry = di;
@@ -101,6 +106,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTempMacroActividades = 0;
         this.idobraRecursos = 0;
         this.editar = true;
+        this.taskStore = taskStore;
+        fechaProyecto = CalendarUtil.copyDate(actividadobraProyectoEditar.getStartDateTime());
         instanciarElementosPantalla();
         cargarFormularioEditar();
     }
@@ -205,13 +212,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         fechaInicio.setWidth(cw);
         fechaInicio.setEmptyText("Fecha inicio");
         con.add(new FieldLabel(fechaInicio, "Fecha inicio"), new HtmlData(".fechainicio"));
-       // con.add(fechaInicio, new HtmlData(".fechainicio"));
+        // con.add(fechaInicio, new HtmlData(".fechainicio"));
 
 
         fechaFin.setWidth(cw);
         fechaFin.setEmptyText("Fecha fin");
         con.add(new FieldLabel(fechaFin, "Fecha fin"), new HtmlData(".fechafin"));
-        
+
         pagodirecto.setWidth(cw);
         pagodirecto.setEmptyText("Pago directo");
         con.add(new FieldLabel(pagodirecto, "Pago directo"), new HtmlData(".pagodirecto"));
@@ -244,7 +251,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
         txtObjeG.setWidth(cw);
         con.add(new FieldLabel(txtObjeG, "Objetivo General"), new HtmlData(".tblobjge"));
-       //con.add(txtObjeG, new HtmlData(".tblobjge"));
+        //con.add(txtObjeG, new HtmlData(".tblobjge"));
 
 
         final WidgetTablaObjetivos tblObjetivos = new WidgetTablaObjetivos(proyectoDTO, actividadObraPadre, "Especifico", "*OBJETIVOS ESPECIFICOS", true);
@@ -353,9 +360,17 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                     }
 
                 } else {
+                    service.setLog("entre antes editar", null);
+                    editarProyecto();
+                    service.setLog("sali editar proyecto ", null);
+                    actividadobraProyectoEditar.setObra(proyectoDTO);
+                    modalPry.hide();
+                    gantt.getGanttPanel().getContainer().refresh();
+                    service.setLog("entre a lo ultimo"+taskStore.getParent(actividadobraProyectoEditar).getDuration(), null);
                 }
             }
         });
+       
 
         btnAdicionarPry.setWidth("" + 150);
         con.add(btnAdicionarPry);
@@ -369,8 +384,129 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     public void editarProyecto() {
+        service.setLog("entre editar proyecto", null);
         if (!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())) {
+            proyectoDTO.setStrnombreobra(nombrePry.getText());
+            propes.name().setValue(actividadobraProyectoEditar, proyectoDTO.getStrnombreobra());
         }
+        /*se verifica si se modifico la fecha de finalizacion del proyecto*/
+        if (proyectoDTO.getFechaFin() != null) {
+            if (proyectoDTO.getFechaFin().compareTo(fechaFin.getValue()) != 0) {
+                service.setLog("entre editar proyecto 1", null);
+                /*se verifica que la fecha modificada no sea mayor que la fecha fin del convenio*/
+                if (fechaFin.getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
+                    service.setLog("entre editar proyecto 2", null);
+                    /*se verifica si la fecha modificada es mayor o igual que la mayor fecha de finalizacion de los actividades hijas*/
+                    if (modificarFechaFin()) {
+                        proyectoDTO.setFechaFin(fechaFin.getValue());
+                        propes.endDateTime().setValue(actividadobraProyectoEditar, proyectoDTO.getFechaFin());
+                        propes.duration().setValue(actividadobraProyectoEditar, CalendarUtil.getDaysBetween(proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin()));
+                    } else {
+                        ventanaDeError("La fecha de fin no puede ser menor que la mayor fecha de fin de las actividades hijas");
+                    }
+                } else {
+                    ventanaDeError("La fecha de fin no puede superar la fecha fin del convenio");
+                }
+            }
+        }
+        if (proyectoDTO.getFechaInicio().compareTo(fechaInicio.getValue()) != 0) {
+            service.setLog("entre editar fecha ini pry 1", null);
+            if (fechaInicio.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
+                service.setLog("entre editar fecha ini pry 2", null);
+                odifi(actividadobraProyectoEditar);
+            } else {
+                ventanaDeError("La fecha de inicio no puede superar la fecha inicio del convenio");
+            }
+        }
+
+    }
+
+    public void odifi(ActividadobraDTO act) {
+        service.setLog("entre editar fecha ini pry 3", null);
+        m(act);
+
+        if (!act.getChildren().isEmpty()) {
+            for (ActividadobraDTO actiHija : act.getChildren()) {
+                odifi(actiHija);
+            }
+        }
+    }
+
+    public void m(ActividadobraDTO actiHija) {
+
+        /*verifico el sentido en que tengo que hacer el movimiento de las
+         * actividades si necesito aumentar la fecha de inicio o disminuirla*/
+        if (fechaInicio.getValue().compareTo(fechaProyecto) > 0) {
+            service.setLog("entre editar fecha ini pry 4 mayor", null);
+            int duracion = CalendarUtil.getDaysBetween(fechaProyecto, fechaInicio.getValue());
+
+            Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+            CalendarUtil.addDaysToDate(fechaI, duracion);
+
+            Date asigFin = CalendarUtil.copyDate(fechaI);
+            actiHija.setEndDateTime(asigFin);
+
+            propes.startDateTime().setValue(actiHija, fechaI);
+
+
+            Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+            CalendarUtil.addDaysToDate(dateFin, actiHija.getDuration());
+            propes.endDateTime().setValue(actiHija, dateFin);
+
+
+             if (actiHija.getTipoActividad() == 2) {
+                proyectoDTO.setFechaInicio(actiHija.getStartDateTime());
+                proyectoDTO.setFechaFin(actiHija.getEndDateTime());
+            } else if (actiHija.getTipoActividad() == 3) {
+                actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
+                actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
+
+               
+            }
+        } else {
+
+            int duracion = CalendarUtil.getDaysBetween(fechaInicio.getValue(), fechaProyecto);
+            Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
+            fechaI.setDate(fechaI.getDate() - duracion);
+            Date asigFin = CalendarUtil.copyDate(fechaI);
+            actiHija.setEndDateTime(asigFin);
+
+           
+            propes.startDateTime().setValue(actiHija, fechaI);
+
+
+            Date dateFin = CalendarUtil.copyDate(actiHija.getEndDateTime());
+            dateFin.setDate(dateFin.getDate() + actiHija.getDuration());
+            propes.endDateTime().setValue(actiHija, dateFin);
+
+            if (actiHija.getTipoActividad() == 2) {
+                proyectoDTO.setFechaInicio(actiHija.getStartDateTime());
+                proyectoDTO.setFechaFin(actiHija.getEndDateTime());
+            } else if (actiHija.getTipoActividad() == 3) {
+                actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
+                actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
+            }
+
+          
+        }
+    }
+
+    public void ventanaDeError(String mensaje) {
+        AlertMessageBox alerta = new AlertMessageBox("Error", mensaje);
+        alerta.show();
+    }
+
+    public boolean modificarFechaFin() {
+        boolean esMenor = false;
+        List<ActividadobraDTO> lstHijosProyecto = taskStore.getChildren(actividadobraProyectoEditar);
+        for (ActividadobraDTO act : lstHijosProyecto) {
+            if (act.getEndDateTime().compareTo(fechaFin.getValue()) <= 0) {
+                esMenor = true;
+            } else {
+                esMenor = false;
+            }
+        }
+        return esMenor;
     }
 
     /*
@@ -427,7 +563,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
         } else {
-            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(),proyectoDTO.getFechaFin(),
+            tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
@@ -448,8 +584,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      *
      */
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
-        actividadPadre.getChildren().add(actividadHija);
-        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadPadre, actividadHija);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, 0,actividadHija);
+        actividadPadre.addChild(actividadHija);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 

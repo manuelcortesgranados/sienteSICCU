@@ -172,6 +172,7 @@ public class ModalAddMontos implements IsWidget {
                 String msgVal = validaRubros(monto);
                 if (msgVal.equals("El rubro se registró correctamente")) {
                     contrato.getMontos().add(monto);
+                   // actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(monto.getValor()));
                     limpiarMontos();
                     idTemp = idTemp++;
                     widTblMontos.getStore().add(monto);

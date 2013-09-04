@@ -641,19 +641,28 @@ public class ContratoForm implements IsWidget, EntryPoint {
         precontractual.setChildren(lstHijosPrecontra);
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, actividadObraContrato);
-        propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,actividadObraContrato);
+        actividadObraPadre.addChild(actividadObraContrato);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
+//        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, actividadObraContrato);
+//        propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
+//        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraContrato, lstHijos);
-        propes.taskType().setValue(actividadObraContrato, GanttConfig.TaskType.PARENT);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraContrato, 0,lstHijos);
+        actividadObraContrato.getChildren().addAll(lstHijos);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraContrato);
+//        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraContrato, lstHijos);
+//        propes.taskType().setValue(actividadObraContrato, GanttConfig.TaskType.PARENT);
+//        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraContrato);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraContrato, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        gantt.getGanttPanel().getContainer().getTreeStore().add(precontractual, lstHijosPrecontra);
-        propes.taskType().setValue(precontractual, GanttConfig.TaskType.PARENT);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(precontractual, 0,lstHijosPrecontra);
+        precontractual.getChildren().addAll(lstHijosPrecontra);
         gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
+//        gantt.getGanttPanel().getContainer().getTreeStore().add(precontractual, lstHijosPrecontra);
+//        propes.taskType().setValue(precontractual, GanttConfig.TaskType.PARENT);
+//        gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
 
         service.setLog("hijos creando acti" + actividadObraContrato.getChildren().size(), null);

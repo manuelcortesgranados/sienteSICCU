@@ -174,6 +174,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         taskStore.setAutoCommit(true);
         root = GanttDatos.getTareas(convenioDTO);
 
+
         for (ActividadobraDTO base : root.getChildren()) {
             taskStore.add(base);
             if (base.hasChildren()) {
@@ -231,6 +232,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onHide(HideEvent event) {
                 if (boxConfim.getHideButton() == boxConfim.getButtonById(PredefinedButton.YES.name())) {
                     if (!tareaSeleccionada.isBoolobligatoria()) {
+                        if (tareaSeleccionada.getTipoActividad() == 3) {
+                            ActividadobraDTO actividadPadre = taskStore.getParent(tareaSeleccionada);
+                            actividadPadre.getObra().setValorDisponible(actividadPadre.getObra().getValorDisponible().add(tareaSeleccionada.getContrato().getNumvlrcontrato()));
+                        }
                         taskStore.remove(tareaSeleccionada);
                     } else {
                         AlertMessageBox d = new AlertMessageBox("Alerta", "La actividad seleccionada no puede ser eliminada, es de caracter obligatoria.");
@@ -290,7 +295,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window editarProyDialog = new Window();
                 editarProyDialog.setBlinkModal(true);
                 editarProyDialog.setModal(true);
-                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, gantt, editarProyDialog, taskStore.getParent(tareaSeleccionada), props);
+                ProyectoForm1 proyectoForm = new ProyectoForm1(tareaSeleccionada, gantt, editarProyDialog, taskStore.getParent(tareaSeleccionada), props, taskStore);
                 editarProyDialog.add(proyectoForm);
                 editarProyDialog.show();
 
@@ -349,7 +354,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE,6);
+                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE, 6);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
             }
@@ -366,7 +371,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF,4);
+                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF, 4);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
 
@@ -552,7 +557,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onBeforeStartEdit(BeforeStartEditEvent<ActividadobraDTO> event) {
                 if (event.getEditCell().getRow() != 0) {
                     ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
-                    actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(),store.get(event.getEditCell().getRow()).getEndDateTime(),store.get(event.getEditCell().getRow()).getDuration());
+                    actividadAnterior = new ActividadobraDTO(store.get(event.getEditCell().getRow()).getStartDateTime(), store.get(event.getEditCell().getRow()).getEndDateTime(), store.get(event.getEditCell().getRow()).getDuration());
                 } else {
                     AlertMessageBox alerta = new AlertMessageBox("Error", "No debe modificar los datos del convenio marco.");
                     alerta.show();
@@ -568,7 +573,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
             public void onCompleteEdit(CompleteEditEvent<ActividadobraDTO> event) {
                 ListStore<ActividadobraDTO> store = editing.getEditableGrid().getStore();
                 ActividadobraDTO ac = store.get(event.getEditCell().getRow());
-                
+
                 /*verifico si el dato a modificar es a fecha de inicio de la actividad*/
                 if (event.getEditCell().getCol() == 1) {
                     /*se verifia si la fecha de inicio es mayor que la fecha de fin en este caso seria un error*/
@@ -579,7 +584,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                                 AlertMessageBox alerta = new AlertMessageBox("Error", "La fecha de inicio no puede ser mayor a la fecha de fin");
                                 alerta.show();
                                 props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
-                                
+
                                 gantt.getGanttPanel().getContainer().refresh();
                             } else if (ac.getStartDateTime().compareTo(ac.getEndDateTime()) < 0) {
                                 props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
@@ -590,14 +595,14 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                             alerta.show();
                             props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                             gantt.getGanttPanel().getContainer().refresh();
-                           
+
                         }
                     } else {
                         AlertMessageBox alerta = new AlertMessageBox("Error", "El convenio no se puede modificar, por favor dirijase a datos basicos");
                         alerta.show();
                         props.startDateTime().setValue(ac, actividadAnterior.getStartDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-                        
+
                     }
                 }
                 /*verifico si el dato a modificar es a fecha de fin de la actividad*/
@@ -608,7 +613,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         alerta.show();
                         props.endDateTime().setValue(ac, actividadAnterior.getEndDateTime());
                         gantt.getGanttPanel().getContainer().refresh();
-                        
+
                     } else if (ac.getEndDateTime().compareTo(ac.getStartDateTime()) > 0) {
                         props.duration().setValue(ac, gantt.getGanttPanel().getContainer().getTaskDuration(ac, new DateWrapper(ac.getStartDateTime()), new DateWrapper(ac.getEndDateTime())));
                         gantt.getGanttPanel().getContainer().refresh();
