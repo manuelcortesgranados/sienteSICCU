@@ -8,9 +8,11 @@ package co.com.interkont.cobra.planoperativo.client.dto;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
+import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import sun.print.resources.serviceui;
 
@@ -73,5 +75,36 @@ public class GanttDatos {
         convenio.getActividadobras().add(lista.get(0));
 
         return convenio;
+    }
+
+    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore,ActividadobraDTOProps props) {
+        List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
+        int duracion=CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
+        Date copiaFecha=CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
+        CalendarUtil.addDaysToDate(copiaFecha, duracion);
+        props.endDateTime().setValue(actividadPadre, copiaFecha);
+       
+    }
+
+    public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
+        Date menor = listaHijas.get(0).getStartDateTime();
+        for (int i = 1; i < listaHijas.size(); i++) {
+            if (listaHijas.get(i).getStartDateTime().compareTo(menor) < 0) {
+                menor = listaHijas.get(i).getStartDateTime();
+            }
+        }
+
+        return CalendarUtil.copyDate(menor);
+    }
+    
+    public static Date obtenerMayorFechaFin(List<ActividadobraDTO> listaHijas) {
+        Date mayor = listaHijas.get(0).getEndDateTime();
+        for (int i = 1; i < listaHijas.size(); i++) {
+            if (listaHijas.get(i).getEndDateTime().compareTo(mayor) > 0) {
+                mayor = listaHijas.get(i).getEndDateTime();
+            }
+        }
+
+        return CalendarUtil.copyDate(mayor);
     }
 }

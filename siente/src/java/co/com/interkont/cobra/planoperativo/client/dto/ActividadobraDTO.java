@@ -244,6 +244,7 @@ public class ActividadobraDTO implements IsSerializable {
 
     public void setDuration(int duration) {
         this.duration = duration;
+        System.out.println("duration = " + duration);
     }
 
     public int getPercentDone() {

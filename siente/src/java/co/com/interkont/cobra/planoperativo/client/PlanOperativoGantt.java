@@ -20,11 +20,14 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTOProps;
+import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDummyData;
+import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
+import com.gantt.client.event.CascadeChangesEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -77,7 +80,9 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
+import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.Iterator;
 
 /**
  *
@@ -222,6 +227,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         config.useEndDate = false;
 
+
+
+
+
         /**
          * Ventana Modal Confirmar Eliminar Actividad
          */
@@ -235,6 +244,10 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         if (tareaSeleccionada.getTipoActividad() == 3) {
                             ActividadobraDTO actividadPadre = taskStore.getParent(tareaSeleccionada);
                             actividadPadre.getObra().setValorDisponible(actividadPadre.getObra().getValorDisponible().add(tareaSeleccionada.getContrato().getNumvlrcontrato()));
+                        }
+                        if (tareaSeleccionada.getTipoActividad() == 2) {
+                            ActividadobraDTO actividadPadreConvenio = taskStore.getParent((taskStore.getParent(tareaSeleccionada)));
+                            reembolsarFuenteRecursos(actividadPadreConvenio);
                         }
                         taskStore.remove(tareaSeleccionada);
                     } else {
@@ -538,7 +551,26 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 dependenciaSeleccionada = event.getDependency();
             }
         });
+        
+        
+        gantt.addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
 
+            @Override
+            public void onTaskResize(TaskResizeEvent<ActividadobraDTO> event) {
+              ActividadobraDTO actiresi= event.getEventModel();
+              Date copiaFecha=CalendarUtil.copyDate(actiresi.getStartDateTime());
+              CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
+              props.endDateTime().setValue(actiresi, copiaFecha);
+              GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
+              //GanttDatos.modificarFechaFin(root, taskStore, props);
+              
+//                AlertMessageBox ale=new AlertMessageBox("Resizable",""+ actiresi.getDuration());
+//                ale.show();
+                
+              }
+        });
+        
+       
 
         // Editing
         final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
@@ -564,8 +596,6 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 }
             }
         });
-
-
 
 
         editing.addCompleteEditHandler(new CompleteEditEvent.CompleteEditHandler<ActividadobraDTO>() {
@@ -703,6 +733,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
+
+
+
 
 
 
@@ -875,5 +908,25 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
     public void cargarDatosEditarContrato() {
         ContratoDTO contrato = tareaSeleccionada.getContrato();
 
+    }
+
+    public void reembolsarFuenteRecursos(ActividadobraDTO actividadConvenio) {
+        for (Iterator it = tareaSeleccionada.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
+            ObrafuenterecursosconveniosDTO obfrc = (ObrafuenterecursosconveniosDTO) it.next();
+            if (obfrc.getTipoaporte() == 1) {
+            FuenterecursosconvenioDTO fuenteModificada=encontrarFuenteRecurso(obfrc.getFuenterecursosconvenio());
+            fuenteModificada.setValorDisponible(fuenteModificada.getValorDisponible().add(obfrc.getValor()));
+            }
+        }
+    }
+
+    public FuenterecursosconvenioDTO encontrarFuenteRecurso(FuenterecursosconvenioDTO fuente) {
+        for (Iterator it = convenioDTO.getFuenterecursosconvenios().iterator(); it.hasNext();) {
+            FuenterecursosconvenioDTO fuenteE = (FuenterecursosconvenioDTO) it.next();
+            if (fuenteE.equals(fuente)) {
+                return fuenteE;
+            }
+        }
+        return null;
     }
 }
