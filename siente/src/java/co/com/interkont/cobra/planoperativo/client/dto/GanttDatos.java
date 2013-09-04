@@ -31,9 +31,9 @@ public class GanttDatos {
      * childrens seteados
      */
     public static ActividadobraDTO getTareas(ContratoDTO convenio) {
-        
+
         ArrayList<ActividadobraDTO> list = new ArrayList<ActividadobraDTO>(convenio.getActividadobras());
-        
+
 //        ///Actividad Principal - ConvenioDTO
 //        //DateWrapper dw;
 //        //dw = new DateWrapper(convenio.getDatefechaini());
@@ -46,9 +46,9 @@ public class GanttDatos {
 //        
 //        list.add(t);
         //list.get(0).addChild(new ActividadobraDTO("M2", list.get(0).getStartDateTime(), 0,0, TaskType.MILESTONE,5,true));
-        
-        ActividadobraDTO root = new ActividadobraDTO(list);        
-        
+
+        ActividadobraDTO root = new ActividadobraDTO(list);
+
         return root;
     }
 
@@ -63,15 +63,15 @@ public class GanttDatos {
      */
     public static ContratoDTO estructurarDatosConvenio(final ContratoDTO convenio, TreeStore<ActividadobraDTO> taskStore, CobraGwtServiceAbleAsync service) {
         //ContratoDTO convenio = contratodto;
-        
-        List<ActividadobraDTO> lista = taskStore.getAll();       
+
+        List<ActividadobraDTO> lista = taskStore.getAll();
         convenio.setDatefechaini(lista.get(0).getStartDateTime());
         convenio.setDatefechafin(lista.get(0).endDateTime);
-                convenio.setIntduraciondias(lista.get(0).duration); 
-        convenio.getActividadobras().clear();         
-        
+        convenio.setIntduraciondias(lista.get(0).duration);
+        convenio.getActividadobras().clear();
+
         convenio.getActividadobras().add(lista.get(0));
-       
+
         return convenio;
-    }    
+    }
 }

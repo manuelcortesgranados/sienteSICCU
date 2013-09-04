@@ -38,7 +38,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 
     @Autowired
     private CobraDaoAble cobraDao;
-    private ContratoDTO contratoDto = new ContratoDTO();
+    private ContratoDTO contratoDto;
     private final Log log = LogFactory.getLog(this.getClass());
     private int navegacion = 1;
 
@@ -64,6 +64,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
 //    }
     @Override
     public ContratoDTO obtenerContratoDTO() {
+        if(contratoDto!=null){
         if (contratoDto.getActividadobras().isEmpty()) {
             try {
                 contratoDto.setActividadobras(new LinkedHashSet(obtenerActividadesObligatorias(contratoDto.getDatefechaini(), contratoDto.getIntduraciondias(), contratoDto.getDatefechaactaini(), contratoDto.getDatefechafin())));
@@ -71,7 +72,7 @@ public class CobraGwtServiceImpl extends RemoteServiceServlet implements CobraGw
                 Logger.getLogger(CobraGwtServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+        }
         return this.contratoDto;
     }
 

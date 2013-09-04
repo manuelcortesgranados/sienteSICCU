@@ -6627,13 +6627,14 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     }
 
     public String planOperativo() {
-        try {
+      try {
             ValidacionesConvenio.validarFechasPlanOperativo(getContrato().getFechaactaini(), getContrato().getDatefechaini(), getContrato().getDatefechafin());
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
+            if( getSessionBeanCobra().getCobraGwtService().getContratoDto()==null){
             getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
-
+            }
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
