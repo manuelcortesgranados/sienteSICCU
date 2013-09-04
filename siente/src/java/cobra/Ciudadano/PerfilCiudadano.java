@@ -20,6 +20,7 @@ import co.com.interkont.cobra.to.Tipoorigen;
 import co.com.interkont.cobra.to.Tiposolicitante;
 import co.com.interkont.cobra.to.Tipotercero;
 import co.com.interkont.cobra.to.Tipousuario;
+import co.com.interkont.cobra.to.utilidades.Propiedad;
 import co.com.interkont.cobra.vista.VistaObraMapa;
 import cobra.ArchivoWeb;
 import cobra.CargadorArchivosWeb;
@@ -149,7 +150,19 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
      * Lista para almacenar las opiniones según la tipificación.
      */
     private List<Opinionciudadano> listopinion = new ArrayList<Opinionciudadano>();
+    /*
+     Mostrar el nombre Segun la opinion
+     */
+    private String opinion;
 
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
+    }
+        
     public UIRepeat getRepeatusuarioperfil() {
         return repeatusuarioperfil;
     }
@@ -1108,18 +1121,22 @@ public class PerfilCiudadano  implements ILifeCycleAware, Serializable {
     }
 
     public void llenarlistaFelicitacion() {
+        opinion= Propiedad.getValor("felicitacion");
         listopinion = getSessionBeanCobra().getCiudadanoservice().encontrarOpinionesxObrayTipoOpinionPublicos(getAdministrarObraNew().getObra().getIntcodigoobra(), 3, getSessionBeanCobra().getUsuarioObra());
     }
 
     public void llenarlistaOpinion() {
+        opinion= Propiedad.getValor("opiniondelciudadano");
         listopinion = getSessionBeanCobra().getCiudadanoservice().encontrarOpinionesxObrayTipoOpinionPublicos(getAdministrarObraNew().getObra().getIntcodigoobra(), 2, getSessionBeanCobra().getUsuarioObra());
     }
 
     public void llenarlistaQuejas() {
+        opinion= Propiedad.getValor("quejas");
         listopinion = getSessionBeanCobra().getCiudadanoservice().encontrarOpinionesxObrayTipoOpinionPublicos(getAdministrarObraNew().getObra().getIntcodigoobra(), 1, getSessionBeanCobra().getUsuarioObra());
     }
 
     public void llenarlistaTodos() {
+        opinion= Propiedad.getValor("todos");
         listopinion = getSessionBeanCobra().getCiudadanoservice().encontrarOpinionesxObrayTipoOpinionPublicos(getAdministrarObraNew().getObra().getIntcodigoobra(), 0, getSessionBeanCobra().getUsuarioObra());
     }
 

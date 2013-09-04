@@ -67,28 +67,36 @@
                 <h:form>
                     <h:panelGrid columns="4" id="paneltipoopinion"  columnClasses="panelcenter" cellpadding="0" cellspacing="0">
                         <h:panelGrid  styleClass="ikont-"  columnClasses="panelcenter,panelcenter,panelcenter,panelcenter"  >
-                            <h:commandLink styleClass="ikont-hcl-llenarlistaFelicitacion"   action="#{Ciudadano$PerfilCiudadano.llenarlistaFelicitacion}"/>
-                            <h:outputText  styleClass="ikont-hot-value-participacion"   value="#{Ciudadano$PerfilCiudadano.felicitar}"></h:outputText>
-                            <h:outputText  styleClass="ikont-hot-text-participacion"     value="#{var.felicitacion}ciones"></h:outputText>
-                            <h:commandLink  styleClass="ikont-hot-textver-participacion"  value="Ver"></h:commandLink>
+                            <a4j:commandLink styleClass="ikont-hcl-llenarlistaFelicitacion" action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>
+                            <h:outputText  styleClass="ikont-hot-value-participacion"   value="#{Ciudadano$PerfilCiudadano.felicitar}"/>
+                            <h:outputText  styleClass="ikont-hot-text-participacion"     value="#{var.felicitacion}"/>
+                            <a4j:commandLink id="felicitacion" styleClass="ikont-hot-textver-participacion"  action="#{Ciudadano$PerfilCiudadano.llenarlistaFelicitacion}" oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" value="#{var.ver}"  render="participacionciudadanomodal"/>     
                         </h:panelGrid>
                         <h:panelGrid columns="1" styleClass="ikont-hpg-paneltipoopinion1"   columnClasses="panelcenter,panelcenter,panelcenter,panelcenter" >
-                            <h:commandLink styleClass="ikont-hcl-llenarlistaOpinion"   action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}"/>
-                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.opinar}"></h:outputText>
-                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.opinar}iones"></h:outputText>
-                            <h:commandLink  styleClass="ikont-hot-textver-participacion"  value="Ver"></h:commandLink>
+                            <a4j:commandLink styleClass="ikont-hcl-llenarlistaOpinion"  action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}" oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>
+                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.opinar}"/>
+                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.opinar}iones"/>
+                            <a4j:commandLink id="opinion"  value="#{var.ver}"  render="participacionciudadanomodal" styleClass="ikont-hot-textver-participacion"   action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}" oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;"/>                        
                         </h:panelGrid>
                         <h:panelGrid columns="1" styleClass="ikont-hpg-paneltipoopinion2"  columnClasses="panelcenter,panelcenter,panelcenter,panelcenter"  >
-                            <h:commandLink styleClass="ikont-hcl-queja"   action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"/>
-                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.quejarse}"></h:outputText>
-                            <h:outputText  styleClass="ikont-hot-text-participacion"   value="#{var.quejas}as"></h:outputText>
-                            <h:commandLink  styleClass="ikont-hot-textver-participacion"  value="Ver"></h:commandLink>
+                            <a4j:commandLink styleClass="ikont-hcl-queja"  action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>
+                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.quejarse}"/>
+                            <h:outputText  styleClass="ikont-hot-text-participacion"   value="#{var.quejas}as"/>
+                            <a4j:commandLink styleClass="ikont-hot-textver-participacion" id="Queja" value="#{var.ver}"  action="#{Ciudadano$PerfilCiudadano.llenarlistaQuejas}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>
                         </h:panelGrid>
                         <h:panelGrid columns="1" styleClass="ikont-hpg-paneltipoopinion3"   columnClasses="panelcenter,panelcenter,panelcenter,panelcenter" >
-                            <h:commandLink styleClass="ikont-hcl-llenarlistaTodos"   action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"/>
-                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.todos}"></h:outputText>
-                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.todos}"></h:outputText>
-                            <h:commandLink  styleClass="ikont-hot-textver-participacion"  value="Ver"></h:commandLink>
+                            <a4j:commandLink styleClass="ikont-hcl-llenarlistaTodos"   action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>    
+                            <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.todos}"/>
+                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.todos}"/>
+                            <a4j:commandLink styleClass="ikont-hot-textver-participacion" id="todos" value="#{var.todos}" action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                                             return false;" render="participacionciudadanomodal"/>    
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:form>
@@ -140,7 +148,7 @@
                             <a4j:commandLink id="btnacta" onclick="#{rich:component('panelDocCiu')}.show();
                 return true;"
                                              styleClass="ikont-acl-seleccionefoto2"  />
-                            
+
                         </h:panelGroup>
                         <h:panelGrid  styleClass="ikont-table-aling-pasos">
                             <h:outputText  styleClass="ikont-hot-paso-participacion" value="#{var.paso} 4" />
@@ -163,7 +171,7 @@
                         </h:panelGroup>
                         <h:panelGroup layout="block">
                             <a4j:commandButton value="Publicar" styleClass="ikont-acb-publicar-coment"  action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinion}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">
-                                </a4j:commandButton>
+                            </a4j:commandButton>
                         </h:panelGroup>
                     </h:panelGrid>
                 </h:form>
@@ -171,6 +179,7 @@
         </h:panelGrid>
         <ui:include src="/modal/panelImagenciudadanoModal.xhtml"/>
         <ui:include src="/modal/paneldocumeciudadanoModal.xhtml"/>
+        <ui:include src="modalCiudadano/ModalOpinionCiudadanoZoom.xhtml"/>
 
     </ui:define>
 

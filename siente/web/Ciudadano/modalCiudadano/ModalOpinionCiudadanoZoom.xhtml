@@ -14,14 +14,14 @@
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
     </h:head>
     <h:body>
-        <rich:popupPanel  id="panelprueba" autosized="true" resizeable="false" width="800" height="500" 
-                          styleClass="ikont-rpp-modaldetalleobra"  >
+        <rich:popupPanel width="562" id="participacionciudadanomodal" resizeable="false" autosized="true"
+                         >
 
             <f:facet name="controls">
                 <h:form>
                     <h:panelGroup>
                         <a4j:commandLink id="esconder_modalDetalleObra" styleClass="ikont-acl-escondermodaldetalleobra closemodal"   
-                                         title="#{var.cerrar}" immediate="true" onclick="#{rich:component('panelprueba')}.hide();
+                                         title="#{var.cerrar}" immediate="true" onclick="#{rich:component('participacionciudadanomodal')}.hide();
                                                  return false;"/>
                     </h:panelGroup>
                 </h:form>
@@ -31,88 +31,72 @@
                 <div class="ikont-rp-OpinionCiu1"></div>
                 <h:panelGroup layout="block" styleClass="ikont-rp-gpdetaobramodal"  id="gpDetaObraModal">
                     <rich:panel styleClass="ikont-rp-OpinionCiu" >
-                        <h1 align="center" style="color: green" >Opinion Ciudadano</h1>
-
-
-
-                        <h:outputText  style="color: green"  id="feli" value="Felicitaciones" rendered="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.tipoopinion.intidtipoopinion == 3}"   >Hola</h:outputText>
+                        <center>
+                            <h:outputText styleClass="ikont-txt-titulo-opinion" value="#{Ciudadano$PerfilCiudadano.opinion}"/>
+                        </center>
                         <h:outputText  styleClass="ikont-hot-idnuevo"   id="idnuevo" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}"   />
 
                         <h:form target="_blank">
                             <h:panelGroup>
                                 <h:panelGrid id="comen_par" >
-                                    <a4j:repeat id="comen" value="#{Ciudadano$PerfilCiudadano.listopinion}"  binding="#{Ciudadano$PerfilCiudadano.repeatopinion}" var="rowcomentario_par" rows="2"  >
-                                        <table>
-                                            <tr>
-                                                <td style="width: 30px; height: 20px;"> 
-                                                    <h:graphicImage 
-                                                        style="color: #999; border: 2px solid grey;-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 50px;width:30px; height: 67px; float: left;"
-                                                        styleClass="ikont-hgi-fotocomentario"   url="#{var.ipserver}siente#{rowcomentario_par.jsfUsuario.tercero.strfoto}" rendered="#{!rowcomentario_par.boolidentidadoculta}" />
-                                                    <h:graphicImage  
-                                                        style="color: #999; border: 2px solid grey;-webkit-border-radius: 90px;-moz-border-radius: 90px; border-radius: 50px;width:30px; height: 67px; float: left;"
-                                                        styleClass="ikont-hgi-bt_user"   url="/resources/imgs/bt_user.png" rendered="#{rowcomentario_par.boolidentidadoculta}" />
+                                    <a4j:repeat id="repeatopinion" value="#{Ciudadano$PerfilCiudadano.listopinion}"  binding="#{Ciudadano$PerfilCiudadano.repeatopinion}" var="rowcomentario_par" >
+                                        <h:panelGrid id="tablaopinionciudadano" styleClass="ikont-table-opinion"  columns="1">
+                                            <h:panelGroup >
 
-                                                    <h:outputText  styleClass="ikont-hot-idstrnombre_parnuevo"   id="idstrnombre_parnuev" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}"   />
-                                                    <h:outputText  styleClass="ikont-hot-idstrnombre_par_nnuevo"   id="idstrnombre_par_nnue" value="Anonimo" rendered="#{rowcomentario_par.boolidentidadoculta}" />
-                                                    <br/>
-                                                    <h:outputText  styleClass="ikont-hot-iddate_parnuevo" style="font: bold 90% serif; "  id="iddate_parnuev" value="#{rowcomentario_par.datefechaopinion}" >
-                                                        <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
-                                                    </h:outputText>
-                                                </td>
+                                                <h:graphicImage styleClass="ikont-img-opinion-ciudadano"   url="#{var.ipserver}#{var.versioncobra}#{rowcomentario_par.jsfUsuario.tercero.strfoto}" 
+                                                       rendered="#{!rowcomentario_par.boolidentidadoculta}" />
+                                                <h:graphicImage   styleClass="ikont-img-opinion-ciudadano"   url="/resources/imgs/bt_nodisponible.png" rendered="#{rowcomentario_par.boolidentidadoculta}" />
 
-                                            </tr>
-                                            <tr>
+                                                <h:outputText  styleClass="ikont-hot-idstrnombre_parnuevo"   id="idstrnombre_parnuev" value="#{rowcomentario_par.jsfUsuario.tercero.strnombrecompleto}" rendered="#{!rowcomentario_par.boolidentidadoculta}"   />
+                                                <h:outputText  styleClass="ikont-hot-idstrnombre_par_nnuevo"   id="idstrnombre_par_nnue" value="Anonimo" rendered="#{rowcomentario_par.boolidentidadoculta}" />
+                                                <br/>
+                                                <h:outputText  styleClass="ikont-date-opinion-fecha"   id="iddate_parnuev" value="#{rowcomentario_par.datefechaopinion}" >
+                                                    <f:convertDateTime timeZone="GMT-5" type="both" dateStyle="long"/>
+                                                </h:outputText>
+                                            </h:panelGroup>
 
-                                                <td>
+                                            <h:panelGrid styleClass="ikont-table-opinion" cellspacing="10" columns="2" >
+                                                <h:outputText styleClass="ikont-txt-opinion-proyecto" value="#{var.obra}"/>
+                                                <h:outputText  styleClass="ikont-hot-idstrnombre_obra"   id="idstrnombre_obra" value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" /> 
 
-                                                    <h:outputText value="Obra: "/>
-                                                    <h:outputText  styleClass="ikont-hot-idstrnombre_obra"   id="idstrnombre_obra" value="#{Supervisor$AdministrarObraNew.obra.strobjetoobra}" /> 
+                                                <h:outputText styleClass="ikont-txt-opinion-proyecto" value="#{var.direccion}"/>
+                                                <h:outputText  styleClass="ikont-hot-idstrdireccion_obra"   id="idstrdireccion_obra" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" /> 
+                                            </h:panelGrid>
+                                            <hr class="ikont-hr-oponion-separador"/>
+                                            <h:panelGrid>
+                                                <h:outputLabel  styleClass="ikont-hol-idcomentario_par"    id="idcomentario_par" value="#{rowcomentario_par.stropinion}" />
+                                                <h:graphicImage rendered="#{rowcomentario_par.strfotoopinion != null}" styleClass="ikont-img-opinion-comentario"   url="#{var.ipserver}#{var.versioncobra}#{rowcomentario_par.strfotoopinion}" />
+                                                <h:graphicImage rendered="#{rowcomentario_par.strfotoopinion == null}" styleClass="ikont-img-opinion-comentario"   url="/resources/imgs/bt_nodisponible.png"/>
 
-                                                </td>   
-                                            </tr>
-                                            <tr>
+                                            </h:panelGrid>
+                                            <h:panelGroup rendered="false">
 
-                                                <td>
-                                                    <h:outputText value="Direccion: "/>
-                                                    <h:outputText  styleClass="ikont-hot-idstrdireccion_obra"   id="idstrdireccion_obra" value="#{Supervisor$AdministrarObraNew.obra.strdireccion}" /> 
-                                                </td>
-                                            </tr>
 
-                                            <tr>
 
-                                                <td>
-                                                    <h:outputLabel  styleClass="ikont-hol-idcomentario_par"    id="idcomentario_par" value="#{rowcomentario_par.stropinion}"
-                                                                    />
-                                                </td>
-                                            </tr>
+                                                <h:outputText  styleClass="ikont-hot-idcontarmensaje2"   id="idcontarmensa" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
+                                                <h:inputTextarea  id="iacomentario2" styleClass="ikont-hit-iacomentario2"   rows="5" cols="40" onkeydown="return maximaLongitud(this, 400)"  
+                                                                  value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo(this);" >
+                                                    <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensa" status="idstatuscomentario2" />
+                                                </h:inputTextarea>
 
-                                            <tr>                                     
-                                                <td>
-                                                    <h:graphicImage styleClass="ikont-hgi-fotocomentario"   url="#{var.ipserver}siente#{Supervisor$AdministrarObraNew.obra.strimagenobra}" />
-                                                </td>
-                                            </tr>
-                                            <tr> 
+                                                <h:panelGroup>
+                                                    <a4j:commandLink styleClass="ikont-acl-cancelarComentario"   action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';">Cancelar</a4j:commandLink>
+                                                    <a4j:commandLink styleClass="ikont-acl-guardarComentarioOpinion"   action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinionZoom}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">guardar
+                                                    </a4j:commandLink>
+                                                </h:panelGroup>
 
-                                                <td>
-                                                    <h:outputText  styleClass="ikont-hot-idcontarmensaje2"   id="idcontarmensa" value="#{Ciudadano$PerfilCiudadano.contarmensaje}" /><br/>
-                                                    <h:inputTextarea  id="iacomentario2" styleClass="ikont-hit-iacomentario2"   rows="5" cols="40" onkeydown="return maximaLongitud(this, 400)"  
-                                                                      value="#{SessionBeanCobra.ciudadanoservice.opinionciudadano.stropinion}" onclick="borrar_campo(this);" >
-                                                        <a4j:ajax listener="#{Ciudadano$PerfilCiudadano.contarcomentario}" event="keyup" render="idcontarmensa" status="idstatuscomentario2" />
-                                                    </h:inputTextarea>
+                                            </h:panelGroup>
+                                        </h:panelGrid>
 
-                                                    <h:panelGroup>
-                                                        <a4j:commandLink styleClass="ikont-acl-cancelarComentario"   action="#{Ciudadano$PerfilCiudadano.cancelarComentario}" oncomplete="document.location.href='../Supervisor/DetalleObra.xhtml?id=#{Supervisor$AdministrarObraNew.obra.intcodigoobra}';">Cancelar</a4j:commandLink>
-                                                        <a4j:commandLink styleClass="ikont-acl-guardarComentarioOpinion"   action="#{Ciudadano$PerfilCiudadano.guardarComentarioOpinionZoom}" render="pgPrincipalComentario, layoutDocCiu, panelImagenCiu">guardar
-                                                        </a4j:commandLink>
-                                                    </h:panelGroup>
-                                                </td>
-                                            </tr>
-                                        </table>
                                     </a4j:repeat>
-                                    <rich:dataScroller for="comen" render="panelprueba"/>
-                                </h:panelGrid>
-                            </h:panelGroup>
 
+                                </h:panelGrid>
+                                <center>
+                                <rich:dataScroller   for="repeatopinion" render="repeatopinion"/>
+                                </center>
+                            </h:panelGroup>
+                            <rich:hotKey key="esc" onkeyup="#{rich:component('participacionciudadanomodal')}.hide();
+                                         return false;" />
                         </h:form>
 
                     </rich:panel>
