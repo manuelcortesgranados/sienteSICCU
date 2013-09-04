@@ -55,7 +55,7 @@
                                                 </h:outputText>
                                             </h:panelGroup>
 
-                                            <h:panelGrid styleClass="ikont-table-opinion" cellspacing="10" columns="2" >
+                                            <h:panelGrid styleClass="ikont-table-inf-opinion" cellspacing="10" columns="2" >
                                                 <h:outputText styleClass="ikont-txt-opinion-proyecto" value="#{var.obra}"/>
                                                 <h:outputText  styleClass="ikont-hot-idstrnombre_obra"   id="idstrnombre_obra" value="#{Supervisor$AdministrarObraNew.obra.strnombreobra}" /> 
 
@@ -92,7 +92,7 @@
 
                                 </h:panelGrid>
                                 <center>
-                                <rich:dataScroller   for="repeatopinion" render="repeatopinion"/>
+                                    <rich:dataScroller rendered="false"  for="repeatopinion" render="repeatopinion"/>
                                 </center>
                             </h:panelGroup>
                             <rich:hotKey key="esc" onkeyup="#{rich:component('participacionciudadanomodal')}.hide();
