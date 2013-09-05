@@ -28,7 +28,6 @@ import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -497,10 +496,14 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static Obra castearObraDdtToObra(ObraDTO obraDto, Contrato convenio) {
-        Obra obra = new Obra(obraDto.getIntcodigoobra(), obraDto.getStrnombreobra());
+        Obra obra = new Obra();
+        obra.setIntcodigoobra(obraDto.getIntcodigoobra());
+        obra.setStrnombreobra(obraDto.getStrnombreobra());
+        obra.setNumvaltotobra(obraDto.getValor());
+        
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
-        return null;
+        return obra;
     }
 
     /*

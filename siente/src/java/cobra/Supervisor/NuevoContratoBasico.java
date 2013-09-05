@@ -868,7 +868,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     private String variabletitulo;
     private String infogeneralcrearconvenio;
     private int panelPantalla;
-    private List<Obra> listaProyectosCovenio;
+    private List<Obra> listaProyectosConvenio;
     private int reportoption;
     private int subpantalla;
     /**
@@ -2379,7 +2379,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         }
         // } else {
         setRecursosconvenio(new RecursosConvenio(getContrato(), getSessionBeanCobra().getCobraService()));
-        listaProyectosCovenio = new ArrayList<Obra>();
+        listaProyectosConvenio = new ArrayList<Obra>();
         variabletitulo = Propiedad.getValor("primerodatosbasicos");
         llenarEstadoConvenio();
         llenarEntidades();
@@ -3425,7 +3425,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         listaContratosPadre.clear();
         listapolizas.clear();
         listaPolizacontratos.clear();
-        listaProyectosCovenio = new ArrayList<Obra>();
+        listaProyectosConvenio = new ArrayList<Obra>();
 
         lisplanifiactapar.clear();
         listaEncargofiduciario.clear();
@@ -6447,12 +6447,12 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         this.infogeneralcrearconvenio = infogeneralcrearconvenio;
     }
 
-    public List<Obra> getListaProyectosCovenio() {
-        return listaProyectosCovenio;
+    public List<Obra> getListaProyectosConvenio() {
+        return listaProyectosConvenio;
     }
 
     public void setListaProyectosCovenio(List<Obra> listaProyectosCovenio) {
-        this.listaProyectosCovenio = listaProyectosCovenio;
+        this.listaProyectosConvenio = listaProyectosCovenio;
     }
 
     /**
@@ -6676,9 +6676,10 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null));
                 
                 //Extrae los proyectos de la actividad
-                listaProyectosCovenio= extraerProyectosActividad(act);
+                listaProyectosConvenio.clear();
+                extraerProyectosActividad(act);
             }
-            System.out.println("lista = " + listaProyectosCovenio.size());
+            //System.out.println("lista = " + listaProyectosConvenio.size());
         }
     }
 
@@ -6686,23 +6687,27 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         contrato.getTercero().setStrnombrecompleto("");
     }    
     
-    public List<Obra> extraerProyectosActividad(ActividadobraDTO act)
+    public void extraerProyectosActividad(ActividadobraDTO act)
     {
         Iterator it= act.getChildren().iterator();
-        List<Obra> lista= new ArrayList<Obra>();
+//        List<Obra> lista= new ArrayList<Obra>();
         while(it.hasNext())
         {
             ActividadobraDTO actdto= (ActividadobraDTO) it.next();
             if(actdto.getObra()!=null)
             {
-                lista.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));
+//                Obra ob= new Obra();
+//                ob.setIntcodigoobra(actdto.getObra().getIntcodigoobra());
+//                ob.setStrnombreobra(actdto.getObra().getStrnombreobra());
+                listaProyectosConvenio.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));
+                
             }    
             if(actdto.hasChildren())
             {
-                lista.addAll(extraerProyectosActividad(actdto));
+                extraerProyectosActividad(actdto);
             }   
         }   
-        return lista;
+//        return lista;
     }        
      
 }
