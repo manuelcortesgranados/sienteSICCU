@@ -16,7 +16,6 @@
             </h:panelGroup>
         </f:facet>
         <f:facet name="controls">
-            <h:form>
                 <h:panelGroup>
                     <a4j:commandLink  id="esconder_mp-seleccionar-formatoreporte" styleClass="ikont-acl-seleccionarmpformatoreporte closemodal"  
                                       title="#{var.cerrar}" immediate="true"
@@ -24,7 +23,6 @@
                                               return  false;">
                     </a4j:commandLink>
                 </h:panelGroup>
-            </h:form>
         </f:facet>
         <h:panelGroup layout="block"  id="rpmostrarerror" rendered="#{Supervisor$Contrato.contrato.intidcontrato==0}">  
             <h:graphicImage  styleClass="ikont-hgi-rpmostrarerror" url="/resources/imgs/alerta.png" />
