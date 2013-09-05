@@ -120,7 +120,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
     }
 
-    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP,ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
+    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP, ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         this.modalPry = di;
@@ -131,8 +131,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
         this.idobraRecursos = 0;
-        this.propes=propes;
-        this.taskStore=taskStore;
+        this.propes = propes;
+        this.taskStore = taskStore;
         instanciarElementosPantalla();
     }
 
@@ -230,7 +230,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         //con.add(otrospagos, new HtmlData(".otrospagos"));
 
 
-        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre);
+
+        final WidgetTablaRubrosPry tblRubros = new WidgetTablaRubrosPry(proyectoDTO, actividadObraPadre, taskStore, editar, actividadobraProyectoEditar);
         con.add(tblRubros.asWidget(), new HtmlData(".tblroles"));
 
 
@@ -250,7 +251,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
         txtObjeG.setWidth(cw);
-        txtObjeG.setHeight(""+150);
+        txtObjeG.setHeight("" + 150);
         con.add(new FieldLabel(txtObjeG, "Objetivo General"), new HtmlData(".tblobjge"));
         //con.add(txtObjeG, new HtmlData(".tblobjge"));
 
@@ -386,10 +387,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     }
 
-    
-     /**
-     * Método para editar la diferente información de los proyectos
-     * plan operativo
+    /**
+     * Método para editar la diferente información de los proyectos plan
+     * operativo
      *
      * @author dgarcia
      */
@@ -417,23 +417,33 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         }
         if (proyectoDTO.getFechaInicio().compareTo(fechaInicio.getValue()) != 0) {
-           if (fechaInicio.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
+            if (fechaInicio.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
                 odifi(actividadobraProyectoEditar);
             } else {
                 ventanaDeError("La fecha de inicio no puede superar la fecha inicio del convenio");
             }
         }
-
+        if (otrospagos.getValue() != null) {
+            if (proyectoDTO.getOtrospagos() != otrospagos.getValue()) {
+                proyectoDTO.setOtrospagos(otrospagos.getValue());
+            }
+        }
+        if (pagodirecto.getValue() != null) {
+            if (proyectoDTO.getPagodirecto() != pagodirecto.getValue()) {
+                proyectoDTO.setPagodirecto(pagodirecto.getValue());
+            }
+        }
     }
-    
+
     /**
-     * Método para editar la actividad padre proyecto y modificar los hijos de esta.
+     * Método para editar la actividad padre proyecto y modificar los hijos de
+     * esta.
      *
      * @param ActividadobraDTO actividad obra principal que se va a editar.
      *
      * @author dgarcia
      */
-     public void odifi(ActividadobraDTO act) {
+    public void odifi(ActividadobraDTO act) {
         m(act);
 
         if (!act.getChildren().isEmpty()) {
@@ -587,12 +597,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
                     enlazaractividadesHijas(act, tareaNueva);
- }
+                }
             }
 
         } else {
             enlazaractividadesHijas(actividadObraPadre, tareaNueva);
-           }
+        }
 
     }
 
@@ -606,7 +616,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-        }
+    }
 
     public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
         if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {

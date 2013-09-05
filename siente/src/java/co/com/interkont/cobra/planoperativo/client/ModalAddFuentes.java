@@ -81,7 +81,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         this.modal = tabla;
         this.modalActual = modalActual;
         this.idTemp = idTemp;
-        this.formaPago=Integer.parseInt(lstFormaP.getValue(0));
+       
     }
 
     @Override
@@ -168,6 +168,8 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
             }
         });
         con.add(valorFuenteRecurso, new AbstractHtmlLayoutContainer.HtmlData(".valorfuente"));
+        
+         this.formaPago=Integer.parseInt(lstFormaP.getValue(0));
 
         Button btnadd = new Button("Adicionar", new ClickHandler() {
             @Override
