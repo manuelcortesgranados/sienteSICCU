@@ -85,8 +85,13 @@ public class CasteoGWT {
                 actividadObra.getTipotareagantt(), actividadObra.getBoolobligatoria());
 
         actdto.setOidactiviobra(actividadObra.getOidactiviobra());
-        Iterator it = actividadObra.getActividadobras().iterator();
-        List<ActividadobraDTO> lista = new ArrayList<ActividadobraDTO>();
+        if(actividadObra.getObra()!=null)
+        {
+            actdto.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
+        }            
+        
+        
+        Iterator it = actividadObra.getActividadobras().iterator();        
         while (it.hasNext()) {
             Actividadobra acti = (Actividadobra) it.next();
             actdto.addChild(castearActividadObraRaizTO(acti, convenio));
@@ -119,28 +124,28 @@ public class CasteoGWT {
 
     }
 
-    /*
-     * metodo que se encarga de convertir la lista de actividades hijos que tenia la actividad raiz
-     * y de ir a verificar si la actividadObra creada tiene a su vez otra lista de actividades para 
-     * realizar asi el mismo de forma recursiva.
-     * 
-     * @param Actividadobra acti la actividadObra Raiz
-     * @param List listaActividades ActividadObraDto hijas para realizar el cambio a ActividadObra
-     * @param Contrato con el cual tiene relacion
-     * 
-     * @author Dgarcia
-     **/
-    public static void castearActividadesDeListaActividadesRaizTO(ActividadobraDTO acti, Set listaActividades, ContratoDTO contrato) {
-        if (!listaActividades.isEmpty()) {
-            for (Iterator it = listaActividades.iterator(); it.hasNext();) {
-                Actividadobra activ = (Actividadobra) it.next();
-                ActividadobraDTO act = castearActividadobraDdoToActividadobraTO(activ, contrato);
-                acti.getChildren().add(act);
-                Set ac = new HashSet(activ.getActividadobras());
-                castearActividadesDeListaActividadesRaizTO(act, ac, contrato);
-            }
-        }
-    }
+//    /*
+//     * metodo que se encarga de convertir la lista de actividades hijos que tenia la actividad raiz
+//     * y de ir a verificar si la actividadObra creada tiene a su vez otra lista de actividades para 
+//     * realizar asi el mismo de forma recursiva.
+//     * 
+//     * @param Actividadobra acti la actividadObra Raiz
+//     * @param List listaActividades ActividadObraDto hijas para realizar el cambio a ActividadObra
+//     * @param Contrato con el cual tiene relacion
+//     * 
+//     * @author Dgarcia
+//     **/
+//    public static void castearActividadesDeListaActividadesRaizTO(ActividadobraDTO acti, Set listaActividades, ContratoDTO contrato) {
+//        if (!listaActividades.isEmpty()) {
+//            for (Iterator it = listaActividades.iterator(); it.hasNext();) {
+//                Actividadobra activ = (Actividadobra) it.next();
+//                ActividadobraDTO act = castearActividadobraDdoToActividadobraTO(activ, contrato);
+//                acti.getChildren().add(act);
+//                Set ac = new HashSet(activ.getActividadobras());
+//                castearActividadesDeListaActividadesRaizTO(act, ac, contrato);
+//            }
+//        }
+//    }
 
 
     /*
@@ -152,11 +157,35 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ObraDTO castearObraDdtToObraTO(Obra obran, ContratoDTO convenio) {
-        ObraDTO obra = new ObraDTO(obran.getIntcodigoobra(), obran.getStrnombreobra());
+        ObraDTO obra = new ObraDTO();
+        obra.setIntcodigoobra(obran.getIntcodigoobra());
+        obra.setFechaInicio(obran.getDatefeciniobra());
+        obra.setFechaFin(obran.getDatefecfinobra());
+        obra.setOtrospagos(obran.getOtrospagos());
+        obra.setPagodirecto(obran.getPagodirecto());
+        //obra.setobraDto.getValorDisponible()        
+        obra.setStrnombreobra(obran.getStrnombreobra());
+        obra.setValor(obran.getNumvaltotobra());        
+        
+        
+        
         obra.setObjetivoses(castearSetObjetivosTO(obran.getObjetivos(), obra));
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursosTO(obra.getObrafuenterecursosconvenioses(), obra, convenio));
+        //obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
+        
         return obra;
     }
+    
+    
+    public static Set<ActividadobraDTO> castearSetActividadesDtoObra(Set<Actividadobra> SetActividades, ObraDTO obra) {
+        Set<ActividadobraDTO> setActividades = new HashSet<ActividadobraDTO>(SetActividades.size());
+        for (Actividadobra obj : SetActividades) {
+            //setActividades.add(castearActividadobraDdoToActividadobra(obj,null,null,obra));
+        }
+        return setActividades;
+    }
+    
+    
 
     /*
      * metodo que se encarga de convertir una una lista de Objetivos a ObjetivosDTO
@@ -274,8 +303,7 @@ public class CasteoGWT {
         relaFuenteObraContrato.setContrato(castearContratoToContratoTO(relacionobrafrecucontrato.getContrato(), convenio));
         return relaFuenteObraContrato;
     }
-
-    //hasta aca cabiooooooooooooooooooooooooooooooooooooooooooooooo
+    
     /*
      * metodo que se encarga de convertir una tercero a terceroDTO
      * @param tercero Tercero el cual va a castear.
@@ -432,7 +460,7 @@ public class CasteoGWT {
      * 
      * @author Dgarcia
      **/
-    public static Actividadobra castearActividadobraDdoToActividadobra(ActividadobraDTO actdto, Contrato convenio, Actividadobra actividadpadre) {
+    public static Actividadobra castearActividadobraDdoToActividadobra(ActividadobraDTO actdto, Contrato convenio, Actividadobra actividadpadre, Obra obra) {
         Actividadobra actividadObra = new Actividadobra();
         //actividadObraDto.getStartDateTime(), actividadObraDto.getEndDateTime(), actividadObraDto.getPeso(), actividadObraDto.getDuration(), actividadObraDto.getPercentDone(), tipoActividad(actividadObraDto.getTaskType())
         actividadObra.setOidactiviobra(actdto.getOidactiviobra());
@@ -450,7 +478,7 @@ public class CasteoGWT {
         LinkedHashSet<Actividadobra> lista = new LinkedHashSet<Actividadobra>();
         while (it.hasNext()) {
             ActividadobraDTO acti = (ActividadobraDTO) it.next();
-            Actividadobra actobra=castearActividadobraDdoToActividadobra(acti, convenio, actividadObra);
+            Actividadobra actobra=castearActividadobraDdoToActividadobra(acti, convenio, actividadObra, obra);
             lista.add(actobra);
         }
         actividadObra.setActividadobras(lista);
@@ -498,14 +526,35 @@ public class CasteoGWT {
     public static Obra castearObraDdtToObra(ObraDTO obraDto, Contrato convenio) {
         Obra obra = new Obra();
         obra.setIntcodigoobra(obraDto.getIntcodigoobra());
+        obra.setDatefeciniobra(obraDto.getFechaInicio());
+        obra.setDatefecfinobra(obraDto.getFechaFin());
+        obra.setOtrospagos(obraDto.getOtrospagos());
+        obra.setPagodirecto(obraDto.getPagodirecto());
+        //obra.setobraDto.getValorDisponible()        
         obra.setStrnombreobra(obraDto.getStrnombreobra());
-        obra.setNumvaltotobra(obraDto.getValor());
+        obra.setNumvaltotobra(obraDto.getValor());        
         
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
+        obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
         return obra;
     }
 
+    /*
+     * metodo que se encarga de convertir una una lista de ObjetivosDTO a Objetivos
+     * @param Set<> ObjetivosDto que se van a castear.
+     * @param Obra obra asociada.
+     * 
+     * @author Dgarcia
+     **/
+    public static Set<Actividadobra> castearSetActividadesObra(Set<ActividadobraDTO> SetActividadesDto, Obra obra) {
+        Set<Actividadobra> setActividades = new HashSet<Actividadobra>(SetActividadesDto.size());
+        for (ActividadobraDTO obj : SetActividadesDto) {
+            setActividades.add(castearActividadobraDdoToActividadobra(obj,null,null,obra));
+        }
+        return setActividades;
+    }
+    
     /*
      * metodo que se encarga de convertir una una lista de ObjetivosDTO a Objetivos
      * @param Set<ObjetivosDTO> ObjetivosDto que se van a castear.
@@ -657,11 +706,7 @@ public class CasteoGWT {
 
     public static ActividadobraDTO castearParametricaactividadesobligatoriasToActividadobraDTO(Parametricaactividadesobligatorias parametricaactidadobligatoria, Date fecini, int duracion, int peso) {
         ActividadobraDTO act = new ActividadobraDTO(parametricaactidadobligatoria.getStrdescripcion(), fecini, duracion, peso, tipoTask(parametricaactidadobligatoria.getTipoparametrica()),
-                parametricaactidadobligatoria.getTipoparametrica(), parametricaactidadobligatoria.getBoolobligatoria());
-
-        //act.setName(parametricaactidadobligatoria.getStrdescripcion());
-        //act.setTaskType(tipoTask(parametricaactidadobligatoria.getTipoparametrica()));
-        ///Falta pensar los hijo main.sets
+                parametricaactidadobligatoria.getTipoparametrica(), parametricaactidadobligatoria.getBoolobligatoria());       
         return act;
     }
 

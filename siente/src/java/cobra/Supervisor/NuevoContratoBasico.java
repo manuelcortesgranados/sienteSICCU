@@ -6637,9 +6637,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             ValidacionesConvenio.validarValorPositivo(getContrato().getNumvlrcontrato(), "convenio");
             ValidacionesConvenio.validarTamanoLista(recursosconvenio.getLstFuentesRecursos(), "Fuente de Recursos");
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
-            if (getSessionBeanCobra().getCobraGwtService().getContratoDto() == null) {
-                getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
-            }
+            
+            getSessionBeanCobra().getCobraGwtService().setContratoDto(CasteoGWT.castearContratoToContratoDTO(contrato));
+            
             return "PlanOperativo";
         } catch (ConvenioException e) {
             FacesUtils.addErrorMessage(e.getMessage());
@@ -6678,7 +6678,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
                 ActividadobraDTO act = (ActividadobraDTO) it.next();
-                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null));
+                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null,null));               
 
                 //Extrae los proyectos de la actividad
                 listaProyectosConvenio.clear();
@@ -6695,16 +6695,16 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public void extraerProyectosActividad(ActividadobraDTO act) {
         Iterator it = act.getChildren().iterator();
 //        List<Obra> lista= new ArrayList<Obra>();
-        while (it.hasNext()) {
-            ActividadobraDTO actdto = (ActividadobraDTO) it.next();
-            if (actdto.getObra() != null) {
-//                Obra ob= new Obra();
-//                ob.setIntcodigoobra(actdto.getObra().getIntcodigoobra());
-//                ob.setStrnombreobra(actdto.getObra().getStrnombreobra());
-                listaProyectosConvenio.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));
+        while(it.hasNext())
+        {
+            ActividadobraDTO actdto= (ActividadobraDTO) it.next();
+            if(actdto.getObra()!=null)
+            {           
+                listaProyectosConvenio.add(CasteoGWT.castearObraDdtToObra(actdto.getObra(), contrato));                
+            }    
+            if(actdto.hasChildren())
+            {
 
-            }
-            if (actdto.hasChildren()) {
                 extraerProyectosActividad(actdto);
             }
         }
