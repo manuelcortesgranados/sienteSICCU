@@ -368,11 +368,9 @@ public class FlujoCaja implements Serializable {
                 } else {
                     totalIngresosPeriodo[iterador] += flujoIngresosRefrescar.getPlanMovimientosIngresosConvenio().get(iterador).getValor().doubleValue();
                 }
-
                 iterador++;
             }
         }
-
         totalIngresosPeriodoAcumulativo[0] += totalIngresosPeriodo[0];
         iterador = 1;
 
@@ -398,11 +396,9 @@ public class FlujoCaja implements Serializable {
 
         itemsFlujoEgresos = getSessionBeanCobra().getCobraService().itemsFlujoCajaPorNaturaleza("E");
 
-        for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosCovenio()) {
+        for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosConvenio()) {
             FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
-///YEISON ACA ESTA YENDO A BDS CUANDO NO HAY NADA GUARDADO          
-            
-                //planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
+
 
             if (planifmovimientoconvenioproyecto.isEmpty()) {
                 itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio, periodosConvenio);

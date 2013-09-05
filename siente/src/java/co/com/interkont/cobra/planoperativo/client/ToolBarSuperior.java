@@ -37,17 +37,29 @@ public class ToolBarSuperior extends ToolBar {
         flujodecaja.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
+                    
                     @Override
                     public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        service.setLog("Problema al transferir el objeto a JSF", null);
                     }
 
                     @Override
                     public void onSuccess(Boolean result) {
-                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                        service.setNavegacion(2, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                            }
+                        });
                     }
                 });
+
 
             }
         });
@@ -55,17 +67,29 @@ public class ToolBarSuperior extends ToolBar {
         reportes.addClickHandler(new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                service.setNavegacion(3, new AsyncCallback<Boolean>() {
+               service.setContratoDto(GanttDatos.estructurarDatosConvenio(convenio, taskStore, service), new AsyncCallback<Boolean>() {
+                    
                     @Override
                     public void onFailure(Throwable caught) {
-                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        service.setLog("Problema al transferir el objeto a JSF", null);
                     }
 
                     @Override
                     public void onSuccess(Boolean result) {
-                        Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                        service.setNavegacion(3, new AsyncCallback<Boolean>() {
+                            @Override
+                            public void onFailure(Throwable caught) {
+                                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                            }
+
+                            @Override
+                            public void onSuccess(Boolean result) {
+                                Window.open(retornarNuevoContrato(), "_parent", retornarConfiguracionPagina());
+                            }
+                        });
                     }
                 });
+
 
             }
         });
