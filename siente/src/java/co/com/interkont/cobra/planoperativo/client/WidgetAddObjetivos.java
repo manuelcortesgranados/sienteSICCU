@@ -90,7 +90,7 @@ public class WidgetAddObjetivos implements IsWidget {
                         idTemp++;
                         proyecto.getObjetivoses().add(objetivos);
                         if(objetivos.getTipoobjetivo()!=1){
-                        tblObjetivos.getStore().add(objetivos);
+                        tblObjetivos.getStore().add(objetivos);                        
                         }else{
                         txtObjG.setValue(objetivos.getDescripcion());
                         }
@@ -98,9 +98,8 @@ public class WidgetAddObjetivos implements IsWidget {
                         ActividadobraDTO actividad=new ActividadobraDTO(box.getValue(), 7,idTemp);
                         idTemp++;
                         proyecto.getActividadobras().add(actividad);
-                        tblMacro.getStore().add(actividad);
-                        
-                    }
+                        tblMacro.getStore().add(actividad);                        
+                    }                    
                 }
             }
         });

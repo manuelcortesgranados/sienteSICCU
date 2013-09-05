@@ -400,8 +400,9 @@ public class FlujoCaja implements Serializable {
 
         for (Obra proyectoConvenio : nuevoContratoBasico.getListaProyectosCovenio()) {
             FlujoEgresos itemFlujoEgresos = new FlujoEgresos();
-
-            planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
+///YEISON ACA ESTA YENDO A BDS CUANDO NO HAY NADA GUARDADO          
+            
+                //planifmovimientoconvenioproyecto = getSessionBeanCobra().getCobraService().buscarPlanificacionConvenioProyecto(proyectoConvenio.getIntcodigoobra());
 
             if (planifmovimientoconvenioproyecto.isEmpty()) {
                 itemFlujoEgresos.crearEstructuraFlujoEgresosProyecto(proyectoConvenio, periodosConvenio);

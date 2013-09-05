@@ -264,6 +264,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(tblObjetivos, proyectoDTO, "Objetivos Especificos", "Por favor ingrese la descripción del objetivo:", 2, true, idTempObj);
                 MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
                 modal.show();
+                
             }
         });
         con.add(btnAdicionarObje, new HtmlData(".objetivoes"));
