@@ -69,7 +69,7 @@
                                 <h:outputText value="Gerente del convenio" styleClass="input_ger_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <rich:select id="select-gerente-convenio"  value="#{Supervisor$Contrato.contrato.gerenteconvenio}" style="height: 32px!important;">
+                                <rich:select id="select-gerente-convenio"  value="#{Supervisor$Contrato.contrato.gerenteconvenio}" style="height: 32px!important; width: 306px!important;">
                                     <f:selectItems value="#{Supervisor$Contrato.gerentesDeConvenio}"  />
                                 </rich:select>
                             </rich:column>
@@ -81,8 +81,7 @@
                                 <h:outputText value="Fecha suscripción" styleClass="input_fec_convenio label_texto_convenio" />
                             </rich:column>
                             <rich:column>
-                                <rich:calendar id="id-fechasuscripcion"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true">                        
-                                    <rich:message for="id-fechasuscripcion"  />
+                                <rich:calendar id="id-fechasuscripcion"  datePattern="yyyy-MM-dd" direction="bottomRight"  value="#{Supervisor$Contrato.contrato.datefechaini}" required="true" style="width: 320px !important;">                                                  <rich:message for="id-fechasuscripcion"  />
                                     <a4j:ajax listener="#{Supervisor$Contrato.fechaCambio}" event="change" execute="id-fechasuscripcion,id-datefechafin" render="h-ol-duraciondias"/>
                                     <rich:tooltip  value="#{var.fechasuscripcion}"/>
                                 </rich:calendar>
@@ -123,7 +122,7 @@
                 <!--rich:collapsiblePanel switchType="client" header="{var.fuenterecurso}"-->
                 <center>                  
                     <h:outputLabel value="#{var.fuenterecurso}" styleClass="hol_fuente_recursos_zoom"/>
-                    <h:panelGrid columns="1" style="font-size: 12px!important;font-style: italic !important;position: relative;right: 70px;">
+                    <h:panelGrid columns="1" style="font-size: 12px!important;font-style: italic !important;position: relative;right: -16px;">
                         <center><h:outputLabel id="hol-fuenterecsubtitulo1" value="#{var.subfuenterecursos1}"/></center>              
                         <center><h:outputLabel id="hol-fuenterecsubtitulo2" value="#{var.subfuenterecursos2}" style="position: relative;top: -7px;right: -15px;"/></center>
                     </h:panelGrid>

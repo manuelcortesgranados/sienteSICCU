@@ -3806,14 +3806,14 @@ a:hover {
     top: -64px;
 }
 .hol_info_convenio_zoom{
-    left: -74px !important;
+    left: 16px !important;
     font-weight: bold !important;
     position: relative !important;
     color: grey !important;
     font-size: 16px !important;
 }
 .hol_fuente_recursos_zoom{
-    left: -69px !important;
+    left: 15px !important;
     font-weight: bold !important;
     position: relative !important;
     color: grey !important;
@@ -3826,7 +3826,7 @@ a:hover {
 }
 .panel_numero_convenio{
     position: relative;
-    right: -48px;
+    right: -63px;
 }
 .input_num_convenio{
     font-style: italic;
@@ -3834,72 +3834,72 @@ a:hover {
 }
 .panel_nom_abreviado{
     position: relative;
-    right: -70px;
+    right: -85px;
     top: -3px;
 }
 .panel_val_estimado{
     position: relative;
-    right: -98px;
+    right: -115px;
     top: -3px;
 }
 .panel_obj_convenio{
     position: relative;
-    right: -59px;
+    right: -76px;
     top: -3px;
 }
 .panel_ger_convenio{
     position: relative;
-    right: -46px;
+    right: -64px;
     top: -3px;
 }
 .panel_fec_suscripcion{
     position: relative;
-    right: -66px;
+    right: -84px;
     top: -3px;
 }
 .panel_fec_final{
     position: relative;
-    right: -68px;
+    right: -85px;
     top: -3px;
 }
 .panel_fec_inicio{
     position: relative;
-    right: -60px;
+    right: -78px;
     top: -3px;
 }
 .panel_ent_convenio{
     position: relative;
-    right: -119px;
+    right: -180px;
     top: -3px;
 }
 .panel_val_aportado{
     position: relative;
-    right: 7px;
+    right: -53px;
     top: -21px;
 }
 .panel_res_iva{
     position: relative;
-    right: -19px;
+    right: -81px;
     top: -3px;
 }
 .panel_rol_desem{
     position: relative;
-    right: -40px;
+    right: -101px;
     top: -11px;
 }
 .panel_cuo_gerencia{
     position: relative;
-    right: -100px;
+    right: -82px;
     top: -24px;
 }
 .panel_val_porcentaje{
     position: relative;
-    right: -140px;
+    right: -138px;
     top: -13px;
 }
 .panel_otr_reserva{
     position: relative;
-    right: -28px;
+    right: -89px;
     top: 6px;
 }
 .label_texto_convenio{
