@@ -178,7 +178,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
         cp.setWidget(grid);
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
-        cp.setExpanded(false);
+        cp.setExpanded(true);
         cp.setPixelSize(500, 150);
         cp.addStyleName("margin-10");
 

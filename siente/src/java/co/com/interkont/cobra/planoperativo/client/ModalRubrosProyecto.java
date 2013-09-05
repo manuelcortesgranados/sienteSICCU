@@ -90,7 +90,7 @@ public class ModalRubrosProyecto implements IsWidget {
         rubro = new TextField();
         tipoAporte = 0;
         formaPago = 0;
-        vigencia = 0;
+        
 
         this.contratoDto = contratoDto;
         this.proyectoDTO = proyectoDTO;
@@ -250,6 +250,8 @@ public class ModalRubrosProyecto implements IsWidget {
                 limpiarMontos();
             }
         });
+        
+        vigencia = Integer.parseInt(lstVigen.getItemText(0));
 
         vp.add(botanAddRubros);
 

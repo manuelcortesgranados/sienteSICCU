@@ -150,7 +150,7 @@ public class WidgetTablaMacro implements IsWidget {
         cp.setHeadingText("MACROACTIVIDADES");
         cp.setWidget(grid);
         cp.setCollapsible(true);
-        cp.setExpanded(false);
+        cp.setExpanded(true);
         cp.setAnimCollapse(true);
         cp.setPixelSize(215, 150);
         cp.addStyleName("margin-10");

@@ -76,7 +76,8 @@ public class ModalAddMontos implements IsWidget {
         this.widTblMontos = widTblMontos;
         this.modalActual = modalActual;
         this.idTemp = idTemp;
-       
+
+
     }
 
     @Override
@@ -100,7 +101,7 @@ public class ModalAddMontos implements IsWidget {
         vp.add(con);
         lstVigen.setWidth(cw);
         llenarV();
-        vigencia=Integer.parseInt(lstVigen.getItemText(0));
+        vigencia = Integer.parseInt(lstVigen.getItemText(0));
         lstVigen.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
@@ -130,7 +131,7 @@ public class ModalAddMontos implements IsWidget {
             }
         });
 
-
+        this.vigencia = Integer.parseInt(lstVigen.getItemText(0));
 
         setValorRubros((NumberField<BigDecimal>) new NumberField(new NumberPropertyEditor.BigDecimalPropertyEditor()));
         getValorRubros().setEmptyText("Valor");
@@ -172,7 +173,7 @@ public class ModalAddMontos implements IsWidget {
                 String msgVal = validaRubros(monto);
                 if (msgVal.equals("El rubro se registró correctamente")) {
                     contrato.getMontos().add(monto);
-                   // actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(monto.getValor()));
+                    // actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(monto.getValor()));
                     limpiarMontos();
                     idTemp = idTemp++;
                     widTblMontos.getStore().add(monto);

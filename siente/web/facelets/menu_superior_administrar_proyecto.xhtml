@@ -14,8 +14,10 @@
                 <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
                     <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                     <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
-                        <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
-                        <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
+                        <h:commandLink styleClass="ikont-hcl-menu-icon-inicio" >
+                        </h:commandLink>
+                        <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio" >
+                        </h:commandLink>
                         <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
                     </h:panelGrid>
                 </h:panelGrid>  
@@ -26,7 +28,7 @@
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnreporte_avance and Supervisor$AdministrarObraNew.obra.solicitudmaestro==null and !Supervisor$AdministrarObraNew.obra.booleantienehijos}"> 
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-avance-proyecto" title="Reportar avanace"  action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
                                    immediate="true"/>              
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 120px;" value="Reportar avanace"  action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 150px;" value="Reportar avanace"  action="#{Supervisor$AdministrarObraNew.iniciarAliment}"
                                    immediate="true"/>              
                 </h:panelGroup>
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
@@ -54,7 +56,7 @@
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnasociar_consultoria}" >
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-contratos-proyecto" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
                                    immediate="true"/>
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Asociar contratos" style="width: 120px;" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" value="Asociar contratos" style="width: 150px;" action="#{Supervisor$AsociarContratos.llenarlistacontratosProyecto}"
                                    immediate="true"/>
                 </h:panelGroup>
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
@@ -63,7 +65,7 @@
                 </h:panelGroup>
                 <h:panelGroup  layout="block" >
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-eliminar-avance-proyecto"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto  ikont-menu-detalle-text" style="width: 120px;" value="Eliminar ult.avance" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto  ikont-menu-detalle-text" style="width: 150px;" value="Eliminar ult.avance" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btneliminarAvance and !Supervisor$AdministrarObraNew.obra.booleantienehijos}" action="#{Supervisor$AdministrarObraNew.iniciarEliminarUltimoAvance}"  />      
                 </h:panelGroup>
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndocumentos}">
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-documentos-proyecto" action="#{Supervisor$AdministrarObraNew.iniciarDocumentos}"/>      
@@ -71,7 +73,7 @@
                 </h:panelGroup>
                 <h:panelGroup  layout="block" rendered="#{SessionBeanCobra.cobraService.ciu}">
                     <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-posicion-participacion-ciudadana-proyecto" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 120px;" value="Participación ciudadana" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
+                    <h:commandLink styleClass="ikont-img-posicion-menu-proyecto ikont-menu-detalle-text" style="width: 150px;" value="Participación ciudadana" immediate="true"  action="#{Ciudadano$PerfilCiudadano.iniciarOpiniones}"/>
                 </h:panelGroup>
             </h:panelGrid>
         </h:panelGroup>
@@ -96,14 +98,24 @@
                 if ($(this).hasClass(localStorage.getItem('accionDetalleProyecto'))) {
                     $(this).parent().find('a').each(function() {
                         $(this).addClass('buttonactive');
-                        console.log($(this));
                     });
-                    console.log($(this).parent());
                 } else {
                     $(this).parent().find('a').each(function() {
                         $(this).removeClass('buttonactive');
                     });
                 }
+            });
+            $('.ikont-hpg-content-menuinicio:first').hover(function(){
+                $('#menuprincipal').animate({width: '268px', top: '60px', position : 'fixed'});
+            },
+            function(){
+               // $('#menuprincipal').animate({width: '0px', top: '137px', position: 'absolute'});
+            });
+            $('#menuprincipal').hover(function(){
+               
+            },
+            function(){
+                $('#menuprincipal').animate({width: '0px', top: '137px', position: 'absolute'});
             });
         });
         $j(window).scroll(function() {

@@ -10,9 +10,20 @@
     >
     <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
         <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
+            <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
+                <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
+                <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
+                    <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
+                    <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
+                    <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
+                </h:panelGrid>
+            </h:panelGrid>  
             <h:panelGroup layout="block" >                     
-
                 <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="ikont-acl-datosbasicos img-button-ncpo" render="frmpanelgeneral"
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
+                </a4j:commandLink>
+                <a4j:commandLink value="Datos básicos" action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="img-button-ncpo ikont-menu-detalle-text" render="frmpanelgeneral"
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
                     <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
                 </a4j:commandLink>
@@ -20,11 +31,17 @@
             <h:panelGroup layout="block" >
                 <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-
+                </a4j:commandLink>
+                <a4j:commandLink value="Plan operativo" action="#{Supervisor$Contrato.planOperativo()}"  styleClass="img-button-ncpo ikont-menu-detalle-text" 
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
                 </a4j:commandLink>
             </h:panelGroup>
             <h:panelGroup layout="block" >
                 <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="ikont-acl-polizas img-button-ncpo"
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
+                </a4j:commandLink>
+                <a4j:commandLink value="Pólizas" action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
                     <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
                 </a4j:commandLink>
@@ -34,49 +51,53 @@
                                  execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
                     <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
                 </a4j:commandLink>
+                <a4j:commandLink value="Documentos" action="#{Supervisor$Contrato.actualizarPanel}" render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
+                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
+                </a4j:commandLink>
 
             </h:panelGroup>
         </h:panelGrid>
     </h:panelGroup>
- <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var $j = jQuery.noConflict();
         var $jq = jQuery.noConflict();
         $jq(document).ready(function() {
-          
+
             $('.img-button-ncpo').each(function() {
-                $(this).removeClass('scroll');
+                $(this).removeClass('scrollactive');
                 $(this).removeClass('buttonactive');
             });
             $('.img-button-ncpo').each(function() {
                 $(this).bind({
-                    click : function(){
-                        $(this).removeClass('scroll');
+                    click: function() {
+                        $(this).removeClass('scrollactive');
                         localStorage.setItem('accionNuevoConvenio', $(this).attr('class'));
                     }
                 });
-                if($(this).hasClass(localStorage.getItem('accionNuevoConvenio'))){
-                    $(this).addClass('buttonactive');
-                }else{
-                    $(this).removeClass('buttonactive');
+                if ($(this).hasClass(localStorage.getItem('accionNuevoConvenio'))) {
+                    $(this).parent().find('a').each(function() {
+                        $(this).addClass('buttonactive');
+                    });
+                } else {
+                    $(this).parent().find('a').each(function() {
+                        $(this).removeClass('buttonactive');
+                    });
                 }
             });
         });
         $j(window).scroll(function() {
             var $jq = jQuery.noConflict();
             if (window.pageYOffset > 208) {
-                $('.ikont-hpg-contentmenu:first').css("position", "fixed");
-                $('.ikont-hpg-contentmenu:first').css("height", "35px");
+                $('.ikont-hpg-contentmenu:first').addClass('scrollactive');
                 $('.img-button-ncpo').each(function() {
-                    $(this).addClass('scroll');
-                    $(this).css("margin-top", "0px");
+                    $(this).addClass('scrollmenudetalle');
                 });
             } else {
-                $('.ikont-hpg-contentmenu:first').css("position", "relative");
-                $('.ikont-hpg-contentmenu:first').css("height", "70px");
+                $('.ikont-hpg-contentmenu:first').removeClass('scrollactive');
                 $('.img-button-ncpo').each(function() {
-                    $(this).removeClass('scroll');
-                    $(this).css("margin-top", "-10px");
+                    $(this).removeClass('scrollmenudetalle');
                 });
             }
         });

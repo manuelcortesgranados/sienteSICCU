@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.util.DateWrapper;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -60,6 +61,7 @@ public class HitoForm implements IsWidget, EntryPoint {
     ContratoDTO contratoDto;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
+     protected TreeStore<ActividadobraDTO> taskStore;
 
     public VerticalPanel getVp() {
         return vp;
@@ -109,7 +111,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad) {
+    public HitoForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad,TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -117,6 +119,7 @@ public class HitoForm implements IsWidget, EntryPoint {
         actividacreada = new ActividadobraDTO();
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
+        this.taskStore=taskStore;
     }
 
     private void crearFormulario() {
@@ -223,12 +226,9 @@ public class HitoForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,tareaNueva);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size()+1,tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
-//        gantt.getGanttPanel().getContainer().getTreeStore().add(actividadObraPadre, tareaNueva);
-//        propes.taskType().setValue(actividadObraPadre, GanttConfig.TaskType.PARENT);
-//        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
     }
