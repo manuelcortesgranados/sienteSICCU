@@ -391,6 +391,7 @@ a.closemodal{
 
 .templatetablacontent{
     width: 85%;
+    height: 815px;
 
 }
 
@@ -2626,7 +2627,7 @@ css usuario modificacion
 .tabPanelFiltroZoom{
     width: 263px; 
     position: absolute;
-    top: -122px; 
+    top: -114px; 
     height: 231px;
     background: #ffffff
 
