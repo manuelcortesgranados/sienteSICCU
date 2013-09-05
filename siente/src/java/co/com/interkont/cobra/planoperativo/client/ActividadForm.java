@@ -63,7 +63,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     ContratoDTO contratoDto;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
-     TreeStore<ActividadobraDTO> taskStore;
+    TreeStore<ActividadobraDTO> taskStore;
 
     public VerticalPanel getVp() {
         return vp;
@@ -129,7 +129,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         actividacreada = new ActividadobraDTO();
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
-        this.taskStore=taskStore;
+        this.taskStore = taskStore;
     }
 
     private void crearFormulario() {
@@ -160,17 +160,17 @@ public class ActividadForm implements IsWidget, EntryPoint {
         getFechafinActividad().setAutoValidate(true);
         con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización:"), new HtmlData(".fechafin"));
 
-          Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
+        Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
-                AlertMessageBox d;               
+                AlertMessageBox d;
                 if (getDescripcionActividad().getValue() != null && getDescripcionActividad().getValue().compareTo("") != 0) {
                     if (getFechainicioActividad().getValue() != null && getFechafinActividad().getValue() != null) {
 
                         if (getFechainicioActividad().getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
                             if (getFechafinActividad().getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
                                 modalAct.hide();
-                                crearActividad();                                
+                                crearActividad();
                             } else {
                                 d = new AlertMessageBox("Error", "La fecha de finalización de la actividad no puede ser superior a "
                                         + obtenerFecha(actividadObraPadre.getEndDateTime()));
@@ -201,7 +201,6 @@ public class ActividadForm implements IsWidget, EntryPoint {
     }
 
     @Override
-
     public Widget asWidget() {
         if (getVp() == null) {
             setVp(new VerticalPanel());
@@ -242,12 +241,13 @@ public class ActividadForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size()+1,tareaNueva);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), tareaNueva);
+        actividadObraPadre.addChild(tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
         GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
-        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);        
+        gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-        
+
     }
 
     public String obtenerFecha(Date fecha) {

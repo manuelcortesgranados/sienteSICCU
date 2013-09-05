@@ -30,10 +30,8 @@ import com.sencha.gxt.data.shared.LabelProvider;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
-import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
-import com.sencha.gxt.widget.core.client.box.MessageBox;
 import com.sencha.gxt.widget.core.client.container.AbstractHtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BlurEvent;
@@ -42,9 +40,7 @@ import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Iterator;
-import sun.print.resources.serviceui;
 
 /**
  *
@@ -85,6 +81,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         this.modal = tabla;
         this.modalActual = modalActual;
         this.idTemp = idTemp;
+        this.formaPago=Integer.parseInt(lstFormaP.getValue(0));
     }
 
     @Override
@@ -144,10 +141,10 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
         lstFormaP.addChangeHandler(new ChangeHandler() {
             @Override
             public void onChange(ChangeEvent event) {
-                formaPago = lstFormaP.getSelectedIndex();
-                if (formaPago == 1) {
+                formaPago =Integer.parseInt(lstFormaP.getValue(lstFormaP.getSelectedIndex()));
+                if (formaPago == 2) {
                     valorFuenteRecurso.setEmptyText("Porcentaje");
-                } else if (formaPago == 0) {
+                } else if (formaPago == 1) {
                     valorFuenteRecurso.setEmptyText("Valor");
                 }
             }

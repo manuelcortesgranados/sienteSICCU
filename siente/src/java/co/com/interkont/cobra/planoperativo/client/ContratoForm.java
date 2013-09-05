@@ -646,17 +646,17 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
 
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size()+1, actividadObraContrato);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size(), actividadObraContrato);
         actividadObraPadre.addChild(actividadObraContrato);
         GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraContrato, taskStore.getChildren(actividadObraContrato).size()+1, lstHijos);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraContrato, taskStore.getChildren(actividadObraContrato).size(), lstHijos);
         actividadObraContrato.getChildren().addAll(lstHijos);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraContrato, true);  //tareaSeleccionada.addChild(tareaNueva);
 
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(precontractual, taskStore.getChildren(precontractual).size()+1, lstHijosPrecontra);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(precontractual, taskStore.getChildren(precontractual).size(), lstHijosPrecontra);
         precontractual.getChildren().addAll(lstHijosPrecontra);
         gantt.getGanttPanel().getContainer().getTreeStore().update(precontractual);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(precontractual, true);  //tareaSeleccionada.addChild(tareaNueva);
