@@ -142,6 +142,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 //     private static final int COLUMN_FORM_WIDTH = 680;
 
     public interface GanttExampleStyle extends CssResource {
+
+        @ClassName("gwt-label")
+        String estiloLabel();
     }
 
     public interface GanttExampleResources extends ClientBundle {
@@ -269,7 +272,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearProyectoDialog = new Window();
                 crearProyectoDialog.setBlinkModal(true);
                 crearProyectoDialog.setModal(true);
-                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO,props,taskStore);
+                final ProyectoForm1 proyectoForm1 = new ProyectoForm1(tareaSeleccionada, gantt, crearProyectoDialog, convenioDTO, props, taskStore);
                 crearProyectoDialog.add(proyectoForm1);
                 crearProyectoDialog.show();
             }
@@ -288,7 +291,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearContratoDialog = new Window();
                 crearContratoDialog.setBlinkModal(true);
                 crearContratoDialog.setModal(true);
-                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, props,taskStore);
+                final ContratoForm contratoForm = new ContratoForm(tareaSeleccionada, gantt, crearContratoDialog, props, taskStore);
                 crearContratoDialog.add(contratoForm);
                 crearContratoDialog.show();
 
@@ -362,7 +365,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE, 6,taskStore);
+                final HitoForm actividadForm = new HitoForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.MILESTONE, 6, taskStore);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
             }
@@ -379,7 +382,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 final Window crearActDialog = new Window();
                 crearActDialog.setBlinkModal(true);
                 crearActDialog.setModal(true);
-                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF, 4,taskStore);
+                final ActividadForm actividadForm = new ActividadForm(tareaSeleccionada, gantt, crearActDialog, convenioDTO, GanttConfig.TaskType.LEAF, 4, taskStore);
                 crearActDialog.add(actividadForm);
                 crearActDialog.show();
 
@@ -546,21 +549,20 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 dependenciaSeleccionada = event.getDependency();
             }
         });
-        
-        
-        gantt.addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
 
+
+        gantt.addTaskResizeHandler(new TaskResizeEvent.TaskResizeHandler<ActividadobraDTO>() {
             @Override
             public void onTaskResize(TaskResizeEvent<ActividadobraDTO> event) {
-              ActividadobraDTO actiresi= event.getEventModel();
-              Date copiaFecha=CalendarUtil.copyDate(actiresi.getStartDateTime());
-              CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
-              props.endDateTime().setValue(actiresi, copiaFecha);
-              GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
-             }
+                ActividadobraDTO actiresi = event.getEventModel();
+                Date copiaFecha = CalendarUtil.copyDate(actiresi.getStartDateTime());
+                CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
+                props.endDateTime().setValue(actiresi, copiaFecha);
+                GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
+            }
         });
-        
-       
+
+
 
         // Editing
         final GridInlineEditing<ActividadobraDTO> editing = new GridInlineEditing<ActividadobraDTO>(gantt.getLeftGrid());
@@ -651,9 +653,9 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                         ac.getEndDateTime().setDate(ac.getEndDateTime().getDate() - ((actividadAnterior.getDuration() - ac.getDuration())) + 1);
                     }
                 }
-                
-              
-              GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props);
+
+
+                GanttDatos.modificarFechaFin(taskStore.getParent(ac), taskStore, props);
 
             }
         });
@@ -907,8 +909,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         for (Iterator it = tareaSeleccionada.getObra().getObrafuenterecursosconvenioses().iterator(); it.hasNext();) {
             ObrafuenterecursosconveniosDTO obfrc = (ObrafuenterecursosconveniosDTO) it.next();
             if (obfrc.getTipoaporte() == 1) {
-            FuenterecursosconvenioDTO fuenteModificada=encontrarFuenteRecurso(obfrc.getFuenterecursosconvenio());
-            fuenteModificada.setValorDisponible(fuenteModificada.getValorDisponible().add(obfrc.getValor()));
+                FuenterecursosconvenioDTO fuenteModificada = encontrarFuenteRecurso(obfrc.getFuenterecursosconvenio());
+                fuenteModificada.setValorDisponible(fuenteModificada.getValorDisponible().add(obfrc.getValor()));
             }
         }
     }

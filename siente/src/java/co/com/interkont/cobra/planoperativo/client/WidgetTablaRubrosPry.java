@@ -5,6 +5,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gwt.cell.client.Cell.Context;
@@ -37,6 +39,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     protected ActividadobraDTO actividadObraEditar;
     protected TreeStore<ActividadobraDTO> taskStore;
     protected boolean editar;
+    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     /**
      * @return the store
@@ -121,7 +124,9 @@ public class WidgetTablaRubrosPry implements IsWidget {
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
+                    service.setLog("entre editar", null);
                     if (!estaEncontrato(store.get(row))) {
+                        service.setLog("entre editar 1", null);
                         if (store.get(row).getTipoaporte() == 0) {
                             obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                             obraDto.setValorDisponible(obraDto.getValor());
@@ -169,6 +174,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     }
 
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
+      service.setLog("entre estaContrato", null);
         boolean estaRelacionado = false;
         List<ActividadobraDTO> lstHijas = taskStore.getChildren(actividadObraEditar);
         for (ActividadobraDTO act : lstHijas) {

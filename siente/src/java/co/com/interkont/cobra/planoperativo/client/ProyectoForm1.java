@@ -8,17 +8,21 @@ import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
+import co.com.interkont.cobra.planoperativo.client.resources.images.CssRecursos;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
 import com.gantt.client.config.GanttConfig;
+import com.google.common.io.Resources;
 import java.util.List;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -74,6 +78,9 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     protected Window modalPry;
     GwtMensajes msj = GWT.create(GwtMensajes.class);
     private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
+
+    
+   
     /*
      * id temporal de objeto, actividad macro, y obra fuente recurso
      */
@@ -194,7 +201,11 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             tituloPantalla = "Editar Proyecto";
         }
 
-        vp.add(new Label(tituloPantalla));
+        Label tituloPagina = new Label(tituloPantalla);        
+        tituloPagina.setStyleName(CssRecursos.INSTANCE.commonsCss().estiloLabel());
+        
+
+        vp.add(tituloPagina);
 
 
         HtmlLayoutContainer con = new HtmlLayoutContainer(getTableMarkup());
