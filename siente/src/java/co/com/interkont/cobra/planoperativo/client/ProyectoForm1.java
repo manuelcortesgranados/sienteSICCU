@@ -386,6 +386,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
     }
 
+    
+     /**
+     * Método para editar la diferente información de los proyectos
+     * plan operativo
+     *
+     * @author dgarcia
+     */
     public void editarProyecto() {
         if (!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())) {
             proyectoDTO.setStrnombreobra(nombrePry.getText());
@@ -410,9 +417,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             }
         }
         if (proyectoDTO.getFechaInicio().compareTo(fechaInicio.getValue()) != 0) {
-            service.setLog("entre editar fecha ini pry 1", null);
-            if (fechaInicio.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
-                service.setLog("entre editar fecha ini pry 2", null);
+           if (fechaInicio.getValue().compareTo(actividadObraPadre.getStartDateTime()) >= 0) {
                 odifi(actividadobraProyectoEditar);
             } else {
                 ventanaDeError("La fecha de inicio no puede superar la fecha inicio del convenio");
@@ -420,8 +425,15 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
 
     }
-
-    public void odifi(ActividadobraDTO act) {
+    
+    /**
+     * Método para editar la actividad padre proyecto y modificar los hijos de esta.
+     *
+     * @param ActividadobraDTO actividad obra principal que se va a editar.
+     *
+     * @author dgarcia
+     */
+     public void odifi(ActividadobraDTO act) {
         m(act);
 
         if (!act.getChildren().isEmpty()) {

@@ -27,7 +27,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.Obrafuenterecursosconveni
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
-import com.gantt.client.event.CascadeChangesEvent;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
 import com.google.gwt.event.logical.shared.SelectionEvent;
@@ -48,7 +47,6 @@ import com.sencha.gxt.core.client.util.Margins;
 import com.sencha.gxt.data.shared.ListStore;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.ContentPanel;
-import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Dialog.PredefinedButton;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -62,7 +60,6 @@ import com.sencha.gxt.widget.core.client.event.HideEvent;
 import com.sencha.gxt.widget.core.client.event.HideEvent.HideHandler;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
-import com.sencha.gxt.widget.core.client.event.StartEditEvent;
 import com.sencha.gxt.widget.core.client.event.ViewReadyEvent;
 import com.sencha.gxt.widget.core.client.form.DateField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
@@ -80,8 +77,6 @@ import java.util.List;
 import com.sencha.gxt.widget.core.client.menu.Item;
 import com.sencha.gxt.widget.core.client.menu.Menu;
 import com.sencha.gxt.widget.core.client.menu.MenuItem;
-import java.math.BigDecimal;
-import java.util.Calendar;
 import java.util.Iterator;
 
 /**
@@ -562,12 +557,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
               CalendarUtil.addDaysToDate(copiaFecha, actiresi.getDuration());
               props.endDateTime().setValue(actiresi, copiaFecha);
               GanttDatos.modificarFechaFin(taskStore.getParent(actiresi), taskStore, props);
-              //GanttDatos.modificarFechaFin(root, taskStore, props);
-              
-//                AlertMessageBox ale=new AlertMessageBox("Resizable",""+ actiresi.getDuration());
-//                ale.show();
-                
-              }
+             }
         });
         
        
