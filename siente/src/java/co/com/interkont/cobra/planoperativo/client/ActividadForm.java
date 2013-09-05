@@ -8,6 +8,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTOProps;
 import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.Gantt;
@@ -25,6 +26,7 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.core.client.util.DateWrapper;
+import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.Window;
 import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
@@ -61,6 +63,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
     ContratoDTO contratoDto;
     private final CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
     GwtMensajes msj = GWT.create(GwtMensajes.class);
+     TreeStore<ActividadobraDTO> taskStore;
 
     public VerticalPanel getVp() {
         return vp;
@@ -118,7 +121,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         this.peso = peso;
     }
 
-    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad) {
+    public ActividadForm(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window dialog, ContratoDTO contratoDtoP, TaskType tipo, int tipoactividad, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         modalAct = dialog;
@@ -126,6 +129,7 @@ public class ActividadForm implements IsWidget, EntryPoint {
         actividacreada = new ActividadobraDTO();
         this.tipo = tipo;
         this.tipoactividad = tipoactividad;
+        this.taskStore=taskStore;
     }
 
     private void crearFormulario() {
@@ -156,11 +160,6 @@ public class ActividadForm implements IsWidget, EntryPoint {
         getFechafinActividad().setAutoValidate(true);
         con.add(new FieldLabel(getFechafinActividad(), "Fecha de Finalización:"), new HtmlData(".fechafin"));
 
-//        setPeso(new TextField());
-//        getPeso().setEmptyText("Peso");
-//        getPeso().setWidth(cw);
-//        con.add(getPeso(),new HtmlData(".peso") );
-// 
           Button btnAdicionarActividad = new Button("Añadir Actividad", new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
@@ -243,8 +242,9 @@ public class ActividadForm implements IsWidget, EntryPoint {
         cargarDatosActividad();
         ActividadobraDTO tareaNueva = new ActividadobraDTO(actividacreada.getName(), actividacreada.getStartDateTime(), actividacreada.calcularDuracion(), 0, tipo, tipoactividad, false);
         /*Se cargan el Panel del Gantt con la actividad Creada*/
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, 0,tareaNueva);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadObraPadre, taskStore.getChildren(actividadObraPadre).size()+1,tareaNueva);
         actividadObraPadre.addChild(tareaNueva);
+        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadObraPadre);        
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadObraPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
         

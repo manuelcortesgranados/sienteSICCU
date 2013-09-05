@@ -166,7 +166,7 @@ public class WidgetTablaFuenteR implements IsWidget {
         cp.setCollapsible(true);
         cp.setAnimCollapse(true);
         cp.setPixelSize(500, 150);
-        cp.setExpanded(false);
+        cp.setExpanded(true);
         cp.addStyleName("margin-10");
 
         return cp;

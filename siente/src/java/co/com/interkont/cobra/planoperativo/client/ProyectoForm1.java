@@ -123,7 +123,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idobraRecursos = 0;
     }
 
-    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP) {
+    public ProyectoForm1(ActividadobraDTO actividadobrapadre, Gantt<ActividadobraDTO, DependenciaDTO> gantt, Window di, ContratoDTO contratoDtoP,ActividadobraDTOProps propes, TreeStore<ActividadobraDTO> taskStore) {
         this.actividadObraPadre = actividadobrapadre;
         this.gantt = gantt;
         this.modalPry = di;
@@ -134,6 +134,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         this.idTempObj = 0;
         this.idTempMacroActividades = 0;
         this.idobraRecursos = 0;
+        this.propes=propes;
+        this.taskStore=taskStore;
         instanciarElementosPantalla();
     }
 
@@ -251,6 +253,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
 
 
         txtObjeG.setWidth(cw);
+        txtObjeG.setHeight(""+150);
         con.add(new FieldLabel(txtObjeG, "Objetivo General"), new HtmlData(".tblobjge"));
         //con.add(txtObjeG, new HtmlData(".tblobjge"));
 
@@ -264,7 +267,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 WidgetAddObjetivos modalAddObj = new WidgetAddObjetivos(tblObjetivos, proyectoDTO, "Objetivos Especificos", "Por favor ingrese la descripción del objetivo:", 2, true, idTempObj);
                 MultiLinePromptMessageBox modal = (MultiLinePromptMessageBox) modalAddObj.asWidget();
                 modal.show();
-                
+
             }
         });
         con.add(btnAdicionarObje, new HtmlData(".objetivoes"));
@@ -307,9 +310,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 service.setLog("entre proyecto", null);
                 if (!editar) {
                     /*Se carga el proyectoDTO */
-                    service.setLog("entre proyecto 1", null);
                     cargarDatosProyectoDTO();
-                    service.setLog("entre proyecto 10", null);
                     boolean varErrorres = false;
                     String msgerrores = "";
                     if (nombrePry.getValue() == null) {
@@ -362,12 +363,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                         AlertMessageBox d = new AlertMessageBox("Error", msgerrores);
                         d.show();
                     }
-                    service.setLog("entre proyecto sali", null);
+
 
                 } else {
-                    service.setLog("entre antes editar", null);
                     editarProyecto();
-                    service.setLog("sali editar proyecto ", null);
                     actividadobraProyectoEditar.setObra(proyectoDTO);
                     modalPry.hide();
                     gantt.getGanttPanel().runCascadeChanges();
@@ -391,7 +390,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     public void editarProyecto() {
-        service.setLog("entre editar proyecto", null);
         if (!proyectoDTO.getStrnombreobra().equals(nombrePry.getText())) {
             proyectoDTO.setStrnombreobra(nombrePry.getText());
             propes.name().setValue(actividadobraProyectoEditar, proyectoDTO.getStrnombreobra());
@@ -399,10 +397,8 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         /*se verifica si se modifico la fecha de finalizacion del proyecto*/
         if (proyectoDTO.getFechaFin() != null) {
             if (proyectoDTO.getFechaFin().compareTo(fechaFin.getValue()) != 0) {
-                service.setLog("entre editar proyecto 1", null);
                 /*se verifica que la fecha modificada no sea mayor que la fecha fin del convenio*/
                 if (fechaFin.getValue().compareTo(actividadObraPadre.getEndDateTime()) <= 0) {
-                    service.setLog("entre editar proyecto 2", null);
                     /*se verifica si la fecha modificada es mayor o igual que la mayor fecha de finalizacion de los actividades hijas*/
                     if (modificarFechaFin()) {
                         proyectoDTO.setFechaFin(fechaFin.getValue());
@@ -429,7 +425,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
     }
 
     public void odifi(ActividadobraDTO act) {
-        service.setLog("entre editar fecha ini pry 3", null);
         m(act);
 
         if (!act.getChildren().isEmpty()) {
@@ -444,7 +439,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         /*verifico el sentido en que tengo que hacer el movimiento de las
          * actividades si necesito aumentar la fecha de inicio o disminuirla*/
         if (fechaInicio.getValue().compareTo(fechaProyecto) > 0) {
-            service.setLog("entre editar fecha ini pry 4 mayor", null);
             int duracion = CalendarUtil.getDaysBetween(fechaProyecto, fechaInicio.getValue());
 
             Date fechaI = CalendarUtil.copyDate(actiHija.getStartDateTime());
@@ -472,12 +466,7 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
 
             GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes);
-//            if (propes.endDateTime().getValue(actiHija).compareTo(propes.endDateTime().getValue(actObraPadre)) > 0) {
-//                int diferencia = CalendarUtil.getDaysBetween(propes.endDateTime().getValue(actObraPadre), propes.endDateTime().getValue(actiHija));
-//                Date copiaFecha = propes.endDateTime().getValue(actObraPadre);
-//                CalendarUtil.addDaysToDate(copiaFecha, diferencia);
-//                propes.endDateTime().setValue(actObraPadre, copiaFecha);
-//            }
+
         } else {
 
             int duracion = CalendarUtil.getDaysBetween(fechaInicio.getValue(), fechaProyecto);
@@ -501,6 +490,10 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
                 actiHija.getContrato().setDatefechaini(actiHija.getStartDateTime());
                 actiHija.getContrato().setDatefechafin(actiHija.getEndDateTime());
             }
+
+            ActividadobraDTO actObraPadre = taskStore.getParent(actiHija);
+
+            GanttDatos.modificarFechaFin(actObraPadre, taskStore, propes);
 
 
         }
@@ -585,12 +578,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {
                 if (act.getName().equals("Ejecución del Convenio")) {
                     enlazaractividadesHijas(act, tareaNueva);
-                }
+ }
             }
 
         } else {
             enlazaractividadesHijas(actividadObraPadre, tareaNueva);
-        }
+           }
 
     }
 
@@ -599,17 +592,12 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
      *
      */
     public void enlazaractividadesHijas(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
-        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, 0, actividadHija);
+        gantt.getGanttPanel().getContainer().getTreeStore().insert(actividadPadre, taskStore.getChildren(actividadPadre).size()+1, actividadHija);
         actividadPadre.addChild(actividadHija);
-        GanttDatos.modificarFechaFin(actividadObraPadre, taskStore, propes);
         GanttDatos.modificarFechaFin(actividadPadre, taskStore, propes);
-              
-        // modificarPadre(actividadObraPadre, actividadHija);
-        //modificarPadre(actividadPadre, actividadHija);
         gantt.getGanttPanel().getContainer().getTreeStore().update(actividadPadre);
         ((TreeGrid<ActividadobraDTO>) gantt.getGanttPanel().getContainer().getLeftGrid()).setExpanded(actividadPadre, true);  //tareaSeleccionada.addChild(tareaNueva);
-
-    }
+        }
 
     public void modificarPadre(ActividadobraDTO actividadPadre, ActividadobraDTO actividadHija) {
         if (propes.endDateTime().getValue(actividadHija).compareTo(propes.endDateTime().getValue(actividadPadre)) > 0) {

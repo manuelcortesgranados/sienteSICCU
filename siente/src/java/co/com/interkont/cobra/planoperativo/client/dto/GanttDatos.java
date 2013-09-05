@@ -5,16 +5,17 @@
  */
 package co.com.interkont.cobra.planoperativo.client.dto;
 
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.config.GanttConfig;
 import com.gantt.client.config.GanttConfig.TaskType;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.sencha.gxt.core.client.util.DateWrapper;
 import com.sencha.gxt.data.shared.TreeStore;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import sun.print.resources.serviceui;
 
 /**
  * Clase para manejar los datos que componen el Gantt del Plan Operativo
@@ -22,6 +23,9 @@ import sun.print.resources.serviceui;
  * @author desarrollo2
  */
 public class GanttDatos {
+    
+    
+    private static CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     /**
      * Método para construir toda la estructura jerárquica de las tareas del
@@ -77,13 +81,18 @@ public class GanttDatos {
         return convenio;
     }
 
-    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore,ActividadobraDTOProps props) {
-        List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
-        int duracion=CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
-        Date copiaFecha=CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
-        CalendarUtil.addDaysToDate(copiaFecha, duracion);
-        props.endDateTime().setValue(actividadPadre, copiaFecha);
-       
+    public static void modificarFechaFin(ActividadobraDTO actividadPadre, TreeStore<ActividadobraDTO> taskStore, ActividadobraDTOProps props) {
+        if (actividadPadre != null) {
+            List<ActividadobraDTO> listaHijas = taskStore.getChildren(actividadPadre);
+            int duracion = CalendarUtil.getDaysBetween(obtenerMenorFechaInicio(listaHijas), obtenerMayorFechaFin(listaHijas));
+            Date copiaFecha = CalendarUtil.copyDate(obtenerMenorFechaInicio(listaHijas));
+            CalendarUtil.addDaysToDate(copiaFecha, duracion);
+            props.endDateTime().setValue(actividadPadre, copiaFecha);
+            modificarFechaFin(taskStore.getParent(actividadPadre),taskStore,props);
+        }else{
+         service.setLog("entre en gant datos 2 null", null);
+        }
+
     }
 
     public static Date obtenerMenorFechaInicio(List<ActividadobraDTO> listaHijas) {
@@ -96,7 +105,7 @@ public class GanttDatos {
 
         return CalendarUtil.copyDate(menor);
     }
-    
+
     public static Date obtenerMayorFechaFin(List<ActividadobraDTO> listaHijas) {
         Date mayor = listaHijas.get(0).getEndDateTime();
         for (int i = 1; i < listaHijas.size(); i++) {
