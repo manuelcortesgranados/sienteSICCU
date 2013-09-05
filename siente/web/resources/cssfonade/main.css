@@ -2249,11 +2249,11 @@ input[type="text"], input[type="password"], select{
     background-position: -55px -105px;
 }
 
-.ikont-hcl-imgestadoproyecto.estado2{
+.ikont-hcl-imgestadoproyecto.estado2, .ikont-hcl-imgestadoproyecto.estado3{
     background-position: -220px -105px;
 }
 
-.ikont-hcl-imgestadoproyecto.estado5{
+.ikont-hcl-imgestadoproyecto.estado5, .ikont-hcl-imgestadoproyecto.estado4{
     background-position: -165px -105px;
 }
 
