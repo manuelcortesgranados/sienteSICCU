@@ -6677,12 +6677,11 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         if (!contratodto.getActividadobras().isEmpty()) {
             Iterator it = contratodto.getActividadobras().iterator();
             while (it.hasNext()) {
-                ActividadobraDTO act = (ActividadobraDTO) it.next();
-                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null,null));               
-
+                ActividadobraDTO act = (ActividadobraDTO) it.next(); 
                 //Extrae los proyectos de la actividad
                 listaProyectosConvenio.clear();
                 extraerProyectosActividad(act);
+                contrato.getActividadobras().add(CasteoGWT.castearActividadobraDdoToActividadobra(act, contrato, null,null));               
             }
             //System.out.println("lista = " + listaProyectosConvenio.size());
         }

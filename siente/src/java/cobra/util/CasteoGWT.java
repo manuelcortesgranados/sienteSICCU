@@ -45,9 +45,9 @@ import java.util.Set;
 public class CasteoGWT {
 
     /*
-     * metodo que se encarga de convertir una contrato a contratoDTO
-     * @param contrato Contrato el cual va a castear.
+     * método que se encarga de convertir una contrato a contratoDTO
      * 
+     * @param contrato Contrato el cual va a castear.
      * @author Dgarcia
      **/
     public static ContratoDTO castearContratoToContratoDTO(Contrato contrato) {
@@ -63,7 +63,7 @@ public class CasteoGWT {
             
             while (it.hasNext()) {
 
-                ActividadobraDTO actraiz = castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO);
+                ActividadobraDTO actraiz = castearActividadObraRaizTO((Actividadobra) it.next(), contratoDTO, null);
                 contratoDTO.getActividadobras().add(actraiz);                
             }
         }
@@ -78,23 +78,26 @@ public class CasteoGWT {
      * 
      * @author Dgarcia
      **/
-    public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio) {
-
+    public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio, ObraDTO obra) {
+        System.out.println("actividadObra name = " + actividadObra.getStrdescactividad());
+        System.out.println("actividadObra tipotarea = " + actividadObra.getTipotareagantt());
+        System.out.println("actividadObra bool obliga = " + actividadObra.getBoolobligatoria());
+        System.out.println("actividadObra fechainicio " + actividadObra.getFechaInicio());
+        System.out.println("actividadObra fechafin " + actividadObra.getFechaFin());
+        System.out.println("actividadObra duracion " + actividadObra.getDuracion());
+        
         ActividadobraDTO actdto = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), 0,
-                tipoTask(actividadObra.getTipotareagantt()),
-                actividadObra.getTipotareagantt(), actividadObra.getBoolobligatoria());
+                tipoTask(actividadObra.getTipotareagantt()), actividadObra.getTipotareagantt(), actividadObra.getBoolobligatoria());
 
         actdto.setOidactiviobra(actividadObra.getOidactiviobra());
         if(actividadObra.getObra()!=null)
         {
             actdto.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
-        }            
-        
-        
+        } 
         Iterator it = actividadObra.getActividadobras().iterator();        
         while (it.hasNext()) {
             Actividadobra acti = (Actividadobra) it.next();
-            actdto.addChild(castearActividadObraRaizTO(acti, convenio));
+            actdto.addChild(castearActividadObraRaizTO(acti, convenio, obra));
         }
 
         return actdto;
@@ -170,8 +173,12 @@ public class CasteoGWT {
         
         
         obra.setObjetivoses(castearSetObjetivosTO(obran.getObjetivos(), obra));
-        obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursosTO(obra.getObrafuenterecursosconvenioses(), obra, convenio));
-        //obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
+        obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursosTO(obran.getObrafuenterecursosconvenioses(), obra, convenio));
+        obra.setActividadobras(castearSetActividadesDtoObra(obran.getActividadobras(), obra));
+        
+        System.out.println("obradto objetivos " + obra.getObjetivoses().size());
+        System.out.println("obradto recursos " + obra.getObrafuenterecursosconvenioses().size());
+        System.out.println("obradto actividades " + obra.getActividadobras().size());
         
         return obra;
     }
@@ -181,6 +188,7 @@ public class CasteoGWT {
         Set<ActividadobraDTO> setActividades = new HashSet<ActividadobraDTO>(SetActividades.size());
         for (Actividadobra obj : SetActividades) {
             //setActividades.add(castearActividadobraDdoToActividadobra(obj,null,null,obra));
+            setActividades.add(castearActividadObraRaizTO(obj,null,obra));
         }
         return setActividades;
     }
@@ -473,21 +481,24 @@ public class CasteoGWT {
 
         actividadObra.setActividadobra(actividadpadre);
 
+         if (actdto.getObra() != null) {
+            actividadObra.setObra(castearObraDdtToObra(actdto.getObra(), convenio));
+        } else if (actdto.getContrato() != null) {
+            actividadObra.setContrato(castearContratoDTOToContrato(actdto.getContrato(), convenio));
+        }
+        
         Iterator it = actdto.getChildren().iterator();
         actividadObra.setActividadobras(new LinkedHashSet());
         LinkedHashSet<Actividadobra> lista = new LinkedHashSet<Actividadobra>();
         while (it.hasNext()) {
             ActividadobraDTO acti = (ActividadobraDTO) it.next();
             Actividadobra actobra=castearActividadobraDdoToActividadobra(acti, convenio, actividadObra, obra);
+            
             lista.add(actobra);
         }
         actividadObra.setActividadobras(lista);
 
-        if (actdto.getObra() != null) {
-            actividadObra.setObra(castearObraDdtToObra(actdto.getObra(), convenio));
-        } else if (actdto.getContrato() != null) {
-            actividadObra.setContrato(castearContratoDTOToContrato(actdto.getContrato(), convenio));
-        }
+       
 
         return actividadObra;
 
@@ -536,7 +547,11 @@ public class CasteoGWT {
         
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
-        obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
+        //obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
+       
+        System.out.println("Objetivos = " + obra.getObjetivos().size());
+        System.out.println("Actividades = " + obra.getActividadobras().size());
+        System.out.println("Fuentes de recursos = " + obra.getObrafuenterecursosconvenioses().size());
         return obra;
     }
 
@@ -550,6 +565,9 @@ public class CasteoGWT {
     public static Set<Actividadobra> castearSetActividadesObra(Set<ActividadobraDTO> SetActividadesDto, Obra obra) {
         Set<Actividadobra> setActividades = new HashSet<Actividadobra>(SetActividadesDto.size());
         for (ActividadobraDTO obj : SetActividadesDto) {
+            obj.setStartDateTime(obra.getDatefeciniobra());
+            obj.setEndDateTime(obra.getDatefecfinobra());
+            obj.setDuration(obj.calcularDuracion());
             setActividades.add(castearActividadobraDdoToActividadobra(obj,null,null,obra));
         }
         return setActividades;
@@ -606,9 +624,30 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static Obrafuenterecursosconvenios castearObrafuenterecursosDTOToObrafuenterecursos(ObrafuenterecursosconveniosDTO obrafuenterecursosDto, Obra obra, Contrato convenio) {
-        Obrafuenterecursosconvenios obraFuenteRecurso = new Obrafuenterecursosconvenios(obrafuenterecursosDto.getIdobrafuenterecursos(), obra, obrafuenterecursosDto.getTipoaporte(), obrafuenterecursosDto.getVigencia(), obrafuenterecursosDto.getValor());
+        Obrafuenterecursosconvenios obraFuenteRecurso = new Obrafuenterecursosconvenios();
+        ///Falta Almacenar el tipo de aporte en especie
+        obrafuenterecursosDto.getDescripcionaporte();        
+        obraFuenteRecurso.setFormaingreso(obrafuenterecursosDto.getFormaingreso());
         obraFuenteRecurso.setFuenterecursosconvenio(castearFuenteRecursosConvenioTO(obrafuenterecursosDto.getFuenterecursosconvenio(), convenio));
-        return null;
+        obraFuenteRecurso.setIdobrafuenterecursos(obrafuenterecursosDto.getIdobrafuenterecursos());
+        
+        //obrafuenterecursosDto.getNombreEntidad();
+               
+        obraFuenteRecurso.setObra(obra);
+        //Esto que donde lo almacena
+        obrafuenterecursosDto.getOtrospagos();
+        obrafuenterecursosDto.getPagodirecto();
+        
+        obraFuenteRecurso.setPorcentaje(obrafuenterecursosDto.getPorcentaje());
+        obraFuenteRecurso.setRubro(obrafuenterecursosDto.getRubro());
+        obraFuenteRecurso.setTipoaporte(obrafuenterecursosDto.getTipoaporte());
+        obraFuenteRecurso.setValor(obrafuenterecursosDto.getValor());       
+        obraFuenteRecurso.setValorDisponible(obrafuenterecursosDto.getValorDisponible());
+        obraFuenteRecurso.setVigencia(obrafuenterecursosDto.getVigencia());
+        //obraFuenteRecurso.setobrafuenterecursosDto.getDescripcionaporte();
+        //obrafuenterecursosDto.getIdobrafuenterecursos(), obra, obrafuenterecursosDto.getTipoaporte(), obrafuenterecursosDto.getVigencia(), obrafuenterecursosDto.getValor());
+        
+        return obraFuenteRecurso;
     }
 
     /*

@@ -7,6 +7,7 @@ package co.com.interkont.cobra.planoperativo.client;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
+import com.gantt.client.config.GanttConfig;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.sencha.gxt.widget.core.client.Dialog;
@@ -96,6 +97,10 @@ public class WidgetAddObjetivos implements IsWidget {
                         }
                     }else{
                         ActividadobraDTO actividad=new ActividadobraDTO(box.getValue(), 7,idTemp);
+                        actividad.setTaskType(GanttConfig.TaskType.LEAF);
+                        actividad.setStartDateTime(proyecto.getFechaInicio());
+                        actividad.setEndDateTime(proyecto.getFechaFin());
+                        actividad.setDuration(actividad.calcularDuracion());                        
                         idTemp++;
                         proyecto.getActividadobras().add(actividad);
                         tblMacro.getStore().add(actividad);                        

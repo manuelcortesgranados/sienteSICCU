@@ -122,7 +122,7 @@ public class WidgetTablaMacro implements IsWidget {
     public List cargarMacroActividades() {
         List<ActividadobraDTO> lstMacroActividades = new ArrayList<ActividadobraDTO>();
         for (Iterator it = obraDto.getActividadobras().iterator(); it.hasNext();) {
-            ActividadobraDTO actividadobraDTO = (ActividadobraDTO) it.next();
+            ActividadobraDTO actividadobraDTO = (ActividadobraDTO) it.next();            
             if (actividadobraDTO.getTipoActividad() == 7) {
                 lstMacroActividades.add(actividadobraDTO);
             }

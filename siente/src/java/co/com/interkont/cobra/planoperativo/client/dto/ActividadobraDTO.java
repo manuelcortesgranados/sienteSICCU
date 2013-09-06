@@ -37,7 +37,7 @@ public class ActividadobraDTO implements IsSerializable {
     /**
      *  Variable para establecer la obligatoriedad de la tarea
      */
-    private boolean boolobligatoria;
+    private boolean boolobligatoria=false;
     /**
      * Atributos del objeto actividadObraDto
      */
