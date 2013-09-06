@@ -72,6 +72,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import org.richfaces.component.UIDataTable;
@@ -2766,6 +2767,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String guardarContrato() {
 //        if (validarContrato()) {        
+        
         if (comboEntidadesContratoguardar()) {
             if (contrato.getIntduraciondias() > 0) {
                 if (contrato.getContratista() == null) {
@@ -2845,6 +2847,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     } else {
                         validadcionGuardarContrato();
                     }
+                    
                     FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 
                     limpiarContrato();
@@ -2888,7 +2891,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
+        
         if (guardarborradorconvenio == true) {
             limpiarContrato();
         }
