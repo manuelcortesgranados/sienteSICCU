@@ -8,57 +8,60 @@
     xmlns:a4j="http://richfaces.org/a4j" 
 
     >
-    <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
-        <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
-            <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
-                <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
-                <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
-                    <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
-                    <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
-                    <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
-                </h:panelGrid>
-            </h:panelGrid>  
-            <h:panelGroup layout="block" >                     
-                <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="ikont-acl-datosbasicos img-button-ncpo" render="frmpanelgeneral"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
-                </a4j:commandLink>
-                <a4j:commandLink value="Datos básicos" action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="img-button-ncpo ikont-menu-detalle-text" render="frmpanelgeneral"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
-                </a4j:commandLink>
-            </h:panelGroup>
-            <h:panelGroup layout="block" >
-                <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                </a4j:commandLink>
-                <a4j:commandLink value="Plan operativo" action="#{Supervisor$Contrato.planOperativo()}"  styleClass="img-button-ncpo ikont-menu-detalle-text" 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                </a4j:commandLink>
-            </h:panelGroup>
-            <h:panelGroup layout="block" >
-                <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="ikont-acl-polizas img-button-ncpo"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
-                </a4j:commandLink>
-                <a4j:commandLink value="Pólizas" action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
-                </a4j:commandLink>
-            </h:panelGroup>                    
-            <h:panelGroup layout="block" >
-                <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}" render="frmpanelgeneral" styleClass="ikont-acl-documentos img-button-ncpo"
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
-                </a4j:commandLink>
-                <a4j:commandLink value="Documentos" action="#{Supervisor$Contrato.actualizarPanel}" render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
-                                 execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
-                    <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
-                </a4j:commandLink>
+    <h:form>
+        <h:panelGroup layout="block" styleClass="ikont-hpg-contentmenu">
+            <h:panelGrid id="menu-nuevo-convenio" styleClass="ikont-hpg-menu-nuevo-convenio"  columns="5"   cellspacing="15" cellpadding="0" rowClasses="panelcenter">
+                <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
+                    <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
+                    <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
+                        <h:commandLink styleClass="ikont-hcl-menu-icon-inicio"  />
+                        <h:commandLink styleClass="ikont-hcl-menu-inicio" value="Inicio"   />    
+                        <h:commandLink styleClass="ikont-hcl-menu-rigth-inicio"  />    
+                    </h:panelGrid>
+                </h:panelGrid>  
+                <h:panelGroup layout="block" >                     
+                    <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="ikont-acl-datosbasicos img-button-ncpo" render="frmpanelgeneral"
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
+                    </a4j:commandLink>
+                    <a4j:commandLink value="Datos básicos" action="#{Supervisor$Contrato.actualizarPanel}"  styleClass="img-button-ncpo ikont-menu-detalle-text" render="frmpanelgeneral"
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="1"/>
+                    </a4j:commandLink>
+                </h:panelGroup>
+                <h:panelGroup layout="block" >
+                    <a4j:commandLink action="#{Supervisor$Contrato.planOperativo()}"  styleClass="ikont-acl-planoperativo img-button-ncpo " 
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    </a4j:commandLink>
+                    <a4j:commandLink value="Plan operativo" action="#{Supervisor$Contrato.planOperativo()}"  styleClass="img-button-ncpo ikont-menu-detalle-text" 
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                    </a4j:commandLink>
+                </h:panelGroup>
+                <h:panelGroup layout="block" >
+                    <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="ikont-acl-polizas img-button-ncpo"
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
+                    </a4j:commandLink>
+                    <a4j:commandLink value="Pólizas" action="#{Supervisor$Contrato.actualizarPanel}"  render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="3"/>
+                    </a4j:commandLink>
+                </h:panelGroup>                    
+                <h:panelGroup layout="block" >
+                    <a4j:commandLink action="#{Supervisor$Contrato.actualizarPanel}" render="frmpanelgeneral" styleClass="ikont-acl-documentos img-button-ncpo"
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
+                    </a4j:commandLink>
+                    <a4j:commandLink value="Documentos" action="#{Supervisor$Contrato.actualizarPanel}" render="frmpanelgeneral" styleClass="img-button-ncpo ikont-menu-detalle-text" 
+                                     execute="hit-nro-convenio,id-fechasuscripcion,hit-valorest-convenio,hit-nom-convenio,id-datefechafin,hit-obj-convenio,id-datefechaini,select-gerente-convenio">
+                        <a4j:param assignTo="#{Supervisor$Contrato.panelPantalla}" value="5"/>
+                    </a4j:commandLink>
 
-            </h:panelGroup>
-        </h:panelGrid>
-    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGrid>
+        </h:panelGroup>    
+    </h:form>
+
     <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var $j = jQuery.noConflict();

@@ -17,7 +17,7 @@
         <ui:include src="/facelets/menu_gestion.xhtml"/>
     </ui:define>
 
-     <ui:define name="menu_lateral">
+    <ui:define name="menu_lateral">
         <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
             <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
@@ -26,142 +26,109 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
-        <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-    </ui:define>
     <ui:define name="body">
-        <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
-            <tr>
-                <td class="templatetablacontent verticalalingtop">
-                    <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
-                        <tr>
-                            <td>
-                                <div id="header_content">
-                                    <div class="ubicacion">
-                                        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-ingresarnuevoproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.veravanceyfinalizar}"/>
-                                    </div>
-                                </div>
+        <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+            <h:form id="formFinProy">
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel  id="panelFinproy" >
+                    <f:facet name="header" >
+                        <h:panelGroup >
+                            <h:outputText  styleClass="ikont-hot-veravanceyfinalizar"   value="#{var.veravanceyfinalizar}" />
+                        </h:panelGroup>
+                    </f:facet>
+                    <center>
+                        <rich:collapsiblePanel  header="#{var.titulofinalizarproyecto}" switchType="client" >
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td valign="top" height="35" >
-                                <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
-                                    <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
-                                        <tr>
-                                            <td>
-                                                <h:form id="formFinProy">
+                            <h:panelGrid id="panelFinalizar" >
+                                <h:outputText  styleClass="ikont-hot-titulofinalizarproyecto"   value="#{var.titulofinalizarproyecto}"/>
+                                <h:panelGrid columns="2" >
+                                    <h:outputText  styleClass="ikont-hot-tippry"   value="#{var.tipificaciondelproyecto}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
 
-                                                    <rich:panel  id="panelFinproy" >
-                                                        <f:facet name="header" >
-                                                            <h:panelGroup >
-                                                                <h:outputText  styleClass="ikont-hot-veravanceyfinalizar"   value="#{var.veravanceyfinalizar}" />
-                                                            </h:panelGroup>
-                                                        </f:facet>
-                                                        <center>
-                                                            <rich:collapsiblePanel  header="#{var.titulofinalizarproyecto}" switchType="client" >
+                                    <h:outputText  styleClass="ikont-hot-datosbasicos"   value="#{var.datosbasicos}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                    <h:graphicImage  styleClass="ikont--hgi-bt_ok1"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
 
-                                                                <h:panelGrid id="panelFinalizar" >
-                                                                    <h:outputText  styleClass="ikont-hot-titulofinalizarproyecto"   value="#{var.titulofinalizarproyecto}"/>
-                                                                    <h:panelGrid columns="2" >
-                                                                        <h:outputText  styleClass="ikont-hot-tippry"   value="#{var.tipificaciondelproyecto}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.tipificacion}"/>
+                                    <h:outputText  styleClass="ikont-hot-ubicaciondelproyecto"   value="#{var.ubicaciondelproyecto}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror2"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok2"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-datosbasicos"   value="#{var.datosbasicos}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror1"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
-                                                                        <h:graphicImage  styleClass="ikont--hgi-bt_ok1"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.datosbasicos}"/>
+                                    <h:outputText  styleClass="ikont-hot-cronogramavalidacion"   value="#{var.cronogramavalidacion}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror3"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok3"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-ubicaciondelproyecto"   value="#{var.ubicaciondelproyecto}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror2"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok2"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.ubicacion}"/>
+                                    <h:outputText  styleClass="ikont-hot-totalobra "   value="#{var.totalobra}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror4"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok4"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-cronogramavalidacion"   value="#{var.cronogramavalidacion}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror3"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok3"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.cronograma}"/>
+                                    <h:outputText  styleClass="ikont-hot-imagenesproyecto"   value="#{var.imagenesproyecto}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror5"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok5"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-totalobra "   value="#{var.totalobra}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror4"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok4"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.presupuesto}"/>
+                                    <h:outputText  styleClass="ikont-hot-informacioncontractual"   value="#{var.informacioncontractual}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror6"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.contratos}"/>
+                                    <h:graphicImage  styleClass="ikont-hgi-bt_ok6"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.contratos}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-imagenesproyecto"   value="#{var.imagenesproyecto}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror5"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok5"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.imagenes}"/>
-
-                                                                        <h:outputText  styleClass="ikont-hot-informacioncontractual"   value="#{var.informacioncontractual}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror6"    url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.contratos}"/>
-                                                                        <h:graphicImage  styleClass="ikont-hgi-bt_ok6"    url="/resources/imgs/bt_ok.png" rendered="#{Supervisor$IngresarNuevaObra.validacion.contratos}"/>
-
-                                                                    </h:panelGrid>
-                                                                </h:panelGrid>
-                                                                <h:panelGrid >
-                                                                    <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-msgerror6"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
-                                                                        <h:outputText  styleClass="ikont-hot-compleinfopry"   value="#{var.completarinformacionproyecto}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
-
-
-                                                                    </h:panelGroup>
-                                                                    <h:panelGroup styleClass="ikont-hpg-volveragenerarFin"  >
-                                                                        <center>
-                                                                        <a4j:commandButton id="btVolveragenerarFin"  value="#{var.volver}" immediate="true"
-                                                                                           action="datosAsociarContrato" />
-                                                                        <h:commandButton id="btCancelarNuevaObraFin"  value="#{var.cancelar}"
-                                                                                         action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                                        </h:commandButton>
-                                                                        <a4j:commandButton id="Finalizar" value="#{var.finalizar}"
-                                                                                           render="layoutGuardar, panelFinproy"
-                                                                                           rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0 and Supervisor$IngresarNuevaObra.validacion.total}"
-                                                                                           action="#{Supervisor$IngresarNuevaObra.finalizar_action}" execute="@this" immediate="true"
-                                                                                           oncomplete="#{rich:component('panelConfirmaGuardar')}.show();">
-                                                                            <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
-                                                                        </a4j:commandButton>
-
-                                                                        <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}">
-
-                                                                            <h:commandButton id="BTaceptarDoc" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
-                                                                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}"   >
-
-                                                                            </h:commandButton>
-                                                                           
-                                                                        </h:panelGroup>
-                                                                         </center>
-                                                                    </h:panelGroup>
-                                                                </h:panelGrid>
-                                                                <a4j:outputPanel id="panelErrorFin">
-                                                                    <rich:messages id="messagesFin" globalOnly="true"
-                                                                                   styleClass="ikont-"   ajaxRendered="true"
-                                                                                   >
-                                                                        <f:facet name="infoMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msginfo.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="warnMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="errorMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="fatalMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
-                                                                        </f:facet>
-                                                                    </rich:messages>
-
-                                                                </a4j:outputPanel>
-                                                            </rich:collapsiblePanel>
-                                                        </center>
-                                                    </rich:panel>
-                                                </h:form>       
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </h:panelGrid>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>                       
-        </table>
+                            </h:panelGrid>
+                            <h:panelGrid >
+                                <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
+                                    <h:graphicImage  styleClass="ikont-hgi-msgerror6"   url="/resources/imgs/msgerror.png" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
+                                    <h:outputText  styleClass="ikont-hot-compleinfopry"   value="#{var.completarinformacionproyecto}" rendered="#{!Supervisor$IngresarNuevaObra.validacion.total}"/>
 
 
+                                </h:panelGroup>
+                                <h:panelGroup styleClass="ikont-hpg-volveragenerarFin"  >
+                                    <center>
+                                        <a4j:commandButton id="btVolveragenerarFin"  value="#{var.volver}" immediate="true"
+                                                           action="datosAsociarContrato" />
+                                        <h:commandButton id="btCancelarNuevaObraFin"  value="#{var.cancelar}"
+                                                         action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                        </h:commandButton>
+                                        <a4j:commandButton id="Finalizar" value="#{var.finalizar}"
+                                                           render="layoutGuardar, panelFinproy"
+                                                           rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0 and Supervisor$IngresarNuevaObra.validacion.total}"
+                                                           action="#{Supervisor$IngresarNuevaObra.finalizar_action}" execute="@this" immediate="true"
+                                                           oncomplete="#{rich:component('panelConfirmaGuardar')}.show();">
+                                            <a4j:param value="1" assignTo="#{HomeGestion.filtro.intvista}"/>
+                                        </a4j:commandButton>
+
+                                        <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}">
+
+                                            <h:commandButton id="BTaceptarDoc" value="#{var.aceptar}" rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==1}"
+                                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}"   >
+
+                                            </h:commandButton>
+
+                                        </h:panelGroup>
+                                    </center>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                            <a4j:outputPanel id="panelErrorFin">
+                                <rich:messages id="messagesFin" globalOnly="true"
+                                               styleClass="ikont-"   ajaxRendered="true"
+                                               >
+                                    <f:facet name="infoMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msginfo.png" />
+                                    </f:facet>
+                                    <f:facet name="warnMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                    </f:facet>
+                                    <f:facet name="errorMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"    url="/resources/imgs/msgerror.png" />
+                                    </f:facet>
+                                    <f:facet name="fatalMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"     url="/resources/imgs/msgerror.png" />
+                                    </f:facet>
+                                </rich:messages>
+
+                            </a4j:outputPanel>
+                        </rich:collapsiblePanel>
+                    </center>
+                </rich:panel>
+            </h:form>     
+        </h:panelGrid>
         <ui:include src="../NuevoProyecto/modal/panelConfirmaGuardar.xhtml"/>
     </ui:define>
 </ui:composition>
