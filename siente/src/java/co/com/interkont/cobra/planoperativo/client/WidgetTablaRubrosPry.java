@@ -24,6 +24,7 @@ import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
@@ -124,16 +125,17 @@ public class WidgetTablaRubrosPry implements IsWidget {
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
-                    service.setLog("entre editar", null);
-                    if (!estaEncontrato(store.get(row))) {
-                        service.setLog("entre editar 1", null);
+                     if (!store.get(row).isEstaEnFuenteRecurso()) {
                         if (store.get(row).getTipoaporte() == 0) {
                             obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                             obraDto.setValorDisponible(obraDto.getValor());
                         }
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                         getStore().remove(store.get(row));
-                    }
+                    }else{
+                         AlertMessageBox alerta=new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato");
+                         alerta.show();
+                     }
 
                 }
             }
