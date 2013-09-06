@@ -106,8 +106,6 @@
                                 <h:inputText styleClass="ikont-hit-numvalorhist"   value="#{Supervisor$ModificarProyecto.historicoobra.numvalorhist}" size="15" onchange="numvalorhistOnchange();">
                                     <f:convertNumber pattern="###,###" maxFractionDigits="6"/>
                                 </h:inputText>
-                                <interkont:spacer height="15px" />
-                                <interkont:spacer height="15px" />
                                 <a4j:commandLink styleClass="ikont-acl-cambioprecios "   onclick="if (!cambioPreciosOnClick())
                                             return false;" rendered="#{!Supervisor$ModificarProyecto.obra.booleantienehijos}"/>
                                 <a4j:commandLink styleClass="ikont-acl-adicionactividades "   onclick="if (!adicionActividadesOnClick())
