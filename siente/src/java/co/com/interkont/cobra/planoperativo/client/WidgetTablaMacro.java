@@ -125,6 +125,7 @@ public class WidgetTablaMacro implements IsWidget {
             ActividadobraDTO actividadobraDTO = (ActividadobraDTO) it.next();            
             if (actividadobraDTO.getTipoActividad() == 7) {
                 lstMacroActividades.add(actividadobraDTO);
+                
             }
         }
         return lstMacroActividades;
