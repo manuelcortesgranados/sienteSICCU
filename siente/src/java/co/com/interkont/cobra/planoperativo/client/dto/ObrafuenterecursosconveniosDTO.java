@@ -29,6 +29,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     private String eliminar;
     private String descripcionaporte;
     private String nombreEntidadTipo;
+    private boolean estaEnFuenteRecurso;
 
     public ObrafuenterecursosconveniosDTO() {
     }
@@ -347,5 +348,19 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
      */
     public void setNombreEntidadTipo(String nombreEntidadTipo) {
         this.nombreEntidadTipo = nombreEntidadTipo;
+    }
+
+    /**
+     * @return the estaEnFuenteRecurso
+     */
+    public boolean isEstaEnFuenteRecurso() {
+        return estaEnFuenteRecurso;
+    }
+
+    /**
+     * @param estaEnFuenteRecurso the estaEnFuenteRecurso to set
+     */
+    public void setEstaEnFuenteRecurso(boolean estaEnFuenteRecurso) {
+        this.estaEnFuenteRecurso = estaEnFuenteRecurso;
     }
 }
