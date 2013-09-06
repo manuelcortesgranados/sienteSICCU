@@ -10,315 +10,279 @@
                 xmlns:rich="http://richfaces.org/rich"
                 xmlns:fn="http://java.sun.com/jsp/jstl/functions"
                 >
-    <ui:composition template="/facelets/template_main.xhtml">
 
-        <ui:define name="head">
-            <title>Nuevo #{var.proyecto} - Supervisor</title>
-            <h:outputScript  name="script_supervisor.js" library="js"/>
-            <h:outputScript  name="validarletra.js" library="js"/>
-        </ui:define>
+    <ui:define name="head">
+        <title>Nuevo #{var.proyecto} - Supervisor</title>
+        <h:outputScript  name="script_supervisor.js" library="js"/>
+        <h:outputScript  name="validarletra.js" library="js"/>
+    </ui:define>
 
-        <ui:define name="menu">
-            <ui:include src="./../facelets/menu_gestion.xhtml"/>
-        </ui:define>
+    <ui:define name="menu">
+        <ui:include src="./../facelets/menu_gestion.xhtml"/>
+    </ui:define>
 
-        <ui:define name="menu_lateral">
-            <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
-                <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
-                <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
-            </h:panelGroup>
-            <h:panelGroup rendered="#{var.permisonuevodiseno}">
-                <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
-            </h:panelGroup>
-        </ui:define>
-        <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
-            
-        </ui:define>
-        <ui:define name="body">
+    <ui:define name="menu_lateral">
+        <h:panelGroup  rendered="#{!var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_gestion.xhtml"/>
+            <ui:include src="/facelets/menu_lateral_proyecto.xhtml"/> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{var.permisonuevodiseno}">
+            <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
+        </h:panelGroup>
+    </ui:define>
+    
+    <ui:define name="body">
 
-            <h:form id="form_datos_basicos"  >
-                <a4j:jsFunction oncomplete="#{rich:component('modalAvisoSupervisor')}.show();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
-                                id="editdatosbasicos" name="showModal" action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction> 
-            </h:form>  
-            <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
-                <tr>
-                    <td class="templatetablacontent verticalalingtop">
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
-                            <tr>
-                                <td>
-                                    <div id="header_content">
-                                        <div class="ubicacion">
-                                            <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-datosbasicos"   value="#{var.ingresarnuevoproyecto} - #{var.datosbasicos}"/>
-                                        </div>
-                                    </div>
+        <h:form id="form_datos_basicos"  >
+            <a4j:jsFunction oncomplete="#{rich:component('modalAvisoSupervisor')}.show();" rendered="#{SessionBeanCobra.vermensajeinterventor and var.varmodalsupervisor}"
+                            id="editdatosbasicos" name="showModal" action="#{SessionBeanCobra.visualizoModal}" ></a4j:jsFunction> 
+        </h:form>  
+        <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+            <h:form>
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel id="mp-proyectosPadres">
+                    <f:facet name="header" >
+                        <h:panelGroup >
+                            <h:outputText  styleClass="ikont-hot-pasosIniciales"  value="#{var.pasosIniciales}"   />
+                        </h:panelGroup>
+                    </f:facet>
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" height="35" >
-                                    <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo" id="pgdatosbasicos"   >
-                                        <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
-                                            <tr>
-                                                <td>
-                                                    <h:form id="formdatosbasico">
-                                                        <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-                                                        <rich:panel id="mp-proyectosPadres">
-                                                            <f:facet name="header" >
-                                                                <h:panelGroup >
-                                                                    <h:outputText  styleClass="ikont-hot-pasosIniciales"  value="#{var.pasosIniciales}"   />
-                                                                </h:panelGroup>
-                                                            </f:facet>
-                                                             
+                    <rich:collapsiblePanel switchType="client" header="3. #{var.datosbasicos}"  >
+                        <h:outputText  styleClass="ikont-hot-intcodigoobra"    value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
+                        <h:panelGrid  cellspacing="13" id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
 
-                                                            <rich:collapsiblePanel switchType="client" header="3. #{var.datosbasicos}"  >
-                                                                <h:outputText  styleClass="ikont-hot-intcodigoobra"    value="(#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra})" rendered="#{Supervisor$IngresarNuevaObra.obranueva.intcodigoobra!=0}"/>
-                                                                <h:panelGrid  cellspacing="13" id="layoutPrincipalTab" columnClasses="aiu" columns="2" >
+                            <h:panelGroup>
+                                <h:outputLabel  styleClass="ikont-hol-nomabrev"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>
+                                <rich:message for="txtNombreAbrev" />
+                            </h:panelGroup>
 
-                                                                    <h:panelGroup>
-                                                                        <h:outputLabel  styleClass="ikont-hol-nomabrev"   id="lblnomabrev"  value="#{var.nombreabre}:" for="txtNombreAbrev"/>
-                                                                        <rich:message for="txtNombreAbrev" />
-                                                                    </h:panelGroup>
+                            <h:inputTextarea  styleClass="ikont-textarea-datosbasicos" id="txtNombreAbrev" value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}" 
+                                              cols="60" rows="2" >
 
-                                                                    <h:inputTextarea  styleClass="ikont-textarea-datosbasicos" id="txtNombreAbrev" value="#{Supervisor$IngresarNuevaObra.obranueva.strnombreobra}" 
-                                                                                      cols="60" rows="2" >
+                            </h:inputTextarea>
+                            <h:panelGroup>
+                                <h:outputLabel  styleClass="ikont-hol-FecIni"   id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni"/>
+                                <rich:message for="fecIni" />
+                            </h:panelGroup>
 
-                                                                    </h:inputTextarea>
-                                                                    <h:panelGroup>
-                                                                        <h:outputLabel  styleClass="ikont-hol-FecIni"   id="lblFecIni"  value="#{var.fechaactainicio}" for="fecIni"/>
-                                                                        <rich:message for="fecIni" />
-                                                                    </h:panelGroup>
+                            <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
+                                <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
+                            </rich:calendar>
 
-                                                                    <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" direction="topRight" id="fecIni" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefeciniobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}" >
-                                                                        <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" event="change" render="layoutPeriodo" />
-                                                                    </rich:calendar>
+                            <h:outputLabel  styleClass="ikont-hol-FecFin"   id="lblFecFin"  value="#{var.fechaterminacion}"/>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-FecFin"   id="lblFecFin"  value="#{var.fechaterminacion}"/>
+                            <h:panelGroup id="layoutFechaFin" >
+                                <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
+                                    <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
+                                </rich:calendar>
+                            </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-periodomedida"    value="#{var.periodomedida}"/>
+                            <h:panelGroup id="layoutPeriodoMedi2">
+                                <h:selectOneMenu id="comboperiodomedida" value="#{Supervisor$IngresarNuevaObra.obranueva.periodomedida.intidperiomedida}"  >
+                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoMedida}" />
+                                    <a4j:ajax event="change" render="layoutPeriodo, layoutPeriodoMedi2 " />
+                                </h:selectOneMenu>
+                            </h:panelGroup>
 
-                                                                    <h:panelGroup id="layoutFechaFin" >
-                                                                        <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="fecFin" inputSize="10" value="#{Supervisor$IngresarNuevaObra.obranueva.datefecfinobra}" disabled="#{Supervisor$IngresarNuevaObra.cargadorCronograma.numArchivos>0}"  >
-                                                                            <a4j:ajax listener="#{Supervisor$IngresarNuevaObra.fechaCambio}" event="change" render="layoutPeriodo"/>
-                                                                        </rich:calendar>
-                                                                    </h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-periodomedida"    value="#{var.periodomedida}"/>
-                                                                    <h:panelGroup id="layoutPeriodoMedi2">
-                                                                        <h:selectOneMenu id="comboperiodomedida" value="#{Supervisor$IngresarNuevaObra.obranueva.periodomedida.intidperiomedida}"  >
-                                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.periodoMedida}" />
-                                                                            <a4j:ajax event="change" render="layoutPeriodo, layoutPeriodoMedi2 " />
-                                                                        </h:selectOneMenu>
-                                                                    </h:panelGroup>
+                            <h:panelGroup>
+                                <h:outputLabel  styleClass="ikont-hol-plazodias"   id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
+                                <rich:message for="plazodias" />
+                            </h:panelGroup>
 
-                                                                    <h:panelGroup>
-                                                                        <h:outputLabel  styleClass="ikont-hol-plazodias"   id="lblPlazodias"  value="#{var.plazodias}" for="plazodias"/>
-                                                                        <rich:message for="plazodias" />
-                                                                    </h:panelGroup>
+                            <h:panelGroup id="layoutPeriodo">
+                                <h:inputText  size="15" id="plazodias" value="#{Supervisor$IngresarNuevaObra.obranueva.intplazoobra}" disabled="true">
+                                    <f:validateLongRange minimum="0"/>
+                                    <f:validateLength maximum="6" minimum="1"/>
+                                    <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" render="layoutPeriodo"/>
+                                </h:inputText>
+                            </h:panelGroup>
 
-                                                                    <h:panelGroup id="layoutPeriodo">
-                                                                        <h:inputText  size="15" id="plazodias" value="#{Supervisor$IngresarNuevaObra.obranueva.intplazoobra}" disabled="true">
-                                                                            <f:validateLongRange minimum="0"/>
-                                                                            <f:validateLength maximum="6" minimum="1"/>
-                                                                            <a4j:ajax event="change" listener="#{Supervisor$IngresarNuevaObra.feciniCambio}" render="layoutPeriodo"/>
-                                                                        </h:inputText>
-                                                                    </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-entidadContratantec"   id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
+                            <h:panelGroup id="layoutenco">
+                                <h:selectOneMenu   id="cmbEntidadContratantec" 
+                                                   label="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
+                                                   disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
+                                    <f:selectItems value="#{Supervisor$IngresarNuevaObra.terceroOption}" />
+                                    <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" render="gpentidadministerios">
+                                    </a4j:ajax>
+                                </h:selectOneMenu>
+                            </h:panelGroup>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-entidadContratantec"   id="lblEntidadContratantec"  value="#{var.entidadcontratante}"/>
-                                                                    <h:panelGroup id="layoutenco">
-                                                                        <h:selectOneMenu   id="cmbEntidadContratantec" 
-                                                                                           label="Ingrese Entidad" value="#{Supervisor$IngresarNuevaObra.obranueva.tercero.strnombrecompleto}"
-                                                                                           disabled="#{Supervisor$IngresarNuevaObra.validacion.contratos or Supervisor$IngresarNuevaObra.desdeconvenio or Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}">
-                                                                            <f:selectItems value="#{Supervisor$IngresarNuevaObra.terceroOption}" />
-                                                                            <a4j:ajax event="valueChange" listener="#{Supervisor$IngresarNuevaObra.comboEntidadesObraguardar}" render="gpentidadministerios">
-                                                                            </a4j:ajax>
-                                                                        </h:selectOneMenu>
-                                                                    </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-interventor"   id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
+                            <h:inputText  id="txtInterventor" value="#{Supervisor$IngresarNuevaObra.obranueva.strinterventor}" disabled="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}"
+                                          maxlength="100" size="40"/>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-interventor"   id="lblinterventor"  value="#{var.houtsupervisor}" for="txtInterventor"/>
-                                                                    <h:inputText  id="txtInterventor" value="#{Supervisor$IngresarNuevaObra.obranueva.strinterventor}" disabled="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro!=null}"
-                                                                                  maxlength="100" size="40"/>
+                            <h:outputLabel  styleClass="ikont-hol-solicitante"   id="lblsolicitante"  value="#{var.solicitante}:" for="txtSolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
+                            <h:panelGroup id="gpsolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
+                                <h:outputText  styleClass="ikont- hot-"   id="txtSolicitante" value="#{Supervisor$IngresarNuevaObra.solicitante.strnombrecompleto}"/>
+                            </h:panelGroup>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-solicitante"   id="lblsolicitante"  value="#{var.solicitante}:" for="txtSolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
-                                                                    <h:panelGroup id="gpsolicitante" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
-                                                                        <h:outputText  styleClass="ikont- hot-"   id="txtSolicitante" value="#{Supervisor$IngresarNuevaObra.solicitante.strnombrecompleto}"/>
-                                                                    </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-cargo"   id="lblcargo"  value="#{var.cargo}" for="txtCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
+                            <h:panelGroup id="gpsolicitanteCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
+                                <h:outputText  styleClass="ikont-hot-cargo"    id="txtCargo" value="#{Supervisor$IngresarNuevaObra.solicitante.cargo.strdescripcion}"/>
+                            </h:panelGroup>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-cargo"   id="lblcargo"  value="#{var.cargo}" for="txtCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}"/>
-                                                                    <h:panelGroup id="gpsolicitanteCargo" rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null || Supervisor$IngresarNuevaObra.obranueva.solicitud_obra!=null}">
-                                                                        <h:outputText  styleClass="ikont-hot-cargo"    id="txtCargo" value="#{Supervisor$IngresarNuevaObra.solicitante.cargo.strdescripcion}"/>
-                                                                    </h:panelGroup>
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" id="gpentidadministerios" >
+                            <h:outputLabel  styleClass="ikont-hol-ruta"   id="lblruta"  value="#{var.seleccionruta}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}" />
+                            <h:panelGroup id="pginvias" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}">
+                                <h:inputText  id="txtruta" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.ruta.strcodigotramo} #{Supervisor$IngresarNuevaObra.obranueva.ruta.strnombretramo}" >
+                                </h:inputText>
+                                <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  
+                                                   render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"
+                                                   oncomplete="#{rich:component('mp-listado-rutas')}.show();"                                                           
+                                                   >
+                                </a4j:commandButton>
+                                <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
+                                </a4j:commandButton>
+                            </h:panelGroup>
+                            <h:outputLabel  styleClass="ikont-hol-sede"   id="lbsede"  value="#{var.seleccionar} Sede:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}"/>
+                            <h:panelGroup id="gpEducacion" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}">
 
-                                                                </h:panelGrid>
-                                                                <h:panelGrid columns="2" id="gpentidadministerios" >
-                                                                    <h:outputLabel  styleClass="ikont-hol-ruta"   id="lblruta"  value="#{var.seleccionruta}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}" />
-                                                                    <h:panelGroup id="pginvias" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==2}">
-                                                                        <h:inputText  id="txtruta" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.ruta.strcodigotramo} #{Supervisor$IngresarNuevaObra.obranueva.ruta.strnombretramo}" >
-                                                                        </h:inputText>
-                                                                        <a4j:commandButton id="btnBuscarRuta" value="#{var.asociar}" action="#{Supervisor$EntidadConvenio.llenarRuta}"  
-                                                                                           render="mp-listado-rutas,tabla-listado-ruta,layoutPrincipalTab,gpTotalRuta" immediate="true"
-                                                                                           oncomplete="#{rich:component('mp-listado-rutas')}.show();"                                                           
-                                                                                           >
-                                                                        </a4j:commandButton>
-                                                                        <a4j:commandButton id="btndesasociarrRuta" value="#{var.desasociar}" action="#{Supervisor$IngresarNuevaObra.desasociarRuta}" render="pginvias,layoutPrincipalTab,mp-proyectosPadres" rendered="#{Supervisor$IngresarNuevaObra.obranueva.ruta!=null}">
-                                                                        </a4j:commandButton>
-                                                                    </h:panelGroup>
-                                                                    <h:outputLabel  styleClass="ikont-hol-sede"   id="lbsede"  value="#{var.seleccionar} Sede:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}"/>
-                                                                    <h:panelGroup id="gpEducacion" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1}">
+                                <h:inputText  id="txtsede" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa.strnombre}">
+                                </h:inputText>
 
-                                                                        <h:inputText  id="txtsede" size="25" maxlength="250" disabled="true" value="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa.strnombre}">
-                                                                        </h:inputText>
+                                <h:panelGroup>
+                                    <a4j:commandButton id="btnBus" value="#{var.buscar} Sede Educativa" action="#{Supervisor$EntidadConvenio.llenarlistaSedes}"
+                                                       render="mp-listado-sedeseducativas,tablasedeseducativas" immediate="true"
+                                                       oncomplete="#{rich:component('mp-listado-sedeseducativas')}.show();">
+                                        <a4j:ajax event="complete"   oncomplete="#{rich:component(mp-listado-sedeseducativa)}.show();" render="tablasedeseducativas"/>
+                                    </a4j:commandButton>
+                                    <a4j:commandButton id="btndesasociarrSede" value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarSede}" render="gpEducacion,layoutPrincipalTab,mp-proyectosPadres"
+                                                       rendered="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa!=null}" >
+                                    </a4j:commandButton>
+                                </h:panelGroup>
+                            </h:panelGroup>
 
-                                                                        <h:panelGroup>
-                                                                            <a4j:commandButton id="btnBus" value="#{var.buscar} Sede Educativa" action="#{Supervisor$EntidadConvenio.llenarlistaSedes}"
-                                                                                               render="mp-listado-sedeseducativas,tablasedeseducativas" immediate="true"
-                                                                                               oncomplete="#{rich:component('mp-listado-sedeseducativas')}.show();">
-                                                                                <a4j:ajax event="complete"   oncomplete="#{rich:component(mp-listado-sedeseducativa)}.show();" render="tablasedeseducativas"/>
-                                                                            </a4j:commandButton>
-                                                                            <a4j:commandButton id="btndesasociarrSede" value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarSede}" render="gpEducacion,layoutPrincipalTab,mp-proyectosPadres"
-                                                                                               rendered="#{Supervisor$IngresarNuevaObra.obranueva.sedeeducativa!=null}" >
-                                                                            </a4j:commandButton>
-                                                                        </h:panelGroup>
-                                                                    </h:panelGroup>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1">
+                            <h:outputLabel  styleClass="ikont-hol-objetoObra"   id="lblObjetoObra"  value="#{var.objetodeobra}" />
+                            <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObjetoObra" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strobjetoobra}" disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
+                            <h:outputLabel  styleClass="ikont-hol-logroObra"   id="lblLogroObra"  value="#{var.logroProyecto}" />
+                            <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtLogroProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strlogros}"/>
+                            <h:outputLabel  styleClass="ikont-hol-obseroObra"   id="lblObseroObra"  value="#{var.observacionesProyecto}" />
+                            <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObserProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strconclucompro}"/>
+                        </h:panelGrid>
+                        <h:panelGroup layout="block">
+                            <h:panelGrid  id="valores" columns="3" >
 
-                                                                </h:panelGrid>
-                                                                <h:panelGrid columns="1">
-                                                                    <h:outputLabel  styleClass="ikont-hol-objetoObra"   id="lblObjetoObra"  value="#{var.objetodeobra}" />
-                                                                    <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObjetoObra" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strobjetoobra}" disabled="#{Supervisor$IngresarNuevaObra.objeto}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-logroObra"   id="lblLogroObra"  value="#{var.logroProyecto}" />
-                                                                    <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtLogroProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strlogros}"/>
-                                                                    <h:outputLabel  styleClass="ikont-hol-obseroObra"   id="lblObseroObra"  value="#{var.observacionesProyecto}" />
-                                                                    <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObserProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strconclucompro}"/>
-                                                                </h:panelGrid>
-                                                                <h:panelGroup layout="block">
-                                                                    <h:panelGrid  id="valores" columns="3" >
+                                <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
+                                <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
+                                <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
+                                <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" />
+                                <rich:tooltip value="#{var.numbeneficiarios}" followMouse="true" direction="topRight" horizontalOffset="5"
+                                              verticalOffset="5" layout="block"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
-                                                                        <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
-                                                                        <h:outputText  styleClass="ikont-hot-otrosactores"   value="#{var.otrosactores}" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}" />
-                                                                        <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numBeneficiarios" value="#{Supervisor$IngresarNuevaObra.obranueva.numhabbeneficiados}" minValue="0" maxValue="50000000" inputSize="20" />
-                                                                        <rich:tooltip value="#{var.numbeneficiarios}" followMouse="true" direction="topRight" horizontalOffset="5"
-                                                                                      verticalOffset="5" layout="block"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20" />
+                                <rich:tooltip value="#{var.numempleosdirectos}"  followMouse="true" direction="topRight" horizontalOffset="5"
+                                              verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <rich:tooltip value="#{var.institucionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
+                                              verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
 
-                                                                        <h:outputText  styleClass="ikont-hot-numempleosdirectos"   value="#{var.numempleosdirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                                                        <h:outputText  styleClass="ikont-hot-institucionesfortalecidas"   value="#{var.institucionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
-                                                                        <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos"  id="numEmpleosDirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempdirectos}" minValue="0" maxValue="50000000" inputSize="20" />
-                                                                        <rich:tooltip value="#{var.numempleosdirectos}"  followMouse="true" direction="topRight" horizontalOffset="5"
-                                                                                      verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                                                        <rich:tooltip value="#{var.institucionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
-                                                                                      verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
+                                <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
+                                                         maxValue="50000000" inputSize="20" />
 
-                                                                        <h:outputText  styleClass="ikont-hot-numempleosindirectos"   value="#{var.numempleosindirectos}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                                                        <h:outputText  styleClass="ikont-hot-organizacionesfortalecidas"   value="#{var.organizacionesfortalecidas}:" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>
-                                                                        <rich:inputNumberSpinner styleClass="input-spinner-datosbasicos" id="numEmpleosIndirectos" value="#{Supervisor$IngresarNuevaObra.obranueva.numempindirectos}" minValue="0" 
-                                                                                                 maxValue="50000000" inputSize="20" />
-
-                                                                        <rich:tooltip value="#{var.numempleosindirectos}" followMouse="true" direction="topRight" horizontalOffset="5"
-                                                                                      verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
-                                                                        <rich:tooltip value="#{var.organizacionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
-                                                                                      verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
+                                <rich:tooltip value="#{var.numempleosindirectos}" followMouse="true" direction="topRight" horizontalOffset="5"
+                                              verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"/>
+                                <rich:tooltip value="#{var.organizacionesfortalecidas}" followMouse="true" direction="topRight" horizontalOffset="5"
+                                              verticalOffset="5" layout="block" rendered="#{Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra==59}"/>                                        
 
 
-                                                                    </h:panelGrid>
-                                                                </h:panelGroup>
-                                                                <h:panelGrid id="valores2" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
-                                                                    <h:outputLabel  styleClass="ikont-hol-numvaldeclarado"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
-                                                                    </h:outputLabel>
-                                                                    <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
-                                                                                 size="20"  maxlength="20"
-                                                                                 onkeypress="return validar(event);">
-                                                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGrid id="valores2" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
+                            <h:outputLabel  styleClass="ikont-hol-numvaldeclarado"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
+                            </h:outputLabel>
+                            <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
+                                         size="20"  maxlength="20"
+                                         onkeypress="return validar(event);">
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
 
-                                                                    </h:inputText>
+                            </h:inputText>
 
 
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}" >
-                                                                    </h:outputLabel>
-                                                                    <h:panelGrid columns="2">
-                                                                        %
-                                                                        <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
-                                                                                     size="20"  maxlength="20">                                             
-                                                                            <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
-                                                                        </h:inputText>
-                                                                    </h:panelGrid>
+                            <h:outputLabel  styleClass="ikont-hol-numvalavanfisicodeclarado"   id="lblnumvalavanfisicodeclarado"  value="#{var.numvalavanfisicodeclarado}" >
+                            </h:outputLabel>
+                            <h:panelGrid columns="2">
+                                %
+                                <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfisicodeclarado}"
+                                             size="20"  maxlength="20">                                             
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number" />
+                                </h:inputText>
+                            </h:panelGrid>
 
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
-                                                                    </h:outputLabel>
-                                                                    <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
-                                                                                 size="20"  maxlength="20"
-                                                                                 onkeypress="return validar(event);" >
-                                                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
-                                                                    </h:inputText>
+                            <h:outputLabel  styleClass="ikont-hol-numvalavanfinancierodeclarado"   id="lblnumvalavanfinancierodeclarado"  value="#{var.numvalavanfinancierodeclarado}" >
+                            </h:outputLabel>
+                            <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalavanfinanciaerodeclarado}"
+                                         size="20"  maxlength="20"
+                                         onkeypress="return validar(event);" >
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                            </h:inputText>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-numvalprogramadoejecicion"   id="lblnumvalprogramadoejecicion"   value="#{var.numvalprogejecucion}" >
-                                                                    </h:outputLabel>
-                                                                    <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalprogramejec}"
-                                                                                 size="20"  maxlength="20"
-                                                                                 onkeypress="return validar(event);" >
-                                                                        <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
-                                                                    </h:inputText>
-                                                                </h:panelGrid>
-                                                                <h:panelGrid id="valores3" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
-                                                                    <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
-                                                                    <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
+                            <h:outputLabel  styleClass="ikont-hol-numvalprogramadoejecicion"   id="lblnumvalprogramadoejecicion"   value="#{var.numvalprogejecucion}" >
+                            </h:outputLabel>
+                            <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvalprogramejec}"
+                                         size="20"  maxlength="20"
+                                         onkeypress="return validar(event);" >
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
+                            </h:inputText>
+                        </h:panelGrid>
+                        <h:panelGrid id="valores3" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
+                            <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
+                            <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-numconvenio"   value="Número de Convenio:"/>
-                                                                    <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
+                            <h:outputLabel  styleClass="ikont-hol-numconvenio"   value="Número de Convenio:"/>
+                            <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.strnumcontrato}"/>
 
-                                                                    <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
-                                                                    <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
-                                                                </h:panelGrid>
-
-
-                                                            </rich:collapsiblePanel>
-                                                            <interkont:spacer height="10px" />
-                                                            <h:panelGroup >
-                                                                <center>
-                                                                    <h:commandButton id="btVolverTipif"  value="#{var.volver}"
-                                                                                     action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" />
-
-                                                                    <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.validabasicos}" />
-                                                                    <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
-                                                                                     action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                                    </h:commandButton>
-                                                                </center>
-                                                                <a4j:outputPanel id="panelErrorDB">
-                                                                    <rich:messages id="messagesDB" globalOnly="true"
-                                                                                   styleClass="ikont-rm-messagesdb"   ajaxRendered="true"
-                                                                                   >
-                                                                        <f:facet name="infoMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="warnMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="errorMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                                        </f:facet>
-                                                                        <f:facet name="fatalMarker">
-                                                                            <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                                        </f:facet>
-                                                                    </rich:messages>
-
-                                                                </a4j:outputPanel>
-                                                            </h:panelGroup>
-
-                                                        </rich:panel>
-                                                    </h:form>
-
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </h:panelGrid>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>                       
-            </table>
+                            <h:outputLabel  styleClass="ikont-hol-contratista"   value="Contratista:"/>
+                            <h:outputText  styleClass="ikont-hot-strcontratista"   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.contratista.strnombre}"/>
+                        </h:panelGrid>
 
 
-            <ui:include src="/modal/listadoRuta.xhtml"/>
-            <ui:include src="/modal/modallistadosedes.xhtml"/>
-        </ui:define>
-    </ui:composition>
+                    </rich:collapsiblePanel>
+                    <interkont:spacer height="10px" />
+                    <h:panelGroup >
+                        <center>
+                            <h:commandButton id="btVolverTipif"  value="#{var.volver}"
+                                             action="#{Supervisor$IngresarNuevaObra.volverTipificacion}" />
+
+                            <h:commandButton value="#{var.continuar}"  action="#{Supervisor$IngresarNuevaObra.validabasicos}" />
+                            <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}" immediate="true"
+                                             action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                            </h:commandButton>
+                        </center>
+                        <a4j:outputPanel id="panelErrorDB">
+                            <rich:messages id="messagesDB" globalOnly="true"
+                                           styleClass="ikont-rm-messagesdb"   ajaxRendered="true"
+                                           >
+                                <f:facet name="infoMarker">
+                                    <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                </f:facet>
+                                <f:facet name="warnMarker">
+                                    <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                </f:facet>
+                                <f:facet name="errorMarker">
+                                    <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                                <f:facet name="fatalMarker">
+                                    <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                </f:facet>
+                            </rich:messages>
+
+                        </a4j:outputPanel>
+                    </h:panelGroup>
+
+                </rich:panel>
+            </h:form>
+        </h:panelGrid>
+        <ui:include src="/modal/listadoRuta.xhtml"/>
+        <ui:include src="/modal/modallistadosedes.xhtml"/>
+    </ui:define>
 
 </ui:composition>

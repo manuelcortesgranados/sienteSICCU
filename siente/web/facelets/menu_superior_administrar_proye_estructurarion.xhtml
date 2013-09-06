@@ -8,44 +8,63 @@
     xmlns:a4j="http://richfaces.org/a4j" 
 
     >
-   
-        <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proestructuracion">
-            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proestructuracion"   columns="9"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
-                <h:panelGrid    cellpadding="0" cellspacing="0"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-tipificacion-proestructuracion buttonactive"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
-                                   type="submit">
-                        <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
-                    </h:commandLink>
-        </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" > 
-                    <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-dbasicos-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
-                        <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
-                    </h:commandLink>
-                </h:panelGrid>
-                <h:panelGrid  cellpadding="0" cellspacing="0"> 
-                    <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-ubicar-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
-                    </h:commandLink>
-                </h:panelGrid>   
-                <h:panelGrid    cellpadding="0" cellspacing="0"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-cronograma-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-fotos-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
-                        <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
-                    </h:commandLink>   
-                </h:panelGrid>
-                <h:panelGrid  cellpadding="0" cellspacing="0"> 
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-contrato-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
-                        <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
-                    </h:commandLink>
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0">
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-borrador-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
-                </h:panelGrid>
-                <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
-                    <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-finalizar-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
-                </h:panelGrid>
+    <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proestructuracion">
+        <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proestructuracion"   columns="9"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
+            <h:panelGrid    cellpadding="0" cellspacing="0"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-tipificacion-proestructuracion buttonactive"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"
+                               type="submit">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="0"/>
+                </h:commandLink>
             </h:panelGrid>
-        </h:panelGroup>
+            <h:panelGrid    cellpadding="0" cellspacing="0" > 
+                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-dbasicos-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}"  type="submit">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="1"/>
+                </h:commandLink>
+            </h:panelGrid>
+            <h:panelGrid  cellpadding="0" cellspacing="0"> 
+                <h:commandLink  styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-ubicar-proestructuracion"     action="#{Supervisor$IngresarNuevaObra.pasaraUbicacion}"  >
+                </h:commandLink>
+            </h:panelGrid>   
+            <h:panelGrid    cellpadding="0" cellspacing="0"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-cronograma-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.pasoGenerarCronograma}" type="submit"/>
+            </h:panelGrid>
+            <h:panelGrid    cellpadding="0" cellspacing="0"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-fotos-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="4"/>
+                </h:commandLink>   
+            </h:panelGrid>
+            <h:panelGrid  cellpadding="0" cellspacing="0"> 
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-contrato-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.navegarNuevaObra}" type="submit">
+                    <a4j:param assignTo="#{Supervisor$IngresarNuevaObra.navegacion}" value="5"/>
+                </h:commandLink>
+            </h:panelGrid>
+            <h:panelGrid    cellpadding="0" cellspacing="0">
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-borrador-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.guardadoIntermedio}"  type="submit"/>
+            </h:panelGrid>
+            <h:panelGrid    cellpadding="0" cellspacing="0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btndevolvervig and !Supervisor$AdministrarObraNew.obra.booleantienehijos}">
+                <h:commandLink styleClass="ikont-img-posicion-menu-proestructuracion ikont-posicion-nuevo-finalizar-proestructuracion"    action="#{Supervisor$IngresarNuevaObra.validarFinalizar}" type="submit"/>
+            </h:panelGrid>
+        </h:panelGrid>
+    </h:panelGroup>
+    <script src="/#{var.versioncobra}/resources/gSlider/js/jquery-1.4.4.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var $j = jQuery.noConflict();
+        $j(window).scroll(function() {
+            if (window.pageYOffset >= 120) {
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion:first').css("position", "fixed");
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion:first').css("height", "70px");
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion').each(function() {
+                    $(this).addClass('scroll');
+                });
+            } else {
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion:first').css("position", "relative");
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion:first').css("height", "70px");
+                $('.ikont-hpg-menu-contenido-nuevo-proestructuracion').each(function() {
+                    $(this).removeClass('scroll');
+                });
+            }
+        });
+
+    </script>
 
 </ui:composition>
