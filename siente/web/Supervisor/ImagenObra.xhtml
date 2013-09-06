@@ -19,7 +19,7 @@
     </ui:define>
     <ui:define name="title">
         <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-imagenesproyecto"    value="#{var.imagenesproyecto}"/>            
-        <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>

@@ -18,8 +18,8 @@
         <h:outputScript  name="script_supervisor"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-modificarobra"   value="#{var.modificarobra}"/>
-        <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-modificarobra"   value="#{var.modificarobra}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>
@@ -118,6 +118,7 @@
                             <interkont:spacer height="15px" />
                             <h:outputText  styleClass="ikont-hot-notapaso2modificacion TextoTipificacionModificacion"   value="#{var.notapaso2modificacion}" />
                             <interkont:spacer height="10" />
+                            <br/>
                             <br/>
                             <h:panelGroup styleClass="ikont-hpg-accionespaso2"  >
                                 <a4j:commandLink  action="#{Supervisor$ModificarProyecto.btAnteriorPaso2Action}" render="pgPasos, messages"  styleClass="ikont-acl-atras BotonesPasosModificar"   value="#{var.atras}" execute="@this"/>
@@ -232,8 +233,7 @@
 
                         </h:panelGroup>
                            
-                        <h:panelGroup styleClass="ikont-hpg-varpaso3"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">
-                            
+                        <h:panelGroup styleClass="ikont-hpg-varpaso2"   layout="block" rendered="#{Supervisor$ModificarProyecto.verPaso3}">                            
                             <interkont:spacer height="10px" />
                              <br/>
                             <h:outputText  styleClass="ikont-hot-titulopaso3modificacion1 TituloModificarProyecto"   value="#{var.tituloPaso3Modificacion1}"/>

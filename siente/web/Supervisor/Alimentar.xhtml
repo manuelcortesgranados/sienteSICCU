@@ -16,10 +16,10 @@
         <h:outputScript name="script_supervisor.js" />
         <h:outputScript name="validarletra.js"  library="js"/>
     </ui:define>
-    <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-reportaravance"   value="Reportar avance"/>
+    <ui:define  name="title">
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-reportaravance"   value="Reportar avance"/>
 
-        <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
         <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="menu">
