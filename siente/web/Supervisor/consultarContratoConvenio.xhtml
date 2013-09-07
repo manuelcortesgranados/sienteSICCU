@@ -121,7 +121,7 @@
 
                             <rich:columnGroup>
                                 <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{var.conveniosporcontratante}" rendered="#{var.varconsulcontratoconvenio}"/>
+                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratante}" rendered="#{var.varconsulcontratoconvenio}"/>
                                 </rich:column>
                             </rich:columnGroup>
 
@@ -273,7 +273,7 @@
 
                             <rich:columnGroup>
                                 <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratista"   value="#{var.conveniosporcontratista}" />
+                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratista"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratista}" />
                                 </rich:column>
                             </rich:columnGroup>
 
