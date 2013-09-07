@@ -915,8 +915,8 @@ a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesP
 a.busquedavanzada {
     width:150px;
     height:25px;
-    background-color:#F3C031;
-    color:#003;
+    background-color: #008000;
+    color: #FFF;
     padding: 5px 20px 5px 30px;
     background-image:url(../imgs/bt_buscar.png);
     background-repeat:no-repeat;
@@ -1736,7 +1736,6 @@ input[type="text"], input[type="password"], select{
     left: 0px;
     right: 0px;
     overflow: hidden;
-    top: 137px;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
@@ -1877,7 +1876,7 @@ input[type="text"], input[type="password"], select{
 #menuprincipal.hovermenuprincipal{
     position: fixed;
     top: 60px;
-    
+
 }
 
 .ikont-hcl-menu-logozoom{
@@ -2957,6 +2956,7 @@ css usuario modificacion
     background-color: #F2F2F2;
     font-size: 13px;
     text-align: center;
+    width: 91%;
 }
 .ikont-hpg-consulconvenio{
     font-size: 14px;
@@ -3942,4 +3942,8 @@ a:hover {
     position: relative;
     top: -7px;
     right: 12px;
+}
+.ikont-hpg-varpaso2 {
+    position: relative;
+    top: -34px;
 }

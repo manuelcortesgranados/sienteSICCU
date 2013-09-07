@@ -112,13 +112,13 @@
                                         <rich:column colspan="8" breakRowBefore="true" >
                                             <center>
                                                 <h:panelGrid columns="4">
-                                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.primeroContratos}" render="tablacontratos,gpTotalCont">
+                                                    <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.primeroContratos}" render="tablacontratos,gpTotalCont" execute="@this">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.anterioresContratos}" render="tablacontratos,gpTotalCont">
+                                                    <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$IngresarNuevaObra.veranteriorcontrato}" action="#{Supervisor$IngresarNuevaObra.anterioresContratos}" render="tablacontratos,gpTotalCont" execute="@this">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.siguienteContratos}" render="tablacontratos,gpTotalCont">
+                                                    <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.siguienteContratos}" render="tablacontratos,gpTotalCont" execute="@this">
                                                     </a4j:commandButton>
-                                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.ultimoContratos}" render="tablacontratos,gpTotalCont">
+                                                    <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$IngresarNuevaObra.verultimoscontrato}" action="#{Supervisor$IngresarNuevaObra.ultimoContratos}" render="tablacontratos,gpTotalCont" execute="@this">
                                                     </a4j:commandButton>
                                                 </h:panelGrid>
                                             </center>

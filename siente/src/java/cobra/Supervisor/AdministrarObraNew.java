@@ -883,7 +883,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
             if (id != null) {
                 getSessionBeanCobra().getCobraService().guardarContadorVisitas(Integer.parseInt(id), getSessionBeanCobra().getUsuarioObra());
             }
-
+            mostrarGoogle();
             llenarSelectTipoDocumento();
             contratistanombre = "";
             //llenarContrato();
@@ -1806,7 +1806,7 @@ public class AdministrarObraNew implements ILifeCycleAware, Serializable {
     }
 
     public String mostrarGoogle() {
-
+        System.out.println("entra al metodo 1");
 
         sede = false;
         boolruta = false;

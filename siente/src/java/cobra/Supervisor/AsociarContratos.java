@@ -16,17 +16,18 @@ import java.util.List;
 import org.richfaces.component.UIDataTable;
 
 /**
- * <p>Fragment bean that corresponds to a similarly named JSP page
- * fragment.  This class contains component definitions (and initialization
- * code) for all components that you have defined on this fragment, as well as
- * lifecycle methods and event handlers where you may add behavior
- * to respond to incoming events.</p>
+ * <p>
+ * Fragment bean that corresponds to a similarly named JSP page fragment. This
+ * class contains component definitions (and initialization code) for all
+ * components that you have defined on this fragment, as well as lifecycle
+ * methods and event handlers where you may add behavior to respond to incoming
+ * events.</p>
  *
  * @version DetalleObra.java
  * @version Created on 13-oct-2010, 13:53:10
  * @author carlosalbertoloaizaguerrero
  */
-public class AsociarContratos implements Serializable{
+public class AsociarContratos implements Serializable {
     // <editor-fold defaultstate="collapsed" desc="Managed Component Definition">
 
     private List<Relacioncontratoobra> listacontratosobra = new ArrayList<Relacioncontratoobra>();
@@ -184,9 +185,10 @@ public class AsociarContratos implements Serializable{
     }
 
     /**
-     * <p>Automatically managed component initialization. <strong>WARNING:</strong>
-     * This method is automatically generated, so any user-specified code inserted
-     * here is subject to being replaced.</p>
+     * <p>
+     * Automatically managed component initialization. <strong>WARNING:</strong>
+     * This method is automatically generated, so any user-specified code
+     * inserted here is subject to being replaced.</p>
      */
     private void _init() throws Exception {
     }
@@ -222,7 +224,6 @@ public class AsociarContratos implements Serializable{
         } else {
             verultimoscontrato = false;
         }
-
 
         return null;
     }
@@ -261,7 +262,6 @@ public class AsociarContratos implements Serializable{
         listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), num, 5, filtrocontrato);
         totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
 
-
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -287,7 +287,6 @@ public class AsociarContratos implements Serializable{
         totalfilas = getSessionBeanCobra().getCobraService().numContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), filtrocontrato);
         listacontratos = getSessionBeanCobra().getCobraService().obtenerContratoxEntidad(getAdministrarObraNew().getObra().getTercero().getIntcodigo(), totalfilas - num, totalfilas, filtrocontrato);
 
-
         if (totalfilas <= 5) {
             totalpaginas = 1;
         } else {
@@ -310,17 +309,13 @@ public class AsociarContratos implements Serializable{
     public String buscarContrato() {
         aplicafiltro = true;
         filtrocontrato.setBooltipocontconv(false);
-        if(nomcontraro!=null && nomcontraro.compareTo("")!=0)
-        {
+        if (nomcontraro != null && nomcontraro.compareTo("") != 0) {
             filtrocontrato.setPalabraClave(nomcontraro);
-        }    
-        else
-        {
+        } else {
             filtrocontrato.setPalabraClave(null);
-        }    
+        }
         primeroContratos();
-        
-        
+
         return null;
     }
 
@@ -375,7 +370,7 @@ public class AsociarContratos implements Serializable{
     public boolean verificarContrato(int numcont) {
         if (listacontratosobra.size() > 0) {
             for (int i = 0; i < listacontratosobra.size(); i++) {
-                if (listacontratosobra.get(i).getContrato().getIntidcontrato()==numcont) {
+                if (listacontratosobra.get(i).getContrato().getIntidcontrato() == numcont) {
 
                     return false;
                 }
@@ -411,34 +406,30 @@ public class AsociarContratos implements Serializable{
 
     public String guardarasociacion() {
 
-
         getAdministrarObraNew().getObra().setRelacioncontratoobras(new LinkedHashSet());
         getAdministrarObraNew().getObra().getRelacioncontratoobras().clear();
 
-
         for (Relacioncontratoobra cont : listacontratosobra) {
-            getAdministrarObraNew().getObra().getRelacioncontratoobras().add(cont);            
+            getAdministrarObraNew().getObra().getRelacioncontratoobras().add(cont);
         }
-
-
 
         getSessionBeanCobra().getCobraService().guardarObra(getAdministrarObraNew().getObra(), getSessionBeanCobra().getUsuarioObra(), -1);
         FacesUtils.addInfoMessage("Los datos se han guardado");
-        listacontratosobra= new ArrayList<Relacioncontratoobra>();
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(),false));        
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(),true));
+        listacontratosobra = new ArrayList<Relacioncontratoobra>();
+        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
+        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
         return null;
     }
 
     public String llenarlistacontratosProyecto() {
 
         listacontratosobra = new ArrayList<Relacioncontratoobra>();
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(),false));
-        
-        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(),true));
-        
+        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), false));
+
+        listacontratosobra.addAll(getSessionBeanCobra().getCobraService().encontrarRelacionContratosObra(getAdministrarObraNew().getObra().getIntcodigoobra(), true));
+
         listacontratos = getSessionBeanCobra().getCobraService().encontrarContratosxObra(getAdministrarObraNew().getObra().getIntcodigoobra());
-        
+
         return "asociarcontratos";
     }
 
@@ -450,7 +441,6 @@ public class AsociarContratos implements Serializable{
         relacioncontratointer.setContrato(contselec);
         relacioncontratointer.setObra(getAdministrarObraNew().getObra());
         relacioncontratointer.setNumvalordisponible(contselec.getNumvlrcontrato().subtract(contselec.getNumvlrsumahijos().add(contselec.getNumvlrsumaproyectos())));
-
 
         if (getAdministrarObraNew().getObra().getNumvaltotobra().compareTo(BigDecimal.ZERO) == 0) {
             relacioncontratointer.setMensaje("El proyecto no posee valor. Debe diligenciar el cronograma del proyecto.");
@@ -464,7 +454,6 @@ public class AsociarContratos implements Serializable{
         if (verificarContrato(contselec.getIntidcontrato())) {
 
             BigDecimal faltanteasociar = getAdministrarObraNew().getObra().getNumvaltotobra().subtract(sumValorContrato);
-
 
             if (faltanteasociar.compareTo(relacioncontratointer.getNumvalordisponible()) <= 0) {
                 relacioncontratointer.setNumvalorrelacion(faltanteasociar);
@@ -481,16 +470,13 @@ public class AsociarContratos implements Serializable{
 
         return null;
     }
-   
 
     public String asociarContrato() {
-       
+
         listacontratosobra.add(relacioncontratointer);
         sumValorContrato = sumValorContrato.add(relacioncontratointer.getNumvalorrelacion());
-        guardarasociacion();        
+        guardarasociacion();
         return null;
     }
-
-
 
 }
