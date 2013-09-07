@@ -24,11 +24,7 @@
             </h:form>
         </f:facet>
         <h:panelGrid  styleClass="ikont-rp-seleccionardocumento"   >
-            <h:form>
-                <h:panelGroup >
-                    <a4j:commandButton id="esconder_panelUploadDocumentocc" onclick=" #{rich:component('panelUploadDocumentocc')}.hide();return false;"
-                                       styleClass="ikont-a4jcb-esconderpanelUploadDocumentocc"    />
-                </h:panelGroup>
+            <h:form>               
                 <h:panelGroup id="gpUploadDocAt">
                     <h:panelGrid columnClasses="top,top" columns="2">
                         <rich:fileUpload
