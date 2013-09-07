@@ -39,6 +39,7 @@ input.rf-insp-inp[type="text"] {
     padding: 0px;
     vertical-align: top;
     width: '#{richSkin.widthInputTextNumberSpinner}';
+    padding-left: 5px;
 }
 
 .rf-insp-btns {

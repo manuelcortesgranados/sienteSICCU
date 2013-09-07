@@ -14,12 +14,15 @@
     <ui:define name="head">
         <link rel="stylesheet" type="text/css" href="/#{var.versioncobra}/resources/css/estilos.css" media="all" />
         <link href="/#{var.versioncobra}/resources/css/style.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript">
+            localStorage.setItem('accionAdminConvenio', "ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admconvenio");
+        </script>
     </ui:define>
 
     <ui:define name="title">
         <h:panelGroup id="layoutTitle">
-            <h:outputText  styleClass="ikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}" />
-            <h:outputText  styleClass="ikont- "    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
+            <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont- "   value="#{var.resumencontrato} #{Supervisor$Contrato.tipoContCon}" />
+            <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont- "    value="(#{Supervisor$Contrato.contrato.intidcontrato})" />
         </h:panelGroup>
     </ui:define>
 

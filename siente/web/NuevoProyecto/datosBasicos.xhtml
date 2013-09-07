@@ -233,7 +233,7 @@
                                 <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
                             </h:inputText>
                         </h:panelGrid>
-                        <h:panelGrid id="valores3" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
+                        <h:panelGrid id="valores3" columns="2" cellspacing="15" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
                             <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
                             <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
 
