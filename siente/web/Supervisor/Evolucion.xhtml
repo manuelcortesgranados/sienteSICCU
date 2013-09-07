@@ -17,8 +17,8 @@
         <h:outputScript name="amcharts.js" library="amcharts"/>
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont-hot-evoluciónproyecto"   value="#{var.evoluciónproyecto}"/>
-        <h:outputText  styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-evoluciónproyecto"   value="#{var.evoluciónproyecto}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-strnombremedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>  
     <ui:define name="menu">
         <ui:include src="/facelets/menu_gestion.xhtml"/>

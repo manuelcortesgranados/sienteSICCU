@@ -2,12 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:rich="http://richfaces.org/rich"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:interkont="http://www.interkont.com/jsf">
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:interkont="http://www.interkont.com/jsf">
 
     <rich:popupPanel id="mp-crear-contratista" moveable="true" autosized="true"  headerClass="rich-panel-header">
         <f:facet name="header" >
@@ -19,13 +19,14 @@
             <h:form>
                 <h:panelGroup>
                     <a4j:commandLink   id="esconder_mp-crear-contratista" styleClass="ikont-acl-escondermpcrearcontratista closemodal"  
-                                     title="#{var.cerrar}" immediate="true"
-                                     onclick="#{rich:component('mp-crear-contratista')}.hide();return false;">
+                                       title="#{var.cerrar}" immediate="true"
+                                       onclick="#{rich:component('mp-crear-contratista')}.hide();
+                                               return false;">
                     </a4j:commandLink>
                 </h:panelGroup>
             </h:form>
         </f:facet>
-        <h:form>
+        <h:form id="form_mp_crear_contratista">
             <h:panelGroup layout="block" id="rpContratista">
                 <center>
                     <h:panelGrid columns="4"  width="100%" >
@@ -50,9 +51,9 @@
                         <h:selectOneMenu id="combodepartamentoContratista" value="#{Supervisor$Contrato.codDepartamentoContratista}"  disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.departamentoContratista}" />
                             <a4j:ajax execute="@this,combodepartamentoContratista" event="change" listener="#{Supervisor$Contrato.llenarMunicipioContratista}"
-                                         render="gpMuniContratista" />
+                                      render="gpMuniContratista" />
                         </h:selectOneMenu>                 
-                   
+
 
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
                         <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
@@ -79,20 +80,20 @@
                         <h:selectOneMenu id="combodepartamentoExpdocumento" value="#{Supervisor$Contrato.codDeptoExpdocumento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.deptoExpdocumento}" />
                             <a4j:ajax execute="@this,combodepartamentoExpdocumento" event="change" listener="#{Supervisor$Contrato.llenarMunicipioExpdocumento}"
-                                         render="gpMuniExpdocumento" />
+                                      render="gpMuniExpdocumento" />
                         </h:selectOneMenu>
 
                         <h:outputLabel  styleClass="ikont-hol-lblfechanacimientocrea"   id="lblfechaNacimientoCrea"  value="#{var.fechadeNacimiento}" for="calendarfechVencim" rendered="#{Supervisor$Contrato.habidescontratista}"/>
                         <rich:calendar locale="#{var.rcalendarlocale}" datePattern="yyyy-MM-dd" id="calendarfechVencim" inputSize="10"
                                        value="#{Supervisor$Contrato.contratista.datefechanacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}"/>
 
-                       
+
                         <h:outputLabel  styleClass="ikont-hol-lbldepartamentonacimiento"   id="lbldepartamentoNacimiento" value="#{var.departamento} de Nacimiento:" for="combodepartamentoNacimiento" rendered="#{Supervisor$Contrato.habidescontratista}">
                         </h:outputLabel>
                         <h:selectOneMenu id="combodepartamentoNacimiento" value="#{Supervisor$Contrato.codDeptoNacimiento}" rendered="#{Supervisor$Contrato.habidescontratista}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.deptoNacimiento}"/>
                             <a4j:ajax execute="@this,combodepartamentoNacimiento" event="change" listener="#{Supervisor$Contrato.llenarMunicipioNacimiento}"
-                                         render="gpMuniNacimiento"/>
+                                      render="gpMuniNacimiento"/>
                         </h:selectOneMenu>
 
                         <h:outputText  styleClass="ikont-hot-lbldigitoverificacioncrea "   id="lbldigitoVerificacionCrea"  value="#{var.digitoVerificacion}"/>
@@ -129,7 +130,7 @@
                                        rendered="#{!Supervisor$Contrato.boolcrearcontratista}"
                                        >
                     </a4j:commandButton>
-                    
+
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.aceptar}" action="#{Supervisor$Contrato.cambiarboolcrearcontratista}"
                                        rendered="#{Supervisor$Contrato.boolcrearcontratista}"
@@ -138,29 +139,28 @@
                     <interkont:spacer width="10"/>
                     <a4j:commandButton value="#{var.cancelar}"
                                        immediate="true"
-                                       oncomplete="#{rich:component('mp-crear-contratista')}.hide();" rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
+                                       oncomplete="#{rich:component('mp-crear-contratista')}.hide();" 
+                                       rendered="#{!Supervisor$Contrato.boolcrearcontratista}" >
                     </a4j:commandButton>
 
                 </center>
-                <a4j:outputPanel id="panelErrorNuevocontratista">
-                    <rich:messages id="messagesNuevocontratista" globalOnly="true"
-                                   styleClass="ikont-"   ajaxRendered="true"
-                                   >
-                        <f:facet name="infoMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msginfo"  url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgwarn"  url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgerror"  url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgerror"  url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
 
-                </a4j:outputPanel>
+
+                <rich:messages id="messagesNuevocontratista" globalOnly="true" styleClass="ikont-" for="mp-crear-contratista"    >
+                    <f:facet name="infoMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msginfo"  url="/resources/imgs/msginfo.png" />
+                    </f:facet>
+                    <f:facet name="warnMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgwarn"  url="/resources/imgs/msgwarn.png" />
+                    </f:facet>
+                    <f:facet name="errorMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgerror"  url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                    <f:facet name="fatalMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgerror"  url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                </rich:messages>
+
             </h:panelGroup>
 
         </h:form>

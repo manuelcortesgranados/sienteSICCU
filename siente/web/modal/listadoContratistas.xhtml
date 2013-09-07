@@ -103,10 +103,10 @@
                                 <rich:column colspan="5" breakRowBefore="true">
                                     <center>
                                         <h:panelGrid columns="4">
-                                            <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorreales}" render="tablaContratistas" action="#{Supervisor$Contrato.primerosreales}"/>
-                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorreales}" render="tablaContratistas" action="#{Supervisor$Contrato.anterioresReales}"/>
-                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimosreales}" render="tablaContratistas" action="#{Supervisor$Contrato.siguientesReales}"/>
-                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimosreales}" render="tablaContratistas" action="#{Supervisor$Contrato.ultimoReales}"/>
+                                            <a4j:commandButton styleClass="ikont-acb-primerociu" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorreales}" render="tablaContratistas" action="#{Supervisor$Contrato.primerosreales}" execute="@this"/>
+                                            <a4j:commandButton styleClass="ikont-acb-anteriorciu" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorreales}" render="tablaContratistas" action="#{Supervisor$Contrato.anterioresReales}" execute="@this"/>
+                                            <a4j:commandButton styleClass="ikont-acb-siguienteciu" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimosreales}" render="tablaContratistas" action="#{Supervisor$Contrato.siguientesReales}" execute="@this" />
+                                            <a4j:commandButton styleClass="ikont-acb-ultimociu" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimosreales}" render="tablaContratistas" action="#{Supervisor$Contrato.ultimoReales}" execute="@this"/>
                                         </h:panelGrid>
                                     </center>
                                 </rich:column>

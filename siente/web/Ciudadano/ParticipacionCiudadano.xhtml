@@ -47,6 +47,9 @@
         <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and !var.permisonuevodiseno}">
             <ui:include src="/facelets/menu_superior_detalle_ciudadano.xhtml"/>
         </h:panelGroup>
+                <h:panelGroup rendered="#{SessionBeanCobra.cobraService.ciu and var.permisonuevodiseno}">
+            <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml" />
+        </h:panelGroup>
     </ui:define>
     <ui:define name="body">
         <h:panelGrid columns="1"  id="pgPrincipalComentario" columnClasses="panelcenter,panelcenter,panelcenter" >
@@ -95,7 +98,7 @@
                                              return false;" render="participacionciudadanomodal"/>    
                             <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.todos}"/>
                             <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.todos}"/>
-                            <a4j:commandLink styleClass="ikont-hot-textver-participacion" id="todos" value="#{var.todos}" action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
+                            <a4j:commandLink styleClass="ikont-hot-textver-participacion" id="todos" value="#{var.ver}" action="#{Ciudadano$PerfilCiudadano.llenarlistaTodos}"  oncomplete="#{rich:component('participacionciudadanomodal')}.show();
                                              return false;" render="participacionciudadanomodal"/>    
                         </h:panelGrid>
                     </h:panelGrid>

@@ -857,82 +857,64 @@ a.ikont-acl-interven:hover {
 }
 
 .vtitle02 {
-    font-family:open;
-    font-size:20px;
-    font-style:italic;
-    font-weight:bold;
-    color:#F90;
-    line-height:20px;
+    font-family: open!important;
+    font-size: 1.2em!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    color: #257500!important;
+    line-height: 20px!important;
 }
 
 .vtitle03 {
-    font-family:open;
-    font-size:15px;
-    font-style:italic;
-    color:#004670;
-    line-height:15px;
-    padding-bottom: 10px;
+    font-family:open!important;
+    font-size:1em!important;
+    font-style:normal!important;
+    color:#58595B!important;
+    line-height:15px!important;
+    padding-bottom: 10px!important;
 }
 
 a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModificar{
-    background: #ff9735;
-    background: -moz-linear-gradient(top,  #ff9735 48%, #f8763c 50%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#ff9735), color-stop(50%,#f8763c));
-    background: -webkit-linear-gradient(top,  #257500 48%,#257500 50%);
-    background: -o-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
-    background: -ms-linear-gradient(top,  #ff9735 48%,#f8763c 50%);
-    background: linear-gradient(top,  #ff9735 48%,#f8763c 50%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9735', endColorstr='#f8763c',GradientType=0 );
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    border: #FFF 2px solid;
+    background: #257500;
+    border-radius: 2px;
     font-family:open;
-    font-size:14px;
-    color:#fff;
+    font-size:0.75em;
+    color:#9CFF00;
     text-align:center;
-    padding:8px;
+    padding:5px 8px; 
     text-decoration: none;
+    margin-right: 5px;
 }
 a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesPasosModificar:hover {
-    background: #f8763c;
-    background: -moz-linear-gradient(top,  #f8763c 48%, #ff9735 50%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(48%,#f8763c), color-stop(50%,#ff9735));
-    background: -webkit-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
-    background: -o-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
-    background: -ms-linear-gradient(top,  #f8763c 48%,#ff9735 50%);
-    background: linear-gradient(top,  #f8763c 48%,#ff9735 50%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8763c', endColorstr='#ff9735',GradientType=0 );
+    background: #1E4C00;
+    color:#9CFF00;
 }
 
 .marcocambioestado{
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: #C1D1E7 thin solid;
+    border: transparent none 0px;
 }
 
 a.busquedavanzada {
     width:150px;
     height:25px;
-    background-color:#F3C031;
-    color:#003;
-    padding: 5px 20px 5px 30px;
+    background-color: #257500;
+    color: #9CFF00;
+    padding: 5px 8px 5px 30px;
     background-image:url(../imgs/bt_buscar.png);
     background-repeat:no-repeat;
     background-position:left;
-    font-size:12px;
+    font-size:0.75em;
+    font-style: normal;
     line-height:30px;
-    font-style:italic;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 2px;
     text-decoration: none;
+    -moz-box-shadow: 0px 0px 0px transparent;
+    -webkit-box-shadow: 0px 0px 0px transparent;
 }
 
 a.busquedavanzada:hover {
-    background-color:#87A7BB;
-    color: black;
+    background-color:#1E4C00;
+    color: #9CFF00;
 }
 
 a.anadirimagen {
@@ -996,7 +978,6 @@ a.evo02:hover {
 .TextoTipificacionModificacion {
     color: #999999;
     font-family: open;
-    font-style: italic;
     text-align: left;
     width: 100%;
     font-size: 1em;
@@ -1007,7 +988,6 @@ a.evo02:hover {
     color: #257500;
     font-family: open;
     font-size: 1.5em;
-    font-style: italic;
     font-weight: bold;
     line-height: 48px;
 }
@@ -1636,7 +1616,7 @@ input[type="text"], input[type="password"], select{
     right: 0px;
     overflow: hidden;
     top: 139px;
-    z-index: 4;
+    z-index: 10;
 
 }
 .ikont-panel-registo-inicio{
@@ -1736,7 +1716,6 @@ input[type="text"], input[type="password"], select{
     left: 0px;
     right: 0px;
     overflow: hidden;
-    top: 137px;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
@@ -1877,7 +1856,7 @@ input[type="text"], input[type="password"], select{
 #menuprincipal.hovermenuprincipal{
     position: fixed;
     top: 60px;
-    
+
 }
 
 .ikont-hcl-menu-logozoom{
@@ -2957,6 +2936,7 @@ css usuario modificacion
     background-color: #F2F2F2;
     font-size: 13px;
     text-align: center;
+    width: 91%;
 }
 .ikont-hpg-consulconvenio{
     font-size: 14px;
@@ -3274,6 +3254,11 @@ css usuario modificacion
     background: transparent!important;
     box-shadow: 0px 0px 0px transparent!important;
 }
+
+.ikont-rpp-modal-box .rf-pp-cnt-scrlr{
+    background-color: transparent;
+}
+
 .imagen_punta2{
     position: relative;
     left: 68px;
@@ -3942,4 +3927,8 @@ a:hover {
     position: relative;
     top: -7px;
     right: 12px;
+}
+.ikont-hpg-varpaso2 {
+    position: relative;
+    top: -34px;
 }

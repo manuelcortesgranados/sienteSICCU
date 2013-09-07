@@ -55,6 +55,7 @@ import com.sencha.gxt.widget.core.client.container.HtmlLayoutContainer;
 import com.sencha.gxt.widget.core.client.event.BlurEvent;
 import com.sencha.gxt.widget.core.client.form.ComboBox;
 import com.sencha.gxt.widget.core.client.form.DateField;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.TextField;
@@ -200,15 +201,15 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
         int cw = 238;
 
-        Label tObj = new Label("*OBJETIVOS");
-        con.add(tObj, new HtmlData(".tobj"));
+//        Label tObj = new Label("*Objetivos");
+//        con.add(tObj, new HtmlData(".tobj"));
 
         getObjetoContrato().setWidth("" + cw);
         getObjetoContrato().setHeight("" + 80);
-        con.add(getObjetoContrato(), new HtmlData(".objetoC"));
+        con.add(new FieldLabel(getObjetoContrato(), "*Objetivos")  , new HtmlData(".objetoC"));
 
         getValorContrato().setWidth(cw);
-        getValorContrato().setWidth(cw);
+        //getValorContrato().setWidth(cw);
 
         getValorContrato().addBlurHandler(new BlurEvent.BlurHandler() {
             @Override
@@ -221,7 +222,8 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 }
             }
         });
-        con.add(getValorContrato(), new HtmlData(".valor"));
+        con.add( new FieldLabel(getValorContrato(), "Valor estimado") , new HtmlData(".valor"));
+        //con.add(getValorContrato(), new HtmlData(".valor"));
 
 
 
@@ -236,10 +238,12 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 tipocontrato = event.getSelectedItem();
             }
         });
-        con.add(getLstTipoContrato(), new HtmlData(".tipocontrato"));
+        con.add(new FieldLabel(getLstTipoContrato(), "Tipo contrato"), new HtmlData(".tipocontrato"));
+        //con.add(getLstTipoContrato(), new HtmlData(".tipocontrato"));
 
         getNombreAbre().setWidth(cw);
-        con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
+        con.add(new FieldLabel(getNombreAbre(), "Nombre abreviado"), new HtmlData(".nomabreviado"));
+        //con.add(getNombreAbre(), new HtmlData(".nomabreviado"));
 
 
         getFechaSuscripcionContrato().setWidth(cw);
@@ -254,15 +258,18 @@ public class ContratoForm implements IsWidget, EntryPoint {
                 }
             }
         });
-        con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
+        con.add(new FieldLabel( getFechaSuscripcionContrato(), "Fecha suscripción")  , new HtmlData(".fechasuscont"));
+        //con.add(getFechaSuscripcionContrato(), new HtmlData(".fechasuscont"));
 
         getFechaSuscripcionActaInicio().setWidth(cw);
-        con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
+        con.add(new FieldLabel(getFechaSuscripcionActaInicio(), "Fecha de suscripción acta inicio"), new HtmlData(".fechasusacta"));
+        //con.add(getFechaSuscripcionActaInicio(), new HtmlData(".fechasusacta"));
 
 
 
         final WidgetTablaMontos tblMontos = new WidgetTablaMontos(contrato);
-        con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
+       
+       con.add(tblMontos.asWidget(), new HtmlData(".tblmontos"));
 
 
         PushButton btnAdicionarRubros = new PushButton(new Image(ExampleImages.INSTANCE.addbtnaddpry()), new ClickHandler() {
@@ -505,10 +512,9 @@ public class ContratoForm implements IsWidget, EntryPoint {
 
     private native String getTableMarkup() /*-{
      return [ '<table width=100% cellpadding=0 cellspacing=10>',
-     '<tr><td class=tobj></td></tr>',
-     '<tr><td class=objetoC></td><td><table cellpadding=0><tr><td class=valor></td></tr><tr height=10><tr><td class=tipocontrato></td></tr></table></td></tr>',
-     '<tr><td class=nomabreviado></td><td class=fechasuscont></td>',
-     '<tr><td></td><td class=fechasusacta></td></tr>',
+     '<tr><td class=objetoC width=50%></td><td class=valor></td></tr>',
+     '<tr><td class=tipocontrato></td><td class=nomabreviado></td></tr>',
+     '<tr><td class=fechasuscont></td><td class=fechasusacta></td></tr>',
      '<tr><td class=tblmontos colspan=2></td><td></td></tr>',
      '<tr><td class=addr></td></tr>',
      '<tr><td class=tblfuen colspan=2></td><td></td></tr>', 

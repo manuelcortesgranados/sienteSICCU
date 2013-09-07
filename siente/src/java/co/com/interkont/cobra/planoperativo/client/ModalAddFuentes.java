@@ -176,6 +176,7 @@ public class ModalAddFuentes implements IsWidget, EntryPoint {
             public void onClick(ClickEvent event) {
                 RelacionobrafuenterecursoscontratoDTO rofr;
                 String validacionDevuelta = "";
+                obraFrDto.setEstaEnFuenteRecurso(true);
                 if (obraFrDto.getTipoaporte() == 0) {
                     if (formaPago == 2) {
                         BigDecimal valorP = obraFrDto.getValor().multiply(valorFuenteRecurso.getValue()).divide(new BigDecimal(100));

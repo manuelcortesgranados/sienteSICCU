@@ -5,6 +5,8 @@ import co.com.interkont.cobra.planoperativo.client.dto.ContratoDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.RelacionobrafuenterecursoscontratoDTO;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
+import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gwt.cell.client.Cell.Context;
@@ -22,6 +24,7 @@ import com.sencha.gxt.data.shared.ModelKeyProvider;
 import com.sencha.gxt.data.shared.PropertyAccess;
 import com.sencha.gxt.data.shared.TreeStore;
 import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.box.AlertMessageBox;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
 import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
@@ -37,6 +40,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     protected ActividadobraDTO actividadObraEditar;
     protected TreeStore<ActividadobraDTO> taskStore;
     protected boolean editar;
+    private CobraGwtServiceAbleAsync service = GWT.create(CobraGwtServiceAble.class);
 
     /**
      * @return the store
@@ -121,14 +125,17 @@ public class WidgetTablaRubrosPry implements IsWidget {
                     obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                     getStore().remove(store.get(row));
                 } else {
-                    if (!estaEncontrato(store.get(row))) {
+                     if (!store.get(row).isEstaEnFuenteRecurso()) {
                         if (store.get(row).getTipoaporte() == 0) {
                             obraDto.setValor(obraDto.getValor().subtract(store.get(row).getValor()));
                             obraDto.setValorDisponible(obraDto.getValor());
                         }
                         obraDto.getObrafuenterecursosconvenioses().remove(store.get(row));
                         getStore().remove(store.get(row));
-                    }
+                    }else{
+                         AlertMessageBox alerta=new AlertMessageBox("Error", "No se puede eliminar la fuente de recurso porque esta asociada a un contrato");
+                         alerta.show();
+                     }
 
                 }
             }
@@ -169,6 +176,7 @@ public class WidgetTablaRubrosPry implements IsWidget {
     }
 
     public boolean estaEncontrato(ObrafuenterecursosconveniosDTO obr) {
+      service.setLog("entre estaContrato", null);
         boolean estaRelacionado = false;
         List<ActividadobraDTO> lstHijas = taskStore.getChildren(actividadObraEditar);
         for (ActividadobraDTO act : lstHijas) {

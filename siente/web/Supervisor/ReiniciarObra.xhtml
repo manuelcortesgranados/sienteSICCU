@@ -11,7 +11,7 @@
 
     <ui:define name="title">
         <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont-hot-reiniciarobra" value="#{var.reiniciarlaobra}"/>
-        <h:outputText  styleClass="ikont-hot-nombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-nombremedio" value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
     </ui:define>
 
     <ui:define name="menu">
@@ -38,7 +38,7 @@
     <ui:define name="body">
         <h:form>
             <center>
-            <h:panelGrid id="panelReiniciarObra"  >
+            <h:panelGrid cellspacing="5" id="panelReiniciarObra"  >
                 <h:panelGroup id="layoutReiniciarObra">
                     <h:outputText  styleClass="ikont-hot-txtreiniciars" rendered="#{Supervisor$AdministrarObraNew.obra.tipoestadobra.intestadoobra!=6}" value="#{var.solosepuedereiniciar}"/>
                     <interkont:spacer width="20"/>

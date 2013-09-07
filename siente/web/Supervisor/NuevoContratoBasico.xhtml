@@ -34,7 +34,7 @@
         </h:panelGroup>
     </ui:define>
     <ui:define name="body">
-        <h:form >
+        <h:form  id="form_nuevo_contrato_basico" >
             <rich:panel id="pgcontrato" header="Datos Basicos #{Supervisor$Contrato.tipoContCon}" styleClass="ikont-rp-datbasicos">
                 <center>
                     <h:panelGrid  columns="2" rendered="#{var.nuevocontratoperiodoevento}">
@@ -585,26 +585,23 @@
                                      action="#{Supervisor$Contrato.cancelar_action}" >
                     </h:commandButton>
 
-                </h:panelGrid>
-                <a4j:outputPanel id="panelErrorNuevocont">
-                    <rich:messages id="messagesNuevocont" globalOnly="true"
-                                   styleClass="ikont-rm-mensajenuevocont" ajaxRendered="true"
-                                   >
-                        <f:facet name="infoMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msginfo"    url="/resources/imgs/msginfo.png" />
-                        </f:facet>
-                        <f:facet name="warnMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgwarn"    url="/resources/imgs/msgwarn.png" />
-                        </f:facet>
-                        <f:facet name="errorMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgerrorcont"    url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                        <f:facet name="fatalMarker">
-                            <h:graphicImage  styleClass="ikont-hgi-msgerrorcont2"    url="/resources/imgs/msgerror.png" />
-                        </f:facet>
-                    </rich:messages>
-                </a4j:outputPanel>
-            </rich:panel>
+                </h:panelGrid>              
+                <rich:messages id="messages" globalOnly="true"  styleClass="ikont-rm-messages"   ajaxRendered="true"
+                               >
+                    <f:facet name="infoMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msginfopng"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                    </f:facet>
+                    <f:facet name="warnMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgwarnpng"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                    </f:facet>
+                    <f:facet name="errorMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgerrorpng"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                    <f:facet name="fatalMarker">
+                        <h:graphicImage  styleClass="ikont-hgi-msgerrorpngfatal"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                    </f:facet>
+                </rich:messages>
+            </rich:panel>         
         </h:form>        
         <ui:include src="/modal/listadoContratoBasicoModal.xhtml"/>
         <ui:include src="/modal/panelUploadDocumentoContratoBasico.xhtml"/>
@@ -612,5 +609,6 @@
         <ui:include src="/modal/listadoNumeroEncargo.xhtml"/>
         <ui:include src="/modal/listadoContratistas.xhtml"/>
         <ui:include src="/modal/crearcontratista.xhtml"/>
+
     </ui:define>    
 </ui:composition>

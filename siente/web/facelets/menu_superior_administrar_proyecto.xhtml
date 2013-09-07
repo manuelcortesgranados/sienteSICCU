@@ -105,18 +105,21 @@
                     });
                 }
             });
-            $('.ikont-hpg-content-menuinicio:first').hover(function(){
-                $('#menuprincipal').animate({width: '268px', top: '60px', position : 'fixed'});
+            $('.ikont-hpg-content-menuinicio:first').hover(function() {
+                $('#menuprincipal').addClass('hovermenuprincipal');
+                $('#menuprincipal').animate({width: '268px'});
             },
-            function(){
-               // $('#menuprincipal').animate({width: '0px', top: '137px', position: 'absolute'});
-            });
-            $('#menuprincipal').hover(function(){
-               
+                    function() {
+                        $('#menuprincipal').animate({width: '0px'});
+                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                    });
+            $('#menuprincipal').hover(function() {
+
             },
-            function(){
-                $('#menuprincipal').animate({width: '0px', top: '137px', position: 'absolute'});
-            });
+                    function() {
+                        $('#menuprincipal').animate({width: '0px'});
+                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                    });
         });
         $j(window).scroll(function() {
             if (window.pageYOffset > 175) {

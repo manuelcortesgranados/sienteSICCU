@@ -28,8 +28,8 @@
 
     </ui:define>
     <ui:define name="title">
-        <h:outputText  styleClass="ikont- hot-docpry1"   value="#{var.documentosproyecto1}"/>
-        <h:outputText  styleClass="ikont- hot-strnommedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont- hot-docpry1"   value="#{var.documentosproyecto1}"/>
+        <h:outputText rendered="#{!var.permisonuevodiseno}" styleClass="ikont- hot-strnommedio"    value="#{Supervisor$AdministrarObraNew.obra.strnombremedio}"/>
          <ui:include rendered="#{var.permisonuevodiseno}" src="/facelets/menu_superior_administrar_proyecto.xhtml"/>
     </ui:define>
     <ui:define name="menusuperior">

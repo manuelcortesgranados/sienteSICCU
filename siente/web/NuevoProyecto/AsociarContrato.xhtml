@@ -27,226 +27,195 @@
             <ui:include src="/facelets/menu_lateral_novedades_zoom.xhtml"/>
         </h:panelGroup>
     </ui:define>
-    <ui:define  rendered="#{var.permisonuevodiseno}" name="menusuperior">
-        <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
-    </ui:define>
     <ui:define name="body" >
         <h:form>
-            <table   align="center" border="0" cellspacing="8" cellpadding="0" class="totalwidth alingtableproyecto">
-                <tr>
-                    <td class="templatetablacontent verticalalingtop">
-                        <table  align="center" border="0" cellspacing="8" cellpadding="0" id="tabla2" class="templatecontentinfo" >
-                            <tr>
-                                <td>
-                                    <div  id="header_content">
-                                        <div class="ubicacion">
-                                            <h:outputText rendered="#{!var.permisonuevodiseno}"  styleClass="ikont-hot-ingresarnuevoproyecto"   value="#{var.ingresarnuevoproyecto} - #{var.informacioncontractual}"/>
-                                        </div>
-                                    </div>
+            <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
+                <ui:include  src="/facelets/menu_superior_administrar_proye_estructurarion.xhtml"/>
+                <rich:panel id="pgcontrat1" header="#{var.asociacioncontrato}" >
+                    <center>
+                        <interkont:spacer height="35" />
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <td valign="top" height="35" >
-                                    <h:panelGrid styleClass="ikont-hpg-templatemain templatecontentinfo"   >
-                                        <table border="0" cellspacing="0" cellpadding="0" class="templatecontentinfo" >
-                                            <tr>
-                                                <td>
-                                                    <rich:panel id="pgcontrat1" header="#{var.asociacioncontrato}" >
-                                                        <center>
-                                                            <interkont:spacer height="35" />
+                        <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-rp-encargofiduciario"  
+                                    bodyClass="ikont-rp-encargofiduciario-body" headerClass="ikont-rp-encargofiduciario-header"
+                                    rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
+                            <center>
+                                <h:panelGrid columns="3">
+                                    <h:outputText  styleClass="ikont-hot-numeroencargo"   value="#{var.numeroencargo}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-intnumencargofiduciario"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
 
-                                                            <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-rp-encargofiduciario"  
-                                                                        bodyClass="ikont-rp-encargofiduciario-body" headerClass="ikont-rp-encargofiduciario-header"
-                                                                        rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
-                                                                <center>
-                                                                    <h:panelGrid columns="3">
-                                                                        <h:outputText  styleClass="ikont-hot-numeroencargo"   value="#{var.numeroencargo}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-intnumencargofiduciario"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.intnumencargofiduciario}"/>
+                                    <h:outputText  styleClass="ikont-hot-fechaapertura"   value="#{var.fechaapertura}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-fechaapertura"   value="#{var.fechaapertura}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                                            <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
-                                                                        </h:outputText>
+                                    <h:outputText  styleClass="ikont-hot-saldoinicial"   value="#{var.saldoinicial}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-numsaldoinicial"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoinicial}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-saldoinicial"   value="#{var.saldoinicial}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-numsaldoinicial"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoinicial}">
-                                                                            <f:convertNumber pattern="$###,###"/>
-                                                                        </h:outputText>
+                                    <h:outputText  styleClass="ikont-hot-saldoactual"   value="#{var.saldoactual}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-numsaldoactual"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoactual}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-saldoactual"   value="#{var.saldoactual}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-numsaldoactual"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitud_obra.encargofiduciario.numsaldoactual}">
-                                                                            <f:convertNumber pattern="$###,###"/>
-                                                                        </h:outputText>
+                                </h:panelGrid>
+                            </center>
+                        </rich:panel>
+                        <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-rp-encargofiduciario"  
+                                    bodyClass="ikont-rp-encargofiduciario-body" headerClass="ikont-rp-encargofiduciario-header"
+                                    rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
 
-                                                                    </h:panelGrid>
-                                                                </center>
-                                                            </rich:panel>
-                                                            <rich:panel header="Informacion #{var.encargofiduciario}" styleClass="ikont-rp-encargofiduciario"  
-                                                                        bodyClass="ikont-rp-encargofiduciario-body" headerClass="ikont-rp-encargofiduciario-header"
-                                                                        rendered="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro != null and Supervisor$IngresarNuevaObra.obranueva.contrato == null}">
+                            <center>
+                                <h:panelGrid columns="3">
+                                    <h:outputText  styleClass="ikont-hot-numeroencargo1"   value="#{var.numeroencargo}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-intnumencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
 
-                                                                <center>
-                                                                    <h:panelGrid columns="3">
-                                                                        <h:outputText  styleClass="ikont-hot-numeroencargo1"   value="#{var.numeroencargo}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-intnumencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.intnumencargofiduciario}"/>
+                                    <h:outputText  styleClass="ikont-hot-fechaapertura1"   value="#{var.fechaapertura}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
+                                        <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-fechaapertura1"   value="#{var.fechaapertura}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-fechaaperturaencargofiduciario1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.datefechaaperturaencargofiduciario}">
-                                                                            <f:convertDateTime pattern="EEEEEEEE, MMM dd, yyyy"/>
-                                                                        </h:outputText>
+                                    <h:outputText  styleClass="ikont-hot-saldoinicial1"   value="#{var.saldoinicial}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-numsaldoinicial"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-saldoinicial1"   value="#{var.saldoinicial}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-numsaldoinicial"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoinicial}">
-                                                                            <f:convertNumber pattern="$###,###"/>
-                                                                        </h:outputText>
+                                    <h:outputText  styleClass="ikont-hot-saldoactual1"   value="#{var.saldoactual}: "/>
+                                    <interkont:spacer width="20"/>
+                                    <h:outputText  styleClass="ikont-hot-numsaldoactual1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
+                                        <f:convertNumber pattern="$###,###"/>
+                                    </h:outputText>
 
-                                                                        <h:outputText  styleClass="ikont-hot-saldoactual1"   value="#{var.saldoactual}: "/>
-                                                                        <interkont:spacer width="20"/>
-                                                                        <h:outputText  styleClass="ikont-hot-numsaldoactual1"   value="#{Supervisor$IngresarNuevaObra.obranueva.solicitudmaestro.encargofiduciario.numsaldoactual}">
-                                                                            <f:convertNumber pattern="$###,###"/>
-                                                                        </h:outputText>
+                                </h:panelGrid>
+                            </center>
+                        </rich:panel>
 
-                                                                    </h:panelGrid>
-                                                                </center>
-                                                            </rich:panel>
+                        <h:panelGrid id="pgconveniocontrato" columns="2">
+                            <a4j:commandLink value="Asociar contrato"
+                                             styleClass="ikont-hcl-asociarcontrato"  
+                                             action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
+                                             render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
+                            </a4j:commandLink>
+                            <a4j:commandLink value="Crear contrato" rendered="false"
+                                             styleClass="ikont-hcl-crearcontrato"  
+                                             action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
+                            </a4j:commandLink>
+                        </h:panelGrid>
+                        <h:panelGrid id="pgdatacontratos">
+                            <center>
+                                <rich:dataTable styleClass="ikont-tabla-entidad-contratista"
+                                                rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
+                                    <rich:column id="cocontr1" width="100px">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-cocontr1"   value="Número contrato" />
+                                        </f:facet>
+                                    </rich:column>
+                                    <rich:column id="co2" width="100px" >
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-co2"   value="Valor del contrato" />
+                                        </f:facet>
+                                    </rich:column>
 
-                                                            <h:panelGrid id="pgconveniocontrato" columns="2">
-                                                                <a4j:commandLink value="Asociar contrato"
-                                                                                 styleClass="ikont-hcl-asociarcontrato"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.llenarContratos}" oncomplete="#{rich:component('mp-listado-contratos')}.show();"
-                                                                                 render="mp-listado-contratos, tablacontratos" execute="@this,mp-listado-contratos, tablacontratos ">
-                                                                </a4j:commandLink>
-                                                                <a4j:commandLink value="Crear contrato" rendered="false"
-                                                                                 styleClass="ikont-hcl-crearcontrato"  
-                                                                                 action="#{Supervisor$IngresarNuevaObra.crearAsociarContrato}">
-                                                                </a4j:commandLink>
-                                                            </h:panelGrid>
-                                                             <h:panelGrid id="pgdatacontratos">
-                                                                <center>
-                                                                    <rich:dataTable styleClass="ikont-tabla-entidad-contratista"
-                                                                                   rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}">
-                                                                        <rich:column id="cocontr1" width="100px">
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-cocontr1"   value="Número contrato" />
-                                                                            </f:facet>
-                                                                        </rich:column>
-                                                                        <rich:column id="co2" width="100px" >
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-co2"   value="Valor del contrato" />
-                                                                            </f:facet>
-                                                                        </rich:column>
+                                    <rich:column id="vlcongtrhijosse">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-vlcongtrhijosse"   value="Valor Asociado"/>
+                                        </f:facet>
+                                    </rich:column>
+                                    <rich:column id="fechaincontse">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-fechaincontse"   value="#{var.datefechaini}"/>
+                                        </f:facet>
+                                    </rich:column>
+                                    <rich:column id="fechaficontse"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-fechaficontse"   value="#{var.datefechafin}"/>
+                                        </f:facet>
+                                    </rich:column>
+                                    <rich:column id="desasociar"  width="150px">
+                                        <f:facet name="header">
+                                            <h:outputText  styleClass="ikont-rc-desasociar"   value="Desasociar"/>
+                                        </f:facet>
+                                    </rich:column>
+                                </rich:dataTable>
+                                <rich:dataTable id="datacontratos" styleClass="ikont-tabla-entidad-contratista"
+                                                var="contrarow" rowKeyVar="filaSeleccionada"
+                                                value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}"
+                                                binding="#{Supervisor$IngresarNuevaObra.tablalistacontratos}">
+                                    <rich:column id="cocontr1" width="100px">
+                                        <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
+                                    </rich:column>
+                                    <rich:column id="co2" width="100px" >
+                                        <h:outputText  styleClass="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
+                                            <f:convertNumber pattern="$ ###,###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="vlcongtrhijosse">
+                                        <h:outputText  styleClass="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.numvalorrelacion}">
+                                            <f:convertNumber pattern="$###,###,###"/>
+                                        </h:outputText>
+                                    </rich:column>
+                                    <rich:column id="fechaincontse">
+                                        <h:outputText  styleClass="ikont-hot-datefechaini"    value="#{contrarow.contrato.datefechaini}"/>
+                                    </rich:column>
+                                    <rich:column id="fechaficontse"  width="150px">
+                                        <h:outputText  styleClass="ikont-hot-datefechafin"    value="#{contrarow.contrato.datefechafin}"/>
+                                    </rich:column>
+                                    <rich:column id="desasociar"  width="150px">
+                                        <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato}"
+                                                           render="datacontratos,pgcontrat1">
+                                        </a4j:commandButton>
+                                    </rich:column>
+                                </rich:dataTable>
+                            </center>
+                        </h:panelGrid>
+                        <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
+                            <center>
+                                <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
+                                                   action="datosGenerarImagenes" />
 
-                                                                        <rich:column id="vlcongtrhijosse">
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-vlcongtrhijosse"   value="Valor Asociado"/>
-                                                                            </f:facet>
-                                                                        </rich:column>
-                                                                        <rich:column id="fechaincontse">
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-fechaincontse"   value="#{var.datefechaini}"/>
-                                                                            </f:facet>
-                                                                        </rich:column>
-                                                                        <rich:column id="fechaficontse"  width="150px">
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-fechaficontse"   value="#{var.datefechafin}"/>
-                                                                            </f:facet>
-                                                                        </rich:column>
-                                                                        <rich:column id="desasociar"  width="150px">
-                                                                            <f:facet name="header">
-                                                                                <h:outputText  styleClass="ikont-rc-desasociar"   value="Desasociar"/>
-                                                                            </f:facet>
-                                                                        </rich:column>
-                                                                    </rich:dataTable>
-                                                                    <rich:dataTable id="datacontratos" styleClass="ikont-tabla-entidad-contratista"
-                                                                                    var="contrarow" rowKeyVar="filaSeleccionada"
-                                                                                    value="#{Supervisor$IngresarNuevaObra.listacontratosobra}" rendered="#{fn:length(Supervisor$IngresarNuevaObra.listacontratosobra)>0}"
-                                                                                    binding="#{Supervisor$IngresarNuevaObra.tablalistacontratos}">
-                                                                        <rich:column id="cocontr1" width="100px">
-                                                                            <h:outputText  styleClass="ikont-hot-outlinun"   id="outlinun" value="#{contrarow.contrato.strnumcontrato}"/>
-                                                                        </rich:column>
-                                                                        <rich:column id="co2" width="100px" >
-                                                                            <h:outputText  styleClass="ikont-hot-outlinunvl"   id="outlinunvl" value="#{contrarow.contrato.numvlrcontrato}">
-                                                                                <f:convertNumber pattern="$ ###,###,###"/>
-                                                                            </h:outputText>
-                                                                        </rich:column>
-                                                                        <rich:column id="vlcongtrhijosse">
-                                                                            <h:outputText  styleClass="ikont-hot-vlcondisse"   id="vlcondisse" value="#{contrarow.numvalorrelacion}">
-                                                                                <f:convertNumber pattern="$###,###,###"/>
-                                                                            </h:outputText>
-                                                                        </rich:column>
-                                                                        <rich:column id="fechaincontse">
-                                                                            <h:outputText  styleClass="ikont-hot-datefechaini"    value="#{contrarow.contrato.datefechaini}"/>
-                                                                        </rich:column>
-                                                                        <rich:column id="fechaficontse"  width="150px">
-                                                                            <h:outputText  styleClass="ikont-hot-datefechafin"    value="#{contrarow.contrato.datefechafin}"/>
-                                                                        </rich:column>
-                                                                        <rich:column id="desasociar"  width="150px">
-                                                                            <a4j:commandButton value="Desasociar" action="#{Supervisor$IngresarNuevaObra.desasociarContrato}"
-                                                                                               render="datacontratos,pgcontrat1">
-                                                                            </a4j:commandButton>
-                                                                        </rich:column>
-                                                                    </rich:dataTable>
-                                                                </center>
-                                                            </h:panelGrid>
-                                                            <h:panelGroup rendered="#{Supervisor$IngresarNuevaObra.estadoguardado==0}">
-                                                                <center>
-                                                                    <a4j:commandButton id="btVolveragenerar"  value="#{var.volver}" immediate="true"
-                                                                                       action="datosGenerarImagenes" />
+                                <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
+                                                 action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"
+                                                 >
 
-                                                                    <h:commandButton id="btAceptarNuevaObra" value="#{var.finalizar}"
-                                                                                     action="#{Supervisor$IngresarNuevaObra.validarFinalizar}"
-                                                                                     >
+                                </h:commandButton>
 
-                                                                    </h:commandButton>
+                                <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
+                                                 action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
+                                </h:commandButton>
+                            </center>     
+                        </h:panelGroup>
+                        <center>
+                            <a4j:outputPanel id="panelErrorAsoCont">
+                                <rich:messages id="messagesAsoCon" globalOnly="true"
+                                               styleClass="ikont-rm-messagesAsoCon"   ajaxRendered="true"
+                                               >
+                                    <f:facet name="infoMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
+                                    </f:facet>
+                                    <f:facet name="warnMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
+                                    </f:facet>
+                                    <f:facet name="errorMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                    </f:facet>
+                                    <f:facet name="fatalMarker">
+                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
+                                    </f:facet>
+                                </rich:messages>
 
-                                                                    <h:commandButton id="btCancelarNuevaObra"  value="#{var.cancelar}"
-                                                                                     action="#{Supervisor$IngresarNuevaObra.cancelar_action}" >
-                                                                    </h:commandButton>
-                                                                </center>     
-                                                            </h:panelGroup>
-                                                            <center>
-                                                            <a4j:outputPanel id="panelErrorAsoCont">
-                                                                <rich:messages id="messagesAsoCon" globalOnly="true"
-                                                                               styleClass="ikont-rm-messagesAsoCon"   ajaxRendered="true"
-                                                                               >
-                                                                    <f:facet name="infoMarker">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-infoMarker"   height="20px" width="20px" url="/resources/imgs/msginfo.png" />
-                                                                    </f:facet>
-                                                                    <f:facet name="warnMarker">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-warnMarker"   height="10px" width="20px" url="/resources/imgs/msgwarn.png" />
-                                                                    </f:facet>
-                                                                    <f:facet name="errorMarker">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-errorMarker"   height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                                    </f:facet>
-                                                                    <f:facet name="fatalMarker">
-                                                                        <h:graphicImage  styleClass="ikont-hgi-fatalMarker"    height="20px" width="20px" url="/resources/imgs/msgerror.png" />
-                                                                    </f:facet>
-                                                                </rich:messages>
+                            </a4j:outputPanel>
+                        </center>
+                    </center>
+                </rich:panel>
 
-                                                            </a4j:outputPanel>
-                                                                </center>
-                                                        </center>
-                                                    </rich:panel>
-
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </h:panelGrid>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>                       
-            </table>
-
+            </h:panelGrid>
         </h:form>
         <ui:include src="../NuevoProyecto/modal/listadoContratoModal.xhtml"/>
         <ui:include src="../NuevoProyecto/modal/modalRelacionContrato.xhtml"/>
