@@ -854,7 +854,7 @@
         <from-view-id>/homes/home_gestion.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>fallo</from-outcome>
-            <to-view-id>Errores.xhtml</to-view-id>
+            <to-view-id>/homes/home_gestion.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>gestion</from-outcome>
