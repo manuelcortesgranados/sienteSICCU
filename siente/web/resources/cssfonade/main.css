@@ -857,21 +857,21 @@ a.ikont-acl-interven:hover {
 }
 
 .vtitle02 {
-    font-family:open;
-    font-size:20px;
-    font-style:italic;
-    font-weight:bold;
-    color:#F90;
-    line-height:20px;
+    font-family: open!important;
+    font-size: 1.2em!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    color: #257500!important;
+    line-height: 20px!important;
 }
 
 .vtitle03 {
-    font-family:open;
-    font-size:15px;
-    font-style:italic;
-    color:#004670;
-    line-height:15px;
-    padding-bottom: 10px;
+    font-family:open!important;
+    font-size:1em!important;
+    font-style:normal!important;
+    color:#58595B!important;
+    line-height:15px!important;
+    padding-bottom: 10px!important;
 }
 
 a.ikont-acl-cambioestado, a.ikont-acl-deleteultimoavance, a.BotonesPasosModificar{
@@ -891,10 +891,7 @@ a.ikont-acl-cambioestado:hover, a.ikont-acl-deleteultimoavance:hover, a.BotonesP
 }
 
 .marcocambioestado{
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: #C1D1E7 thin solid;
+    border: transparent none 0px;
 }
 
 a.busquedavanzada {
