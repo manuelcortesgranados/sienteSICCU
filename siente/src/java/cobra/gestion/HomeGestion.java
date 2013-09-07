@@ -802,9 +802,9 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
         iniciarFiltroAvanzado();
         llenarTablaNovedades();
         llenarZonaEspecifica();
-        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
-            iniciarSlider();
-        }
+//        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {
+//            iniciarSlider();
+//        }
         //getPerfilControl().encontrarEtiqueta();
         //Debería utilizarse solo en ciudadano
 //        if (getSessionBeanCobra().getUsuarioObra().getRenderrecurso().isBtnslider_imagenes_ciudadano()) {

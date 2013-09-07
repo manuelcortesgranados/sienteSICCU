@@ -833,7 +833,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Clase para manejar la lógica de fuentes de recursos
      */
-    private RecursosConvenio recursosconvenio;
+    private RecursosConvenio recursosconvenio= new RecursosConvenio();
 
     public RecursosConvenio getRecursosconvenio() {
         return recursosconvenio;

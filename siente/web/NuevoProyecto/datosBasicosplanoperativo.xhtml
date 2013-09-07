@@ -10,10 +10,11 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"> 
     <link href="#{facesContext.externalContext.requestContextPath}/resources/cssfonade/main.css?#{var.version}" rel="stylesheet" type="text/css"/>
     <center>
+        
         <h:panelGroup  id="paneldatosbasicopo" layout="block" style="width: 900px;" styleClass="ikont-rp-db" >
             <center>
                 <h:outputLabel value="#{var.informacionbasica}" styleClass="hol_info_convenio_zoom"/>
-                <a4j:region id="datosBasicosConvenio" >
+                
                     <h:panelGrid columns="1" cellpadding="5" cellspacing="10">
                         <h:panelGrid columns="2" styleClass="panel_numero_convenio">
                             <rich:column>
@@ -114,7 +115,6 @@
                             </rich:column>
                         </h:panelGrid>
                     </h:panelGrid>
-                </a4j:region>
 
                 <br/>
                 <br/>
@@ -162,11 +162,11 @@
                                 <h:outputText value="Valor aporte al convenio" styleClass="input_var_convenio label_texto_convenio"/>
                             </rich:column>
                             <rich:column>
-                                <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" style="width: 321px!important;" >
-                                    <rich:placeholder value="Ej: $74,784.0"  styleClass="input_num_convenio"/>
+                                <h:inputText id="hit-valoraportado-convenio" value="#{Supervisor$Contrato.recursosconvenio.fuenteRecursoConvenio.valoraportado}" required="true" style="width: 321px!important;" >                                    
                                     <f:validateDoubleRange minimum="0"/>
                                     <f:validateLength maximum="26" minimum="1"/>
-                                    <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" execute="hit-valoraportado-convenio,hit-cuotagerencia-convenio,rs-tipoaporte" render="hpg-valor"/>
+                                    <a4j:ajax event="change" listener="#{Supervisor$Contrato.recursosconvenio.calcularValorGerencia}" 
+                                              execute="hpg-fuenter-valoraportado,hit-valoraportado-convenio" render="hpg-valor"/>
                                 </h:inputText>
                                 <rich:message for="hit-valoraportado-convenio"  />
                             </rich:column>

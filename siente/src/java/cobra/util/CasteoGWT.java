@@ -541,7 +541,7 @@ public class CasteoGWT {
         obra.setDatefecfinobra(obraDto.getFechaFin());
         obra.setOtrospagos(obraDto.getOtrospagos());
         obra.setPagodirecto(obraDto.getPagodirecto());
-        //obra.setobraDto.getValorDisponible()        
+        obra.setValorDisponible(obraDto.getValorDisponible());        
         obra.setStrnombreobra(obraDto.getStrnombreobra());
         obra.setNumvaltotobra(obraDto.getValor());        
         
@@ -624,28 +624,21 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static Obrafuenterecursosconvenios castearObrafuenterecursosDTOToObrafuenterecursos(ObrafuenterecursosconveniosDTO obrafuenterecursosDto, Obra obra, Contrato convenio) {
-        Obrafuenterecursosconvenios obraFuenteRecurso = new Obrafuenterecursosconvenios();
-        ///Falta Almacenar el tipo de aporte en especie
-        obrafuenterecursosDto.getDescripcionaporte();        
+        Obrafuenterecursosconvenios obraFuenteRecurso = new Obrafuenterecursosconvenios();        
+        obraFuenteRecurso.setDescripciontipoaporte(obrafuenterecursosDto.getDescripcionaporte());        
         obraFuenteRecurso.setFormaingreso(obrafuenterecursosDto.getFormaingreso());
         obraFuenteRecurso.setFuenterecursosconvenio(castearFuenteRecursosConvenioTO(obrafuenterecursosDto.getFuenterecursosconvenio(), convenio));
-        obraFuenteRecurso.setIdobrafuenterecursos(obrafuenterecursosDto.getIdobrafuenterecursos());
-        
-        //obrafuenterecursosDto.getNombreEntidad();
-               
-        obraFuenteRecurso.setObra(obra);
-        //Esto que donde lo almacena
-        obrafuenterecursosDto.getOtrospagos();
-        obrafuenterecursosDto.getPagodirecto();
-        
+        obraFuenteRecurso.setIdobrafuenterecursos(obrafuenterecursosDto.getIdobrafuenterecursos());              
+        obraFuenteRecurso.setObra(obra);        
+        obraFuenteRecurso.setOtrospagos(obrafuenterecursosDto.getOtrospagos());
+        obraFuenteRecurso.setPagosdirectos(obrafuenterecursosDto.getPagodirecto());        
         obraFuenteRecurso.setPorcentaje(obrafuenterecursosDto.getPorcentaje());
         obraFuenteRecurso.setRubro(obrafuenterecursosDto.getRubro());
         obraFuenteRecurso.setTipoaporte(obrafuenterecursosDto.getTipoaporte());
         obraFuenteRecurso.setValor(obrafuenterecursosDto.getValor());       
         obraFuenteRecurso.setValorDisponible(obrafuenterecursosDto.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursosDto.getVigencia());
-        //obraFuenteRecurso.setobrafuenterecursosDto.getDescripcionaporte();
-        //obrafuenterecursosDto.getIdobrafuenterecursos(), obra, obrafuenterecursosDto.getTipoaporte(), obrafuenterecursosDto.getVigencia(), obrafuenterecursosDto.getValor());
+     
         
         return obraFuenteRecurso;
     }
