@@ -5,15 +5,15 @@
 }
 
 input.rf-au-inp {
-    background-color: '#{richSkin.controlBackgroundColor}';
-    background-image: url("#{resource['org.richfaces.images:inputBackgroundImage.png']}");
+    background-color: #F2F2F2;
     background-position: 1px 1px;
     background-repeat: no-repeat;
     border: 0px;
     margin: 0px;
-    padding: 0px;
+    padding: 7px;
     vertical-align: top;
-    width: 182px;
+    width: 230px;
+    font-size: 17px;    
 }
 
 .rf-au {

@@ -256,6 +256,10 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     private List<vistahomezoom> listavistahomezoom = new ArrayList<vistahomezoom>();
     //CONTRATISTAS
     private List<Contratista> contratistas = new ArrayList<Contratista>();
+    private List<Contratista> contratistas1 = new ArrayList<Contratista>();
+    private List<VistaObraMapa> interventores = new ArrayList<VistaObraMapa>();
+    private List<Tercero> clientes = new ArrayList<Tercero>();
+    private List<Tercero> gerentes = new ArrayList<Tercero>();
 
     public List<Contratista> getContratistas() {
         return contratistas;
@@ -678,7 +682,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public int getCero() {
-        System.out.println("cero " + cero);
         return cero;
     }
 
@@ -687,14 +690,44 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     }
 
     public int getCien() {
-        System.out.println("cien " + cien);
         return cien;
     }
 
     public void setCien(int cien) {
         this.cien = cien;
     }
-    
+
+    public List<Contratista> getContratistas1() {
+        return contratistas1;
+    }
+
+    public void setContratistas1(List<Contratista> contratistas1) {
+        this.contratistas1 = contratistas1;
+    }
+
+    public List<VistaObraMapa> getInterventores() {
+        return interventores;
+    }
+
+    public void setInterventores(List<VistaObraMapa> interventores) {
+        this.interventores = interventores;
+    }
+
+    public List<Tercero> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Tercero> clientes) {
+        this.clientes = clientes;
+    }
+
+    public List<Tercero> getGerentes() {
+        return gerentes;
+    }
+
+    public void setGerentes(List<Tercero> gerentes) {
+        this.gerentes = gerentes;
+    }
 
     public void iniciarfiltro() {
 
@@ -755,6 +788,7 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             filtro.setIntestadoobra(1);
         }
         mostrarCantidadProyectos();
+        mostrarContratistas();
         llenarComboEntidades();
         ubicaciondetalle = 1;
         getSessionBeanCobra().llenadodatos();
@@ -1682,7 +1716,6 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
     public void setNumo(BigDecimal numo) {
         this.numo = numo;
     }
-    
 
     public String filtroObrasActionMapaAvanModal() {
         System.out.println("ingresoo al sistema");
@@ -2767,4 +2800,15 @@ public class HomeGestion implements Serializable, ILifeCycleAware {
             setMostrarvalortotalproyectos(false);
         }
     }
+    
+    
+    //Metodo para cargar las listas para el autocomplete del filtro
+    
+    public void mostrarContratistas(){
+        contratistas1 = getSessionBeanCobra().getCobraService().encontrarContratista();
+        interventores = getSessionBeanCobra().getCobraService().encontrarInterventor();
+        clientes =  getSessionBeanCobra().getCobraService().encontrarCliente();
+        gerentes = getSessionBeanCobra().getCobraService().encontrarGerente();
+            }
+    
 }
