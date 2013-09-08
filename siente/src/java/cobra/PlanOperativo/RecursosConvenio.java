@@ -149,11 +149,7 @@ public class RecursosConvenio implements Serializable {
      */
     public void adicionarFuenteRecursos() {
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
-        
-        System.out.println("otras reservas = " +getFuenteRecursoConvenio().getOtrasreservas() );
-        System.out.println("reservaiva = " + getFuenteRecursoConvenio().getReservaiva());
-        System.out.println("valorcuotagerencia = " + getFuenteRecursoConvenio().getValorcuotagerencia());
+        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());        
         
         if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                 .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
@@ -184,42 +180,37 @@ public class RecursosConvenio implements Serializable {
     public void calcularValorGerencia() {
         SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         ResourceBundle bundle = sbc.getBundle();
-        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");        
+        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");                
         
-        System.out.println("otras reservas = " +getFuenteRecursoConvenio().getOtrasreservas() );
-        System.out.println("reservaiva = " + getFuenteRecursoConvenio().getReservaiva());
-        System.out.println("valorcuotagerencia = " + getFuenteRecursoConvenio().getValorcuotagerencia());
-        System.out.println("valor aportado = " + getFuenteRecursoConvenio().getValoraportado());
-        
-//        switch (getFuenteRecursoConvenio().getTipoaporte()) {
-//            case 1://porcentual
-//                try {
-//                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
-//                        getFuenteRecursoConvenio().setPorcentajecuotagerencia(
-//                                getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
-//                        BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
-//                        DecimalFormat valorConDecimal = new DecimalFormat("0.00");
-//                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + valorConDecimal.format(valorConverPorcentajeGerencia));
-//                    } else {
-//                        FacesUtils.addErrorMessage(bundle.getString("validarporcentajefuente"));
-//                    }
-//                } catch (ArithmeticException a) {
-//                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ 0.0000");
-//                }
-//                break;
-//            case 2://Valor
-//                try {
-//                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
-//                        getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
-//                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia(getFuenteRecursoConvenio().getPorcentajecuotagerencia() + " %");
-//                    } else {
-//                        FacesUtils.addErrorMessage(bundle.getString("validarvalorfuente"));
-//                    }
-//                } catch (ArithmeticException a) {
-//                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("0.0000 %");
-//                }
-//                break;
-//        }
+        switch (getFuenteRecursoConvenio().getTipoaporte()) {
+            case 1://porcentual
+                try {
+                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < 100) {
+                        getFuenteRecursoConvenio().setPorcentajecuotagerencia(
+                                getFuenteRecursoConvenio().getValoraportado().doubleValue() * getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / 100);
+                        BigDecimal valorConverPorcentajeGerencia = new BigDecimal(getFuenteRecursoConvenio().getPorcentajecuotagerencia(), MathContext.DECIMAL64);
+                        DecimalFormat valorConDecimal = new DecimalFormat("0.00");
+                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ " + valorConDecimal.format(valorConverPorcentajeGerencia));
+                    } else {
+                        FacesUtils.addErrorMessage(bundle.getString("validarporcentajefuente"));
+                    }
+                } catch (ArithmeticException a) {
+                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("$ 0.0000");
+                }
+                break;
+            case 2://Valor
+                try {
+                    if (getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() < getFuenteRecursoConvenio().getValoraportado().doubleValue()) {
+                        getFuenteRecursoConvenio().setPorcentajecuotagerencia(getFuenteRecursoConvenio().getValorcuotagerencia().doubleValue() / getFuenteRecursoConvenio().getValoraportado().doubleValue() * 100);
+                        getFuenteRecursoConvenio().setStrporcentajecuotagerencia(getFuenteRecursoConvenio().getPorcentajecuotagerencia() + " %");
+                    } else {
+                        FacesUtils.addErrorMessage(bundle.getString("validarvalorfuente"));
+                    }
+                } catch (ArithmeticException a) {
+                    getFuenteRecursoConvenio().setStrporcentajecuotagerencia("0.0000 %");
+                }
+                break;
+        }
 
     }
 

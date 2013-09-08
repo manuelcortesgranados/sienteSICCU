@@ -19,7 +19,7 @@ public class MontoDTO implements IsSerializable{
      private BigDecimal valor;
      private int vigencia;
      private String descripcionRubro;
-     private String eliminar;
+     private String eliminar="Eliminar";
 
     public MontoDTO() {
     }

@@ -27,7 +27,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
     /*valores necesarios para cargar la tabla de obra fuente recursos*/
     private String nombreEntidad;
     private String eliminar;
-    private String descripcionaporte;
+    private String descripcionaporte="";
     private String nombreEntidadTipo;
     private boolean estaEnFuenteRecurso;
 
@@ -74,8 +74,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
         } else {
             descripcionaporte = "Especie";
         }
-        nombreEntidad = fuente.getTercero().getStrnombrecompleto();
-        nombreEntidadTipo = nombreEntidad + "-" + descripcionaporte;
+        nombreEntidad = fuente.getTercero().getStrnombrecompleto();        
         this.eliminar = "Eliminar";
     }
 
@@ -340,6 +339,7 @@ public class ObrafuenterecursosconveniosDTO implements IsSerializable {
      * @return the nombreEntidadTipo
      */
     public String getNombreEntidadTipo() {
+        nombreEntidadTipo = nombreEntidad + "-" + descripcionaporte;        
         return nombreEntidadTipo;
     }
 

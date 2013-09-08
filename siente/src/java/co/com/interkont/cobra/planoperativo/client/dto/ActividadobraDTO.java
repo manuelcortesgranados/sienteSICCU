@@ -54,7 +54,7 @@ public class ActividadobraDTO implements IsSerializable {
     private Set dependenciasForFkActividadDestino = new HashSet(0);
     private ContratoDTO contrato;
     private ObraDTO obra;
-    private String eliminar;
+    private String eliminar="Eliminar";
     private List<ActividadobraDTO> children = new ArrayList<ActividadobraDTO>();
 
     public long getOidactiviobra() {
@@ -178,14 +178,15 @@ public class ActividadobraDTO implements IsSerializable {
         this.id = id;
         this.name = name;
         this.startDateTime = start;
+        this.endDateTime= fin;
         this.duration = calcularDuracion();
         this.percentDone = percentDone;
         this.taskType = taskType;
         this.tipoActividad= tipoActividad;
         this.boolobligatoria = boolobligatoria;
         this.obra=obraDto;
-         DateWrapper dw= new DateWrapper(start).clearTime();
-        this.endDateTime= dw.addDays(duration).asDate();
+//         DateWrapper dw= new DateWrapper(start).clearTime();
+//        this.endDateTime= dw.addDays(duration).asDate();
     }
      
        public ActividadobraDTO(String id, String name, Date start, int duration,

@@ -600,9 +600,13 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         if (fechaFin.getValue() == null) {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), calcularDuracion(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+            
+            
         } else {
             tareaNueva = new ActividadobraDTO(proyectoDTO.getStrnombreobra(), proyectoDTO.getFechaInicio(), proyectoDTO.getFechaFin(),
                     0, GanttConfig.TaskType.PARENT, 2, false, proyectoDTO);
+            
+            service.setLog("Cree proyecto", null);
         }
         if (actividadObraPadre.getTipoActividad() == 1) {
             for (ActividadobraDTO act : actividadObraPadre.getChildren()) {

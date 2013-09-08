@@ -79,13 +79,7 @@ public class CasteoGWT {
      * @author Dgarcia
      **/
     public static ActividadobraDTO castearActividadObraRaizTO(Actividadobra actividadObra, ContratoDTO convenio, ObraDTO obra) {
-        System.out.println("actividadObra name = " + actividadObra.getStrdescactividad());
-        System.out.println("actividadObra tipotarea = " + actividadObra.getTipotareagantt());
-        System.out.println("actividadObra bool obliga = " + actividadObra.getBoolobligatoria());
-        System.out.println("actividadObra fechainicio " + actividadObra.getFechaInicio());
-        System.out.println("actividadObra fechafin " + actividadObra.getFechaFin());
-        System.out.println("actividadObra duracion " + actividadObra.getDuracion());
-        
+               
         ActividadobraDTO actdto = new ActividadobraDTO(actividadObra.getStrdescactividad(), actividadObra.getFechaInicio(), actividadObra.getDuracion(), 0,
                 tipoTask(actividadObra.getTipotareagantt()), actividadObra.getTipotareagantt(), actividadObra.getBoolobligatoria());
 
@@ -166,7 +160,7 @@ public class CasteoGWT {
         obra.setFechaFin(obran.getDatefecfinobra());
         obra.setOtrospagos(obran.getOtrospagos());
         obra.setPagodirecto(obran.getPagodirecto());
-        //obra.setobraDto.getValorDisponible()        
+        obra.setValorDisponible(obran.getValorDisponible());      
         obra.setStrnombreobra(obran.getStrnombreobra());
         obra.setValor(obran.getNumvaltotobra());        
         
@@ -245,10 +239,27 @@ public class CasteoGWT {
      * 
      * @author Dgarcia
      **/
-    public static ObrafuenterecursosconveniosDTO castearObrafuenterecursosObrafuenterecursosTO(Obrafuenterecursosconvenios obrafuenterecursos, ObraDTO obra, ContratoDTO convenio) {
-        ObrafuenterecursosconveniosDTO obraFuenteRecurso = new ObrafuenterecursosconveniosDTO(obrafuenterecursos.getIdobrafuenterecursos(), obra, obrafuenterecursos.getTipoaporte(), obrafuenterecursos.getVigencia(), obrafuenterecursos.getValor());
-        obraFuenteRecurso.setFuenterecursosconvenio(castearFuenteRecursosConvenio(obrafuenterecursos.getFuenterecursosconvenio(), convenio));
-        return null;
+    public static ObrafuenterecursosconveniosDTO castearObrafuenterecursosObrafuenterecursosTO(Obrafuenterecursosconvenios obrafuenterecursoobra, ObraDTO obra, ContratoDTO convenio) {
+        ObrafuenterecursosconveniosDTO obraFuenteRecurso = new ObrafuenterecursosconveniosDTO();
+        
+        obraFuenteRecurso.setDescripcionaporte(obrafuenterecursoobra.getDescripciontipoaporte());
+        obraFuenteRecurso.setEliminar("Eliminar");
+        obraFuenteRecurso.setEstaEnFuenteRecurso(obrafuenterecursoobra.isEstaenfuenterecurso());
+        obraFuenteRecurso.setFormaingreso(obrafuenterecursoobra.getFormaingreso());
+        obraFuenteRecurso.setFuenterecursosconvenio(castearFuenteRecursosConvenio(obrafuenterecursoobra.getFuenterecursosconvenio(), convenio));
+        obraFuenteRecurso.setIdobrafuenterecursos(obrafuenterecursoobra.getIdobrafuenterecursos());
+       obraFuenteRecurso.setObra(obra);
+       obraFuenteRecurso.setOtrospagos(obrafuenterecursoobra.getOtrospagos());
+       obraFuenteRecurso.setPagodirecto(obrafuenterecursoobra.getPagosdirectos());
+       obraFuenteRecurso.setPorcentaje(obrafuenterecursoobra.getPorcentaje());
+       obraFuenteRecurso.setRubro(obrafuenterecursoobra.getRubro());
+       obraFuenteRecurso.setTipoaporte(obrafuenterecursoobra.getTipoaporte());
+       obraFuenteRecurso.setValor(obrafuenterecursoobra.getValor());
+       obraFuenteRecurso.setValorDisponible(obrafuenterecursoobra.getValorDisponible());
+       obraFuenteRecurso.setVigencia(obrafuenterecursoobra.getVigencia());   
+       obraFuenteRecurso.setNombreEntidad(obrafuenterecursoobra.getFuenterecursosconvenio().getTercero().getStrnombrecompleto());
+       //obraFuenteRecurso.setN
+       return obraFuenteRecurso;
     }
 
     /*
@@ -547,7 +558,7 @@ public class CasteoGWT {
         
         obra.setObjetivos(castearSetObjetivos(obraDto.getObjetivoses(), obra));
         obra.setObrafuenterecursosconvenioses(castearSetObraFuenteRecursos(obraDto.getObrafuenterecursosconvenioses(), obra, convenio));
-        //obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
+        obra.setActividadobras(castearSetActividadesObra(obraDto.getActividadobras(), obra));
        
         System.out.println("Objetivos = " + obra.getObjetivos().size());
         System.out.println("Actividades = " + obra.getActividadobras().size());
@@ -639,6 +650,8 @@ public class CasteoGWT {
         obraFuenteRecurso.setValorDisponible(obrafuenterecursosDto.getValorDisponible());
         obraFuenteRecurso.setVigencia(obrafuenterecursosDto.getVigencia());
      
+        System.out.println("obraFuenteRecurso = " + obraFuenteRecurso.getRubro());
+        System.out.println("obraFuenteRecurso valor = " + obraFuenteRecurso.getValor());
         
         return obraFuenteRecurso;
     }
