@@ -81,7 +81,7 @@
                             <a4j:commandLink styleClass="ikont-hcl-llenarlistaOpinion"  action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}" oncomplete="#{rich:component('participacionciudadanomodal')}.show();
                                              return false;" render="participacionciudadanomodal"/>
                             <h:outputText  styleClass="ikont-hot-value-participacion"    value="#{Ciudadano$PerfilCiudadano.opinar}"/>
-                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="#{var.opcionesMA}"/>
+                            <h:outputText  styleClass="ikont-hot-text-participacion"  value="Opiniones"/>
                             <a4j:commandLink id="opinion"  value="#{var.ver}"  render="participacionciudadanomodal" styleClass="ikont-hot-textver-participacion"   action="#{Ciudadano$PerfilCiudadano.llenarlistaOpinion}" oncomplete="#{rich:component('participacionciudadanomodal')}.show();
                                              return false;"/>                        
                         </h:panelGrid>

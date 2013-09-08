@@ -54,10 +54,6 @@
                                       render="gpMuniContratista" />
                         </h:selectOneMenu>                 
 
-
-                        <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
-                        <interkont:spacer width="10" rendered="#{!Supervisor$Contrato.habidescontratista}"/>
-
                         <h:outputLabel  styleClass="ikont-hol-lbltipocontratista"   id="lbltipoidContratista"  value="#{var.tipodeIdentificacion}" for="combotipoidcontratista" />
                         <h:selectOneMenu id="combotipoidcontratista" value="#{Supervisor$Contrato.contratista.tipoidentificacion.intcodigotipoiden}" disabled="#{Supervisor$Contrato.boolcrearcontratista}">
                             <f:selectItems value="#{Supervisor$Contrato.tipoIdentificacionOption}"/>

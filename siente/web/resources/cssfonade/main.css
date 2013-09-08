@@ -2088,6 +2088,7 @@ input[type="text"], input[type="password"], select{
     background-repeat: no-repeat;
     background-image: url(../imgs/modal/modal_btn_sombra.png);
     background-position: center 25px;
+    height: 23px;
 }
 
 
