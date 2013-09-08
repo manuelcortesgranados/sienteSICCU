@@ -3969,3 +3969,61 @@ a:hover {
 .ikont-div-bienvenida{
 
 }
+.ikont-po-img-continuarGWTInferior{
+    width: 100px;
+    height: 100px;
+    border: solid 1px #CCC;
+    border-radius: 50% 50% 50% 50%;
+    background-color: #ffffff;    
+    float: left;
+    text-decoration: none;
+    color: #A7A9AC;
+    font-family: 'Open Sans';
+    line-height: 95px;
+    rgin: 0px auto;
+    left: 50% !important;
+    font-size: 15px!important;
+
+}
+.ikont-po-img-continuarGWTInferior:hover{
+    width: 100px;
+    height: 100px;
+    border: solid 1px #CCC;
+    border-radius: 50% 50% 50% 50%;
+    float: left;
+    text-decoration: none;
+    color: #9CFF00;
+    background-color:#257500;
+    transition: background-color 1s ease-in-out 0s;
+    font-family: 'Open Sans';
+    line-height: 95px;
+
+}
+.ikont-po-img-finalizarGWTInferior{
+    width: 100px;
+    height: 100px;
+    border: solid 1px #CCC;
+    background-color: #ffffff;
+    border-radius: 50% 50% 50% 50%;
+    float: right;
+    text-decoration: none;
+    color: #A7A9AC;
+    font-family: 'Open Sans';
+    line-height: 95px;
+    rgin: 0px auto;
+    left: 60% !important;
+    font-size: 15px!important;
+}
+.ikont-po-img-finalizarGWTInferior:hover{
+    width: 100px;
+    height: 100px;
+    border: solid 1px #257500;
+    border-radius: 50% 50% 50% 50%;
+    float: right;
+    text-decoration: none;
+    color: #9CFF00;
+    background-color:#257500;
+    transition: background-color 1s ease-in-out 0s;
+    font-family: 'Open Sans';
+    line-height: 95px;
+}
