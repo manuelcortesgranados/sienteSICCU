@@ -68,341 +68,355 @@
                 <br/>
                 <br/>
                 <h:panelGrid  cellspacing="12" columns="2"  id="panel-filtro-novedades">
-                    <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEntidadconveniocontrato" value="#{var.entidadconvenio}: " />
-                    <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >        
-                        <rich:select onclick="this.value = '';" id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" 
-                                     value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >                           
-                            <f:selectItem itemLabel="TODOS" itemValue="TODOS"/>
-                            <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />   
-                            <a4j:ajax event="change"
-                                      listener="#{Supervisor$Contrato.comboEntidadesContrato}"
-                                      render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
-                                      execute="@this" >
-                            </a4j:ajax>                               
-                        </rich:select>                           
-                       
+                        <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipocontrato" value="#{var.TipoContratoContralorias}: " />
+                        <h:panelGrid  columnClasses="inputsDetalle,inputsDetalle" columns="2"   >        
+                            <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.tipocontrato}" >
+                                <f:selectItem itemLabel="Obra" itemValue="1"/>       
+                                <f:selectItems value="#{Supervisor$Contrato.tipocontratoconsultoria}"/>                  
+                                <a4j:ajax event="valueChange"
+                                          listener="#{Supervisor$Contrato.listarPorTipoContrato}"
+                                          render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
+                                          execute="@this"/>         
+                            </h:selectOneMenu>                           
+                        </h:panelGrid>
+                        <h:outputLabel  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lbltipoentidad" value="#{var.entidad}: " />
+
+                        <h:panelGrid columns="2" columnClasses="inputsDetalle,inputsDetalle" id="consulconvenio" styleClass="ikont-hpg-consulconvenio"  >        
+                            <rich:select onclick="this.value = '';" id="ikont-fsi-selecentid" enableManualInput="true" defaultLabel="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" 
+                                         value="#{Supervisor$Contrato.contrato.tercero.strnombrecompleto}" >                           
+                                <f:selectItem itemLabel="TODOS" itemValue="TODOS"/>
+                                <f:selectItems value="#{Supervisor$Contrato.terceroOption}" />   
+                                <a4j:ajax event="change"
+                                          listener="#{Supervisor$Contrato.comboEntidadesContrato}"
+                                          render="tabla-listado-contratoconvenio,ikont-fsi-selecentid, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
+                                          execute="@this" >
+                                </a4j:ajax>                               
+                            </rich:select>                           
+
+                        </h:panelGrid>
+                        <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
+                        <h:panelGrid  columns="2" rendered="#{var.boolestadoconvenio and Supervisor$Contrato.tipoContCon == 'Convenio'}">
+                            <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}"
+                                             >
+                                <f:selectItems value="#{Supervisor$Contrato.estadoConvenioOption}" />     
+                                <f:selectItem itemLabel="Todos" itemValue="0"/>
+                                <a4j:ajax event="valueChange"
+                                          listener="#{Supervisor$Contrato.comboEntidadesContrato()}"
+                                          render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
+                                          execute="@this"/>
+                            </h:selectOneMenu>  
+                        </h:panelGrid>
                     </h:panelGrid>
-                    <h:outputLabel rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}"  styleClass="ikont-hol-lblEntidadconveniocontrato"   id="lblEstadoconvenio" value="Estado convenio: " />
-                    <h:panelGrid  columns="2" rendered="#{var.boolestadoconvenio and Supervisor$Contrato.tipoContCon == 'Convenio'}">
-                        <h:selectOneMenu value="#{Supervisor$Contrato.filtrocontrato.estadoConvenio}"
-                                         >
-                            <f:selectItems value="#{Supervisor$Contrato.estadoConvenioOption}" />     
-                            <f:selectItem itemLabel="Todos" itemValue="0"/>
-                            <a4j:ajax event="valueChange"
-                                      listener="#{Supervisor$Contrato.comboEntidadesContrato()}"
-                                      render="tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio, pl-tabla-listado-contratoconvenio-contratista"
-                                      execute="@this"/>
-                        </h:selectOneMenu>  
-                    </h:panelGrid>
+
+                    <interkont:spacer height="10px"  />
+
+                    <!-- Listado de convenios según la entidad del contratante -->
+                    <h:panelGroup layout="block" id="pl-tabla-listado-contratoconvenio" >
+                        <h:panelGrid rendered="#{empty Supervisor$Contrato.listacontratos and empty Supervisor$Contrato.listacontratoscontratista}">
+                            <f:facet name="header">
+                                <h:outputText  styleClass="ikont-hot-noencontrocontratoentidad"   value="No se encontró #{Supervisor$Contrato.tipoContCon} para esta entidad" />
+                            </f:facet>
+                        </h:panelGrid>
+
+                        <rich:dataTable id="tabla-listado-contratoconvenio" styleClass="ikont-tabla-entidad-contratista"
+                                        rowKeyVar="filaSeleccionada"
+                                        value="#{Supervisor$Contrato.listacontratos}"
+                                        rendered="#{Supervisor$Contrato.listacontratos.size()>0}"
+                                        sortMode="single" var="currentRow"  rows="6"
+                                        rowClasses="cabezo_tabla01, cabezo_tabla02"
+                                        binding="#{Supervisor$Contrato.tablacontratoconvenio}">
+                            <f:facet name="header">
+
+                                <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
+                                    <h:outputText  styleClass="ikont-hot-contratoencontrados"   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
+                                </rich:column>
+
+                                <rich:columnGroup>
+                                    <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
+                                        <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratante}" rendered="#{var.varconsulcontratoconvenio}"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+
+                                <rich:columnGroup>
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" breakRowBefore="true">
+                                        <h:outputText  styleClass="ikont-hot-txtnumerocc"   id="txtnumeroccccc" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-outxtnombrecc"   id="outxtnombrecc" value="#{var.nombre}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-outxttipocc"   id="outxttipocc" value="#{var.tipocontr}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-outxtvlrcc"   id="outxtvlrcc" value="#{var.valor}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-outxtcontratistacc"   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                        <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                        <h:outputText  styleClass="ikont-hot-outxtcontraconsul"   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-outxtpadrecc"   id="outxtpadrecc" value="#{var.proyectosasociados}?" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="false">
+                                        <h:outputText  styleClass="ikont-hot-outxtconthijo"   id="outxtconthijo" value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-contratosdeconsultoria"   value="#{var.contratosdeconsultoria}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-contratopadre"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
+                                    </rich:column>
+
+                                    <!--<rich:column width="150px">
+                                        <h:outputText  styleClass="ikont-hot-editar"   value="#{var.editar}" />
+                                    </rich:column>-->
+                                </rich:columnGroup>
+                            </f:facet>
+
+                            <rich:column  width="150px" breakRowBefore="true">
+                                <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{currentRow.strnumcontrato}" />
+                            </rich:column>
+
+                            <rich:column >
+                                <h:inputTextarea id="intxtnombrecc" value="#{currentRow.strnombre}" disabled="true" cols="35" rows="2" />
+                            </rich:column>
+
+                            <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-intxttipocc"   id="intxttipocc" value="#{currentRow.tipocontrato.strdesctipocontrato}" />
+                            </rich:column>
+
+                            <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-intxttipocc2"   id="intxttipocc2" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
+                            </rich:column>
+
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numtxtvlrcc"   id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
+                                    <f:convertNumber pattern="$#,###.00" />
+                                </h:outputText>
+                            </rich:column>
+
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                            </rich:column>
+
+                            <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-numproyecto"   id="numproyecto" value="#{currentRow.intcantproyectos}" />
+                            </rich:column>
+
+                            <rich:column  rendered="false">
+                                <h:outputText  styleClass="ikont-hot-numtxtpadrecc"   id="numtxtpadrecc" value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
+                                <h:outputText  styleClass="ikont-hot-numtxtpadrehijocc"   id="numtxtpadrehijocc" value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
+                            </rich:column>
+
+                            <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-descontrconsul"   id="descontrconsul" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
+                            </rich:column>
+
+                            <rich:column width="120px">
+                                <h:commandLink  action="#{Supervisor$Contrato.detalleContrato}">
+                                    <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                </h:commandLink>
+                            </rich:column>
+
+                            <rich:column width="120px" id="contconvpadre" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre}" rendered="#{currentRow.contrato!=null}">
+                                    <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                </h:commandLink>
+                            </rich:column>
+
+
+                            <f:facet name="footer">
+
+                                <rich:column colspan="10" breakRowBefore="true">
+                                    <center>
+                                        <h:panelGrid columns="4">
+                                            <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:column>
+
+                            </f:facet>
+                        </rich:dataTable>
+                        <br/>
+                        <br/>
+                    </h:panelGroup>
+
+                    <interkont:spacer height="10px"  />
+
+                    <!-- Listado de convenios según la entidad del contratista -->
+                    <h:panelGroup id="pl-tabla-listado-contratoconvenio-contratista"  >
+                        <rich:dataTable  styleClass="ikont-tabla-entidad-contratista"  id="tabla-listado-contratoconvenio-contratista"
+                                         rowKeyVar="filaSeleccionada"
+                                         value="#{Supervisor$Contrato.listacontratoscontratista}"
+                                         rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
+                                         binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
+                                         sortMode="single" var="currentRow"  rows="6"
+                                         rowClasses="cabezo_tabla01, cabezo_tabla02">
+                            <f:facet id="ikont-colum-superior-consulta" name="header">
+
+                                <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
+                                    <h:outputText  styleClass="ikont-hot-tipocontratosencontrados"   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilasContratista} #{var.paginaCiu} #{Supervisor$Contrato.paginaContratista} #{var.deCiu} #{Supervisor$Contrato.totalpaginasContratista}" />
+                                </rich:column>
+
+                                <rich:columnGroup>
+                                    <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
+                                        <h:outputText  styleClass="ikont-hot-conveniosporcontratista"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratista}" />
+                                    </rich:column>
+                                </rich:columnGroup>
+
+                                <rich:columnGroup  >
+                                    <rich:column styleClass="ikont-colum-superior-consulta"  width="150px" breakRowBefore="true">
+                                        <h:outputText  styleClass="ikont-hot-numerotipocontrato"   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-nombre"   value="#{var.nombre}" />
+                                    </rich:column>
+
+                                    <rich:column  styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-tipocontr"   value="#{var.tipocontr}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-valor"   value="#{var.valor}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
+                                        <h:outputText  styleClass="ikont-hot-entidad"   value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
+                                        <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-proyectosasociados"   value="#{var.proyectosasociados}?" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="false">
+                                        <h:outputText  styleClass="ikont-hot-vontratohijo"   value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-contratosdeconsultoria"   value="#{var.contratosdeconsultoria}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
+                                        <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
+                                    </rich:column>
+
+                                    <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                        <h:outputText  styleClass="ikont-hot-consultarpadre"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
+                                    </rich:column>
+
+                                    <!--<rich:column width="150px">
+                                        <h:outputText  styleClass="ikont-hot-editar"   value="#{var.editar}" />
+                                    </rich:column>-->
+                                </rich:columnGroup>
+                            </f:facet>
+                            <rich:column width="150px" breakRowBefore="true">
+                                <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{currentRow.strnumcontrato}" />
+                            </rich:column>
+
+                            <rich:column >
+                                <h:inputTextarea value="#{currentRow.strnombre}" disabled="true" cols="35" rows="2" />
+                            </rich:column>
+
+                            <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-strdesctipocontrato"   value="#{currentRow.tipocontrato.strdesctipocontrato}" />
+                            </rich:column>
+
+                            <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
+                            </rich:column>
+
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="#{currentRow.numvlrcontrato}">
+                                    <f:convertNumber pattern="$#,###.00" />
+                                </h:outputText>
+                            </rich:column>
+
+                            <rich:column>
+                                <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
+                            </rich:column>
+
+                            <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-intcantproyectos"   value="#{currentRow.intcantproyectos}" />
+                            </rich:column>
+
+                            <rich:column rendered="false">
+                                <h:outputText  styleClass="ikont-hot-si"   value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
+                                <h:outputText  styleClass="ikont-hot-no"   value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
+                            </rich:column>
+
+                            <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
+                            </rich:column>
+
+                            <rich:column width="120px">
+                                <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista}">
+                                    <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                </h:commandLink>
+                            </rich:column>
+
+                            <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
+                                <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista}" rendered="#{currentRow.contrato!=null}">
+                                    <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
+                                </h:commandLink>
+                            </rich:column>
+                            <f:facet name="footer">
+
+                                <rich:column colspan="10" breakRowBefore="true">
+                                    <center>
+                                        <h:panelGrid columns="4">
+                                            <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+
+                                            <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}"
+                                                               render="tabla-listado-contratoconvenio,pgcontratoconvenio">
+                                            </a4j:commandButton>
+                                        </h:panelGrid>
+                                    </center>
+                                </rich:column>
+
+                            </f:facet>
+                        </rich:dataTable>
+                    </h:panelGroup>
                 </h:panelGrid>
-
-                <interkont:spacer height="10px"  />
-
-                <!-- Listado de convenios según la entidad del contratante -->
-                <h:panelGroup layout="block" id="pl-tabla-listado-contratoconvenio" >
-                    <h:panelGrid rendered="#{empty Supervisor$Contrato.listacontratos and empty Supervisor$Contrato.listacontratoscontratista}">
-                        <f:facet name="header">
-                            <h:outputText  styleClass="ikont-hot-noencontrocontratoentidad"   value="No se encontró #{Supervisor$Contrato.tipoContCon} para esta entidad" />
-                        </f:facet>
-                    </h:panelGrid>
-
-                    <rich:dataTable id="tabla-listado-contratoconvenio" styleClass="ikont-tabla-entidad-contratista"
-                                    rowKeyVar="filaSeleccionada"
-                                    value="#{Supervisor$Contrato.listacontratos}"
-                                    rendered="#{Supervisor$Contrato.listacontratos.size()>0}"
-                                    sortMode="single" var="currentRow"  rows="6"
-                                    rowClasses="cabezo_tabla01, cabezo_tabla02"
-                                    binding="#{Supervisor$Contrato.tablacontratoconvenio}">
-                        <f:facet name="header">
-
-                            <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                <h:outputText  styleClass="ikont-hot-contratoencontrados"   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilas} #{var.paginaCiu} #{Supervisor$Contrato.pagina} #{var.deCiu} #{Supervisor$Contrato.totalpaginas}" />
-                            </rich:column>
-
-                            <rich:columnGroup>
-                                <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratante"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratante}" rendered="#{var.varconsulcontratoconvenio}"/>
-                                </rich:column>
-                            </rich:columnGroup>
-
-                            <rich:columnGroup>
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-txtnumerocc"   id="txtnumeroccccc" value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-outxtnombrecc"   id="outxtnombrecc" value="#{var.nombre}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-outxttipocc"   id="outxttipocc" value="#{var.tipocontr}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-outxtvlrcc"   id="outxtvlrcc" value="#{var.valor}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-outxtcontratistacc"   id="outxtcontratistacc" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                    <h:outputText  styleClass="ikont-hot-outxtentidadconv"   id="outxtentidadconv" value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                    <h:outputText  styleClass="ikont-hot-outxtcontraconsul"   id="outxtcontraconsul" value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-outxtpadrecc"   id="outxtpadrecc" value="#{var.proyectosasociados}?" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="false">
-                                    <h:outputText  styleClass="ikont-hot-outxtconthijo"   id="outxtconthijo" value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-contratosdeconsultoria"   value="#{var.contratosdeconsultoria}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-contratopadre"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
-                                </rich:column>
-
-                                <!--<rich:column width="150px">
-                                    <h:outputText  styleClass="ikont-hot-editar"   value="#{var.editar}" />
-                                </rich:column>-->
-                            </rich:columnGroup>
-                        </f:facet>
-
-                        <rich:column  width="150px" breakRowBefore="true">
-                            <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{currentRow.strnumcontrato}" />
-                        </rich:column>
-
-                        <rich:column >
-                            <h:inputTextarea id="intxtnombrecc" value="#{currentRow.strnombre}" disabled="true" cols="35" rows="2" />
-                        </rich:column>
-
-                        <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-intxttipocc"   id="intxttipocc" value="#{currentRow.tipocontrato.strdesctipocontrato}" />
-                        </rich:column>
-
-                        <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-intxttipocc2"   id="intxttipocc2" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
-                        </rich:column>
-
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtvlrcc"   id="numtxtvlrcc" value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###.00" />
-                            </h:outputText>
-                        </rich:column>
-
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numtxtcontratistacc"   id="numtxtcontratistacc" value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
-                        </rich:column>
-
-                        <rich:column  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-numproyecto"   id="numproyecto" value="#{currentRow.intcantproyectos}" />
-                        </rich:column>
-
-                        <rich:column  rendered="false">
-                            <h:outputText  styleClass="ikont-hot-numtxtpadrecc"   id="numtxtpadrecc" value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
-                            <h:outputText  styleClass="ikont-hot-numtxtpadrehijocc"   id="numtxtpadrehijocc" value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
-                        </rich:column>
-
-                        <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-descontrconsul"   id="descontrconsul" value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
-                        </rich:column>
-
-                        <rich:column width="120px">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContrato}">
-                                <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                            </h:commandLink>
-                        </rich:column>
-
-                        <rich:column width="120px" id="contconvpadre" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadre}" rendered="#{currentRow.contrato!=null}">
-                                <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                            </h:commandLink>
-                        </rich:column>
-
-
-                        <f:facet name="footer">
-
-                            <rich:column colspan="10" breakRowBefore="true">
-                                <center>
-                                    <h:panelGrid columns="4">
-                                        <a4j:commandButton id="btPriCont" value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.primeroDetcontrato}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton id="btAntCont" value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontrato}" action="#{Supervisor$Contrato.anterioresDetcontrato}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton id="btSigCont" value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.siguienteDetcontrato}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton id="btUltCont" value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontrato}" action="#{Supervisor$Contrato.ultimoDetcontrato}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-                                    </h:panelGrid>
-                                </center>
-                            </rich:column>
-
-                        </f:facet>
-                    </rich:dataTable>
-                </h:panelGroup>
-
-                <interkont:spacer height="10px"  />
-
-                <!-- Listado de convenios según la entidad del contratista -->
-                <h:panelGroup id="pl-tabla-listado-contratoconvenio-contratista"  >
-                    <rich:dataTable  styleClass="ikont-tabla-entidad-contratista"  id="tabla-listado-contratoconvenio-contratista"
-                                     rowKeyVar="filaSeleccionada"
-                                     value="#{Supervisor$Contrato.listacontratoscontratista}"
-                                     rendered="#{Supervisor$Contrato.listacontratoscontratista.size()>0}"
-                                     binding="#{Supervisor$Contrato.tablacontratoconveniocontratista}"
-                                     sortMode="single" var="currentRow"  rows="6"
-                                     rowClasses="cabezo_tabla01, cabezo_tabla02">
-                        <f:facet id="ikont-colum-superior-consulta" name="header">
-
-                            <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                <h:outputText  styleClass="ikont-hot-tipocontratosencontrados"   value="#{Supervisor$Contrato.tipoContCon}s encontrados #{Supervisor$Contrato.totalfilasContratista} #{var.paginaCiu} #{Supervisor$Contrato.paginaContratista} #{var.deCiu} #{Supervisor$Contrato.totalpaginasContratista}" />
-                            </rich:column>
-
-                            <rich:columnGroup>
-                                <rich:column styleClass="ikont-colum-superior-consulta" colspan="10">
-                                    <h:outputText  styleClass="ikont-hot-conveniosporcontratista"   value="#{Supervisor$Contrato.tipoContCon}s #{var.conveniosporcontratista}" />
-                                </rich:column>
-                            </rich:columnGroup>
-
-                            <rich:columnGroup  >
-                                <rich:column styleClass="ikont-colum-superior-consulta"  width="150px" breakRowBefore="true">
-                                    <h:outputText  styleClass="ikont-hot-numerotipocontrato"   value="#{var.numero} #{Supervisor$Contrato.tipoContCon}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-nombre"   value="#{var.nombre}" />
-                                </rich:column>
-
-                                <rich:column  styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-tipocontr"   value="#{var.tipocontr}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-valor"   value="#{var.valor}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato'}" />
-                                    <h:outputText  styleClass="ikont-hot-entidad"   value="#{var.entidad}" rendered="#{Supervisor$Contrato.tipoContCon=='Convenio'}" />
-                                    <h:outputText  styleClass="ikont-hot-contratista"   value="#{var.contratista}" rendered="#{Supervisor$Contrato.tipoContCon=='Contrato consultoría'}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-proyectosasociados"   value="#{var.proyectosasociados}?" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="false">
-                                    <h:outputText  styleClass="ikont-hot-vontratohijo"   value="#{var.contratohijo} #{Supervisor$Contrato.tipoContCon}?" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px" rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-contratosdeconsultoria"   value="#{var.contratosdeconsultoria}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px">
-                                    <h:outputText  styleClass="ikont-hot-consultar"   value="#{var.consultar}" />
-                                </rich:column>
-
-                                <rich:column styleClass="ikont-colum-superior-consulta" width="150px"  rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                                    <h:outputText  styleClass="ikont-hot-consultarpadre"   value="#{var.consultar} #{Supervisor$Contrato.tipoContCon} Padre" />
-                                </rich:column>
-
-                                <!--<rich:column width="150px">
-                                    <h:outputText  styleClass="ikont-hot-editar"   value="#{var.editar}" />
-                                </rich:column>-->
-                            </rich:columnGroup>
-                        </f:facet>
-                        <rich:column width="150px" breakRowBefore="true">
-                            <h:outputText  styleClass="ikont-hot-strnumcontrato"   value="#{currentRow.strnumcontrato}" />
-                        </rich:column>
-
-                        <rich:column >
-                            <h:inputTextarea value="#{currentRow.strnombre}" disabled="true" cols="35" rows="2" />
-                        </rich:column>
-
-                        <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-strdesctipocontrato"   value="#{currentRow.tipocontrato.strdesctipocontrato}" />
-                        </rich:column>
-
-                        <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" />
-                        </rich:column>
-
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-numvlrcontrato"   value="#{currentRow.numvlrcontrato}">
-                                <f:convertNumber pattern="$#,###.00" />
-                            </h:outputText>
-                        </rich:column>
-
-                        <rich:column>
-                            <h:outputText  styleClass="ikont-hot-strnombre"   value="#{currentRow.contratista.strnombre} #{currentRow.contratista.strapellido1}" />
-                        </rich:column>
-
-                        <rich:column rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-intcantproyectos"   value="#{currentRow.intcantproyectos}" />
-                        </rich:column>
-
-                        <rich:column rendered="false">
-                            <h:outputText  styleClass="ikont-hot-si"   value="#{var.si}" rendered="#{currentRow.booleantienehijos}" />
-                            <h:outputText  styleClass="ikont-hot-no"   value="#{var.no}" rendered="#{!currentRow.booleantienehijos}" />
-                        </rich:column>
-
-                        <rich:column rendered="#{Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:outputText  styleClass="ikont-hot-strdescripcion"   value="#{currentRow.tipocontratoconsultoria.strdescripcion}" rendered="#{Supervisor$Contrato.boolcontrconsultoria}" />
-                        </rich:column>
-
-                        <rich:column width="120px">
-                            <h:commandLink   action="#{Supervisor$Contrato.detalleContratoContratista}">
-                                <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                            </h:commandLink>
-                        </rich:column>
-
-                        <rich:column width="120px" rendered="#{!Supervisor$Contrato.boolcontrconsultoria}">
-                            <h:commandLink  action="#{Supervisor$Contrato.detalleContratoPadreContratista}" rendered="#{currentRow.contrato!=null}">
-                                <h:graphicImage  styleClass="ikont-hgi-btverpng"    value="/resources/imgs/bt_ver.png" />
-                            </h:commandLink>
-                        </rich:column>
-                        <f:facet name="footer">
-
-                            <rich:column colspan="10" breakRowBefore="true">
-                                <center>
-                                    <h:panelGrid columns="4">
-                                        <a4j:commandButton value="#{var.primeroCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.primeroDetcontratoContratista}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton value="#{var.anteriorCiu}" disabled="#{!Supervisor$Contrato.veranteriorcontratoContratista}" action="#{Supervisor$Contrato.anterioresDetcontratoContratista}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton value="#{var.siguienteCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.siguienteDetcontratoContratista}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-
-                                        <a4j:commandButton value="#{var.ultimoCiu}" disabled="#{!Supervisor$Contrato.verultimoscontratoContratista}" action="#{Supervisor$Contrato.ultimoDetcontratoContratista}"
-                                                           render="tabla-listado-contratoconvenio,pgcontratoconvenio">
-                                        </a4j:commandButton>
-                                    </h:panelGrid>
-                                </center>
-                            </rich:column>
-
-                        </f:facet>
-                    </rich:dataTable>
-                </h:panelGroup>
-            </h:panelGrid>
 
 
         </h:form>

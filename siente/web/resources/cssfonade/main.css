@@ -1710,15 +1710,16 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-div-menu-principal {
-    background-color:white;
+     background-color:white;
     width:0px; height:100%;
-    position: absolute;
+    position: fixed;
     left: 0px;
     right: 0px;
     overflow: hidden;
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
+    top:139px; 
 }
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
