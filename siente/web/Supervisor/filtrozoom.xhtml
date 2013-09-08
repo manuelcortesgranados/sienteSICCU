@@ -55,7 +55,6 @@
                                               $("#numero1").val(numero1);
                                               $("#numero2").val(numero2);
                                               $("#amount").val("Valor $" + ui.values[ 0 ] + " a $" + ui.values[ 1 ]);
-
                                           }
                                       });
                                       $("#amount").val("Valor $ " + $("#slider-range").slider("values", 0) +
@@ -150,32 +149,32 @@
         <rich:tab header="#{var.filtroquien}" id="tab_tres" name="tab_tres">
             <h:graphicImage styleClass="imagen_punta3" value="/resources/imgs/logo_punta_filtro_zoom.png" />
             <h:panelGrid columns="1" styleClass="panel_filtro_zoom"> 
-                
-                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" style="position: absolute;top: 85px;"
+
+                <rich:autocomplete id="auto_cliente" mode="client"  autocompleteList="#{HomeGestion.clientes}" style="position: absolute;top: 85px; width: 236px!important;"
                                    var="cap3" fetchValue="#{cap3.strnombrecompleto}" value="#{HomeGestion.filtro.strcliente}" layout="div">
                     #{cap3.strnombrecompleto}
                     <rich:placeholder id="placeHolderCliente" value="Cliente" />
                 </rich:autocomplete>
-                
-                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;"
+
+                <rich:autocomplete id="auto_contratista" mode="client" autocompleteList="#{HomeGestion.contratistas1}" style="position: absolute;top: 132px;width: 236px!important;"
                                    var="cap" fetchValue="#{cap.strnombre}" value="#{HomeGestion.filtro.strcontratista}" layout="div">
                     #{cap.strnombre}
                     <rich:placeholder id="placeHolderContratista" value="Contratista" />
                 </rich:autocomplete>
-                
-                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;"                                  
+
+                <rich:autocomplete immediate="true" id="auto_interventor" mode="client"  autocompleteList="#{HomeGestion.interventores}" style="position: absolute;top: 182px;width: 236px!important;"                                  
                                    var="cap1" fetchValue="#{cap1.strinterventor}" value="#{HomeGestion.filtro.strinterventor}" layout="div">
                     #{cap1.strinterventor}
                     <rich:placeholder  id="placeHolderInterventor" value="Interventor" />
                 </rich:autocomplete>
-                
-                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;"
+
+                <rich:autocomplete id="auto_gerente" immediate="true" mode="client" autocompleteList="#{HomeGestion.gerentes}" style="position: absolute;top: 234px;width: 236px!important;"
                                    var="cap2" fetchValue="#{cap2.strnombrecompleto}" value="#{HomeGestion.filtro.strgerenteconvenio}" layout="div">
                     #{cap2.strnombrecompleto}
                     <rich:placeholder id="placeHolderGerente" value="Gerente de Convenio" />
                 </rich:autocomplete>
-                
-                
+
+
             </h:panelGrid>
 
             <center>

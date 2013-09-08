@@ -19,8 +19,14 @@
         <script src="/#{var.versioncobra}/resources/js/analytics/#{var.srcanalytics}" type="text/javascript"></script>
         <link href="/#{var.versioncobra}/resources/gSlider/style/panel-image-slider.css" rel="stylesheet" type="text/css" />
         <link href="/#{var.versioncobra}/resources/css/valla.css" rel="stylesheet" type="text/css" />
-
-
+        <script type="text/javascript">
+            function esconderbienvenida() {
+                             var divIngresoUsuario = j('.ikont-div-ingreso-bienvenida');
+                            divIngresoUsuario.stop().animate({height: '0px'});
+                             var divIngresoUsuario = j('.ikont-div-bienvenida');
+                            divIngresoUsuario.stop().animate({height: '0px'});
+                        }
+        </script>
 
     </ui:define>
 
@@ -55,26 +61,33 @@
             </h:panelGroup>
         </center>
     </ui:define>   
-    <ui:define name="body">      
+    <ui:define name="body">  
         <h:form id="form_gestion" prependId="false" style="border-bottom: 0px dashed rgb(88, 89, 91)!important;position: absolute;">
-            <center>
-                <h:panelGroup style="border-bottom: 0px!important;" >
-                    <rich:collapsiblePanel header="X" switchType="client">
-                        <h:panelGrid  styleClass="panelzoomhome1">
-                            <rich:column>
-                                <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.bienvenidazoom}"/></center><br/>      
-                            </rich:column>
-                            <rich:column>
-                                <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.bienvenidazoomtexto}"/></center> 
-                            </rich:column> 
-                            <br/> 
-                        </h:panelGrid>
-                    </rich:collapsiblePanel>
-                </h:panelGroup>
-            </center>
-            <center><div id="header_content header_content_inicio"/> </center>
+            <table>
+                <tr>
+                    <td>
+                        <blink>
+                            <h:outputText  styleClass="ikont-hot-mensajes "    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
+                        </blink>
+                    </td>
+                </tr>
+            </table>
+            <h:commandLink  immediate="true"  value="X" styleClass="x_bienvenida" onclick="esconderbienvenida();
+                            return  false;"/>         
+            <div id="ingreso-bienvenida" style="" class="ikont-div-ingreso-bienvenida">
+                    <h:panelGrid  styleClass="panelzoomhome1">
+                        <rich:column>
+                            <center><h:outputText styleClass="inputbienvenidahomezoom" value="#{var.bienvenidazoom}"/></center><br/>      
+                        </rich:column>
+                        <rich:column>
+                            <center><h:outputText styleClass="inputbienvenidahomezoomtexto" value="#{var.bienvenidazoomtexto}"/></center> 
+                        </rich:column> 
+                    </h:panelGrid>
+                </div>
             <br/>
-            <center><h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom}"/>     
+            <center>
+                <div id="ikont-div-bienvenida">
+                <h:outputText styleClass="inputtitulohomezoomtexto"  value="#{var.titulohomezoom}"/>     
                 <h:panelGrid>
                     <rich:column>
                         <h:panelGroup style="alignment-adjust: central" id="panelinfo">
@@ -102,17 +115,16 @@
                                 </rich:column> </center>
                         </h:panelGroup>
                     </rich:column>
-                </h:panelGrid> </center>
+                </h:panelGrid> 
             <h:panelGroup><center>
                     <h:graphicImage styleClass="imagen_flecha_home1" value="/resources/imgs/flecha_home1.png"/>
                 </center></h:panelGroup>
 
             <center><a4j:commandLink styleClass="inputlinkhomevermas" id="vermas" value="Ver mas" rendered="false"/></center>
-
-            <br/><br/> <br/><br/>
             <center><table align="center" id="panel_mapa_filtro">
                     <tr id="unouno" style="position: absolute;top: 578px;left: 28px;"><td style="width: 275px; position:relative; top: -20px;"  rowspan="3" >  <div style="position: relative; bottom: 93px;">
                                 <ui:include src="/Supervisor/filtrozoom.xhtml"/>
+
                             </div>
                         </td><tr id="trestres" style="position: absolute;top: 358px;right: -71px;"><td align="right">
                                 <!--h:outputText  styleClass="ikont-hot-proyectos"   value="#{var.proyecto}s " rendered="#{HomeGestion.filtro.intestadoobra==-1}"/-->
@@ -128,15 +140,6 @@
                             </td></tr><tr id="dosdos" style="position: absolute;top: 0px;right: -61px;border: 2px;"><td>
                                 <h:panelGroup style="border: 2px; border-color: black;">
                                     <h:panelGrid  id="vistaMapa" width="#{var.anchomapa}" style=" box-shadow: 2px 2px 7px #999;padding: 9px;position: absolute;top: 391px;right: -26px;" rendered="#{HomeGestion.filtro.intvista == 1}" >
-                                         <table>
-                                    <tr>
-                                        <td>
-                                            <blink>
-                                                <h:outputText  styleClass="ikont-hot-mensajes" style="font-size: 12px;"    rendered="#{HomeGestion.resulbusqueda}" value="#{HomeGestion.mensaje}" />
-                                            </blink>
-                                        </td>
-                                    </tr>
-                                </table>
                                         <m:map latitude="#{var.latitudmapa}" width="100%" longitude="#{var.longitudmapa}" enableScrollWheelZoom="true"  id="map" 
                                                jsVariable="mapa" zoom="#{var.zoommapa}"  partiallyTriggered="false"  height="#{SessionBeanCobra.cobraService.altomapa}">
 
@@ -302,7 +305,7 @@
 
                                     </rich:dataTable>
                                 </h:panelGrid>
-                            </td></tr></tr></table>  </center>
+                            </td></tr></tr></table>  </center> </div></center>
         </h:form>
 
 
@@ -332,12 +335,12 @@
         <script src="/#{var.versioncobra}/resources/gSlider/js/panel-image-slider.js" type="text/javascript"></script>
         <script src="/#{var.versioncobra}/resources/gSlider/js/image-slider.js" type="text/javascript"></script>
         <script type="text/javascript">
-                                                    var $jpanel = jQuery.noConflict();
-                                                    $jpanel(document).ready(function() {
-                                                        var $i = jQuery.noConflict();
-                                                        $i('#slider2').slider2({speed: 500, action: true});
+            var $jpanel = jQuery.noConflict();
+            $jpanel(document).ready(function() {
+                var $i = jQuery.noConflict();
+                $i('#slider2').slider2({speed: 500, action: true});
 
-                                                    });
+            });
         </script>
         <script type="text/javascript">
             var $j = jQuery.noConflict();
