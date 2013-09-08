@@ -115,7 +115,7 @@
                         </h:panelGrid>
                     </h:panelGrid>
                 </a4j:region>
-
+                
                 <br/>
                 <br/>
                 <br/>
@@ -216,7 +216,7 @@
                     </h:panelGroup>
 
                 </h:panelGrid>  
-                <h:panelGrid columns="2" styleClass="panel_res_iva">
+                <h:panelGrid  id="hpg-fuenter-reservaiva" columns="2" styleClass="panel_res_iva">
                     <rich:column>
                         <h:outputText value="Reserva para IVA"  styleClass="input_var_convenio label_texto_convenio"/>
                     </rich:column>
@@ -226,7 +226,7 @@
                         </h:inputText>
                     </rich:column>
                 </h:panelGrid>
-                <h:panelGrid columns="2" styleClass="panel_otr_reserva">
+                <h:panelGrid  id="hpg-fuenter-otrasreservas" columns="2" styleClass="panel_otr_reserva">
                     <rich:column>
                         <h:outputText value="Otras reservas" styleClass="input_var_convenio label_texto_convenio"/>
                     </rich:column>
@@ -258,8 +258,8 @@
                 <h:panelGrid cellspacing="10" cellpadding="10">
                     <a4j:commandButton value="#{var.adicionar}" 
                                        action="#{Supervisor$Contrato.recursosconvenio.adicionarFuenteRecursos}" 
-                                       render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,panel_res_iva,panel_otr_reserva,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso" 
-                                       execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,panel_res_iva, panel_otr_reserva,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso"/>
+                                       render="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas, ,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso" 
+                                       execute="hpg-fuenter-conv,hpg-fuenter-cuotag, hpg-fuenter-valoraportado,hit-valorgerencia-convenio,hpg-fuenter-reservaiva,hpg-fuenter-otrasreservas,hit-reservaiva-convenio,hit-otrasreservas-convenio, rdt-fuenteRecurso"/>
 
                 </h:panelGrid>        
                 <!--/rich:collapsiblePanel-->

@@ -19,7 +19,7 @@ public class ObjetivosDTO implements IsSerializable
      private Boolean esobjetivo;
      private ObraDTO obra;
      private String strtipoObj;
-     private String eliminar;
+     private String eliminar="Eliminar";
      
     
 

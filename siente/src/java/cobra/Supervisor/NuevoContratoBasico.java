@@ -762,6 +762,18 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Objeto para acceder a los atributos de modalidadcontratista
      */
+    /*
+     * Variable para listar los cotratos segun el tipo
+     */
+    private int varibaleTipo = 1;
+
+    public int getVaribaleTipo() {
+        return varibaleTipo;
+    }
+
+    public void setVaribaleTipo(int varibaleTipo) {
+        this.varibaleTipo = varibaleTipo;
+    }
     private Modalidadcontratista modalidadcontratista = new Modalidadcontratista();
     private boolean guardarborradorconvenio = false;
     private UIDataTable tablaDocumentos = new UIDataTable();
@@ -833,7 +845,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     /**
      * Clase para manejar la lógica de fuentes de recursos
      */
-    private RecursosConvenio recursosconvenio;
+    private RecursosConvenio recursosconvenio= new RecursosConvenio();
 
     public RecursosConvenio getRecursosconvenio() {
         return recursosconvenio;
@@ -2536,6 +2548,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         int i = 0;
         for (Tipocontratoconsultoria tconcon : liscontrconsul) {
             SelectItem opt = new SelectItem(tconcon.getIntidtipocontratoconsultoria(), tconcon.getStrdescripcion());
+            System.out.println("tipo" + tconcon.getStrdescripcion());
             tipocontratoconsultoria[i++] = opt;
         }
 
@@ -2767,7 +2780,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
 
     public String guardarContrato() {
 //        if (validarContrato()) {        
-        
+
         if (comboEntidadesContratoguardar()) {
             if (contrato.getIntduraciondias() > 0) {
                 if (contrato.getContratista() == null) {
@@ -2847,7 +2860,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                     } else {
                         validadcionGuardarContrato();
                     }
-                    
+
                     FacesUtils.addInfoMessage(bundle.getString("losdatossehanguardado"));
 
                     limpiarContrato();
@@ -2891,7 +2904,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
                 Logger.getLogger(NuevoContratoBasico.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         if (guardarborradorconvenio == true) {
             limpiarContrato();
         }
@@ -3871,7 +3884,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
         return null;
 
     }
- 
+
     /**
      * cancelar el contrato
      *
@@ -4009,7 +4022,7 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             FacesUtils.addInfoMessage("No pertence a ningún contrato Padre");
             return null;
         }
-        if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {          
+        if (contratotabla.getEstadoconvenio().getIdestadoconvenio() != 2) {
             contrato.setFuenterecursosconvenios(new LinkedHashSet<Fuenterecursosconvenio>(recursosconvenio.getLstFuentesRecursos()));
             return "nuevoConvenioPo";
         } else {
@@ -6408,8 +6421,8 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
      *metodo que  carga las entidades de fonade en la lista de seleccion
      *      
      */
-    public void llenarEntidades() {        
-        lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2); 
+    public void llenarEntidades() {
+        lstentidades = getSessionBeanCobra().getCobraService().encontrarTercerosxTiposolicitante(2);
 //        setEntidades(new SelectItem[lstentidades.size()]);
 //        int i = 0;
 //        for (Tercero tercero : lstentidades) {
@@ -6731,5 +6744,50 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
             }
         }
 //        return lista;
+    }
+
+    public String listarPorTipoContrato() {
+        switch (filtrocontrato.getTipocontrato()) {
+            case 1:
+                 tipoContCon = "Obra";
+                iniciarDetaContrato();
+                
+                break;
+            case 2:
+                tipoContCon = "Estudios y Diseños";
+                contrConsultoria();
+                break;
+            case 3:
+                tipoContCon = "Prefactibilidad";
+                contrConsultoria();
+                break;
+            case 4:
+                tipoContCon = "Factibilidad";
+                contrConsultoria();
+                break;
+            case 5:
+                tipoContCon = "Asesoría";
+                contrConsultoria();
+                break;
+            case 6:
+                tipoContCon = "Gerencia de Obra";
+                contrConsultoria();
+
+                break;
+            case 7:
+                listacontratos.clear();
+                listacontratoscontratista.clear();
+                tipoContCon = "Contrato consultoría";
+                booltipocontratoconvenio = false;
+                boolcontrconsultoria = true;
+                filtrocontrato.setBooltienehijo(false);
+                filtrocontrato.setBooltipocontconv(false);
+                filtrocontrato.setBoolcontrconsultoria(true);
+                primeroDetcontrato();
+
+                break;
+        }
+
+        return "consultarContratoConvenio";
     }
 }

@@ -51,10 +51,16 @@ public class RecursosConvenio implements Serializable {
         this.lstRoles = lstRoles;
     }
 
+    public RecursosConvenio()
+    {
+        
+    }        
+    
     public RecursosConvenio(Contrato contrato, CobraServiceAble cobraService) {
         fuenteRecursoConvenio = new Fuenterecursosconvenio(new Tercero(), contrato, new Rolentidad());
         lstFuentesRecursos = new ArrayList<Fuenterecursosconvenio>();
         sumafuentes = BigDecimal.ZERO;
+        
         llenarTipoAporte();
         llenarRoles(cobraService);
     }
@@ -143,8 +149,8 @@ public class RecursosConvenio implements Serializable {
      */
     public void adicionarFuenteRecursos() {
         NuevoContratoBasico n = (NuevoContratoBasico) FacesUtils.getManagedBean("Supervisor$Contrato");
-        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());
-
+        Tercero tercero = n.obtenerTerceroXcodigo(n.getRecursosconvenio().getFuenteRecursoConvenio().getTercero().getIntcodigo());        
+        
         if (getFuenteRecursoConvenio().getOtrasreservas().add(getFuenteRecursoConvenio().getReservaiva())
                 .add(getFuenteRecursoConvenio().getValorcuotagerencia()).compareTo(getFuenteRecursoConvenio().getValoraportado()) < 1) {
             fuenteRecursoConvenio.setTercero(tercero);
@@ -174,8 +180,8 @@ public class RecursosConvenio implements Serializable {
     public void calcularValorGerencia() {
         SessionBeanCobra sbc = (SessionBeanCobra) FacesUtils.getManagedBean("SessionBeanCobra");
         ResourceBundle bundle = sbc.getBundle();
-        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");
-
+        getFuenteRecursoConvenio().setStrporcentajecuotagerencia("");                
+        
         switch (getFuenteRecursoConvenio().getTipoaporte()) {
             case 1://porcentual
                 try {

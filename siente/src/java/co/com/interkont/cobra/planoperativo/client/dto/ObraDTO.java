@@ -22,8 +22,8 @@ public class ObraDTO implements IsSerializable {
     private String strnombreobra;
     private Date fechaInicio;
     private Date fechaFin;
-    private Set objetivoses = new HashSet(0);
-    private Set obrafuenterecursosconvenioses = new HashSet(0);
+    private Set objetivoses = new LinkedHashSet(0);
+    private Set obrafuenterecursosconvenioses = new LinkedHashSet(0);
     private Set actividadobras = new LinkedHashSet(0);
     private BigDecimal valorDisponible;
     private BigDecimal valor;
