@@ -231,7 +231,10 @@
                                                                                  action="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" 
                                                                                  render="tablatipoobra"  />
 
-                                                                <h:selectBooleanCheckbox value="#{tipoobra.check}" disabled="true"  />
+                                                                <h:selectBooleanCheckbox value="#{tipoobra.check}">
+                                                                    <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.cambioSubtipo(SessionBeanCobra.cobraService.listatipoobra[fila].inttipoobra)}" execute="@this" render="tablatipoobra" />
+
+                                                                </h:selectBooleanCheckbox>
 
                                                             </h:panelGrid>
                                                         </center>
