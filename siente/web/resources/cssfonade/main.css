@@ -1393,11 +1393,11 @@ a.ikont-hcl-modificarusuario:hover {
 }
 
 .img-button-ncpo.ikont-acl-documentos{
-    background-position: -374px -10px;
+    background-position: -274px -10px;
 }
 
 .img-button-ncpo.ikont-acl-documentos:hover, .ikont-acl-documentos.buttonactive{
-    background-position: -374px -74px;
+    background-position: -274px -74px;
 }
 
 .img-button-ncpo.ikont-acl-formapago{
@@ -1769,10 +1769,10 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 .ikont-label-estructura-menu:hover{
-     color:  #257500 !important; 
+    color:  #257500 !important; 
 }
 .ikont-label-estructura-menu:active{
-      color:  #257500 !important; 
+    color:  #257500 !important; 
 }
 .ikont-label-menu:link{ 
     width: 120px; 
@@ -1790,10 +1790,10 @@ input[type="text"], input[type="password"], select{
     color: #58595B;
 }
 .ikont-label-menu-item:hover { 
-     color:  #257500 !important; 
+    color:  #257500 !important; 
 }
 .ikont-label-menu-item:active { 
-     color:  #257500 !important; 
+    color:  #257500 !important; 
 }
 .ikont-label-menu-buscar-proyecto { 
     font-size: 12px; 
@@ -2640,11 +2640,12 @@ css usuario modificacion
     alignment-adjust: central;
 }
 .tabPanelFiltroZoom{
-    width: 263px; 
+  width: 263px;
     position: absolute;
     top: -114px; 
     height: 231px;
     background: #ffffff
+
 
 }
 .panel_filtro_zoom{
