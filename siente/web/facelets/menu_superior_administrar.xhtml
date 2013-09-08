@@ -86,6 +86,22 @@
                     });
                 }
             });
+         $('.ikont-hpg-content-menuinicio:first').hover(function() {
+                $('#menuprincipal').addClass('hovermenuprincipal');
+                $('#menuprincipal').css({top:'61px',position:'fixed'}).animate({width: '268px'});
+            },
+                    function() {
+//                       $('#menuprincipal').animate({width: '0px'});
+//                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                    });
+            $('#menuprincipal').hover(function() {
+
+            },
+                    function() {
+                        $('#menuprincipal').animate({width: '0px'});
+//                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                        
+                    });
         });
         $j(window).scroll(function() {
             var $jq = jQuery.noConflict();
