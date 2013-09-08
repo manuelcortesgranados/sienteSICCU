@@ -6749,7 +6749,9 @@ public class NuevoContratoBasico implements ILifeCycleAware, Serializable {
     public String listarPorTipoContrato() {
         switch (filtrocontrato.getTipocontrato()) {
             case 1:
-                contrConsultoria();
+                 tipoContCon = "Obra";
+                iniciarDetaContrato();
+                
                 break;
             case 2:
                 tipoContCon = "Estudios y Diseños";
