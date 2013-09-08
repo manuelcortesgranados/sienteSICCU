@@ -1710,9 +1710,9 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-div-menu-principal {
-     background-color:white;
+    background-color:white;
     width:0px; height:100%;
-    position: fixed;
+    position: absolute;
     left: 0px;
     right: 0px;
     overflow: hidden;
