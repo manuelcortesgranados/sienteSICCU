@@ -199,7 +199,9 @@
 
                                                             <a4j:commandLink styleClass="ikont-"   value="#{tipoproyecto.strnombre}" action="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}"  execute="@this" render="panelSubTipo, tablasubtipoah"  >
                                                             </a4j:commandLink>
-                                                            <h:selectBooleanCheckbox value="#{tipoproyecto.check}" disabled="true"  />
+                                                            <h:selectBooleanCheckbox value="#{tipoproyecto.check}" >
+                                                                <a4j:ajax event="click" listener="#{Supervisor$IngresarNuevaObra.obtenerFilaTipoProyecto(fila)}" execute="@this" render="panelSubTipo, tablasubtipoah" />
+                                                            </h:selectBooleanCheckbox>
 
                                                         </h:panelGrid>
                                                     </center>
