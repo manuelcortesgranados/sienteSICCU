@@ -1739,7 +1739,7 @@ input[type="text"], input[type="password"], select{
     height:40px;
     font-size: 20px; 
     font-family:Verdana, Arial, Helvetica, sans-serif;
-    color:#808080;
+    color:#58595B;
 }
 .ikont-menu-inicio-zoom{
     background-image: url(../imgs/icons_menu_pr.png);
@@ -1760,15 +1760,21 @@ input[type="text"], input[type="password"], select{
     position: relative !important;
     top: -69px!important;
 }
-.ikont-label-estructura-menu{   
+.ikont-label-estructura-menu:link{   
     position: relative;
     cursor: pointer;
     vertical-align:middle;
     background-position: 2px 8px; 
     font-size: 18px; 
-    color: #37444c;
+    color: #58595B;
 }
-.ikont-label-menu{ 
+.ikont-label-estructura-menu:hover{
+     color:  #257500 !important; 
+}
+.ikont-label-estructura-menu:active{
+      color:  #257500 !important; 
+}
+.ikont-label-menu:link{ 
     width: 120px; 
     line-height: 26px;
     color: #1C8F14;    
@@ -1777,11 +1783,17 @@ input[type="text"], input[type="password"], select{
     line-height:11px; 
     color: #1C8F14;
 } 
-.ikont-label-menu-item { 
+.ikont-label-menu-item:link { 
     font-size: 15px; 
     width: 120px; 
     line-height: 26px;
-    color: #37444c;
+    color: #58595B;
+}
+.ikont-label-menu-item:hover { 
+     color:  #257500 !important; 
+}
+.ikont-label-menu-item:active { 
+     color:  #257500 !important; 
 }
 .ikont-label-menu-buscar-proyecto { 
     font-size: 12px; 
@@ -1790,11 +1802,17 @@ input[type="text"], input[type="password"], select{
     font-style: italic;
     line-height: 26px;
 }
-.ikont-label-menu-estr-sub-titulo{ 
+.ikont-label-menu-estr-sub-titulo:link{ 
     font-size: 16px; 
     width: 120px; 
-    color: #808080;
+    color: #58595B;
     line-height: 26px;
+}
+.ikont-label-menu-estr-sub-titulo:hover{
+    color:  #257500 !important; 
+}
+.ikont-label-menu-estr-sub-titulo:active{
+    color:  #257500 !important; 
 }
 .ikont-div-menu-zoom-inicio{
     background-position: 0px -52px;
@@ -4027,3 +4045,4 @@ a:hover {
     font-family: 'Open Sans';
     line-height: 95px;
 }
+
