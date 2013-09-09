@@ -268,11 +268,11 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
+                                    <h:outputLabel   id="numrecursospropios" value="#{Supervisor$Contrato.contrato.numrecursospropios}" styleClass="ikont-"   rendered="true">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
+                                    <h:panelGrid  rendered="false">
                                         <rich:inplaceInput id="Pch" value="#{Supervisor$Contrato.contrato.numrecursospropios}" showControls="true" required="true" validatorMessage="No se permite valores menores de 0" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosPropios}">
                                             <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
 
@@ -286,11 +286,11 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel     id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
+                                    <h:outputLabel     id="spinumrecursosch" value="#{Supervisor$Contrato.contrato.numrecursosch}" styleClass="ikont-"   rendered="true">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
+                                    <h:panelGrid  rendered="false">
                                         <rich:inplaceInput id="Ich" value="#{Supervisor$Contrato.contrato.numrecursosch}" showControls="true" required="true" validatorMessage="No se permite valores menores de 0"  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosCH}">
                                             <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
 
@@ -304,11 +304,11 @@
 
                                     <interkont:spacer width="20" />
 
-                                    <h:outputLabel    id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="#{!SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
+                                    <h:outputLabel    id="spinumrecursoster" value="#{Supervisor$Contrato.contrato.numrecursostercero}" styleClass="ikont-"   rendered="true">
                                         <f:convertNumber pattern="$ ###,###" />
                                     </h:outputLabel>
 
-                                    <h:panelGrid  rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}">
+                                    <h:panelGrid  rendered="false">
                                         <rich:inplaceInput id="Irp" value="#{Supervisor$Contrato.contrato.numrecursostercero}" showControls="true" required="true" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btn_editarRecursosTerceros}" validatorMessage="No se permite valores menores de 0">
                                             <a4j:ajax listener="#{Supervisor$ModificarContrato.modificarRecursosContrato}" event="change" render="strcostocontrato,strdispocontrato,pgcontratoconvenio,valor" />
 
@@ -837,7 +837,7 @@
 
                     <rich:collapsiblePanel id="simpleTogglegirodirecto" switchType="ajax" header="#{var.girodirecto}"  
                                            expanded="#{Supervisor$Contrato.boolgiros}"
-                                           rendered="#{Supervisor$Contrato.booltipocontratoconvenio}"
+                                           rendered="#{Supervisor$Contrato.booltipocontratoconvenio}#{!var.aplicafonade}"
                                            toggleListener="#{Supervisor$Contrato.limpiarGirodirecto}">
                         <a4j:ajax event="switch" render="pngirodirecto, notieneop" />
 

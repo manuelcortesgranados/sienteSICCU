@@ -12,7 +12,7 @@ input.rf-au-inp {
     margin: 0px;
     padding: 7px;
     vertical-align: top;
-    width: 230px;
+    width: 236px;
     font-size: 17px;    
 }
 
@@ -96,6 +96,9 @@ input.rf-au-inp {
     border-style: dotted;
     border-color: '#{richSkin.generalTextColor}';
     padding: 1px;
+    color: white;
+    font-weight: bolder;
+    font-size: 13px;
 }
 
 .rf-au-opt {

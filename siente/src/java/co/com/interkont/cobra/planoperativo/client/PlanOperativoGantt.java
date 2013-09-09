@@ -29,11 +29,14 @@ import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
 import com.gantt.client.event.DependencyContextMenuEvent;
 import com.gantt.client.event.TaskResizeEvent;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.scheduler.client.core.TimeResolution.Unit;
 import com.scheduler.client.core.config.SchedulerConfig.ResizeHandle;
@@ -186,7 +189,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
 
         final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
-        depStore.addAll(GanttDummyData.getDependencies());
+        depStore.addAll(GanttDatos.getDependencia(convenioDTO));
 
         GanttConfig config = new GanttConfig();
         // ColumnModel for left static columns
@@ -427,7 +430,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type,fromTask,toTask);
             }
         ;
 
@@ -690,7 +693,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         cp.setWidget(vc);
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO));
+        vc.add(createToolBarInferior());
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
         // main.setPagePosition(200, 0);
         main.setWidth("100%");
         main.add(cp);
@@ -728,8 +732,8 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 gantt.reconfigure(true);
             }
         });
-
-
+        
+    
 
 
 
@@ -769,6 +773,39 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
 
         return tbar;
     }
+    
+    private ToolBar createToolBarInferior() {
+        
+        ToolBar tbarinferior = new ToolBar();
+        
+        final Button continuar = new Button();
+        continuar.setText("Continuar");
+        continuar.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        continuar.setStyleName("ikont-po-img-continuarGWTInferior");
+        
+        final Button finalizar  = new Button();
+        finalizar.setText("Finalizar");
+        finalizar.addClickHandler(new ClickHandler() {
+
+            @Override
+            public void onClick(ClickEvent event) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        finalizar.setStyleName("ikont-po-img-finalizarGWTInferior");
+        
+        tbarinferior.add(continuar);
+        tbarinferior.add(finalizar);
+        tbarinferior.setStyleName("ikont-po-tb");
+        
+        return  tbarinferior;
+    }    
     // Creates the static columns
 
     @SuppressWarnings({"rawtypes", "unchecked"})

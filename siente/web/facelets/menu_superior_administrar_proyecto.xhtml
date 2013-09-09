@@ -10,7 +10,7 @@
     >
     <h:form styleClass="ikont-hf-nuevodetalleobrazoom">
         <h:panelGroup layout="block" styleClass="ikont-hpg-menu-contenido-nuevo-proyecto">
-            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="11"   cellspacing="7" cellpadding="0" rowClasses="panelcenter">         
+            <h:panelGrid styleClass="ikont-hpg-menu-nuevo-proyecto"   columns="11"   cellspacing="5" cellpadding="0" rowClasses="panelcenter">         
                 <h:panelGrid columns="2"  styleClass="ikont-menu-principal"> 
                     <h:commandLink styleClass="ikont-hcl-menu-logozoom " />
                     <h:panelGrid columns="3" styleClass="ikont-hpg-content-menuinicio">
@@ -107,18 +107,19 @@
             });
             $('.ikont-hpg-content-menuinicio:first').hover(function() {
                 $('#menuprincipal').addClass('hovermenuprincipal');
-                $('#menuprincipal').animate({width: '268px'});
+                $('#menuprincipal').css({top:'61px',position:'fixed'}).animate({width: '268px'});
             },
                     function() {
-                        $('#menuprincipal').animate({width: '0px'});
-                        $('#menuprincipal').removeClass('hovermenuprincipal');
+//                       $('#menuprincipal').animate({width: '0px'});
+//                        $('#menuprincipal').removeClass('hovermenuprincipal');
                     });
             $('#menuprincipal').hover(function() {
 
             },
                     function() {
                         $('#menuprincipal').animate({width: '0px'});
-                        $('#menuprincipal').removeClass('hovermenuprincipal');
+//                        $('#menuprincipal').removeClass('hovermenuprincipal');
+                        
                     });
         });
         $j(window).scroll(function() {

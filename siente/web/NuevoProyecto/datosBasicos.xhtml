@@ -164,7 +164,7 @@
                             <h:inputTextarea styleClass="ikont-textarea-datosbasicos" cols="80" id="txtObserProyecto" rows="4" value="#{Supervisor$IngresarNuevaObra.obranueva.strconclucompro}"/>
                         </h:panelGrid>
                         <h:panelGroup layout="block">
-                            <h:panelGrid  id="valores" columns="3" >
+                            <h:panelGrid  cellspacing="9" id="valores" columns="3" >
 
                                 <h:outputText  styleClass="ikont-hot-numbeneficiarios"   value="#{var.numbeneficiarios}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio!=1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}"  />
                                 <h:outputText  styleClass="ikont-hot-poblacionestudiantil"   value="#{var.poblacionestudiantil}:" rendered="#{Supervisor$EntidadConvenio.intentidadconvenio==1 and Supervisor$IngresarNuevaObra.obranueva.tipoobra.inttipoobra!=59}" />
@@ -194,7 +194,7 @@
 
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGrid id="valores2" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
+                        <h:panelGrid cellspacing="7" id="valores2" columns="2" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null and var.vervlrsdeclaradosentipifiobra}">
                             <h:outputLabel  styleClass="ikont-hol-numvaldeclarado"   id="lblnumvaldeclarado"  value="#{var.numvaldeclarado}" >
                             </h:outputLabel>
                             <h:inputText value="#{Supervisor$IngresarNuevaObra.obranueva.numvaldeclarado}"
@@ -233,7 +233,7 @@
                                 <f:convertNumber maxFractionDigits="2" minFractionDigits="2" type="number"  />
                             </h:inputText>
                         </h:panelGrid>
-                        <h:panelGrid id="valores3" columns="2" cellspacing="15" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
+                        <h:panelGrid id="valores3" columns="2" cellspacing="9" rendered="#{Supervisor$IngresarNuevaObra.obranueva.contrato!=null}">
                             <h:outputLabel  styleClass="ikont-hol-sector"   value="Sector:"/>
                             <h:outputText  styleClass="ikont-hot-nombresector "   value="#{Supervisor$IngresarNuevaObra.obranueva.contrato.tercero.sector.strnombre}"/>
 

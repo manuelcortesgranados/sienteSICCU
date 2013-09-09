@@ -10,6 +10,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO
 import co.com.interkont.cobra.planoperativo.client.dto.RolentidadDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.TerceroDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ActividadobraDTO;
+import co.com.interkont.cobra.planoperativo.client.dto.DependenciaDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObrafuenterecursosconveniosDTO;
@@ -17,6 +18,7 @@ import co.com.interkont.cobra.planoperativo.client.dto.Relacionobrafuenterecurso
 import co.com.interkont.cobra.planoperativo.client.dto.TipocontratoDTO;
 import co.com.interkont.cobra.to.Actividadobra;
 import co.com.interkont.cobra.to.Contrato;
+import co.com.interkont.cobra.to.Dependencia;
 import co.com.interkont.cobra.to.Fuenterecursosconvenio;
 import co.com.interkont.cobra.to.Objetivos;
 import co.com.interkont.cobra.to.Obra;
@@ -27,6 +29,7 @@ import co.com.interkont.cobra.to.Rolentidad;
 import co.com.interkont.cobra.to.Tercero;
 import co.com.interkont.cobra.to.Tipocontrato;
 import com.gantt.client.config.GanttConfig;
+import com.gantt.client.config.GanttConfig.DependencyType;
 import com.gantt.client.config.GanttConfig.TaskType;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -100,6 +103,10 @@ public class CasteoGWT implements Serializable{
         {
             actdto.setObra(castearObraDdtToObraTO(actividadObra.getObra(), convenio));
         } 
+
+        actdto.getDependenciasForFkActividadOrigen().clear();
+        actdto.setDependenciasForFkActividadOrigen(castearSetDependenciaTOaDependenciaDTO(actividadObra.getDependenciasForFkActividadOrigen(), actdto, convenio));
+
         Iterator it = actividadObra.getActividadobras().iterator();        
         while (it.hasNext()) {
             Actividadobra acti = (Actividadobra) it.next();
@@ -528,6 +535,9 @@ public class CasteoGWT implements Serializable{
         actividadObra.setTipotareagantt(actdto.getTipoActividad());
 
         actividadObra.setActividadobra(actividadpadre);
+        
+        actividadObra.setDependenciasForFkActividadOrigen(castearSetDependenciaDTOaDependencia(actdto.getDependenciasForFkActividadOrigen(),actividadObra,convenio));
+       
 
          if (actdto.getObra() != null) {
             actividadObra.setObra(castearObraDdtToObra(actdto.getObra(), convenio));
@@ -621,6 +631,68 @@ public class CasteoGWT implements Serializable{
         return setActividades;
     }
     
+    public static Set<Dependencia> castearSetDependenciaDTOaDependencia(List<DependenciaDTO> SetDependencias, Actividadobra acti, Contrato convenio) {
+        Set<Dependencia> setDependencias = new HashSet<Dependencia>(SetDependencias.size());
+        for (DependenciaDTO dep : SetDependencias) {
+            setDependencias.add(castearDependenciaDTOaDependencia(dep, acti, convenio));
+        }
+        return setDependencias;
+    }
+
+    public static Dependencia castearDependenciaDTOaDependencia(DependenciaDTO dependenciaDto, Actividadobra actividad, Contrato convenio) {
+        Dependencia dependencia = new Dependencia();
+        dependencia.setIdDependencia(dependenciaDto.getIdDependencia());
+        dependencia.setActividadobraByFkActividadOrigen(actividad);
+        int tipoDependencia = 0;
+        if (dependenciaDto.getType().equals(GanttConfig.DependencyType.ENDtoEND)) {
+            tipoDependencia = 1;
+        } else if (dependenciaDto.getType().equals(GanttConfig.DependencyType.ENDtoSTART)) {
+            tipoDependencia = 2;
+        } else if (dependenciaDto.getType().equals(GanttConfig.DependencyType.STARTtoEND)) {
+            tipoDependencia = 3;
+        } else if (dependenciaDto.getType().equals(GanttConfig.DependencyType.STARTtoSTART)) {
+            tipoDependencia = 4;
+        }
+        dependencia.setTipoDepencia(tipoDependencia);
+        dependencia.setActividadobraByFkActividadDestino(castearActividadobraDdoToActividadobra(dependenciaDto.getActividadTo(), convenio, null, null));
+        convenio.getDependenciasGenerales().add(dependencia);
+        return dependencia;
+
+    }
+    
+    
+     public static List<DependenciaDTO> castearSetDependenciaTOaDependenciaDTO(Set<Dependencia> SetDependencias, ActividadobraDTO acti, ContratoDTO convenio) {
+        List<DependenciaDTO> setDependencias = new ArrayList<DependenciaDTO>(SetDependencias.size());
+        for (Dependencia dep : SetDependencias) {
+            setDependencias.add(castearDependenciaTOaDependenciaDTO(dep, acti, convenio));
+        }
+        return setDependencias;
+    }
+
+    public static DependenciaDTO castearDependenciaTOaDependenciaDTO(Dependencia dependenciaTO, ActividadobraDTO actividad, ContratoDTO convenio) {
+        DependenciaDTO dependencia = new DependenciaDTO();
+        dependencia.setIdDependencia(dependenciaTO.getIdDependencia());
+        dependencia.setActividadFrom(actividad);
+        dependencia.setFromId(dependencia.getActividadFrom().getName());
+        DependencyType tipoDependencia = DependencyType.ENDtoEND;
+        if (dependenciaTO.getTipoDepencia()==1) {
+            tipoDependencia =DependencyType.ENDtoEND ;
+        } else if (dependenciaTO.getTipoDepencia()==2) {
+            tipoDependencia = DependencyType.ENDtoSTART;
+        } else if (dependenciaTO.getTipoDepencia()==3) {
+            tipoDependencia = DependencyType.STARTtoEND;
+        } else if (dependenciaTO.getTipoDepencia()==4) {
+            tipoDependencia = DependencyType.STARTtoSTART;
+        }
+        dependencia.setType(tipoDependencia);        
+        dependencia.setActividadTo(castearActividadObraRaizTO(dependenciaTO.getActividadobraByFkActividadDestino(),convenio,null));
+        dependencia.setToId(dependencia.getActividadTo().getName());
+        convenio.getDependenciasGenerales().add(dependencia);
+        return dependencia;
+
+    }
+
+
     /*
      * metodo que se encarga de convertir una una lista de ObjetivosDTO a Objetivos
      * @param Set<ObjetivosDTO> ObjetivosDto que se van a castear.

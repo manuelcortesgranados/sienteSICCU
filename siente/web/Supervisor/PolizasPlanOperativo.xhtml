@@ -44,46 +44,63 @@
                     </h:panelGrid>
                 </h:panelGrid>
                 <interkont:spacer height="14"/>
-                <h:panelGrid id="pgpolis">
-                    <rich:dataTable id="dtPolizas"
-                                    rows="4"  
-                                    value="#{Supervisor$Contrato.listapolizas}"
-                                    binding="#{Supervisor$Contrato.tablaPolizasbin}"
-                                    var="registro" >
+                <h:panelGrid id="pgpolis" cellspacing="25" columns="1">
+                    <rich:dataTable rows="4"   
+                                    style="text-align: center;">
                         <rich:column id="tc-strTipoPoliza" width="100px">
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-policont" value="#{var.tipoPolizaContrato}:"  style="color: #000"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}" style="color: #000"/>
                         </rich:column>
                         <rich:column id="tc-strnumPolizaContrato" 
                                      >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-numpolizacont" value="#{var.numPolizaContrato}:"  style="color: #000"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}" style="color: #000"/>
                         </rich:column>
                         <rich:column id="tc-strVencimientoPoliza" width="100px"
                                      >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-vencepoliza" value="#{var.vencimientoPoliza}:" style="color: #000"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont-hot-fechavence" id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}" style="color: #000">
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            </h:outputText>
                         </rich:column>
                         <rich:column id="tc-strEntidadPoliza" 
                                      >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-entipoliza" value="#{var.entidadPoliza}:" style="color: #000"/>
                             </f:facet>
-                            <h:outputText  styleClass="ikont-hot-nomentipoliza"   id="otxt-strEntidadPoliza" value="#{registro.aseguradora.strnombreentidad}" style="color: #000"/>
                         </rich:column>
                         <rich:column id="tc-streliminarPoliza" width="250px"
                                      >
                             <f:facet name="header">
                                 <h:outputText  styleClass="ikont-hot-eliminars"   value="#{var.eliminar}" style="color: #000"/>
-                            </f:facet>
+                            </f:facet>                           
+                        </rich:column>                      
+                    </rich:dataTable>                    
+                     <rich:dataTable id="dtPolizas" 
+                                    rows="4"  
+                                    value="#{Supervisor$Contrato.listapolizas}"
+                                    binding="#{Supervisor$Contrato.tablaPolizasbin}"
+                                    var="registro" 
+                                    style="text-align: center; margin-top: -32px;">
+                        <rich:column id="tc-strTipoPoliza" width="100px">                     
+                            <h:outputText  styleClass="ikont-hot-descpoliza" id="otxt-strTipoPoliza" value="#{registro.tipopoliza.strdesctipopoliza}" style="color: #000"/>
+                        </rich:column>
+                         <rich:column id="tc-strnumPolizaContrato" >
+                            <h:outputText  styleClass="ikont-hot-numpoliza" id="otxt-strnumPolizaContrato" value="#{registro.strnumpoliza}" style="color: #000"/>
+                        </rich:column>
+                        <rich:column id="tc-strVencimientoPoliza" width="100px"                                     >
+                            
+                            <h:outputText  styleClass="ikont-hot-fechavence" id="otxt-strVencimientoPoliza" value="#{registro.datefechavecimiento}" style="color: #000">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:outputText>
+                        </rich:column>
+                        <rich:column id="tc-strEntidadPoliza" 
+                                     >
+                            <h:outputText  styleClass="ikont-hot-nomentipoliza"   id="otxt-strEntidadPoliza" value="#{registro.aseguradora.strnombreentidad}" style="color: #000"/>
+                        </rich:column>
+                        <rich:column id="tc-streliminarPoliza" width="250px"
+                                     >                           
                             <a4j:commandButton styleClass="ikont-acb-elipoliza" id="eliminarpol" value="#{var.eliminar}" render="pgpolis" execute="@this"
                                                action="#{Supervisor$Contrato.eliminarPoliza}" style="color: #000">
                             </a4j:commandButton>

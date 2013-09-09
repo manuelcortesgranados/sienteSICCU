@@ -351,7 +351,7 @@
                                 </h:selectOneMenu>
                             </h:panelGrid>
                             <h:panelGroup id="pgformapago">                                     
-                                <h:panelGrid columns="2" id="gpFormas">
+                                <h:panelGrid cellspacing="6" columns="2" id="gpFormas">
                                     <h:panelGrid rendered="#{var.fechaformapago and Supervisor$Contrato.contrato.formapago.intidformapago==3}">
                                         <h:outputText  styleClass="ikont-hot-fechaformadepa" id="lbfechaformadepa"  value="Fecha de Pago: " rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==3}"/>
 
@@ -390,7 +390,7 @@
 
                                     <rich:dataTable value="#{Supervisor$Contrato.lisplanifiactapar}" var="arr"
                                                     rendered="#{Supervisor$Contrato.contrato.formapago.intidformapago==1 ||Supervisor$Contrato.contrato.formapago.intidformapago==2}">
-                                        <rich:column id="porcub" width="100px">
+                                        <rich:column id="porcub" width="40px">
                                             <f:facet name="header">
                                                 <h:outputText  styleClass="ikont-hot-vlrporcentaje" value="#{var.valorporcentaje}:" />
                                             </f:facet>
@@ -422,14 +422,13 @@
                 <rich:collapsiblePanel id="rsgtpoliz" switchType="ajax" header="3. #{var.anadirpolizas}:" expanded="false"  toggleListener="#{Supervisor$Contrato.instanciarPolizar}" immediate="true">                      
                     <center>
 
-                        <h:panelGrid id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
+                        <h:panelGrid cellspacing="6" id="gpPolizaSelec" columns="2"   rendered="#{Supervisor$Contrato.verEliminar==0}" >
 
                             <h:outputLabel  styleClass="ikont-hol-tipopoliza" id="lblTipoPoliza"  value="#{var.tipoPolizaContrato}:" for="comboTipoPoliza">
 
                             </h:outputLabel>
                             <h:selectOneMenu id="comboTipoPoliza" value="#{Supervisor$Contrato.tipointpoli}">
                                 <f:selectItems value="#{Supervisor$Contrato.tipoPolizas}"/>
-                                <a4j:ajax event="valueChange" listener="#{Supervisor$Contrato.probar}" />
                             </h:selectOneMenu>
 
                             <h:outputLabel  styleClass="ikont-hol-numpolcont" id="lblnumPolizaContrato"  value=" #{var.numPolizaContrato}:" for="numPolizaContrato">
@@ -534,7 +533,7 @@
                     <rich:dataGrid id="rdDoccontrato" columns="1" rowKeyVar="row" value="#{Supervisor$Contrato.cargadorDocumento.archivos}" var="file" >
                         <h:outputText  styleClass="ikont-nomarch" id="txt_nombrearchivocc" value=" #{file.nombre}"/>
                     </rich:dataGrid>
-                    <rich:dataTable id="tablaDocumentoscont"  sortMode="single"
+                    <rich:dataTable styleClass="totalwidth" id="tablaDocumentoscont"  sortMode="single"
                                     var="currentRow"
                                     rows="7" rowKeyVar="filaSeleccionada"
                                     value="#{Supervisor$Contrato.listadocumentos}"

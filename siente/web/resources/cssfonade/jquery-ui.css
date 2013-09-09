@@ -290,7 +290,7 @@ button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padd
  * http://docs.jquery.com/UI/Slider#theming
  */
 .ui-slider { position: relative; text-align: left; }
-.ui-slider .ui-slider-handle { position: absolute; z-index: 0; width: 8px; height: 8px; cursor: default; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 0; width: 10px; height: 10px; cursor: default; }
 .ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .1em; display: block; border: 0; background-position: 0 0; }
 
 .ui-slider-horizontal { height: .0em; color: red; }
@@ -365,7 +365,7 @@ button.ui-button:-moz-focus-inner { border: 0; padding: 0; } /* reset extra padd
 	color: #FFF/*{fcDefault}*/;
 	text-decoration: none;
 }
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background: #257500/*{bgColorHover}*//*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcHover}*/; background-position:left; background-repeat:no-repeat; height:8px; line-height:30px;  font-size:5px; font-style:italic; font-weight:bold;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { background: #257500/*{bgColorHover}*//*{bgImgUrlHover}*/ 50%/*{bgHoverXPos}*/ 50%/*{bgHoverYPos}*/ repeat-x/*{bgHoverRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcHover}*/; background-position:left; background-repeat:no-repeat; height:10px;width: 10px; line-height:30px;  font-size:5px; font-style:italic; font-weight:bold;}
 .ui-state-hover a, .ui-state-hover a:hover { color: black/*{fcHover}*/; text-decoration: none; }
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { background: #257500/*{bgColorActive}*/ /*{bgImgUrlActive}*/ 50%/*{bgActiveXPos}*/ 50%/*{bgActiveYPos}*/ repeat-x/*{bgActiveRepeat}*/; font-weight: normal/*{fwDefault}*/; color: #FFF/*{fcActive}*/;  background-position:left; background-repeat:no-repeat; height:5px; line-height:30px;  font-size:5px; font-style:italic; font-weight:bold;}
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #069/*{fcActive}*/;}
