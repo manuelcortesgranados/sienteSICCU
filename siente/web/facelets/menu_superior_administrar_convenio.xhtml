@@ -25,7 +25,8 @@
                     <h:commandLink  styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text"  value="Nuevo Proyecto"  action="#{Supervisor$Contrato.crearProyecto}"  immediate="true"  />
                 </h:panelGroup>
                 <h:panelGroup layout="block" > 
-                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admconvenio "   immediate="true" action="detalleContrato"/>          
+                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admconvenio "  rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}" immediate="true" action="detalleContrato"/>          
+                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-detalle-admcontrato "  rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}" immediate="true" action="detalleContrato"/>          
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text " style="width: 120px;" value="Detalle #{Supervisor$Contrato.tipoContCon}"  immediate="true" action="detalleContrato"/>          
                 </h:panelGroup>
                 <h:panelGroup layout="block" > 
@@ -33,7 +34,8 @@
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text" value="Documentos"  immediate="true" action="#{Supervisor$Contrato.documentocontrato}"/>
                 </h:panelGroup>   
                 <h:panelGroup layout="block" rendered="#{SessionBeanCobra.usuarioObra.renderrecurso.btnmodificar}"> 
-                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-modificacion-admconvenio"   action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
+                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-modificacion-admconvenio" rendered="#{Supervisor$Contrato.tipoContCon == 'Convenio'}" action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
+                    <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-posicion-nuevo-modificacion-admcontrato" rendered="#{Supervisor$Contrato.tipoContCon == 'Contrato'}"  action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
                     <h:commandLink styleClass="ikont-img-posicion-administrar-convenio ikont-menu-detalle-text" style="width: 120px" value="Modificar #{Supervisor$Contrato.tipoContCon}"  action="#{Supervisor$ModificarContrato.iniciarModicontrato}"/>
                 </h:panelGroup>
                 <h:panelGroup layout="block" > 
