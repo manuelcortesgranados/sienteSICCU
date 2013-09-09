@@ -31,7 +31,7 @@ public class RecursosConvenio implements Serializable {
 
     private Fuenterecursosconvenio fuenteRecursoConvenio;
     private boolean boolguardofuente;
-    private List<Fuenterecursosconvenio> lstFuentesRecursos;
+    private List<Fuenterecursosconvenio> lstFuentesRecursos= new ArrayList<Fuenterecursosconvenio>();
     private SelectItem[] tipoAporte;
     private BigDecimal sumafuentes;
     private UIDataTable tableFuente = new UIDataTable();

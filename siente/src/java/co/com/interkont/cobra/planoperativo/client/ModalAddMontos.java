@@ -137,6 +137,28 @@ public class ModalAddMontos implements IsWidget {
         getValorRubros().setEmptyText("Valor");
         getValorRubros().setWidth(cw);
         con.add(getValorRubros(), new AbstractHtmlLayoutContainer.HtmlData(".valorubro"));
+        
+        Button btnAdicionarRubros = new Button("Adicionar Rubro", new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                MontoDTO monto = new MontoDTO(rubro, getValorRubros().getValue(), vigencia, idTemp, rubro.getStrdescripcion());
+                String msgVal = validaRubros(monto);
+                if (msgVal.equals("El rubro se registró correctamente")) {
+                    contrato.getMontos().add(monto);
+                    // actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(monto.getValor()));
+                    limpiarMontos();
+                    idTemp = idTemp++;
+                    widTblMontos.getStore().add(monto);
+                    modalActual.hide();
+                } else {
+                    AlertMessageBox d = new AlertMessageBox("Error", msgVal);
+                    d.show();
+                }
+
+            }
+        });
+
+        con.add(btnAdicionarRubros);
 
     }
 
@@ -165,28 +187,7 @@ public class ModalAddMontos implements IsWidget {
                 }
             }
         });
-
-        Button btnAdicionarRubros = new Button("Adicionar", new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                MontoDTO monto = new MontoDTO(rubro, getValorRubros().getValue(), vigencia, idTemp, rubro.getStrdescripcion());
-                String msgVal = validaRubros(monto);
-                if (msgVal.equals("El rubro se registró correctamente")) {
-                    contrato.getMontos().add(monto);
-                    // actividadObraPadre.getObra().setValorDisponible(actividadObraPadre.getObra().getValorDisponible().subtract(monto.getValor()));
-                    limpiarMontos();
-                    idTemp = idTemp++;
-                    widTblMontos.getStore().add(monto);
-                    modalActual.hide();
-                } else {
-                    AlertMessageBox d = new AlertMessageBox("Error", msgVal);
-                    d.show();
-                }
-
-            }
-        });
-
-        vp.add(btnAdicionarRubros);
+        
     }
 
     public void limpiarMontos() {
@@ -220,7 +221,10 @@ public class ModalAddMontos implements IsWidget {
                 lstRubrosDto = result;
                 for (RubroDTO rb : result) {
                     getComboRubros().addItem(rb.getStrdescripcion(), rb.getIdrubro());
+                    
                 }
+                getComboRubros().setSelectedIndex(0);
+                rubro = lstRubrosDto.get(getComboRubros().getSelectedIndex());
             }
         });
 

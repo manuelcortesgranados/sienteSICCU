@@ -396,7 +396,7 @@ a.closemodal{
 }
 
 .templatetablamenulateral .rf-p-b {
-    width : 225px;
+    width : 225px
 }
 
 
@@ -1321,6 +1321,7 @@ a.ikont-hcl-modificarusuario:hover {
     position: relative;
     top: 0px;
     z-index:5;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-hpg-menu-nuevo-convenio{
@@ -1376,12 +1377,12 @@ a.ikont-hcl-modificarusuario:hover {
 
 .ikont-hf-nuevocontratoplanoperativo{
     position: relative;
-    top: -25px;
+    top: -30px;
 }
 
 .ikont-hf-nuevodetalleobrazoom{
     position: relative;
-    top: -35px;
+    top: -30px;
 }
 
 .img-button-ncpo.ikont-acl-datosbasicos{
@@ -1719,7 +1720,7 @@ input[type="text"], input[type="password"], select{
     z-index:8;
     -webkit-box-shadow: 7px 8px 16px #A8A6A4;
     box-shadow: 5px 2px 5px #999;
-    top:139px; 
+    top: 141px;
 }
 .ikont-bt-cerrar-login1{
     font-size: 30px; 
@@ -1735,11 +1736,17 @@ input[type="text"], input[type="password"], select{
     position: absolute;
     z-index: 4;
 }
-.ikont-bt-cerrar-login2{
+.ikont-bt-cerrar-login2:link{
     height:40px;
     font-size: 20px; 
     font-family:Verdana, Arial, Helvetica, sans-serif;
     color:#58595B;
+}
+.ikont-bt-cerrar-login2:hover{
+      color:  #257500 !important;   
+}
+.ikont-bt-cerrar-login2:active{
+      color:  #257500 !important;   
 }
 .ikont-menu-inicio-zoom{
     background-image: url(../imgs/icons_menu_pr.png);
@@ -1863,6 +1870,7 @@ input[type="text"], input[type="password"], select{
     position: relative;
     top: 0px;
     z-index: 5;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-menu-principal{
@@ -1938,10 +1946,12 @@ input[type="text"], input[type="password"], select{
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text{
     color: #FFF;
     font-family: open;
-    font-size: 0.9em;
+    font-size: 0.8em;
     display: none;
     position: relative;
     top: -48px;
+    width: 50px;
+    float: left;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text:hover, .ikont-hpg-menu-contenido-nuevo-proyecto .ikont-menu-detalle-text.buttonactive{
@@ -1950,7 +1960,7 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-img-posicion-menu-proyecto.scrollmenudetalle.ikont-menu-detalle-text{
-    display: block;
+    display: inline-block;
 }
 
 .ikont-img-posicion-menu-proyecto{
@@ -1963,6 +1973,7 @@ input[type="text"], input[type="password"], select{
 
 .ikont-img-posicion-menu-proyecto.scrollmenudetalle{
     background-size: 0px 0px;
+    width: 65px;
 }
 
 .ikont-posicion-detalle-proyecto{
@@ -2380,17 +2391,22 @@ input[type="text"], input[type="password"], select{
 }
 
 .ikont-hot-zoom-numvobra{
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 .ikont-hot-zoom-soliobra, .ikont-hot-zoom-numvaltotobra{
-    font-size: 1.3em;
+    font-size: 2em;
 }
 
-.ikont-hpg-zoom-detalleobra label{
+.ikont-hpg-datosrelevantes label{
     font-family: open;
     font-size: 0.8em;
     color: #58595B;
+}
+
+.ikont-hpg-datosrelevantes span{
+    font-family: open;
+    font-size: 0.9em;
 }
 
 .ikont-acl-btadjuntarimagen{
@@ -2462,6 +2478,7 @@ css usuario modificacion
     position: relative;
     top: 0px;
     z-index: 1;
+    border-bottom: solid 1px #F2F2F2;
 }
 
 .ikont-hpg-menu-contenido-administrar-convenio.scrollactive{
@@ -2508,7 +2525,7 @@ css usuario modificacion
 
 .ikont-hf-menusuperior-convenio{
     position: relative;
-    top: -34px;
+    top: -30px;
 }
 
 .ikont-hpg-menu-administrar-convenio{ 
@@ -2541,6 +2558,14 @@ css usuario modificacion
     background-position:-128px -110px;
 }
 
+.ikont-posicion-nuevo-detalle-admcontrato{
+    background-position:-550px -10px;
+}
+
+.ikont-posicion-nuevo-detalle-admcontrato:hover, .ikont-posicion-nuevo-detalle-admcontrato.buttonactive{
+    background-position:-550px -110px;
+}
+
 .ikont-posicion-nuevo-documentos-admconvenio{
     background-position:-236px -10px;
 }
@@ -2556,12 +2581,20 @@ css usuario modificacion
 .ikont-posicion-nuevo-modificacion-admconvenio:hover, .ikont-posicion-nuevo-modificacion-admconvenio.buttonactive{
     background-position: -341px -110px;
 }
+.ikont-posicion-nuevo-modificacion-admcontrato{
+    width: 112px;
+    background-position: -672px -10px;
+}
+
+.ikont-posicion-nuevo-modificacion-admcontrato:hover, .ikont-posicion-nuevo-modificacion-admcontrato.buttonactive{
+    background-position: -672px -110px;
+}
 .ikont-posicion-nuevo-evolucion-admconvenio{
-    background-position:-470px -10px;
+    background-position:-455px -10px;
 }
 
 .ikont-posicion-nuevo-evolucion-admconvenio:hover, .ikont-posicion-nuevo-evolucion-admconvenio.buttonactive{
-    background-position:-470px -110px;
+    background-position:-455px -110px;
 }
 .tab-pestania-active, tab-pestania-active-tres{
     width: 100px !important;  
@@ -2798,7 +2831,7 @@ css usuario modificacion
 
 /*Css para el menu superior de proyecto*/
 .ikont-hpg-menu-nuevo-proestructuracion{ 
-    margin-top: -4px;
+    margin-top: -1px;
     margin-left: 62px;
 }
 .ikont-hpg-menu-contenido-nuevo-proestructuracion{
@@ -2811,6 +2844,7 @@ css usuario modificacion
     position: relative;
     top: -32px;
     z-index: 1;
+    border-bottom: solid 1px #f2f2f2;
 }
 
 .ikont-hpg-menu-contenido-nuevo-proestructuracion.scrollactive{
@@ -3267,7 +3301,7 @@ css usuario modificacion
 }
 
 .ikont-btn-cerrar-flecha-session{
-    background-image: url(../imgs/flecha_home1_1.png);
+    background-image: url(../imgs/flecha_home1.png);
     background-repeat: no-repeat;
     width:600px;
     height: 33px;
@@ -4048,3 +4082,25 @@ a:hover {
     line-height: 95px;
 }
 
+.menuprincipalactive{
+    width: 100%;
+    height: 2500px;
+    background-color: transparent;
+    z-index: 7;
+    position: absolute;
+    top: 0px;
+    left: 258px;
+}
+
+.buttondetallevalor{
+    width: 100px;
+    text-align: center;
+}
+
+.buttondetallevalor input{
+    margin-top: 22px;
+}
+
+.ikont-hpg-conectatezoom{
+    margin-top: 30px;
+}
