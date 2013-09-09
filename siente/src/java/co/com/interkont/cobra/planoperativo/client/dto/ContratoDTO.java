@@ -19,24 +19,24 @@ public class ContratoDTO implements IsSerializable {
 
     private int intidcontrato;
     private Date datefechaini;
-    private Date datefechafin;    
+    private Date datefechafin;
     private Date datefechaactaini;
     private String strnumcontrato;
     private BigDecimal numvlrcontrato;
     private Date datefechacreacion;
-    private String textobjeto;       
+    private String textobjeto;
     private int estadoConvenio;
-    private int intduraciondias;    
+    private int intduraciondias;
     //tipo contrato es para contrato solamente
     private TipocontratoDTO tipocontrato;
     private String nombreAbreviado;
     private BigDecimal valorDisponible;
-    
     private Set actividadobras = new LinkedHashSet(0);
     private Set relacionobrafuenterecursoscontratos = new HashSet(0);
     private Set fuenterecursosconvenios = new HashSet(0);
     private Set montos = new HashSet(0);
-    
+    private Set dependenciasGenerales = new LinkedHashSet(0);
+
     public ContratoDTO() {
     }
 
@@ -50,13 +50,11 @@ public class ContratoDTO implements IsSerializable {
         this.datefechacreacion = datefechacreacion;
         this.textobjeto = textobjeto;
         this.estadoConvenio = estadoConvenio;
-        this.intduraciondias = intduraciondias;        
+        this.intduraciondias = intduraciondias;
         this.tipocontrato = tipocontrato;
-        this.nombreAbreviado= strnombrecorto;
+        this.nombreAbreviado = strnombrecorto;
     }
-    
-    
-    
+
 //    
 //    public ContratoDTO(int intidcontrato, Date datefechaini, Date datefechafin, String strnumcontrato, BigDecimal numvlrcontrato, Date datefechaactaini, int intduraciondias) {
 //        this.intidcontrato=intidcontrato;
@@ -68,8 +66,6 @@ public class ContratoDTO implements IsSerializable {
 //        this.intduraciondias= intduraciondias;
 //    }
 //    
-     
-
     /**
      * @return the intidcontrato
      */
@@ -210,8 +206,7 @@ public class ContratoDTO implements IsSerializable {
     public void setTextobjeto(String textobjeto) {
         this.textobjeto = textobjeto;
     }
-    
-    
+
     /**
      * @return the tipocontrato
      */
@@ -226,7 +221,7 @@ public class ContratoDTO implements IsSerializable {
         this.tipocontrato = tipocontrato;
     }
 
-       /**
+    /**
      * @return the estadoConvenio
      */
     public int getEstadoConvenio() {
@@ -239,7 +234,8 @@ public class ContratoDTO implements IsSerializable {
     public void setEstadoConvenio(int estadoConvenio) {
         this.estadoConvenio = estadoConvenio;
     }
-     /**
+
+    /**
      * @return datefechaactaini Fecha acta de inicio
      */
     public Date getDatefechaactaini() {
@@ -300,6 +296,17 @@ public class ContratoDTO implements IsSerializable {
         this.valorDisponible = valorDisponible;
     }
 
-    
-   
+    /**
+     * @return the dependenciasGenerales
+     */
+    public Set getDependenciasGenerales() {
+        return dependenciasGenerales;
+    }
+
+    /**
+     * @param dependenciasGenerales the dependenciasGenerales to set
+     */
+    public void setDependenciasGenerales(Set dependenciasGenerales) {
+        this.dependenciasGenerales = dependenciasGenerales;
+    }
 }

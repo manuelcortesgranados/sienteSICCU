@@ -8,7 +8,6 @@ import co.com.interkont.cobra.planoperativo.client.dto.FuenterecursosconvenioDTO
 import co.com.interkont.cobra.planoperativo.client.dto.GanttDatos;
 import co.com.interkont.cobra.planoperativo.client.dto.ObjetivosDTO;
 import co.com.interkont.cobra.planoperativo.client.dto.ObraDTO;
-import co.com.interkont.cobra.planoperativo.client.resources.images.CssRecursos;
 import co.com.interkont.cobra.planoperativo.client.resources.images.ExampleImages;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAble;
 import co.com.interkont.cobra.planoperativo.client.services.CobraGwtServiceAbleAsync;
@@ -202,7 +201,6 @@ public class ProyectoForm1 implements IsWidget, EntryPoint {
         }
 
         Label tituloPagina = new Label(tituloPantalla);        
-        tituloPagina.setStyleName(CssRecursos.INSTANCE.commonsCss().estiloLabel());
         
 
         vp.add(tituloPagina);

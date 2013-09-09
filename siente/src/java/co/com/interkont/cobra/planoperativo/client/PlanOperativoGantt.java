@@ -189,7 +189,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         }
 
         final ListStore<DependenciaDTO> depStore = new ListStore<DependenciaDTO>(depProps.key());
-        depStore.addAll(GanttDummyData.getDependencies());
+        depStore.addAll(GanttDatos.getDependencia(convenioDTO));
 
         GanttConfig config = new GanttConfig();
         // ColumnModel for left static columns
@@ -430,7 +430,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
                 config) {
             @Override
             public DependenciaDTO createDependencyModel(ActividadobraDTO fromTask, ActividadobraDTO toTask, GanttConfig.DependencyType type) {
-                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type);
+                return new DependenciaDTO(String.valueOf(new Date().getTime()), fromTask.getId(), toTask.getId(), type,fromTask,toTask);
             }
         ;
 
@@ -694,7 +694,7 @@ public class PlanOperativoGantt implements IsWidget, EntryPoint {
         vc.add(createToolBar(taskStore), new VerticalLayoutContainer.VerticalLayoutData(1, -1));
         vc.add(gantt, new VerticalLayoutContainer.VerticalLayoutData(1, 1));
         vc.add(createToolBarInferior());
-        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO));
+        main.add(new ToolBarSuperior(service, gantt.getTreeStore(), convenioDTO,depStore));
         // main.setPagePosition(200, 0);
         main.setWidth("100%");
         main.add(cp);
